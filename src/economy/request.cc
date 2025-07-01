@@ -91,7 +91,7 @@ Request::~Request() {
 	}
 }
 
-// Modified to allow Requirements and SoldierRequests
+// Modified to allow Requirements and SoldierRequestManagers
 constexpr uint16_t kCurrentPacketVersion = 6;
 
 /**

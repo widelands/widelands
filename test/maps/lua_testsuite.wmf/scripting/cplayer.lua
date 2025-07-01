@@ -211,3 +211,9 @@ function place_building_tests:test_force_building_illegal_name()
       player1:place_building("kjhsfjkh", map:get_field(10,10))
    end)
 end
+
+function place_building_tests:test_foreign_building()
+   assert_error("Should not be able to place a building that the tribe can't use", function()
+      player1:place_building("amazons_warehouse", self.f, false, true)
+   end)
+end

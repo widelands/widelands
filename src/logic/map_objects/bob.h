@@ -44,11 +44,13 @@ public:
 	BobDescr(const std::string& init_descname,
 	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type,
-	         const LuaTable& table);
+	         const LuaTable& table,
+	         const std::vector<std::string>& attribs);
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
 	         MapObjectType type,
-	         MapObjectDescr::OwnerType owner_type);
+	         MapObjectDescr::OwnerType owner_type,
+	         const std::vector<std::string>& attribs);
 
 	~BobDescr() override = default;
 

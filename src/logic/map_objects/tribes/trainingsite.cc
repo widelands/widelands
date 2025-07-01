@@ -61,8 +61,9 @@ const uint32_t TrainingSite::training_state_multiplier_ = 12;
  */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
+                                     const std::vector<std::string>& attribs,
                                      Descriptions& descriptions)
-   : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, descriptions),
+   : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, attribs, descriptions),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")) {
 	// Read the range of levels that can update this building
@@ -270,8 +271,6 @@ std::vector<Soldier*> TrainingSite::SoldierControl::associated_soldiers() const 
 }
 
 void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
-	assert(min_soldier_capacity() <= capacity);
-	assert(capacity <= max_soldier_capacity());
 	if (training_site_->capacity_ == capacity) {
 		return;  // Nothing to do
 	}
@@ -297,7 +296,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 			training_site_->recent_capacity_increase_ = true;
 		}
 	}
-	training_site_->capacity_ = capacity;
+	training_site_->capacity_ = std::min(capacity, max_soldier_capacity());
 	training_site_->update_soldier_request(false);
 }
 
@@ -632,8 +631,9 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			recent_capacity_increase_ = false;
 		}
 
-		soldier_request_ = new Request(
-		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER);
+		soldier_request_ = new SoldierRequest(
+		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
+		   requesting_weak_trainees_ ? SoldierPreference::kRookies : SoldierPreference::kHeroes);
 
 		RequireOr r;
 

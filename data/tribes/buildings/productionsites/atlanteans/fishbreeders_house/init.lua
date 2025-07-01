@@ -40,6 +40,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _("breeding fish"),
          actions = {
+            -- time of worker: 20.7-49.5 sec, min+max average 35.1 sec
+            -- min. time total: 20.7 + 13.5 = 34.2 sec
+            -- max. time total: 49.5 + 13.5 = 63 sec
+            -- avg. time total: 35.1 + 13.5 = 48.6 sec
             "callworker=breed",
             "sleep=duration:13s500ms"
          }

@@ -32,6 +32,10 @@ SoldierDescription
 */
 const char LuaSoldierDescription::className[] = "SoldierDescription";
 const MethodType<LuaSoldierDescription> LuaSoldierDescription::Methods[] = {
+   METHOD(LuaSoldierDescription, get_health_level_image_filepath),
+   METHOD(LuaSoldierDescription, get_attack_level_image_filepath),
+   METHOD(LuaSoldierDescription, get_defense_level_image_filepath),
+   METHOD(LuaSoldierDescription, get_evade_level_image_filepath),
    {nullptr, nullptr},
 };
 const PropertyType<LuaSoldierDescription> LuaSoldierDescription::Properties[] = {
@@ -184,6 +188,80 @@ int LuaSoldierDescription::get_defense_incr_per_level(lua_State* L) {
 */
 int LuaSoldierDescription::get_evade_incr_per_level(lua_State* L) {
 	lua_pushinteger(L, get()->get_evade_incr_per_level());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+   .. method:: get_health_level_image_filepath(level)
+
+      .. versionadded:: 1.3
+
+      Get the filepath for this soldier's "health" attribute icon at the specified training level.
+
+      :arg level: The soldier training attribute level whose icon to query
+      :type level: :class:`integer`
+
+      :returns: The image file path.
+*/
+int LuaSoldierDescription::get_health_level_image_filepath(lua_State* L) {
+	lua_pushstring(L, get()->get_health_level_image_filepath(luaL_checkinteger(L, 2)).c_str());
+	return 1;
+}
+
+/* RST
+   .. method:: get_attack_level_image_filepath(level)
+
+      .. versionadded:: 1.3
+
+      Get the filepath for this soldier's "attack" attribute icon at the specified training level.
+
+      :arg level: The soldier training attribute level whose icon to query
+      :type level: :class:`integer`
+
+      :returns: The image file path.
+*/
+int LuaSoldierDescription::get_attack_level_image_filepath(lua_State* L) {
+	lua_pushstring(L, get()->get_attack_level_image_filepath(luaL_checkinteger(L, 2)).c_str());
+	return 1;
+}
+
+/* RST
+   .. method:: get_defense_level_image_filepath(level)
+
+      .. versionadded:: 1.3
+
+      Get the filepath for this soldier's "defense" attribute icon at the specified training level.
+
+      :arg level: The soldier training attribute level whose icon to query
+      :type level: :class:`integer`
+
+      :returns: The image file path.
+*/
+int LuaSoldierDescription::get_defense_level_image_filepath(lua_State* L) {
+	lua_pushstring(L, get()->get_defense_level_image_filepath(luaL_checkinteger(L, 2)).c_str());
+	return 1;
+}
+
+/* RST
+   .. method:: get_evade_level_image_filepath(level)
+
+      .. versionadded:: 1.3
+
+      Get the filepath for this soldier's "evade" attribute icon at the specified training level.
+
+      :arg level: The soldier training attribute level whose icon to query
+      :type level: :class:`integer`
+
+      :returns: The image file path.
+*/
+int LuaSoldierDescription::get_evade_level_image_filepath(lua_State* L) {
+	lua_pushstring(L, get()->get_evade_level_image_filepath(luaL_checkinteger(L, 2)).c_str());
 	return 1;
 }
 

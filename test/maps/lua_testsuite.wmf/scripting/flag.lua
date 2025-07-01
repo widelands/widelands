@@ -147,7 +147,7 @@ end
 -- buildings and roads
 -- ===================
 function flag_tests:roads_and_buildings_test()
-   local field = map:get_field(4,14)
+   local field = map:get_field(54,14)
    self.w = player1:place_building("barbarians_warehouse", field)
    self.f1 = self.w.flag
    local road = player1:place_road("normal", self.f1, "br", "br", "br")

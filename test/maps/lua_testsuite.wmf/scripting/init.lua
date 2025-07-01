@@ -77,6 +77,13 @@ end
 include "map:scripting/table.lua"
 include "map:scripting/set.lua"
 
+local tc_at_end = lunit.TestCase("check at end")
+function tc_at_end.test_not_missing()
+   -- check that important initial things are still here
+   local at_startpos = map.player_slots[1].starting_field.immovable
+   assert_equal("barbarians_headquarters", at_startpos and at_startpos.descr.name, "on start field")
+end
+
 -- ============
 -- Test Runner
 -- ============

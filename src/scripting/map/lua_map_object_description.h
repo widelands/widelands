@@ -54,6 +54,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int has_attribute(lua_State*);
 	int helptexts(lua_State*);
 
 	/*

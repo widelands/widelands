@@ -33,7 +33,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::PINNED_NOTE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attribs*/) {
 	}
 
 	[[nodiscard]] Bob& create_object() const override {

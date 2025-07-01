@@ -95,14 +95,13 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction& /* actio
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
                            const std::vector<std::string>& attribs)
-   : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
+   : BobDescr(
+        init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table, attribs),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
 
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
-
-	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(

@@ -47,9 +47,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
          descname = _("spinning gold"),
          actions = {
+            -- time total: 15.4 + 25 + 3.6 = 44 sec
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
-            "sleep=duration:15s",
+            "sleep=duration:15s400ms",
             "playsound=sound/atlanteans/goldspin priority:50% allow_multiple",
             "animate=working duration:25s",
             "produce=gold_thread"

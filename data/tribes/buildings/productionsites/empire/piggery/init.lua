@@ -56,9 +56,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
          descname = _("raising pigs"),
          actions = {
+            -- time total: 10.4 + 20 + 3.6 = 34 sec
             "return=skipped unless economy needs meat",
             "consume=water wheat",
-            "sleep=duration:10s",
+            "sleep=duration:10s400ms",
             "playsound=sound/farm/farm_animal priority:40% allow_multiple",
             "animate=working duration:20s",
             "produce=meat"

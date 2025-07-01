@@ -11,7 +11,7 @@
 # GunChleoc, 2014
 # henrique terto de souza <henrique.terto.new@gmail.com>, 2015
 # Sara Carreiro, 2021
-# Yuri Laskowski <yurinikolai00@gmail.com>, 2020
+# 05f7c14829a7f0004c7a414c9bd4d253_5e10bee <ac668b7aa91ffe1e4ff8943d2a820367_813261>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"

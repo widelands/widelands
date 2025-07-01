@@ -149,7 +149,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
-   : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
+   : MapObjectDescr(
+        MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table, attribs),
      descriptions_(descriptions) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
@@ -168,8 +169,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (!attribs.empty()) {
-		add_attributes(attribs);
-
 		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
 				// All resource indicators must have a menu icon

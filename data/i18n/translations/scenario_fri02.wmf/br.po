@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (https://app.transifex.com/widelands/teams/35159/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr ""
+msgstr "Notenn"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -33,11 +33,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Sevel un armerzh diazez"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Pourveziñ an holl zanvezioù diazez"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
@@ -47,11 +47,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
-msgstr ""
+msgstr "Astennit war-zu ar Su"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Astennit ho tomani da ergerzhit war-zu ar Su"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:36
 msgid ""
@@ -61,11 +61,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
-msgstr ""
+msgstr "Gourdonañ hag adaozañ"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Adaozit armoù da gaout metal en-dro"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -113,11 +113,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Koad"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × Maen-greun"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
@@ -125,11 +125,11 @@ msgstr "30 × Pesked"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Bier"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Dour"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
@@ -137,27 +137,27 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Pred"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Glaou"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Kailh houarn"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Houarn"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × Kailh aour"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Aour"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -171,11 +171,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Spiañ Murilius"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Kasit ur sklêrijenner da spiañ an Impalaerezh"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
@@ -216,11 +216,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Pilit ar varbared!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Pilit ar varbared"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Pilit Murilius!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -246,11 +246,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Pilit Murilius hag ar varbared!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Pilit ar varbared ha trevadenn an Impalaerezh"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
@@ -295,13 +295,13 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Donemat en-dro!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
-msgstr ""
+msgstr "Un ti nevez"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
@@ -344,11 +344,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
-msgstr ""
+msgstr "Kit d'ar Su"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Astenn hag aloubiñ"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:171
@@ -370,11 +370,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Berrentez metal"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
-msgstr ""
+msgstr "N'hon eus tamm metal ebet ket"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
@@ -394,7 +394,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
-msgstr ""
+msgstr "Kaout metal en-dro"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:191
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
-msgstr ""
+msgstr "Metal nevez"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:200
@@ -443,11 +443,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
-msgstr ""
+msgstr "Produiñ metal"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
-msgstr ""
+msgstr "Oberiat eo ar mengleuzioù"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:217
@@ -556,7 +556,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -567,13 +567,15 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
+"sum. Vos nominate!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
-msgstr ""
+msgstr "Estrañjourien"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
@@ -691,11 +693,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Dizoloet eo bet un dra bennak gant ar sklêrijenner"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
-msgstr ""
+msgstr "Deuet eo hor sklêrijenner en-dro"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:333
@@ -716,7 +718,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:353
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Fuloret eo an Impalaerezh"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -749,11 +751,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
-msgstr ""
+msgstr "Daou enebour"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Pilit an enebourien!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:375
@@ -779,7 +781,7 @@ msgstr ""
 #. though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
@@ -807,7 +809,7 @@ msgstr ""
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:397
@@ -828,11 +830,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
-msgstr ""
+msgstr "Un enebour all"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Pilit an Impalaerezh!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:406
@@ -853,11 +855,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
-msgstr ""
+msgstr "Trec'h"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
-msgstr ""
+msgstr "Trec'h!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:416
@@ -868,7 +870,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""
@@ -888,4 +890,4 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Etrepaouez an Impalaerezh"

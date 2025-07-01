@@ -56,7 +56,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          const std::vector<std::string>& attribs);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -375,7 +377,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
-	void erase_warship_soldier_request();
+	void erase_warship_soldier_request_manager();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);

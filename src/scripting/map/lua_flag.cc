@@ -145,7 +145,7 @@ int LuaFlag::set_wares(lua_State* L) {
 	const Widelands::Descriptions& descriptions = egbase.descriptions();
 
 	InputMap setpoints;
-	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
+	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true, false);
 	WaresWorkersMap c_wares = count_wares_on_flag_(*f, descriptions);
 
 	for (const auto& ware : c_wares) {

@@ -56,9 +56,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
          descname = _("breeding sheep"),
          actions = {
+            -- time total: 25.4 + 30 + 3.6 = 59 sec
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "sleep=duration:25s",
+            "sleep=duration:25s400ms",
             "playsound=sound/farm/sheep priority:50% allow_multiple",
             "animate=working duration:30s",
             "produce=wool"

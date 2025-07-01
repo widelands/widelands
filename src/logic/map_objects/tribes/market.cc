@@ -32,8 +32,9 @@ namespace Widelands {
 
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
+                         const std::vector<std::string>& attribs,
                          Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions),
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, attribs, descriptions),
      local_carrier(descriptions.worker_index(table.get_string("local_carrier"))),
      trade_carrier(descriptions.worker_index(table.get_string("trade_carrier"))) {
 }

@@ -29,6 +29,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       fish_in_pond = {
+         -- steps from building to pond: 2-11
+         -- min. worker time: 2 * 2 * 1.8 + 3 = 10.2 sec
+         -- max. worker time: 2 * 11 * 1.8 + 3 = 42.6 sec
          "findobject=attrib:pond_mature radius:8",
          "walk=object",
          "animate=fishing duration:3s",
@@ -37,6 +40,9 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       breed_in_pond = {
+         -- steps from building to pond: 2-11
+         -- min. worker time: 2 * 2 * 1.8 + 2 = 9.2 sec
+         -- max. worker time: 2 * 11 * 1.8 + 2 = 41.6 sec
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
          "animate=release duration:2s",

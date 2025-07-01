@@ -58,9 +58,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making wine because ...
          descname = _("making wine"),
          actions = {
+            -- time total: 30.4 + 30 + 3.6 = 64 sec
             -- Grapes are only needed for wine, so no need to check if wine is needed
             "consume=grape:2",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "playsound=sound/empire/winebubble priority:40% allow_multiple",
             "animate=working duration:30s",
             "produce=wine"

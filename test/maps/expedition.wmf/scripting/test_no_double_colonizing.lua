@@ -10,6 +10,8 @@ run(function()
    }
    port:set_workers("barbarians_builder", 5)
 
+   p1:place_pinned_note(map:get_field(11, 11), "note in water") -- to be listed as ship dest
+
    create_two_ships()
    port:start_expedition()
    wait_for_message("Expedition")

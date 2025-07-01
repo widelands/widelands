@@ -12,7 +12,6 @@ The definitions for the tribes' units are located in the subdirectories of
 file.
 
 * ``register.lua`` will inform the engine about the existence of units and their attributes if they have any.
-  Attributes are only supported for immovables (and critters).
   This is needed for registering the objects before they are loaded.
 * ``init.lua`` will load the units if they are used in the game
 * Help texts contained in ``data/tribes/initialization/<tribe_name>/units.lua`` will provide the information

@@ -1,0 +1,20 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="2"
+
+[player_1]
+name=
+tribe=
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_2]
+name=
+tribe=
+ai=
+closeable="false"
+team="0"
+random="false"
