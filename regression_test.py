@@ -335,7 +335,9 @@ class WidelandsTestCase():
                                         f', see in {f_name}\n')
                     self.out_status('Info ', f'ASan log: {f_name}')
                 if not self.report_header:
-                    self.report_header = 'lsan'  # might be overwritten, which is no problem
+                    # set header, as else the output will not be shown and the files get deleted
+                    # The header might get overwritten, which is no problem.
+                    self.report_header = f'Memory problem or memory leak. ASan log is: {f_name}'
             # else it is information about what was skipped matching suppression file
 
         # Catch instabilities with SDL in CI environment
