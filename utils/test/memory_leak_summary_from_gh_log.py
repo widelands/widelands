@@ -57,7 +57,17 @@ class GithubASan:
             if os.getenv('GITHUB_STEP_SUMMARY'):
                 write_summary('    our origin: ', text)
             cls.found_local_tb = True
-            return f'::notice title=memory leak origin::{text}'
+            if os.getenv('WLRT_ANNOTATE_LINE'):  # with strategy.job-index == 0 from workflow
+                # annotate only one test job to not have many dublicate messages on one line
+                # unfortunately the jobs can not coordinate
+                f_name = text.rsplit(f'/{compile_d}/', 1)[1]
+                if f_name == text:
+                    f_name = 'src/' + text.rsplit(' src/', 1)[1]
+                f_name, line_no = f_name.rsplit(':', 2)[:2]
+                return f'::notice file={f_name}, line={line_no}, title=memory leak origin::{text}'
+            else:
+                # only mark in log
+                return f'::notice title=memory leak origin::{text}'
         return text
 
     @classmethod
