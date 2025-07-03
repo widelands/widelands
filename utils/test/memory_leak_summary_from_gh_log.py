@@ -17,6 +17,8 @@ import os
 
 
 class GithubASan:
+    test_script = None
+
     @classmethod
     def github_asan_line(cls, text):
         "annotates asan summary on GitHub and writes more info to the steps summary file"
@@ -31,6 +33,7 @@ class GithubASan:
 
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
             write_summary('### ', text)  # this text is colored
+            write_summary('triggered by test ', cls.test_script, '\n\n')
         if 'SUMMARY' in text:
             if os.getenv('GITHUB_STEP_SUMMARY'):
                 write_summary('\n', text)
@@ -38,6 +41,10 @@ class GithubASan:
         if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
             write_summary('+ ', text)  # this text is colored
         return text
+
+    @classmethod
+    def set_test_script(cls, test_script):
+        cls.test_script = test_script
 
 
 def create_summary_one_runner():
@@ -69,6 +76,14 @@ def create_summary_one_runner():
             case ReadingMode.RT_LOGS:
                 if ' ##[group]' in line and 'lsan.' in line:
                     r_mode = ReadingMode.LSAN
+                elif ': ' in line and ('Passed' in line or 'FAILED' in line or 'TIMED OUT' in line):
+                    # this is before stdout
+                    idx = line.find(': ')
+                    if idx > 0:
+                        test_name = line[idx+2:]
+                    else:
+                        test_name = None
+                    GithubASan.set_test_script(test_name)
             case ReadingMode.LSAN:
                 if ' ##[endgroup]' in line:
                     r_mode = ReadingMode.RT_LOGS
