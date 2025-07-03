@@ -1302,7 +1302,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één liaan produceren tussen %1$s en %2$s, afhankelijk van hoe ver de liaan-snijder moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1379,7 +1379,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "De wildernisbewaker kan één vis kweken en één dier vrijlaten tussen %1$s en %2$s, afhankelijk van hoe ver ze moet lopen."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1431,7 +1431,7 @@ msgstr "Maakt touwen van lianen."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "De touwwever heeft gemiddeld %s nodig om één touw te produceren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1644,7 +1644,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr ""
+msgstr "De junglemeester kan één terraform uitvoeren tussen %1$s en %2$s, afhankelijk van hoe ver ze moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -4499,7 +4499,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "De viskweker kan één vis kweken tussen %1$s en %2$s, afhankelijk van hoe ver hij moet lopen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4626,7 +4626,7 @@ msgstr "Geschilderd op een goudspinnerij zonder benodigdheden"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr ""
+msgstr "De goudspinnerij heeft gemiddeld %s nodig om één gouddraad te produceren."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -5180,7 +5180,7 @@ msgstr "Een spinnenkweekster toont haar boerderij"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "De spinnenboerderij heeft gemiddeld %s nodig om één spinnengaren te produceren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7142,7 +7142,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gamekeeper can release one animal between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "De jachtopzichter kan één dier vrijlaten tussen %1$s en %2$s, afhankelijk van hoe ver hij moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Well
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1258
@@ -11523,7 +11523,7 @@ msgstr "Hakt marmeren zuilen uit marmer."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr ""
+msgstr "Het steenhouwershuis heeft gemiddeld %s nodig om één marmeren zuil te produceren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11734,7 +11734,7 @@ msgstr "Maakt wijn."
 #, lua-format
 msgctxt "empire_building"
 msgid "The winery needs %s on average to produce one wine."
-msgstr ""
+msgstr "De wijnmakerij heeft gemiddeld %s nodig om één wijn te produceren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12126,7 +12126,7 @@ msgstr "Houdt schapen voor hun wol."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr ""
+msgstr "De schapenboerderij heeft gemiddeld %s nodig om één wol te produceren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -15111,7 +15111,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one clay between %1$s and %2$s, depending on how "
 "far the clay digger has to walk."
-msgstr ""
+msgstr "Dit gebouw kan tussen %1$s en %2$s klei produceren, afhankelijk van hoe ver de kleigraver moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15261,7 +15261,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "De imker verzameltéén honing tussen %1$s en %2$s, afhankelijk van hoe ver hij moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15346,7 +15346,7 @@ msgstr "Maakt bakstenen van graniet en klei, en kolen als brandstof. Bakstenen z
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "De steenoven heeft gemiddeld %s nodig om één steen te produceren."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15935,7 +15935,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is, kan de dijkwerker één terraform uitvoeren tussen %1$s en %2$s, afhankelijk van hoe ver hij moet lopen."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
