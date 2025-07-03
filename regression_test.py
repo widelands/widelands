@@ -220,7 +220,10 @@ class WidelandsTestCase():
                 f'return code is {widelands.returncode:d}', info_color))
             stdout_file.write('\n')
             self.widelands_returncode = widelands.returncode
-        self.outputs.append(FileToPrint(stdout_filename))
+        if os.getenv('WLRT_HIDE_STDOUT'):
+            self.outputs.append(f'Stdout is: {stdout_filename}')
+        else:
+            self.outputs.append(FileToPrint(stdout_filename))
         return stdout_filename
 
     def run(self):
