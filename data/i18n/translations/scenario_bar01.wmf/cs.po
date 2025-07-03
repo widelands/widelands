@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -8,14 +8,14 @@
 # GunChleoc, 2014
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016
-# af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+# Ondřej Itřech, 2020-2021,2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +80,7 @@ msgstr "K tomu je třeba umístit vlajku na úbočí hory na východě (na kamen
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr "něco uhlí"
+msgstr "něco málo uhlí"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -88,7 +88,7 @@ msgstr "hodně uhlí"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr "něco železa"
+msgstr "něco málo železa"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -96,7 +96,7 @@ msgstr "hodně železa"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr "něco zlata"
+msgstr "něco málo zlata"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -104,7 +104,7 @@ msgstr "hodně zlata"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr "něco žuly"
+msgstr "něco málo žuly"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -147,7 +147,7 @@ msgstr "Lovec zvěř loví, zatímco hajný udržuje její stavy. Maso se potom 
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Toto je první příklad suroviny, kterou je nutné zpracovat, než ji lze použít v další budově. Další budou ještě následovat."
+msgstr "Toto je jen jeden z příkladů suroviny, kterou je nutné zpracovat, než ji lze použít v další budově. Další budou ještě následovat."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
@@ -186,7 +186,7 @@ msgstr "Vylepši budovy a postav malý pivovar"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Vylepši důl, hospodu a postav malý pivovar"
+msgstr "Vylepši důl, hospodu a postav malý pivovar."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
@@ -298,7 +298,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Třetím materiálem potřebným pro stavbu pokročilejších budov je rákos, který slouží jako pokrývka střech. Rákosová pole sází zahradník okolo své budovy, rákosové farmy."
+msgstr "Třetím materiálem potřebným pro stavbu pokročilejších budov je rákos, který slouží jako pokrývka střech. Rákosová pole sází zahradnice okolo své budovy, rákosové farmy."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -447,7 +447,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr "Možná je na čase, abychom to prozatím pustili z hlavy. Je snad správný čas, abychom těm, kdo stále žijí a smýšlí v jednotě, dali nový domov, který prozatím nahradí to, co jsme ztratili? Dokud se nebudeme moci vrátit do míst, která bývala naším domovem…"
+msgstr "Možná je na čase, abychom to prozatím pustili z hlavy. Možná je na čase, abychom těm, kdo stále žijí a smýšlí v jednotě, dali nový domov, který prozatím nahradí to, co jsme ztratili. Než se budeme moci vrátit do míst, která bývala naším domovem…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
@@ -704,7 +704,7 @@ msgstr "Mohlo by to být dost..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
-msgstr "Khantrukh skočí do řeči…"
+msgstr "Khantrukh přerušuje…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -713,7 +713,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "Přestože je to všechno pěkné, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých svačin. A zabezpečit jejich zásobování nemusí být zcela snadné."
+msgstr "Přestože to všechno je pravda, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých svačin. A zabezpečit jejich zásobování nemusí být zcela snadné."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
@@ -730,7 +730,7 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Vypadá to, že tu po lesích běhá celkem dost zvěře, můžeme ji zkusit začít lovit ve větším. A potom, každý určitě bude nadšený z nové hospody. Hele, co jí tak říkat \"Thronova chlouba\" nebo tak nějak!"
+msgstr "Vypadá to, že tu po lesích běhá celkem dost zvěře, můžeme ji zkusit lovit. A potom, každý určitě bude nadšený z nové hospody. Hele, co jí tak říkat \"Thronova chlouba\" nebo tak nějak!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
@@ -763,7 +763,7 @@ msgstr "Naši lovci jsou v lesích, Throne."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Slibuji ti, že než dnes slunce zapadne, budeš mít připravenu hostinu tak bohatou, že by jí nepohrdl ani náčelník všech klanů!"
+msgstr "Slibuji ti, že než dnes slunce zapadne, budeš mít připravenu hostinu tak bohatou, že by jí nepohrdl ani velitel všech klanů!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
@@ -775,7 +775,7 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr "Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekař tu bude co nevidět, s nejchutnějšími chlebovými plackami jen pro našeho velitele!"
+msgstr "Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekařka tu bude co nevidět, s nejchutnějšími chlebovými plackami jen pro našeho velitele!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
@@ -897,7 +897,7 @@ msgstr "Khantrukhovi spadl kámen ze srdce…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Báječné! Střechy už netečou a máme dostatek materiálu na jakoukoli budovu, kterou si jen zamaneme!"
+msgstr "Báječné! Střechy už netečou a máme dostatek materiálu, na jakoukoli budovu si jen zamanem!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"

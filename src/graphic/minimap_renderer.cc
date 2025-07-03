@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -252,18 +252,14 @@ void draw_view_window(const Widelands::Map& map,
 	const int width = map.get_width() * scale_map(map, zoom);
 	const int height = map.get_height() * scale_map(map, zoom);
 	const auto make_red = [width, height, &texture](int x, int y) {
-		if (x < 0) {
+		while (x < 0) {
 			x += width;
 		}
-		if (x >= width) {
-			x -= width;
-		}
-		if (y < 0) {
+		while (y < 0) {
 			y += height;
 		}
-		if (y >= height) {
-			y -= height;
-		}
+		x %= width;
+		y %= height;
 		texture->set_pixel(x, y, kRed);
 	};
 

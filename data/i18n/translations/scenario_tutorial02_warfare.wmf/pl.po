@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -493,15 +493,14 @@ msgstr "Trzecia liczba to brakujący żołnierze. Dwóch z ośmiu (1 + 5 + 2) ż
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Żołnierze w kwaterze głównej"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
-"Your headquarters has some capabilities of military sites: It conqers some "
-"land, and the stored soldiers defend it when attacked. However this also "
-"means that the enemy can attack the headquarters itself too. On the other "
-"hand, there’s a difference too: you can’t start an attack with the soldiers "
-"in your headquarters."
+"Your headquarters has some capabilities of military sites: It conquers some "
+"land, the enemy can attack it directly, and the stored soldiers defend it "
+"and its surroundings when attacked. On the other hand, there’s a difference "
+"too: you can’t start an attack with the soldiers in your headquarters."
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
@@ -510,12 +509,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Możliwości wojskowe kwatery głównej znacznie różnią się od zwykłych magazynów, które nie podbijają lądu i potrzebują pobliskich obiektów wojskowych do obrony. Żołnierze zgromadzeni w zwykłych magazynach nie biorą udziału w żadnych walkach, a zwykłych magazynów nie można atakować bezpośrednio."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Ustawienia żołnierzy w kwaterze głównej"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -526,7 +525,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Podczas gdy wszyscy żołnierze, którzy akurat znajdują się w Twojej kwaterze głównej, pomagają w jej obronie, nie są oni na stałe przypisani do kwatery głównej, więc mogą zostać odesłani w dowolnym momencie, gdy obiekt wojskowy potrzebuje żołnierza. Na szczęście możesz także przydzielić kilku żołnierzy do obrony kwatery głównej w ten sam sposób, w jaki ustalasz liczbę żołnierzy i preferencje dla obiektów wojskowych. Jeśli to zrobisz, kwatera główna zezwoli jedynie na wysłanie nadwyżek żołnierzy do innych budynków, ale nie żołnierzy z ustalonego przydziału."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -537,7 +536,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Jeśli spojrzysz na linie statusu, zobaczysz, że w twoim magazynie nie ma nic, ale twoja kwatera główna ma początkowo znak ‘—’. Oznacza to, że nie ma garnizonu utworzonego w celu ochrony kwatery głównej, chociaż nadal mogą tam być przechowywani żołnierze. Jeśli zwiększysz żądaną liczbę żołnierzy do wartości większej niż zero, kwatera główna wyświetli te same informacje o żołnierzach, co obiekty wojskowe w statusie. Nadwyżka żołnierzy nigdy nie jest wyświetlana w statusie."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

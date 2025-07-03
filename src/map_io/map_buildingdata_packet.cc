@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "map_io/map_buildingdata_packet.h"
+
+#include <memory>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -40,6 +42,7 @@
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -58,27 +61,31 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 9;
+constexpr uint16_t kCurrentPacketVersion = 10;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
-constexpr uint16_t kCurrentPacketPFBuilding = 2;
+constexpr uint16_t kCurrentPacketPFBuilding = 3;
+constexpr uint16_t kCurrentPacketVersionMarket = 1;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
+ * - 10 (v1.3): Added priority disambiguator id
  * Dismantlesite: v1.1 = 1
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
+ * - 2 -> 3: added evict worker
+ * Market: v1.3 = 1
  * Militarysite: v1.1 = 7
  * - 7 -> 8: Refactored soldier request handling
  * Productionsite: v1.1 = 9
  * - 9 -> 10: Added infinite production
  * - 10 -> 11: Added ship/ferry fleet/yard interfaces
- * Trainingesite: v1.1 = 7
+ * Trainingsite: v1.1 = 7
  */
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -98,6 +105,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility v1.2
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 9) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
@@ -154,8 +162,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 						const std::string warename(fr.string());
-						building.set_priority(
-						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+						const uint32_t disambiguator_id = packet_version >= 10 ? fr.unsigned_32() : 0;
+						building.set_priority(wwWARE, egbase.descriptions().ware_index(warename),
+						                      WarePriority(fr), disambiguator_id);
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
@@ -229,6 +238,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						read_militarysite(*militarysite, fr, game, mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse(*warehouse, fr, game, mol);
+					} else if (upcast(Market, market, &building)) {
+						read_market(*market, fr, game, mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
 						if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite(*trainingsite, fr, game, mol);
@@ -236,8 +247,6 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							read_productionsite(*productionsite, fr, game, mol);
 						}
 					} else {
-						//  type of building is not one of (or derived from)
-						//  {ConstructionSite, Warehouse, ProductionSite}
 						NEVER_HERE();
 					}
 					mol.mark_object_as_loaded(building);
@@ -260,7 +269,7 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
                                                              MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketPFBuilding) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
 			pfb.building_ = tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
@@ -302,9 +311,12 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			}
 
 			pfb.working_ = (fr.unsigned_8() != 0u);
-			pfb.work_steptime_ = Time(fr);
+			pfb.workstep_completiontime_ = Time(fr);
 			pfb.work_completed_ = fr.unsigned_32();
 			pfb.work_steps_ = fr.unsigned_32();
+			if (packet_version >= 3) {
+				pfb.last_remaining_time_ = Duration(fr);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Partially Finished Building",
 			                            packet_version, kCurrentPacketPFBuilding);
@@ -391,8 +403,11 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			assert(warehouse.get_warehouse_name().empty());
 			// TODO(tothxa): Savegame compatibility v1.1
 			warehouse.set_warehouse_name(
-			   packet_version >= 9 ? fr.string() :
-			                         player->pick_warehousename(warehouse.descr().get_isport()));
+			   packet_version >= 9 ?
+			      fr.string() :
+			      player->pick_warehousename(warehouse.descr().get_isport() ?
+			                                    Player::WarehouseNameType::kPort :
+			                                    Player::WarehouseNameType::kWarehouse));
 
 			while (fr.unsigned_8() != 0u) {
 				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());
@@ -419,8 +434,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 			}
 
-			// TODO(sirver,trading): Pull out and reuse this for market workers.
 			assert(warehouse.incorporated_workers_.empty());
+			assert(warehouse.incorporated_soldiers_.empty());
 			{
 				uint16_t const nrworkers = fr.unsigned_16();
 				for (uint16_t i = 0; i < nrworkers; ++i) {
@@ -429,10 +444,18 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					try {
 						Worker& worker = mol.get<Worker>(worker_serial);
 						const DescriptionIndex& worker_index = tribe.worker_index(worker.descr().name());
-						if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
-							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
+						if (worker_index == warehouse.owner().tribe().soldier()) {
+							// Even though the Soldier object exists, we can't get it back from the
+							// stored ObjectPointer until the game is fully loaded, so we can't use
+							// Warehouse::incorporate_soldier_inner() to sort the soldiers on loading.
+							warehouse.incorporated_soldiers_.emplace_back(dynamic_cast<Soldier*>(&worker));
+							warehouse.soldiers_are_sorted_ = false;
+						} else {
+							if (warehouse.incorporated_workers_.count(worker_index) == 0u) {
+								warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
+							}
+							warehouse.incorporated_workers_[worker_index].emplace_back(&worker);
 						}
-						warehouse.incorporated_workers_[worker_index].emplace_back(&worker);
 					} catch (const WException& e) {
 						throw GameDataError(
 						   "incorporated worker #%u (%u): %s", i, worker_serial, e.what());
@@ -507,7 +530,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			warehouse.next_stock_remove_act_ = Time(fr);
 
 			if (warehouse.descr().get_isport()) {
-				if (Serial portdock = fr.unsigned_32()) {
+				if (Serial portdock = fr.unsigned_32(); portdock != 0) {
 					warehouse.portdock_ = &mol.get<PortDock>(portdock);
 					warehouse.portdock_->set_economy(warehouse.get_economy(wwWARE), wwWARE);
 					warehouse.portdock_->set_economy(warehouse.get_economy(wwWORKER), wwWORKER);
@@ -525,23 +548,29 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						// TODO(Nordfriese): The ship can only fail to exist in a pre-v1.2
 						// development version. Require its existence after v1.2.
 						if (!mol.is_object_known(ship_serial)) {
-							log_warn("Reading soldier request for nonexistent ship %u", ship_serial);
-							SoldierRequest req(
+							log_warn(
+							   "Reading soldier request manager for nonexistent ship %u", ship_serial);
+							SoldierRequestManager srm(
 							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 							   []() { return 0U; }, []() { return std::vector<Widelands::Soldier*>(); });
-							req.read(fr, game, mol);
+							srm.read(fr, game, mol);
 							continue;
 						}
 
 						Ship* ship = &mol.get<Ship>(ship_serial);
-						assert(warehouse.portdock_->warship_soldier_requests_.count(ship->serial()) == 0);
-						SoldierRequest* req = new SoldierRequest(
+						assert(warehouse.portdock_->warship_soldier_request_managers_.count(
+						          ship->serial()) == 0);
+						SoldierRequestManager* srm = new SoldierRequestManager(
 						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
 						   [ship]() { return ship->get_warship_soldier_capacity(); },
 						   [ship]() { return ship->onboard_soldiers(); });
-						req->read(fr, game, mol);
-						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
+						srm->read(fr, game, mol);
+						warehouse.portdock_->warship_soldier_request_managers_.emplace(
+						   ship->serial(), srm);
 					}
+				} else {
+					log_err(
+					   "Loading port %s without a portdock.", warehouse.get_warehouse_name().c_str());
 				}
 			}
 
@@ -563,7 +592,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			// TODO(tothxa): Savegame compatibility v1.1
 			if (packet_version >= 10) {
 				warehouse.next_swap_soldiers_time_ = Time(fr);
-				warehouse.soldier_request_.read(fr, game, mol);
+				warehouse.soldier_request_manager_.read(fr, game, mol);
 				warehouse.desired_soldier_count_ = packet_version >= 11 ? fr.unsigned_32() : 0;
 			}
 		} else {
@@ -572,6 +601,76 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 		}
 	} catch (const WException& e) {
 		throw GameDataError("warehouse: %s", e.what());
+	}
+}
+
+void MapBuildingdataPacket::read_market(Market& market,
+                                        FileRead& fr,
+                                        Game& game,
+                                        MapObjectLoader& mol) {
+	try {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionMarket) {
+
+			market.set_market_name(fr.string());
+			market.fetchfromflag_ = fr.unsigned_32();
+
+			assert(market.pending_dropout_wares_.empty());
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				market.pending_dropout_wares_.push_back(fr.unsigned_32());
+			}
+
+			assert(market.carrier_request_ == nullptr);
+			Serial carrier = fr.unsigned_32();
+			if (carrier != 0) {
+				market.carrier_ = &mol.get<Worker>(carrier);
+			} else {
+				market.carrier_request_.reset(
+				   new Request(market, 0, Market::carrier_callback, wwWORKER));
+				market.carrier_request_->read(fr, game, mol);
+			}
+
+			assert(market.trade_orders_.empty());
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				const TradeID trade_id = fr.unsigned_32();
+				std::unique_ptr<Market::TradeOrder>& trade = market.trade_orders_[trade_id];
+				trade.reset(new Market::TradeOrder());
+				trade->market = &market;
+
+				Serial s = fr.unsigned_32();
+				trade->other_side = s == 0 ? nullptr : &mol.get<Market>(s);
+
+				trade->initial_num_batches = fr.signed_32();
+				trade->num_shipped_batches = fr.signed_32();
+				trade->received_traded_wares_in_this_batch = fr.unsigned_32();
+				trade->paused = fr.unsigned_8() != 0;
+
+				for (size_t j = fr.unsigned_32(); j > 0; --j) {
+					const std::string warename(fr.string());
+					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
+					trade->items.emplace_back(ware_index, fr.unsigned_32());
+				}
+
+				for (size_t j = fr.unsigned_32(); j > 0; --j) {
+					const std::string warename(fr.string());
+					const DescriptionIndex ware_index = game.descriptions().ware_index(warename);
+					std::unique_ptr<WaresQueue> queue(new WaresQueue(market, ware_index, 1));
+					queue->read(fr, game, mol);
+					queue->set_callback(Market::ware_arrived_callback, &market);
+					trade->wares_queues_[ware_index] = std::move(queue);
+				}
+
+				trade->carriers_queue_.reset(new WorkersQueue(market, 0, 1));
+				trade->carriers_queue_->read(fr, game, mol);
+				trade->carriers_queue_->set_callback(Market::ware_arrived_callback, &market);
+			}
+
+		} else {
+			throw UnhandledVersionError(
+			   "MapBuildingdataPacket - Market", packet_version, kCurrentPacketVersionMarket);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("market: %s", e.what());
 	}
 }
 
@@ -637,7 +736,7 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 
 			// TODO(tothxa): Savegame compatibility v1.1
 			if (packet_version >= 8) {
-				militarysite.soldier_request_.read(fr, game, mol);
+				militarysite.soldier_request_manager_.read(fr, game, mol);
 			}
 
 		} else {
@@ -889,20 +988,19 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				// Probably not worth adding graphic/text_layout as a dependency. It would
 				// require specifying the font styles too, but we already get that through
 				// Building::send_message().
-				// TODO(tothxa): The main problem is the hard-coded vspace gap.
+				// TODO(tothxa): The main problem are the hard-coded spacing gaps.
 				static const std::string paragraph_separator("</p><vspace gap=8><p>");
 
 				std::string body("<p>");
 				body += format(
 				   /** TRANSLATORS: The argument is the buiding name */
-				   _("%s: the building's inputs have changed."), productionsite.descr().descname());
+				   _("%s: the building’s inputs have changed."), productionsite.descr().descname());
 				if (!deleted_wares.empty() || deleted_unknown > 0) {
-					/** TRANSLATORS: Amount and type of space between two sentences */
-					body += pgettext("sentence_separator", " ");
-					body += _("The following wares have been deleted:");
 					body += paragraph_separator;
+					body += _("The following wares have been deleted:");
+					body += "</p><p>";
 
-					static const std::string list_entry(" • %s</p><p>");  // ugly, but simple
+					static const std::string list_entry("<space gap=8>• %s</p><p>");  // ugly, but simple
 					for (const WareAmount& deleted : deleted_wares) {
 						body += format(
 						   list_entry,
@@ -995,8 +1093,10 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			delete trainingsite.soldier_request_;
 			trainingsite.soldier_request_ = nullptr;
 			if (fr.unsigned_8() != 0u) {
+				// Preference is set below
 				trainingsite.soldier_request_ =
-				   new Request(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER);
+				   new SoldierRequest(trainingsite, 0, TrainingSite::request_soldier_callback, wwWORKER,
+				                      SoldierPreference::kAny);
 				trainingsite.soldier_request_->read(fr, game, mol);
 			}
 
@@ -1056,6 +1156,14 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			uint8_t somebits = fr.unsigned_8();
 			trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
 			trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
+
+			// TODO(tothxa): update if preference is changed to manual
+			if (trainingsite.soldier_request_ != nullptr) {
+				trainingsite.soldier_request_->set_preference(trainingsite.requesting_weak_trainees_ ?
+				                                                 SoldierPreference::kRookies :
+				                                                 SoldierPreference::kHeroes);
+			}
+
 			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
 			trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
 			assert(16 > somebits);
@@ -1145,7 +1253,8 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 
 			fw.unsigned_32(building->ware_priorities_.size());
 			for (const auto& pair : building->ware_priorities_) {
-				fw.string(egbase.descriptions().get_ware_descr(pair.first)->name());
+				fw.string(egbase.descriptions().get_ware_descr(pair.first.first)->name());
+				fw.unsigned_32(pair.first.second);
 				pair.second.write(fw);
 			}
 
@@ -1190,6 +1299,8 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				write_militarysite(*militarysite, fw, game, mos);
 			} else if (upcast(Warehouse const, warehouse, building)) {
 				write_warehouse(*warehouse, fw, game, mos);
+			} else if (upcast(Market const, market, building)) {
+				write_market(*market, fw, game, mos);
 			} else if (upcast(ProductionSite const, productionsite, building)) {
 				if (upcast(TrainingSite const, trainingsite, productionsite)) {
 					write_trainingsite(*trainingsite, fw, game, mos);
@@ -1198,8 +1309,6 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 			} else {
 				NEVER_HERE();
-				//  type of building is not one of (or derived from)
-				//  {ConstructionSite, Warehouse, ProductionSite}
 			}
 			mos.mark_object_as_saved(*building);
 		}
@@ -1244,9 +1353,10 @@ void MapBuildingdataPacket::write_partially_finished_building(const PartiallyFin
 	}
 
 	fw.unsigned_8(static_cast<uint8_t>(pfb.working_));
-	pfb.work_steptime_.save(fw);
+	pfb.workstep_completiontime_.save(fw);
 	fw.unsigned_32(pfb.work_completed_);
 	fw.unsigned_32(pfb.work_steps_);
+	pfb.last_remaining_time_.save(fw);
 }
 
 void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& constructionsite,
@@ -1323,6 +1433,8 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	for (const auto& cwt : warehouse.incorporated_workers_) {
 		nworkers += cwt.second.size();
 	}
+	// Soldiers were moved to incorporated_soldiers_ in v1.3
+	nworkers += warehouse.incorporated_soldiers_.size();
 
 	fw.unsigned_16(nworkers);
 	using TWorkerMap = std::map<uint32_t, const Worker*>;
@@ -1333,6 +1445,11 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 			assert(mos.is_object_known(w));
 			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
+	}
+	for (const OPtr<Soldier>& temp_soldier : warehouse.incorporated_soldiers_) {
+		const Soldier& s = *temp_soldier.get(game);
+		assert(mos.is_object_known(s));
+		workermap.insert(std::make_pair(mos.get_object_file_index(s), &s));
 	}
 
 	for (const auto& temp_worker : workermap) {
@@ -1372,21 +1489,73 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	if (warehouse.descr().get_isport()) {
 		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.portdock_));
 
-		// Expedition specific stuff. See comment in loader.
-		if (warehouse.portdock_->expedition_started()) {
-			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
-		}
+		if (warehouse.portdock_ != nullptr) {
+			// Expedition specific stuff. See comment in loader.
+			if (warehouse.portdock_->expedition_started()) {
+				warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
+			}
 
-		fw.unsigned_32(warehouse.portdock_->warship_soldier_requests_.size());
-		for (const auto& pair : warehouse.portdock_->warship_soldier_requests_) {
-			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
-			pair.second->write(fw, game, mos);
+			fw.unsigned_32(warehouse.portdock_->warship_soldier_request_managers_.size());
+			for (const auto& pair : warehouse.portdock_->warship_soldier_request_managers_) {
+				fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
+				pair.second->write(fw, game, mos);
+			}
+		} else {
+			log_err_time(game.get_gametime(),
+			             "Saving port %s without a portdock. Expect problems on loading.",
+			             warehouse.get_warehouse_name().c_str());
 		}
 	}
 
 	warehouse.next_swap_soldiers_time_.save(fw);
-	warehouse.soldier_request_.write(fw, game, mos);
+	warehouse.soldier_request_manager_.write(fw, game, mos);
 	fw.unsigned_32(warehouse.desired_soldier_count_);
+}
+
+void MapBuildingdataPacket::write_market(const Market& market,
+                                         FileWrite& fw,
+                                         Game& game,
+                                         MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionMarket);
+
+	fw.string(market.market_name_);
+
+	fw.unsigned_32(market.fetchfromflag_);
+	fw.unsigned_32(market.pending_dropout_wares_.size());
+	for (DescriptionIndex di : market.pending_dropout_wares_) {
+		fw.unsigned_32(di);
+	}
+
+	MapObject* carrier = market.carrier_.get(game);
+	assert((market.carrier_request_ == nullptr) ^ (carrier == nullptr));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(carrier));
+	if (carrier == nullptr) {
+		market.carrier_request_->write(fw, game, mos);
+	}
+
+	fw.unsigned_32(market.trade_orders_.size());
+	for (const auto& order : market.trade_orders_) {
+		fw.unsigned_32(order.first);
+		fw.unsigned_32(mos.get_object_file_index(*order.second->other_side.get(game)));
+		fw.signed_32(order.second->initial_num_batches);
+		fw.signed_32(order.second->num_shipped_batches);
+		fw.unsigned_32(order.second->received_traded_wares_in_this_batch);
+		fw.unsigned_8(order.second->paused ? 1 : 0);
+
+		fw.unsigned_32(order.second->items.size());
+		for (const auto& ware_amount : order.second->items) {
+			fw.string(game.descriptions().get_ware_descr(ware_amount.first)->name());
+			fw.unsigned_32(ware_amount.second);
+		}
+
+		fw.unsigned_32(order.second->wares_queues_.size());
+		for (const auto& queue : order.second->wares_queues_) {
+			fw.string(game.descriptions().get_ware_descr(queue.first)->name());
+			queue.second->write(fw, game, mos);
+		}
+
+		order.second->carriers_queue_->write(fw, game, mos);
+	}
 }
 
 void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
@@ -1407,7 +1576,7 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 		fw.unsigned_8(pair.second ? 1 : 0);
 	}
 
-	militarysite.soldier_request_.write(fw, game, mos);
+	militarysite.soldier_request_manager_.write(fw, game, mos);
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,

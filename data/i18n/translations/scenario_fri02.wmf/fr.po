@@ -1,24 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # zecas <jjorge@free.fr>, 2018
-# Renaud Bouchard, 2019
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # C138, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # David D, 2023
 # Laurent Godard, 2024
+# Renaud Bouchard, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: Renaud Bouchard, 2024\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -789,7 +789,7 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
-"30 troncs, 40 dalles de granit, 10 poissons, 30 choppes de bière, 150 sceaux"
+"30 troncs, 40 dalles de granit, 30 poissons, 30 choppes de bière, 150 sceaux"
 " d'eau, 40 rations, 10 repas, 30 blocs de charbon, 40 blocs de minerai fer, "
 "20 lingots de fer, 20 blocs de minerai d'or et 10 lingots d'or."
 

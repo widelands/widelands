@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -210,6 +210,10 @@ public:
 	// Read helptext from Lua table
 	void load_helptexts(MapObjectDescr* descr, const LuaTable& table) const;
 
+	void set_descname(std::string dn) {
+		descname_ = dn;
+	}
+
 	// Make sure that everything is there and that dependencies are calculated.
 	// This needs to be called exactly once during postloading.
 	void finalize_loading(Descriptions& descriptions);
@@ -235,7 +239,7 @@ private:
 	void process_productionsites(Descriptions& descriptions);
 
 	const std::string name_;
-	const std::string descname_;
+	std::string descname_;
 	const Descriptions& descriptions_;
 
 	uint32_t frontier_animation_id_{0U};

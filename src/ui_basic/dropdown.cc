@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/dropdown.h"
+
+#include <algorithm>
 
 #include "base/i18n.h"
 #include "base/utf8.h"
@@ -219,9 +221,9 @@ UI::Panel* BaseDropdown::get_open_dropdown() {
 void BaseDropdown::layout() {
 	int list_width = list_->calculate_desired_width();
 
-	const int new_list_height = std::min(max_list_height_ / list_->get_lineheight(),
-	                                     std::min(list_->size(), max_list_items_)) *
-	                            list_->get_lineheight();
+	const int new_list_height =
+	   std::min({max_list_height_ / list_->get_lineheight(), list_->size(), max_list_items_}) *
+	   list_->get_lineheight();
 	list_->set_size(std::max(list_width, button_box_.get_w()), new_list_height);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we

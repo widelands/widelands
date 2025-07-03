@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "commands/cmd_net_check_sync.h"
 #include "config.h"
 #include "game_io/game_loader.h"
 #include "io/fileread.h"
@@ -36,7 +37,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
@@ -141,14 +141,22 @@ void GameClientImpl::send_custom_naming_lists() const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_CUSTOM_NAMING_LISTS);
 
-	auto names = Widelands::read_custom_warehouse_ship_names();
-	s.unsigned_32(names.first.size());
-	for (const std::string& name : names.first) {
-		s.string(name);
+	auto lists = Widelands::read_custom_warehouse_ship_names();
+	s.unsigned_32(lists.first.size());
+	for (const auto& tribe_and_list : lists.first) {
+		s.string(tribe_and_list.first);
+		s.unsigned_32(tribe_and_list.second.size());
+		for (const std::string& name : tribe_and_list.second) {
+			s.string(name);
+		}
 	}
-	s.unsigned_32(names.second.size());
-	for (const std::string& name : names.second) {
-		s.string(name);
+	s.unsigned_32(lists.second.size());
+	for (const auto& tribe_and_list : lists.second) {
+		s.string(tribe_and_list.first);
+		s.unsigned_32(tribe_and_list.second.size());
+		for (const std::string& name : tribe_and_list.second) {
+			s.string(name);
+		}
 	}
 
 	net->send(s);
@@ -316,7 +324,8 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	std::map<Widelands::PlayerNumber,
+	         std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
 	   custom_naming_lists;
 	for (;;) {
 		Widelands::PlayerNumber number = packet.unsigned_8();
@@ -325,10 +334,16 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 
 		for (size_t i = packet.unsigned_32(); i > 0; --i) {
-			custom_naming_lists[number].first.insert(packet.string());
+			auto& set = custom_naming_lists[number].first[packet.string()];
+			for (size_t j = packet.unsigned_32(); j > 0; --j) {
+				set.insert(packet.string());
+			}
 		}
 		for (size_t i = packet.unsigned_32(); i > 0; --i) {
-			custom_naming_lists[number].second.insert(packet.string());
+			auto& set = custom_naming_lists[number].second[packet.string()];
+			for (size_t j = packet.unsigned_32(); j > 0; --j) {
+				set.insert(packet.string());
+			}
 		}
 	}
 
@@ -419,7 +434,7 @@ void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
+		verb_log_info("[Client]: enqueue playercommand at time %u\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -735,7 +750,7 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
+	verb_log_info("[Client]: sending timestamp: %u", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
@@ -1116,7 +1131,8 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	}
 	const Time time(packet.unsigned_32());
 	d->time.receive(time);
-	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+	d->game->enqueue_command(
+	   new Widelands::CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
 }
 

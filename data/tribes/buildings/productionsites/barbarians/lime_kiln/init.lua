@@ -51,9 +51,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
          descname = _("mixing grout"),
          actions = {
+            -- time total: 50.8 + 29 + 3 + 2 * 3.6 = 90 sec
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",
-            "sleep=duration:50s",
+            "sleep=duration:50s800ms",
             "playsound=sound/barbarians/stonegrind priority:80%",
             "animate=working duration:29s",
             "playsound=sound/barbarians/mortar priority:60%",

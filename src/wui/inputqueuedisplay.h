@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
+#include <functional>
 #include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -91,18 +92,26 @@ public:
 	                  Widelands::InputQueue& queue,
 	                  bool show_only,
 	                  bool has_priority,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id = 0);
 	// For constructionsite settings
 	InputQueueDisplay(UI::Panel* parent,
 	                  InteractiveBase& interactive_base,
 	                  Widelands::ConstructionSite& constructionsite,
 	                  Widelands::WareWorker type,
 	                  Widelands::DescriptionIndex ware_or_worker_index,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id = 0);
 
 	~InputQueueDisplay() override = default;
 
 	void set_max_icons(size_t);
+
+	void lock_desired_fill(const std::string& reason,
+	                       const std::string& unlock_title,
+	                       const std::string& unlock_body,
+	                       std::function<void()> unlock_fn);
+	void unlock_desired_fill(bool call_unlock_fn);
 
 protected:
 	void think() override;
@@ -111,6 +120,7 @@ protected:
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	void handle_mousein(bool inside) override;
 
 private:
 	// Common constructor
@@ -123,7 +133,8 @@ private:
 	                  Widelands::ProductionsiteSettings* settings,
 	                  bool show_only,
 	                  bool has_priority,
-	                  BuildingWindow::CollapsedState* collapsed);
+	                  BuildingWindow::CollapsedState* collapsed,
+	                  uint32_t disambiguator_id);
 
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
@@ -138,6 +149,8 @@ private:
 	Widelands::ProductionsiteSettings* settings_;
 
 	Widelands::ProductionsiteSettings::InputQueueSetting* get_setting() const;
+
+	uint32_t disambiguator_id_;
 
 	// Run a function on this InputQueueDisplay and all its siblings
 	void recurse(const std::function<void(InputQueueDisplay&)>&);
@@ -162,6 +175,11 @@ private:
 	UI::PrioritySlider priority_;
 	UI::Panel spacer_, priority_indicator_;
 	const Widelands::WarePriority* slider_was_moved_;
+
+	bool lock_desired_fill_{false};
+	std::function<void()> unlock_fn_;
+	std::string unlock_title_;
+	std::string unlock_body_;
 
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 

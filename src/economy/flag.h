@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ class WareInstance;
 class FlagDescr : public MapObjectDescr {
 public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~FlagDescr() override = default;
 

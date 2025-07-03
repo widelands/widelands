@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -475,10 +475,10 @@ public:
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t nr_wanted = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(const Flag&,
-	                     PlayerNumber attacker,
-	                     const std::vector<Widelands::Soldier*>&,
-	                     bool allow_conquer);
+	void attack(const Flag&,
+	            PlayerNumber attacker,
+	            const std::vector<Widelands::Soldier*>&,
+	            bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -571,15 +571,20 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
+	[[nodiscard]] std::multimap<uint32_t, const Market*> get_markets(Coords closest_to) const;
+	[[nodiscard]] std::vector<const Market*> get_markets() const;
+
+	enum class WarehouseNameType { kWarehouse, kPort, kMarket };
 	[[nodiscard]] std::string pick_shipname();
-	[[nodiscard]] std::string pick_warehousename(bool port);
+	[[nodiscard]] std::string pick_warehousename(WarehouseNameType);
 
 	// Remove name from the list of remaining names
 	void reserve_shipname(const std::string& name);
 	void reserve_warehousename(const std::string& name);
 
-	void set_shipnames(const std::set<std::string>& names);
-	void set_warehousenames(const std::set<std::string>& names);
+	using CustomNamingList = std::map<std::string, std::set<std::string>>;
+	void set_shipnames(const CustomNamingList& names);
+	void set_warehousenames(const CustomNamingList& names);
 
 	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
 	detected_port_spaces() const {
@@ -781,7 +786,7 @@ void find_former_buildings(const Descriptions& descriptions,
                            DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 
-std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names();
+std::pair<Player::CustomNamingList, Player::CustomNamingList> read_custom_warehouse_ship_names();
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

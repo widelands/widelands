@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -52,8 +53,9 @@ static const Duration kBuildingLeaveInterval = Duration(1000);
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
+                             const std::vector<std::string>& attribs,
                              Descriptions& descriptions)
-   : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
+   : MapObjectDescr(init_type, table.get_string("name"), init_descname, table, attribs),
      descriptions_(descriptions),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle")),
@@ -547,34 +549,69 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
 	case InfoStringFormat::kCensus:
-		if (descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+		switch (descr().type()) {
+		case MapObjectType::CONSTRUCTIONSITE: {
 			upcast(ConstructionSite const, constructionsite, this);
 			result = constructionsite->building().descname();
-		} else if (descr().type() == MapObjectType::WAREHOUSE) {
+		} break;
+
+		case MapObjectType::WAREHOUSE: {
 			upcast(Warehouse const, warehouse, this);
 			result = warehouse->warehouse_census_string();
-		} else {
+		} break;
+
+		case MapObjectType::MARKET: {
+			upcast(Market const, market, this);
+			result = market->market_census_string();
+		} break;
+
+		default:
 			result = descr().descname();
+			break;
 		}
+
 		break;
+
 	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
+
 	case InfoStringFormat::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
 		break;
+
 	default:
 		NEVER_HERE();
 	}
+
 	return result;
+}
+
+std::string Building::named_building_census_string(const std::string& icon_fmt,
+                                                   std::string name) const {
+	if (name.empty()) {
+		name = descr().descname();
+		// See explanation in set_warehouse_name().
+		// Needed because of e.g. Temple of Vesta in emp04
+		replace_all(name, " ", " ");
+	}
+	return format(icon_fmt, richtext_escape(name));
 }
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi,
                                  WareWorker const /* type */,
-                                 const Request* /* req */) {
+                                 const Request* /* req */,
+                                 uint32_t /* disambiguator_id */) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
+}
+
+bool Building::can_change_max_fill(DescriptionIndex /* di */,
+                                   WareWorker /* ww */,
+                                   const Request* /* r */,
+                                   uint32_t /* disambiguator_id */) {
+	return true;
 }
 
 /*
@@ -742,10 +779,15 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
+uint32_t Building::get_priority_disambiguator_id(const Request* /*req*/) const {
+	return 0;
+}
+
 const WarePriority& Building::get_priority(const WareWorker type,
-                                           const DescriptionIndex ware_index) const {
+                                           const DescriptionIndex ware_index,
+                                           const uint32_t disambiguator_id) const {
 	if (type == wwWARE) {
-		const auto it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find({ware_index, disambiguator_id});
 		if (it != ware_priorities_.end()) {
 			return it->second;
 		}
@@ -759,13 +801,15 @@ const WarePriority& Building::get_priority(const WareWorker type,
  */
 void Building::set_priority(const WareWorker type,
                             const DescriptionIndex ware_index,
-                            const WarePriority& new_priority) {
+                            const WarePriority& new_priority,
+                            const uint32_t disambiguator_id) {
 	if (type == wwWARE) {
 		// WarePriority is not default-constructible, so no [] access :(
-		if (ware_priorities_.count(ware_index) != 0u) {
-			ware_priorities_.at(ware_index) = new_priority;
+		std::pair<DescriptionIndex, uint32_t> key(ware_index, disambiguator_id);
+		if (ware_priorities_.count(key) != 0u) {
+			ware_priorities_.at(key) = new_priority;
 		} else {
-			ware_priorities_.emplace(ware_index, new_priority);
+			ware_priorities_.emplace(key, new_priority);
 		}
 	}
 }
@@ -781,9 +825,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
+	molog(egbase.get_gametime(), "animstart: %u\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
+	molog(egbase.get_gametime(), "leave_time: %u\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,7 +91,7 @@ Request::~Request() {
 	}
 }
 
-// Modified to allow Requirements and SoldierRequests
+// Modified to allow Requirements and SoldierRequestManagers
 constexpr uint16_t kCurrentPacketVersion = 6;
 
 /**
@@ -282,8 +282,10 @@ constexpr Duration kBlacklistDurationAfterEvict(18000);
 uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
-	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
-	                                  WarePriority::kNormal);
+	   (target_building_ != nullptr ?
+	       target_building_->get_priority(
+	          get_type(), get_index(), target_building_->get_priority_disambiguator_id(this)) :
+	       WarePriority::kNormal);
 
 	// Don't allow evicted workers to go straight back inside (bug #4809)
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
@@ -338,7 +340,8 @@ uint32_t Request::get_normalized_transfer_priority() const {
 	// High               4096                 12
 	// VeryHigh         2^32-1                 16
 
-	const WarePriority& priority = target_building_->get_priority(get_type(), get_index());
+	const WarePriority& priority = target_building_->get_priority(
+	   get_type(), get_index(), target_building_->get_priority_disambiguator_id(this));
 	if (WarePriority::kVeryHigh <= priority) {
 		return Flag::kMaxTransferPriority;
 	}

@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# RadinShirzad, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: RadinShirzad, 2025\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr ""
 
 #: ../../../../data/world/critters/brownbear/init.lua:7
 msgid "Brown bear"
-msgstr ""
+msgstr "خرس قهوه‌ای"
 
 #: ../../../../data/world/critters/bunny/init.lua:7
 msgid "Bunny"
-msgstr ""
+msgstr "خرگوش"
 
 #: ../../../../data/world/critters/chamois/init.lua:7
 msgid "Chamois"
@@ -34,15 +35,15 @@ msgstr ""
 
 #: ../../../../data/world/critters/deer/init.lua:7
 msgid "Deer"
-msgstr ""
+msgstr "آهو"
 
 #: ../../../../data/world/critters/duck/init.lua:7
 msgid "Duck"
-msgstr ""
+msgstr "اردک"
 
 #: ../../../../data/world/critters/fox/init.lua:7
 msgid "Fox"
-msgstr ""
+msgstr "روباه"
 
 #: ../../../../data/world/critters/lynx/init.lua:7
 msgid "Lynx"
@@ -62,7 +63,7 @@ msgstr ""
 
 #: ../../../../data/world/critters/sheep/init.lua:7
 msgid "Sheep"
-msgstr ""
+msgstr "گوسفند"
 
 #: ../../../../data/world/critters/stag/init.lua:7
 msgid "Stag"
@@ -78,7 +79,7 @@ msgstr ""
 
 #: ../../../../data/world/critters/wolf/init.lua:7
 msgid "Wolf"
-msgstr ""
+msgstr "گرگ"
 
 #: ../../../../data/world/immovables/artifacts/artifact00/init.lua:176
 #: ../../../../data/world/immovables/artifacts/artifact01/init.lua:7
@@ -94,7 +95,7 @@ msgstr ""
 #: ../../../../data/world/immovables/miscellaneous/ruin1/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/ruin2/init.lua:7
 msgid "Ruin"
-msgstr ""
+msgstr "خرابه"
 
 #: ../../../../data/world/immovables/miscellaneous/debris00/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/debris01/init.lua:7
@@ -105,7 +106,7 @@ msgstr ""
 #: ../../../../data/world/immovables/miscellaneous/mushroom1/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/mushroom2/init.lua:7
 msgid "Mushroom"
-msgstr ""
+msgstr "قارچ"
 
 #: ../../../../data/world/immovables/miscellaneous/pebble1/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/pebble2/init.lua:7
@@ -147,20 +148,20 @@ msgstr ""
 #: ../../../../data/world/immovables/plants/bush4/init.lua:7
 #: ../../../../data/world/immovables/plants/bush5/init.lua:7
 msgid "Bush"
-msgstr ""
+msgstr "بوته"
 
 #: ../../../../data/world/immovables/plants/cactus1/init.lua:7
 #: ../../../../data/world/immovables/plants/cactus2/init.lua:7
 #: ../../../../data/world/immovables/plants/cactus3/init.lua:7
 #: ../../../../data/world/immovables/plants/cactus4/init.lua:7
 msgid "Cactus"
-msgstr ""
+msgstr "کاکتوس"
 
 #: ../../../../data/world/immovables/plants/grass1/init.lua:7
 #: ../../../../data/world/immovables/plants/grass2/init.lua:7
 #: ../../../../data/world/immovables/plants/grass3/init.lua:7
 msgid "Grass"
-msgstr ""
+msgstr "چمن"
 
 #: ../../../../data/world/immovables/rocks/blackland/1/init.lua:7
 #: ../../../../data/world/immovables/rocks/desert/1/init.lua:7
@@ -493,11 +494,11 @@ msgstr ""
 
 #: ../../../../data/world/immovables/trees/oak/old/init.lua:9
 msgid "Oak (Old)"
-msgstr ""
+msgstr "بلوط (کهن)"
 
 #: ../../../../data/world/immovables/trees/oak/old/init.lua:10
 msgid "Oak"
-msgstr ""
+msgstr "بلوط"
 
 #: ../../../../data/world/immovables/trees/oak/pole/init.lua:9
 msgid "Oak (Pole)"
@@ -804,7 +805,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543
 msgid "Winter"
-msgstr ""
+msgstr "زمستان"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:571
@@ -813,19 +814,19 @@ msgstr ""
 
 #: ../../../../data/world/resources/coal/init.lua:110
 msgid "Coal"
-msgstr ""
+msgstr "زغال سنگ"
 
 #: ../../../../data/world/resources/fish/init.lua:7
 msgid "Fish"
-msgstr ""
+msgstr "ماهی"
 
 #: ../../../../data/world/resources/gold/init.lua:7
 msgid "Gold"
-msgstr ""
+msgstr "زَر"
 
 #: ../../../../data/world/resources/iron/init.lua:7
 msgid "Iron"
-msgstr ""
+msgstr "آهن"
 
 #: ../../../../data/world/resources/stones/init.lua:7
 msgid "Stones"
@@ -837,7 +838,7 @@ msgstr ""
 #: ../../../../data/world/terrains/wasteland/water/init.lua:5
 #: ../../../../data/world/terrains/winter/water/init.lua:5
 msgid "Water"
-msgstr ""
+msgstr "آب"
 
 #: ../../../../data/world/terrains/desert/beach/init.lua:179
 #: ../../../../data/world/terrains/summer/beach/init.lua:5
@@ -864,7 +865,7 @@ msgstr ""
 
 #: ../../../../data/world/terrains/desert/drysoil/init.lua:5
 msgid "Dry Soil"
-msgstr ""
+msgstr "خاک خشک"
 
 #: ../../../../data/world/terrains/desert/forested_mountain1/init.lua:5
 #: ../../../../data/world/terrains/summer/forested_mountain1/init.lua:5
@@ -949,7 +950,7 @@ msgstr ""
 #: ../../../../data/world/terrains/summer/snow/init.lua:5
 #: ../../../../data/world/terrains/winter/snow/init.lua:5
 msgid "Snow"
-msgstr ""
+msgstr "برف"
 
 #: ../../../../data/world/terrains/summer/steppe_barren/init.lua:5
 msgid "Barren Steppe"
@@ -957,15 +958,15 @@ msgstr ""
 
 #: ../../../../data/world/terrains/summer/swamp/init.lua:5
 msgid "Swamp"
-msgstr ""
+msgstr "مرداب"
 
 #: ../../../../data/world/terrains/wasteland/ashes1/init.lua:5
 msgid "Ashes 1"
-msgstr ""
+msgstr "خاکستر ۱"
 
 #: ../../../../data/world/terrains/wasteland/ashes2/init.lua:5
 msgid "Ashes 2"
-msgstr ""
+msgstr "خاکستر ۲"
 
 #: ../../../../data/world/terrains/wasteland/hardground1/init.lua:5
 msgid "Hard Ground 1"
@@ -997,7 +998,7 @@ msgstr ""
 
 #: ../../../../data/world/terrains/winter/ice/init.lua:5
 msgid "Ice"
-msgstr ""
+msgstr "یخ"
 
 #: ../../../../data/world/terrains/winter/ice_floes/init.lua:5
 msgid "Ice Floes 1"

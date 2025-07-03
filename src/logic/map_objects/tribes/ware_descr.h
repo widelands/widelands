@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,9 @@ namespace Widelands {
  */
 class WareDescr : public MapObjectDescr {
 public:
-	WareDescr(const std::string& init_descname, const LuaTable& t);
+	WareDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          const std::vector<std::string>& attribs);
 	~WareDescr() override = default;
 
 	/// AI hints for this ware type

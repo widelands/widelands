@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,10 +18,10 @@
 
 #include "wui/warehousewindow.h"
 
+#include "commands/cmd_set_stock_policy.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "wui/buildingwindow.h"
 #include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
@@ -74,7 +74,7 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
 		for (const Widelands::DescriptionIndex& workertype : worker_types_without_cost) {
-			hide_ware(workertype);
+			set_hidden(workertype, true);
 		}
 	}
 }
@@ -275,7 +275,7 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 			return;
 		}
 		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
-			game->send_player_ship_port_name(
+			game->send_player_building_name(
 			   wh->owner().player_number(), wh->serial(), name_field->get_text());
 		} else {
 			wh->set_warehouse_name(name_field->get_text());

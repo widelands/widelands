@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -299,7 +299,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const Descriptions& descriptions) 
 			for (std::unique_ptr<LuaTable>& entry : entries) {
 				entry->get_string("name");  // name is only for debugging really. Touch it so LuaTable
 				                            // will not complain.
-				area_vector->push_back(MapGenAreaInfo(*entry, descriptions, area_type));
+				area_vector->emplace_back(*entry, descriptions, area_type);
 			}
 		};
 

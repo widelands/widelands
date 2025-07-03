@@ -11,9 +11,9 @@ local r = {
    rt(
       pagetitle(_("Licensing information for Widelands")) ..
       -- TRANSLATORS: Placeholder is copyright end year
-      subtitle(_("Copyright 2002 - %1% by the Widelands Development Team.")):bformat(2024) ..
+      subtitle(_("Copyright 2002 - %1% by the Widelands Development Team.")):bformat(2025) ..
 
-      h2(_("This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0.")) ..
+      h2(_("This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0 (or, at your option, any later version).")) ..
 
       p_sp(_("You can find more information on FOSS and the GPL by visiting the following webpage: %s"):bformat(a("https://www.gnu.org/licenses/old-licenses/gpl-2.0.html", "url", "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"))) ..
 

@@ -17,6 +17,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       dig = {
+         -- steps from building to pond: 2-7
+         -- min. worker time: 2 * 2 * 1.8 + 8 = 15.2 sec
+         -- max. worker time: 2 * 7 * 1.8 + 8 = 33.2 sec
          "findspace=size:any radius:4",
          "walk=coords",
          "animate=dig duration:8s",

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -7,14 +7,15 @@
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Renaud Bouchard, 2021
 # Laurent Godard, 2024
+# L. Ch., 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: L. Ch., 2025\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,16 +38,16 @@ msgstr "Construisez une économie du bois et une roselière"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr "Économie du Bois"
+msgstr "Économie du bois"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Construire au moins une cabane de bûcheron et deux cabanes de sylviculteur "
-"pour commencer à produire des troncs d'arbres, et une plantation de roseaux "
-"pour commencer à cultiver du roseau."
+"Construisez au moins une cabane de bûcheron et deux cabanes de sylviculteur "
+"pour établir une production de rondins, et une plantation de roseaux, pour "
+"commencer à cultiver du roseau."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -54,23 +55,23 @@ msgstr "Commencer à produire des briques"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr "Économie des Briques"
+msgstr "Économie des briques"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Construire un four à briques, une mine de charbon, une carrière de pierres "
-"et une d'argile, et un puits pour commencer à produire des briques."
+"Construisez un four à briques, une mine de charbon, une mine de pierre,  une"
+" carrière d'argile et un puits pour commencer à produire des briques."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr "Rassemble des matériaux de construction"
+msgstr "Rassemblez des matériaux de construction"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr "Réserve de matériaux de construction"
+msgstr "Stocker des matériaux de construction"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
@@ -81,7 +82,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr "30 × Troncs"
+msgstr "30 × Rondins"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
@@ -113,7 +114,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr "Produit de la nourriture pour les mineurs."
+msgstr "Produisez de la nourriture pour les mineurs."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
@@ -124,12 +125,12 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
-"Construisez une taverne, une maison de pêcheur, un fumoir, une plantation de"
+"Construisez une taverne, une cabane de pêcheur, un fumoir, une plantation de"
 " baies et une cabane de cueilleur de fruits."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr "Améliorer votre économie alimentaire"
+msgstr "Améliorez votre économie alimentaire"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
@@ -145,7 +146,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr "Construire une mine de fer et une infrastructure minière"
+msgstr "Construisez une mine de fer et une infrastructure minière"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
@@ -154,18 +155,18 @@ msgstr "Construire des mines et une infrastructure minière"
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
-"Construire une mine de fer, un four, un forgeron et une petite forge "
+"Construisez une mine de fer, un fourneau, un forgeron et une petite forge "
 "d'armures."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr "Commencer à recruter des soldats"
+msgstr "Commencez à recruter des soldats"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr "Recrute des soldats"
+msgstr "Recruter des soldats"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
@@ -174,19 +175,19 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr "Explorez plus l'île"
+msgstr "Explorez davantage l'île"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr "Expansion et Découverte"
+msgstr "S'étendre et explorer"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr "Explorez plus et découvrez toute l'île."
+msgstr "Étendez plus loin votre territoire et explorez l'île."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr "Entraîner vos soldats."
+msgstr "Entraînez vos soldats."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -196,7 +197,7 @@ msgstr "Entraîner vos soldats."
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr "Entraîne des Soldats"
+msgstr "Entraîner des soldats"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -205,23 +206,23 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
-"Entraîner un soldat au plus haut niveau possible. Les soldats sont entraînés"
+"Entraînez un soldat au plus haut niveau possible. Les soldats sont entraînés"
 " dans des camps d'entraînement et des arènes d'entraînement. Nous aurons "
-"besoin d'une mine d'or, d'un atelier de tailleur pour coudre de meilleures "
-"armures et d'une grande fabrique d'armures pour de meilleures armes et de "
-"meilleurs casques."
+"besoin d'une mine d'or, d'un atelier de tailleur pour coudre des vêtements "
+"plus robustes et d'une grande forge d'armures pour fabriquer de meilleures "
+"armes et de meilleurs heaumes."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr "Défaire l'ennemi !"
+msgstr "Triomphez de l'ennemi !"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr "Défaire l'ennemi !"
+msgstr "Vaincre l'ennemi !"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr "Détruire les quartiers-généraux de la tribu ennemie."
+msgstr "Détruisez les quartiers-généraux de la tribu ennemie."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
@@ -229,14 +230,14 @@ msgstr "Échapper aux inondations"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr "Échapper aux inondations"
+msgstr "Échappez aux inondations"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Construire un port, une filature et un chantier naval, puis commencer une "
+"Construisez un port, une filature et un chantier naval, puis commencez une "
 "expédition pour fuir avant que la tempête n'inonde l'île."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
@@ -268,7 +269,7 @@ msgstr "Introduction"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr "Bienvenu !"
+msgstr "Bienvenu-e !"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129

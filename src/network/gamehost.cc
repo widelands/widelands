@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "chat/chat.h"
+#include "commands/cmd_net_check_sync.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -44,7 +45,6 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
-#include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "network/constants.h"
 #include "network/host_game_settings_provider.h"
@@ -267,8 +267,8 @@ struct Client {
 	/// to when the last answer of the client was received.
 	time_t lastdelta;
 
-	std::set<std::string> custom_ship_names;
-	std::set<std::string> custom_warehouse_names;
+	Widelands::Player::CustomNamingList custom_ship_names;
+	Widelands::Player::CustomNamingList custom_warehouse_names;
 };
 
 struct GameHostImpl {
@@ -507,7 +507,8 @@ void GameHost::run_callback() {
 		packet.string(a->internal_name);
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	std::map<Widelands::PlayerNumber,
+	         std::pair<Widelands::Player::CustomNamingList, Widelands::Player::CustomNamingList>>
 	   custom_naming_lists;
 	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
 		int playernumber = d->settings.playernum + 1;
@@ -519,22 +520,34 @@ void GameHost::run_callback() {
 			playernumber = client.playernum + 1;
 			if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
 				// Merge instead of overwrite - multiple clients can share a player
-				custom_naming_lists[playernumber].first.insert(
-				   client.custom_ship_names.begin(), client.custom_ship_names.end());
-				custom_naming_lists[playernumber].second.insert(
-				   client.custom_warehouse_names.begin(), client.custom_warehouse_names.end());
+				for (const auto& tribe_lists : client.custom_ship_names) {
+					auto& set = custom_naming_lists[playernumber].first[tribe_lists.first];
+					set.insert(tribe_lists.second.begin(), tribe_lists.second.end());
+				}
+				for (const auto& tribe_lists : client.custom_warehouse_names) {
+					auto& set = custom_naming_lists[playernumber].second[tribe_lists.first];
+					set.insert(tribe_lists.second.begin(), tribe_lists.second.end());
+				}
 			}
 		}
 
 		for (const auto& lists : custom_naming_lists) {
 			packet.unsigned_8(lists.first);
 			packet.unsigned_32(lists.second.first.size());
-			for (const std::string& name : lists.second.first) {
-				packet.string(name);
+			for (const auto& tribe_and_list : lists.second.first) {
+				packet.string(tribe_and_list.first);
+				packet.unsigned_32(tribe_and_list.second.size());
+				for (const std::string& name : tribe_and_list.second) {
+					packet.string(name);
+				}
 			}
 			packet.unsigned_32(lists.second.second.size());
-			for (const std::string& name : lists.second.second) {
-				packet.string(name);
+			for (const auto& tribe_and_list : lists.second.second) {
+				packet.string(tribe_and_list.first);
+				packet.unsigned_32(tribe_and_list.second.size());
+				for (const std::string& name : tribe_and_list.second) {
+					packet.string(name);
+				}
 			}
 		}
 	}
@@ -1877,10 +1890,10 @@ void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 	}
 
 	client.time = time;
-	verb_log_info("[Host]: Client %i: Time %i", number, time.get());
+	verb_log_info("[Host]: Client %u: Time %u", number, time.get());
 
 	if (d->waiting) {
-		verb_log_info("[Host]: Client %i reports time %i (networktime = %i) during hang", number,
+		verb_log_info("[Host]: Client %u reports time %u (networktime = %u) during hang", number,
 		              time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
@@ -1906,7 +1919,7 @@ void GameHost::check_hung_clients() {
 			assert(d->game != nullptr);
 			++nrdelayed;
 			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
-				verb_log_info("[Host]: Client %i (%s) hung", i,
+				verb_log_info("[Host]: Client %u (%s) hung", i,
 				              d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
@@ -2053,7 +2066,7 @@ void GameHost::request_sync_reports() {
 		client.syncreport_arrived = false;
 	}
 
-	verb_log_info("[Host]: Requesting sync reports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: Requesting sync reports for time %u", d->syncreport_time.get());
 	d->game->report_sync_request();
 
 	SendPacket packet;
@@ -2062,7 +2075,7 @@ void GameHost::request_sync_reports() {
 	broadcast(packet);
 
 	d->game->enqueue_command(
-	   new CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
+	   new Widelands::CmdNetCheckSync(d->syncreport_time, [this] { sync_report_callback(); }));
 
 	committed_network_time(d->syncreport_time);
 }
@@ -2084,7 +2097,7 @@ void GameHost::check_sync_reports() {
 	}
 
 	d->syncreport_pending = false;
-	verb_log_info("[Host]: comparing syncreports for time %i", d->syncreport_time.get());
+	verb_log_info("[Host]: comparing syncreports for time %u", d->syncreport_time.get());
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients.at(i);
@@ -2093,7 +2106,7 @@ void GameHost::check_sync_reports() {
 		}
 
 		if (client.syncreport != d->syncreport) {
-			log_err("[Host]: lost synchronization with client %u at time %i!\n"
+			log_err("[Host]: lost synchronization with client %u at time %u!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
 			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),
@@ -2338,11 +2351,19 @@ void GameHost::handle_playercommand(uint32_t const client_num, Client& client, R
 void GameHost::handle_custom_naming_lists(Client& client, RecvPacket& r) {
 	client.custom_ship_names.clear();
 	client.custom_warehouse_names.clear();
+
 	for (size_t i = r.unsigned_32(); i > 0; --i) {
-		client.custom_ship_names.insert(r.string());
+		auto& set = client.custom_ship_names[r.string()];
+		for (size_t j = r.unsigned_32(); j > 0; --j) {
+			set.insert(r.string());
+		}
 	}
+
 	for (size_t i = r.unsigned_32(); i > 0; --i) {
-		client.custom_warehouse_names.insert(r.string());
+		auto& set = client.custom_warehouse_names[r.string()];
+		for (size_t j = r.unsigned_32(); j > 0; --j) {
+			set.insert(r.string());
+		}
 	}
 }
 

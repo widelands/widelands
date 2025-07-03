@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2024 by the Widelands Development Team
+ * Copyright (C) 2010-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          const std::vector<std::string>& attribs);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -151,7 +153,7 @@ struct Ship : Bob {
 	struct Battle {
 		enum class Phase : uint8_t {
 			kNotYetStarted = 0,
-			kAttackerMovingTowardsOpponent = 1,
+			kMovingToBattlePositions = 1,
 			kAttackersTurn = 2,
 			kDefendersTurn = 3,
 			kAttackerAttacking = 4,
@@ -164,6 +166,7 @@ struct Ship : Bob {
 
 		OPtr<Ship> opponent;
 		Coords attack_coords;
+		Coords battle_position{Coords::null()};
 		std::vector<uint32_t> attack_soldier_serials;
 		Time time_of_last_action;
 		uint32_t pending_damage{0U};
@@ -374,7 +377,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
-	void erase_warship_soldier_request();
+	void erase_warship_soldier_request_manager();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
