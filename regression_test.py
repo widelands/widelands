@@ -328,6 +328,8 @@ class WidelandsTestCase():
             if "ERROR: " in lsan_log_txt:
                 if os.getenv('GITHUB_ACTION'):
                     self.outputs.append(FileToPrint(f_name, github_asan_line))
+                elif os.getenv('WLRT_SHOW_ASAN'):
+                    self.outputs.append(FileToPrint(f_name))
                 else:
                     idx1 = lsan_log_txt.find('ERROR: ')
                     idx2 = lsan_log_txt.find('\n', idx1)
