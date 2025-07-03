@@ -5,6 +5,7 @@
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Petr Valášek, 2023
+# Ondřej Itřech, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Petr Valášek, 2023\n"
+"Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgstr "Klikni na nabídku \"Zobrazit / Skrýt\"."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr "Vyber \"Zobrazit stavební místa\""
+msgstr "Vyber \"Zobrazit stavební místa\"."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
@@ -73,7 +74,7 @@ msgstr "Klikni na symbol vlajky."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr "Klikni na tlačítko vlajky"
+msgstr "Klikni na tlačítko vlajky."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
@@ -217,8 +218,8 @@ msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
-"Toto okno můžete otevřít a zavřít kliknutím na tlačítko ‘Úkoly’ na panelu "
-"nástrojů ve spodní části obrazovky."
+"Toto okno lze otvírat a zavírat kliknutím na tlačítko \"Úkoly\" v nabídce na"
+" spodní straně obrazovky."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
@@ -273,8 +274,8 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
-"Klikněte na tlačítko ‘Budovat cestu‘. Poté kliknutím na barevnou značku na "
-"mapě veďte svou cestu, dokud nedosáhnete vlajky před cílovou budovou."
+"Klikni na tlačítko ‘Budovat cestu‘. Poté klikáním na barevné značky na mapě "
+"veď svou cestu, dokud nedosáhne vlajky před cílovou budovou."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

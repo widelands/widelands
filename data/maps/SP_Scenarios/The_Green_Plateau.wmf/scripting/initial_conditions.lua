@@ -2,6 +2,7 @@
 --                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
+p1:forbid_buildings{"barbarians_market"}
 
 prefilled_buildings(p1, { "barbarians_headquarters_interim", 65, 6,
    wares = {

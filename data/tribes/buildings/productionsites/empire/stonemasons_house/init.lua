@@ -56,9 +56,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
          descname = _("sculpting a marble column"),
          actions = {
+            -- time total: 50.4 + 32 + 3.6 = 86 sec
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "sleep=duration:50s",
+            "sleep=duration:50s400ms",
             "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
             "animate=working duration:32s",
             "produce=marble_column"

@@ -226,8 +226,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Bau eene Muu, eene Spinnweelmöhlen un eene Warft; fang dann eene Söök an, um"
-" to flüchten ehr de Störmflood de Hallig överswemmt."
+"Bau eene Muu, eenen Weevstohl un eene Warft; fang dann eene Söök an, um to "
+"flüchten ehr de Störmflood de Hallig överswemmt."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
@@ -1084,9 +1084,9 @@ msgid ""
 "make haste!"
 msgstr ""
 "De Störmflood kummt wull vun Westen her. Wenn wi futtmaken, könen wi ’t "
-"knapp schaffen! Wi mutten nix as eene Muu un eene Warft bauen – och, un eene"
-" Spinnweelmöhlen, um ut Reit un Fell de starken Stoff för de Seils to weven."
-" Dann könen wi an de Muu eene Söök utrüsten. Beedt to de Gotten un maakt to!"
+"knapp schaffen! Wi mutten nix as eene Muu un eene Warft bauen – och, un "
+"eenen Weevstohl, um ut Reit un Fell de starken Stoff för de Seils to weven. "
+"Dann könen wi an de Muu eene Söök utrüsten. Beedt to de Gotten un maakt to!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"

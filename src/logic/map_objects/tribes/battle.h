@@ -26,7 +26,8 @@ class Soldier;
 class BattleDescr : public MapObjectDescr {
 public:
 	BattleDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
+	   : MapObjectDescr(
+	        MapObjectType::BATTLE, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~BattleDescr() override = default;
 
