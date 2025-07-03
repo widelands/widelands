@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-21 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -52,8 +52,8 @@ msgstr "Copyright 2002 - %1% Vývojový tím hry Widelands."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -209,13 +209,13 @@ msgid "Elders"
 msgstr "Rada starších"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:416
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:360
-#: ../../../../data/txts/developers.lua:423
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "Domovská stránka"
 
@@ -224,7 +224,7 @@ msgid "Scripting"
 msgstr "Skriptovanie"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:431
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -240,103 +240,103 @@ msgstr "Jazyky"
 msgid "Coders"
 msgstr "Programátori"
 
-#: ../../../../data/txts/developers.lua:150
+#: ../../../../data/txts/developers.lua:151
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../../../data/txts/developers.lua:188
+#: ../../../../data/txts/developers.lua:189
 msgid "Musicians"
 msgstr "Hudobníci"
 
-#: ../../../../data/txts/developers.lua:207
+#: ../../../../data/txts/developers.lua:208
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../../../data/txts/developers.lua:223
+#: ../../../../data/txts/developers.lua:224
 msgid "Maps and Missions"
 msgstr "Mapy a misie"
 
-#: ../../../../data/txts/developers.lua:257
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "Kampane"
 
-#: ../../../../data/txts/developers.lua:261
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "Barbari"
 
-#: ../../../../data/txts/developers.lua:269
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "Impérium"
 
-#: ../../../../data/txts/developers.lua:276
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "Atlantíďania"
 
-#: ../../../../data/txts/developers.lua:284
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "Frízania"
 
-#: ../../../../data/txts/developers.lua:292
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
-#: ../../../../data/txts/developers.lua:296
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:310
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:329
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:341
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:352
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:364
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "Domovskú stránku napísali"
 
-#: ../../../../data/txts/developers.lua:375
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentácia, pomoc a wiki"
 
-#: ../../../../data/txts/developers.lua:393
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
 msgstr "Doplnky"
 
-#: ../../../../data/txts/developers.lua:412
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "Bývalá rada starších"
 
-#: ../../../../data/txts/developers.lua:438
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "Preklad"
 
-#: ../../../../data/txts/developers.lua:447
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "Ostatní"
 
-#: ../../../../data/txts/developers.lua:455
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
@@ -445,7 +445,7 @@ msgstr "Hráč s farbou vlajky. Ak si viacerí klienti vyberú rovnakú farbu, z
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom."
+msgstr "Divácky režim, čo znamená, že vidíte všetko, ale nemáte kontrolu nad žiadnym hráčom"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -696,7 +696,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode."
+msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."

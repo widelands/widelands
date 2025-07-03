@@ -44,7 +44,6 @@ jobs:
             - &installer
               - *src_cmake_dependencies
               - 'data/**'
-              - 'po/**'
             - &ubuntu_dependencies
               - *src_cmake_dependencies
               - 'utils/ubuntu/packages'
@@ -58,6 +57,7 @@ jobs:
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
+            - '.clang-tidy'
           test_suite:
             - *ubuntu_dependencies
             - 'data/**' # TODO(aDiscoverer) list what needs to be checked
@@ -71,7 +71,6 @@ jobs:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
-            - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer

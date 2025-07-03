@@ -394,7 +394,7 @@ msgstr "Lehr de Lütte Kaart to bruken"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:286
 msgid "Try moving around by clicking on the minimap"
-msgstr "Versöök, een bietje to stromern, indeem du up de Lütt Kaart rumklickst."
+msgstr "Versöök, een bietje to stromern, indeem du up de Lütt Kaart rumklickst"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -890,7 +890,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr "Du hest even twee Narichten. Deese hier, wat du upstünds leest, un eene, wat di över een nejes Raadhuus in diener Weertskupp informeert. Laat mi di lehren, wo dat Wegdoon vun Narichten gaht."
+msgstr "Du hest even twee Narichten. Deese hier, wat du upstünds leest, un eene, wat di över een nejes Raadhuus in diener Weertskupp informeert. Laat mi di lehren, wo dat Wegdoon vun Narichten gaht:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Close the messages window"

@@ -16,6 +16,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       cut = {
+         -- steps from building to tree: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 4 + 1 = 12.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 4 + 1 = 37.4 sec
          "findobject=attrib:tree radius:6",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
