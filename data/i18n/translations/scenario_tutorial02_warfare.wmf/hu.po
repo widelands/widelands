@@ -10,14 +10,14 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021,2023-2024
+# Tóth András <txa-dev@posteo.hu>, 2021,2023-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2024\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -491,7 +491,7 @@ msgstr "A harmadik szám mutatja, hogy hány katona hiányzik az épületből. A
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Katonák a főhadiszálláson"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -499,7 +499,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "A főhadiszállásodnak vannak katonai képességei is: területet hódít, az ellenség meg tudja támadni közvetlenül, és a benne tárolt katonák megvédik, ha támadás éri. Abban viszont különbözik a katonai épületektől, hogy nem tudsz támadást indítani a főhadiszálláson tárolt katonáiddal."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -507,12 +507,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "A főhadiszállás katonai képességei nagy különbséget jelentenek az egyszerű raktárakhoz képest, amelyek nem hódítanak területet, és a közeli katonai épületekre szorulnak a védelmükhöz. Az egyszerű raktárakban tárolt katonák soha nem vesznek részt a harcokban, és az egyszerű raktárakat nem lehet közvetlenül megtámadni sem."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "A főhadiszállás katonai beállításai"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -523,7 +523,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Bár minden katona, aki épp a főhadiszálláson tartózkodik, részt vesz a védelmében, a tárolt katonák bármikor el is mehetnek, ha egy katonai épületnek szüksége van rájuk. Szerencsére lehetőséged van arra is, hogy néhány katonát tartósan a főhadiszállás védelmére rendelj, ugyanúgy, ahogy a katonai épületekben állítod be a férőhelyeket és az előnyben részesített katonákat. Ha ezt megteszed, akkor csak a fölösleges katonák mehetnek el máshová, a kijelölt védők nem."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -534,7 +534,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Ha megnézed az állapotsorokat, láthatod, hogy a raktáré üres, de a főhadiszálláséban kezdetben egy „—” jel van. Ez jelzi, hogy nincs beállítva helyőrség a főhadiszállás védelmére. Ennek ellenére elképzelhető, hogy vannak benne tárolt katonák. Ha nullánál több férőhelyet állítasz be, akkor a főhadiszállás állapotsora megegyezik a katonai épületekével, de a további tárolt katonák ekkor sem jelennek meg itt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

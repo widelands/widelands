@@ -69,16 +69,20 @@ public:
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);
+	int get_trades(lua_State*);
+	int get_trade_extension_proposals(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
 	int launch_coroutine(lua_State*);
 	int save(lua_State*);
+	int get_trade(lua_State*);
 
 	/*
 	 * C methods
 	 */
+	void push_trade(lua_State* L, Widelands::TradeID id);
 };
 
 class LuaEditor : public LuaBases::LuaEditorGameBase {
@@ -128,6 +132,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_all_tribes_names(lua_State* L);
 	int get_tribes_descriptions(lua_State* L);
 	int get_immovable_descriptions(lua_State* L);
 	int get_building_descriptions(lua_State* L);
@@ -167,6 +172,7 @@ public:
 	void do_modify_trainingsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_productionsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_militarysite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_market(lua_State* L, const std::string&, const std::string&);
 	void do_modify_warehouse(lua_State* L, const std::string&, const std::string&);
 	void do_modify_worker(lua_State* L, const std::string&, const std::string&);
 	void do_modify_ware(lua_State* L, const std::string&, const std::string&);

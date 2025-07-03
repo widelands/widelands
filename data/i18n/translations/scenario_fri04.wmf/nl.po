@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Alex Rijckaert, 2023
+# Alex Rijckaert, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Alex Rijckaert, 2023\n"
+"Last-Translator: Alex Rijckaert, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -549,15 +549,15 @@ msgstr "Er is iets aan de hand..."
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"We hebben vandaag een gewonde soldaat ontmoet bij onze noordwestelijke "
-"grens. Hij hijgde iets over zijn stam die werd aangevallen door vreemden, "
-"maar hij stierf voordat hij ons meer kon vertellen. Zijn harnas en wapens "
-"zagen er verbazingwekkend bekend uit. Ik vraag me af of de stam van Reebaud "
-"in gevaar is?"
+"Vandaag hebben we een gewonde soldaat aangetroffen bij onze noordwestelijke "
+"grens. Hij mompelde iets over een aanval op zijn stam door wrede "
+"vreemdelingen, maar stierf voordat hij ons meer kon vertellen. Zijn "
+"wapenrusting en wapens kwamen me opvallend bekend voor. Ik vraag me af of de"
+" stam van Reebaud in gevaar is?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -572,13 +572,13 @@ msgstr "We zijn te laat"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"We ontmoetten vandaag een gewonde soldaat in de buurt van onze "
-"noordwestelijke grens. Hij hijgde iets over het feit dat zijn stam werd "
-"aangevallen en verslagen door plaatsvervangende vreemdelingen. Met zijn "
-"laatste adem vertelde hij ons de naam van zijn leider: Reebaud."
+"Vandaag hebben we een gewonde soldaat ontmoet bij onze noordwestelijke "
+"grens. Hij hijgde iets over zijn stam die was aangevallen en verslagen door "
+"wrede vreemdelingen. Met zijn laatste adem vertelde hij ons de naam van zijn"
+" leider: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

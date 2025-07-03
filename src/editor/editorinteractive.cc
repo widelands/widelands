@@ -1264,6 +1264,9 @@ bool EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "  FATAL EXCEPTION in editor: %s\n"
 		        "##############################\n",
 		        e.what());
+		if (g_fail_on_errors) {
+			abort();
+		}
 		if (error_message_parent == nullptr) {
 			return false;
 		}
@@ -1562,16 +1565,28 @@ void EditorInteractive::publish_map() {
 
 	/* Ask for confirmation. */
 	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
-		UI::WLMessageBox w(
-		   this, UI::WindowStyle::kWui, _("Publish Map"),
+		std::string temp = richtext_escape(
 		   format(_("Are you certain that you want to publish this map online?\n\n"
 		            "Name: %1$s\n"
 		            "Internal name: %2$s\n"
 		            "Author: %3$s\n"
 		            "Description: %4$s\n"
-		            "Hint: %5$s\n"),
+		            "Hint: %5$s\n\n"),
 		          map_name, sanitized_name + kAddOnExtension, egbase().map().get_author(),
-		          egbase().map().get_description(), egbase().map().get_hint()),
+		          egbase().map().get_description(), egbase().map().get_hint()));
+		newlines_to_richtext(temp);
+
+		UI::WLMessageBox w(
+		   this, UI::WindowStyle::kWui, _("Publish Map"),
+		   format("<rt><p>%s</p><p>%s</p></rt>",
+		          g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(temp),
+		          g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		             .as_font_tag(
+		                format(_("By uploading, you agree to publish the map under the terms of the "
+		                         "GNU General Public License (GPL) version 2 or any later version "
+		                         "(the same license under which Widelands itself is distributed). "
+		                         "For more information, see %s."),
+		                       as_url_hyperlink("https://www.gnu.org/licenses/")))),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

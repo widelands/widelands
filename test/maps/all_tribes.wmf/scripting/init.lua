@@ -36,9 +36,13 @@ function verify_buildings(playernumber, total_expected_buildings)
          end
          -- This can be commented out for convenience while adding a new tribe.
          --  So, we still keep the message above too.
-         assert_true(#player:get_buildings(
-            building.name) > 0,
-            "Building '" .. building.name .. "' should have been built somewhere.")
+         if #player:get_buildings(building.name) == 0 then
+            if same_version() then
+               assert_true(false, "Building '" .. building.name .. "' should have been built somewhere.")
+            else
+               print("WARNING: Building '" .. building.name .. "' not found. Is it new in this version?")
+            end
+         end
       end
       total_buildings = total_buildings + #player:get_buildings(building.name)
    end
@@ -95,6 +99,12 @@ end
 function place_militarysite(player, buildingname, starting_field, x, y)
    local building = place_safe_building(player, buildingname, starting_field, x, y)
    building:set_soldiers({ [{0,0,0,0}] = 1 })
+   return building
+end
+
+-- Place an empty market
+function place_market(player, buildingname, starting_field, x, y)
+   local building = place_safe_building(player, buildingname, starting_field, x, y)
    return building
 end
 

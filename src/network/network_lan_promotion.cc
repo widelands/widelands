@@ -75,7 +75,7 @@ int get_ip_version(const asio::ip::udp& version) {
  * On Apple we have to specify the interface, forcing us to send our message over all interfaces we
  * can find.
  */
-LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
+LanBase::LanBase(uint16_t port) : socket_v4(io_context), socket_v6(io_context) {
 
 #ifndef _WIN32
 	// Iterate over all interfaces. If they support IPv4, store the broadcast-address
@@ -252,7 +252,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 	                             asio::ip::udp::socket& socket, const std::string& address) -> bool {
 		if (socket.is_open()) {
 			std::error_code ec;
-			asio::ip::udp::endpoint destination(asio::ip::address::from_string(address), port);
+			asio::ip::udp::endpoint destination(asio::ip::make_address(address), port);
 			socket.send_to(asio::buffer(buf, len), destination, 0, ec);
 			if (!ec) {
 				return true;

@@ -111,6 +111,13 @@ public:
 	int get_produced_wares_count(lua_State* L);
 	int set_attack_forbidden(lua_State* L);
 	int is_attack_forbidden(lua_State* L);
+	int cancel_trade(lua_State* L);
+	int reject_trade(lua_State* L);
+	int retract_trade(lua_State* L);
+	int propose_trade_extension(lua_State* L);
+	int accept_trade_extension(lua_State* L);
+	int reject_trade_extension(lua_State* L);
+	int retract_trade_extension(lua_State* L);
 
 	/*
 	 * C methods

@@ -146,6 +146,29 @@ private:
 	Size size;
 };
 
+/// Accepts a node based on its ownership.
+struct FindNodeOwned {
+	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
+	}
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const;
+
+private:
+	PlayerNumber owner_;
+};
+
+/// Accepts a free node with free space all around it.
+/// If landbased_ is false, the behaviour is modified to instead accept the node
+/// only if *at least one* adjacent triangle has MOVECAPS_SWIM.
+struct FindNodeSpace {
+	explicit FindNodeSpace(bool land) : landbased_(land) {
+	}
+
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const;
+
+private:
+	bool landbased_;
+};
+
 /// Accepts a node based on the size of the immovable there (if any).
 struct FindNodeImmovableSize {
 	enum { sizeNone = 1 << 0, sizeSmall = 1 << 1, sizeMedium = 1 << 2, sizeBig = 1 << 3 };
