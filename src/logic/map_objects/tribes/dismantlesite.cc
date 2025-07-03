@@ -39,8 +39,9 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
+                                       const std::vector<std::string>& attribs,
                                        Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, attribs, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -224,7 +225,14 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 	}
 
 	// Check if one step has completed
-	if (game.get_gametime() >= work_steptime_ && working_) {
+	if (working_) {
+		if (game.get_gametime() < workstep_completiontime_) {
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       (workstep_completiontime_ - game.get_gametime()).get());
+			return true;
+		}
+		// TODO(hessenfarmer): cause "demolition sounds" to be played -
+		// perhaps dependent on kind of dismantled building?
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
@@ -257,7 +265,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
+		workstep_completiontime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
 		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 

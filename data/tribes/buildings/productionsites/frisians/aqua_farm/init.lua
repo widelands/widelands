@@ -54,6 +54,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- min. time total: 32.2 + 19.2 =  51.4 sec
+            -- max. time total: 64.6 + 51.6 = 116.2 sec
             "call=breed_fish",
             "call=fish_pond",
          },
@@ -62,6 +64,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _("breeding fish"),
          actions = {
+            -- time of worker: 9.2-41.6 sec
+            -- min. time: 9.2  + 23 = 32.2 sec
+            -- max. time: 41.6 + 23 = 64.6 sec
             "return=skipped unless economy needs fish",
             "return=failed unless site has water:2",
             "return=failed unless site has fruit",
@@ -74,6 +79,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _("fishing"),
          actions = {
+            -- time of worker: 10.2-42.6 sec
+            -- min. time: 9 + 10.2 = 19.2 sec
+            -- max. time: 9 + 42.6 = 51.6 sec
             "return=skipped unless economy needs fish",
             "sleep=duration:9s",
             "callworker=fish_in_pond",

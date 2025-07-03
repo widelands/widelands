@@ -5,8 +5,8 @@
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Stron Zios <danielekeb@gmail.com>, 2021
-# Guybrush88 <erpizzo@alice.it>, 2022
 # Log Merger, 2022
+# Guybrush88 <erpizzo@alice.it>, 2025
 # 
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,11 +25,11 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "La grande inondazione (salvataggio automatico di recupero)"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -149,7 +149,7 @@ msgstr "Costruisci una miniera di ferro e l'infrastruttura per l'estrazione"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr "Costuisci delle Miniere e l'infrastruttura per l'estrazione"
+msgstr "Costuisci delle miniere e l'infrastruttura per l'estrazione"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
@@ -165,7 +165,7 @@ msgstr "Inizia a reclutare dei soldati"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr "Reclutare i Soldati"
+msgstr "Reclutare i soldati"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
@@ -174,7 +174,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr "Scopri l'isola"
+msgstr "Scopri altro dell'isola"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
@@ -182,7 +182,7 @@ msgstr "Espanditi e scopri"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr "Espanditi e scopri l'isola."
+msgstr "Espanditi ulteriormente e scopri altro dell'isola."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
@@ -288,9 +288,9 @@ msgid ""
 " this untouched island."
 msgstr ""
 "Io e la mia tribù siamo appena arrivati dalla terraferma. Ci sono stati "
-"degli scontro con i Danes a nord, gli Schauenburgers e gli Holsteiners a est"
-" e a sud... Per cui ho deciso di condurre via la mia tribù per iniziare una "
-"tranquilla, pacifica vita su questa isola intatta."
+"degli scontri con i Dane a nord, gli Schauenburger e gli Holsteiner a est e "
+"a sud... Per cui ho deciso di condurre via la mia tribù per iniziare una "
+"tranquilla e pacifica vita su questa isola intatta."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
@@ -304,7 +304,7 @@ msgid ""
 msgstr ""
 "Questo è un buon posto per iniziare a costruire la nostra nuova casa. Prima "
 "di tutto, dobbiamo assicurare una fornitura stabile di materiali da "
-"costruzione. di base "
+"costruzione di base "
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -683,6 +683,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Le nostre miniere stanno funzionando bene. Adesso riusciamo a produrre tutti"
+" gli strumenti di cui abbiamo bisogno, a anche alcune armi."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -763,6 +765,7 @@ msgstr "Nemico avvistato!"
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
 msgstr ""
+"Un'altra tribù! Sulla NOSTRA isola! Che cosa state facendo qui, invasori?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -773,6 +776,9 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"Questa è la MIA isola! TU sei l'invasore qui! Prego l'unico vero Dio che vi "
+"uccideremo tutti, e che le vostre anime saranno tormentate all'inferno per "
+"sempre!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -801,7 +807,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Combattimento dei Frisiani"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321

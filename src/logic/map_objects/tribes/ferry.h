@@ -32,7 +32,10 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions);
+	FerryDescr(const std::string& init_descname,
+	           const LuaTable& table,
+	           const std::vector<std::string>& attribs,
+	           Descriptions& descriptions);
 	~FerryDescr() override = default;
 
 	[[nodiscard]] uint32_t movecaps() const override;

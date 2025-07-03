@@ -26,18 +26,13 @@
 
 namespace Widelands {
 
-static Serial last_serial(0U);
-
-DetectedPortSpace::DetectedPortSpace() : serial(++last_serial) {
+DetectedPortSpace::DetectedPortSpace(Game& game)
+   : serial(game.generate_detectedportspace_serial()) {
 }
 
-void DetectedPortSpace::initialize_serial() {
-	last_serial = 0;
-}
-
-void DetectedPortSpace::set_serial(Serial s) {
+void DetectedPortSpace::set_serial(Game& game, Serial s) {
 	serial = s;
-	last_serial = std::max(last_serial, s);
+	game.notify_detectedportspace_serial(serial);
 }
 
 bool DetectedPortSpace::has_dockpoint(const Coords& c) const {

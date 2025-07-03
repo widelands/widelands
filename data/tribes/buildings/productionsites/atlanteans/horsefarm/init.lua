@@ -48,6 +48,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
          descname = pgettext("atlanteans_building", "breeding horses"),
          actions = {
+            -- time total: 15 + 15 = 30 sec
             "return=skipped unless economy needs atlanteans_horse",
             "consume=corn water",
             "sleep=duration:15s",

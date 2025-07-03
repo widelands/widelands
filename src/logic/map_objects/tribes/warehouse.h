@@ -41,7 +41,10 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	WarehouseDescr(const std::string& init_descname,
+	               const LuaTable& t,
+	               const std::vector<std::string>& attribs,
+	               Descriptions& descriptions);
 	~WarehouseDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
@@ -180,7 +183,16 @@ public:
 	bool fetch_from_flag(Game&) override;
 
 	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
+	Quantity count_soldiers(const Game&, const Requirements&);
+	Quantity count_all_soldiers() {
+		return incorporated_soldiers_.size();
+	}
+
 	Worker& launch_worker(Game&, DescriptionIndex worker, const Requirements&);
+	Soldier& launch_soldier(Game&,
+	                        const Requirements&,
+	                        bool defender = false,
+	                        SoldierPreference pref = SoldierPreference::kAny);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
@@ -222,7 +234,8 @@ public:
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	[[nodiscard]] const std::string& get_warehouse_name() const {
 		return warehouse_name_;
@@ -236,7 +249,7 @@ public:
 
 	void set_soldier_preference(SoldierPreference);
 	[[nodiscard]] SoldierPreference get_soldier_preference() const {
-		return soldier_request_.get_preference();
+		return soldier_request_manager_.get_preference();
 	}
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -317,7 +330,7 @@ private:
 	Quantity desired_soldier_count_{0U};
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
-	SoldierRequest soldier_request_;
+	SoldierRequestManager soldier_request_manager_;
 	Time next_swap_soldiers_time_{0U};
 
 	WarehouseSupply* supply_;
@@ -330,6 +343,18 @@ private:
 	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
+
+	// We keep soldiers separately, always sorted by level in decreasing order
+	using SoldierList = std::vector<OPtr<Soldier>>;
+	SoldierList incorporated_soldiers_;
+
+	// Called by incorporate_worker() for soldiers. This handles keeping them sorted.
+	void incorporate_soldier_inner(EditorGameBase& egbase, Soldier* soldier);
+
+	// Flag for launch_soldier() whether it needs to sort them first.
+	// Adding soldiers on game loading in map_io/map_buildingdata_packet.cc sets it to false.
+	bool soldiers_are_sorted_{true};
+
 	std::vector<Time> next_worker_without_cost_spawn_;
 	Time next_military_act_{0U};
 	Time next_stock_remove_act_{0U};
