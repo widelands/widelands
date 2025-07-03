@@ -5,8 +5,8 @@ Changes
 -------
 
 Eris:
-- removed luac.c. It defined a main() function which could hide our own main()
-  eris was linked in.
+- Renamed main() to lmain() in luac.c and lua.c. The main() function defined there would hide our own main()
+  where eris was linked in.
 
 Tinygettext:
 - Not using the base repository but the fork at `https://github.com/SuperTux/tinygettext`

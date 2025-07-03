@@ -36,7 +36,6 @@
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
-#include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
@@ -71,6 +70,7 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/marketwindow.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/seafaring_statistics_menu.h"
@@ -667,6 +667,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 		wa_index = 0;
 		break;
 	default:
+		// Should be impossible, checked by TribeDescr finalizing code
 		throw wexception(
 		   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
 	}
@@ -1780,7 +1781,12 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 			                    avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
-	// TODO(sirver,trading): Add UI for market.
+	case Widelands::MapObjectType::MARKET:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MarketWindow(*this, registry, *dynamic_cast<Widelands::Market*>(building),
+			                 avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
 	default:
 		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
 		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());

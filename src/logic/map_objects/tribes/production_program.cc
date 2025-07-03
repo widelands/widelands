@@ -1404,7 +1404,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 			   /** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			   /** TRANSLATORS:    %1$i = "2" */
 			   /** TRANSLATORS:    %2$s = "Coal" */
-			   _("%1$ix %2$s"), static_cast<unsigned int>(item_pair.second), ware_descname);
+			   _("%1$i× %2$s"), static_cast<unsigned int>(item_pair.second), ware_descname);
 		}
 		ware_descnames.push_back(ware_descname);
 	}
@@ -2051,7 +2051,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	DescriptionIndex available_resource = INVALID_INDEX;
 
 	for (const auto& item : buildcost) {
-		if (psite.inputqueue(item.first, wwWARE, nullptr).get_filled() > 0) {
+		if (psite.inputqueue(item.first, wwWARE, nullptr, 0).get_filled() > 0) {
 			available_resource = item.first;
 			break;
 		}
@@ -2133,7 +2133,8 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
-		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr));
+		WaresQueue& thiswq =
+		   dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr, 0));
 		if (thiswq.get_filled() > 0) {
 			wq = &thiswq;
 			break;

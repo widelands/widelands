@@ -47,7 +47,7 @@ wl.Descriptions():new_militarysite_type {
 
    messages = {
       -- TRANSLATORS: Message sent by an Empire military site
-      occupied = pgettext("empire_building", "Your soldiers have occupied your blockhouse."),
+      occupied = pgettext("empire_building", "Your soldier has occupied your blockhouse."),
       -- TRANSLATORS: Message sent by an Empire military site
       aggressor = pgettext("empire_building", "Your blockhouse discovered an aggressor."),
       -- TRANSLATORS: Message sent by an Empire military site
