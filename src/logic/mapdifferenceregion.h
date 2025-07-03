@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,8 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 			DIRECTION_CASE(WALK_SW, get_bln)
 			DIRECTION_CASE(WALK_W, get_ln)
 #undef DIRECTION_CASE
+		default:
+			NEVER_HERE();
 		}
 		--direction;
 		if (direction == 0u) {

@@ -40,8 +40,7 @@ wl.Descriptions():new_productionsite_type {
    aihints = {
       prohibited_till = 700,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2,
-      --basic_amount = 1
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -58,10 +57,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _("smelting gold"),
          actions = {
-            -- time total: 72
+            -- time total: 30.4 + 42 + 3.6 = 76 sec
             "return=skipped unless economy needs gold",
             "consume=coal gold_dust",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "animate=working duration:42s",
             "produce=gold"
          },

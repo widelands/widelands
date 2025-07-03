@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,14 @@ struct WorkerProgram : public MapObjectProgram {
 	[[nodiscard]] const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
+	[[nodiscard]] const std::set<std::pair<MapObjectType, std::string>>&
+	needed_named_map_objects() const {
+		return needed_named_map_objects_;
+	}
+	[[nodiscard]] const std::set<std::pair<MapObjectType, std::string>>&
+	collected_named_map_objects() const {
+		return collected_named_map_objects_;
+	}
 
 	/// Set of ware types produced by this program
 	[[nodiscard]] const std::set<DescriptionIndex>& produced_ware_types() const {
@@ -89,6 +97,8 @@ private:
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> created_bobs_;
+	std::set<std::pair<MapObjectType, std::string>> needed_named_map_objects_;
+	std::set<std::pair<MapObjectType, std::string>> collected_named_map_objects_;
 
 	struct ParseMap {
 		const char* name;
@@ -113,6 +123,7 @@ private:
 	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_script(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const WorkerDescr& worker_;
 	Descriptions& descriptions_;

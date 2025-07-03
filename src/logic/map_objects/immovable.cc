@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ static std::string const base_immovable_name = "unknown";
  * \note this function will remove the immovable (if existing) currently connected to this position.
  */
 void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
-	assert(c);
+	assert(c.valid());
 
 	Map* map = egbase.mutable_map();
 	FCoords f = map->get_fcoords(c);
@@ -149,7 +149,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
-   : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
+   : MapObjectDescr(
+        MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table, attribs),
      descriptions_(descriptions) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
@@ -168,8 +169,6 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (!attribs.empty()) {
-		add_attributes(attribs);
-
 		for (const std::string& attribute : attribs) {
 			if (attribute == "resi") {
 				// All resource indicators must have a menu icon
@@ -429,8 +428,14 @@ void Immovable::draw(const Time& gametime,
 		return;
 	}
 	if (anim_construction_total_ == 0u) {
-		dst->blit_animation(
-		   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
+			dst->blit_animation(
+			   point_on_dst, coords, scale, anim_, Time(gametime.get() - animstart_.get()));
+		} else {
+			dst->blit_animation(point_on_dst, coords, scale, anim_,
+			                    Time(gametime.get() - animstart_.get()), nullptr,
+			                    kImmovableSilhouetteOpacity);
+		}
 		if (former_building_descr_ != nullptr) {
 			do_draw_info(
 			   info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
@@ -476,14 +481,26 @@ void Immovable::draw_construction(const Time& gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
-		                    Time(frametime.get() * (current_frame - 1)), &player_color);
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
+			                    Time(frametime.get() * (current_frame - 1)), &player_color);
+		} else {
+			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
+			                    Time(frametime.get() * (current_frame - 1)), nullptr,
+			                    kImmovableSilhouetteOpacity);
+		}
 	}
 
 	const int percent = ((done.get() % units_per_frame.get()) * 100) / units_per_frame.get();
 
-	dst->blit_animation(point_on_dst, coords, scale, anim_, Time((frametime * current_frame).get()),
-	                    &player_color, percent);
+	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
+		dst->blit_animation(point_on_dst, coords, scale, anim_,
+		                    Time((frametime * current_frame).get()), &player_color, 1.f, percent);
+	} else {
+		dst->blit_animation(point_on_dst, coords, scale, anim_,
+		                    Time((frametime * current_frame).get()), nullptr,
+		                    kImmovableSilhouetteOpacity, percent);
+	}
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
@@ -844,6 +861,11 @@ void PlayerImmovable::remove_worker(Worker& w) {
 	}
 
 	throw wexception("PlayerImmovable::remove_worker: not in list");
+}
+
+void PlayerImmovable::kickout_worker_from_queue(Game& game, Worker& worker) {
+	worker.reset_tasks(game);
+	worker.start_task_leavebuilding(game, true);
 }
 
 void Immovable::set_former_building(const BuildingDescr& building) {

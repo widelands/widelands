@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,9 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
+                                       const std::vector<std::string>& attribs,
                                        Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, attribs, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -163,8 +164,8 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
-                                         former_descr->enhancement_returns_on_dismantle() :
-                                         former_descr->returns_on_dismantle();
+		                                   former_descr->enhancement_returns_on_dismantle() :
+		                                   former_descr->returns_on_dismantle();
 
 		for (const auto& ware : return_wares) {
 			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
@@ -224,7 +225,14 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 	}
 
 	// Check if one step has completed
-	if (game.get_gametime() >= work_steptime_ && working_) {
+	if (working_) {
+		if (game.get_gametime() < workstep_completiontime_) {
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       (workstep_completiontime_ - game.get_gametime()).get());
+			return true;
+		}
+		// TODO(hessenfarmer): cause "demolition sounds" to be played -
+		// perhaps dependent on kind of dismantled building?
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
@@ -257,7 +265,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
+		workstep_completiontime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
 		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 
@@ -286,7 +294,7 @@ void DismantleSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -295,7 +303,7 @@ void DismantleSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 
@@ -305,7 +313,7 @@ void DismantleSite::draw(const Time& gametime,
 		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
 	} else {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
-		                    nullptr, kBuildingSilhouetteOpacity,
+		                    nullptr, kImmovableSilhouetteOpacity,
 		                    100 - ((get_built_per64k() * 100) >> 16));
 	}
 

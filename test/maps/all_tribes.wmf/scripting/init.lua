@@ -13,6 +13,7 @@ include "test/scripting/lunit.lua"
 include "test/scripting/stable_save.lua"
 
 game = wl.Game()
+map = wl.Game().map
 
 -- See all so that we can debug stuff
 game.players[1].see_all = 1
@@ -35,9 +36,13 @@ function verify_buildings(playernumber, total_expected_buildings)
          end
          -- This can be commented out for convenience while adding a new tribe.
          --  So, we still keep the message above too.
-         assert_true(#player:get_buildings(
-            building.name) > 0,
-            "Building '" .. building.name .. "' should have been built somewhere.")
+         if #player:get_buildings(building.name) == 0 then
+            if same_version() then
+               assert_true(false, "Building '" .. building.name .. "' should have been built somewhere.")
+            else
+               print("WARNING: Building '" .. building.name .. "' not found. Is it new in this version?")
+            end
+         end
       end
       total_buildings = total_buildings + #player:get_buildings(building.name)
    end
@@ -73,22 +78,33 @@ end
 
 -- Placement functions
 
+local map_w = map.width
+local map_h = map.height
+
 -- Get a field with the coordinates shifted for the player
-function get_safe_field(player, starting_field, x, y)
-   return map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512)
+function get_safe_field(starting_field, x, y)
+   return map:get_field((starting_field.x + x) % map_w, (starting_field.y + y) % map_h)
 end
 
 -- Add a building with coordinates not going out of range.
 -- Note that this has only been tested with starting_field.y == 1
 function place_safe_building(player, buildingname, starting_field, x, y)
-   print("Placing " .. buildingname .. " at " .. ((starting_field.x + x) % 512) .. " " .. ((starting_field.y + y) % 512))
-   return player:place_building(buildingname, map:get_field((starting_field.x + x) % 512, (starting_field.y + y) % 512), false, true)
+   local fld = get_safe_field(starting_field, x, y)
+   print("Placing " .. buildingname .. " at " .. fld.x .. " " .. fld.y)
+   local b = player:place_building(buildingname, fld, false, true)
+   return b
 end
 
 -- Place a militarysite and add a soldier to it
 function place_militarysite(player, buildingname, starting_field, x, y)
    local building = place_safe_building(player, buildingname, starting_field, x, y)
    building:set_soldiers({ [{0,0,0,0}] = 1 })
+   return building
+end
+
+-- Place an empty market
+function place_market(player, buildingname, starting_field, x, y)
+   local building = place_safe_building(player, buildingname, starting_field, x, y)
    return building
 end
 
@@ -164,7 +180,7 @@ end
 function place_player_ship(playernumber)
    local player = wl.Game().players[playernumber]
    local starting_field = wl.Game().map.player_slots[playernumber].starting_field
-   player:place_ship(map:get_field((starting_field.x + 12) % 512, (starting_field.y + 6) % 512))
+   player:place_ship(get_safe_field(starting_field, 12, 6))
 end
 
 -- Sleep and adjust game speed each second for reasonable average FPS

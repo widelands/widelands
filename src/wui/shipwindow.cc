@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,13 @@ constexpr int kButtonSize = 34;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
-   : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+   : UniqueWindow(&ib,
+                  UI::WindowStyle::kWui,
+                  format("shipwindow_%u", ship->serial()),
+                  &reg,
+                  0,
+                  0,
+                  ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
@@ -132,10 +138,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgConstructPort, true, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
-	btn_warship_stay_ =
-	   make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay, true,
-	               [this]() { act_scout_towards(Widelands::IDLE); });
-	exp_mid->add(btn_warship_stay_);
+	btn_stay_ = make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay,
+	                        true, [this]() { act_scout_towards(Widelands::IDLE); });
+	exp_mid->add(btn_stay_);
 
 	btn_scout_[Widelands::WALK_E - 1] =
 	   make_button(exp_mid, "sce", _("Scout towards the east"), kImgScoutE, true,
@@ -220,9 +225,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 				   break;
 				// If the ship state has changed, e.g. expedition started or scouting direction changed,
 				// think() will take care of it.
-			   case Widelands::NoteShip::Action::kDestinationChanged:
-			   case Widelands::NoteShip::Action::kWaitingForCommand:
-			   case Widelands::NoteShip::Action::kGained:
+			   default:
 				   break;
 			   }
 		   }
@@ -249,13 +252,18 @@ void ShipWindow::set_button_visibility() {
 
 	const bool is_refitting = ship->is_refitting();
 	const bool show_expedition_controls = ship->state_is_expedition() && !is_refitting;
-	const bool is_warship = (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_soldier_controls =
+	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_wares = (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
+	const bool show_construct_port =
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionColonizing;
 
-	display_->set_visible(!is_warship);
-	warship_capacity_control_->set_visible(is_warship);
+	display_->set_visible(show_wares);
+	warship_capacity_control_->set_visible(show_soldier_controls);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	btn_warship_stay_->set_visible(is_warship);
-	btn_construct_port_->set_visible(!is_warship);
+	btn_stay_->set_visible(!show_construct_port);
+	btn_construct_port_->set_visible(show_construct_port);
 	navigation_box_.set_visible(show_expedition_controls);
 	set_destination_->set_visible(show_expedition_controls);
 }
@@ -352,7 +360,9 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 	if (needs_update) {
 		set_destination_->clear();
 		texture_cache_.clear();
-		set_destination_->add(_("(none)"), DestinationWrapper(), nullptr, !ship->has_destination());
+		set_destination_->add(/** TRANSLATORS: No destination */
+		                      pgettext("destination", "(none)"), DestinationWrapper(), nullptr,
+		                      !ship->has_destination());
 
 		for (Widelands::PortDock* pd : all_ports) {
 			set_destination_->add(pd->get_warehouse()->get_warehouse_name(),
@@ -363,35 +373,38 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			set_destination_->add(temp_ship->get_shipname(), DestinationWrapper(temp_ship, nullptr),
 			                      temp_ship->descr().icon(), temp_ship == dest_ship);
 		}
-		for (Widelands::PinnedNote* note : all_notes) {
-			constexpr int kTextureSize = 24;
-			const Image* unscaled =
-			   g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
-			      .representative_image(&note->get_rgb());
+		NoteThreadSafeFunction::instantiate(
+		   [this, &all_notes, &dest_note]() {
+			   for (Widelands::PinnedNote* note : all_notes) {
+				   constexpr int kTextureSize = 24;
+				   const Image* unscaled = g_animation_manager->get_representative_image(
+				      note->owner().tribe().pinned_note_animation(), &note->get_rgb());
 
-			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
-			RenderTarget rt(downscaled);
-			float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
-			Rectf result_rect;
-			if (aspect_ratio < 1.f) {
-				result_rect.h = kTextureSize;
-				result_rect.w = kTextureSize * aspect_ratio;
-				result_rect.y = 0;
-				result_rect.x = (kTextureSize - result_rect.w) / 2.f;
-			} else {
-				result_rect.w = kTextureSize;
-				result_rect.h = kTextureSize / aspect_ratio;
-				result_rect.x = 0;
-				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
-			}
-			rt.blitrect_scale(result_rect, unscaled,
-			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
-			                  BlendMode::UseAlpha);
-			texture_cache_.emplace(downscaled);
+				   Texture* downscaled = new Texture(kTextureSize, kTextureSize);
+				   RenderTarget rt(downscaled);
+				   rt.fill_rect(rt.get_rect(), RGBAColor(0, 0, 0, 0),
+				                BlendMode::Copy);  // Initialize to fully transparent background
+				   float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
+				   Rectf result_rect;
+				   if (aspect_ratio < 1.f) {
+					   result_rect.h = kTextureSize;
+					   result_rect.w = kTextureSize * aspect_ratio;
+					   result_rect.y = 0;
+					   result_rect.x = (kTextureSize - result_rect.w) / 2.f;
+				   } else {
+					   result_rect.w = kTextureSize;
+					   result_rect.h = kTextureSize / aspect_ratio;
+					   result_rect.x = 0;
+					   result_rect.y = (kTextureSize - result_rect.h) / 2.f;
+				   }
+				   rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
+				   texture_cache_.emplace(downscaled);
 
-			set_destination_->add(
-			   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
-		}
+				   set_destination_->add(note->get_text(), DestinationWrapper(note, nullptr),
+				                         downscaled, note == dest_note);
+			   }
+		   },
+		   true, true);
 		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
 			set_destination_->add(temp_dps->to_short_string(egbase),
 			                      DestinationWrapper(nullptr, temp_dps),
@@ -453,16 +466,16 @@ void ShipWindow::think() {
 	btn_refit_->set_visible(!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed());
 
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                             kImgRefitTransport :
-                                             kImgRefitWarship));
+	                                          kImgRefitTransport :
+	                                          kImgRefitWarship));
 	btn_refit_->set_enabled(can_act &&
 	                        ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                              Widelands::ShipType::kTransport :
-                                              Widelands::ShipType::kWarship));
+	                                           Widelands::ShipType::kTransport :
+	                                           Widelands::ShipType::kWarship));
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                              _("Refit to transport ship") :
-                              _("Refit to warship"));
-	btn_warship_stay_->set_enabled(can_act);
+	                           _("Refit to transport ship") :
+	                           _("Refit to warship"));
+	btn_stay_->set_enabled(can_act);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -488,15 +501,12 @@ void ShipWindow::think() {
 	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
-		 * - The "construct port" button is only active, if the ship is waiting for commands and found
-		 * a port
-		 *   buildspace
+		 * - The "construct port" button is only active, if the ship is waiting for commands and
+		 *   found a port buildspace
 		 * - The "scout towards a direction" buttons are only active, if the ship can move at least
-		 * one field
-		 *   in that direction without reaching the coast.
-		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no
-		 * matter if
-		 *   in waiting or already expedition/scouting mode)
+		 *   one field in that direction without reaching the coast.
+		 * - The "explore island's coast" buttons are only active, if a coast is in vision range
+		 *   (no matter if in waiting or already expedition/scouting mode)
 		 */
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
@@ -541,7 +551,7 @@ void ShipWindow::act_rename() {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_port_name(
+		game->send_player_building_name(
 		   ship->owner().player_number(), ship->serial(), name_field_->get_text());
 	} else {
 		ship->set_shipname(name_field_->get_text());
@@ -605,8 +615,8 @@ void ShipWindow::act_refit() {
 		return;
 	}
 	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                    Widelands::ShipType::kTransport :
-                                    Widelands::ShipType::kWarship;
+	                                 Widelands::ShipType::kTransport :
+	                                 Widelands::ShipType::kWarship;
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 		game->send_player_refit_ship(*ship, t);
 	} else {
@@ -666,7 +676,7 @@ void ShipWindow::act_construct_port() {
 		return;
 	}
 	const Widelands::Coords portspace = ship->current_portspace();
-	if (!static_cast<bool>(portspace)) {
+	if (!portspace.valid()) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {

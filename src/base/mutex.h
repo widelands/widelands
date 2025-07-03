@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 by the Widelands Development Team
+ * Copyright (C) 2022-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ public:
 	enum class ID : uint32_t {
 		kNone,  ///< Does not represent a valid ID.
 
+		kMutexInternal,        ///< For internal use by the mutex locking logic only.
 		kLogicFrame,           ///< The game logic progression.
 		kObjects,              ///< MapObjects are being modified.
 		kCommands,             ///< The game's command queue is being modified.

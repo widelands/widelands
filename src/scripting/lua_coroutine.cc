@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
 
 namespace {
 
@@ -78,6 +78,8 @@ int LuaCoroutine::get_status() {
 }
 
 int LuaCoroutine::resume() {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 
 	int rv = lua_resume(lua_state_, nullptr, ninput_args_);

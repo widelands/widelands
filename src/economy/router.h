@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <vector>
 
 #include "logic/map_objects/tribes/wareworker.h"
 
@@ -43,6 +44,11 @@ struct Router {
 	                WareWorker type,
 	                int32_t cost_cutoff,
 	                ITransportCostCalculator& cost_calculator);
+	bool find_nearest(std::vector<RoutingNode*> start_nodes,
+	                  RoutingNode& end,
+	                  IRoute* route,
+	                  WareWorker type,
+	                  ITransportCostCalculator& cost_calculator);
 	uint32_t assign_cycle();
 
 private:

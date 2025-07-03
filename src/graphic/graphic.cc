@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,7 @@ Graphic::Graphic() {
  * Initialize the SDL video mode.
  */
 void Graphic::initialize(const TraceGl& trace_gl,
+                         int display,
                          int window_mode_w,
                          int window_mode_h,
                          bool init_fullscreen,
@@ -86,14 +87,27 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_info("Graphics: Try to set Videomode %dx%d\n", window_mode_width_, window_mode_height_);
+
+	if (display < 0 || display >= SDL_GetNumVideoDisplays()) {
+		// Find the display, the mouse pointer is on.
+		int mouse_x;
+		int mouse_y;
+		SDL_GetGlobalMouseState(&mouse_x, &mouse_y);
+		display = get_display_at(mouse_x, mouse_y);
+	}
+	int window_x = SDL_WINDOWPOS_UNDEFINED;
+	int window_y = SDL_WINDOWPOS_UNDEFINED;
+	if (display >= 0 && display < SDL_GetNumVideoDisplays()) {
+		window_x = window_y = SDL_WINDOWPOS_CENTERED_DISPLAY(display);
+	}
+
 	uint32_t window_flags = SDL_WINDOW_OPENGL;
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
 #endif
-	sdl_window_ =
-	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-	                    window_mode_width_, window_mode_height_, window_flags);
+	sdl_window_ = SDL_CreateWindow("Widelands Window", window_x, window_y, window_mode_width_,
+	                               window_mode_height_, window_flags);
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
@@ -132,8 +146,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
-	verb_log_info("**** END GRAPHICS REPORT ****\n");
-	rebuild_texture_atlas();
+	log_info("**** END GRAPHICS REPORT ****\n");
 }
 
 void Graphic::rebuild_texture_atlas() const {
@@ -142,6 +155,7 @@ void Graphic::rebuild_texture_atlas() const {
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	verb_log_info("Texture atlas rebuilt");
 }
 
 Graphic::~Graphic() {
@@ -157,6 +171,26 @@ Graphic::~Graphic() {
 		SDL_GL_DeleteContext(gl_context_);
 		gl_context_ = nullptr;
 	}
+}
+
+int Graphic::get_display_at(int x, int y) const {
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		SDL_Rect r;
+		if (SDL_GetDisplayBounds(i, &r) == 0 && r.x <= x && x < r.x + r.w && r.y <= y &&
+		    y < r.y + r.h) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+void Graphic::move_to_display(int display) {
+	if (display < 0 || display >= SDL_GetNumVideoDisplays()) {
+		return;
+	}
+
+	SDL_SetWindowPosition(sdl_window_, SDL_WINDOWPOS_CENTERED_DISPLAY(display),
+	                      SDL_WINDOWPOS_CENTERED_DISPLAY(display));
 }
 
 /**
@@ -241,19 +275,37 @@ int Graphic::max_texture_size_for_font_rendering() const {
 #endif
 }
 
+int Graphic::get_display() const {
+	int x;
+	int y;
+	int w;
+	int h;
+	SDL_GetWindowPosition(sdl_window_, &x, &y);
+	SDL_GetWindowSize(sdl_window_, &w, &h);
+	return get_display_at(x + w / 2, y + h / 2);
+}
+
 bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_MAXIMIZED) != 0u;
 }
 
-void Graphic::set_maximized(const bool to_maximize) {
+void Graphic::set_maximized(const bool to_maximize, int to_display) {
 	window_mode_maximized_ = to_maximize;
-	if (fullscreen() || maximized() == to_maximize) {
+	int display = get_display();
+	if (to_display < 0) {
+		to_display = display;
+	}
+	if (fullscreen() || (maximized() == to_maximize && display == to_display)) {
 		return;
 	}
 	if (to_maximize) {
 		// Maximizing only works if the window is resizable.
 		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+		if (display != to_display) {
+			SDL_RestoreWindow(sdl_window_);
+			move_to_display(to_display);
+		}
 		SDL_MaximizeWindow(sdl_window_);
 	} else {
 		// Avoid glitches. See the comment in set_window_size().
@@ -268,8 +320,12 @@ bool Graphic::fullscreen() const {
 	       ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
 }
 
-void Graphic::set_fullscreen(const bool value) {
-	if (value == fullscreen()) {
+void Graphic::set_fullscreen(const bool value, int to_display) {
+	int display = get_display();
+	if (to_display < 0) {
+		to_display = display;
+	}
+	if (value == fullscreen() && display == to_display) {
 		return;
 	}
 
@@ -280,6 +336,12 @@ void Graphic::set_fullscreen(const bool value) {
 	// SDL will resize the window for us.
 	if (value) {
 		window_mode_maximized_ = maximized();
+		if (display != to_display) {
+			SDL_SetWindowFullscreen(sdl_window_, 0);
+			SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+			SDL_RestoreWindow(sdl_window_);
+			move_to_display(to_display);
+		}
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(sdl_window_, 0);

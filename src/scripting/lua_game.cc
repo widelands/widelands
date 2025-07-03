@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -32,7 +33,8 @@
 #include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "scripting/globals.h"
-#include "scripting/lua_map.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
@@ -78,7 +80,13 @@ Player
 
       local plr = wl.Game().players[1]                            -- the first player (usually blue)
       local plr = wl.Game().players[2]                            -- the second player
-      local plr = wl.Game().players[wl.Game().interactive_player] -- the interactive player
+      local i_plr
+      for p_idx, player in pairs(wl.Game().players) do
+         if player.number == wl.Game().interactive_player then
+            i_plr = player                                        -- the interactive player
+            break
+         end
+      end
 
 */
 const char LuaPlayer::className[] = "Player";
@@ -109,6 +117,13 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, get_produced_wares_count),
    METHOD(LuaPlayer, set_attack_forbidden),
    METHOD(LuaPlayer, is_attack_forbidden),
+   METHOD(LuaPlayer, cancel_trade),
+   METHOD(LuaPlayer, reject_trade),
+   METHOD(LuaPlayer, retract_trade),
+   METHOD(LuaPlayer, propose_trade_extension),
+   METHOD(LuaPlayer, accept_trade_extension),
+   METHOD(LuaPlayer, reject_trade_extension),
+   METHOD(LuaPlayer, retract_trade_extension),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
@@ -117,6 +132,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, resigned),
+   PROP_RO(LuaPlayer, end_result),
    PROP_RO(LuaPlayer, messages),
    PROP_RO(LuaPlayer, inbox),
    PROP_RO(LuaPlayer, color),
@@ -125,6 +141,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
    PROP_RW(LuaPlayer, hidden_from_general_statistics),
+   PROP_RO(LuaPlayer, ai_type),
    {nullptr, nullptr, nullptr},
 };
 
@@ -211,6 +228,25 @@ int LuaPlayer::get_resigned(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
 	lua_pushboolean(L, p != nullptr && p->result == Widelands::PlayerEndResult::kResigned ? 1 : 0);
+	return 1;
+}
+
+/* RST
+   .. attribute:: end_result
+
+      .. versionadded:: 1.2
+
+      (RO) This player's end status: :const:`0`: lost, :const:`1`: won, :const:`2`: resigned,
+           :const:`255`: end status is not set
+*/
+int LuaPlayer::get_end_result(lua_State* L) {
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	if (p == nullptr) {
+		lua_pushinteger(L, 255);
+	} else {
+		lua_pushinteger(L, static_cast<int>(p->result));
+	}
 	return 1;
 }
 
@@ -342,6 +378,24 @@ int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
 int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
+}
+
+/* RST
+   .. attribute:: ai_type
+
+      .. versionadded:: 1.2
+
+      (RO) Type of the AI controlling this player
+      ("normal", "weak", "very_weak", "empty"; "" if human controlled only)
+
+      This information is reliable for multi player games. For single player games,
+      the value for an ai player may also be "random" or even "".
+*/
+int LuaPlayer::get_ai_type(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	const Widelands::Player& p = get(L, game);
+	lua_pushstring(L, p.get_ai());
+	return 1;
 }
 
 /*
@@ -755,7 +809,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	const Widelands::HideOrRevealFieldMode mode =
 	   (state == "permanent")  ? Widelands::HideOrRevealFieldMode::kHide :
 	   (state == "explorable") ? Widelands::HideOrRevealFieldMode::kUnexplore :
-                                Widelands::HideOrRevealFieldMode::kUnreveal;
+	                             Widelands::HideOrRevealFieldMode::kUnreveal;
 	if (mode == Widelands::HideOrRevealFieldMode::kUnreveal && state != "seen") {
 		report_error(L, "'%s' is no valid parameter for hide_fields!", state.c_str());
 	}
@@ -1037,7 +1091,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       full control over the player given by **playernumber** and loosing control over the
       formerly interactive player.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The :attr:`wl.bases.PlayerBase.number` of the player to switch to.
       :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
@@ -1053,15 +1107,15 @@ int LuaPlayer::switchplayer(lua_State* L) {
 }
 
 /* RST
-   .. method:: produced_wares_count(what)
+   .. method:: get_produced_wares_count(what)
 
       Returns count of wares produced by the player up to now.
 
-      :arg what: This can be either :const:`"all"` or a single name of a ware or an :class`array`
+      :arg what: This can be either :const:`"all"` or a single name of a ware or an :class:`array`
          of ware names.
       :type what: :class:`string` or :class:`array`
-      :returns: If a single ware name is given, integer is returned, otherwise a :class:`table`
-         is returned.
+      :returns: If a single ware name is given, :class:`integer` is returned,
+         otherwise a :class:`table` is returned.
       :rtype: :class:`integer` or :class:`table`
 */
 int LuaPlayer::get_produced_wares_count(lua_State* L) {
@@ -1101,7 +1155,7 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
       necessarily mean that this player *can* attack the other player, as they might for
       example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :rtype: :class:`boolean`
 */
@@ -1118,7 +1172,7 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
       **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :arg forbid: If this is :const:`true` forbids attacking, :const:`false` allows
          attacking (if the player is not in the same team).
@@ -1126,6 +1180,151 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
 */
 int LuaPlayer::set_attack_forbidden(lua_State* L) {
 	get(L, get_egbase(L)).set_attack_forbidden(luaL_checkinteger(L, 2), luaL_checkboolean(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: cancel_trade(id)
+
+      .. versionadded:: 1.3
+
+      Cancel the trade agreement with the provided ID.
+
+      Only active trade agreements can be cancelled.
+      Either of the two players between whom the agreement exists may cancel it at any time.
+
+      :arg id: Unique ID of the trade to cancel.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::cancel_trade(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	game.cancel_trade(luaL_checkinteger(L, 2), false, &get(L, game));
+	return 0;
+}
+
+/* RST
+   .. method:: reject_trade(id)
+
+      .. versionadded:: 1.3
+
+      Reject the proposed trade with the provided ID.
+
+      Only proposed trade offers can be rejected.
+      Only the recipient of the offer may reject it.
+
+      :arg id: Unique ID of the trade to reject.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::reject_trade(lua_State* L) {
+	get_game(L).reject_trade(luaL_checkinteger(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: retract_trade(id)
+
+      .. versionadded:: 1.3
+
+      Retract the proposed trade with the provided ID.
+
+      Only proposed trade offers can be retracted.
+      Only the player who initiated the offer may retract it.
+
+      :arg id: Unique ID of the trade to retract.
+      :type id: :class:`integer`
+
+      :see also: :attr:`wl.Game.trades`
+*/
+int LuaPlayer::retract_trade(lua_State* L) {
+	get_game(L).retract_trade(luaL_checkinteger(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: propose_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Propose to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::propose_trade_extension(lua_State* L) {
+	get_game(L).propose_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: accept_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Accept the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::accept_trade_extension(lua_State* L) {
+	get_game(L).accept_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: reject_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Reject the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::reject_trade_extension(lua_State* L) {
+	get_game(L).reject_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
+	return 0;
+}
+
+/* RST
+   .. method:: retract_trade_extension(id, batches)
+
+      .. versionadded:: 1.3
+
+      Retract the proposal to extend the trade with the given ID by the given number of batches.
+
+      :arg id: Unique ID of the trade to propose to extend.
+      :type id: :class:`integer`
+      :arg batches: Number of batches to add to the trade.
+         Maximum 100. Use :const:`-1` to make the trade indefinite.
+      :type batches: :class:`integer`
+
+      :see also: :attr:`wl.Game.trade_extension_proposals`
+*/
+int LuaPlayer::retract_trade_extension(lua_State* L) {
+	get_game(L).retract_trade_extension(
+	   player_number(), luaL_checkinteger(L, 2), luaL_checkinteger(L, 3));
 	return 0;
 }
 
@@ -1512,6 +1711,8 @@ int LuaInboxMessage::get_status(lua_State* L) {
 	case Widelands::Message::Status::kArchived:
 		lua_pushstring(L, "archived");
 		break;
+	default:
+		NEVER_HERE();
 	}
 	return 1;
 }

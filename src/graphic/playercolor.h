@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,5 +69,7 @@ const RGBColor kTeamColors[kMaxPlayers / 2 + 1] = {
 /// 'foo_pc.png'.
 const Image* playercolor_image(const RGBColor& clr, const std::string& image_filename);
 const Image* playercolor_image(int player_number, const std::string& image_filename);
+std::pair<const Image*, float /* scale of the selected mipmap */>
+playercolor_image(const RGBColor& clr, const std::string& image_filename, float scale);
 
 #endif  // end of include guard: WL_GRAPHIC_PLAYERCOLOR_H

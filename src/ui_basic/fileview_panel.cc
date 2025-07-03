@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,8 +99,8 @@ void FileViewPanel::layout() {
 	contents_width_ = std::max(0, get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
-                                     get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-                                     get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
+	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
+	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);

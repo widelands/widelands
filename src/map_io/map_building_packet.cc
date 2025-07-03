@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite
 							if (!tribe.has_building(index) &&
-							    !((bd != nullptr) && bd->type() == MapObjectType::MILITARYSITE)) {
+							    ((bd == nullptr) || bd->type() != MapObjectType::MILITARYSITE)) {
 								throw GameDataError("tribe %s does not define building type \"%s\"",
 								                    tribe.name().c_str(),
 								                    bd != nullptr ? bd->name().c_str() : name);

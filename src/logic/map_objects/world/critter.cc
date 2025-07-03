@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,14 +95,13 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction& /* actio
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
                            const std::vector<std::string>& attribs)
-   : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
+   : BobDescr(
+        init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table, attribs),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
 
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
-
-	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -414,7 +413,7 @@ void Critter::roam_update(Game& game, State& state) {
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 :
 				   S >= N  ? 1.0 :
-                         -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
+				             -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
                           std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
 				               (2 * N * kPi);
 				molog(game.get_gametime(),

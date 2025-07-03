@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,7 @@ public:
 	[[nodiscard]] bool get_passable() const override;
 
 	[[nodiscard]] Flag& base_flag() override;
+	[[nodiscard]] const Flag& base_flag() const override;
 	[[nodiscard]] PositionList get_positions(const EditorGameBase&) const override;
 
 	bool init(EditorGameBase&) override;
@@ -131,9 +132,9 @@ public:
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
-	[[nodiscard]] SoldierRequest* get_warship_request(Serial ship) const;
-	SoldierRequest& create_warship_request(Ship* ship, SoldierPreference pref);
-	void erase_warship_request(Serial ship);
+	[[nodiscard]] SoldierRequestManager* get_warship_request_manager(Serial ship) const;
+	SoldierRequestManager& create_warship_request_manager(Ship* ship, SoldierPreference pref);
+	void erase_warship_request_manager(Serial ship);
 	[[nodiscard]] Ship* find_ship_for_warship_request(const EditorGameBase& egbase,
 	                                                  const Request& req) const;
 
@@ -164,7 +165,7 @@ private:
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
-	std::map<Serial, std::unique_ptr<SoldierRequest>> warship_soldier_requests_;
+	std::map<Serial, std::unique_ptr<SoldierRequestManager>> warship_soldier_request_managers_;
 
 	// saving and loading
 protected:

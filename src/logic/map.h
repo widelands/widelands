@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <map>
 #include <memory>
+#include <optional>
 #include <set>
 #include <string>
 
@@ -185,6 +186,8 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
+	static const std::vector<int32_t> kMapFieldCounts;
+
 	struct OldWorldInfo {
 		// What we call it now (used for the gameloading UI's themes
 		// and by the random map generator)
@@ -193,6 +196,9 @@ public:
 		// What this is called in very old map files. Used ONLY to map
 		// the world names of old maps to the new theme definitions.
 		std::string old_name;
+
+		// Representative icon filepath.
+		std::string icon;
 
 		// Localized name
 		std::function<std::string()> descname;
@@ -559,6 +565,15 @@ public:
 	// The objectives that are defined in this map if it is a scenario.
 	[[nodiscard]] const Objectives& objectives() const {
 		return objectives_;
+	}
+	// Count the number of objectives that match the given done/visible flags
+	// Pass nullopt for "don't care"
+	[[nodiscard]] int objectives_count(std::optional<bool> done = std::nullopt,
+	                                   std::optional<bool> visible = std::nullopt) const {
+		return std::count_if(objectives_.begin(), objectives_.end(), [done, visible](const auto& o) {
+			return (!done.has_value() || o.second->done() == *done) &&
+			       (!visible.has_value() || o.second->visible() == *visible);
+		});
 	}
 	Objectives* mutable_objectives() {
 		return &objectives_;

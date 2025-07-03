@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,6 +45,8 @@ struct ImmovableAction;
 struct ImmovableActionData;
 struct ImmovableProgram;
 struct PlayerImmovable;
+
+constexpr float kImmovableSilhouetteOpacity = 0.3f;
 
 struct NoteImmovable {
 	CAN_BE_SENT_AS_NOTE(NoteId::Immovable)
@@ -358,11 +360,14 @@ struct PlayerImmovable : public BaseImmovable {
 	}
 
 	virtual Flag& base_flag() = 0;
+	virtual const Flag& base_flag() const = 0;
 
 	virtual void set_economy(Economy*, WareWorker);
 
 	virtual void add_worker(Worker&);
 	virtual void remove_worker(Worker&);
+
+	virtual void kickout_worker_from_queue(Game& game, Worker& worker);
 
 	using Workers = std::vector<Worker*>;
 
@@ -390,6 +395,8 @@ struct PlayerImmovable : public BaseImmovable {
 	/*@{*/
 	virtual void receive_ware(Game&, DescriptionIndex ware);
 	virtual void receive_worker(Game&, Worker& worker);
+	virtual void inputqueue_max_fill_changed() {
+	}
 	/*@}*/
 
 	void set_owner(Player*) override;

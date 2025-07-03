@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -186,7 +186,6 @@ void GameClientDisconnected::exit_game_aborted(Panel* dialog) {
 }
 
 void GameClientDisconnected::set_ai(const std::string& ai) {
-	const std::string ai_descr = AI::ComputerPlayer::get_implementation(ai)->descname;
 	for (size_t i = 0; i < host_->settings().players.size(); i++) {
 		if (host_->settings().players.at(i).state != PlayerSettings::State::kOpen ||
 		    !igb_->game().get_player(i + 1)->get_ai().empty()) {

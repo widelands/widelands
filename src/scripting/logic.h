@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,10 @@
 
 class EditorFactory;
 class GameFactory;
+
+namespace FsMenu {
+class MainMenu;
+}  // namespace FsMenu
 
 class LuaEditorInterface : public LuaInterface {
 public:
@@ -61,6 +65,12 @@ public:
 
 private:
 	std::unique_ptr<GameFactory> factory_;
+};
+
+class LuaFsMenuInterface : public LuaInterface {
+public:
+	explicit LuaFsMenuInterface(FsMenu::MainMenu* menu);
+	~LuaFsMenuInterface() override = default;
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LOGIC_H

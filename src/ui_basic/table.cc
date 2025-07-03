@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -288,7 +288,7 @@ void BaseTable::draw(RenderTarget& dst) {
 	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
-		if (y >= static_cast<int32_t>(get_h())) {
+		if (y >= get_h()) {
 			return;
 		}
 
@@ -384,6 +384,8 @@ void BaseTable::draw(RenderTarget& dst) {
 				break;
 			case UI::Align::kLeft:
 				break;
+			default:
+				NEVER_HERE();
 			}
 
 			constexpr int kMargin = 1;
@@ -431,7 +433,7 @@ UI::FontStyleInfo& BaseTable::get_column_fontstyle(const BaseTable::EntryRecord&
 	return const_cast<FontStyleInfo&>(
 	   er.font_style() != nullptr ? *er.font_style() :
 	   er.is_disabled()           ? g_style_manager->table_style(panel_style_).disabled() :
-                                   g_style_manager->table_style(panel_style_).enabled());
+	                                g_style_manager->table_style(panel_style_).enabled());
 }
 bool BaseTable::is_mouse_in(const Vector2i& cursor_pos,
                             const Vector2i& point,

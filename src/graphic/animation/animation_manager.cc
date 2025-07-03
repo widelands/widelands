@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,9 @@ uint32_t AnimationManager::load(const LuaTable& table,
 	case Animation::Type::kSpritesheet:
 		animations_.push_back(std::unique_ptr<Animation>(
 		   new SpriteSheetAnimation(table, basename, animation_directory)));
+		break;
+	default:
+		NEVER_HERE();
 	}
 	return animations_.size();
 }
@@ -55,7 +58,7 @@ uint32_t AnimationManager::load(const std::string& map_object_name,
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if ((id == 0u) || id > animations_.size()) {
-		throw wexception("Requested unknown animation with id: %i", id);
+		throw wexception("Requested unknown animation with id: %u", id);
 	}
 	return *animations_[id - 1];
 }

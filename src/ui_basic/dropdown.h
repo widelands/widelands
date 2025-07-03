@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2024 by the Widelands Development Team
+ * Copyright (C) 2016-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,6 +163,10 @@ public:
 	/// Expand display button to make enough room for each entry's text. Call this before adding any
 	/// entries.
 	void set_autoexpand_display_button();
+
+	[[nodiscard]] UI::BaseListselect* get_list() {
+		return list_;
+	}
 
 	void notify_list_deleted() {
 		list_ = nullptr;

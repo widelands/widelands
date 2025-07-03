@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,17 @@
 #include <memory>
 
 #include "base/log.h"
-#include "logic/cmd_luacoroutine.h"
+#include "commands/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/production_program.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker_program.h"
 #include "logic/map_objects/world/critter.h"
@@ -35,8 +39,11 @@
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_game.h"
-#include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "scripting/map/lua_building_description.h"
+#include "scripting/map/lua_immovable_description.h"
+#include "scripting/map/lua_terrain_description.h"
+#include "scripting/map/lua_tribe_description.h"
 #include "wui/interactive_player.h"
 
 namespace LuaRoot {
@@ -46,7 +53,7 @@ namespace LuaRoot {
 ======================
 
 .. module:: wl
-   :synopsis: Base classes which allow access to all widelands internals.
+   :synopsis: Base classes which allow access to all Widelands internals.
 
 .. moduleauthor:: The Widelands development team
 
@@ -82,15 +89,24 @@ const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine),
    METHOD(LuaGame, save),
+   METHOD(LuaGame, get_trade),
    {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),         PROP_RO(LuaGame, time),
-   PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
-   PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
-   PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   PROP_RO(LuaGame, win_condition),      PROP_RO(LuaGame, win_condition_duration),
-   PROP_RW(LuaGame, allow_diplomacy),    PROP_RW(LuaGame, allow_naval_warfare),
+   PROP_RO(LuaGame, real_speed),
+   PROP_RO(LuaGame, time),
+   PROP_RW(LuaGame, desired_speed),
+   PROP_RW(LuaGame, allow_saving),
+   PROP_RO(LuaGame, last_save_time),
+   PROP_RO(LuaGame, type),
+   PROP_RO(LuaGame, interactive_player),
+   PROP_RO(LuaGame, scenario_difficulty),
+   PROP_RO(LuaGame, win_condition),
+   PROP_RO(LuaGame, win_condition_duration),
+   PROP_RW(LuaGame, allow_diplomacy),
+   PROP_RW(LuaGame, allow_naval_warfare),
+   PROP_RO(LuaGame, trades),
+   PROP_RO(LuaGame, trade_extension_proposals),
    {nullptr, nullptr, nullptr},
 };
 
@@ -176,6 +192,8 @@ int LuaGame::get_allow_saving(lua_State* L) {
    .. attribute:: interactive_player
 
       (RO) The player number of the interactive player, or 0 for spectator
+
+      value of :attr:`wl.game.Player.number` of the interactive player
 */
 int LuaGame::get_interactive_player(lua_State* L) {
 	upcast(const InteractivePlayer, p, get_game(L).get_ibase());
@@ -295,6 +313,100 @@ int LuaGame::set_allow_naval_warfare(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. attribute:: trades
+
+      .. versionadded:: 1.3
+
+      (RO) An :class:`array` of all proposed trade offers and ongoing trade agreements.
+
+      Each trade agreement is a :class:`table` with the following properties:
+
+      - **trade_id** (:class:`integer`): The unique identifier for this trade.
+      - **state** (:class:`string`): Either ``"proposed"`` or ``"running"``.
+      - **initiator** (:class:`wl.map.Market`): The market that initiated this trade.
+      - **receiver** (:class:`wl.map.Market`): The market that receives this trade,
+         or :const:`nil` if the trade has not been accepted yet.
+      - **sending_player** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who initiated the trade.
+      - **receiving_player** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who receives the trade.
+      - **items_to_send** (:class:`table`): A table of ware names to amounts of wares to send.
+      - **items_to_receive** (:class:`table`): A table of ware names to amounts of wares to receive.
+      - **num_batches** (:class:`integer`): The number of ware batches to exchange
+         (:const:`-1` for indefinite trades).
+
+      :see also: :meth:`get_trade`
+      :see also: :meth:`wl.map.Market.propose_trade`
+      :see also: :meth:`wl.map.Market.accept_trade`
+      :see also: :meth:`wl.game.Player.cancel_trade`
+      :see also: :meth:`wl.game.Player.reject_trade`
+      :see also: :meth:`wl.game.Player.retract_trade`
+*/
+int LuaGame::get_trades(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	lua_newtable(L);
+
+	unsigned index = 1;
+	for (const auto& pair : game.all_trade_agreements()) {
+		lua_pushuint32(L, index++);
+		push_trade(L, pair.first);
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
+   .. attribute:: trade_extension_proposals
+
+      .. versionadded:: 1.3
+
+      (RO) An :class:`array` of all proposed trade extensions.
+
+      Each trade extensions proposal is a :class:`table` with the following properties:
+
+      - **trade_id** (:class:`integer`): The unique identifier for the trade to extend.
+      - **proposer** (:class:`integer`): The :attr:`wl.game.Player.number`
+         of the player who proposed the trade extension.
+      - **num_batches** (:class:`integer`): The number of ware batches to add to the trade
+         (:const:`-1` to make the trade indefinite).
+
+      :see also: :meth:`wl.game.Player.propose_trade_extension`
+      :see also: :meth:`wl.game.Player.accept_trade_extension`
+      :see also: :meth:`wl.game.Player.reject_trade_extension`
+      :see also: :meth:`wl.game.Player.retract_trade_extension`
+*/
+int LuaGame::get_trade_extension_proposals(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	lua_newtable(L);
+
+	unsigned index = 1;
+	for (const Widelands::TradeExtension& ext : game.all_trade_extension_proposals()) {
+		lua_pushuint32(L, index++);
+
+		{
+			lua_newtable(L);
+
+			lua_pushstring(L, "trade_id");
+			lua_pushuint32(L, ext.trade_id);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "proposer");
+			lua_pushuint32(L, ext.proposer);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "num_batches");
+			lua_pushint32(L, ext.batches);
+			lua_rawset(L, -3);
+		}
+
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -359,11 +471,95 @@ int LuaGame::save(lua_State* L) {
 	return 0;
 }
 
+/* RST
+   .. method:: get_trade(id)
+
+      .. versionadded:: 1.3
+
+      Get a table containing information about the trade proposal or agreement with the
+      provided unique ID.
+
+      See :attr:`trades` for information on the table structure.
+
+      If no trade with the provided ID exists, :const:`nil` is returned.
+
+      :arg id: Unique ID of the trade to look up.
+      :type id: :class:`integer`
+
+      :see also: :attr:`trades`
+*/
+int LuaGame::get_trade(lua_State* L) {
+	push_trade(L, luaL_checkinteger(L, 2));
+	return 1;
+}
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
+
+void LuaGame::push_trade(lua_State* L, Widelands::TradeID id) {
+	Widelands::Game& game = get_game(L);
+	if (!game.has_trade(id)) {
+		lua_pushnil(L);
+		return;
+	}
+
+	const Widelands::TradeInstance& trade = game.get_trade(id);
+	lua_newtable(L);
+
+	lua_pushstring(L, "trade_id");
+	lua_pushuint32(L, id);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "state");
+	lua_pushstring(
+	   L, trade.state == Widelands::TradeInstance::State::kRunning ? "running" : "proposed");
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "initiator");
+	if (LuaMaps::upcasted_map_object_to_lua(L, trade.initiator.get(game)) == 0) {
+		lua_pushnil(L);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "receiver");
+	if (LuaMaps::upcasted_map_object_to_lua(L, trade.receiver.get(game)) == 0) {
+		lua_pushnil(L);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "sending_player");
+	lua_pushuint32(L, trade.sending_player);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "receiving_player");
+	lua_pushuint32(L, trade.receiving_player);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "num_batches");
+	lua_pushint32(L, trade.num_batches);
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "items_to_send");
+	lua_newtable(L);
+	for (const auto& ware_amount : trade.items_to_send) {
+		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
+		lua_pushuint32(L, ware_amount.second);
+		lua_rawset(L, -3);
+	}
+	lua_rawset(L, -3);
+
+	lua_pushstring(L, "items_to_receive");
+	lua_newtable(L);
+	for (const auto& ware_amount : trade.items_to_receive) {
+		lua_pushstring(L, game.descriptions().get_ware_descr(ware_amount.first)->name().c_str());
+		lua_pushuint32(L, ware_amount.second);
+		lua_rawset(L, -3);
+	}
+	lua_rawset(L, -3);
+}
 
 /* RST
 Editor
@@ -445,6 +641,7 @@ const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
+   PROP_RO(LuaDescriptions, all_tribes_names),
    PROP_RO(LuaDescriptions, tribes_descriptions),
    PROP_RO(LuaDescriptions, immovable_descriptions),
    PROP_RO(LuaDescriptions, terrain_descriptions),
@@ -477,9 +674,31 @@ void LuaDescriptions::__unpersist(lua_State* /* L */) {
  */
 
 /* RST
+   .. attribute:: all_tribes_names
+
+      .. versionadded:: 1.3
+
+      Returns an array with the names of all registered tribes,
+      including tribes not currently loaded.
+
+      (RO) :class:`array` of :class:`string`
+*/
+int LuaDescriptions::get_all_tribes_names(lua_State* L) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	lua_newtable(L);
+	int i = 0;
+	for (const Widelands::TribeBasicInfo& tbi : descriptions.all_tribes()) {
+		lua_pushint32(L, ++i);
+		lua_pushstring(L, tbi.name.c_str());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: tribes_descriptions
 
-      Returns a list of all the tribes that are available.
+      Returns a list of all the tribes that are available and loaded.
 
       (RO) a list of :class:`~wl.map.TribeDescription` objects
 */
@@ -498,7 +717,7 @@ int LuaDescriptions::get_tribes_descriptions(lua_State* L) {
 /* RST
    .. attribute:: immovable_descriptions
 
-      Returns a list of all the immovables that are available.
+      Returns a list of all the immovables that are available and loaded.
 
       (RO) a list of :class:`~wl.map.ImmovableDescription` objects
 */
@@ -519,7 +738,8 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 
       .. versionadded:: 1.2
 
-      (RO) An :class:`array` of all :class:`~wl.map.BuildingDescription` objects that are available.
+      (RO) An :class:`array` of all :class:`~wl.map.BuildingDescription` objects
+      that are available and loaded.
 */
 int LuaDescriptions::get_building_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
@@ -535,7 +755,7 @@ int LuaDescriptions::get_building_descriptions(lua_State* L) {
 /* RST
    .. attribute:: terrain_descriptions
 
-      Returns a list of all the terrains that are available.
+      Returns a list of all the terrains that are available and loaded.
 
       (RO) a list of :class:`~wl.map.TerrainDescription` objects
 */
@@ -554,7 +774,7 @@ int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 /* RST
    .. attribute:: worker_descriptions
 
-      Returns a list of all the workers that are available.
+      Returns a list of all the workers that are available and loaded.
 
       (RO) a list of :class:`~wl.map.WorkerDescription` objects
 */
@@ -731,7 +951,11 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       - Resource_
       - Terrain_
+      - Critter_
+      - Immovable_
+      - Ware_
       - Worker_
+      - Ship_
       - Building_
       - Productionsite_
       - Trainingsite_
@@ -742,158 +966,265 @@ int LuaDescriptions::new_tribe(lua_State* L) {
       .. table:: ``"resource"``
          :name: resource
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"max_amount"`                         **amount**         (*int*)               1.0
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"max_amount"`                         **amount**   (*int*)                     ``wl.Descriptions():modify_unit("resource", "resource_coal", "max_amount", 50)``   1.0
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("resource", "resource_coal",                       1.3
+                                                                                                "descname", _("Fossilized Plants"))``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"terrain"``
          :name: terrain
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"enhancement"`                        **terrain_name**     (*string*)          1.0
-         :const:`"textures"`                           **textures_and_fps** (*table*)           1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"enhancement"`                        **category**         (*string*),         ``wl.Descriptions():modify_unit("terrain", "winter_tundra",                        1.0
+                                                       **terrain_name**     (*string*)          "enhancement", "diking", "winter_taiga2")``
+         :const:`"textures"`                           **textures_and_fps** (*table*)           ``wl.Descriptions():modify_unit("terrain", "winter_tundra", "textures",            1.1
+                                                                                                {fps = 10,
+                                                                                                textures = path.list_files(path.dirname(__file__) ..
+                                                                                                "blackland_water/water_??.png" )})``
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("terrain", "winter_tundra",                        1.3
+                                                                                                "descname", _("Winter Tundra"))``
+         ============================================  =======================================  =================================================================================  =============
+
+      .. table:: ``"critter"``
+         :name: critter
+         :width: 100%
+         :widths: 15,25,50,10
+         :align: left
+
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("critter", "moose",                                1.3
+                                                                                                "descname", _("Elk"))``
+         ============================================  =======================================  =================================================================================  =============
+
+      .. table:: ``"immovable"``
+         :name: immovable
+         :width: 100%
+         :widths: 15,25,50,10
+         :align: left
+
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("immovable", "spruce_summer_old",                  1.3
+                                                                                                "descname", _("Fir Tree (Old)"))``
+         ============================================  =======================================  =================================================================================  =============
+
+      .. table:: ``"ware"``
+         :name: ware
+         :width: 100%
+         :widths: 15,25,50,10
+         :align: left
+
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"target_quantity"`                    **tribe**          (*string*),           ``wl.Descriptions():modify_unit("ware", "reed",                                    1.3
+                                                       **amount**         (*int* or *nil*)      "target_quantity", "frisians", 20)``
+         :const:`"preciousness"`                       **tribe**          (*string*),           ``wl.Descriptions():modify_unit("ware", "reed", "preciousness", "frisians", 3)``   1.3
+                                                       **amount**         (*int*)
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("ware", "reed",                                    1.3
+                                                                                                "descname", _("Thatch Reed"))``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"worker"``
          :name: worker
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"experience"`                         **experience**     (*int*)               1.0
-         :const:`"becomes"`                            **worker_name**    (*string*)            1.0
-         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
-                                                       **actions_table**  (*table*)
-         :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           1.2
-                                                       **amount**         (*int*)
-         :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           1.2
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"experience"`                         **experience**     (*int*)               ``wl.Descriptions():modify_unit("worker", "frisians_baker", "experience", 32)``    1.0
+         :const:`"becomes"`                            **worker_name**    (*string*)            ``wl.Descriptions():modify_unit("worker", "frisians_baker",                        1.0
+                                                                                                "becomes", "frisians_baker_chief")``
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "programs", "set",     1.0
+                                                       **actions_table**  (*table*)             "plant_rye", {
+                                                                                                "findspace=size:any radius:2 space",
+                                                                                                "walk=coords",
+                                                                                                "animate=planting duration:6s",
+                                                                                                "plant=attrib:seed_rye",
+                                                                                                "animate=planting duration:6s",
+                                                                                                "return"
+                                                                                                })``
+         :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "buildcost",           1.2
+                                                       **amount**         (*int*)               "set", "basket", 1)``
+         :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "buildcost",           1.2
+                                                                                                "remove", "bread_paddle")``
+         :const:`"target_quantity"`                    **amount**         (*int* or *nil*)      ``wl.Descriptions():modify_unit("worker", "frisians_baker",                        1.3
+                                                                                                "target_quantity", 5)``
+         :const:`"preciousness"`                       **tribe**          (*string*),           ``wl.Descriptions():modify_unit("worker", "frisians_baker", "preciousness",        1.3
+                                                       **amount**         (*int*)               "frisians", 8)``
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("worker", "frisians_baker",                        1.3
+                                                                                                "descname", _("Bread Master"))``
+         ============================================  =======================================  =================================================================================  =============
+
+      .. table:: ``"ship"``
+         :name: ship
+         :width: 100%
+         :widths: 15,25,50,10
+         :align: left
+
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("ship", "frisians_ship",                           1.3
+                                                                                                "descname", _("Sail Ship"))``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"building"``
          :name: building
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ==============================================================  =======================================  =============
-         Property descriptor                                             Values                                   Since version
-         ==============================================================  =======================================  =============
-         :const:`"enhancement"`                                          **building_name**  (*string*)            1.1
-         :const:`"buildcost"`, :const:`"remove"`                         **ware_name**      (*string*)            1.1
-         :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            1.1
-         :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            1.1
-         :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            1.1
-         :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           1.1
-                                                                         **amount**         (*int*)
-         ==============================================================  =======================================  =============
+         ==============================================================  =======================================  =============================================================  =============
+         Property descriptor                                             Values                                   Example                                                        Since version
+         ==============================================================  =======================================  =============================================================  =============
+         :const:`"enhancement"`                                          **building_name**  (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement", "frisians_farm_big")``
+         :const:`"buildcost"`, :const:`"remove"`                         **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "buildcost", "remove", "granite")``
+         :const:`"buildcost"`, :const:`"set"`                            **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "buildcost", "set", "brick", 4)``
+         :const:`"return_on_dismantle"`, :const:`"remove"`               **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "return_on_dismantle", "remove", "granite")``
+         :const:`"return_on_dismantle"`, :const:`"set"`                  **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "return_on_dismantle", "set", "brick", 2)``
+         :const:`"enhancement_cost"`, :const:`"remove"`                  **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement_cost", "remove", "granite")``
+         :const:`"enhancement_cost"`, :const:`"set"`                     **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "enhancement_cost", "set", "brick", 4)``
+         :const:`"enhancement_return_on_dismantle"`, :const:`"remove"`   **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                                                                  "enhancement_return_on_dismantle", "remove", "brick", 3)``
+         :const:`"enhancement_return_on_dismantle"`, :const:`"set"`      **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.1
+                                                                         **amount**         (*int*)               "enhancement_return_on_dismantle", "set", "brick", 3)``
+         :const:`"descname"`                                             **descname** (*string*)                  ``wl.Descriptions():modify_unit("building", "frisians_farm",   1.3
+                                                                                                                  "descname", _("Barley Plantation"))``
+         ==============================================================  =======================================  =============================================================  =============
 
       .. table:: ``"productionsite"``
          :name: productionsite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"input"`, :const:`"add_ware"`         **ware_name**      (*string*),           1.0
-                                                       **amount**         (*int*)
-         :const:`"input"`, :const:`"modify_ware"`      **ware_name**      (*string*),           1.0
-                                                       **new_amount**     (*int*)
-         :const:`"input"`, :const:`"remove_ware"`      **ware_name**      (*string*)            1.0
-         :const:`"input"`, :const:`"add_worker"`       **worker_name**    (*string*),           1.0
-                                                       **amount**         (*int*)
-         :const:`"input"`, :const:`"modify_worker"`    **worker_name**    (*string*),           1.0
-                                                       **new_amount**     (*int*)
-         :const:`"input"`, :const:`"remove_worker"`    **worker_name**    (*string*)            1.0
-         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
-                                                       **program_table**  (*table*)
-         ============================================  =======================================  =============
+         ============================================  =======================================  =================================================================================  =============
+         Property descriptor                           Values                                   Example                                                                            Since version
+         ============================================  =======================================  =================================================================================  =============
+         :const:`"input"`, :const:`"add_ware"`         **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                       **amount**         (*int*)               "add_ware", "salt", 4)``
+         :const:`"input"`, :const:`"modify_ware"`      **ware_name**      (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                       **new_amount**     (*int*)               "modify_ware", "water", 9)``
+         :const:`"input"`, :const:`"remove_ware"`      **ware_name**      (*string*)            ``wl.Descriptions():modify_unit("productionsite", "frisians_bakery", "input",      1.0
+                                                                                                "remove_ware", "barley")``
+         :const:`"input"`, :const:`"add_worker"`       **worker_name**    (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                       **amount**         (*int*)               "add_worker", "frisians_trainer", 4)``
+         :const:`"input"`, :const:`"modify_worker"`    **worker_name**    (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                       **new_amount**     (*int*)               "modify_worker", "frisians_carrier", 4)``
+         :const:`"input"`, :const:`"remove_worker"`    **worker_name**    (*string*)            ``wl.Descriptions():modify_unit("productionsite", "frisians_barracks", "input",    1.0
+                                                                                                "remove_worker", "frisians_carrier")``
+         :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           ``wl.Descriptions():modify_unit("productionsite", "frisians_honey_bread_bakery",   1.0
+                                                       **program_table**  (*table*)             "programs", "set", "main", {
+                                                                                                descname = _("working"), actions = {
+                                                                                                "call=bake_honey",
+                                                                                                "call=bake_normal",
+                                                                                                "return=skipped"
+                                                                                                }})``
+         ============================================  =======================================  =================================================================================  =============
 
       .. table:: ``"trainingsite"``
          :name: trainingsite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"soldier_capacity"`                   **capacity**       (*int*)               1.1
-         :const:`"trainer_patience"`                   **patience**       (*int*)               1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  ==========================================================================  =============
+         Property descriptor                           Values                                   Example                                                                     Since version
+         ============================================  =======================================  ==========================================================================  =============
+         :const:`"soldier_capacity"`                   **capacity**       (*int*)               ``wl.Descriptions():modify_unit("trainingsite", "frisians_training_arena",  1.1
+                                                                                                "soldier_capacity", 8)``
+         :const:`"trainer_patience"`                   **patience**       (*int*)               ``wl.Descriptions():modify_unit("trainingsite", "frisians_training_arena",  1.1
+                                                                                                "trainer_patience", 12)``
+         ============================================  =======================================  ==========================================================================  =============
 
       .. table:: ``"militarysite"``
          :name: militarysite
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"conquers"`                           **radius**         (*int*)               1.1
-         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
-         :const:`"max_soldiers"`                       **amount**         (*int*)               1.1
-         ============================================  =======================================  =============
+         ============================================  =======================================  ====================================================================  =============
+         Property descriptor                           Values                                   Example                                                               Since version
+         ============================================  =======================================  ====================================================================  =============
+         :const:`"conquers"`                           **radius**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "conquers", 8)``
+         :const:`"heal_per_second"`                    **amount**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "heal_per_second", 180)``
+         :const:`"max_soldiers"`                       **amount**         (*int*)               ``wl.Descriptions():modify_unit("militarysite", "frisians_outpost",   1.1
+                                                                                                "max_soldiers", 5)``
+         ============================================  =======================================  ====================================================================  =============
 
       .. table:: ``"warehouse"``
          :name: warehouse
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
-         :const:`"conquers"`                           **radius**         (*int*)               1.1
-         :const:`"max_garrison"`                       **amount**         (*int*)               1.2
-         ============================================  =======================================  =============
+         ============================================  =======================================  ====================================================================  =============
+         Property descriptor                           Values                                   Example                                                               Since version
+         ============================================  =======================================  ====================================================================  =============
+         :const:`"heal_per_second"`                    **amount**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.1
+                                                                                                "heal_per_second", 220)``
+         :const:`"conquers"`                           **radius**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.1
+                                                                                                "conquers", 7)``
+         :const:`"max_garrison"`                       **amount**         (*int*)               ``wl.Descriptions():modify_unit("warehouse", "frisians_warehouse",    1.2
+                                                                                                "max_garrison", 10)``
+         ============================================  =======================================  ====================================================================  =============
 
       .. table:: ``"tribe"``
          :name: tribe
          :width: 100%
-         :widths: 40,50,10
+         :widths: 15,25,50,10
          :align: left
 
-         ============================================  =======================================  =============
-         Property descriptor                           Values                                   Since version
-         ============================================  =======================================  =============
-         :const:`"add_ware"`                           **ware_name**       (*string*),          1.0
-                                                       **menu_column**     (*int*),
-                                                       **target_quantity** (*int* or *nil*),
-                                                       **preciousness**    (*int*),
+         ============================================  =======================================  ========================================================================  =============
+         Property descriptor                           Values                                   Example                                                                   Since version
+         ============================================  =======================================  ========================================================================  =============
+         :const:`"add_ware"`                           **ware_name**       (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_ware", "rye",   1.0
+                                                       **menu_column**     (*int*),             1, nil,1, { helptexts = { purpose =
+                                                       **target_quantity** (*int* or *nil*),    _("Rye is used to bake bread. It needs to be ground into flour first.")
+                                                       **preciousness**    (*int*),             }})``
                                                        **helptexts**       (*table*)
-         :const:`"add_worker"`                         **worker_name**     (*string*),          1.0
-                                                       **menu_column**     (*int*),
-                                                       **target_quantity** (*int* or *nil*),
-                                                       **preciousness**    (*int* or *nil*),
+         :const:`"add_worker"`                         **worker_name**     (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_worker",        1.0
+                                                       **menu_column**     (*int*),             "frisians_miller", 2, nil, nil, { helptexts = { purpose =
+                                                       **target_quantity** (*int* or *nil*),    _("The miller grinds barley and rye into flour.")
+                                                       **preciousness**    (*int* or *nil*),    }})``
                                                        **helptexts**       (*table*)
-         :const:`"add_building"`                       **building_name**   (*string*),          1.0
-                                                       **helptexts**       (*table*)
-         :const:`"add_immovable"`                      **immovable_name**  (*string*),          1.0
-                                                       **helptexts**       (*table*)
-         ============================================  =======================================  =============
+         :const:`"add_building"`                       **building_name**   (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_building",      1.0
+                                                       **helptexts**       (*table*)            "frisians_rye_farm", { helptexts = { purpose =
+                                                                                                _("The rye farm sows and harvests rye.")
+                                                                                                }})``
+         :const:`"add_immovable"`                      **immovable_name**  (*string*),          ``wl.Descriptions():modify_unit("tribe", "frisians", "add_immovable",     1.0
+                                                       **helptexts**       (*table*)            "ryefield_small", { helptexts = { purpose =
+                                                                                                _("This rye field is growing.")
+                                                                                                }})``
+         :const:`"descname"`                           **descname** (*string*)                  ``wl.Descriptions():modify_unit("tribe", "frisians",                      1.3
+                                                                                                "descname", _("Frisia Magna"))``
+         ============================================  =======================================  ========================================================================  =============
 
       Example to add a new worker to an existing tribe; the worker will be appended to the 2nd
       column in the workers displays (stock menu, warehouse window, economy options), and have
@@ -976,6 +1307,8 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 			do_modify_productionsite(L, unit, property);
 		} else if (type == "militarysite") {
 			do_modify_militarysite(L, unit, property);
+		} else if (type == "market") {
+			do_modify_market(L, unit, property);
 		} else if (type == "warehouse") {
 			do_modify_warehouse(L, unit, property);
 		} else {
@@ -1004,6 +1337,8 @@ void LuaDescriptions::do_modify_resource(lua_State* L,
 
 	if (property == "max_amount") {
 		resource_descr.set_max_amount(luaL_checkuint32(L, 5));
+	} else if (property == "descname") {
+		resource_descr.set_descname(luaL_checkstring(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid resource property '%s'", property.c_str());
 	}
@@ -1102,6 +1437,8 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		LuaTable t(L);
 		tribe_descr.load_helptexts(
 		   descrs.get_mutable_immovable_descr(descrs.load_immovable(immo_name)), t);
+	} else if (property == "descname") {
+		tribe_descr.set_descname(luaL_checkstring(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid tribe property '%s'", property.c_str());
 	}
@@ -1112,13 +1449,19 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
                                        const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	Widelands::WorkerDescr& worker_descr =
-	   *descrs.get_mutable_worker_descr(descrs.load_worker(unit_name));
+	const Widelands::DescriptionIndex workerindex = descrs.load_worker(unit_name);
+	Widelands::WorkerDescr& worker_descr = *descrs.get_mutable_worker_descr(workerindex);
 
 	if (property == "experience") {
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
 	} else if (property == "becomes") {
 		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
+		descrs.get_mutable_worker_descr(worker_descr.becomes())->set_promoted_from(workerindex);
+	} else if (property == "target_quantity") {
+		worker_descr.set_default_target_quantity(lua_isnil(L, 5) ? Widelands::kInvalidWare :
+		                                                           luaL_checkuint32(L, 5));
+	} else if (property == "preciousness") {
+		worker_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
 	} else if (property == "programs") {
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string prog_name = luaL_checkstring(L, 6);
@@ -1140,6 +1483,8 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 		} else {
 			report_error(L, "modify_unit - worker - buildcost: invalid command '%s'", cmd.c_str());
 		}
+	} else if (property == "descname") {
+		worker_descr.set_descname(luaL_checkstring(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid worker property '%s'", property.c_str());
 	}
@@ -1211,6 +1556,8 @@ void LuaDescriptions::do_modify_building(lua_State* L,
 			   L, "modify_unit - building - enhancement_return_on_dismantle: invalid command '%s'",
 			   cmd.c_str());
 		}
+	} else if (property == "descname") {
+		bld.set_descname(luaL_checkstring(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid building property '%s'", property.c_str());
 	}
@@ -1235,7 +1582,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
-			psdescr.mutable_input_wares().push_back(Widelands::WareAmount(di, amount));
+			psdescr.mutable_input_wares().emplace_back(di, amount);
 		} else if (cmd == "modify_ware") {
 			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
@@ -1263,7 +1610,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
-			psdescr.mutable_input_workers().push_back(Widelands::WareAmount(di, amount));
+			psdescr.mutable_input_workers().emplace_back(di, amount);
 		} else if (cmd == "modify_worker") {
 			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
@@ -1310,15 +1657,32 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 }
 
 void LuaDescriptions::do_modify_ship(lua_State* L,
-                                     const std::string& /* unit_name */,
-                                     const std::string& /* property */) {
-	report_error(L, "modify_unit for ships not yet supported");
+                                     const std::string& unit_name,
+                                     const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	Widelands::ShipDescr& ship = *descrs.get_mutable_ship_descr(descrs.load_ship(unit_name));
+
+	if (property == "descname") {
+		ship.set_descname(luaL_checkstring(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid ship property '%s'", property.c_str());
+	}
 }
 
 void LuaDescriptions::do_modify_critter(lua_State* L,
-                                        const std::string& /* unit_name */,
-                                        const std::string& /* property */) {
-	report_error(L, "modify_unit for critters not yet supported");
+                                        const std::string& unit_name,
+                                        const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	Widelands::CritterDescr& critter =
+	   *descrs.get_mutable_critter_descr(descrs.load_critter(unit_name));
+
+	if (property == "descname") {
+		critter.set_descname(luaL_checkstring(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid critter property '%s'", property.c_str());
+	}
 }
 
 void LuaDescriptions::do_modify_terrain(lua_State* L,
@@ -1334,21 +1698,46 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 	} else if (property == "textures") {
 		LuaTable t(L);
 		terrain.replace_textures(t);
+	} else if (property == "descname") {
+		terrain.set_descname(luaL_checkstring(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid terrain property '%s'", property.c_str());
 	}
 }
 
 void LuaDescriptions::do_modify_immovable(lua_State* L,
-                                          const std::string& /* unit_name */,
-                                          const std::string& /* property */) {
-	report_error(L, "modify_unit for immovables not yet supported");
+                                          const std::string& unit_name,
+                                          const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	Widelands::ImmovableDescr& immovable =
+	   *descrs.get_mutable_immovable_descr(descrs.load_immovable(unit_name));
+
+	if (property == "descname") {
+		immovable.set_descname(luaL_checkstring(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid immovable property '%s'", property.c_str());
+	}
 }
 
 void LuaDescriptions::do_modify_ware(lua_State* L,
-                                     const std::string& /* unit_name */,
-                                     const std::string& /* property */) {
-	report_error(L, "modify_unit for wares not yet supported");
+                                     const std::string& unit_name,
+                                     const std::string& property) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
+	Widelands::WareDescr& ware_descr = *descrs.get_mutable_ware_descr(descrs.load_ware(unit_name));
+
+	if (property == "target_quantity") {
+		ware_descr.set_default_target_quantity(luaL_checkstring(L, 5), lua_isnil(L, 6) ?
+		                                                                  Widelands::kInvalidWare :
+		                                                                  luaL_checkuint32(L, 6));
+	} else if (property == "preciousness") {
+		ware_descr.set_preciousness(luaL_checkstring(L, 5), luaL_checkuint32(L, 6));
+	} else if (property == "descname") {
+		ware_descr.set_descname(luaL_checkstring(L, 5));
+	} else {
+		report_error(L, "modify_unit: invalid ware property '%s'", property.c_str());
+	}
 }
 
 void LuaDescriptions::do_modify_trainingsite(lua_State* L,
@@ -1387,6 +1776,12 @@ void LuaDescriptions::do_modify_militarysite(lua_State* L,
 	} else {
 		report_error(L, "modify_unit: invalid militarysite property '%s'", property.c_str());
 	}
+}
+
+void LuaDescriptions::do_modify_market(lua_State* L,
+                                       const std::string& /* unit_name */,
+                                       const std::string& /* property */) {
+	report_error(L, "modify_unit for markets not yet supported");
 }
 
 void LuaDescriptions::do_modify_warehouse(lua_State* L,

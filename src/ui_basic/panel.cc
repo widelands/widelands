@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/listselect.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -87,7 +88,11 @@ Panel::Panel(Panel* const nparent,
      hyperlink_subscriber_(
         Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
 	        if (starts_with(name_, note.target)) {
-		        handle_hyperlink(note.action);
+		        if (static_cast<bool>(hyperlink_action_)) {
+			        hyperlink_action_(note.action);
+		        } else {
+			        handle_hyperlink(note.action);
+		        }
 	        }
         })),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
@@ -378,15 +383,15 @@ int Panel::do_run() {
 	notes_.clear();
 	handled_notes_.clear();
 	subscriber1_ = is_initializer ?
-                     Notifications::subscribe<NoteThreadSafeFunction>(
+	                  Notifications::subscribe<NoteThreadSafeFunction>(
 	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
-                     nullptr;
+	                  nullptr;
 	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
 	                                   [this](const NoteThreadSafeFunctionHandled& note) {
 		                                   assert(!handled_notes_.count(note.id));
 		                                   handled_notes_.insert(note.id);
 	                                   }) :
-                                   nullptr;
+	                                nullptr;
 
 	// Loop
 	running_ = true;
@@ -405,6 +410,10 @@ int Panel::do_run() {
 		}
 
 		if (is_initializer) {
+			// We are handling input now. Can not be in WLApplication::handle_input(), because it is
+			// also called from ProgressWindow::step(), where the cursor shouldn't be reset.
+			g_mouse_cursor->change_wait(false);
+
 			app.handle_input(&input_callback);
 		}
 
@@ -415,6 +424,13 @@ int Panel::do_run() {
 			}
 
 			{
+				// TODO(tothxa): This is overbroad locking. Should be refined, but that needs
+				//               a lot of hunting down problems.
+				//               Since the addition of Lua plugin timers, which run their actions
+				//               in the UI thread, this requires that all Lua entry points are
+				//               guarded first by the kObjects, then by the kLua locks, otherwise
+				//               deadlocks may occur when Lua code calls functions that need
+				//               kObjects, due to the different locking order.
 				current_think_mutex_.reset(new MutexLock(MutexLock::ID::kObjects));
 				do_think();
 				current_think_mutex_.reset();
@@ -440,6 +456,7 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
+		g_mouse_cursor->change_wait(true);
 		while (get_flag(pf_logic_think) && logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
@@ -682,8 +699,15 @@ void Panel::set_visible(bool const on) {
 	}
 
 	set_flag(pf_visible, on);
-	if (!on && (parent_ != nullptr) && parent_->focus_ == this) {
-		parent_->focus_ = nullptr;
+	if (!on) {
+		if ((parent_ != nullptr) && parent_->focus_ == this) {
+			parent_->focus_ = nullptr;
+		}
+		if (Panel* cm = find_context_menu(); cm != nullptr) {
+			cm->die();
+		}
+	} else if (get_flag(pf_unresponsive)) {
+		g_mouse_cursor->change_wait(true);
 	}
 	if (parent_ != nullptr) {
 		parent_->on_visibility_changed();
@@ -739,7 +763,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		for (const Recti& r : focus_overlay_rects()) {
 			dst.fill_rect(r,
 			              focus_ != nullptr ? g_style_manager->semi_focused_color() :
-                                           g_style_manager->focused_color(),
+			                                  g_style_manager->focused_color(),
 			              BlendMode::Default);
 		}
 	}
@@ -825,7 +849,7 @@ void Panel::do_think() {
  */
 Vector2i Panel::get_mouse_position() const {
 	return (parent_ != nullptr ? parent_->get_mouse_position() :
-                                WLApplication::get().get_mouse_position()) -
+	                             WLApplication::get().get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
@@ -864,11 +888,16 @@ void Panel::handle_mousein(bool /* inside */) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t btn, int32_t /* x */, int32_t /* y */) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT) {
+		return show_default_context_menu(Vector2i(x, y));
+	}
+
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 		clicked();
 	}
+
 	return false;
 }
 
@@ -912,6 +941,11 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 			tooltip_fixed_pos_ = Vector2i::invalid();
 			return true;
 		}
+
+		if (matches_shortcut(KeyboardShortcut::kCommonContextMenu, code)) {
+			return show_default_context_menu(Vector2i::zero());
+		}
+
 		switch (code.sym) {
 		case SDLK_TAB:
 			return handle_tab_pressed((code.mod & KMOD_SHIFT) != 0);
@@ -1316,6 +1350,15 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	x -= lborder_;
 	y -= tborder_;
+
+	if (Panel* cm = find_context_menu(); cm != nullptr) {
+		for (Panel* p = cm; p != this; p = p->get_parent()) {
+			x -= p->get_x();
+			y -= p->get_y();
+		}
+		return cm->do_mousepress(btn, x, y);
+	}
+
 	if (get_flag(pf_top_on_click)) {
 		move_to_top();
 	}
@@ -1401,6 +1444,10 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		return false;
 	}
 
+	if (Panel* cm = find_context_menu(); cm != nullptr && cm->do_key(down, code)) {
+		return true;
+	}
+
 	if ((focus_ != nullptr) && focus_->do_key(down, code)) {
 		return true;
 	}
@@ -1438,8 +1485,9 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RCTRL:
 		case SDLK_LALT:
 			return false;
+		default:
+			return (code.mod & KMOD_CTRL) == 0 && (code.sym < SDLK_F1 || code.sym > SDLK_F12);
 		}
-		return !(((code.mod & KMOD_CTRL) != 0) || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12));
 	}
 
 	return false;
@@ -1448,6 +1496,10 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 bool Panel::do_textinput(const std::string& text) {
 	if (!initialized_) {
 		return false;
+	}
+
+	if (Panel* cm = find_context_menu(); cm != nullptr && cm->do_textinput(text)) {
+		return true;
 	}
 
 	if ((focus_ != nullptr) && focus_->do_textinput(text)) {
@@ -1489,8 +1541,25 @@ bool Panel::get_key_state(const SDL_Scancode key) const {
 
 UI::Panel* Panel::get_open_dropdown() {
 	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
-		if (UI::Panel* dd = child->get_open_dropdown()) {
+		if (UI::Panel* dd = child->get_open_dropdown(); dd != nullptr) {
 			return dd;
+		}
+	}
+
+	if (Panel* cm = find_context_menu(); cm != nullptr) {
+		return cm;
+	}
+
+	return nullptr;
+}
+
+Panel* Panel::find_context_menu() {
+	if (context_menu_ != nullptr) {
+		return context_menu_;
+	}
+	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
+		if (UI::Panel* cm = child->find_context_menu(); cm != nullptr) {
+			return cm;
 		}
 	}
 	return nullptr;
@@ -1698,8 +1767,8 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
 		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
-                                                                UI::FontStyle::kWuiTooltip :
-                                                                UI::FontStyle::kFsTooltip);
+		                                                          UI::FontStyle::kWuiTooltip :
+		                                                          UI::FontStyle::kFsTooltip);
 	}
 
 	constexpr int kTipWidthMax = 360;
@@ -1745,7 +1814,89 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 }
 
 void Panel::handle_hyperlink(const std::string& action) {
-	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+	log_err("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+}
+
+struct ContextMenu : public Listselect<Panel::ContextMenuEntry> {
+	using Base = Listselect<Panel::ContextMenuEntry>;
+
+	ContextMenu(UI::Panel* context_parent,
+	            UI::Panel* owner,
+	            Vector2i pos,
+	            PanelStyle ps,
+	            const std::vector<ContextMenuEntry>& entries)
+	   : Base(context_parent, "context_menu", pos.x, pos.y, 0, 0, ps, ListselectLayout::kDropdown),
+	     owner_(owner) {
+		for (const ContextMenuEntry& entry : entries) {
+			add(entry.descname, entry, entry.icon, false, entry.tooltip, entry.shortcut, 0,
+			    entry.enable);
+		}
+
+		set_z(ZOrder::kDropdown);
+		set_size(get_w(), get_lineheight() * entries.size());
+
+		clicked.connect([this]() { do_select(); });
+
+		if (Panel* cm = owner_->find_context_menu(); cm != nullptr) {
+			cm->die();
+		}
+		owner_->context_menu_ = this;
+		initialization_complete();
+	}
+
+	void die() override {
+		owner_->context_menu_ = nullptr;
+		Base::die();
+		owner_->focus();
+	}
+
+	bool handle_mousepress(const uint8_t btn, int32_t x, int32_t y) override {
+		if (x < 0 || y < 0 || x > get_w() || y > get_h()) {
+			die();
+			return true;
+		}
+		return Base::handle_mousepress(btn, x, y);
+	}
+
+	bool handle_key(bool down, SDL_Keysym code) override {
+		if (down) {
+			switch (code.sym) {
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			case SDLK_RETURN:
+				do_select();
+				return true;
+			default:
+				break;
+			}
+		}
+		return Base::handle_key(down, code);
+	}
+
+private:
+	void do_select() {
+		if (has_selection()) {
+			get_selected().callback();
+			die();
+		}
+	}
+
+	Panel* owner_;
+};
+
+void Panel::show_context_menu(Vector2i pos, const std::vector<ContextMenuEntry>& entries) {
+	if (entries.empty()) {
+		return;
+	}
+
+	UI::Panel* context_parent = this;
+	while (context_parent->get_parent() != nullptr) {
+		pos += context_parent->get_pos();
+		context_parent = context_parent->get_parent();
+	}
+
+	new ContextMenu(context_parent, this, pos, panel_style_, entries);
 }
 
 }  // namespace UI

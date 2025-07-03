@@ -680,11 +680,11 @@ function translators() return {
       entries = {
          {
             members = {
-               "Mister Pi ",
-               "Nasenbaer ",
-               "Ole ",
-               "tando ",
+               "Mister Pi",
+               "Nasenbaer",
                "Nordfriese",
+               "Ole",
+               "tando",
             },
          },
       },
@@ -694,6 +694,7 @@ function translators() return {
       entries = {
          {
             members = {
+               "Alex Rijckaert",
                "ben2s",
                "BenW",
                "Christian Groenendijk",
@@ -750,6 +751,7 @@ function translators() return {
                "Jacek Wolszczak (Shutdownrunner)",
                "Jens Beyer",
                "Karol Sobolewski",
+               "Leszek Szary",
                "Łukasz Chełmicki",
                "Mateusz Micał",
                "Michal Maslanko",

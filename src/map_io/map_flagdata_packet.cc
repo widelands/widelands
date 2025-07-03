@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,7 +118,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 								//  waitforcapacity task for this flag is in
 								//  Flag::load_finish, which is called after the worker
 								//  (with his stack of tasks) has been fully loaded.
-								flag.capacity_wait_.push_back(&mol.get<Worker>(worker_serial));
+								flag.capacity_wait_.emplace_back(&mol.get<Worker>(worker_serial));
 							} catch (const WException& e) {
 								throw GameDataError("worker #%u (%u): %s", i, worker_serial, e.what());
 							}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ Campaigns::Campaigns() {
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
 	/** TRANSLATORS: A campaign difficulty */
-	const std::string default_difficulty_name = _("Default");
+	const std::string default_difficulty_name = pgettext("difficulty", "Default");
 	i18n::Textdomain td("maps");
 
 	// Now load the campaign info

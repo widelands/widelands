@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2024 by the Widelands Development Team
+ * Copyright (C) 2023-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,18 +26,13 @@
 
 namespace Widelands {
 
-static Serial last_serial(0U);
-
-DetectedPortSpace::DetectedPortSpace() : serial(++last_serial) {
+DetectedPortSpace::DetectedPortSpace(Game& game)
+   : serial(game.generate_detectedportspace_serial()) {
 }
 
-void DetectedPortSpace::initialize_serial() {
-	last_serial = 0;
-}
-
-void DetectedPortSpace::set_serial(Serial s) {
+void DetectedPortSpace::set_serial(Game& game, Serial s) {
 	serial = s;
-	last_serial = std::max(last_serial, s);
+	game.notify_detectedportspace_serial(serial);
 }
 
 bool DetectedPortSpace::has_dockpoint(const Coords& c) const {
@@ -48,28 +43,36 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 	std::string direction;
 	switch (direction_from_portdock) {
 	case CompassDir::kNorthWest:
-		direction = format(_("northwest of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps northwest of Port1" */
+		direction = _("northwest");
 		break;
 	case CompassDir::kNorthEast:
-		direction = format(_("northeast of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps northeast of Port1" */
+		direction = _("northeast");
 		break;
 	case CompassDir::kSouthWest:
-		direction = format(_("southwest of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps southwest of Port1" */
+		direction = _("southwest");
 		break;
 	case CompassDir::kSouthEast:
-		direction = format(_("southeast of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps southwest of Port1" */
+		direction = _("southeast");
 		break;
 	case CompassDir::kNorth:
-		direction = format(_("north of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps north of Port1" */
+		direction = _("north");
 		break;
 	case CompassDir::kSouth:
-		direction = format(_("south of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps south of Port1" */
+		direction = _("south");
 		break;
 	case CompassDir::kWest:
-		direction = format(_("west of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps west of Port1" */
+		direction = _("west");
 		break;
 	case CompassDir::kEast:
-		direction = format(_("east of %s"), nearest_portdock);
+		/** TRANSLATORS: "12 steps east of Port1" */
+		direction = _("east");
 		break;
 	default:
 		break;
@@ -81,11 +84,13 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 			              gametimestring(time_discovered.get()), discovering_ship);
 		}
 		return format(
-		   /** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-		   ngettext("Unowned port space discovered at %1$s by %2$s %3$u step %4$s",
-		            "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s",
+		   /** TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps north of
+		       Port5" */
+		   ngettext("Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s",
+		            "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s",
 		            distance_to_portdock),
-		   gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock, direction);
+		   gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock, direction,
+		   nearest_portdock);
 	}
 	if (direction.empty()) {
 		return format(_("Port space of %1$s discovered at %2$s by %3$s"),
@@ -93,12 +98,13 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 		              discovering_ship);
 	}
 	return format(
-	   /** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-	   ngettext("Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s",
-	            "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s",
+	   /** TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps north
+	       of Port6" */
+	   ngettext("Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s",
+	            "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s",
 	            distance_to_portdock),
 	   egbase.player(owner).get_name(), gametimestring(time_discovered.get()), discovering_ship,
-	   distance_to_portdock, direction);
+	   distance_to_portdock, direction, nearest_portdock);
 }
 
 std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) const {

@@ -4,6 +4,7 @@
 """Script to find unused includes.
 
 Call from src directory.
+
 """
 
 import copy
@@ -36,12 +37,13 @@ FUNCTION_REGEX = re.compile(
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h',
-                 'base/format/abstract_node.h'}
+                 'base/format/abstract_node.h',
+                 'third_party/tinygettext/include/tinygettext/tinygettext.hpp'}
 
 # Headers files with contents that need to be detected by functions
-DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h',
+DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h', 'wlapplication_options.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h',
-                   'wlapplication_options.h'}
+                   'third_party/libmd/include/sha2.h'}
 
 # Remove overgenerated symbols
 FUNCTION_EXCLUDES = {'_Pragma',
@@ -213,6 +215,7 @@ def main():
     """Script to find unused includes and print them to console.
 
     Call from src directory.
+
     """
 
     error_count = 0

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -65,17 +66,14 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		   known ? g_animation_manager->get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		*tf += nrframes;
-		anims->push_back(std::make_pair(anim_idx, nrframes));
+		anims->emplace_back(anim_idx, nrframes);
 	};
 	for (const BuildingDescr* d : intermediates) {
 		push_animation(d, &animations, &total_frames);
 	}
 	push_animation(becomes, &animations, &total_frames);
 
-	uint32_t frame_index =
-	   totaltime.get() != 0u ?
-         std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
-         0;
+	uint32_t frame_index = std::min(((progress_64k * total_frames) >> 16), total_frames - 1);
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
@@ -91,7 +89,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = 1.0f;
 	} else {
 		player_color_to_draw = nullptr;
-		opacity = kBuildingSilhouetteOpacity;
+		opacity = kImmovableSilhouetteOpacity;
 	}
 
 	// Initialize variable to make checks happy
@@ -119,17 +117,14 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 
 	// Now blit a segment of the current construction phase from the bottom.
-	int percent = 100 * completedtime.get() * total_frames;
-	if (totaltime.get() != 0u) {
-		percent /= totaltime.get();
-	}
+	uint32_t percent = ((progress_64k * 100 * total_frames) >> 16);
 	percent -= 100 * frame_index;
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
 	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
 	                    player_color_to_draw, opacity,
-	                    /* fix a race condition in drawing code: */ std::min(percent, 100));
+	                    /* fix a race condition in drawing code: */ std::min(percent, 100U));
 }
 
 /**
@@ -138,8 +133,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
+                                             const std::vector<std::string>& attribs,
                                              Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, descriptions),
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, attribs, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -177,7 +173,8 @@ Access to the wares queues by id
 */
 InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi,
                                          WareWorker const type,
-                                         const Request* /* req */) {
+                                         const Request* /* req */,
+                                         uint32_t /* disambiguator_id */) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -255,8 +252,8 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 }
 
 void ConstructionSite::init_settings() {
-	assert(building_);
-	assert(!settings_);
+	assert(building_ != nullptr);
+	assert(settings_ == nullptr);
 	const TribeDescr& tribe = owner().tribe();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		settings_.reset(new WarehouseSettings(*wd, tribe));
@@ -266,8 +263,9 @@ void ConstructionSite::init_settings() {
 		settings_.reset(new ProductionsiteSettings(*pd, tribe));
 	} else if (upcast(const MilitarySiteDescr, md, building_)) {
 		settings_.reset(new MilitarysiteSettings(*md, tribe));
+	} else if (upcast(const MarketDescr, mkt, building_)) {
+		settings_.reset(new MarketSettings(*mkt, tribe));
 	} else {
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn("Created constructionsite for a %s, which is not of any known building type\n",
 		         building_->name().c_str());
 	}
@@ -299,7 +297,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, true));
+		old_buildings_.emplace_back(becomes_idx, true);
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -323,15 +321,16 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 #endif
 
 		// Apply settings
-		if (settings_) {
+		if (settings_ != nullptr) {
 			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
 				for (const auto& pair : ps->ware_queues) {
-					b.inputqueue(pair.first, wwWARE, nullptr).set_max_fill(pair.second.desired_fill);
-					b.set_priority(wwWARE, pair.first, pair.second.priority);
+					b.inputqueue(pair.first, wwWARE, nullptr, 0).set_max_fill(pair.second.desired_fill);
+					b.set_priority(wwWARE, pair.first, pair.second.priority, 0);
 				}
 				for (const auto& pair : ps->worker_queues) {
-					b.inputqueue(pair.first, wwWORKER, nullptr).set_max_fill(pair.second.desired_fill);
-					b.set_priority(wwWORKER, pair.first, pair.second.priority);
+					b.inputqueue(pair.first, wwWORKER, nullptr, 0)
+					   .set_max_fill(pair.second.desired_fill);
+					b.set_priority(wwWORKER, pair.first, pair.second.priority, 0);
 				}
 				if (upcast(TrainingsiteSettings, ts, ps)) {
 					assert(b.soldier_control());
@@ -363,6 +362,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				}
 				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
 				site.set_soldier_preference(ws->soldier_preference);
+			} else if (upcast(MarketSettings, mkt, settings_.get()); mkt != nullptr) {
+				// Nothing to do currently.
 			} else {
 				NEVER_HERE();
 			}
@@ -400,8 +401,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(
-	   std::make_pair(owner().tribe().building_index(building_->name()), true));
+	old_buildings_.emplace_back(owner().tribe().building_index(building_->name()), true);
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -536,8 +536,12 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->soldier_preference = ms->soldier_preference;
 	} break;
+	case Widelands::MapObjectType::MARKET: {
+		upcast(const MarketDescr, md, building_);
+		// Markets don't have any special properties currently.
+		settings_.reset(new MarketSettings(*md, owner().tribe()));
+	} break;
 	default:
-		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log_warn_time(egbase.get_gametime(),
 		              "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		              building_->name().c_str());
@@ -608,9 +612,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 
 	// Check if one step has completed
 	if (working_) {
-		if (game.get_gametime() < work_steptime_) {
+		if (game.get_gametime() < workstep_completiontime_) {
 			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
-			                       (work_steptime_ - game.get_gametime()).get());
+			                       (workstep_completiontime_ - game.get_gametime()).get());
 			builder_idle_ = false;
 			return true;
 		}
@@ -670,7 +674,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*succ
 			get_owner()->ware_consumed(wq->get_index(), 1);
 
 			working_ = true;
-			work_steptime_ = game.get_gametime() + kConstructionsiteStepTime;
+			workstep_completiontime_ = game.get_gametime() + kConstructionsiteStepTime;
 
 			worker.start_task_idle(
 			   game, worker.descr().get_animation("work", &worker), kConstructionsiteStepTime.get());
@@ -735,7 +739,7 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), tanim,
-			                    nullptr, kBuildingSilhouetteOpacity);
+			                    nullptr, kImmovableSilhouetteOpacity);
 		}
 	} else {
 		// Draw the construction site marker
@@ -744,21 +748,12 @@ void ConstructionSite::draw(const Time& gametime,
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
 			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, nullptr,
-			                    kBuildingSilhouetteOpacity);
+			                    kImmovableSilhouetteOpacity);
 		}
 	}
 
 	// Draw the partially finished building
-	info_.totaltime = kConstructionsiteStepTime * work_steps_;
-	info_.completedtime = kConstructionsiteStepTime * work_completed_;
-
-	if (working_) {
-		// This assert causes a race condition with multithreaded logic/drawing code
-		// assert(work_steptime_ <=
-		//       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
-		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
-	}
-
+	info_.progress_64k = get_built_per64k();
 	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0,
 	           player_color, dst);
 

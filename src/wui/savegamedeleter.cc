@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,11 +58,11 @@ const std::string
 SavegameDeleter::create_header_for_confirmation_window(const size_t no_selections) const {
 	std::string header =
 	   no_selections == 1    ? _("Do you really want to delete this game?") :
-                              /** TRANSLATORS: Used with multiple games, 1 game has a separate
-                                 string. DO NOT omit the placeholder in your translation. */
-                              format(ngettext("Do you really want to delete this %d game?",
-                         "Do you really want to delete these %d games?", no_selections),
-                no_selections);
+	                           /** TRANSLATORS: Used with multiple games, 1 game has a separate
+	                              string. DO NOT omit the placeholder in your translation. */
+	                           format(ngettext("Do you really want to delete this %d game?",
+	                                           "Do you really want to delete these %d games?", no_selections),
+	                                  no_selections);
 
 	return header;
 }
@@ -121,12 +121,12 @@ const std::string
 ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections) const {
 	std::string header =
 	   no_selections == 1 ?
-                            _("Do you really want to delete this replay?") :
-                            /** TRANSLATORS: Used with multiple replays, 1 replay has a
-                                               separate string. DO NOT omit the placeholder in your translation. */
-                            format(ngettext("Do you really want to delete this %d replay?",
-                         "Do you really want to delete these %d replays?", no_selections),
-                no_selections);
+	      _("Do you really want to delete this replay?") :
+	                         /** TRANSLATORS: Used with multiple replays, 1 replay has a
+	                                            separate string. DO NOT omit the placeholder in your translation. */
+	                         format(ngettext("Do you really want to delete this %d replay?",
+	                                         "Do you really want to delete these %d replays?", no_selections),
+	                                no_selections);
 
 	return header;
 }

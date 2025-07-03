@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,9 @@ std::string soldier_preference_icon(const SoldierPreference p) {
 		return "↓";
 	case SoldierPreference::kAny:
 		return "=";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 }  // namespace Widelands

@@ -3,7 +3,7 @@
 <component type="desktop-application">
   <id>org.widelands.Widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
+  <project_license>GPL-2.0-or-later</project_license>
   SUMMARY_DESCRIPTION_HOOK
   <screenshots>
     <screenshot type="default">
@@ -44,6 +44,8 @@
   </provides>
   <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
+    <release date="2024-11-15" version="1.2.1"/>
+    <release date="2024-03-30" version="1.2"/>
     <release date="2022-10-23" version="1.1"/>
     <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="~Build 21"/>

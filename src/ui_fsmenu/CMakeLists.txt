@@ -63,6 +63,7 @@ wl_library(ui_fsmenu
   DEPENDS
     ai
     base
+    base_crypto
     base_exceptions
     base_random
     base_time_string
@@ -70,6 +71,7 @@ wl_library(ui_fsmenu
     editor
     graphic
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
     graphic_playercolor
     graphic_styles
@@ -92,11 +94,11 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     scripting_coroutine
+    scripting_logic
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     sound
-    third_party_sha1
     ui_addons
     widelands_ball_of_mud
     widelands_options
@@ -104,6 +106,7 @@ wl_library(ui_fsmenu
     wui_chat_ui
     wui_common_mapdetails
     wui_common_gamedetails
+    wui_common_plugins
     wui_common_suggested_teams
     wui_sound_options
   USES_SDL2

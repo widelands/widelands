@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/mouse_cursor.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "map_io/widelands_map_loader.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "wui/map_tags.h"
@@ -37,8 +37,6 @@ namespace FsMenu {
 // Fix align for table headings & entries and for wordwrap.
 
 constexpr int checkbox_space_ = 20;
-
-using Widelands::WidelandsMapLoader;
 
 MapSelect::MapSelect(MenuCapsule& m,
                      LaunchMPG* mpg,
@@ -66,6 +64,9 @@ MapSelect::MapSelect(MenuCapsule& m,
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl) {
+
+	g_mouse_cursor->change_wait(true);
+
 	curdir_ = {basedir_};
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -75,9 +76,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	table_.selected.connect([this](uint32_t /* value */) { entry_selected(); });
 	table_.double_clicked.connect([this](uint32_t /* value */) { clicked_ok(); });
-	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
-	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
-	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
+	table_.cancel.connect([this]() { clicked_back(); });
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "hbox", 0, 0,
 	                            UI::Box::Horizontal, checkbox_space_, get_w());
@@ -203,28 +202,16 @@ void MapSelect::think() {
 		// Call performance heavy draw_minimap function only during think
 		update_map_details_ = false;
 		bool loadable = map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state(), true);
-		ok_.set_enabled(loadable && maps_data_.at(table_.get_selected()).nrplayers > 0);
+		   table_.get_selected_data(), !cb_dont_localize_mapnames_->get_state(), true);
+		ok_.set_enabled(loadable && table_.get_selected_data().nrplayers > 0);
 	}
-}
-
-bool MapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
-}
-
-bool MapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
-}
-
-bool MapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
-	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
 }
 
 MapData const* MapSelect::get_map() const {
 	if (!table_.has_selection()) {
 		return nullptr;
 	}
-	return &maps_data_[table_.get_selected()];
+	return &table_.get_selected_data();
 }
 
 void MapSelect::clicked_back() {
@@ -238,20 +225,19 @@ void MapSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const MapData& mapdata = maps_data_[table_.get_selected()];
+	const MapData& mapdata = table_.get_selected_data();
 
 	if (mapdata.width == 0u) {
-		curdir_ = mapdata.filenames;
-		fill_table();
+		navigate_directory(mapdata.filenames, mapdata.localized_name);
 	} else if (!ok_.enabled()) {
 		return;
 	} else if (parent_screen_ != nullptr) {
 		parent_screen_->clicked_select_map_callback(
-		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		   get_map(), table_.get_selected_data().maptype == MapData::MapType::kScenario);
 		die();
 	} else {
 		new LaunchSPG(get_capsule(), *settings_, std::make_shared<Widelands::Game>(), get_map(),
-		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		              table_.get_selected_data().maptype == MapData::MapType::kScenario);
 	}
 }
 
@@ -263,6 +249,23 @@ bool MapSelect::set_has_selection() {
 		map_details_.clear();
 	}
 	return has_selection;
+}
+
+void MapSelect::navigate_directory(const std::vector<std::string>& filenames,
+                                   const std::string& localized_name) {
+	curdir_ = filenames;
+	if (localized_name == MapData::parent_name()) {
+		MapData::DisplayType display_type;
+		if (cb_dont_localize_mapnames_->get_state()) {
+			display_type = MapData::DisplayType::kMapnames;
+		} else {
+			display_type = MapData::DisplayType::kMapnamesLocalized;
+		}
+		table_.update_table(display_type, true);
+	} else {
+		fill_table();
+	}
+	set_has_selection();
 }
 
 void MapSelect::entry_selected() {
@@ -289,11 +292,6 @@ void MapSelect::entry_selected() {
  * entry to move back up.
  */
 void MapSelect::fill_table() {
-	has_translated_mapname_ = false;
-	bool unspecified_balancing_found = false;
-
-	maps_data_.clear();
-
 	MapData::DisplayType display_type;
 	if (cb_dont_localize_mapnames_->get_state()) {
 		display_type = MapData::DisplayType::kMapnames;
@@ -301,142 +299,58 @@ void MapSelect::fill_table() {
 		display_type = MapData::DisplayType::kMapnamesLocalized;
 	}
 
-	// This is the normal case
+	has_translated_mapname_ = false;
+	bool unspecified_balancing_found = false;
 
-	//  Fill it with all files we find in all directories.
-	assert(!curdir_.empty());
-	FilenameSet files;
-	for (const std::string& dir : curdir_) {
-		FilenameSet f = g_fs->list_directory(dir);
-		files.insert(f.begin(), f.end());
-	}
+	MapTable::FilterFn filter = [this, &unspecified_balancing_found](MapData& mapdata) {
+		has_translated_mapname_ = has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-	// If we are not at the top of the map directory hierarchy (we're not talking
-	// about the absolute filesystem top!) we manually add ".."
-	if (curdir_.at(0) != basedir_) {
-		maps_data_.push_back(MapData::create_parent_dir(curdir_.at(0)));
-	} else {
-		// In the toplevel directory we also need to include add-on maps
-		for (auto& addon : AddOns::g_addons) {
-			if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
-				for (const std::string& mapname : g_fs->list_directory(
-				        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
-					files.insert(mapname);
-				}
+		bool has_all_tags = true;
+		if (team_tags_dropdown_->has_selection()) {
+			const std::string selected_tag = team_tags_dropdown_->get_selected();
+			if (!selected_tag.empty()) {
+				has_all_tags &= mapdata.tags.count(selected_tag) > 0;
 			}
 		}
-	}
-
-	Widelands::Map map;  //  MapLoader needs a place to put its preload data
-
-	for (const std::string& mapfilename : files) {
-		// Add map file (compressed) or map directory (uncompressed)
-		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-		if (ml != nullptr) {
-			try {
-				map.set_filename(mapfilename);
-				ml->preload_map(true, nullptr);
-
-				if ((map.get_width() == 0) || (map.get_height() == 0)) {
-					continue;
-				}
-
-				MapData::MapType maptype;
-				if ((map.scenario_types() & scenario_types_) != 0u) {
-					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get()) != nullptr) {
-					maptype = MapData::MapType::kNormal;
+		if (official_tags_dropdown_->has_selection()) {
+			const std::string selected_tag = official_tags_dropdown_->get_selected();
+			if (!selected_tag.empty()) {
+				if (selected_tag == "official") {
+					has_all_tags &= mapdata.tags.count("official") > 0;
 				} else {
-					maptype = MapData::MapType::kSettlers2;
+					has_all_tags &= mapdata.tags.count("official") == 0u;
 				}
-
-				MapData mapdata(map, mapfilename, maptype, display_type);
-
-				has_translated_mapname_ =
-				   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-				bool has_all_tags = true;
-				if (team_tags_dropdown_->has_selection()) {
-					const std::string selected_tag = team_tags_dropdown_->get_selected();
-					if (!selected_tag.empty()) {
-						has_all_tags &= mapdata.tags.count(selected_tag) > 0;
-					}
-				}
-				if (official_tags_dropdown_->has_selection()) {
-					const std::string selected_tag = official_tags_dropdown_->get_selected();
-					if (!selected_tag.empty()) {
-						if (selected_tag == "official") {
-							has_all_tags &= mapdata.tags.count("official") > 0;
-						} else {
-							has_all_tags &= mapdata.tags.count("official") == 0u;
-						}
-					}
-				}
-				if (balancing_tags_dropdown_->has_selection()) {
-					const std::string selected_tag = balancing_tags_dropdown_->get_selected();
-					if (!selected_tag.empty()) {
-						if (selected_tag == "unspecified") {
-							has_all_tags &= mapdata.tags.count("balanced") == 0u;
-							has_all_tags &= mapdata.tags.count("unbalanced") == 0u;
-						} else {
-							has_all_tags &= mapdata.tags.count(selected_tag) > 0;
-						}
-					}
-				}
-				// Backwards compatibility
-				if ((mapdata.tags.count("balanced") == 0u) &&
-				    (mapdata.tags.count("unbalanced") == 0u)) {
-					unspecified_balancing_found = true;
-				} else if ((mapdata.tags.count("balanced") != 0u) &&
-				           (mapdata.tags.count("unbalanced") != 0u)) {
-					log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
-					         "packet\n",
-					         mapfilename.c_str());
-				}
-
-				for (uint32_t tag : req_tags_) {
-					has_all_tags &= mapdata.tags.count(tags_ordered_[tag]) > 0;
-				}
-
-				if (!has_all_tags) {
-					continue;
-				}
-				maps_data_.push_back(mapdata);
-			} catch (const std::exception& e) {
-				log_warn(
-				   "Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-			} catch (...) {
-				log_warn("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
-			}
-		} else if (g_fs->is_directory(mapfilename) && !g_fs->list_directory(mapfilename).empty()) {
-			// Add subdirectory to the list
-			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
-				continue;
-			}
-
-			MapData new_md = MapData::create_directory(mapfilename);
-			bool found = false;
-			for (MapData& md : maps_data_) {
-				if (md.maptype == MapData::MapType::kDirectory &&
-				    md.localized_name == new_md.localized_name) {
-					found = true;
-					md.add(new_md);
-					break;
-				}
-			}
-			if (!found) {
-				maps_data_.push_back(new_md);
 			}
 		}
-	}
+		if (balancing_tags_dropdown_->has_selection()) {
+			const std::string selected_tag = balancing_tags_dropdown_->get_selected();
+			if (!selected_tag.empty()) {
+				if (selected_tag == "unspecified") {
+					has_all_tags &= mapdata.tags.count("balanced") == 0u;
+					has_all_tags &= mapdata.tags.count("unbalanced") == 0u;
+				} else {
+					has_all_tags &= mapdata.tags.count(selected_tag) > 0;
+				}
+			}
+		}
+		// Backwards compatibility
+		if ((mapdata.tags.count("balanced") == 0u) && (mapdata.tags.count("unbalanced") == 0u)) {
+			unspecified_balancing_found = true;
+		} else if ((mapdata.tags.count("balanced") != 0u) &&
+		           (mapdata.tags.count("unbalanced") != 0u)) {
+			log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
+			         "packet\n",
+			         mapdata.localized_name.c_str());
+		}
 
-	table_.fill(maps_data_, display_type);
-	if (!table_.empty()) {
-		table_.select(0);
-	}
-	set_has_selection();
-	table_.cancel.connect([this]() { clicked_back(); });
+		for (uint32_t tag : req_tags_) {
+			has_all_tags &= mapdata.tags.count(tags_ordered_[tag]) > 0;
+		}
+
+		return has_all_tags;
+	};
+
+	table_.fill(curdir_, basedir_, display_type, scenario_types_, filter, true);
 
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;

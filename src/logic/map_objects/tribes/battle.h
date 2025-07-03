@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,8 @@ class Soldier;
 class BattleDescr : public MapObjectDescr {
 public:
 	BattleDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
+	   : MapObjectDescr(
+	        MapObjectType::BATTLE, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~BattleDescr() override = default;
 

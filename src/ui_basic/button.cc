@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "ui_basic/button.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <SDL_mouse.h>
@@ -90,7 +91,9 @@ Button::Button(Panel* const parent,
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink) {
-	expand(w, h);
+	expand_w_ = (w == 0);
+	expand_h_ = (h == 0);
+	expand();
 }
 
 Button::Button  //  for pictorial buttons
@@ -121,14 +124,14 @@ void Button::set_pic(const Image* pic) {
 	title_image_ = pic;
 }
 
-void Button::expand(int w, int h) {
-	if (h == 0) {
+void Button::expand() {
+	if (expand_h_) {
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
 		const int new_height = std::max(text_height(button_style().enabled().font()),
 		                                text_height(button_style().disabled().font())) +
 		                       4 * kButtonImageMargin;
-		if (w == 0) {
+		if (expand_w_) {
 			// Automatically resize for text width too.
 			new_width = std::max(text_width(title_, button_style().enabled().font()),
 			                     text_width(title_, button_style().disabled().font())) +
@@ -220,23 +223,20 @@ void Button::draw(RenderTarget& dst) {
 			const int max_image_w = get_w() - 2 * kButtonImageMargin;
 			const int max_image_h = get_h() - 2 * kButtonImageMargin;
 			const float image_scale =
-			   std::min(1.f, std::min(static_cast<float>(max_image_w) / title_image_->width(),
-			                          static_cast<float>(max_image_h) / title_image_->height()));
+			   std::min({1.f, static_cast<float>(max_image_w) / title_image_->width(),
+			             static_cast<float>(max_image_h) / title_image_->height()});
 			int blit_width = image_scale * title_image_->width();
 			int blit_height = image_scale * title_image_->height();
 
 			if (!is_monochrome) {
 				dst.blitrect_scale(Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f,
 				                         blit_width, blit_height),
-				                   title_image_,
-				                   Recti(0, 0, title_image_->width(), title_image_->height()), 1.,
-				                   BlendMode::UseAlpha);
+				                   title_image_, title_image_->rect(), 1.f, BlendMode::UseAlpha);
 			} else {
 				dst.blitrect_scale_monochrome(
 				   Rectf((get_w() - blit_width) / 2.f, (get_h() - blit_height) / 2.f, blit_width,
 				         blit_height),
-				   title_image_, Recti(0, 0, title_image_->width(), title_image_->height()),
-				   RGBAColor(255, 255, 255, 127));
+				   title_image_, title_image_->rect(), RGBAColor(255, 255, 255, 127));
 			}
 		}
 
@@ -318,6 +318,11 @@ void Button::think() {
 			//  longer be accessed.
 		}
 	}
+}
+
+void Button::update_template() {
+	Panel::update_template();
+	expand();
 }
 
 bool Button::handle_key(bool down, SDL_Keysym code) {
@@ -403,7 +408,7 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 
 void Button::set_perm_pressed(bool pressed) {
 	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
-                              UI::Button::VisualState::kRaised);
+	                           UI::Button::VisualState::kRaised);
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
@@ -424,6 +429,8 @@ void Button::toggle() {
 		break;
 	case UI::Button::VisualState::kFlat:
 		break;  // Do nothing for flat buttons
+	default:
+		NEVER_HERE();
 	}
 }
 }  // namespace UI

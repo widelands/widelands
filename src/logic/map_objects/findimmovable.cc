@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,6 +96,10 @@ bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 	return &baseimm.descr() == &descr;
+}
+
+bool FindImmovableByName::accept(const BaseImmovable& baseimm) const {
+	return baseimm.descr().name() == name_;
 }
 
 bool FindImmovableNotReserved::accept(const BaseImmovable& i) const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,7 +122,9 @@ private:
 	bool auto_roadbuild_mode_;
 	Widelands::Coords flag_to_connect_;
 
+	UI::Button* toggle_objective_menu_;
 	UI::Button* toggle_message_menu_;
+	void do_toggle_objective_menu();
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;

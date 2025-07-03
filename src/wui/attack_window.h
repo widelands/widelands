@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -200,13 +200,13 @@ private:
 
 	[[nodiscard]] Widelands::Building* get_building() const {
 		return attack_type_ != AttackPanel::AttackType::kBuilding ?
-                nullptr :
-                dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
+		          nullptr :
+		          dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] Widelands::Ship* get_ship() const {
 		return attack_type_ != AttackPanel::AttackType::kShip ?
-                nullptr :
-                dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
+		          nullptr :
+		          dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] bool is_naval_invasion() const {
 		return attack_type_ == AttackPanel::AttackType::kNavalInvasion;

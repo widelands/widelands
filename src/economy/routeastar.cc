@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,25 @@ void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
 	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker)) {
 		route.insert_as_first(node);
 	}
+}
+
+RoutingNode& BaseRouteAStar::route_start(RoutingNode& to) {
+	if (to.cookie(type_).is_active()) {
+		throw wexception("BaseRouteAStar::routeto should not have an active cookie.");
+	}
+	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
+
+	RoutingNode* node = &to;
+	if (type_ == wwWARE) {
+		while (node->mpf_backlink_ware != nullptr) {
+			node = node->mpf_backlink_ware;
+		}
+	} else {
+		while (node->mpf_backlink_worker != nullptr) {
+			node = node->mpf_backlink_worker;
+		}
+	}
+	return *node;
 }
 
 }  // namespace Widelands

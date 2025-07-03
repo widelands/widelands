@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 		   case NoteMapObjectDescription::LoadType::kObject:
 			   load_description_on_demand(note.name, note.allow_failure);
 			   break;
-		   case NoteMapObjectDescription::LoadType::kAttribute:
+		   case NoteMapObjectDescription::LoadType::kAttribute: {
 			   auto it = registered_attributes_.find(note.name);
 			   if (it != registered_attributes_.end()) {
 				   for (const std::string& objectname : it->second) {
@@ -56,6 +56,9 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 				   registered_attributes_.erase(it);
 			   }
 			   break;
+		   }
+		   default:
+			   NEVER_HERE();
 		   }
 	   });
 }
@@ -157,6 +160,8 @@ void DescriptionManager::register_description(const std::string& description_nam
 			replace = true;
 		}
 		break;
+	default:
+		NEVER_HERE();
 	}
 
 	if (registered_descriptions_.count(description_name) == 1) {
@@ -283,8 +288,8 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	       registered_descriptions_.count(description_name) == 1);
 
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).attributes :
-             registered_descriptions_.at(description_name).attributes;
+	          registered_scenario_descriptions_.at(description_name).attributes :
+	          registered_descriptions_.at(description_name).attributes;
 }
 
 const DescriptionManager::RegistryCallerInfo&
@@ -292,8 +297,8 @@ DescriptionManager::get_registry_caller_info(const std::string& description_name
 	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
 	       registered_descriptions_.count(description_name) == 1);
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).caller :
-             registered_descriptions_.at(description_name).caller;
+	          registered_scenario_descriptions_.at(description_name).caller :
+	          registered_descriptions_.at(description_name).caller;
 }
 
 void DescriptionManager::clear_scenario_descriptions() {
