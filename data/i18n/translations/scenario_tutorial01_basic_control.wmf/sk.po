@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 # Viliam Molo, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-11-30 03:02+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1006,7 +1006,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr "Pamätajte si, že veľké budovy (označené zelenou ikonou) nemožno postaviť  na malých (označené červenou) alebo stredných (označené žltou) stavebných parcelách. Každú budovu však možno postaviť na parcele, ktorá poskytuje viac miesta, ako budova potrebuje. Nezabudnite na to, keď budete hľadať vhodné miesto."
+msgstr "Pamätajte si, že veľké budovy (označené zelenou ikonou) nemožno postaviť na malých (označené červenou) alebo stredných (označené žltou) stavebných parcelách. Každú budovu však možno postaviť na parcele, ktorá poskytuje viac miesta, ako budova potrebuje. Nezabudnite na to, keď budete hľadať vhodné miesto."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:628
 msgid "Expanding Your Territory!"

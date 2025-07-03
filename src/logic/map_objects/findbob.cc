@@ -47,4 +47,12 @@ bool FindBobCritter::accept(Bob* bob) const {
 	return bob->descr().type() == MapObjectType::CRITTER;
 }
 
+bool FindBobSoldierAttackingPlayer::accept(Bob* const bob) const {
+	if (upcast(Soldier, soldier, bob)) {
+		return (soldier->get_current_health() != 0u) && soldier->is_attacking_player(game, player) &&
+		       soldier->owner().is_hostile(player);
+	}
+	return false;
+}
+
 }  // namespace Widelands

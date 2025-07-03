@@ -1,6 +1,9 @@
 Other Scripts
 =============
 
+Miscellaneous Lua Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The ``data/tribes/scripting`` directory provides some global scripts related to
 the tribes. It contains the following subdirectories:
 
@@ -13,3 +16,32 @@ the tribes. It contains the following subdirectories:
    :maxdepth: 3
 
 REPLACE_ME
+
+Non-Scripting User Data
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Naming Lists
+------------
+
+A user can define custom naming lists for ships and warehouses in their home directory.
+The files are called ``ship_names`` and ``warehouse_names`` respectively and placed in the Widelands home directory.
+
+Each file, if present and not empty, may define any number of names, with one name per line,
+where each name can be used for all tribes or just some tribes.
+The file is divided with section headers in brackets, where each header is a comma-separated list of tribes.
+All names in this section are applied to only these tribes.
+Names outside a section or in sections with an empty name apply to all tribes.
+Example:
+
+.. code-block:: ini
+
+   All Tribes 1
+   All Tribes 2
+
+   [barbarians]
+   Barbarians Only 1
+   Barbarians Only 2
+
+   [empire, barbarians, amazons]
+   This name applies to these three tribes
+

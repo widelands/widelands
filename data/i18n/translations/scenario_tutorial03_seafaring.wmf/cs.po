@@ -5,7 +5,7 @@
 # Jakub Šebek <mrfly8988@gmail.com>, 2015
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
-# af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+# Ondřej Itřech, 2020-2021,2025
 # Petr Valášek, 2023
 # Tomáš Mráz, 2022
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Petr Valášek, 2023\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,7 +165,7 @@ msgstr "Skvělé. Zatímco se přístav bude stavět, pojďme postavit pár lod�
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr "Lodě staví na pobřeží v blízkosti loděnice stavitel lodí. Musíme tedy někde při pobřeží postavit loděnici."
+msgstr "Lodě staví na pobřeží v blízkosti loděnice loďař. Musíme tedy někde při pobřeží postavit loděnici."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
@@ -189,7 +189,7 @@ msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "Loděnice je středně velkou budovou. Přestože může být postavena kdekoli na mapě, stavitel lodí pracuje pouze tehdy, když je blízko vody a na pobřeží nejsou žádné stromy nebo cesty."
+msgstr "Loděnice je středně velkou budovou. Přestože může být postavena kdekoli na mapě, loďař pracuje pouze tehdy, když je blízko vody a na pobřeží nejsou žádné stromy nebo cesty."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
@@ -200,14 +200,14 @@ msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr "Výborně. Tvá loděnice je postavená a tvůj stavitel lodí začal ihned pracovat. Na stavbu lodí potřebuje klády, prkna a pavoučí látku. Tyto suroviny budou do loděnice průběžně přinášeny."
+msgstr "Výborně. Tvá loděnice je postavená a tvůj loďař začal ihned pracovat. Na stavbu lodí potřebuje klády, prkna a pavoučí látku. Tyto suroviny budou do loděnice průběžně nošeny."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr "Stavitel lodí si vezme suroviny, které potřebuje, na volné místo na pobřeží, kde postaví loď. Jakmile bude loď hotová, spustí se na moře a loďař začne stavět další."
+msgstr "Loďař si vezme suroviny, které potřebuje, na volné místo na pobřeží, kde postaví loď. Jakmile bude loď hotová, spustí se na moře a loďař začne stavět další."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
@@ -229,7 +229,7 @@ msgstr "Lodě se staví automaticky, jakmile je postavena loděnice a jsou doru�
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr "Počkej, dokud stavitel lodí nepostaví dvě lodě."
+msgstr "Počkej, dokud loďař nepostaví dvě lodě."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
@@ -252,7 +252,7 @@ msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr "Musíš zastavit loděnici, jakmile máš dost lodí. Jinak tvůj stavitel lodí spotřebuje všechny tvé klády a pavoučí látku na výrobu spousty lodí."
+msgstr "Musíš zastavit loděnici, jakmile máš dost lodí. Jinak tvůj loďař spotřebuje všechny tvé klády a pavoučí látku na výrobu spousty lodí."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 msgid ""
@@ -315,7 +315,7 @@ msgstr "Výpravu lze zahájit v každém přístavu. Potom jsou všechny potřeb
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Můžeš zkontrolovat potřebné suroviny v záložce Výprava ( ta se objeví jako nová poslední záložka, když zahájíš výpravu)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -476,14 +476,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Zajisti, že bude dobře bráněn. I zde lze umístit obrannou posádku pomocí záložky s vojenským nastavením, podobně jako u vojenských budov. Současně jde ale i o sklad, takže se v něm může nacházet libovolné množství vojáků. Nastavením požadované posádky zajistíš stálou obranu přístavu, stejně jako u hlavní budovy. Jakmile je posádka přítomna, zůstává bez ohledu na nenaplněnou kapacitu jiných budov."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Na této mapě se nemusíš obávat žádného nepřítele. V jiných hrách by mělo být vyčlenění obranné posádky pro tvůj přístav a postavení jedné, nebo dvou vojenských budov v okolí tvé nové kolonie prioritou."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -571,7 +571,7 @@ msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Převozník se staví v převoznictví, jedna loďka stojí dvě klády a jeden kus látky a je stavěna rychle. Přívoz je středně velká stavba, kterou je třeba postavit blízko břehu."
+msgstr "Přívozy se staví v převoznictví, jedna loďka stojí dvě klády a jeden kus látky a stavba je rychlá. Převoznictví je středně velkou budovou, kterou je třeba postavit blízko břehu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
@@ -720,13 +720,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Můžeš si všimnout, že výroba přívozů je celkem rychlá, ale není se třeba obávat, že by při ní docházelo k plýtvání materiálem, protože převoznictví postaví jen tolik přívozů, kolik je třeba k obsazení zatím neobsluhovaných vodních cest."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Pokud přívoz obsluhuje vodní cestu, jeho životnost je neomezená, Ale pokud není využíván, chátrá a po čase se potopí."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349

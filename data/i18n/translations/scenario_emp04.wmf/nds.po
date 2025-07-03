@@ -1478,7 +1478,7 @@ msgstr "Wi bruken blot noch eenen Helden"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:709
 msgid "Saledus is in a good mood…"
-msgstr "Saledus hett gode Luun"
+msgstr "Saledus hett gode Luun …"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:711

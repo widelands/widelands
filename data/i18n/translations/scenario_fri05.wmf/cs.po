@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ondřej Itřech, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Ondřej Itřech, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Upozornění"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -26,64 +30,71 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Vypadá to, že předchozí mise není splněna. I tak můžeš hrát tento scénář, "
+"ale budeš v nevýhodě. Doporučuji ti, nejprve dokončit předchozí scénář a "
+"poté začít tuto misi od začátku."
 
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
-#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
+#: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
-msgstr ""
+msgstr "Kodaň"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Obchod"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Na tomto ostrově není možné těžit zdroje ani lámat skály. Místo toho lze "
+"obchodovat s lokálními produkty a získávat tak jiné druhy surovin."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Všechny suroviny uskladněné v přístavech lze obchodovat. Směnné poměry jsou "
+"stanoveny následující tabulkou."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Poraž vetřelce"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Poraž Zítřkovy útočné síly."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Znič všechny budovy nepřátel."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Zablokuj pobřežní soutěsku"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Zablokuj pobřežní soutěsku."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -91,48 +102,51 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Získej pod kontrolu úzkou soutěsku na východní straně náhorní plošiny "
+"stavbou několika velkých vojenských budov, tak aby nepřítel nemohl projít "
+"dříve, než budeme schopni sami zaútočit."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Produkce dřeva"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Zajisti produkci dřeva."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Postav alespoň tři domky dřevorubce."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Postav alespoň čtyři domky lesníka."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "Náhorní plošina"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Využij náhorní plošiny."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Přemísti své hospodářství na náhorní plošinu."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Úvod"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Vítej zpět!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -140,6 +154,9 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"Konečně doma! Nelze vyjádřit slovy jaký pocit radosti to je vidět opět svůj "
+"domov... a ani ten pocit nedočkavosti z toho, jak je člověk blízko a stejně "
+"pořád tak daleko."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -152,6 +169,14 @@ msgid ""
 " will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"Pro jednou bylo moře klidné a umožnilo nám dostat se rychle zpět na jih. Já "
+"i Hennek jsme v očekávání brzkého návratu strávili většinu naší plavby "
+"postávajíce na přídi. Rýbaud se nejčastěji zdržoval na zádi a díval se zpět "
+"stejným pohledem, jako my hleděli vpřed. Je zcela jasné, že cítí ke svému "
+"novému domovu to samé, co my cítíme k tomu starému. Jsem si jistý, že jeho "
+"touha vrátit se domů jako vítěz bude pro něj i pro jeho vojáky stejně dobrou"
+" motivací k udatnému boji, jako je pro mé vojáky dobrou motivací touha "
+"získat zpět náš domov."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -160,6 +185,9 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"Čím jsme byli blíže domovským vodám, nálada na palubě se stávala tíživější. "
+"Veselý smích a vzrušení z blížícího se návratu se proměnily v chmurné nálady"
+" spojené s přípravami na nadcházející bitvu."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -168,6 +196,8 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"A pak nastal ten den. Spatřili jsme nejsevernější výběžek ostrova Sylt a "
+"věděli jsme, že ještě téhož dne večer zakotvíme na Föhru. Ale pak..."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -176,6 +206,9 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Dopustili jsme se začátečnické chyby a měli bychom se opravdu stydět, "
+"protože nejsme o nic pozornější než pomocný lodník. V průběhu měsíců, co "
+"jsme opustili Föhr, zanedbávali jsme sledování kalendáře."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -186,6 +219,11 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Dnes jsou Dušičky, druhý listopadový den, a každé místní malé dítě ví, že "
+"žádný kapitán, který má všech pět pohromadě, by ani nepomyslel na to, že by "
+"se v průběhu dušičkového týdne mohl vydat na moře. Od nepaměti v tuto roční "
+"dobu vždy vzedmou moře neobvykle silné bouře, které už poslaly ke dnu mnoho "
+"neopatrných námořníků."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -196,6 +234,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Jen s neuvěřitelným štěstím se nám podařilo vyváznout. Naše lodě téměř "
+"nepoškozeny, žádného námořníka si neodneslo moře. Kdybych to nezažil na "
+"vlastní kůži, ani bych nevěřil, že někdo vůbec může mít takové štěstí. To, "
+"jak se nám podařilo vyváznout, mi dodává naděje, je to evidentní důkaz toho,"
+" že naši nebezpečnou výpravu chrání všichni svatí."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -207,6 +250,12 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"Bouře zahnala naši loď dva dny daleko od její původní trasy. Naštěstí zdejší"
+" vody jsou nám stále dobře známy, takže jde o velmi malé zdržení. Když bouře"
+" ustala, ocitli jsme se poblíž ostrova Helgoland a rozhodli se, že zde "
+"přistaneme. Obyvatelé ostrova jsou proslulí svou pohostinností a využití "
+"možnosti si před bitvou odpočinout a posilnit se může sehrát zásadní roli. "
+"Možná bychom i některé místní mohli získat na svou stranu."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -215,12 +264,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Pozdrav"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Vítej na Helgolandu!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -231,10 +280,15 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Mír s Vámi a vítejte na Helgolandu! Váš věhlas Vás předchází, Klausi "
+"Lemmeku, oblíbený pane z Föhru, a Vy Rýbaude o jehož chytrosti, statečnosti "
+"a postavení i bardové prozpěvují. Jmenuji se Ocke Ketelsen, jsem starším "
+"radním na Helgolandu, a i přes všechny těžkosti, které nám tento čas "
+"přinesl, jsem potěšen a poctěn, že mohu přivítat takto proslulé hosty."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Pohostinnost"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -246,6 +300,12 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Mír s Vámi a děkuji Vám za toto přátelské uvítání, Ocke Ketelsne! Je pro nás"
+" příjemnou změnou, že nemusíme jít do války s každým, na jehož ostrově "
+"přistaneme. Ale Vaše uvítání zní poněkud ztrápeně. Díky Vašim milým slovům "
+"předpokládám, že Vaše trápení má trochu jiný důvod, než je náš příchod. Snad"
+" Vám nevadí, že se takto zpříma ptám. Rád bych věděl, zda-li bychom Vám snad"
+" nemohli být nějak nápomocni."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -253,18 +313,20 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Vám opravdu nic neunikne. Skutečně se nacházíme v problémech a můžete se o "
+"nich přesvědčit tak, že obrátíte svůj pohled tímto směrem."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Nepřátelé"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Dánové! Snad Zítřkovy dobyvačné choutky nesahají až sem?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -272,6 +334,9 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Vskutku, že sahají. Vidím, že nepřítele poznáváte dobře, a rád bych si "
+"poslechl, jakým způsobem jste již měli tu čest se seznámit. Dokážu si "
+"představit, že to setkání pro ně nedopadlo příliš dobře!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -282,6 +347,12 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Vaše představa bohužel, k mé velké nelibosti, neodpovídá plně skutečnosti. "
+"Abych to zkrátil, řeknu pouze, že Zítřek napadl Föhr s takovou silou, že "
+"jsem byl nucen z ostrova uprchnout a požádat zde stojícího Rýbauda, aby mi "
+"pomohl získat ho zpět. Věci se vlastně mají tak, že jsme se právě plavili na"
+" Föhr, abychom ty vetřelce jednou pro vždy vystrnadili, když nás bouře "
+"zahnala z naší trasy až k Helgolandu."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -290,12 +361,15 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"To, že se tak stalo, je snad zásah vyšší moci. Velmi rádi Vám pomůžeme "
+"zbavit se tohoto nepřítele. Bude to pro nás, řekněme, taková rozcvička, už "
+"se na to velmi těším!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "Přípravy na bitvu"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -305,6 +379,10 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"Váš zápal je pro mě stejně velkým povzbuzením, jak velké jsou mé sympatie k "
+"Vám z důvodu nepřízně, která Vás potkala. Ale nepřítel je silnější, než by "
+"se mohlo zdát. Přivezl s sebou ohromné množství dánských vojáků a ani Vašim "
+"udatným vojákům se nemůže podařit všechny je porazit."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -313,6 +391,9 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"Náš ostrov není přivyklý takovým bitvám. Jsme rybáři a sedláci, nemáme "
+"odbornost ani hospodářství k odrážení takovýchto válečných tažení. Vaše "
+"zkušenosti nám přijdou velmi vhod."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -320,10 +401,11 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Ale nejprve mi dovolte, abych Vám ukázal náš ostrov a trochu Vás tu provedl."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Hospodářství"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -333,6 +415,10 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Jak se vám tu daří hospodařit? Ty skály jsou opravdu úchvatné, ale nevidím "
+"způsob, jak by je bylo možné těžit na materiál pro stavbu kamenných domků. "
+"Nevidím ani příliš stromů a místo, kde by bylo možné těžit železnou rudu a "
+"jiné nerosty! Jak to zvládáte?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -345,6 +431,12 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Obchodujeme. Prodáváme obilí, ryby a další zboží na pevnině a nakupujeme tam"
+" rudy a žulu. Rozdělme si své úkoly podle toho, komu co dobře jde: Vy se "
+"zaměříte na reorganizaci hospodářství a výcvik našich lidí v boji a já Vám "
+"zajistím dovoz zboží v množství, jaké bude třeba. Jednoduše nechte zboží na "
+"prodej v přístavech a o zbytek se postarám. Tato tabulka stanoví, jaká "
+"množství zboží různého druhu obvykle obchodujeme."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -353,11 +445,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "Plánování bitvy"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "Využij náhorní plošiny dobře"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -366,6 +458,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Ale pěkně popořadě. Toto město lze výborně bránit, ale je žalostně "
+"nestřežené. Musíme vše dopředu strategicky naplánovat, protože souhlasím s "
+"tím, že tuto bitvu nepůjde vyhrát rychle."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -379,10 +474,18 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"Náhorní plošina je přístupná pouze z jedné strany, prostřednictvím tohoto "
+"svahu hned vedle středu města. Postavme všechny naše výrobní budovy tam "
+"nahoře. Pár vedle sebe postavených pevností poblíž jejího jižního cípu učiní"
+" tuto rozlehnou plošinu prakticky nedobytnou. I kdyby nepřítel dobyl celou "
+"spodní část ostrova, dokážu si představit, že bychom se tam udrželi roky. Za"
+" předpokladu, že by se nám tam nahoře ve skladu předem podařilo nashromáždit"
+" dostatečné zásoby. Samozřejmě bychom pak přišli o přístup k přístavům, "
+"takže se raději musíme této variantě vyhnout."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "Opevni soutěsku"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -397,6 +500,15 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"Avšak naší nejnaléhavější starostí by mělo být zajištění soutěsky poblíž "
+"našeho nejsevernějšího přístavu. K tomu, aby k nám nepřítel pronikl, musí jí"
+" projít, ale platí to i obráceně. Pokud budeme postupovat obezřetně, můžeme "
+"zde nepřítele pozdržet dostatečně dlouho do doby, než budeme moci provést "
+"protiútok. Ale soutěska je poměrně úzká na to, aby mohla být bráněna stejně "
+"snadno jako plošina. Musíme zde postavit tolik pevností těsně vedle sebe, "
+"kolik nám jen prostor dovolí, abychom zabránili tomu, že by nepřítel mohl "
+"získat jakékoli území navíc. Nebylo by rozumné stavět cokoli na sever od "
+"soutěsky, protože by to bylo snadno napadnutelné."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -407,10 +519,14 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"V závislosti na tom, jak moc stavebního materiálu můžeme ušetřit, možná by "
+"bylo rozumné, zničit některé další budovy a udělat ještě více místa pro "
+"pevnosti. Každopádně všechny budovy v této oblasti budou pod neustálou "
+"hrozbou zničení dánskými vpády."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "Dodávky dřeva"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -419,6 +535,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Rýbaud dobře poznamenává, že náhorní plošina je ideální pro stavbu nových "
+"budov. Vedle své strategické hodnoty nabízí spoustu místa, kterého se v níže"
+" položených oblastech ostrova značně nedostává."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -429,6 +548,11 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"V tom, co bychom měli postavit, s ním však nesouhlasím. Mít více vojenských "
+"budov je důležité, ale ještě důležitější je být schopný nové budovy vůbec "
+"stavět. Na celém ostrově nejsou vůbec žádní dřevorubci a na obchod se dřevem"
+" spoléhat nelze. Proto musíme zajistit produkci dřeva a to ještě dříve, než "
+"začneme spotřebovávat dřevo v udírnách a uhlířských pecích!"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -439,10 +563,16 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"Země vypadá poměrně neúrodně, takže bude třeba vyčlenit na zalesnění více "
+"místa, než by mi bylo příjemné. Níže položená země se zdá být o něco "
+"úrodnější, takže by mělo být rozumné postavit domky lesníků a dřevorubců "
+"právě zde, níže, a přemístit některé ze statků na náhorní plošinu. Statky, "
+"rákosové farmy a ovocné sady nejsou tak závislé na úrodné půdě jako jsou "
+"stromy."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "Dlouhodobá strategie"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -454,6 +584,12 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"Naše obchodování je již v plném proudu. Nyní musíme naplánovat nábor a "
+"výcvik. Jsme schopni vyrábět jídlo i kovy, ale zdá se, že nikdo neřešil, "
+"kolik čeho bude potřeba, a že nebudeme schopni pokrýt naše potřeby. Budeme "
+"potřebovat více pokročilých budov na výrobu zbraní a zbroje, stejně jako na "
+"výrobu potravin pro vojáky. Není třeba ani zmiňovat, že nutně budou třeba i "
+"cvičiště a kasárna."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -465,10 +601,15 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"Neustále bude potřeba mít přehled o dodávkách zboží k obchodování. Požádám "
+"Ockeho Ketelsena, aby nakupoval pouze to zboží, které naše hospodářství "
+"skutečně potřebuje, abychom neplýtvali surovinami, ale bude na nás zajistit,"
+" aby výroba zboží byla dostatečná. Ty obchodní cesty jsou velmi nákladné a "
+"bude třeba vyčlenit velkou část území čistě na produkci zboží k prodeji."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Stavění hrází"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -479,6 +620,10 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Stále mě znepokojuje nedostatek místa na Helgolandu. Máme dostatek místa na "
+"dostatečně rychlý výcvik značného množství vojáků, přesto vytrénovat armádu "
+"podle našich představ může trvat věky! Možná by bylo dobré využít dalších "
+"příležitostí a vhodně zvolenou strategií eliminovat překážky, kterým čelíme."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -490,10 +635,17 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"Ale pokud si chceme být opravdu jistí, že vše zvládneme, neměli bychom "
+"zapomínat, že ostrov můžeme jednoduše zvětšit. Když nyní máme stabilní "
+"dodávky klád, můžeme stavět hráze a vlnolamy, abychom získali více "
+"stavebního místa na úkor moře. Až budeme připraveni k útoku, můžeme je také "
+"použít k rozšíření úzkého místa na východě. A nebo, pokud bychom chtěli být "
+"opravdu vynalézaví, mohli bychom postavit hráze podél celého západního "
+"pobřeží ostrova a napadnout nepřítele ze dvou stran současně!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Hodně štěstí!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -501,14 +653,16 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Jsem potěšen Vaším odhodláním. Dejme tedy každý ruku k dílu a ať nám štěstí "
+"přeje!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "Dodávky dřeva"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "Dodávky dřeva jsou zajištěny"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -517,14 +671,17 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Naši lesníci a dřevorubci se již pustili do práce. Ještě to nějakou dobu "
+"potrvá, než budou dodávky klád stabilní, ale bezprostřední krize je "
+"zažehnána."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "Soutěska je zajištěna"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "Soutěska je pod kontrolou"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:293
@@ -532,14 +689,16 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
+"Naši vojáci opevnili soutěsku. Zcela jistě tudy žádný nepřítel nebude moci "
+"projít dříve, než budeme připraveni."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "Náhorní plošina osídlena"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "Náhorní plošina byla osídlena"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -548,6 +707,10 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"Náhorní plošina se stala opravdovým centrem našeho hospodářství. Nesmíme "
+"zapomínat neustále kontrolovat výměnu surovin mezi oblastmi při pobřeží a "
+"náhorní plošinou, musíme ji udržovat na minimu, aby se zabránilo zácpám na "
+"cestách."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -557,12 +720,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "Vítězství"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Nepřítel poražen"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -571,6 +734,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Jsou poraženi! Mnohokrát děkuji za Vaši pomoc. Sami bychom nikdy "
+"nezvítězili. A naše město ani neutrpělo žádné závažnější škody. Naopak "
+"podařilo se nám jej rozšířit až za jeho dřívější hranice."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -580,6 +746,10 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"Já a můj lid nikdy nebudeme schopni oplatit to, jak jsme vám zavázáni. Dám k"
+" dispozici veškeré vojáky, které se vám podařilo vytrénovat, aby pomohli "
+"dobýt a osvobodit vaši vlastní zemi. Pokud je něco dalšího, co pro Vás mohu "
+"udělat nyní nebo v budoucnu, stačí požádat a budu Vám k službám."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -587,6 +757,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Rádo se stalo, Ocke Ketelsne. Nezapomínejte však ani na váš vlastní podíl na"
+" vítězství, jelikož sami bychom to také nezvládli."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -599,12 +771,20 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"A přijměte mé srdečné díky za Váš slib poskytnout nám vaše vojáky. Už dříve "
+"jsem věděl, že Zítřek je nepřítel, kterému je lepší se vyhnout, ale vojenská"
+" síla, která stála proti nám zde, předčila vše, s čím jsem se ve svém "
+"dosavadním životě setkal. A to šlo o pouhý předvoj! Musíme využít každé "
+"příležitosti, která se nám naskytne, a i tak už si nejsem zdaleka tak jist "
+"našim vítězstvím, jako jsem si byl dříve. Pokud Vám přichází na mysl ještě "
+"něco dalšího, co by nám mohlo pomoci, jakákoli taktická rada, města, která "
+"by se k nám mohla přidat, prosím, podělte se s námi o vše, co Vás napadne."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "Poznej svého nepřítele"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -615,6 +795,10 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Podělím se velmi rád. Opravdu, podle našich obchodních kontaktů Zítřkovo "
+"bažení po dobývání nezná hranic. Poté, co si podrobil Föhr, dobyl i všechny "
+"ostatní ostrovy poblíž. Vaše pevnost pro ně byla vždy jedinou zárukou "
+"ochrany, takže když padla, zmocnit se celého okolí byl už lehký úkol."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -625,6 +809,11 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Šíří se zvěsti, že uchvatitelé vládnou tvrdou rukou. Je všeobecně známo, že "
+"přerušili veškerý obchod a že místní jsou nuceni odevzdávat polovinu veškeré"
+" své produkce Dánům. Polovinu! Již desítky lidí měly být popraveny za to, že"
+" nevykázaly bušl obilí. Lidé trpí a jistě se rádi přidají ke každému, kdo by"
+" je přišel osvobodit."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -634,6 +823,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"A ještě jedna záležitost. Obchodní lodě, které se pokusily proplout severně "
+"od obsazené oblasti, byly napadeny a potopeny piráty. A přeživší přísahají, "
+"že piráti byli ve skutečnosti dánští vojáci a že jejich lodě náležely k "
+"dánskému loďstvu."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -644,6 +837,12 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"A teď tohle může být pouhá spekulace, ale věřím, že Zítřek převáží na lodích"
+" svá vojska z dánského hlavního města na ostrovy, které si podrobil. Cesta "
+"po souši by byla o dost delší a více strastiplná, takže důvod proč tak činí "
+"je zřejmý. Evidentně se ale snaží o to, aby na to nikoho příliš "
+"neupozorňoval. Proč by to dělal, kdyby tomu nepřikládal nějaký strategický "
+"význam?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -657,11 +856,19 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Není mi známo, jak velká část jeho mužů je takto mezi hlavním městem a "
+"ostrovy loděmi převážena, ale jejich množství se zdá být dostatečně velké na"
+" to, abych vám mohl doporučit pokusit se tuto výměnu přerušit. Jak jistě "
+"víte zmíněná místa jsou spojena pouze jednou námořní trasou a ta vede přes "
+"úžinu Kattegat. Tato úžina je jeden a půl míle široká a posetá malými "
+"ostrůvky. Pokud se vám tam podaří dostat, aniž byste byli napadeni jejich "
+"loděmi, mohli byste se těchto ostrůvků zmocnit a postavit pás nedobytných "
+"pevností, které by bránily nepřátelským lodím proplout."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Vítězství!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:350
@@ -671,6 +878,10 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"A pokud by se nám ji podařilo zablokovat, ztratili by své nejdůležitější "
+"přepravní spojení! Musíme se o to pokusit. Poplujeme ke Kattegatu okamžitě, "
+"abychom úžinu obsadili, a pak, podnítíme obyvatele Föhru a okolních ostrovů,"
+" aby se připojili ke vzpouře proti okupantům!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -682,6 +893,13 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Ještě bych měl na vás jednu prosbu. Prosbu a nabídku. Mí dva synové, Harke "
+"Ockesen a Eschel Ockesen, jsou ve výcviku jako vojáci a poručíci. Byl bych "
+"velmi rád, kdyby, kdyby se k vám mohli na vaší výpravě ke Kattegatu "
+"připojit, aby získali nějaké ty zkušenosti, a pak se zase vrátili domů. "
+"Mezitím využijeme hospodářství, které se vám tu podařilo vybudovat, k "
+"výcviku dalších vojáků, kteří vám jistě přijdou vhod na vašich dalších "
+"výpravách."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -690,6 +908,8 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Budeme velmi rádi pokud se k nám připojí a slibuji, že se o ně dobře "
+"postaráme. Umíte to ale vybrat svým synům dobré učitele."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -697,13 +917,17 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"A teď se můžeme rozloučit, ale jistě ne nadlouho. Tak tedy na shledanou a "
+"nechť vás všechny na Helgolandu pokoj doprovází!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratuluji"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Mise je splněna. Jestli chceš, můžeš pokračovat ve hře, nebo se přesuň k "
+"další misi."

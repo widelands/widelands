@@ -19,6 +19,8 @@
 #ifndef WL_IO_MACHDEP_H
 #define WL_IO_MACHDEP_H
 
+#include <cstring>
+
 #include <SDL_endian.h>
 
 #include "base/macros.h"

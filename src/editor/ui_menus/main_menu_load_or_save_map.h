@@ -45,14 +45,13 @@ protected:
 	// Sets the current dir and updates labels.
 	virtual void set_current_directory(const std::vector<std::string>& filenames) = 0;
 	void layout() override;
-	void fill_table();
-
-	bool compare_players(uint32_t, uint32_t);
-	bool compare_mapnames(uint32_t, uint32_t);
-	bool compare_size(uint32_t, uint32_t);
+	void navigate_directory(const std::vector<std::string>& filenames,
+	                        const std::string& localized_name);
+	bool set_has_selection();
 
 	// Private variables first, because compiler would complain about initialization order otherwise
 private:
+	void fill_table();
 	// Common padding between panels
 	int32_t const padding_{4};
 
@@ -68,7 +67,6 @@ private:
 protected:
 	// Table of maps and its data
 	MapTable table_;
-	std::vector<MapData> maps_data_;
 
 	// Side panel with details about the currently selected map
 	Widelands::EditorGameBase egbase_;
