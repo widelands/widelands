@@ -42,7 +42,9 @@ class GithubASan:
         if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
             write_summary('+ ', text.replace(' allocated from:', '', 1))  # this text is colored
             cls.found_local_tb = False
-        if not cls.found_local_tb and '/widelands/src/' in text and '/third_party/' not in text:
+        compile_d = os.getenv('WLRT_COMPILE_DIR', 'widelands')  # default is for GitHub
+        if not cls.found_local_tb and '/third_party/' not in text and \
+                (f'/{compile_d}/src/' in text or ' src/' in text):
             if os.getenv('GITHUB_STEP_SUMMARY'):
                 write_summary('    our origin: ', text)
             cls.found_local_tb = True
