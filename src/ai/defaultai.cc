@@ -6714,7 +6714,7 @@ EconomyObserver& DefaultAI::get_economy_observer(const Widelands::Economy& econo
 		}
 	}
 
-	economies_.emplace_back(EconomyObserver(economy));
+	economies_.emplace_back(economy);
 	return economies_.back();
 }
 
