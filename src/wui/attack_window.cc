@@ -279,10 +279,10 @@ void AttackWindow::think() {
 static inline std::string slider_heading(const uint32_t num_attackers, const bool ship) {
 	return format(
 	   ship ?
-         /** TRANSLATORS: Number of ships that should attack. Used in the attack window. */
-         ngettext("%u ship", "%u ships", num_attackers) :
-         /** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
-         ngettext("%u soldier", "%u soldiers", num_attackers),
+	      /** TRANSLATORS: Number of ships that should attack. Used in the attack window. */
+	      ngettext("%u ship", "%u ships", num_attackers) :
+	      /** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
+	      ngettext("%u soldier", "%u soldiers", num_attackers),
 	   num_attackers);
 }
 
@@ -372,15 +372,15 @@ void AttackPanel::init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>
 	less_soldiers_.reset(add_button(this, linebox_, "less", "0", &AttackPanel::send_less_soldiers,
 	                                UI::ButtonStyle::kWuiSecondary,
 	                                attack_type_ == AttackType::kShip ?
-                                      _("Send less ships. Hold down Ctrl to send no ships") :
-                                      _("Send less soldiers. Hold down Ctrl to send no soldiers")));
+	                                   _("Send less ships. Hold down Ctrl to send no ships") :
+	                                   _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 	linebox_.add(&columnbox_);
 	more_soldiers_.reset(
 	   add_button(this, linebox_, "more", std::to_string(max_attackers),
 	              &AttackPanel::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
 	              attack_type_ == AttackType::kShip ?
-                    _("Send more ships. Hold down Ctrl to send as many ships as possible") :
-                    _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
+	                 _("Send more ships. Hold down Ctrl to send as many ships as possible") :
+	                 _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox_.add_space(kSpacing);
 	if (can_attack) {
 		attack_button_.reset(add_button(
@@ -413,16 +413,16 @@ void AttackPanel::init_soldier_lists(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 		      .as_font_tag(attack_type_ == AttackType::kShip ?
-                            _("Click on a ship to remove her from the list of attackers") :
-                            _("Click on a soldier to remove him from the list of attackers")),
+		                      _("Click on a ship to remove her from the list of attackers") :
+		                      _("Click on a soldier to remove him from the list of attackers")),
 		   as_listitem(attack_type_ == AttackType::kShip ?
-                        _("Hold down Ctrl to remove all ships from the list") :
-                        _("Hold down Ctrl to remove all soldiers from the list"),
+		                  _("Hold down Ctrl to remove all ships from the list") :
+		                  _("Hold down Ctrl to remove all soldiers from the list"),
 		               UI::FontStyle::kWuiTooltip),
 		   as_listitem(
 		      attack_type_ == AttackType::kShip ?
-               _("Hold down Shift to remove all ships up to the one you’re pointing at") :
-               _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		         _("Hold down Shift to remove all ships up to the one you’re pointing at") :
+		         _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
 		      UI::FontStyle::kWuiTooltip)));
 		add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -435,15 +435,15 @@ void AttackPanel::init_soldier_lists(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 		      .as_font_tag(attack_type_ == AttackType::kShip ?
-                            _("Click on a ship to add her to the list of attackers") :
-                            _("Click on a soldier to add him to the list of attackers")),
+		                      _("Click on a ship to add her to the list of attackers") :
+		                      _("Click on a soldier to add him to the list of attackers")),
 		   as_listitem(attack_type_ == AttackType::kShip ?
-                        _("Hold down Ctrl to add all ships to the list") :
-                        _("Hold down Ctrl to add all soldiers to the list"),
+		                  _("Hold down Ctrl to add all ships to the list") :
+		                  _("Hold down Ctrl to add all soldiers to the list"),
 		               UI::FontStyle::kWuiTooltip),
 		   as_listitem(attack_type_ == AttackType::kShip ?
-                        _("Hold down Shift to add all ships up to the one you’re pointing at") :
-                        _("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		                  _("Hold down Shift to add all ships up to the one you’re pointing at") :
+		                  _("Hold down Shift to add all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
 		add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -548,8 +548,8 @@ void AttackPanel::send_less_soldiers() {
 
 void AttackPanel::send_more_soldiers() {
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                                  soldiers_slider_->get_max_value() :
-                                  soldiers_slider_->get_value() + 1);
+	                               soldiers_slider_->get_max_value() :
+	                               soldiers_slider_->get_value() + 1);
 }
 
 size_t AttackPanel::count_soldiers() const {
@@ -702,12 +702,12 @@ void AttackPanel::ListOfSoldiers::sort() {
 		          const Widelands::Bob* objb = pb.get(attack_box_->iplayer_.egbase());
 		          const uint32_t dista =
 		             obja != nullptr ?
-                      map.calc_distance(obja->get_position(), *attack_box_->target_coordinates_) :
-                      std::numeric_limits<uint32_t>::max();
+		                map.calc_distance(obja->get_position(), *attack_box_->target_coordinates_) :
+		                std::numeric_limits<uint32_t>::max();
 		          const uint32_t distb =
 		             objb != nullptr ?
-                      map.calc_distance(objb->get_position(), *attack_box_->target_coordinates_) :
-                      std::numeric_limits<uint32_t>::max();
+		                map.calc_distance(objb->get_position(), *attack_box_->target_coordinates_) :
+		                std::numeric_limits<uint32_t>::max();
 
 		          return dista < distb;
 	          });

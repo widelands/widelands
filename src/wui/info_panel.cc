@@ -497,11 +497,11 @@ void InfoPanel::think() {
 		if (static_cast<uint8_t>(p->get_z()) < static_cast<uint8_t>(UI::Panel::ZOrder::kInfoPanel) &&
 		    p->get_x() < snap_target_panel_.get_w() &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
-                     (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
+		               (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
 				w->set_pos(Vector2i(
 				   w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() :
-                                     snap_target_panel_.get_y() - w->get_h()));
+				                         snap_target_panel_.get_y() - w->get_h()));
 			}
 		}
 	}
@@ -563,8 +563,8 @@ void InfoPanel::layout() {
 	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
 	snap_target_panel_.set_size((display_mode_ == UI::ToolbarDisplayMode::kMinimized ||
 	                             display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden) ?
-                                  toggle_mode_.get_w() :
-                                  w,
+	                               toggle_mode_.get_w() :
+	                               w,
 	                            toggle_mode_.get_h());
 }
 
@@ -574,8 +574,8 @@ void InfoPanel::draw(RenderTarget& r) {
 	}
 
 	const int h = display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden ?
-                    kSpacing :
-                    UI::main_toolbar_button_size();
+	                 kSpacing :
+	                 UI::main_toolbar_button_size();
 	r.brighten_rect(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), -100);
 
 	r.draw_rect(Recti(0, on_top_ ? h : get_h() - h - 1, get_w(), 1), RGBColor(0, 0, 0));

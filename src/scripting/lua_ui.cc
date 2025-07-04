@@ -1745,7 +1745,7 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	UI::SpinBox* spinbox = new UI::SpinBox(
 	   parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
 	   value_list.empty() ? step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall :
-                           UI::SpinBox::Type::kValueList,
+	                        UI::SpinBox::Type::kValueList,
 	   step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
@@ -3762,7 +3762,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number(),
 	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
-                                                                       RoadBuildingType::kRoad);
+	                                                                    RoadBuildingType::kRoad);
 
 	return 0;
 }

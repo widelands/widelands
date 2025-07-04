@@ -4,6 +4,7 @@
 """Script to find unused includes.
 
 Call from src directory.
+
 """
 
 import copy
@@ -213,6 +214,7 @@ def main():
     """Script to find unused includes and print them to console.
 
     Call from src directory.
+
     """
 
     error_count = 0
