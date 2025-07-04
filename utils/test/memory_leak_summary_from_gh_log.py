@@ -14,11 +14,13 @@ pipe to this script input like from:
 import enum
 import sys
 import os
+import re
 
 
 class GithubASan:
     found_local_tb = True
     test_script = None
+    ansi_escape_pattern = None
 
     @classmethod
     def github_asan_line(cls, text):
@@ -26,21 +28,28 @@ class GithubASan:
         # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
         # Therefore only annotate the summary line of ASan and write other info to the steps summary
         def write_summary(arg1, *args):
-            "write to github summary file"
+            "write to github summary file (markdown format)"
             with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
                 summary_file.write(arg1)
                 for arg in args:
                     summary_file.write(arg)
 
+        def remove_ansi_escape_sequences(text):
+            "removes ansi escape sequences (because github summary does not support them)"
+            if not cls.ansi_escape_pattern:
+                cls.ansi_escape_pattern = re.compile(r'\x1b[^m]*m')
+            return cls.ansi_escape_pattern.sub('', text)
+
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
-            write_summary('### ', text)  # this text is colored
+            write_summary('### ', remove_ansi_escape_sequences(text))
             write_summary('triggered by test ', cls.test_script, '\n\n')
         if 'SUMMARY' in text:
             if os.getenv('GITHUB_STEP_SUMMARY'):
                 write_summary('\n', text)
             return '::warning title=ASan error::' + text
         if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
-            write_summary('+ ', text.replace(' allocated from:', '', 1))  # this text is colored
+            write_summary('+ ', remove_ansi_escape_sequences(
+                text.replace(' allocated from:', '', 1)))
             cls.found_local_tb = False
         compile_d = os.getenv('WLRT_COMPILE_DIR', 'widelands')  # default is for GitHub
         if not cls.found_local_tb and '/third_party/' not in text and \
