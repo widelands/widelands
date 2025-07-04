@@ -71,12 +71,12 @@ update_authors() {
   python3 utils/fix_formatting.py --lua --dir data/txts
 }
 
-update_appdata() {
-  # Update appdata
-  if python3 utils/update_appdata.py; then
-    echo "Updated appdata"
+update_metainfo() {
+  # Update metainfo
+  if python3 utils/update_metainfo.py; then
+    echo "Updated MetaInfo"
   else
-    echo "Failed updating appdata"
+    echo "Failed updating MetaInfo"
     exit 1
   fi
 }
@@ -97,8 +97,8 @@ gitAddGeneratedFiles() {
   git add 'data/txts/*.lua' || true
   # - Locale data
   git add 'data/i18n/*.lua' || true
-  # - Appdata
-  git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
+  # - MetaInfo
+  git add xdg/org.widelands.Widelands.metainfo.xml xdg/org.widelands.Widelands.desktop || true
   # - Statistics
   git add data/i18n/translation_stats.conf || true
 }
@@ -133,7 +133,7 @@ undo_oneliner_diffs
 
 # These may have changes either from git or from transifex
 update_authors
-update_appdata
+update_metainfo
 
 if [ -n "$(git status -s)" ]; then
   update_statistics
@@ -176,7 +176,7 @@ if [ -n "$(git status -s)" ]; then
 
   # in case translations were edited while this script was running
   update_authors
-  update_appdata
+  update_metainfo
   # and this also changes by a catalog change
   update_statistics
 
