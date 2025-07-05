@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Arventennoù an arval"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""

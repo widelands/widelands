@@ -1107,15 +1107,15 @@ int LuaPlayer::switchplayer(lua_State* L) {
 }
 
 /* RST
-   .. method:: produced_wares_count(what)
+   .. method:: get_produced_wares_count(what)
 
       Returns count of wares produced by the player up to now.
 
-      :arg what: This can be either :const:`"all"` or a single name of a ware or an :class`array`
+      :arg what: This can be either :const:`"all"` or a single name of a ware or an :class:`array`
          of ware names.
       :type what: :class:`string` or :class:`array`
-      :returns: If a single ware name is given, integer is returned, otherwise a :class:`table`
-         is returned.
+      :returns: If a single ware name is given, :class:`integer` is returned,
+         otherwise a :class:`table` is returned.
       :rtype: :class:`integer` or :class:`table`
 */
 int LuaPlayer::get_produced_wares_count(lua_State* L) {

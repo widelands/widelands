@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-05 03:23+0000\n"
+"POT-Creation-Date: 2025-06-26 03:25+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -1614,8 +1614,8 @@ msgstr "Chata sběračky lián"
 msgid "cutting lianas"
 msgstr "řezání lián"
 
-#. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
+#. TRANSLATORS: Short for "No Tree to Cut Lianas" for a resource
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
@@ -1624,11 +1624,11 @@ msgstr "řezání lián"
 msgid "No Trees"
 msgstr "Žádné stromy"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
 msgid "No Tree to Cut Lianas"
 msgstr "Žádné stromy na řezání lián"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:54
 msgctxt "amazons_building"
 msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
@@ -1957,14 +1957,14 @@ msgstr "Stan ochránkyně fauny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:65
 msgid "breeding fish"
 msgstr "chování ryb"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
 msgid "releasing game"
 msgstr "navracení divoké zvěře"
 
@@ -2195,7 +2195,7 @@ msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
 msgstr "Domek porybného"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
@@ -2203,7 +2203,7 @@ msgstr "Domek porybného"
 msgid "No Fish"
 msgstr "Nejsou ryby"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
@@ -2211,7 +2211,7 @@ msgstr "Nejsou ryby"
 msgid "Out of Fish"
 msgstr "Došly ryby"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
@@ -2220,7 +2220,7 @@ msgid ""
 "in the first place."
 msgstr "Porybnému pracujícímu v tomto domku porybného se nedaří ve svém okolí najít žádnou vodu vhodnou k chovu ryb. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud v okolí nějaké ryby jsou."
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:61
 msgid "The fishing grounds are full"
 msgstr "Loviště ryb jsou plná"
 
@@ -2234,7 +2234,7 @@ msgstr "Domek rybáře"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:50
 msgid "fishing"
 msgstr "chytání ryb"
@@ -3053,7 +3053,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "Zahradník nemůže pěstovat rákos, protože nemá kam sázet."
+msgstr "Zahradnice nemůže pěstovat rákos, protože nemá kam sázet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
@@ -3605,16 +3605,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "Rybí sádka"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
 msgid "No Ponds"
 msgstr "Nejsou rybníčky"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
 msgid "Out of Fish Ponds"
 msgstr "Došly rybníčky"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:96
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:104
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3689,15 +3689,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Včelařský domek"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
 msgid "No Flowers"
 msgstr "Žádné květy"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
 msgid "Out of Flowers"
 msgstr "Došly květy"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
@@ -3798,15 +3798,15 @@ msgid "making clay"
 msgstr "mísení cihlářské hlíny"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgid "No Ground"
 msgstr "Žádná země"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:81
 msgid "No Level Ground"
 msgstr "Žádná plocha"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:82
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -3874,12 +3874,12 @@ msgid "Diker’s House"
 msgstr "Domek hrázného"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
 msgid "diking"
 msgstr "stavění hrází"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:77
 msgid "building a dike"
 msgstr "staví hráz"
 
@@ -9203,7 +9203,7 @@ msgstr "Platnéř"
 #: ../../../../data/tribes/workers/atlanteans/baker/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Baker"
-msgstr "Pekař"
+msgstr "Pekařka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:8
@@ -9383,7 +9383,7 @@ msgstr "Dřevorubec"
 #: ../../../../data/tribes/workers/barbarians/baker/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Baker"
-msgstr "Pekař"
+msgstr "Pekařka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/blacksmith/init.lua:8
@@ -9461,7 +9461,7 @@ msgstr "Hajný"
 #: ../../../../data/tribes/workers/barbarians/gardener/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Gardener"
-msgstr "Zahradník"
+msgstr "Zahradnice"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/geologist/init.lua:8
@@ -9575,7 +9575,7 @@ msgstr "Cvičitel"
 #: ../../../../data/tribes/workers/barbarians/weaver/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Weaver"
-msgstr "Tkadlec"
+msgstr "Tkadlena"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/armorsmith/init.lua:8
@@ -9587,7 +9587,7 @@ msgstr "Platnéř"
 #: ../../../../data/tribes/workers/empire/baker/init.lua:8
 msgctxt "empire_worker"
 msgid "Baker"
-msgstr "Pekař"
+msgstr "Pekařka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/brewer/init.lua:8
@@ -9671,7 +9671,7 @@ msgstr "Lovec"
 #: ../../../../data/tribes/workers/empire/innkeeper/init.lua:8
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr "Hostinský"
+msgstr "Hostinská"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/lumberjack/init.lua:8
@@ -9779,7 +9779,7 @@ msgstr "Zbrojíř"
 #: ../../../../data/tribes/workers/empire/weaver/init.lua:8
 msgctxt "empire_worker"
 msgid "Weaver"
-msgstr "Tkadlec"
+msgstr "Tkadlena"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/baker/init.lua:8

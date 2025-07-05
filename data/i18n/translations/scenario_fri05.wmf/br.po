@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Notenn"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -224,7 +224,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Donemat e Helgoland!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -263,7 +263,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Enebourien"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
@@ -472,7 +472,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Ar chaoseriañ"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268

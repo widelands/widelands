@@ -57,7 +57,7 @@ msgstr "Copyright 2002 - %1% Widelands Development Team."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Tato hra je svobodným a otevřeným softwarem (FOSS), registrovaným pod GNU General Public License (GPL) V2.0 (nebo podle možností jinou pozdější verzí licence)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format

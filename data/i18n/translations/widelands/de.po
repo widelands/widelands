@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-07-03 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -869,7 +869,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Bist du sicher, dass du diese Karte online veröffentlichen willst?\n\nName: %1$s\nInterner Name: %2$s\nAutor: %3$s\nBeschreibung: %4$s\nHinweis: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -882,7 +882,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Durch das Hochladen stimmst du zu, deine Karte unter den Bedingungen der GNU General Public License (GPL) Version 2.0 oder jeder späteren Version (die selbe Lizenz unter der auch Widelands selber verbreitet wird) zu veröffentlichen. Für mehr Informationen schaue hier %s nach."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -1600,7 +1600,7 @@ msgid ""
 msgstr "Diese Karte wurde automatisch durch den Widelands-Zufallskartengenerator generiert."
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1662
+#: ../../../../src/network/gamehost.cc:1675
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
@@ -1938,7 +1938,7 @@ msgstr "Wirtschaften"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Handel"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2436,103 +2436,103 @@ msgstr "Handelsangebot"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Neues Handelsangebot empfangen"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Du hast ein neues Handelsangebot von %s empfangen."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Handel akzeptiert"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Handelsangebot akzeptiert"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s hat dein Handelsangebot von %2$s akzeptiert."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Handel abgelehnt"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Handelsangebot abgelehnt"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s hat dein Handelsangebot von %2$s abgelehnt."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Handel zurückgezogen"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Handelsangebot zurückgezogen"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "Das Handelsangebot von %s wurde zurückgezogen."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Handelserweiterungsvorschlag"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Neuer Handelserweiterungsvorschlag empfangen"
 
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s hat vorgeschlagen einen Handel zu erweitern."
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Handelserweiterung zurückgezogen"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Handelserweiterungsvorschlag zurückgezogen"
 
 #: ../../../../src/logic/game.cc:1560
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "Der Vorschlag von %s zur Erweiterung eines Handels wurde zurückgezogen."
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Handelserweiterung abgelehnt"
 
 #: ../../../../src/logic/game.cc:1601
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Handelserweiterungsvorschlag abgelehnt"
 
 #: ../../../../src/logic/game.cc:1602
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s hat deinen Vorschlag zur Erweiterung eines Handels abgelehnt. "
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Handelserweiterung akzeptiert"
 
 #: ../../../../src/logic/game.cc:1656
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Handelserweiterungsvorschlag akzeptiert"
 
 #: ../../../../src/logic/game.cc:1657
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s hat deinen Vorschlag zur Erweiterung eines Handels akzeptiert. "
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2624,136 +2624,136 @@ msgstr "%u%% abgerissen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Ein neuer Markt wurde deiner Wirtschaft hinzugefügt."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Geschäft"
+msgstr[1] "%u Geschäfte"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Handel abgebrochen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Handel abgeschlossen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Handelsvereinbarung abgebrochen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Handelsvereinbarung abgeschlossen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Deine Handelsvereinbarung von %s ist abgeschlossen."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Deine Handelsvereinbarung von %s wurde abgebrochen."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
-msgstr ""
+msgstr "Handel pausiert"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Handelsvereinbarung pausiert"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s hat den Handel mit dir von %2$s pausiert."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Handel wieder aufgenommen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Handelsvereinbarung wieder aufgenommen"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s hat den Handel mit dir von %2$s wieder aufgenommen."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Handelsvereinbarung von %1$s mit %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Handelsangebot von %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Handelsangebot von %1$s nach %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Los"
+msgstr[1] "%d Lose"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Handel läuft unendlich"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%dLos geliefert"
+msgstr[1] "%d Lose geliefert"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Los ausstehend"
+msgstr[1] "%d Lose ausstehend"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
-msgstr ""
+msgstr "Pausiert von beiden Spielern"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
-msgstr ""
+msgstr "Pausiert von dir"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:820
 #: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Pausiert von %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
-msgstr ""
+msgstr "Spieler sendet:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Du sendest:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2763,15 +2763,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "Spieler empfängt:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Du empfängst:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -3486,7 +3486,7 @@ msgstr "Hafen %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Markt %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -3698,19 +3698,19 @@ msgstr "Prüfe Karte"
 msgid "Postloading map objects"
 msgstr "Kartenobjekte nachladen"
 
-#: ../../../../src/network/gameclient.cc:163
-#: ../../../../src/network/gamehost.cc:561
+#: ../../../../src/network/gameclient.cc:171
+#: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:909
 msgid "Preparing game…"
 msgstr "Spiel wird vorbereitet …"
 
-#: ../../../../src/network/gameclient.cc:233
+#: ../../../../src/network/gameclient.cc:241
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Konnte keine Verbindung zum Host erstellen"
 
-#: ../../../../src/network/gameclient.cc:234
+#: ../../../../src/network/gameclient.cc:242
 #, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
@@ -3718,42 +3718,42 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands konnte keine Verbindung zu der angegebenen Adresse erstellen. Entweder es war kein Widelandsserver am TCP-Port %u erreichbar, oder der Server wurde gerade geschlossen, als du dich anmelden wolltest."
 
-#: ../../../../src/network/gameclient.cc:817
+#: ../../../../src/network/gameclient.cc:832
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u Erweiterungsdiskrepanz erkannt:\n"
 msgstr[1] "%u Erweiterungsdiskrepanzen erkannt:\n"
 
-#: ../../../../src/network/gameclient.cc:819
+#: ../../../../src/network/gameclient.cc:834
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• „%2$s“ vom Host benötigt aber nicht gefunden"
 
-#: ../../../../src/network/gameclient.cc:822
+#: ../../../../src/network/gameclient.cc:837
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• „%2$s“ installiert in Version %3$s aber der Host verwendet Version %4$s"
 
-#: ../../../../src/network/gameclient.cc:989
+#: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me s Datei hat die Überprüfung mit MD5 nicht bestanden."
 
-#: ../../../../src/network/gameclient.cc:1031
+#: ../../../../src/network/gameclient.cc:1046
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me überprüfte die empfangene Datei. Obwohl das md5-Prüfsummenverfahren erfolgreich durchgeführt wurde, kann ich die Datei nicht verarbeiten."
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
 msgstr "Verbindung verloren"
 
-#: ../../../../src/network/gameclient.cc:1354
+#: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3875,7 +3875,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands konnte keinen Server starten.\nMöglicherweise lässt bereits ein anderer Prozess einen Server auf unserem Port laufen."
 
-#: ../../../../src/network/gamehost.cc:1921
+#: ../../../../src/network/gamehost.cc:1934
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -4977,7 +4977,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Hier kannst du deine Erweiterung zum Server hochladen, um sie für andere Spieler verfügbar zu machen. Durch das Hochladen stimmst du zu, deine Entwicklung unter den Bedingungen der GNU General Public License (GPL) Version 2.0 oder jeder späteren Version (die selbe Lizenz unter der auch Widelands selber verbreitet wird) zu veröffentlichen. Für mehr Informationen bezüglich der GPL schaue bitte unter  ‘Über Widelands’ → ‘Lizenz’ im Hauptmenü oder hier %s nach."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
@@ -7628,7 +7628,7 @@ msgstr "Fenstergröße"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Anzeige"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7800,7 +7800,7 @@ msgstr "Nie"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Mauszeiger folgen"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -8715,7 +8715,7 @@ msgstr "Zeige nur Szenarionachrichten"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Zeige nur Diplomatienachrichten"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Go to Ship"
@@ -9232,40 +9232,40 @@ msgstr "Aufgeben?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Abbrechen?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "Möchtest du wirklich diese Handelsvereinbarung abbrechen?"
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Handel erweitern"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Wähle um wieviele Lose du diesen Handel erweitern möchtest:"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Unendlicher Handel an/aus"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Lose:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Weiter?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Möchtest du wirklich diese Handelsvereinbarung wieder aufnehmen?\n\nDies wird alle Warenschlangen auf die maximale Kapazität zurücksetzen."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -10060,15 +10060,15 @@ msgstr "Lade diesen Spieler ein deinem Team beizutreten"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Von anderen Spielern empfangene Handelsangebote"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "An andere Spieler gesendete Handelsangebote"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Deine aktiven Handelsvereinbarungen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10118,141 +10118,141 @@ msgstr "Zurückziehen"
 #: ../../../../src/wui/marketwindow.cc:936
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Handelsangebote (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:449
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Niemand hat dir im Moment einen Handel angeboten."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Markt um den Handel zu akzeptieren"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
 #: ../../../../src/wui/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (nähester)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s (Entfernung: %2$u Feld)"
+msgstr[1] "%1$s (Entfernung: %2$u Felder)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:468
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Dieses Handelsangebot akzeptieren"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:471
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Dieses Handelsangebot ablehnen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Baue einen Markt um Handelsangebote zu akzeptieren."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:930
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Vorgeschlagene Geschäfte (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "Es gibt im Moment keine ausstehenden Handelsvorschläge. Du kannst einen neuen Handel in einem Markt vorschlagen."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Zentriere die Hauptansicht auf diesen Market"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Dieses Handelsangebot zurückziehen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:347
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Dieses Handelsangot umziehen…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:558
 #: ../../../../src/wui/marketwindow.cc:358
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Ziehe dieses Handelsangebot nach %s um"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:563
 #: ../../../../src/wui/game_diplomacy_menu.cc:683
 #: ../../../../src/wui/marketwindow.cc:364
 #: ../../../../src/wui/marketwindow.cc:624
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Du hast keine Märkte zu denen du dieses Handelsangebot umziehen könntest."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Aktive Geschäfte (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Im Moment gibt es keine aktiven Handelsvereinbarungen."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
 #: ../../../../src/wui/marketwindow.cc:570
 #: ../../../../src/wui/marketwindow.cc:578
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Erweiterung dieses Handels vorschlagen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:571
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Halte STRG gedrückt, um ihn um %d Los zu erweitern"
+msgstr[1] "Halte STRG gedrückt, um ihn um %d Lose zu erweitern"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:655
 #: ../../../../src/wui/marketwindow.cc:576
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Halte UMSCHALT gedrückt, um den Handel unendlich zu erweitern"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Diese Handelsvereinbarung abbrechen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:601
 msgid "Move this trade…"
-msgstr ""
+msgstr "Diesen Handel umziehen…"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:676
 #: ../../../../src/wui/marketwindow.cc:617
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Ziehe diesen Handel nach %s (nähester) um"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:618
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Ziehe diesen Handel nach %s um"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:737
 #: ../../../../src/wui/marketwindow.cc:703
 #: ../../../../src/wui/marketwindow.cc:789
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s hat vorgeschlagen diesen Handel unendlich zu erweitern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:740
 #: ../../../../src/wui/marketwindow.cc:706
@@ -10260,36 +10260,36 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s hat vorgeschlagen diesen Handel um %2$d Los zu erweitern."
+msgstr[1] "%1$s hat vorgeschlagen diesen Handel um %2$d Lose zu erweitern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:716
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Diesen Handelserweiterungsvorschlag ablehnen"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:720
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Diesen Handelserweiterungsvorschlag akzeptieren"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:763
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Du hast vorgeschlagen diesen Handel unendlich zu erweitern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:784
 #: ../../../../src/wui/marketwindow.cc:759
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Du hast vorgeschlagen diesen Handel um %d Los zu erweitern."
+msgstr[1] "Du hast vorgeschlagen diesen Handel um %d Lose zu erweitern."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:769
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Diesen Handelserweiterungsvorschlag zurückziehen"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10373,7 +10373,7 @@ msgstr "Zeige nur Szenarionachrichten"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Zeige nur Diplomatienachrichten"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -11164,109 +11164,109 @@ msgstr "Kartenname"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Vorschlagen"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Du bietest an:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Du benötigst:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Verkleinere die Menge um 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Verkleinere die Menge"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Erhöhe die Menge"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Erhöhe die Menge um 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Bitte den Spieler zum Handeln auswählen."
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Bitte die Waren auswählen, die du senden und empfangen möchtest."
 
 #: ../../../../src/wui/marketwindow.cc:230
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Es ist nicht erlaubt, mehr als %d Ware pro Los auszutauschen."
+msgstr[1] "Es ist nicht erlaubt, mehr als %dWaren pro Los auszutauschen."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Du kannst den gleichen Warentyp (%s) nicht gleichzeitig senden und empfangen."
 
 #: ../../../../src/wui/marketwindow.cc:245
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Das zusammengestellte Angebot an den ausgewählten Spieler senden"
 
 #: ../../../../src/wui/marketwindow.cc:313
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "Es gibt im Moment keine ausstehenden Handelsvorschläge. Du kannst einen neuen Handel aus dem ersten Reiter vorschlagen."
 
 #: ../../../../src/wui/marketwindow.cc:316
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Es gibt im Moment keine ausstehenden Handelsvorschläge. "
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Diesen Handel abbrechen"
 
 #: ../../../../src/wui/marketwindow.cc:809
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Diesen pausierten Handel wieder aufnehmen. Dazu müssen alle Warenschlangen ihre maximale Kapazität haben."
 
 #: ../../../../src/wui/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Diesen Handel pausieren"
 
 #: ../../../../src/wui/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Du musst erst den Handel pausieren, ehe du die Kapazität der Warenschlangen ändern kannst."
 
 #: ../../../../src/wui/marketwindow.cc:825
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Handel pausieren?"
 
 #: ../../../../src/wui/marketwindow.cc:826
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Das Ändern der Kapazität der Warenschlangen wird den Handel anhalten. Den Handel jetzt anhalten?"
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Handel vorschlagen"
 
 #: ../../../../src/wui/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Vorgeschlagene Geschäfte"
 
 #: ../../../../src/wui/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Handelsangebote"
 
 #: ../../../../src/wui/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Aktives Geschäft"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"
@@ -11854,25 +11854,25 @@ msgctxt "destination"
 msgid "(none)"
 msgstr "(keine)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:444
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Gehe zum Ziel (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:449
 msgid "Go to destination"
 msgstr "Gehe zum Ziel"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to transport ship"
 msgstr "Zum Transportschiff umrüsten"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:477
 msgid "Refit to warship"
 msgstr "Zum Kriegsschiff umrüsten"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:499
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "Leben: %1$u/%2$u"
