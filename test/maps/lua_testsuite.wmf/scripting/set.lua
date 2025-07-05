@@ -111,3 +111,9 @@ function set_tests:test_pop_at()
    self.s1:pop_at(1)
    assert_equal(0, self.s1.size)
 end
+
+-- for testing return value of include
+return {
+   testString = 'set return text',
+   testNo = 7,
+}
