@@ -11250,23 +11250,23 @@ msgstr "Handel pausieren?"
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Das Ändern der Kapazität der Warenschlangen wird den Handel anhalten. Den Handel jetzt anhalten?"
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Handel vorschlagen"
 
 #: ../../../../src/wui/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Vorgeschlagene Geschäfte"
 
 #: ../../../../src/wui/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Handelsangebote"
 
 #: ../../../../src/wui/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Aktives Geschäft"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"
