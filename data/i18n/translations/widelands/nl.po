@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-07-03 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -846,7 +846,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Weet je zeker dat je deze kaart online wilt publiceren?\n\nNaam: %1$s\nInterne naam: %2$s\nAuteur: %3$s\nBeschrijving: %4$s\nTip: %5$s\n\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -859,7 +859,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Door te uploaden ga je akkoord met het publiceren van de kaart onder de voorwaarden van de GNU General Public License (GPL) versie 2 of een latere versie (dezelfde licentie waaronder Widelands zelf wordt gedistribueerd). Zie voor meer informatie  %s."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -1577,7 +1577,7 @@ msgid ""
 msgstr "Deze kaart is automatisch aangemaakt door de Widelands Willekeurige Kaart Generator"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1662
+#: ../../../../src/network/gamehost.cc:1675
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
@@ -3675,19 +3675,19 @@ msgstr "Kaart controleren"
 msgid "Postloading map objects"
 msgstr "Kaartobjecten achteraf laden"
 
-#: ../../../../src/network/gameclient.cc:163
-#: ../../../../src/network/gamehost.cc:561
+#: ../../../../src/network/gameclient.cc:171
+#: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:909
 msgid "Preparing game…"
 msgstr "Spel Voorbereiden..."
 
-#: ../../../../src/network/gameclient.cc:233
+#: ../../../../src/network/gameclient.cc:241
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Kon geen verbinding met de host maken"
 
-#: ../../../../src/network/gameclient.cc:234
+#: ../../../../src/network/gameclient.cc:242
 #, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
@@ -3695,42 +3695,42 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands kon geen verbinding maken met het opgegeven adres. Ofwel was er geen Widelands server bereikbaar op de TCP poort %u of de server is afgesloten toen je verbinding probeerde te maken."
 
-#: ../../../../src/network/gameclient.cc:817
+#: ../../../../src/network/gameclient.cc:832
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u uitbreiding ongelijkheid ontdekt:\n"
 msgstr[1] "%u uitbreiding ongelijkheden ontdekt:\n"
 
-#: ../../../../src/network/gameclient.cc:819
+#: ../../../../src/network/gameclient.cc:834
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ vereist door host niet gevonden"
 
-#: ../../../../src/network/gameclient.cc:822
+#: ../../../../src/network/gameclient.cc:837
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ geïnstalleerd onder versie %3$s maar host gebruikt versie %4$s"
 
-#: ../../../../src/network/gameclient.cc:989
+#: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
 msgstr "het bestand van /me  heeft een md5 checksum fout"
 
-#: ../../../../src/network/gameclient.cc:1031
+#: ../../../../src/network/gameclient.cc:1046
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me heeft het ontvangen bestand gecontroleerd. Hoewel de md5 controle succesvol was, kan ik het bestand niet verwerken."
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
 msgstr "Verbinding verbroken"
 
-#: ../../../../src/network/gameclient.cc:1354
+#: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3852,7 +3852,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kon geen server starten.\nHet lijkt erop dat een ander proces al als server draait op onze poort."
 
-#: ../../../../src/network/gamehost.cc:1921
+#: ../../../../src/network/gamehost.cc:1934
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -4954,7 +4954,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Hier kun je je add-ons uploaden naar de server om ze beschikbaar te maken voor andere spelers. Door te uploaden ga je akkoord met het publiceren van je creatie onder de voorwaarden van de GNU General Public License (GPL) versie 2 of een latere versie (dezelfde licentie waaronder Widelands zelf wordt gedistribueerd). Voor meer informatie over de GPL verwijzen we je naar ‘Over Widelands’ → ‘Licentie’ in het hoofdmenu of zie %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
@@ -11831,25 +11831,25 @@ msgctxt "destination"
 msgid "(none)"
 msgstr "(geen)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:444
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Ga naar bestemming (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:449
 msgid "Go to destination"
 msgstr "Ga naar bestemming"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to transport ship"
 msgstr "Verbouwing tot transportschip"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:477
 msgid "Refit to warship"
 msgstr "Verbouwing tot oorlogsschip"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:499
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "HP: %1$u/%2$u"

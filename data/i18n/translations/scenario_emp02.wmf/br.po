@@ -104,7 +104,7 @@ msgstr ""
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Evit pourvezañ peadra da zebriñ e c'hellec'h sevel un ti pesketaer, un ti chaseour, un atant, ur vilin hag un ti-bara."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
