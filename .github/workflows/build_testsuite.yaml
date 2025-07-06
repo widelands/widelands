@@ -84,13 +84,14 @@ jobs:
         while [ $(( i++ )) -lt 60 ]
         do
           sleep 1
-          if xset q 2>/dev/null >/dev/null # ask some config
-          then
+          # glxinfo is installed by .github/scrips/install_deps.sh
+          if glxinfo 2>/dev/null >/dev/null || [ $? -eq 127 ]
+          then  # successful or command not found
             break
           fi
         done
-        sleep 5 # some extra time
-        xset q >/dev/null # report error if it is still there
+        sleep 2 # some extra time
+        glxinfo >/dev/null # report error if it still occurs
     - name: Website Binaries
       run: |
         # Ignore transient SDL errors (exit code 2)
