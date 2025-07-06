@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-23 03:32+0000\n"
+"POT-Creation-Date: 2025-07-03 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2025\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -11970,25 +11970,25 @@ msgctxt "destination"
 msgid "(none)"
 msgstr "(ничего)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:444
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Идти к (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:449
 msgid "Go to destination"
 msgstr "Идти к указанному месту"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to transport ship"
 msgstr "Переоборудовать в транспорт"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:477
 msgid "Refit to warship"
 msgstr "Переоборудование в военный корабль"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:499
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "HP: %1$u/%2$u"

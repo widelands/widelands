@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-23 03:32+0000\n"
+"POT-Creation-Date: 2025-07-03 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -11827,25 +11827,25 @@ msgctxt "destination"
 msgid "(none)"
 msgstr "(keens)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:444
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Tum Enn gahn (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:449
 msgid "Go to destination"
 msgstr "Tum Enn gahn"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to transport ship"
 msgstr "För Schipperee umrüsten"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:477
 msgid "Refit to warship"
 msgstr "To Kriegsschipp umrüsten"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:499
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "GH: %1$u/%2$u"
