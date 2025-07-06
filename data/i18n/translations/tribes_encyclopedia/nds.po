@@ -1298,7 +1298,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "Dat Huus bruukt %1$s bit %2$s, um een Deel Boomreep to produzeren, je nadeem, wo wied de Boomreep-Slagerske lopen mutt."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1375,7 +1375,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "De Fauna-Wahrderske tüsket eenen Fiss un een Deert in %1$s bit %2$s, je nadeem, wo wied se lopen mutt."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1427,7 +1427,7 @@ msgstr "Maakt Tau ut Boomreep."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "De Reeperbahn bruukt dör de Bank %s um een Tau to produzeren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1640,7 +1640,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr ""
+msgstr "De Meister-Waldwahrderske kann in %1$s bit %2$s een Maal dat Land umwanneln, je nadeem, wo wied se lopen mutt."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -4495,7 +4495,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "De Fisstüchter tüsket eenen Fiss in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4622,7 +4622,7 @@ msgstr "Staht up eener unversörgt Goldspinneree"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr ""
+msgstr "De Goldspinneree bruukt dör de Bank %s um een Deel Goldwulle to produzeren."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -5176,7 +5176,7 @@ msgstr "Eene Spinnentüchterske wiest hör Buurderee"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "De Spinnentüchteree bruukt dör de Bank %s um een Deel Spinnensied to produzeren."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7138,7 +7138,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gamekeeper can release one animal between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "De Deertentüchter tüsket een Deert in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Well
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1258
@@ -11519,7 +11519,7 @@ msgstr "Sniddjet Marmelpielers ut Marmel."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr ""
+msgstr "Dat Steenbickerhuus bruukt dör de Bank %s um eenen Marmelpieler to produzeren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11730,7 +11730,7 @@ msgstr "Produzeert Wien."
 #, lua-format
 msgctxt "empire_building"
 msgid "The winery needs %s on average to produce one wine."
-msgstr ""
+msgstr "De Wienmakeree bruukt dör de Bank %s um eenen Wien to produzeren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12122,7 +12122,7 @@ msgstr "Tücht Schapen för hör Wull."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr ""
+msgstr "De Schaaptüchteree bruukt dör de Bank %s um eene Wull to produzeren."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -15107,7 +15107,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one clay between %1$s and %2$s, depending on how "
 "far the clay digger has to walk."
-msgstr ""
+msgstr "Dat Huus bruukt %1$s bit %2$s, um eenen Lehm to produzeren, je nadeem, wo wied de Lehmgraver lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15257,7 +15257,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "De Imker pottjet eenen Hönnig in %1$s bit %2$s, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15342,7 +15342,7 @@ msgstr "Brannt Backstenen ut Flint un Lehm. Köhle hollt dat Füür heet. Backst
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "De Backsteenbranneree bruukt dör de Bank %s um eenen Backsteen to produzeren."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15931,7 +15931,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen, kann de Diekbauer in %1$s bit %2$s een Maal dat Land umwanneln, je nadeem, wo wied he lopen mutt."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
