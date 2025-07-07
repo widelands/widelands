@@ -43,6 +43,12 @@ class GithubASan:
             return cls.ansi_escape_pattern.sub('', text)
 
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
+            if cls.counted_leaks is None:
+                write_summary(
+                    '## memory leaks\n\n> [!TIP]\n'
+                    '> To find the full traceback, go to the log (from menu `...` on top right of '
+                    'this text block) and copy the line from the traceback here in the log\'s '
+                    'search field.\n')
             write_summary('\n### ', remove_ansi_escape_sequences(text))
             write_summary('triggered by test ', cls.test_script, '\n\n')
             cls.counted_leaks = 0
