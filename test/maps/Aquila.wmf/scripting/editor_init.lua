@@ -1,12 +1,6 @@
--- No logic required. Just try to load this old map in the Editor.
+print("INFO: run editor_init.lua")  -- printed to show that the script runs twice
 
-if editor_init_has_run then -- was loaded before
-   -- avoid reporting twice (for cleanness), which happens in editor
+if editor_test_has_run then
    print("(quit again)")
-   wl.ui.MapView():close() -- must be repeated
-   return
+   wl.ui.MapView():close() -- was done by editor_test_loading.lua, but must be repeated
 end
-
-print("# All Tests passed.")
-wl.ui.MapView():close()
-editor_init_has_run = 1
