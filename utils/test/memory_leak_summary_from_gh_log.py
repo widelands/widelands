@@ -21,6 +21,7 @@ class GithubASan:
     found_local_tb = True
     test_script = None
     ansi_escape_pattern = None
+    counted_leaks = None
 
     @classmethod
     def github_asan_line(cls, text):
@@ -42,20 +43,25 @@ class GithubASan:
 
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
             write_summary('### ', remove_ansi_escape_sequences(text))
-            write_summary('triggered by test ', cls.test_script, '\n\n')
+            write_summary('triggered by test ', cls.test_script, '\n\n<details>\n')
+            cls.counted_leaks = 0
         if 'SUMMARY' in text:
             if os.getenv('GITHUB_STEP_SUMMARY'):
-                write_summary('\n', text)
+                summary_tag = f'\n<summary>{cls.counted_leaks} leaks</summary>\n'
+                write_summary(summary_tag, '</details>\n', text, '\n')
             return '::warning title=ASan error::' + text
         if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
             write_summary('+ ', remove_ansi_escape_sequences(
                 text.replace(' allocated from:', '', 1)))
             cls.found_local_tb = False
+            cls.counted_leaks += 1
         compile_d = os.getenv('WLRT_COMPILE_DIR', 'widelands')  # default is for GitHub
         if not cls.found_local_tb and '/third_party/' not in text and \
                 (f'/{compile_d}/src/' in text or ' src/' in text):
             if os.getenv('GITHUB_STEP_SUMMARY'):
-                write_summary('    our origin: ', text)
+                # add code part in `` to avoid invalid html
+                to_write = ')`'.join(text.rsplit(')', 1)).replace(' in ', ' in `', 1)
+                write_summary('    our origin: ', to_write)
             cls.found_local_tb = True
             if ' src/' in text:  # stipped by ASAN_OPTIONS='strip_path_prefix=/...
                 f_name_line = 'src/' + text.rsplit(' src/', 1)[1].rstrip()
