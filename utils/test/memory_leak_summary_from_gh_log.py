@@ -18,11 +18,11 @@ import re
 
 
 class GithubASan:
-    found_local_tb = True
+    found_local_tb = True  # true if not looking for our line in current traceback
     test_script = None
-    ansi_escape_pattern = None
-    counted_leaks = None
-    leaks_by_origin = {}
+    ansi_escape_pattern = None  # for remove_ansi_escape_sequences()
+    counted_leaks = None  # counts memory leaks from one run of widelands
+    leaks_by_origin = {}  # memory leaks grouped by origin
 
     @classmethod
     def github_asan_line(cls, text):
