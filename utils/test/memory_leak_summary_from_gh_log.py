@@ -22,6 +22,7 @@ class GithubASan:
     test_script = None
     ansi_escape_pattern = None
     counted_leaks = None
+    leaks_by_origin = {}
 
     @classmethod
     def github_asan_line(cls, text):
@@ -58,16 +59,18 @@ class GithubASan:
         compile_d = os.getenv('WLRT_COMPILE_DIR', 'widelands')  # default is for GitHub
         if not cls.found_local_tb and '/third_party/' not in text and \
                 (f'/{compile_d}/src/' in text or ' src/' in text):
-            if os.getenv('GITHUB_STEP_SUMMARY'):
-                # add code part in `` to avoid invalid html and also #7 to avoid issue references
-                to_write = ')`'.join(text.rsplit(')', 1)).replace(
-                    ' in ', '` in `', 1).replace('#', '`#', 1)
-                write_summary('    our origin: ', to_write)
             cls.found_local_tb = True
             if ' src/' in text:  # stipped by ASAN_OPTIONS='strip_path_prefix=/...
                 f_name_line = 'src/' + text.rsplit(' src/', 1)[1].rstrip()
             else:
                 f_name_line = text.rsplit(f'/{compile_d}/', 1)[1].rstrip()
+            if os.getenv('GITHUB_STEP_SUMMARY'):
+                # add code part in `` to avoid invalid html
+                to_write = ')`'.join(text.rsplit(')', 1)).replace(
+                    ' in ', '` in `', 1).replace('#', '`#', 1)
+                write_summary('    our origin: ', to_write)
+                data = {'tb': to_write, 'test': cls.test_script}
+                cls.leaks_by_origin.setdefault(f_name_line, []).append(data)
             if os.getenv('WLRT_ANNOTATE_LINE'):  # with strategy.job-index == 0 from workflow
                 # annotate only one test job to not have many dublicate messages on one line
                 # unfortunately the jobs can not coordinate
@@ -82,6 +85,19 @@ class GithubASan:
     @classmethod
     def set_test_script(cls, test_script):
         cls.test_script = test_script
+
+    @classmethod
+    def summarize_origins(cls):
+        if not cls.leaks_by_origin or not os.getenv('GITHUB_STEP_SUMMARY'):
+            return
+        with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
+            summary_file.write('\n\n## memory leaks by origin\n\n')
+            for origin in sorted(cls.leaks_by_origin):
+                summary_file.write(f'#### {origin}\n')
+                for data in cls.leaks_by_origin[origin]:
+                    summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
+                summary_file.write('\n')
+        cls.leaks_by_origin = {}
 
 
 def create_summary_one_runner():
@@ -126,6 +142,7 @@ def create_summary_one_runner():
                     r_mode = ReadingMode.RT_LOGS
                 else:
                     GithubASan.github_asan_line(get_log_line(line))
+    GithubASan.summarize_origins()
 
 
 def main():
