@@ -452,6 +452,7 @@ public:
 	}
 	void remove_fleet_interface(EditorGameBase& egbase, const ShipFleetYardInterface* i);
 	void remove_fleet_interface(EditorGameBase& egbase, const FerryFleetYardInterface* i);
+	void init_yard_interfaces(EditorGameBase& egbase);
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
@@ -512,7 +513,6 @@ protected:
 	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
-	void init_yard_interfaces(EditorGameBase& egbase);
 
 	void format_statistics_string();
 	void try_start_working(Game&);
