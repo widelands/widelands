@@ -59,7 +59,7 @@ class GithubASan:
             cls.found_local_tb = True
             f_name_line = text.rsplit(f'/{compile_d}/', 1)[1]
             if f_name_line == text:
-                f_name_line = 'src/' + text.rsplit(' src/', 1)[1]
+                f_name_line = 'src/' + text.rsplit(' src/', 1)[1].rstrip()
             if os.getenv('WLRT_ANNOTATE_LINE'):  # with strategy.job-index == 0 from workflow
                 # annotate only one test job to not have many dublicate messages on one line
                 # unfortunately the jobs can not coordinate
