@@ -43,15 +43,17 @@ class GithubASan:
             return cls.ansi_escape_pattern.sub('', text)
 
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
-            write_summary('### ', remove_ansi_escape_sequences(text))
-            write_summary('triggered by test ', cls.test_script, '\n\n<details>\n')
+            write_summary('\n### ', remove_ansi_escape_sequences(text))
+            write_summary('triggered by test ', cls.test_script, '\n\n')
             cls.counted_leaks = 0
         if 'SUMMARY' in text:
-            if os.getenv('GITHUB_STEP_SUMMARY'):
+            if os.getenv('GITHUB_STEP_SUMMARY') and cls.counted_leaks > 0:
                 summary_tag = f'\n<summary>{cls.counted_leaks} leaks</summary>\n'
-                write_summary(summary_tag, '</details>\n', text, '\n')
+                write_summary(summary_tag, '</details>\n', text)
             return '::warning title=ASan error::' + text
         if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
+            if cls.counted_leaks == 0:
+                write_summary('<details>\n\n')  # needs empty line for the following list
             write_summary('+ ', remove_ansi_escape_sequences(
                 text.replace(' allocated from:', '', 1)))
             cls.found_local_tb = False
