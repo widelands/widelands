@@ -2534,6 +2534,7 @@ wl.Descriptions():new_tribe {
    },
 
    fastplace = {
+      market = "frisians_market",
       warehouse = "frisians_warehouse",
       port = "frisians_port",
       training_small = "frisians_training_camp",
