@@ -40,15 +40,19 @@
 --    **heal_per_second**: The number of hitpoints the ship heals per second when in a dock.
 --
 --    **animations**: A table containing all file animations for this ship.
---    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--    Ships have two sets of animations: One for transport ships and one for warships.
+--    Transport ships have an "idle", a "sinking", and a directional "sail" animation.
+--    Warships' animations are called "warship", "sinking_warship", and "sail_warship" respectively;
+--    they additionally have battle animations for attacker and defender in west and east positions
+--    called "(atk|eva)_(ok|fail)_(w|e)".
 --    Animations can either be defined as file animations in this table or as spritesheet animations
 --    as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
 --    See :doc:`animations` for a detailed description of the animation format.
 --
 --    **spritesheets**: A table containing all spritesheet animations for this ship.
---    Ships have an "idle", a "sinking" and a directional "sail" animation.
 --    Animations can either be defined as spritesheet animations in this table or as file animations
 --    as defined in table ``animations``. A mixture of the two animation formats is allowed.
+--    See the description for ``animations`` for a list of all ship animations.
 --    See :doc:`animations` for a detailed description of the animation format.
 --
 --    **names**: A list of strings with ship names presented to the user - be creative :)
@@ -107,6 +111,17 @@ push_textdomain("tribes")
 
 local dirname = path.dirname(__file__)
 
+-- TODO(Nordfriese): All warship animations needed
+local placeholder_table = {
+   basename = "warship",
+   play_once = true,
+   fps = 10,
+   frames = 39,
+   rows = 7,
+   columns = 6,
+   hotspot = { 58, 55 }
+}
+
 wl.Descriptions():new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
@@ -146,6 +161,38 @@ wl.Descriptions():new_ship_type {
          columns = 4,
          hotspot = { 58, 54 }
       },
+
+      warship = {
+         fps = 10,
+         frames = 39,
+         rows = 7,
+         columns = 6,
+         hotspot = { 58, 55 }
+      },
+      sail_warship = {
+         fps = 10,
+         frames = 40,
+         rows = 7,
+         columns = 6,
+         directional = true,
+         hotspot = { 86, 85 }
+      },
+      sinking_warship = {
+         fps = 7,
+         frames = 22,
+         rows = 6,
+         columns = 4,
+         hotspot = { 58, 54 }
+      },
+
+      atk_ok_w = placeholder_table,
+      atk_ok_e = placeholder_table,
+      atk_fail_w = placeholder_table,
+      atk_fail_e = placeholder_table,
+      eva_ok_w = placeholder_table,
+      eva_ok_e = placeholder_table,
+      eva_fail_w = placeholder_table,
+      eva_fail_e = placeholder_table,
    },
 
    names = {
