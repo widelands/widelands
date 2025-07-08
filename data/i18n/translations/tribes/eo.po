@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-01 03:23+0000\n"
+"POT-Creation-Date: 2025-06-26 03:25+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -21,6 +21,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
+msgctxt "amazons_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
+msgctxt "atlanteans_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
+msgctxt "barbarians_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
+msgctxt "empire_building"
+msgid "Market"
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
+msgctxt "frisians_building"
+msgid "Market"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1240,42 +1270,42 @@ msgid "working"
 msgstr "laboranta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:58
 msgid "planting cassava"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
 msgid "harvesting cassava"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:92
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:107
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:109
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:94
 msgid "No Fields"
 msgstr "Neniom da kampoj"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:94
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:85
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:108
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:110
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:95
 msgid "Out of Fields"
 msgstr "Ne plu kampoj"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:83
 msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
@@ -1291,7 +1321,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
 msgstr ""
@@ -1325,16 +1355,16 @@ msgid "Cocoa Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:66
 msgid "planting cocoa"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
 msgid "harvesting cocoa"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
 msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
@@ -1582,8 +1612,8 @@ msgstr ""
 msgid "cutting lianas"
 msgstr ""
 
-#. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
+#. TRANSLATORS: Short for "No Tree to Cut Lianas" for a resource
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
@@ -1592,11 +1622,11 @@ msgstr ""
 msgid "No Trees"
 msgstr "Neniom da arboj"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
 msgid "No Tree to Cut Lianas"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:54
 msgctxt "amazons_building"
 msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
@@ -1925,14 +1955,14 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:65
 msgid "breeding fish"
 msgstr "bredanta fiŝojn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
 msgid "releasing game"
 msgstr ""
 
@@ -2016,17 +2046,17 @@ msgid "Blackroot Farm"
 msgstr "Skorzoner-farmo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:61
 msgid "planting blackroot"
 msgstr "plantanta skorzoneron"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:72
 msgid "harvesting blackroot"
 msgstr "rikoltanta skorzoneron"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -2136,16 +2166,16 @@ msgid "Farm"
 msgstr "Maiz-farmo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:65
 msgid "planting corn"
 msgstr "plantanta maizon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
 msgid "harvesting corn"
 msgstr "rikoltanta maizon"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:90
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2163,7 +2193,7 @@ msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
 msgstr "Fiŝ-bredejo"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
@@ -2171,7 +2201,7 @@ msgstr "Fiŝ-bredejo"
 msgid "No Fish"
 msgstr "Neniom da fiŝo"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
@@ -2179,7 +2209,7 @@ msgstr "Neniom da fiŝo"
 msgid "Out of Fish"
 msgstr "Ne plu fiŝo"
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
@@ -2188,7 +2218,7 @@ msgid ""
 "in the first place."
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:61
 msgid "The fishing grounds are full"
 msgstr ""
 
@@ -2202,7 +2232,7 @@ msgstr "Fiŝkaptist-kabano"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:50
 msgid "fishing"
 msgstr "fiŝkaptanta"
@@ -2740,18 +2770,18 @@ msgid "Farm"
 msgstr "Farmo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:67
 msgid "planting wheat"
 msgstr "plantana tritikon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 msgid "harvesting wheat"
 msgstr "rikoltanta tritikon"
 
-#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:109
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3005,18 +3035,18 @@ msgid "Reed Yard"
 msgstr "Kan-korto"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:48
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:71
 msgid "planting reed"
 msgstr "plantanta kanon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgid "harvesting reed"
 msgstr "rikoltanta kanon"
 
-#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:83
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -3210,7 +3240,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Farmo"
 
-#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3487,17 +3517,17 @@ msgstr "Vinberejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:67
 msgid "planting grapevines"
 msgstr "plantanta viton"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:78
 msgid "harvesting grapes"
 msgstr "rikoltanta viton"
 
-#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -3573,16 +3603,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
 msgid "No Ponds"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
 msgid "Out of Fish Ponds"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:96
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:104
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3657,15 +3687,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
 msgid "No Flowers"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
 msgid "Out of Flowers"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
@@ -3766,15 +3796,15 @@ msgid "making clay"
 msgstr ""
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgid "No Ground"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:81
 msgid "No Level Ground"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:82
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -3820,15 +3850,15 @@ msgstr ""
 msgid "gathering berries"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgid "No Bushes"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
 msgid "Out of Berries"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -3842,12 +3872,12 @@ msgid "Diker’s House"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
 msgid "diking"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:77
 msgid "building a dike"
 msgstr ""
 
@@ -3864,16 +3894,16 @@ msgid "Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:84
 msgid "planting barley"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgid "harvesting barley"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:111
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -4045,7 +4075,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr ""
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "

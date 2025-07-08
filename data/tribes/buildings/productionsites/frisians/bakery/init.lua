@@ -21,8 +21,7 @@ wl.Descriptions():new_productionsite_type {
       enhancement_return_on_dismantle = {
          brick = 2,
          granite = 1,
-         log = 1,
-         reed = 2
+         log = 2
       }
    },
 

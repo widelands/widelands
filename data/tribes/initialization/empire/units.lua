@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1228,6 +1226,25 @@ wl.Descriptions():new_tribe {
          }
       },
 
+      -- Markets
+      {
+         name = "empire_market",
+         helptexts = {
+            lore = latin_lore(
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Good contracts make good friends."
+               _("Clara pacta, boni amici."),
+               -- TRANSLATORS: Lore helptext for an Empire market: Market
+               --    Translation for the classical Latin quote:
+               --    "Clara pacta, boni amici."
+               _("Good contracts make good friends.")
+            ),
+            -- TRANSLATORS: Purpose helptext for an Empire market: Market
+            purpose = pgettext("empire_building", "A market enables trading with other tribes.")
+         }
+      },
+
       -- Small
       {
          name = "empire_quarry",
@@ -1441,7 +1458,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Stonemason's House
             lore_author = pgettext("empire_building", "Motto of the Stonemasons’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's House
-            purpose = pgettext("empire_building", "Carves marble columns out of marble.")
+            purpose = pgettext("empire_building", "Carves marble columns out of marble."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Stonemason's House
+            performance = pgettext("empire_building", "The stonemason’s house needs %s on average to produce one marble column."):bformat(format_minutes_seconds(1, 26))
          }
       },
       {
@@ -1547,7 +1566,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Vineyard
             lore_author = pgettext("empire_building", "A proud vine farmer boasting"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Vineyard
-            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes.")
+            purpose = pgettext("empire_building", "Plants grapevines and harvests grapes."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 1
+               pgettext("empire_building", "The vine farmer sows and harvests one basket of grapes between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(44), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Vineyard, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The vineyard needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1566,7 +1591,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Winery
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Winery
-            purpose = pgettext("empire_building", "Produces wine.")
+            purpose = pgettext("empire_building", "Produces wine."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Winery
+            performance = pgettext("empire_building", "The winery needs %s on average to produce one wine."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1766,8 +1793,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "History of the Empire, Part VII"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Farm
             purpose = pgettext("building", "Sows and harvests wheat."),
-            -- TRANSLATORS: Performance helptext for an Empire production site: Farm
-            performance = pgettext("empire_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 1
+               pgettext("empire_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("empire_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -1788,7 +1819,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Piggery
             purpose = pgettext("empire_building", "Breeds pigs for their meat."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Piggery
-            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
+            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_seconds(34))
          }
       },
       {
@@ -1807,7 +1838,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Sheep Farm
             lore_author = pgettext("empire_building", "Imperial proverb for trying the impossible"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Sheep Farm
-            purpose = pgettext("empire_building", "Keeps sheep for their wool.")
+            purpose = pgettext("empire_building", "Keeps sheep for their wool."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Sheep Farm
+            performance = pgettext("empire_building", "The sheep farm needs %s on average to produce one wool."):bformat(format_seconds(59))
          }
       },
       {
@@ -2068,7 +2101,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an Empire training site: Arena
             note = pgettext("empire_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came."),
             -- TRANSLATORS: Performance helptext for an Empire training site: Arena
-            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier first level in evade in %s on average."):bformat(format_seconds(36))
+            performance = pgettext("empire_building", "If all needed wares are delivered in time, an arena can train one soldier to the first level in evade in %s on average."):bformat(format_seconds(36))
          }
       },
       {
@@ -2799,6 +2832,7 @@ wl.Descriptions():new_tribe {
    port = "empire_port",
 
    fastplace = {
+      market = "empire_market",
       warehouse = "empire_warehouse",
       port = "empire_port",
       training_small = "empire_arena",

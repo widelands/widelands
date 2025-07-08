@@ -48,6 +48,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -1038,7 +1039,8 @@ void Player::enhance_or_dismantle(Building* building,
 			}
 		};
 
-		if (upcast(Warehouse, wh, building)) {
+		if (building->descr().type() == MapObjectType::WAREHOUSE) {
+			upcast(Warehouse, wh, building);
 			workers = wh->get_incorporated_workers();
 			if (keep_wares) {
 				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di != 0u; --di) {
@@ -1060,8 +1062,17 @@ void Player::enhance_or_dismantle(Building* building,
 		} else {
 			workers = building->get_workers();
 			if (keep_wares) {
-				// TODO(Nordfriese): Add support for markets?
-				if (upcast(ProductionSite, ps, building)) {
+				if (building->descr().type() == MapObjectType::MARKET) {
+					upcast(Market, market, building);
+					for (DescriptionIndex di : market->pending_dropout_wares()) {
+						auto it = wares.find(di);
+						if (it == wares.end()) {
+							wares[di] = 1;
+						} else {
+							it->second++;
+						}
+					}
+				} else if (upcast(ProductionSite, ps, building)) {
 					for (const InputQueue* q : ps->inputqueues()) {
 						if (q->get_type() == wwWARE) {
 							auto it = wares.find(q->get_index());
@@ -1920,6 +1931,44 @@ bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
 
+std::multimap<uint32_t, const Market*> Player::get_markets(Coords closest_to) const {
+	std::multimap<uint32_t, const Market*> result;
+	const Widelands::Map& map = egbase().map();
+	closest_to = map.br_n(closest_to);
+
+	for (DescriptionIndex di : tribe().buildings()) {
+		if (tribe().get_building_descr(di)->type() == MapObjectType::MARKET) {
+			for (const BuildingStats& bs : get_building_statistics(di)) {
+				if (!bs.is_constructionsite) {
+					Path unused;
+					int32_t distance = map.findpath(closest_to, map.br_n(bs.pos), 0, unused,
+					                                CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER);
+					if (distance >= 0) {
+						result.emplace(
+						   distance, dynamic_cast<const Market*>(map[bs.pos].get_immovable()));
+					}
+				}
+			}
+		}
+	}
+	return result;
+}
+
+std::vector<const Market*> Player::get_markets() const {
+	std::vector<const Market*> result;
+	const Widelands::Map& map = egbase().map();
+	for (DescriptionIndex di : tribe().buildings()) {
+		if (tribe().get_building_descr(di)->type() == MapObjectType::MARKET) {
+			for (const BuildingStats& bs : get_building_statistics(di)) {
+				if (!bs.is_constructionsite) {
+					result.emplace_back(dynamic_cast<const Market*>(map[bs.pos].get_immovable()));
+				}
+			}
+		}
+	}
+	return result;
+}
+
 void Player::register_pinned_note(PinnedNote* note) {
 	assert(pinned_notes_.count(note) == 0);
 	pinned_notes_.insert(note);
@@ -2032,12 +2081,23 @@ std::string Player::pick_shipname() {
 	return new_name;
 }
 
-std::string Player::pick_warehousename(bool port) {
+std::string Player::pick_warehousename(const WarehouseNameType type) {
 	++warehouse_name_counter_;
 
 	if (remaining_warehousenames_.empty()) {
-		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"),
-		              warehouse_name_counter_);
+		std::string fmt;
+		switch (type) {
+		case WarehouseNameType::kPort:
+			fmt = pgettext("warehouse", "Port %d");
+			break;
+		case WarehouseNameType::kMarket:
+			fmt = pgettext("market", "Market %d");
+			break;
+		default:
+			fmt = pgettext("warehouse", "Warehouse %d");
+			break;
+		}
+		return format(fmt, warehouse_name_counter_);
 	}
 
 	const size_t index =
@@ -2071,18 +2131,29 @@ void Player::reserve_warehousename(const std::string& name) {
 	}
 }
 
-void Player::set_shipnames(const std::set<std::string>& names) {
-	if (!names.empty()) {
-		remaining_shipnames_.clear();
-		remaining_shipnames_.insert(remaining_shipnames_.begin(), names.begin(), names.end());
+void Player::set_shipnames(const CustomNamingList& names) {
+	std::vector<std::string> result;
+	if (auto it = names.find(std::string()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (auto it = names.find(tribe().name()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (!result.empty()) {
+		remaining_shipnames_ = result;
 	}
 }
 
-void Player::set_warehousenames(const std::set<std::string>& names) {
-	if (!names.empty()) {
-		remaining_warehousenames_.clear();
-		remaining_warehousenames_.insert(
-		   remaining_warehousenames_.begin(), names.begin(), names.end());
+void Player::set_warehousenames(const CustomNamingList& names) {
+	std::vector<std::string> result;
+	if (auto it = names.find(std::string()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (auto it = names.find(tribe().name()); it != names.end()) {
+		result.insert(result.end(), it->second.begin(), it->second.end());
+	}
+	if (!result.empty()) {
+		remaining_warehousenames_ = result;
 	}
 }
 
@@ -2385,14 +2456,15 @@ void Player::write_statistics(FileWrite& fw) const {
 	}
 }
 
-std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names() {
-	std::pair<std::set<std::string>, std::set<std::string>> result;
+std::pair<Player::CustomNamingList, Player::CustomNamingList> read_custom_warehouse_ship_names() {
+	std::pair<Player::CustomNamingList, Player::CustomNamingList> result;
 
 	const std::string* filenames[2] = {&kCustomShipNamesFile, &kCustomWarehouseNamesFile};
-	std::set<std::string>* result_sets[2] = {&result.first, &result.second};
+	Player::CustomNamingList* result_sets[2] = {&result.first, &result.second};
 
 	for (int i = 0; i < 2; ++i) {  // To deduplicate this a bit
 		if (FileRead fr; fr.try_open(*g_fs, *filenames[i])) {
+			std::set<std::set<std::string>*> current = {&(*result_sets[i])[std::string()]};
 			for (;;) {
 				const char* line = nullptr;
 				try {
@@ -2417,7 +2489,19 @@ std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_sh
 				}
 
 				if (!name.empty()) {
-					result_sets[i]->insert(name);
+					if (name.front() == '[' && name.back() == ']') {
+						std::vector<std::string> tribes;
+						split(tribes, name.substr(1, name.size() - 2), {','});
+						current.clear();
+						for (std::string t : tribes) {
+							trim(t);
+							current.insert(&(*result_sets[i])[t]);
+						}
+					} else {
+						for (auto* set : current) {
+							set->insert(name);
+						}
+					}
 				}
 			}
 		}

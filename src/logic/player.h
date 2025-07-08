@@ -571,15 +571,20 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
+	[[nodiscard]] std::multimap<uint32_t, const Market*> get_markets(Coords closest_to) const;
+	[[nodiscard]] std::vector<const Market*> get_markets() const;
+
+	enum class WarehouseNameType { kWarehouse, kPort, kMarket };
 	[[nodiscard]] std::string pick_shipname();
-	[[nodiscard]] std::string pick_warehousename(bool port);
+	[[nodiscard]] std::string pick_warehousename(WarehouseNameType);
 
 	// Remove name from the list of remaining names
 	void reserve_shipname(const std::string& name);
 	void reserve_warehousename(const std::string& name);
 
-	void set_shipnames(const std::set<std::string>& names);
-	void set_warehousenames(const std::set<std::string>& names);
+	using CustomNamingList = std::map<std::string, std::set<std::string>>;
+	void set_shipnames(const CustomNamingList& names);
+	void set_warehousenames(const CustomNamingList& names);
 
 	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
 	detected_port_spaces() const {
@@ -781,7 +786,7 @@ void find_former_buildings(const Descriptions& descriptions,
                            DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 
-std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names();
+std::pair<Player::CustomNamingList, Player::CustomNamingList> read_custom_warehouse_ship_names();
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

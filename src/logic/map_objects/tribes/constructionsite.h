@@ -73,6 +73,7 @@ class ConstructionSiteDescr : public BuildingDescr {
 public:
 	ConstructionSiteDescr(const std::string& init_descname,
 	                      const LuaTable& t,
+	                      const std::vector<std::string>& attribs,
 	                      Descriptions& descriptions);
 	~ConstructionSiteDescr() override = default;
 
@@ -98,7 +99,8 @@ public:
 		return info_;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {

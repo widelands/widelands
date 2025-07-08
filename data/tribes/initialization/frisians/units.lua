@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
-
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1548,6 +1546,19 @@ wl.Descriptions():new_tribe {
          }
       },
 
+      -- Markets
+      {
+         name = "frisians_market",
+         helptexts = {
+            -- TRANSLATORS: Lore helptext for a Frisian market: Market
+            lore = pgettext("frisians_building", "Tradecraft is the fine art of getting others to give you the wares that you want in exchange for wares you don’t want; excuse me, I mean, for wares you convince them to think that they need."),
+            -- TRANSLATORS: Lore author helptext for a Frisian market: Market
+            lore_author = pgettext("frisians_building", "A trader explaining his diplomacy"),
+            -- TRANSLATORS: Purpose helptext for a Frisian market: Market
+            purpose = pgettext("frisians_building", "A market enables trading with other tribes.")
+         }
+      },
+
       -- Small
       {
          name = "frisians_quarry",
@@ -1656,7 +1667,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Reed Farm
             purpose = pgettext("frisians_building", "Cultivates reed that serves three different purposes for the Frisians."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Reed Farm
-            note = pgettext("frisians_building", "Reed is the traditional material for roofing. It is also needed to produce baskets and fishing nets, and it is woven – together with reindeer fur – into the cloth used for ships’ sails.")
+            note = pgettext("frisians_building", "Reed is the traditional material for roofing. It is also needed to produce baskets and fishing nets, and it is woven – together with reindeer fur – into the cloth used for ships’ sails."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm, part 1
+               pgettext("frisians_building", "The reed farmer sows and harvests one sheaf of reed between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(52), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("frisians_building", "The reed farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 3):bformat(3))
+            }
          }
       },
       {
@@ -1684,7 +1701,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Frisian production site: Clay Pit
             lore_author = pgettext("frisians_building", "A clay digger arguing with a builder"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Clay Pit
-            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
+            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Clay Pit, part 1
+               pgettext("frisians_building", "This building can produce one clay between %1$s and %2$s, depending on how far the clay digger has to walk."):bformat(format_seconds(55), format_minutes_seconds(1, 13)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Clay Pit, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1717,8 +1740,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Plants berry bushes in the surrounding area."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Berry Farm
             note = pgettext("frisians_building", "The berry farm needs free space within the work area to plant the bushes."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm
-            performance = pgettext("frisians_building", "The berry farmer pauses %s before going to work again."):bformat(format_seconds(21))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm, part 1
+               pgettext("frisians_building", "The berry farmer plants one bush between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(33), format_seconds(51)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Berry Farm, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1732,8 +1759,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Collects berries from nearby bushes."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Fruit Collector's House
             note = pgettext("frisians_building", "The fruit collector needs bushes full of berries within the work area."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House
-            performance = pgettext("frisians_building", "The fruit collector pauses %s before going to work again."):bformat(format_seconds(21))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House, part 1
+               pgettext("frisians_building", "The fruit collector harvests one bush between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(37), format_minutes_seconds(1, 2)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fruit Collector's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1747,8 +1778,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("frisians_building", "Keeps bees and lets them swarm over flowering fields to produce honey."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Beekeeper's House
             note = pgettext("frisians_building", "Needs medium-sized fields (barley, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House
-            performance = pgettext("frisians_building", "The beekeeper pauses %s before going to work again."):bformat(format_seconds(45))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House, part 1
+               pgettext("frisians_building", "The beekeeper collects one honey between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 2), format_minutes_seconds(1, 24)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Beekeeper's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1761,7 +1796,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Aqua Farm
             purpose = pgettext("frisians_building", "Breeds fish as food for soldiers and miners."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Aqua Farm
-            note = pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds.")
+            note = pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Aqua Farm, part 1
+               pgettext("frisians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(51), format_minutes_seconds(1, 56)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Aqua Farm, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1794,7 +1835,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Brick Kiln
             purpose = pgettext("building", "Burns bricks using granite and clay, and coal as fuel. Bricks are the most important building material."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Brick Kiln
-            performance = pgettext("frisians_building", "The brick kiln needs %s on average to produce three bricks."):bformat(format_minutes_seconds(1, 24))
+            performance = pgettext("frisians_building", "The brick kiln needs %s on average to produce one brick."):bformat(format_seconds(30))
          }
       },
       {
@@ -2032,7 +2073,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Farm
             purpose = pgettext("building", "Sows and harvests barley."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Farm
-            note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds.")
+            note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Farm, part 1
+               pgettext("frisians_building", "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("frisians_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 9):bformat(9))
+            }
          }
       },
       {
@@ -2041,7 +2088,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
             purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Diker's House
-            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place.")
+            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place."),
+            -- TRANSLATORS: Performance helptext for a Frisian production site: Diker's House
+            performance = pgettext("frisians_building", "If this building is fully supplied, the diker can perform one terraform between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(2, 43), format_minutes_seconds(3, 17))
          }
       },
 
@@ -2485,6 +2534,7 @@ wl.Descriptions():new_tribe {
    },
 
    fastplace = {
+      market = "frisians_market",
       warehouse = "frisians_warehouse",
       port = "frisians_port",
       training_small = "frisians_training_camp",
