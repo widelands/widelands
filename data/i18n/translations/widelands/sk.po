@@ -3490,7 +3490,7 @@ msgstr "Prístav %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Tržnica %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
