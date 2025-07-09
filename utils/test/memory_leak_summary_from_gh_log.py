@@ -76,7 +76,8 @@ class GithubASan:
                 # add code part in `` to avoid invalid html
                 to_write = ')`'.join(text.rsplit(')', 1)).replace(
                     ' in ', '` in `', 1).replace('#', '`#', 1)
-                write_summary('    our origin: ', to_write)
+                write_summary('    our origin: ', to_write.replace(
+                    f_name_line, f'[{f_name_line}](<#user-content-{f_name_line.lower()}> "to grouped")'))
                 data = {'tb': to_write, 'test': cls.test_script}
                 cls.leaks_by_origin.setdefault(f_name_line, []).append(data)
             if os.getenv('WLRT_ANNOTATE_LINE'):  # with strategy.job-index == 0 from workflow
@@ -101,7 +102,7 @@ class GithubASan:
         with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
             summary_file.write('\n\n## memory leaks by origin\n\n')
             for origin in sorted(cls.leaks_by_origin):
-                summary_file.write(f'#### {origin}\n')
+                summary_file.write(f'#### {origin} <a name="{origin}"></a>\n')
                 for data in cls.leaks_by_origin[origin]:
                     summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
                 summary_file.write('\n')
