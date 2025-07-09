@@ -97,14 +97,22 @@ class GithubASan:
 
     @classmethod
     def summarize_origins(cls):
+        def to_query_str(txt):
+            "only escape what is needed for our case"
+            return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
+
         if not cls.leaks_by_origin or not os.getenv('GITHUB_STEP_SUMMARY'):
             return
         with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
             summary_file.write('\n\n## memory leaks by origin\n\n')
             for origin in sorted(cls.leaks_by_origin):
+                search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
+                                '/issues?q=' + to_query_str(
+                    f'is:issue state:open label:"memory & performance" '
+                    f'"{origin.rsplit(":", 1)[0]}"'))
                 summary_file.write(
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
-                )
+                    f'[search issue on gh](<{search_on_gh}>)\n')
                 for data in cls.leaks_by_origin[origin]:
                     summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
                 summary_file.write('</details>\n')
