@@ -45,7 +45,7 @@ class GithubASan:
         if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
             if cls.counted_leaks is None:
                 write_summary(
-                    '## memory leaks\n\n> [!TIP]\n'
+                    '## memory leaks <a name=memory-leak></a>\n\n> [!TIP]\n'
                     '> To find the full traceback, go to the log (from menu `...` on top right of '
                     'this text block) and copy the line from the traceback here in the log\'s '
                     'search field.\n')
@@ -106,6 +106,11 @@ class GithubASan:
                     summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
                 summary_file.write('\n')
         cls.leaks_by_origin = {}
+        print('\nsee about memory leaks in job summary on',
+              os.getenv('GITHUB_SERVER_URL', 'https://github.com') + '/' +
+              os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') + '/actions/' +
+              ('/runs/' + os.getenv('GITHUB_RUN_ID') if os.getenv('GITHUB_RUN_ID') else '') +
+              '#user-content-memory-leak')
 
 
 def create_summary_one_runner():
