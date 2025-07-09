@@ -238,7 +238,7 @@ int LuaWarehouse::set_wares(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	const Widelands::TribeDescr& tribe = wh->owner().tribe();
 	InputMap setpoints;
-	parse_wares_workers_counted(L, tribe, &setpoints, true);
+	parse_wares_workers_counted(L, tribe, &setpoints, true, false);
 
 	for (const auto& ware : setpoints) {
 		const Widelands::DescriptionIndex& index = ware.first.first;
@@ -256,7 +256,7 @@ int LuaWarehouse::set_workers(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	const Widelands::TribeDescr& tribe = wh->owner().tribe();
 	InputMap setpoints;
-	parse_wares_workers_counted(L, tribe, &setpoints, false);
+	parse_wares_workers_counted(L, tribe, &setpoints, false, false);
 
 	for (const auto& worker : setpoints) {
 		const Widelands::DescriptionIndex& index = worker.first.first;

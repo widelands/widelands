@@ -298,7 +298,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Třetím materiálem potřebným pro stavbu pokročilejších budov je rákos, který slouží jako pokrývka střech. Rákosová pole sází zahradník okolo své budovy, rákosové farmy."
+msgstr "Třetím materiálem potřebným pro stavbu pokročilejších budov je rákos, který slouží jako pokrývka střech. Rákosová pole sází zahradnice okolo své budovy, rákosové farmy."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -775,7 +775,7 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr "Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekař tu bude co nevidět, s nejchutnějšími chlebovými plackami jen pro našeho velitele!"
+msgstr "Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící ve větru? A myslím, že pekařka tu bude co nevidět, s nejchutnějšími chlebovými plackami jen pro našeho velitele!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"

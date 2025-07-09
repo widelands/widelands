@@ -1458,7 +1458,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Stonemason's House
             lore_author = pgettext("empire_building", "Motto of the Stonemasons’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's House
-            purpose = pgettext("empire_building", "Carves marble columns out of marble.")
+            purpose = pgettext("empire_building", "Carves marble columns out of marble."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Stonemason's House
+            performance = pgettext("empire_building", "The stonemason’s house needs %s on average to produce one marble column."):bformat(format_minutes_seconds(1, 26))
          }
       },
       {
@@ -1589,7 +1591,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Winery
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Winery
-            purpose = pgettext("empire_building", "Produces wine.")
+            purpose = pgettext("empire_building", "Produces wine."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Winery
+            performance = pgettext("empire_building", "The winery needs %s on average to produce one wine."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1815,7 +1819,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Piggery
             purpose = pgettext("empire_building", "Breeds pigs for their meat."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Piggery
-            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
+            performance = pgettext("empire_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_seconds(34))
          }
       },
       {
@@ -1834,7 +1838,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Sheep Farm
             lore_author = pgettext("empire_building", "Imperial proverb for trying the impossible"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Sheep Farm
-            purpose = pgettext("empire_building", "Keeps sheep for their wool.")
+            purpose = pgettext("empire_building", "Keeps sheep for their wool."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Sheep Farm
+            performance = pgettext("empire_building", "The sheep farm needs %s on average to produce one wool."):bformat(format_seconds(59))
          }
       },
       {
@@ -2826,6 +2832,7 @@ wl.Descriptions():new_tribe {
    port = "empire_port",
 
    fastplace = {
+      market = "empire_market",
       warehouse = "empire_warehouse",
       port = "empire_port",
       training_small = "empire_arena",

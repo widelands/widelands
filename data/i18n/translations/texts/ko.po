@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-06-21 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -56,8 +56,8 @@ msgstr "저작권 2002 - %1% 와이드랜드 개발 팀."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "이 게임은 무료 및 오픈 소스 (FOSS)이며, GNU 일반 공중 사용 허가서 (GPL) V2.0의 허가서 아래에 있습니다."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format

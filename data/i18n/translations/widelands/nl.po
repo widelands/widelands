@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-19 03:23+0000\n"
+"POT-Creation-Date: 2025-07-03 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -770,14 +770,14 @@ msgstr "Weet je zeker dat je de editor wilt afsluiten?"
 #: ../../../../src/logic/addons.cc:48 ../../../../src/ui_basic/dropdown.cc:360
 #: ../../../../src/ui_basic/dropdown.cc:362
 #: ../../../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1919
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1930
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2002
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2010
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2035
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2105
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2215
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2295
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1921
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1932
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2004
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2012
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2037
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2107
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2217
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2297
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:107
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:314
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:588
@@ -836,10 +836,6 @@ msgid "Tool gaps: %u%%"
 msgstr "Gereedschapstekorten: %u%%"
 
 #: ../../../../src/editor/editorinteractive.cc:1569
-msgid "Publish Map"
-msgstr "Kaart Publiceren"
-
-#: ../../../../src/editor/editorinteractive.cc:1570
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -849,52 +845,66 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr "Weet je zeker dat je deze kaart online wilt publiceren?\n\nNaam: %1$s\nInterne naam: %2$s\nAuteur: %3$s\nBeschrijving: %4$s\nTip: %5$s\n"
+"\n"
+msgstr "Weet je zeker dat je deze kaart online wilt publiceren?\n\nNaam: %1$s\nInterne naam: %2$s\nAuteur: %3$s\nBeschrijving: %4$s\nTip: %5$s\n\n"
 
-#: ../../../../src/editor/editorinteractive.cc:1594
+#: ../../../../src/editor/editorinteractive.cc:1580
+msgid "Publish Map"
+msgstr "Kaart Publiceren"
+
+#: ../../../../src/editor/editorinteractive.cc:1585
+#, c-format
+msgid ""
+"By uploading, you agree to publish the map under the terms of the GNU "
+"General Public License (GPL) version 2 or any later version (the same "
+"license under which Widelands itself is distributed). For more information, "
+"see %s."
+msgstr "Door te uploaden ga je akkoord met het publiceren van de kaart onder de voorwaarden van de GNU General Public License (GPL) versie 2 of een latere versie (dezelfde licentie waaronder Widelands zelf wordt gedistribueerd). Zie voor meer informatie  %s."
+
+#: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
 msgstr "Fout bij inloggen"
 
-#: ../../../../src/editor/editorinteractive.cc:1599
+#: ../../../../src/editor/editorinteractive.cc:1611
 msgid "Uploading Add-On…"
 msgstr "Add-On uploaden..."
 
-#: ../../../../src/editor/editorinteractive.cc:1600
+#: ../../../../src/editor/editorinteractive.cc:1612
 msgid "Saving map…"
 msgstr "Kaart opslaan..."
 
-#: ../../../../src/editor/editorinteractive.cc:1619
+#: ../../../../src/editor/editorinteractive.cc:1631
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:314
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Fout bij het opslaan van de kaart!"
 
-#: ../../../../src/editor/editorinteractive.cc:1625
+#: ../../../../src/editor/editorinteractive.cc:1637
 msgid "Packaging add-on…"
 msgstr "Inpakken add-on..."
 
-#: ../../../../src/editor/editorinteractive.cc:1676
+#: ../../../../src/editor/editorinteractive.cc:1688
 msgid "Add-On Generation Error"
 msgstr "Fout bij Genereren Add-On"
 
-#: ../../../../src/editor/editorinteractive.cc:1677
+#: ../../../../src/editor/editorinteractive.cc:1689
 msgid "The add-on could not be written to the disk."
 msgstr "De add-on kon niet naar de schijf worden geschreven."
 
-#: ../../../../src/editor/editorinteractive.cc:1684
+#: ../../../../src/editor/editorinteractive.cc:1696
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr "Zenden..."
 
-#: ../../../../src/editor/editorinteractive.cc:1690
+#: ../../../../src/editor/editorinteractive.cc:1702
 msgid "Upload Error"
 msgstr "Uploadfout"
 
-#: ../../../../src/editor/editorinteractive.cc:1712
+#: ../../../../src/editor/editorinteractive.cc:1724
 msgid "Success"
 msgstr "Succes"
 
-#: ../../../../src/editor/editorinteractive.cc:1713
+#: ../../../../src/editor/editorinteractive.cc:1725
 msgid "The add-on was uploaded successfully."
 msgstr "De add-on is succesvol geüpload."
 
@@ -1567,7 +1577,7 @@ msgid ""
 msgstr "Deze kaart is automatisch aangemaakt door de Widelands Willekeurige Kaart Generator"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:747
-#: ../../../../src/network/gamehost.cc:1662
+#: ../../../../src/network/gamehost.cc:1675
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
@@ -2578,165 +2588,165 @@ msgstr "Woestijn"
 msgid "No description defined"
 msgstr "Geen beschrijving gedefinieerd"
 
-#: ../../../../src/logic/map_objects/immovable.cc:509
-#: ../../../../src/logic/map_objects/tribes/constructionsite.cc:164
+#: ../../../../src/logic/map_objects/immovable.cc:508
+#: ../../../../src/logic/map_objects/tribes/constructionsite.cc:165
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% gebouwd"
 
-#: ../../../../src/logic/map_objects/tribes/dismantlesite.cc:115
+#: ../../../../src/logic/map_objects/tribes/dismantlesite.cc:116
 #, c-format
 msgid "%u%% dismantled"
 msgstr "%u%% ontmanteld"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:70
+#: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
 msgstr "Er is een nieuwe markt toegevoegd aan uw economie."
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:152
+#: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
 msgstr[0] "%u handel"
 msgstr[1] "%u handels"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:274
+#: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
 msgstr "Ruil Geannuleerd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:274
+#: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
 msgstr "Ruil Voltooid"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:276
+#: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
 msgstr "Ruilovereenkomst geannuleerd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:276
+#: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
 msgstr "Ruilovereenkomst gesloten"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:277
+#: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
 msgstr "Uw ruilovereenkomst tegen %s is voltooid."
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:278
+#: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
 msgstr "Uw ruilovereenkomst bij %s is geannuleerd."
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:546
+#: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
 msgstr "Ruilhandel Gepauzeerd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:547
+#: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
 msgstr "Ruilovereenkomst opgeschort"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:548
+#: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
 msgstr "%1$s heeft de ruil met jou opgeschort bij %2$s."
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:552
+#: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
 msgstr "Ruil Hervat"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:553
+#: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
 msgstr "Ruilovereenkomst hervat"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:554
+#: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
 msgstr "%1$s heeft de ruil met u hervat tegen %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
-#: ../../../../src/logic/map_objects/tribes/market.cc:753
+#: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
 msgstr "Ruilovereenkomst bij %1$s met %2$s"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:761
+#: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
 msgstr "Ruilaanbod vanaf %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
-#: ../../../../src/logic/map_objects/tribes/market.cc:771
+#: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
 msgstr "Ruilaanbod van %1$s tot %2$s"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:781
+#: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
 msgstr[0] "%d partij"
 msgstr[1] "%d partijen"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:783
+#: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
 msgstr "De ruilhandel loopt voor onbepaalde tijd."
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:794
+#: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
 msgstr[0] "%d partij geleverd "
 msgstr[1] "%d partijen geleverd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:802
+#: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
 msgstr[0] "%d resterende partij"
 msgstr[1] "%d resterende partijen"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:816
+#: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
 msgstr "Door beide spelers gepauzeerd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:818
+#: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
 msgstr "Door jou gepauzeerd"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:819
-#: ../../../../src/logic/map_objects/tribes/market.cc:823
+#: ../../../../src/logic/map_objects/tribes/market.cc:820
+#: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
 msgstr "Gepauzeerd door %s"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:825
+#: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
 msgstr "Actief"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:837
+#: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
 msgstr "Speler stuurt:"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:837
+#: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
 msgstr "Jij stuurt:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Coal"
-#: ../../../../src/logic/map_objects/tribes/market.cc:840
-#: ../../../../src/logic/map_objects/tribes/market.cc:852
+#: ../../../../src/logic/map_objects/tribes/market.cc:841
+#: ../../../../src/logic/map_objects/tribes/market.cc:853
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
 msgstr "%1$i× %2$s"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:849
+#: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
 msgstr "Speler ontvangt:"
 
-#: ../../../../src/logic/map_objects/tribes/market.cc:849
+#: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
 msgstr "Jij ontvangt:"
 
@@ -2762,12 +2772,12 @@ msgid "Enemy at site defeated!"
 msgstr "Vijand op locatie verslagen!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
 msgctxt "building"
 msgid "Attack!"
 msgstr "Aanval!"
 
-#: ../../../../src/logic/map_objects/tribes/militarysite.cc:716
+#: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
 msgid "You are under attack"
 msgstr "Je wordt aangevallen"
 
@@ -2942,266 +2952,266 @@ msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
 msgid "Completed %s"
 msgstr "Afgerond %s"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:397
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:400
 msgid "(stopped)"
 msgstr "(gestopt)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:481
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:484
 #: ../../../../src/wui/building_statistics_menu.cc:726
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1202
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1205
 msgid "Can’t find any more resources!"
 msgstr "Kan geen grondstoffen meer vinden!"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1250
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1271
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1253
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1274
 msgctxt "building"
 msgid "No Shore"
 msgstr "Geen Kust"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1251
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
 msgid "Shipyard Without Shore"
 msgstr "Scheepswerf Zonder Wal"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1252
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr "Je scheepswerf is niet dicht genoeg bij een kust gebouwd. Het zal geen schepen kunnen bouwen."
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1272
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
 msgid "Ferry Yard Without Shore"
 msgstr "Veerbootwerf Zonder Wal"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1273
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1276
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
 msgstr "Je veerbootwerf is niet dicht genoeg bij de kust gebouwd. Het zal geen veerboten kunnen bouwen."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:399
+#: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Destination Gone"
 msgstr "Bestemming Weg"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:399
+#: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Ship Destination Vanished"
 msgstr "Scheepsbestemming verdwenen"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:400
+#: ../../../../src/logic/map_objects/tribes/ship.cc:403
 msgid "Your ship’s destination has disappeared."
 msgstr "De bestemming van je schip is verdwenen."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:427
+#: ../../../../src/logic/map_objects/tribes/ship.cc:430
 msgid "Ship Arrived"
 msgstr "Schip Aangekomen"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:427
+#: ../../../../src/logic/map_objects/tribes/ship.cc:430
 msgid "Ship Reached Destination"
 msgstr "Schip Bestemming bereikt"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:428
+#: ../../../../src/logic/map_objects/tribes/ship.cc:431
 msgid "Your ship has arrived at its destination."
 msgstr "Je schip is aangekomen op zijn bestemming."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:639
+#: ../../../../src/logic/map_objects/tribes/ship.cc:642
 msgid "A warship arrived at a known port build space."
 msgstr "Een oorlogsschip arriveerde in een bekende havenlocatie."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:640
+#: ../../../../src/logic/map_objects/tribes/ship.cc:643
 msgid "An expedition ship arrived at a known port build space."
 msgstr "Een expeditieschip arriveerde in een bekende havenlocatie."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:641
-#: ../../../../src/logic/map_objects/tribes/ship.cc:649
+#: ../../../../src/logic/map_objects/tribes/ship.cc:644
+#: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space"
 msgstr "Havenlocatie"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:641
+#: ../../../../src/logic/map_objects/tribes/ship.cc:644
 msgid "Port Space Spotted"
 msgstr "Havenlocatie gespot"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:647
+#: ../../../../src/logic/map_objects/tribes/ship.cc:650
 msgid "A warship found a new port build space."
 msgstr "Een oorlogsschip heeft een nieuwe havenlocatie gevonden."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:648
+#: ../../../../src/logic/map_objects/tribes/ship.cc:651
 msgid "An expedition ship found a new port build space."
 msgstr "Een expeditieschip heeft een nieuwe bouwlocatie voor een haven gevonden."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:649
+#: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space Found"
 msgstr "Havenlocatie Gevonden"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:749
+#: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship"
 msgstr "Vijandelijk Schip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:749
+#: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship Spotted"
 msgstr "Vijandelijk Schip Gespot"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:750
+#: ../../../../src/logic/map_objects/tribes/ship.cc:753
 msgid "A warship spotted an enemy ship."
 msgstr "Een oorlogsschip heeft een vijandelijk schip gespot."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:780
-#: ../../../../src/logic/map_objects/tribes/ship.cc:799
+#: ../../../../src/logic/map_objects/tribes/ship.cc:783
+#: ../../../../src/logic/map_objects/tribes/ship.cc:802
 msgid "Destination Unreachable"
 msgstr "Bestemming Onbereikbaar"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:780
-#: ../../../../src/logic/map_objects/tribes/ship.cc:799
+#: ../../../../src/logic/map_objects/tribes/ship.cc:783
+#: ../../../../src/logic/map_objects/tribes/ship.cc:802
 msgid "Ship Destination Unreachable"
 msgstr "Scheepsbestemming Onbereikbaar"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:781
+#: ../../../../src/logic/map_objects/tribes/ship.cc:784
 msgid "Your ship could not find a path to its destination."
 msgstr "Je schip kon geen pad naar zijn bestemming vinden."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:800
+#: ../../../../src/logic/map_objects/tribes/ship.cc:803
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr "Uw schip kon geen pad vinden naar zijn bestemminghaven‘%s’."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1596
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1599
 msgid "Enemy Ship Attacking"
 msgstr "Vijandelijk Schip valt aan"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1313
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1595
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1598
 msgid "Naval Attack"
 msgstr "Zee-aanval"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1314
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1317
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr "Uw schip ‘%s’ wordt aangevallen door een vijandelijk oorlogsschip."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
 msgid "Ship Destroyed"
 msgstr "Schip Vernietigd"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1433
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
 msgid "Ship Sunk"
 msgstr "Schip Gezonken"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1434
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1437
 msgid "An enemy ship has destroyed your warship."
 msgstr "Een vijandig schip heeft je oorlogsschip vernietigd."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1597
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1600
 msgid "Your coast is under attack from an enemy warship."
 msgstr "Je kust wordt aangevallen door een vijandelijk oorlogsschip."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
 msgid "Island Circumnavigated"
 msgstr "Eiland rondgevaren"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1829
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Schip wacht"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1830
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1833
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Een expeditieschip is rond zijn eiland gevaren zonder dat er iets is gebeurd."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
 msgid "Coast Reached"
 msgstr "Kust bereikt"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1895
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
 msgid "Land Ahoy!"
 msgstr "Land in zicht!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1896
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1899
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Een expeditieschip heeft een kust bereikt en wacht op verdere opdrachten."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
 msgid "New port construction site is gone"
 msgstr "Nieuwe havenlocatie is verdwenen"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1949
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
 msgid "Port Lost!"
 msgstr "Haven verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1950
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1953
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Het uitladen van de goederen mislukt, de expeditie is nu geannuleerd."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
 msgid "No Port Can Be Built"
 msgstr "Er kan geen Haven worden gebouwd"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2007
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
 msgid "Port Space Lost!"
 msgstr "Havenruimte Verloren!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2008
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2011
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Een ontdekte bouwruimte voor een haven is niet meer beschikbaar om een haven te bouwen."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
 msgctxt "ship"
 msgid "Warship"
 msgstr "Oorlogsschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2255
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
 msgid "Warship Ready"
 msgstr "Oorlogsschip Klaar"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2256
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
 msgid "A warship is waiting for your commands."
 msgstr "Een oorlogsschip wacht op je commando's."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expeditie"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2261
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
 msgid "Expedition Ready"
 msgstr "Expeditie gereed"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2262
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2265
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een expeditieschip wacht op jouw opdrachten."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2439
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Zinkend"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2441
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2444
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Vechten"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2445
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Ombouw tot Transportschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Ombouw tot Oorlogsschip"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2459
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3213,10 +3223,10 @@ msgstr "Oorlogsschip"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2462
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2472
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2478
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2492
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2475
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2495
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3224,7 +3234,7 @@ msgstr "Zeilen naar %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2467
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3232,7 +3242,7 @@ msgstr "Leeg"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2487
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3240,7 +3250,7 @@ msgstr "Verscheping naar %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2499
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3248,14 +3258,14 @@ msgstr "Wacht"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2503
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2506
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Expeditie"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3264,7 +3274,7 @@ msgstr "Havenlocatie Gevonden"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2512
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2515
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Kolonisatie"
@@ -3349,30 +3359,30 @@ msgstr "Ontbrekende expert"
 msgid "Experts missing"
 msgstr "Ontbrekende experten"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:601
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
 msgid "A new port was added to your economy."
 msgstr "Een nieuwe haven is toegevoegd aan je economie."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:604
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:605
 msgid "A new headquarters was added to your economy."
 msgstr "Een nieuw hoofdkwartier is toegevoegd aan je economie."
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:607
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:608
 msgid "A new warehouse was added to your economy."
 msgstr "Een nieuw magazijn is toegevoegd aan je economie."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:700
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:701
 msgid "Waterway"
 msgstr "Waterweg"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:701
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:702
 msgid "Waterway destroyed"
 msgstr "Waterweg vernietigd"
 
-#: ../../../../src/logic/map_objects/tribes/warehouse.cc:702
+#: ../../../../src/logic/map_objects/tribes/warehouse.cc:703
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Een waterweg moest vernietigd worden om ruimte te maken voor jouw nieuwe havendok"
 
@@ -3665,19 +3675,19 @@ msgstr "Kaart controleren"
 msgid "Postloading map objects"
 msgstr "Kaartobjecten achteraf laden"
 
-#: ../../../../src/network/gameclient.cc:163
-#: ../../../../src/network/gamehost.cc:561
+#: ../../../../src/network/gameclient.cc:171
+#: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
 #: ../../../../src/wlapplication.cc:909
 msgid "Preparing game…"
 msgstr "Spel Voorbereiden..."
 
-#: ../../../../src/network/gameclient.cc:233
+#: ../../../../src/network/gameclient.cc:241
 #: ../../../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Kon geen verbinding met de host maken"
 
-#: ../../../../src/network/gameclient.cc:234
+#: ../../../../src/network/gameclient.cc:242
 #, c-format
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
@@ -3685,42 +3695,42 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands kon geen verbinding maken met het opgegeven adres. Ofwel was er geen Widelands server bereikbaar op de TCP poort %u of de server is afgesloten toen je verbinding probeerde te maken."
 
-#: ../../../../src/network/gameclient.cc:817
+#: ../../../../src/network/gameclient.cc:832
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u uitbreiding ongelijkheid ontdekt:\n"
 msgstr[1] "%u uitbreiding ongelijkheden ontdekt:\n"
 
-#: ../../../../src/network/gameclient.cc:819
+#: ../../../../src/network/gameclient.cc:834
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ vereist door host niet gevonden"
 
-#: ../../../../src/network/gameclient.cc:822
+#: ../../../../src/network/gameclient.cc:837
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ geïnstalleerd onder versie %3$s maar host gebruikt versie %4$s"
 
-#: ../../../../src/network/gameclient.cc:989
+#: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
 msgstr "het bestand van /me  heeft een md5 checksum fout"
 
-#: ../../../../src/network/gameclient.cc:1031
+#: ../../../../src/network/gameclient.cc:1046
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me heeft het ontvangen bestand gecontroleerd. Hoewel de md5 controle succesvol was, kan ik het bestand niet verwerken."
 
-#: ../../../../src/network/gameclient.cc:1353
+#: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
 msgstr "Verbinding verbroken"
 
-#: ../../../../src/network/gameclient.cc:1354
+#: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3842,7 +3852,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kon geen server starten.\nHet lijkt erop dat een ander proces al als server draait op onze poort."
 
-#: ../../../../src/network/gamehost.cc:1921
+#: ../../../../src/network/gamehost.cc:1934
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -4272,7 +4282,7 @@ msgstr "Widelands kon het lokale netwerk niet gebruiken. Misschien voert een and
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../../../src/scripting/lua_game.cc:1475
+#: ../../../../src/scripting/lua_game.cc:1563
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -4936,15 +4946,17 @@ msgid ""
 msgstr "Voor meer informatie betreffende over het ontwerpen en samenvoegen van je eigen uitbreidingen, kom ajb langs op %s ."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:648
+#, c-format
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
-"terms of the GNU General Public License (GPL) version 2 (the same license "
-"under which Widelands itself is distributed). For more information on the "
-"GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr "Hier kun je je add-ons uploaden naar de server om ze beschikbaar te maken voor andere spelers. Door te uploaden, gaat u akkoord met het publiceren van uw creatie onder de voorwaarden van de GNU General Public License (GPL) versie 2 (dezelfde licentie waaronder Widelands zelf wordt gedistribueerd). Voor meer informatie over de GPL, zie 'Over Widelands' → 'Licentie' in het hoofdmenu."
+"terms of the GNU General Public License (GPL) version 2 or any later version"
+" (the same license under which Widelands itself is distributed). For more "
+"information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
+" main menu or see %s."
+msgstr "Hier kun je je add-ons uploaden naar de server om ze beschikbaar te maken voor andere spelers. Door te uploaden ga je akkoord met het publiceren van je creatie onder de voorwaarden van de GNU General Public License (GPL) versie 2 of een latere versie (dezelfde licentie waaronder Widelands zelf wordt gedistribueerd). Voor meer informatie over de GPL verwijzen we je naar ‘Over Widelands’ → ‘Licentie’ in het hoofdmenu of zie %s."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:655
+#: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -4952,7 +4964,7 @@ msgid ""
 " stead."
 msgstr "Het is verboden add-ons te uploaden die schadelijke of kwaadaardige inhoud of spam bevatten. Door een add-on te uploaden, verklaart u dat de add-on uw eigen creatie is of dat u toestemming hebt van de auteur(s) van de add-on om deze in hun plaats in te dienen."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:661
+#: ../../../../src/ui_fsmenu/addons/manager.cc:663
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -4960,7 +4972,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "U dient de documentatie van de add-ons onder de link hierboven te hebben gelezen voordat u inhoud instuurt. Aangezien de documentatie regelmatig wordt gewijzigd, moet u ervoor zorgen dat u deze onlangs hebt gelezen en dat u alle richtlijnen hebt gevolgd die daarin worden vermeld."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:667
+#: ../../../../src/ui_fsmenu/addons/manager.cc:669
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -4968,7 +4980,7 @@ msgid ""
 "profile page frequently."
 msgstr "Het Widelands Development Team zal uw add-on snel na het uploaden bekijken. Als ze nog meer vragen hebben, zullen ze contact met u opnemen via een PM op de Widelands website; controleer daarom regelmatig de inbox van uw online gebruikersprofielpagina."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:697
+#: ../../../../src/ui_fsmenu/addons/manager.cc:699
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -4977,7 +4989,7 @@ msgid ""
 "be happy to help."
 msgstr "Technische problemen? Onduidelijke documentatie? Geavanceerde wensen zoals het verwijderen van een add-on of samenwerken met een andere add-on ontwerper? Bezoek onze forums op %s, leg uw behoeften uit en het Widelands Development Team zal u graag helpen."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:714
+#: ../../../../src/ui_fsmenu/addons/manager.cc:716
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -4988,15 +5000,15 @@ msgid ""
 " website user profile page."
 msgstr "U kunt ook een bericht sturen naar het Widelands Development Team en dan proberen we u zo snel mogelijk te helpen met uw vraag. Alleen de serverbeheerders kunnen berichten lezen die op deze manier zijn verzonden. Omdat andere add-on ontwerpers meestal kunnen profiteren van de vragen en antwoorden van anderen, verzoeken we u deze manier van communicatie alleen te gebruiken als er een reden is waarom uw bezorgdheid niet voor ieders oren bestemd is. U zult ons antwoord ontvangen via een PM op uw Widelands website gebruikersprofielpagina."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:754
+#: ../../../../src/ui_fsmenu/addons/manager.cc:756
 msgid "Manage your installed add-ons"
 msgstr "Uw geïnstalleerde add-ons beheren"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:756
+#: ../../../../src/ui_fsmenu/addons/manager.cc:758
 msgid "Browse and install add-ons available on the server"
 msgstr "Bladeren door add-ons die beschikbaar zijn op de server en deze installeren"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:758
+#: ../../../../src/ui_fsmenu/addons/manager.cc:760
 #, c-format
 msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
@@ -5004,154 +5016,154 @@ msgid ""
 "directory under the Widelands home directory."
 msgstr "Blader door kaarten uit het widelands.org website kaartenarchief en installeer ze. Net als handmatig gedownloade kaarten, worden geïnstalleerde websitemaps opgeslagen in de map ‘%s’ onder de homedirectory van Widelands."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:762
+#: ../../../../src/ui_fsmenu/addons/manager.cc:764
 msgid "Development"
 msgstr "Ontwikkeling"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:762
+#: ../../../../src/ui_fsmenu/addons/manager.cc:764
 msgid "Tools for add-on developers"
 msgstr "Tools voor add-on-ontwikkelaars"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../../../src/ui_fsmenu/addons/manager.cc:766
+#: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
 msgstr "Naam"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../../../src/ui_fsmenu/addons/manager.cc:768
+#: ../../../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Name (descending)"
 msgstr "Naam (aflopend)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:770
+#: ../../../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Most popular"
 msgstr "Meest populair"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui_fsmenu/addons/manager.cc:772
+#: ../../../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Least popular"
 msgstr "Minst populair"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:774
+#: ../../../../src/ui_fsmenu/addons/manager.cc:776
 msgid "Most often downloaded"
 msgstr "Het meest vaak gedownload"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui_fsmenu/addons/manager.cc:776
+#: ../../../../src/ui_fsmenu/addons/manager.cc:778
 msgid "Least often downloaded"
 msgstr "Het minst vaak gedownload"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:778
+#: ../../../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Oldest"
 msgstr "Oudste"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui_fsmenu/addons/manager.cc:780
+#: ../../../../src/ui_fsmenu/addons/manager.cc:782
 msgid "Newest"
 msgstr "Nieuwste"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:789
+#: ../../../../src/ui_fsmenu/addons/manager.cc:791
 msgid "Filter add-ons by name"
 msgstr "Selecteer Uitbereidingen op Naam"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:790
+#: ../../../../src/ui_fsmenu/addons/manager.cc:792
 msgid "Filter maps by name"
 msgstr "Filter kaarten op naam"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:801
+#: ../../../../src/ui_fsmenu/addons/manager.cc:803
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Wissel catagorie '%s'"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:817
+#: ../../../../src/ui_fsmenu/addons/manager.cc:819
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:709
 msgid "One World"
 msgstr "Eén Wereld"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:825
+#: ../../../../src/ui_fsmenu/addons/manager.cc:827
 #, c-format
 msgid "Toggle world ‘%s’"
 msgstr "Wissel Wereld ‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1016
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1018
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Weet je zeker dat je %u uitbreiding wilt opwaarden?"
 msgstr[1] "Weet je zeker dat je deze %u uitbreidingen wilt opwaarden?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1022
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1024
 #, c-format
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
 msgstr "\n• %1$s (%2$s) door %3$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1023
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1025
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:525
 msgid "NOT VERIFIED"
 msgstr "NIET GECONTROLEERD"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1023
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1025
 msgid "verified"
 msgstr "gecontroleerd"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1027
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1029
 msgid "Upgrade All"
 msgstr "Alles Opwaarderen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1180
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1182
 msgid "Not logged in"
 msgstr "Niet ingelogd"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1181
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1183
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Klik om in te loggen. U kunt dan commentaar geven en stemmen op add-ons en uw eigen add-ons uploaden."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1185
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1187
 msgid "Please log in to upload add-ons"
 msgstr "Log in om add-ons te uploaden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1187
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1189
 msgid "Please log in to upload content"
 msgstr "Log in om inhoud te uploaden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1189
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1191
 msgid "Please log in to send an enquiry"
 msgstr "Log in om een vraag te stellen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1194
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1196
 #, c-format
 msgid "Logged in as %s"
 msgstr "Aangemeld als %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1194
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1196
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Aangemeld als %s (admin)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1195
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1197
 msgid "Click to log out"
 msgstr "Klik om uit te loggen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1200
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1202
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Vink het selectievakje voor bevestiging aan om add-ons te uploaden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1203
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1205
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Vink het selectievakje voor bevestiging aan om inhoud te uploaden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1230
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1232
 msgid "Server Error"
 msgstr "Serverfout"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1231
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1233
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -5159,114 +5171,114 @@ msgid ""
 "%s"
 msgstr "Kan geen verbinding maken met de server.\nFoutmelding:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1239
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1241
 msgid "Wrong Password"
 msgstr "Verkeerd wachtwoord"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1240
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1242
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr "De ingevoerde gebruikersnaam of het ingevoerde wachtwoord is ongeldig:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1357
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1359
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Add-ons ophalen... (%.1f%%)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1360
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1362
 msgid "Connecting to the server…"
 msgstr "Verbinding maken met de server..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1383
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1385
 msgid "Server Connection Error"
 msgstr "Server Verbindingsfout"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1385
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1387
 msgid "a networking bug"
 msgstr "een netwerk fout"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1386
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1388
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Onmogelijk om de lijst met uitbreidingen van de server te halen! <br> Fout boodschap: %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1542
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1544
 #, c-format
 msgid "Installed (%u)"
 msgstr "Geinstalleerd ( %u )"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1613
 msgid "Browse"
 msgstr "Bladeren"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1611
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1613
 #, c-format
 msgid "Browse (%u)"
 msgstr "Bladeren (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1618
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1620
 msgid "Translations for website maps"
 msgstr "Vertalingen voor websitekaarten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1621
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1623
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Alles Opwaarderen (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1624
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1626
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Geen opwaarderingen beschikbaar voor de geinstalleerde uitbreidingen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1626
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1628
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Opwaarden van de volgende %u uitbreiding:"
 msgstr[1] "Opwaarden van de volgende %u uitbreidingen:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1631
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1633
 #, c-format
 msgid "• %s"
 msgstr "• %s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1684
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1686
 msgid "Website Maps"
 msgstr "Website Kaarten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1685
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1687
 #, c-format
 msgid "Website Maps (%u)"
 msgstr "Website Kaarten (%u)"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1717
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1719
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die niet kon worden gevonden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1722
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1724
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die is uitgeschakeld"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1729
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1731
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• ‘%1$s’ vereist ‘%2$s’ die onder de vereiste add-on staat"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1757
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1759
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "• ‘%1$s’ vereist eerst ‘%2$s’ en dan ‘%3$s’, maar ze staan in de verkeerde volgorde"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1773
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1775
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5274,67 +5286,67 @@ msgid ""
 "%s"
 msgstr "Een actieve uitbreiding is kapot. Er kan geen spel gestart worden met de huidige configuratie.\nFoutmeldig:\n%s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1790
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1792
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u Afhankelijksheid Fout"
 msgstr[1] "%u Afhankelijksheid Fouten"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1792
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1794
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "UItbreidingen met afhankelijkheids fouten kunnen incorrect werken of verhinderen spelen en kaarten om geladen te worden"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1920
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1922
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "De add-on ‘%1$s’ kan niet worden geüpload omdat de versie (%2$s) niet nieuwer is dan de versie op de server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1931
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1933
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "De add-on ‘%1$s’ kan niet worden geüpload omdat de categorie (%2$s) niet overeen komt met de categorie van de versie op de server (%3$s)."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1942
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1944
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Zend"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1943
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1945
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Wilt u de add-on echt uploaden ‘%s’ naar de server?"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1953
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1955
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "Uploaden ‘%s’…"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1960
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2091
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2180
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1962
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2093
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1984
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
 msgid "‘%s’"
 msgstr "‘%s’"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1992
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1994
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "De add-on ‘%s’ kan niet worden geüpload naar de server omdat de volgende bestandsnamen in de add-on niet zijn toegestaan:"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:1996
+#: ../../../../src/ui_fsmenu/addons/manager.cc:1998
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5342,7 +5354,7 @@ msgid ""
 "exceed 80 characters."
 msgstr "Bestandsnamen mogen alleen alfanumerieke tekens (A-Z, a-z, 0-9) en eenvoudige interpunctie (punt, koppelteken en onderstrepingsteken; niet meerdere punten) bevatten. Andere tekens zoals spaties zijn niet toegestaan. Bestandsnamen mogen niet langer zijn dan 80 tekens."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2011
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2013
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5351,7 +5363,7 @@ msgid ""
 "%2$s"
 msgstr "De add-on ‘%1$s’ kon niet worden geüpload naar de server.\n\nFoutmelding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2037
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2039
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5360,12 +5372,12 @@ msgid ""
 "%2$s"
 msgstr "De kaart ‘%1$s’ kon niet worden gedownload van de server.\n\nFoutbericht:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2070
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2072
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Ophalen '%s'..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2107
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2109
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5374,7 +5386,7 @@ msgid ""
 "%2$s"
 msgstr "De uitbreiding '%1$s' kon niet worden opgehaald van de server. Installeren/opwaarderen van deze uitbreiding zal worden overgeslagen.\n\nFout melding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2216
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2218
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5383,15 +5395,15 @@ msgid ""
 "%2$s"
 msgstr "De vertalingen voor de add-on ‘%1$s’ kon niet worden gedownload van de server. Het installeren/upgraden van de vertalingen wordt overgeslagen.\n\nFoutmelding:\n%2$s"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2239
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2241
 msgid "Website Maps Translations"
 msgstr "Website Kaarten Vertalingen"
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2240
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2242
 msgid "Downloading website maps translations…"
 msgstr "Vertalingen van websitekaarten downloaden..."
 
-#: ../../../../src/ui_fsmenu/addons/manager.cc:2296
+#: ../../../../src/ui_fsmenu/addons/manager.cc:2298
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "De benodigde uitbreiding '%s' kon niet worden gevonden op de server"
@@ -11819,25 +11831,25 @@ msgctxt "destination"
 msgid "(none)"
 msgstr "(geen)"
 
-#: ../../../../src/wui/shipwindow.cc:429 ../../../../src/wui/shipwindow.cc:434
-#: ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
+#: ../../../../src/wui/shipwindow.cc:444
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Ga naar bestemming (%s)"
 
-#: ../../../../src/wui/shipwindow.cc:444
+#: ../../../../src/wui/shipwindow.cc:449
 msgid "Go to destination"
 msgstr "Ga naar bestemming"
 
-#: ../../../../src/wui/shipwindow.cc:471
+#: ../../../../src/wui/shipwindow.cc:476
 msgid "Refit to transport ship"
 msgstr "Verbouwing tot transportschip"
 
-#: ../../../../src/wui/shipwindow.cc:472
+#: ../../../../src/wui/shipwindow.cc:477
 msgid "Refit to warship"
 msgstr "Verbouwing tot oorlogsschip"
 
-#: ../../../../src/wui/shipwindow.cc:494
+#: ../../../../src/wui/shipwindow.cc:499
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "HP: %1$u/%2$u"

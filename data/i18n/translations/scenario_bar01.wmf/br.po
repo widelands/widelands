@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Pourvezit boued d'ho mengleuzierien"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
@@ -130,7 +130,7 @@ msgstr "Savit ul lochenn chaseour, ul lochenn ward-jiboez hag un davarn"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Ho mengleuzierien o deus ezhomm boued evit labourat."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -287,7 +287,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Savit ur porzh korz"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""

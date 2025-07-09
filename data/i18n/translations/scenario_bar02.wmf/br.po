@@ -23,7 +23,7 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Ondun"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
@@ -48,7 +48,7 @@ msgstr "Savit ur vengleuz"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Savit ur c'haletaer koad"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
@@ -89,12 +89,12 @@ msgstr "Savit un ti-bara"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Savit un atant chatal"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Na zisoñjit ket sevel un atant chatal"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
@@ -105,7 +105,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr ""
+msgstr "Savit un tour"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
@@ -143,7 +143,7 @@ msgstr "Sevel ur c'hreñvlec'h"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Savit ur c'hreñvlec'h e reter ar menezioù."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:89

@@ -874,14 +874,14 @@ msgstr ""
 #: ../../../../data/world/terrains/wasteland/forested_mountain1/init.lua:5
 #: ../../../../data/world/terrains/winter/forested_mountain1/init.lua:5
 msgid "Forested Mountain 1"
-msgstr ""
+msgstr "Menez koadek 1"
 
 #: ../../../../data/world/terrains/desert/forested_mountain2/init.lua:5
 #: ../../../../data/world/terrains/summer/forested_mountain2/init.lua:5
 #: ../../../../data/world/terrains/wasteland/forested_mountain2/init.lua:5
 #: ../../../../data/world/terrains/winter/forested_mountain2/init.lua:5
 msgid "Forested Mountain 2"
-msgstr ""
+msgstr "Menez koadek 2"
 
 #: ../../../../data/world/terrains/desert/highmountainmeadow/init.lua:5
 msgid "High Mountain Meadow"

@@ -45,8 +45,12 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
+	            const std::vector<std::string>& attribs,
 	            Descriptions& descriptions);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	WorkerDescr(const std::string& init_descname,
+	            const LuaTable& t,
+	            const std::vector<std::string>& attribs,
+	            Descriptions& descriptions);
 	~WorkerDescr() override;
 
 	[[nodiscard]] Bob& create_object() const override;
