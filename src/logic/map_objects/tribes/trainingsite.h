@@ -179,7 +179,6 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
-	// TODO(tothxa): implement controlling by UI
 	SoldierPreference get_build_heroes() const {
 		return build_heroes_;
 	}

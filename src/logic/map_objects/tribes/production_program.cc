@@ -1847,7 +1847,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 		             static_cast<unsigned>(training_.attribute), current_level, training_.level);
 	}
 
-	assert(current_level < training_.level);
+	assert(current_level == training_.level - 1);
 	assert(ts.current_training_attribute() == training_.attribute);
 
 	Soldier* soldier = ts.get_selected_soldier(game, training_.attribute, current_level);

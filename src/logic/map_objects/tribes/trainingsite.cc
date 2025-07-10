@@ -251,32 +251,6 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 		return;  // Nothing to do
 	}
 
-	// TODO(tothxa): need to check below behaviour with new implementation
-	/*
-	// Said in github issue #3869 discussion:
-	//
-	// > the problem will always be if the capacity of a training site will be
-	// > increased AND you don't see soldiers leaving the warehouse while you
-	// > know they are there you will be confused. So we should keep this very
-	// > short anything more then 5 sec will cause confusion I believe.
-	//
-	// This piece implements this demand. If we add more control buttons to the
-	// UI later, side-effects like this could go away.
-	if (capacity > training_site_->capacity_) {
-	   // This is the capacity increased part from above.
-	   // Splitting a bit futher.
-	   if (0 == training_site_->capacity_ && 1 == capacity) {
-	      // If the site had a capacity of zero, then the player probably micromanages
-	      // and wants a partially trained soldier, if available. Resetting the state.
-	      training_site_->repeated_layoff_ctr_ = 0;
-	      training_site_->latest_trainee_was_kickout_ = false;
-	   } else {
-	      // Now the player just wants soldier. Any soldiers.
-	      training_site_->recent_capacity_increase_ = true;
-	   }
-	}
-	*/
-
 	training_site_->capacity_ = std::min(capacity, max_soldier_capacity());
 	training_site_->update_soldier_request(true);
 }
@@ -635,11 +609,12 @@ void TrainingSite::drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned 
 		return;
 	}
 
-	// TODO(tothxa): skip sorting if preference == kAny
-	std::sort(v.begin(), v.end(), [this](Soldier* a, Soldier* b) {
-		// Sort in order of decreasing desirability, so we can use pop_back()
-		return !compare_levels(a->get_total_level(), b->get_total_level());
-	});
+	if (build_heroes_ != SoldierPreference::kAny) {
+		std::sort(v.begin(), v.end(), [this](Soldier* a, Soldier* b) {
+			// Sort in order of decreasing desirability, so we can use pop_back()
+			return !compare_levels(a->get_total_level(), b->get_total_level());
+		});
+	}
 	for (; number_to_drop > 0; --number_to_drop) {
 		soldier_control_.drop_soldier(*v.back());
 		v.pop_back();
