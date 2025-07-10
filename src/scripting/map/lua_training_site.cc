@@ -88,14 +88,16 @@ int LuaTrainingSite::get_capacity(lua_State* L) {
 */
 int LuaTrainingSite::set_build_heroes(lua_State* L) {
 	try {
-		get(L, get_egbase(L))->set_build_heroes(string_to_soldier_preference(luaL_checkstring(L, -1)));
+		get(L, get_egbase(L))
+		   ->set_build_heroes(string_to_soldier_preference(luaL_checkstring(L, -1)));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
 }
 int LuaTrainingSite::get_build_heroes(lua_State* L) {
-	lua_pushstring(L, soldier_preference_to_string(get(L, get_egbase(L))->get_build_heroes()).c_str());
+	lua_pushstring(
+	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_build_heroes()).c_str());
 	return 1;
 }
 
