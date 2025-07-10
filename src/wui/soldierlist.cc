@@ -31,12 +31,14 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 #include "wui/interactive_base.h"
 #include "wui/soldiercapacitycontrol.h"
+#include "wui/soldier_preference_control.h"
 
 namespace {
 
@@ -447,7 +449,6 @@ protected:
 private:
 	void mouseover(const Widelands::Soldier* soldier);
 	void eject(const Widelands::Soldier* soldier);
-	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 	bool can_eject() const;
 	void unset_infotext();
@@ -455,8 +456,8 @@ private:
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::MapObject> building_or_ship_;
 	SoldierPanel soldierpanel_;
-	UI::Radiogroup soldier_preference_;
 
+	UI::Panel* soldier_preference_;
 	UI::Panel* soldier_capacity_control_;
 };
 
@@ -469,9 +470,6 @@ SoldierList::SoldierList(UI::Panel& parent,
      building_or_ship_(&building_or_ship),
 
      soldierpanel_(*this, ib.egbase(), building_or_ship) {
-	upcast(Widelands::MilitarySite, ms, &building_or_ship);
-	upcast(Widelands::Warehouse, wh, &building_or_ship);
-	upcast(Widelands::Ship, ship, &building_or_ship);
 
 	unset_infotext();
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -482,35 +480,8 @@ SoldierList::SoldierList(UI::Panel& parent,
 	UI::Box* buttons =
 	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 
-	bool can_act = ibase_.can_act(building_or_ship.owner().player_number());
-	if (building_or_ship.descr().type() != Widelands::MapObjectType::TRAININGSITE) {
-		// Make sure the creation order is consistent with enum SoldierPreference!
-		soldier_preference_.add_button(
-		   buttons, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
-		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
-		soldier_preference_.add_button(
-		   buttons, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
-		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, "prefer_any", Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
-		                               _("No preference"));
-		UI::Radiobutton* button = soldier_preference_.get_first_button();
-		while (button != nullptr) {
-			buttons->add(button);
-			button = button->next_button();
-		}
-
-		soldier_preference_.set_state(
-		   static_cast<uint8_t>(ms != nullptr ? ms->get_soldier_preference() :
-		                        wh != nullptr ? wh->get_soldier_preference() :
-		                                        ship->get_soldier_preference()),
-		   false);
-		if (can_act) {
-			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
-		} else {
-			soldier_preference_.set_enabled(false);
-		}
-	}
+	soldier_preference_ = create_soldier_preference_control(*buttons, ib, building_or_ship);
+	buttons->add(soldier_preference_);
 	buttons->add_inf_space();
 	soldier_capacity_control_ = create_soldier_capacity_control(*buttons, ib, building_or_ship);
 	buttons->add(soldier_capacity_control_);
@@ -523,30 +494,12 @@ void SoldierList::think() {
 	if (object == nullptr) {
 		return;
 	}
-
-	switch (object->descr().type()) {
-	case Widelands::MapObjectType::MILITARYSITE: {
-		upcast(const Widelands::MilitarySite, ms, object);
-		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
-		break;
+	if (object->descr().type() != Widelands::MapObjectType::SHIP) {
+		return;
 	}
-	case Widelands::MapObjectType::WAREHOUSE: {
-		upcast(const Widelands::Warehouse, wh, object);
-		soldier_preference_.set_state(static_cast<uint8_t>(wh->get_soldier_preference()), false);
-		break;
-	}
-	case Widelands::MapObjectType::SHIP: {
-		upcast(const Widelands::Ship, ship, object);
-		soldier_preference_.set_state(static_cast<uint8_t>(ship->get_soldier_preference()), false);
-		soldierpanel_.set_visible((ship->get_ship_type() == Widelands::ShipType::kWarship) &&
-		                          !ship->is_refitting());
-		break;
-	}
-	case Widelands::MapObjectType::TRAININGSITE:
-		break;
-	default:
-		NEVER_HERE();
-	}
+	upcast(const Widelands::Ship, ship, object);
+	soldierpanel_.set_visible((ship->get_ship_type() == Widelands::ShipType::kWarship) &&
+	                          !ship->is_refitting());
 }
 
 void SoldierList::mouseover(const Widelands::Soldier* soldier) {
@@ -606,21 +559,6 @@ void SoldierList::eject(const Widelands::Soldier* soldier) {
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
-	}
-}
-
-void SoldierList::set_soldier_preference(int32_t changed_to) {
-	MutexLock m(MutexLock::ID::kObjects);
-	Widelands::MapObject* object = building_or_ship_.get(ibase_.egbase());
-	if (object == nullptr) {
-		return;
-	}
-
-	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_soldier_preference(
-		   *object, static_cast<Widelands::SoldierPreference>(changed_to));
-	} else {
-		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
 }
 
