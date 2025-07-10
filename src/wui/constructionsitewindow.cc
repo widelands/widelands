@@ -367,7 +367,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		});
 
 		UI::Panel* soldier_preference_box =
-		   create_soldier_preference_control(*(settings_box.get()), *ibase(), *construction_site);
+		   create_soldier_preference_control(*settings_box, *ibase(), *construction_site);
 		settings_box->add(soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		settings_box->add_space(8);

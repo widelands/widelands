@@ -22,7 +22,6 @@
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"
-#include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
