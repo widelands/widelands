@@ -2832,6 +2832,7 @@ wl.Descriptions():new_tribe {
    port = "empire_port",
 
    fastplace = {
+      market = "empire_market",
       warehouse = "empire_warehouse",
       port = "empire_port",
       training_small = "empire_arena",

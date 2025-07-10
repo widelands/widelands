@@ -1303,7 +1303,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "A liánvágó %1$s és %2$s között termel egy liánt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1380,7 +1380,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "A vadonőrző %1$s és %2$s között nevel fel egy halat és egy vadat, attól függően, hogy mennyit kell gyalogolnia."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1432,7 +1432,7 @@ msgstr "Kötelet fon liánból."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "A kötélfonó bódé átlagosan %s alatt készít egy kötelet."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1645,7 +1645,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr ""
+msgstr "A dzsungelmester %1$s és %2$s között javít fel egy mezőt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -4500,7 +4500,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "A haltenyésztő %1$s és %2$s között nevel fel egy halat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4627,7 +4627,7 @@ msgstr "Felirat egy nyersanyagokból kifogyott aranyszálfonó malmon"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr ""
+msgstr "Az aranyszálfonó malom átlagosan %s alatt készít egy aranyfonalat."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -5181,7 +5181,7 @@ msgstr "Egy póktenyésztő bemutatója a tenyészetéről"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "A póktenyészet átlagosan %s alatt készít egy vég pókselymet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7143,7 +7143,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gamekeeper can release one animal between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr ""
+msgstr "A vadőr %1$s és %2$s között nevel fel egy vadat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Well
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1258
@@ -11524,7 +11524,7 @@ msgstr "Márványoszlopokat farag ki márványból."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr ""
+msgstr "A kőfaragó átlagosan %s alatt készít egy márványoszlopot."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11735,7 +11735,7 @@ msgstr "Bort készít."
 #, lua-format
 msgctxt "empire_building"
 msgid "The winery needs %s on average to produce one wine."
-msgstr ""
+msgstr "A borászat átlagosan %s alatt készít egy amfóra bort."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12127,7 +12127,7 @@ msgstr "Juhokat tenyészt a gyapjújukért."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr ""
+msgstr "A juhtelep átlagosan %s alatt termel egy bála gyapjút."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -15112,7 +15112,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one clay between %1$s and %2$s, depending on how "
 "far the clay digger has to walk."
-msgstr ""
+msgstr "A vályogvető %1$s és %2$s között termel egy vödör agyagot, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15262,7 +15262,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "A méhész %1$s és %2$s között gyűjt egy adag mézet, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15347,7 +15347,7 @@ msgstr "Téglákat éget gránitból és agyagból, szenet használva tüzelőne
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "A téglaégető átlagosan %s alatt éget ki egy téglát."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15936,7 +15936,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Ha az ellátás folyamatos, akkor a gátépítő %1$s és %2$s között alakít át egy mezőt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine

@@ -2363,6 +2363,7 @@ wl.Descriptions():new_tribe {
    port = "atlanteans_port",
 
    fastplace = {
+      market = "atlanteans_market",
       warehouse = "atlanteans_warehouse",
       port = "atlanteans_port",
       training_small = "atlanteans_labyrinth",

@@ -534,7 +534,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Času na přípravu bylo při nalodění na tuto výpravu pomálu. Ani další postup nebude podle našich průzkumníků tak jednoduchý, jak ti bylo dříve řečeno. Měl bys očekávat nelítostný souboj. Rozšiř svou základnu a buď prvním, kdo dosáhne Prstence moci."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -935,7 +935,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Vítej vetřelče! Jsi jako evropský dobyvatel z počátku 19. století, který se rozhodl osídlit Van Diemenovu zemi, později známou jako Tasmánie. Mezi lety 1828 až 1832 tu probíhala Černá válka, během které Britské impérium pobilo téměř všechny zde žijící Aboridžince.\nMapa simuluje poslední zbytky britských sil a nedává ti tak v podstatě velké šance, spíše naopak. Vlastně budeš mít velké problémy takto Tasmánii vůbec dobýt. Během skutečné Černé války byl poměr evropských a domorodých sil zhruba deset ku jedné, ale tentokrát je po zuby ozbrojený nepřítel připraven na odvetu."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -948,7 +948,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "Mapa je navržena pro hru jednoho hráče startujícího jako Císařství z pozice modrého. Za nepřátele si zvol Barbary a Amazonky. Pokud si to chceš udělat opravdu těžké, přiřaď jim stejný tým a deaktivuj diplomacii. Případně můžeš také hrát hru všech proti všem a jako výherní podmínku zvolit \"Vládce území\". Mapa je navržena pro dlouhé hry a očekávej, že hra bude trvat minimálně deset hodin. AI se na této mapě daří dobře. Můžeš také očekávat, že některý z protihráčů začne expandovat po moři a obsadí nejvhodnější místa pro přístav na tasmánském pobřeží, tak s tím počítej!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"

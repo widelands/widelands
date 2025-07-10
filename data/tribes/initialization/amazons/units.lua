@@ -2175,6 +2175,7 @@ wl.Descriptions():new_tribe {
    port = "amazons_port",
 
    fastplace = {
+      market = "amazons_market",
       warehouse = "amazons_warehouse",
       port = "amazons_port",
       training_small = "amazons_warriors_gathering",

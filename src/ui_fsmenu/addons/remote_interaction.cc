@@ -318,8 +318,8 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 		}
 	});
 
-	reset_text();
 	set_center_panel(&main_box_);
+	reset_text();
 	center_to_parent();
 	text_->focus();
 

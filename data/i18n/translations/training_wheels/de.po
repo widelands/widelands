@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Wuzzy <Wuzzy@disroot.org>, 2022
-# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2025\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,7 +176,8 @@ msgstr "Klicke auf die Flagge vor dem Gebäude, um den Straßenbau zu beginnen."
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
 msgstr ""
-"Klicke auf den „Straßenbau“-Knopf, danach klicke auf die angezeigte Flagge."
+"Klicke auf die „Straßenbau“-Schaltfläche, danach klicke auf die angezeigte "
+"Flagge."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:164
 #: ../../../../data/scripting/training_wheels/rocks.lua:166
@@ -283,9 +284,9 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
-"Klicke auf den „Straßenbau“-Knopf. Danach klicke die farbigen Markierungen "
-"auf der Karte, um deine Straße zu lenken bis du die Flagge vor dem "
-"gewünschten Gebäude erreichst."
+"Klicke auf die „Straßenbau“-Schaltfläche. Danach klicke die farbigen "
+"Markierungen auf der Karte, um deine Straße zu lenken bis du die Flagge vor "
+"dem gewünschten Gebäude erreichst."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

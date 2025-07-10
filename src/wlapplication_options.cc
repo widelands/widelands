@@ -179,6 +179,7 @@ static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
 	KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_UNKNOWN),                      \
 	                     kFastplaceGroupPrefix + name, descname)
+   FP("market", gettext_noop("Market")),
    FP("warehouse", gettext_noop("Warehouse")),
    FP("port", gettext_noop("Port")),
    FP("training_small", gettext_noop("Minor Training Site")),

@@ -2659,6 +2659,7 @@ wl.Descriptions():new_tribe {
    port = "barbarians_port",
 
    fastplace = {
+      market = "barbarians_market",
       warehouse = "barbarians_warehouse",
       port = "barbarians_port",
       training_small = "barbarians_battlearena",
