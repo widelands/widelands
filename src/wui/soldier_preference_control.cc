@@ -37,7 +37,9 @@
  * Soldier preference radiobutton
  */
 struct SoldierPreferenceControl : UI::Box {
-	SoldierPreferenceControl(UI::Panel& parent, InteractiveBase& ib, Widelands::MapObject& building_or_ship);
+	SoldierPreferenceControl(UI::Panel& parent,
+	                         InteractiveBase& ib,
+	                         Widelands::MapObject& building_or_ship);
 
 private:
 	void set_soldier_preference(int32_t changed_to);
@@ -58,12 +60,12 @@ SoldierPreferenceControl::SoldierPreferenceControl(UI::Panel& parent,
 	bool can_act = ibase_.can_act(building_or_ship.owner().player_number());
 
 	// Make sure the creation order is consistent with enum SoldierPreference!
-	soldier_preference_.add_button(
-	   this, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
-	   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
-	soldier_preference_.add_button(
-	   this, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
-	   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+	soldier_preference_.add_button(this, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
+	                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
+	                               _("Prefer rookies"));
+	soldier_preference_.add_button(this, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
+	                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
+	                               _("Prefer heroes"));
 	soldier_preference_.add_button(this, UI::PanelStyle::kWui, "prefer_any", Vector2i::zero(),
 	                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
 	                               _("No preference"));
@@ -89,8 +91,8 @@ void SoldierPreferenceControl::think() {
 		return;
 	}
 
-	Widelands::SoldierPreference
-	current_pref = static_cast<Widelands::SoldierPreference>(soldier_preference_.get_state());
+	Widelands::SoldierPreference current_pref =
+	   static_cast<Widelands::SoldierPreference>(soldier_preference_.get_state());
 
 	switch (object->descr().type()) {
 	case Widelands::MapObjectType::MILITARYSITE: {

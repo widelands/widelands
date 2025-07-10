@@ -118,8 +118,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick,
                                                bool workarea_preview_wanted)
-   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
-     construction_site_(&cs) {
+   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick), construction_site_(&cs) {
 
 	init(avoid_fastclick, workarea_preview_wanted);
 }
@@ -230,7 +229,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		}
 
 		if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-			UI::Box* soldier_box = new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_box", 0, 0, UI::Box::Horizontal);
+			UI::Box* soldier_box = new UI::Box(
+			   settings_box.get(), UI::PanelStyle::kWui, "soldier_box", 0, 0, UI::Box::Horizontal);
 
 			UI::Panel* soldier_preference_box =
 			   create_soldier_preference_control(*soldier_box, *ibase(), *construction_site);

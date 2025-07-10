@@ -29,9 +29,8 @@ namespace Widelands {
 class MapObject;
 }  // namespace Widelands
 
-UI::Panel*
-create_soldier_preference_control(UI::Panel& parent,
-                                  InteractiveBase&,
-                                  Widelands::MapObject& building_or_ship);
+UI::Panel* create_soldier_preference_control(UI::Panel& parent,
+                                             InteractiveBase&,
+                                             Widelands::MapObject& building_or_ship);
 
 #endif  // end of include guard: WL_WUI_SOLDIER_PREFERENCE_CONTROL_H

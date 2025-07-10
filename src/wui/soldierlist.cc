@@ -37,8 +37,8 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 #include "wui/interactive_base.h"
-#include "wui/soldiercapacitycontrol.h"
 #include "wui/soldier_preference_control.h"
+#include "wui/soldiercapacitycontrol.h"
 
 namespace {
 
