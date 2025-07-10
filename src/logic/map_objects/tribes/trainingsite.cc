@@ -563,6 +563,9 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 		soldier_request_->set_requirements(r);
 
 		force_rebuild_soldier_requests_ = false;
+
+	} else {
+		soldier_request_->set_preference(build_heroes_);
 	}
 
 	soldier_request_->set_count(capacity_ - soldiers_.size());

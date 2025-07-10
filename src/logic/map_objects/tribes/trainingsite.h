@@ -184,6 +184,7 @@ public:
 	}
 	void set_build_heroes(SoldierPreference b_heroes) {
 		build_heroes_ = b_heroes;
+		update_soldier_request(true);
 	}
 
 	void set_economy(Economy* e, WareWorker type) override;
