@@ -51,6 +51,7 @@ const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
    PROP_RW(LuaConstructionSite, has_builder),
    PROP_RW(LuaConstructionSite, setting_soldier_capacity),
    PROP_RW(LuaConstructionSite, setting_soldier_preference),
+   PROP_RW(LuaConstructionSite, setting_build_heroes),
    PROP_RW(LuaConstructionSite, setting_launch_expedition),
    PROP_RW(LuaConstructionSite, setting_stopped),
    {nullptr, nullptr, nullptr},
