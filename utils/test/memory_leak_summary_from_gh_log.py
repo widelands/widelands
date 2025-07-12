@@ -59,8 +59,9 @@ class GithubASan:
         if not cls.found_local_tb and '/third_party/' not in text and \
                 (f'/{compile_d}/src/' in text or ' src/' in text):
             if os.getenv('GITHUB_STEP_SUMMARY'):
-                # add code part in `` to avoid invalid html
-                to_write = ')`'.join(text.rsplit(')', 1)).replace(' in ', ' in `', 1)
+                # add code part in `` to avoid invalid html and also #7 to avoid issue references
+                to_write = ')`'.join(text.rsplit(')', 1)).replace(
+                    ' in ', '` in `', 1).replace('#', '`#', 1)
                 write_summary('    our origin: ', to_write)
             cls.found_local_tb = True
             if ' src/' in text:  # stipped by ASAN_OPTIONS='strip_path_prefix=/...
