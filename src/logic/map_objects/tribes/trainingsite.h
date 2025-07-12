@@ -30,6 +30,9 @@ struct TrainingSiteWindow;
 
 namespace Widelands {
 
+// Unique key to address each training level of each war art
+using TypeAndLevel = uint32_t;
+
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
@@ -59,6 +62,10 @@ public:
 		return train_evade_;
 	}
 
+	[[nodiscard]] const std::set<TrainingAttribute>& trained_attributes() const {
+		return trained_attributes_;
+	}
+
 	[[nodiscard]] unsigned get_min_level(TrainingAttribute) const;
 	[[nodiscard]] unsigned get_max_level(TrainingAttribute) const;
 	[[nodiscard]] int32_t get_max_stall() const {
@@ -76,6 +83,11 @@ public:
 		return no_soldier_for_training_level_message_;
 	}
 
+	[[nodiscard]] const ProductionProgram::Groups&
+	get_training_cost(const TypeAndLevel& upgrade_step) const {
+		return training_costs_.at(upgrade_step);
+	}
+
 private:
 	void update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level);
 
@@ -86,6 +98,7 @@ private:
 	Quantity num_soldiers_;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out. */
 	uint32_t max_stall_;
+
 	/** Whether this site can train health */
 	bool train_health_{false};
 	/** Whether this site can train attack */
@@ -94,6 +107,8 @@ private:
 	bool train_defense_{false};
 	/** Whether this site can train evasion */
 	bool train_evade_{false};
+
+	std::set<TrainingAttribute> trained_attributes_;
 
 	/** Minimum health a soldier needs to train at this site */
 	unsigned min_health_{std::numeric_limits<uint32_t>::max()};
@@ -112,6 +127,8 @@ private:
 	unsigned max_defense_{0U};
 	/** Maximum evasion a soldier can acquire at this site */
 	unsigned max_evade_{0U};
+
+	std::map<TypeAndLevel, ProductionProgram::Groups> training_costs_;
 
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
@@ -133,16 +150,22 @@ class TrainingSite : public ProductionSite {
 	friend struct ::TrainingSiteWindow;
 
 	struct Upgrade {
-		TrainingAttribute attribute;  // attribute for this upgrade
-		std::string prefix;           // prefix for programs
-		int32_t min, max;             // minimum and maximum program number (inclusive)
-		uint32_t prio;                // relative priority
-		uint32_t credit;              // whenever an upgrade gets credit >= 10, it can be run
-		int32_t lastattempt;          // level of the last attempt in this upgrade category
+		TypeAndLevel key;
+		std::string program_name;
 
-		// whether the last attempt in this upgrade category was successful
-		bool lastsuccess;
-		uint32_t failures;
+		enum class Status : uint8_t {
+			kDisabled = 0,     // the input queue settings prevent this upgrade
+			kNotPossible = 1,  // one or more wares are missing
+			kWait = 2,         // one or more wares are missing, but they all have active transfers
+			kCanStart = 3      // all necessary wares are available
+		};
+		Status status{Status::kNotPossible};
+		std::vector<Soldier*> candidates;
+
+		Upgrade(TrainingAttribute attr, uint16_t level);
+		[[nodiscard]] bool has_wares_and_candidate() const {
+			return status == Upgrade::Status::kCanStart && !candidates.empty();
+		}
 	};
 
 public:
@@ -156,29 +179,21 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
-	// TODO(tothxa): These are never used, the variable is always false.
-	bool get_build_heroes() const {
+	SoldierPreference get_build_heroes() const {
 		return build_heroes_;
 	}
-	void set_build_heroes(bool b_heroes) {
+	void set_build_heroes(SoldierPreference b_heroes) {
 		build_heroes_ = b_heroes;
-	}
-	void switch_heroes();
-
-	bool get_requesting_weak_trainees() const {
-		return requesting_weak_trainees_;
+		update_soldier_request(true);
 	}
 
 	void set_economy(Economy* e, WareWorker type) override;
 
-	int32_t get_pri(enum TrainingAttribute atr);
-	void set_pri(enum TrainingAttribute atr, int32_t prio);
+	[[nodiscard]] unsigned current_training_level() const;
+	[[nodiscard]] TrainingAttribute current_training_attribute() const;
 
-	// These are for premature soldier kick-out
-	void training_attempted(TrainingAttribute type, uint32_t level);
-	void training_successful(TrainingAttribute type, uint32_t level);
-	void training_done();
-	ProductionProgram::Action::TrainingParameters checked_soldier_training() const;
+	// Returns the previously selected soldier if still available, or tries to find a replacement
+	Soldier* get_selected_soldier(Game& game, TrainingAttribute attr, unsigned level);
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
@@ -204,82 +219,74 @@ private:
 	private:
 		TrainingSite* const training_site_;
 	};
-	void update_soldier_request(bool);
+
+	void update_soldier_request(bool needs_update_statuses);
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	void find_and_start_next_program(Game&) override;
-	void start_upgrade(Game&, Upgrade&);
-	void add_upgrade(TrainingAttribute, const std::string& prefix);
-	void calc_upgrades();
 
-	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
+	// Only called when selected_soldier_ or the wares to train him or her are gone by the time
+	// we need them.
+	Soldier* pick_another_soldier(TrainingAttribute attr, unsigned level);
+
+	// Takes preference in account, returns true if second is more preferred.
+	bool compare_levels(unsigned first, unsigned second) const;
+
+	// Used in initialization of TrainingSite
+	void init_upgrades();
+	void add_upgrades(TrainingAttribute attr);
+
+	// Checks input queues and updates status and candidates of each Upgrade as well as lists of
+	// soldiers who cannot start any upgrade
+	void update_upgrade_statuses(bool select_next_step);
+
+	void drop_all_soldiers_from_vector(std::vector<Soldier*>& v);
+	void drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned number_to_drop);
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
-	Upgrade* get_upgrade(TrainingAttribute);
+
+	// Only for loading from savegame!
+	void set_current_training_step(uint8_t attr, uint16_t level);
 
 	SoldierControl soldier_control_;
+
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
 	SoldierRequest* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
 
+	// Keep track of soldiers who cannot start any upgrade
+	std::vector<Soldier*> untrainable_soldiers_;  // all statuses are Upgrade::Status::kDisabled
+	std::vector<Soldier*> stalled_soldiers_;      // best status is Upgrade::Status::kNotPossible
+	std::vector<Soldier*> waiting_soldiers_;      // best status is Upgrade::Status::kWait
+
 	/** Number of soldiers that should be trained concurrently.
 	 * Equal or less to maximum number of soldiers supported by a training site.
 	 * There is no guarantee there really are capacity_ soldiers in the
 	 * building - some of them might still be under way or even not yet
-	 * available*/
+	 * available */
 	Quantity capacity_;
 
-	/** True, \b always upgrade already experienced soldiers first, when possible
-	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool build_heroes_{false};
+	/** kHeroes, \b request and upgrade already experienced soldiers first, when possible
+	 *  kRookies, \b request and upgrade inexperienced soldiers first, when possible
+	 *  kAny, \b request and upgrade first found suitable soldier */
+	SoldierPreference build_heroes_{SoldierPreference::kHeroes};
 
-	std::vector<Upgrade> upgrades_;
-	Upgrade* current_upgrade_;
+	std::map<TypeAndLevel, Upgrade> upgrades_;
+	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;
+	Upgrade::Status max_possible_status_{Upgrade::Status::kNotPossible};
 
-	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
+	// The soldier we picked to be trained next
+	OPtr<Soldier> selected_soldier_;
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
-	// Unuque key to address each training level of each war art
-
-	using TypeAndLevel = std::pair<TrainingAttribute, uint16_t>;
-	// First entry is the "stallness", second is a bool
-	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
-	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
-	TrainFailCount training_failure_count_;
 	uint32_t max_stall_val_;
-	// These are for soldier import.
-	// If the training site can complete its job, or, in other words, soldiers leave
-	// because of they are unupgradeable, then the training site tries to grab already-trained
-	// folks in. If the site kicks soldiers off in the middle, it attempts to get poorly trained
-	// replacements.
-	//
-	// Since ALL training sites do this, there needs to be a way to avoid deadlocks.
-	// That makes this a bit messy. Sorry.
-	//
-	// If I was importing strong folks, and switch to weak ones, the switch only happens
-	// after ongoing request is (partially) fulfilled. The other direction happens immediately.
-	uint8_t highest_trainee_level_seen_;    // When requesting already-trained, start here.
-	uint8_t latest_trainee_kickout_level_;  // If I cannot train, request soldiers that have been
-	                                        // trainable
-	uint8_t trainee_general_lower_bound_;   // This is the acceptance threshold currently in use.
-	uint8_t repeated_layoff_ctr_;  // increases when soldier is prematurely releases, reset when
-	                               // training succeeds.
-	bool repeated_layoff_inc_;
-	bool latest_trainee_was_kickout_;  // If soldier was not dropped, requesting new soldier.
-	bool requesting_weak_trainees_;    // Value of the previous after incorporate.
-	bool recent_capacity_increase_;    // If used explicitly asks for more folks
-	const uint8_t kUpperBoundThreshold_ =
-	   3;  // Higher value makes it less likely to get weak soldiers in.
-	const Duration acceptance_threshold_timeout =
-	   Duration(5555);         // Lower the bar after this many milliseconds.
-	Time request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
-	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
+	uint32_t failures_count_{0};
 
-	ProductionProgram::Action::TrainingParameters checked_soldier_training_;
+	bool force_rebuild_soldier_requests_{true};
 };
 
 /**
