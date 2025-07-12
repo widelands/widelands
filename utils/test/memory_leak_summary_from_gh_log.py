@@ -102,10 +102,12 @@ class GithubASan:
         with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
             summary_file.write('\n\n## memory leaks by origin\n\n')
             for origin in sorted(cls.leaks_by_origin):
-                summary_file.write(f'#### {origin} <a name="{origin}"></a>\n')
+                summary_file.write(
+                    f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
+                )
                 for data in cls.leaks_by_origin[origin]:
                     summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
-                summary_file.write('\n')
+                summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
         print('\nsee about memory leaks in job summary on',
               os.getenv('GITHUB_SERVER_URL', 'https://github.com') + '/' +
