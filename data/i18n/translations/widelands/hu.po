@@ -8161,7 +8161,7 @@ msgstr "Elnézést kérünk, a Widelands nem tudta elkészíteni a vészhelyzeti
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Piactér"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
