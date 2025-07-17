@@ -18,6 +18,7 @@ import re
 
 
 class GithubASan:
+    summary_file = None  # path of github summary file
     found_local_tb = True  # true if not looking for our line in current traceback
     test_script = None
     ansi_escape_pattern = None  # for remove_ansi_escape_sequences()
@@ -31,7 +32,7 @@ class GithubASan:
         # Therefore only annotate the summary line of ASan and write other info to the steps summary
         def write_summary(arg1, *args):
             "write to github summary file (markdown format)"
-            with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
+            with open(cls.summary_file, 'a') as summary_file:
                 summary_file.write(arg1)
                 for arg in args:
                     summary_file.write(arg)
@@ -42,7 +43,7 @@ class GithubASan:
                 cls.ansi_escape_pattern = re.compile(r'\x1b[^m]*m')
             return cls.ansi_escape_pattern.sub('', text)
 
-        if 'ERROR: ' in text and os.getenv('GITHUB_STEP_SUMMARY'):
+        if 'ERROR: ' in text and cls.summary_file:
             if cls.counted_leaks is None:
                 write_summary(
                     '## memory leaks <a name=memory-leak></a>\n\n> [!TIP]\n'
@@ -53,11 +54,11 @@ class GithubASan:
             write_summary('triggered by test ', cls.test_script, '\n\n')
             cls.counted_leaks = 0
         if 'SUMMARY' in text:
-            if os.getenv('GITHUB_STEP_SUMMARY') and cls.counted_leaks > 0:
+            if cls.summary_file and cls.counted_leaks > 0:
                 summary_tag = f'\n<summary>{cls.counted_leaks} leaks</summary>\n'
                 write_summary(summary_tag, '</details>\n', text)
             return '::warning title=ASan error::' + text
-        if 'irect leak of ' in text and os.getenv('GITHUB_STEP_SUMMARY'):  # Direct or Indirect leak
+        if 'irect leak of ' in text and cls.summary_file:  # Direct or Indirect leak
             if cls.counted_leaks == 0:
                 write_summary('<details>\n\n')  # needs empty line for the following list
             write_summary('+ ', remove_ansi_escape_sequences(
@@ -72,7 +73,7 @@ class GithubASan:
                 f_name_line = 'src/' + text.rsplit(' src/', 1)[1].rstrip()
             else:
                 f_name_line = text.rsplit(f'/{compile_d}/', 1)[1].rstrip()
-            if os.getenv('GITHUB_STEP_SUMMARY'):
+            if cls.summary_file:
                 # add code part in `` to avoid invalid html
                 to_write = ')`'.join(text.rsplit(')', 1)).replace(
                     ' in ', '` in `', 1).replace('#', '`#', 1)
@@ -96,14 +97,18 @@ class GithubASan:
         cls.test_script = test_script
 
     @classmethod
+    def set_summary_file(cls, summary_file):
+        cls.summary_file = summary_file
+
+    @classmethod
     def summarize_origins(cls):
         def to_query_str(txt):
             "only escape what is needed for our case"
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
-        if not cls.leaks_by_origin or not os.getenv('GITHUB_STEP_SUMMARY'):
+        if not cls.leaks_by_origin or not cls.summary_file:
             return
-        with open(os.getenv('GITHUB_STEP_SUMMARY'), 'a') as summary_file:
+        with open(cls.summary_file, 'a') as summary_file:
             summary_file.write('\n\n## memory leaks by origin\n\n')
             for origin in sorted(cls.leaks_by_origin):
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
@@ -117,11 +122,15 @@ class GithubASan:
                     summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
                 summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
-        print('\nsee about memory leaks in job summary on',
-              os.getenv('GITHUB_SERVER_URL', 'https://github.com') + '/' +
-              os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') + '/actions/' +
-              ('/runs/' + os.getenv('GITHUB_RUN_ID') if os.getenv('GITHUB_RUN_ID') else '') +
-              '#user-content-memory-leak')
+        summary_hint = '\nsee about memory leaks in job summary on'
+        if os.getenv('GITHUB_RUN_ID'):
+            print(summary_hint,
+                  os.getenv('GITHUB_SERVER_URL', 'https://github.com') + '/' +
+                  os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
+                  '/actions/runs/' + os.getenv('GITHUB_RUN_ID') +
+                  '#user-content-memory-leak')
+        elif cls.summary_file and not cls.summary_file.startswith('/dev/'):
+            print(summary_hint, cls.summary_file, file=sys.stderr)
 
 
 def create_summary_one_runner():
@@ -135,6 +144,12 @@ def create_summary_one_runner():
     def get_log_line(line):
         "get the log line without timestamp"
         return line.split('Z ', 1)[-1]
+
+    if not os.getenv('GITHUB_STEP_SUMMARY') and not '/dev/' in os.devnull:
+        print('set environment variable GITHUB_STEP_SUMMARY to get output', sys.stderr)
+        os.exit(19)  # exit with "no such device exists" (stdout file not found)
+    GithubASan.set_summary_file(os.getenv('GITHUB_STEP_SUMMARY', '/dev/stdout'))
+    # TODO summary file should be empty
 
     r_mode: ReadingMode = ReadingMode.BEGIN
     for line in sys.stdin:
