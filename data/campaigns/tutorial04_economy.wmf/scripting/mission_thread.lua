@@ -296,11 +296,13 @@ function trading()
                trade_accepted = true
 
                local num_batches = trade.num_batches
-               if num_batches < 0 then  -- inifinite
-                  num_batches = 99  -- kind of high
+               if num_batches < 0 then  -- infinite
+                  num_batches = 106  -- kind of high
+               else
+                  num_batches = num_batches + 3  -- some extra
                end
                for ware,amount in pairs(trade.items_to_receive) do
-                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (num_batches + 3)))
+                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (num_batches)))
                end
             end
          end
