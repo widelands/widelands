@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-06-12 03:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,17 +62,17 @@ msgstr ""
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Aes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Etre."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Diaes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:30
@@ -86,7 +87,7 @@ msgstr "An Eil Impalaerezh"
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Un tañva d'ar varbared."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52
@@ -114,7 +115,7 @@ msgstr ""
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Un tañva d'an Impalaerezh."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:75
@@ -134,12 +135,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Redadeg an Tan"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Un tañva d'an Atlantiz."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:98
@@ -154,12 +155,12 @@ msgstr ""
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Diouzh dour da skorn"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Un tañva d'ar Frizoned."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../../../data/campaigns/campaigns.lua:116
@@ -318,7 +319,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Ar brezeliñ"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -339,12 +340,51 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
-msgstr ""
+msgstr "An armerzh"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
+msgid "Accurate Europe 1.2"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
+msgid ""
+"Warning: This map is provided as an experimental preview. Although it is "
+"better in many ways than Europa 1.2 that it replaces, it probably still has "
+"bugs. Furthermore, it is a very large map with more player positions than "
+"generally recommended, so it has high hardware requirements.  —  A map for "
+"roleplaying historical empires. – This map of Europe aims to be as accurate "
+"as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
+"Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
+"German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
+msgid ""
+"The wide rivers are navigable to create a ”trade network”. All players have "
+"their own challenges, but are relatively balanced to be playable: – British "
+"Empire: create sustainable colonies – Russian Empire: Very large distances …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:8
+msgid "Amoebae"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:10
+msgid "You are an Amoeba, expand and conquer all other Amoebae …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:11
+msgid ""
+"Be aware that you are surrounded by enemies. Disable diplomacy for an easier"
+" game, enable it for a more challenging game. Additionally you can define "
+"the difficulty by playing against different AI teams. Although some players "
+"have more space in the beginning, the map is well balanced."
 msgstr ""
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
@@ -439,7 +479,7 @@ msgstr ""
 
 #: ../../../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
-msgstr ""
+msgstr "Ar c'hrater"
 
 #: ../../../../data/maps/Crater.wmf/elemental:10
 msgid ""
@@ -481,14 +521,16 @@ msgid ""
 " you can – it’s the only way to find all the precious farm spaces."
 msgstr ""
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:8
-msgid "Elven Forests"
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
+msgid "Egyptian Mandala v1.2"
 msgstr ""
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:10
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
+"They hardly had time to prepare themselves when they embarked for this "
+"island. According to your explorers, however, things will not go as easily "
+"as you were told earlier. You should expect fierce opposition. Expand your "
+"base and be the first to reach the ring of power."
 msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
@@ -501,16 +543,6 @@ msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
-
-#: ../../../../data/maps/Europa.wmf/elemental:8
-msgid "Europa 1.2"
-msgstr ""
-
-#: ../../../../data/maps/Europa.wmf/elemental:10
-msgid ""
-"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
-"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr ""
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
@@ -558,9 +590,19 @@ msgid ""
 " tribe?"
 msgstr ""
 
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
+msgid "Forest Valley v2.0"
+msgstr ""
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
+msgid ""
+"A river valley surrounded by mountains with lots of resources except coal. "
+"Plenty of flat building space."
+msgstr ""
+
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr ""
+msgstr "Ar pevar c'hastell"
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
@@ -570,7 +612,7 @@ msgstr ""
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
-msgstr ""
+msgstr "Ar pevar menez"
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:10
 msgid ""
@@ -586,7 +628,7 @@ msgstr ""
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Kann al loar"
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
@@ -596,7 +638,7 @@ msgstr ""
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Lenn ar skorneg"
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
@@ -609,7 +651,7 @@ msgstr ""
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Al ledenez alaouret"
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
@@ -617,7 +659,7 @@ msgstr ""
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Brezelioù ar skorn"
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -629,7 +671,7 @@ msgstr ""
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Brezel war an inizi"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
@@ -640,7 +682,7 @@ msgstr ""
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Roueed ha rouanezed"
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
@@ -651,7 +693,7 @@ msgstr ""
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Lenn ar sioulder"
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:10
 msgid ""
@@ -666,7 +708,7 @@ msgstr ""
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Ur barbar all – embannet gant king_of_nowhere"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
@@ -720,7 +762,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
-msgstr ""
+msgstr "Lamm-enez"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
@@ -743,7 +785,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tridant an Tan"
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -875,9 +917,39 @@ msgid ""
 "key to control over the whole island."
 msgstr ""
 
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
+msgid "Tasmanian Black War"
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
+msgid ""
+"Welcome, intruder! You’re like a European conqueror from the early 1800s "
+"when they settled the Van Diemen land – later known as Tasmania. Between "
+"1828 and 1832 there was a war called the Black War in which the British "
+"Empire eradicated almost the entire Aboriginal population of the Van Diemen "
+"land. – The map simulates a scattered British Empire but without any "
+"advantages – actually it offers some great disadvantages and you will likely"
+" have a hard time conquering Tasmania. During the historical Black War the "
+"ratio between Europeans and Aboriginals was around one against ten, but this"
+" time they’re armed to the teeth for a rematch."
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
+msgid ""
+"This map is intended to be played by a single player from the blue player’s "
+"starting location as Empire. Choose Barbarians and Amazons for the rival "
+"tribes. If you want a challenge, put them all on the same side and disable "
+"Diplomacy. Or you can play with every player against all others, with a win "
+"condition of Territorial Time. This map isn’t suitable for short games and "
+"one game will likely take more than ten hours. The AI has great capability "
+"on this map. One of the computer players will likely also begin seafaring "
+"and competing for the best harbor places on the Tasmanian coast, so you’ve "
+"been warned!"
+msgstr ""
+
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
-msgstr ""
+msgstr "Al lenn vras"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:10
 msgid ""
@@ -908,6 +980,18 @@ msgid ""
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr ""
 
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
+msgid "The Islands of the Eight Tribes"
+msgstr "Inizi an Eizh Meuriad"
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
+msgid ""
+"This map is designed for a long game! Eight tribes, three islands, and lots "
+"of resources. Colonization and ferries can give you a big advantage, but "
+"this is not necessary to defeat other players. If you want to delay the "
+"fighting, you can turn off the last four players."
+msgstr ""
+
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
 msgstr ""
@@ -920,7 +1004,7 @@ msgstr ""
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "An Nil"
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
@@ -970,7 +1054,7 @@ msgstr ""
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
-msgstr ""
+msgstr "An tri brezelour"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:10
 msgid ""
@@ -980,11 +1064,11 @@ msgstr ""
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "Kavet e vez dour tro-dro al lennoù."
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Asambles omp kreñv"
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
@@ -1016,22 +1100,6 @@ msgstr ""
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr ""
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr ""
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:11
-msgid ""
-"Take care not to build your ships in the lagoons. They cannot pass through "
-"the reefs to the main ocean, where your ports are located."
 msgstr ""
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
@@ -416,12 +416,9 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
-"El gran peso, juanto a la fuerte corriente y las fuerzas de Lutas, fue "
-"demasiado para el barco y lo arrastraron por debajo del nivel del mar, "
-"perdiendo la mayoría de los hombres y todas las mercancías que transportaba."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203

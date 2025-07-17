@@ -14,21 +14,29 @@ function test_descr:test_descname()
    assert_equal(_("Atlanteans"), egbase:get_tribe_description("atlanteans").descname)
    assert_equal(_("Barbarians"), egbase:get_tribe_description("barbarians").descname)
    assert_equal(_("Empire"), egbase:get_tribe_description("empire").descname)
+   assert_equal(_("Frisians"), egbase:get_tribe_description("frisians").descname)
+   assert_equal(_("Amazons"), egbase:get_tribe_description("amazons").descname)
 end
 
 function test_descr:test_name()
    assert_equal("atlanteans", egbase:get_tribe_description("atlanteans").name)
    assert_equal("barbarians", egbase:get_tribe_description("barbarians").name)
    assert_equal("empire", egbase:get_tribe_description("empire").name)
+   assert_equal("frisians", egbase:get_tribe_description("frisians").name)
+   assert_equal("amazons", egbase:get_tribe_description("amazons").name)
 end
 
 function test_descr:test_get_buildings()
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(43, #tribe.buildings)
+   assert_equal(44, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(52, #tribe.buildings)
-   tribe = egbase:get_tribe_description("empire")
    assert_equal(53, #tribe.buildings)
+   tribe = egbase:get_tribe_description("empire")
+   assert_equal(54, #tribe.buildings)
+   tribe = egbase:get_tribe_description("frisians")
+   assert_equal(59, #tribe.buildings)
+   tribe = egbase:get_tribe_description("amazons")
+   assert_equal(42, #tribe.buildings)
 
    -- Test if buildings have been casted to their correct types
    for i, building in ipairs(tribe.buildings) do
@@ -42,6 +50,9 @@ function test_descr:test_get_buildings()
          assert_true(building.max_number_of_soldiers == nil)
       elseif (building.type_name == "trainingsite") then
          assert_true(building.max_attack ~= nil or building.max_defense ~= nil or building.max_evade ~= nil or building.max_health ~= nil)
+      elseif (building.type_name == "market") then
+         assert_true(building.local_carrier ~= nil)
+         assert_true(building.trade_carrier ~= nil)
       end
    end
 end
@@ -88,6 +99,10 @@ function test_descr:test_get_wares()
    assert_equal(40, #tribe.wares)
    tribe = egbase:get_tribe_description("empire")
    assert_equal(44, #tribe.wares)
+   tribe = egbase:get_tribe_description("frisians")
+   assert_equal(50, #tribe.wares)
+   tribe = egbase:get_tribe_description("amazons")
+   assert_equal(41, #tribe.wares)
 end
 
 function test_descr:test_get_workers()
@@ -97,6 +112,10 @@ function test_descr:test_get_workers()
    assert_equal(33, #tribe.workers)
    tribe = egbase:get_tribe_description("empire")
    assert_equal(34, #tribe.workers)
+   tribe = egbase:get_tribe_description("frisians")
+   assert_equal(37, #tribe.workers)
+   tribe = egbase:get_tribe_description("amazons")
+   assert_equal(26, #tribe.workers)
 end
 
 function test_descr:test_has_building()

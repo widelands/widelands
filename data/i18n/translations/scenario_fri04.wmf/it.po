@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Log Merger, 2022
+# Guybrush88 <erpizzo@alice.it>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Trova Reebaud"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
@@ -45,19 +46,19 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Sconfiggi gli estranei"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Sconfiggi gli estranei"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Sconfiggi la tribù ostile."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Sconfiggi l'Impero"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
@@ -69,7 +70,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Recluta & addestra"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
@@ -89,13 +90,13 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Ben ritornati!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Finalmente arrivati"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -143,12 +144,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Estranei"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Chi sono?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -168,7 +169,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Nemici"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -179,7 +180,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Intrusi"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -207,7 +208,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Un vecchio amico"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -222,7 +223,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Incontrati finalmente"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
@@ -422,7 +423,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
@@ -440,8 +441,8 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1

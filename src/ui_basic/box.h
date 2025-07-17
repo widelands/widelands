@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2024 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,6 +93,11 @@ struct Box : public Panel {
 	void clear() {
 		items_.clear();
 	}
+	void delete_all_children() {
+		scrollbar_.reset();
+		free_children();
+		clear();
+	}
 
 	Scrollbar* get_scrollbar() {
 		return scrollbar_.get();
@@ -111,7 +116,6 @@ private:
 	void set_item_pos(uint32_t idx, int32_t pos);
 	bool is_item_visible(uint32_t idx);
 	void scrollbar_moved(int32_t);
-	void update_positions();
 	void on_death(Panel* p) override;
 	void on_visibility_changed() override;
 
@@ -119,6 +123,8 @@ private:
 	int max_x_, max_y_;
 
 public:
+	void update_positions();
+
 	struct Item {
 		enum Type {
 			ItemPanel,

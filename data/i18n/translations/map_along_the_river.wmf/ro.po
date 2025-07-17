@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Dominic Iastrebschi, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: Dominic Iastrebschi, 2025\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,79 +23,87 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% unitate de %2% a fost adusă în clădirea ta „%3%”."
+msgstr[1] "%1% unități de %2% a fost adusă în clădirea ta „%3%”."
+msgstr[2] "%1% unități de %2% a fost adusă în clădirea ta „%3%”."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
+"Patru lopeți pentru îndepărtarea mlaștinilor au fost colectate la depozit."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
-msgstr ""
+msgstr "Lopeți"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr ""
+"Alte patru lopeți pentru îndepărtarea mlaștinilor au fost colectate la "
+"depozit."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
-msgstr ""
+msgstr "Învinge-l pe Törver"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr ""
+msgstr "Învinge armata lui Törver"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
-msgstr ""
+msgstr "Törver este dușmanul din nord care luptă sub steagul roșu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
-msgstr ""
+msgstr "Construiește un port"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr ""
+msgstr "Construiește un port în nord"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
+"Ar trebui să construim un port în fostul teritoriu al lui Törver, pentru a "
+"fi gata să trimitem o expediție imediat ce vom afla cum se construiesc "
+"navele."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
-msgstr ""
+msgstr "Cucerește santinela piraților"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr ""
+msgstr "Cucerește santinela piraților"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
 "Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
+"Cucerește santinela piraților de lângă pârâul din est. Să sperăm că vom afla"
+" ce s-a întâmplat cu aurul din această zonă."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr ""
+msgstr "Construiește un depozit"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr ""
+msgstr "Construiește un depozit lângă santinela piraților"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -99,80 +111,90 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
+"Construiește un depozit aproape de santinela piraților cucerită lângă pârâu."
+" Vom avea nevoie de el ca bază pentru explorarea ulterioară. În plus, am "
+"putea să o folosim pentru a depozita aurul pe care îl vom extrage de pe "
+"dealurile din jur."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
-msgstr ""
+msgstr "Aduce lopeți"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr ""
+msgstr "Aduce patru lopeți la noul depozit"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr ""
+msgstr "Acestea vor fi distribuite unor voluntari pentru uscarea mlaștinilor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
-msgstr ""
+msgstr "Acestea vor fi distribuite unor voluntari pentru uscarea mlaștinilor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
 msgid "Defeat the pirates"
-msgstr ""
+msgstr "Învinge pirații"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr ""
+msgstr "Învinge pirații"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
+"Eliberează cartierul nostru de amenințarea piraților. Pirații luptă sub "
+"steagul gri."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr ""
+msgstr "Eliberează cercetașul nostru de pirați"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr ""
+msgstr "Cucerește cetatea de pe insulă"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr ""
+msgstr "Acesta este locul în care cercetașul este ținut captiv."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
-msgstr ""
+msgstr "Învinge-l pe Hjalmar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr ""
+msgstr "Învinge armata lui Hjalmar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
 msgstr ""
+"Hjalmar este dușmanul din nord al foștilor pirați care luptă sub steagul "
+"verde."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
-msgstr ""
+msgstr "Învinge-l pe Runar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr ""
+msgstr "Învinge armata lui Runar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
 msgstr ""
+"Runar este dușmanul din sud-est al foștilor pirați care luptă sub steagul "
+"galben."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
@@ -194,15 +216,15 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr ""
+msgstr "Consilierul tău"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr ""
+msgstr "De-a lungul râului"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
-msgstr ""
+msgstr "Permiteți-mi să vă informez despre triburile din jur, maiestate."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -210,6 +232,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Din nord suntem amenințați de un trib beligerant, condus de războinicul "
+"Törver care își construiește rapid armatele. În curând, ar putea deveni prea"
+" puternici pentru a putea fi înfrânți."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -217,6 +242,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"O zonă mare din nord-est este chinuită de o hoardă sălbatică de pirați "
+"neînfrânați, condusă de nebunul lor Arvid. Prezența lor ne blochează "
+"drumurile către alte triburi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -224,6 +252,9 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Peste râu se află țara prosperă a misteriosului rege Runar. Am fost în "
+"război cu el înainte ca pirații să ocupe zona de est. Puterea sa se bazează "
+"pe vasta sa industrie și pe armatele sale numeroase."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
@@ -231,16 +262,21 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Zona de dincolo de pirați aparține unui trib dezvoltat condus de puternicul "
+"lor șef Hjalmar. Aceștia s-au pregătit îndelung pentru a-și construi "
+"armatele de descurajare."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"Situația pare destul de periculoasă și sfatul meu este să ne îndreptăm "
+"eforturile către construirea unei armate puternice."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
-msgstr ""
+msgstr "Dușmanul nostru din nord"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
@@ -248,22 +284,31 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Deși soldații noștri ar înfrunta orice inamic fără cea mai mică teamă, "
+"rivalul nostru din Nord este încă mai puternic decât toate armatele noastre "
+"la un loc. Ar trebui să evităm un conflict până când vom reuși să îl "
+"învingem, maiestate."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Ai răbdare și recunoști că o armată puternică este indispensabilă în această"
+" situație. Törver are o reputație foarte proastă."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Pericol din nord"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Am primit un mesaj alarmant de la unul dintre exploratorii noștri, "
+"maiestate. Törver își extinde linia frontului și se apropie de teritoriul "
+"nostru."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -271,15 +316,18 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"Nu putem evita la nesfârșit să le atacăm armatele. Dacă vom reuși să ne "
+"cucerim inamicul nordic, ne vom extinde teritoriul și vom găsi mai multe "
+"resurse pentru a ne întări armatele."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
-msgstr ""
+msgstr "Apoi putem folosi accesul lor la lac pentru a explora mai mult teren."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr ""
+msgstr "Pe calea cea bună"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
@@ -288,10 +336,13 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Lupta cu Törver progresează glorios și am învins deja cea mai puternică "
+"parte a armatei sale. Dar acest inamic nu va fi învins ușor. Într-o mișcare "
+"disperată, Törver a apelat la un grup de mercenari înrăiți."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
-msgstr ""
+msgstr "Marele lac"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
@@ -299,6 +350,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Acum că am cucerit ținutul Törver, ne putem folosi de accesul lor excelent "
+"la marele lac adiacent. Un port în nord ne va oferi oportunități mai bune de"
+" a avea contact cu alte triburi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -306,16 +360,21 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"În sediul lui Törver am găsit documente care descriu construcția de nave. "
+"Din păcate, textele sunt scrise într-o limbă care ne este necunoscută. "
+"Înțelepții noștri vor încerca să traducă aceste descrieri."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr ""
+msgstr "Căutarea aurului"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Oamenii noștri au localizat o santinelă pirat inamică izolată. Colibele "
+"abandonate indică faptul că există aur în apropiere."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -324,10 +383,14 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Trebuie totuși să fim atenți dacă vrem să cucerim santinela. Pot exista mai "
+"multe clădiri inamice care nu sunt încă la vedere, iar pirații sunt "
+"cunoscuți ca fiind foarte buni luptători. Cel mai bine este să stabilim o "
+"prezență militară puternică aici înainte de a continua."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr ""
+msgstr "Am găsit o comoară"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -335,6 +398,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Am găsit 25 de unități de minereu de aur în santinelele piraților. Este "
+"posibil ca acestea să fi fost jefuite de la barăcile căutătorilor de aur din"
+" apropiere. Acest minereu de aur va fi transportat la sediul nostru."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -343,11 +409,15 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Având în vedere succesul expansiunii noastre în această zonă, ar trebui să "
+"luăm în considerare construirea unui depozit direct la sud-vest de "
+"santinelă, pentru a explora în continuare această zonă. Există un loc bun de"
+" construcție la doar trei pași distanță de santinelă."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Înlăturarea mlaștinilor"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -356,6 +426,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Sezonul umed a creat mlaștini de-a lungul pârâului spre est și nu putem "
+"trece prin ele. Ele trebuie îndepărtate înainte să putem continua. Dacă "
+"aduceți suficiente lopeți la noul depozit, atunci voluntarii vor îndepărta "
+"mlaștinile."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -363,6 +437,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Toate lopețile au fost distribuite, dar dacă vom continua în acest ritm, nu "
+"vom reuși să îndepărtăm mlaștinile înainte de următorul sezon ploios. Dacă "
+"aduceți mai multe lopeți la noul depozit, atunci mai mulți voluntari se vor "
+"alătura."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -370,20 +448,24 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Acum că avem acces la ascunzătoarea piraților, ar trebui să o cucerim și să "
+"îi terminăm. Poate că există și mai multe comori ascunse pe teritoriul lor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr ""
+msgstr "Pirații au fost învinși."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"I-am învins pe pirați, maiestate! Ei au ascuns aur în ultimul lor bastion, "
+"care este acum transferat la cartierul nostru general."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr ""
+msgstr "Pirații se regrupează"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -392,10 +474,14 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Ca urmare a atacurilor noastre asupra piraților, ei au început să se "
+"regrupeze cu pirați din alte triburi. Și-ar putea recăpăta o mare parte din "
+"forța pierdută anterior. Resursele noastre în scădere pot deveni o problemă "
+"cu un dușman atât de puternic în fața noastră."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Pirații pe fugă"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -403,10 +489,13 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Datorită eforturilor noastre reușite de a-i alunga pe pirați, mulți dintre "
+"ei au fugit și s-au îndepărtat în bărci mici. Nu se știe în ce direcție au "
+"fugit."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Abilitatea de a construi șantiere navale"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -414,10 +503,13 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"După lungi studii și cercetări, înțelepții noștri au reușit în sfârșit să "
+"descifreze limbajul ciudat din descrierile lui Törver pe care le-am găsit în"
+" cartierul său general. De acum înainte putem construi șantiere navale."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr ""
+msgstr "Cercetașul nostru a fost capturat"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -425,6 +517,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Unul dintre cercetașii noștri a fost capturat de pirați și dus pe insula "
+"lor. El este singura persoană care știe drumul prin mlaștini spre Hjalmar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -432,10 +526,13 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Potrivit pescarilor noștri, el este închis în cetatea de pe insulă. Ar "
+"trebui să folosim cunoștințele despre construcția de nave pe care le-am luat"
+" de la Törver pentru a construi nave și a le ataca pozițiile."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr ""
+msgstr "Insulă cucerită"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -443,26 +540,32 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Soldații noștri au cucerit insula și au reușit să elibereze cercetașul. Se "
+"pare că pirații au lăsat pe insulă o cantitate mare de aur, bere și arme."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr ""
+msgstr "Cercetașul se întoarce"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Iscoadele noastre s-au întors pe teritoriul nostru și ne-au arătat drumul "
+"prin mlaștini spre Hjalmar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"El a observat că ne putem deplasa și pe cealaltă parte a muntelui, în cazul "
+"în care vom eșua aici, dar va fi mult mai dificil de făcut."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "Ultima frontieră"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -470,19 +573,24 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Am învins aproape toate armatele și acum ne apropiem de ultimul nostru "
+"dușman. Ei ne așteaptă de mult timp și vor fi pregătiți pentru cea mai grea "
+"bătălie din viața lor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Asigură-te că armatele noastre sunt la putere maximă și apoi acționează "
+"decisiv."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
-msgstr ""
+msgstr "Victorie!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Felicitările mele, maiestate!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -490,7 +598,10 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Ai îndeplinit toate obiectivele și ai învins toți dușmanii noștri. Nu numai "
+"că ai cucerit triburile noastre rivale, dar ai și cucerit inimile poporului "
+"tău iubitor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Numele tău va fi amintit pentru totdeauna."

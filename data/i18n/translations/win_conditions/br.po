@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +49,7 @@ msgstr ""
 #. "New artifact"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
-msgstr "Daraozadoù Kavet"
+msgstr "Daraozad kavet"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
@@ -56,12 +57,12 @@ msgstr "Un daraozad ouzhpenn zo bet kavet gant ho skipailh."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Kavet ho peus un daraozad nevez."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
-msgstr "Daraozadoù Kollet"
+msgstr "Daraozad kollet"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
@@ -94,25 +95,25 @@ msgstr ""
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i daraozad"
-msgstr[1] "%i daraozadoù"
-msgstr[2] "%i daraozadoù"
-msgstr[3] "%i daraozadoù"
-msgstr[4] "%i daraozadoù"
+msgstr[1] "%i zaraozad"
+msgstr[2] "%i daraozad"
+msgstr[3] "%i  a zaraozadoù"
+msgstr[4] "%i daraozad"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%2$s a zo gant %1$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "%3$s a zo gant skipailh %1$i (%2$s)."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
-msgstr ""
+msgstr "Dastumerien"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:20
 #, lua-format
@@ -134,17 +135,17 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
-msgstr ""
+msgstr "Poentoù"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "Statud evit %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../../../data/scripting/win_conditions/collectors.lua:84
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:88
 #, lua-format
@@ -191,7 +192,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Chaseour penngarterioù"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
@@ -216,7 +217,7 @@ msgstr ""
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Dregantad an domani"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -298,23 +299,23 @@ msgstr[4] "%1% eurvezh"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%1% vunutenn"
+msgstr[1] "%1% vunutenn"
+msgstr[2] "%1% munutenn"
+msgstr[3] "%1% a vunutennoù"
+msgstr[4] "%1% munutenn"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, ha %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ha %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -332,7 +333,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
-msgstr ""
+msgstr "Pilet oc'h bet!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
@@ -342,7 +343,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
-msgstr ""
+msgstr "Trec'h oc'h"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"

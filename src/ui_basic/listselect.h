@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -207,7 +207,7 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	 * allow it). You should use pointers instead because they are more
 	 * explicit, and that was how Listselect<Entry&> worked internally.
 	 */
-	static_assert(!std::is_reference<Entry>::value, "Listselect does not accept reference types!");
+	static_assert(!std::is_reference_v<Entry>, "Listselect does not accept reference types!");
 
 	Listselect(Panel* parent,
 	           const std::string& name,

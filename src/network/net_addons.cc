@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ namespace AddOns {
  * repo (widelands/wl_addons_server) in `wl.server.Command`.
  */
 
-constexpr unsigned kCurrentProtocolVersion = 7;
+constexpr unsigned kCurrentProtocolVersion = 8;
 static const std::string kCmdList = "3:CMD_LIST";
 static const std::string kCmdInfo = "3:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
@@ -182,7 +182,7 @@ void NetAddons::append_multiline_message(std::string& send, const std::string& m
 
 void NetAddons::set_timeouts(bool suppress_timeout) {
 	timeout_was_suppressed_ = suppress_timeout;
-	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 4;
+	const uint32_t kTimeout = suppress_timeout ? (60 * 60 * 12) : 12;
 #ifdef _WIN32
 	DWORD timeout_val = kTimeout * 1000;
 	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
@@ -270,6 +270,7 @@ void NetAddons::init(std::string username, std::string password) {
 
 	is_admin_ = false;
 	server_descname_ = read_line();
+	websitemaps_i18n_version_ = math::to_long(read_line());
 	if (username.empty()) {
 		check_endofstream();
 	} else {

@@ -81,6 +81,7 @@ wl_library(scripting_lua_interface
 
 wl_library(scripting_logic
   SRCS
+    eris.h
     factory.cc
     factory.h
     globals.cc
@@ -99,13 +100,138 @@ wl_library(scripting_logic
     lua_root.h
     lua_ui.cc
     lua_ui.h
+    map/lua_base_immovable.cc
+    map/lua_base_immovable.h
+    map/lua_bob.cc
+    map/lua_bob.h
+    map/lua_building.cc
+    map/lua_building_description.cc
+    map/lua_building_description.h
+    map/lua_building.h
+    map/lua_construction_site.cc
+    map/lua_construction_site_description.cc
+    map/lua_construction_site_description.h
+    map/lua_construction_site.h
+    map/lua_dismantle_site.cc
+    map/lua_dismantle_site_description.cc
+    map/lua_dismantle_site_description.h
+    map/lua_dismantle_site.h
+    map/lua_economy.cc
+    map/lua_economy.h
+    map/lua_ferry_fleet_yard_interface.cc
+    map/lua_ferry_fleet_yard_interface.h
+    map/lua_field.cc
+    map/lua_field.h
+    map/lua_flag.cc
+    map/lua_flag.h
+    map/lua_immovable_description.cc
+    map/lua_immovable_description.h
+    map/lua_map.cc
+    map/lua_map.h
+    map/lua_map_object.cc
+    map/lua_map_object_description.cc
+    map/lua_map_object_description.h
+    map/lua_map_object.h
+    map/lua_market.cc
+    map/lua_market_description.cc
+    map/lua_market_description.h
+    map/lua_market.h
+    map/lua_military_site.cc
+    map/lua_military_site_description.cc
+    map/lua_military_site_description.h
+    map/lua_military_site.h
+    map/lua_naval_invasion_base.cc
+    map/lua_naval_invasion_base.h
+    map/lua_pinned_note.cc
+    map/lua_pinned_note.h
+    map/lua_player_immovable.cc
+    map/lua_player_immovable.h
+    map/lua_player_slot.cc
+    map/lua_player_slot.h
+    map/lua_port_dock.cc
+    map/lua_port_dock.h
+    map/lua_production_site.cc
+    map/lua_production_site_description.cc
+    map/lua_production_site_description.h
+    map/lua_production_site.h
+    map/lua_resource_description.cc
+    map/lua_resource_description.h
+    map/lua_road.cc
+    map/lua_road.h
+    map/lua_ship.cc
+    map/lua_ship_description.cc
+    map/lua_ship_description.h
+    map/lua_ship_fleet_yard_interface.cc
+    map/lua_ship_fleet_yard_interface.h
+    map/lua_ship.h
+    map/lua_soldier.cc
+    map/lua_soldier_description.cc
+    map/lua_soldier_description.h
+    map/lua_soldier.h
+    map/lua_terrain_description.cc
+    map/lua_terrain_description.h
+    map/lua_training_site.cc
+    map/lua_training_site_description.cc
+    map/lua_training_site_description.h
+    map/lua_training_site.h
+    map/lua_tribe_description.cc
+    map/lua_tribe_description.h
+    map/lua_ware_description.cc
+    map/lua_ware_description.h
+    map/lua_warehouse.cc
+    map/lua_warehouse_description.cc
+    map/lua_warehouse_description.h
+    map/lua_warehouse.h
+    map/lua_worker.cc
+    map/lua_worker_description.cc
+    map/lua_worker_description.h
+    map/lua_worker.h
     persistence.cc
     persistence.h
-    eris.h
+    ui/lua_box.cc
+    ui/lua_box.h
+    ui/lua_button.cc
+    ui/lua_button.h
+    ui/lua_checkbox.cc
+    ui/lua_checkbox.h
+    ui/lua_dropdown.cc
+    ui/lua_dropdown.h
+    ui/lua_listselect.cc
+    ui/lua_listselect.h
+    ui/lua_main_menu.cc
+    ui/lua_main_menu.h
+    ui/lua_map_view.cc
+    ui/lua_map_view.h
+    ui/lua_multiline_textarea.cc
+    ui/lua_multiline_textarea.h
+    ui/lua_panel.cc
+    ui/lua_panel.h
+    ui/lua_panel_create_child.cc
+    ui/lua_progress_bar.cc
+    ui/lua_progress_bar.h
+    ui/lua_radio_button.cc
+    ui/lua_radio_button.h
+    ui/lua_slider.cc
+    ui/lua_slider.h
+    ui/lua_spin_box.cc
+    ui/lua_spin_box.h
+    ui/lua_tab.cc
+    ui/lua_tab.h
+    ui/lua_table.cc
+    ui/lua_table.h
+    ui/lua_tab_panel.cc
+    ui/lua_tab_panel.h
+    ui/lua_textarea.cc
+    ui/lua_textarea.h
+    ui/lua_text_input_panel.cc
+    ui/lua_text_input_panel.h
+    ui/lua_ui_helper_functions.cc
+    ui/lua_ui_helper_functions.h
+    ui/lua_window.cc
+    ui/lua_window.h
   USES_SDL2
   DEPENDS
     base
-    base_exceptions
     base_macros
     economy
     graphic
@@ -114,7 +240,7 @@ wl_library(scripting_logic
     io_filesystem
     io_profile
     logic
-    logic_commands
+    commands
     logic_constants
     logic_filesystem_constants
     logic_game_controller
@@ -122,7 +248,6 @@ wl_library(scripting_logic
     logic_map
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     scripting_base

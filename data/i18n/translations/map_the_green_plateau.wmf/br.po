@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # GunChleoc, 2018
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: GunChleoc, 2018\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgstr "Aloubiñ ar C'hastell-Kozh"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr ""
+msgstr "Pilit Lanissa hag aloubit ar c'hastell kozh."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
@@ -123,7 +124,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
-msgstr ""
+msgstr "Pilet eo bet Erwyn"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
@@ -133,7 +134,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
-msgstr ""
+msgstr "Pilet eo bet Jomo"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
@@ -147,7 +148,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
-msgstr ""
+msgstr "Trec'h!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2024 by the Widelands Development Team
+ * Copyright (C) 2009-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,7 @@ enum class SchedulerTaskId : uint8_t {
 	kUpdateStats,
 	kWarehouseFlagDist,
 	kDiplomacy,
+	kTrading,
 	kUnset
 };
 
@@ -475,7 +476,8 @@ struct BuildingObserver {
 		kMilitarysite,
 		kWarehouse,
 		kTrainingsite,
-		kMine
+		kMine,
+		kMarket
 	};
 
 	[[nodiscard]] uint32_t total_count() const;

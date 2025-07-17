@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (https://app.transifex.com/widelands/teams/35159/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Savit ho rakpost kentañ"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr ""
+msgstr "Rakpost kentañ"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
@@ -35,11 +35,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
-msgstr ""
+msgstr "Savit ur vengleuz"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Quarry"
-msgstr ""
+msgstr "Mengleuz"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid ""
@@ -95,11 +95,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Savit ur porzh-mor hag ur chanter-bigi war an enezenn"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
-msgstr ""
+msgstr "Ar sevel listri"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
@@ -111,11 +111,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr ""
+msgstr "Produit gwinizh"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
-msgstr ""
+msgstr "Produiñ gwinizh"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
@@ -128,7 +128,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
-msgstr ""
+msgstr "Produiñ gwiad"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
@@ -164,7 +164,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
-msgstr ""
+msgstr "Produiñ aour"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
@@ -173,11 +173,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Pilit ar varbared"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Pilit an enebour"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
@@ -223,6 +223,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Savit ur c'hamp gourdonañ, ur c'hazarn hag ul lis pe ur c'holize evit lakaat"
+" ho soudarded da c'hourdonañ."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
@@ -271,7 +273,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Peñseet adarre"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:209
@@ -489,7 +491,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
-msgstr ""
+msgstr "Ezhomm hon eus eus ur porzh-mor"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
@@ -628,7 +630,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Ret e vefe deomp ergerzhout an inizi"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:459
@@ -720,12 +722,12 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "We Should Conquer All the Islands"
-msgstr ""
+msgstr "Ret e vefe deomp aloubiñ an holl inizi"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:461
 msgid "Now it is time to conquer the islands."
-msgstr ""
+msgstr "Poent eo bremañ aloubiñ an inizi."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:463
 msgid ""
@@ -1035,7 +1037,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid "Victory"
-msgstr ""
+msgstr "Trec'h"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:626
 msgid ""
@@ -1073,4 +1075,4 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
-msgstr ""
+msgstr "Daraozad kavet"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -552,6 +552,7 @@ StyleManager::StyleManager() {
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	                "map_plateau_message_pos_y");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
+	add_styled_size(UI::StyledSize::kUIDefaultIndent, *element_table, "ui_default_indent");
 	add_styled_size(UI::StyledSize::kToolbarButtonSize, *element_table, "toolbar_button_size");
 	check_completeness("styled_sizes", styled_sizes_.size(),
 	                   static_cast<size_t>(UI::StyledSize::kToolbarButtonSize));

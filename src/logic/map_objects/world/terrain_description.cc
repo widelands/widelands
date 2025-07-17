@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,12 +46,10 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 		return TerrainDescription::Is::kWalkable;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kWater |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "unreachable") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kUnreachable |
-		                                           TerrainDescription::Is::kUnwalkable);
+		return (TerrainDescription::Is::kUnreachable | TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "mineable") {
 		return TerrainDescription::Is::kMineable;

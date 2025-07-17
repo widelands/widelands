@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -213,9 +213,6 @@ public:
 	}
 
 	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
-
-protected:
-	static Serial last_economy_serial_;
 
 private:
 	// This structs is to store distance from supply to request(or), but to allow unambiguous

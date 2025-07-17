@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2024 Widelands Development Team
+# Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-05-23 02:35+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
@@ -546,15 +546,10 @@ msgstr "Algo está pasando…"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Hoy nos encontramos con un soldado herido cerca de nuestra frontera "
-"noroeste. Jadeó algo acerca de que su tribu había sido atacada por extraños "
-"viciosos, pero murió antes de poder contarnos más. Su armadura y armamento "
-"parecían sorprendentemente familiares. Me pregunto si la tribu de Reebaud "
-"está en peligro."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -569,13 +564,9 @@ msgstr "Llegamos demasiado tarde"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
-"Hoy nos encontramos con un soldado herido cerca de nuestra frontera "
-"noroeste. Jadeó algo acerca de que su tribu había sido atacada y vencida por"
-" extraños viciosos. Con su último aliento nos dijo el nombre de su líder: "
-"Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

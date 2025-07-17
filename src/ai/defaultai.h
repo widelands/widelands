@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2024 by the Widelands Development Team
+ * Copyright (C) 2008-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -174,6 +174,7 @@ private:
 	static constexpr Duration kStatUpdateInterval{15 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
 	static constexpr Duration kDiplomacyInterval{90 * 1000};
+	static constexpr Duration kTradingInterval{90 * 1000};
 
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr Duration kExpeditionMinDuration{60 * 60 * 1000};
@@ -245,8 +246,23 @@ private:
 	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(const Time&);
-	void diplomacy_actions(const Time&);
 	FlagWarehouseDistances flag_warehouse_distance;
+
+	void diplomacy_actions(const Time&);
+	void trading_actions(const Time&);
+
+	// returns true if the trade offer or extension is advantageous
+	// targets and stock levels are taken from `economy`
+	// `batches` should be 0 for trade offers, or the new number of remaining batches if the
+	// extension proposal is accepted
+	bool evaluate_trade(const Widelands::TradeInstance& offer,
+	                    const Widelands::Economy* economy,
+	                    int32_t batches);
+
+	int32_t trade_preciousness(Widelands::DescriptionIndex ware_id,
+	                           int32_t amount,
+	                           const Widelands::Economy* economy,
+	                           bool receive);
 
 	bool check_economies();
 	bool check_productionsites(const Time&);

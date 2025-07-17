@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,10 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	SoldierDescr(const std::string& init_descname,
+	             const LuaTable& t,
+	             const std::vector<std::string>& attribs,
+	             Descriptions& descriptions);
 	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {
@@ -116,19 +119,36 @@ public:
 
 	const Image* get_health_level_pic(uint32_t const level) const {
 		assert(level <= get_max_health_level());
-		return health_.images[level];
+		return health_.images.at(level).second;
 	}
 	const Image* get_attack_level_pic(uint32_t const level) const {
 		assert(level <= get_max_attack_level());
-		return attack_.images[level];
+		return attack_.images.at(level).second;
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
 		assert(level <= get_max_defense_level());
-		return defense_.images[level];
+		return defense_.images.at(level).second;
 	}
 	const Image* get_evade_level_pic(uint32_t const level) const {
 		assert(level <= get_max_evade_level());
-		return evade_.images[level];
+		return evade_.images.at(level).second;
+	}
+
+	const std::string& get_health_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_health_level());
+		return health_.images.at(level).first;
+	}
+	const std::string& get_attack_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_attack_level());
+		return attack_.images.at(level).first;
+	}
+	const std::string& get_defense_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_defense_level());
+		return defense_.images.at(level).first;
+	}
+	const std::string& get_evade_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_evade_level());
+		return evade_.images.at(level).first;
 	}
 
 	uint16_t get_max_anim_height() const {
@@ -148,11 +168,11 @@ private:
 	struct BattleAttribute {
 		explicit BattleAttribute(std::unique_ptr<LuaTable> table);
 
-		uint32_t base;                     // Base value
-		uint32_t maximum;                  // Maximum value for randomizing attack values
-		uint32_t increase;                 // Per level increase
-		uint32_t max_level;                // Maximum level
-		std::vector<const Image*> images;  // Level images
+		uint32_t base;       // Base value
+		uint32_t maximum;    // Maximum value for randomizing attack values
+		uint32_t increase;   // Per level increase
+		uint32_t max_level;  // Maximum level
+		std::vector<std::pair<std::string, const Image*>> images;  // Level images
 	};
 
 	BattleAttribute health_;
@@ -217,6 +237,9 @@ class Soldier : public Worker {
 
 public:
 	enum class InfoMode { kWalkingAround, kInBuilding };
+
+	static constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
+	static constexpr int kPortSpaceRadius = 2;
 
 	explicit Soldier(const SoldierDescr&);
 
@@ -410,57 +433,6 @@ protected:
 
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-};
-
-class NavalInvasionBaseDescr : public BobDescr {
-public:
-	NavalInvasionBaseDescr(char const* const init_name, char const* const init_descname)
-	   : BobDescr(init_name,
-	              init_descname,
-	              MapObjectType::NAVAL_INVASION_BASE,
-	              MapObjectDescr::OwnerType::kTribe) {
-	}
-	~NavalInvasionBaseDescr() override = default;
-	[[nodiscard]] Bob& create_object() const override;
-
-private:
-	DISALLOW_COPY_AND_ASSIGN(NavalInvasionBaseDescr);
-};
-
-class NavalInvasionBase : public Bob {
-public:
-	NavalInvasionBase();
-	static NavalInvasionBase* create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
-
-	const NavalInvasionBaseDescr& descr() const;
-	void init_auto_task(Game& game) override;
-	void cleanup(EditorGameBase&) override;
-	void log_general_info(const EditorGameBase&) const override;
-
-	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
-
-	[[nodiscard]] const std::set<OPtr<Soldier>>& get_soldiers() const {
-		return soldiers_;
-	}
-
-	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-
-private:
-	std::set<OPtr<Soldier>> soldiers_;
-
-	void check_unconquer();
-
-protected:
-	struct Loader : Bob::Loader {
-		Loader() = default;
-
-		void load(FileRead& fr);
-		void load_pointers() override;
-
-	private:
-		std::set<Serial> soldiers_;
-	};
 };
 
 }  // namespace Widelands

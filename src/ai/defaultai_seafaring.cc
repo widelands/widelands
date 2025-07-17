@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2024 by the Widelands Development Team
+ * Copyright (C) 2009-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -290,8 +290,8 @@ void DefaultAI::manage_shipyards() {
 			std::vector<Widelands::InputQueue*> const inputqueues = sy_obs.site->inputqueues();
 			for (Widelands::InputQueue* queue : inputqueues) {
 				if (queue->get_type() == Widelands::wwWARE) {
-					if (!stopped && sy_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) !=
-					                   Widelands::WarePriority::kHigh) {
+					if (!stopped && sy_obs.site->get_priority(Widelands::wwWARE, queue->get_index(),
+					                                          0) != Widelands::WarePriority::kHigh) {
 						game().send_player_set_ware_priority(*sy_obs.site, Widelands::wwWARE,
 						                                     queue->get_index(),
 						                                     Widelands::WarePriority::kHigh);

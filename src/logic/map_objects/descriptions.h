@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,11 +119,13 @@ public:
 	[[nodiscard]] BuildingDescr* get_mutable_building_descr(DescriptionIndex index) const;
 	[[nodiscard]] const CritterDescr* get_critter_descr(DescriptionIndex index) const;
 	[[nodiscard]] const CritterDescr* get_critter_descr(const std::string& name) const;
+	[[nodiscard]] CritterDescr* get_mutable_critter_descr(DescriptionIndex index) const;
 	[[nodiscard]] const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
 	[[nodiscard]] ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex index) const;
 	[[nodiscard]] const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
 	[[nodiscard]] ResourceDescription* get_mutable_resource_descr(DescriptionIndex index) const;
 	[[nodiscard]] const ShipDescr* get_ship_descr(DescriptionIndex index) const;
+	[[nodiscard]] ShipDescr* get_mutable_ship_descr(DescriptionIndex index) const;
 	[[nodiscard]] const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;
 	[[nodiscard]] const TerrainDescription* get_terrain_descr(const std::string& name) const;
 	[[nodiscard]] TerrainDescription* get_mutable_terrain_descr(DescriptionIndex index) const;

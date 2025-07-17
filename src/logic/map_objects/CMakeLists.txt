@@ -89,6 +89,8 @@ wl_library(logic_map_objects
     tribes/market.h
     tribes/militarysite.cc
     tribes/militarysite.h
+    tribes/naval_invasion_base.cc
+    tribes/naval_invasion_base.h
     tribes/partially_finished_building.cc
     tribes/partially_finished_building.h
     tribes/production_program.cc
@@ -107,6 +109,7 @@ wl_library(logic_map_objects
     tribes/soldier.h
     tribes/soldiercontrol.cc
     tribes/soldiercontrol.h
+    tribes/soldier_distance.h
     tribes/training_attribute.h
     tribes/trainingsite.cc
     tribes/trainingsite.h
@@ -126,6 +129,50 @@ wl_library(logic_map_objects
     tribes/worker_descr.h
     tribes/worker_program.cc
     tribes/worker_program.h
+    tribes/worker_programs/animate.cc
+    tribes/worker_programs/breed.cc
+    tribes/worker_programs/callobject.cc
+    tribes/worker_programs/construct.cc
+    tribes/worker_programs/createbob.cc
+    tribes/worker_programs/createware.cc
+    tribes/worker_programs/findobject.cc
+    tribes/worker_programs/findresources.cc
+    tribes/worker_programs/findspace.cc
+    tribes/worker_programs/mine.cc
+    tribes/worker_programs/plant.cc
+    tribes/worker_programs/playsound.cc
+    tribes/worker_programs/removeobject.cc
+    tribes/worker_programs/repeatsearch.cc
+    tribes/worker_programs/return.cc
+    tribes/worker_programs/scout.cc
+    tribes/worker_programs/script.cc
+    tribes/worker_programs/terraform.cc
+    tribes/worker_programs/walk.cc
+    tribes/worker_tasks/buildingwork.cc
+    tribes/worker_tasks/carrier_road.cc
+    tribes/worker_tasks/carrier_transport.cc
+    tribes/worker_tasks/carrytradeitem.cc
+    tribes/worker_tasks/dropoff.cc
+    tribes/worker_tasks/ferry_row.cc
+    tribes/worker_tasks/ferry_unemployed.cc
+    tribes/worker_tasks/fetchfromflag.cc
+    tribes/worker_tasks/fugitive.cc
+    tribes/worker_tasks/geologist.cc
+    tribes/worker_tasks/gowarehouse.cc
+    tribes/worker_tasks/leavebuilding.cc
+    tribes/worker_tasks/program.cc
+    tribes/worker_tasks/releaserecruit.cc
+    tribes/worker_tasks/return.cc
+    tribes/worker_tasks/scout.cc
+    tribes/worker_tasks/shipping.cc
+    tribes/worker_tasks/soldier_attack.cc
+    tribes/worker_tasks/soldier_battle.cc
+    tribes/worker_tasks/soldier_defense.cc
+    tribes/worker_tasks/soldier_die.cc
+    tribes/worker_tasks/soldier_moveinbattle.cc
+    tribes/worker_tasks/soldier_navalinvasion.cc
+    tribes/worker_tasks/transfer.cc
+    tribes/worker_tasks/waitforcapacity.cc
     walkingdir.cc
     walkingdir.h
     world/critter.cc
@@ -161,7 +208,7 @@ wl_library(logic_map_objects
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency
     logic_addons
-    logic_commands # TODO(GunChleoc): Circular dependency
+    commands # TODO(GunChleoc): Circular dependency
     logic_constants
     logic_exceptions
     logic_filesystem_constants
@@ -177,6 +224,7 @@ wl_library(logic_map_objects
     note_sound
     notifications
     scripting_logic
+    scripting_lua_interface
     scripting_lua_table
     sound_constants
     sound

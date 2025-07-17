@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 by the Widelands Development Team
+ * Copyright (C) 2022-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::PINNED_NOTE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attribs*/) {
 	}
 
 	[[nodiscard]] Bob& create_object() const override {

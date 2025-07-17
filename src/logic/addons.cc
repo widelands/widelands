@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,10 @@ i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const st
 }
 
 i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {
-	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
+	if (!starts_with(mapfilename, kAddOnDir)) {
+		if (starts_with(mapfilename, kDownloadedMapsDirFull)) {
+			return new i18n::AddOnTextdomain("websitemaps");
+		}
 		return new i18n::Textdomain("maps");
 	}
 

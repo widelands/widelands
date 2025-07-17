@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,8 @@
 #include "logic/addons.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
-#include "scripting/lua_map.h"
 #include "scripting/lua_table.h"
+#include "scripting/map/lua_field.h"
 #include "scripting/report_error.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -442,7 +442,9 @@ static int L_npgettext(lua_State* L) {
 
    :type script: :class:`string`
    :arg script: The filename relative to the root of the data directory.
-   :returns: :const:`nil`
+   :returns: The table returned by the included script, or an empty table if the script does not
+      return anything.
+      .. versionchanged:: 1.3  It returned nil before
 */
 static int L_include(lua_State* L) {
 	const std::string script = luaL_checkstring(L, -1);
@@ -455,10 +457,12 @@ static int L_include(lua_State* L) {
 		lua_pop(L, 1);  // pop this userdata
 		std::unique_ptr<LuaTable> table(lua->run_script(script));
 		table->do_not_warn_about_unaccessed_keys();
+		lua_pushlightuserdata(L, table.get());  // S: ... userdata
+		lua_rawget(L, LUA_REGISTRYINDEX);       // S: ... table
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
-	return 0;
+	return 1;
 }
 
 /* RST

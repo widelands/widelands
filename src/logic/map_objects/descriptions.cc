@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -347,6 +347,9 @@ const CritterDescr* Descriptions::get_critter_descr(DescriptionIndex index) cons
 const CritterDescr* Descriptions::get_critter_descr(const std::string& name) const {
 	return critters_->exists(name);
 }
+CritterDescr* Descriptions::get_mutable_critter_descr(DescriptionIndex index) const {
+	return critters_->get_mutable(index);
+}
 
 const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex index) const {
 	return immovables_->get_mutable(index);
@@ -364,6 +367,9 @@ const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex con
 }
 
 const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex index) const {
+	return ships_->get_mutable(index);
+}
+ShipDescr* Descriptions::get_mutable_ship_descr(DescriptionIndex index) const {
 	return ships_->get_mutable(index);
 }
 
@@ -434,47 +440,60 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 		add_terrain_description(type_name, table);
 		break;
 	case MapObjectType::CARRIER:
-		workers_->add(new CarrierDescr(type_descname, table, *this));
+		workers_->add(new CarrierDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::CONSTRUCTIONSITE:
-		buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
+		buildings_->add(new ConstructionSiteDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::DISMANTLESITE:
-		buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
+		buildings_->add(new DismantleSiteDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::FERRY:
-		workers_->add(new FerryDescr(type_descname, table, *this));
+		workers_->add(new FerryDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::IMMOVABLE:
 		immovables_->add(new ImmovableDescr(
 		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::MARKET:
-		buildings_->add(new MarketDescr(type_descname, table, *this));
+		buildings_->add(new MarketDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::MILITARYSITE:
-		buildings_->add(new MilitarySiteDescr(type_descname, table, *this));
+		buildings_->add(new MilitarySiteDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::PRODUCTIONSITE:
-		buildings_->add(new ProductionSiteDescr(type_descname, table, *this));
+		buildings_->add(new ProductionSiteDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::SHIP:
-		ships_->add(new ShipDescr(type_descname, table));
+		ships_->add(
+		   new ShipDescr(type_descname, table, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::SOLDIER:
-		workers_->add(new SoldierDescr(type_descname, table, *this));
+		workers_->add(new SoldierDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::TRAININGSITE:
-		buildings_->add(new TrainingSiteDescr(type_descname, table, *this));
+		buildings_->add(new TrainingSiteDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::WARE:
-		wares_->add(new WareDescr(type_descname, table));
+		wares_->add(
+		   new WareDescr(type_descname, table, description_manager_->get_attributes(type_name)));
 		break;
 	case MapObjectType::WAREHOUSE:
-		buildings_->add(new WarehouseDescr(type_descname, table, *this));
+		buildings_->add(new WarehouseDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	case MapObjectType::WORKER:
-		workers_->add(new WorkerDescr(type_descname, table, *this));
+		workers_->add(new WorkerDescr(
+		   type_descname, table, description_manager_->get_attributes(type_name), *this));
 		break;
 	default:
 		NEVER_HERE();

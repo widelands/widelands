@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,9 @@ struct NetAddons {
 	}
 	[[nodiscard]] const std::string& server_descname() const {
 		return server_descname_;
+	}
+	[[nodiscard]] uint32_t websitemaps_i18n_version() const {
+		return websitemaps_i18n_version_;
 	}
 
 	// Fetch the list of all available add-ons from the server
@@ -118,6 +121,7 @@ private:
 	bool is_admin_{false};
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
+	uint32_t websitemaps_i18n_version_{0U};
 	bool is_uploading_addon_{false};
 	bool timeout_was_suppressed_{false};
 	mutable std::string last_error_message_;

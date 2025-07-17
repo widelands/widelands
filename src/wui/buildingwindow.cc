@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,12 +96,18 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
-				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
+				const std::string active_tab = tabs_->tabs().empty() ?
+				                                  std::string() :
+				                                  tabs_->tabs().at(tabs_->active())->get_name();
 				save_position();
 				NoteThreadSafeFunction::instantiate(
 				   [this, active_tab]() {
 					   init(true, showing_workarea_);
-					   tabs_->activate(active_tab);
+					   if (!active_tab.empty()) {
+						   tabs_->activate(active_tab);
+					   } else if (!tabs_->tabs().empty()) {
+						   tabs_->activate(0);
+					   }
 				   },
 				   true);
 			}

@@ -44,7 +44,6 @@ jobs:
             - &installer
               - *src_cmake_dependencies
               - 'data/**'
-              - 'po/**'
             - &ubuntu_dependencies
               - *src_cmake_dependencies
               - 'utils/ubuntu/packages'
@@ -58,6 +57,7 @@ jobs:
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
+            - '.clang-tidy'
           test_suite:
 
             - *ubuntu_dependencies
@@ -78,7 +78,6 @@ jobs:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
-            - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
@@ -156,8 +155,10 @@ jobs:
           do
             [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
             MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
-            ls ../Widelands*/Widelands*${MATRIX} || \
+            if ! ls ../Widelands*/Widelands*${MATRIX} ; then
+              echo "::warning::Falling back to old artifact $ARTIFACT"
               curl -L -o $ARTIFACT "$RELEASE_URL/Widelands-daily-${MATRIX}"
+            fi
           done
       - name: List and rename artifacts
         run: |

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2024 by the Widelands Development Team
+ * Copyright (C) 2012-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,6 +179,7 @@ static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
 	KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_UNKNOWN),                      \
 	                     kFastplaceGroupPrefix + name, descname)
+   FP("market", gettext_noop("Market")),
    FP("warehouse", gettext_noop("Warehouse")),
    FP("port", gettext_noop("Port")),
    FP("training_small", gettext_noop("Minor Training Site")),
@@ -743,6 +744,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_5, KMOD_ALT),
                          "game_msg_filter_scenario",
                          gettext_noop("Show Scenario Messages Only"))},
+   {KeyboardShortcut::kInGameMessagesFilterDiplomacy,
+    KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
+                         keysym(SDLK_6, KMOD_ALT),
+                         "game_msg_filter_diplomacy",
+                         gettext_noop("Show Diplomacy Messages Only"))},
    {KeyboardShortcut::kInGameSeafaringstatsGotoShip,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame},
                          keysym(SDLK_j),

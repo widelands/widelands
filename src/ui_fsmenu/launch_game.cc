@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,7 +181,6 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      settings_(settings),
      ctrl_(ctrl),
      has_desyncing_addon_(false) {
-	warn_desyncing_addon_.set_visible(false);
 	write_replay_.set_state(true);
 
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
