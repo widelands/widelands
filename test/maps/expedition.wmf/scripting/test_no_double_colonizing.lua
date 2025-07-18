@@ -68,6 +68,31 @@ run(function()
    sleep(5000)
    first_ship:build_colonization_port()
    -- This test is to check that there won't be any crash now
+
+   sleep(1000)
+   assert_equal("exp_waiting", first_ship.state, "1st ship waits for instructions")
+   assert_equal("transport", second_ship.state, "2nd ship goes back")
+
+   -- check sending to a destination and then canceling the expedition does not raise an error
+   if not mv.windows[sw1_name] then -- open ship window if closed
+      mv:click(first_ship.field)
+      while(mv.windows[sw1_name] == nil) do
+         sleep(100)
+      end
+   end
+   assert_nil(first_ship.destination, "no destination")
+   mv.windows[sw1_name].dropdowns.set_destination:highlight_item(2) -- 1 is none, select after
+   sleep(500)
+   mv.windows[sw1_name].dropdowns.set_destination:select()
+   sleep(500)
+   assert_not_nil(first_ship.destination, "destination should be set")
+   if mv.windows[sw2_name] then
+      mv.windows[sw2_name]:close() -- to let cancel_...() take the correct ship
+   end
+   cancel_expedition_in_shipwindow(first_ship)
+   sleep(500)
+   assert_equal("transport", first_ship.state) -- expedition is canceled
+
    wait_for_message("Port")
 
    print("# All Tests passed.")

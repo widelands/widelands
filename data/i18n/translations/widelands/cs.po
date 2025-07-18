@@ -8245,7 +8245,7 @@ msgstr "Omlouváme se, ale z následujícího důvodu nebylo možné nouzové ul
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Tržnice"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"

@@ -68,11 +68,53 @@ def colorize_log(text):
             return colorize(text, color)
     return text
 
+
+def github_asan_line(text):
+    "annotates asan summary on GitHub"
+    # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
+    # Therefore only annotate the summary line of ASan.
+    if 'SUMMARY' in text:
+        return '::warning title=ASan error::' + text
+    return text
+
+
+class FileToPrint:
+    """For files in WidelandsTestCase.outputs[]
+
+    To print those files, colorized by default.
+
+    Only use inside print, as __str__() does not return the string but prints it.
+    """
+
+    def __init__(self, file_path, colorize_fn=colorize_log):
+        self.file_path = file_path
+        self.colorize_fn = colorize_fn
+
+    def to_stream(self, out_file):
+        colorize_fn = self.colorize_fn
+        with open(self.file_path, "r") as stdout:
+            for line in stdout:
+                if colorize_fn:
+                    line = colorize_fn(line)
+                print(line, end='', file=out_file)
+
+    def __str__(self):
+        try:
+            self.to_stream(out_file=None)  # to stdout
+        except Exception as ex:
+            # __str__() may not throw an exception (until python 3.xx)
+            return f'Exception: {ex}'
+        return ''  # output was printed
+
+
 group_start = '\n'
 group_end = ''
 if os.getenv('GITHUB_ACTION'):
     group_start = '\n::group::'
     group_end = '\n::endgroup::\n'
+
+# exit code to use for failure of LeakSanitizer
+LSAN_ERROR = 58  # conflict unlikely, it is not defined in module errno
 
 
 class WidelandsTestCase():
@@ -147,9 +189,19 @@ class WidelandsTestCase():
             stdout_file.write("\n")
             stdout_file.flush()
 
+            env = dict(os.environ)
+            lsan = env.get("LSAN_OPTIONS", "")
+            if "suppressions=" not in lsan:  # allow to overwrite
+                lsan += f" suppressions={datadir_for_testing()}/asan_3rd_party_leaks"
+            lsan_path = stdout_filename.replace('stdout', 'lsan').replace('.txt', '')
+            lsan += f" exitcode={LSAN_ERROR} log_path={lsan_path} log_suffix=.txt"
+            if use_colors:
+                lsan += ' color=always'
+            env["LSAN_OPTIONS"] = lsan
+
             start_time = get_time()
             widelands = subprocess.Popen(
-                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
+                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT, env=env)
             try:
                 widelands.communicate(timeout = self.timeout)
             except subprocess.TimeoutExpired:
@@ -168,7 +220,10 @@ class WidelandsTestCase():
                 f'return code is {widelands.returncode:d}', info_color))
             stdout_file.write('\n')
             self.widelands_returncode = widelands.returncode
-        self.outputs.append(stdout_filename)
+        if os.getenv('WLRT_HIDE_STDOUT'):
+            self.outputs.append(f'Stdout is: {stdout_filename}')
+        else:
+            self.outputs.append(FileToPrint(stdout_filename))
         return stdout_filename
 
     def run(self):
@@ -246,16 +301,18 @@ class WidelandsTestCase():
 
     def out_result(self, stdout_filename):
         self.out_status(self.statuses[self.result], f'{self.result} in {self.duration}')
-        if self.keep_output_around:
+        if self.keep_output_around or self.report_header and not os.getenv('GITHUB_ACTION'):
+            # files are kept in this cases, show early that the user can examine them already
             self.out_status('Info ', f'stdout: {stdout_filename}')
+            # ASan info should be printed here instead of verify_success(), but data is not here
 
     def fail(self, short, long, stdout_filename):
         self.success = False
         self.result = short
-        self.out_result(stdout_filename)
         long = colorize(long, self.status_colors['FAIL '])
         self.report_header = f'{long} Analyze the files in {self.run_dir} to see why this test case failed.\n'
         self.report_header += colorize(f'Stdout is: {stdout_filename}', info_color)
+        self.out_result(stdout_filename)  # after report_header is set
 
     def step_success(self, stdout_filename):
         old_result = self.result
@@ -267,6 +324,32 @@ class WidelandsTestCase():
             self.result = old_result
 
     def verify_success(self, stdout, stdout_filename):
+        lsan_path = stdout_filename.replace('stdout', 'lsan').replace('.txt', '')
+        for f_name in glob(lsan_path + "*"):
+            with open(f_name) as file:
+                lsan_log_txt = file.read()
+            if "ERROR: " in lsan_log_txt:
+                if os.getenv('GITHUB_ACTION'):
+                    self.outputs.append(FileToPrint(f_name, github_asan_line))
+                elif os.getenv('WLRT_SHOW_ASAN'):
+                    self.outputs.append(FileToPrint(f_name))
+                else:
+                    idx1 = lsan_log_txt.find('ERROR: ')
+                    idx2 = lsan_log_txt.find('\n', idx1)
+                    txt = colorize(lsan_log_txt[idx1:idx2], warning_color) + f', see in {f_name}\n'
+                    idx1 = lsan_log_txt.rfind('SUMMARY: ')
+                    idx2 = lsan_log_txt.find('\n', idx1)
+                    if idx2 < 0:
+                        idx2 = None  # till end
+                    txt += '    ' + lsan_log_txt[idx1:idx2] + '\n'
+                    self.outputs.append(txt)
+                    self.out_status('Info ', f'ASan log: {f_name}')
+                if not self.report_header:
+                    # set header, as else the output will not be shown and the files get deleted
+                    # The header might get overwritten, which is no problem.
+                    self.report_header = f'Memory problem or memory leak. ASan log is: {f_name}'
+            # else it is information about what was skipped matching suppression file
+
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             # Print stdout in the final summary with this header
@@ -282,10 +365,10 @@ class WidelandsTestCase():
                 self.fail("TIMED OUT", "The test timed out.", stdout_filename)
                 return
             if self.widelands_returncode != 0:
-                if self.widelands_returncode == 1 and self.ignore_error_code:
-                    self.out_status(' IGN ', f'IGNORING error code 1')
+                if self.widelands_returncode == LSAN_ERROR and self.ignore_error_code:
+                    self.out_status(' IGN ', f'IGNORING error code {LSAN_ERROR}')
                 else:
-                    self.fail("FAILED", "Widelands exited abnormally.", stdout_filename)
+                    self.fail("FAILED", f"Widelands exited abnormally ({self.widelands_returncode}).", stdout_filename)
                     return
             if not "All Tests passed" in stdout or "lua_errors.cc" in stdout:
                 self.fail("FAILED", "Not all tests pass.", stdout_filename)
@@ -295,14 +378,12 @@ class WidelandsTestCase():
     def print_report(self):
         print(f'{colorize(self.result, self.get_result_color())}: {self.test_script}\n')
         print(self.report_header)
-        print(group_start, end='')
-        print(colorize("stdout:", info_color))
         for stdout_fn in self.outputs:
-            with open(stdout_fn, "r") as stdout:
-                for line in stdout:
-                    line = colorize_log(line)
-                    print(line, end='')
-        print(group_end, end='')
+            title = os.path.basename(getattr(stdout_fn, 'file_path', 'output'))\
+                .replace('_00', '').replace('.txt', '')
+            print(group_start, colorize(f'{title}:', info_color))
+            print(stdout_fn)
+            print(group_end, end='')
 
 
 # For parallel execution of tests
@@ -395,7 +476,7 @@ def parse_args():
         help = "Run this binary as Widelands. Otherwise some default paths are searched."
     )
     p.add_argument("-i", "--ignore-error-code", action="store_true", default = False,
-        help = "Assume success on return code 1, to allow running the tests "
+        help = f"Assume success on return code {LSAN_ERROR}, to allow running the tests "
         "without ASan reporting false positives."
     )
     p.add_argument("-j", "--workers", type=int, default = 0,

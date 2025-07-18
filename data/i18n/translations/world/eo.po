@@ -5,14 +5,14 @@
 # fenris <fenris@folksprak.org>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Ximena Delgado, 2022
+# 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Ximena Delgado, 2022\n"
+"Last-Translator: 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

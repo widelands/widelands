@@ -7,6 +7,7 @@
 # C138, 2023
 # Arthinet Balika, 2023
 # Laurent Godard, 2024
+# Renaud Bouchard, 2025
 # 
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: Renaud Bouchard, 2025\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -563,6 +564,11 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Nous avons rencontré aujourd'hui un soldat blessé près de notre frontière "
+"nord-ouest. Il a haleté quelque chose à propos de sa tribu attaquée par des "
+"étrangers sadiques, mais il est mort avant de pouvoir nous en dire plus. Son"
+" armure et ses armes semblaient étonnamment familières. Je me demande si la "
+"tribu de Reebaud est en danger ?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -580,6 +586,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Nous avons rencontré aujourd'hui un soldat blessé près de notre frontière "
+"nord-ouest. Il haletait quelque chose à propos de sa tribu attaquée et "
+"vaincue par des étrangers sadiques. Dans son dernier souffle, il nous a "
+"donné le nom de son chef : Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243

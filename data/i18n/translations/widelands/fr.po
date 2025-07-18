@@ -862,7 +862,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Êtes vous certain de vouloir publier cette carte en ligne ?\n\nNom: %1$s\nNom interne: %2$s\nAuteur: %3$s\nDescription: %4$s\nAstuce: %5$s\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -8216,7 +8216,7 @@ msgstr "Nous sommes désolés, mais Widelands n'a pas été dans la possibilité
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Marché"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
@@ -11279,7 +11279,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Annuler cet échange"
 
 #: ../../../../src/wui/marketwindow.cc:809
 msgid ""
@@ -11289,7 +11289,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Mettre en pause cet échange"
 
 #: ../../../../src/wui/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
@@ -11297,7 +11297,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:825
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Mettre en pause cet échange ?"
 
 #: ../../../../src/wui/marketwindow.cc:826
 msgid ""

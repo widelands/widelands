@@ -8152,7 +8152,7 @@ msgstr "Dat dood uns Leid, aver Widelands hett dat nich daan kregen, dat Speel i
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Markt"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
