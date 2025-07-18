@@ -142,7 +142,13 @@ def create_summary_one_runner():
         LSAN = enum.auto()
 
     def get_log_line(line):
-        "get the log line without timestamp"
+        """get the normal log line
+
+        without timestamp and github label"""
+        if 'Z ##[' in line:
+            line, cnt = re.subn('^.*Z ##[[][^]]+]', '', line, 1)
+            if cnt > 0:  # if it really was with github label
+                return line
         return line.split('Z ', 1)[-1]
 
     if not os.getenv('GITHUB_STEP_SUMMARY') and not '/dev/' in os.devnull:
