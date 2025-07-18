@@ -1844,7 +1844,7 @@ Event Subscribers
    * ``building``: A building changed state.
      Parameters:
 
-     * ``object`` (:class:`int`): The building.
+     * ``object`` (:class:`wl.map.Building`): The building.
      * ``action`` (:class:`string`): The action; one of
        ``"changed"``, ``"start_warp"``, ``"finish_warp"``, and ``"workers_changed"``.
 
@@ -1855,15 +1855,16 @@ Event Subscribers
      * ``sender`` (:class:`string`): The player who sent the message.
      * ``recipient`` (:class:`string`): The player who received the message
        (empty for public messages).
-     * ``player`` (:class:`int`): The sender's player number;
+     * ``player`` (:class:`integer`): The sender's player number;
        :const:`0` for spectators and negative for system messages.
-     * ``time`` (:class:`int`): The realtimestamp in seconds since epoch when the message was sent.
+     * ``time`` (:class:`integer`): The realtimestamp in seconds since epoch
+       when the message was sent.
 
    * ``economy``: An economy was merged or deleted.
      Parameters:
 
-     * ``old_economy`` (:class:`int`): The old serial of the economy.
-     * ``new_economy`` (:class:`int`): The new serial of the economy.
+     * ``old_economy`` (:class:`integer`): The old serial of the economy.
+     * ``new_economy`` (:class:`integer`): The new serial of the economy.
      * ``action`` (:class:`string`): The action; either ``"merged"`` or ``"deleted"``.
 
    * ``economy_profile``: The saved economy profiles were modified.
@@ -1875,25 +1876,25 @@ Event Subscribers
    * ``field_possession``: Ownership of a field has changed.
      Parameters:
 
-     * ``x`` (:class:`int`): The x coordinate of the field.
-     * ``y`` (:class:`int`): The y coordinate of the field.
-     * ``player`` (:class:`int`): The player number of the player who gained or lost ownership.
+     * ``x`` (:class:`integer`): The x coordinate of the field.
+     * ``y`` (:class:`integer`): The y coordinate of the field.
+     * ``player`` (:class:`integer`): The player number of the player who gained or lost ownership.
      * ``ownership`` (:class:`string`): Whether the player ``"lost"`` or ``"gained"`` the field.
 
    * ``field_terrain_changed``: The terrain or immovable on a field has changed.
      Parameters:
 
-     * ``x`` (:class:`int`): The x coordinate of the field.
-     * ``y`` (:class:`int`): The y coordinate of the field.
+     * ``x`` (:class:`integer`): The x coordinate of the field.
+     * ``y`` (:class:`integer`): The y coordinate of the field.
      * ``action`` (:class:`string`): What changed; either ``"terrain"`` or ``"immovable"``.
 
    * ``graphic_resolution_changed``: The Widelands main window was resized.
      Parameters:
 
-     * ``old_w`` (:class:`int`): The previous window width.
-     * ``old_h`` (:class:`int`): The previous window height.
-     * ``new_w`` (:class:`int`): The new window width.
-     * ``new_h`` (:class:`int`): The new window height.
+     * ``old_w`` (:class:`integer`): The previous window width.
+     * ``old_h`` (:class:`integer`): The previous window height.
+     * ``new_w`` (:class:`integer`): The new window width.
+     * ``new_h`` (:class:`integer`): The new window height.
 
    * ``immovable``: An immovable was created or destroyed.
      Parameters:
@@ -1904,16 +1905,16 @@ Event Subscribers
    * ``pinned_note_moved``: A pinned note has moved to a different field.
      Parameters:
 
-     * ``old_x`` (:class:`int`): The x coordinate of the pinned note's former field.
-     * ``old_y`` (:class:`int`): The y coordinate of the pinned note's former field.
-     * ``new_x`` (:class:`int`): The x coordinate of the pinned note's new field.
-     * ``new_y`` (:class:`int`): The y coordinate of the pinned note's new field.
-     * ``player`` (:class:`int`): The player number of the pinned note's owner.
+     * ``old_x`` (:class:`integer`): The x coordinate of the pinned note's former field.
+     * ``old_y`` (:class:`integer`): The y coordinate of the pinned note's former field.
+     * ``new_x`` (:class:`integer`): The x coordinate of the pinned note's new field.
+     * ``new_y`` (:class:`integer`): The y coordinate of the pinned note's new field.
+     * ``player`` (:class:`integer`): The player number of the pinned note's owner.
 
    * ``player_details``: The presentation of a player's details has changed.
      Parameters:
 
-     * ``player`` (:class:`int`): The player number of the player whose details changed.
+     * ``player`` (:class:`integer`): The player number of the player whose details changed.
 
    * ``production_site_out_of_resources``: A production site can not find any more resources.
      Parameters:
