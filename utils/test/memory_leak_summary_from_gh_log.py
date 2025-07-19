@@ -45,11 +45,17 @@ class GithubASan:
 
         if 'ERROR: ' in text and cls.summary_file:
             if cls.counted_leaks is None:
+                goto_txt = 'go to the log'
+                if os.getenv('GITHUB_ACTION'):
+                    goto_txt = goto_txt + ' (from menu `...` on top right of this text block)'
+                elif os.getenv('WLRT_LOG_URL'):
+                    goto_txt = f'({goto_txt})[os.getenv(WLRT_LOG_URL)]'
+                else:
+                    goto_txt = goto_txt + ' (you gave as input)'
                 write_summary(
                     '## memory leaks <a name=memory-leak></a>\n\n> [!TIP]\n'
-                    '> To find the full traceback, go to the log (from menu `...` on top right of '
-                    'this text block) and copy the line from the traceback here in the log\'s '
-                    'search field.\n')
+                    f'> To find the full traceback, {goto_txt} '
+                    'and copy the line from the traceback here in the log\'s search field.\n')
             write_summary('\n### ', remove_ansi_escape_sequences(text))
             write_summary('triggered by test ', cls.test_script or '???', '\n\n')
             cls.counted_leaks = 0
