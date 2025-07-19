@@ -161,11 +161,10 @@ def create_summary_one_runner():
         RT_LOGS = enum.auto()
         LSAN = enum.auto()
 
-    def get_log_line(line):
+    def get_log_line_gh(line):
         """get the normal log line.
 
         without timestamp and github label
-
         """
         if 'Z ##[' in line:
             line, cnt = re.subn('^.*Z ##\[[^]]+\]', '', line, 1)
@@ -173,6 +172,11 @@ def create_summary_one_runner():
                 return line
         return line.split('Z ', 1)[-1]
 
+    def get_log_line_passtrough(line):
+        """for when input is log"""
+        return line
+
+    get_log_line = get_log_line_gh
     if not os.getenv('GITHUB_STEP_SUMMARY') and not '/dev/' in os.devnull:
         print('set environment variable GITHUB_STEP_SUMMARY to get output', sys.stderr)
         os.exit(19)  # exit with "no such device exists" (stdout file not found)
@@ -186,8 +190,9 @@ def create_summary_one_runner():
     for line in sys.stdin:
         match r_mode:
             case ReadingMode.BEGIN:
-                if '========' in line:  # directly a log as input
+                if '========' in line and 'Z ' not in line:  # directly a log as input
                     r_mode = ReadingMode.LSAN
+                    get_log_line = get_log_line_passtrough
                 elif line != '\n':  # when not an empty line
                     r_mode = ReadingMode.INSIDE
             case ReadingMode.INSIDE:
