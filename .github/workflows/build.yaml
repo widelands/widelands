@@ -32,6 +32,7 @@ jobs:
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
+        #   pattern: https://github.com/micromatch/picomatch?tab=readme-ov-file#globbing-features
         filters: |
           _anchors: # to define yaml anchors in one place
             - &src_cmake_dependencies
