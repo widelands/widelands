@@ -51,7 +51,7 @@ class GithubASan:
                     'this text block) and copy the line from the traceback here in the log\'s '
                     'search field.\n')
             write_summary('\n### ', remove_ansi_escape_sequences(text))
-            write_summary('triggered by test ', cls.test_script, '\n\n')
+            write_summary('triggered by test ', cls.test_script or '???', '\n\n')
             cls.counted_leaks = 0
         if 'SUMMARY' in text:
             if cls.summary_file and cls.counted_leaks > 0:
@@ -119,7 +119,7 @@ class GithubASan:
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
                     f'[search issue on gh](<{search_on_gh}>)\n')
                 for data in cls.leaks_by_origin[origin]:
-                    summary_file.write(f'+{data["tb"]}    triggered by {data["test"]}\n')
+                    summary_file.write(f'+{data["tb"]}    triggered by {data["test"] or "???"}\n')
                 summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
         summary_hint = '\nsee about memory leaks in job summary on'
