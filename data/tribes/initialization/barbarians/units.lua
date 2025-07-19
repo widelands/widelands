@@ -1243,8 +1243,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Barbarian nursery rhyme"),
             -- TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
             purpose = pgettext("barbarians_building", "Releases animals into the wild to steady the meat production."),
-            -- TRANSLATORS: Performance helptext for production site: Gamekeeper's Hut
-            performance = pgettext("barbarians_building", "The gamekeeper pauses %s before going to work again."):bformat(format_seconds(53))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Gamekeeper's Hut, part 1
+               pgettext("barbarians_building", "The gamekeeper can release one animal between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 4), format_minutes_seconds(1, 19)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Gamekeeper's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1329,7 +1333,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Barbarian production site: Lime Kiln
             note = pgettext("barbarians_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Lime Kiln
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce grout in about %s on average."):bformat(format_seconds(41))
+            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce grout in about %s on average."):bformat(format_seconds(45))
          }
       },
       {
@@ -2655,6 +2659,7 @@ wl.Descriptions():new_tribe {
    port = "barbarians_port",
 
    fastplace = {
+      market = "barbarians_market",
       warehouse = "barbarians_warehouse",
       port = "barbarians_port",
       training_small = "barbarians_battlearena",
