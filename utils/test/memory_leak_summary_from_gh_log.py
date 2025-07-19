@@ -157,6 +157,9 @@ def create_summary_one_runner():
     GithubASan.set_summary_file(os.getenv('GITHUB_STEP_SUMMARY', '/dev/stdout'))
     # TODO summary file should be empty
 
+    if sys.stdin.isatty():
+        print('  hint: program expects input on stdin', file=sys.stderr)
+
     r_mode: ReadingMode = ReadingMode.BEGIN
     for line in sys.stdin:
         match r_mode:
