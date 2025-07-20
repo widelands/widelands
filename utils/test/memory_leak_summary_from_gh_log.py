@@ -116,7 +116,8 @@ class GithubASan:
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
         def key_path_of_tb(data):
-            "for sorting by path in traceback line (ignoring memory address and code)"
+            """for sorting by path in traceback line (ignoring memory address
+            and code)"""
             return data['tb'].rsplit('` ', 1)[-1], data['test']
 
         if not cls.leaks_by_origin or not cls.summary_file:
