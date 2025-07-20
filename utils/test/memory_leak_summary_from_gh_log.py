@@ -1,5 +1,5 @@
 #!/bin/env python3
-"""write github job summary from github log
+"""write github job summary from github log.
 
 pipe to this script input like from:
 - unzip -p .../wl_logs_run_41823906582.zip
@@ -9,6 +9,7 @@ pipe to this script input like from:
     # one way to get a raw log by url
 - gh run view --log --job 456789  # maybe, unchecked
 - cat /tmp/widelands_regression_test_XXX/lsan_XX.XXX.txt  # file created by ./regression_test.py
+
 """
 
 import enum
@@ -27,18 +28,20 @@ class GithubASan:
 
     @classmethod
     def github_asan_line(cls, text):
-        "annotates asan summary on GitHub and writes more info to the steps summary file"
+        """annotates asan summary on GitHub and writes more info to the steps
+        summary file."""
         # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
         # Therefore only annotate the summary line of ASan and write other info to the steps summary
         def write_summary(arg1, *args):
-            "write to github summary file (markdown format)"
+            """write to github summary file (markdown format)"""
             with open(cls.summary_file, 'a') as summary_file:
                 summary_file.write(arg1)
                 for arg in args:
                     summary_file.write(arg)
 
         def remove_ansi_escape_sequences(text):
-            "removes ansi escape sequences (because github summary does not support them)"
+            """removes ansi escape sequences (because github summary does not
+            support them)"""
             if not cls.ansi_escape_pattern:
                 cls.ansi_escape_pattern = re.compile(r'\x1b[^m]*m')
             return cls.ansi_escape_pattern.sub('', text)
@@ -109,7 +112,7 @@ class GithubASan:
     @classmethod
     def summarize_origins(cls):
         def to_query_str(txt):
-            "only escape what is needed for our case"
+            """only escape what is needed for our case."""
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
         if not cls.leaks_by_origin or not cls.summary_file:
@@ -120,12 +123,12 @@ class GithubASan:
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
                                 '/issues?q=' + to_query_str(
                     f'is:issue state:open label:"memory & performance" '
-                    f'"{origin.rsplit(":", 1)[0]}"'))
+                    f'"{origin.rsplit(':', 1)[0]}"'))
                 summary_file.write(
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
                     f'[search issue on gh](<{search_on_gh}>)\n')
                 for data in cls.leaks_by_origin[origin]:
-                    summary_file.write(f'+{data["tb"]}    triggered by {data["test"] or "???"}\n')
+                    summary_file.write(f'+{data['tb']}    triggered by {data['test'] or '???'}\n')
                 summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
         summary_hint = '\nsee about memory leaks in job summary on'
@@ -148,9 +151,11 @@ def create_summary_one_runner():
         LSAN = enum.auto()
 
     def get_log_line(line):
-        """get the normal log line
+        """get the normal log line.
 
-        without timestamp and github label"""
+        without timestamp and github label
+
+        """
         if 'Z ##[' in line:
             line, cnt = re.subn('^.*Z ##[[][^]]+]', '', line, 1)
             if cnt > 0:  # if it really was with github label
