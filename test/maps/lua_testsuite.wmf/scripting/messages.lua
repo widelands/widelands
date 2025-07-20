@@ -13,9 +13,7 @@ function messages_tests:test_defaults()
    local m = player1:send_to_inbox("Hallo", "World!")
    assert_equal("Hallo", m.title)
    assert_equal("World!", m.body)
-   -- test script is run at game time 1
-   assert_equal(1, m.sent, "sent at game time")
-   assert_equal(1, m.sent)
+   assert_equal(wl.Game().time, m.sent, "sent at game time")
    assert_equal(nil, m.field)
    assert_equal("new", m.status)
 end

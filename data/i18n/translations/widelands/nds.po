@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-07-03 03:27+0000\n"
+"POT-Creation-Date: 2025-07-10 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -281,7 +281,7 @@ msgid "Dec"
 msgstr "Dez."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
-#: ../../../../src/wlapplication_options.cc:658
+#: ../../../../src/wlapplication_options.cc:659
 #: ../../../../src/wui/game_diplomacy_menu.cc:44
 #: ../../../../src/wui/interactive_gamebase.cc:250
 msgid "Diplomacy"
@@ -405,7 +405,7 @@ msgstr "Esc"
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../../../src/editor/editorinteractive.cc:117
-#: ../../../../src/wlapplication_options.cc:1042
+#: ../../../../src/wlapplication_options.cc:1043
 msgctxt "editor"
 msgid "Tools"
 msgstr "Warktügen"
@@ -426,18 +426,18 @@ msgid "Tool size"
 msgstr "Warktüüg-Grött"
 
 #: ../../../../src/editor/editorinteractive.cc:161
-#: ../../../../src/wlapplication_options.cc:457
+#: ../../../../src/wlapplication_options.cc:458
 msgid "Undo"
 msgstr "Torüggnehmen"
 
 #: ../../../../src/editor/editorinteractive.cc:166
-#: ../../../../src/wlapplication_options.cc:461
+#: ../../../../src/wlapplication_options.cc:462
 msgid "Redo"
 msgstr "Wedderhalen"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:178
-#: ../../../../src/wlapplication_options.cc:860
+#: ../../../../src/wlapplication_options.cc:861
 #: ../../../../src/wui/buildingwindow.cc:454
 #: ../../../../src/wui/interactive_player.cc:237
 msgid "Help"
@@ -447,14 +447,14 @@ msgstr "Hülp"
 #: ../../../../src/editor/editorinteractive.cc:213
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../../../src/ui_fsmenu/main.cc:438
-#: ../../../../src/wlapplication_options.cc:440
+#: ../../../../src/wlapplication_options.cc:441
 msgid "New Map"
 msgstr "Neje Kaart"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/editor/editorinteractive.cc:222
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:853
-#: ../../../../src/wlapplication_options.cc:445
+#: ../../../../src/wlapplication_options.cc:446
 msgid "New Random Map"
 msgstr "Neje tofällig Kaart"
 
@@ -463,7 +463,7 @@ msgstr "Neje tofällig Kaart"
 #: ../../../../src/editor/editorinteractive.cc:230
 #: ../../../../src/editor/ui_menus/main_menu_load_map.cc:36
 #: ../../../../src/ui_fsmenu/main.cc:443
-#: ../../../../src/wlapplication_options.cc:851
+#: ../../../../src/wlapplication_options.cc:852
 msgid "Load Map"
 msgstr "Lade Kaart"
 
@@ -471,7 +471,7 @@ msgstr "Lade Kaart"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:238
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../../../src/wlapplication_options.cc:854
+#: ../../../../src/wlapplication_options.cc:855
 msgid "Save Map"
 msgstr "Kaart sekern"
 
@@ -484,14 +484,14 @@ msgstr "Kaart im Internett publik maken"
 #: ../../../../src/editor/editorinteractive.cc:251
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../../../src/editor/ui_menus/main_menu_save_map.cc:62
-#: ../../../../src/wlapplication_options.cc:453
+#: ../../../../src/wlapplication_options.cc:454
 msgid "Map Options"
 msgstr "Kaart-Instellens"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/editor/editorinteractive.cc:256
-#: ../../../../src/wlapplication_options.cc:857
+#: ../../../../src/wlapplication_options.cc:858
 msgid "Exit Editor"
 msgstr "Bewarker verlaten"
 
@@ -624,7 +624,7 @@ msgstr "Klick up een Feld, um Informationen daaröver to wiesen"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:402
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
-#: ../../../../src/wlapplication_options.cc:516
+#: ../../../../src/wlapplication_options.cc:517
 msgid "Tool History"
 msgstr "Warktüüg-Histoorje"
 
@@ -1926,7 +1926,7 @@ msgstr "Speelbefehlen"
 #: ../../../../src/game_io/game_loader.cc:165
 #: ../../../../src/map_io/map_saver.cc:146
 #: ../../../../src/map_io/widelands_map_loader.cc:400
-#: ../../../../src/wlapplication_options.cc:661
+#: ../../../../src/wlapplication_options.cc:662
 #: ../../../../src/wui/interactive_player.cc:227
 #: ../../../../src/wui/interactive_player.cc:495
 msgid "Messages"
@@ -3606,7 +3606,7 @@ msgstr "Schrievens"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
-#: ../../../../src/wlapplication_options.cc:654
+#: ../../../../src/wlapplication_options.cc:655
 #: ../../../../src/wui/game_objectives_menu.cc:30
 #: ../../../../src/wui/interactive_player.cc:216
 #: ../../../../src/wui/interactive_player.cc:484
@@ -4606,7 +4606,7 @@ msgid "Delete the selected text"
 msgstr "De utköört Text lösken"
 
 #: ../../../../src/ui_basic/textinput.cc:388
-#: ../../../../src/wlapplication_options.cc:364
+#: ../../../../src/wlapplication_options.cc:365
 msgid "Select All"
 msgstr "All utkören"
 
@@ -6445,7 +6445,7 @@ msgid "Help: %s"
 msgstr "Hülp: %s"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:57
-#: ../../../../src/wlapplication_options.cc:320
+#: ../../../../src/wlapplication_options.cc:321
 msgid "Metaserver Lobby"
 msgstr "Metaserver-Deel"
 
@@ -6586,7 +6586,7 @@ msgid "General"
 msgstr "Allgemeen"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
-#: ../../../../src/wlapplication_options.cc:277
+#: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
 msgstr "Bewarker"
 
@@ -6596,9 +6596,9 @@ msgstr "Fixbau"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:307
 #: ../../../../src/ui_fsmenu/main.cc:526
-#: ../../../../src/wlapplication_options.cc:312
-#: ../../../../src/wlapplication_options.cc:1008
-#: ../../../../src/wlapplication_options.cc:1067
+#: ../../../../src/wlapplication_options.cc:313
+#: ../../../../src/wlapplication_options.cc:1009
+#: ../../../../src/wlapplication_options.cc:1068
 msgid "Add-Ons"
 msgstr "Verwiederns"
 
@@ -6864,7 +6864,7 @@ msgid "Online Game Settings"
 msgstr "Internett-Speel-Instellens"
 
 #: ../../../../src/ui_fsmenu/login_box.cc:44
-#: ../../../../src/wlapplication_options.cc:400
+#: ../../../../src/wlapplication_options.cc:401
 #: ../../../../src/wui/economy_options_window.cc:682
 msgid "Save"
 msgstr "Sekern"
@@ -6913,13 +6913,13 @@ msgid "Begin a new game"
 msgstr "Een nejes Speel begünnen"
 
 #: ../../../../src/ui_fsmenu/main.cc:380
-#: ../../../../src/wlapplication_options.cc:237
+#: ../../../../src/wlapplication_options.cc:238
 msgid "New Game"
 msgstr "Nejes Speel"
 
 #: ../../../../src/ui_fsmenu/main.cc:382
 #: ../../../../src/ui_fsmenu/random_game.cc:29
-#: ../../../../src/wlapplication_options.cc:258
+#: ../../../../src/wlapplication_options.cc:259
 msgid "New Random Game"
 msgstr "Nejes tofällig Speel"
 
@@ -6928,7 +6928,7 @@ msgid "Create a new random match"
 msgstr "Een nejes tofällig Speel inrichten"
 
 #: ../../../../src/ui_fsmenu/main.cc:385
-#: ../../../../src/wlapplication_options.cc:266
+#: ../../../../src/wlapplication_options.cc:267
 msgid "Campaigns"
 msgstr "Rutfödderungs-Riegen"
 
@@ -6937,7 +6937,7 @@ msgid "Play a campaign"
 msgstr "Eene Rutfödderungs-Riege spölen"
 
 #: ../../../../src/ui_fsmenu/main.cc:387
-#: ../../../../src/wlapplication_options.cc:262
+#: ../../../../src/wlapplication_options.cc:263
 msgid "Tutorials"
 msgstr "Inföhrens"
 
@@ -6948,8 +6948,8 @@ msgstr "Een vun uns’ Inföhrens för neje Spelers spölen"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui_fsmenu/main.cc:390
-#: ../../../../src/wlapplication_options.cc:241
-#: ../../../../src/wlapplication_options.cc:872
+#: ../../../../src/wlapplication_options.cc:242
+#: ../../../../src/wlapplication_options.cc:873
 #: ../../../../src/wui/game_main_menu_save_game.cc:48
 #: ../../../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
@@ -6960,7 +6960,7 @@ msgid "Continue a saved game"
 msgstr "Een sekert Speel wiederspölen"
 
 #: ../../../../src/ui_fsmenu/main.cc:402
-#: ../../../../src/wlapplication_options.cc:300
+#: ../../../../src/wlapplication_options.cc:301
 msgid "Continue Playing"
 msgstr "Wiederspölen"
 
@@ -6999,7 +6999,7 @@ msgid "Log in as a registered user"
 msgstr "As vermarkt Bruker anmellen"
 
 #: ../../../../src/ui_fsmenu/main.cc:434
-#: ../../../../src/wlapplication_options.cc:316
+#: ../../../../src/wlapplication_options.cc:317
 msgid "LAN / Direct IP"
 msgstr "LAN / IP stracks"
 
@@ -7020,13 +7020,13 @@ msgid "Edit an existing map"
 msgstr "Eene Kaart bewarken"
 
 #: ../../../../src/ui_fsmenu/main.cc:452
-#: ../../../../src/wlapplication_options.cc:295
+#: ../../../../src/wlapplication_options.cc:296
 msgid "Continue Editing"
 msgstr "Wiederbewarken"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui_fsmenu/main.cc:474
-#: ../../../../src/wlapplication_options.cc:249
+#: ../../../../src/wlapplication_options.cc:250
 #: ../../../../src/wui/game_main_menu_save_game.cc:46
 #: ../../../../src/wui/interactive_gamebase.cc:167
 msgid "Load Replay"
@@ -7078,7 +7078,7 @@ msgstr "Verwiederns installeren un verwalten"
 
 #: ../../../../src/ui_fsmenu/main.cc:530
 #: ../../../../src/ui_fsmenu/options.cc:89
-#: ../../../../src/wlapplication_options.cc:328
+#: ../../../../src/wlapplication_options.cc:329
 msgid "Options"
 msgstr "Instellens"
 
@@ -7091,7 +7091,7 @@ msgid "Readme, License, and Credits"
 msgstr "Leesmi, Lizenz un well dat maakt hett"
 
 #: ../../../../src/ui_fsmenu/main.cc:538
-#: ../../../../src/wlapplication_options.cc:304
+#: ../../../../src/wlapplication_options.cc:305
 msgid "Exit Widelands"
 msgstr "Widelands verlaten"
 
@@ -8151,610 +8151,614 @@ msgid ""
 msgstr "Dat dood uns Leid, aver Widelands hett dat nich daan kregen, dat Speel im Noodfall to sekern. Grund:\n\n%s"
 
 #: ../../../../src/wlapplication_options.cc:182
+msgid "Market"
+msgstr "Markt"
+
+#: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
 msgstr "Kraamhuus"
 
-#: ../../../../src/wlapplication_options.cc:183
+#: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
 msgstr "Muu"
 
-#: ../../../../src/wlapplication_options.cc:184
+#: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
 msgstr "Lütte Övens-Boen"
 
-#: ../../../../src/wlapplication_options.cc:185
+#: ../../../../src/wlapplication_options.cc:186
 msgid "Major Training Site"
 msgstr "Grote Övens-Boen"
 
-#: ../../../../src/wlapplication_options.cc:186
+#: ../../../../src/wlapplication_options.cc:187
 msgid "Primary Small Military Site"
 msgstr "Eerste lütte Soldateree-Boo"
 
-#: ../../../../src/wlapplication_options.cc:187
+#: ../../../../src/wlapplication_options.cc:188
 msgid "Secondary Small Military Site"
 msgstr "Twede lütte Soldateree-Boo"
 
-#: ../../../../src/wlapplication_options.cc:188
+#: ../../../../src/wlapplication_options.cc:189
 msgid "Primary Medium Military Site"
 msgstr "Eerste middelgrote Soldateree-Boo"
 
-#: ../../../../src/wlapplication_options.cc:189
+#: ../../../../src/wlapplication_options.cc:190
 msgid "Secondary Medium Military Site"
 msgstr "Twede middelgrote Soldateree-Boo"
 
-#: ../../../../src/wlapplication_options.cc:190
+#: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
 msgstr "Toorn"
 
-#: ../../../../src/wlapplication_options.cc:191
+#: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
 msgstr "Schanz"
 
-#: ../../../../src/wlapplication_options.cc:192
+#: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
 msgstr "Boomslagerhuus"
 
-#: ../../../../src/wlapplication_options.cc:193
+#: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
 msgstr "Försterhuus"
 
-#: ../../../../src/wlapplication_options.cc:194
+#: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
 msgstr "Flintslagerhuus"
 
-#: ../../../../src/wlapplication_options.cc:195
+#: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
 msgstr "Eerstes Baukraam-Produzeren"
 
-#: ../../../../src/wlapplication_options.cc:196
+#: ../../../../src/wlapplication_options.cc:197
 msgid "Secondary Building Materials Industry"
 msgstr "Twedes Baukraam-Produzeren"
 
-#: ../../../../src/wlapplication_options.cc:197
+#: ../../../../src/wlapplication_options.cc:198
 msgid "Tertiary Building Materials Industry"
 msgstr "Dardes Baukraam-Produzeren"
 
-#: ../../../../src/wlapplication_options.cc:198
+#: ../../../../src/wlapplication_options.cc:199
 msgid "Fishing"
 msgstr "Fisken"
 
-#: ../../../../src/wlapplication_options.cc:199
+#: ../../../../src/wlapplication_options.cc:200
 msgid "Hunting"
 msgstr "Jagen"
 
-#: ../../../../src/wlapplication_options.cc:200
+#: ../../../../src/wlapplication_options.cc:201
 msgid "Fish/Meat Replenishing"
 msgstr "Fiss/Fleesk nafüllen"
 
-#: ../../../../src/wlapplication_options.cc:201
+#: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
 msgstr "Well"
 
-#: ../../../../src/wlapplication_options.cc:202
+#: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
 msgstr "Eerste Buurderee"
 
-#: ../../../../src/wlapplication_options.cc:203
+#: ../../../../src/wlapplication_options.cc:204
 msgid "Secondary Farm"
 msgstr "Twede Buurderee"
 
-#: ../../../../src/wlapplication_options.cc:204
+#: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
 msgstr "Möhlen"
 
-#: ../../../../src/wlapplication_options.cc:205
+#: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
 msgstr "Backeree"
 
-#: ../../../../src/wlapplication_options.cc:206
+#: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
 msgstr "Broeree"
 
-#: ../../../../src/wlapplication_options.cc:207
+#: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
 msgstr "Rökelkamer"
 
-#: ../../../../src/wlapplication_options.cc:208
+#: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
 msgstr "Kneipe"
 
-#: ../../../../src/wlapplication_options.cc:209
+#: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
 msgstr "Kluten Smelten"
 
-#: ../../../../src/wlapplication_options.cc:210
+#: ../../../../src/wlapplication_options.cc:211
 msgid "Tool Smithy"
 msgstr "Warktüügsmee"
 
-#: ../../../../src/wlapplication_options.cc:211
+#: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
 msgstr "Wapensmee"
 
-#: ../../../../src/wlapplication_options.cc:212
+#: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
 msgstr "Panzersmee"
 
-#: ../../../../src/wlapplication_options.cc:213
+#: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
 msgstr "Weevstohl"
 
-#: ../../../../src/wlapplication_options.cc:214
+#: ../../../../src/wlapplication_options.cc:215
 msgid "Shipyard"
 msgstr "Warft"
 
-#: ../../../../src/wlapplication_options.cc:215
+#: ../../../../src/wlapplication_options.cc:216
 msgid "Ferry Yard"
 msgstr "Fährenwarft"
 
-#: ../../../../src/wlapplication_options.cc:216
+#: ../../../../src/wlapplication_options.cc:217
 msgid "Scouting"
 msgstr "Bespejen"
 
-#: ../../../../src/wlapplication_options.cc:217
+#: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
 msgstr "Kasern"
 
-#: ../../../../src/wlapplication_options.cc:218
+#: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
 msgstr "Tweder Lastendrager"
 
-#: ../../../../src/wlapplication_options.cc:219
+#: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"
 msgstr "Holtköhl"
 
-#: ../../../../src/wlapplication_options.cc:220
+#: ../../../../src/wlapplication_options.cc:221
 msgid "Stone Mine"
 msgstr "Steen-Bargwark"
 
-#: ../../../../src/wlapplication_options.cc:221
+#: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
 msgstr "Köhle-Bargwark"
 
-#: ../../../../src/wlapplication_options.cc:222
+#: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
 msgstr "Iesen-Bargwark"
 
-#: ../../../../src/wlapplication_options.cc:223
+#: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
 msgstr "Gold-Bargwark"
 
-#: ../../../../src/wlapplication_options.cc:224
+#: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
 msgstr "Buurderee-Produzeren"
 
-#: ../../../../src/wlapplication_options.cc:225
+#: ../../../../src/wlapplication_options.cc:226
 msgid "Primary Agricultural Consumer"
 msgstr "Eerster Buurderee-Bruker"
 
-#: ../../../../src/wlapplication_options.cc:226
+#: ../../../../src/wlapplication_options.cc:227
 msgid "Secondary Agricultural Consumer"
 msgstr "Tweder Buurderee-Bruker"
 
-#: ../../../../src/wlapplication_options.cc:227
+#: ../../../../src/wlapplication_options.cc:228
 msgid "Alternative Industry"
 msgstr "Wiedere Weertskupp"
 
-#: ../../../../src/wlapplication_options.cc:228
+#: ../../../../src/wlapplication_options.cc:229
 msgid "Industry Support"
 msgstr "Weertskupp-Unnerstütten"
 
-#: ../../../../src/wlapplication_options.cc:229
+#: ../../../../src/wlapplication_options.cc:230
 msgid "Terraforming"
 msgstr "Landwinnen"
 
-#: ../../../../src/wlapplication_options.cc:245
+#: ../../../../src/wlapplication_options.cc:246
 msgid "Watch Replay"
 msgstr "Upteken ankieken"
 
-#: ../../../../src/wlapplication_options.cc:254
+#: ../../../../src/wlapplication_options.cc:255
 msgid "Watch Latest Replay"
 msgstr "Lestes Upteken ankieken"
 
-#: ../../../../src/wlapplication_options.cc:270
+#: ../../../../src/wlapplication_options.cc:271
 msgid "Singleplayer"
 msgstr "Een Speler"
 
-#: ../../../../src/wlapplication_options.cc:274
+#: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
 msgstr "Mennig Spelers"
 
-#: ../../../../src/wlapplication_options.cc:281
+#: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
 msgstr "Bewarker – Lade Kaart"
 
-#: ../../../../src/wlapplication_options.cc:285
+#: ../../../../src/wlapplication_options.cc:286
 msgid "Editor – New Map"
 msgstr "Bewarker – Neje Kaart"
 
-#: ../../../../src/wlapplication_options.cc:290
+#: ../../../../src/wlapplication_options.cc:291
 msgid "Editor – New Random Map"
 msgstr "Bewarker – Neje tofällig Kaart"
 
-#: ../../../../src/wlapplication_options.cc:308
+#: ../../../../src/wlapplication_options.cc:309
 msgid "About"
 msgstr "Över"
 
-#: ../../../../src/wlapplication_options.cc:324
+#: ../../../../src/wlapplication_options.cc:325
 msgid "Internet Login"
 msgstr "Internett-Instellens"
 
-#: ../../../../src/wlapplication_options.cc:334
+#: ../../../../src/wlapplication_options.cc:335
 msgid "Toggle Building Spaces"
 msgstr "Rüümte tum Bauen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:339
+#: ../../../../src/wlapplication_options.cc:340
 msgid "Toggle Minimap"
 msgstr "Lütt Kaart wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:344
+#: ../../../../src/wlapplication_options.cc:345
 msgid "Encyclopedia"
 msgstr "Tum Naslaan"
 
-#: ../../../../src/wlapplication_options.cc:348
+#: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"
 msgstr "Kontextmenü"
 
-#: ../../../../src/wlapplication_options.cc:352
+#: ../../../../src/wlapplication_options.cc:353
 msgid "Cut Text"
 msgstr "Text utsnieden"
 
-#: ../../../../src/wlapplication_options.cc:356
+#: ../../../../src/wlapplication_options.cc:357
 msgid "Copy Text"
 msgstr "Text koperen"
 
-#: ../../../../src/wlapplication_options.cc:360
+#: ../../../../src/wlapplication_options.cc:361
 msgid "Paste Text"
 msgstr "Text infögen"
 
-#: ../../../../src/wlapplication_options.cc:368
+#: ../../../../src/wlapplication_options.cc:369
 msgid "Delete Item"
 msgstr "Ding wegdoon"
 
-#: ../../../../src/wlapplication_options.cc:373
+#: ../../../../src/wlapplication_options.cc:374
 msgid "Tooltip Accessibility Mode Key"
 msgstr "Knoop för Muushülptexten-Togangelkheid"
 
-#: ../../../../src/wlapplication_options.cc:377
+#: ../../../../src/wlapplication_options.cc:378
 msgid "Toggle Fullscreen"
 msgstr "Heler Billschirm an- of utknipsen"
 
-#: ../../../../src/wlapplication_options.cc:381
+#: ../../../../src/wlapplication_options.cc:382
 msgid "Take Screenshot"
 msgstr "Billschirmfoto maken"
 
-#: ../../../../src/wlapplication_options.cc:385
+#: ../../../../src/wlapplication_options.cc:386
 msgid "Change Music"
 msgstr "Musik ännern"
 
-#: ../../../../src/wlapplication_options.cc:390
+#: ../../../../src/wlapplication_options.cc:391
 msgid "Open the Debug Console (developer tool)"
 msgstr "Wies de Ingaav tum Fehler-Söken (Entwickler-Warktüüg)"
 
-#: ../../../../src/wlapplication_options.cc:395
+#: ../../../../src/wlapplication_options.cc:396
 msgid "Toggle Cheat Mode (developer tool)"
 msgstr "Bescheten-Modus an- of utknipsen (Entwickler-Warktüüg)"
 
-#: ../../../../src/wlapplication_options.cc:405
+#: ../../../../src/wlapplication_options.cc:406
 msgid "Load"
 msgstr "Laden"
 
-#: ../../../../src/wlapplication_options.cc:410
+#: ../../../../src/wlapplication_options.cc:411
 msgid "Exit"
 msgstr "Verlaten"
 
-#: ../../../../src/wlapplication_options.cc:415
+#: ../../../../src/wlapplication_options.cc:416
 msgid "Zoom In"
 msgstr "Vergrotern"
 
-#: ../../../../src/wlapplication_options.cc:420
+#: ../../../../src/wlapplication_options.cc:421
 msgid "Zoom Out"
 msgstr "Verkleenern"
 
-#: ../../../../src/wlapplication_options.cc:425
+#: ../../../../src/wlapplication_options.cc:426
 msgid "Reset Zoom"
 msgstr "Vergrotern torüggsetten"
 
-#: ../../../../src/wlapplication_options.cc:430
+#: ../../../../src/wlapplication_options.cc:431
 msgid "Jump to Next Location"
 msgstr "To de anner Stee gahn"
 
-#: ../../../../src/wlapplication_options.cc:435
+#: ../../../../src/wlapplication_options.cc:436
 msgid "Jump to Previous Location"
 msgstr "To de lesten Stee gahn"
 
-#: ../../../../src/wlapplication_options.cc:449
+#: ../../../../src/wlapplication_options.cc:450
 msgid "Publish Map Online"
 msgstr "Kaart im Internett publik maken"
 
-#: ../../../../src/wlapplication_options.cc:466
+#: ../../../../src/wlapplication_options.cc:467
 msgid "Toggle Tools Menu"
 msgstr "Warktüügmenü wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:471
+#: ../../../../src/wlapplication_options.cc:472
 msgid "Change Height Tool"
 msgstr "Warktüüg: Höcht ännern"
 
-#: ../../../../src/wlapplication_options.cc:476
+#: ../../../../src/wlapplication_options.cc:477
 msgid "Random Height Tool"
 msgstr "Warktüüg: Toföllig Höcht"
 
-#: ../../../../src/wlapplication_options.cc:480
+#: ../../../../src/wlapplication_options.cc:481
 msgid "Terrain Tool"
 msgstr "Warktüüg: Landskupp"
 
-#: ../../../../src/wlapplication_options.cc:484
+#: ../../../../src/wlapplication_options.cc:485
 msgid "Immovables Tool"
 msgstr "Warktüüg: Faste Dingen"
 
-#: ../../../../src/wlapplication_options.cc:488
+#: ../../../../src/wlapplication_options.cc:489
 msgid "Animals Tool"
 msgstr "Warktüüg: Deerten"
 
-#: ../../../../src/wlapplication_options.cc:492
+#: ../../../../src/wlapplication_options.cc:493
 msgid "Resources Tool"
 msgstr "Warktüüg: Mineraale"
 
-#: ../../../../src/wlapplication_options.cc:496
+#: ../../../../src/wlapplication_options.cc:497
 msgid "Port Spaces Tool"
 msgstr "Warktüüg: Rüümte för Muden"
 
-#: ../../../../src/wlapplication_options.cc:500
+#: ../../../../src/wlapplication_options.cc:501
 msgid "Info Tool"
 msgstr "Informatioons-Warktüüg"
 
-#: ../../../../src/wlapplication_options.cc:504
+#: ../../../../src/wlapplication_options.cc:505
 msgid "Map Origin Tool"
 msgstr "Warktüüg: Kaart-Quell"
 
-#: ../../../../src/wlapplication_options.cc:508
+#: ../../../../src/wlapplication_options.cc:509
 msgid "Map Size Tool"
 msgstr "Warktüüg: Kaart-Grött"
 
-#: ../../../../src/wlapplication_options.cc:512
+#: ../../../../src/wlapplication_options.cc:513
 msgid "Players Menu"
 msgstr "Spelers-Menü"
 
-#: ../../../../src/wlapplication_options.cc:521
+#: ../../../../src/wlapplication_options.cc:522
 msgid "Toggle Height Heat Map"
 msgstr "Höchten-Farvkaart an- of utknipsen"
 
-#: ../../../../src/wlapplication_options.cc:525
+#: ../../../../src/wlapplication_options.cc:526
 msgid "Toggle Grid"
 msgstr "Gadder wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:529
+#: ../../../../src/wlapplication_options.cc:530
 msgid "Toggle Oceans"
 msgstr "Seen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:534
+#: ../../../../src/wlapplication_options.cc:535
 msgid "Toggle Immovables"
 msgstr "Faste Dingen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:539
+#: ../../../../src/wlapplication_options.cc:540
 msgid "Toggle Animals"
 msgstr "Deerten wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:544
+#: ../../../../src/wlapplication_options.cc:545
 msgid "Toggle Resources"
 msgstr "Mineraale wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:550
+#: ../../../../src/wlapplication_options.cc:551
 msgid "Toggle Maximum Build Spaces"
 msgstr "Gröttste Rüümte tum Bauen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:557
+#: ../../../../src/wlapplication_options.cc:558
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "Warktüüg-Grött up %d setten"
 
-#: ../../../../src/wlapplication_options.cc:575
+#: ../../../../src/wlapplication_options.cc:576
 #, c-format
 msgid "Set Tool Gap to %d%%"
 msgstr "Warktüüg-Lock up %d%% setten"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:593
+#: ../../../../src/wlapplication_options.cc:594
 #: ../../../../src/wui/game_options_sound_menu.cc:34
 #: ../../../../src/wui/interactive_gamebase.cc:147
 msgid "Sound Options"
 msgstr "Gedrüüs-Instellens"
 
-#: ../../../../src/wlapplication_options.cc:598
+#: ../../../../src/wlapplication_options.cc:599
 msgid "Restart Scenario or Replay"
 msgstr "Rutfödderung of Upteken neei begünnen"
 
-#: ../../../../src/wlapplication_options.cc:602
+#: ../../../../src/wlapplication_options.cc:603
 msgid "Toggle Census"
 msgstr "Namen vun Husen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:607
+#: ../../../../src/wlapplication_options.cc:608
 msgid "Toggle Status Labels"
 msgstr "Tostand-Texten wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:612
+#: ../../../../src/wlapplication_options.cc:613
 msgid "Toggle Soldier Levels"
 msgstr "Soldaten-Stand wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:617
+#: ../../../../src/wlapplication_options.cc:618
 msgid "Toggle Buildings Visibility"
 msgstr "Sicht up Husen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:622
+#: ../../../../src/wlapplication_options.cc:623
 msgid "Toggle Overlapping Workareas"
 msgstr "Arbeidsgewest-Övernannerliggen wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:627
+#: ../../../../src/wlapplication_options.cc:628
 #: ../../../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr "Tahlen över Allgemeens"
 
-#: ../../../../src/wlapplication_options.cc:631
+#: ../../../../src/wlapplication_options.cc:632
 #: ../../../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Tahlen över Waren"
 
-#: ../../../../src/wlapplication_options.cc:636
+#: ../../../../src/wlapplication_options.cc:637
 #: ../../../../src/wui/building_statistics_menu.cc:52
 msgid "Building Statistics"
 msgstr "Tahlen över Husen"
 
-#: ../../../../src/wlapplication_options.cc:640
+#: ../../../../src/wlapplication_options.cc:641
 msgid "Stock Inventory"
 msgstr "Bestand-Fenster"
 
-#: ../../../../src/wlapplication_options.cc:645
+#: ../../../../src/wlapplication_options.cc:646
 #: ../../../../src/wui/soldier_statistics_menu.cc:148
 msgid "Soldier Statistics"
 msgstr "Tahlen över Soldaten"
 
-#: ../../../../src/wlapplication_options.cc:650
+#: ../../../../src/wlapplication_options.cc:651
 msgid "Seafaring Statistics"
 msgstr "Tahlen över Seefahrt"
 
-#: ../../../../src/wlapplication_options.cc:666
+#: ../../../../src/wlapplication_options.cc:667
 msgid "Decrease Game Speed by 1×"
 msgstr "Speel-Gauheid um 1× minnern"
 
-#: ../../../../src/wlapplication_options.cc:671
+#: ../../../../src/wlapplication_options.cc:672
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Speel-Gauheid um 0,25× minnern"
 
-#: ../../../../src/wlapplication_options.cc:676
+#: ../../../../src/wlapplication_options.cc:677
 msgid "Decrease Game Speed by 10×"
 msgstr "Speel-Gauheid um 10× minnern"
 
-#: ../../../../src/wlapplication_options.cc:681
+#: ../../../../src/wlapplication_options.cc:682
 msgid "Increase Game Speed by 1×"
 msgstr "Speel-Gauheid um 1× verhogen"
 
-#: ../../../../src/wlapplication_options.cc:686
+#: ../../../../src/wlapplication_options.cc:687
 msgid "Increase Game Speed by 0.25×"
 msgstr "Speel-Gauheid um 0,25× verhogen"
 
-#: ../../../../src/wlapplication_options.cc:691
+#: ../../../../src/wlapplication_options.cc:692
 msgid "Increase Game Speed by 10×"
 msgstr "Speel-Gauheid um 10× verhogen"
 
-#: ../../../../src/wlapplication_options.cc:695
+#: ../../../../src/wlapplication_options.cc:696
 msgid "Reset Game Speed"
 msgstr "Speel-Gauheid torüggsetten"
 
-#: ../../../../src/wlapplication_options.cc:699
+#: ../../../../src/wlapplication_options.cc:700
 msgid "Pause The Game"
 msgstr "Dat Speel anhollen"
 
-#: ../../../../src/wlapplication_options.cc:704
+#: ../../../../src/wlapplication_options.cc:705
 msgid "Scroll to Starting Field"
 msgstr "Tur Anfangsstee gahn"
 
-#: ../../../../src/wlapplication_options.cc:707
+#: ../../../../src/wlapplication_options.cc:708
 #: ../../../../src/wui/game_chat_menu.cc:68
 #: ../../../../src/wui/interactive_gamebase.cc:416
 msgid "Chat"
 msgstr "Snack"
 
-#: ../../../../src/wlapplication_options.cc:711
+#: ../../../../src/wlapplication_options.cc:712
 #: ../../../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
 msgstr "Faste Anmarken"
 
-#: ../../../../src/wlapplication_options.cc:715
+#: ../../../../src/wlapplication_options.cc:716
 msgid "Go to Location"
 msgstr "To Stee gahn"
 
-#: ../../../../src/wlapplication_options.cc:720
+#: ../../../../src/wlapplication_options.cc:721
 msgid "Show All Messages"
 msgstr "Alle Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:725
+#: ../../../../src/wlapplication_options.cc:726
 msgid "Show Geologists’ Messages Only"
 msgstr "Blot Narichten vun Schattsökers wiesen"
 
-#: ../../../../src/wlapplication_options.cc:730
+#: ../../../../src/wlapplication_options.cc:731
 msgid "Show Economy Messages Only"
 msgstr "Blot Weertskupp-Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:735
+#: ../../../../src/wlapplication_options.cc:736
 msgid "Show Seafaring Messages Only"
 msgstr "Blot Seefahrt-Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:740
+#: ../../../../src/wlapplication_options.cc:741
 msgid "Show Military Messages Only"
 msgstr "Blot Soldateree-Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:745
+#: ../../../../src/wlapplication_options.cc:746
 msgid "Show Scenario Messages Only"
 msgstr "Blot Rutfödderungs-Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:750
+#: ../../../../src/wlapplication_options.cc:751
 msgid "Show Diplomacy Messages Only"
 msgstr "Blot Betreckens-Narichten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:755
+#: ../../../../src/wlapplication_options.cc:756
 msgid "Go to Ship"
 msgstr "Tum Schipp gahn"
 
-#: ../../../../src/wlapplication_options.cc:760
+#: ../../../../src/wlapplication_options.cc:761
 msgid "Watch Ship"
 msgstr "Schipp beluren"
 
-#: ../../../../src/wlapplication_options.cc:765
+#: ../../../../src/wlapplication_options.cc:766
 msgid "Open Ship Window"
 msgstr "Schipp-Fenster opmaken"
 
-#: ../../../../src/wlapplication_options.cc:770
+#: ../../../../src/wlapplication_options.cc:771
 msgid "Open Ship Window And Go to Ship"
 msgstr "Schippfenster opmaken un tum Schipp gahn"
 
-#: ../../../../src/wlapplication_options.cc:775
+#: ../../../../src/wlapplication_options.cc:776
 msgid "Show All Ships"
 msgstr "All Schippen wiesen"
 
-#: ../../../../src/wlapplication_options.cc:780
+#: ../../../../src/wlapplication_options.cc:781
 msgid "Show Idle Ships"
 msgstr "Lege Schippen wiesen"
 
-#: ../../../../src/wlapplication_options.cc:785
+#: ../../../../src/wlapplication_options.cc:786
 msgid "Show Transport Ships"
 msgstr "Schippen up Schipperee wiesen"
 
-#: ../../../../src/wlapplication_options.cc:790
+#: ../../../../src/wlapplication_options.cc:791
 msgid "Show Waiting Expeditions"
 msgstr "Söken bi’m Wachten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:795
+#: ../../../../src/wlapplication_options.cc:796
 msgid "Show Scouting Expeditions"
 msgstr "Söken bi’m Utförsken wiesen"
 
-#: ../../../../src/wlapplication_options.cc:800
+#: ../../../../src/wlapplication_options.cc:801
 msgid "Show Expeditions with Port Spaces"
 msgstr "Seefahrt: Söken mit Rüümte för Muden wiesen"
 
-#: ../../../../src/wlapplication_options.cc:805
+#: ../../../../src/wlapplication_options.cc:806
 msgid "Show Warships"
 msgstr "Kriegsschippen wiesen"
 
-#: ../../../../src/wlapplication_options.cc:810
+#: ../../../../src/wlapplication_options.cc:811
 msgid "Show Ships Being Refitted"
 msgstr "Schippen bi’m Umrüsten wiesen"
 
-#: ../../../../src/wlapplication_options.cc:815
+#: ../../../../src/wlapplication_options.cc:816
 msgid "Toggle Quick Navigation"
 msgstr "Fixnavigeren wiesen of verbargen"
 
-#: ../../../../src/wlapplication_options.cc:821
+#: ../../../../src/wlapplication_options.cc:822
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Stee #%d marken"
 
-#: ../../../../src/wlapplication_options.cc:825
+#: ../../../../src/wlapplication_options.cc:826
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "To markter Stee #%d gahn"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:875
+#: ../../../../src/wlapplication_options.cc:876
 #: ../../../../src/wui/game_main_menu_save_game.cc:50
 #: ../../../../src/wui/interactive_gamebase.cc:157
 msgid "Save Game"
@@ -8763,7 +8767,7 @@ msgstr "Speel sekern"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../../../src/wlapplication_options.cc:878
+#: ../../../../src/wlapplication_options.cc:879
 #: ../../../../src/wui/game_client_disconnected.cc:112
 #: ../../../../src/wui/game_summary.cc:108
 #: ../../../../src/wui/interactive_gamebase.cc:194
@@ -8771,118 +8775,118 @@ msgid "Exit Game"
 msgstr "Speel verlaten"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:896
+#: ../../../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Pieltasten"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:898
+#: ../../../../src/wlapplication_options.cc:899
 msgid "Move the map"
 msgstr "De Kaart bewegen"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:900
+#: ../../../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Strg + Pieltasten"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:902
+#: ../../../../src/wlapplication_options.cc:903
 msgid "Move the map fast"
 msgstr "De Kaart fix bewegen"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:904
+#: ../../../../src/wlapplication_options.cc:905
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Umschalt + Pieltasten"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:906
+#: ../../../../src/wlapplication_options.cc:907
 msgid "Move the map slowly"
 msgstr "De Kaart sachte bewegen"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:918
+#: ../../../../src/wlapplication_options.cc:919
 msgid "Remember current location"
 msgstr "Deese Stee marken"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:921
+#: ../../../../src/wlapplication_options.cc:922
 msgid "Go to previously remembered location"
 msgstr "To markter Stee gahn"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../../../src/wlapplication_options.cc:970
+#: ../../../../src/wlapplication_options.cc:971
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr "%1$s / %2$s"
 
-#: ../../../../src/wlapplication_options.cc:988
-#: ../../../../src/wlapplication_options.cc:1032
+#: ../../../../src/wlapplication_options.cc:989
+#: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
 msgstr "Handigtasten"
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:999
+#: ../../../../src/wlapplication_options.cc:1000
 msgid "Message Window"
 msgstr "Narichtenfenster"
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../../../src/wlapplication_options.cc:1004
+#: ../../../../src/wlapplication_options.cc:1005
 msgid "Ship Statistics"
 msgstr "Tahlen över Schippen"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1046
+#: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
 msgstr "Warktüüg-Grött ännern"
 
-#: ../../../../src/wlapplication_options.cc:1047
+#: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
 msgstr "Warktüüg-Lock ännern"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1052
+#: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Klick an"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1054
+#: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr "Sett neje Dingen up de Kaart of verhoogt Kaart-Elementen um de »Verhoge/Minnere«-Weert"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1058
+#: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Umschalt + Klick"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1060
+#: ../../../../src/wlapplication_options.cc:1061
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr "Maakt Dingen vun de Kaart weg of minnert Kaart-Elementen um de »Verhoge/Minnere«-Weert"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../../../src/wlapplication_options.cc:1063
+#: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Strg + Klick"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../../../src/wlapplication_options.cc:1065
+#: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Sett Kaart-Elementen up de »Fastmaken«-Weert fast"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../../../src/wlapplication_options.cc:1172
+#: ../../../../src/wlapplication_options.cc:1173
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -8890,241 +8894,241 @@ msgstr "Narichten: %s"
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../../../src/wlapplication_options.cc:1177
+#: ../../../../src/wlapplication_options.cc:1178
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr "Seefahrt: %s"
 
-#: ../../../../src/wlapplication_options.cc:1375
+#: ../../../../src/wlapplication_options.cc:1376
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Umschalt"
 
-#: ../../../../src/wlapplication_options.cc:1378
+#: ../../../../src/wlapplication_options.cc:1379
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../../../src/wlapplication_options.cc:1382
+#: ../../../../src/wlapplication_options.cc:1383
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../../../src/wlapplication_options.cc:1384
+#: ../../../../src/wlapplication_options.cc:1385
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../../../src/wlapplication_options.cc:1388
+#: ../../../../src/wlapplication_options.cc:1389
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Strg"
 
-#: ../../../../src/wlapplication_options.cc:1397
+#: ../../../../src/wlapplication_options.cc:1398
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../../../src/wlapplication_options.cc:1410
+#: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Leegtast"
 
-#: ../../../../src/wlapplication_options.cc:1412
+#: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Enter"
 
-#: ../../../../src/wlapplication_options.cc:1414
+#: ../../../../src/wlapplication_options.cc:1415
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape"
 
-#: ../../../../src/wlapplication_options.cc:1416
+#: ../../../../src/wlapplication_options.cc:1417
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Tab"
 
-#: ../../../../src/wlapplication_options.cc:1418
+#: ../../../../src/wlapplication_options.cc:1419
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Menü"
 
-#: ../../../../src/wlapplication_options.cc:1420
+#: ../../../../src/wlapplication_options.cc:1421
 msgctxt "hotkey"
 msgid "Application"
 msgstr "Anwennen"
 
-#: ../../../../src/wlapplication_options.cc:1422
+#: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Paus"
 
-#: ../../../../src/wlapplication_options.cc:1424
+#: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Bild rup"
 
-#: ../../../../src/wlapplication_options.cc:1426
+#: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Bild runner"
 
-#: ../../../../src/wlapplication_options.cc:1428
+#: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Pos1"
 
-#: ../../../../src/wlapplication_options.cc:1430
+#: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
 msgid "End"
 msgstr "Ende"
 
-#: ../../../../src/wlapplication_options.cc:1432
+#: ../../../../src/wlapplication_options.cc:1433
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Pieltast na links"
 
-#: ../../../../src/wlapplication_options.cc:1434
+#: ../../../../src/wlapplication_options.cc:1435
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Pieltast na rechts"
 
-#: ../../../../src/wlapplication_options.cc:1436
+#: ../../../../src/wlapplication_options.cc:1437
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Pieltast na boven"
 
-#: ../../../../src/wlapplication_options.cc:1438
+#: ../../../../src/wlapplication_options.cc:1439
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Pieltast na unnern"
 
-#: ../../../../src/wlapplication_options.cc:1440
+#: ../../../../src/wlapplication_options.cc:1441
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Einfg"
 
-#: ../../../../src/wlapplication_options.cc:1442
+#: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Entf"
 
-#: ../../../../src/wlapplication_options.cc:1444
+#: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Rücktast"
 
-#: ../../../../src/wlapplication_options.cc:1446
+#: ../../../../src/wlapplication_options.cc:1447
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Faststelltast"
 
-#: ../../../../src/wlapplication_options.cc:1448
+#: ../../../../src/wlapplication_options.cc:1449
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Num-Lock-Tast"
 
-#: ../../../../src/wlapplication_options.cc:1450
+#: ../../../../src/wlapplication_options.cc:1451
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Rollen-Tast"
 
-#: ../../../../src/wlapplication_options.cc:1452
+#: ../../../../src/wlapplication_options.cc:1453
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Tahlenblock 1"
 
-#: ../../../../src/wlapplication_options.cc:1454
+#: ../../../../src/wlapplication_options.cc:1455
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Tahlenblock 2"
 
-#: ../../../../src/wlapplication_options.cc:1456
+#: ../../../../src/wlapplication_options.cc:1457
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Tahlenblock 3"
 
-#: ../../../../src/wlapplication_options.cc:1458
+#: ../../../../src/wlapplication_options.cc:1459
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Tahlenblock 4"
 
-#: ../../../../src/wlapplication_options.cc:1460
+#: ../../../../src/wlapplication_options.cc:1461
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Tahlenblock 5"
 
-#: ../../../../src/wlapplication_options.cc:1462
+#: ../../../../src/wlapplication_options.cc:1463
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Tahlenblock 6"
 
-#: ../../../../src/wlapplication_options.cc:1464
+#: ../../../../src/wlapplication_options.cc:1465
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Tahlenblock 7"
 
-#: ../../../../src/wlapplication_options.cc:1466
+#: ../../../../src/wlapplication_options.cc:1467
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Tahlenblock 8"
 
-#: ../../../../src/wlapplication_options.cc:1468
+#: ../../../../src/wlapplication_options.cc:1469
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Tahlenblock 9"
 
-#: ../../../../src/wlapplication_options.cc:1470
+#: ../../../../src/wlapplication_options.cc:1471
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Tahlenblock 0"
 
-#: ../../../../src/wlapplication_options.cc:1472
+#: ../../../../src/wlapplication_options.cc:1473
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Tahlenblock ,"
 
-#: ../../../../src/wlapplication_options.cc:1474
+#: ../../../../src/wlapplication_options.cc:1475
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Tahlenblock +"
 
-#: ../../../../src/wlapplication_options.cc:1476
+#: ../../../../src/wlapplication_options.cc:1477
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Tahlenblock -"
 
-#: ../../../../src/wlapplication_options.cc:1478
+#: ../../../../src/wlapplication_options.cc:1479
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Tahlenblock *"
 
-#: ../../../../src/wlapplication_options.cc:1480
+#: ../../../../src/wlapplication_options.cc:1481
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Tahlenblock /"
 
-#: ../../../../src/wlapplication_options.cc:1482
+#: ../../../../src/wlapplication_options.cc:1483
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Tahlenblock Enter"
 
-#: ../../../../src/wlapplication_options.cc:1491
+#: ../../../../src/wlapplication_options.cc:1492
 msgid "(disabled)"
 msgstr "(utknipst)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../../../src/wlapplication_options.cc:1494
+#: ../../../../src/wlapplication_options.cc:1495
 #: ../../../../src/wui/waresdisplay.cc:646
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../../../src/wlapplication_options.cc:1550
+#: ../../../../src/wlapplication_options.cc:1551
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Fixbau #%i"

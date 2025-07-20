@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-19 03:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
@@ -337,13 +337,7 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr ""
-
-#: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
-msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
+msgid "Economy and Trading"
 msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
