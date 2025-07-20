@@ -115,6 +115,10 @@ class GithubASan:
             """only escape what is needed for our case."""
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
+        def key_path_of_tb(data):
+            "for sorting by path in traceback line (ignoring memory address and code)"
+            return data['tb'].rsplit('` ', 1)[-1], data['test']
+
         if not cls.leaks_by_origin or not cls.summary_file:
             return
         with open(cls.summary_file, 'a') as summary_file:
@@ -127,7 +131,7 @@ class GithubASan:
                 summary_file.write(
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
                     f'[search issue on gh](<{search_on_gh}>)\n')
-                for data in cls.leaks_by_origin[origin]:
+                for data in sorted(cls.leaks_by_origin[origin], key=key_path_of_tb):
                     summary_file.write(f'+{data['tb']}    triggered by {data['test'] or '???'}\n')
                 summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
