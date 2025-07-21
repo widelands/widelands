@@ -342,7 +342,7 @@ msgstr "In deeser Inföhren lehrst du, wo du Schippen, Muden, Fähren un Prielen
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Weertskupp un Hannel"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
