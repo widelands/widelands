@@ -128,12 +128,13 @@ class GithubASan:
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
                                 '/issues?q=' + to_query_str(
                     f'is:issue state:open label:"memory & performance" '
-                    f'"{origin.rsplit(':', 1)[0]}"'))
+                    f'''"{origin.rsplit(':', 1)[0]}"'''))
                 summary_file.write(
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
                     f'[search issue on gh](<{search_on_gh}>)\n')
                 for data in sorted(cls.leaks_by_origin[origin], key=key_path_of_tb):
-                    summary_file.write(f'+{data['tb']}    triggered by {data['test'] or '???'}\n')
+                    summary_file.write(
+                        f'''+{data['tb']}    triggered by {data['test'] or '???'}\n''')
                 summary_file.write('</details>\n')
         cls.leaks_by_origin = {}
         summary_hint = '\nsee about memory leaks in job summary on'
