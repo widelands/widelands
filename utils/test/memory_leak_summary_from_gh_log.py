@@ -11,6 +11,7 @@ pipe to this script input like from:
 - gh run view --log --job 456789  # maybe, unchecked
 - cat /tmp/widelands_regression_test_XXX/lsan_XX.XXX.txt  # file created by ./regression_test.py
 
+Or give a file in this format as argument.
 """
 
 import enum
@@ -154,7 +155,7 @@ class GithubASan:
             print(summary_hint, cls.summary_file, file=sys.stderr)
 
 
-def create_summary_one_runner():
+def create_summary_one_runner(in_file):
     class ReadingMode(enum.Enum):
         BEGIN = enum.auto()
         INSIDE = enum.auto()
@@ -190,11 +191,11 @@ def create_summary_one_runner():
     GithubASan.set_summary_file(os.getenv('GITHUB_STEP_SUMMARY', '/dev/stdout'))
     # TODO summary file should be empty
 
-    if sys.stdin.isatty():
-        print('  hint: program expects input on stdin', file=sys.stderr)
+    if in_file.isatty():
+        print(f'  hint: program expects input on {in_file.name}', file=sys.stderr)
 
     r_mode: ReadingMode = ReadingMode.BEGIN
-    for line in sys.stdin:
+    for line in in_file:
         match r_mode:
             case ReadingMode.BEGIN:
                 if '========' in line and 'Z ' not in line:  # directly a log as input
@@ -238,7 +239,13 @@ def create_summary_one_runner():
 
 
 def main():
-    create_summary_one_runner()
+    in_file = None
+    if len(sys.argv) > 1 and sys.argv[1] != '-':
+        in_file = open(sys.argv[1])
+    try:
+        create_summary_one_runner(in_file or sys.stdin)
+    finally:
+        in_file and in_file.close()
 
 
 if __name__ == '__main__':
