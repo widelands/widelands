@@ -43,7 +43,8 @@ class GithubASan:
             """removes ansi escape sequences (because github summary does not
             support them)"""
             if not cls.ansi_escape_pattern:
-                cls.ansi_escape_pattern = re.compile(r'\x1b[^m]*m')
+                # \x1b is the escape character, the other one the textual representation used by gh
+                cls.ansi_escape_pattern = re.compile(r'[\x1b\u241b][^m]*m')
             return cls.ansi_escape_pattern.sub('', text)
 
         if 'ERROR: ' in text and cls.summary_file:
