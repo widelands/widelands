@@ -7,6 +7,7 @@ pipe to this script input like from:
     # zip fetched from github, with "download log archive"
 - curl https://github.com/widelands/widelands/commit/$C_HASH/checks/$JOB_NUM_ID/logs
     # one way to get a raw log by url
+- GITHUB_ACTION=dummy ./regression_test.py
 - gh run view --log --job 456789  # maybe, unchecked
 - cat /tmp/widelands_regression_test_XXX/lsan_XX.XXX.txt  # file created by ./regression_test.py
 
@@ -159,6 +160,8 @@ def create_summary_one_runner():
         INSIDE = enum.auto()
         RT_HEADER = enum.auto()
         RT_LOGS = enum.auto()
+        RT_HEADER_L = enum.auto()  # when log is local
+        RT_LOGS_L = enum.auto()
         LSAN = enum.auto()
 
     def get_log_line_gh(line):
@@ -172,8 +175,12 @@ def create_summary_one_runner():
                 return line
         return line.split('Z ', 1)[-1]
 
-    def get_log_line_passtrough(line):
-        """for when input is log"""
+    def get_log_line_local(line):
+        """for when input is not from github"""
+        if '::' in line and line.startswith('::'):
+            idx = line.find('::', 2)
+            if idx > 0:
+                return line[idx + 2:]  # without ::warning xxx::
         return line
 
     get_log_line = get_log_line_gh
@@ -192,18 +199,26 @@ def create_summary_one_runner():
             case ReadingMode.BEGIN:
                 if '========' in line and 'Z ' not in line:  # directly a log as input
                     r_mode = ReadingMode.LSAN
-                    get_log_line = get_log_line_passtrough
+                    get_log_line = get_log_line_local
                 elif line != '\n':  # when not an empty line
                     r_mode = ReadingMode.INSIDE
             case ReadingMode.INSIDE:
                 if ' ##[group]Run ' in line and 'regression_test.py' in line:
                     r_mode = ReadingMode.RT_HEADER
-            case ReadingMode.RT_HEADER:
+                elif ' tests with ' in line and line.startswith('Will run '):
+                    r_mode = ReadingMode.RT_HEADER_L
+            case ReadingMode.RT_HEADER | ReadingMode.RT_HEADER_L:
                 if '------' in line:
-                    r_mode = ReadingMode.RT_LOGS
-            case ReadingMode.RT_LOGS:
+                    if r_mode == ReadingMode.RT_HEADER_L:
+                        r_mode = ReadingMode.RT_LOGS_L
+                    else:
+                        r_mode = ReadingMode.RT_LOGS
+            case ReadingMode.RT_LOGS | ReadingMode.RT_LOGS_L:
                 if ' ##[group]' in line and 'lsan.' in line:
                     r_mode = ReadingMode.LSAN
+                elif '::group::' in line and 'lsan.' in line:
+                    r_mode = ReadingMode.LSAN
+                    get_log_line = get_log_line_local
                 elif ': ' in line and ('Passed' in line or 'FAILED' in line or 'TIMED OUT' in line):
                     # this is before stdout
                     idx = line.find(': ')
@@ -214,6 +229,8 @@ def create_summary_one_runner():
                     GithubASan.set_test_script(test_name)
             case ReadingMode.LSAN:
                 if ' ##[endgroup]' in line:
+                    r_mode = ReadingMode.RT_LOGS
+                elif '::endgroup::' in line:
                     r_mode = ReadingMode.RT_LOGS
                 else:
                     GithubASan.github_asan_line(get_log_line(line))
