@@ -117,15 +117,19 @@ class GithubASan:
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
         def key_path_of_tb(data):
-            """for sorting by path in traceback line (ignoring memory address
-            and code)"""
-            return data['tb'].rsplit('` ', 1)[-1], data['test']
+            """for sorting by path in traceback line (ignoring memory address)"""
+            # sort by: called code, then test
+            return data['tb'].split(' in ', 1)[-1], data['test']
+
+        def key_file_line_col(file_line_col):
+            """for sorting by line numerically"""
+            return [int(e) if e.isdecimal() else e for e in file_line_col.rsplit(':', 2)]
 
         if not cls.leaks_by_origin or not cls.summary_file:
             return
         with open(cls.summary_file, 'a') as summary_file:
             summary_file.write('\n\n## memory leaks by origin\n\n')
-            for origin in sorted(cls.leaks_by_origin):
+            for origin in sorted(cls.leaks_by_origin, key=key_file_line_col):
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
                                 '/issues?q=' + to_query_str(
                     f'is:issue state:open label:"memory & performance" '
