@@ -107,7 +107,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _("Trade can help your economy and strengthen relationships between players. Learn the basics in tutorial `Economy and Trading`."),
+      text = _("Trade can help your economy and strengthen relationships between players. Learn the basics in the tutorial `Economy and Trading`."),
       seconds = 5
    },
 }
