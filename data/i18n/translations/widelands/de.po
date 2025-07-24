@@ -699,11 +699,11 @@ msgstr "Die Anzeige der maximalen Bauhilfe, die verfügbar wäre, wenn alle unbe
 #. the map height heat map is shown
 #: ../../../../src/editor/editorinteractive.cc:495
 msgid "Disable height heat map"
-msgstr "Höhenkarte anzeigen"
+msgstr "Höhenanzeige deaktivieren"
 
 #: ../../../../src/editor/editorinteractive.cc:496
 msgid "Enable height heat map"
-msgstr "Höhenkarte ausblenden"
+msgstr "Höhenanzeige aktivieren"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -8547,7 +8547,7 @@ msgstr "Spielermenü"
 
 #: ../../../../src/wlapplication_options.cc:522
 msgid "Toggle Height Heat Map"
-msgstr "Höhenkarte an-/ausschalten"
+msgstr "Höhenanzeige umschalten"
 
 #: ../../../../src/wlapplication_options.cc:526
 msgid "Toggle Grid"
