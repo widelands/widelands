@@ -12,6 +12,7 @@ pipe to this script input like from:
 - cat /tmp/widelands_regression_test_XXX/lsan_XX.XXX.txt  # file created by ./regression_test.py
 
 Or give a file in this format as argument.
+
 """
 
 import enum
@@ -119,12 +120,13 @@ class GithubASan:
             return txt.translate({ord(':'): '%3A', ord('"'): '%22', ord('&'): '%26'})
 
         def key_path_of_tb(data):
-            """for sorting by path in traceback line (ignoring memory address)"""
+            """for sorting by path in traceback line (ignoring memory
+            address)"""
             # sort by: called code, then test
             return data['tb'].split(' in ', 1)[-1], data['test']
 
         def key_file_line_col(file_line_col):
-            """for sorting by line numerically"""
+            """for sorting by line numerically."""
             return [int(e) if e.isdecimal() else e for e in file_line_col.rsplit(':', 2)]
 
         if not cls.leaks_by_origin or not cls.summary_file:
@@ -169,6 +171,7 @@ def create_summary_one_runner(in_file):
         """get the normal log line.
 
         without timestamp and github label
+
         """
         if 'Z ##[' in line:
             line, cnt = re.subn('^.*Z ##\[[^]]+\]', '', line, 1)
@@ -177,7 +180,7 @@ def create_summary_one_runner(in_file):
         return line.split('Z ', 1)[-1]
 
     def get_log_line_local(line):
-        """for when input is not from github"""
+        """for when input is not from github."""
         if '::' in line and line.startswith('::'):
             idx = line.find('::', 2)
             if idx > 0:
