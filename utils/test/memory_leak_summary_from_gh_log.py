@@ -133,7 +133,7 @@ class GithubASan:
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
                                 '/issues?q=' + to_query_str(
                     f'is:issue state:open label:"memory & performance" '
-                    f'''"{origin.rsplit(':', 1)[0]}"'''))
+                    f'''"{origin.rsplit(':', 2)[0]}"'''))
                 summary_file.write(
                     f'\n<details><summary>\n\n#### {origin} <a name="{origin}"></a>\n</summary>\n\n'
                     f'[search issue on gh](<{search_on_gh}>)\n')
