@@ -218,9 +218,10 @@ def create_summary_one_runner(in_file):
                     else:
                         r_mode = ReadingMode.RT_LOGS
             case ReadingMode.RT_LOGS | ReadingMode.RT_LOGS_L:
-                if ' ##[group]' in line and 'lsan.' in line:
+                if ' ##[group] ' in line and 'lsan' in line:
+                    # matching on "lsan.245:" and "lsan_01.732:"
                     r_mode = ReadingMode.LSAN
-                elif '::group::' in line and 'lsan.' in line:
+                elif '::group:: ' in line and 'lsan' in line:
                     r_mode = ReadingMode.LSAN
                     get_log_line = get_log_line_local
                 elif ': ' in line and ('Passed' in line or 'FAILED' in line or 'TIMED OUT' in line):
