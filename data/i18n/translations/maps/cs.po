@@ -343,7 +343,7 @@ msgstr "V tomto tutoriálu se seznámíš s mořeplavbou, to znamená, jak použ
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Hospodářství a obchod"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

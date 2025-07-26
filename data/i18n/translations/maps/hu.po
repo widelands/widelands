@@ -348,7 +348,7 @@ msgstr "Ebben az oktatójátékban megismered a hajózást, azon belül a hajók
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Gazdaság és kereskedelem"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
