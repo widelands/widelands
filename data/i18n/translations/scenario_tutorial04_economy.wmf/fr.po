@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: L. Ch., 2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -259,7 +259,7 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Après ça, choisissez 'Stock'."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr "Vous pouvez aussi utiliser le raccourci clavier  \"%s\" pour accéder plus rapidement à cette fenêtre."
@@ -984,7 +984,7 @@ msgstr "Chaque entrepôt dispose de quatre boutons pour fixer vos préférences.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:623
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:631
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:723
 msgid "Trading"
 msgstr "Commercer"
 
@@ -1109,45 +1109,50 @@ msgstr "Pour finir, sélectionnez combien de lots de marchandises seront échang
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
+"A batch will be delivered in one transport, each ware needing a donkey."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
 msgstr "Lorsque vous avez tout paramétré, cliquez sur le bouton « Proposer » pour envoyer l'offre d'échange à l'autre joueur. Il peut ensuite décider d'accepter ou de rejeter votre proposition."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
 msgstr "Essayez !"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
 msgstr "Proposer un échange"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
 msgstr "Proposer un échange aux Frisons"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
 msgstr "Les Frisons n'accepteront qu'un échange qui leur est avantageux ; c'est-à-dire qu'ils ne donneront pas plus de marchandises qu'ils n'en reçoivent. "
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
 msgstr "Échange rejeté"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
 msgstr "Les Frisons ont rejeté votre offre d'échange. Ils n'accepteront pas un échange qui leur serait désavantageux. Envoyez-leur une nouvelle proposition d'échange. "
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 msgid "Trade Accepted"
 msgstr "Échange accepté"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Well done! The Frisians have accepted your trade offer. Did you notice that "
 "the market window now has a new tab? It has one such tab for every active "
@@ -1155,63 +1160,63 @@ msgid ""
 "and also allows you to cancel it at any time."
 msgstr "Bon travail ! Les Frisons ont accepté votre proposition d'échange. Avez-vous remarqué que la fenêtre du marché dispose maintenant d'un nouvel onglet ? Elle comporte un onglet comme celui-ci pour chaque échange actif dans ce marché. L'onglet montre plus de détails sur l'échange en cours et permet aussi de l'annuler à tout moment."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:675
 msgid ""
 "Soon you will see a caravan of your donkeys leaving the market to bring "
 "wares to the Frisians, and a caravan of their reindeer bringing you wares in"
 " exchange."
 msgstr "Bientôt, vous verrez une caravane d'ânes quitter votre marché pour apporter des marchandises aux Frisons, et une caravane de rennes se diriger vers lui, vous apportant les marchandises échangées."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:682
 msgid "Trade Offered"
 msgstr "Échange proposé"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
 msgstr "Maintenant, les Frisons vous ont aussi fait une proposition d'échange. Vous pouvez trouver une liste de toutes les propositions d'échange et des échanges en cours dans la fenêtre de diplomatie. Ouvrez-la au moyen du bouton de la barre d'outils principale."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:690
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:692
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:691
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
 msgid "Open the diplomacy window"
 msgstr "Ouvrez la fenêtre diplomatie"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
 msgstr "La fenêtre diplomatie vous donne une vision d'ensemble de tous vos échanges, offres d'échanges et propositions d'échanges."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
 msgid "You can open it via this button from the main toolbar."
 msgstr "Vous pouvez l'ouvrir depuis ce bouton de la barre d'outils principale."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:701
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:702
 msgid "The Diplomacy Window"
 msgstr "La fenêtre Diplomatie"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
 msgstr "Dans la moitié supérieure de la fenêtre de diplomatie, vous pouvez voir tous les joueurs et leurs équipes. Ici, vous pouvez inviter d'autres joueurs à rejoindre votre équipe ou demander à rejoindre la leur. Cependant, appartenir à une équipe n'est pas requis pour commercer."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
 msgstr "Nous sommes intéressés tout particulièrement par la moitié inférieure de la fenêtre. Vous pouvez voir ici vos échanges proposés, soumis et actifs."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
 msgstr "Pour le moment, une seule offre d'échange vous a été soumise – celle que les Frisons viennent de vous envoyer. Examinez-la, puis utilisez les boutons à côté de celle-ci pour l'accepter ou la rejeter. "
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid ""
 "If you wish to accept a trade, you need to select from the dropdown which "
 "market you want to use for this trade, as you can have multiple markets. You"
@@ -1219,39 +1224,39 @@ msgid ""
 "want to accept the trade."
 msgstr "Si vous souhaitez accepter un accord commercial, il vous faut sélectionner depuis le menu déroulant quel marché vous voulez utiliser pour cet échange, car il est possible de posséder plusieurs marchés. Vous pouvez aussi gérer l'offre directement via la fenêtre du marché depuis lequel vous voulez accepter l'échange."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:713
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:715
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid "Decide about the trade offer"
 msgstr "Prendre une décision au sujet de la proposition d'échange"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid "Accept or reject the Frisians’ trade offer."
 msgstr "Accepter ou rejeter la proposition d'échange des Frisons."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
 msgstr "Vous pouvez le faire soit depuis la fenêtre Diplomatie, soit depuis la fenêtre du marché."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:724
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
 msgstr "Bon travail ! C'est à peu près tout, vraiment ; vous savez maintenant comment envoyer et organiser les offres et propositions d'échanges commerciaux."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
 msgstr "Vous pouvez établir n'importe quel nombre de traités commerciaux avec n'importe quel nombre de joueurs ; depuis le même marché ou depuis plusieurs, comme il vous sied."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
 msgstr "Pour véritablement maîtriser l'art du commerce, souvenez-vous juste de ceci : la valeur de chaque marchandise dépend éminemment des circonstances, ainsi que de la tribu. "
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid ""
 "For example, Frisian miners will happily accept any meal, regardless of "
 "whether it was produced cheaply by an Imperial Inn or at a much higher cost "
@@ -1260,18 +1265,18 @@ msgid ""
 "against Frisian coal is a trade from which both parties can benefit greatly."
 msgstr "Par exemple, les mineurs Frisons accepteront avec joie n'importe quel repas, qu'il ait été confectionné à faible coût dans une auberge Impériale ou à un coût plus élevé dans la Taverne Frisienne. D'autre part, les Frisiens peuvent brûler du charbon de bois bien plus efficacement que l'Empire. Par conséquent, troquer des repas Impériaux contre du charbon Frisien est un échange dont chacune des parties peut grandement profiter."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
 msgstr "À mesure que vous gagnerez de l'expérience avec les différentes tribus de Widelands, vous acquerrez une compréhension subtile du coût relatif et de la valeur que chaque bien représente pour chaque tribu. Cette connaissance est inestimable lorsqu'on négocie des échanges.  "
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Congratulations"
 msgstr "Félicitations"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "This concludes our tutorial! I hope I could teach you how you can control "
 "the economy in Widelands. There are many options and they can be confusing "
@@ -1280,7 +1285,7 @@ msgid ""
 " possibilities. Then, return to this tutorial and learn the rest!"
 msgstr "Ceci conclut notre didactitiel ! J'espère avoir pu vous enseigner comment administrer l'économie dans Widelands. Il existe de nombreuses options, qui peuvent être au premier abord déroutantes. Même si vous n'avez compris qu'un petit nombre de concepts, il ne faut pas abandonner. Essayez-les lors de quelques parties, devenez familier avec eux et faites l'expérience des possibilités offertes. Ensuite, revenez à ce didactitiel et apprenez le reste !"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

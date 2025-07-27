@@ -10,7 +10,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
-# Simon Heimberg, 2023
+# Simon Heimberg, 2023,2025
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023,2025
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023,2025\n"
+"Last-Translator: Simon Heimberg, 2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -350,14 +350,15 @@ msgid ""
 msgstr "In diesem Einführungsspiel wirst du die Seefahrt kennen lernen, das heißt, wie du mit Schiffen und Häfen umgehst, und wie man Fähren und Wasserwege benutzt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Wirtschaft"
+msgid "Economy and Trading"
+msgstr "Wirtschaft und Handel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "In diesem Einführungsspiel lernst du die Optionen, die Widelands besitzt, um deine Wirtschaft zu regeln, kennen. Empfohlen für Spieler mit etwas Erfahrung."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
