@@ -56,7 +56,7 @@ class GithubASan:
                 if os.getenv('GITHUB_ACTION'):
                     goto_txt = goto_txt + ' (from menu `...` on top right of this text block)'
                 elif os.getenv('WLRT_LOG_URL'):
-                    goto_txt = f'({goto_txt})[os.getenv(WLRT_LOG_URL)]'
+                    goto_txt = f'''({goto_txt})[{os.getenv('WLRT_LOG_URL')}]'''
                 else:
                     goto_txt = goto_txt + ' (you gave as input)'
                 write_summary(
