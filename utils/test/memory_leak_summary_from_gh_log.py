@@ -13,6 +13,11 @@ pipe to this script input like from:
 
 Or give a file in this format as argument.
 
+If not running on GitHub, those variables might be helpful:
+WLRT_COMPILE_DIR: Name of the directory widelands was compiled in. Default is widelands.
+                  Origins are not found in traceback if this value is wrong.
+GITHUB_SHA: commit hash for widelands. Used in links for searching or creating issues.
+WLRT_LOG_URL: url to the log, used in one link
 """
 
 import enum
@@ -248,7 +253,12 @@ def create_summary_one_runner(in_file):
 
 def main():
     in_file = None
-    if len(sys.argv) > 1 and sys.argv[1] != '-':
+    if len(sys.argv) == 0:
+        pass
+    elif sys.argv[1] in ('-h', '--help'):
+        print(__doc__)
+        return
+    elif sys.argv[1] != '-':
         in_file = open(sys.argv[1])
     try:
         create_summary_one_runner(in_file or sys.stdin)
