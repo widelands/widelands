@@ -191,8 +191,12 @@ def create_summary_one_runner(in_file):
     if not os.getenv('GITHUB_STEP_SUMMARY') and not '/dev/' in os.devnull:
         print('set environment variable GITHUB_STEP_SUMMARY to get output', sys.stderr)
         os.exit(19)  # exit with "no such device exists" (stdout file not found)
+    step_summary_p = os.getenv('GITHUB_STEP_SUMMARY')
+    if step_summary_p and os.path.isfile(step_summary_p) and os.stat(step_summary_p).st_size > 0:
+        with open(step_summary_p, 'a') as summary_file:
+            summary_file.write('\n\n\n\n')  # write separating empty lines
+        print('WARNING: ' + step_summary_p + ' has content', file=sys.stderr)
     GithubASan.set_summary_file(os.getenv('GITHUB_STEP_SUMMARY', '/dev/stdout'))
-    # TODO summary file should be empty
 
     if in_file.isatty():
         print(f'  hint: program expects input on {in_file.name}', file=sys.stderr)
