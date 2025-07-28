@@ -1103,7 +1103,7 @@ msgstr "Tolest köörst du noch ut, wo völe Bünsels vun de utköört Waren tuu
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Een Bünsel word as eene Grupp levert; elkeen Waar bruukt een Langohr."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""

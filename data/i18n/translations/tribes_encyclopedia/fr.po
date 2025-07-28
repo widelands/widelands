@@ -7922,7 +7922,7 @@ msgstr "Le bois peut servir dans les foyers des maison et pour vous garder au ch
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon en %s en moyenne."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -14503,7 +14503,7 @@ msgstr "Travaille au chantier naval et construit de nouveaux navires."
 #: ../../../../data/tribes/initialization/frisians/units.lua:727
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../../../data/tribes/initialization/frisians/units.lua:737
@@ -15949,7 +15949,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames tout près pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2091

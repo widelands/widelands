@@ -229,7 +229,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Savit ur c'haletaer koad"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""

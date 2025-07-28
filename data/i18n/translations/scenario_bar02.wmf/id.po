@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bangun sebuah tambang"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
-msgstr ""
+msgstr "Bangun sebuah sumur air"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
@@ -175,7 +175,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bangun sebuah gudang"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."

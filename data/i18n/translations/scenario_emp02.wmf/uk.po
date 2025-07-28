@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
-msgstr ""
+msgstr "Мармур"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
@@ -81,7 +81,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Забезпечте своїх шахтарів їжею"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
@@ -456,7 +456,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "Перемога"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264
@@ -510,4 +510,4 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ви впорались із завданням. Тепер, якщо бажаєте, можете просто пограти, або ж переходьте до наступного завдання."
