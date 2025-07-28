@@ -215,6 +215,7 @@ def create_summary_one_runner(in_file):
                 if '------' in line:
                     if r_mode == ReadingMode.RT_HEADER_L:
                         r_mode = ReadingMode.RT_LOGS_L
+                        get_log_line = get_log_line_local
                     else:
                         r_mode = ReadingMode.RT_LOGS
             case ReadingMode.RT_LOGS | ReadingMode.RT_LOGS_L:
@@ -223,7 +224,6 @@ def create_summary_one_runner(in_file):
                     r_mode = ReadingMode.LSAN
                 elif '::group:: ' in line and 'lsan' in line:
                     r_mode = ReadingMode.LSAN
-                    get_log_line = get_log_line_local
                 elif ': ' in line and ('Passed' in line or 'FAILED' in line or 'TIMED OUT' in line):
                     # this is before stdout
                     idx = line.find(': ')
@@ -236,7 +236,7 @@ def create_summary_one_runner(in_file):
                 if ' ##[endgroup]' in line:
                     r_mode = ReadingMode.RT_LOGS
                 elif '::endgroup::' in line:
-                    r_mode = ReadingMode.RT_LOGS
+                    r_mode = ReadingMode.RT_LOGS_L
                 else:
                     GithubASan.github_asan_line(get_log_line(line))
     GithubASan.summarize_origins()
