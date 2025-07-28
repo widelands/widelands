@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr ""
+msgstr "Licencija"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "Būsena"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""
@@ -415,7 +415,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Kelių žaidėjų žaidimo nustatymai"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."

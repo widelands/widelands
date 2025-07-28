@@ -957,7 +957,7 @@ msgstr "Alberi automatici"
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Oggetti fissi: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/set_terrain_tool.cc:120
@@ -2003,7 +2003,7 @@ msgstr "Widelands non può funzionare perché la versione dei driver grafici è 
 #: ../../../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Aggiornare la versione %1$s a %2$u,%3$u o successiva."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -6219,7 +6219,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Suggerimento:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
@@ -6261,7 +6261,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:563
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Categoria: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:293
@@ -6593,7 +6593,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "Imposta predefiniti"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -6620,7 +6620,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6638,12 +6638,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6663,7 +6663,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Lancia gioco"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7311,7 +7311,7 @@ msgstr "Torna a '%s'"
 
 #: ../../../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
-msgstr ""
+msgstr "Chiudi la finestra"
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:59
@@ -8255,7 +8255,7 @@ msgstr "Casa del taglialegna"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa della guardia forestale"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
@@ -8327,11 +8327,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Armaiolo"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Fucina di armature"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
@@ -8351,7 +8351,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
-msgstr ""
+msgstr "Caserma"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
@@ -8849,7 +8849,7 @@ msgstr "Ctrl + Tasti freccia"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:903
 msgid "Move the map fast"
-msgstr ""
+msgstr "Sposta la mappa velocemente"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:905
@@ -8897,7 +8897,7 @@ msgstr "Statistiche della nave"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Cambia la dimensione dello strumento"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8914,7 +8914,7 @@ msgstr "Clicca"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Mettere nuovi elementi sulla mappa, o aumentare gli elementi della mappa in base al valore selezionato da 'Incrementa / Decrementa'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1059
@@ -8927,7 +8927,7 @@ msgstr "Shift + Clicca"
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Rimuovere elementi dalla mappa, o ridurre gli elementi della mappa in base al valore selezionato da 'Incrementa / Decrementa'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1064
@@ -8938,7 +8938,7 @@ msgstr "Ctrl + Clicca"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Impostare gli elementi della mappa al valore settato da 'Set Value'"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -9023,17 +9023,17 @@ msgstr "Pausa"
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Pagina su"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Pagina giù"
 
 #: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Pagina iniziale"
 
 #: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
@@ -10386,7 +10386,7 @@ msgstr "Mostra tutti i messaggi"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:579
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Mostra solamente i messaggi dei geologi"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:584
@@ -11449,11 +11449,11 @@ msgstr "Navigazione rapida"
 
 #: ../../../../src/wui/quicknavigation.cc:174
 msgid "Go to previous location"
-msgstr ""
+msgstr "Vai alla posizione precedente"
 
 #: ../../../../src/wui/quicknavigation.cc:186
 msgid "Go to next location"
-msgstr ""
+msgstr "Vai alla posizione successiva"
 
 #: ../../../../src/wui/quicknavigation.cc:197
 msgid "Add a new landmark"

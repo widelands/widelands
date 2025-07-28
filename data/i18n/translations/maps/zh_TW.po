@@ -189,7 +189,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr ""
+msgstr "尚未執行"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -197,7 +197,7 @@ msgstr "沒有人"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "抱歉, 這個地圖尚未執行"
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -329,7 +329,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "航海"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""

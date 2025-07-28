@@ -33,7 +33,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
@@ -70,7 +70,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Resurse"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
@@ -90,7 +90,7 @@ msgstr ""
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../../../data/scripting/editor/terrain_help.lua:57

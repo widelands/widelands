@@ -193,7 +193,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
-msgstr ""
+msgstr "Nihče"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
@@ -329,7 +329,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Pomorstvo"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -423,7 +423,7 @@ msgstr ""
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr ""
+msgstr "Atoli"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"

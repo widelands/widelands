@@ -425,7 +425,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Encyklopedi"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
@@ -1269,7 +1269,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulerar!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""

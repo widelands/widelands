@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
-msgstr ""
+msgstr "Στατιστικά κτιρίων"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
-msgstr ""
+msgstr "Στατιστικά Κτιρίων"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
@@ -262,7 +262,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:165
 msgid "Stock"
-msgstr ""
+msgstr "Απόθεμα"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
@@ -623,7 +623,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Στατιστικά Υλικών"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
@@ -766,7 +766,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
-msgstr ""
+msgstr "Επιλογές οικονομίας"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""

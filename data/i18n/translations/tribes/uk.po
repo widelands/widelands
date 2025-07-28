@@ -5356,7 +5356,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Сухе дерево"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5474,7 +5474,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/init.lua:10
 #: ../../../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Команда розробників Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/amazons/init.lua:13
@@ -5584,7 +5584,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Штаб"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
@@ -5711,13 +5711,13 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "Атланти"
 
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
+msgstr "Це плем'я відоме з давніх легенд. Сини та дочки Атлантиди."
 
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5731,7 +5731,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr ""
+msgstr "Варвари"
 
 #: ../../../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5740,7 +5740,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "Імперія"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
@@ -5765,11 +5765,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Вступ"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Керування"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
@@ -5781,11 +5781,11 @@ msgstr "Товари"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Робочі"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Будівлі"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -5798,7 +5798,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Корабель"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

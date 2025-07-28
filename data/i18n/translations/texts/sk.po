@@ -829,7 +829,7 @@ msgstr "Klávesy šípiek"
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -839,7 +839,7 @@ msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:102
 msgid ""

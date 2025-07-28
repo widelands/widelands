@@ -132,7 +132,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Шість місяців тому, Люциус - молодий полководець Імперії - вирушив з 150 солдатами до північного лісу. де Варвари переходили на землі, якими володіла Імперія. Його завданням було захистити Імперські землі. Спочатку все було спокійно. Він навіть розмовляв з декількома дітьми варварів, та подумував про мирне життя, пліч о пліч з цим народом. Він став спокійніше, і його армія почала приділяти менше уваги потенційному супернику. Це було їх помилкою. В одну з березневих ночей, його непідготовлена армія була атакована варварами, в кількості 100 чоловік, та повністю розбита. Тільки завдяки його мирному життю, йому та частині його солдат вдалося вижити."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
@@ -196,11 +196,11 @@ msgstr "Ще не впроваджено"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
-msgstr ""
+msgstr "Нікого"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Вибачте, цю мапу ще не закінчено"
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"

@@ -1108,7 +1108,7 @@ msgstr "Végül pedig állítsd be, hogy hány szállítmányt szeretnél a beá
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Egy-egy szállítmány mindig egyszerre indul el, amikor minden áru összegyűlt, és egy üzlethez egyszerre mindig csak egy szállítmány lehet úton. Az első szállítmány elindításához szükség van egy-egy szamárra minden egyes elszállítandó áruhoz. Ugyanezek a szamarak fogják az üzlethez tartozó további szállítmányokat is szállítani."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""

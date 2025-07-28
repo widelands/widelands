@@ -154,7 +154,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
-msgstr ""
+msgstr "Gebouwstatistiken"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
@@ -764,7 +764,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
-msgstr ""
+msgstr "Ekonomyske opsjes"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
@@ -1266,7 +1266,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Congratulations"
-msgstr ""
+msgstr "Lokwinske"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""

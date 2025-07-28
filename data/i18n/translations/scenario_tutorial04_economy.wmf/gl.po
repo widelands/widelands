@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
-msgstr ""
+msgstr "Estadísticas de construción"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
@@ -262,7 +262,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:165
 msgid "Stock"
-msgstr ""
+msgstr "Existencias"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
@@ -623,7 +623,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Estadísticas de mercaderías"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
@@ -766,7 +766,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
-msgstr ""
+msgstr "Opcións da economía"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
