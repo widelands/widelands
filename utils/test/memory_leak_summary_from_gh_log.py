@@ -18,6 +18,7 @@ WLRT_COMPILE_DIR: Name of the directory widelands was compiled in. Default is wi
                   Origins are not found in traceback if this value is wrong.
 GITHUB_SHA: commit hash for widelands. Used in links for searching or creating issues.
 WLRT_LOG_URL: url to the log, used in one link
+
 """
 
 import enum
