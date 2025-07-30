@@ -13,7 +13,7 @@ from file_utils import read_text_file, find_files
 def check_line(filename, lidx, line, print_error=True):
     e = 0
     for method in ['(^|[^A-Za-z0-9_])_', 'gettext']:
-        for stringtype in ['"', '\[=*\[']:
+        for stringtype in ['"',  r'\[=*\[']:
             if re.compile(method + ' *' + stringtype).search(line):
                 e = e + 1
                 if print_error:
