@@ -4,7 +4,6 @@ local saved_version = get_build_id()
 
 -- Save the game so that reloading does not skip
 function stable_save(game, savename, desired_speed)
-   local mapview = wl.ui.MapView()
    local last_save_time = game.last_save_time
    print("###### stable_save: last save time " .. last_save_time)
 
@@ -28,6 +27,7 @@ function stable_save(game, savename, desired_speed)
    print("###### stable_save: new save time " .. game.last_save_time)
 
    -- Give the loaded game a chance to catch up
+   local mapview = wl.ui.MapView()
    local counter = 0
    while mapview.average_fps < 20 and counter < 100 do
       sleep(200)
