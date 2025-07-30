@@ -7,7 +7,7 @@
 import os
 import re
 import sys
-from file_utils import read_text_file, find_files
+from file_utils import find_files
 
 
 def check_line(filename, lidx, line, print_error=True):
@@ -18,7 +18,7 @@ def check_line(filename, lidx, line, print_error=True):
                 e = e + 1
                 if print_error:
                     print('Optional parentheses missing at {}:{}: {}'.format(
-                        filename, lidx, line))
+                        filename, lidx, line), end='')
     return e
 
 
@@ -59,7 +59,7 @@ if errors > 0:
 
 # Actual check
 for filename in find_files(os.path.relpath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
-    for lidx, line in enumerate(read_text_file(filename).strip().split('\n')):
+    for lidx, line in enumerate(open(filename, 'r')):
         errors += check_line(filename, lidx, line)
 
 if errors > 0:
