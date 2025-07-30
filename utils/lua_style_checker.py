@@ -12,13 +12,16 @@ from file_utils import find_files
 
 def check_line(filename, lidx, line, print_error=True):
     e = 0
-    for method in ['(^|[^A-Za-z0-9_])_', 'gettext']:
+    # check if i18n functions have parentheses
+    check_i18n = '_' in line or 'gettext' in line  # s1 in s2 is much faster than re.search()
+    for method in ['(^|[^A-Za-z0-9_])_', 'gettext'] if check_i18n else []:
         for stringtype in ['"',  r'\[=*\[']:
             if re.compile(method + ' *' + stringtype).search(line):
                 e = e + 1
                 if print_error:
                     print('Optional parentheses missing at {}:{}: {}'.format(
                         filename, lidx, line), end='')
+    # possibly more checks
     return e
 
 
