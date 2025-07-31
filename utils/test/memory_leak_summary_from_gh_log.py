@@ -180,7 +180,7 @@ def create_summary_one_runner(in_file):
 
         """
         if 'Z ##[' in line:
-            line, cnt = re.subn('^.*Z ##\[[^]]+\]', '', line, 1)
+            line, cnt = re.subn(r'^.*Z ##\[[^]]+\]', '', line, 1)
             if cnt > 0:  # if it really was with github label
                 return line
         return line.split('Z ', 1)[-1]
