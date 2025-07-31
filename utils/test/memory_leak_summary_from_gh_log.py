@@ -254,7 +254,7 @@ def create_summary_one_runner(in_file):
 
 def main():
     in_file = None
-    if len(sys.argv) == 0:
+    if len(sys.argv) == 1:
         pass
     elif sys.argv[1] in ('-h', '--help'):
         print(__doc__)
