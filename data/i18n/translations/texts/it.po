@@ -230,7 +230,7 @@ msgstr "Pagina iniziale"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Script"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -454,7 +454,7 @@ msgstr "Il giocatore con il colore della bandiera. Se più di un client selezion
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "La modalità spettatore, significa che puoi vedere ogni cosa, ma non puoi controllare nessun giocatore"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"

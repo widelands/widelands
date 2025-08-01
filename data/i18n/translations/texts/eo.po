@@ -6,7 +6,7 @@
 # Fredy Ivan  Sucari-Callohuanca, 2022
 # Peter Garami <petro.garami@gmail.com>, 2021
 # Raúl Contreras, 2024-2025
-# Ximena Delgado, 2022
+# 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -222,7 +222,7 @@ msgstr "Retpaĝo"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptado"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -420,11 +420,11 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Agordoj por plurludant-reĝimo"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Vi troviĝas en la menuo por lanĉi plurludantan ludon."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
@@ -446,7 +446,7 @@ msgstr ""
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Spektant-reĝimo, "
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"

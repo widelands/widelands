@@ -53,7 +53,7 @@ msgstr "Copyright 2002 - %1% Vývojový tím hry Widelands."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0 (alebo podľa vášho výberu akejkoľvek neskoršej verzie)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -829,7 +829,7 @@ msgstr "Klávesy šípiek"
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -839,7 +839,7 @@ msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:102
 msgid ""

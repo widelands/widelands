@@ -22,7 +22,7 @@
 # Thadah D. Denyse <gontzalpujana@protonmail.com>, 2015
 # Walter Benkel, 2020
 # X Bello <xbello@gmail.com>, 2020
-# Ximena Delgado, 2024
+# 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -4653,7 +4653,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Debes conectar esta bandera a la casa de un explorador antes de poder enviar un explorador aquí."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
@@ -7919,7 +7919,7 @@ msgstr "La madera puede servir para un fuego doméstico y para mantener el calor
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si la reserva de comida es estable, esta mina puede producir carbón %s en promedio."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine

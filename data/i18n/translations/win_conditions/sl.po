@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakti"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
@@ -131,7 +131,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
-msgstr ""
+msgstr "Točke"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
@@ -197,7 +197,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "Ekipa %i"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -289,10 +289,10 @@ msgstr[3] ""
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% minuta"
+msgstr[1] "%1% minuti"
+msgstr[2] "%1% minute"
+msgstr[3] "%1% minut"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
@@ -304,7 +304,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s in %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -348,7 +348,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
-msgstr ""
+msgstr "Stanje"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:83

@@ -22,7 +22,7 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Paulo Paulo <paulletilly@gmail.com>, 2021
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2016-2022,2024
+# Renaud Bouchard, 2016-2022,2024-2025
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # syl_, 2017
 # Tubuntu, 2015
@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-26 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Laurent Godard, 2024\n"
+"Last-Translator: Renaud Bouchard, 2016-2022,2024-2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1130,7 +1130,7 @@ msgstr "Comme pour les quatiers généraux, un port peut être attaqué et détr
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
 msgctxt "amazons_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Un marché permet des échanges avec les autres tribus."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
@@ -1447,7 +1447,7 @@ msgstr "Fabrique des cordes à partir de lianes."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "Le tresseur de corde à besoin de %s en moyenne pour produire une corde."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1505,7 +1505,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master plants one tree between %1$s and %2$s, depending on how "
 "far she has to walk."
-msgstr ""
+msgstr "Le maître de la jungle plante un arbre entre %1$s et %2$s, en fonction de la distance qu'elle a à marcher."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
 #: ../../../../data/tribes/initialization/amazons/units.lua:1487
@@ -1587,7 +1587,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Si toutes les marchandises sont livrées à temps, ce bâtiment peut produire un pain en %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -1660,7 +1660,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr ""
+msgstr "Le maître de la jungle peut faire une terraformation entre %1$s et %2$s, en fonction de la distance qu'elle a à marcher."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -1681,7 +1681,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a tapir"
 " in %s on average."
-msgstr ""
+msgstr "Si toutes les marchandises sont livrées à temps, ce bâtiment peut produire un tapir %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
@@ -1705,7 +1705,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Le planteur de manioc plante et récolte une botte de manioc entre %1$s and %2$s, en fonction de la distance qu'elle a à marcher."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1589
 #: ../../../../data/tribes/initialization/amazons/units.lua:1604
@@ -1720,9 +1720,9 @@ msgstr ""
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d champ en croissance"
+msgstr[1] "%d champs en croissance"
+msgstr[2] "%d champs en croissance"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1732,7 +1732,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr ""
+msgstr "La plantation de manioc à besoin d'au moins %s pour fonctionner à son rendement optimum la plupart du temps."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1597
@@ -1753,7 +1753,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Le planteur de cacao sème et récolte un panier de cacao entre %1$s et %2$s, en fonction de la distance qu'elle a à marcher."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'
@@ -1763,7 +1763,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "La plantation de cacao à besoin d'au moins %s pour fonctionner à son rendement optimum la plupart du temps."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1614
@@ -1832,7 +1832,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Compléter l'entraînement d'un soldat prend %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
 #: ../../../../data/tribes/initialization/amazons/units.lua:1649
@@ -4262,7 +4262,7 @@ msgstr "Ostur, le concepteur de la nouvelle classe de navires d'expédition, lor
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1475
 msgctxt "atlanteans_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Un marché permet des échanges avec les autres tribus."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1484
@@ -4494,7 +4494,7 @@ msgstr "Élèvez des poissons."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1574
 msgctxt "atlanteans_building"
 msgid "The fish breeder needs open access to the coast."
-msgstr "Le pisciculteur a besoin d'un accès libre à la côte."
+msgstr "Le pisciculteur a besoin d'un accès ouvert à la côte."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Fish Breeder's
 #. House
@@ -4539,7 +4539,7 @@ msgstr "Chassez les animaux pour produire de la viande."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1596
 msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr "La cabane du chasseur nécessite des animaux à chasser dans son champs d'action."
+msgstr "La cabane du chasseur nécessite des animaux à chasser dans son périmètre d'activité."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Hunter's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1598
@@ -4690,7 +4690,7 @@ msgstr "On ne voit pas tout depuis ses tours. Parfois, il faut que quelqu’un l
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1656
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr "Un éclaireur répondant à un soldat"
+msgstr "Un éclaireur répond à un soldat"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Scout's
 #. House, part 1
@@ -4756,7 +4756,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1690
 msgctxt "atlanteans_building"
 msgid "A Smoker answering a passer-by"
-msgstr ""
+msgstr "Un artisan saurisseur répond à un passant"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1692
@@ -5193,7 +5193,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1871
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing her farm"
-msgstr ""
+msgstr "Un éleveur d'araignées montre sa ferme"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Spider
 #. Farm
@@ -7922,7 +7922,7 @@ msgstr "Le bois peut servir dans les foyers des maison et pour vous garder au ch
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon en %s en moyenne."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -11184,13 +11184,13 @@ msgstr ""
 #. "Clara pacta, boni amici."
 #: ../../../../data/tribes/initialization/empire/units.lua:1241
 msgid "Good contracts make good friends."
-msgstr ""
+msgstr "Les bons contrats font les bons amis."
 
 #. TRANSLATORS: Purpose helptext for an Empire market: Market
 #: ../../../../data/tribes/initialization/empire/units.lua:1244
 msgctxt "empire_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Un marché permet des échanges avec les autres tribus."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11492,7 +11492,7 @@ msgstr "Ciatkaruthus ante portas!"
 #. "Ciatkaruthus ante portas!"
 #: ../../../../data/tribes/initialization/empire/units.lua:1428
 msgid "Chat’Karuth at the gates!"
-msgstr ""
+msgstr "Chat’Karuth est à nos portes !"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Scout's
 #. House
@@ -11573,7 +11573,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1480
 msgctxt "empire_building"
 msgid "Motto of the Carpenters’ Guild"
-msgstr ""
+msgstr "La devise de la guilde des charpentiers"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Sawmill
 #: ../../../../data/tribes/initialization/empire/units.lua:1484
@@ -11595,7 +11595,7 @@ msgstr "Sero molunt deorum molæ."
 #. "Sero molunt deorum molæ."
 #: ../../../../data/tribes/initialization/empire/units.lua:1498
 msgid "The mills of the gods grind slowly."
-msgstr ""
+msgstr "Les moulins des dieux moulent lentement."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Mill
 #: ../../../../data/tribes/initialization/empire/units.lua:1501
@@ -11737,7 +11737,7 @@ msgstr "In vino veritas."
 #. "In vino veritas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1589
 msgid "In wine there is truth."
-msgstr ""
+msgstr "Dans le vin, la vérité."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Winery
 #. TRANSLATORS: Lore author helptext for an Empire production site: Piggery
@@ -11750,7 +11750,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1977
 msgctxt "empire_building"
 msgid "Excerpt from the Encyclopædia Imperica"
-msgstr ""
+msgstr "Extrait de l'Encyclopédie Impériale"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Winery
 #: ../../../../data/tribes/initialization/empire/units.lua:1594
@@ -11778,13 +11778,13 @@ msgstr "Esse oportet ut vivas, non vivere ut edas."
 #. "Esse oportet ut vivas, non vivere ut edas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1610
 msgid "We eat to live, not live to eat."
-msgstr ""
+msgstr "Nous mangeons pour vivre, ne vivons pas pour manger."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Tavern
 #: ../../../../data/tribes/initialization/empire/units.lua:1613
 msgctxt "empire_building"
 msgid "Warning to a gluttonous miner"
-msgstr ""
+msgstr "Attention aux mineurs gloutons"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Tavern
 #: ../../../../data/tribes/initialization/empire/units.lua:1617
@@ -11811,7 +11811,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1634
 msgctxt "empire_building"
 msgid "Warning from a master miner to an apprentice"
-msgstr ""
+msgstr "L'avertissement d'un maître mineur envers un apprenti"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Inn
 #: ../../../../data/tribes/initialization/empire/units.lua:1636
@@ -11844,7 +11844,7 @@ msgstr "Creta an carbone notandi?"
 #. "Creta an carbone notandi?"
 #: ../../../../data/tribes/initialization/empire/units.lua:1652
 msgid "Are they to be marked with chalk or charcoal?"
-msgstr ""
+msgstr "Sont ils marqués avec de la craie ou du charbon ?"
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Charcoal
 #. Kiln
@@ -11952,7 +11952,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1724
 msgctxt "empire_building"
 msgid "An armorsmith teaching an apprentice"
-msgstr ""
+msgstr "Un armurier enseignant à un apprenti"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Armor Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1726
@@ -11987,7 +11987,7 @@ msgstr "Non muri, sed viri sunt præsidium oppidorum."
 #. "Non muri, sed viri sunt præsidium oppidorum."
 #: ../../../../data/tribes/initialization/empire/units.lua:1742
 msgid "Not walls but men protect the towns."
-msgstr ""
+msgstr "Ce ne sont pas les murs mais les hommes qui protègent les villes."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Barracks
 #: ../../../../data/tribes/initialization/empire/units.lua:1745
@@ -12021,14 +12021,14 @@ msgstr "Asinus stramen mavult quam aurum."
 #. "Asinus stramen mavult quam aurum."
 #: ../../../../data/tribes/initialization/empire/units.lua:1765
 msgid "A donkey prefers straw to gold."
-msgstr ""
+msgstr "Un âne préfère la paille à l'or."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Donkey
 #. Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1768
 msgctxt "empire_building"
 msgid "A donkey breeder during a shortage of wheat"
-msgstr ""
+msgstr "Un éleveur d'ânes pendant une pénurie de blé"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Donkey Farm
 #: ../../../../data/tribes/initialization/empire/units.lua:1770
@@ -12076,7 +12076,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1793
 msgctxt "empire_building"
 msgid "History of the Empire, Part VII"
-msgstr ""
+msgstr "Histoire de l'Empire, chapitre VII"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 1
@@ -12170,14 +12170,14 @@ msgstr "Vestis virum reddit."
 #. "Vestis virum reddit."
 #: ../../../../data/tribes/initialization/empire/units.lua:1857
 msgid "Clothes make a man."
-msgstr ""
+msgstr "L'habit fait le moine."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Weaving
 #. Mill
 #: ../../../../data/tribes/initialization/empire/units.lua:1860
 msgctxt "empire_building"
 msgid "Motto of the Weavers’ Guild"
-msgstr ""
+msgstr "La devise de la guilde des tisserands"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Weaving Mill
 #: ../../../../data/tribes/initialization/empire/units.lua:1862
@@ -12449,7 +12449,7 @@ msgstr "Formidinem mortis vicit aurum."
 #. "Formidinem mortis vicit aurum."
 #: ../../../../data/tribes/initialization/empire/units.lua:2062
 msgid "Gold has conquered the fear of death."
-msgstr ""
+msgstr "L'or a vaincu la peur de la mort."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Deep Gold
 #. Mine
@@ -12485,7 +12485,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2094
 msgctxt "empire_building"
 msgid "History of the Empire, Part X – the decline"
-msgstr ""
+msgstr "Histoire de l'Empire, Chapitre X – Le déclin"
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Arena, part 1
 #. TRANSLATORS: Purpose helptext for an Empire training site: Colosseum, part
@@ -12541,13 +12541,13 @@ msgstr "Ave Cæsar! Morituri te salutant!"
 #. "Ave Cæsar! Morituri te salutant!"
 #: ../../../../data/tribes/initialization/empire/units.lua:2118
 msgid "Hail Cæsar! Those who are about to die greet you!"
-msgstr ""
+msgstr "Avé César, ceux qui vont mourir te saluent !"
 
 #. TRANSLATORS: Lore author helptext for an Empire training site: Colosseum
 #: ../../../../data/tribes/initialization/empire/units.lua:2121
 msgctxt "empire_building"
 msgid "Greeting from the gladiators to the emperor"
-msgstr ""
+msgstr "L’hommage des gladiateurs à l'empereur"
 
 #. TRANSLATORS: Performance helptext for an Empire training site: Colosseum,
 #. part 1
@@ -12629,7 +12629,7 @@ msgstr "Aquila non captat muscas."
 #. "Aquila non captat muscas."
 #: ../../../../data/tribes/initialization/empire/units.lua:2184
 msgid "An eagle doesn’t catch flies."
-msgstr ""
+msgstr "L'aigle ne chasse point les mouches."
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Blockhouse
 #: ../../../../data/tribes/initialization/empire/units.lua:2188
@@ -12745,7 +12745,7 @@ msgstr "Alea iacta est!"
 #. "Alea iacta est!"
 #: ../../../../data/tribes/initialization/empire/units.lua:2257
 msgid "The die is cast!"
-msgstr ""
+msgstr "Les dés sont jetés !"
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Barrier
 #: ../../../../data/tribes/initialization/empire/units.lua:2261
@@ -12768,7 +12768,7 @@ msgstr "Veni, Vidi, Vici!"
 #. "Veni, Vidi, Vici!"
 #: ../../../../data/tribes/initialization/empire/units.lua:2281
 msgid "I came, I saw, I conquered!"
-msgstr ""
+msgstr "Je suis venu, j'ai vu, j'ai vaincu !"
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Tower
 #: ../../../../data/tribes/initialization/empire/units.lua:2285
@@ -12791,7 +12791,7 @@ msgstr "Si vis pacem, para bellum."
 #. "Si vis pacem, para bellum."
 #: ../../../../data/tribes/initialization/empire/units.lua:2305
 msgid "If you want peace, prepare for war."
-msgstr ""
+msgstr "Qui veut la paix, prépare la guerre."
 
 #. TRANSLATORS: Lore author helptext for an Empire military site: Fortress
 #: ../../../../data/tribes/initialization/empire/units.lua:2308
@@ -12833,7 +12833,7 @@ msgstr "Non terretur fluminibus, qui maria transiit."
 #. "Non terretur fluminibus, qui maria transiit."
 #: ../../../../data/tribes/initialization/empire/units.lua:2351
 msgid "Who crossed seas does not fear rivers."
-msgstr ""
+msgstr "Qui a traversé les mers ne craint les rivières."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Ferry Yard
 #: ../../../../data/tribes/initialization/empire/units.lua:2355
@@ -13975,7 +13975,7 @@ msgstr "Les ouvriers arrivent"
 #: ../../../../data/tribes/initialization/empire/units.lua:2800
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13983,7 +13983,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2802
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -14503,7 +14503,7 @@ msgstr "Travaille au chantier naval et construit de nouveaux navires."
 #: ../../../../data/tribes/initialization/frisians/units.lua:727
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../../../data/tribes/initialization/frisians/units.lua:737
@@ -14826,7 +14826,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
 msgctxt "frisians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Un marché permet de commercer avec d'autres tribus."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../../../data/tribes/initialization/frisians/units.lua:1567
@@ -15949,7 +15949,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames tout près pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2091
@@ -16717,7 +16717,7 @@ msgstr "Les ouvriers arrivent"
 #: ../../../../data/tribes/initialization/frisians/units.lua:2489
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -16725,7 +16725,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2491
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Expert manquant"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
