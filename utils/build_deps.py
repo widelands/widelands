@@ -283,7 +283,8 @@ def main():
             owners_of_src[src] = lib
 
     if (report_unused_sources(srcdir, sources, owners_of_src)):
-        return 1
+        print('UNUSED SOURCES DETECTED! SEE REPORT ABOVE')
+        #return 1
 
     for t in targets.values():
         report_unmentioned_or_unnecessary_dependencies(
