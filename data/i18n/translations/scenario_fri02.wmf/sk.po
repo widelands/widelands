@@ -3,6 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Karl Vest, 2025
 # Pavol Gono, 2025
 # 
 msgid ""
@@ -301,7 +302,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
-msgstr ""
+msgstr "Nový domov"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
@@ -875,6 +876,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Túto misiu ste splnili. Môžete pokračovať v hre alebo prejsť na ďalšiu "
+"misiu."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13

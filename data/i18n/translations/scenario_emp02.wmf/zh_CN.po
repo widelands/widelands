@@ -458,7 +458,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264
@@ -512,4 +512,4 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续玩下去，也可以继续下一个任务。"

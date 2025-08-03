@@ -5352,7 +5352,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Ölü Ağaç"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5757,15 +5757,15 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Giriş"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
@@ -5777,7 +5777,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "İşçiler"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"

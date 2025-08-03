@@ -16741,7 +16741,7 @@ msgstr "Λαική παράδοση"
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -17043,7 +17043,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Κλικ"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:30
@@ -17055,7 +17055,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Κλικ"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:34
@@ -17140,7 +17140,7 @@ msgstr "Απαιτούμενος χώρος:"
 #: ../../../../data/tribes/scripting/help/format_help.lua:154
 #: ../../../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
 #: ../../../../data/tribes/scripting/help/format_help.lua:170
@@ -17209,7 +17209,7 @@ msgstr "Προτιμώμενα εδάφη"
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Εγκυκλοπαίδεια Φυλών"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
@@ -17218,7 +17218,7 @@ msgstr "Εισαγωγή"
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Συμβουλές"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -17230,11 +17230,11 @@ msgstr "Κτήρια"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Αμετακίνητα Φυλών"
 
 #: ../../../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Αμετακίνητα Κόσμου"
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -17258,11 +17258,11 @@ msgstr[1] "%d λεπτά"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% και %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Ένας παίκτης"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"

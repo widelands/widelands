@@ -745,7 +745,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefaktuak"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -794,7 +794,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:486
 msgid "Summer"
-msgstr ""
+msgstr "Uda"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:515
@@ -804,12 +804,12 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543
 msgid "Winter"
-msgstr ""
+msgstr "Negua"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:571
 msgid "Desert"
-msgstr ""
+msgstr "Basamortua"
 
 #: ../../../../data/world/resources/coal/init.lua:110
 msgid "Coal"

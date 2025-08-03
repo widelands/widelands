@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefaktai"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
@@ -305,7 +305,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ir %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -349,7 +349,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
-msgstr ""
+msgstr "Būsena"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:83

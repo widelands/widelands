@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "建造一个采石场"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
@@ -598,7 +598,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""

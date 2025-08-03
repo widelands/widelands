@@ -64,7 +64,7 @@ msgstr ""
 #: ../../../../src/wui/game_message_menu.cc:71
 #: ../../../../src/wui/game_summary.cc:119
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "Nije doelen"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -81,7 +81,7 @@ msgstr ""
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s%s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -2172,7 +2172,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Gjin"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -3464,7 +3464,7 @@ msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "Spultsje oan it opslaan..."
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3535,7 +3535,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Terrein"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3615,7 +3615,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Minikaart"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4440,8 +4440,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d oere"
+msgstr[1] "%d oeren"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -5323,7 +5323,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2093
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
@@ -5695,7 +5695,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Spilers: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -6072,7 +6072,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6560,7 +6560,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6578,12 +6578,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Algemien"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "Bewurker"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6603,7 +6603,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Start potsje"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7251,7 +7251,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
-msgstr ""
+msgstr "Slút finster"
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:59
@@ -7805,7 +7805,7 @@ msgstr "De oersetting nei it %s is foltôge."
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "The oersetting nei it %1% is %2%%% foltôge."
 
 #: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
@@ -7931,7 +7931,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "Free BSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -7939,7 +7939,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekind"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8355,7 +8355,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "Meardere spilers"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8837,7 +8837,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Arkformaat oanpasse"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8847,7 +8847,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
@@ -8860,7 +8860,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift+klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
@@ -8873,7 +8873,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl+klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
@@ -8928,7 +8928,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Romte"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -8958,22 +8958,22 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
@@ -9008,7 +9008,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
@@ -10049,7 +10049,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Tiim %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -12033,7 +12033,7 @@ msgstr ""
 
 #: ../../../../src/wui/ware_statistics_menu.cc:132
 msgid "Production"
-msgstr ""
+msgstr "Produksje"
 
 #: ../../../../src/wui/ware_statistics_menu.cc:139
 msgid "Consumption"

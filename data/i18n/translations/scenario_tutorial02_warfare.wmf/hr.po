@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr ""
+msgstr "Uvod"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
@@ -158,7 +158,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Borbena sjekira"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"

@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -263,7 +263,7 @@ msgstr "Barbari"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
-msgstr ""
+msgstr "Carstvo"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
@@ -319,7 +319,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Proširenja"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -412,11 +412,11 @@ msgstr ""
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Postavke mrežne igre"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -424,7 +424,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Postavke klijenta"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -442,7 +442,7 @@ msgstr ""
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Gledatelj, to znači da sve vidiš, ali ne možeš upravljati igračima"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -471,7 +471,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Zatvoreno."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -489,7 +489,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr ""
+msgstr "detalji zemljovida"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""

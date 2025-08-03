@@ -5776,7 +5776,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Langileak"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"

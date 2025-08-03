@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "أهداف جديدة"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -84,7 +84,7 @@ msgstr ""
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -1513,7 +1513,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "جزيرة مرجانية"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
@@ -1879,7 +1879,7 @@ msgstr "حجم الأداة"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "الحجم:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2195,7 +2195,7 @@ msgstr[5] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -3463,7 +3463,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
 msgid "Logic error"
-msgstr ""
+msgstr "خطأ منطقى"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:69
@@ -3527,7 +3527,7 @@ msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "يحفظ اللعبة..."
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3606,7 +3606,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "التربة"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3686,7 +3686,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "الخريطة المُصغرة"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4358,7 +4358,7 @@ msgstr ""
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #: ../../../../src/scripting/lua_game.cc:1563
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
@@ -4462,7 +4462,7 @@ msgstr "يُحمل..."
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "خفض القيمة"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4475,7 +4475,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "رفع القيمة"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4535,12 +4535,12 @@ msgstr[5] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%d ساعة"
+msgstr[1] "%d ساعة"
+msgstr[2] "%d ساعاتان"
+msgstr[3] "%d ساعات"
+msgstr[4] "%d ساعات"
+msgstr[5] "%d ساعات"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -4841,7 +4841,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "تسجبل الدخول"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -5149,7 +5149,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5573,7 +5573,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "اﻹسم:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5850,7 +5850,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "اللاعبيين: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5907,7 +5907,7 @@ msgstr "الصعوبة"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "الصعوبة:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -6010,7 +6010,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6326,7 +6326,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "تلميح:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
@@ -6712,7 +6712,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "أرجع إلي الإفتراضي"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -6739,7 +6739,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6757,12 +6757,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "المٌحرر"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6782,7 +6782,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "شغل اللعبه"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -6999,7 +6999,7 @@ msgstr ""
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:457
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "إعداد اللعبة الجماعية"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:41
 msgid "Choose Game"
@@ -7702,7 +7702,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "فريق %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7941,7 +7941,7 @@ msgstr "مغلق"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../../../src/ui_fsmenu/options.cc:528
 msgid "Never"
-msgstr ""
+msgstr "ابداً"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
@@ -8110,7 +8110,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "فري بي ‌إس ‌دي"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -8118,7 +8118,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8374,11 +8374,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "منزل حراج"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
-msgstr ""
+msgstr "محجر"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
@@ -8534,7 +8534,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "اللعب الجماعي"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -9001,12 +9001,12 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "إختصارات لوحة المفاتيح"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
 msgid "Message Window"
-msgstr ""
+msgstr "نافذة الرسائل"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1005
@@ -9016,7 +9016,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "غير حجم الاداة"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -9026,38 +9026,38 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "أضغط"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "أضف عناصر على الخريطة، أو زدّ عناصر الخريطة بالقيمة المحددة بـ\"زيادة/تقليص القيمة\""
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "أمسح عناصر الخريطة، او قلل عناصر الخريطة بالقيمة المحددة بــ\"زيادة/تقليص القيمة\""
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "ضَع عناصر الخريطة إلى القيمة المحددة بـ\"حدد القيمة\""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -9107,7 +9107,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "مساحة"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -9187,7 +9187,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "إحذف"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
@@ -9617,7 +9617,7 @@ msgstr ""
 
 #: ../../../../src/wui/building_statistics_menu.cc:374
 msgid "Ports"
-msgstr ""
+msgstr "المرافئ"
 
 #: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
@@ -10236,7 +10236,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "فريق %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -10518,32 +10518,32 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:567
 msgid "Show all messages"
-msgstr ""
+msgstr "أظهر كل الرسائل"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:579
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "أظهر رسائل الجيولوجيين فقط"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:584
 msgid "Show economy messages only"
-msgstr ""
+msgstr "أظهر رسائل الإقتصاد فقط"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:589
 msgid "Show seafaring messages only"
-msgstr ""
+msgstr "أظهر رسائل البِحارة فقط"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:594
 msgid "Show warfare messages only"
-msgstr ""
+msgstr "أظهر رسائل الحرب فقط"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:599
 msgid "Show scenario messages only"
-msgstr ""
+msgstr "أظهر رسائل المشاهد فقط"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604

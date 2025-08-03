@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr ""
+msgstr "Licenca"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "Stanje"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""
@@ -217,12 +217,12 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Potek dogodkov"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
 msgid "Sound"
-msgstr ""
+msgstr "Zvok"
 
 #: ../../../../data/txts/developers.lua:42
 msgid "vacant"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:346
 msgid "Windows"
-msgstr ""
+msgstr "Okna"
 
 #: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
@@ -318,7 +318,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Dodatki"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -415,7 +415,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Nastavitve večigralske igre"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -423,7 +423,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Nastavitve odjemalca"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -445,13 +445,13 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Nastavitve igralca"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "Na sredini so nastavitve za igralce. Za začetek igre mora vsak igralec biti eno od sledečih:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -466,11 +466,11 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Izberi kot deljeno v startni poziciji za drugega igralca."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Zaprto."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

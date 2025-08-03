@@ -1028,7 +1028,7 @@ msgstr ""
 
 #: ../../../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

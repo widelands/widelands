@@ -17057,7 +17057,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Koñtroloù"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17122,7 +17122,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Pennlizh. + Klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:34
@@ -17160,12 +17160,12 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Bihan"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Etre"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66

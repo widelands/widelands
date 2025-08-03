@@ -830,7 +830,7 @@ msgstr "鐵"
 
 #: ../../../../data/world/resources/stones/init.lua:7
 msgid "Stones"
-msgstr ""
+msgstr "石"
 
 #: ../../../../data/world/resources/water/init.lua:7
 #: ../../../../data/world/terrains/desert/water/init.lua:5

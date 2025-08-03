@@ -16717,7 +16717,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -16802,7 +16802,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "Tidak ada"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16965,7 +16965,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Kontrol"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17018,7 +17018,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:30
@@ -17030,7 +17030,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:34
@@ -17068,17 +17068,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Sedang"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Besar"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17188,12 +17188,12 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Pengantar"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"

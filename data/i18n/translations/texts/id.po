@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "Pengantar"
 
 #: ../../../../data/txts/help/common_helptexts.lua:20
 msgid ""

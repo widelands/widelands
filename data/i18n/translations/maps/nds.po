@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -341,14 +341,15 @@ msgid ""
 msgstr "In deeser Inföhren lehrst du, wo du Schippen, Muden, Fähren un Prielen bruukst."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Weertskupp"
+msgid "Economy and Trading"
+msgstr "Weertskupp un Hannel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene Weertskupp anpassen kannst. Deese Inföhren is för Spelers mit wat Erfahrung rekumdeert."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene Weertskupp anpassen kannst, un wo du mit anner Spelers hannelst. Deese Inföhren is för Spelers mit wat Erfahrung rekumdeert."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

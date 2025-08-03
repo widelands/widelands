@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "एक खदान बनाएँ"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"

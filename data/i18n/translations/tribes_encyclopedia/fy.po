@@ -17096,7 +17096,7 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Gemiddeld"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
@@ -17207,7 +17207,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Stamensyklopedy"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
@@ -17216,7 +17216,7 @@ msgstr "Yntroduksje"
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Oanwizings"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -17256,7 +17256,7 @@ msgstr[1] "%d minuten"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% еn %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"

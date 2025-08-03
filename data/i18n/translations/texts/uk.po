@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr ""
+msgstr "Ліцензія"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""
@@ -225,7 +225,7 @@ msgstr ""
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
 msgid "Sound"
-msgstr ""
+msgstr "Звук"
 
 #: ../../../../data/txts/developers.lua:42
 msgid "vacant"
@@ -261,15 +261,15 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Варвари"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
-msgstr ""
+msgstr "Імперія"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Атланти"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -305,7 +305,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:346
 msgid "Windows"
-msgstr ""
+msgstr "Вікна"
 
 #: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
@@ -353,7 +353,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "Вступ"
 
 #: ../../../../data/txts/help/common_helptexts.lua:20
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Параметри програвача"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Закрито."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

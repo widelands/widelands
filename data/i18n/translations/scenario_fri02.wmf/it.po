@@ -309,13 +309,13 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Ben ritornati!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
-msgstr ""
+msgstr "Una nuova casa"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
@@ -590,7 +590,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
-msgstr ""
+msgstr "Estranei"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
@@ -877,11 +877,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
-msgstr ""
+msgstr "Vittoria"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
-msgstr ""
+msgstr "Vittoria!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:416
@@ -892,7 +892,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
-msgstr ""
+msgstr "Congratulazioni"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""

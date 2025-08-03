@@ -35,7 +35,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Marked"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -1863,7 +1863,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "minedrift"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -4516,7 +4516,7 @@ msgstr "opgraderer soldaterundvig fra niveau 0 til niveau 1"
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Ingen soldater at træne!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
@@ -5353,7 +5353,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dødt træ"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5795,7 +5795,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Skib"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

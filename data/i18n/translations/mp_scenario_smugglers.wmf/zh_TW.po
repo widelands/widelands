@@ -40,7 +40,7 @@ msgstr "規則"
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
-msgstr ""
+msgstr "狀態"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"

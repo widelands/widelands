@@ -7904,7 +7904,7 @@ msgstr ""
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Se todos os recursos forem entregues a tempo, esta construção pode produzir um pão sírio a cada %s segundos em média."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -17015,7 +17015,7 @@ msgstr "Performance:"
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Controles"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17118,17 +17118,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Médio"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17247,11 +17247,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Mercadorias"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Edificios"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -17285,11 +17285,11 @@ msgstr[2] "%d minutos"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% e %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Jogador individual"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
@@ -17359,7 +17359,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
-msgstr ""
+msgstr "Saúde"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:191
@@ -17388,7 +17388,7 @@ msgstr[2] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "Ataque"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202
@@ -17397,7 +17397,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
-msgstr ""
+msgstr "Defesa"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:213
 #: ../../../../data/tribes/scripting/help/worker_help.lua:221
@@ -17418,4 +17418,4 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
-msgstr ""
+msgstr "Evasão"

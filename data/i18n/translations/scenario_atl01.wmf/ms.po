@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bina kuari"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
@@ -98,7 +98,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr ""
+msgstr "Bina telaga"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
@@ -247,7 +247,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bina gudang"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"

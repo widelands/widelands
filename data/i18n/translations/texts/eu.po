@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "Egoera"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""

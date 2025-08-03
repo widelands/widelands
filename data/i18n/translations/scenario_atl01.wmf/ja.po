@@ -935,7 +935,7 @@ msgstr "おめでとうございます"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "このミッションを達成しました。このままプレイを続けることもできますが、終了して次のミッションに挑むこともできます。"
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

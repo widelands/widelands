@@ -5,6 +5,9 @@
 # Translators:
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
+# Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2025
+# Leszek Szary, 2025
+# Karol Zygmunt, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Karol Zygmunt, 2025\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -585,6 +588,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ukończyłeś tę misję. Jeśli chcesz, możesz kontynuować grę, w przeciwnym "
+"razie przejdź do następnej misji."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:306
@@ -621,6 +626,9 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Przegrałeś i nie możesz kontynuować rozgrywki. Może będziesz mieć więcej "
+"szczęścia, gdy powtórzysz ten scenariusz. Kliknij OK aby wrócić do menu "
+"głównego."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:329
@@ -664,3 +672,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Służy za bazę do zamorskiej kolonizacji i handlu. Przechowuje również twoich"
+" żołnierzy, towary i narzędzia."

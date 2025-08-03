@@ -794,17 +794,17 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:486
 msgid "Summer"
-msgstr ""
+msgstr "Kezä"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:515
 msgid "Wasteland"
-msgstr ""
+msgstr "Joudomua"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543
 msgid "Winter"
-msgstr ""
+msgstr "Talvi"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:571

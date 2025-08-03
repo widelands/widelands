@@ -200,7 +200,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr ""
+msgstr "Casam militarem aedifica."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"

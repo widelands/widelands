@@ -16804,7 +16804,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16846,7 +16846,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:572
 #: ../../../../data/tribes/scripting/help/building_help.lua:621
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:577
 msgid "If built directly, dismantle yields:"
@@ -16874,7 +16874,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:665
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "工人"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../../../data/tribes/scripting/help/building_help.lua:687
@@ -16900,7 +16900,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "生產"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
@@ -17070,17 +17070,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17166,7 +17166,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17190,7 +17190,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
@@ -17332,7 +17332,7 @@ msgstr[0] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "攻擊"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202

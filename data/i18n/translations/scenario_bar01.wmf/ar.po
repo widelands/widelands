@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "إبنى مصنع الصهر"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
@@ -916,7 +916,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr ""
+msgstr "المهمة إكتملت"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
@@ -947,13 +947,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "النصر"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "لقد أكملت المهمة. أنت ربما تُكمل اللعب إذا أردت، غير ذلك تحرك إلي المهمة التالية."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"

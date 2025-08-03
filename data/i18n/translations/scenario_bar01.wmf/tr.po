@@ -165,7 +165,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Build a smelting works"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
@@ -946,13 +946,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Zafer"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"

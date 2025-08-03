@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "Ebumnuche Ọhụrụ"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -123,7 +123,7 @@ msgstr ""
 #: ../../../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "%s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/computer_player.cc:41
@@ -8343,7 +8343,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:345
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Akwụkwọ ndekọ"
 
 #: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"

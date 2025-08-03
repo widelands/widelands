@@ -16847,7 +16847,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "Ниједан"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16889,7 +16889,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:572
 #: ../../../../data/tribes/scripting/help/building_help.lua:621
 msgid "Unknown"
-msgstr ""
+msgstr "Непознат"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:577
 msgid "If built directly, dismantle yields:"
@@ -16943,7 +16943,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "Производња"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
@@ -17113,7 +17113,7 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Мали"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63

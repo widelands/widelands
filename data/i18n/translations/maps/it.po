@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -111,7 +111,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Quando Chat'Karuth morì, era un vecchio, padre di tre figli forti e ambiziosi,  e capo di un esercito in grdo di affrontare qualunque nemico avesse osato marciare contro le antiche foreste. Verso la fine del suo glorioso regno, Chat'Karuth scelse il suo figlio maggiore, Thron, per succedergli come capo della tribù - una decisione che scontentò i suoi due fratelli. Il vecchio capo lo sapeva. Seguendo le indicazioni di suo padre, Thron lasciò la capitale Al'thunran, seggio del Trono Tra Gli Alberi, e ritirò le sue forze tra le alte colline dove seppellì suo padre. Qui giurò agli dei e allo spirito di suo padre che sarebbe tornato per ristabilire l'ordine. Mentre i suoi fratelli ciecamente ingaggiavano in guerra contro Thron e le poche forze che aveva lasciato a difendere i confini di Al'thunran, il giovano signore della guerra cercava di riunire i suoi ambiziosi fratelli e forzare le tribù a marciare ancora sotto un'unica bandiera."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
@@ -136,7 +136,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Sei mesi fa Lutius - un giovane generale dell'Impero - fu mandato con 150 soldati sulla frontiera oltre le foreste settentrionali ove tribù barbare stavano sconfinando sui terreni dell'Impero. Il suo compito era difendere le terre dell'Impero. All'inizio tutto era calmo. Parlò  ad alcuni bambini barbarici e pensò alla possibilità di una vita pacifica, fianco a fianco con questa gente arcaica. Cominciò a sentirsi sicuro, e il suo esercito cominciò ad abbassare la guardia verso il loro potenziale nemico. Questa fu la loro fine. Una notte di mazo il suo esercito impreparato fu attaccato da 100 fanti barbarici e completammente disperso. Solo il generale e un pugno di soldati riuscirono a scappare."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
@@ -156,7 +156,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Quando gli dei persero fede negli atlantidei e sprofondarono la loro isola, la lotta di una donna per la giustizia e una seconda opportunità per il suo popolo divenne leggendaria. Alla guida dei superstiti atlantidei verso un nuovo futuro in un'altra parte del mondo, Jundlina divenne la persona più potente del suo tempo, ma a caro prezzo: la sua umanità e la sua anima."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
@@ -345,14 +345,15 @@ msgid ""
 msgstr "In questo tutorial conoscerai i viaggi in mare, cioè come gestire navi e porti, e come usare traghetti e vie d'acqua."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Economia"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "In questo tutorial imparerai che opzioni offre Widelands per regolare la tua economia. Consigliato ai giocatori con un po' di esperienza."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

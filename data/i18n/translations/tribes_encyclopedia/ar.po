@@ -16826,7 +16826,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -16916,7 +16916,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16958,7 +16958,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:572
 #: ../../../../data/tribes/scripting/help/building_help.lua:621
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:577
 msgid "If built directly, dismantle yields:"
@@ -16986,7 +16986,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:665
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "العمال"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../../../data/tribes/scripting/help/building_help.lua:687
@@ -17012,7 +17012,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "إنتاج"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
@@ -17079,7 +17079,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "التحكم"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17132,7 +17132,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:30
@@ -17144,7 +17144,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:34
@@ -17182,17 +17182,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "متوسط"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "كبير"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17278,7 +17278,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "الحجم"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17298,7 +17298,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "موسوعة القبائل"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
@@ -17464,7 +17464,7 @@ msgstr[5] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "هجوم"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202

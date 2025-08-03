@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://app.transifex.com/widelands/widelands/language/ja/)\n"
@@ -82,7 +82,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "第二帝国"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -105,12 +105,12 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "チャト-カルースは老齢まで生き、そして死んだ。三人の強靭で野心的な息子の父親であり、太古の森を侵すあらゆる敵を寄せ付けなかった大首領であった。その栄光の治世の晩年、チャト-カルースは最年長の息子であるスロンを後継者に指名した… しかし、その判断は残り二人の息子達には到底満足できるものではなかった。老いた大首領はそれを理解していた。スロンは父の勧めに従い、アル-サンランの都を離れ、玉座の森の本拠地へと向かった。そして彼の軍勢もまた父の遺体を埋葬した丘陵へ向かって退かせた。スロンはそこで神と父の魂に誓いを立てた… 必ず都に戻り秩序を取り戻すと。彼の兄弟達はスロンの軍勢やスロンが国境警備のために残してきたわずかな軍勢に対して血みどろの戦をしている。そんな中、この若き将軍は野心あふれる兄弟達を屈服させ、再び部族を一つの旗の元にまとめあげようとしている。"
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "追放者の雌伏"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
@@ -130,12 +130,12 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "六ヶ月前、帝国の若き将軍であるルティウスは 150 人の兵士とともに北の森の先にある国境地域へと派遣された。そこでは野蛮人の部族達が帝国の領土に手を伸ばしていた。彼の任務は帝国の領土を守ることだった。初めは何の問題もなかった。彼は野蛮人の子供たちと会話ができるほどだった…… この太古から続く部族と共存していけるのではないかとすら思った。彼も徐々に気が緩んでいき、兵士達も潜在的な敵への注意が薄れてきていた。しかし、それがいけなかった。３月のある夜、無警戒だった兵士達に 100 人の野蛮人の歩兵が襲いかかり、帝国兵は完全に蹴散らされてしまった。ルティウスもわずかに生き残った兵士とともに命からがら逃げ延びるのがやっとだった。"
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "炎へ向かって"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -150,12 +150,12 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "神はアトランティス人への信頼を無くし、彼らの島は海に沈んだ。彼らの第二の希望、そしてある女性のその正義のための奮闘はやがて伝説となる。生き残りのアトランティス人を世界の新たな場所へと導き、未来を示せ。ジュンドゥリナはこの時代最も力を持つ人間となる…… 彼女の人間性と魂という大きな代償の元に。"
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "水から氷へ"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
@@ -186,7 +186,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "海から離れて暮らすことはただでさえ苦難の道だ。北の海の岸辺に住むフリジアの住民にとっては言語に絶する程の苦難の道だろう。洪水を引き起こした先の嵐は記録に残る中でも最悪のものだった。フリジアの人々にかつてない苦難が待ち受けていることは確実だ…… これは全く新しい土地へ向かえという神の思し召しなのだろうか？"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -227,7 +227,7 @@ msgstr "ついに船は修復された。ルティウスと一団は新たな生
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "ネプチューンの復讐"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -339,14 +339,15 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "経済"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "このチュートリアルでは、Widelandsで経済を制御する様々な方法について学べます。ある程度経験を積んでからプレイした方が良いかもしれません。"
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

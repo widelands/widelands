@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr ""
+msgstr "Introdución"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
@@ -160,7 +160,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Arena de batalla"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
@@ -242,7 +242,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo de adestramento"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
@@ -287,7 +287,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Choza do explorador"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
@@ -356,7 +356,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Explorador"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"

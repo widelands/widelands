@@ -6,6 +6,11 @@
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Guybrush88 <erpizzo@alice.it>, 2022
 # Log Merger, 2022
+# Luigi Lain <lainluigi86@tiscali.it>, 2025
+# GunChleoc, 2025
+# Samuele Battarra, 2025
+# ilmaren, 2025
+# xno, 2025
 # 
 msgid ""
 msgstr ""
@@ -13,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: xno, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1391,7 +1396,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Birrificio"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
@@ -1434,11 +1439,13 @@ msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Il contadino che lavora in questa fattoria non ha terreni liberi per "
+"piantare i suoi semi."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa della guardia forestale"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
@@ -1462,7 +1469,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Pianta degli alberi nell'area circostante."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Forester’s House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1471,13 +1478,15 @@ msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
+"La casa della guardia forestale necessita di spazio libero nella sua area di"
+" lavoro per piantare alberi"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack’s
 #. House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Pianta degli alberi nell'area circostante."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Lumberjack’s
 #. House
@@ -1497,14 +1506,14 @@ msgstr "Macina il grano per produrre farina."
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Addestra i soldati in \"attacco\" e \"salute\""
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 2
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Equipaggia i soldati con tutte le armi e armature necessarie."
 
 #. TRANSLATORS: Note helptext for an Empire training site: Training Camp
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
@@ -1513,12 +1522,14 @@ msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"I soldati imperiali non possono addestrarsi in 'difesa' e pertanto "
+"rimarranno al loro livello originario."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Well
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Estrae dell'acqua dalle profondità."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Temple of Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
@@ -1555,6 +1566,10 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Il taglialegna che lavora in questa capanna non riesce trovare nessun albero"
+" nella sua area di lavoro. Dovresti considerare la possibilità di "
+"smantellare o distruggere l'edificio o costruire una capanna per la guardia "
+"forestale."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1585,42 +1600,42 @@ msgstr "dormendo"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "migliorare il livello di attacco del soldato da 0 a 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "migliorare il livello di attacco del soldato da 1 a 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "migliorare il livello di attacco del soldato da 2 a 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "migliorare il livello di attacco del soldato da 3 a 4"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "migliorare il livello di salute del soldato da 0 a 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "migliorare il livello di salute del soldato da 1 a 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "migliorare il livello di salute del soldato da 2 a 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "migliorare il livello di salute del soldato da 3 a 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
@@ -1654,3 +1669,4 @@ msgstr "Acqua esaurita"
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
+"Il portatore che lavora a questo pozzo non riesce a trovare dell'acqua."

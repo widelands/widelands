@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "Reljefai"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Ištekliai"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
@@ -106,7 +106,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.

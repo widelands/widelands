@@ -1324,7 +1324,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
-msgstr ""
+msgstr "bakanta panon"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -5356,7 +5356,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Morta arbo"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5773,7 +5773,7 @@ msgstr "Stirado"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "Sugestoj"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -5798,7 +5798,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Ŝipo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

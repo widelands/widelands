@@ -5780,7 +5780,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "ساختمان‌ها"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"

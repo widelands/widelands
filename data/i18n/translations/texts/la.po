@@ -261,7 +261,7 @@ msgstr "Fabula contentionis"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -269,7 +269,7 @@ msgstr "Imperium"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantidenses"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -473,7 +473,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Clausum."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

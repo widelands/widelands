@@ -226,7 +226,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Bina pengeras kayu"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -297,7 +297,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Bina ladang ternak lembu"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -476,7 +476,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "Penasihat"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
@@ -602,7 +602,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Rakan Setia Anda"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
@@ -946,7 +946,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Kemenangan Mutlak!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
@@ -976,11 +976,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Suatu Hari Yang Sejuk"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron kelihatan risau..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:515

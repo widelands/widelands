@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "ברברימ"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -266,7 +266,7 @@ msgstr "אימפריה"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "אטלנטים"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"

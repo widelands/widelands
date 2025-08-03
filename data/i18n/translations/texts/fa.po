@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "وضعیت"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""
@@ -318,7 +318,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "افزونه ها"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -415,7 +415,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "راه‌اندازی بازی چندنفره"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -445,7 +445,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "تنظیمات پخش‌کننده‌"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""

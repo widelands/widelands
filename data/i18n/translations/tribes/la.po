@@ -5353,7 +5353,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Arbor mortua"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5471,7 +5471,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/init.lua:10
 #: ../../../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Concilium Widelands ludum fingens"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/amazons/init.lua:13
@@ -5581,7 +5581,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Principia"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
@@ -5708,13 +5708,13 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantidenses"
 
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
+msgstr "Gens Atlantidenses, qui sunt filii filiaeque ex Atlantide insula, de fabulis antiquissimis nota est."
 
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5728,7 +5728,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5737,11 +5737,11 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "Imperium"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Hoc est Imperium Romanum."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
@@ -5754,19 +5754,19 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Thesaurus gentis"
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "Generales"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Institutio"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Gubernaculum"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
@@ -5774,15 +5774,15 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Res"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Operarii"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Aedificia"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"

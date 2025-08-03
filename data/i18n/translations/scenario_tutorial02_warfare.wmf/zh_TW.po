@@ -354,7 +354,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "偵察兵"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"

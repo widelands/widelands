@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "Objektif Baharu"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -1873,7 +1873,7 @@ msgstr "Saiz Alat"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Saiz:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2169,7 +2169,7 @@ msgstr[0] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Tiada"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -3310,7 +3310,7 @@ msgstr ""
 #. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers missing"
-msgstr ""
+msgstr "Pekerja hilang"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:245
@@ -3451,7 +3451,7 @@ msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "Menyimpan permainan..."
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3520,7 +3520,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Rupa Bumi"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3600,7 +3600,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Peta Mini"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4361,7 +4361,7 @@ msgstr "Memuatkan..."
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Rendahkan nilai"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4374,7 +4374,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Tingkatkan nilai"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4419,7 +4419,7 @@ msgstr[0] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
+msgstr[0] "%d jam"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -4680,7 +4680,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Daftar Masuk"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -4988,7 +4988,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5290,7 +5290,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2093
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
@@ -5397,7 +5397,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Nama:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5637,7 +5637,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nama: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5659,7 +5659,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Pemain: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5716,7 +5716,7 @@ msgstr "Kesukaran"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Kesukaran:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5819,7 +5819,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Kecil"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6034,7 +6034,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6125,7 +6125,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Pembayang:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
@@ -6167,7 +6167,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:563
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategori: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:293
@@ -6491,7 +6491,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "Tetap semula ke lalai"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -6518,7 +6518,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6536,12 +6536,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Jeneral"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "Penyunting"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6561,7 +6561,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Lancar Permainan"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7481,7 +7481,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Pasukan %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7864,7 +7864,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:58
 #: ../../../../src/wui/mapdetails.cc:167
 msgid "Authors"
-msgstr ""
+msgstr "Pengarang"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:183
@@ -7889,7 +7889,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -7897,7 +7897,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak Diketahui"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8201,15 +8201,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "Kedai roti"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
-msgstr ""
+msgstr "Tempat pembuatan bir"
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "Kedai roti"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
@@ -8265,7 +8265,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "Batubara"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
@@ -8273,7 +8273,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
-msgstr ""
+msgstr "Emas"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
@@ -8313,7 +8313,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "Pemain Berbilang"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8780,7 +8780,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Pintasan Papan Kekunci"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
@@ -8795,7 +8795,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Ubah saiz alat"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8805,38 +8805,38 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Letak unsur baharu ke dalam peta, atau tingkatkan unsur peta dengan nilai terpilih mengikut 'Tingkat/Kurangkan nilai'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Buang unsur dari peta, atau kurangkan unsur peta dengan nilai terpilih mengikut 'Tingkat/Kurangkan nilai'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Tetapkan unsur peta pada nilai yang dipilih oleh 'Tetap Nilai'"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -8886,7 +8886,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Ruang"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -10005,7 +10005,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Pasukan %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -11456,7 +11456,7 @@ msgstr ""
 #. month day, year
 #: ../../../../src/wui/savegameloader.cc:188
 msgid "%1% %2%, %3%"
-msgstr ""
+msgstr "%1% %2%, %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:

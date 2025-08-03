@@ -17096,17 +17096,17 @@ msgstr "Medan en flagga tas bort: Alla flaggor fram till närmaste korsning tas 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Medel"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Stor"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17192,7 +17192,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Storlek"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17233,11 +17233,11 @@ msgstr "Byggnader"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Stammar fasta föremål"
 
 #: ../../../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Världen fasta föremål"
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"

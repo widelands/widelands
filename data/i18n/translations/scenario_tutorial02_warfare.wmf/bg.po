@@ -159,7 +159,7 @@ msgstr "Докато чакаме бойната арена, може да за�
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Бойна арена"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
@@ -241,7 +241,7 @@ msgstr "Постройте тренировъчен лагер."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Тренировъчен лагер"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
@@ -286,7 +286,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Разузнаваческа колиба"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
@@ -355,7 +355,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Разузнавач"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"

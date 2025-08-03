@@ -830,7 +830,7 @@ msgstr "Piltangenter"
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl och Piltangenter"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -840,7 +840,7 @@ msgstr ""
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift och Piltangenter"
 
 #: ../../../../data/txts/tips/general_game.lua:102
 msgid ""

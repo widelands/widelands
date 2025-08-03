@@ -321,7 +321,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Ai pierdut"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:745

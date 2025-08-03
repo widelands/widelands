@@ -16717,7 +16717,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "常规的"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -16802,7 +16802,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "没有"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16872,7 +16872,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:665
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "劳动者"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../../../data/tribes/scripting/help/building_help.lua:687
@@ -16898,7 +16898,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "生产"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
@@ -16965,7 +16965,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "控制"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -16980,7 +16980,7 @@ msgstr ""
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:14
 msgid "Close window"
-msgstr ""
+msgstr "关闭窗口"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:16
@@ -17068,17 +17068,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17115,7 +17115,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/format_help.lua:154
 #: ../../../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
 #: ../../../../data/tribes/scripting/help/format_help.lua:170
@@ -17156,7 +17156,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
-msgstr ""
+msgstr "注意"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
@@ -17164,7 +17164,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "尺寸"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17184,24 +17184,24 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "部落大百科"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "提示"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "物品"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "建筑物"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -17213,33 +17213,33 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "关于Widelands"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../../../data/tribes/scripting/help/time_strings.lua:62
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
+msgstr[0] "%d 秒"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:42
 #: ../../../../data/tribes/scripting/help/time_strings.lua:61
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
+msgstr[0] "%d 分钟"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% 和 %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "单人游戏"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "多人游戏"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
@@ -17330,7 +17330,7 @@ msgstr[0] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "攻击"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202

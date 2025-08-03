@@ -477,7 +477,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "Onye ndụmọdụ"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
@@ -977,11 +977,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Ụbọchị oyi ọzọ"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Tron dị ka onye na-echegbu uche"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:515

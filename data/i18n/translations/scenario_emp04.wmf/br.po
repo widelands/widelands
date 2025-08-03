@@ -1426,6 +1426,8 @@ msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"N'eus bet kavet tachenn zieub ebet da blantañ e had enni gant ar feurmer a "
+"labour en atant-mañ."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1547,6 +1549,8 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"N'eus bet kavet gwezenn ebet en e dachenn-labour gant ar bucher a labour en "
+"ti-mañ. Soñjit e distruj pe divontañ ar savadur, pe e sevel un ti foricher."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1618,7 +1622,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Soudard ebet da c'hourdonañ!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program

@@ -5756,19 +5756,19 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Pengantar"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Kontrol"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"

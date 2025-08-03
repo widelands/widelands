@@ -399,7 +399,7 @@ msgstr "Menu principal"
 #: ../../../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -647,7 +647,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/options.cc:305
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Mostrar lotes de construção"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -945,7 +945,7 @@ msgstr ""
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Inamovível: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/set_terrain_tool.cc:120
@@ -1511,7 +1511,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "O Atol"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
@@ -1810,7 +1810,7 @@ msgstr "Elevação fixa"
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
@@ -1877,7 +1877,7 @@ msgstr "Tamanho da ferramenta"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Tamanho:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2181,7 +2181,7 @@ msgstr[2] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -3342,7 +3342,7 @@ msgstr ""
 #. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers missing"
-msgstr ""
+msgstr "Faltam trabalhadores"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:245
@@ -3483,7 +3483,7 @@ msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "Salvando o jogo …"
 
 #: ../../../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -3556,7 +3556,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Terrenos"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3636,7 +3636,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Mini-mapa"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4403,7 +4403,7 @@ msgstr "A carregar …"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Diminui o valor"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4416,7 +4416,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Aumenta o valor"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4467,9 +4467,9 @@ msgstr[2] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d hora"
+msgstr[1] "%d horas"
+msgstr[2] "%d horas"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -4746,7 +4746,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Autenticação de utilizador"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -5054,7 +5054,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5362,7 +5362,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2093
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
@@ -5469,7 +5469,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5715,7 +5715,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nome: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5737,7 +5737,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Jogadores: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5794,7 +5794,7 @@ msgstr "Dificuldade"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Dificuldade:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5897,7 +5897,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6116,7 +6116,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6207,7 +6207,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Dica:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"
@@ -6581,7 +6581,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "Voltar à quantidade predefinida"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -6608,7 +6608,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6626,12 +6626,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6651,7 +6651,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Lançar um Jogo"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7299,7 +7299,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
-msgstr ""
+msgstr "Fechar janela"
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../../../src/ui_fsmenu/mousewheel_options.cc:59
@@ -7810,7 +7810,7 @@ msgstr "Desligado"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../../../src/ui_fsmenu/options.cc:528
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
@@ -7954,7 +7954,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:58
 #: ../../../../src/wui/mapdetails.cc:167
 msgid "Authors"
-msgstr ""
+msgstr "Autores"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:183
@@ -7979,7 +7979,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -7987,7 +7987,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8199,11 +8199,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
-msgstr ""
+msgstr "Armazém"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
-msgstr ""
+msgstr "Porto"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
@@ -8231,23 +8231,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
-msgstr ""
+msgstr "Torre"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
-msgstr ""
+msgstr "Fortaleza"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Casa do Madeireiro"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa do silvicultor"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
-msgstr ""
+msgstr "Pedreira"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
@@ -8275,7 +8275,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
-msgstr ""
+msgstr "Poço"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
@@ -8287,23 +8287,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
-msgstr ""
+msgstr "Moinho"
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "Padaria"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
-msgstr ""
+msgstr "Cervejeira"
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "Fumeiro"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
-msgstr ""
+msgstr "Taverna"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
@@ -8315,19 +8315,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Loja do Armeiro"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Loja do Armador"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Tecelagem"
 
 #: ../../../../src/wlapplication_options.cc:215
 msgid "Shipyard"
-msgstr ""
+msgstr "Estaleiro Naval"
 
 #: ../../../../src/wlapplication_options.cc:216
 msgid "Ferry Yard"
@@ -8339,7 +8339,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
-msgstr ""
+msgstr "Quartel"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
@@ -8355,15 +8355,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mina de Carvão"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mina de ferro"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mina de ouro"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
@@ -8403,7 +8403,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "Vários Jogadores"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8435,7 +8435,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:345
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Enciclopédia"
 
 #: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"
@@ -8821,7 +8821,7 @@ msgstr "Sair do jogo"
 #: ../../../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Teclas setas"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:899
@@ -8853,12 +8853,12 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:919
 msgid "Remember current location"
-msgstr ""
+msgstr "Lembrar localização atual"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:922
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Ir para a localização anteriormente memorizada"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
 #: ../../../../src/wlapplication_options.cc:971
@@ -8870,22 +8870,22 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atalhos de teclado"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
 msgid "Message Window"
-msgstr ""
+msgstr "Janela das Mensagens"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1005
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Estatísticas de Navio"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Mudar o tamanho das ferramentas"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8895,38 +8895,38 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Clicar"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Meter elementos novos no mapa ou aumentar elementos do mapa pelo valor que foi escolhido por «Aumentar/Diminuir o valor»"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Clique"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Remover elementos do mapa ou diminuir elementos do mapa pelo valor que foi escolhido por «Aumentar/Diminuir o valor»"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Clique"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Colocar elementos do mapa no valor que foi escolhido por «Definir valor»"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -8976,7 +8976,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Espaço"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -9006,22 +9006,22 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: ../../../../src/wlapplication_options.cc:1431
 msgctxt "hotkey"
@@ -9056,7 +9056,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
@@ -10099,7 +10099,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Equipa %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -10374,7 +10374,7 @@ msgstr "Mostrar todas as mensagens"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:579
 msgid "Show geologists’ messages only"
-msgstr ""
+msgstr "Mostrar apenas mensagens dos geólogos"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:584
@@ -11425,7 +11425,7 @@ msgstr ""
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr ""
+msgstr "livre"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
@@ -11593,7 +11593,7 @@ msgstr "%1% %2%, %3%"
 #: ../../../../src/wui/savegameloader.cc:194
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "guardado em %1$s %2$u, %3$u"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../../../src/wui/savegametable.cc:47

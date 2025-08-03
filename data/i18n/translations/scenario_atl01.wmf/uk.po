@@ -185,7 +185,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Побудувати плавильний завод"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
@@ -937,7 +937,7 @@ msgstr "Поздоровляю"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ви впорались із завданням. Тепер, якщо бажаєте, можете просто пограти, або ж переходьте до наступного завдання."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

@@ -2,12 +2,17 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# GunChleoc, 2025
+# Gregers K-Hansen <gregers86@me.com>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: Gregers K-Hansen <gregers86@me.com>, 2025\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/widelands/teams/35159/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -217,11 +222,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:161
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Bekjemp Barbarerne"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Bekjemp fienden"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -1379,7 +1384,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Bryggeri"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
@@ -1389,7 +1394,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Gård"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
@@ -1422,11 +1427,12 @@ msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Bonden som jobber på denne gården har ingen ledig plass til å så nye frø."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Skogforvalters hus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
@@ -1450,7 +1456,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Planter trær i områdene rundt."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Forester’s House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1465,7 +1471,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Planter trær i områdene rundt."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Lumberjack’s
 #. House
@@ -1506,7 +1512,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Heiser vann opp fra dypet."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Temple of Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
@@ -1519,7 +1525,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Tømmerhuggers hus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
@@ -1547,7 +1553,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Mølle"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
@@ -1563,7 +1569,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Treningsleir"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
@@ -1626,7 +1632,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Brønn"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"

@@ -17116,17 +17116,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Médios"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17193,7 +17193,7 @@ msgstr ""
 #. productionsite
 #: ../../../../data/tribes/scripting/help/format_help.lua:285
 msgid "Wares consumed:"
-msgstr ""
+msgstr "Mercadorias consumidas"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:35
 #: ../../../../data/tribes/scripting/help/ware_help.lua:30
@@ -17212,7 +17212,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17232,7 +17232,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Enciclopédia da tribo"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
@@ -17245,7 +17245,7 @@ msgstr "Dicas"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Mercadorias"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"

@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr ""
+msgstr "Splošno"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "Tereni"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Surovine"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
@@ -89,7 +89,7 @@ msgstr ""
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../../../data/scripting/editor/terrain_help.lua:57
@@ -106,7 +106,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f %%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.

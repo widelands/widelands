@@ -2353,7 +2353,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:98
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "No Iron"
-msgstr ""
+msgstr "沒鐵礦"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:88
@@ -5736,7 +5736,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "帝國"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
@@ -5761,7 +5761,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
@@ -5777,7 +5777,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "工人"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"

@@ -1863,7 +1863,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "rudarenje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -3368,7 +3368,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "mining marble"
-msgstr ""
+msgstr "rudarenje mramora"
 
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:148
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:93
@@ -5353,7 +5353,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Osušeno stablo"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5737,7 +5737,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "Carstvo"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
@@ -5758,11 +5758,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "Općenito"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Uvod"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
@@ -5774,15 +5774,15 @@ msgstr "Savjeti"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Roba"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Radnici"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Građevine"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -5795,7 +5795,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Brod"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

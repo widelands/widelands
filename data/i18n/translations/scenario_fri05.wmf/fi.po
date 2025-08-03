@@ -4,6 +4,9 @@
 # 
 # Translators:
 # Oi Suomi On! <oisuomion@protonmail.com>, 2023
+# Markus <markus@hallfors.com>, 2025
+# Atte Timonen, 2025
+# LINUX-SAUNA, 2025
 # 
 msgid ""
 msgstr ""
@@ -11,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-05-19 03:23+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: LINUX-SAUNA, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,14 +140,14 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Esittely"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Tervetuloa takaisin!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -227,7 +230,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Tervehdys"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
@@ -271,7 +274,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Viholliset"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
@@ -480,7 +483,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Patoaminen"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -569,7 +572,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
@@ -673,7 +676,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:350
@@ -712,10 +715,12 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Onneksi olkoon"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet suorittanut tämän tehtävän loppuunsa. Voit jatkaa halutessasi "
+"pelaamista, muutoin siirry seuraavaan tehtävään."

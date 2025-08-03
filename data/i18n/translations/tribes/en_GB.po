@@ -38,7 +38,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Market"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -1324,7 +1324,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
-msgstr ""
+msgstr "baking bread"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
@@ -5356,7 +5356,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dead Tree"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5749,7 +5749,7 @@ msgstr "This is the culture of the Roman Empire."
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
-msgstr ""
+msgstr "Frisians"
 
 #: ../../../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
@@ -5798,7 +5798,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Ship"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

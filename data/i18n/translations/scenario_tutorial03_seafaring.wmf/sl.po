@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
-msgstr ""
+msgstr "Pomorstvo"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
@@ -64,7 +64,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
 msgid "Ports"
-msgstr ""
+msgstr "Pristanišča"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
 msgid ""
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Ladje"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
@@ -356,11 +356,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Odprava"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Začni odpravo"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."

@@ -36,7 +36,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "متجر"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -5354,7 +5354,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "شجره ميته"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5709,7 +5709,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "الاطلانتيين"
 
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
@@ -5729,7 +5729,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr ""
+msgstr "البرابرة"
 
 #: ../../../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5738,11 +5738,11 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "اﻹمبراطورية"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "هذه الثقافة التي كانت سائدة في الأمبروطورية الرومانية"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
@@ -5755,35 +5755,35 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "موسوعة القبائل"
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "مُقدمة"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "التحكم"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "نصائح"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "سلع"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "العمال"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "مباني"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"

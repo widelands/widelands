@@ -36,7 +36,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Marked"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -1864,7 +1864,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "graver"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -5354,7 +5354,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dødt tre"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5472,7 +5472,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/init.lua:10
 #: ../../../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Widelands utviklerteam"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/amazons/init.lua:13
@@ -5582,7 +5582,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Hovedkvarter"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
@@ -5709,13 +5709,13 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantere"
 
 #: ../../../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
+msgstr "Denne stammen er kjent fra de eldste sagn. Sønner og døtre av Atlantis."
 
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5729,7 +5729,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbarer"
 
 #: ../../../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5738,11 +5738,11 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
-msgstr ""
+msgstr "Imperiet"
 
 #: ../../../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Dette er kulturen til det romerske Imperiet."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
@@ -5759,31 +5759,31 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Introduksjon"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Varer"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Arbeidere"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Bygninger"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -5796,7 +5796,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Skip"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:48

@@ -16849,7 +16849,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "Niciunul"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -17012,7 +17012,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Comenzi"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17120,7 +17120,7 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Medii"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
@@ -17162,7 +17162,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/format_help.lua:154
 #: ../../../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
 #: ../../../../data/tribes/scripting/help/format_help.lua:170
@@ -17235,7 +17235,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
@@ -17282,7 +17282,7 @@ msgstr[2] ""
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% şi %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"

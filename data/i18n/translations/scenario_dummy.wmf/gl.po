@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Aínda non se fixo."
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:14
 msgid "Sorry, this map is not yet implemented."

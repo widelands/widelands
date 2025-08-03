@@ -938,7 +938,7 @@ msgstr "Поздравления"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Вие завършихте тази мисия. Ако искате, можете да продължите да играете, или да преминете на следващата мисия."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

@@ -1866,7 +1866,7 @@ msgstr "Kamenná baňa"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "ťaženie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64

@@ -225,7 +225,7 @@ msgstr "누리집"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "스크립트를 하고 있음"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436

@@ -39,11 +39,11 @@ msgstr ""
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
-msgstr ""
+msgstr "走私犯"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""

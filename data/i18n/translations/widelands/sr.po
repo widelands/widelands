@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "Novi ciljevi"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -82,7 +82,7 @@ msgstr ""
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -124,7 +124,7 @@ msgstr ""
 #: ../../../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/computer_player.cc:41
@@ -1514,7 +1514,7 @@ msgstr ""
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../../../src/logic/map.cc:77
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustoš"
 
 #. * TRANSLATORS: Random Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
@@ -2178,7 +2178,7 @@ msgstr[2] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Ниједан"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2572,12 +2572,12 @@ msgstr ""
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:71
 msgid "Summer"
-msgstr ""
+msgstr "Leto"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:74
 msgid "Winter"
-msgstr ""
+msgstr "Zima"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:80
@@ -5734,7 +5734,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Играчи: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5894,7 +5894,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Мали"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -7568,7 +7568,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Tim %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7984,7 +7984,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Непознат"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -10096,7 +10096,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Tim %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -11058,7 +11058,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakti"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63

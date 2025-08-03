@@ -263,7 +263,7 @@ msgstr "Campanha"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -271,7 +271,7 @@ msgstr "Império"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantes"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -420,15 +420,15 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Configuração de Jogo Multiplayer"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Você está no menu multiplayer."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Configurações do Client"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -456,7 +456,7 @@ msgstr "Configurações do jogador"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "No meio estão as configurações para o jogador. Para iniciar o jogo cada jogador deve ser um dos tipos:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -471,11 +471,11 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Selecione compartilhado na posição inicial para outro jogador."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Fechado."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

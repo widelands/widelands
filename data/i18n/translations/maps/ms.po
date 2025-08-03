@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2017\n"
 "Language-Team: Malay (http://app.transifex.com/widelands/widelands/language/ms/)\n"
@@ -80,7 +80,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Empayar Kedua"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -128,12 +128,12 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Enam bulan lepas, Lutius - seorang jeneral muda Empayar - telah mengerahkan sejumlah 150 orang askar ke perbatasan di bahagian hutan utara yang mana puak Gasar telah menceroboh masuk ke dalam tanah jajahan Empayar. Beliau ditugaskan untuk mempertahankan tahah air ini. Pada awalnya, keadaan masih terkawal. Dia berjaya memujuk beberapa orang anak-anak puak Gasar untuk berdamai - menggunakan kemahiran dialeknya. Beliau merasa lebih selamat dan tenteranya tidak lagi menunjukkan tanda-tanda bersedia untuk berperang. Tindakannya mengundang satu malapetaka yang lebih besar. Pada malam Mac, askarnya yang tidak bersedia berperang telah diserang hendap oleh 100 orang puak Gasar dan sepenuhnya menjadi kelam kabut. Hanya sebilangan kecil tenteranya masih hidup."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Lari dari Serangan"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Pelayaran"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -337,13 +337,14 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
+msgid "Economy and Trading"
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
 msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
@@ -772,7 +773,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Penyeludup"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""

@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# ks k, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: ks k, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -297,7 +301,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "졌습니다!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
@@ -317,7 +321,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "졌습니다"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -326,6 +330,8 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"당신은 졌으므로 계속 플레이 할 수 없습니다. 이 시나리오를 다시 시도 할 때 행운이 있기를 바랍니다. 확인을 눌러 기본 메뉴로 "
+"돌아가십시오."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
@@ -927,13 +933,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "축하합니다"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "이 임무를 완료했습니다. 원하는 경우 계속 놀 수도 있고, 그렇지 않으면 다음 임무로 넘어갈 수 있습니다."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
@@ -1215,7 +1221,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "정찰대의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
@@ -1298,14 +1304,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "여기에 정찰대를 보내려면 먼저 이 깃발을 정찰대의 집에 연결해야 합니다."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "알려지지 않은 땅을 탐험합니다."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul

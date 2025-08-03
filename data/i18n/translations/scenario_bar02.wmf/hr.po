@@ -434,7 +434,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "Savjetnik"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."

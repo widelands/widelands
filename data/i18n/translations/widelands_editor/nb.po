@@ -90,7 +90,7 @@ msgstr ""
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1% stk. %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../../../data/scripting/editor/terrain_help.lua:57

@@ -220,7 +220,7 @@ msgstr "Duilleag-dhachaigh"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Sgriobtadh"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436

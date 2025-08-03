@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -252,7 +252,7 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Klick dann up »Bestand«."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr "Du kannst ok de Handigtaste »%s« bruken, um deeses Fenster stracks opentomaken."
@@ -977,7 +977,7 @@ msgstr "Elkeen Waarhuus hett veer Knopen, um Vörrang fasttoleggen. Wenn du de M
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:623
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:631
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:723
 msgid "Trading"
 msgstr "Hanneln"
 
@@ -1102,45 +1102,50 @@ msgstr "Tolest köörst du noch ut, wo völe Bünsels vun de utköört Waren tuu
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
+"A batch will be delivered in one transport, each ware needing a donkey."
+msgstr "Een Bünsel word as eene Grupp levert; elkeen Waar bruukt een Langohr."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
 msgstr "Wenn du allens inricht hest, klick de »Vörslagen«-Knoop an, um dat Hannels-Angebood an de anner Speler to schicken. He kann dann reselveren, of he dienen Vörslag annimmt of oflehnt."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
 msgstr "Versöök 't!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
 msgstr "Slaa eenen Hannel vör"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
 msgstr "Beed de Fresen eenen Hannel an."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
 msgstr "De Fresen worden blots eenen Hannel to hör Vördeel annehmen; datt heet, dat se nich mehr Waren weggeven, as se sülvst kriegen."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
 msgstr "Hannel oflehnt"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
 msgstr "De Fresen hebben dien Hannels-Angebood oflehnt. Se worden keenen Hannel annehmen, dat to hör Nadeel wesen kann. Schick hör eenen nejen Hannels-Vörslag."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 msgid "Trade Accepted"
 msgstr "Hannel annohmen"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Well done! The Frisians have accepted your trade offer. Did you notice that "
 "the market window now has a new tab? It has one such tab for every active "
@@ -1148,63 +1153,63 @@ msgid ""
 "and also allows you to cancel it at any time."
 msgstr "Hunnert! De Fresen hebben dien Hannels-Angebood annohmen. Hest du markt, dat dat Marktfenster nu eenen nejen Listenwessler hett? ’t hett eenen sülken Listenwessler för elkeen lopend Hannel in deesem Markt. De Listenwessler wiest mehr Informatioonen över de lopend Hannel un verlöövt di ok, ’t to elkeen Tied oftobreken."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:675
 msgid ""
 "Soon you will see a caravan of your donkeys leaving the market to bring "
 "wares to the Frisians, and a caravan of their reindeer bringing you wares in"
 " exchange."
 msgstr "Bold worst du sehn, wo eene Heerde vun dienen Langohren de Markt verlett, um Waren to de Fresen to brengen, un wo eene Heerde vun hör Sneeihirsken di Waren tum Tuusk daartegen brengen."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:682
 msgid "Trade Offered"
 msgstr "Hannel anboden"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
 msgstr "Nu hebben de Fresen di ok eenen Hannel anboden. Du kannst eene List vun all Hannels-Angeboden un -Vörslagen un ok all lopend Hannels im Betreckens-Fenster finnen. Maak ’t mit de Knoop vun de Höövd-Infobalken op."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:690
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:692
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:691
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
 msgid "Open the diplomacy window"
 msgstr "Maak dat Betreckens-Fenster op"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
 msgstr "Dat Betreckens-Fenster wiest di all de Hannels, Hannels-Angeboden un Hannels-Vörslagen, wat du upstünds hest."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
 msgid "You can open it via this button from the main toolbar."
 msgstr "Du kannst ’t mit deesem Knoop vun de Höövd-Infobalken opmaken."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:701
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:702
 msgid "The Diplomacy Window"
 msgstr "Dat Betreckens-Fenster"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
 msgstr "In de bovern Hälfte vum Betreckens-Fenster süchst du all Spelers un hör Klottjen. Hier kannst du anner Spelers to diener Klottje inladen of anfragen, to hör Klottje bitotreden. Aver tum Hanneln muttst du nich in eener Klottje wesen."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
 msgstr "Wi finnen upstünds de unnern Hälfte vum Fenster interessanter. Hier süchst du diene anbeden, vörslagen un lopend Hannels."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
 msgstr "Jüüst nu hest du een Hannels-Angebood – dat, wat de Fresen di jüüst schickt hebben. Kiek ’t na un bruuk dann de Knopen daartegen, um ’t of antonehmen of oftolehnen."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid ""
 "If you wish to accept a trade, you need to select from the dropdown which "
 "market you want to use for this trade, as you can have multiple markets. You"
@@ -1212,39 +1217,39 @@ msgid ""
 "want to accept the trade."
 msgstr "Wenn du eenen Hannel annehmen willst, muttst du ut de Runntertreck-List utkören, welken Markt du för deesen Hannel bruken willst, denn du kannst mennig Markten hebben. Du kannst dat Angebood ok stracks ut de Fenster vun de Markt, waar du de Hannel annehmen willst, verwalten."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:713
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:715
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid "Decide about the trade offer"
 msgstr "Reselveer över dat Hannels-Angebood"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid "Accept or reject the Frisians’ trade offer."
 msgstr "Nimm dat freesk Hannels-Angebood an of lehn ’t of."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
 msgstr "Du kannst dat of ut de Betreckens-Fenster of vun de Marktfenster doon."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:724
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
 msgstr "Hunnert! Das is al würrelk all daarbi; nu weetst du, wo man Hannels-Vörslagen un -Angeboden schickt un verwalt."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
 msgstr "Du kannst elkeen Tahl vun lopend Hannels hebben, un mit elkeen Tahl vun Spelers; bi de sülven Markt of in mennig Markten, as di leev is."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
 msgstr "Um mit de Hannelskünne kumpleet klaartoworden, verstah blots dat: De Weert vun elkeen Ware hangt unbannig vun de Umstännen of, un ok vum Volk."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid ""
 "For example, Frisian miners will happily accept any meal, regardless of "
 "whether it was produced cheaply by an Imperial Inn or at a much higher cost "
@@ -1253,18 +1258,18 @@ msgid ""
 "against Frisian coal is a trade from which both parties can benefit greatly."
 msgstr "To’n Bispööl worden freesk Bargwarkslüü bliede elkeen Mahltied annehmen, of dat nu billig vun eenem Rieks-Weertshuus produzeert worden is of vööl düürer vun de freesk Weertshuus. Up de anner Kant könen Fresen Holtköhl vööl billiger un gauer brannen as dat Latienske Riek. Um dat is een Hannel, waar Rieks-Mahltieden tegen freesk Köhl tuuskt word, för beide Sieden bannig nüttelk."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
 msgstr "As du mehr Erfahrung mit de verschedenen Völkers vun Widelands sammelst, worst du de smaals Köst un Weert vun elkeen Waar för elkeen Volk verstahn un lehren. Deese Künne is unbannig nüttelk, wenn du över Hannels reselveerst."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Congratulations"
 msgstr "Glückwunsk"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "This concludes our tutorial! I hope I could teach you how you can control "
 "the economy in Widelands. There are many options and they can be confusing "
@@ -1273,7 +1278,7 @@ msgid ""
 " possibilities. Then, return to this tutorial and learn the rest!"
 msgstr "Dat sluut uns’ Inföhren of! Ick hoop, dat ick di lehren kunn, wo du de Weertskupp in Widelands kuntrolleren kannst. ’t gifft mennig Instellens un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök ’t all in een paar Spelen, um ’t to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

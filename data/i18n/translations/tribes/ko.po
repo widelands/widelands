@@ -35,7 +35,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "시장"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -3866,7 +3866,7 @@ msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에�
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "제방꾼의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
@@ -9858,7 +9858,7 @@ msgstr "진흙 파는 이"
 #: ../../../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "제방꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/farmer/init.lua:8

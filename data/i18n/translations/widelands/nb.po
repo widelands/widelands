@@ -82,7 +82,7 @@ msgstr "Nye oppdrag"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -124,7 +124,7 @@ msgstr "%1$s og %2$s"
 #: ../../../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "«%s»"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/computer_player.cc:41
@@ -1392,7 +1392,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:554
 msgid "Size: %1% x %2%"
-msgstr ""
+msgstr "Størrelse: %1% x %2%"
 
 #: ../../../../src/editor/ui_menus/main_menu_new_map.cc:62
 msgid "Create Map"
@@ -1465,7 +1465,7 @@ msgstr ""
 #: ../../../../src/ui_basic/spinbox.cc:594
 #, c-format
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:195
 msgid "Island mode"
@@ -1507,13 +1507,13 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "Atoll"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../../../src/logic/map.cc:77
 msgid "Wasteland"
-msgstr ""
+msgstr "Ødemark"
 
 #. * TRANSLATORS: Random Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
@@ -1806,7 +1806,7 @@ msgstr ""
 #: ../../../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
@@ -1873,7 +1873,7 @@ msgstr "Verktøystørrelse"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Størrelse:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2173,7 +2173,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2589,7 +2589,7 @@ msgstr "%i%% bygd"
 #: ../../../../src/logic/map_objects/tribes/dismantlesite.cc:116
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% demontert"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
@@ -2750,7 +2750,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Militær bygning tapt!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
@@ -2761,7 +2761,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Vellykket angrep!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
@@ -2823,13 +2823,13 @@ msgstr "økonomien trenger ikke arbeideren '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$i stk. %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:540
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "bygningen har følgende varer: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:564
@@ -2933,7 +2933,7 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Fant ingen soldater for dette treningsnivået!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -2946,7 +2946,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:400
 msgid "(stopped)"
-msgstr ""
+msgstr "(stoppet)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -2958,7 +2958,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1205
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Kan ikke finne flere ressurser!"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1253
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1274
@@ -3033,11 +3033,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:651
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Et ekspedisjonsskip har funnet et nytt havneområde."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space Found"
-msgstr ""
+msgstr "Havneområde funnet"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship"
@@ -3103,7 +3103,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1832
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Øy sirklet"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
@@ -3114,11 +3114,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1833
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Et ekspedisjonsskip har seilt rundt en øy uten noen nevneverdige hendelser."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1898
 msgid "Coast Reached"
-msgstr ""
+msgstr "Skip har nådd kyst"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1898
@@ -3128,7 +3128,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1899
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Et ekspedisjonsskip har nådd en kyst og venter på nye ordre."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1952
 msgid "New port construction site is gone"
@@ -3177,11 +3177,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2264
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Ekspedisjon klar"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2265
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Et ekspedisjonsskip avventer dine ordre."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2442
 msgctxt "ship_state"
@@ -3324,7 +3324,7 @@ msgstr ""
 #. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers missing"
-msgstr ""
+msgstr "Arbeidere mangler"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:245
@@ -3380,7 +3380,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
-msgstr ""
+msgstr "En geolog fant ressurser."
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
@@ -3396,12 +3396,12 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Arbeider gikk seg bort!"
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
 msgid "Logic error"
-msgstr ""
+msgstr "Logisk feil"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:69
@@ -3536,7 +3536,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Terrenger"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3616,7 +3616,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Minikart"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4276,7 +4276,7 @@ msgstr ""
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #: ../../../../src/scripting/lua_game.cc:1563
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
@@ -4380,7 +4380,7 @@ msgstr "Laster…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Senk verdien"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4393,7 +4393,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Øk verdien"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4421,8 +4421,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minutt"
+msgstr[1] "%d minutter"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
@@ -4711,7 +4711,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Logg inn"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -5019,7 +5019,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5431,7 +5431,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Navn:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5753,7 +5753,7 @@ msgstr "Vanskelighetsgrad"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Vanskelighetsgrad:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5856,7 +5856,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6534,7 +6534,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "Bruk standard innstillinger"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -7524,7 +7524,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Lag %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7763,7 +7763,7 @@ msgstr "Av"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../../../src/ui_fsmenu/options.cc:528
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
@@ -7940,7 +7940,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8152,11 +8152,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
-msgstr ""
+msgstr "Varehus"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
-msgstr ""
+msgstr "Havn"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
@@ -8184,19 +8184,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
-msgstr ""
+msgstr "Tårn"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
-msgstr ""
+msgstr "Fort"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Trefellers hus"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "Skogforvalters hus"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
@@ -8228,7 +8228,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
-msgstr ""
+msgstr "Brønn"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
@@ -8240,23 +8240,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
-msgstr ""
+msgstr "Mølle"
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "Bakeri"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
-msgstr ""
+msgstr "Bryggeri"
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "Røkeri"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
-msgstr ""
+msgstr "Kro"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
@@ -8268,19 +8268,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Våpensmie"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Rustningssmie"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Veveri"
 
 #: ../../../../src/wlapplication_options.cc:215
 msgid "Shipyard"
-msgstr ""
+msgstr "Skipsverft"
 
 #: ../../../../src/wlapplication_options.cc:216
 msgid "Ferry Yard"
@@ -8292,7 +8292,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
-msgstr ""
+msgstr "Kaserne"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
@@ -8308,15 +8308,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "Kullgruve"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr ""
+msgstr "Jerngruve"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
-msgstr ""
+msgstr "Gullgruve"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
@@ -8356,7 +8356,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "Flerspiller"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8388,7 +8388,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:345
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Encyklopedia"
 
 #: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"
@@ -8823,7 +8823,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tastatursnarveier"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
@@ -8838,7 +8838,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Bytt verktøystørrelse"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8848,38 +8848,38 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Trykk"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Plasser nye elementer på kartet, eller øk kartelementer med verdien valgt av ‘Increase/Decrease value’"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Fjern elementer fra kartet, eller reduser kartelementer med verdien valgt av ‘Increase/Decrease value’"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Velg kartelementenes verdi med ‘Set Value’"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -8959,7 +8959,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
@@ -10050,7 +10050,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Lag %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format

@@ -402,7 +402,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Mmeri"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""

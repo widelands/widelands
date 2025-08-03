@@ -74,7 +74,7 @@ msgstr ""
 
 #: ../../../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "新目標"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -125,7 +125,7 @@ msgstr ""
 #: ../../../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../../../src/ai/computer_player.cc:41
@@ -645,7 +645,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/options.cc:305
 #: ../../../../src/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "顯示建築空間"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -1873,7 +1873,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "尺寸:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2169,7 +2169,7 @@ msgstr[0] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2932,7 +2932,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:400
 msgid "(stopped)"
-msgstr ""
+msgstr "(已停止)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -4988,7 +4988,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5397,7 +5397,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "名稱:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5637,7 +5637,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "名稱: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5659,7 +5659,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "玩家: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5819,7 +5819,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6778,7 +6778,7 @@ msgstr ""
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:457
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "多人遊戲設定"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:41
 msgid "Choose Game"
@@ -7481,7 +7481,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "隊伍%d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7697,7 +7697,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/options.cc:421
 msgid "Sound"
-msgstr ""
+msgstr "聲音"
 
 #: ../../../../src/ui_fsmenu/options.cc:422
 msgid "Saving"
@@ -7864,7 +7864,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:58
 #: ../../../../src/wui/mapdetails.cc:167
 msgid "Authors"
-msgstr ""
+msgstr "作者"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:183
@@ -7897,7 +7897,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8109,7 +8109,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
-msgstr ""
+msgstr "倉庫"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
@@ -8145,7 +8145,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
-msgstr ""
+msgstr "堡壘"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
@@ -8201,7 +8201,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "麵包店"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
@@ -8209,7 +8209,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "麵包店"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
@@ -8265,7 +8265,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "煤"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
@@ -9386,7 +9386,7 @@ msgstr "公里"
 
 #: ../../../../src/wui/building_statistics_menu.cc:374
 msgid "Ports"
-msgstr ""
+msgstr "碼頭"
 
 #: ../../../../src/wui/building_statistics_menu.cc:735
 msgid "Low productivity:"
@@ -9480,7 +9480,7 @@ msgstr ""
 #: ../../../../src/wui/buildingwindow.cc:737
 #: ../../../../src/wui/constructionsitewindow.cc:318
 msgid "Start an expedition"
-msgstr ""
+msgstr "開始遠征"
 
 #: ../../../../src/wui/buildingwindow.cc:741
 msgid "Cancel the expedition"
@@ -10005,7 +10005,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "隊伍%u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -10812,7 +10812,7 @@ msgstr "統計"
 #: ../../../../src/wui/interactive_player.cc:308
 #: ../../../../src/wui/map_tags.cc:51
 msgid "Seafaring"
-msgstr ""
+msgstr "航海"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/wui/interactive_player.cc:314

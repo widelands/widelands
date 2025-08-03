@@ -351,7 +351,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../data/txts/help/common_helptexts.lua:20
 msgid ""

@@ -100,7 +100,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr ""
+msgstr "Φτιάξτε ένα πηγάδι"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
@@ -184,7 +184,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Φτιάξτε ένα χυτήριο"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
@@ -249,7 +249,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Φτιάξτε μια αποθήκη"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
@@ -936,7 +936,7 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ολοκληρώσατε αυτήν την αποστολή. Εάν το επιθυμείτε, μπορείτε να συνεχίσετε να παίζετε, αλλιώς συνεχίστε με την επόμενη αποστολή."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

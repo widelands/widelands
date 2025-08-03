@@ -47,7 +47,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Bygg en treherder"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"

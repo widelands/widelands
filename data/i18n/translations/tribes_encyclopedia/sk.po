@@ -10669,7 +10669,7 @@ msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní, kováči zbrojí
 #: ../../../../data/tribes/initialization/empire/units.lua:443
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:456
@@ -17313,11 +17313,11 @@ msgstr "%1% a %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Jeden hráč"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "Viacerí hráči"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker

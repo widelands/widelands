@@ -939,7 +939,7 @@ msgstr "Gratulerer"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du har fullført dette oppdraget. Du kan fortsette å spille hvis du vil, eller gå videre til neste oppdrag."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
