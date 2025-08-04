@@ -864,7 +864,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Messages"
-msgstr ""
+msgstr "Pranešimai"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:553
 msgid "Introducing Messages"

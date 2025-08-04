@@ -413,7 +413,7 @@ msgstr "%s: "
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"

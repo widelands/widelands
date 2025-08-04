@@ -261,7 +261,7 @@ msgstr "قصة الحملة"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "البرابرة"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -269,7 +269,7 @@ msgstr "اﻹمبراطورية"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "الاطلانتيين"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"

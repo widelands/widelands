@@ -352,7 +352,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/txts/help/common_helptexts.lua:20
 msgid ""
@@ -417,15 +417,15 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Configurare joc multiplayer"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Vă aflați in meniul joc multiplayer."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Setări client"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -447,7 +447,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Opțiuni jucator"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
@@ -472,7 +472,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Închis."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -490,7 +490,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr ""
+msgstr "Detalii hartă"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""

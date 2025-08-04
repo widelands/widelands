@@ -15,10 +15,7 @@ if [ "${GITHUB_JOB}" = "testsuite" ]; then
     ${CXX} \
     libwayland-egl1-mesa  \
     mesa-utils  \
-    xserver-xorg  \
-    xserver-xorg-core \
-    xserver-xorg-input-all  \
-    xserver-xorg-video-all"
+    "
 fi
 
 if [ "${GITHUB_JOB}" = "appimage" ]; then

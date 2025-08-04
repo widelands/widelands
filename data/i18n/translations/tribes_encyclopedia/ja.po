@@ -17071,17 +17071,17 @@ msgstr "旗の消去時：最寄りの交差点までの旗を除去する"
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17167,7 +17167,7 @@ msgstr "必要要件"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "サイズ"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."

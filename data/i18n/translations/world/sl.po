@@ -748,7 +748,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakti"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -802,7 +802,7 @@ msgstr "Poletje"
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:515
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustinja"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543

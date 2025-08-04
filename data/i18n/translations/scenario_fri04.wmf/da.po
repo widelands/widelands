@@ -2,12 +2,17 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ole Laursen <ole.laursen@gmail.com>, 2025
+# Joe Hansen <joedalton2@yahoo.dk>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2025\n"
 "Language-Team: Danish (https://app.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,6 +31,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Du har vist ikke fuldført den forrige mission. Du kan stadig spille denne "
+"mission, men du vil have en ulempe. Jeg anbefaler, at du fuldfører det "
+"forrige scenarie først og så genstarter denne mission."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
@@ -82,7 +90,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Velkommen tilbage!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
@@ -136,7 +144,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Fremmede"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
@@ -577,6 +585,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Du har fuldført denne mission. Du kan fortsætte med at spille, hvis du "
+"ønsker det, eller gå til den næste mission."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -591,7 +601,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Havn"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
@@ -600,3 +610,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Tjener som en base til kolonisering over havet og handel. Opbevarer også "
+"soldater, varer og værktøj."

@@ -16781,7 +16781,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/init.lua:90
 #: ../../../../data/tribes/scripting/help/tips.lua:29
 msgid "General"
-msgstr ""
+msgstr "Splošno"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:255
 msgid "Purpose:"
@@ -16869,7 +16869,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:465
 msgid "None"
-msgstr ""
+msgstr "Brez"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:466
 msgid "Dependencies"
@@ -16911,7 +16911,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:572
 #: ../../../../data/tribes/scripting/help/building_help.lua:621
 msgid "Unknown"
-msgstr ""
+msgstr "Neznano"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:577
 msgid "If built directly, dismantle yields:"
@@ -16939,7 +16939,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:665
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Delavci"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
 #: ../../../../data/tribes/scripting/help/building_help.lua:687
@@ -16965,7 +16965,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:734
 msgid "Production"
-msgstr ""
+msgstr "Proizvodnja"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
@@ -17135,17 +17135,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Majhen"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Srednje velik"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Velik"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17182,7 +17182,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/format_help.lua:154
 #: ../../../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
 #: ../../../../data/tribes/scripting/help/format_help.lua:170
@@ -17231,7 +17231,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17264,11 +17264,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Dobrine"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Zgradbe"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -17280,39 +17280,39 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "O Widelands"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../../../data/tribes/scripting/help/time_strings.lua:62
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d sekunda"
+msgstr[1] "%d sekundi"
+msgstr[2] "%d sekunde"
+msgstr[3] "%d sekund"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:42
 #: ../../../../data/tribes/scripting/help/time_strings.lua:61
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d minuta"
+msgstr[1] "%d minuti"
+msgstr[2] "%d minute"
+msgstr[3] "%d minut"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% in %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "En igralec"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "Več igralcev"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
@@ -17409,7 +17409,7 @@ msgstr[3] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "Napad"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202
