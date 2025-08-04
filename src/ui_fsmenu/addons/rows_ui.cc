@@ -636,10 +636,6 @@ void RemoteAddOnRow::layout() {
 	                                   4 * kRowButtonSize - bottom_row_right_.get_h()));
 }
 
-bool RemoteAddOnRow::upgradeable() const {
-	return upgrade_.enabled();
-}
-
 MapRow::MapRow(Panel* parent,
                AddOnsCtrl* ctrl,
                std::shared_ptr<AddOns::AddOnInfo> info,
