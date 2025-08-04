@@ -147,6 +147,10 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	[[nodiscard]] uint32_t current_wares() const {
 		return ware_filled_;
 	}
+	[[nodiscard]] bool is_congested() const {
+		static const int32_t kCongestionThreshold = 5;
+		return ware_filled_ > kCongestionThreshold;
+	}
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
