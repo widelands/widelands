@@ -594,7 +594,7 @@ msgstr "Je to skúška bohov alebo zlomyseľný plán niekoho iného, že ste sa
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Lesné údolie v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
@@ -984,7 +984,7 @@ msgstr "Povráva sa, že nepreniknuteľné krajiny na ďalekom severe odradili a
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Ostrovy ôsmich kmeňov"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
