@@ -47,6 +47,7 @@ public:
 	 */
 	int dismantle(lua_State* L);
 	int enhance(lua_State* L);
+	int subscribe_to_muted(lua_State* L);
 
 	/*
 	 * C Methods
