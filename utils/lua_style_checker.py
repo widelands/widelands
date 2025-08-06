@@ -62,8 +62,18 @@ if errors > 0:
 
 # Actual check
 for filename in find_files(os.path.relpath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
-    for lidx, line in enumerate(open(filename, 'r')):
-        errors += check_line(filename, lidx, line)
+    if filename.endswith(".lua"):
+        for lidx, line in enumerate(open(filename, 'r')):
+            errors += check_line(filename, lidx, line)
+    else:  # rst file
+        checking = True
+        for lidx, line in enumerate(open(filename, 'r')):
+            if checking:
+                checking = line != '.. code-block:: ini\n'  # disable checking in an ini block
+            else:
+                checking = line[:1] not in (' ', '\n')  # enable checking at end of block
+            if checking:
+                errors += check_line(filename, lidx, line)
 
 if errors > 0:
     print('\nThere were {} error(s), please fix!'.format(errors))
