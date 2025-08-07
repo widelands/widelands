@@ -1559,7 +1559,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1518
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
-msgstr ""
+msgstr "Pečie chlieb z manioku."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Root Cooker
@@ -3324,7 +3324,7 @@ msgstr "Dosky sú dôležitým stavebným materiálom."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:458
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Vyrába ich píla z kmeňov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Planks, part 3
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:460
@@ -6707,7 +6707,7 @@ msgstr "Sadí polia."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:666
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Pečie pitu pre baníkov, vojakov a prieskumníkov."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Brewer
 #: ../../../../data/tribes/initialization/barbarians/units.lua:673
@@ -10460,7 +10460,7 @@ msgstr "Imperiálni drevorubači rúbu stromy; horári sa zase starajú o zásob
 #: ../../../../data/tribes/initialization/empire/units.lua:138
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Vyrába ich píla z kmeňov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Planks, part 3
 #: ../../../../data/tribes/initialization/empire/units.lua:140
@@ -11814,7 +11814,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Pripravuje prídely pre prieskumníkov, ako aj prídely a obedy, ktoré sa podávajú baníkom vo všetkých baniach."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Inn
 #: ../../../../data/tribes/initialization/empire/units.lua:1638
@@ -14289,7 +14289,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:445
 msgctxt "frisians_ware"
 msgid "Fishing nets are the tool used by fishers."
-msgstr ""
+msgstr "Rybárske siete sú nástrojom, ktorý používajú rybári."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Hunting Spear, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:457
@@ -14550,7 +14550,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:786
 msgctxt "frisians_worker"
 msgid "Bakes bread for miners and soldiers."
-msgstr ""
+msgstr "Pečie chlieb pre baníkov a vojakov."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Master Baker
 #: ../../../../data/tribes/initialization/frisians/units.lua:793
@@ -14574,7 +14574,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:814
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Pripravuje prídely a obedy pre baníkov a prieskumníkov."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Geologist
 #: ../../../../data/tribes/initialization/frisians/units.lua:824
@@ -15812,7 +15812,7 @@ msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Pripravuje prídely pre prieskumníkov, ako aj prídely a obedy, ktoré sa podávajú baníkom vo všetkých baniach."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Drinking
 #. Hall

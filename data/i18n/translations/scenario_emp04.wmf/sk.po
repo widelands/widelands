@@ -1393,7 +1393,7 @@ msgstr "Pivovar"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "varenie piva"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
