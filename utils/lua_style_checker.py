@@ -62,7 +62,7 @@ if errors > 0:
 
 # Actual check
 for filename in find_files(os.path.relpath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
-    if filename.endswith(".lua"):
+    if filename.endswith('.lua'):
         for lidx, line in enumerate(open(filename, 'r')):
             errors += check_line(filename, lidx, line)
     else:  # rst file
