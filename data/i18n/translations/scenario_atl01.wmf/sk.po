@@ -214,7 +214,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Teraz, keď sa kujú zbrane, je možné verbovať nových vojakov. Aby sa tak mohlo stať, musime do Kasární doručiť ľahké trojzubce a krátke plášte. Verbovanci dorazia zo Skladu, budú vyzbrojení, odetí a vycvičení a stanú sa vojakmi."
+msgstr "Teraz, keď sa kujú zbrane, je možné verbovať nových vojakov. Aby sa tak mohlo stať, musime do kasární doručiť ľahké trojzubce a kabátce. Verbovanci dorazia zo skladu, budú vyzbrojení, odetí a vycvičení a stanú sa vojakmi."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"

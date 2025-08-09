@@ -4633,7 +4633,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "You need to connect this flag to a scout’s house before you can send a scout here."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
