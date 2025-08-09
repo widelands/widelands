@@ -339,7 +339,7 @@ msgstr "Zavreli ste okno Zásoby!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Zavreli ste okno Zásoby, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na prvú kartu?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
@@ -354,7 +354,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Zavreli ste okno Zásoby ešte skôr, ako som vám o ňom stihol všetko povedať. Ak už je vám všetko jasné, tento tutoriál môžete kedykoľvek ukončiť."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
@@ -365,7 +365,7 @@ msgstr ""
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zavreli ste okno Zásoby, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na tretiu kartu?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -573,7 +573,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "V tejto chvíli sú prídelmi zásobované všetky bane. Ak chcete uprednostniť nejakú baňu, jednoducho otvorte jej okno. Na karte Výrobky si môžete za každým výrobkom všimnúť posúvač."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -721,7 +721,7 @@ msgstr "Zavreli ste okno Štatistika výrobkov!"
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na tretiu kartu?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
@@ -734,13 +734,13 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov ešte skôr, ako som vám o ňom stihol všetko povedať. Ak už je vám všetko jasné, tento tutoriál môžete kedykoľvek ukončiť."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Zavreli ste okno Štatistika výrobkov, no nedovolili ste mi vysvetliť všetko, čo som chcel. Mohli by ste ho, prosím, znovu otvoriť a kliknúť na štvrtú kartu?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
@@ -929,7 +929,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Všetkých 20 mramorových stĺpov pošlite do skladu pri fronte."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
@@ -982,7 +982,7 @@ msgstr "Každý sklad má štyri tlačidlá, ktorými sa nastavuje uprednostňov
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:723
 msgid "Trading"
-msgstr ""
+msgstr "Obchodovanie"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
