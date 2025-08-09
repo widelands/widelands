@@ -130,7 +130,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Voda"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"

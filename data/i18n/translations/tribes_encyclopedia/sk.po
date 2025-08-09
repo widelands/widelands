@@ -3841,7 +3841,7 @@ msgstr "Chová pavúky pre hodváb."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:976
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Vyrába pavúčiu látku pre budovy, lode a vojakov."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Shipwright
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:983
@@ -10885,7 +10885,7 @@ msgstr "Sadí polia."
 #: ../../../../data/tribes/initialization/empire/units.lua:713
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr "Mlie pšenicu na múku."
+msgstr "Melie pšenicu na múku."
 
 #. TRANSLATORS: Helptext for an Empire worker: Baker
 #: ../../../../data/tribes/initialization/empire/units.lua:720
@@ -11732,7 +11732,7 @@ msgstr ""
 #. "In vino veritas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1589
 msgid "In wine there is truth."
-msgstr ""
+msgstr "Vo víne je pravda."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Winery
 #. TRANSLATORS: Lore author helptext for an Empire production site: Piggery

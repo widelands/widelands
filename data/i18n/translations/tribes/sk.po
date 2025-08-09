@@ -1380,7 +1380,7 @@ msgstr "Krajčírstvo"
 #. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
-msgstr ""
+msgstr "šitie tuniky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
 #. because ...
@@ -1398,18 +1398,18 @@ msgstr "vyrábanie drevenej helmy"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "šitie bojovníckeho kabáta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
-msgstr ""
+msgstr "vyrábanie pevných topánok"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
-msgstr ""
+msgstr "vyrábanie svižných topánok"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
@@ -1798,7 +1798,7 @@ msgstr "vyrábanie ihiel"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
-msgstr ""
+msgstr "vyrábanie kamennej misy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
@@ -1809,13 +1809,13 @@ msgstr "vyrábanie pazúrikov"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
-msgstr ""
+msgstr "vyrábanie drevenej kopije"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "vyrábanie kopije s kamenným hrotom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
@@ -9801,7 +9801,7 @@ msgstr "Včelár"
 #: ../../../../data/tribes/workers/frisians/berry_farmer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Berry Farmer"
-msgstr "Bobuľový farmár"
+msgstr "Pestovateľ bobúľ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/blacksmith/init.lua:8
