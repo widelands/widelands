@@ -7,13 +7,14 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015,2017
 # MiroslavR <miroslavr256@gmail.com>, 2015
+# Pavol Gono, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -240,7 +241,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Väčšie a kvalitnejšie budovy – vrátane všetkých vojenských – vyžadujú lepšie stavebné materiály. Nemožno ich postaviť z obyčajných kmeňov – tie najprv treba zdokonaliť v sušiarni dreva. Predtým, ako sa vám minie upravené drevo, bez ktorého sa nemôžete rozpínať, nezabúdajte vždy postaviť sušiareň dreva."
+msgstr "Väčšie a kvalitnejšie budovy – vrátane všetkých vojenských – vyžadujú lepšie stavebné materiály. Nemožno ich postaviť z obyčajných kmeňov – tie najprv treba upraviť v sušiarni dreva. Predtým, ako sa vám minie upravené drevo, bez ktorého sa nemôžete rozpínať, nezabúdajte vždy postaviť sušiareň dreva."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"

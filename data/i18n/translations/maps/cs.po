@@ -350,7 +350,7 @@ msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "V tomto tutoriálu se seznámíš s volbami, které máš ve Widelands k dispozici pro zlepšení výkonu tvého hospodářství, a naučíš se obchodovat s dalšími hráči. Doporučeno pro hráče, kteří již mají nějaké zkušenosti."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

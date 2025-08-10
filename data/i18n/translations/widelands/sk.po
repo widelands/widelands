@@ -5088,42 +5088,42 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr "Názov"
+msgstr "názvu (A-Z)"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Name (descending)"
-msgstr ""
+msgstr "názvu (Z-A)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Most popular"
-msgstr ""
+msgstr "najväčšej populárnosti"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Least popular"
-msgstr ""
+msgstr "najmenšej populárnosti"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../../../src/ui_fsmenu/addons/manager.cc:776
 msgid "Most often downloaded"
-msgstr ""
+msgstr "najčastejšie sťahovaných"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../../../src/ui_fsmenu/addons/manager.cc:778
 msgid "Least often downloaded"
-msgstr ""
+msgstr "najmenej sťahovaných"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Oldest"
-msgstr ""
+msgstr "najstarších"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:782
 msgid "Newest"
-msgstr ""
+msgstr "najnovších"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:791
 msgid "Filter add-ons by name"
@@ -9631,7 +9631,7 @@ msgstr "Zrušiť výpravu"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Poslať stavbára preč"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
@@ -10039,7 +10039,7 @@ msgstr ""
 #: ../../../../src/wui/game_chat_menu.cc:79
 #: ../../../../src/wui/interactive_gamebase.cc:138
 msgid "Script Console"
-msgstr ""
+msgstr "Skriptovacia konzola"
 
 #: ../../../../src/wui/game_chat_panel.cc:69
 msgid "Recipient"
