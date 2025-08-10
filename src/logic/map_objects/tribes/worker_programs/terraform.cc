@@ -34,13 +34,14 @@ bool Worker::terraform_prevented(const FCoords& coord, Game& game) {
 		// there is no immovable ergo no portdock
 		Coords ports_space = game.map().find_portspace_for_dockpoint(coord);
 		if (ports_space == Coords::null()) {
-			// no portspace is available from this firld
+			// no portspace is available from this field
 			return false;
 		}
 		BaseImmovable* ps_imm = game.map().get_fcoords(ports_space).field->get_immovable();
-		if (upcast(Widelands::ConstructionSite const, constructionsite, ps_imm)) {
-			// only true if a port (warehouse) construction is going on at the field
-			return constructionsite->building().type() == MapObjectType::WAREHOUSE;
+		if (ps_imm != nullptr && ps_imm->descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+			upcast(Widelands::ConstructionSite const, constructionsite, ps_imm);
+			// only true if a port construction is going on at the field
+			return constructionsite->building().get_isport();
 		}
 		// no constructionsite on portspace
 		return false;

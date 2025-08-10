@@ -596,9 +596,9 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 							if (!fleet_->get_path(*lastdock, *destination, path)) {
 								fleet_->split(game);
 								send_message(game,
-								             /** TRANSLATORS: Ship fleets had to be splitted */
-								             pgettext("ship", "Fleet splitted"), _("Ship Fleet splitted"),
-								             _("A ship fleet had to be splitted, because a terrain change "
+								             /** TRANSLATORS: Ship fleets had to be split */
+								             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+								             _("A ship fleet had to be split, because a terrain change "
 								               "blocked a passage."),
 								             descr().icon_filename());
 							}
@@ -2230,9 +2230,9 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		fleet_->split(game);
 		send_message(
 		   game,
-		   /** TRANSLATORS: Ship fleets had to be splitted */
-		   pgettext("ship", "Fleet splitted"), _("Ship Fleet splitted"),
-		   _("A ship fleet had to be splitted, because a terrain change blocked a passage."),
+		   /** TRANSLATORS: Ship fleets had to be split */
+		   pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+		   _("A ship fleet had to be split, because a terrain change blocked a passage."),
 		   descr().icon_filename());
 	}
 	return false;

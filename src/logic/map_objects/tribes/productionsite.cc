@@ -1227,6 +1227,8 @@ void ProductionSite::unnotify_player() {
 
 void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
+	// This is the deduplicated "list" of unique fields from a coords search
+	static std::set<Widelands::Coords> processed_fields;
 
 	while (!ship_fleet_interfaces_.empty()) {
 		ship_fleet_interfaces_.front()->remove(egbase);
@@ -1244,8 +1246,6 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(kMinOceanSize));
 
-		// This is "list" of unique fields in result we got above
-		static std::set<Widelands::Coords> processed_fields;
 		processed_fields.clear();
 
 		for (const Coords& coords : result) {
@@ -1271,8 +1271,6 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeFerry(0));
 
-		// This is "list" of unique fields in result we got above
-		static std::set<Widelands::Coords> processed_fields;
 		processed_fields.clear();
 
 		for (const Coords& coords : result) {
