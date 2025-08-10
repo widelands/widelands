@@ -2228,12 +2228,11 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
 	if (fleet_ != nullptr) {
 		fleet_->split(game);
-		send_message(
-		   game,
-		   /** TRANSLATORS: Ship fleets had to be split */
-		   pgettext("ship", "Fleet split"), _("Ship Fleet split"),
-		   _("A ship fleet had to be split, because a terrain change blocked a passage."),
-		   descr().icon_filename());
+		send_message(game,
+		             /** TRANSLATORS: Ship fleets had to be split */
+		             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+		             _("A ship fleet had to be split, because a terrain change blocked a passage."),
+		             descr().icon_filename());
 	}
 	return false;
 }
