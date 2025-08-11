@@ -45,7 +45,7 @@ msgstr "Postavte dva drevorubačské domy"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "Postavte dva horárne"
+msgstr "Postavte dve horárne"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
