@@ -1151,8 +1151,11 @@ For objects which consume wares, see: :ref:`has_inputs`.
    of thin air.
 
    Setting some wares does not influence other wares for
+
    - warehouse
+
    but sets other wares to empty for
+
    - flag
 
    :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
@@ -1225,6 +1228,7 @@ workers that do the work, see: :ref:`has_workers`.
    economy out of thin air.
 
    Setting a few wares does not influence other wares for
+
    - production site
    - training site
 
@@ -1338,8 +1342,11 @@ For workers which are consumed, see: :ref:`has_inputs`.
    Ferries can not be set by this method either, except for waterways.
 
    Setting some wares does not influence other wares for
+
    - warehouse
+
    but sets other wares to empty for
+
    - road
    - productionsite
 */
@@ -1434,6 +1441,7 @@ Supported at the time of this writing by
    below for an example.
 
    Setting some soldiers sets all others to empty for
+
    - military site
    - training site
    - warehouse
