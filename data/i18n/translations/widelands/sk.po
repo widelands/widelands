@@ -8389,7 +8389,7 @@ msgstr "Kasárne"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
-msgstr ""
+msgstr "Druhý nosič"
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"

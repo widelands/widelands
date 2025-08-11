@@ -1310,7 +1310,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "Pestovateľka pracujúca na tejto maniokovej plantáži nemá k dispozícii čistú pôdu, na ktorej by mohla začať sadiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1369,7 +1369,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "Pestovateľka pracujúca na tejto kakaovníkovej plantáži nemá k dispozícii čistú pôdu, na ktorej by mohla začať sadiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1945,7 +1945,7 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr ""
+msgstr "Nosička pracujúca pri tejto chatrči nedokáže nájsť žiadnu vodu v jej blízkosti."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
@@ -2630,7 +2630,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením lesníckej chatrče."
+msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
