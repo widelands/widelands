@@ -135,10 +135,14 @@ class GithubASan:
             """for sorting by line numerically."""
             return [int(e) if e.isdecimal() else e for e in file_line_col.rsplit(':', 2)]
 
-        if not cls.leaks_by_origin or not cls.summary_file:
+        if not cls.leaks_by_origin and not cls.counted_leaks or not cls.summary_file:
             return
         with open(cls.summary_file, 'a') as summary_file:
-            summary_file.write('\n\n## memory leaks by origin\n\n')
+            summary_file.write('\n\n## memory leaks by origin\n\n'
+                               f'from {len(cls.leaks_by_origin)} origins\n')
+            if len(cls.leaks_by_origin) == 0:
+                summary_file.write('(No origin detected. Set WLRT_COMPILE_DIR to the name of the '
+                                   'directory widelands was compiled in.)')
             for origin in sorted(cls.leaks_by_origin, key=key_file_line_col):
                 search_on_gh = ('/' + os.getenv('GITHUB_REPOSITORY', 'widelands/widelands') +
                                 '/issues?q=' + to_query_str(
