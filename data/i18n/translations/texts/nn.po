@@ -267,7 +267,7 @@ msgstr "Imperium"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantarar"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -416,15 +416,15 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Oppsett for spel med fleire spelarar"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Du er i fleirspelar-køyr-spelet-menyen"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Klientinnstillingar"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -446,13 +446,13 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Spelarval"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "I midten er vala for spelarane.  For å starte eit spel må kvar spelar vera ein av følgande:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -467,11 +467,11 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Vel som delt startstad for ein annan spelar."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Lukka"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

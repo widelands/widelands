@@ -84,7 +84,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Provizu viajn ministojn per manĝaĵo."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
@@ -459,7 +459,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "Venko"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264

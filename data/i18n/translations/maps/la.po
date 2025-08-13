@@ -82,7 +82,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Imperium secundum"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -110,7 +110,7 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Menses exilii"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73

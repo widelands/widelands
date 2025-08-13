@@ -222,7 +222,7 @@ msgstr "Retpaĝo"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptado"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -420,11 +420,11 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Agordoj por plurludant-reĝimo"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Vi troviĝas en la menuo por lanĉi plurludantan ludon."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
@@ -446,7 +446,7 @@ msgstr ""
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Spektant-reĝimo, "
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"

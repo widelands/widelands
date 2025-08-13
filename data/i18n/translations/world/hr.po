@@ -796,7 +796,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:486
 msgid "Summer"
-msgstr ""
+msgstr "Ljeto"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:515
@@ -806,12 +806,12 @@ msgstr "Pustopoljina"
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543
 msgid "Winter"
-msgstr ""
+msgstr "Zima"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:571
 msgid "Desert"
-msgstr ""
+msgstr "Pustinja"
 
 #: ../../../../data/world/resources/coal/init.lua:110
 msgid "Coal"

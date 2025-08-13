@@ -196,7 +196,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Orsak, dette kartet er enno ikkje laga."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"

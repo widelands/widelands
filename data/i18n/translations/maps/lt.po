@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr ""
+msgstr "Atolas"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"

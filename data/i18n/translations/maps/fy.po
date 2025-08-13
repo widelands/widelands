@@ -187,7 +187,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Noch net ymplemintearre"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "It spyt ús, mar dizze kaart is noch net ymplemintearre."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -772,7 +772,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Smokkelers"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""

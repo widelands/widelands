@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
-msgstr ""
+msgstr "Pomorstvo"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
@@ -356,11 +356,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Ekspedicija"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Pokreni ekspediciju"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -500,7 +500,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "Rudnik željeza"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
@@ -725,7 +725,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
-msgstr ""
+msgstr "Čestitam"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"

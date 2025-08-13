@@ -199,7 +199,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Desculpe, este mapa ainda não está implementado."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -331,7 +331,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Exploração Marítima"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -776,7 +776,7 @@ msgstr "Um torneio especial na cultura atlanteana é o chamado \"Pulando Ilhas\"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Contrabandistas"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""

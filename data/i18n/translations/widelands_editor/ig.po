@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Ihe onwunwe"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25

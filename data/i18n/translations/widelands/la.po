@@ -86,7 +86,7 @@ msgstr "Proposita Nova"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -1511,7 +1511,7 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "Atollum"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
@@ -1877,7 +1877,7 @@ msgstr "Magnitudo instrumenti"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Magnitudo:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2177,7 +2177,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Nullus"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2754,7 +2754,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Aedificium militare ab hostem capitur!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
@@ -2765,7 +2765,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Aedificium hostis captum!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
@@ -2775,7 +2775,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
 msgid "You are under attack"
-msgstr ""
+msgstr "Hostes te aggreduntur!"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -2827,7 +2827,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:540
@@ -2845,7 +2845,7 @@ msgstr ""
 #. experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:580
 msgid "a worker needs experience"
-msgstr ""
+msgstr "operariis experientia necesse est"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
@@ -2937,7 +2937,7 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Non inveni militem pro huic exercendi gradui!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -2950,7 +2950,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:400
 msgid "(stopped)"
-msgstr ""
+msgstr "(statum)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -3384,7 +3384,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geologus aes vel aquam invenit."
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
@@ -3400,7 +3400,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
-msgstr ""
+msgstr "Operarius aberravit!"
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
@@ -3540,7 +3540,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:127
 #: ../../../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Loci"
 
 #: ../../../../src/map_io/map_saver.cc:134
 #: ../../../../src/map_io/widelands_map_loader.cc:257
@@ -3620,7 +3620,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Tabula minima"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4384,7 +4384,7 @@ msgstr "Tollens..."
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Pretium minue"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4397,7 +4397,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Pretium auge"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4715,7 +4715,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Aperire conventum"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -5023,7 +5023,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Nomen"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5435,7 +5435,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Nomen:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5678,7 +5678,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nomen: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5700,7 +5700,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Ludores: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5757,7 +5757,7 @@ msgstr "Difficultas"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Difficultas:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5860,7 +5860,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "parvum"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6583,12 +6583,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Generales"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -6608,7 +6608,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Ludum incipere"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7528,7 +7528,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Societas %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7944,7 +7944,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Ignotum"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8156,11 +8156,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
-msgstr ""
+msgstr "Horreum"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
-msgstr ""
+msgstr "Portus"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
@@ -8188,23 +8188,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
-msgstr ""
+msgstr "Turris"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
-msgstr ""
+msgstr "Arx"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Casa lignatoris"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa saltuarii"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
-msgstr ""
+msgstr "Lapidicina"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
@@ -8232,7 +8232,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
-msgstr ""
+msgstr "Fons"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
@@ -8244,23 +8244,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
-msgstr ""
+msgstr "Molae"
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "Pistrina"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
-msgstr ""
+msgstr "Fabrica cervisiae"
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "Fumarium"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
-msgstr ""
+msgstr "Tabernus"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
@@ -8272,19 +8272,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Fabrica armorum"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Fabrica loricarum"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Textrinum"
 
 #: ../../../../src/wlapplication_options.cc:215
 msgid "Shipyard"
-msgstr ""
+msgstr "Navale"
 
 #: ../../../../src/wlapplication_options.cc:216
 msgid "Ferry Yard"
@@ -8296,7 +8296,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
-msgstr ""
+msgstr "Casa militaris"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
@@ -8312,15 +8312,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "Metallum carbonis"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr ""
+msgstr "Metallum ferri"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
-msgstr ""
+msgstr "Metallum auri"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
@@ -8360,7 +8360,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "Nonnulli ludores"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8827,7 +8827,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "claviaturae iussa"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
@@ -10054,7 +10054,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Societas %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -10869,7 +10869,7 @@ msgstr "Census"
 #: ../../../../src/wui/interactive_player.cc:308
 #: ../../../../src/wui/map_tags.cc:51
 msgid "Seafaring"
-msgstr ""
+msgstr "Navigatio"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/wui/interactive_player.cc:314
@@ -11007,7 +11007,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
 msgid "Artifacts"
-msgstr ""
+msgstr "Res"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63

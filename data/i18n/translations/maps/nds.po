@@ -349,7 +349,7 @@ msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "In deese Inföhren lehrst du, welke Kansen Widelands hett, wo du diene Weertskupp anpassen kannst, un wo du mit anner Spelers hannelst. Deese Inföhren is för Spelers mit wat Erfahrung rekumdeert."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

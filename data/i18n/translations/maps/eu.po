@@ -189,7 +189,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Garatu gabe oraindik"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -197,7 +197,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Barkatu, mapa hau garatu gabe dago oraindik."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
