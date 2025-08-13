@@ -260,7 +260,7 @@ msgstr "Historia da campaña"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -268,7 +268,7 @@ msgstr "Imperio"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlánticos"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -413,7 +413,7 @@ msgstr ""
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -472,7 +472,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Pechado."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""

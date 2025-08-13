@@ -4751,7 +4751,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/warehouses/empire/port/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/empire/warehouse/init.lua:8
@@ -5762,11 +5762,11 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Comenzi"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"

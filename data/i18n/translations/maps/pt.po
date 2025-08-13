@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2018\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -85,7 +85,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "O segundo império"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -108,12 +108,12 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Quando Chat’Karuth morreu, era já um homem muito velho, pai de três fortes e ambiciosos filhos e senhor de um exercito que podia confrontar qualquer inimigo disposto a marchar contra as florestas antigas. No final do seu glorioso reinado, Chat’Karuth escolheu o seu  filho mais velho Thron para o suceder no trono como soberano da tribo, decisão que deixou os dois irmãos insatisfeitos. Por saber que isso iria acontecer, o antigo soberano deixou instruções para que o novo Rei Thron deixasse a capital Al’thunran, onde estava o Trono-entre-as-árvores, e recuasse com as suas forças para as montanhas. Nelas enterrou o corpo do seu pai e sobre a sua campa jurou aos Deuses que voltaria para restabelecer a ordem. Enquanto os seus irmãos continuaram a guerra cega contra Thron e as pequenas forças que deixara a defender as fronteiras de Al’thunran, o jovem guerreiro procurou reunir os seus ambiciosos irmãos e forçá-los às suas tribos a de novo voltarem a marchar unidos sobre a mesma bandeira."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Os meses de exílio"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
@@ -133,12 +133,12 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Seis meses atrás, Lutius - um jovem general do Império - fora enviado com 150 soltados para a fronteira que fica para além das florestas do Norte, onde tribos bárbaras e as terras do Império se cruzam. O sua tarefa era a de defender o território do Império. Primeiro, tudo estava calmo, e até brincou com as crianças bárbaras que os visitavam. Já sonhava com uma vida tranquila lado a lado com esta gente arcaica. Ele e o seu exército começaram a sentir-se seguro demais e a menosprezar o potencial inimigo. Isto fora a sua perdição. Numa noite em Março, o seu exército foi apanhado desprevenido por 100 guerreiros bárbaros que os atacaram e os obrigaram a dispersar. Só ele e uma mão cheia dos seus soldados sobreviveram e por pouco!"
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "A corrida ao fogo"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -153,12 +153,12 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Quando o Deus perdeu a fé nos Atlantas e submergiu-lhes a ilha, uma valente mulher que lutava pela justiça e por uma segunda oportunidade para o seu povo, tornou-se numa lenda. Liderando o que restava do povo da Atlântida em direção a um novo futuro numa nova terra, Jundlina tornou-se a mais poderosa humana do seu tempo. Mas pagou um alto preço: entregou a sua humanidade e a sua alma."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Da Água ao Gelo"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
@@ -189,7 +189,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Viver no oceano é uma luta constante, e ainda mais para os habitantes da costa norte do mar Frísio. Foi a última tempestade, a mais devastadora da história humana. Nada mais do que mais um exemplo do que os Frísios têm de enfrentar – ou um sinal dos deuses de que a tribo que assentou aqui tem de encontrar outro local?"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -230,7 +230,7 @@ msgstr "Finalmente o navio fora reparado! Lutius e o seu povo pode novamente lan
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "A Vingança do Netuno"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -342,14 +342,15 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Economia"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "Neste tutorial, vais aprender as possibilidades que o Widelands oferece para ajustar a tua economia. Só é aconselhado aos jogadores com alguma experiência."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

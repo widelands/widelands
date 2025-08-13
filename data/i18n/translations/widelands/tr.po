@@ -86,7 +86,7 @@ msgstr "Yeni görevler"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -1511,13 +1511,13 @@ msgstr ""
 
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:319
 msgid "Atoll"
-msgstr ""
+msgstr "Mercanada"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:320
 #: ../../../../src/logic/map.cc:77
 msgid "Wasteland"
-msgstr ""
+msgstr "Çorak arazi"
 
 #. * TRANSLATORS: Random Terrain Distribution
 #: ../../../../src/editor/ui_menus/main_menu_random_map.cc:322
@@ -1877,7 +1877,7 @@ msgstr "Araç Boyutu"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Boyut:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -2177,7 +2177,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 #: ../../../../src/logic/addons.cc:284
 #, c-format
@@ -2593,7 +2593,7 @@ msgstr "%%%i inşa edildi"
 #: ../../../../src/logic/map_objects/tribes/dismantlesite.cc:116
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% sökülmüş"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
@@ -2754,7 +2754,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Askeri saha kaybedildi!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
@@ -2765,7 +2765,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Sahada düşman öldürüldü!"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
@@ -2775,7 +2775,7 @@ msgstr "Saldır!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:717
 msgid "You are under attack"
-msgstr ""
+msgstr "Saldırı altındasın"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -2783,7 +2783,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:456
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "ekonomi ‘%s’ malını gerektiriyor"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -2791,7 +2791,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:463
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "ekonomi ‘%s’ malını gerektirmiyor"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -2799,14 +2799,14 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:476
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "ekonomi ‘%s’ işçisini gerektiriyor"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:485
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "ekonomi ‘%s’ işçisini gerektirmiyor"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2827,31 +2827,31 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:540
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "bina şu mallara sahip: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:564
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "bina şu mallara sahip değil: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:580
 msgid "a worker needs experience"
-msgstr ""
+msgstr "bir işçinin deneyime ihtiyacı var"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:586
 msgid "the workers need no experience"
-msgstr ""
+msgstr "işçilerin deneyime ihtiyacı yok"
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:615
 msgid "the fleet needs a ferry"
@@ -2890,19 +2890,19 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1324
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "%1$s başlatılmadı çünkü %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:777
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "%1$s tamamlandı çünkü %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:784
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "%1$s atlandı çünkü %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -2937,7 +2937,7 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1881
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Bu eğitim seviyesinde hiç asker bulunamadı!"
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the
 #. description of the
@@ -2962,7 +2962,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1205
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Daha fazla kaynak bulunamıyor!"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1253
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1274
@@ -3037,11 +3037,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:651
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Bir sefer gemisi yeni liman inşa alanı buldu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space Found"
-msgstr ""
+msgstr "Liman Alanı Bulundu"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship"
@@ -3107,7 +3107,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1832
 msgid "Island Circumnavigated"
-msgstr ""
+msgstr "Adanın Etrafında Dolaşıldı"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
@@ -3118,11 +3118,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1833
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Bir sefer gemisi adayı hiçbir olay olmadan dolaştı."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1898
 msgid "Coast Reached"
-msgstr ""
+msgstr "Kıyıya Ulaşıldı"
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1898
@@ -3132,7 +3132,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1899
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Bir sefer gemisi kıyıya ulaştı ve sonraki komutları bekliyor."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1952
 msgid "New port construction site is gone"
@@ -3144,7 +3144,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1953
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Malların boşaltılması başarısız, sefer artık iptal edildi."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2010
 msgid "No Port Can Be Built"
@@ -3181,11 +3181,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2264
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Sefer Hazır"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2265
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Bir seyir gemisi komutlarını bekliyor."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2442
 msgctxt "ship_state"
@@ -3328,7 +3328,7 @@ msgstr ""
 #. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers missing"
-msgstr ""
+msgstr "İşçiler eksik"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:245
@@ -3357,15 +3357,15 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Yeni bir liman ekonomine eklendi."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:605
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Yeni bir karargah ekonomine eklendi."
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:608
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Yeni bir depo ekonomine eklendi."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
@@ -3384,7 +3384,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_programs/findresources.cc:58
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Bir jeolojist kaynak buldu."
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:115
 #, c-format
@@ -3400,17 +3400,17 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/return.cc:121
 msgid "Worker got lost!"
-msgstr ""
+msgstr "İşçi kayboldu!"
 
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:158
 #: ../../../../src/logic/map_objects/tribes/worker_tasks/soldier_battle.cc:162
 msgid "Logic error"
-msgstr ""
+msgstr "Mantık hatası"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:69
 msgid "arable"
-msgstr ""
+msgstr "elverişli"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../../../src/logic/map_objects/world/terrain_description.cc:79
@@ -3620,7 +3620,7 @@ msgstr ""
 
 #: ../../../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Mini Harita"
 
 #: ../../../../src/map_io/map_scripting_packet.cc:80
 msgid ""
@@ -4280,7 +4280,7 @@ msgstr ""
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #: ../../../../src/scripting/lua_game.cc:1563
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:63
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
@@ -4384,7 +4384,7 @@ msgstr "Yükleniyor..."
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Değeri azalt"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4397,7 +4397,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Değeri yükselt"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4445,8 +4445,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d saat"
+msgstr[1] "%d saat"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -5023,7 +5023,7 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5328,7 +5328,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2093
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
@@ -5435,7 +5435,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "İsim:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5678,7 +5678,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "İsim: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5700,7 +5700,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Oyuncular: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5860,7 +5860,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Küçük"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6077,7 +6077,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6210,7 +6210,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:563
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategori: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:293
@@ -6565,7 +6565,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6583,7 +6583,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
@@ -7528,7 +7528,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Takım %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7936,7 +7936,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -7944,7 +7944,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmeyen"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8827,7 +8827,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Klavye Kısayolları"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
@@ -9246,7 +9246,7 @@ msgstr ""
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
-msgstr ""
+msgstr "Saldırı"
 
 #. * TRANSLATORS: Number of ships that should attack. Used in the attack
 #. window.
@@ -9880,7 +9880,7 @@ msgstr ""
 #: ../../../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../../../src/wui/fieldaction.cc:1272
 msgid "Select Ship"
@@ -10054,7 +10054,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Takım %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -11007,7 +11007,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:61 ../../../../src/wui/minimap.cc:226
 msgid "Artifacts"
-msgstr ""
+msgstr "Eserler"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63

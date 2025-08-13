@@ -11,7 +11,7 @@
 # C138, 2022
 # charly ghislain, 2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2018,2023
+# David D, 2018,2023,2025
 # David TARCZEWSKI <transifex@tarczewski.fr>, 2019
 # Drisse Atek <dageneration@live.fr>, 2020
 # GunChleoc, 2016,2018
@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-06-26 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Renaud Bouchard, 2016-2022,2024-2025\n"
+"Last-Translator: David D, 2018,2023,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4547,7 +4547,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Sometimes we end up in a region with no fish, so we must hunt. Game will "
 "reproduce by itself, if not hunted too much. But yes, fish is our main meal."
-msgstr ""
+msgstr "Parfois, nous finissons dans une région sans poisson, donc nous devons chasser. Le gibier se reproduira tout seul, si il n’est pas trop chassé. Mais oui, le poisson est notre principal repas."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Hunter's House
@@ -4791,7 +4791,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "We invented this vertical axis design first, the sawmill just copied our "
 "ideas but never acknowledged our claim."
-msgstr ""
+msgstr "Nous avons inventé ce design d’axe vertical en premier, la scierie a simplement copié nos idées mais n’a jamais reconnu notre revendication."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1706
@@ -4829,7 +4829,7 @@ msgid ""
 "recipe was inherited for generations. It is more nutritious than that paper-"
 "like bread you find elsewhere. And it is needed for the personal rite of "
 "preparing one’s meal. May Satul bless you."
-msgstr ""
+msgstr "Vous ne pouvez pas comparer notre pain à quoi que ce soit de ces autres tribus. Cette recette a été héritée pendant des générations. Il est plus nutritif que ce pain semblable au papier que vous trouvez ailleurs. Et il est nécessaire pour le rite personnel de préparer son repas. Que Satul vous bénisse."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1723
@@ -4869,7 +4869,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build only if you absolutely must produce some coal, or when you have a very"
 " large amount of logs."
-msgstr ""
+msgstr "Construisez seulement si vous devez absolument produire du charbon, ou lorsque vous avez une très grande quantité de grumes."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1736
@@ -4877,7 +4877,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "We must admit that this business is not really the Atlantean way, but in "
 "times of need we do what’s necessary."
-msgstr ""
+msgstr "Nous devons admettre que cette entreprise n’est pas vraiment à la mode Atlante, mais en cas de besoin, nous faisons ce qui est nécessaire."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Charcoal Kiln
@@ -5143,7 +5143,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The secret of Atlantean health and strength is hidden in these roots. It’s "
 "not spinach, it’s not a carrot, it’s … a secret."
-msgstr ""
+msgstr "Le secret de la santé et de la force Atlantes est caché dans ces racines. Ce ne sont pas des épinards, ce n’est pas une carotte, c’est ... un secret."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Blackroot Farm
@@ -5186,7 +5186,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr ""
+msgstr "Non, les araignées ne sont pas nourries avec du maïs. Nous le donnons à des sauterelles grasses, qui à leur tour sont digérées par nos araignées. Nous les mettons sur un appareil spécial pour obtenir la soie d’araignée une fois par jour. Il n’est pas nécessaire de tourner cela à nouveau. Le fil peut directement être utilisé par le moulin à tisser. Oh bonjour, voici l’une de nos belles araignées... Hé ! Pourquoi tu t’enfuis ?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
@@ -5201,7 +5201,7 @@ msgstr "Un éleveur d'araignées montre sa ferme"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "La ferme à araignées a besoin en moyenne de %s pour produire une soie d’araignée."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -7922,7 +7922,7 @@ msgstr "Le bois peut servir dans les foyers des maison et pour vous garder au ch
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon en %s en moyenne."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -14503,7 +14503,7 @@ msgstr "Travaille au chantier naval et construit de nouveaux navires."
 #: ../../../../data/tribes/initialization/frisians/units.lua:727
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../../../data/tribes/initialization/frisians/units.lua:737
@@ -15379,7 +15379,7 @@ msgstr "Cuit des briques en utilisant du granit et de l'argile avec du charbon c
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "La briqueterie a besoin de %s en moyenne pour produire une brique."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15650,7 +15650,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Si ce bâtiment est entièrement approvisionné, la production d’un exemplaire de chaque aliment fumé prend en moyenne %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1962
@@ -15854,7 +15854,7 @@ msgstr "Équipe les recrues et les forme en soldats"
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Las casernes ont besoin de %s en moyenne pour recruter un soldat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reindeer Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2055
@@ -15885,7 +15885,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Si l’approvisionnement est stable et qu’il y a une demande continue pour la fourrure, alors l'élevage de rennes produit une pièce de viande après avoir produit trois morceaux de fourrure."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15949,7 +15949,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Construisez des brise-lames tout près pour gagner de nouvelles terres sur la mer."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2091
@@ -16971,29 +16971,29 @@ msgstr "Production"
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
 msgid "Health improvement:"
-msgstr ""
+msgstr "Amélioration santé :"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:745
 #: ../../../../data/tribes/scripting/help/building_help.lua:753
 #: ../../../../data/tribes/scripting/help/building_help.lua:761
 #: ../../../../data/tribes/scripting/help/building_help.lua:769
 msgid "From %1% to %2%"
-msgstr ""
+msgstr "De %1% à %2%"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:752
 msgid "Attack training:"
-msgstr ""
+msgstr "Entrainement à l'attaque :"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:760
 msgid "Defense training:"
-msgstr ""
+msgstr "Entraînement à la défense :"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:768
 msgid "Evade training:"
-msgstr ""
+msgstr "Entrainement à l'esquive :"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:778
@@ -17236,11 +17236,11 @@ msgstr "Taille"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
-msgstr ""
+msgstr "Les travailleurs et les animaux peuvent traverser des champs avec cet inamovible."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
-msgstr ""
+msgstr "Les travailleurs et les animaux ne peuvent pas traverser les champs avec cet inamovible."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"

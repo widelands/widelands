@@ -219,7 +219,7 @@ msgstr "网站主页"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "脚本"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -320,7 +320,7 @@ msgstr "文档，帮助和维基"
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "附加组件"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -413,7 +413,7 @@ msgstr "%s:"
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1%/%2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -431,19 +431,19 @@ msgstr "客户端设置"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "左边是包括你在内的客户端列表。你可以用名字后面的按钮设置角色。可用的角色有："
 
 #: ../../../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "玩家。有不同颜色的旗子。如果多于一个用户选了同一种颜色，那么他们可以相互控制对方的单位(“共治王国模式”)"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "观察模式。你将能看到所有的东西。但是不能操作任何玩家单位。"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -453,26 +453,26 @@ msgstr "游戏玩家设置"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "在中间是玩家设置。要开始游戏，每一个玩家必须满足以下的一种情况："
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "已经连接到了一个或多个客户端（参见“客户端设置“）"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "已经连接到一个电脑玩家 (图片的脸和鼠标放上去显示的文字表示选择的电脑玩家的等级)"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "设为此地点共享给了另外一个玩家"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "关闭"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -498,7 +498,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "你要以在右边看到已选择的地图或游戏存档的信息。东道主可以用地图名字旁边的按钮修改地图。除此之外，也可以设置不同胜利的条件。最后，玩家都准备好，就可以开始游戏啦。"
 
 #: ../../../../data/txts/tips/amazons.lua:4
 msgid ""

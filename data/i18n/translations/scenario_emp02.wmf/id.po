@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bangun sebuah tambang"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"

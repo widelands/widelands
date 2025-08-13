@@ -221,7 +221,7 @@ msgstr "Hjemmeside"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptopsætning"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -322,7 +322,7 @@ msgstr "Dokumentation, hjælp og wiki"
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Udvidelser"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -415,7 +415,7 @@ msgstr "%s:"
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"

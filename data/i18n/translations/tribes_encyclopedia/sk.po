@@ -1559,7 +1559,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1518
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
-msgstr ""
+msgstr "Pečie chlieb z manioku."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Root Cooker
@@ -1687,7 +1687,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Pestovateľka manioku zasadí a pozberá jeden zväzok manioku za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1589
 #: ../../../../data/tribes/initialization/amazons/units.lua:1604
@@ -1736,7 +1736,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Pestovateľka kakaovníkov zasadí a pozberá jeden košík kakaových bôbov za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'
@@ -1932,7 +1932,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jeden trajekt za %1$s až %2$s, podľa toho, ako ďaleko musí lodiarka prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1750
@@ -1965,7 +1965,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu loď za %1$s až %2$s, podľa toho, ako ďaleko musí lodiarka prejsť."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -1979,7 +1979,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2329
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
-msgstr ""
+msgstr "Nenadávajte na stavbára, ktorému chýba stavebný materiál."
 
 #. TRANSLATORS: Lore author helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an Atlantean building: Construction
@@ -3324,7 +3324,7 @@ msgstr "Dosky sú dôležitým stavebným materiálom."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:458
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Vyrába ich píla z kmeňov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Planks, part 3
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:460
@@ -3841,7 +3841,7 @@ msgstr "Chová pavúky pre hodváb."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:976
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Vyrába pavúčiu látku pre budovy, lode a vojakov."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Shipwright
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:983
@@ -4507,7 +4507,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "Rybnikár vychová jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -5106,7 +5106,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Farmár zasadí a pozberá jeden snop kukurice za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -5146,7 +5146,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Pestovateľ čierneho koreňa zasadí a pozberá jeden zväzok čierneho koreňa za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5632,7 +5632,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2106
 msgctxt "atlanteans_building"
 msgid "Traditional song of the ferrymen"
-msgstr ""
+msgstr "Tradičná pieseň prievozníkov"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Ferry
 #. Yard, part 1
@@ -5641,7 +5641,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jeden trajekt za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5679,7 +5679,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu loď za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2169
@@ -6707,7 +6707,7 @@ msgstr "Sadí polia."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:666
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Pečie pitu pre baníkov, vojakov a prieskumníkov."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Brewer
 #: ../../../../data/tribes/initialization/barbarians/units.lua:673
@@ -7548,7 +7548,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1433
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
-msgstr ""
+msgstr "Uhliarova pieseň"
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Charcoal
 #. Kiln
@@ -7788,7 +7788,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Farmár zasadí a pozberá jeden snop pšenice za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -8197,7 +8197,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jeden trajekt za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1853
@@ -8215,7 +8215,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu loď za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1877
@@ -10460,7 +10460,7 @@ msgstr "Imperiálni drevorubači rúbu stromy; horári sa zase starajú o zásob
 #: ../../../../data/tribes/initialization/empire/units.lua:138
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Vyrába ich píla z kmeňov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Planks, part 3
 #: ../../../../data/tribes/initialization/empire/units.lua:140
@@ -10669,7 +10669,7 @@ msgstr "Potrebujú ho geológovia, stavbári, kováči zbraní, kováči zbrojí
 #: ../../../../data/tribes/initialization/empire/units.lua:443
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:456
@@ -10885,7 +10885,7 @@ msgstr "Sadí polia."
 #: ../../../../data/tribes/initialization/empire/units.lua:713
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr "Mlie pšenicu na múku."
+msgstr "Melie pšenicu na múku."
 
 #. TRANSLATORS: Helptext for an Empire worker: Baker
 #: ../../../../data/tribes/initialization/empire/units.lua:720
@@ -11732,7 +11732,7 @@ msgstr ""
 #. "In vino veritas."
 #: ../../../../data/tribes/initialization/empire/units.lua:1589
 msgid "In wine there is truth."
-msgstr ""
+msgstr "Vo víne je pravda."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Winery
 #. TRANSLATORS: Lore author helptext for an Empire production site: Piggery
@@ -11814,7 +11814,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Pripravuje prídely pre prieskumníkov, ako aj prídely a obedy, ktoré sa podávajú baníkom vo všetkých baniach."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Inn
 #: ../../../../data/tribes/initialization/empire/units.lua:1638
@@ -12041,7 +12041,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a "
 "donkey in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vychovať jedného osla v priemere za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12080,7 +12080,7 @@ msgctxt "empire_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Farmár zasadí a pozberá jeden snop pšenice za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -12843,7 +12843,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jeden trajekt za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12873,7 +12873,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu loď za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2434
@@ -14289,7 +14289,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:445
 msgctxt "frisians_ware"
 msgid "Fishing nets are the tool used by fishers."
-msgstr ""
+msgstr "Rybárske siete sú nástrojom, ktorý používajú rybári."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Hunting Spear, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:457
@@ -14550,7 +14550,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:786
 msgctxt "frisians_worker"
 msgid "Bakes bread for miners and soldiers."
-msgstr ""
+msgstr "Pečie chlieb pre baníkov a vojakov."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Master Baker
 #: ../../../../data/tribes/initialization/frisians/units.lua:793
@@ -14574,7 +14574,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:814
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Pripravuje prídely a obedy pre baníkov a prieskumníkov."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Geologist
 #: ../../../../data/tribes/initialization/frisians/units.lua:824
@@ -15143,7 +15143,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one clay between %1$s and %2$s, depending on how "
 "far the clay digger has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu hlinu za %1$s až %2$s, podľa toho, ako ďaleko musí hlinokopáč prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15181,7 +15181,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one coal between %1$s and %2$s, depending on how "
 "far the charcoal burner has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jedno uhlie za %1$s až %2$s, podľa toho, ako ďaleko musí uhliar prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1736
@@ -15217,7 +15217,7 @@ msgctxt "frisians_building"
 msgid ""
 "The berry farmer plants one bush between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "Pestovateľ bobúľ zasadí jeden krík za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fruit Collector's
 #. House
@@ -15293,7 +15293,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr ""
+msgstr "Včelár zberá jeden med za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15812,7 +15812,7 @@ msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Pripravuje prídely pre prieskumníkov, ako aj prídely a obedy, ktoré sa podávajú baníkom vo všetkých baniach."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Drinking
 #. Hall
@@ -15933,7 +15933,7 @@ msgctxt "frisians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Farmár zasadí a pozberá jeden snop jačmeňa za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -15967,7 +15967,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená, staviteľ hrádze vykoná úpravu terénu za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
@@ -16186,7 +16186,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jeden trajekt za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../../../data/tribes/initialization/frisians/units.lua:2291
@@ -16211,7 +16211,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jednu loď za %1$s až %2$s, podľa toho, ako ďaleko musí lodiar prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/frisians/units.lua:2314
@@ -17313,11 +17313,11 @@ msgstr "%1% a %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Jeden hráč"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "Viacerí hráči"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
