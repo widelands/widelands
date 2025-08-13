@@ -1107,7 +1107,7 @@ msgstr "Nakonec vyber počet dodávek, který má být v rámci obchodu zrealizo
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Každá dodávka je doručována najednou a na každý kus zboží bude potřeba jeden osel."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""

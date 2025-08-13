@@ -2422,7 +2422,7 @@ msgstr "Inicializácia…"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "Trade Offer"
-msgstr ""
+msgstr "Obchodná ponuka"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
@@ -2687,7 +2687,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Obchodná ponuka od %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
@@ -2751,7 +2751,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Vy pošlete:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2769,7 +2769,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Vy dostanete:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -5088,42 +5088,42 @@ msgstr ""
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr "Názov"
+msgstr "názvu (A-Z)"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Name (descending)"
-msgstr ""
+msgstr "názvu (Z-A)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Most popular"
-msgstr ""
+msgstr "najväčšej populárnosti"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Least popular"
-msgstr ""
+msgstr "najmenšej populárnosti"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../../../src/ui_fsmenu/addons/manager.cc:776
 msgid "Most often downloaded"
-msgstr ""
+msgstr "najčastejšie sťahovaných"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../../../src/ui_fsmenu/addons/manager.cc:778
 msgid "Least often downloaded"
-msgstr ""
+msgstr "najmenej sťahovaných"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Oldest"
-msgstr ""
+msgstr "najstarších"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../../../src/ui_fsmenu/addons/manager.cc:782
 msgid "Newest"
-msgstr ""
+msgstr "najnovších"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:791
 msgid "Filter add-ons by name"
@@ -7690,7 +7690,7 @@ msgstr "Veľkosť okna"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Monitor"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7862,7 +7862,7 @@ msgstr "Nikdy"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Nasledovať myš"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -8081,7 +8081,7 @@ msgstr "Adresár lokalizácie:"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:123
 msgid "Executable Directory:"
-msgstr ""
+msgstr "Adresár so spustiteľným súborom:"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
@@ -8241,7 +8241,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Tržnica"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
@@ -8389,7 +8389,7 @@ msgstr "Kasárne"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
-msgstr ""
+msgstr "Druhý nosič"
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"
@@ -8781,7 +8781,7 @@ msgstr "Zobraziť iba správy scenára"
 
 #: ../../../../src/wlapplication_options.cc:751
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Zobraziť iba správy týkajúce sa diplomacie"
 
 #: ../../../../src/wlapplication_options.cc:756
 msgid "Go to Ship"
@@ -9315,12 +9315,12 @@ msgstr ""
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Prepnúť nekonečný obchod"
 
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Dávky:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
@@ -9631,7 +9631,7 @@ msgstr "Zrušiť výpravu"
 #: ../../../../src/wui/constructionsitewindow.cc:164
 #: ../../../../src/wui/dismantlesitewindow.cc:79
 msgid "Send the builder away"
-msgstr ""
+msgstr "Poslať stavbára preč"
 
 #: ../../../../src/wui/constructionsitewindow.cc:170
 #: ../../../../src/wui/dismantlesitewindow.cc:85
@@ -10039,7 +10039,7 @@ msgstr ""
 #: ../../../../src/wui/game_chat_menu.cc:79
 #: ../../../../src/wui/interactive_gamebase.cc:138
 msgid "Script Console"
-msgstr ""
+msgstr "Skriptovacia konzola"
 
 #: ../../../../src/wui/game_chat_panel.cc:69
 msgid "Recipient"
@@ -10130,15 +10130,15 @@ msgstr "Pozvať tohto hráča do svojho tímu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Obchodné ponuky, ktoré ste dostali od iných hráčov"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Obchody, ktoré ste navrhli iným hráčom"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Vaše prebiehajúce obchodné dohody"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 msgid "No team"
@@ -10188,12 +10188,12 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:936
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Obchodné ponuky (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:449
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Momentálne vám nikto neponúkol žiadne obchody."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
@@ -10233,13 +10233,13 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:930
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Navrhnuté obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy. Môžete navrhnúť nový obchod z tržnice."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
@@ -10272,11 +10272,11 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Prebiehajúce obchody (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Momentálne nie sú žiadne prebiehajúce obchodné dohody."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:649
 #: ../../../../src/wui/game_diplomacy_menu.cc:657
@@ -10451,7 +10451,7 @@ msgstr "Zobraziť iba správy scenára"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Zobraziť iba správy týkajúce sa diplomacie"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -11252,31 +11252,31 @@ msgstr "Názov mapy"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Navrhnúť"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Vy ponúkate:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Vy požadujete:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Znížiť množstvo o 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Znížiť množstvo"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Zvýšiť množstvo"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Zvýšiť množstvo o 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
@@ -11308,11 +11308,11 @@ msgstr ""
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy. Môžete navrhnúť nový obchod z prvej karty."
 
 #: ../../../../src/wui/marketwindow.cc:316
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy."
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
@@ -11344,19 +11344,19 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Navrhnúť obchod"
 
 #: ../../../../src/wui/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Navrhnuté obchody"
 
 #: ../../../../src/wui/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Obchodné ponuky"
 
 #: ../../../../src/wui/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Prebiehajúci obchod"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"

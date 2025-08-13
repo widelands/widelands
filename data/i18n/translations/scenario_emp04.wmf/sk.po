@@ -126,7 +126,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:105
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Postavte dve nové horárne"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:106
 msgid ""
@@ -1393,7 +1393,7 @@ msgstr "Pivovar"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "varenie piva"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
@@ -1409,12 +1409,12 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr ""
+msgstr "sadenie pšenice"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr ""
+msgstr "zberanie pšenice"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
@@ -1448,7 +1448,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Vyrába pivo na posilnenie a uspokojenie baníkov."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Farm
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
@@ -1491,7 +1491,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
 msgctxt "empire_building"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Melie pšenicu na múku."
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 1
@@ -1570,7 +1570,7 @@ msgstr "Mlyn"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
-msgstr ""
+msgstr "mletie pšenice"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
