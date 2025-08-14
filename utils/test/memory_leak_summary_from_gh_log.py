@@ -10,6 +10,7 @@ pipe to this script input like from:
 - GITHUB_ACTION=dummy ./regression_test.py
 - gh run view --log --job 456789  # maybe, unchecked
 - cat /tmp/widelands_regression_test_XXX/lsan_XX.XXX.txt  # file created by ./regression_test.py
+- cat build/Testing/Temporary/LastTest.log  # file created by ctest (from cmake)
 
 Or give a file in this format as argument.
 
@@ -56,7 +57,8 @@ class GithubASan:
                 cls.ansi_escape_pattern = re.compile(r'[\x1b\u241b][^m]*m')
             return cls.ansi_escape_pattern.sub('', text)
 
-        if 'ERROR: ' in text and cls.summary_file:
+        if 'ERROR: ' in text and 'Sanitizer' in text and cls.summary_file:
+            # Error from LeakSanizer or MemorySaniziter
             if cls.counted_leaks is None:
                 goto_txt = 'go to the log'
                 if os.getenv('GITHUB_ACTION'):
@@ -175,6 +177,7 @@ def create_summary_one_runner(in_file):
         RT_LOGS = enum.auto()
         RT_HEADER_L = enum.auto()  # when log is local
         RT_LOGS_L = enum.auto()
+        RT_LOGS_T = enum.auto()  # when ctest log as input
         LSAN = enum.auto()
 
     def get_log_line_gh(line):
@@ -218,6 +221,9 @@ def create_summary_one_runner(in_file):
                 if '========' in line and 'Z ' not in line:  # directly a log as input
                     r_mode = ReadingMode.LSAN
                     get_log_line = get_log_line_local
+                elif 'Start testing: ' in line and line.startswith('Start testing: '):
+                    # build/Testing/Temporary/LastTest.log created by ctest (cmake)
+                    r_mode = ReadingMode.RT_LOGS_T
                 elif line != '\n':  # when not an empty line
                     r_mode = ReadingMode.INSIDE
             case ReadingMode.INSIDE:
@@ -246,11 +252,19 @@ def create_summary_one_runner(in_file):
                     else:
                         test_name = None
                     GithubASan.set_test_script(test_name)
+            case ReadingMode.RT_LOGS_T:
+                if 'Command: ' in line:
+                    test_name = line.split(' ', 1)[1]
+                    GithubASan.set_test_script(test_name)
+                elif '========' in line:
+                    r_mode = ReadingMode.LSAN
             case ReadingMode.LSAN:
                 if ' ##[endgroup]' in line:
                     r_mode = ReadingMode.RT_LOGS
                 elif '::endgroup::' in line:
                     r_mode = ReadingMode.RT_LOGS_L
+                elif line == '<end of output>\n':
+                    r_mode = ReadingMode.RT_LOGS_T
                 else:
                     GithubASan.github_asan_line(get_log_line(line))
     GithubASan.summarize_origins()
