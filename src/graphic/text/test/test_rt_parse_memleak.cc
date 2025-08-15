@@ -61,14 +61,13 @@ TESTCASE(parser_parse) {
 	{
 		try {
 			parser.parse("<a", allowed_tags);
+			check_equal("no error raised", "");
 		/* } catch (RT::EndOfText) {  // reports compile error
-			// expected
 			// */
 		} catch (std::exception& e) {
 			/* if (typeid(e).name().find("EndOfText") < 0) {  // is char* and not std::string
 				throw;  // unexpected, throw it again
-			}  // else expected
-			// */
+			}  // TODO(somebody): check here or above */
 		}
 	}
 #ifdef BASE_HEAP_CHECKER_H_
@@ -78,8 +77,14 @@ TESTCASE(parser_parse) {
 	{
 		try {
 			parser.parse("<rt><p>Title <not_a_tag> more&nbsp;text</p></rt>", allowed_tags);
+			check_equal("no error raised", "");
+		/* } catch (RT::SyntaxError) {  // reports compile error
+			// */
 		} catch (std::exception& e) {
-			std::cout << "DEBUG exception: " << typeid(e).name() << "\n";
+			/* Fails, names are different
+			if (typeid(e).name() != typeid(RT::EndOfText).name()) {
+				throw;  // unexpected, throw it again
+			}  // TODO(somebody): check here or above */
 		}
 	}
 }
