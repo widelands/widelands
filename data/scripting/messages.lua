@@ -61,7 +61,7 @@ end
 --
 function send_to_all_inboxes(text, heading)
    push_textdomain("widelands")
-   for idx,plr in ipairs(game.players) do
+   for idx,plr in ipairs(wl.Game().players) do
       if (heading ~= nil and heading ~= "") then
          send_to_inbox(plr, _("Status"), text, {popup=true, heading=heading})
       else
