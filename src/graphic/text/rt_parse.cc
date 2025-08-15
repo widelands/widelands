@@ -162,13 +162,13 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 					children_.push_back(new Child(text.substr(0, match_start)));
 				}
 
-				Tag* child = new Tag();
+				std::unique_ptr<Tag> child(new Tag());
 				std::string url = text.substr(match_start, match_len);
 				TextStream linktext(format(
 				   "<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>",
 				   url, url, url));
 				child->parse(linktext, tcs, allowed_tags);
-				children_.push_back(new Child(child));
+				children_.push_back(new Child(child.release()));
 
 				text = text.substr(match_start + match_len);
 				autolink_protection = false;
