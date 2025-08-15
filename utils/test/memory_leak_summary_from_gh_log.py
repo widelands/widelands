@@ -40,7 +40,7 @@ class GithubASan:
     def github_asan_line(cls, text):
         """annotates asan summary on GitHub and writes more info to the steps
         summary file."""
-        # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
+        # GitHub only lists 10 error and 10 warning annotations per step. This might be too few.
         # Therefore only annotate the summary line of ASan and write other info to the steps summary
         def write_summary(arg1, *args):
             """write to github summary file (markdown format)"""

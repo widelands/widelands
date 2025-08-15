@@ -71,7 +71,7 @@ def colorize_log(text):
 
 def github_asan_line(text):
     "annotates asan summary on GitHub"
-    # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
+    # GitHub only lists 10 error and 10 warning annotations per step. This might be too few.
     # Therefore only annotate the summary line of ASan.
     if 'SUMMARY' in text:
         return '::warning::' + text
