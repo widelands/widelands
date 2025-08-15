@@ -938,7 +938,7 @@ msgstr "Tillykke"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du har fuldført denne mission. Du kan fortsætte med at spille, hvis du ønsket det, eller gå i gang med den næste mission."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

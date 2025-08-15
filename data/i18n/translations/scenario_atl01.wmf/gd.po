@@ -938,7 +938,7 @@ msgstr "Meal do naidheachd"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a chluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

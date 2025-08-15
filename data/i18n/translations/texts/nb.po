@@ -262,7 +262,7 @@ msgstr "Kampanjer"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbarer"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -270,7 +270,7 @@ msgstr "Imperiet"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantere"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -306,7 +306,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:346
 msgid "Windows"
-msgstr ""
+msgstr "Vinduer"
 
 #: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
@@ -322,7 +322,7 @@ msgstr "Dokumentasjon, hjelp og wiki"
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Tillegg"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -419,15 +419,15 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Oppsett for flerspiller"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Du befinner deg i menyen for å starte et nytt spill med flere spillere."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Klient innstillinger"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -439,23 +439,23 @@ msgstr ""
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Spilleren med fargen på flagget. Hvis mer enn en klient velger samme farge, får de delt kontroll over spilleren («delt kongedømme-modus»)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Tilskuermodus, der du kan se alt, men ikke kontrollere noen spillere"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "Spiller innstillinger"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "I midten er innstillinger for spillerne. For å kunne starte et spill, må hver av spillerne være en av følgende:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -474,7 +474,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Lukket."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -492,7 +492,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr ""
+msgstr "Kartdetaljer"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""
@@ -500,7 +500,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Du kan se informasjon om det valgte kartet eller lagrede spillet på høyresiden. En knapp ved siden av navnet på kartet gir verten mulighet til å bytte til et annet kart. Videre kan verten stille på seiersvilkårene og til slutt starte spillet når alle spillerne er klare."
 
 #: ../../../../data/txts/tips/amazons.lua:4
 msgid ""

@@ -1310,7 +1310,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "Pestovateľka pracujúca na tejto maniokovej plantáži nemá k dispozícii čistú pôdu, na ktorej by mohla začať sadiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
@@ -1346,7 +1346,7 @@ msgstr "Výrobňa čokolády"
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "varenie čokolády"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
@@ -1369,7 +1369,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "Pestovateľka pracujúca na tejto kakaovníkovej plantáži nemá k dispozícii čistú pôdu, na ktorej by mohla začať sadiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
@@ -1380,53 +1380,53 @@ msgstr "Krajčírstvo"
 #. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
-msgstr ""
+msgstr "šitie tuniky"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
-msgstr ""
+msgstr "vyrábanie ľahkej drevenej zbroje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden helmet because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
-msgstr ""
+msgstr "vyrábanie drevenej helmy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a warrior’s coat
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
-msgstr ""
+msgstr "šitie bojovníckeho kabáta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making sturdy boots because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
-msgstr ""
+msgstr "vyrábanie pevných topánok"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making swift boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
-msgstr ""
+msgstr "vyrábanie svižných topánok"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making hero boots because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
-msgstr ""
+msgstr "vyrábanie topánok hrdiniek"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a padded vest because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
-msgstr ""
+msgstr "vyrábanie polstrovanej vesty"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a padded protector
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
-msgstr ""
+msgstr "vyrábanie polstrovaného chrániča"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
@@ -1534,7 +1534,7 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr ""
+msgstr "Hlavná žila tohto obydlia zlatokopky je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné obydlie rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1572,7 +1572,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr ""
+msgstr "Lovkyňa-zberačka pracujúca mimo tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver ani ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -1584,7 +1584,7 @@ msgstr "Iniciačný tábor"
 #: ../../../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "verbovanie vojačky"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
@@ -1632,7 +1632,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "Rezačka lián pracujúca v tejto chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1691,7 +1691,7 @@ msgstr "Výrobňa lán"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr ""
+msgstr "vyrábanie lana"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
@@ -1763,7 +1763,7 @@ msgstr "vyrábanie krompáča"
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
-msgstr ""
+msgstr "vyrábanie mačety"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1772,7 +1772,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making kitchen tools"
-msgstr "vyrábanie kuchynských nástrojov"
+msgstr "vyrábanie kuchynského náradia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:147
@@ -1786,7 +1786,7 @@ msgstr "vyrábanie kladiva"
 #. TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:159
 msgid "making a chisel"
-msgstr ""
+msgstr "vyrábanie dláta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
@@ -1798,30 +1798,30 @@ msgstr "vyrábanie ihiel"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
-msgstr ""
+msgstr "vyrábanie kamennej misy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "vyrábanie pazúrikov"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
-msgstr ""
+msgstr "vyrábanie drevenej kopije"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "vyrábanie kopije s kamenným hrotom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
-msgstr ""
+msgstr "vyrábanie vystuženej kopije"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
@@ -1866,7 +1866,7 @@ msgstr "Kamenná baňa"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "ťaženie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1916,7 +1916,7 @@ msgstr "Tapíria farma"
 #: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
 msgctxt "amazons_building"
 msgid "breeding tapir"
-msgstr ""
+msgstr "chovanie tapírov"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
@@ -1945,7 +1945,7 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr ""
+msgstr "Nosička pracujúca pri tejto chatrči nedokáže nájsť žiadnu vodu v jej blízkosti."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
@@ -1995,7 +1995,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr ""
+msgstr "Drevorubačka pracujúca v tejto drevorubačskej chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2037,7 +2037,7 @@ msgstr "Kasárne"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:56
 msgctxt "atlanteans_building"
 msgid "recruiting soldier"
-msgstr "verbovať vojaka"
+msgstr "verbovanie vojaka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:8
@@ -2285,7 +2285,7 @@ msgstr "Stajňa"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
 msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr "chov koňov"
+msgstr "chovanie koňov"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
@@ -2630,7 +2630,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením lesníckej chatrče."
+msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2666,7 +2666,7 @@ msgstr "Pekáreň"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:54
 msgctxt "barbarians_building"
 msgid "baking pitta bread"
-msgstr "pečenie chleba"
+msgstr "pečenie pity"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:8
@@ -2986,7 +2986,7 @@ msgstr "Kovodielňa"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:144
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:127
 msgid "making a fishing rod"
-msgstr "vyrábanie rybárskej udice"
+msgstr "vyrábanie udice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
@@ -3008,7 +3008,7 @@ msgstr "Mikropivovar"
 #: ../../../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:77
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
 msgid "brewing beer"
-msgstr "varenie"
+msgstr "varenie piva"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
@@ -3637,7 +3637,7 @@ msgstr "kutie širokého meča"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:82
 msgid "forging a double-edged sword"
-msgstr "kutie obojsečného meča"
+msgstr "kutie dvojsečného meča"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
@@ -3758,7 +3758,7 @@ msgstr "Uhliarov dom"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:67
 msgid "making a charcoal stack"
-msgstr "výroba uhlia"
+msgstr "kopenie hromady dreveného uhlia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:81
@@ -4201,7 +4201,7 @@ msgstr "Tkáčovňa"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:65
 msgid "weaving cloth"
-msgstr "látky"
+msgstr "tkanie látky"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/well/init.lua:8
@@ -4226,7 +4226,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením lesníckej chatrče."
+msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -7814,7 +7814,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:125
 msgctxt "shipname"
 msgid "Marble"
-msgstr ""
+msgstr "Mramor"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:127
@@ -8221,7 +8221,7 @@ msgstr "Helma"
 #: ../../../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr "Ľahké drevené brnenie"
+msgstr "Ľahká drevená zbroj"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/ax/init.lua:8
@@ -8641,7 +8641,7 @@ msgstr "Železné drevo"
 #: ../../../../data/tribes/wares/kitchen_tools/init.lua:8
 msgctxt "ware"
 msgid "Kitchen Tools"
-msgstr "Kuchynské nástroje"
+msgstr "Kuchynské náradie"
 
 #. TRANSLATORS: This is a ware name used in lists of wares. Used to make
 #. ropes.
@@ -8883,7 +8883,7 @@ msgstr "Široký meč"
 #: ../../../../data/tribes/wares/sword_double/init.lua:8
 msgctxt "ware"
 msgid "Double-edged Sword"
-msgstr "Obojsečný meč"
+msgstr "Dvojsečný meč"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/sword_long/init.lua:8
@@ -9801,7 +9801,7 @@ msgstr "Včelár"
 #: ../../../../data/tribes/workers/frisians/berry_farmer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Berry Farmer"
-msgstr "Bobuľový farmár"
+msgstr "Pestovateľ bobúľ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/blacksmith/init.lua:8
