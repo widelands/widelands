@@ -20,7 +20,7 @@
 #include <memory>
 
 #include "base/test.h"
-// #include "graphic/text/rt_errors_impl.h"  // for RT::EndOfText
+#include "graphic/text/rt_errors_impl.h"  // for RT::EndOfText and RT::SyntaxError
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
 
@@ -71,12 +71,8 @@ TESTCASE(parser_parse) {
 		try {
 			parser.parse("<a", allowed_tags);
 			check_equal("no error raised", "");
-		/* } catch (RT::EndOfText) {  // reports compile error
-			// */
-		} catch (std::exception& e) {
-			/* if (typeid(e).name().find("EndOfText") < 0) {  // is char* and not std::string
-				throw;  // unexpected, throw it again
-			}  // TODO(somebody): check here or above */
+		} catch (RT::EndOfText&) {
+			// could test text in exc.what()
 		}
 	}
 	end_memory_block();
@@ -86,13 +82,8 @@ TESTCASE(parser_parse) {
 		try {
 			parser.parse("<rt><p>Title <not_a_tag> more&nbsp;text</p></rt>", allowed_tags);
 			check_equal("no error raised", "");
-		/* } catch (RT::SyntaxError) {  // reports compile error
-			// */
-		} catch (std::exception& e) {
-			/* Fails, names are different
-			if (typeid(e).name() != typeid(RT::EndOfText).name()) {
-				throw;  // unexpected, throw it again
-			}  // TODO(somebody): check here or above */
+		} catch (RT::SyntaxError&) {
+			// could test text in exc.what()
 		}
 	}
 	end_memory_block();
