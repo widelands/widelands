@@ -64,11 +64,10 @@ TESTCASE(parser_parse) {
 #ifdef BASE_HEAP_CHECKER_H_
 	check_equal(heap_checker.NoLeaks(), true);
 #endif
-	// triggering an other leak (trying)
-	allowed_tags.insert("rt");
+	// triggering more leaks
 	{
 		try {
-			parser.parse("<a><x>x</x></a>", allowed_tags);
+			parser.parse("<rt><p>Title <not_a_tag> more&nbsp;text</p></rt>", allowed_tags);
 		} catch (std::exception& e) {
 			std::cout << "DEBUG exception: " << typeid(e).name() << "\n";
 		}
