@@ -18,7 +18,7 @@ jobs:
         set -o pipefail # to keep return value
         #
         # for all c++ source files excluding /third_party/
-        ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t][^h]*/ |
+        ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t]*/ |
           tee codecheck.out
         # exit code of CodeCheck.py is also 0 if failures detected
       timeout-minutes: 2
@@ -27,6 +27,13 @@ jobs:
         if [ -s codecheck.out ] ; then
           echo "You have codecheck warnings (see above). Please fix."
           exit 1
+        elif ls -d src/*/ |
+          grep --fixed-strings --line-regexp --invert-match \
+            -e src/third_party/ $(ls -d src/[^t]*/ | sed ' s/^/-e /')
+        then  # checked the pattern from above step, it excluded too much
+          echo 'Only /third_party/ should be excluded, but above is skipped as well.'
+          echo 'Update the pattern in this workflow'
+          exit 4
         else
           echo "Codecheck is clear :)"
           exit 0
