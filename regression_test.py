@@ -74,7 +74,7 @@ def github_asan_line(text):
     # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
     # Therefore only annotate the summary line of ASan.
     if 'SUMMARY' in text:
-        return '::warning title=ASan error::' + text
+        return '::warning::' + text
     return text
 
 
