@@ -28,6 +28,17 @@
 /* Helper classes */
 /******************/
 
+#ifdef BASE_HEAP_CHECKER_H_
+// HeapLeakChecker became a dummy only since gperftools-2.16.90, TODO(somebody): replace with ...
+#define init_memory_block_vars() HeapLeakChecker heap_checker;
+#define start_memory_block(block_name) heap_checker = HeapLeakChecker(block_name)
+#define end_memory_block() check_equal(heap_checker.NoLeaks(), true)
+#else
+#define init_memory_block_vars()
+#define start_memory_block(block_name)
+#define end_memory_block()
+#endif
+
 /*************************************************************************/
 /*                                 TESTS                                 */
 /*************************************************************************/
@@ -40,13 +51,10 @@ TESTSUITE_START(RtParseMemleak)
  */
 
 TESTCASE(parser_parse) {
+	init_memory_block_vars();
 	RT::Parser parser;
 	// std::unique_ptr<RT::Parser()> parser(new RT::Parser());  // wrong, but similar would be better
 	RT::TagSet allowed_tags = RT::TagSet();
-#ifdef BASE_HEAP_CHECKER_H_
-	// HeapLeakChecker became a dummy only since gperftools-2.16.90, TODO(somebody): replace with ...
-	HeapLeakChecker heap_checker("test_parse");
-#endif
 	// normal parse
 	{
 		std::unique_ptr<RT::Tag> tag(parser.parse("<rt><p>some text</p></rt>", allowed_tags));
@@ -58,6 +66,7 @@ TESTCASE(parser_parse) {
 		check_equal(tag->children()[0]->tag->children()[0]->text, "some text");
 	}
 	// leak from Parser::parse()
+	start_memory_block("test_parse");
 	{
 		try {
 			parser.parse("<a", allowed_tags);
@@ -70,10 +79,9 @@ TESTCASE(parser_parse) {
 			}  // TODO(somebody): check here or above */
 		}
 	}
-#ifdef BASE_HEAP_CHECKER_H_
-	check_equal(heap_checker.NoLeaks(), true);
-#endif
+	end_memory_block();
 	// triggering more leaks
+	start_memory_block("more leaks");
 	{
 		try {
 			parser.parse("<rt><p>Title <not_a_tag> more&nbsp;text</p></rt>", allowed_tags);
@@ -87,6 +95,7 @@ TESTCASE(parser_parse) {
 			}  // TODO(somebody): check here or above */
 		}
 	}
+	end_memory_block();
 }
 
 TESTSUITE_END()
