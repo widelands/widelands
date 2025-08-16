@@ -63,10 +63,6 @@ public:
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
-	bool upgradeable() const;
-	bool full_upgrade_possible() const {
-		return full_upgrade_possible_;
-	}
 
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
