@@ -191,7 +191,7 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
 
-		children_.push_back(new Child(child.get()));
+		children_.push_back(new Child(child.release()));
 	}
 }
 
@@ -605,7 +605,7 @@ Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rv(new Tag());
 	rv->parse(*text_stream_, tag_constraints_, allowed_tags);
 
-	return rv.get();
+	return rv.release();
 }
 std::string Parser::remaining_text() {
 	if (text_stream_ == nullptr) {
