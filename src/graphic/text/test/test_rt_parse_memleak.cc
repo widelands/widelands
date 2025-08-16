@@ -87,6 +87,20 @@ TESTCASE(parser_parse) {
 		}
 	}
 	end_memory_block();
+	// leak from Tag::parse_content()
+	allowed_tags.insert("rt");
+	allowed_tags.insert("p");
+	start_memory_block("parse_content");
+	{
+		try {
+			parser.parse("<p>some text https://example.com/xxx</p>", allowed_tags);
+			check_equal("no error raised", "");
+		} catch (RT::SyntaxError&) {
+			// created tag <font> is not in allowed_tags
+			// could test text in exc.what()
+		}
+	}
+	end_memory_block();
 }
 
 TESTSUITE_END()
