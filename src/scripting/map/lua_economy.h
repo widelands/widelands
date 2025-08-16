@@ -49,6 +49,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+	int __eq(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int target_quantity(lua_State*);
 	int set_target_quantity(lua_State*);
 	int needs(lua_State*);
