@@ -47,6 +47,16 @@ TESTCASE(parser_parse) {
 	// HeapLeakChecker became a dummy only since gperftools-2.16.90, TODO(somebody): replace with ...
 	HeapLeakChecker heap_checker("test_parse");
 #endif
+	// normal parse
+	{
+		std::unique_ptr<RT::Tag> tag(parser.parse("<rt><p>some text</p></rt>", allowed_tags));
+		check_equal(tag->name(), "rt");
+		check_equal(tag->children().size(), 1);
+		check_equal(tag->children()[0]->tag ? "" : "tag is nullptr", "");
+		check_equal(tag->children()[0]->tag->name(), "p");
+		check_equal(tag->children()[0]->tag->children().size(), 1);
+		check_equal(tag->children()[0]->tag->children()[0]->text, "some text");
+	}
 	// leak from Parser::parse()
 	{
 		try {
