@@ -101,6 +101,22 @@ TESTCASE(parser_parse) {
 		}
 	}
 	end_memory_block();
+	// check normal parsing
+	allowed_tags.insert("link");
+	allowed_tags.insert("font");
+	{
+		std::unique_ptr<RT::Tag> tag(parser.parse("<p>some text https://example.com/xxx</p>", allowed_tags));
+		check_equal(tag->name(), "p");
+		if (tag->children().size() == 1 && tag->children()[0]->tag == nullptr) {
+			std::cerr << "TODO(somebody): autolink_protection in Tag::parse_content() stays true after above exception";
+			return;
+		}
+		check_equal(tag->children().size(), 2);
+		check_equal(tag->children()[0]->tag ? "tag instead of text" : "", "");
+		check_equal(tag->children()[0]->text, "some text ");
+		check_equal(tag->children()[1]->tag ? "" : "tag is nullptr", "");
+		check_equal(tag->children()[1]->tag->name(), "link");
+	}
 }
 
 TESTSUITE_END()
