@@ -448,7 +448,7 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "Potrebujú ho geologičky, stavbárky, lodiarky a kamenosochárky. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrába ich kamenosochárka."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Machete
 #: ../../../../data/tribes/initialization/amazons/units.lua:365
@@ -840,7 +840,7 @@ msgstr ""
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tento balzovník je pripravený na ťažbu balzového dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:914
@@ -874,7 +874,7 @@ msgstr ""
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tento leopardí strom je pripravený na ťažbu železného dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:1026
@@ -908,7 +908,7 @@ msgstr ""
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tento kaučukovník je pripravený na ťažbu kaučuku majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -1610,7 +1610,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1545
 msgctxt "amazons_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Vystrojuje verbovankyne a cvičí ich na vojačky."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Initiation
 #. Site
@@ -1618,7 +1618,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "Iniciačný tábor potrebuje v priemere %s na naverbovanie jednej vojačky."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gardening
 #. Center
@@ -3359,7 +3359,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Ryby sú jedným z najväčších zdrojov potravy Atlantíďanov. Pred dodaním baniam, výcvikovým stavbám a prieskumníkom sa musia sa vyúdiť v udiarni."
+msgstr "Ryby sú jedným z najväčších zdrojov potravy Atlantíďanov. Pred dodaním baniam, výcvikovým stavbám a prieskumníkom sa musia vyúdiť v udiarni."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Smoked Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:499
@@ -4728,7 +4728,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon and labyrinth."
-msgstr ""
+msgstr "Údi mäso a ryby, ktoré sa podávajú prieskumníkom a baníkom, ako aj vojakom počas výcviku v kobke a labyrinte."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1688
@@ -5025,7 +5025,7 @@ msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy ští
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
 msgctxt "atlanteans_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Vystrojuje verbovancov a cvičí ich na vojakov."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Barracks
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1804
@@ -5048,7 +5048,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárne potrebujú v priemere %s na naverbovanie jedného vojaka."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1817
@@ -5377,7 +5377,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1950
 msgctxt "atlanteans_building"
 msgid "Miner’s prayer"
-msgstr ""
+msgstr "Modlitba baníka"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Gold
 #. Mine
@@ -7717,14 +7717,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1515
 msgctxt "barbarians_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Vystrojuje verbovancov a cvičí ich na vojakov."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Barracks
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1517
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárne potrebujú v priemere %s na naverbovanie jedného vojaka."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Cattle Farm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1526
@@ -7846,7 +7846,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "Takto odpovedal Rimbert Baník – neskôr známy ako Rimbert Samotár –, keď ho požiadali, aby zostal sedieť na núdzovom stretnutí v Stonforde v roku, keď mesto postihla veľká záplava."
 
 #. TRANSLATORS: Lore author helptext for a Barbarian production site: Granite
 #. Mine, part 2
@@ -11296,7 +11296,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1298
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Drevorubačský dom potrebuje vo svojej pracovnej oblasti stromy."
 
 #. TRANSLATORS: Performance helptext for an Empire production site:
 #. Lumberjack's House
@@ -11994,14 +11994,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1747
 msgctxt "empire_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Vystrojuje verbovancov a cvičí ich na vojakov."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Barracks
 #: ../../../../data/tribes/initialization/empire/units.lua:1749
 #, lua-format
 msgctxt "empire_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárne potrebujú v priemere %s na naverbovanie jedného vojaka."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14080,7 +14080,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "Cloth is needed for ships. It is produced out of reindeer fur and reed."
-msgstr ""
+msgstr "Látku je potrebná na výrobu lodí. Vyrába sa zo sobej kožušiny a trstiny."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fruit
 #: ../../../../data/tribes/initialization/frisians/units.lua:168
@@ -14260,7 +14260,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:397
 msgctxt "frisians_ware"
 msgid "Picks are used by stonemasons and miners."
-msgstr ""
+msgstr "Krompáče používajú kamenári a baníci."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Felling Ax, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:409
@@ -14283,7 +14283,7 @@ msgid ""
 "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Potrebujú ho geológovia, stavbári, kováči a lodiari. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrábajú sa v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:445
@@ -15050,7 +15050,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1666
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
-msgstr ""
+msgstr "Anonymný trstinový farmár"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Reed Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1668
@@ -15074,7 +15074,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr ""
+msgstr "Trstinový farmár zasadí a pozberá jeden snop trstiny za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -15311,7 +15311,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1797
 msgctxt "frisians_building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Chová ryby, ktoré budú jedlom pre vojakov aj baníkov."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1799
@@ -15729,7 +15729,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1992
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
-msgstr ""
+msgstr "Varí pivo pre baníkov a vojakov."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Brewery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1994
@@ -15846,14 +15846,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2044
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Vystrojuje verbovancov a cvičí ich na vojakov."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Barracks
 #: ../../../../data/tribes/initialization/frisians/units.lua:2046
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasárne potrebujú v priemere %s na naverbovanie jedného vojaka."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reindeer Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2055

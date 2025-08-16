@@ -1572,7 +1572,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr "Lovkyňa-zberačka pracujúca mimo tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver ani ryby."
+msgstr "Lovkyňa-zberačka pracujúca z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver ani ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -1632,7 +1632,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Rezačka lián pracujúca v tejto chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
+msgstr "Rezačka lián pracujúca z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1995,7 +1995,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Drevorubačka pracujúca v tejto drevorubačskej chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
+msgstr "Drevorubačka pracujúca z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením chatrče strážkyne džungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2243,7 +2243,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Rybár pracujúci mimo tohto rybárskeho domu nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby. Nezabúdajte, že počet rýb sa dá zvýšiť postavením rybnikárskeho domu."
+msgstr "Rybár pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby. Nezabúdajte, že počet rýb sa dá zvýšiť postavením rybnikárskeho domu."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2322,7 +2322,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Lovec pracujúci mimo tohto loveckého domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
+msgstr "Lovec pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
@@ -2630,7 +2630,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
+msgstr "Drevorubač pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2804,7 +2804,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr "Rybár pracujúci mimo tejto rybárskej chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
+msgstr "Rybár pracujúci z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:8
@@ -2908,7 +2908,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "Lovec pracujúci mimo tejto loveckej chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver. Nezabúdajte, že ak chcete vypúšťať zver do divočiny, môžete postaviť hájnickú chatrč."
+msgstr "Lovec pracujúci z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver. Nezabúdajte, že ak chcete vypúšťať zver do divočiny, môžete postaviť hájnickú chatrč."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2973,7 +2973,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "Drevorubač pracujúci v tejto drevorubačskej chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu rozobrať alebo zničiť, prípadne postaviť lesnícku chatrč."
+msgstr "Drevorubač pracujúci z tejto chatrče nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu rozobrať alebo zničiť, prípadne postaviť lesnícku chatrč."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3263,7 +3263,7 @@ msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Rybár pracujúci v tomto rybárskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
+msgstr "Rybár pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
@@ -3310,7 +3310,7 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Lovec pracujúci mimo tohto loveckého domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
+msgstr "Lovec pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
@@ -3357,7 +3357,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu rozobrať alebo zničiť, prípadne postaviť horáreň."
+msgstr "Drevorubač pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu rozobrať alebo zničiť, prípadne postaviť horáreň."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3619,7 +3619,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Rybár pracujúci v tejto vodnej farme nedokáže vo svojej pracovnej oblasti nájsť žiadne nádrže s rybami. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a vodná farma je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
+msgstr "Rybár pracujúci na tejto vodnej farme nedokáže vo svojej pracovnej oblasti nájsť žiadne nádrže s rybami. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a vodná farma je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3926,7 +3926,7 @@ msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Rybár pracujúci v tomto rybárskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
+msgstr "Rybár pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne ryby."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
@@ -3991,7 +3991,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Lovec pracujúci mimo tohto loveckého domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
+msgstr "Lovec pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadnu divú zver."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
@@ -4080,7 +4080,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr "Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
+msgstr "Trstinový farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by mohol začať sadiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:8
@@ -4226,7 +4226,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
+msgstr "Drevorubač pracujúci z tohto drevorubačského domu nedokáže vo svojej pracovnej oblasti nájsť žiadne stromy. Porozmýšľajte nad rozobratím alebo zničením budovy, prípadne postavením horárne."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -7460,7 +7460,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/barbarians/init.lua:89
 msgctxt "shipname"
 msgid "Red Fox"
-msgstr ""
+msgstr "Červená líška"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
 #: ../../../../data/tribes/ships/barbarians/init.lua:91
