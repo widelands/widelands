@@ -265,11 +265,9 @@ def main():
     cmake_files, sources = find_source_and_cmake_files(srcdir)
 
     includes_by_src = defaultdict(set)
-    for src in sources:
-        includes_by_src[src] = extract_includes(srcdir, src)
-
     uses_includes_by_src = defaultdict(set)
     for src in sources:
+        includes_by_src[src] = extract_includes(srcdir, src)
         uses_includes_by_src[src] = extract_uses_includes(srcdir, src)
 
     target_list = []
