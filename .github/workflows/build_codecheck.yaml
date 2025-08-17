@@ -17,10 +17,12 @@ jobs:
       run: |
         set -o pipefail # to keep return value
         #
+        {
         # for all c++ source files excluding /third_party/
-        ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t]*/ |
-          tee codecheck.out
-        # exit code of CodeCheck.py is also 0 if failures detected
+        ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t]*/
+        ./utils/build_deps.py
+        } | tee codecheck.out
+        # exit code of CodeCheck.py and build_deps.py is also 0 if failures detected
       timeout-minutes: 2
     - name: Report
       run: |
