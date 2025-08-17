@@ -89,6 +89,8 @@ def extract_uses_includes(srcdir, source):
     """Returns all included files for the USES_* libraries."""
     includes = set()
     for line in io.open(source, encoding='utf-8'):
+        if '#include ' not in line:
+            continue
         for key in __USES_INCLUDES.keys():
             match = re.compile(
                 r'^#include (' + __USES_INCLUDES[key] + ')').match(line)
