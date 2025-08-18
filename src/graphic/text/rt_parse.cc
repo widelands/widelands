@@ -126,7 +126,10 @@ void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allow
 	attribute_map_.add_attribute(aname, new Attr(aname, ts.parse_string()));
 }
 
-void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags, const bool autolink_protection) {
+void Tag::parse_content(TextStream& ts,
+                        TagConstraints& tcs,
+                        const TagSet& allowed_tags,
+                        const bool autolink_protection) {
 	TagConstraint tc = tcs[name_];
 
 	for (;;) {
@@ -192,7 +195,10 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 	}
 }
 
-void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags, const bool autolink_protection) {
+void Tag::parse(TextStream& ts,
+                TagConstraints& tcs,
+                const TagSet& allowed_tags,
+                const bool autolink_protection) {
 	parse_opening_tag(ts, tcs);
 
 	TagConstraint tc = tcs[name_];

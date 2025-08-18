@@ -102,7 +102,8 @@ void initialize() {
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
 	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, -1 /*display*/, 1, 1, false /*fullscreen*/, false /*maximized*/);
+	g_gr->initialize(
+	   Graphic::TraceGl::kNo, -1 /*display*/, 1, 1, false /*fullscreen*/, false /*maximized*/);
 }
 
 }  // namespace
