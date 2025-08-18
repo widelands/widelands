@@ -107,10 +107,6 @@ TESTCASE(parser_parse) {
 	{
 		std::unique_ptr<RT::Tag> tag(parser.parse("<p>some text https://example.com/xxx</p>", allowed_tags));
 		check_equal(tag->name(), "p");
-		if (tag->children().size() == 1 && tag->children()[0]->tag == nullptr) {
-			std::cerr << "TODO(somebody): autolink_protection in Tag::parse_content() stays true after above exception";
-			return;
-		}
 		check_equal(tag->children().size(), 2);
 		check_equal(tag->children()[0]->tag ? "tag instead of text" : "", "");
 		check_equal(tag->children()[0]->text, "some text ");

@@ -126,7 +126,7 @@ void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allow
 	attribute_map_.add_attribute(aname, new Attr(aname, ts.parse_string()));
 }
 
-void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags) {
+void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags, const bool autolink_protection) {
 	TagConstraint tc = tcs[name_];
 
 	for (;;) {
@@ -147,14 +147,12 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			static std::regex kLinkRegex("https?:\\/\\/"
 			                             "(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}"
 			                             "\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
-			static thread_local bool autolink_protection(false);
 			while (!text.empty()) {
 				std::smatch match;
 				if (autolink_protection || !std::regex_search(text, match, kLinkRegex)) {
 					children_.push_back(new Child(text));
 					break;
 				}
-				autolink_protection = true;
 
 				size_t match_start = match.position();
 				size_t match_len = match.length();
@@ -167,11 +165,10 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 				TextStream linktext(format(
 				   "<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>",
 				   url, url, url));
-				child->parse(linktext, tcs, allowed_tags);
+				child->parse(linktext, tcs, allowed_tags, true);  // autolink_protection enabled
 				children_.push_back(new Child(child.release()));
 
 				text = text.substr(match_start + match_len);
-				autolink_protection = false;
 			}
 		}
 
@@ -183,7 +180,7 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 		line = ts.line();
 		col = ts.col();
 		size_t cpos = ts.pos();
-		child->parse(ts, tcs, allowed_tags);
+		child->parse(ts, tcs, allowed_tags, autolink_protection);
 		if (tc.allowed_children.count(child->name()) == 0u) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
@@ -195,12 +192,12 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 	}
 }
 
-void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags) {
+void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags, const bool autolink_protection) {
 	parse_opening_tag(ts, tcs);
 
 	TagConstraint tc = tcs[name_];
 	if (tc.has_closing_tag) {
-		parse_content(ts, tcs, allowed_tags);
+		parse_content(ts, tcs, allowed_tags, autolink_protection);
 		parse_closing_tag(ts);
 	}
 }
