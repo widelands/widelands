@@ -85,12 +85,13 @@ int parse_arguments(int argc,
 		return 1;
 	}
 
-	*w = strtol(argv[1], 0, 10);
+	*w = strtol(argv[1], nullptr, 10);
 	outname = argv[2];
 	inname = argv[3];
 
-	for (int i = 4; i < argc; i++)
+	for (int i = 4; i < argc; i++) {
 		allowed_tags.insert(argv[i]);
+	}
 
 	return 0;
 }
@@ -101,7 +102,7 @@ void initialize() {
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
 	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
+	g_gr->initialize(Graphic::TraceGl::kNo, -1 /*display*/, 1, 1, false /*fullscreen*/, false /*maximized*/);
 }
 
 }  // namespace
@@ -110,9 +111,11 @@ int main(int argc, char** argv) {
 	int32_t w;
 	std::set<std::string> allowed_tags;
 
-	std::string outname, inname;
-	if (parse_arguments(argc, argv, &w, outname, inname, allowed_tags))
+	std::string outname;
+	std::string inname;
+	if (parse_arguments(argc, argv, &w, outname, inname, allowed_tags) != 0) {
 		return 0;
+	}
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		std::cerr << "SDLInit did not succeed: " << SDL_GetError() << std::endl;
@@ -125,10 +128,11 @@ int main(int argc, char** argv) {
 	}
 
 	std::string txt;
-	if (inname == "-")
+	if (inname == "-") {
 		txt = read_stdin();
-	else
+	} else {
 		txt = read_file(inname);
+	}
 	if (txt.empty()) {
 		return 1;
 	}
@@ -139,7 +143,7 @@ int main(int argc, char** argv) {
 
 	try {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   standalone_renderer.renderer()->render(txt, w, allowed_tags);
+		   standalone_renderer.renderer()->render(txt, w, true /* is_rtl */, allowed_tags);
 		std::unique_ptr<Texture> texture(
 		   new Texture(rendered_text->width(), rendered_text->height()));
 		std::unique_ptr<RenderTarget> dst(new RenderTarget(texture.get()));
