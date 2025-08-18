@@ -78,7 +78,7 @@ class GithubASan:
             if cls.summary_file and cls.counted_leaks > 0:
                 summary_tag = f'\n<summary>{cls.counted_leaks} leaks</summary>\n'
                 write_summary(summary_tag, '</details>\n', text)
-            return f'''::warning file={cls.test_script or "??"}::''' + text
+            return f'''::warning file={cls.test_script or '??'}::''' + text
         if 'irect leak of ' in text and cls.summary_file:  # Direct or Indirect leak
             if cls.counted_leaks == 0:
                 write_summary('<details>\n\n')  # needs empty line for the following list
