@@ -756,7 +756,7 @@ msgstr "Obraňuj a panuj!"
 #: ../../../../data/tribes/initialization/amazons/units.lua:756
 msgctxt "amazons_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Cvičí vojačky."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Dressmaker
 #: ../../../../data/tribes/initialization/amazons/units.lua:763
@@ -840,7 +840,7 @@ msgstr ""
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Tento balzovník je pripravený na ťažbu balzového dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
+msgstr "Tento balzovník je pripravený na ťažbu balzového dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť ako bežné drevo."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:914
@@ -874,7 +874,7 @@ msgstr ""
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Tento leopardí strom je pripravený na ťažbu železného dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
+msgstr "Tento leopardí strom je pripravený na ťažbu železného dreva majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť ako bežné drevo."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:1026
@@ -908,7 +908,7 @@ msgstr ""
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Tento kaučukovník je pripravený na ťažbu kaučuku majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť na bežné kmene."
+msgstr "Tento kaučukovník je pripravený na ťažbu kaučuku majsterkou drevorubačkou. Ostatné kmene ho môžu ťažiť ako bežné drevo."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -1786,7 +1786,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Attack up to level 2. Equips the soldiers with all "
 "necessary weapons."
-msgstr ""
+msgstr "Cvičí vojačky v útoku po úroveň 2. Vystrojuje vojačky všetkými potrebnými zbraňami."
 
 #. TRANSLATORS: Note helptext for an Amazon training site: Warriors’ Gathering
 #. TRANSLATORS: Note helptext for an Amazon training site: Training Glade
@@ -1815,7 +1815,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Kompletný výcvik jednej vojačky trvá priemerne %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
 #: ../../../../data/tribes/initialization/amazons/units.lua:1649
@@ -1823,7 +1823,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
 "necessary equipment and armor parts."
-msgstr ""
+msgstr "Cvičí vojačky v uhýbaní, obrane a zdraví. Vystrojuje vojačky všetkým potrebným vybavním a časťami zbroje."
 
 #. TRANSLATORS: Performance helptext for an Amazon training site: Training
 #. Glade, part 1
@@ -3933,7 +3933,7 @@ msgstr "Vyrába nástroje pre pracovníkov."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1093
 msgctxt "atlanteans_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Túži stať sa vojakom a brániť svoj kmeň!"
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Soldier
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1102
@@ -4196,7 +4196,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools. It will help you to stabilize your economy."
-msgstr ""
+msgstr "Poskytuje ubytovanie pracovníkom a vojakom. Taktiež skladuje výrobky a nástroje. Pomôže vám to stabilizovať vašu ekonomiku."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Warehouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1449
@@ -5437,7 +5437,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Kompletný výcvik jedného vojaka trvá priemerne %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -6262,7 +6262,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:148
 msgctxt "barbarians_ware"
 msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
-msgstr ""
+msgstr "Látka je potrebná na výrobu barbarských lodí. Vyrába sa z trstiny."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fish
 #: ../../../../data/tribes/initialization/barbarians/units.lua:159
@@ -6768,7 +6768,7 @@ msgstr "Vyrába zbrane pre vojakov a nástroje pre pracovníkov."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:759
 msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Túži stať sa vojakom a brániť svoj kmeň!"
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Soldier
 #: ../../../../data/tribes/initialization/barbarians/units.lua:768
@@ -6891,7 +6891,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Poskytuje ubytovanie pracovníkom a vojakom. Taktiež skladuje výrobky a nástroje."
 
 #. TRANSLATORS: Lore helptext for a Barbarian warehouse: Port
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1117
@@ -8056,7 +8056,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Kompletný výcvik jedného vojaka trvá priemerne %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Training Camp
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1741
@@ -10758,7 +10758,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Helma poskytuje vojakom základnú ochranu. Vyrába sa vo vyhni na zbroje. Spolu s drevenou kopijou tvorí výbavu mladých vojakov. Helmy sa tiež používajú vo výcvikových táboroch – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:567
@@ -10959,7 +10959,7 @@ msgstr "Vyrába nástroje pre pracovníkov."
 #: ../../../../data/tribes/initialization/empire/units.lua:813
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "Túži stať sa vojakom a brániť svoj kmeň!"
 
 #. TRANSLATORS: Helptext for an Empire worker: Soldier
 #: ../../../../data/tribes/initialization/empire/units.lua:822
@@ -11125,7 +11125,7 @@ msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Poskytuje ubytovanie pracovníkom a vojakom. Taktiež skladuje výrobky a nástroje."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12563,7 +12563,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Kompletný výcvik jedného vojaka trvá priemerne %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12671,7 +12671,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorého vojaka preč, ak naňho kliknete."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14080,7 +14080,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "Cloth is needed for ships. It is produced out of reindeer fur and reed."
-msgstr "Látku je potrebná na výrobu lodí. Vyrába sa zo sobej kožušiny a trstiny."
+msgstr "Látka je potrebná na výrobu lodí. Vyrába sa zo sobej kožušiny a trstiny."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fruit
 #: ../../../../data/tribes/initialization/frisians/units.lua:168
@@ -14625,7 +14625,7 @@ msgstr "Obraňuj a panuj!"
 #: ../../../../data/tribes/initialization/frisians/units.lua:885
 msgctxt "frisians_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Cvičí vojakov."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Scout
 #: ../../../../data/tribes/initialization/frisians/units.lua:892
@@ -14788,7 +14788,7 @@ msgctxt "frisians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Poskytuje ubytovanie pracovníkom a vojakom. Taktiež skladuje výrobky a nástroje."
 
 #. TRANSLATORS: Purpose helptext for a Frisian warehouse: Port
 #: ../../../../data/tribes/initialization/frisians/units.lua:1543
@@ -16077,7 +16077,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack up to level 3 as well as in Defense and Health to "
 "level 1. Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Cvičí vojakov v útoku po úroveň 3 a tiež v obrane a zdraví po úroveň 1. Vystrojuje vojakov všetkými potrebnými zbraňami a časťami zbroje."
 
 #. TRANSLATORS: Note helptext for a Frisian training site: Training Camp
 #: ../../../../data/tribes/initialization/frisians/units.lua:2182
@@ -16106,7 +16106,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Kompletný výcvik jedného vojaka trvá priemerne %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Arena
 #: ../../../../data/tribes/initialization/frisians/units.lua:2195
@@ -16123,7 +16123,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
 " soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Cvičí vojakov v útoku, obrane a zdraví na konečnú úroveň. Vystrojuje vojakov všetkými potrebnými zbraňami a časťami zbroje."
 
 #. TRANSLATORS: Note helptext for a Frisian training site: Training Arena
 #: ../../../../data/tribes/initialization/frisians/units.lua:2201

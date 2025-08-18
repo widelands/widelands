@@ -1632,7 +1632,7 @@ msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Žiaden vojak nepotrebuje výcvik!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program

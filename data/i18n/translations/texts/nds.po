@@ -860,7 +860,7 @@ msgstr "Wenn een Huus ofrieten word, söken de Arbeiders na eener Fahn, vun waar
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Hannel kann diener Weertskupp helpen un Betreckens tüsken Spelers verbetern. Lehr de Grundlagen in de Inföhren »Weertskupp un Hannel«."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

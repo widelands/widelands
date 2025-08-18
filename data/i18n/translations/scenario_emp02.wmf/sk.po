@@ -152,7 +152,7 @@ msgstr "Zničte barbarský kmeň"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr "Aby ste mohli vyrábať vojakov, postavte Kasárne."
+msgstr "Aby ste mohli začať cvičiť vojakov, postavte kasárne."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
