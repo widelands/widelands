@@ -86,11 +86,11 @@ public:
 	}
 
 private:
-	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&, const bool autolink_protection);
+	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&, bool autolink_protection);
 	void parse_opening_tag(TextStream& ts, TagConstraints& tcs);
 	void parse_closing_tag(TextStream& ts);
 	void parse_attribute(TextStream& ts, std::unordered_set<std::string>&);
-	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&, const bool autolink_protection);
+	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&, bool autolink_protection);
 
 	std::string name_;
 	AttrMap attribute_map_;
