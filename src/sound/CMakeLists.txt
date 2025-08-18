@@ -18,6 +18,8 @@ wl_library(sound
   SRCS
     fxset.cc
     fxset.h
+    song.cc
+    song.h
     songset.cc
     songset.h
     sound_handler.cc
@@ -34,3 +36,4 @@ wl_library(sound
     sound_constants
     widelands_options
 )
+
