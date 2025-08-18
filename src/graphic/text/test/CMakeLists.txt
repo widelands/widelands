@@ -35,7 +35,6 @@ wl_test(test_graphic_text
     text_test_main.cc
     test_rt_parse_memleak.cc
   DEPENDS
-    base_macros
     base_test
     graphic_text
 )
