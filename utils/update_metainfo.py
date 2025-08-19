@@ -208,7 +208,7 @@ for line in input_file:
             version = dev_version
             if not ' date=' in line:
                 # Date is not in stub to not have to update it all the time, but we need something
-                # stable to avoid churn in git. We still use current date as fallback value.
+                # stable to avoid churn in git. We will use current date as fallback value.
                 date = datetime.datetime.today().strftime('%Y-%m-%d')
                 result = subprocess.run( \
                     ('git log -1 --format=%ci -- ' + english_source_filename).split(), \
