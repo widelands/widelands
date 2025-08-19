@@ -2620,10 +2620,10 @@ msgstr ""
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u obchod"
+msgstr[1] "%u obchody"
+msgstr[2] "%u obchoda"
+msgstr[3] "%u obchodov"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
@@ -2761,7 +2761,7 @@ msgstr "Vy pošlete:"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
@@ -3751,7 +3751,7 @@ msgstr ""
 
 #: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "/me - zlyhal kontrolný súčet md5 môjho súboru."
 
 #: ../../../../src/network/gameclient.cc:1046
 msgid ""
@@ -4197,7 +4197,7 @@ msgstr "Server poslal aktualizáciu pre neexistujúceho hráča."
 
 #: ../../../../src/network/network_gaming_messages.cc:51
 msgid "Server sent a user update for a user that does not exist."
-msgstr "Server poslal aktualizáciu pre neexistujúceho užívateľa."
+msgstr "Server poslal aktualizáciu pre neexistujúceho používateľa."
 
 #: ../../../../src/network/network_gaming_messages.cc:52
 msgid "Server uses a different protocol version"
@@ -4811,17 +4811,17 @@ msgstr "Heslo:"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:63
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:66
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:69
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:71
 #, c-format
@@ -5212,7 +5212,7 @@ msgstr "Prihlásený ako %s (správca)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1197
 msgid "Click to log out"
-msgstr ""
+msgstr "Kliknutím sa odhlásite"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1202
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -5867,7 +5867,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:181
 msgid "Write Comment"
-msgstr ""
+msgstr "Písanie komentára"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
@@ -5877,7 +5877,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgid "Bold"
-msgstr ""
+msgstr "Tučné"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
@@ -5887,11 +5887,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgid "Italic"
-msgstr ""
+msgstr "Kurzíva"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgid "Underline"
-msgstr ""
+msgstr "Podčiarknuté"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
@@ -5917,7 +5917,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:252
 msgid "Color…"
-msgstr ""
+msgstr "Farba…"
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
@@ -5927,7 +5927,7 @@ msgstr "1"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
 msgid "Tiny"
-msgstr ""
+msgstr "Drobné"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
@@ -5937,7 +5937,7 @@ msgstr "2"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr "Malá"
+msgstr "Malé"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -5953,7 +5953,7 @@ msgstr "4"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:280
 msgid "Large"
-msgstr ""
+msgstr "Veľké"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
@@ -5963,7 +5963,7 @@ msgstr "5"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
 msgid "Huge"
-msgstr ""
+msgstr "Obrovské"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:315
 #, c-format
@@ -6045,7 +6045,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Your vote"
-msgstr ""
+msgstr "Vaše hodnotenie"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:701
 msgid "Next screenshot"
@@ -6057,7 +6057,7 @@ msgstr "Predchádzajúca snímka obrazovky"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:718
 msgid "Write a comment…"
-msgstr ""
+msgstr "Napíšte komentár…"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:728
 msgid "Administrator actions"
@@ -6065,7 +6065,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:735
 msgid "Not voted"
-msgstr ""
+msgstr "bez hodnotenia"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:746
 #, c-format
@@ -12228,14 +12228,14 @@ msgstr "="
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:681
 msgid "%1%k"
-msgstr ""
+msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:684
 msgid "%1%M"
-msgstr ""
+msgstr "%1%M"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5G =
 #. 5,000,000,000).
@@ -12243,7 +12243,7 @@ msgstr ""
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:687
 msgid "%1%G"
-msgstr ""
+msgstr "%1%G"
 
 #: ../../../../src/wui/watchwindow.cc:93
 msgid "Follow"

@@ -695,7 +695,7 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Dostalo sa mi do uší, že náš ťažobný priemysel začal fungovať. A tak, keď už kujeme zbrane, pošlem list Sidolusovi a budem ho informovať, že je čas postaviť Kasárne a začať verbovať vojakov."
+msgstr "Dostalo sa mi do uší, že náš ťažobný priemysel začal fungovať. A tak, keď už kujeme zbrane, pošlem list Sidolusovi a budem ho informovať, že je čas postaviť kasárne a začať verbovať vojakov."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:342
