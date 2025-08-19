@@ -345,37 +345,9 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-06-28" version="1.3~git">
-      <description><ul>
-        <li>Market trading</li>
-        <li>Six new maps added and three old maps removed</li>
-        <li>Economy districts</li>
-        <li>Many improvements to the in-game Encyclopedia</li>
-        <li>Download website maps as add-ons</li>
-        <li>New visualisation modes in the editor</li>
-        <li>Many new capabilities for add-on developers</li>
-      </ul></description>
-      <url type="details">https://codeberg.org/wl/widelands/milestone/4647?type=all&amp;state=closed&amp;sort=recentupdate</url>
-    </release>
-    <release date="2024-11-15" version="1.2.1">
-      <description><ul>
-        <li>Bugfix release</li>
-      </ul></description>
-      <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
-    </release>
-    <release date="2024-03-30" version="1.2">
-      <description><ul>
-        <li>New Frisian scenario</li>
-        <li>Diplomacy handling by computer players</li>
-        <li>Naval Warfare (preview)</li>
-        <li>Garrisons for ports and headquarters</li>
-        <li>UI Plugins</li>
-        <li>Pinned notes</li>
-        <li>Direct map publishing</li>
-        <li>Enhanced error handling</li>
-      </ul></description>
-      <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
-    </release>
+    <release version="1.3~git"/>
+    <release date="2024-11-15" version="1.2.1"/>
+    <release date="2024-03-30" version="1.2"/>
     <release date="2022-10-23" version="1.1"/>
     <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="~Build 21"/>
