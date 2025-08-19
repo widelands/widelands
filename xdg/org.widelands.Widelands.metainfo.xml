@@ -354,20 +354,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li>Download website maps as add-ons</li>
         <li>New visualisation modes in the editor</li>
         <li>Many new capabilities for add-on developers</li>
-        <li xml:lang="hu">Kereskedés</li>
-        <li xml:lang="hu">A játék hat új térképpel bővült, és három régi térkép el lett távolítva</li>
-        <li xml:lang="hu">Raktár körzetek</li>
-        <li xml:lang="hu">Sok új információ az enciklopédiában</li>
-        <li xml:lang="hu">Térképek letöltése a honlapról a bővítményekhez hasonlóan</li>
-        <li xml:lang="hu">Új megjelenítési módok a térképszerkesztőben</li>
-        <li xml:lang="hu">Sok új lehetőség a bővítményfejlesztők számára</li>
       </ul></description>
       <url type="details">https://codeberg.org/wl/widelands/milestone/4647?type=all&amp;state=closed&amp;sort=recentupdate</url>
     </release>
     <release date="2024-11-15" version="1.2.1">
       <description><ul>
         <li>Bugfix release</li>
-        <li xml:lang="hu">Hibajavító kiadás</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
@@ -381,14 +373,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li>Pinned notes</li>
         <li>Direct map publishing</li>
         <li>Enhanced error handling</li>
-        <li xml:lang="hu">Új küldetés a fríz hadjáratban</li>
-        <li xml:lang="hu">A számítógépes játékosok is kezelik a diplomáciát</li>
-        <li xml:lang="hu">Tengeri hadviselés (előzetes)</li>
-        <li xml:lang="hu">Garrisons for ports and headquarters</li>
-        <li xml:lang="hu">Kezelői felület bővítmények</li>
-        <li xml:lang="hu">Térképjelölők</li>
-        <li xml:lang="hu">Térképek feltöltése a szerkesztőből</li>
-        <li xml:lang="hu">Jobb hibakezelés</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>
@@ -512,29 +496,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
   <developer id="org.widelands">
     <name>The Widelands Development Team</name>
-    <name xml:lang="bg">Екипът по разработката на Widelands</name>
-    <name xml:lang="br">Skipailh diorren Widelands</name>
-    <name xml:lang="ca">L’equip de desenvolupament del Widelands</name>
-    <name xml:lang="cs">Tým vývojářů Widelands</name>
-    <name xml:lang="da">Widelands' udviklingshold</name>
-    <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
-    <name xml:lang="el">Η Ομάδα Ανάπτυξης του Widelands</name>
-    <name xml:lang="eo">La Widelands-disvolvant-skipo</name>
-    <name xml:lang="es">El Equipo de Desarrollo de Widelands</name>
-    <name xml:lang="fi">Widelands-kehittäjät</name>
-    <name xml:lang="fr">L'équipe de développement de Widelands</name>
-    <name xml:lang="fy">It Widelands ûntwikkeltiim</name>
-    <name xml:lang="gd">An sgioba leasachaidh Widelands</name>
-    <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
-    <name xml:lang="it">Il team di sviluppo di Widelands</name>
-    <name xml:lang="ja">Widelands開発チーム</name>
-    <name xml:lang="ko">와이드랜드 개발 팀</name>
-    <name xml:lang="nl">Het Widelands Ontwikkelingsteam</name>
-    <name xml:lang="pl">Zespół rozwojowy Widelands</name>
-    <name xml:lang="pt">A equipa de desenvolvimento de Widelands</name>
-    <name xml:lang="ru">Команда разработчиков Widelands</name>
-    <name xml:lang="sk">Vývojový tím hry Widelands</name>
-    <name xml:lang="sv">Widelands utvecklingsteam</name>
   </developer>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
