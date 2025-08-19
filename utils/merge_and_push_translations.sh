@@ -139,7 +139,8 @@ if [ -n "$(git status -s)" ]; then
   update_statistics
 
   # Stage translations
-  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json' \
+          'xdg/release_urls.json'
   # and generated files
   gitAddGeneratedFiles
 
