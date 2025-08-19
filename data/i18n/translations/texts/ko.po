@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -860,6 +860,12 @@ msgid ""
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "건물이 파괴되면, 일꾼들은 땅길 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
