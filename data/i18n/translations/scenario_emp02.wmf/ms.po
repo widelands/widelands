@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bina kuari"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
@@ -456,7 +456,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "Kemenangan Mutlak!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264
