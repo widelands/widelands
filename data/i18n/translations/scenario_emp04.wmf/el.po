@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Alexandros Koutroulis, 2025
+# Alexandros “Icydemon” Koutroulis, 2025
 # erimitis, 2025
 # 
 msgid ""

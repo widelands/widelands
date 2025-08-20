@@ -71,7 +71,7 @@ def extract_includes(srcdir, source):
     return includes
 
 
-__USES_INCLUDES = defaultdict(str)
+__USES_INCLUDES = dict()
 __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_TINYGETTEXT'] = r'"third_party\/tinygettext\/include\/tinygettext\/tinygettext\.hpp"'
@@ -89,6 +89,8 @@ def extract_uses_includes(srcdir, source):
     """Returns all included files for the USES_* libraries."""
     includes = set()
     for line in io.open(source, encoding='utf-8'):
+        if '#include ' not in line:
+            continue
         for key in __USES_INCLUDES.keys():
             match = re.compile(
                 r'^#include (' + __USES_INCLUDES[key] + ')').match(line)
@@ -263,11 +265,9 @@ def main():
     cmake_files, sources = find_source_and_cmake_files(srcdir)
 
     includes_by_src = defaultdict(set)
-    for src in sources:
-        includes_by_src[src] = extract_includes(srcdir, src)
-
     uses_includes_by_src = defaultdict(set)
     for src in sources:
+        includes_by_src[src] = extract_includes(srcdir, src)
         uses_includes_by_src[src] = extract_uses_includes(srcdir, src)
 
     target_list = []

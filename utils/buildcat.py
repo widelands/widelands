@@ -16,6 +16,7 @@ import os
 import subprocess
 import sys
 from time import strftime, gmtime
+import json
 
 try:
     maketrans = ''.maketrans
@@ -471,6 +472,96 @@ def do_update_po(lang, files):
     sys.stdout.write('\n')
 
 
+##############################################################################
+#
+# Update release highlights translation source
+#
+##############################################################################
+#
+# Release notes for the last three releases are collected from Release_Notes.md
+# and updated in xdg/translations/appdata.json and xdg/release_urls.json
+#
+# For this to work, Release_Notes.md must use a limited subset of markdown like
+# this for each release:
+#
+# >## Widelands <version_number>
+# >
+# > - Release highlight 1
+# > - Release highlight 2
+# >
+# >[More info](https://www.widelands.org/news/...)
+#
+# <version_number> must match a release listed in the metainfo stub.
+# Each highlight must fit on one line.
+#
+##############################################################################
+def update_appdata_json():
+    print('Reading release notes:')
+
+    release_notes_filename = 'Release_Notes.md'
+    if (not os.path.isfile(release_notes_filename)):
+        raise BuildcatError('File ' + release_notes_filename + ' not found.')
+
+    appdata_catalog_filename = 'xdg/translations/appdata.json'
+    if (not os.path.isfile(appdata_catalog_filename)):
+        raise BuildcatError('File ' + appdata_catalog_filename + ' not found.')
+
+    release_urls_filename = 'xdg/release_urls.json'
+    if (not os.path.isfile(release_urls_filename)):
+        raise BuildcatError('File ' + release_urls_filename + ' not found.')
+
+    release_heading = '## Widelands '
+    item_bullet = ' - '
+    url_text = '[More info]('
+    dev_version_suffix = '~git'
+
+    releases = {}
+    release_urls = {}
+    version = ''
+    with open(release_notes_filename, 'r', encoding = 'utf-8') as release_notes_file:
+        for line in release_notes_file.readlines():
+            if line.startswith(release_heading):
+                if len(releases) >= 3:
+                    # we only include the last 3 in the metainfo
+                    break
+                version = line[len(release_heading):].strip()
+                if version.endswith(dev_version_suffix):
+                    if len(releases) > 0:
+                        raise BuildcatError('Development version is not first one in Release_Notes.md')
+                    version = version[:-len(dev_version_suffix)]
+                if version in releases:
+                    raise BuildcatError('Duplicate version in Release_Notes.md: ' + version)
+                releases[version] = []
+            elif line.startswith(item_bullet):
+                if version == '':
+                    raise BuildcatError('List item without release header')
+                releases[version] += [line[len(item_bullet):].strip()]
+            elif line.startswith(url_text):
+                link = line.rstrip()[len(url_text):-1]
+                # Plain '&' causes xml error, link with %26 doesn't work.
+                # Maybe this?
+                release_urls[version] = link.replace('&', '&amp;')
+    print('\t' + release_notes_filename)
+
+    with open(appdata_catalog_filename, 'r', encoding = 'utf-8') as appdata_catalog_file:
+        appdata_catalog = json.load(appdata_catalog_file)
+
+    if appdata_catalog['release_notes'] != releases:
+        appdata_catalog['release_notes'] = releases
+        with open(appdata_catalog_filename, 'w', encoding = 'utf-8') as appdata_catalog_file:
+            json.dump(appdata_catalog, appdata_catalog_file, ensure_ascii = False, indent = '\t')
+        print('\t' + appdata_catalog_filename)
+
+    with open(release_urls_filename, 'r', encoding = 'utf-8') as release_urls_file:
+        old_release_urls = json.load(release_urls_file)
+
+    if old_release_urls != release_urls:
+        with open(release_urls_filename, 'w', encoding = 'utf-8') as release_urls_file:
+            json.dump(release_urls, release_urls_file, ensure_ascii = False, indent = '\t')
+        print('\t' + release_urls_filename)
+
+
+##############################################################################
 if __name__ == '__main__':
     # Sanity checks
     are_we_in_root_directory()
@@ -478,6 +569,7 @@ if __name__ == '__main__':
     # Make sure .pot files are up to date.
     try:
         do_update_potfiles()
+        update_appdata_json()
     except BuildcatError as err_msg:
         sys.stderr.write('Error: %s\n' % err_msg)
         sys.exit(1)

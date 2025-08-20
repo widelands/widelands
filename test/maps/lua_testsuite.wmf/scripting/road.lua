@@ -88,6 +88,27 @@ function road_tests:test_carrier_creation_and_deletion()
    self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("barbarians_carrier"))
+   -- check call with two arguments: replaces other carriers
+   self.r:set_workers("barbarians_ox",1)
+   assert_equal(1, _cnt(self.r:get_workers("all")))
+   assert_equal(1, self.r:get_workers("barbarians_ox"))
+end
+function road_tests:test_carrier_set_table()
+   self.r:set_workers({barbarians_ox = 1, barbarians_carrier = 1})
+   assert_equal(1, _cnt(self.r:get_workers("all"))) -- TODO(somebody): set 2 if #6849 fixed
+   assert_equal(0, self.r:get_workers("barbarians_carrier")) -- TODO(somebody): set to 1 if #6849 f
+   assert_equal(1, self.r:get_workers("barbarians_ox"))
+   do
+      print("WARN: Skipping to test again set_workers() with table, would block")
+      return
+      -- below call to set_workers() blocks widelands, TODO(somebody) fix this blocking issue
+      -- can not call sleep() to avoid this, would fail in editor
+   end
+   print("DBG test_carrier_set_table() calls again set_workers() with table") -- show where blocked
+   -- check call with table: replaces other carriers
+   self.r:set_workers({barbarians_carrier = 1})
+   assert_equal(1, _cnt(self.r:get_workers("all")))
+   assert_equal(1, self.r:get_workers("barbarians_carrier"))
 end
 function road_tests:test_carrier_creation_not_a_carrier()
    assert_error("Not a carrier!", function()

@@ -85,6 +85,7 @@ function productionsite_tests:test_set_workers_warmill()
    assert_equal(1, rv.barbarians_blacksmith_master)
    assert_equal(0, rv.barbarians_carrier)
 
+   -- check call with two arguments: replaces other workers
    self.warmill:set_workers("barbarians_blacksmith",1)
    assert_equal(1, _cnt(self.warmill:get_workers("all")))
    local rv = self.warmill:get_workers{"barbarians_blacksmith", "barbarians_blacksmith_master", "barbarians_carrier"}
@@ -98,6 +99,13 @@ function productionsite_tests:test_set_workers_warmill()
    assert_equal(1, rv.barbarians_blacksmith)
    assert_equal(1, rv.barbarians_blacksmith_master)
    assert_equal(0, rv.barbarians_carrier)
+
+   -- check call with table: replaces other workers
+   self.warmill:set_workers{barbarians_blacksmith_master=1}
+   assert_equal(1, _cnt(self.warmill:get_workers("all")))
+   local rv = self.warmill:get_workers{"barbarians_blacksmith", "barbarians_blacksmith_master"}
+   assert_equal(0, rv.barbarians_blacksmith)
+   assert_equal(1, rv.barbarians_blacksmith_master)
 end
 function productionsite_tests:test_get_workers_all()
    self.warmill:set_workers{barbarians_blacksmith=1, barbarians_blacksmith_master = 1}
@@ -161,10 +169,18 @@ end
 function productionsite_tests:test_set_inputs_string_arg()
    self.inn:set_inputs("fish", 3)
    assert_equal(3, self.inn:get_inputs("fish"))
+   -- check call with two arguments keeps other wares
+   self.inn:set_inputs("beer_strong", 1)
+   assert_equal(3, self.inn:get_inputs("fish"))
+   assert_equal(1, self.inn:get_inputs("beer_strong"))
 end
 function productionsite_tests:test_set_inputs_array_arg()
    self.inn:set_inputs{fish=3, beer_strong=2}
    assert_equal(3, self.inn:get_inputs("fish"))
+   assert_equal(2, self.inn:get_inputs("beer_strong"))
+   -- check call with table keeps other wares
+   self.inn:set_inputs{fish=1}
+   assert_equal(1, self.inn:get_inputs("fish"))
    assert_equal(2, self.inn:get_inputs("beer_strong"))
 end
 function productionsite_tests:test_set_inputs_illegal_name()

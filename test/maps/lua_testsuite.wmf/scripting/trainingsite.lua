@@ -105,10 +105,18 @@ end
 function trainingsite_tests:test_set_inputs_string_arg()
    self.camp:set_inputs("fish", 3)
    assert_equal(3, self.camp:get_inputs("fish"))
+   -- check call with two arguments keeps other wares
+   self.camp:set_inputs("meat", 1)
+   assert_equal(3, self.camp:get_inputs("fish"))
+   assert_equal(1, self.camp:get_inputs("meat"))
 end
 function trainingsite_tests:test_set_inputs_array_arg()
    self.camp:set_inputs{fish=3, meat=2}
    assert_equal(3, self.camp:get_inputs("fish"))
+   assert_equal(2, self.camp:get_inputs("meat"))
+   -- check call with table keeps other wares
+   self.camp:set_inputs{fish=1}
+   assert_equal(1, self.camp:get_inputs("fish"))
    assert_equal(2, self.camp:get_inputs("meat"))
 end
 function trainingsite_tests:test_set_inputs_illegal_name()

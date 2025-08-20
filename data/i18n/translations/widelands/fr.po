@@ -34,7 +34,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-07-10 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2025\n"
+"Last-Translator: David D, 2017-2018,2021-2023,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -875,7 +875,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "En téléchargeant, vous acceptez de publier la carte selon les termes de la licence publique générale GNU (GPL) version 2 ou toute version ultérieure (la même licence sous laquelle Widelands lui-même est distribué). Pour plus d’informations, voir %s."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -5002,7 +5002,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Ici, vous pouvez uploader vos modules complémentaires vers le serveur afin de les rendre disponibles aux autres joueurs. Par cet upload, vous agréez à la publication de votre création sous les termes de la GNU Licence Publique Générale (GPL) version 2  ou toute version ultérieure (la même licence sous laquelle est distribué Widelands lui même). Pour plus d'informations sur la GPL, veuillez voir ‘A propos de Widelands’ → ‘Licence’ dans le menu principal ou voyez %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
@@ -9285,7 +9285,7 @@ msgstr "Prolonger un échange"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Sélectionnez par combien de lots vous souhaitez étendre cet échange :"
 
 #: ../../../../src/wui/actionconfirm.cc:603
 #: ../../../../src/wui/marketwindow.cc:75
@@ -9306,7 +9306,7 @@ msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "Voulez-vous vraiment reprendre ce commerce ?\n\nCela réinitialisera toutes les files d’attente à leur capacité maximale."
 
 #: ../../../../src/wui/attack_window.cc:79
 msgid "Attack"
@@ -10170,7 +10170,7 @@ msgstr "Personne ne vous a fait d'offre commerciale pour le moment"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Marché pour accepter l’échange à"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
@@ -11244,38 +11244,38 @@ msgstr "Augmenter la somme par 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Veuillez sélectionner le joueur avec lequel vous souhaitez commercer."
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Veuillez sélectionner les marchandises que vous souhaitez envoyer et recevoir."
 
 #: ../../../../src/wui/marketwindow.cc:230
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Il n’est pas permis d’échanger plus de %d marchandise par lot."
+msgstr[1] "Il n’est pas permis d’échanger plus de %d marchandises par lot."
+msgstr[2] "Il n’est pas permis d’échanger plus de %d marchandises par lot."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Vous ne pouvez pas à la fois envoyer et recevoir le même type de marchandise (%s)."
 
 #: ../../../../src/wui/marketwindow.cc:245
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Proposer le commerce configuré au joueur sélectionné"
 
 #: ../../../../src/wui/marketwindow.cc:313
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "Il n'y a pas de propositions commerciales pour le moment. Vous pouvez proposer une nouvelle offre depuis le premier onglet."
 
 #: ../../../../src/wui/marketwindow.cc:316
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Il n’y a pas de propositions commerciales en attente pour le moment."
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
@@ -11285,7 +11285,7 @@ msgstr "Annuler cet échange"
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Reprendre ce commerce suspendu. Cela nécessite que toutes les files d’attente soient à leur capacité maximale."
 
 #: ../../../../src/wui/marketwindow.cc:813
 msgid "Pause this trade"
@@ -11293,7 +11293,7 @@ msgstr "Mettre en pause cet échange"
 
 #: ../../../../src/wui/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Vous devez mettre en pause la transaction avant de pouvoir modifier la capacité de la file d’attente."
 
 #: ../../../../src/wui/marketwindow.cc:825
 msgid "Pause Trade?"
@@ -11303,7 +11303,7 @@ msgstr "Mettre en pause cet échange ?"
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Changer la capacité des files d’attente d’entrée entraînera la mise en pause du commerce. Mettre en pause le commerce maintenant ?"
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"

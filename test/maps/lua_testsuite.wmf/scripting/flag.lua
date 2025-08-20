@@ -47,6 +47,10 @@ end
 function flag_tests:test_set_wares_two_args()
    self.f:set_wares("log", 3)
    assert_equal(3, self.f:get_wares("log"))
+   -- check call with two args: replaces other wares
+   self.f:set_wares("fish", 1)
+   assert_equal(0, self.f:get_wares("log"))
+   assert_equal(1, self.f:get_wares("fish"))
 end
 function flag_tests:test_set_wares_one_arg()
    self.f:set_wares{
@@ -58,6 +62,7 @@ function flag_tests:test_set_wares_one_arg()
 end
 function flag_tests:test_change_wares_on_flag()
    self.f:set_wares{log = 3, coal = 2}
+   -- check call with table: replaces all other wares
    self.f:set_wares{fish = 3}
    assert_equal(3, self.f:get_wares("fish"))
    assert_equal(0, self.f:get_wares("log"))
