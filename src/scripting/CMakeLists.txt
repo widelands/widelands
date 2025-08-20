@@ -12,6 +12,7 @@ wl_library(scripting_base
     base_exceptions
     third_party_eris
 )
+set_target_properties(scripting_base PROPERTIES INTERFACE_SYSTEM_INCLUDE_DIRECTORIES ../third_party/eris/)
 
 wl_library(scripting_luna
   SRCS
