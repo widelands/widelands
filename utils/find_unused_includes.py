@@ -113,6 +113,7 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
 def find_includes(file_to_check):
     """Returns a set of includes."""
     files = set()
+    not_found_includes = set()
     with open(file_to_check, 'r', encoding='utf-8') as f:
         for line in f.readlines():
             line = line.strip()
@@ -128,8 +129,17 @@ def find_includes(file_to_check):
                 elif '/third_party/' not in file_to_check and \
                         not os.path.isfile(include_file + '.cmake'):
                     # include file not found, probably in the wrong directory
-                    msg = f'include file not found (from {file_to_check})'
-                    raise FileNotFoundError(2, msg, include_file)
+                    not_found_includes.add(include_file)
+    if not_found_includes:
+        print(f'include files not found for {file_to_check}:')
+        for file in not_found_includes:
+            print(f'\t{file}')
+        if files:
+            print('Hint: Some include files found. Are the others wrong?')
+        else:
+            print('Hint: No include file found. Did you call this util from "src/" directory?')
+        print('Abort')
+        sys.exit(5)  # io error, well, kind of
 
     return files
 
