@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
-msgstr ""
+msgstr "وضعیت"
 
 #: ../../../../data/txts/README.lua:14
 msgid ""
@@ -318,7 +318,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "افزونه ها"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -415,7 +415,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "راه‌اندازی بازی چندنفره"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -445,7 +445,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr ""
+msgstr "تنظیمات پخش‌کننده‌"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
@@ -851,6 +851,12 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
+msgstr ""
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
 msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4

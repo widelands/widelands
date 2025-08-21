@@ -949,7 +949,7 @@ msgstr ""
 #: ../../../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "固定物：%1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../../../src/editor/tools/set_terrain_tool.cc:120
@@ -1879,7 +1879,7 @@ msgstr "工具大小"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "尺寸："
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -4367,7 +4367,7 @@ msgstr "载入中…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "减小值"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4380,7 +4380,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "增加值"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4425,7 +4425,7 @@ msgstr[0] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
+msgstr[0] "%d小时"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -5296,7 +5296,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2093
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2182
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1%/%2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1986
 #, c-format
@@ -5722,7 +5722,7 @@ msgstr "难度"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "难度"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5825,7 +5825,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6524,7 +6524,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s:%2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6547,7 +6547,7 @@ msgstr "常规的"
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
 msgid "Editor"
-msgstr ""
+msgstr "地图编辑"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
@@ -7726,7 +7726,7 @@ msgstr "关"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../../../src/ui_fsmenu/options.cc:528
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 #. * TRANSLATORS: Entry in the display selection dropdown
 #: ../../../../src/ui_fsmenu/options.cc:583
@@ -8159,11 +8159,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "护林小屋"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
-msgstr ""
+msgstr "采石场"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
@@ -8319,7 +8319,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:275
 msgid "Multiplayer"
-msgstr ""
+msgstr "多人游戏"
 
 #: ../../../../src/wlapplication_options.cc:282
 msgid "Editor – Load Map"
@@ -8887,12 +8887,12 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1398
 #, c-format
 msgid "%1$s+%2$s"
-msgstr ""
+msgstr "%1$s+%2$s"
 
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "空间"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -8922,17 +8922,17 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "暂停"
 
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 #: ../../../../src/wlapplication_options.cc:1427
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 #: ../../../../src/wlapplication_options.cc:1429
 msgctxt "hotkey"
@@ -10011,7 +10011,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "团队%u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -11311,7 +11311,7 @@ msgstr ""
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr ""
+msgstr "空闲的"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
@@ -11471,7 +11471,7 @@ msgstr "%1%%2%,%3%"
 #: ../../../../src/wui/savegameloader.cc:194
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr ""
+msgstr "保存于：%1$s%2$u,%3$u"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../../../src/wui/savegametable.cc:47

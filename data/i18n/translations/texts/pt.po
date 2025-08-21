@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2018,2020\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -415,7 +415,7 @@ msgstr "%s:"
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -856,6 +856,12 @@ msgid ""
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "Quando um edifício é destruido, os trabalhadores vão procurar uma bandeira ao redor a partir da qual vão seguir a estrada até um armazém ligado. Se não houverem bandeiras na vizinhança, eles vão continuar de procurar até morrerem."
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

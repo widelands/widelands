@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bina kuari"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
@@ -402,7 +402,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Kemenangan Mutlak!"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""

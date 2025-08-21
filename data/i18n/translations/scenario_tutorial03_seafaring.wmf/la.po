@@ -66,7 +66,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
 msgid "Ports"
-msgstr ""
+msgstr "Portus"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
 msgid ""
@@ -502,7 +502,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "Metallum ferri"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
@@ -670,7 +670,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "Conclusio"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
@@ -727,7 +727,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
-msgstr ""
+msgstr "Congratulamur"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"

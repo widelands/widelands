@@ -6171,7 +6171,7 @@ msgstr "Kräver minst Widelands version %1$s men inte senare version än %2$s."
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:168
 msgid "Hint:"
-msgstr ""
+msgstr "Tips:"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:175
 msgid "Comment by uploader:"

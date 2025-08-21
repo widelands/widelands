@@ -324,8 +324,8 @@ msgid ""
 " one for a woodcutter."
 msgstr ""
 "Mali by sme začať tým, že sa postaráme o produkciu dreva. Zdá sa, že na "
-"tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme dva "
-"domy pre lesníkov a jeden pre drevorubača."
+"tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme aspoň "
+"dva domy pre horárov a jeden pre drevorubača."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -489,7 +489,7 @@ msgstr "Hladní baníci"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Baníci sa sťažujú…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217

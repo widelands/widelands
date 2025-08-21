@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Roy Luo <1598359376@qq.com>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: Roy Luo <1598359376@qq.com>, 2025\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/widelands/teams/35159/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1379,7 +1383,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "啤酒坊"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
@@ -1389,7 +1393,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "农场"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
@@ -1421,12 +1425,12 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "在这个农场工作的农夫没有清理土壤就播撒了她的种子。"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "护林员之屋"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
@@ -1519,7 +1523,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "伐木工之屋"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
@@ -1542,12 +1546,12 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "伐木工在他的伐木工之屋工作区域内已找不到任何可采的树木。你应该考虑拆除或销毁伐木工之屋，或者修建护林员之屋。"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "磨坊"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
@@ -1563,7 +1567,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "训练营"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
@@ -1573,60 +1577,60 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "士兵的攻击从0级升级到第1级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "士兵的攻击从第1级升级到第2级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "士兵的攻击从第2级升级到第3级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "士兵的攻击从第3级升级到第4级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "士兵的健康从0级升级到第1级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "士兵的健康从第1级升级到第2级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "士兵的健康从第2级升级到第3级"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "士兵的健康从第3级升级到第4级"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr " 没有士兵训练！"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "找不到符合此训练级别的士兵"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "井"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
@@ -1641,4 +1645,4 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "搬运工在他的水井工作区域内已找不到任何水资源。"

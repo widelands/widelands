@@ -17114,17 +17114,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "קטן"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "בינוני"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "גדול"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17210,7 +17210,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17355,7 +17355,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
-msgstr ""
+msgstr "בריאות"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:191
@@ -17384,7 +17384,7 @@ msgstr[2] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "תקיפה"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202
@@ -17393,7 +17393,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
-msgstr ""
+msgstr "הגנה"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:213
 #: ../../../../data/tribes/scripting/help/worker_help.lua:221
@@ -17414,4 +17414,4 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
-msgstr ""
+msgstr "התחמקות"

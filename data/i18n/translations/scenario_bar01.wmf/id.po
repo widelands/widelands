@@ -165,7 +165,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Bangun sebuah tempat peleburan"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""

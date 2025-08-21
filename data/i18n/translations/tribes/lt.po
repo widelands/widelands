@@ -5353,7 +5353,7 @@ msgstr ""
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Negyvas medis"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5774,15 +5774,15 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Gaminiai"
 
 #: ../../../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
-msgstr ""
+msgstr "Darbininkai"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Statiniai"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"

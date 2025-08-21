@@ -215,7 +215,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Construct two ships"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -358,11 +358,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Expedition"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Start an expedition"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -417,7 +417,7 @@ msgstr ""
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid "Found a settlement"
-msgstr ""
+msgstr "Found a settlement"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
@@ -502,7 +502,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "Iron Mine"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"

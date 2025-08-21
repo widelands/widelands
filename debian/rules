@@ -63,11 +63,11 @@ override_dh_auto_install:
 	  cp ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
-	# appdata
+	# metainfo
 	mkdir -p debian/tmp/usr/share/applications/
 	cp xdg/org.widelands.Widelands.desktop debian/tmp/usr/share/applications/
 	mkdir -p debian/tmp/usr/share/metainfo/
-	cp xdg/org.widelands.Widelands.appdata.xml debian/tmp/usr/share/metainfo/
+	cp xdg/org.widelands.Widelands.metainfo.xml debian/tmp/usr/share/metainfo/
 
 override_dh_missing:
 	dh_missing --list-missing

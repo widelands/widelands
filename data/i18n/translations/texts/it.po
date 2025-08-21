@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2020-2021,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -230,7 +230,7 @@ msgstr "Pagina iniziale"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Script"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:436
@@ -454,7 +454,7 @@ msgstr "Il giocatore con il colore della bandiera. Se più di un client selezion
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "La modalità spettatore, significa che puoi vedere ogni cosa, ma non puoi controllare nessun giocatore"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -864,6 +864,12 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
+msgstr ""
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
 msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
