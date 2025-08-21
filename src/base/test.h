@@ -174,18 +174,20 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 	}
 }
 
-#define check_error(what, fn) do_check_error(__FILE__, __LINE__, what, fn)
+#define check_error(type, what, fn) do_check_error<type>(__FILE__, __LINE__, #type, what, fn)
+template <typename ExceptionType>
 inline void do_check_error(const char* f,
                            uint32_t l,
+                           const char* err_type,
                            const std::string& what,
                            const std::function<void()>& fn) {
 	log_info("Running testcase %s:%u\n", f, l);
 	try {
 		fn();
-	} catch (...) {
+	} catch (const ExceptionType&) {
 		return;
 	}
-	throw WException(f, l, "Error not detected: %s", what.c_str());
+	throw WException(f, l, "Error of type %s not detected: %s", err_type, what.c_str());
 }
 }  // namespace WLTestsuite
 

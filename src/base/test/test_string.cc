@@ -172,21 +172,21 @@ TESTCASE(string_formatting) {
 	check_equal("Hello World", format("%2% %1%", format_impl::ArgsVector{p1, p2}));
 	check_equal("World Hello", format("%2% %1%", format_impl::ArgsVector{p2, p1}));
 
-	check_error("invalid placeholder", []() { format("%q", 1); });
-	check_error("invalid placeholder", []() { format("%lf", 1); });
-	check_error("invalid character after %", []() { format("%|1$d|", 1); });
-	check_error("end of string", []() { format("%02.7", 4); });
-	check_error("missing placeholder", []() { format("%2% %3$i", 2, 3); });
-	check_error("duplicate placeholder", []() { format("%1% %1$d", 1, 1); });
-	check_error("mixed placeholders", []() { format("%4d %2%", 123, 123); });
-	check_error("too many args", []() { format("%u %li %lld", 1, 2, 3, 4); });
-	check_error("too few args", []() { format("%lu %llu %lli", 1, 2); });
-	check_error("wrong arg type", []() { format("%s", 1); });
-	check_error("wrong arg type", []() { format("%i", "foo"); });
-	check_error("float too large", []() { format("%f", 12345678901234567890.f); });
-	check_error("int too large", []() { format("%ld", 0x876543210fedcba9); });
-	check_error("invalid flag combination", []() { format("%-05d", 123); });
-	check_error("repeated flag", []() { format("%+0+5d", 123); });
+	check_error(WException, "invalid placeholder", []() { format("%q", 1); });
+	check_error(WException, "invalid placeholder", []() { format("%lf", 1); });
+	check_error(WException, "invalid character after %", []() { format("%|1$d|", 1); });
+	check_error(WException, "end of string", []() { format("%02.7", 4); });
+	check_error(WException, "missing placeholder", []() { format("%2% %3$i", 2, 3); });
+	check_error(WException, "duplicate placeholder", []() { format("%1% %1$d", 1, 1); });
+	check_error(WException, "mixed placeholders", []() { format("%4d %2%", 123, 123); });
+	check_error(WException, "too many args", []() { format("%u %li %lld", 1, 2, 3, 4); });
+	check_error(WException, "too few args", []() { format("%lu %llu %lli", 1, 2); });
+	check_error(WException, "wrong arg type", []() { format("%s", 1); });
+	check_error(WException, "wrong arg type", []() { format("%i", "foo"); });
+	check_error(WException, "float too large", []() { format("%f", 12345678901234567890.f); });
+	check_error(WException, "int too large", []() { format("%ld", 0x876543210fedcba9); });
+	check_error(WException, "invalid flag combination", []() { format("%-05d", 123); });
+	check_error(WException, "repeated flag", []() { format("%+0+5d", 123); });
 }
 
 TESTSUITE_END()
