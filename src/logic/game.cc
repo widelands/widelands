@@ -192,8 +192,9 @@ Game::Game()
 	last_detectedportspace_serial_ = 0;
 }
 
-Game::~Game() {  // NOLINT
+Game::~Game() {
 	              // ReplayWriter needs this
+	delete_pending_player_commands();
 }
 
 void Game::sync_reset() {
