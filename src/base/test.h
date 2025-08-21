@@ -186,7 +186,8 @@ inline void do_check_error(const char* f,
 		fn();
 	} catch (const ExceptionType& e) {
 		if (!contains(e.what(), what, false)) {
-			throw WException(f, l, "Error of type %s with wrong message: Expected '%s', received '%s'", err_type, what.c_str(), e.what());
+			throw WException(f, l, "Error of type %s with wrong message: Expected '%s', received '%s'",
+			                 err_type, what.c_str(), e.what());
 		}
 		return;
 	}

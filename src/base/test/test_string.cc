@@ -178,13 +178,20 @@ TESTCASE(string_formatting) {
 	check_error(WException, "unrecognized format type character", []() { format("%02.7", 4); });
 	check_error(WException, "index 1 is unused", []() { format("%2% %3$i", 2, 3); });
 	check_error(WException, "duplicate use of index 1", []() { format("%1% %1$d", 1, 1); });
-	check_error(WException, "Cannot mix positional and unpositional placeholders", []() { format("%4d %2%", 123, 123); });
-	check_error(WException, "Too many arguments provided (expected only 3)", []() { format("%u %li %lld", 1, 2, 3, 4); });
-	check_error(WException, "Too few arguments provided: 3 required but only 2 passed", []() { format("%lu %llu %lli", 1, 2); });
-	check_error(WException, "Wrong argument type: expected string, found int", []() { format("%s", 1); });
-	check_error(WException, "Wrong argument type: expected int, found string", []() { format("%i", "foo"); });
-	check_error(WException, "Floating point value too large", []() { format("%f", 12345678901234567890.f); });
-	check_error(WException, "Unsigned integral value too large", []() { format("%ld", 0x876543210fedcba9); });
+	check_error(WException, "Cannot mix positional and unpositional placeholders",
+	            []() { format("%4d %2%", 123, 123); });
+	check_error(WException, "Too many arguments provided (expected only 3)",
+	            []() { format("%u %li %lld", 1, 2, 3, 4); });
+	check_error(WException, "Too few arguments provided: 3 required but only 2 passed",
+	            []() { format("%lu %llu %lli", 1, 2); });
+	check_error(
+	   WException, "Wrong argument type: expected string, found int", []() { format("%s", 1); });
+	check_error(
+	   WException, "Wrong argument type: expected int, found string", []() { format("%i", "foo"); });
+	check_error(
+	   WException, "Floating point value too large", []() { format("%f", 12345678901234567890.f); });
+	check_error(
+	   WException, "Unsigned integral value too large", []() { format("%ld", 0x876543210fedcba9); });
 	check_error(WException, "can not be combined", []() { format("%-05d", 123); });
 	check_error(WException, "Repeated flag", []() { format("%+0+5d", 123); });
 }
