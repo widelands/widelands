@@ -37,7 +37,6 @@ FUNCTION_REGEX = re.compile(
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.h', 'third_party/eris/lualib.h', 'scripting/eris.h',
-                 'base/format/abstract_node.h',
                  'third_party/tinygettext/include/tinygettext/tinygettext.hpp'}
 
 # Headers files with contents that need to be detected by functions
