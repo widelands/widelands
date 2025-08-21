@@ -193,7 +193,7 @@ Game::Game()
 }
 
 Game::~Game() {
-	              // ReplayWriter needs this
+	// ReplayWriter needs this
 	delete_pending_player_commands();
 }
 
