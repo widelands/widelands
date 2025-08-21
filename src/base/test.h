@@ -184,7 +184,10 @@ inline void do_check_error(const char* f,
 	log_info("Running testcase %s:%u\n", f, l);
 	try {
 		fn();
-	} catch (const ExceptionType&) {
+	} catch (const ExceptionType& e) {
+		if (!contains(e.what(), what, false)) {
+			throw WException(f, l, "Error of type %s with wrong message: Expected '%s', received '%s'", err_type, what.c_str(), e.what());
+		}
 		return;
 	}
 	throw WException(f, l, "Error of type %s not detected: %s", err_type, what.c_str());
