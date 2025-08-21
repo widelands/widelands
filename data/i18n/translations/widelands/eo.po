@@ -4046,11 +4046,11 @@ msgstr "Vi estis provizore forbarita de reta ludado."
 
 #: ../../../../src/network/internet_gaming_messages.cc:32
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "La protokola versio, kiun vi uzas, ne estas subtenata!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:33
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Vi jam estas ensalutinta!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:36
 msgid ""

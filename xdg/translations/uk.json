@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Стратегічна гра",
 	"tagline": "Стратегічна гра у режимі реального часу",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.",
 		"Widelands пропонує режим одиночної гри в кампанію, яка розповідає історії племен та їх боротьбу у всесвіті Widelands. Однак, реальне розселення починається тоді, коли ви об’єднуєтеся з друзями через інтернет або локальну мережу, будувати нові імперії разом, або розбити один одного в пилу війни. Widelands також пропонує штучний інтелект, щоб кинути виклик вам."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }
