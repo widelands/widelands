@@ -431,10 +431,12 @@ void MainMenu::set_labels() {
 	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
 	                 _("Log in as a registered user"),
 	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin, false));
+#ifndef __EMSCRIPTEN__
+	// not supported in wasm build
 	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"),
 	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN, false));
-
+#endif
 	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"),
 	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew, false));
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
@@ -674,9 +676,11 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuLobby, MenuTarget::kMetaserver)) {
 			return true;
 		}
+#ifndef __EMSCRIPTEN__
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuLAN, MenuTarget::kLan)) {
 			return true;
 		}
+#endif
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuAddons, MenuTarget::kAddOns)) {
 			return true;
 		}
