@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 #: ../../../../data/txts/ABOUT.lua:15
 msgid "Developers"
@@ -263,7 +263,7 @@ msgstr "Barbari"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
-msgstr ""
+msgstr "Carstvo"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
@@ -319,7 +319,7 @@ msgstr ""
 
 #: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Proširenja"
 
 #: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
@@ -412,11 +412,11 @@ msgstr ""
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Postavke mrežne igre"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -424,7 +424,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr ""
+msgstr "Postavke klijenta"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
@@ -442,7 +442,7 @@ msgstr ""
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Gledatelj, to znači da sve vidiš, ali ne možeš upravljati igračima"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -471,7 +471,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Zatvoreno."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -489,7 +489,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr ""
+msgstr "detalji zemljovida"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""
@@ -852,6 +852,12 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
+msgstr ""
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
 msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4

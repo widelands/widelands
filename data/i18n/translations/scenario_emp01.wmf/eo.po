@@ -379,7 +379,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
-msgstr ""
+msgstr "Misio Plenumita"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:224
@@ -403,7 +403,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Venko"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""

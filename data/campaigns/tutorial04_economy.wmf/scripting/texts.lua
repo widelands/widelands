@@ -641,6 +641,7 @@ trading_8 = {
    title = _("Trading"),
    body = (
       p(_([[Lastly, select how many batches of the selected wares will be exchanged. You can also set the trade to run indefinitely using the Infinity icon.]])) ..
+      p(_([[A batch will be delivered in one transport, each ware needing a donkey.]])) ..
       p(_([[When you have configured everything, click the ‘Propose’ button to send the trade offer to the other player. He can then decide whether to accept or reject your proposal.]])) ..
       p(_([[Try it out!]]))
    ),

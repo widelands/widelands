@@ -362,7 +362,7 @@ msgstr "Výprava"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Začnite výpravu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -502,7 +502,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "Železná baňa"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"

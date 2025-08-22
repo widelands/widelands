@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adrian@chaves.gal>, 2010\n"
 "Language-Team: Galician (http://app.transifex.com/widelands/widelands/language/gl/)\n"
@@ -260,7 +260,7 @@ msgstr "Historia da campaña"
 
 #: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
-msgstr ""
+msgstr "Bárbaros"
 
 #: ../../../../data/txts/developers.lua:274
 msgid "Empire"
@@ -268,7 +268,7 @@ msgstr "Imperio"
 
 #: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlánticos"
 
 #: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
@@ -413,7 +413,7 @@ msgstr ""
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -472,7 +472,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr ""
+msgstr "Pechado."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -853,6 +853,12 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
+msgstr ""
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
 msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4

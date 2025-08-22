@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bir adet taş ocağı inşa et"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
@@ -402,13 +402,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Zafer"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"

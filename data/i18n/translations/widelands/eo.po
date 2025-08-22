@@ -8,7 +8,7 @@
 # GunChleoc, 2014
 # Peter Garami <petro.garami@gmail.com>, 2021
 # Raúl Contreras, 2024-2025
-# Ximena Delgado, 2022
+# 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -843,7 +843,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas publikigi ĉi tiun mapon rete?\n\nNomo:%1$s\nInterna nomo:%2$s\nAŭtoro:%3$s\nPriskribo:%4$s\nKonsileto:%5$s\n\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -856,7 +856,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Per alŝuto, vi konsentas publikigi la mapon laŭ la kondiĉoj de la Ĝenerala Publika Permesilo (GPL) versio 2 aŭ iu ajn posta versio (la sama permesilo, laŭ kiu Widelands mem estas distribuita). Por pliaj informoj, vidu %s."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -1722,7 +1722,7 @@ msgstr "Hazarda"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "La tribo estos elektita hazarde."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1912,7 +1912,7 @@ msgstr "Ekonomioj"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Komercoj"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2410,103 +2410,103 @@ msgstr "Komerca oferto"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Nova komerca oferto ricevita"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Vi ricevis novan komercan oferton de %s."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Komerco akceptita"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Komerca oferto akceptita"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s akceptis vian komercan oferton ĉe %2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Komerco malakceptita"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Komerca oferto malakceptita"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s malakceptis vian komercan oferton ĉe %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Komerco retirita"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Komerca oferto retirita"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "La komerca oferto de %s estis retirita."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Propono por komerca etendo"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Nova propono por komerca etendo ricevita"
 
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s proponis etendi komercon."
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Komerca etendo retirita"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Propono por komerca etendo retirita"
 
 #: ../../../../src/logic/game.cc:1560
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "La propono de %s por komerca etendo estis retirita."
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Komerca etendo malakceptita"
 
 #: ../../../../src/logic/game.cc:1601
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Propono por komerca etendo malakceptita"
 
 #: ../../../../src/logic/game.cc:1602
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s malakceptis vian proponon por komerca etendo."
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr " Komerca etendo akceptita"
 
 #: ../../../../src/logic/game.cc:1656
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr " Propono por komerca etendo akceptita"
 
 #: ../../../../src/logic/game.cc:1657
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s akceptis vian proponon por komerca etendo."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2598,136 +2598,136 @@ msgstr "%u%% malkonstruita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Nova bazaro estis aldonita al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u komerco"
+msgstr[1] "%u komercoj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Komerco nuligita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Komerco kompletigita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Komerca interkonsento nuligita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Komerca interkonsento kompletigita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Via komerca interkonsento ĉe %s estas kompletigita."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr " Via komerca interkonsento ĉe %s estas nuligita."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
-msgstr ""
+msgstr "Komerco paŭzita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Komerca interkonsento paŭzita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s paŭzigis la komercon kun vi ĉe %2$s."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Komerco rekomencita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Komerca interkonsento rekomencita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s rekomencis la komercon kun vi ĉe %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Komerca interkonsento ĉe %1$s kun %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Komerca oferto de %s "
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Komerca oferto de %1$s al %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d aro"
+msgstr[1] "%d aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "La komerco daŭras senlime"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d liverita aro"
+msgstr[1] "%d liveritaj aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d restanta aro"
+msgstr[1] "%d restantaj aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
-msgstr ""
+msgstr "Paŭzigita de ambaŭ ludantoj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
-msgstr ""
+msgstr "Paŭzigita de vi"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:820
 #: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Paŭzigita de %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Aktiva"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
-msgstr ""
+msgstr "Ludanto sendas:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Vi sendas:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2737,15 +2737,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "Ludanto ricevas:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Vi ricevas:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -3460,7 +3460,7 @@ msgstr "Haveno %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Bazaro %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -3977,80 +3977,80 @@ msgstr "Neatendita erarmesaĝo estis ricevita pri la komando %1%: %2%"
 #: ../../../../src/network/internet_gaming.cc:706
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr "Oni ricevis nekonatan komandon de la metaservilo: %s"
+msgstr "Ricevis nekonatan komandon de la metaservilo: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Ne eblis sendi mesaĝon: Vi ne estas konektita al la metaservilo!"
 
 #: ../../../../src/network/internet_gaming.cc:879
 #: ../../../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "Ne eblis sendi mesaĝon: Ĉu ĉi tio supozeble estis privata mesaĝo?"
 
 #: ../../../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "Subtenataj administraj komandoj:"
 
 #: ../../../../src/network/internet_gaming.cc:903
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr ""
+msgstr "/motd <msg> - Agordu konstantan salutmesaĝon"
 
 #: ../../../../src/network/internet_gaming.cc:904
 msgid "/announce <msg> - Send a one time system message"
-msgstr ""
+msgstr "/announce <msg> - Sendu unuufojan sisteman mesaĝon"
 
 #: ../../../../src/network/internet_gaming.cc:907
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr ""
+msgstr "/warn <user> <msg> - Sendu privatan sisteman mesaĝon al la donita uzanto"
 
 #: ../../../../src/network/internet_gaming.cc:910
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <user|game> - Forigu la donitan uzanton aŭ ludon el la metaservilo"
 
 #: ../../../../src/network/internet_gaming.cc:912
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <user> - Forbaru uzanton por 24 horoj el la metaservilo"
 
 #: ../../../../src/network/internet_gaming.cc:991
 msgid "Conversion error"
-msgstr ""
+msgstr "Eraro de konverto"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
 #: ../../../../src/network/internet_gaming.cc:994
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr ""
+msgstr "Ne eblas determini la verovaloron de \"%s\""
 
 #: ../../../../src/network/internet_gaming.cc:1018
 msgctxt "chat_sender"
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #: ../../../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Neniu uzanto kun tiu nomo estas ensalutinta."
 
 #: ../../../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "La ludo jam ne ekzistas, eble ĝi ĵus estis fermita."
 
 #: ../../../../src/network/internet_gaming_messages.cc:30
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Malĝusta pasvorto, bonvolu provi denove."
 
 #: ../../../../src/network/internet_gaming_messages.cc:31
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Vi estis provizore forbarita de reta ludado."
 
 #: ../../../../src/network/internet_gaming_messages.cc:32
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "La protokola versio, kiun vi uzas, ne estas subtenata!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:33
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Vi jam estas ensalutinta!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:36
 msgid ""
@@ -4385,7 +4385,7 @@ msgstr "Ŝarganta…"
 
 #: ../../../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Malaltigi la valoron"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4398,7 +4398,7 @@ msgstr ""
 
 #: ../../../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Altigi la valoron"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -4426,8 +4426,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutoj"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
@@ -4446,8 +4446,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d horo"
+msgstr[1] "%d horoj"
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -5024,7 +5024,7 @@ msgstr "Iloj por kromprogramaj programistoj"
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Name"
-msgstr ""
+msgstr "Nomo"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
 #: ../../../../src/ui_fsmenu/addons/manager.cc:770
@@ -5436,7 +5436,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
-msgstr ""
+msgstr "Nomo:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:171
 #: ../../../../src/ui_fsmenu/tech_info.cc:76
@@ -5679,7 +5679,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/main.cc:461
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nomo: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:285
 #: ../../../../src/ui_fsmenu/main.cc:463
@@ -5701,7 +5701,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapdetailsbox.cc:121
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Ludantoj: %s"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
@@ -5758,7 +5758,7 @@ msgstr "Facileco"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:503
 msgid "Difficulty:"
-msgstr ""
+msgstr "Facileco:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
@@ -5861,7 +5861,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr ""
+msgstr "Malgranda"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -6566,7 +6566,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:240
 #, c-format
 msgid "%1$s: %2$s"
-msgstr ""
+msgstr "%1$s: %2$s"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
@@ -6584,7 +6584,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../../../src/wui/interactive_player.cc:334
 msgid "General"
-msgstr ""
+msgstr "Generalo"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../../../src/wlapplication_options.cc:278
@@ -6609,7 +6609,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Lanĉi ludon"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
@@ -7529,7 +7529,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:393
 #, c-format
 msgid "Team %d"
-msgstr ""
+msgstr "Teamo %d"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 msgid "Clients"
@@ -7745,7 +7745,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/options.cc:421
 msgid "Sound"
-msgstr ""
+msgstr "Sono"
 
 #: ../../../../src/ui_fsmenu/options.cc:422
 msgid "Saving"
@@ -7912,7 +7912,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/scenariodetails.cc:58
 #: ../../../../src/wui/mapdetails.cc:167
 msgid "Authors"
-msgstr ""
+msgstr "Aŭtoroj"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:183
@@ -7937,7 +7937,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -7945,7 +7945,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
@@ -8157,11 +8157,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
-msgstr ""
+msgstr "Stokejo"
 
 #: ../../../../src/wlapplication_options.cc:184
 msgid "Port"
-msgstr ""
+msgstr "Haveno"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
@@ -8189,19 +8189,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
-msgstr ""
+msgstr "Turo"
 
 #: ../../../../src/wlapplication_options.cc:192
 msgid "Fortress"
-msgstr ""
+msgstr "Fortikaĵo"
 
 #: ../../../../src/wlapplication_options.cc:193
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Arbohakist-kabano"
 
 #: ../../../../src/wlapplication_options.cc:194
 msgid "Forester’s House"
-msgstr ""
+msgstr "Arbarist-kabano"
 
 #: ../../../../src/wlapplication_options.cc:195
 msgid "Quarry"
@@ -8233,7 +8233,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
-msgstr ""
+msgstr "Puto"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
@@ -8245,23 +8245,23 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
-msgstr ""
+msgstr "Muelejo"
 
 #: ../../../../src/wlapplication_options.cc:206
 msgid "Bakery"
-msgstr ""
+msgstr "Bakejo"
 
 #: ../../../../src/wlapplication_options.cc:207
 msgid "Brewery"
-msgstr ""
+msgstr "Bier-farejo"
 
 #: ../../../../src/wlapplication_options.cc:208
 msgid "Smokery"
-msgstr ""
+msgstr "Fumaĵejo"
 
 #: ../../../../src/wlapplication_options.cc:209
 msgid "Tavern"
-msgstr ""
+msgstr "Taverno"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
@@ -8273,19 +8273,19 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Kirasoforĝejo"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Kirasoforĝejo"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Teksejo"
 
 #: ../../../../src/wlapplication_options.cc:215
 msgid "Shipyard"
-msgstr ""
+msgstr "Ŝip-farejo"
 
 #: ../../../../src/wlapplication_options.cc:216
 msgid "Ferry Yard"
@@ -8297,7 +8297,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
-msgstr ""
+msgstr "Barakoj"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
@@ -8313,15 +8313,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:222
 msgid "Coal Mine"
-msgstr ""
+msgstr "Karb-ekspluatejo"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr ""
+msgstr "Fer-minejo"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
-msgstr ""
+msgstr "Or-minejo"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
@@ -8779,7 +8779,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Sagoklavoj"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:899
@@ -8790,7 +8790,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Sagoklavoj"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:903
@@ -8828,7 +8828,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:989
 #: ../../../../src/wlapplication_options.cc:1033
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Klavaraj ŝparvojoj"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../../../src/wlapplication_options.cc:1000
@@ -8843,7 +8843,7 @@ msgstr ""
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1047
 msgid "Change tool size"
-msgstr ""
+msgstr "Ŝanĝi ilan grandecon"
 
 #: ../../../../src/wlapplication_options.cc:1048
 msgid "Change tool gap"
@@ -8853,7 +8853,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1053
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klaki"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1055
@@ -8866,7 +8866,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1059
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Klaki"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1061
@@ -8879,12 +8879,12 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Klaki"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:1066
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Agordu la mapaĵojn al la valoro elektita de 'Agordu Valoron'"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../../../src/wlapplication_options.cc:1173
@@ -8934,7 +8934,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1411
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Spacklavo"
 
 #: ../../../../src/wlapplication_options.cc:1413
 msgctxt "hotkey"
@@ -10055,7 +10055,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:246
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Teamo %u"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -11368,7 +11368,7 @@ msgstr ""
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr ""
+msgstr "Vaka"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
