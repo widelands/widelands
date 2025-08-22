@@ -45,6 +45,7 @@ override_dh_auto_install:
 	else \
 	  echo "Warning: Licence file changed. Please check it out:"; \
 	  diff -u debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2; \
+	  exit 0; \
 	fi
 	# Remove binaries that are not intended for the user (according to SirVer)
 	# We want all binaries for our PPA...
