@@ -489,7 +489,7 @@ msgstr "Hladní baníci"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Baníci sa sťažujú…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217
