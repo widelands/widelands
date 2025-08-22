@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Geama ro-innleachd",
 	"tagline": "Geama ro-innleachd togail fìor-ama",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Tha thu ’nad cheannard cinnidh bhig. ’S e an dleastanas agad a th’ ann gun tog thu tuineachadh a dh’fhàsas. Nì do mhuinntir obair gus barrachd stòrasan a dhèanamh ach an cuir iad ris an fhàs seo.",
 		"Bheir Widelands modh aon-chluicheadair chut le iomairtean a dh’innseas sgeulachdan nan treubhan agus an còmhstri aca air saoghal Widelands. Co-dhiù, cha tòisich an tuineachadh ann an dà-rìribh ach nuair a bhios tu ’s do charaidean cruinn còmhla air an eadar-lìn no air lìonra ionadail gus impireachdan ùra a thogail còmhla – no gus càch a chèile a cheannsachadh air a’ bhlàr. Tha inntinn fhuadain aig Widelands cuideachd a bheir dùbhlan dhut."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }

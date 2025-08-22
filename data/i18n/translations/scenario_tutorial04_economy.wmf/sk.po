@@ -461,7 +461,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Použite encyklopédiu a zistite, ako vycvičiť nových vojakov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."

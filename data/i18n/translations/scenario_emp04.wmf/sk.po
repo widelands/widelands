@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Karl Vest, 2025
 # MiroslavR <miroslavr256@gmail.com>, 2025
+# Karl Vest, 2025
 # GunChleoc, 2025
 # Pavol Gono, 2025
 # 
@@ -96,7 +96,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Postavte aspoň 3 drevorubačské domy a 2 kameňolomy"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:87
 msgid "Quarries and Lumberjacks"
@@ -1485,7 +1485,7 @@ msgstr "Rúbať stromy na okolitom území a spracovať ich na kmene."
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Drevorubačský dom potrebuje vo svojej pracovnej oblasti stromy."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Mill
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
@@ -1558,7 +1558,7 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
-"Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej "
+"Drevorubač pracujúci z tohto drevorubačského domu nedokáže vo svojej "
 "pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu "
 "rozobrať alebo zničiť, prípadne postaviť horáreň."
 
@@ -1632,7 +1632,7 @@ msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Žiaden vojak nepotrebuje výcvik!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
