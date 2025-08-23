@@ -468,7 +468,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Potrebujú ho kamenosochárky. Dbajte na to, aby ste vždy mali nejaké v rezerve! Vyrábajú ich kamenosochárky."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Kitchen Tools
 #: ../../../../data/tribes/initialization/amazons/units.lua:389
@@ -506,7 +506,7 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr ""
+msgstr "Táto kopija je základnou zbraňou v amazonskom vojenskom systéme. Vyrába ich kamenosochárka. V kombinácii s tunikou tvorí výbavu mladých vojačiek."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:435
@@ -626,7 +626,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Tapirs help to carry items along busy roads. They are reared in a tapir "
 "farm."
-msgstr ""
+msgstr "Tapíry pomáhajú nosiť predmety po rušných cestách. Chovajú sa na tapírej farme."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Tapir Breeder
 #: ../../../../data/tribes/initialization/amazons/units.lua:599
@@ -1125,7 +1125,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1302
 msgctxt "amazons_building"
 msgid "The stonecutter’s hut needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kamenárska chatrč potrebuje vo svojej pracovnej oblasti skaly."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 1
@@ -1190,7 +1190,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1317
 msgctxt "amazons_building"
 msgid "The woodcutter’s hut needs trees to fell within the work area."
-msgstr ""
+msgstr "Drevorubačská chatrč potrebuje vo svojej pracovnej oblasti stromy."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Woodcutter's Hut, part 1
@@ -1258,7 +1258,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr "Táto budova dokáže vyrobiť jedno mäso alebo jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí lovkyňa-zberačka prejsť. Ak sú dostupné oba druhy jedla, každé je vyrobené za %3$s až %4$s."
+msgstr "Táto budova dokáže vyrobiť jedno mäso alebo jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí lovkyňa-zberačka prejsť. Ak sú dostupné oba druhy jedla, každé z jedného druhu je vyrobené za %3$s až %4$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1352,7 +1352,7 @@ msgid ""
 "how far the woodcutter has to walk. If all kinds of rare tree are available "
 "within her work area, then one of each kind is produced between %3$s and "
 "%4$s."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jedno vzácne drevo za %1$s až %2$s, podľa toho, ako ďaleko musí majsterka drevorubačka prejsť. Ak sú dostupné všetky druhy vzácnych driev, každé z jedného druhu je vyrobené za %3$s až %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1377,7 +1377,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr ""
+msgstr "Ochrankyňa divočiny vychová jednu rybu a vypustí jedno zviera za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1429,7 +1429,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "Výrobňa lán potrebuje v priemere %s na výrobu jedného lana."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1663,7 +1663,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a tapir"
 " in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vychovať jedného tapíra v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
@@ -3520,7 +3520,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr ""
+msgstr "Vyrába sa v taviarni a používa sa vo vyhniach na nástroje, zbroje a zbrane."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold Ore, part 1
@@ -3561,7 +3561,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used by the armor smithy, the "
 "weapon smithy and the gold spinning mill."
-msgstr ""
+msgstr "Vyrába sa v taviarni a používa sa vo vyhniach na zbroje a zbrane a v pradiarni zlata."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Pick
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:673
@@ -3602,7 +3602,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Kliešte na dojenie používa chovateľ pavúkov na dojenie pavúkov. Vyrába ich kováč nástrojov."
+msgstr "Kliešte na dojenie používa chovateľka pavúkov na dojenie pavúkov. Vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:726
@@ -3683,7 +3683,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:791
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Používajú sa v taviarni a vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Light Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:804
@@ -3710,7 +3710,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr ""
+msgstr "Toto je stredný trojzubec. Vyrába sa vo vyhni na zbrane a používa sa v kobke – spolu s jedlom – na výcvik pokročilých vojakov v útoku z úrovne 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Double Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:831
@@ -5019,7 +5019,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy štítov, výroba jedného štítu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh štítu, výroba jedného oceľového štítu trvá priemerne %2$s a jedného vylepšeného štítu %3$s."
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy štítov, výroba jedného druhu štítu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh štítu, výroba jedného oceľového štítu trvá priemerne %2$s a jedného vylepšeného štítu %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1802
@@ -6391,7 +6391,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr ""
+msgstr "Vyrába sa v taviarni a používa sa na výrobu zbraní a nástrojov v kovodielni, výrobni sekier, vojenskom závode a vyhni na helmy."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold Ore, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:307
@@ -6409,7 +6409,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr ""
+msgstr "Zdobia sa ním len veľmi dôležité veci. Vyrába sa v taviarni a používa sa ako cenný stavebný materiál a zároveň na výrobu rôznych sekier (vo vojenskom závode) a častí zbrojí (vo vyhni na helmy)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Pick
 #: ../../../../data/tribes/initialization/barbarians/units.lua:333
@@ -6593,7 +6593,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Maska je vylepšená zbroj pre barbarských vojakov. Vyrába sa vo vyhni na helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Warhelm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:530
@@ -6602,7 +6602,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr ""
+msgstr "Toto je najlepšia zbroj, akú môžu mať Barbari k dispozícii. Vyrába sa vo vyhni na helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Carrier
 #: ../../../../data/tribes/initialization/barbarians/units.lua:546
@@ -8045,7 +8045,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train one "
 "soldier one level in evade in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, zápasnícka aréna dokáže vycvičiť jedného vojaka jednu úroveň uhýbania v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for a Barbarian training site: Battle
 #. Arena, part 2
@@ -10624,7 +10624,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr ""
+msgstr "Vyrába sa v taviarni. Zbroje a zbrane sa vo vyhni na zbroje a vyhni na zbrane zdobia zlatom."
 
 #. TRANSLATORS: Helptext for an Empire ware: Pick
 #: ../../../../data/tribes/initialization/empire/units.lua:370
@@ -10638,7 +10638,7 @@ msgstr "Krompáče používajú kamenári a baníci. Vyrába ich kováč nástro
 #: ../../../../data/tribes/initialization/empire/units.lua:382
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr ""
+msgstr "Drevorubačské sekery používajú drevorubači a vyrábajú sa vo vyhni na nástroje."
 
 #. TRANSLATORS: Helptext for an Empire ware: Saw
 #: ../../../../data/tribes/initialization/empire/units.lua:392
@@ -10703,7 +10703,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:500
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Používajú sa v taviarni a vyrába ich kováč nástrojov."
 
 #. TRANSLATORS: Helptext for an Empire ware: Wooden Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:513
@@ -11229,7 +11229,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr ""
+msgstr "Kamenár nájde zo 7 skál 5 blokov žuly a 2 bloky mramoru."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -11547,7 +11547,7 @@ msgstr "Vykresáva mramorové stĺpy z mramoru."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr ""
+msgstr "Kamenársky dom potrebuje v priemere %s na výrobu jedného mramorového stĺpu."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11707,7 +11707,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer sows and harvests one basket of grapes between %1$s and "
 "%2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Vinohradník zasadí a pozberá jeden košík hrozna za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Vineyard,
 #. part 2; %s is replaced by 'N growing fields'
@@ -12521,7 +12521,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, an arena can train one soldier to"
 " the first level in evade in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, aréna dokáže vycvičiť jedného vojaka prvú úroveň uhýbania v priemere za %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14266,7 +14266,7 @@ msgstr "Krompáče používajú kamenári a baníci."
 #: ../../../../data/tribes/initialization/frisians/units.lua:409
 msgctxt "frisians_ware"
 msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
-msgstr ""
+msgstr "Drevorubačské sekery používajú drevorubači a vyrábajú sa v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Shovel, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:422
@@ -14402,7 +14402,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the small "
 "armor smithy and used to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Helma je základný nástroj na ochranu vojakov. Vyrába sa v malej vyhni na zbroje a používa sa na výcvik vojakov v zdraví z úrovne 0 na úroveň 1."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Golden Helmet
 #: ../../../../data/tribes/initialization/frisians/units.lua:608
@@ -14410,7 +14410,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A golden helmet protects soldiers. It is produced in the large armor smithy "
 "and used to train soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Zlatá helma slúži k ochrane vojakov. Vyrába sa vo veľkej vyhni na zbroje a používa sa na výcvik vojakov v zdraví z úrovne 1 na úroveň 2."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Carrier
 #: ../../../../data/tribes/initialization/frisians/units.lua:624
@@ -14927,7 +14927,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1592
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Drevorubačský dom potrebuje vo svojej pracovnej oblasti stromy."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site:
 #. Woodcutter's House, part 1
@@ -16141,7 +16141,7 @@ msgid ""
 "If all needed wares are delivered in time, a training arena can train one "
 "soldier one level in attack in %1$s, one level in defense in %2$s and one "
 "level in health in %3$s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, výcviková aréna dokáže vycvičiť jedného vojaka jednu úroveň útoku v priemere za %1$s, jednu úroveň obrany za %2$s a jednu úroveň zdravia za %3$s."
 
 #. TRANSLATORS: Purpose helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Purpose helptext for a Frisian military site: High Wooden

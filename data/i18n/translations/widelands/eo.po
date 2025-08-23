@@ -843,7 +843,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas publikigi ĉi tiun mapon rete?\n\nNomo:%1$s\nInterna nomo:%2$s\nAŭtoro:%3$s\nPriskribo:%4$s\nKonsileto:%5$s\n\n"
 
 #: ../../../../src/editor/editorinteractive.cc:1580
 msgid "Publish Map"
@@ -856,7 +856,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "Per alŝuto, vi konsentas publikigi la mapon laŭ la kondiĉoj de la Ĝenerala Publika Permesilo (GPL) versio 2 aŭ iu ajn posta versio (la sama permesilo, laŭ kiu Widelands mem estas distribuita). Por pliaj informoj, vidu %s."
 
 #: ../../../../src/editor/editorinteractive.cc:1606
 msgid "Login Error"
@@ -1722,7 +1722,7 @@ msgstr "Hazarda"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random."
-msgstr ""
+msgstr "La tribo estos elektita hazarde."
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1912,7 +1912,7 @@ msgstr "Ekonomioj"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Komercoj"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2410,103 +2410,103 @@ msgstr "Komerca oferto"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Nova komerca oferto ricevita"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Vi ricevis novan komercan oferton de %s."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Komerco akceptita"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Komerca oferto akceptita"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s akceptis vian komercan oferton ĉe %2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Komerco malakceptita"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Komerca oferto malakceptita"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s malakceptis vian komercan oferton ĉe %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Komerco retirita"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Komerca oferto retirita"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "La komerca oferto de %s estis retirita."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Propono por komerca etendo"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Nova propono por komerca etendo ricevita"
 
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s proponis etendi komercon."
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Komerca etendo retirita"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Propono por komerca etendo retirita"
 
 #: ../../../../src/logic/game.cc:1560
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "La propono de %s por komerca etendo estis retirita."
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Komerca etendo malakceptita"
 
 #: ../../../../src/logic/game.cc:1601
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Propono por komerca etendo malakceptita"
 
 #: ../../../../src/logic/game.cc:1602
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s malakceptis vian proponon por komerca etendo."
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr " Komerca etendo akceptita"
 
 #: ../../../../src/logic/game.cc:1656
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr " Propono por komerca etendo akceptita"
 
 #: ../../../../src/logic/game.cc:1657
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s akceptis vian proponon por komerca etendo."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -2598,136 +2598,136 @@ msgstr "%u%% malkonstruita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Nova bazaro estis aldonita al via ekonomio."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u komerco"
+msgstr[1] "%u komercoj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Komerco nuligita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Komerco kompletigita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Komerca interkonsento nuligita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Komerca interkonsento kompletigita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Via komerca interkonsento ĉe %s estas kompletigita."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr " Via komerca interkonsento ĉe %s estas nuligita."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
-msgstr ""
+msgstr "Komerco paŭzita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Komerca interkonsento paŭzita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s paŭzigis la komercon kun vi ĉe %2$s."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Komerco rekomencita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Komerca interkonsento rekomencita"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s rekomencis la komercon kun vi ĉe %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Komerca interkonsento ĉe %1$s kun %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Komerca oferto de %s "
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Komerca oferto de %1$s al %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d aro"
+msgstr[1] "%d aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "La komerco daŭras senlime"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d liverita aro"
+msgstr[1] "%d liveritaj aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d restanta aro"
+msgstr[1] "%d restantaj aroj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
-msgstr ""
+msgstr "Paŭzigita de ambaŭ ludantoj"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
-msgstr ""
+msgstr "Paŭzigita de vi"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:820
 #: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Paŭzigita de %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Aktiva"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
-msgstr ""
+msgstr "Ludanto sendas:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Vi sendas:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2737,15 +2737,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "Ludanto ricevas:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Vi ricevas:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -3460,7 +3460,7 @@ msgstr "Haveno %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Bazaro %d"
 
 #: ../../../../src/logic/player.cc:2097
 #, c-format
@@ -3977,167 +3977,167 @@ msgstr "Neatendita erarmesaĝo estis ricevita pri la komando %1%: %2%"
 #: ../../../../src/network/internet_gaming.cc:706
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr "Oni ricevis nekonatan komandon de la metaservilo: %s"
+msgstr "Ricevis nekonatan komandon de la metaservilo: %s"
 
 #: ../../../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Ne eblis sendi mesaĝon: Vi ne estas konektita al la metaservilo!"
 
 #: ../../../../src/network/internet_gaming.cc:879
 #: ../../../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "Ne eblis sendi mesaĝon: Ĉu ĉi tio supozeble estis privata mesaĝo?"
 
 #: ../../../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "Subtenataj administraj komandoj:"
 
 #: ../../../../src/network/internet_gaming.cc:903
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr ""
+msgstr "/motd <msg> - Agordu konstantan salutmesaĝon"
 
 #: ../../../../src/network/internet_gaming.cc:904
 msgid "/announce <msg> - Send a one time system message"
-msgstr ""
+msgstr "/announce <msg> - Sendu unuufojan sisteman mesaĝon"
 
 #: ../../../../src/network/internet_gaming.cc:907
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr ""
+msgstr "/warn <user> <msg> - Sendu privatan sisteman mesaĝon al la donita uzanto"
 
 #: ../../../../src/network/internet_gaming.cc:910
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <user|game> - Forigu la donitan uzanton aŭ ludon el la metaservilo"
 
 #: ../../../../src/network/internet_gaming.cc:912
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <user> - Forbaru uzanton por 24 horoj el la metaservilo"
 
 #: ../../../../src/network/internet_gaming.cc:991
 msgid "Conversion error"
-msgstr ""
+msgstr "Eraro de konverto"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
 #: ../../../../src/network/internet_gaming.cc:994
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr ""
+msgstr "Ne eblas determini la verovaloron de \"%s\""
 
 #: ../../../../src/network/internet_gaming.cc:1018
 msgctxt "chat_sender"
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #: ../../../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Neniu uzanto kun tiu nomo estas ensalutinta."
 
 #: ../../../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "La ludo jam ne ekzistas, eble ĝi ĵus estis fermita."
 
 #: ../../../../src/network/internet_gaming_messages.cc:30
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Malĝusta pasvorto, bonvolu provi denove."
 
 #: ../../../../src/network/internet_gaming_messages.cc:31
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Vi estis provizore forbarita de reta ludado."
 
 #: ../../../../src/network/internet_gaming_messages.cc:32
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "La protokola versio, kiun vi uzas, ne estas subtenata!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:33
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Vi jam estas ensalutinta!"
 
 #: ../../../../src/network/internet_gaming_messages.cc:36
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "Vi estis malkonektita, ĉar vi sendis superuzantan komandon sen superuzanta permeso. Ĉi tiu incidento estos registrita kaj raportita al la administranto."
 
 #: ../../../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "La konekto estis normale fermita de la kliento."
 
 #: ../../../../src/network/internet_gaming_messages.cc:41
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "La konekto al la metaservilo estis perdita."
 
 #: ../../../../src/network/internet_gaming_messages.cc:42
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "La metaservilo ne respondis."
 
 #: ../../../../src/network/internet_gaming_messages.cc:45
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "Vi estis malkonektita de la metaservilo, ĉar vi ne respondis al PING-peto ĝustatempe."
 
 #: ../../../../src/network/net_addons.cc:895
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Sendante metadatumojn por %s"
 
 #: ../../../../src/network/net_addons.cc:937
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Alŝutante %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
-msgstr ""
+msgstr "La kliento forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:31
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "La kliento paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:32
 msgid "Connection was lost."
-msgstr "Konekto perdiĝis."
+msgstr "La konekto perdiĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:33
 msgid "Server has left the game."
-msgstr ""
+msgstr "La servilo forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:35
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "La ludo komenciĝis tuj post kiam vi provis konektiĝi."
 
 #: ../../../../src/network/network_gaming_messages.cc:36
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "La servilo paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "La kliento kaj la gastiganto malsinkroniĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:38
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Elĵetita de la gastiganto: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "La kliento sendis misformitajn komandojn: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:41
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s forlasis la ludon (%2$s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%1$sestis anstataŭigita per %2$s "
 
 #: ../../../../src/network/network_gaming_messages.cc:43
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Nekonata uzanto forlasis la ludon (%s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:45
 msgid "Server sent a SYNCREQUEST even though no game is running."
@@ -9014,7 +9014,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

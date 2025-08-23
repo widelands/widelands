@@ -4769,7 +4769,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Čas"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -8357,7 +8357,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:211
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Vyhňa na nástroje"
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"

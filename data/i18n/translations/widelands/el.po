@@ -8964,7 +8964,7 @@ msgstr "Εφαρμογή"
 #: ../../../../src/wlapplication_options.cc:1423
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Παύση"
 
 #: ../../../../src/wlapplication_options.cc:1425
 msgctxt "hotkey"
@@ -9014,7 +9014,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
