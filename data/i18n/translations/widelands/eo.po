@@ -4056,88 +4056,88 @@ msgstr "Vi jam estas ensalutinta!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "Vi estis malkonektita, ĉar vi sendis superuzantan komandon sen superuzanta permeso. Ĉi tiu incidento estos registrita kaj raportita al la administranto."
 
 #: ../../../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "La konekto estis normale fermita de la kliento."
 
 #: ../../../../src/network/internet_gaming_messages.cc:41
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "La konekto al la metaservilo estis perdita."
 
 #: ../../../../src/network/internet_gaming_messages.cc:42
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "La metaservilo ne respondis."
 
 #: ../../../../src/network/internet_gaming_messages.cc:45
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "Vi estis malkonektita de la metaservilo, ĉar vi ne respondis al PING-peto ĝustatempe."
 
 #: ../../../../src/network/net_addons.cc:895
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Sendante metadatumojn por %s"
 
 #: ../../../../src/network/net_addons.cc:937
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Alŝutante %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
-msgstr ""
+msgstr "La kliento forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:31
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "La kliento paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:32
 msgid "Connection was lost."
-msgstr "Konekto perdiĝis."
+msgstr "La konekto perdiĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:33
 msgid "Server has left the game."
-msgstr ""
+msgstr "La servilo forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:35
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "La ludo komenciĝis tuj post kiam vi provis konektiĝi."
 
 #: ../../../../src/network/network_gaming_messages.cc:36
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "La servilo paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "La kliento kaj la gastiganto malsinkroniĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:38
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Elĵetita de la gastiganto: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "La kliento sendis misformitajn komandojn: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:41
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s forlasis la ludon (%2$s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%1$sestis anstataŭigita per %2$s "
 
 #: ../../../../src/network/network_gaming_messages.cc:43
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Nekonata uzanto forlasis la ludon (%s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:45
 msgid "Server sent a SYNCREQUEST even though no game is running."
@@ -9014,7 +9014,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
