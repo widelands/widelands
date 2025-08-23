@@ -670,7 +670,7 @@ msgstr "Loftomor podáva správu"
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Nech ťa Satul hreje, Jundlína! Dokončili sme výheň na nástroje a teraz naši kováči v okamihu vyrobia nové nástroje."
+msgstr "Nech ťa Satul hreje, Jundlína! Dokončili sme vyhňu na nástroje a teraz naši kováči v okamihu vyrobia nové nástroje."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
@@ -683,7 +683,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Nech ťa Satul tiež zahreje, Loftomor. To je dobrá správa. Nezabudni však prosím, že náš kováč nástrojov musí byť vybavený pílou. Výroba nástrojov je pre nás umenie ktoré si vyžaduje precízny nástroj, ako je píla, a nie brutálne kladivo ako u ostatných kmeňov."
+msgstr "Nech ťa Satul tiež zahreje, Loftomor. To je dobrá správa. Nezabudni však prosím, že náši kováči nástrojov musia byť vybavení pílou. Výroba nástrojov je pre nás umenie, ktoré si vyžaduje precízny nástroj, ako je píla, a nie brutálne kladivo ako u ostatných kmeňov."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"

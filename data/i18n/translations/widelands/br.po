@@ -9142,7 +9142,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Dilemel"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

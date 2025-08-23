@@ -4669,7 +4669,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Hantar"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -8966,7 +8966,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Padam"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

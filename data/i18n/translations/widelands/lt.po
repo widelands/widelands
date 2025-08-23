@@ -2849,7 +2849,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1489
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$i x %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:540
@@ -9099,7 +9099,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Ištrinti"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

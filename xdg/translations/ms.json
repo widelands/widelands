@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Permainan Strategi",
 	"tagline": "Permainan strategi pembinaan masa-nyata",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.",
 		"Widelands menawarkan mod pemain-tunggal dengan kempen yang menceritakan kisah sebuah puak dan perjuangan mereka di dunia Widelands. Peredaan sebenarnya bermula apabila anda bersatu dengan rakan anda di Internet atau LAN untuk bersama-sama membina sebuah empayar - atau musnahkan di antara satu sama lain. Widelands juga menawarkan kepintaran buatan yang dapat memberi cabaran kepada anda."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }

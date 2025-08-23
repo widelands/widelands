@@ -4703,7 +4703,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Sendt"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""

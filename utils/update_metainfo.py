@@ -59,6 +59,9 @@ if (not os.path.isdir(translations_path)):
     print('Error: Path ' + translations_path + ' not found.')
     sys.exit(1)
 
+# Not critical, we only need its last modification time here.
+release_notes_filename = os.path.normpath(base_path + '/Release_Notes.md')
+
 english_source_filename = os.path.normpath(
     # metainfo used to be called appdata, that's how it was added on transifex
     base_path + '/xdg/translations/appdata.json')
@@ -186,6 +189,8 @@ dev_version = open(os.path.join(base_path, 'NEXT_STABLE_VERSION')).read().strip(
 
 release_regex = re.compile(r'^ *<release[^>]* version="([0-9.A-Za-z~@ _-]*)"/>$')
 releases_processed = 0
+if len(release_notes) == 0:
+    releases_processed = -1
 
 for line in input_file:
     if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
@@ -208,25 +213,30 @@ for line in input_file:
             version = dev_version
             if not ' date=' in line:
                 # Date is not in stub to not have to update it all the time, but we need something
-                # stable to avoid churn in git. We will use current date as fallback value.
-                date = datetime.datetime.today().strftime('%Y-%m-%d')
+                # stable to avoid churn in git, so we use the date of the last modification of
+                # Release_Notes.md. We will use the current date as fallback value if the detection
+                # fails.
+                date = datetime.date.today().isoformat()
                 result = subprocess.run( \
-                    ('git log -1 --format=%ci -- ' + english_source_filename).split(), \
+                    ('git log -1 --format=%ci -- ' + release_notes_filename).split(), \
                     text=True, encoding='utf-8', capture_output=True)
                 if result.returncode == 0:
                     date = result.stdout[:10]
                 idx = line.find('version=')
                 line = line[:idx] + f'date="{ date }" ' + line[idx:]
-        metainfo += line.rstrip()[:-2] + '>\n'  # replace '/>' with '>'
-        if not version in release_notes:
-            print('<releases> in metainfo stub are not in sync with Release_Notes.md!')
-            sys.exit(1)
-        metainfo += release_notes[version]
-        if version in release_urls:
-            metainfo += f'      <url type="details">{ release_urls[version] }</url>\n'
+        if len(release_notes) > 0:
+            metainfo += line.rstrip()[:-2] + '>\n'  # replace '/>' with '>'
+            if not version in release_notes:
+                print('<releases> in metainfo stub are not in sync with Release_Notes.md!')
+                sys.exit(1)
+            metainfo += release_notes[version]
+            if version in release_urls:
+                metainfo += f'      <url type="details">{ release_urls[version] }</url>\n'
+            else:
+                print('WARNING: No URL for version ' + version)
+            metainfo += '    </release>\n'
         else:
-            print('WARNING: No URL for version ' + version)
-        metainfo += '    </release>\n'
+            metainfo += line
         releases_processed += 1
     else:
         metainfo += line

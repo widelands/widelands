@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Strateška igra",
 	"tagline": "Graditeljska strateška igra v realnem času",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Ste poveljnik majhnega klana. Vaša naloga je zgraditi rastočo naselbino. Vsak član klana bo opravil svoj del naloge pri pridobivanju surovin in njeni rasti.",
 		"Widelands ponuja enoigralski način s kampanijami, ki pripovedujejo o plemenih in njihovem trudu osvojiti prostor Widelands. Pravo naseljevanje pa se začne šele, ko se poenotite z vašimi prijatelji prek interneta ali lokalnega omrežja in zgradite nove imperije skupaj - ali pa premagate drug drugega v vojni. Widelands ponuja tudi boj z računalniškimi nasprotniki."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }
