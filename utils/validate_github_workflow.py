@@ -44,7 +44,7 @@ class CheckGithubYaml:
                 return self._check_glob_path_exists(file.replace('**', '**/*'), False)
         return None
 
-    def _check_glob_path_valid(self, file, ref):
+    def _check_glob_path_valid(self, file, ref, in_parentheses=False):
         exists = False
         if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
@@ -58,7 +58,7 @@ class CheckGithubYaml:
             ex_patterns = []
             for ex_part in ex_parts:
                 mfile = file[0:l] + ex_part + file[r+1:]
-                self._check_glob_path_valid(mfile, ref)
+                self._check_glob_path_valid(mfile, ref, True)
                 ex_patterns.append(mfile)
             # replace !(xx|yy) by * to check if any other match exists
             mfile = file[0:l] + '*' + file[r+1:]
@@ -73,6 +73,9 @@ class CheckGithubYaml:
                         if file_in_git(match_path):
                             return True  # found another match
                     match_path = next(i, None)
+        elif in_parentheses and file.endswith('/**'):
+            # in dorny/paths-filter, a/!(d|f)/** must be used to exclude a file a/f (with dir a/d)
+            return True
         self._report_path_invalid(file, exists, ref)
         return False
 
