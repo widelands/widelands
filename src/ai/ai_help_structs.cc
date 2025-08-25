@@ -630,8 +630,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
 		DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                               DnaParent::kPrimary :
-                               DnaParent::kSecondary;
+		                         DnaParent::kPrimary :
+		                         DnaParent::kSecondary;
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
@@ -649,8 +649,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                                     DnaParent::kPrimary :
-                                     DnaParent::kSecondary;
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
@@ -666,8 +666,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-                                     DnaParent::kPrimary :
-                                     DnaParent::kSecondary;
+		                               DnaParent::kPrimary :
+		                               DnaParent::kSecondary;
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
 			persistent_data->f_neurons.push_back(f_neurons_P1[i]);
@@ -1162,8 +1162,8 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 	const int my_team_sc =
 	   me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
 	const int other_team_sc = other_alone ?
-                                get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
-                                get_team_average_score(other_tn, pn);
+	                             get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
+	                             get_team_average_score(other_tn, pn);
 	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_sc);
 	const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
 

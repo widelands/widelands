@@ -8,6 +8,7 @@
 
 For a troughout test the author recommends https://github.com/rhysd/actionlint/
 this tool just does some additional tests.
+
 """
 
 import fnmatch
@@ -20,7 +21,7 @@ import yaml
 
 
 def file_in_git(file):
-    'returns True if the file is tracked by git'
+    """returns True if the file is tracked by git."""
     cmd = ['git', 'ls-files', '--error-unmatch', file]
     fp = subprocess.run(cmd, stdout=subprocess.DEVNULL)
     return fp.returncode == 0
@@ -94,7 +95,7 @@ class CheckGithubYaml:
         else:
             msg = 'missing file:'
         if os.getenv('GITHUB_ACTION'):
-            msg = f'::error file={ ref["file"] }::{ msg }'
+            msg = f'::error file={ ref['file'] }::{ msg }'
         print(msg, file, 'from', ref)
         self.failures += 1
 

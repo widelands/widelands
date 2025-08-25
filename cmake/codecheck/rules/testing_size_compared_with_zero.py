@@ -5,6 +5,7 @@
 check whether it contains something.
 
 Just use "!something.empty()".
+
 """
 
 error_msg = 'Do not use a.size() to check for emptiness, use a.empty() instead.'

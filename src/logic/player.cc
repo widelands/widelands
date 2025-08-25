@@ -819,8 +819,8 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
-                                 get_buildcaps(fc) :
-                                 map.get_max_nodecaps(egbase(), fc);
+	                              get_buildcaps(fc) :
+	                              map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
 		if ((buildcaps & BUILDCAPS_MINE) == 0) {
 			return false;
@@ -922,8 +922,8 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
 						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other = flag == &primary_start ?
-                                           primary_road->get_flag(RoadBase::FlagEnd) :
-                                           primary_start;
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_start;
 						primary_road->destroy(egbase());
 						verb_log_info_time(egbase().get_gametime(),
 						                   "destroying road/waterway from (%i, %i) going in dir %u\n",
@@ -1999,8 +1999,8 @@ std::string Player::pick_shipname() {
 
 	const size_t index =
 	   egbase().is_game() ?
-         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
-         RNG::static_rand(remaining_shipnames_.size());
+	      (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
+	      RNG::static_rand(remaining_shipnames_.size());
 	std::string new_name = remaining_shipnames_.at(index);
 	remaining_shipnames_.at(index) = remaining_shipnames_.back();
 	remaining_shipnames_.pop_back();
@@ -2017,8 +2017,8 @@ std::string Player::pick_warehousename(bool port) {
 
 	const size_t index =
 	   egbase().is_game() ?
-         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
-         RNG::static_rand(remaining_warehousenames_.size());
+	      (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
+	      RNG::static_rand(remaining_warehousenames_.size());
 	std::string new_name = remaining_warehousenames_.at(index);
 	remaining_warehousenames_.at(index) = remaining_warehousenames_.back();
 	remaining_warehousenames_.pop_back();

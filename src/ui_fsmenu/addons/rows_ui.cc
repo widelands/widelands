@@ -50,7 +50,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		                       "Category: %4$s\n"
 		                       "%5$s\n\n"
 		                       "Note that this add-on can not be downloaded again from the server.") :
-                           _("Are you certain that you want to uninstall this add-on?\n\n"
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
 		                       "by %2$s\n"
 		                       "Version %3$s\n"
@@ -108,7 +108,7 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
-                                                                    UI::FontStyle::kWarning)
+		                                                              UI::FontStyle::kWarning)
 		             .as_font_tag(str);
 	}
 	return result;
@@ -196,12 +196,12 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 			if (pair.first->internal_name == info->internal_name) {
 				pair.second = !pair.second;
 				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
-                                                          "images/ui_basic/checkbox_checked.png" :
-                                                          "images/ui_basic/checkbox_empty.png"));
+				                                              "images/ui_basic/checkbox_checked.png" :
+				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
-                                                     AddOns::UpdateThemeAction::kAutodetect,
+					                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
 				}
@@ -251,7 +251,7 @@ void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 :
 	                                               enabled_    ? -20 :
-                                                                0);
+	                                                             0);
 }
 
 void RemoteAddOnRow::draw(RenderTarget& r) {
@@ -477,28 +477,28 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));
 	verified_.set_tooltip(
 	   info->internal_name.empty() ?
-         _("Error") :
+	      _("Error") :
 	   info->verified ?
-         _("Verified by the Widelands Development Team") :
-         _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
+	      _("Verified by the Widelands Development Team") :
+	      _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	quality_.set_tooltip(info->internal_name.empty() ?
-                           _("Error") :
-                           AddOnQuality::kQualities.at(info->quality)().description);
+	                        _("Error") :
+	                        AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
-         "" :
-         format(
+	      "" :
+	      format(
 	         "%s<br>%s<br>%s<br>%s<br>%s",
 	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
 	                info->total_file_size),
 	         format(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() != 0u ?
-                format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	             format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                      info->average_rating(), info->number_of_votes()) :
-                _("No votes yet")),
+	             _("No votes yet")),
 	         format(ngettext("%u comment", "%u comments", info->user_comments.size()),
 	                info->user_comments.size()),
 	         format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size()),

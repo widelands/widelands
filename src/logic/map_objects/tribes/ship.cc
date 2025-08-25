@@ -1111,12 +1111,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
 	      (lastdock_.is_set()) ?
-            format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	         format("%u (%s at %3dx%3d)", lastdock_.serial(),
 	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
 	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
 	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	            .c_str() :
-            "-");
+	         "-");
 	if (destination_ != nullptr) {
 		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", destination_->serial(),
 		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y,
@@ -1139,12 +1139,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "  * %u (%s), destination: %s\n", shipping_item.object_.serial(),
 		      shipping_item.object_.get(egbase)->descr().name().c_str(),
 		      (shipping_item.destination_dock_.is_set()) ?
-               format("%u (%d x %d)", shipping_item.destination_dock_.serial(),
+		         format("%u (%d x %d)", shipping_item.destination_dock_.serial(),
 		                shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x,
 		                shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y)
 
 		            .c_str() :
-               "-");
+		         "-");
 	}
 }
 
