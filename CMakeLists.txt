@@ -320,7 +320,7 @@ else()
     "-Winvalid-pch"
     "-Wmissing-include-dirs"
     "-Wno-undef"
-    "-Wold-style-cast"
+#    "-Wold-style-cast"  # TODO(somebody): enable again, only ignore for third_party/eris/
     "-Woverlength-strings"
     "-Wpacked"
     "-Wpointer-arith"
@@ -608,4 +608,3 @@ if(NOT TARGET uninstall)
   add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
 endif()
-
