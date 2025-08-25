@@ -375,6 +375,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nds">Lade Internettsied-Kaarten as Verwiederns runner</li>
         <li xml:lang="nds">Neje Wiesaarden im Bewarker</li>
         <li xml:lang="nds">Mennig neje Künnen för Verwiederns-Entwicklers</li>
+        <li xml:lang="sk">Obchodovanie v tržnici</li>
+        <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
+        <li xml:lang="sk">Ekonomické oblasti</li>
+        <li xml:lang="sk">Veľa vylepšení v hernej encyklopédii</li>
+        <li xml:lang="sk">Mapy z webstránky sa dajú stiahnuť ako doplnky</li>
+        <li xml:lang="sk">Nové zobrazenia v editore</li>
+        <li xml:lang="sk">Veľa nových funkcií pre vývoj doplnkov</li>
       </ul></description>
       <url type="details">https://codeberg.org/wl/widelands/milestone/4647?type=all&amp;state=closed&amp;sort=recentupdate</url>
     </release>
@@ -546,6 +553,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <name xml:lang="cs">Tým vývojářů Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
+    <name xml:lang="sk">Vývojový tím hry Widelands</name>
   </developer>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>

@@ -5156,7 +5156,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr ""
+msgstr "Čiernokoreňová farma potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1865
@@ -6427,7 +6427,7 @@ msgid ""
 "Felling axes are used by lumberjacks and produced in the metal workshop (but"
 " cease to be produced by the building if it is enhanced to an ax workshop "
 "and war mill)."
-msgstr ""
+msgstr "Drevorubačské sekery používajú drevorubači a vyrábajú sa v kovodielni (ale prestanú sa v nej vyrábať, keď sa vylepší na výrobňu sekier alebo vojenský závod)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Shovel, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:358
@@ -6518,7 +6518,7 @@ msgid ""
 "They are used in the smelting works and produced by the metal workshop (but "
 "they cease to be produced by the building if it is enhanced to an ax "
 "workshop and war mill)."
-msgstr ""
+msgstr "Používajú sa v taviarni a vyrábajú sa v kovodielni (ktorá ich však prestane vyrábať po vylepšení na výrobňu sekier alebo vojenský závod)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Ax
 #: ../../../../data/tribes/initialization/barbarians/units.lua:458
@@ -7688,7 +7688,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr ""
+msgstr "Barbarská výrobňa sekier je prostrednou produkčnou stavbou v sérii troch budov. Vzniká vylepšením kovodielne, ale nepožaduje vyššiu kvalifikáciu pracovníka."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Ax
 #. Workshop
@@ -10521,7 +10521,7 @@ msgctxt "empire_ware"
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
-msgstr "Z čiernych koreňov sa v mlynoch vyrába múka. Používa sa v pekárňach na prípravu chutného chleba."
+msgstr "Múka sa vyrába v mlyne z pšenice a používa sa v pekárni na výrobu chutného imperiálneho chleba."
 
 #. TRANSLATORS: Helptext for an Empire ware: Bread
 #: ../../../../data/tribes/initialization/empire/units.lua:225
@@ -14032,7 +14032,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr ""
+msgstr "Drevorubači rúbu stromy, kým horári sa starajú o zásobu stromov. Kmene sa ďalej používajú na výrobu základných nástrojov v kováčstve a produkciu uhlia v uhliarskej peci. V udiarňach kmene slúžia ako palivo na údenie mäsa a rýb."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Granite, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:112
@@ -14295,19 +14295,19 @@ msgstr "Rybárske siete sú nástrojom, ktorý používajú rybári."
 #: ../../../../data/tribes/initialization/frisians/units.lua:457
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr ""
+msgstr "Lovecké oštepy sa vyrábajú v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:470
 msgctxt "frisians_ware"
 msgid "Scythes are produced by the blacksmithy."
-msgstr ""
+msgstr "Kosy sa vyrábajú v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Bread Paddle, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:483
 msgctxt "frisians_ware"
 msgid "Bread paddles are produced by the blacksmithy."
-msgstr ""
+msgstr "Pekárske lopaty sa vyrábajú v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Kitchen Tools
 #: ../../../../data/tribes/initialization/frisians/units.lua:493
@@ -14323,7 +14323,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used in the furnace and the brick kiln and produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Používajú sa v peci a tehliarskej peci a vyrábajú sa v kováčstve."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Basket
 #: ../../../../data/tribes/initialization/frisians/units.lua:515
@@ -15208,7 +15208,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
-msgstr ""
+msgstr "Bobuľová farma vyžaduje vo svojej pracovnej oblasti voľné miesto na sadenie kríkov."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Berry
 #. Farm, part 1
@@ -15674,7 +15674,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr ""
+msgstr "Pekáreň vyrobí bochník chleba v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Honey Bread
 #. Bakery
@@ -16085,7 +16085,7 @@ msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
 "level."
-msgstr ""
+msgstr "Frízskych vojakov nemožno cvičiť v uhýbaní, a preto zostanú na počiatočnej úrovni."
 
 #. TRANSLATORS: Performance helptext for a Frisian training site: Training
 #. Camp, part 1

@@ -3701,7 +3701,7 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "Včelár pracujúci v tomto včelárskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne kvetové polia alebo kríky. Porozmýšľajte nad postavením ďalšej farmy alebo bobuľovej farmy, prípadne nad rozobratím alebo zničením tejto budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
