@@ -22,6 +22,8 @@
 #include <cassert>
 #include <map>
 #include <memory>
+#include <tuple>
+#include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>
@@ -185,11 +187,17 @@ public:
 
 	void register_songs(const std::string& dir, const std::string& basename);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
+	std::string current_song();
+	[[nodiscard]] bool is_shuffle() const;
+	void set_shuffle(bool on);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+	void set_music_track_enabled(std::string& filename, bool on);
+	bool is_music_track_enabled(std::string& filename);
+	std::vector<Song> get_music_data();
+
 	void use_custom_songset(bool on);
 	[[nodiscard]] bool use_custom_songset() const;
-
 	[[nodiscard]] const std::string current_songset() const;
 
 	[[nodiscard]] bool is_sound_enabled(SoundType type) const;
@@ -213,6 +221,7 @@ private:
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);
+	void notify_song_title_changed(const std::string& song_name);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -257,6 +266,9 @@ private:
 	 */
 	std::string current_songset_;
 
+	/// The title of the current (or most recently played) son
+	std::string current_song_;
+
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!
@@ -273,6 +285,7 @@ private:
 	 */
 	static bool backend_is_disabled_;
 	bool use_custom_songset_instead_ingame_;
+	bool shuffle_;
 };
 
 extern SoundHandler* g_sh;
