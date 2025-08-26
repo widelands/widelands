@@ -4769,7 +4769,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Poslané"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -6609,7 +6609,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:456
 msgid "Connection Timed Out"
-msgstr ""
+msgstr "Časový limit spojenia vypršal"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:485
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:547
@@ -7868,7 +7868,7 @@ msgstr "Nasledovať myš"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:604
@@ -8119,7 +8119,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication.cc:959
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Hre Widelands sa nepodarilo nájsť poslednú editovanú mapu."
 
 #: ../../../../src/wlapplication.cc:964
 msgid "No Last Edited Map"
@@ -8253,27 +8253,27 @@ msgstr "Prístav"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Vedľajšia výcviková stavba"
 
 #: ../../../../src/wlapplication_options.cc:186
 msgid "Major Training Site"
-msgstr ""
+msgstr "Hlavná výcviková stavba"
 
 #: ../../../../src/wlapplication_options.cc:187
 msgid "Primary Small Military Site"
-msgstr ""
+msgstr "Primárna malá vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:188
 msgid "Secondary Small Military Site"
-msgstr ""
+msgstr "Sekundárna malá vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:189
 msgid "Primary Medium Military Site"
-msgstr ""
+msgstr "Primárna stredná vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:190
 msgid "Secondary Medium Military Site"
-msgstr ""
+msgstr "Sekundárna stredná vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
@@ -8309,15 +8309,15 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:199
 msgid "Fishing"
-msgstr ""
+msgstr "Chytanie rýb"
 
 #: ../../../../src/wlapplication_options.cc:200
 msgid "Hunting"
-msgstr ""
+msgstr "Lov"
 
 #: ../../../../src/wlapplication_options.cc:201
 msgid "Fish/Meat Replenishing"
-msgstr ""
+msgstr "Dopĺňanie rýb/mäsa"
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
@@ -8325,11 +8325,11 @@ msgstr "Studňa"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
-msgstr ""
+msgstr "Primárna farma"
 
 #: ../../../../src/wlapplication_options.cc:204
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Sekundárna farma"
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
@@ -8353,11 +8353,11 @@ msgstr "Krčma"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
-msgstr ""
+msgstr "Tavenie rudy"
 
 #: ../../../../src/wlapplication_options.cc:211
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Vyhňa na nástroje"
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
@@ -8381,7 +8381,7 @@ msgstr "Trajektový dvor"
 
 #: ../../../../src/wlapplication_options.cc:217
 msgid "Scouting"
-msgstr ""
+msgstr "Prieskum"
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"

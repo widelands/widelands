@@ -54,7 +54,7 @@ msgstr "Ochráňte svoju osadu"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr "Postavte niekoľko vojenských zrubov alebo strážnic v okolí kolónie."
+msgstr "Postavte niekoľko vojenských zrubov a strážnic v okolí kolónie."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -105,7 +105,7 @@ msgstr "To, samozrejme, znamená, že na prípravu týchto jedál budeme potrebo
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "Pre získanie týchto potravín môžete postaviť dom rybára, dom lovca, farmu, mlyn a pekáreň."
+msgstr "Pre získanie týchto potravín môžete postaviť rybársky dom, lovecký dom, farmu, mlyn a pekáreň."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""

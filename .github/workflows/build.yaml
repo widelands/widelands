@@ -32,6 +32,7 @@ jobs:
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
+        #   pattern: https://github.com/micromatch/picomatch?tab=readme-ov-file#globbing-features
         filters: |
           _anchors: # to define yaml anchors in one place
             - &src_cmake_dependencies
@@ -60,7 +61,16 @@ jobs:
             - '.clang-tidy'
           test_suite:
             - *ubuntu_dependencies
-            - 'data/**' # TODO(aDiscoverer) list what needs to be checked
+            # data/ except of some subdirectories
+            - 'data/!(campaigns|i18n|maps|music|sound)/**'
+            # but track parts of them
+            - 'data/i18n/!(translations)/**'  # exclude translations, they are updated frequently
+            - 'data/i18n/!(translations|translation_stats.conf)'  # also from translation (above)
+            - 'data/maps/Crater.wmf/**' # for test/template/test_alldefaults.wgt
+            - 'data/maps/Lesser_Ring.wmf/**' # for test/template/*.wgt
+            - 'data/maps/Wisent_Valley.wmf/**' # for test/template/test_fortified_vi*-artifacts.wgt
+            - 'data/*' # do not ignore files directly inside
+            # changes of other files
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
