@@ -866,7 +866,7 @@ msgstr "Amikor egy épület megsemmisül, a benne lévő munkások keresnek egy 
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "A kereskedés kisegítheti a gazdaságodat a nehézségek idején, és megerősíti a kapcsolatot a játékosok között. A használatának az alapjait a „Gazdaság és kereskedelem” oktatójátékban tanulhatod meg."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

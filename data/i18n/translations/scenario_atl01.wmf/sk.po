@@ -84,7 +84,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Jedlo je veľmi dôležité pre bane a výcvikové oblasti. Zriaďte dobre fungujúce potravinárske prostredie postavením aspoň jednej farmy, jednej farmy s čiernym koreňom a mlynu. Tieto dva druhy múky sa spolu s vodou zo studne použijú na výrobu chleba v pekárni, takže postavte aj pekáreň a studňu."
+msgstr "Jedlo je veľmi dôležité pre bane a výcvikové stavby. Zriaďte dobre fungujúce potravinárske prostredie postavením aspoň jednej farmy, jednej čiernokoreňovej farmy a mlynu. Dva druhy múky sa spolu s vodou zo studne použijú na výrobu chleba v pekárni, takže postavte aj pekáreň a studňu."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -670,7 +670,7 @@ msgstr "Loftomor podáva správu"
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Nech ťa Satul hreje, Jundlína! Dokončili sme výheň na nástroje a teraz naši kováči v okamihu vyrobia nové nástroje."
+msgstr "Nech ťa Satul hreje, Jundlína! Dokončili sme vyhňu na nástroje a teraz naši kováči v okamihu vyrobia nové nástroje."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
@@ -683,7 +683,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Nech ťa Satul tiež zahreje, Loftomor. To je dobrá správa. Nezabudni však prosím, že náš kováč nástrojov musí byť vybavený pílou. Výroba nástrojov je pre nás umenie ktoré si vyžaduje precízny nástroj, ako je píla, a nie brutálne kladivo ako u ostatných kmeňov."
+msgstr "Nech ťa Satul tiež zahreje, Loftomor. To je dobrá správa. Nezabudni však prosím, že náši kováči nástrojov musia byť vybavení pílou. Výroba nástrojov je pre nás umenie, ktoré si vyžaduje precízny nástroj, ako je píla, a nie brutálne kladivo ako u ostatných kmeňov."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"

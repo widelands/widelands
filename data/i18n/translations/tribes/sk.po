@@ -1855,7 +1855,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "Kamenárka pracujúca v tejto chatrči nedokáže vo svojej pracovnej oblasti nájsť žiadne skaly."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -3625,7 +3625,7 @@ msgstr "Rybár pracujúci na tejto vodnej farme nedokáže vo svojej pracovnej o
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
 msgctxt "frisians_building"
 msgid "Large Armor Smithy"
-msgstr "Veľká vyhňa na zbroj"
+msgstr "Veľká vyhňa na zbroje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
@@ -3649,7 +3649,7 @@ msgstr "kutie zlatej helmy"
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:8
 msgctxt "frisians_building"
 msgid "Small Armor Smithy"
-msgstr "Malá vyhňa na zbroj"
+msgstr "Malá vyhňa na zbroje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
@@ -3701,7 +3701,7 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "Včelár pracujúci v tomto včelárskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne kvetové polia alebo kríky. Porozmýšľajte nad postavením ďalšej farmy alebo bobuľovej farmy, prípadne nad rozobratím alebo zničením tejto budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -9339,7 +9339,7 @@ msgstr "Vojak"
 #: ../../../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr "Chovateľ pavúkov"
+msgstr "Chovateľka pavúkov"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8

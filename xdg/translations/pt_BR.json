@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Jogo de estratégia",
 	"tagline": "Um jogo em tempo real de estratégia e evolução",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Você é o governante de um pequeno clã. Sua meta é construir um assentamento em constante crescimento. Cada membro do seu clã fará sua parte para produzir recursos de forma a sustentar esse crescimento.",
 		"Widelands têm um modo de único jogador com campanhas que contam estórias das tribos e sua luta no universo Widelands. No entanto, o verdadeiro jogo começa quando se une os amigos pela Internet ou pela LAN para construir novos impérios juntos - ou aniquilar uns aos outros. Widelands também disponibiliza uma inteligência artificial para desafiar você."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }
