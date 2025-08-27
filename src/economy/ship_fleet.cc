@@ -292,6 +292,9 @@ void ShipFleet::split(Game& game) {
 	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: interfaces removed");
 	for (auto& ship : fleetships) {
 		ship->set_destination(game, nullptr);
+		for (ShippingItem& si : ship->items_) {
+			si.destination_dock_ = nullptr;
+		}
 		remove_ship(game, ship);
 	}
 	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ships removed");
