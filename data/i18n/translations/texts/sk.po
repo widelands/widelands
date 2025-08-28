@@ -572,7 +572,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Sledujte činnosť svojich rybárov a postavte rybochovateľov dom. Potom ako sa v ich pracovnej oblasti minú ryby, nie je už možné zdroj rýb obnoviť."
+msgstr "Sledujte činnosť svojich rybárov a postavte rybnikársky dom. Potom ako sa v ich pracovnej oblasti minú ryby, nie je už možné zdroj rýb obnoviť."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -696,7 +696,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
+msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo kamennú baňu; pre ich postavenie potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."

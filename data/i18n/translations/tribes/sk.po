@@ -2216,7 +2216,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr ""
+msgstr "Rybnikár pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť žiadne miesto vody, kde by mohol chovať ryby. Pamätajte, že svoje rybie zdroje môžete obnoviť iba vtedy, ak sa v okolí niekedy nejaké ryby nachádzali."
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:61
 msgid "The fishing grounds are full"
@@ -3776,7 +3776,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Uhliar pracujúci v tejto uhliarni nedokáže vo svojej pracovnej oblasti nájsť hlinené nádrže. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a uhliareň je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
+msgstr "Uhliar pracujúci z tohto domu nedokáže vo svojej pracovnej oblasti nájsť hlinené nádrže. Prosím uistite sa, že v okolí sa nachádza funkčná jama na hlinu a uhliareň je zásobená všetkým potrebným, prípadne uvažujte nad rozobratím alebo zničením tejto budovy."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3864,7 +3864,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "Zberateľ ovocia pracujúci v tomto zberateľskom dome nedokáže vo svojej pracovnej oblasti nájsť žiadne bobuľové kríky. Porozmýšľajte nad postavením ďalšej bobuľovej farmy, prípadne nad rozobratím alebo zničením tejto budovy."
+msgstr "Zberateľ ovocia pracujúci v tomto dome nedokáže vo svojej pracovnej oblasti nájsť žiadne bobuľové kríky. Porozmýšľajte nad postavením ďalšej bobuľovej farmy, prípadne nad rozobratím alebo zničením tejto budovy."
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
@@ -5667,7 +5667,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr ""
+msgstr "Začať hru iba s ústredím a máličkom zdrojov pre rozbehnutie ekonomiky. Upozornenie: AI sa nebude vedieť úspešne rozvinúť."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11

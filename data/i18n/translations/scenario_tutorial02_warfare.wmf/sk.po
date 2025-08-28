@@ -55,7 +55,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Nový vojak sa vytvára inak ako ostatní robotníci: verbovanci prejdú zo skladu (alebo vášho ústredia) do kasární, kde získajú základný tréning a stanú sa vojakmi. Základní barbarskí vojaci nepoužívajú brnenie, potrebujú iba sekeru."
+msgstr "Noví vojaci sa vytvárajú inak ako ostatní robotníci: verbovanci prejdú zo skladu (alebo vášho ústredia) do kasární, kde získajú základný tréning a stanú sa vojakmi. Základní barbarskí vojaci nepoužívajú brnenie, potrebujú iba sekeru."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
