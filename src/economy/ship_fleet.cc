@@ -132,7 +132,8 @@ struct StepEvalFindShipFleet {
 		if ((from.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			// We are allowed to land on and leave the shore,
 			// but not in the middle of a path
-			if (fromcost > 0) {
+			// also prevent 1 step paths between 2 land nodes
+			if (fromcost > 0 || (fromcost == 0 && (to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
 				return -1;
 			}
 
@@ -268,6 +269,51 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 
 	update(egbase);
 	return false;
+}
+
+/**
+ * Split the fleet into two or more fleets, due to changed terrain.
+ *
+ */
+void ShipFleet::split(Game& game) {
+	// something changed the map, splitting fleets (Diker, maps scripts, etc.)
+	// we do not know which ports and ships are affected in the fleet
+	// therefore we need to remove them all from the fleet (effectively deleting the fleet)
+	// and afterwards reinit new fleets
+	std::vector<Ship*> fleetships = ships_;
+	std::vector<PortDock*> fleetports = ports_;
+	std::vector<ShipFleetYardInterface*> fleetinterfaces = interfaces_;
+	std::set<ProductionSite*> fleetshipyards;
+
+	for (auto& interface : fleetinterfaces) {
+		fleetshipyards.insert(interface->get_building());
+		remove_interface(game, interface);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: interfaces removed");
+	for (auto& ship : fleetships) {
+		ship->set_destination(game, nullptr);
+		for (ShippingItem& si : ship->items_) {
+			si.destination_dock_ = nullptr;
+		}
+		remove_ship(game, ship);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ships removed");
+	for (auto& port : fleetports) {
+		remove_port(game, port);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ports removed");
+	for (auto& port : fleetports) {
+		port->init_fleet(game);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ports added");
+	for (auto& ship : fleetships) {
+		ship->init_fleet(game);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: ships added");
+	for (const auto& yard : fleetshipyards) {
+		yard->init_yard_interfaces(game);
+	}
+	verb_log_dbg_time(game.get_gametime(), "[Splitting ShipFleet]: yardinterfaces added");
 }
 
 /**
