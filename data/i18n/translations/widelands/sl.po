@@ -4766,7 +4766,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Poslano ob"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -9099,7 +9099,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Zbriši"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

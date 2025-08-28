@@ -2614,16 +2614,16 @@ msgstr "rozobratých %u %%"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Vaša ekonomika bola rozšírená o novú tržnicu."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u obchod"
+msgstr[1] "%u obchody"
+msgstr[2] "%u obchoda"
+msgstr[3] "%u obchodov"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
@@ -2761,7 +2761,7 @@ msgstr "Vy pošlete:"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
@@ -3003,13 +3003,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Lodenica bez pobrežia"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Vaša lodenica nebola postavená dostatočne blízko pobrežia. Nebude môcť stavať lode."
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
 msgid "Ferry Yard Without Shore"
@@ -3103,7 +3103,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:803
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Vaša loď nenašla cestu do cieľového prístavu „%s“."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1316
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1599
@@ -3751,7 +3751,7 @@ msgstr ""
 
 #: ../../../../src/network/gameclient.cc:1004
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "/me - zlyhal kontrolný súčet md5 môjho súboru."
 
 #: ../../../../src/network/gameclient.cc:1046
 msgid ""
@@ -3903,7 +3903,7 @@ msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou.\nBuď na predpokla
 
 #: ../../../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Používatelia označení ako IRC pravdepodobne nebudú reagovať na správy."
 
 #: ../../../../src/network/internet_gaming.cc:206
 msgid "Successfully reconnected to the metaserver!"
@@ -4197,7 +4197,7 @@ msgstr "Server poslal aktualizáciu pre neexistujúceho hráča."
 
 #: ../../../../src/network/network_gaming_messages.cc:51
 msgid "Server sent a user update for a user that does not exist."
-msgstr "Server poslal aktualizáciu pre neexistujúceho užívateľa."
+msgstr "Server poslal aktualizáciu pre neexistujúceho používateľa."
 
 #: ../../../../src/network/network_gaming_messages.cc:52
 msgid "Server uses a different protocol version"
@@ -4408,7 +4408,7 @@ msgstr "Nevybraná"
 
 #: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
-msgstr ""
+msgstr "Žiadna zhoda"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -4769,7 +4769,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
-msgstr ""
+msgstr "Poslané"
 
 #: ../../../../src/ui_fsmenu/addons/contact.cc:91
 msgid ""
@@ -4811,22 +4811,22 @@ msgstr "Heslo:"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:63
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:66
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:69
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:71
 #, c-format
 msgid "%u bytes"
-msgstr ""
+msgstr "%u bajtov"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:141
@@ -5212,7 +5212,7 @@ msgstr "Prihlásený ako %s (správca)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1197
 msgid "Click to log out"
-msgstr ""
+msgstr "Kliknutím sa odhlásite"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1202
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -5867,7 +5867,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:181
 msgid "Write Comment"
-msgstr ""
+msgstr "Písanie komentára"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
@@ -5877,7 +5877,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgid "Bold"
-msgstr ""
+msgstr "Tučné"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
@@ -5887,11 +5887,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgid "Italic"
-msgstr ""
+msgstr "Kurzíva"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgid "Underline"
-msgstr ""
+msgstr "Podčiarknuté"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
@@ -5917,7 +5917,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:252
 msgid "Color…"
-msgstr ""
+msgstr "Farba…"
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
@@ -5927,7 +5927,7 @@ msgstr "1"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:268
 msgid "Tiny"
-msgstr ""
+msgstr "Drobné"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
@@ -5937,7 +5937,7 @@ msgstr "2"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:272
 msgid "Small"
-msgstr "Malá"
+msgstr "Malé"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:276
@@ -5953,7 +5953,7 @@ msgstr "4"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:280
 msgid "Large"
-msgstr ""
+msgstr "Veľké"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
@@ -5963,7 +5963,7 @@ msgstr "5"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:284
 msgid "Huge"
-msgstr ""
+msgstr "Obrovské"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:315
 #, c-format
@@ -6045,19 +6045,19 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Your vote"
-msgstr ""
+msgstr "Vaše hodnotenie"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:701
 msgid "Next screenshot"
-msgstr ""
+msgstr "Ďalšia snímka obrazovky"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:710
 msgid "Previous screenshot"
-msgstr ""
+msgstr "Predchádzajúca snímka obrazovky"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:718
 msgid "Write a comment…"
-msgstr ""
+msgstr "Napíšte komentár…"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:728
 msgid "Administrator actions"
@@ -6065,7 +6065,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:735
 msgid "Not voted"
-msgstr ""
+msgstr "bez hodnotenia"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:746
 #, c-format
@@ -6077,7 +6077,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:810
 #, c-format
 msgid "Screenshots (%u)"
-msgstr ""
+msgstr "Snímky obrazovky (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:833
 msgid "Change verification status"
@@ -6098,12 +6098,12 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:887
 #, c-format
 msgid "Comments (%u)"
-msgstr ""
+msgstr "Komentáre (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:888
 #, c-format
 msgid "Votes (%u)"
-msgstr ""
+msgstr "Hodnotenia (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:892
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:587
@@ -6111,29 +6111,29 @@ msgstr ""
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Priemerné hodnotenie: %1$.3f (%2$u hodnotenie)"
+msgstr[1] "Priemerné hodnotenie: %1$.3f (%2$u hodnotenia)"
+msgstr[2] "Priemerné hodnotenie: %1$.3f (%2$u hodnotenia)"
+msgstr[3] "Priemerné hodnotenie: %1$.3f (%2$u hodnotení)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:590
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:765
 msgid "No votes yet"
-msgstr ""
+msgstr "Zatiaľ nehodnotený"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:913
 msgid "No comments yet."
-msgstr ""
+msgstr "Zatiaľ nekomentovaný"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:914
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u komentár:"
+msgstr[1] "%u komentáre:"
+msgstr[2] "%u komentára:"
+msgstr[3] "%u komentárov:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:925
 #, c-format
@@ -6314,7 +6314,7 @@ msgstr "Aktualizovať"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:388
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:682
 msgid "Comments and Votes"
-msgstr ""
+msgstr "Komentáre a hodnotenia"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
@@ -6372,44 +6372,44 @@ msgstr ""
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Celková veľkosť: %u bajt"
+msgstr[1] "Celková veľkosť: %u bajty"
+msgstr[2] "Celková veľkosť: %u bajta"
+msgstr[3] "Celková veľkosť: %u bajtov"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:585
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:760
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u stiahnutie"
+msgstr[1] "%u stiahnutia"
+msgstr[2] "%u stiahnutia"
+msgstr[3] "%u stiahnutí"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:591
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:766
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u komentár"
+msgstr[1] "%u komentáre"
+msgstr[2] "%u komentára"
+msgstr[3] "%u komentárov"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:593
 #, c-format
 msgid "%u screenshot"
 msgid_plural "%u screenshots"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u snímka obrazovky"
+msgstr[1] "%u snímky obrazovky"
+msgstr[2] "%u snímky obrazovky"
+msgstr[3] "%u snímok obrazovky"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:704
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Veľkosť: %1$u×%2$u • Max hráči: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
@@ -6609,7 +6609,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:456
 msgid "Connection Timed Out"
-msgstr ""
+msgstr "Časový limit spojenia vypršal"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:485
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:547
@@ -6762,11 +6762,11 @@ msgstr "Ukázať viac nastavení"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:305
 msgid "The relations between players are set by the scenario"
-msgstr ""
+msgstr "Vzťahy medzi hráčmi sú určené scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:307
 msgid "The relations between players are set by the saved game"
-msgstr ""
+msgstr "Vzťahy medzi hráčmi sú určené uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:309
 msgid "The selected win condition does not allow peaceful matches"
@@ -6782,11 +6782,11 @@ msgstr "Všetky zvolené počiatočné podmienky ignorujú začiatočné pozíci
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:348
 msgid "The starting positions are set by the scenario"
-msgstr ""
+msgstr "Začiatočné pozície sú určené scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:350
 msgid "The starting positions are set by the saved game"
-msgstr ""
+msgstr "Začiatočné pozície sú určené uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:353
 msgid ""
@@ -6796,11 +6796,11 @@ msgstr "Umožní hráčom, aby si na začiatku hry vybrali svoje vlastné začia
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:373
 msgid "Player vision is set by the scenario"
-msgstr ""
+msgstr "Viditeľnosť je určená scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:375
 msgid "Player vision is set by the saved game"
-msgstr ""
+msgstr "Viditeľnosť je určená uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:377
 msgid "Give all players permanent vision of the entire map"
@@ -6823,11 +6823,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:425
 msgid "Player relations are set by the scenario"
-msgstr ""
+msgstr "Diplomatické vzťahy sú určené scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:427
 msgid "Player relations are set by the saved game"
-msgstr ""
+msgstr "Diplomatické vzťahy sú určené uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:429
 msgid "Disallow players to change their alliances during the game"
@@ -7868,7 +7868,7 @@ msgstr "Nasledovať myš"
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:604
@@ -8119,7 +8119,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication.cc:959
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Hre Widelands sa nepodarilo nájsť poslednú editovanú mapu."
 
 #: ../../../../src/wlapplication.cc:964
 msgid "No Last Edited Map"
@@ -8253,27 +8253,27 @@ msgstr "Prístav"
 
 #: ../../../../src/wlapplication_options.cc:185
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Vedľajšia výcviková stavba"
 
 #: ../../../../src/wlapplication_options.cc:186
 msgid "Major Training Site"
-msgstr ""
+msgstr "Hlavná výcviková stavba"
 
 #: ../../../../src/wlapplication_options.cc:187
 msgid "Primary Small Military Site"
-msgstr ""
+msgstr "Primárna malá vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:188
 msgid "Secondary Small Military Site"
-msgstr ""
+msgstr "Sekundárna malá vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:189
 msgid "Primary Medium Military Site"
-msgstr ""
+msgstr "Primárna stredná vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:190
 msgid "Secondary Medium Military Site"
-msgstr ""
+msgstr "Sekundárna stredná vojenská budova"
 
 #: ../../../../src/wlapplication_options.cc:191
 msgid "Tower"
@@ -8297,27 +8297,27 @@ msgstr "Kameňolom"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
-msgstr ""
+msgstr "Primárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:197
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Sekundárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:198
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Terciálny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:199
 msgid "Fishing"
-msgstr ""
+msgstr "Chytanie rýb"
 
 #: ../../../../src/wlapplication_options.cc:200
 msgid "Hunting"
-msgstr ""
+msgstr "Lov"
 
 #: ../../../../src/wlapplication_options.cc:201
 msgid "Fish/Meat Replenishing"
-msgstr ""
+msgstr "Dopĺňanie rýb/mäsa"
 
 #: ../../../../src/wlapplication_options.cc:202
 msgid "Well"
@@ -8325,11 +8325,11 @@ msgstr "Studňa"
 
 #: ../../../../src/wlapplication_options.cc:203
 msgid "Primary Farm"
-msgstr ""
+msgstr "Primárna farma"
 
 #: ../../../../src/wlapplication_options.cc:204
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Sekundárna farma"
 
 #: ../../../../src/wlapplication_options.cc:205
 msgid "Mill"
@@ -8353,11 +8353,11 @@ msgstr "Krčma"
 
 #: ../../../../src/wlapplication_options.cc:210
 msgid "Ore Smelting"
-msgstr ""
+msgstr "Tavenie rudy"
 
 #: ../../../../src/wlapplication_options.cc:211
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Vyhňa na nástroje"
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
@@ -8381,7 +8381,7 @@ msgstr "Trajektový dvor"
 
 #: ../../../../src/wlapplication_options.cc:217
 msgid "Scouting"
-msgstr ""
+msgstr "Prieskum"
 
 #: ../../../../src/wlapplication_options.cc:218
 msgid "Barracks"
@@ -8389,11 +8389,11 @@ msgstr "Kasárne"
 
 #: ../../../../src/wlapplication_options.cc:219
 msgid "Second Carrier"
-msgstr ""
+msgstr "Druhý nosič"
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"
-msgstr ""
+msgstr "Drevené uhlie"
 
 #: ../../../../src/wlapplication_options.cc:221
 msgid "Stone Mine"
@@ -8405,7 +8405,7 @@ msgstr "Uhoľná baňa"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr "Železná baňa"
+msgstr "Železnorudná baňa"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
@@ -8413,27 +8413,27 @@ msgstr "Zlatá baňa"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Poľnohospodársky producent"
 
 #: ../../../../src/wlapplication_options.cc:226
 msgid "Primary Agricultural Consumer"
-msgstr ""
+msgstr "Primárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:227
 msgid "Secondary Agricultural Consumer"
-msgstr ""
+msgstr "Sekundárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:228
 msgid "Alternative Industry"
-msgstr ""
+msgstr "Alternatívny priemysel"
 
 #: ../../../../src/wlapplication_options.cc:229
 msgid "Industry Support"
-msgstr ""
+msgstr "Podpora priemyslu"
 
 #: ../../../../src/wlapplication_options.cc:230
 msgid "Terraforming"
-msgstr ""
+msgstr "Úprava terénu"
 
 #: ../../../../src/wlapplication_options.cc:246
 msgid "Watch Replay"
@@ -8513,11 +8513,11 @@ msgstr "Prepnúť režim celej obrazovky"
 
 #: ../../../../src/wlapplication_options.cc:382
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Urobiť snímku obrazovky"
 
 #: ../../../../src/wlapplication_options.cc:386
 msgid "Change Music"
-msgstr ""
+msgstr "Zmeniť hudbu"
 
 #: ../../../../src/wlapplication_options.cc:391
 msgid "Open the Debug Console (developer tool)"
@@ -8561,7 +8561,7 @@ msgstr "Zverejniť mapu online"
 
 #: ../../../../src/wlapplication_options.cc:467
 msgid "Toggle Tools Menu"
-msgstr ""
+msgstr "Zobrazenie ponuky nástrojov"
 
 #: ../../../../src/wlapplication_options.cc:472
 msgid "Change Height Tool"
@@ -8730,7 +8730,7 @@ msgstr "Zvýšiť násobok rýchlosti hry o 10"
 
 #: ../../../../src/wlapplication_options.cc:696
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Nastavenie normálnej rýchlosti hry"
 
 #: ../../../../src/wlapplication_options.cc:700
 msgid "Pause The Game"
@@ -8738,7 +8738,7 @@ msgstr "Zastaviť hru"
 
 #: ../../../../src/wlapplication_options.cc:705
 msgid "Scroll to Starting Field"
-msgstr ""
+msgstr "Návrat na počiatočnú pozíciu"
 
 #: ../../../../src/wlapplication_options.cc:708
 #: ../../../../src/wui/game_chat_menu.cc:68
@@ -9856,7 +9856,7 @@ msgstr "Vyslať geológa na prieskum oblasti"
 #: ../../../../src/wui/fieldaction.cc:451
 #: ../../../../src/wui/fieldaction.cc:471
 msgid "Send scout to explore surroundings"
-msgstr ""
+msgstr "Začať prieskum okolia"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
@@ -9864,7 +9864,7 @@ msgstr ""
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr ""
+msgstr "Predtým, ako sem môžete poslať prieskumníka, musíte túto vlajku prepojiť s prieskumníckou budovou."
 
 #: ../../../../src/wui/fieldaction.cc:491
 msgid "Place a flag"
@@ -9896,7 +9896,7 @@ msgstr "Pripnutá poznámka"
 
 #: ../../../../src/wui/fieldaction.cc:549
 msgid "Show debug window"
-msgstr ""
+msgstr "Zobraziť okno ladenia"
 
 #: ../../../../src/wui/fieldaction.cc:557
 #: ../../../../src/wui/watchwindow.cc:85
@@ -10227,7 +10227,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Postavte tržnicu, aby ste mohli prijímať obchodné ponuky."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:930
@@ -10244,7 +10244,7 @@ msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy. Môžete navrh
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Vycentrovať pohľad na túto tržnicu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
@@ -11802,7 +11802,7 @@ msgstr "Otvoriť okno vybranej lode"
 #: ../../../../src/wui/seafaring_statistics_menu.cc:162
 #, c-format
 msgid "(You can use %s to go to the selected ship and open its window.)"
-msgstr ""
+msgstr "(Môžete použiť %s na prechod na vybranú loď a otvorenie jej okna.)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:177
@@ -12228,14 +12228,14 @@ msgstr "="
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:681
 msgid "%1%k"
-msgstr ""
+msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:684
 msgid "%1%M"
-msgstr ""
+msgstr "%1%M"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5G =
 #. 5,000,000,000).
@@ -12243,7 +12243,7 @@ msgstr ""
 #. whitespace.
 #: ../../../../src/wui/waresdisplay.cc:687
 msgid "%1%G"
-msgstr ""
+msgstr "%1%G"
 
 #: ../../../../src/wui/watchwindow.cc:93
 msgid "Follow"

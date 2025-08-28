@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr "Vybudujte drevovýrobu a trstinovú farmu"
+msgstr "Vybudujte drevovýrobu a trstinovú záhradu"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -119,6 +119,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Postavte krčmu, rybársky dom, udiareň, bobuľovú farmu a dom zberateľa "
+"ovocia."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
@@ -144,7 +146,7 @@ msgstr "Postavte bane a banskú infraštruktúru"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr ""
+msgstr "Postavte železnorudnú baňu, pec, kováčstvo a malú vyhňu na zbroj."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -158,7 +160,7 @@ msgstr "Verbovanie vojakov"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Postavte kasárne, sobiu farmu a šiciu dielňu."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
@@ -324,8 +326,8 @@ msgid ""
 " one for a woodcutter."
 msgstr ""
 "Mali by sme začať tým, že sa postaráme o produkciu dreva. Zdá sa, že na "
-"tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme dva "
-"domy pre lesníkov a jeden pre drevorubača."
+"tomto ostrove stromy celkom dobre nerastú. Lepšie bude, keď postavíme aspoň "
+"dva domy pre horárov a jeden pre drevorubača."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -399,7 +401,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr ""
+msgstr "Postavte ďalšiu trstinovú záhradu"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -422,7 +424,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Postavte ďalšiu jamu na hlinu"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -489,7 +491,7 @@ msgstr "Hladní baníci"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Baníci sa sťažujú…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217

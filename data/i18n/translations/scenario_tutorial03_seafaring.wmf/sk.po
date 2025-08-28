@@ -3,14 +3,14 @@
 # 
 # Translators:
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,7 +155,7 @@ msgstr "Postavme lode"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "Skvelé. Kým sa stavia váš prístav, postavme nejaké lode."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
@@ -169,11 +169,11 @@ msgstr "Postavte lodenicu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Postavte lodenicu blízko brehu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "Lode sa vyrábajú v lodenici. Radí sa medzi stredné budovy."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
@@ -479,7 +479,7 @@ msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Na tejto mape niet nepriateľa, ktorého by ste sa mali báť. V iných hrách by ste mali pre svoje prístavy umiestniť obrancov a prioritou by malo byť vybudovanie jedného alebo dvoch vojenských opevnení okolo vašich nových kolónií."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -502,11 +502,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr "Železná baňa"
+msgstr "Železnorudná baňa"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "Postavte železnorudnú baňu na ostrove"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
@@ -571,25 +571,25 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "Kým budeme pokračovať, postavme blízko brehu trajektový dvor."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "Postavte trajektový dvor"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "Postavte trajektový dvor blízko brehu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Trajekty sa stavajú v trajektovom dvore."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "Trajektový dvor musíte postaviť blízko brehu, inak tam nebude možné stavať trajekty."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
@@ -648,7 +648,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Postavte zlatú baňu a vodné cesty"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""

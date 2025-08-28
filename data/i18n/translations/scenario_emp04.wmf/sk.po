@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Karl Vest, 2025
 # MiroslavR <miroslavr256@gmail.com>, 2025
+# Karl Vest, 2025
 # GunChleoc, 2025
 # Pavol Gono, 2025
 # 
@@ -96,7 +96,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Postavte aspoň 3 drevorubačské domy a 2 kameňolomy"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:87
 msgid "Quarries and Lumberjacks"
@@ -126,7 +126,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:105
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Postavte dve nové horárne"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:106
 msgid ""
@@ -236,15 +236,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "Build 2 charcoal kilns"
-msgstr ""
+msgstr "Postavte 2 uhliarske pece"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Postavte dve uhliarske pece"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Postavte dve uhliarske pece na podporu železiarskeho priemyslu."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:174
 msgid "Remember to ensure a constant log supply for them."
@@ -256,7 +256,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:182
 msgid "Training is Important"
-msgstr ""
+msgstr "Výcvik je dôležitý"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:183
 msgid "Train your soldiers hard and train them fast."
@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:193
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Postavte výcvikový tábor a vylepšite arénu na koloseum."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:204
 msgid "Home, Sweet Home"
@@ -1485,7 +1485,7 @@ msgstr "Rúbať stromy na okolitom území a spracovať ich na kmene."
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Drevorubačský dom potrebuje vo svojej pracovnej oblasti stromy."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Mill
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
@@ -1558,7 +1558,7 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
-"Drevorubač pracujúci v tomto drevorubačskom dome nedokáže vo svojej "
+"Drevorubač pracujúci z tohto drevorubačského domu nedokáže vo svojej "
 "pracovnej oblasti nájsť žiadne stromy. Zvážte, či by nebolo vhodné budovu "
 "rozobrať alebo zničiť, prípadne postaviť horáreň."
 
@@ -1632,7 +1632,7 @@ msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Žiaden vojak nepotrebuje výcvik!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
