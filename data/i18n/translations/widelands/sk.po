@@ -2614,7 +2614,7 @@ msgstr "rozobratých %u %%"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Vaša ekonomika bola rozšírená o novú tržnicu."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
@@ -3003,13 +3003,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Lodenica bez pobrežia"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Vaša lodenica nebola postavená dostatočne blízko pobrežia. Nebude môcť stavať lode."
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
 msgid "Ferry Yard Without Shore"
@@ -3103,7 +3103,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:803
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Vaša loď nenašla cestu do cieľového prístavu „%s“."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1316
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1599
@@ -4408,7 +4408,7 @@ msgstr "Nevybraná"
 
 #: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
-msgstr ""
+msgstr "Žiadna zhoda"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -8297,15 +8297,15 @@ msgstr "Kameňolom"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
-msgstr ""
+msgstr "Primárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:197
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Sekundárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:198
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Terciálny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:199
 msgid "Fishing"
@@ -8393,7 +8393,7 @@ msgstr "Druhý nosič"
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"
-msgstr ""
+msgstr "Drevené uhlie"
 
 #: ../../../../src/wlapplication_options.cc:221
 msgid "Stone Mine"
@@ -8405,7 +8405,7 @@ msgstr "Uhoľná baňa"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr "Železná baňa"
+msgstr "Železnorudná baňa"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
@@ -8413,23 +8413,23 @@ msgstr "Zlatá baňa"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Poľnohospodársky producent"
 
 #: ../../../../src/wlapplication_options.cc:226
 msgid "Primary Agricultural Consumer"
-msgstr ""
+msgstr "Primárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:227
 msgid "Secondary Agricultural Consumer"
-msgstr ""
+msgstr "Sekundárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:228
 msgid "Alternative Industry"
-msgstr ""
+msgstr "Alternatívny priemysel"
 
 #: ../../../../src/wlapplication_options.cc:229
 msgid "Industry Support"
-msgstr ""
+msgstr "Podpora priemyslu"
 
 #: ../../../../src/wlapplication_options.cc:230
 msgid "Terraforming"
@@ -8517,7 +8517,7 @@ msgstr "Urobiť snímku obrazovky"
 
 #: ../../../../src/wlapplication_options.cc:386
 msgid "Change Music"
-msgstr ""
+msgstr "Zmeniť hudbu"
 
 #: ../../../../src/wlapplication_options.cc:391
 msgid "Open the Debug Console (developer tool)"
@@ -8561,7 +8561,7 @@ msgstr "Zverejniť mapu online"
 
 #: ../../../../src/wlapplication_options.cc:467
 msgid "Toggle Tools Menu"
-msgstr ""
+msgstr "Zobrazenie ponuky nástrojov"
 
 #: ../../../../src/wlapplication_options.cc:472
 msgid "Change Height Tool"
@@ -8730,7 +8730,7 @@ msgstr "Zvýšiť násobok rýchlosti hry o 10"
 
 #: ../../../../src/wlapplication_options.cc:696
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Nastavenie normálnej rýchlosti hry"
 
 #: ../../../../src/wlapplication_options.cc:700
 msgid "Pause The Game"
@@ -8738,7 +8738,7 @@ msgstr "Zastaviť hru"
 
 #: ../../../../src/wlapplication_options.cc:705
 msgid "Scroll to Starting Field"
-msgstr ""
+msgstr "Návrat na počiatočnú pozíciu"
 
 #: ../../../../src/wlapplication_options.cc:708
 #: ../../../../src/wui/game_chat_menu.cc:68
@@ -10227,7 +10227,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Postavte tržnicu, aby ste mohli prijímať obchodné ponuky."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:930
@@ -10244,7 +10244,7 @@ msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy. Môžete navrh
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Vycentrovať pohľad na túto tržnicu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339

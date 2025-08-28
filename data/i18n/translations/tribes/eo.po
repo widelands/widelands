@@ -188,25 +188,25 @@ msgstr "Via patrolposteno estas atakata."
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la patrolposteno."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr ""
+msgstr " Viaj soldatoj venkis la malamikon ĉe la patrolposteno."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Tower"
-msgstr ""
+msgstr "Turo"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian turon."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:61

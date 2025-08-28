@@ -355,7 +355,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce armor."
-msgstr ""
+msgstr "Tavením v peci sa z neho získava zlato, ktoré sa používa ako vzácny stavebný materiál, ako aj na výrobu zbrojí."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:288
@@ -738,7 +738,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:727
 msgctxt "amazons_worker"
 msgid "Smelts gold at furnaces."
-msgstr ""
+msgstr "Taví zlato v peciach."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Stone Carver
 #: ../../../../data/tribes/initialization/amazons/units.lua:737
@@ -1082,7 +1082,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1266
 msgctxt "amazons_building"
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Ústredie je vaša hlavná budova."
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Warehouse
 #: ../../../../data/tribes/initialization/amazons/units.lua:1273
@@ -1106,13 +1106,13 @@ msgctxt "amazons_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
 
 #. TRANSLATORS: Purpose helptext for an Amazon market: Market
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
 msgctxt "amazons_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnica umožňuje obchodovanie s inými kmeňmi."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
@@ -1444,7 +1444,7 @@ msgctxt "amazons_building"
 msgid ""
 "The furnace can produce one gold ingot in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Pec môže vyrobiť jeden zlatý ingot v priemere za %s, ak je budova plne zásobená."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Rare Tree
 #. Plantation
@@ -1552,7 +1552,7 @@ msgstr "Páli kmene na uhlie."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The charcoal kiln needs %s on average to produce one lump of coal."
-msgstr ""
+msgstr "Uhliarska pec potrebuje v priemere %s na výrobu jedného kusu uhlia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava Root
 #. Cooker
@@ -1585,7 +1585,7 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The chocolate brewery needs %s on average to brew one mug of chocolate."
-msgstr ""
+msgstr "Výrobňa čokolády potrebuje v priemere %s na uvarenie jedného hrnčeka čokolády."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
 #: ../../../../data/tribes/initialization/amazons/units.lua:1536
@@ -1603,7 +1603,7 @@ msgctxt "amazons_building"
 msgid ""
 "The food preserver can produce one ration in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Prípravovňa jedál môže vyrobiť jeden prídel v priemere za %s, ak je budova plne zásobená."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Initiation
 #. Site
@@ -1678,7 +1678,7 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "Manioková plantáž vyžaduje vo svojej pracovnej oblasti voľné miesto na výsadbu semien."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 1
@@ -1715,7 +1715,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr ""
+msgstr "Manioková plantáž potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1597
@@ -1746,7 +1746,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Kakaovníková plantáž potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1614
@@ -1777,7 +1777,7 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "Táto baňa dokáže vyprodukovať zlatý prach v priemere za %s, ak je budova plne zásobená."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
@@ -1940,7 +1940,7 @@ msgctxt "amazons_building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr ""
+msgstr "Stavia lode, ktoré slúžia na kolonizáciu zámorských oblastí a obchodovanie medzi prístavmi."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Shipyard, part 1
 #. TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part
@@ -3455,7 +3455,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "These transparent quartz gems are used to build some exclusive buildings. "
 "They are produced in a crystal mine."
-msgstr "Tieto prehľadné kremene sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálovej bani."
+msgstr "Tieto priehľadné kremene sa používajú pri stavbe niektorých exkluzívnych budov. Ťažia sa v kryštálových baniach."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Diamond
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:596
@@ -3494,13 +3494,13 @@ msgstr "Atlantíďania prikladajú do ohňov v taviarňach, vyhniach na zbroje a
 #: ../../../../data/tribes/initialization/frisians/units.lua:319
 msgctxt "default_ware"
 msgid "Iron ore is mined in iron mines."
-msgstr ""
+msgstr "Železná ruda sa ťaží v železnorudnej bani."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:621
 msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "V taviarni sa taví na železo."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron, part 1
@@ -3532,7 +3532,7 @@ msgstr "Vyrába sa v taviarni a používa sa vo vyhniach na nástroje, zbroje a 
 #: ../../../../data/tribes/initialization/frisians/units.lua:345
 msgctxt "ware"
 msgid "Gold ore is mined in a gold mine."
-msgstr ""
+msgstr "Zlatá ruda sa ťaží v zlatej bani."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:647
@@ -3540,7 +3540,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Tavením v taviarni sa z nej získava zlato, ktoré sa používa ako vzácny stavebný materiál, ako aj na výrobu zbraní a zbrojí."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold, part 1
@@ -3990,7 +3990,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1291
 #: ../../../../data/tribes/initialization/frisians/units.lua:1335
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "Uhoľné žily obsahujú uhlie, ktoré sa dá vyťažiť v uhoľných baniach."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Coal part 2
@@ -4016,7 +4016,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1302
 #: ../../../../data/tribes/initialization/frisians/units.lua:1346
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "Železné žily obsahujú železnú rudu, ktorá sa dá vyťažiť v železnorudných baniach."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Iron, part 2
@@ -4042,7 +4042,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1313
 #: ../../../../data/tribes/initialization/frisians/units.lua:1357
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "Zlaté žily obsahujú zlatú rudu, ktorá sa dá vyťažiť v zlatých baniach."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 1
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1274
@@ -4050,7 +4050,7 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Drahokamy sa používajú pri stavbe veľkých budov. Dajú sa vykopať v kryštálovej bani. Z bane získate aj žulu."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1276
@@ -4227,7 +4227,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1464
@@ -4249,7 +4249,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1475
 msgctxt "atlanteans_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnica umožňuje obchodovanie s inými kmeňmi."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1484
@@ -4402,7 +4402,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1531
 msgctxt "atlanteans_building"
 msgid "Prophecy of the foresters’ guild"
-msgstr ""
+msgstr "Proroctvo cechu horárov"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Forester's House, part 1
@@ -4425,7 +4425,7 @@ msgstr "Chytá ryby na pobreží v blízkosti rybárskeho domu."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1547
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "Rybárska chatrč potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
+msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Fisher's
 #. House, part 2
@@ -4481,7 +4481,7 @@ msgstr "Chová ryby."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1574
 msgctxt "atlanteans_building"
 msgid "The fish breeder needs open access to the coast."
-msgstr ""
+msgstr "Rybnikár potrebuje otvorený prístup k pobrežiu."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Fish Breeder's
 #. House
@@ -4498,7 +4498,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1581
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fish breeders"
-msgstr ""
+msgstr "Proroctvo rybnikárov"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Fish
 #. Breeder’s House, part 1
@@ -4626,7 +4626,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1639
 msgctxt "atlanteans_building"
 msgid "Painted on a gold spinning mill without supplies"
-msgstr ""
+msgstr "Namaľované na pradiarni zlata bez zásob"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4634,7 +4634,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr ""
+msgstr "Pradiareň zlata potrebuje v priemere %s na výrobu jednej zlatej nite."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -4670,7 +4670,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You do not see everything from your high towers. Sometimes you need someone "
 "to find out in person, that’s me!"
-msgstr ""
+msgstr "Z tých vysokých veží nevidíš všetko. Niekedy potrebuješ niekoho, kto to zistí osobne, a to som ja!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Scout's House
@@ -4706,21 +4706,21 @@ msgctxt "atlanteans_building"
 msgid ""
 "The design of our sawmills makes operation simple, yet powerful. Patent "
 "pending."
-msgstr ""
+msgstr "Konštrukcia našich píl umožňuje jednoduchú a zároveň výkonnú prevádzku. Patent je v procese schválenia."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1677
 msgctxt "atlanteans_building"
 msgid "Askadus, Inventor of the vertical axis windmill"
-msgstr ""
+msgstr "Askadus, vynálezca veterného mlyna s vertikálnou osou"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1679
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Píla potrebuje v priemere %s na výrobu jednej dosky."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1686
@@ -4770,7 +4770,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "When no cornmeal is required, the mill will try to produce blackroot flour "
 "even when there is no demand for it."
-msgstr ""
+msgstr "Keď nie je potrebná kukuričná múka, mlyn sa bude snažiť vyrábať čiernokoreňovú múku, aj keď po nej nie je dopyt."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1704
@@ -4778,13 +4778,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We invented this vertical axis design first, the sawmill just copied our "
 "ideas but never acknowledged our claim."
-msgstr ""
+msgstr "Túto konštrukciu s vertikálnou osou sme vymysleli ako prví, píla naše nápady len skopírovala, ale nikdy naše tvrdenie neuznala."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1706
 msgctxt "atlanteans_building"
 msgid "Miller arguing with a sawyer"
-msgstr ""
+msgstr "Mlynár sa háda s piliarom"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1708
@@ -4871,7 +4871,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1738
 msgctxt "atlanteans_building"
 msgid "A black voice from inside the charcoal kiln"
-msgstr ""
+msgstr "Čierny hlas zvnútra uhliarskej pece"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Charcoal Kiln
@@ -4879,7 +4879,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Uhliarska pec potrebuje v priemere %s na výrobu jedného uhlia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -5115,7 +5115,7 @@ msgstr "Farmár zasadí a pozberá jeden snop kukurice za %1$s až %2$s, podľa 
 msgctxt "atlanteans_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Farma potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot
 #. Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
@@ -5137,7 +5137,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1852
 msgctxt "atlanteans_building"
 msgid "Blackroot farmer asked by a foreigner"
-msgstr ""
+msgstr "Pestovateľ čierneho koreňa odpovedá cudzincovi"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 1
@@ -5173,14 +5173,14 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr ""
+msgstr "Nie, pavúky nekŕmime kukuricou. Kŕmime ňou tučné kobylky, ktoré následne strávia naše pavúky. Umiestnime ich na špeciálne zariadenie, aby sme raz denne získali pavúčí hodváb. Nie je potrebné ho znova spriadať. Vlákno môže byť priamo použité v tkáčovni. Och, ahoj, tu je jeden z našich milých pavúkov... Hej! Prečo utekáš?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1871
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing her farm"
-msgstr ""
+msgstr "Chovateľka pavúkov ukazuje svoju farmu"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Spider
 #. Farm
@@ -5188,7 +5188,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr ""
+msgstr "Pavúčia farma potrebuje v priemere %s na výrobu jedného pavúčieho hodvábu."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -5416,7 +5416,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1969
 msgctxt "atlanteans_building"
 msgid "Engraving on the entrance to the dungeon"
-msgstr ""
+msgstr "Rytina na vchode do kobky"
 
 #. TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon,
 #. part 1
@@ -5426,7 +5426,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, a dungeon can train one soldier "
 "one level in attack in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, kobka dokáže vycvičiť jedného vojaka jednu úroveň útoku v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for an Atlantean training site: Dungeon,
 #. part 2
@@ -5452,7 +5452,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Our enemies claim: we have a ruddy twisted way to fight. Check the way we "
 "train, in this labyrinth they may be right."
-msgstr ""
+msgstr "Naši nepriatelia tvrdia: máme poriadne zvrátený spôsob boja. Pozrite sa na spôsob, akým trénujeme, v tomto labyrinte môžu mať pravdu."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean training site: Labyrinth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1991
@@ -5468,7 +5468,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, a labyrinth can train one soldier"
 " one level in defense, evade or health in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, labyrint dokáže vycvičiť jedného vojaka jednu úroveň obrany, uhýbania alebo zdravia v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhall
@@ -5518,7 +5518,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2013
 msgctxt "atlanteans_building"
 msgid "Officer visiting a remote guardhouse"
-msgstr ""
+msgstr "Dôstojník navštevuje odľahlú strážnicu"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Guardhall
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2024
@@ -5531,7 +5531,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2026
 msgctxt "atlanteans_building"
 msgid "Scribbling on the wall of a guardhall"
-msgstr ""
+msgstr "Čmáranica na stene strážnej haly"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Small Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2037
@@ -5568,14 +5568,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Beware our mighty high towers! From the topmost spot we can see wide into "
 "the lands and spot the enemy far away."
-msgstr ""
+msgstr "Dajte si pozor na naše mohutné vysoké veže! Z najvyššieho miesta môžeme vidieť doširoka do krajiny a spozorovať nepriateľa v diaľke."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: High
 #. Tower
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2069
 msgctxt "atlanteans_building"
 msgid "Soldier showing off a High Tower"
-msgstr ""
+msgstr "Vojak predvádza vysokú vežu"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Castle
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2082
@@ -6256,7 +6256,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Reed is produced in a reed yard and used to make the roofs of buildings "
 "waterproof."
-msgstr ""
+msgstr "Trstina sa pestuje v trstinovej záhrade a používa sa na ochranu striech budov pred vodou."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Cloth
 #: ../../../../data/tribes/initialization/barbarians/units.lua:148
@@ -6383,7 +6383,7 @@ msgstr "Barbari zvyčajne pridávajú do ohňov uhlie. Spotrebúva ho viacero bu
 #: ../../../../data/tribes/initialization/barbarians/units.lua:281
 msgctxt "barbarians_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "V taviarni sa taví na železo."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:294
@@ -6399,7 +6399,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Tavením v taviarni sa z nej získava zlato, ktoré sa používa ako vzácny stavebný materiál, ako aj na výrobu zbraní a zbrojí."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:320
@@ -6922,13 +6922,13 @@ msgctxt "barbarians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
 
 #. TRANSLATORS: Purpose helptext for a Barbarian market: Market
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1132
 msgctxt "barbarians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnica umožňuje obchodovanie s inými kmeňmi."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Quarry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1141
@@ -7300,7 +7300,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Trstinová záhrada potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1328
@@ -7556,7 +7556,7 @@ msgstr "Uhliarova pieseň"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Uhliarska pec potrebuje v priemere %s na výrobu jedného uhlia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1444
@@ -7797,7 +7797,7 @@ msgstr "Farmár zasadí a pozberá jeden snop pšenice za %1$s až %2$s, podľa 
 msgctxt "barbarians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Farma potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Helm Smithy
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1557
@@ -7889,7 +7889,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "Pred vekmi sa Barbari naučili hľadať v horských svahoch čierny materiál, ktorým zásobujú svoje pece."
 
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 2
 #. TRANSLATORS: Lore helptext for production site: Deep Coal Mine
@@ -8246,7 +8246,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "Tkáčovňa potrebuje v priemere %s na výrobu jednej látky."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1915
@@ -10513,7 +10513,7 @@ msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "Pšenica sa pestuje sa na farmách a spotrebúva v mlynoch a pivovaroch. Musia sa ňou zásobovať aj oslie a ovčie farmy, ako aj chlievy."
 
 #. TRANSLATORS: Helptext for an Empire ware: Flour
 #: ../../../../data/tribes/initialization/empire/units.lua:216
@@ -10600,7 +10600,7 @@ msgstr "Do ohňov v imperiálnych taviarňach, vyhniach na zbroje a vyhniach na 
 #: ../../../../data/tribes/initialization/empire/units.lua:318
 msgctxt "empire_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "V taviarni sa taví na železo."
 
 #. TRANSLATORS: Helptext for an Empire ware: Iron, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:331
@@ -10616,7 +10616,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Tavením v taviarni sa z nej získava zlato, ktoré sa používa ako vzácny stavebný materiál, ako aj na výrobu zbraní a zbrojí."
 
 #. TRANSLATORS: Helptext for an Empire ware: Gold, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:357
@@ -11164,7 +11164,7 @@ msgctxt "empire_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11185,7 +11185,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1244
 msgctxt "empire_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnica umožňuje obchodovanie s inými kmeňmi."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11379,7 +11379,7 @@ msgstr "Chytá ryby na pobreží v blízkosti rybárskeho domu."
 #: ../../../../data/tribes/initialization/empire/units.lua:1353
 msgctxt "empire_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "Rybárska chatrč potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
+msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Fisher's House,
 #. part 2
@@ -11575,7 +11575,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Píla potrebuje v priemere %s na výrobu jednej dosky."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11854,7 +11854,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Uhliarska pec potrebuje v priemere %s na výrobu jedného uhlia."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12089,7 +12089,7 @@ msgstr "Farmár zasadí a pozberá jeden snop pšenice za %1$s až %2$s, podľa 
 msgctxt "empire_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Farma potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12150,7 +12150,7 @@ msgstr "Pasie ovce pre vlnu."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr ""
+msgstr "Ovčia farma potrebuje v priemere %s na výrobu jednej vlny."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12186,7 +12186,7 @@ msgstr "Tká látku z vlny."
 #, lua-format
 msgctxt "empire_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "Tkáčovňa potrebuje v priemere %s na výrobu jednej látky."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12552,7 +12552,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, a colosseum can train one soldier"
 " one level in evade in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, koloseum dokáže vycvičiť jedného vojaka jednu úroveň uhýbania v priemere za %s."
 
 #. TRANSLATORS: Performance helptext for an Empire training site: Colosseum,
 #. part 2
@@ -14229,7 +14229,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Tavením v peci sa z nej získava zlato, ktoré sa používa ako vzácny stavebný materiál, ako aj na výrobu zbraní a zbrojí."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Gold, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:360
@@ -14430,7 +14430,7 @@ msgctxt "frisians_worker"
 msgid ""
 "Reindeer help to carry items along busy roads. They are reared in a reindeer"
 " farm."
-msgstr ""
+msgstr "Soby pomáhajú nosiť predmety po rušných cestách. Chovajú sa na sobej farme."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Reindeer Breeder
 #: ../../../../data/tribes/initialization/frisians/units.lua:647
@@ -14780,7 +14780,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1529
 msgctxt "frisians_building"
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Ústredie je vaša hlavná budova."
 
 #. TRANSLATORS: Purpose helptext for a Frisian warehouse: Warehouse
 #: ../../../../data/tribes/initialization/frisians/units.lua:1536
@@ -14804,7 +14804,7 @@ msgctxt "frisians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
 
 #. TRANSLATORS: Lore helptext for a Frisian market: Market
 #: ../../../../data/tribes/initialization/frisians/units.lua:1554
@@ -14825,7 +14825,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
 msgctxt "frisians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Tržnica umožňuje obchodovanie s inými kmeňmi."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../../../data/tribes/initialization/frisians/units.lua:1567
@@ -14849,7 +14849,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1573
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kameňolom potrebuje vo svojej pracovnej oblasti skaly."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 1
@@ -15011,14 +15011,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1645
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Chytá ryby na pobreží v blízkosti rybárskeho domu."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Fisher's House,
 #. part 1
 #: ../../../../data/tribes/initialization/frisians/units.lua:1648
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Fisher's House,
 #. part 2
@@ -15084,7 +15084,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Trstinová záhrada potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../../../data/tribes/initialization/frisians/units.lua:1683
@@ -15126,7 +15126,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1702
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "Hlinokopáč sa háda so stavbárom"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Clay Pit
 #: ../../../../data/tribes/initialization/frisians/units.lua:1704
@@ -15163,7 +15163,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1938
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr ""
+msgstr "Vynálezca frízskej uhliarskej pece"
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Charcoal Burner's
 #. House
@@ -15378,7 +15378,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr ""
+msgstr "Tehliarska pec potrebuje v priemere %s na výrobu jednej tehly."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15578,7 +15578,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
-msgstr ""
+msgstr "Šicia dielňa potrebuje v priemere %s na výrobu jedného kožušinového odevu."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tailor's Shop
 #: ../../../../data/tribes/initialization/frisians/units.lua:1923
@@ -15618,7 +15618,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Uhliarska pec potrebuje v priemere %s na výrobu jedného uhlia."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Smokery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1949
@@ -15736,7 +15736,7 @@ msgstr "Varí pivo pre baníkov a vojakov."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr ""
+msgstr "Pivovar potrebuje v priemere %s na uvarenie jedného pohára piva."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Mead Brewery
 #: ../../../../data/tribes/initialization/frisians/units.lua:2001
@@ -15924,7 +15924,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2076
 msgctxt "frisians_building"
 msgid "The farm needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "Farma vyžaduje vo svojej pracovnej oblasti voľné miesto na výsadbu semien."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Farm, part
 #. 1
@@ -15942,7 +15942,7 @@ msgstr "Farmár zasadí a pozberá jeden snop jačmeňa za %1$s až %2$s, podľa
 msgctxt "frisians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Farma potrebuje aspoň %s, aby väčšinu času pracovala na plný výkon."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
@@ -16240,7 +16240,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr ""
+msgstr "Tkáčovňa potrebuje v priemere %s na výrobu jednej látky."
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
@@ -16982,7 +16982,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:761
 #: ../../../../data/tribes/scripting/help/building_help.lua:769
 msgid "From %1% to %2%"
-msgstr ""
+msgstr "Z %1% na %2%"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:752
