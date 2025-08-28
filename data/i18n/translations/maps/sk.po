@@ -521,7 +521,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Hory sú plné rovného terénu. Poväčšine však, nanešťastie, ide o úbočia. Priestoru na stavbu je málo, preto ho využite rozumne. Pevnosť naspodku úzkeho priesmyku môže pre nepriateľskú armádu znamenať ťažko prekonateľnú prekážku – využite terén vo svoj prospech. Vysekajte všetky stromy a rozšírte sa kdekoľvek môžete – je to jediný spôsob ako nájsť tých málo miest, kde sa dajú postaviť farmy."
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
@@ -818,7 +818,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Táto mapa je určená ako solo výzva pre veľmi skúsených hráčov, ktorí považujú hru jeden proti šesť AI za príliš jednoduchú. Modrý hráč nemá žiadne železo (okrem trochy na rozbeh ekonomiky), takže sa budeš musieť spoľahnúť na 5% produkciu vyčerpanej bane. A stále hráš 1v6 (samozrejme stále môžeš nejaké AI odstrániť a spraviť si to jednoduchším). Veľa štastia!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"

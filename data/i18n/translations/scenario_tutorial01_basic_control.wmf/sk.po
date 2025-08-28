@@ -592,7 +592,7 @@ msgstr "Pripojte stavenisko"
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Pripojte stavenisko kameňolomu k vášmu ústrediu cestou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -646,7 +646,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Vaši pracovníci neradi chodia pešo cez krajinu. Musíte postaviť cestu zo svojho ústredia na stavenisko, aby mohli nosiči prepravovať výrobky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid "You Destroyed the Construction Site!"
@@ -796,13 +796,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Zmeňte názov vášho ústredia"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Ak chcete nastaviť nový názov pre svoje ústredie, najprv naň kliknite, čím otvoríte jeho okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
