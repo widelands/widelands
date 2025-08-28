@@ -46,7 +46,7 @@ msgstr "Konstruu ŝtonminejon"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Konstruu lignodurigejon."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Konstruu bovbienon"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
@@ -279,7 +279,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Alia Malvarma Tago"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -370,7 +370,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Via Lojala Kunulo"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
@@ -434,7 +434,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "La Konsilanto"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
@@ -599,7 +599,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
-msgstr ""
+msgstr "Venko"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
