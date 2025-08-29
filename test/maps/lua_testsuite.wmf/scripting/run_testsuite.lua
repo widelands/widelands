@@ -130,6 +130,7 @@ include "scripting/coroutine.lua"
 if wl.editor then
    run(test_with_coro, test_include, 0)  -- no sleeping
    lunit:run()
+   print("(quit)")
    wl.ui.MapView():close()
 else
    run(test_with_coro, test_include, 10)
