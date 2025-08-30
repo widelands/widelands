@@ -1904,7 +1904,7 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -4112,7 +4112,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu vylepšiť, rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8

@@ -146,7 +146,7 @@ msgstr "Postavte bane a banskú infraštruktúru"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr "Postavte železnorudnú baňu, pec, kováčstvo a malú vyhňu na zbroj."
+msgstr "Postavte železnorudnú baňu, pec, kováčstvo a malú vyhňu na zbroje."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255

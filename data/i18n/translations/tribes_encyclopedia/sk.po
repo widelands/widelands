@@ -1761,7 +1761,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "Kamenná baňa dokáže vyrobiť jeden kus z každého druhu horniny v priemere za %s, ak je stály prísun prídelov a baňa nie je vyčerpaná."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
@@ -3494,7 +3494,7 @@ msgstr "Atlantíďania prikladajú do ohňov v taviarňach, vyhniach na zbroje a
 #: ../../../../data/tribes/initialization/frisians/units.lua:319
 msgctxt "default_ware"
 msgid "Iron ore is mined in iron mines."
-msgstr "Železná ruda sa ťaží v železnorudnej bani."
+msgstr "Železná ruda sa ťaží v železnorudných baniach."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:621
@@ -11531,7 +11531,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1459
 msgctxt "empire_building"
 msgid "Motto of the Stonemasons’ Guild"
-msgstr ""
+msgstr "Motto kamenárskeho cechu"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's
 #. House
