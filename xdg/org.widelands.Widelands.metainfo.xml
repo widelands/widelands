@@ -375,6 +375,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nds">Lade Internettsied-Kaarten as Verwiederns runner</li>
         <li xml:lang="nds">Neje Wiesaarden im Bewarker</li>
         <li xml:lang="nds">Mennig neje Künnen för Verwiederns-Entwicklers</li>
+        <li xml:lang="nl">Markthandel</li>
+        <li xml:lang="nl">Zes nieuwe kaarten toegevoegd en drie oude kaarten verwijderd</li>
+        <li xml:lang="nl">Economie districten</li>
+        <li xml:lang="nl">Veel verbeteringen aan de Encyclopedie in het spel</li>
+        <li xml:lang="nl">Download websitekaarten als add-ons</li>
+        <li xml:lang="nl">Nieuwe visualisatiemodi in de editor</li>
+        <li xml:lang="nl">Veel nieuwe mogelijkheden voor ontwikkelaars van add-ons</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -390,6 +397,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li>Bugfix release</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
+        <li xml:lang="nl">Bugfix-bericht</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
@@ -427,6 +435,14 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nds">Faste Anmarkens</li>
         <li xml:lang="nds">Kaarten stracks publizeren</li>
         <li xml:lang="nds">Beterer Umgang mit Fehlers</li>
+        <li xml:lang="nl">Nieuw Fries scenario</li>
+        <li xml:lang="nl">Diplomatie door computerspelers</li>
+        <li xml:lang="nl">Oorlogsvoering op zee (preview)</li>
+        <li xml:lang="nl">Garnizoenen voor havens en hoofdkwartier</li>
+        <li xml:lang="nl">UI Plugins</li>
+        <li xml:lang="nl">Vastgepinde opmerkingen</li>
+        <li xml:lang="nl">Directe kaart publicatie</li>
+        <li xml:lang="nl">Verbeterde foutverwerking</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>
@@ -553,6 +569,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <name xml:lang="cs">Tým vývojářů Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
+    <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
   </developer>
   <content_rating type="oars-1.0">

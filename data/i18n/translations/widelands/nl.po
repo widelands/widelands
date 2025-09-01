@@ -8156,7 +8156,7 @@ msgstr "Het spijt ons, maar Widelands kon dit spel Niet redden door het op te sl
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Markt"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"

@@ -5632,7 +5632,7 @@ msgstr "Úbohý Hamlet"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Začať hru iba so skladom a úplným minimom pre rozbehnutie ekonomiky. Upozornenie: AI sa nebude vedieť úspešne rozvinúť."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49

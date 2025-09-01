@@ -299,12 +299,12 @@ msgstr "Hráč sa vzdal"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:68
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Hráč opustil tím"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:69
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s opustil tím %2$u a je teraz bez tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:77
 msgid "Team Joining Request"
@@ -318,18 +318,18 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s požiadal o pripojenie sa do tímu  %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:81
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s pozval %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:120
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s prijal %2$s do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format

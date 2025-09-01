@@ -774,7 +774,7 @@ msgstr "Možnosti ekonomiky"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Ukazoval som vám okno Zásoby, ktoré vám umožnilo zistiť, aké výrobky sú v skladoch. Spomínate si?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""

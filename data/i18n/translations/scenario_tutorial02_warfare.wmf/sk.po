@@ -482,7 +482,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Tretie číslo značí chýbajúcich vojakov. Z ôsmych vojakov (1 + 5 + 2), ktorých tu chcete mať umiestnených, dvaja pravdepodobne zomreli. Ak je to možné, nahradia ich noví vojaci zo skladiska."
+msgstr "Tretie číslo značí chýbajúcich vojakov. Z ôsmych vojakov (1 + 5 + 2), ktorých tu chcete mať umiestnených, dvaja pravdepodobne zomreli. Ak je to možné, nahradia ich noví vojaci zo skladu."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209

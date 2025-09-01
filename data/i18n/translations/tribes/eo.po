@@ -272,37 +272,37 @@ msgstr "Viaj soldatoj venkis la malamikon ĉe la arbokrona sentinelejo."
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Dwelling"
-msgstr ""
+msgstr "Loĝejo de batalantoj"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your warriors’ dwelling."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian loĝejo de batalantoj."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:43
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling discovered an aggressor."
-msgstr ""
+msgstr "Via loĝejo de batalantoj malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:45
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling is under attack."
-msgstr ""
+msgstr "Via loĝejo de batalantoj estas atakata."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the warriors’ dwelling."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la loĝejo de batalantoj."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la loĝejo de batalantoj."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -314,31 +314,31 @@ msgstr "Kastelo"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian kastelon."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Via kastelo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Via kastelo estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la kastelo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la kastelo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -350,31 +350,31 @@ msgstr "Gard-barako"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian gard-barakon."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Via gard-barako malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Via gard-barako estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la gard-barako."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la gard-barako."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
@@ -386,31 +386,31 @@ msgstr "Gard-domo"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian gard-domo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Via gard-domo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Via gard-domo estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la gard-domo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la gard-domo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
@@ -422,31 +422,31 @@ msgstr "Turo"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian turon."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
 msgctxt "atlanteans_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Via turo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Via turo estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la turo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la turo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -458,31 +458,31 @@ msgstr "Turego"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian turegon."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Via turego malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Via turego estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la turego."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la turego."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
@@ -494,31 +494,31 @@ msgstr "Tureto"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian tureton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Via tureto malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Via tureto estas atakata."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la tureto."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la tureto."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -530,31 +530,31 @@ msgstr "Barilo"
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian barilon."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Via barilo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Via barilo estas atakata."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la barilo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la barilo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -566,31 +566,31 @@ msgstr "Citadelo"
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:43
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian citadelon."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
 msgctxt "barbarians_building"
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "Via citadelo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:47
 msgctxt "barbarians_building"
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Via citadelo estas atakata."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la citadelo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la citadelo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:8
