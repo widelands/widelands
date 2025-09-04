@@ -14,13 +14,13 @@ wl.Descriptions():new_productionsite_type {
       balsa = 2,
       log = 2,
       rubber = 3,
-      rope = 2,
+      rope = 2
    },
    return_on_dismantle = {
       balsa = 1,
       log = 1,
       rubber = 1,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -58,7 +58,7 @@ wl.Descriptions():new_productionsite_type {
             -- min. time total: 16 * (2 * 2 * 1.8 + 5.5 + 20 + 35) = 1083.2 sec
             -- max. time total: 16 * (2 * 9 * 1.8 + 5.5 + 20 + 35) = 1486.4 sec
             "call=ship on failure fail",
-            "call=ship_preparation",
+            "call=ship_preparation"
          }
       },
       ship = {
@@ -66,13 +66,13 @@ wl.Descriptions():new_productionsite_type {
          descname = _("constructing a ship"),
          actions = {
             "construct=amazons_shipconstruction worker:buildship radius:6",
-            "sleep=duration:20s",
+            "sleep=duration:20s"
          }
       },
       ship_preparation = {
          descname = _("working"),
          actions = {
-            "sleep=duration:35s",
+            "sleep=duration:35s"
          }
       },
    },
