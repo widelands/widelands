@@ -12,11 +12,11 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 5,
       granite = 2,
-      rubber =1
+      rubber = 1
    },
    return_on_dismantle = {
       log = 3,
-      granite = 1,
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -35,7 +35,7 @@ wl.Descriptions():new_productionsite_type {
    },
 
    aihints = {
-      basic_amount = 1,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -43,14 +43,15 @@ wl.Descriptions():new_productionsite_type {
    },
 
    inputs = {
-      { name = "liana", amount = 8 },
+      { name = "liana", amount = 8 }
    },
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a rope because ...
          descname = _("making a rope"),
          actions = {
+            -- "return=skipped unless economy needs rope", -> is not missing but not needed since liana can only be used to make rope
             "consume=liana:2",
             "sleep=duration:20s",
             "animate=working duration:35s",
