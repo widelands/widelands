@@ -17,7 +17,7 @@ wl.Descriptions():new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      requires_supporters = true,
+      requires_supporters = true
    },
 
    working_positions = {
@@ -34,11 +34,11 @@ wl.Descriptions():new_productionsite_type {
             -- avg. time total: 3 * 67 = 201 sec
             "call=harvest_balsa",
             "call=harvest_rubber",
-            "call=harvest_ironwood",
+            "call=harvest_ironwood"
          },
       },
       harvest_balsa = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting a balsa tree
          descname = _("harvesting balsa"),
          actions = {
             -- time of worker: 35.2-74.8, min+max average 55 sec
@@ -50,7 +50,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       harvest_rubber = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting a rubber tree
          descname = _("harvesting rubber"),
          actions = {
             -- time of worker: 35.2-74.8, min+max average 55 sec
@@ -62,7 +62,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       harvest_ironwood = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting an ironwood tree
          descname = _("harvesting ironwood"),
          actions = {
             -- time of worker: 35.2-74.8, min+max average 55 sec
