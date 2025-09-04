@@ -15,7 +15,7 @@ wl.Descriptions():new_productionsite_type {
       rubber = 1
    },
    return_on_dismantle = {
-      log = 2,
+      log = 2
    },
 
    animation_directory = dirname,
@@ -34,8 +34,8 @@ wl.Descriptions():new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _("working"),
+         -- TRANSLATORS: Completed/Skipped/Did not start collecting water because ...
+         descname = _("collecting water"),
          actions = {
             -- obtaining second bucket from hut takes takes 3.6 sec
             -- time of worker: 8.2-40.6 sec, min+max average 24.4 sec
@@ -45,7 +45,7 @@ wl.Descriptions():new_productionsite_type {
             "sleep=duration:20s",
             "callworker=fetch_water",
             -- she carries 2 buckets so we need to create one now
-            "produce=water",
+            "produce=water"
          }
       },
    },
