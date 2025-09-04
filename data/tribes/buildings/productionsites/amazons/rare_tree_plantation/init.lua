@@ -12,12 +12,12 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 6,
       granite = 3,
-      rope = 3,
+      rope = 3
    },
    return_on_dismantle = {
       log = 2,
       granite = 2,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -48,11 +48,11 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             "call=plant_balsa",
             "call=plant_rubber",
-            "call=plant_ironwood",
+            "call=plant_ironwood"
          },
       },
       plant_balsa = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start planting a balsa tree
          descname = _("planting balsa tree"),
          actions = {
             -- time of worker: 11.2-32.8 sec, mean 21.784 sec
@@ -65,7 +65,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       plant_rubber = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start planting a rubber tree
          descname = _("planting rubber tree"),
          actions = {
             -- time of worker: 11.2-32.8 sec, mean 21.784 sec
@@ -78,7 +78,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       plant_ironwood = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         -- TRANSLATORS: Completed/Skipped/Did not start planting an ironwood tree
          descname = _("planting ironwood tree"),
          actions = {
             -- time of worker: 11.2-32.8 sec, mean 21.784 sec
