@@ -361,7 +361,7 @@ msgstr "Tavením v peci sa z neho získava zlato, ktoré sa používa ako vzácn
 #: ../../../../data/tribes/initialization/amazons/units.lua:288
 msgctxt "amazons_ware"
 msgid "Gold is the most valuable of all metals."
-msgstr ""
+msgstr "Zlato je najcennejšie zo všetkých kovov."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:290
@@ -618,7 +618,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:583
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Prepravuje výrobky cez úzke rieky."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Tapir
 #: ../../../../data/tribes/initialization/amazons/units.lua:592
@@ -943,7 +943,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:890
 #: ../../../../data/tribes/initialization/frisians/units.lua:1176
 msgid "This field is growing."
-msgstr ""
+msgstr "Toto pole rastie."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -1248,7 +1248,7 @@ msgstr "Lovecko-zberačská chatrč potrebuje vo svojej pracovnej oblasti lovnú
 #: ../../../../data/tribes/initialization/amazons/units.lua:1350
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú rybolov."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut, part 1
@@ -1323,7 +1323,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1388
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú čerpanie vody."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Water
 #. Gatherer's Hut, part 1
@@ -1504,7 +1504,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje a kopije, výroba jedného z každého nástroja trvá priemerne %1$s a výroba jednej z každej kopije %2$s. Ak ekonomika potrebuje len jeden druh nástroja alebo kopije, jeho výroba trvá priemerne %3$s."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../../../data/tribes/initialization/amazons/units.lua:1496
@@ -1538,7 +1538,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetok odev, obuv a zbroje, výroba jedného z nich trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh výrobku, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/amazons/units.lua:1509
@@ -1569,7 +1569,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť jeden chlieb v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
@@ -1702,10 +1702,10 @@ msgstr "Pestovateľka manioku zasadí a pozberá jeden zväzok manioku za %1$s a
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d obrábané pole"
+msgstr[1] "%d obrábané polia"
+msgstr[2] "%d obrábaného poľa"
+msgstr[3] "%d obrábaných polí"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1873,7 +1873,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send her away."
-msgstr ""
+msgstr "Ak nemáte dostatok vojačiek, ktoré by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorú vojačku preč, ak na ňu kliknete."
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Treetop Sentry
 #: ../../../../data/tribes/initialization/amazons/units.lua:1677
@@ -1885,14 +1885,14 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1731
 msgctxt "amazons_building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Vyrába trajekty."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:1734
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "V blízkosti je potrebná vodná plocha. Nezabudnite, že trajekty prepravujú iba tovar, nie pracovníčky."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1923,7 +1923,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2300
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú prístup k vode."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Ferry
 #. Yard, part 1
@@ -1956,7 +1956,7 @@ msgstr "Stavia lode, ktoré slúžia na kolonizáciu zámorských oblastí a obc
 #: ../../../../data/tribes/initialization/frisians/units.lua:2298
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Potrebuje v blízkosti otvorenú vodu."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Shipyard,
 #. part 1
@@ -2054,7 +2054,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "Na tomto mieste sa rozoberá budova. Časť surovín použitých počas stavby tejto budovy sa vráti do skladov vášho kmeňa."
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
@@ -3261,7 +3261,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojačka (+%2%)"
 msgstr[1] "%1% vojačky (+%2%)"
-msgstr[2] "%1% vojačiek (+%2%)"
+msgstr[2] "%1% vojačky (+%2%)"
 msgstr[3] "%1% vojačiek (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
@@ -3271,7 +3271,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% vojačka"
 msgstr[1] "%1% vojačky"
-msgstr[2] "%1% vojačiek"
+msgstr[2] "%1% vojačky"
 msgstr[3] "%1% vojačiek"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
@@ -3283,7 +3283,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojačka (+%3%)"
 msgstr[1] "%1%(+%2%) vojačky (+%3%)"
-msgstr[2] "%1%(+%2%) vojačiek (+%3%)"
+msgstr[2] "%1%(+%2%) vojačky (+%3%)"
 msgstr[3] "%1%(+%2%) vojačiek (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
@@ -3294,7 +3294,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojačka"
 msgstr[1] "%1%(+%2%) vojačky"
-msgstr[2] "%1%(+%2%) vojačiek"
+msgstr[2] "%1%(+%2%) vojačky"
 msgstr[3] "%1%(+%2%) vojačiek"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
@@ -3512,7 +3512,7 @@ msgstr "V taviarni sa taví na železo."
 #: ../../../../data/tribes/initialization/frisians/units.lua:332
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "Železo sa taví zo železnej rudy."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:634
@@ -3553,7 +3553,7 @@ msgstr "Tavením v taviarni sa z nej získava zlato, ktoré sa používa ako vz�
 msgctxt "ware"
 msgid ""
 "Gold is the most valuable of all metals, and it is smelted out of gold ore."
-msgstr ""
+msgstr "Zlato je najcennejšie zo všetkých kovov a získava sa tavením zlatej rudy."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:660
@@ -3677,7 +3677,7 @@ msgstr "Pekárske lopaty vyrába kováč nástrojov."
 #: ../../../../data/tribes/initialization/frisians/units.lua:503
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
-msgstr ""
+msgstr "Kliešte na uhlie sú nástroje na tavenie rúd."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fire Tongs, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:791
@@ -3783,7 +3783,7 @@ msgstr "Nosí predmety po vašich cestách."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:908
 msgctxt "atlanteans_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Prepravuje výrobky cez úzke rieky."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Horse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:917
@@ -3891,7 +3891,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Melie čierne korene a kukuricu a produkuje tak čiernokoreňovú múku a kukuričnú múku v uvedenom poradí."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Baker
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1042
@@ -4441,7 +4441,7 @@ msgstr "Postavením rybnikárskeho domu v blízkosti rybárskeho domu zabezpeč�
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1551
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú rybolov."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -4458,7 +4458,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1559
 msgctxt "atlanteans_building"
 msgid "A song from the fishers’ guild"
-msgstr ""
+msgstr "Pieseň rybárskeho cechu"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Fisher's House, part 1
@@ -4568,7 +4568,7 @@ msgstr "Čerpá vodu z hlbín zeme."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1616
 msgctxt "atlanteans_building"
 msgid "I hope you have checked this spot with a geologist."
-msgstr ""
+msgstr "Dúfam, že ste toto miesto skontrolovali s geológom."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Well
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1618
@@ -4610,7 +4610,7 @@ msgstr "Pradie zlatú niť zo zlata."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1635
 msgctxt "atlanteans_building"
 msgid "Do not build until you have a steady gold supply."
-msgstr ""
+msgstr "Nestavajte, kým nebudete mať stabilný prísun zlata."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Gold Spinning
 #. Mill
@@ -4662,7 +4662,7 @@ msgstr "Vykonáva prieskum neznámeho územia."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1652
 msgctxt "atlanteans_building"
 msgid "Will need fish and bread to have his meal the Atlantean way."
-msgstr ""
+msgstr "Bude potrebovať ryby a chlieb, aby sa najedol atlantídskym spôsobom."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1654
@@ -4736,14 +4736,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "We are using pure logs, no other ingredients! Which drunken foreigner hath "
 "told you that myth?"
-msgstr ""
+msgstr "Používame čisté kmene, žiadne iné prísady! Ktorý opitý cudzinec vám povedal tento mýtus?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site:
 #. Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1690
 msgctxt "atlanteans_building"
 msgid "A Smoker answering a passer-by"
-msgstr ""
+msgstr "Údenár odpovedá okoloidúcemu"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1692
@@ -4762,7 +4762,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "Melie čierne korene a kukuricu a produkuje tak čiernokoreňovú múku a kukuričnú múku v uvedenom poradí."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1702
@@ -4806,7 +4806,7 @@ msgstr "Pečie chlieb, ktorý sa podáva prieskumníkom a baníkom, ako aj vojak
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1717
 msgctxt "atlanteans_building"
 msgid "Will need cornmeal and blackroot flour."
-msgstr ""
+msgstr "Bude potrebovať kukuričnú múku a čiernokoreňovú múku."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1719
@@ -4831,7 +4831,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "bread in %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť jeden chlieb v priemere za %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal
 #. Kiln
@@ -4856,7 +4856,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build only if you absolutely must produce some coal, or when you have a very"
 " large amount of logs."
-msgstr ""
+msgstr "Postavajte iba vtedy, ak absolútne musíte vyrobiť nejaké uhlie, alebo ak máte veľmi veľké množstvo kmeňov."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1736
@@ -4906,7 +4906,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1751
 msgctxt "atlanteans_building"
 msgid "A member of the smelters’ guild"
-msgstr ""
+msgstr "Člen cechu tavičov"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Smelting Works
@@ -5040,7 +5040,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1806
 msgctxt "atlanteans_building"
 msgid "Recruiting poster"
-msgstr ""
+msgstr "Náborový plagát"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Barracks
@@ -5232,7 +5232,7 @@ msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy l
 msgctxt "atlanteans_building"
 msgid ""
 "Carves precious (and normal) stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Vysekáva drahé (a bežné) kamene zo skaly na horskom teréne."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Crystal Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1899
@@ -5300,7 +5300,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1934
 msgctxt "atlanteans_building"
 msgid "Song from the miners’ guild"
-msgstr ""
+msgstr "Pieseň baníckeho cechu"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Coal
 #. Mine
@@ -5503,7 +5503,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorého vojaka preč, ak naňho kliknete."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Guardhouse
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2011
@@ -5601,7 +5601,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2272
 msgctxt "building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Vyrába trajekty."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard,
 #. part 1
@@ -5617,7 +5617,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2275
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "V blízkosti je potrebná vodná plocha. Nezabudnite, že trajekty prepravujú iba tovar, nie pracovníkov."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2101
@@ -5670,7 +5670,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2132
 msgctxt "atlanteans_building"
 msgid "Transcript from oral tradition"
-msgstr ""
+msgstr "Prepis z ústneho podania"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Shipyard, part 1
@@ -6182,7 +6182,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojak (+%2%)"
 msgstr[1] "%1% vojaci (+%2%)"
-msgstr[2] "%1% vojakov (+%2%)"
+msgstr[2] "%1% vojaka (+%2%)"
 msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
@@ -6192,7 +6192,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% vojak"
 msgstr[1] "%1% vojaci"
-msgstr[2] "%1% vojakov"
+msgstr[2] "%1% vojaka"
 msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -6204,7 +6204,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojak (+%3%)"
 msgstr[1] "%1%(+%2%) vojaci (+%3%)"
-msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[2] "%1%(+%2%) vojaka (+%3%)"
 msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -6215,7 +6215,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojak"
 msgstr[1] "%1%(+%2%) vojaci"
-msgstr[2] "%1%(+%2%) vojakov"
+msgstr[2] "%1%(+%2%) vojaka"
 msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Granite, part 2
@@ -6614,7 +6614,7 @@ msgstr "Nosí predmety po vašich cestách."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:553
 msgctxt "barbarians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Prepravuje výrobky cez úzke rieky."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Ox
 #: ../../../../data/tribes/initialization/barbarians/units.lua:562
@@ -7089,7 +7089,7 @@ msgstr "Rybárska chatrč potrebuje vo svojej pracovnej oblasti vodu plnú rýb.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1208
 msgctxt "building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú rybolov."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's
 #. Hut, part 1
@@ -7498,7 +7498,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy jedál, výroba jedného druhu jedla trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh jedla, výroba jedného prídelu trvá priemerne %2$s a jednej desiaty %3$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1411
@@ -7530,7 +7530,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy jedál, výroba jedného druhu jedla trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh jedla, výroba jedného prídelu trvá priemerne %2$s, jednej desiaty %3$s a jedného obedu %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1424
@@ -7664,7 +7664,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky sekery, výroba jednej sekery trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh sekery, jej výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7830,7 +7830,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky helmy, výroba jednej helmy trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh helmy, výroba jednej obyčajnej helmy trvá priemerne %2$s, jednej masky %3$s a jednej vojenskej helmy %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1572
@@ -8141,7 +8141,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorého vojaka preč, ak naňho kliknete."
 
 #. TRANSLATORS: Lore helptext for a Barbarian military site: Barrier
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1779
@@ -10399,7 +10399,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojak (+%2%)"
 msgstr[1] "%1% vojaci (+%2%)"
-msgstr[2] "%1% vojakov (+%2%)"
+msgstr[2] "%1% vojaka (+%2%)"
 msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
@@ -10409,7 +10409,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% vojak"
 msgstr[1] "%1% vojaci"
-msgstr[2] "%1% vojakov"
+msgstr[2] "%1% vojaka"
 msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
@@ -10421,7 +10421,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojak (+%3%)"
 msgstr[1] "%1%(+%2%) vojaci (+%3%)"
-msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[2] "%1%(+%2%) vojaka (+%3%)"
 msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
@@ -10432,7 +10432,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojak"
 msgstr[1] "%1%(+%2%) vojaci"
-msgstr[2] "%1%(+%2%) vojakov"
+msgstr[2] "%1%(+%2%) vojaka"
 msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Format string for a latin quote and its translation
@@ -10797,7 +10797,7 @@ msgstr "Nosí predmety po vašich cestách."
 #: ../../../../data/tribes/initialization/empire/units.lua:607
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Prepravuje výrobky cez úzke rieky."
 
 #. TRANSLATORS: Helptext for an Empire worker: Donkey
 #: ../../../../data/tribes/initialization/empire/units.lua:616
@@ -11386,7 +11386,7 @@ msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 #: ../../../../data/tribes/initialization/empire/units.lua:1355
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú rybolov."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Fisher's
 #. House, part 1
@@ -11824,7 +11824,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy jedál, výroba jedného druhu jedla trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh jedla, výroba jedného prídelu trvá priemerne %2$s a jedného obedu %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11967,7 +11967,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy zbroje a helmy, výroba jednej helmy trvá priemerne %1$s a jedného z každého druhu zbroje %2$s. Ak ekonomika potrebuje len jeden druh zbroje alebo helmy, výroba jednej helmy trvá priemerne %3$s a jedného druhu zbroje %4$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12228,7 +12228,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky kopije, výroba jednej kopije trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh kopije, výroba jednej drevenej kopije trvá priemerne %2$s, výroba jednej kopije, vylepšenej kopije, ťažkej kopije alebo vojenskej kopije trvá %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13988,7 +13988,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojak (+%2%)"
 msgstr[1] "%1% vojaci (+%2%)"
-msgstr[2] "%1% vojakov (+%2%)"
+msgstr[2] "%1% vojaka (+%2%)"
 msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
@@ -13998,7 +13998,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% vojak"
 msgstr[1] "%1% vojaci"
-msgstr[2] "%1% vojakov"
+msgstr[2] "%1% vojaka"
 msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
@@ -14010,7 +14010,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojak (+%3%)"
 msgstr[1] "%1%(+%2%) vojaci (+%3%)"
-msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[2] "%1%(+%2%) vojaka (+%3%)"
 msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
@@ -14021,7 +14021,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojak"
 msgstr[1] "%1%(+%2%) vojaci"
-msgstr[2] "%1%(+%2%) vojakov"
+msgstr[2] "%1%(+%2%) vojaka"
 msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
@@ -14422,7 +14422,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:631
 msgctxt "frisians_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Prepravuje výrobky cez úzke rieky."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Reindeer
 #: ../../../../data/tribes/initialization/frisians/units.lua:640
@@ -15025,7 +15025,7 @@ msgstr "Rybársky dom potrebuje vo svojej pracovnej oblasti vodu plnú rýb."
 #: ../../../../data/tribes/initialization/frisians/units.lua:1650
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Cesty a stromy pozdĺž pobrežia blokujú rybolov."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House, part 1
@@ -15445,7 +15445,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky materiály, výroba jednej kožušiny trvá priemerne %1$s, jedného železa %2$s a jedného zlata %3$s. Ak ekonomika potrebuje len jeden druh materiálu, výroba jednej kožušiny trvá priemerne %4$s, jedného železa %5$s a jedného zlata %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../../../data/tribes/initialization/frisians/units.lua:1871
@@ -15476,7 +15476,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s. Výnimkou sú ihly – za čas potrebný na výrobu jedného nástroja sa vyrobia dve ihly."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15511,7 +15511,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky meče a helmy, výroba jedného krátkeho meča trvá priemerne %1$s, jedného dlhého meča %2$s a jednej helmy %3$s. Ak ekonomika potrebuje len jeden druh meča alebo helmy, výroba jedného krátkeho meča trvá priemerne %4$s, jedného dlhého meča %5$s a jednej helmy %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -15549,7 +15549,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky meče a helmy, výroba jedného širokého meča trvá priemerne %1$s, jedného dvojsečného meča %2$s a jednej zlatej helmy %3$s. Ak ekonomika potrebuje len jeden druh meča alebo helmy, výroba jedného širokého meča trvá priemerne %4$s, jedného dvojsečného meča %5$s a jednej zlatej helmy %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../../../data/tribes/initialization/frisians/units.lua:1910
@@ -15610,7 +15610,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky odevy, výroba jedného odevu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh odevu, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -15649,7 +15649,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená, výroba jednej údenej potraviny trvá priemerne %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1962
@@ -15710,7 +15710,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky chleby, výroba jedného obyčajného chleba trvá priemerne %1$s a jedného medového chleba %2$s. Ak ekonomika potrebuje len jeden druh chleba, výroba jedného obyčajného chleba alebo medového chleba trvá priemerne %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1988
@@ -15768,7 +15768,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nápoje, výroba jedného piva trvá priemerne %1$s a jednej medoviny %2$s. Ak ekonomika potrebuje len jeden druh nápoja, výroba jedného piva alebo medoviny trvá priemerne %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../../../data/tribes/initialization/frisians/units.lua:2014
@@ -15789,7 +15789,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Ak je krčma plne zásobená, môže vyrobiť jeden prídel použitím dvoch druhov prísad v priemere za %1$s. Ak sa dá použiť iba jeden druh prísad, môže vyrobiť jeden prídel v priemere za %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../../../data/tribes/initialization/frisians/units.lua:2027
@@ -15823,7 +15823,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy jedál, výroba jedného druhu jedla trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh jedla, výroba jedného prídelu trvá priemerne %2$s a jedného obedu %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../../../data/tribes/initialization/frisians/units.lua:2040
@@ -15896,7 +15896,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje aj soby aj kožušiny, chovanie jedného soba trvá priemerne %1$s a výroba jednej kožušiny %2$s. Ak ekonomika potrebuje iba soby, ich chovanie trvá priemerne %3$s. Ak ekonomika potrebuje iba kožušiny, ich výroba trvá priemerne %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:2070
@@ -16177,7 +16177,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorého vojaka preč, ak naňho kliknete."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Ferry
 #. Yard, part 1
@@ -16734,7 +16734,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojak (+%2%)"
 msgstr[1] "%1% vojaci (+%2%)"
-msgstr[2] "%1% vojakov (+%2%)"
+msgstr[2] "%1% vojaka (+%2%)"
 msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
@@ -16744,7 +16744,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% vojak"
 msgstr[1] "%1% vojaci"
-msgstr[2] "%1% vojakov"
+msgstr[2] "%1% vojaka"
 msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
@@ -16756,7 +16756,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojak (+%3%)"
 msgstr[1] "%1%(+%2%) vojaci (+%3%)"
-msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[2] "%1%(+%2%) vojaka (+%3%)"
 msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
@@ -16767,7 +16767,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojak"
 msgstr[1] "%1%(+%2%) vojaci"
-msgstr[2] "%1%(+%2%) vojakov"
+msgstr[2] "%1%(+%2%) vojaka"
 msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
@@ -16797,7 +16797,7 @@ msgstr "Účel:"
 msgid ""
 "This mine will exploit %1%%% of its resources. From there on out, it will "
 "only have a %2%%% chance of finding any more of them."
-msgstr ""
+msgstr "Táto baňa dokáže vyťažiť %1%%% zdroja. Potom bude mať len %2%%% šancu, že nájde ešte trocha horniny."
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../../../data/tribes/scripting/help/building_help.lua:341
@@ -16805,7 +16805,7 @@ msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
 "even after having done so, it will still have a %1%%% chance of finding some"
 " more of them."
-msgstr ""
+msgstr "Táto baňa dokáže vyťažiť všetky zdroje po najhlbšiu úroveň. Aj po tom, ako sa tak stane, stále bude mať %1%%% šancu, že nájde ešte trocha horniny."
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:349
 #: ../../../../data/tribes/scripting/help/building_help.lua:496
@@ -16828,7 +16828,7 @@ msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bod zdravia za sekundu."
 msgstr[1] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d body zdravia za sekundu."
-msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
+msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodu zdravia za sekundu."
 msgstr[3] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:360
@@ -16961,7 +16961,7 @@ msgstr "Pracovník používa:"
 #. uses
 #: ../../../../data/tribes/scripting/help/building_help.lua:702
 msgid "Workers use:"
-msgstr ""
+msgstr "Pracovníci používajú:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:712
 #: ../../../../data/tribes/scripting/help/worker_help.lua:179
@@ -16975,7 +16975,7 @@ msgstr "Výroba"
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:744
 msgid "Health improvement:"
-msgstr ""
+msgstr "Zlepšenie zdravia:"
 
 #: ../../../../data/tribes/scripting/help/building_help.lua:745
 #: ../../../../data/tribes/scripting/help/building_help.lua:753
@@ -17240,19 +17240,19 @@ msgstr "Veľkosť"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
-msgstr ""
+msgstr "Pracovníci a zvieratá sa môžu prechádzať po tomto nehybnom objekte."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
-msgstr ""
+msgstr "Pracovníci a zvieratá sa nemôžu prechádzať po tomto nehybnom objekte."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"
-msgstr ""
+msgstr "Mení sa na"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Preferované terény"
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
@@ -17294,7 +17294,7 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d sekundu"
 msgstr[1] "%d sekundy"
-msgstr[2] "%d sekúnd"
+msgstr[2] "%d sekundy"
 msgstr[3] "%d sekúnd"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:42
@@ -17304,7 +17304,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
-msgstr[2] "%d minút"
+msgstr[2] "%d minúty"
 msgstr[3] "%d minút"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
@@ -17397,7 +17397,7 @@ msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Za každú úroveň sa zvýši o %1% bod."
 msgstr[1] "Za každú úroveň sa zvýši o %1% body."
-msgstr[2] "Za každú úroveň sa zvýši o %1% bodov."
+msgstr[2] "Za každú úroveň sa zvýši o %1% bodu."
 msgstr[3] "Za každú úroveň sa zvýši o %1% bodov."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level

@@ -318,7 +318,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr "%1$s požiadal o pripojenie sa do tímu  %2$s."
+msgstr "%1$s požiadal o pripojenie sa do tímu %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:81
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
@@ -571,12 +571,12 @@ msgstr "Nastaviť alebo zmeniť zdroje"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:359
 msgid "Port spaces"
-msgstr "Miesta pre prístavy"
+msgstr "Prístavné miesta"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:362
 msgid "Add or remove port spaces"
-msgstr "Pridať alebo odobrať miesta pre prístavy"
+msgstr "Pridať alebo odobrať prístavné miesta"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:370
@@ -2251,7 +2251,7 @@ msgstr ""
 #: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Loď %2$s objavila neobsadené prístavné miesto o %1$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2269,7 +2269,7 @@ msgstr[3] ""
 #: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Loď %3$s objavila prístavné miesto hráča %1$s o %2$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2337,7 +2337,7 @@ msgstr "V"
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Neobsadené / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2346,7 +2346,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Neobsadené / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2528,22 +2528,22 @@ msgstr ""
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Táto hra bola uložená pomocou staršej verzie Widelands a už sa nedá načítať, alebo ide o novšiu verziu, ktorú zatiaľ nie je možné spracovať."
 
 #: ../../../../src/logic/generic_save_handler.cc:223
 #: ../../../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Súbor uložený úspešne!"
 
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "Záložný súbor „%s“ sa nepodarilo vymazať."
 
 #: ../../../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "Adresár „%s“ sa nepodarilo vytvoriť!"
 
 #: ../../../../src/logic/generic_save_handler.cc:236
 #, c-format
@@ -2552,35 +2552,35 @@ msgstr "Nepodarilo sa vymazať súbor „%s“!"
 
 #: ../../../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Skúste uložiť pod iným menom!"
 
 #: ../../../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Chyba pri zápise údajov do súboru „%s“!"
 
 #: ../../../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Uložený súbor môže byť poškodený!"
 
 #: ../../../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "Súbor „%s“ sa nepodarilo obnoviť!"
 
 #: ../../../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Záložný súbor „%s“ bude nejaký čas k dispozícii."
 
 #: ../../../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "Súbor „%s“ bol obnovený zo zálohy."
 
 #: ../../../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Vyskytla sa neočakávaná chyba:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:71
@@ -3019,7 +3019,7 @@ msgstr ""
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr ""
+msgstr "Váš trajektový dvor nebol postavená dostatočne blízko pobrežia. Nebude môcť stavať trajekty."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Destination Gone"
@@ -3047,11 +3047,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:642
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Vojnová loď prišla na známe miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:643
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Expedičná loď prišla na známe miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:644
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
@@ -3060,11 +3060,11 @@ msgstr "Prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:644
 msgid "Port Space Spotted"
-msgstr "Spozorované miesto pre prístav"
+msgstr "Spozorované prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:650
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Vojnová loď našla nové miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:651
 msgid "An expedition ship found a new port build space."
@@ -3072,7 +3072,7 @@ msgstr "Expedičná loď našla nové miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space Found"
-msgstr "Nález miesta pre prístav"
+msgstr "Nájdené prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship"
@@ -4070,7 +4070,7 @@ msgstr ""
 
 #: ../../../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Neexistuje žiaden prihlásený používateľ s týmto menom."
 
 #: ../../../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
@@ -7894,12 +7894,12 @@ msgstr "Vyskúšať jazyk systému"
 #: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "Preklad do jazyka %s je hotový."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "Preklad do jazyka %1% je na %2%%% hotový."
 
 #: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
@@ -7923,7 +7923,7 @@ msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr ""
+msgstr "Generátor náhodných máp nedokázal vygenerovať vhodnú mapu. Stáva sa to občas, pretože generátor je stále v beta verzii. Prosím skúste to znova s ​​mierne odlišnými nastaveniami."
 
 #: ../../../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -8193,7 +8193,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication.cc:1998
 msgid "Incompatible"
-msgstr ""
+msgstr "Nekompatibilné"
 
 #: ../../../../src/wlapplication.cc:2038
 msgid "Game ended unexpectedly"
@@ -8821,7 +8821,7 @@ msgstr "Ukázať prieskumné výpravy"
 
 #: ../../../../src/wlapplication_options.cc:801
 msgid "Show Expeditions with Port Spaces"
-msgstr "Ukázať výpravy s miestom pre prístav"
+msgstr "Ukázať výpravy s prístavným miestom"
 
 #: ../../../../src/wlapplication_options.cc:806
 msgid "Show Warships"
@@ -9262,7 +9262,7 @@ msgstr "Naozaj chcete vylepšiť túto budovu?"
 #. building
 #: ../../../../src/wui/actionconfirm.cc:397
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Buďte opatrní, ak je nepriateľ blízko!"
 
 #: ../../../../src/wui/actionconfirm.cc:408
 msgid ""
@@ -9668,15 +9668,15 @@ msgstr "Odstrániť vybrané výrobky"
 
 #: ../../../../src/wui/constructionsitewindow.cc:307
 msgid "Ware settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia výrobkov použité po výstavbe"
 
 #: ../../../../src/wui/constructionsitewindow.cc:310
 msgid "Worker settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia pracovníkov použité po výstavbe"
 
 #: ../../../../src/wui/constructionsitewindow.cc:318
 msgid "Start an expedition from this port after completion"
-msgstr ""
+msgstr "Začať výpravu po postavení prístavu"
 
 #: ../../../../src/wui/constructionsitewindow.cc:371
 #: ../../../../src/wui/soldierlist.cc:490
@@ -10586,7 +10586,7 @@ msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
 msgstr[0] "Vybratý %1% adresár a %2%:"
 msgstr[1] "Vybraté %1% adresáre a %2%:"
-msgstr[2] "Vybratých %1% adresárov a %2%:"
+msgstr[2] "Vybratých %1% adresára a %2%:"
 msgstr[3] "Vybratých %1% adresárov a %2%:"
 
 #: ../../../../src/wui/gamedetails.cc:137
@@ -11555,11 +11555,11 @@ msgstr[3] "Naozaj chcete vymazať týchto %d hier?"
 
 #: ../../../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Chyba pri odstraňovaní súboru!"
 
 #: ../../../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Chyba pri odstraňovaní súborov!"
 
 #: ../../../../src/wui/savegamedeleter.cc:108
 msgid "The game could not be deleted."
@@ -11866,7 +11866,7 @@ msgstr "Ukázať prieskumné výpravy"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:607
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Ukázať výpravy, ktoré našli miesto pre prístav alebo zakladajú kolóniu"
+msgstr "Ukázať výpravy, ktoré našli prístavné miesto alebo zakladajú kolóniu"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:612
@@ -12060,7 +12060,7 @@ msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Či sa má prehrať úvodná hudba pri spustení Widelands. Úvodná obrazovka sa automaticky zatvorí iba po skončení úvodnej hudby, ale dá sa preskočiť stlačením klávesu alebo kliknutím myši."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
