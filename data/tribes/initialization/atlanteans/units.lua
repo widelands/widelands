@@ -553,7 +553,7 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "blackroot",
-	        default_target_quantity = 0,
+            default_target_quantity = 0,
             preciousness = 10,
             helptexts = {
                -- TRANSLATORS: Helptext for an Atlantean ware: Blackroot
