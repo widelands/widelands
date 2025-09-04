@@ -11,7 +11,7 @@ wl.Descriptions():new_productionsite_type {
 
    buildcost = {
       log = 4,
-      rope = 1,
+      rope = 1
    },
    return_on_dismantle = {
       log = 2
@@ -56,7 +56,7 @@ wl.Descriptions():new_productionsite_type {
             "consume=ration",
             "sleep=duration:23s800ms",
             "call=mine_granite",
-            "call=mine_quartz",
+            "call=mine_quartz"
          }
       },
       mine_granite = {
@@ -65,7 +65,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             "animate=working duration:17s",
             "mine=resource_stones radius:1 yield:100% when_empty:20%",
-            "produce=granite",
+            "produce=granite"
          }
       },
       mine_quartz = {
@@ -74,7 +74,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             "animate=working duration:21s",
             "mine=resource_stones radius:1 yield:100% when_empty:15%",
-            "produce=quartz",
+            "produce=quartz"
          }
       },
       encyclopedia = {
@@ -82,7 +82,7 @@ wl.Descriptions():new_productionsite_type {
          descname = "encyclopedia",
          actions = {
             "consume=ration",
-            "produce=granite quartz",
+            "produce=granite quartz"
          }
       },
    },
