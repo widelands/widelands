@@ -11,11 +11,11 @@ wl.Descriptions():new_productionsite_type {
 
    buildcost = {
       log = 5,
-      rope = 2,
+      rope = 2
    },
    return_on_dismantle = {
       log = 3,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
