@@ -14,13 +14,13 @@ wl.Descriptions():new_productionsite_type {
       balsa = 2,
       log = 2,
       rubber = 3,
-      rope = 2,
+      rope = 2
    },
    return_on_dismantle = {
       balsa = 1,
       log = 1,
       rubber = 1,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -36,7 +36,7 @@ wl.Descriptions():new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 8 },
+      { name = "log", amount = 8 }
    },
 
    programs = {
