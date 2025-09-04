@@ -49,7 +49,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "coal", amount = 8 },
-      { name = "gold_dust", amount = 8 },
+      { name = "gold_dust", amount = 8 }
    },
 
    programs = {
