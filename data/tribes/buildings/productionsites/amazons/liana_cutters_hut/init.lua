@@ -10,7 +10,7 @@ wl.Descriptions():new_productionsite_type {
    size = "small",
 
    buildcost = {
-      log = 5,
+      log = 5
    },
    return_on_dismantle = {
       log = 3
@@ -25,7 +25,7 @@ wl.Descriptions():new_productionsite_type {
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
-      basic_amount = 1,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -35,17 +35,17 @@ wl.Descriptions():new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start cutting lianas because ...
          descname = _("cutting lianas"),
          actions = {
             "return=skipped unless economy needs liana",
             "callworker=cut",
-            "sleep=duration:30s",
+            "sleep=duration:30s"
          },
       },
    },
    out_of_resource_notification = {
-      -- TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
+      -- TRANSLATORS: Short for "No Trees to cut lianas" for liana cutters hut
       title = _("No Trees"),
       heading = _("No Tree to Cut Lianas"),
       message = pgettext ("amazons_building", "The liana cutter working at this site can’t find any tree in her work area. You should consider dismantling or destroying the building or building a jungle preserver’s hut."),
