@@ -38,23 +38,23 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             "call=breed",
-            "call=release",
+            "call=release"
          },
       },
       breed = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _("breeding fish"),
          actions = {
             "callworker=breed_fish",
-            "sleep=duration:52s500ms",
+            "sleep=duration:52s500ms"
          },
       },
       release = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start releasing game because ...
          descname = _("releasing game"),
          actions = {
             "callworker=release_game",
-            "sleep=duration:52s500ms",
+            "sleep=duration:52s500ms"
          },
       },
    },
