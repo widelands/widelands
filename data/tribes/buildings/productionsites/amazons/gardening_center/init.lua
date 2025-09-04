@@ -12,12 +12,12 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 4,
       granite = 2,
-      rope = 2,
+      rope = 2
    },
    return_on_dismantle = {
       log = 2,
       granite = 1,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -44,7 +44,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "coal", amount = 3 },
-      { name = "fish", amount = 3 },
+      { name = "fish", amount = 3 }
    },
 
    programs = {
@@ -59,7 +59,7 @@ wl.Descriptions():new_productionsite_type {
             "call=terraform",
             "call=terraform",
             "call=terraform",
-            "call=terraform",
+            "call=terraform"
          }
       },
       terraform = {
