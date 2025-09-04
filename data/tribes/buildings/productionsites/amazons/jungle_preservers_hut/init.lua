@@ -15,7 +15,7 @@ wl.Descriptions():new_productionsite_type {
       rope = 1
    },
    return_on_dismantle = {
-      log = 2,
+      log = 2
    },
 
    spritesheets = {
@@ -35,7 +35,7 @@ wl.Descriptions():new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      space_consumer = true,
+      space_consumer = true
    },
 
    working_positions = {
