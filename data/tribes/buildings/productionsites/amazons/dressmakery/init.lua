@@ -13,12 +13,12 @@ wl.Descriptions():new_productionsite_type {
       balsa = 3,
       log = 3,
       rubber = 3,
-      rope = 1,
+      rope = 1
    },
    return_on_dismantle = {
       balsa = 1,
       log = 2,
-      rubber = 1,
+      rubber = 1
    },
 
    animation_directory = dirname,
@@ -37,7 +37,7 @@ wl.Descriptions():new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 750,
+      prohibited_till = 750
    },
 
    working_positions = {
@@ -49,7 +49,7 @@ wl.Descriptions():new_productionsite_type {
       { name = "balsa", amount = 6 },
       { name = "rubber", amount = 9 },
       { name = "rope", amount = 6 },
-      { name = "gold", amount = 3 },
+      { name = "gold", amount = 3 }
    },
 
    programs = {
@@ -66,7 +66,7 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_vest_padded",
             "call=produce_boots_swift",
             "call=produce_boots_hero",
-            "call=produce_protector_padded",
+            "call=produce_protector_padded"
          },
       },
       produce_tunic = {
