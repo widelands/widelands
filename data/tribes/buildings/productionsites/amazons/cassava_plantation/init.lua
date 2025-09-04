@@ -12,12 +12,12 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 4,
       rope = 2,
-      granite = 2,
+      granite = 2
    },
    return_on_dismantle = {
       log = 2,
       rope = 1,
-      granite = 1,
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -28,7 +28,7 @@ wl.Descriptions():new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      prohibited_till = 220,
+      prohibited_till = 220
    },
 
    working_positions = {
@@ -41,7 +41,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             "call=plant_cassava",
-            "call=harvest_cassava",
+            "call=harvest_cassava"
          }
       },
       plant_cassava = {
@@ -57,7 +57,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("harvesting cassava"),
          actions = {
             "callworker=harvest",
-            "sleep=duration:4s",
+            "sleep=duration:4s"
          }
       },
    },
