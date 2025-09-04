@@ -42,7 +42,7 @@ wl.Descriptions():new_productionsite_type {
             -- max. time total: 2 * 96.2 = 192.4 sec
             -- avg. time total: 2 * 69.2 = 138.4 sec
             "call=hunt",
-            "call=fish",
+            "call=fish"
          }
       },
       hunt = {
@@ -54,7 +54,7 @@ wl.Descriptions():new_productionsite_type {
             -- max. time: 62.2 + 34 = 96.2 sec
             -- avg. time: 35.2 + 34 = 69.2 sec
             "callworker=hunt",
-            "sleep=duration:34s",
+            "sleep=duration:34s"
          }
       },
       fish = {
@@ -66,7 +66,7 @@ wl.Descriptions():new_productionsite_type {
             -- max. time: 62.2 + 34 = 96.2 sec
             -- avg. time: 35.2 + 34 = 69.2 sec
             "callworker=fish",
-            "sleep=duration:34s",
+            "sleep=duration:34s"
          }
       },
    },
