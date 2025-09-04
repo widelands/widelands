@@ -12,12 +12,12 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 2,
       granite = 4,
-      rope = 2,
+      rope = 2
    },
    return_on_dismantle = {
       log = 1,
       granite = 2,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -45,7 +45,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "cassavaroot", amount = 4 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 8 }
    },
 
    programs = {
@@ -53,7 +53,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            "call=produce_bread",
+            "call=produce_bread"
          }
       },
       produce_bread = {
