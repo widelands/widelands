@@ -13,13 +13,13 @@ wl.Descriptions():new_productionsite_type {
       balsa = 2,
       ironwood = 2,
       rubber = 2,
-      granite = 2,
+      granite = 2
    },
    return_on_dismantle = {
       balsa = 1,
       ironwood = 1,
       rubber = 1,
-      granite = 1,
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -40,7 +40,7 @@ wl.Descriptions():new_productionsite_type {
    aihints = {
       basic_amount = 1,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 3,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -51,7 +51,7 @@ wl.Descriptions():new_productionsite_type {
       { name = "granite", amount = 4 },
       { name = "quartz", amount = 7 },
       { name = "log", amount = 6 },
-      { name = "ironwood", amount = 6 },
+      { name = "ironwood", amount = 6 }
    },
 
    programs = {
@@ -79,7 +79,7 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_spear_stone_tipped",
             "call=produce_needles",
             "call=produce_spear_hardened",
-            "call=produce_stone_bowl",
+            "call=produce_stone_bowl"
          },
       },
       produce_shovel = {
