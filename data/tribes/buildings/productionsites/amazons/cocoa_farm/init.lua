@@ -12,12 +12,12 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 4,
       rubber = 2,
-      granite = 2,
+      granite = 2
    },
    return_on_dismantle = {
       log = 2,
       rubber = 1,
-      granite = 1,
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -34,7 +34,7 @@ wl.Descriptions():new_productionsite_type {
       space_consumer = true,
       prohibited_till = 220,
       very_weak_ai_limit = 2,
-      weak_ai_limit = 3,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -47,11 +47,11 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             "call=plant_cocoa",
-            "call=harvest_cocoa",
+            "call=harvest_cocoa"
          }
       },
       plant_cocoa = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start planting cocoa because ...
          descname = _("planting cocoa"),
          actions = {
             "callworker=plant",
@@ -59,7 +59,7 @@ wl.Descriptions():new_productionsite_type {
          }
       },
       harvest_cocoa = {
-         -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting cocoa because ...
          descname = _("harvesting cocoa"),
          actions = {
             "callworker=harvest",
