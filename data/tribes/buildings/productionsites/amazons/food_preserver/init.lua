@@ -13,12 +13,12 @@ wl.Descriptions():new_productionsite_type {
       log = 2,
       granite = 3,
       rope = 2,
-      rubber =1
+      rubber = 1
    },
    return_on_dismantle = {
       log = 1,
       granite = 2,
-      rope = 1,
+      rope = 1
    },
 
    animation_directory = dirname,
@@ -50,7 +50,7 @@ wl.Descriptions():new_productionsite_type {
       { name = "coal", amount = 3 },
       { name = "amazons_bread", amount = 6 },
       { name = "fish", amount = 6 },
-      { name = "meat", amount = 6 },
+      { name = "meat", amount = 6 }
    },
 
    programs = {
