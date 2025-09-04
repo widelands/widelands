@@ -13,11 +13,11 @@ wl.Descriptions():new_productionsite_type {
       balsa = 1,
       log = 2,
       rubber = 2,
-      granite = 1,
+      granite = 1
    },
    return_on_dismantle = {
       log = 2,
-      granite = 1,
+      granite = 1
    },
 
    animation_directory = dirname,
@@ -46,7 +46,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "cocoa_beans", amount = 4 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 8 }
    },
 
    programs = {
