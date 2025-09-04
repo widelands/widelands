@@ -57,7 +57,7 @@ wl.Descriptions():new_productionsite_type {
          }
       },
       produce_bread = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start baking a bread because ...
          descname = _("baking bread"),
          actions = {
             -- time total: 5.4 + 18 + 10 + 3.6 = 37 sec
