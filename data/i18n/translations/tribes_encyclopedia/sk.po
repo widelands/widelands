@@ -646,7 +646,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:616
 msgctxt "amazons_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Rúbe stromy."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Master Woodcutter
 #: ../../../../data/tribes/initialization/amazons/units.lua:623
@@ -658,7 +658,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:630
 msgctxt "amazons_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Sadí stromy."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Master
 #: ../../../../data/tribes/initialization/amazons/units.lua:637
@@ -923,7 +923,7 @@ msgstr "Tento kaučukovník je pripravený na ťažbu kaučuku majsterkou drevor
 #: ../../../../data/tribes/initialization/empire/units.lua:876
 #: ../../../../data/tribes/initialization/frisians/units.lua:1169
 msgid "This field has just been planted."
-msgstr ""
+msgstr "Toto pole bolo práve zasiate."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -958,7 +958,7 @@ msgstr "Toto pole rastie."
 #: ../../../../data/tribes/initialization/empire/units.lua:897
 #: ../../../../data/tribes/initialization/frisians/units.lua:1190
 msgid "This field is ready for harvesting."
-msgstr ""
+msgstr "Toto pole je pripravené na zber."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -973,7 +973,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:904
 #: ../../../../data/tribes/initialization/frisians/units.lua:1197
 msgid "This field has been harvested."
-msgstr ""
+msgstr "Toto pole bolo pozberané."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:1173
@@ -2037,7 +2037,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2342
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Príslovie"
 
 #. TRANSLATORS: Purpose helptext for an Amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an Atlantean building: Dismantle Site
@@ -4677,7 +4677,7 @@ msgstr "Z tých vysokých veží nevidíš všetko. Niekedy potrebuješ niekoho,
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1656
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr ""
+msgstr "Prieskumník odpovedá vojakovi"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Scout's
 #. House, part 1
@@ -4698,7 +4698,7 @@ msgstr "Píli kmene na dosky."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1673
 msgctxt "atlanteans_building"
 msgid "Will need at least four woodcutters for a constant supply of planks."
-msgstr ""
+msgstr "Pre stály prísun dosiek budete potrebovať najmenej štyroch drevorubačov."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1675
@@ -5069,7 +5069,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1821
 msgctxt "atlanteans_building"
 msgid "Busy carrier murmuring to himself"
-msgstr ""
+msgstr "Zaneprázdnený nosič si mrmle popod nos"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Horse
 #. Farm
@@ -6663,7 +6663,7 @@ msgstr "Mieša maltu zo žuly, vody a uhlia vo vápenke."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:614
 msgctxt "barbarians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Sadí a zberá úrodu z trstinových polí."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Weaver
 #: ../../../../data/tribes/initialization/barbarians/units.lua:621
@@ -14448,13 +14448,13 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:664
 msgctxt "frisians_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Rúbe stromy."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Forester
 #: ../../../../data/tribes/initialization/frisians/units.lua:671
 msgctxt "frisians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Sadí stromy."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Clay Digger
 #: ../../../../data/tribes/initialization/frisians/units.lua:678
@@ -14478,7 +14478,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:699
 msgctxt "frisians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Sadí a zberá úrodu z trstinových polí."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Seamstress
 #: ../../../../data/tribes/initialization/frisians/units.lua:706

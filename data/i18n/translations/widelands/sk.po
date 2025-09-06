@@ -2890,13 +2890,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "flotila nepotrebuje ďalšie trajekty"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "flotila nepotrebuje ďalšie lode"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -3632,7 +3632,7 @@ msgstr "Územie"
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
-msgstr ""
+msgstr "Viditeľnosť"
 
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
@@ -7904,7 +7904,7 @@ msgstr "Preklad do jazyka %1% je na %2%%% hotový."
 #: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "Ak nám chcete pomôcť s prekladom, prosím navštívte %s"
 
 #: ../../../../src/ui_fsmenu/random_game.cc:73
 msgid ""
@@ -7923,7 +7923,7 @@ msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr "Generátor náhodných máp nedokázal vygenerovať vhodnú mapu. Stáva sa to občas, pretože generátor je stále v beta verzii. Prosím skúste to znova s ​​mierne odlišnými nastaveniami."
+msgstr "Generátor náhodných máp nedokázal vygenerovať vhodnú mapu. Stáva sa to občas, pretože generátor je stále v beta verzii. Prosím skúste to znova s mierne odlišnými nastaveniami."
 
 #: ../../../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -9880,11 +9880,11 @@ msgstr "Zničiť vodnú cestu"
 
 #: ../../../../src/wui/fieldaction.cc:521
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Nastaviť flotilu lodí tohto oceánu"
 
 #: ../../../../src/wui/fieldaction.cc:532
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Nastaviť flotilu trajektov tohto oceánu"
 
 #: ../../../../src/wui/fieldaction.cc:539
 msgid "Watch field in a separate window"
@@ -9989,19 +9989,19 @@ msgstr ""
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
-msgstr ""
+msgstr "Nastavenie flotily trajektov"
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ship Fleet Options"
-msgstr ""
+msgstr "Nastavenie flotily lodí"
 
 #: ../../../../src/wui/fleet_options_window.cc:124
 msgid "Toggle infinite production"
-msgstr ""
+msgstr "Prepnúť neobmedzenú výrobu"
 
 #: ../../../../src/wui/fleet_options_window.cc:134
 msgid "Fleet Statistics"
-msgstr ""
+msgstr "Štatistika flotily"
 
 #: ../../../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
@@ -10013,27 +10013,27 @@ msgstr "Lode:"
 
 #: ../../../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
-msgstr ""
+msgstr "Celkový počet vodných ciest:"
 
 #: ../../../../src/wui/fleet_options_window.cc:162
 msgid "Unserviced waterways:"
-msgstr ""
+msgstr "Neobsluhované vodné cesty:"
 
 #: ../../../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
-msgstr ""
+msgstr "Celkový počet trajektov:"
 
 #: ../../../../src/wui/fleet_options_window.cc:164
 msgid "Unemployed ferries:"
-msgstr ""
+msgstr "Nevyužité trajekty:"
 
 #: ../../../../src/wui/fleet_options_window.cc:175
 msgid "Desired number of transport ships:"
-msgstr ""
+msgstr "Požadovaný počet transportných lodí:"
 
 #: ../../../../src/wui/fleet_options_window.cc:176
 msgid "Desired number of unemployed ferries:"
-msgstr ""
+msgstr "Požadovaný počet nevyužitých trajektov:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/wui/game_chat_menu.cc:79
@@ -10965,7 +10965,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../../../src/wui/interactive_gamebase.cc:669
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Zostávajúce stavebné náklady:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../../../src/wui/interactive_player.cc:187
@@ -11437,11 +11437,11 @@ msgstr "hra"
 
 #: ../../../../src/wui/portdockwaresdisplay.cc:103
 msgid "Additional item"
-msgstr ""
+msgstr "Ďalšia položka"
 
 #: ../../../../src/wui/portdockwaresdisplay.cc:105
 msgid "(Empty)"
-msgstr ""
+msgstr "(Prázdna)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../../../src/wui/portdockwaresdisplay.cc:157

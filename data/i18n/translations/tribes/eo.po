@@ -236,37 +236,37 @@ msgstr "Viaj soldatoj venkis la malamikon ĉe la turo."
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
 msgctxt "amazons_building"
 msgid "Treetop Sentry"
-msgstr "Arbokrona sentinelejo"
+msgstr "Arbokrona gardejo"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldier has occupied your treetop sentry."
-msgstr "Viaj soldatoj okupis vian arbokronan sentinelejon."
+msgstr "Viaj soldatoj okupis vian arbokronan gardejon."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr "Via arbokrona sentinelejo malkovris atakanton."
+msgstr "Via arbokrona gardejo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr "Via arbokrona sentinelejo estas atakata."
+msgstr "Via arbokrona gardejo estas atakata."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr "La malamiko venkis viajn soldatojn ĉe la arbokrona sentinelejo."
+msgstr "La malamiko venkis viajn soldatojn ĉe la arbokrona gardejo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr "Viaj soldatoj venkis la malamikon ĉe la arbokrona sentinelejo."
+msgstr "Viaj soldatoj venkis la malamikon ĉe la arbokrona gardejo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
@@ -1028,37 +1028,37 @@ msgstr "Viaj soldatoj venkis la malamikon ĉe la avanposteno."
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr ""
+msgstr "Sentinelejo"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "Viaj soldatoj okupis vian sentinelejon."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "Via sentinelejo malkovris atakanton."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "Via sentinelejo estas atakata."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "La malamiko venkis viajn soldatojn ĉe la sentinelejo."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr ""
+msgstr "Viaj soldatoj venkis la malamikon ĉe la sentinelejo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1186,7 +1186,7 @@ msgstr "Malkonstruejo"
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Maniokplantejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1267,17 +1267,17 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:82
 #: ../../../../data/tribes/buildings/productionsites/frisians/well/init.lua:49
 msgid "working"
-msgstr "laboranta"
+msgstr "labori"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:58
 msgid "planting cassava"
-msgstr ""
+msgstr "planti maniokon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
 msgid "harvesting cassava"
-msgstr ""
+msgstr "rikolti maniokon"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
@@ -1310,7 +1310,7 @@ msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "La farmistino laboranta en ĉi tiu maniokplantejo ne havas senarbustan grundon por semi siajn semojn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8

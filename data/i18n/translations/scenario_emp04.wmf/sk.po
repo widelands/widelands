@@ -1442,7 +1442,7 @@ msgstr "Horáreň"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr ""
+msgstr "sadenie stromov"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Brewery
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
@@ -1539,12 +1539,12 @@ msgstr "Drevorubačský dom"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
-msgstr ""
+msgstr "rúbanie stromov"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Došli stromy"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"

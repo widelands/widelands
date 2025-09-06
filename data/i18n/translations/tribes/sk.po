@@ -5336,22 +5336,22 @@ msgstr "Balzovník (mladý)"
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "Kakaovník (dospelý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Kakaovník (starý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "Kakaovník (žrďovina)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "Kakaovník (mladý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -7274,7 +7274,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:257
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr ""
+msgstr "Tygrie oko"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:259
