@@ -299,12 +299,12 @@ msgstr "Hráč sa vzdal"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:68
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Hráč opustil tím"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:69
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s opustil tím %2$u a je teraz bez tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:77
 msgid "Team Joining Request"
@@ -318,18 +318,18 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s požiadal o pripojenie sa do tímu %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:81
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s pozval %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:120
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s prijal %2$s do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format
@@ -571,12 +571,12 @@ msgstr "Nastaviť alebo zmeniť zdroje"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:359
 msgid "Port spaces"
-msgstr "Miesta pre prístavy"
+msgstr "Prístavné miesta"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:362
 msgid "Add or remove port spaces"
-msgstr "Pridať alebo odobrať miesta pre prístavy"
+msgstr "Pridať alebo odobrať prístavné miesta"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:370
@@ -2251,7 +2251,7 @@ msgstr ""
 #: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Loď %2$s objavila neobsadené prístavné miesto o %1$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -2269,7 +2269,7 @@ msgstr[3] ""
 #: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Loď %3$s objavila prístavné miesto hráča %1$s o %2$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -2337,7 +2337,7 @@ msgstr "V"
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Neobsadené / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2346,7 +2346,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Neobsadené / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2528,22 +2528,22 @@ msgstr ""
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Táto hra bola uložená pomocou staršej verzie Widelands a už sa nedá načítať, alebo ide o novšiu verziu, ktorú zatiaľ nie je možné spracovať."
 
 #: ../../../../src/logic/generic_save_handler.cc:223
 #: ../../../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Súbor uložený úspešne!"
 
 #: ../../../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "Záložný súbor „%s“ sa nepodarilo vymazať."
 
 #: ../../../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "Adresár „%s“ sa nepodarilo vytvoriť!"
 
 #: ../../../../src/logic/generic_save_handler.cc:236
 #, c-format
@@ -2552,35 +2552,35 @@ msgstr "Nepodarilo sa vymazať súbor „%s“!"
 
 #: ../../../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Skúste uložiť pod iným menom!"
 
 #: ../../../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Chyba pri zápise údajov do súboru „%s“!"
 
 #: ../../../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Uložený súbor môže byť poškodený!"
 
 #: ../../../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "Súbor „%s“ sa nepodarilo obnoviť!"
 
 #: ../../../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Záložný súbor „%s“ bude nejaký čas k dispozícii."
 
 #: ../../../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "Súbor „%s“ bol obnovený zo zálohy."
 
 #: ../../../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Vyskytla sa neočakávaná chyba:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:71
@@ -2614,7 +2614,7 @@ msgstr "rozobratých %u %%"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Vaša ekonomika bola rozšírená o novú tržnicu."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
@@ -2890,13 +2890,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "flotila nepotrebuje ďalšie trajekty"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:622
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "flotila nepotrebuje ďalšie lode"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -3003,13 +3003,13 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Lodenica bez pobrežia"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Vaša lodenica nebola postavená dostatočne blízko pobrežia. Nebude môcť stavať lode."
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
 msgid "Ferry Yard Without Shore"
@@ -3019,7 +3019,7 @@ msgstr ""
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr ""
+msgstr "Váš trajektový dvor nebol postavená dostatočne blízko pobrežia. Nebude môcť stavať trajekty."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Destination Gone"
@@ -3047,11 +3047,11 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:642
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Vojnová loď prišla na známe miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:643
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Expedičná loď prišla na známe miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:644
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
@@ -3060,11 +3060,11 @@ msgstr "Prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:644
 msgid "Port Space Spotted"
-msgstr "Spozorované miesto pre prístav"
+msgstr "Spozorované prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:650
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Vojnová loď našla nové miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:651
 msgid "An expedition ship found a new port build space."
@@ -3072,7 +3072,7 @@ msgstr "Expedičná loď našla nové miesto na postavenie prístavu."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:652
 msgid "Port Space Found"
-msgstr "Nález miesta pre prístav"
+msgstr "Nájdené prístavné miesto"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Enemy Ship"
@@ -3103,7 +3103,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:803
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Vaša loď nenašla cestu do cieľového prístavu „%s“."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1316
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1599
@@ -3632,7 +3632,7 @@ msgstr "Územie"
 #: ../../../../src/map_io/map_saver.cc:287
 #: ../../../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
-msgstr ""
+msgstr "Viditeľnosť"
 
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
@@ -4070,7 +4070,7 @@ msgstr ""
 
 #: ../../../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Neexistuje žiaden prihlásený používateľ s týmto menom."
 
 #: ../../../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
@@ -4408,7 +4408,7 @@ msgstr "Nevybraná"
 
 #: ../../../../src/ui_basic/dropdown.h:483
 msgid "No matches"
-msgstr ""
+msgstr "Žiadna zhoda"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -7894,17 +7894,17 @@ msgstr "Vyskúšať jazyk systému"
 #: ../../../../src/ui_fsmenu/options.cc:811
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "Preklad do jazyka %s je hotový."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../../../src/ui_fsmenu/options.cc:815
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "Preklad do jazyka %1% je na %2%%% hotový."
 
 #: ../../../../src/ui_fsmenu/options.cc:827
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "Ak nám chcete pomôcť s prekladom, prosím navštívte %s"
 
 #: ../../../../src/ui_fsmenu/random_game.cc:73
 msgid ""
@@ -7923,7 +7923,7 @@ msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
 " with slightly different settings."
-msgstr ""
+msgstr "Generátor náhodných máp nedokázal vygenerovať vhodnú mapu. Stáva sa to občas, pretože generátor je stále v beta verzii. Prosím skúste to znova s mierne odlišnými nastaveniami."
 
 #: ../../../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
@@ -8193,7 +8193,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication.cc:1998
 msgid "Incompatible"
-msgstr ""
+msgstr "Nekompatibilné"
 
 #: ../../../../src/wlapplication.cc:2038
 msgid "Game ended unexpectedly"
@@ -8297,15 +8297,15 @@ msgstr "Kameňolom"
 
 #: ../../../../src/wlapplication_options.cc:196
 msgid "Primary Building Materials Industry"
-msgstr ""
+msgstr "Primárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:197
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Sekundárny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:198
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Terciálny priemysel stavebných materiálov"
 
 #: ../../../../src/wlapplication_options.cc:199
 msgid "Fishing"
@@ -8393,7 +8393,7 @@ msgstr "Druhý nosič"
 
 #: ../../../../src/wlapplication_options.cc:220
 msgid "Charcoal"
-msgstr ""
+msgstr "Drevené uhlie"
 
 #: ../../../../src/wlapplication_options.cc:221
 msgid "Stone Mine"
@@ -8405,7 +8405,7 @@ msgstr "Uhoľná baňa"
 
 #: ../../../../src/wlapplication_options.cc:223
 msgid "Iron Mine"
-msgstr "Železná baňa"
+msgstr "Železnorudná baňa"
 
 #: ../../../../src/wlapplication_options.cc:224
 msgid "Gold Mine"
@@ -8413,23 +8413,23 @@ msgstr "Zlatá baňa"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Poľnohospodársky producent"
 
 #: ../../../../src/wlapplication_options.cc:226
 msgid "Primary Agricultural Consumer"
-msgstr ""
+msgstr "Primárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:227
 msgid "Secondary Agricultural Consumer"
-msgstr ""
+msgstr "Sekundárny poľnohospodársky konzument"
 
 #: ../../../../src/wlapplication_options.cc:228
 msgid "Alternative Industry"
-msgstr ""
+msgstr "Alternatívny priemysel"
 
 #: ../../../../src/wlapplication_options.cc:229
 msgid "Industry Support"
-msgstr ""
+msgstr "Podpora priemyslu"
 
 #: ../../../../src/wlapplication_options.cc:230
 msgid "Terraforming"
@@ -8517,7 +8517,7 @@ msgstr "Urobiť snímku obrazovky"
 
 #: ../../../../src/wlapplication_options.cc:386
 msgid "Change Music"
-msgstr ""
+msgstr "Zmeniť hudbu"
 
 #: ../../../../src/wlapplication_options.cc:391
 msgid "Open the Debug Console (developer tool)"
@@ -8561,7 +8561,7 @@ msgstr "Zverejniť mapu online"
 
 #: ../../../../src/wlapplication_options.cc:467
 msgid "Toggle Tools Menu"
-msgstr ""
+msgstr "Zobrazenie ponuky nástrojov"
 
 #: ../../../../src/wlapplication_options.cc:472
 msgid "Change Height Tool"
@@ -8730,7 +8730,7 @@ msgstr "Zvýšiť násobok rýchlosti hry o 10"
 
 #: ../../../../src/wlapplication_options.cc:696
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Nastavenie normálnej rýchlosti hry"
 
 #: ../../../../src/wlapplication_options.cc:700
 msgid "Pause The Game"
@@ -8738,7 +8738,7 @@ msgstr "Zastaviť hru"
 
 #: ../../../../src/wlapplication_options.cc:705
 msgid "Scroll to Starting Field"
-msgstr ""
+msgstr "Návrat na počiatočnú pozíciu"
 
 #: ../../../../src/wlapplication_options.cc:708
 #: ../../../../src/wui/game_chat_menu.cc:68
@@ -8821,7 +8821,7 @@ msgstr "Ukázať prieskumné výpravy"
 
 #: ../../../../src/wlapplication_options.cc:801
 msgid "Show Expeditions with Port Spaces"
-msgstr "Ukázať výpravy s miestom pre prístav"
+msgstr "Ukázať výpravy s prístavným miestom"
 
 #: ../../../../src/wlapplication_options.cc:806
 msgid "Show Warships"
@@ -9262,7 +9262,7 @@ msgstr "Naozaj chcete vylepšiť túto budovu?"
 #. building
 #: ../../../../src/wui/actionconfirm.cc:397
 msgid "Be careful if the enemy is near!"
-msgstr ""
+msgstr "Buďte opatrní, ak je nepriateľ blízko!"
 
 #: ../../../../src/wui/actionconfirm.cc:408
 msgid ""
@@ -9668,15 +9668,15 @@ msgstr "Odstrániť vybrané výrobky"
 
 #: ../../../../src/wui/constructionsitewindow.cc:307
 msgid "Ware settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia výrobkov použité po výstavbe"
 
 #: ../../../../src/wui/constructionsitewindow.cc:310
 msgid "Worker settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia pracovníkov použité po výstavbe"
 
 #: ../../../../src/wui/constructionsitewindow.cc:318
 msgid "Start an expedition from this port after completion"
-msgstr ""
+msgstr "Začať výpravu po postavení prístavu"
 
 #: ../../../../src/wui/constructionsitewindow.cc:371
 #: ../../../../src/wui/soldierlist.cc:490
@@ -9880,11 +9880,11 @@ msgstr "Zničiť vodnú cestu"
 
 #: ../../../../src/wui/fieldaction.cc:521
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Nastaviť flotilu lodí tohto oceánu"
 
 #: ../../../../src/wui/fieldaction.cc:532
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Nastaviť flotilu trajektov tohto oceánu"
 
 #: ../../../../src/wui/fieldaction.cc:539
 msgid "Watch field in a separate window"
@@ -9989,19 +9989,19 @@ msgstr ""
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
-msgstr ""
+msgstr "Nastavenie flotily trajektov"
 
 #: ../../../../src/wui/fleet_options_window.cc:94
 msgid "Ship Fleet Options"
-msgstr ""
+msgstr "Nastavenie flotily lodí"
 
 #: ../../../../src/wui/fleet_options_window.cc:124
 msgid "Toggle infinite production"
-msgstr ""
+msgstr "Prepnúť neobmedzenú výrobu"
 
 #: ../../../../src/wui/fleet_options_window.cc:134
 msgid "Fleet Statistics"
-msgstr ""
+msgstr "Štatistika flotily"
 
 #: ../../../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
@@ -10013,27 +10013,27 @@ msgstr "Lode:"
 
 #: ../../../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
-msgstr ""
+msgstr "Celkový počet vodných ciest:"
 
 #: ../../../../src/wui/fleet_options_window.cc:162
 msgid "Unserviced waterways:"
-msgstr ""
+msgstr "Neobsluhované vodné cesty:"
 
 #: ../../../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
-msgstr ""
+msgstr "Celkový počet trajektov:"
 
 #: ../../../../src/wui/fleet_options_window.cc:164
 msgid "Unemployed ferries:"
-msgstr ""
+msgstr "Nevyužité trajekty:"
 
 #: ../../../../src/wui/fleet_options_window.cc:175
 msgid "Desired number of transport ships:"
-msgstr ""
+msgstr "Požadovaný počet transportných lodí:"
 
 #: ../../../../src/wui/fleet_options_window.cc:176
 msgid "Desired number of unemployed ferries:"
-msgstr ""
+msgstr "Požadovaný počet nevyužitých trajektov:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/wui/game_chat_menu.cc:79
@@ -10227,7 +10227,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Postavte tržnicu, aby ste mohli prijímať obchodné ponuky."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:498
 #: ../../../../src/wui/marketwindow.cc:930
@@ -10244,7 +10244,7 @@ msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy. Môžete navrh
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Vycentrovať pohľad na túto tržnicu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
@@ -10586,7 +10586,7 @@ msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
 msgstr[0] "Vybratý %1% adresár a %2%:"
 msgstr[1] "Vybraté %1% adresáre a %2%:"
-msgstr[2] "Vybratých %1% adresárov a %2%:"
+msgstr[2] "Vybratých %1% adresára a %2%:"
 msgstr[3] "Vybratých %1% adresárov a %2%:"
 
 #: ../../../../src/wui/gamedetails.cc:137
@@ -10965,7 +10965,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../../../src/wui/interactive_gamebase.cc:669
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Zostávajúce stavebné náklady:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../../../src/wui/interactive_player.cc:187
@@ -11437,11 +11437,11 @@ msgstr "hra"
 
 #: ../../../../src/wui/portdockwaresdisplay.cc:103
 msgid "Additional item"
-msgstr ""
+msgstr "Ďalšia položka"
 
 #: ../../../../src/wui/portdockwaresdisplay.cc:105
 msgid "(Empty)"
-msgstr ""
+msgstr "(Prázdna)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../../../src/wui/portdockwaresdisplay.cc:157
@@ -11555,11 +11555,11 @@ msgstr[3] "Naozaj chcete vymazať týchto %d hier?"
 
 #: ../../../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Chyba pri odstraňovaní súboru!"
 
 #: ../../../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Chyba pri odstraňovaní súborov!"
 
 #: ../../../../src/wui/savegamedeleter.cc:108
 msgid "The game could not be deleted."
@@ -11866,7 +11866,7 @@ msgstr "Ukázať prieskumné výpravy"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:607
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Ukázať výpravy, ktoré našli miesto pre prístav alebo zakladajú kolóniu"
+msgstr "Ukázať výpravy, ktoré našli prístavné miesto alebo zakladajú kolóniu"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:612
@@ -12060,7 +12060,7 @@ msgid ""
 "Whether to play the intro music when Widelands is started. The splashscreen "
 "is only closed automatically when the intro music ends, but can be skipped "
 "by a keypress or a mouse click."
-msgstr ""
+msgstr "Či sa má prehrať úvodná hudba pri spustení Widelands. Úvodná obrazovka sa automaticky zatvorí iba po skončení úvodnej hudby, ale dá sa preskočiť stlačením klávesu alebo kliknutím myši."
 
 #: ../../../../src/wui/sound_options.cc:172
 msgctxt "sound_options"
