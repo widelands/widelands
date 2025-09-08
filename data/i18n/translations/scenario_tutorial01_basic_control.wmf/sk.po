@@ -411,7 +411,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Keď budete pripravení pokračovať, zatvorte minimapu výberom možnosti „Skryť minimapu“ v ponuke „Zobrazenie mapy“ alebo stlačením tlačidla „%s“. Samozrejme, funguje aj kliknutie pravým tlačidlom myši."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
@@ -425,18 +425,18 @@ msgstr "Použitie minimapy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "Veľmi dobre. A teraz k minimape."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Môžete ju otvoriť výberom položky „Ukázať minimapu“ v ponuke „Zobrazenie mapy“ v dolnej časti obrazovky alebo jednoducho pomocou klávesovej skratky „%s“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid "I will open it for you."
-msgstr ""
+msgstr "Otvorím vám ju."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
