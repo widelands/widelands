@@ -145,9 +145,9 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
 	immovable.program_step(game, Duration(parameters.duration.get() != 0u ?
-                                            1 + game.logic_rand() % parameters.duration.get() +
+	                                         1 + game.logic_rand() % parameters.duration.get() +
 	                                            game.logic_rand() % parameters.duration.get() :
-                                            0));
+	                                         0));
 }
 
 /* RST

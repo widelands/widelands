@@ -145,8 +145,8 @@ void MainMenuSaveMap::clicked_ok() {
 			std::string::size_type const filename_size = filename.at(0).size();
 			map->set_name(4 <= filename_size &&
 			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
-                          filename.at(0).substr(0, filename_size - 4) :
-                          filename.at(0));
+			                 filename.at(0).substr(0, filename_size - 4) :
+			                 filename.at(0));
 		}
 		if (save_map(filename.at(0), !get_config_bool("nozip", false))) {
 			die();

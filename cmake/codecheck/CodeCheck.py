@@ -9,6 +9,7 @@ keeping its functionality or improving on it) and supersede the old
 detect_spurious_indentation.py script (while also keeping its cases
 around). Additionally, we replace the spurious code checking done with
 grep which is currently also around.
+
 """
 
 from collections import defaultdict
@@ -66,6 +67,7 @@ $)
         String contents are replace by spaces. Removes comments from
         lines. Comments are completely stripped, including // and /**/
         symbols
+
         """
         if fn in self._stripped_comments_and_strings:
             return self._stripped_comments_and_strings[fn]
@@ -93,6 +95,7 @@ $)
         """Remove macros definitions.
 
         Also multiline macros. They are replaced with empty lines
+
         """
         if fn in self._stripped_all:
             return self._stripped_all[fn]
@@ -158,6 +161,7 @@ class CheckingRule(object):
         preprocessor - Tool to preprocess the text (strip it from unwanted tokens)
         fn           - File name of current file to check
         data         - File contents
+
         """
         lines = preprocessor.get_preprocessed_data(
             fn, data, self._strip_comments_and_strings, self._strip_macros)

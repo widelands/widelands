@@ -759,11 +759,11 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	const std::string state = lua_isnone(L, 3)        ? "seen" :
 	                          !lua_isboolean(L, 3)    ? luaL_checkstring(L, 3) :
 	                          luaL_checkboolean(L, 3) ? "permanent" :
-                                                       "seen";
+	                                                    "seen";
 	const Widelands::HideOrRevealFieldMode mode =
 	   (state == "permanent")  ? Widelands::HideOrRevealFieldMode::kHide :
 	   (state == "explorable") ? Widelands::HideOrRevealFieldMode::kUnexplore :
-                                Widelands::HideOrRevealFieldMode::kUnreveal;
+	                             Widelands::HideOrRevealFieldMode::kUnreveal;
 	if (mode == Widelands::HideOrRevealFieldMode::kUnreveal && state != "seen") {
 		report_error(L, "'%s' is no valid parameter for hide_fields!", state.c_str());
 	}

@@ -74,7 +74,7 @@ Textarea::Textarea(Panel* parent,
 
 inline const FontStyleInfo& Textarea::font_style() const {
 	return font_style_override_ != nullptr ? *font_style_override_ :
-                                            g_style_manager->font_style(font_style_);
+	                                         g_style_manager->font_style(font_style_);
 }
 
 void Textarea::set_style(const FontStyle style) {
@@ -148,7 +148,7 @@ void Textarea::draw(RenderTarget& dst) {
 		Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
 		Vector2i anchor((alignment == Align::kCenter)    ? get_w() / 2 :
 		                (alignment == UI::Align::kRight) ? get_w() :
-                                                         0,
+		                                                   0,
 		                0);
 		rendered_text_->draw(dst, anchor, alignment);
 	}

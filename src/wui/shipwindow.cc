@@ -238,9 +238,9 @@ void ShipWindow::update_destination_button(const Widelands::Ship* ship) {
 	btn_destination_->set_enabled(ship->get_destination() != nullptr);
 	btn_destination_->set_tooltip(
 	   ship->get_destination() == nullptr ?
-         _("Go to destination") :
-         /** TRANSLATORS: Placeholder is the name of the destination port */
-         format(_("Go to destination (%s)"),
+	      _("Go to destination") :
+	      /** TRANSLATORS: Placeholder is the name of the destination port */
+	      format(_("Go to destination (%s)"),
 	             ship->get_destination()->get_warehouse()->get_warehouse_name()));
 }
 

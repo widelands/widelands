@@ -91,7 +91,7 @@ public:
 
 	[[nodiscard]] int32_t cost(WareWorker which) const {
 		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
-                                 mpf_realcost_worker + mpf_estimate_worker;
+		                           mpf_realcost_worker + mpf_estimate_worker;
 	}
 	Queue::Cookie& cookie(WareWorker which) {
 		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;
