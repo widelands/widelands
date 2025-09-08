@@ -127,7 +127,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 					lineup_box_->add(player_icon);
 					player_icons_.push_back(player_icon);
 				}  // Players in team
-			}     // Teams in lineup
+			}  // Teams in lineup
 			++lineup_counter;
 		}  // All lineups
 

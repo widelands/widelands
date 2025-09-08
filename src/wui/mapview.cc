@@ -553,12 +553,12 @@ bool MapView::handle_mousemove(
 
 	is_scrolling_x_ = edge_scrolling_ ? x < kEdgeScrollingMargin           ? -1 :
 	                                    x > get_w() - kEdgeScrollingMargin ? 1 :
-                                                                            0 :
-                                       0;
+	                                                                         0 :
+	                                    0;
 	is_scrolling_y_ = edge_scrolling_ ? y < kEdgeScrollingMargin           ? -1 :
 	                                    y > get_h() - kEdgeScrollingMargin ? 1 :
-                                                                            0 :
-                                       0;
+	                                                                         0 :
+	                                    0;
 
 	track_sel(Vector2i(x, y));
 
@@ -584,7 +584,7 @@ void MapView::think() {
 
 		const int16_t speed = (SDL_GetModState() & KMOD_CTRL) != 0  ? kEdgeScrollingSpeedFast :
 		                      (SDL_GetModState() & KMOD_SHIFT) != 0 ? kEdgeScrollingSpeedSlow :
-                                                                    kEdgeScrollingSpeedNormal;
+		                                                              kEdgeScrollingSpeedNormal;
 		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
 }

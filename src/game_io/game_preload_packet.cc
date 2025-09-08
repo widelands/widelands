@@ -75,7 +75,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 			win_condition_ = s.get_safe_string("win_condition");
 			// TODO(Nordfriese): Savegame compatibility
 			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration :
-                                                          s.get_safe_int("win_condition_duration"));
+			                                                 s.get_safe_int("win_condition_duration"));
 			number_of_players_ = s.get_safe_int("player_amount");
 			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {
@@ -143,8 +143,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	s.set_int("win_condition_duration", game.get_win_condition_duration());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
-                                                 game.game_controller()->get_game_type() :
-                                                 GameController::GameType::kReplay));
+	                                              game.game_controller()->get_game_type() :
+	                                              GameController::GameType::kReplay));
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	s.set_string("active_training_wheel", game.active_training_wheel());
 	s.set_bool("training_wheels", game.training_wheels_wanted());

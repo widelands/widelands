@@ -187,7 +187,7 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	const bool has_priority = (record.nr_waiting_threads.load() == 0 || is_initializer_thread());
 	const uint32_t sleeptime = has_priority             ? kMutexPriorityLockInterval :
 	                           (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval :
-                                                         kMutexNormalLockInterval;
+	                                                      kMutexNormalLockInterval;
 	++record.nr_waiting_threads;
 	if (!has_priority && record.current_owner != self) {
 		SDL_Delay(sleeptime);

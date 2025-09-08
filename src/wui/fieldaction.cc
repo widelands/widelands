@@ -353,8 +353,8 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 
 			const Widelands::BuildingDescr& descr =
 			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
-               dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
-               dynamic_cast<const Widelands::Building&>(*mo).descr();
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
 
 			if (i.descr().collected_by().count(descr.name()) != 0u) {
 				upcast(const Widelands::Building, b, mo);
@@ -613,8 +613,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_MINE) == 0) {
 				continue;
 			}
@@ -624,8 +624,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                  buildcaps :
-                  max_nodecaps) &
+			         buildcaps :
+			         max_nodecaps) &
 			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
 			}
@@ -937,8 +937,8 @@ void FieldActionWindow::act_goto_buildroadstart() {
 		return;
 	}
 	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                                          ibase().get_build_road_end() :
-                                          ibase().get_build_road_start(),
+	                                       ibase().get_build_road_end() :
+	                                       ibase().get_build_road_start(),
 	                                    MapView::Transition::Smooth);
 	reset_mouse_and_die();
 }

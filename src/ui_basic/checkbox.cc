@@ -60,7 +60,7 @@ Statebox::Statebox(Panel* const parent,
 
 static inline std::string get_checkbox_graphics(const PanelStyle& s) {
 	return s == PanelStyle::kWui ? "images/ui_basic/checkbox_light.png" :
-                                  "images/ui_basic/checkbox_dark.png";
+	                               "images/ui_basic/checkbox_dark.png";
 }
 
 Statebox::Statebox(Panel* const parent,
@@ -92,11 +92,11 @@ void Statebox::layout() {
 		int pic_width = kStateboxSize;
 		assert((flags_ & Has_Custom_Picture) == 0);
 		rendered_text_ = label_text_.empty() ?
-                          nullptr :
-                          UI::g_fh->render(as_richtext_paragraph(
+		                    nullptr :
+		                    UI::g_fh->render(as_richtext_paragraph(
 		                                        label_text_, panel_style_ == PanelStyle::kFsMenu ?
-                                                              UI::FontStyle::kFsMenuLabel :
-                                                              UI::FontStyle::kWuiLabel),
+		                                                        UI::FontStyle::kFsMenuLabel :
+		                                                        UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
@@ -122,7 +122,7 @@ void Statebox::set_enabled(bool const enabled) {
 
 	if ((flags_ & Has_Custom_Picture) == 0) {
 		pic_graphics_ = g_image_cache->get(enabled ? get_checkbox_graphics(panel_style_) :
-                                                   "images/ui_basic/checkbox.png");
+		                                             "images/ui_basic/checkbox.png");
 		set_flags(Is_Highlighted, ((flags_ & Is_Highlighted) != 0) && ((flags_ & Is_Enabled) != 0));
 	}
 }
@@ -144,7 +144,7 @@ void Statebox::set_state(bool const on, const bool send_signal) {
 
 std::vector<Recti> Statebox::focus_overlay_rects() {
 	return (flags_ & Has_Custom_Picture) != 0 ? Panel::focus_overlay_rects(1, 1, -1) :
-                                               Panel::focus_overlay_rects();
+	                                            Panel::focus_overlay_rects();
 }
 
 /**

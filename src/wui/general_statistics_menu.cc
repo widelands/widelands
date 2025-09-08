@@ -100,9 +100,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
 		const Widelands::Player* p = parent.game().get_player(i + 1);
 		const RGBColor& color = p != nullptr ? p->get_playercolor() :
-                                             // The plot is always invisible if this player doesn't
-                                             // exist, but we need to assign a color anyway
-                                             kPlayerColors[i];
+		                                       // The plot is always invisible if this player doesn't
+		                                       // exist, but we need to assign a color anyway
+		                                       kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
@@ -336,7 +336,7 @@ void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mo
 	for (UI::Button* c : cbs_) {
 		// The saved value indicates whether we explicitly need to toggle this button
 		fw.unsigned_8(((c != nullptr) && c->style() != UI::Button::VisualState::kPermpressed) ? 1 :
-                                                                                              0);
+		                                                                                        0);
 	}
 	fw.signed_32(slider_->get_slider().get_value());
 }

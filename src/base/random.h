@@ -52,7 +52,7 @@ private:
 	uint32_t state1{0U};
 };
 
-#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
+#define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x) & 0xff])
 
 /// Generates a random UUID, looking like "550e8400-e29b-11d4-a716-446655440000".
 /// This does not use logic_rand(), but instead a thread local random number

@@ -371,8 +371,8 @@ void AttackWindow::send_less_soldiers() {
 
 void AttackWindow::send_more_soldiers() {
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                                  soldiers_slider_->get_max_value() :
-                                  soldiers_slider_->get_value() + 1);
+	                               soldiers_slider_->get_max_value() :
+	                               soldiers_slider_->get_value() + 1);
 }
 
 size_t AttackWindow::count_soldiers() const {

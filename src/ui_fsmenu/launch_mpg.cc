@@ -70,8 +70,8 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
         [&settings](int player_number) {
 	        const GameSettings& s = settings.settings();
 	        return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ?
-                     &s.players.at(player_number - 1).color :
-                     nullptr;
+	                  &s.players.at(player_number - 1).color :
+	                  nullptr;
         },
         0,
         0,

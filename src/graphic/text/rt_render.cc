@@ -1016,8 +1016,8 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(c, ns),
 	     image_(use_playercolor ?
-                  playercolor_image(color, image_filename) :
-                  g_image_cache->get(image_filename, true, ImageCache::kDefaultScaleIndex)),
+	               playercolor_image(color, image_filename) :
+	               g_image_cache->get(image_filename, true, ImageCache::kDefaultScaleIndex)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
