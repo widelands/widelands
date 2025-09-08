@@ -11,7 +11,11 @@ if (checkresult STREQUAL "" AND NOT exitcode)
     COMMAND cmake -E touch ${OUTPUT_FILE}
   )
 else (checkresult STREQUAL "" AND NOT exitcode)
-  message ("${checkresult}")
+  if (exitcode)
+    message ("${checkresult} exitcode: ${exitcode}")
+  else (exitcode)
+    message ("${checkresult}")
+  endif (exitcode)
   execute_process(
     COMMAND cmake -E remove ${OUTPUT_FILE}
   )
