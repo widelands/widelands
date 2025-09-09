@@ -8238,7 +8238,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1882
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
-msgstr ""
+msgstr "Tká látku z trstiny."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Weaving
 #. Mill
