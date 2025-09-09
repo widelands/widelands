@@ -10,8 +10,8 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
-# Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023
+# Simon Heimberg, 2023,2025
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023,2025
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Simon Heimberg, 2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -350,14 +350,54 @@ msgid ""
 msgstr "In diesem Einführungsspiel wirst du die Seefahrt kennen lernen, das heißt, wie du mit Schiffen und Häfen umgehst, und wie man Fähren und Wasserwege benutzt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Wirtschaft"
+msgid "Economy and Trading"
+msgstr "Wirtschaft und Handel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "In diesem Einführungsspiel lernst du die Optionen, die Widelands besitzt, um deine Wirtschaft zu regeln, kennen. Empfohlen für Spieler mit etwas Erfahrung."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr "In diesem Einführungsspiel lernst du die Optionen kennen, die Widelands besitzt, um deine Wirtschaft zu regeln und mit anderen Spielern zu handeln. Empfohlen für Spieler mit etwas Erfahrung."
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
+msgid "Accurate Europe 1.2"
+msgstr "Akkurates Europa 1.2"
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
+msgid ""
+"Warning: This map is provided as an experimental preview. Although it is "
+"better in many ways than Europa 1.2 that it replaces, it probably still has "
+"bugs. Furthermore, it is a very large map with more player positions than "
+"generally recommended, so it has high hardware requirements.  —  A map for "
+"roleplaying historical empires. – This map of Europe aims to be as accurate "
+"as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
+"Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
+"German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
+msgstr "Warnung: Diese Karte wird als experimentelle Vorschau bereitgestellt. Obwohl sie auf vielfältige Weise besser als Europa 1.2, welche durch sie ersetzt wird, ist, kann sie doch noch Fehler enthalten. Außerdem ist es eine sehr große Karte mit mehr Spielerpositionen als empfohlen. Daher hat sie hohe Hardware-Anforderungen. — Eine Karte um historische Imperien nachzuspielen. – Diese Karte zielt darauf ab, so akkurat wie praktisch in Widelands möglich zu sein. – LEICHT: Osmanisches Reich, Schweden, Russisches Reich, Karthago – MITTEL: Französisches Reich, Britisches Imperium, Spanien, Deutsches Reich, Römisches Reich – SCHWER: Ägypten, Polen, Griechenland"
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
+msgid ""
+"The wide rivers are navigable to create a ”trade network”. All players have "
+"their own challenges, but are relatively balanced to be playable: – British "
+"Empire: create sustainable colonies – Russian Empire: Very large distances …"
+msgstr "Die breiten Flüsse sind schiffbar, um ein ”Handelsnetzwerk” zu etablieren. Alle Spieler haben ihre eigenen Herausforderungen, aber sind relativ ausgeglichen spielbar: – Britisches Imperium: Schaffe tragfähige Kolonien – Russisches Reich: Sehr große Entfernungen …"
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:8
+msgid "Amoebae"
+msgstr "Amoebae"
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:10
+msgid "You are an Amoeba, expand and conquer all other Amoebae …"
+msgstr "Du bist eine Amöbe, breite dich aus und erobere alle anderen Amöben …"
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:11
+msgid ""
+"Be aware that you are surrounded by enemies. Disable diplomacy for an easier"
+" game, enable it for a more challenging game. Additionally you can define "
+"the difficulty by playing against different AI teams. Although some players "
+"have more space in the beginning, the map is well balanced."
+msgstr "Sei dir bewusst, daß du von Feinden umgeben bist. Deaktiviere Diplomatie für ein leichteres Spiel, aktiviere sie für ein herausfordernderes Spiel. Zusätzlich kannst du die Schwierigkeit durch das Spiel gegen verschiedene KI Teams beeinflussen. Obwohl einige Spieler mehr Platz am Anfang haben, ist diese Karte doch sehr ausgewogen."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -493,15 +533,17 @@ msgid ""
 " you can – it’s the only way to find all the precious farm spaces."
 msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegnerische Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:8
-msgid "Elven Forests"
-msgstr "Elfenwälder"
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
+msgid "Egyptian Mandala v1.2"
+msgstr "Ägyptisches Mandala v1.2"
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:10
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
-msgstr "Die atemberaubende Schönheit dieser grünen Länder hat schon viele Stämme dazu bewogen, sie für sich beanspruchen zu wollen."
+"They hardly had time to prepare themselves when they embarked for this "
+"island. According to your explorers, however, things will not go as easily "
+"as you were told earlier. You should expect fierce opposition. Expand your "
+"base and be the first to reach the ring of power."
+msgstr "Man hatte kaum Zeit sich vorzubereiten, als man das Schiff zu dieser Insel bestieg. Gemäß deiner Kundschafter, werden die Dinge allerdings nicht so einfach laufen, wie man dir vorher gesagt hat. Du solltest heftige Gegenwehr erwarten. Erweitere deine Basis und sei der Erste, der den Ring der Macht erreicht."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -514,16 +556,6 @@ msgstr "Identische Startbedingungen für 3 Spieler."
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
 msgstr "v0.2"
-
-#: ../../../../data/maps/Europa.wmf/elemental:8
-msgid "Europa 1.2"
-msgstr "Europa 1.2"
-
-#: ../../../../data/maps/Europa.wmf/elemental:10
-msgid ""
-"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
-"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr "Eine große Europa Karte. Blau = Schweden, Rot = Italien, Gelb = Spanien, Grün = Türkei, Schwarz = Russland, Orange = England, Lila = Frankreich, Weiß = Polen"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -569,6 +601,16 @@ msgid ""
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
 msgstr "Ist es ein Test der Götter oder ein böser Plan von jemand anderem, dass du mit deinem Stamm heute morgen auf dieser Insel zwischen Feuer und Lava erwachen musstest? Bisher bist du anscheinend alleine, doch niemand weiß, was passieren wird, wenn du auf einen gegnerischen Stamm triffst."
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
+msgid "Forest Valley v2.0"
+msgstr "Tal des Waldes v2.0"
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
+msgid ""
+"A river valley surrounded by mountains with lots of resources except coal. "
+"Plenty of flat building space."
+msgstr "Ein Flusstal umgeben von Bergen mit vielen Rohstoffen außer Kohle. Viel flacher Baugrund."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -887,6 +929,36 @@ msgid ""
 "key to control over the whole island."
 msgstr "Es wird erzählt, dass die alten Mönchskrieger, die in den noch viel älteren Sümpfen leben, der Schlüssel zur Kontrolle über die ganze Insel sind."
 
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
+msgid "Tasmanian Black War"
+msgstr "Tasmanischer Schwarzer Krieg"
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
+msgid ""
+"Welcome, intruder! You’re like a European conqueror from the early 1800s "
+"when they settled the Van Diemen land – later known as Tasmania. Between "
+"1828 and 1832 there was a war called the Black War in which the British "
+"Empire eradicated almost the entire Aboriginal population of the Van Diemen "
+"land. – The map simulates a scattered British Empire but without any "
+"advantages – actually it offers some great disadvantages and you will likely"
+" have a hard time conquering Tasmania. During the historical Black War the "
+"ratio between Europeans and Aboriginals was around one against ten, but this"
+" time they’re armed to the teeth for a rematch."
+msgstr "Willkommen Eindringling! Du bist wie einer der europäischen Eroberer aus den frühen 1800er Jahren, als sie das Van Diemen Land – später bekannt als Tasmanien – besiedelten. Zwischen 1828 und 1832 gab es einen Krieg, der schwarzer Krieg genannt wurde, in dem das britische Weltreich fast die gesamte Ureinwohnerpopulation des Van Diemen Lands auslöschte. Die Karte simuliert ein verstreutes britisches Weltreich aber ohne einen einzigen Vorteil – tatsächlich gibt es einige große Nachteile und du wirst wahrscheinlich eine harte Zeit bei der Eroberung Tasmaniens haben. Während des historischen schwarzen Kriegs betrug das Zahlenverhältnis zwischen Europäern und Eingeborenen ungefähr eins zu zehn, aber dieses Mal sind sie für eine Revanche bis an die Zähne bewaffnet."
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
+msgid ""
+"This map is intended to be played by a single player from the blue player’s "
+"starting location as Empire. Choose Barbarians and Amazons for the rival "
+"tribes. If you want a challenge, put them all on the same side and disable "
+"Diplomacy. Or you can play with every player against all others, with a win "
+"condition of Territorial Time. This map isn’t suitable for short games and "
+"one game will likely take more than ten hours. The AI has great capability "
+"on this map. One of the computer players will likely also begin seafaring "
+"and competing for the best harbor places on the Tasmanian coast, so you’ve "
+"been warned!"
+msgstr "Diese Karte ist als Einzelspielerszenario aus der Startposition des blauen Spielers mit dem Imperium gedacht. Wähle die Barbaren und die Amazonen für die rivalisierenden Stämme. Wenn du eine Herausforderung möchtest, dann ordne sie alle einer Seite zu und deaktiviere Diplomatie. Oder du spielst mit jedem Spieler gegen alle anderen mit der Siegbedingung Landherr (Zeit). Diese Karte ist nicht geeignet für kurze Spiele und ein Spiel wird wahrscheinlich mehr als zehn Stunden dauern. Die KI funktioniert sehr gut auf dieser Karte. Einer der Computerspieler wird wahrscheinlich auch beginnen zur See zu fahren und um die besten Hafenbauplätze an der tasmanischen Küste zu konkurrieren. Du wurdest also gewarnt!"
+
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
 msgstr "Der große See"
@@ -919,6 +991,18 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Man sagt, dass die undurchdringlichen Länder im hohen Norden selbst die mutigsten Siedler und die tapfersten der tapferen Soldaten abgeschreckt haben. Riesige uralte Wälder, voller Großwild und Raubtieren, unterbrochen nur von Feuchtgebieten und Hügeln, blieben geheimnisumwittert. Die wenigen, die es geschafft haben, zurückzukehren, berichten von gewaltigen Bauten, reich verziert mit Ornamenten und Gold aus den majestätischen Gebirgszügen in der Wildnis. Dutzende Jahre später zeugen nur noch einige moosüberwucherte Ruinen von der guten alten Zeit. Ihre Gestalt deutet die Kunstfertigkeiten ihrer Erbauer nur an. Niemand weiß, warum sie verschwunden sind. Die Leute erzählen, dass dem Reichtum nun nichts mehr im Wege steht. Aber viele werden sterben, zerrissen von Wölfen, in Sümpfen versinkend … umzingelt von feindlichen Stämmen."
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
+msgid "The Islands of the Eight Tribes"
+msgstr "Die Inseln der acht Stämme"
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
+msgid ""
+"This map is designed for a long game! Eight tribes, three islands, and lots "
+"of resources. Colonization and ferries can give you a big advantage, but "
+"this is not necessary to defeat other players. If you want to delay the "
+"fighting, you can turn off the last four players."
+msgstr "Diese Karte wurde für ein langes Spiel entwickelt! Acht Stämme, drei Inseln und sehr viele Rohstoffe. Kolonisierung und Fähren können dir einen großen Vorteil bieten, aber sie sind nicht notwendig, um andere Spieler zu besiegen. Wenn du das Kämpfen verzögern möchtest, kannst du die letzten vier Spieler deaktivieren."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -1029,22 +1113,6 @@ msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
 msgstr "Verteidige deine Transportwege oder umgehe deinen Gegenspieler mithilfe von Schiffen. Sorge schließlich dafür, dass es auf diesen Lagunen keine weiteren feindlichen Aktivitäten mehr gibt."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr "Glitzernde Wellen"
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr "Viele wunderschöne, grüne Inseln warten auf jene, die tapfer genug sind, tausende im Sonnenlicht glitzernde Wellen zu bezwingen."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:11
-msgid ""
-"Take care not to build your ships in the lagoons. They cannot pass through "
-"the reefs to the main ocean, where your ports are located."
-msgstr "Achte darauf keine Schiffe in den Lagunen zu bauen. Sie können nicht durch die Riffe zum Hauptozean navigieren, wo deine Häfen sind."
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

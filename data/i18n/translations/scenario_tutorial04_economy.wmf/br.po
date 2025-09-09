@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Anthony Guéchoum <a.guechoum@proton.me>, 2020
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
 # Irriep Nala Novram <per.morvan.bzh29@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2020\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +21,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:10
 msgid "Your Economy and its Settings"
-msgstr "Ho armezh hag e zibarzhioù"
+msgstr "Ho armerzh hag e zibarzhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:12
 msgid "Economy"
-msgstr "Armezh"
+msgstr "Armerzh"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:13
 msgid ""
@@ -113,7 +114,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
-msgstr "Stadegoù ar Savadur"
+msgstr "Stadegoù ar savadurioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
@@ -152,7 +153,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
-msgstr ""
+msgstr "Serrit prenestr stadegoù ar savadurioù pa viot prest."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
@@ -225,7 +226,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr "Digorit en-dro prenestr stadegoù ar savadur"
+msgstr "Digorit en-dro prenestr stadegoù ar savadurioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
@@ -241,7 +242,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "Digorit prenestr ho stok"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
@@ -253,7 +254,7 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr ""
@@ -262,7 +263,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:165
 msgid "Stock"
-msgstr ""
+msgstr "Stok"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
@@ -331,7 +332,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Serret ho peus prenestr ar stok!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
@@ -344,7 +345,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Digorit prenestr ar stok en-dro"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -612,7 +613,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Digerit prenestr stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
@@ -623,7 +624,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
@@ -695,7 +696,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "Serrit prenestr stadegoù ar marc'hadouriezhioù pa viot prest."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
@@ -713,7 +714,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Serret ho peus prenestr stadegoù ar marc'hadouriezhioù!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
@@ -724,7 +725,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Digorit en-dro prenestr stadegoù ar marc'hadouriezhioù"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -766,7 +767,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
-msgstr ""
+msgstr "Dibarzhioù an armerzh"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
@@ -978,7 +979,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:623
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:631
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:723
 msgid "Trading"
 msgstr ""
 
@@ -1103,45 +1104,50 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
+"A batch will be delivered in one transport, each ware needing a donkey."
+msgstr ""
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
-msgid "Propose a trade"
-msgstr ""
-
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
-msgid "Offer the Frisians a trade."
-msgstr ""
+msgid "Propose a trade"
+msgstr "Kinnig un eskemm"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
+msgid "Offer the Frisians a trade."
+msgstr "Kinnig un eskemm d'ar Frizoned"
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Eskemm bet nac'het"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Eskemm bet asantet"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Well done! The Frisians have accepted your trade offer. Did you notice that "
 "the market window now has a new tab? It has one such tab for every active "
@@ -1149,63 +1155,63 @@ msgid ""
 "and also allows you to cancel it at any time."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:675
 msgid ""
 "Soon you will see a caravan of your donkeys leaving the market to bring "
 "wares to the Frisians, and a caravan of their reindeer bringing you wares in"
 " exchange."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:682
 msgid "Trade Offered"
-msgstr ""
+msgstr "Eskemm bet kinniget"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:690
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:692
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:691
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
 msgid "Open the diplomacy window"
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
 msgid "You can open it via this button from the main toolbar."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:701
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:702
 msgid "The Diplomacy Window"
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid ""
 "If you wish to accept a trade, you need to select from the dropdown which "
 "market you want to use for this trade, as you can have multiple markets. You"
@@ -1213,39 +1219,39 @@ msgid ""
 "want to accept the trade."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:713
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:715
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid "Decide about the trade offer"
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid "Accept or reject the Frisians’ trade offer."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:724
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid ""
 "For example, Frisian miners will happily accept any meal, regardless of "
 "whether it was produced cheaply by an Imperial Inn or at a much higher cost "
@@ -1254,18 +1260,18 @@ msgid ""
 "against Frisian coal is a trade from which both parties can benefit greatly."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "This concludes our tutorial! I hope I could teach you how you can control "
 "the economy in Widelands. There are many options and they can be confusing "
@@ -1274,7 +1280,7 @@ msgid ""
 " possibilities. Then, return to this tutorial and learn the rest!"
 msgstr ""
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

@@ -1243,8 +1243,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Barbarian nursery rhyme"),
             -- TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
             purpose = pgettext("barbarians_building", "Releases animals into the wild to steady the meat production."),
-            -- TRANSLATORS: Performance helptext for production site: Gamekeeper's Hut
-            performance = pgettext("barbarians_building", "The gamekeeper pauses %s before going to work again."):bformat(format_seconds(53))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Gamekeeper's Hut, part 1
+               pgettext("barbarians_building", "The gamekeeper can release one animal between %1$s and %2$s, depending on how far he has to walk."):bformat(format_minutes_seconds(1, 4), format_minutes_seconds(1, 19)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Gamekeeper's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1309,8 +1313,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("barbarians_building", "Cultivates reed that serves two different purposes for the Barbarian tribe."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Reed Yard
             note = pgettext("barbarians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard
-            performance = pgettext("barbarians_building", "A reed yard can produce a sheaf of reed in about %s on average."):bformat(format_minutes_seconds(1, 5))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 1
+               pgettext("barbarians_building", "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(52), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard, part 2; %s is replaced by 'N growing fields'
+               pgettext("barbarians_building", "The reed yard needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 3):bformat(3))
+            }
          }
       },
       {
@@ -1325,7 +1333,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Barbarian production site: Lime Kiln
             note = pgettext("barbarians_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Lime Kiln
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce grout in about %s on average."):bformat(format_seconds(41))
+            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce grout in about %s on average."):bformat(format_seconds(45))
          }
       },
       {
@@ -1534,8 +1542,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Line from the harvesting song ‘The Wealth of the Fields’"),
             -- TRANSLATORS: Purpose helptext for production site: Farm
             purpose = pgettext("building", "Sows and harvests wheat."),
-            -- TRANSLATORS: Performance helptext for production site: Farm
-            performance = pgettext("barbarians_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 1
+               pgettext("barbarians_building", "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(54), format_minutes_seconds(1, 23)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Farm, part 2; %s is replaced by 'N growing fields'
+               pgettext("barbarians_building", "The farm needs at least %s to work at full productivity most of the time."):bformat(ngettext("%d growing field", "%d growing fields", 4):bformat(4))
+            }
          }
       },
       {
@@ -2647,6 +2659,7 @@ wl.Descriptions():new_tribe {
    port = "barbarians_port",
 
    fastplace = {
+      market = "barbarians_market",
       warehouse = "barbarians_warehouse",
       port = "barbarians_port",
       training_small = "barbarians_battlearena",

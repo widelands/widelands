@@ -43,7 +43,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construiește o carieră de piatră"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"

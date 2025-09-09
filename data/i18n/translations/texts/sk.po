@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-01 03:04+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -52,8 +52,8 @@ msgstr "Copyright 2002 - %1% Vývojový tím hry Widelands."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0 (alebo podľa vášho výberu akejkoľvek neskoršej verzie)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -209,13 +209,13 @@ msgid "Elders"
 msgstr "Rada starších"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:361
-#: ../../../../data/txts/developers.lua:424
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "Domovská stránka"
 
@@ -224,7 +224,7 @@ msgid "Scripting"
 msgstr "Skriptovanie"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:432
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -256,87 +256,87 @@ msgstr "Zvukové efekty"
 msgid "Maps and Missions"
 msgstr "Mapy a misie"
 
-#: ../../../../data/txts/developers.lua:258
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "Kampane"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "Barbari"
 
-#: ../../../../data/txts/developers.lua:270
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "Impérium"
 
-#: ../../../../data/txts/developers.lua:277
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "Atlantíďania"
 
-#: ../../../../data/txts/developers.lua:285
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "Frízania"
 
-#: ../../../../data/txts/developers.lua:293
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:311
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:330
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:342
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:353
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "Domovskú stránku napísali"
 
-#: ../../../../data/txts/developers.lua:376
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentácia, pomoc a wiki"
 
-#: ../../../../data/txts/developers.lua:394
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
 msgstr "Doplnky"
 
-#: ../../../../data/txts/developers.lua:413
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "Bývalá rada starších"
 
-#: ../../../../data/txts/developers.lua:439
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "Preklad"
 
-#: ../../../../data/txts/developers.lua:448
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "Ostatní"
 
-#: ../../../../data/txts/developers.lua:456
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
@@ -393,7 +393,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných údajových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
+msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných údajových súboroch alebo spustiteľnom súbore Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
 #, lua-format
@@ -572,7 +572,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Sledujte činnosť svojich rybárov a postavte rybochovateľov dom. Potom ako sa v ich pracovnej oblasti minú ryby, nie je už možné zdroj rýb obnoviť."
+msgstr "Sledujte činnosť svojich rybárov a postavte rybnikársky dom. Potom ako sa v ich pracovnej oblasti minú ryby, nie je už možné zdroj rýb obnoviť."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -696,7 +696,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo baňu; pre postavenie týchto potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
+msgstr "Pre výrobu tehiel potrebujete žulu; pre ťažbu žuly potrebujete kameňolom alebo kamennú baňu; pre ich postavenie potrebujete tehly. Dajte pozor, aby ste sa nezasekli, aby ste neostali na mŕtvom bode!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -829,7 +829,7 @@ msgstr "Klávesy šípiek"
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -839,7 +839,7 @@ msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 #: ../../../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + šípky"
 
 #: ../../../../data/txts/tips/general_game.lua:102
 msgid ""
@@ -856,6 +856,12 @@ msgid ""
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "Keď dôjde k zničeniu budovy, jej pracovníci začnú hľadať v okolí vlajku, od ktorej by sa po ceste dostali k najbližšiemu skladu. Ak sa v okolí takéto vlajky nenachádzajú, budú sa potulovať naokolo a po čase zomrú."
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

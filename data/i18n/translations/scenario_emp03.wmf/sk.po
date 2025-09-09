@@ -58,7 +58,7 @@ msgstr "Postavte drevorubačov dom, pílu a kamenársky dom"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "Drevorubač, Píla a Kamenár"
+msgstr "Drevorubač, píla a kamenár"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -168,8 +168,8 @@ msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Pošli loď na sever, aby si získal nejaké poznatky o Barbaroch. Pokús sa na "
-"ostrove postaviť prístav a vojenskú základňu."
+"Pošlite loď na sever, aby ste získali nejaké poznatky o Barbaroch. Pokúste "
+"sa na ostrove postaviť prístav a pozorovateľňu."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
@@ -204,9 +204,7 @@ msgstr "Vykonajte ďalší prieskum a postavte prístavy"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
-"Preskúmajte ďalšie ostrovy a hľadajte Prístavné miesta, miesta pre stavbu "
-"prístavov"
+msgstr "Preskúmajte ďalšie ostrovy a hľadajte prístavné miesta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -468,7 +466,7 @@ msgstr "Vstúpi Amalea…"
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr ""
+msgstr "Musím s tebou prebrať dôležité záležitosti… Najprv dobrá správa:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -511,7 +509,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
-msgstr ""
+msgstr "Potrebujeme prístav"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"

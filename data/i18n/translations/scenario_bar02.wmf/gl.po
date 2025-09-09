@@ -44,11 +44,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "Constrúe unha canteira"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Constrúe un reforzador de madeira"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"

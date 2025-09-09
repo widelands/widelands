@@ -405,10 +405,10 @@ public:
 	void cancel_trade(TradeID trade_id, bool reached_regular_end, const Player* canceller);
 	void move_trade(TradeID trade_id, Market& old_market, Market& new_market);
 
-	void propose_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
-	void reject_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
-	void retract_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
-	void accept_trade_extension(PlayerNumber sender, TradeID trade_id, int batches);
+	void propose_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void reject_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void retract_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
+	void accept_trade_extension(PlayerNumber sender, TradeID trade_id, int32_t batches);
 
 	[[nodiscard]] bool has_trade(TradeID trade_id) const {
 		return trade_agreements_.count(trade_id) != 0;

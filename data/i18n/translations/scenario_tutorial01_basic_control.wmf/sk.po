@@ -374,7 +374,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Pohybovanie pravým tlačidlom myši môže byť nepraktické, ak hráte na notebooku s touchpadom. Pohyb po mape pomocou rolovania touchpadom môžete povoliť v hlavnej ponuke Widelands: vyberte „Možnosti“, potom stlačte „Upraviť akcie klávesnice a myši“ a vyberte kartu „Posúvanie kolieskom myši“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
@@ -411,7 +411,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Keď budete pripravení pokračovať, zatvorte minimapu výberom možnosti „Skryť minimapu“ v ponuke „Zobrazenie mapy“ alebo stlačením tlačidla „%s“. Samozrejme, funguje aj kliknutie pravým tlačidlom myši."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
@@ -425,18 +425,18 @@ msgstr "Použitie minimapy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "Veľmi dobre. A teraz k minimape."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Môžete ju otvoriť výberom položky „Ukázať minimapu“ v ponuke „Zobrazenie mapy“ v dolnej časti obrazovky alebo jednoducho pomocou klávesovej skratky „%s“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid "I will open it for you."
-msgstr ""
+msgstr "Otvorím vám ju."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
@@ -592,7 +592,7 @@ msgstr "Pripojte stavenisko"
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Pripojte stavenisko kameňolomu k vášmu ústrediu cestou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -646,7 +646,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Vaši pracovníci neradi chodia pešo cez krajinu. Musíte postaviť cestu zo svojho ústredia na stavenisko, aby mohli nosiči prepravovať výrobky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid "You Destroyed the Construction Site!"
@@ -796,13 +796,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Zmeňte názov vášho ústredia"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Ak chcete nastaviť nový názov pre svoje ústredie, najprv naň kliknite, čím otvoríte jeho okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
@@ -814,7 +814,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Keď skončíte, jednoducho zatvorte okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"

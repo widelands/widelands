@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -340,14 +340,54 @@ msgid ""
 msgstr "V tomto tutoriáli spoznáte moreplavbu, čo predstavuje spôsob ako narábať s loďami a prístavmi a ako používať prevozníkov a vodné cesty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Ekonomika"
+msgid "Economy and Trading"
+msgstr "Ekonomika a obchod"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "V tomto tutoriáli sa dozviete, aké možnosti Widelands ponúka na prispôsobenie ekonomiky. Odporúča sa hráčom, ktorí majú už nejaké skúsenosti."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr "V tomto tutoriáli sa dozviete, aké možnosti Widelands ponúka na prispôsobenie ekonomiky a ako obchodovať s ostatnými hráčmi. Odporúča sa hráčom, ktorí majú už nejaké skúsenosti."
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
+msgid "Accurate Europe 1.2"
+msgstr "Presná Európa 1.2"
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
+msgid ""
+"Warning: This map is provided as an experimental preview. Although it is "
+"better in many ways than Europa 1.2 that it replaces, it probably still has "
+"bugs. Furthermore, it is a very large map with more player positions than "
+"generally recommended, so it has high hardware requirements.  —  A map for "
+"roleplaying historical empires. – This map of Europe aims to be as accurate "
+"as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
+"Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
+"German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
+msgid ""
+"The wide rivers are navigable to create a ”trade network”. All players have "
+"their own challenges, but are relatively balanced to be playable: – British "
+"Empire: create sustainable colonies – Russian Empire: Very large distances …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:8
+msgid "Amoebae"
+msgstr "Meňavky"
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:10
+msgid "You are an Amoeba, expand and conquer all other Amoebae …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:11
+msgid ""
+"Be aware that you are surrounded by enemies. Disable diplomacy for an easier"
+" game, enable it for a more challenging game. Additionally you can define "
+"the difficulty by playing against different AI teams. Although some players "
+"have more space in the beginning, the map is well balanced."
+msgstr ""
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -472,7 +512,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Pohorie Dolomity, klenot Álp, bolo vyhlásené za svetové dedičstvo vďaka svojej nenarušenej kráse. Táto mapa je do rozumnej miery vernou rekonštrukciou územia, ktoré ohraničuje Cortina d’Ampezzo na severovýchode a Canazei na juhozápade. Keď už musíte čeliť nepriateľom v boji na život a na smrť, nech sa to aspoň koná na peknom mieste."
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -481,21 +521,23 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Hory sú plné rovného terénu. Poväčšine však, nanešťastie, ide o úbočia. Priestoru na stavbu je málo, preto ho využite rozumne. Pevnosť naspodku úzkeho priesmyku môže pre nepriateľskú armádu znamenať ťažko prekonateľnú prekážku – využite terén vo svoj prospech. Vysekajte všetky stromy a rozšírte sa kdekoľvek môžete – je to jediný spôsob ako nájsť tých málo miest, kde sa dajú postaviť farmy."
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:8
-msgid "Elven Forests"
-msgstr "Lesy Elfov"
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
+msgid "Egyptian Mandala v1.2"
+msgstr "Egyptská mandala v1.2"
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:10
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
-msgstr "Úchvatná krása týchto smaragdových zemí zvábila mnohé kmene na pokus vziať si ich pre seba."
+"They hardly had time to prepare themselves when they embarked for this "
+"island. According to your explorers, however, things will not go as easily "
+"as you were told earlier. You should expect fierce opposition. Expand your "
+"base and be the first to reach the ring of power."
+msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr "Escher_Goose_Fish"
+msgstr "Escherove husy a ryby"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -504,16 +546,6 @@ msgstr "Rovnaké počiatočné podmienky pre troch hráčov."
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
 msgstr "v0.2"
-
-#: ../../../../data/maps/Europa.wmf/elemental:8
-msgid "Europa 1.2"
-msgstr ""
-
-#: ../../../../data/maps/Europa.wmf/elemental:10
-msgid ""
-"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
-"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -559,6 +591,16 @@ msgid ""
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
 msgstr "Je to skúška bohov alebo zlomyseľný plán niekoho iného, že ste sa vy a váš kmeň prebudili na tomto ostrove uprostred ohňa a lávy? Zatiaľ sa zdá, že ste sami, no ktovie, čo sa môže stať, keď stretnete nepriateľský kmeň?"
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
+msgid "Forest Valley v2.0"
+msgstr "Lesné údolie v2.0"
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
+msgid ""
+"A river valley surrounded by mountains with lots of resources except coal. "
+"Plenty of flat building space."
+msgstr ""
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -699,7 +741,7 @@ msgstr "Štyri kmene bojujú o nadvládu v nehostinnom kraji. Zdroje sú roztrú
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Menší prsteň 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -776,11 +818,11 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Táto mapa je určená ako sólová výzva pre veľmi skúsených hráčov, ktorí považujú hru jeden proti šesť AI za príliš jednoduchú. Modrý hráč nemá žiadne železo (okrem trochy na rozbeh ekonomiky), takže sa budeš musieť spoľahnúť na 5% produkciu vyčerpanej bane. A stále hráš 1v6 (samozrejme stále môžeš nejaké AI odstrániť a spraviť si to jednoduchším). Veľa štastia!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr "Rendezvous"
+msgstr "Stretnutie"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
@@ -847,7 +889,7 @@ msgstr "Stojíte na ostrove korunovanom mohutnými horami, ktoré vo svojom vnú
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Piesočné úžiny"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -876,6 +918,36 @@ msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
 msgstr "Hovorí sa, že starí vojnoví mnísi, žijúci v ešte starších močiaroch, sú kľúčom k ovládnutiu celého ostrova."
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
+msgid "Tasmanian Black War"
+msgstr "Tasmánska čierna vojna"
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
+msgid ""
+"Welcome, intruder! You’re like a European conqueror from the early 1800s "
+"when they settled the Van Diemen land – later known as Tasmania. Between "
+"1828 and 1832 there was a war called the Black War in which the British "
+"Empire eradicated almost the entire Aboriginal population of the Van Diemen "
+"land. – The map simulates a scattered British Empire but without any "
+"advantages – actually it offers some great disadvantages and you will likely"
+" have a hard time conquering Tasmania. During the historical Black War the "
+"ratio between Europeans and Aboriginals was around one against ten, but this"
+" time they’re armed to the teeth for a rematch."
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
+msgid ""
+"This map is intended to be played by a single player from the blue player’s "
+"starting location as Empire. Choose Barbarians and Amazons for the rival "
+"tribes. If you want a challenge, put them all on the same side and disable "
+"Diplomacy. Or you can play with every player against all others, with a win "
+"condition of Territorial Time. This map isn’t suitable for short games and "
+"one game will likely take more than ten hours. The AI has great capability "
+"on this map. One of the computer players will likely also begin seafaring "
+"and competing for the best harbor places on the Tasmanian coast, so you’ve "
+"been warned!"
+msgstr ""
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -909,6 +981,18 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Povráva sa, že nepreniknuteľné krajiny na ďalekom severe odradili aj tých najodvážnejších osadníkov a najstatočnejších bojovníkov. Veľké a staré lesy, plné veľkej dravej zveri, predelené mokrinami a kopcami, boli zahalené tajomstvom. Tí, ktorým sa podarilo vrátiť späť, spomínali ohromné budovy ozdobené rezbami a zlatom z majestátnych pohorí kdesi uprostred divočiny. O niekoľko desiatok rokov nato zostali z tých starých dobrých spomienok len drobivé zrúcaniny pokryté machom a stromami. Ich tvary poskytujú predstavu o zručnosti dávnych staviteľov. Nikto nevie, prečo vymizli. Ľudia tvrdia, že na ceste k bohatstvu už nestoja žiadne prekážky. Mnohých však roztrhajú vlky, pohltí močiar či obkľúčia nepriateľské kmene."
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
+msgid "The Islands of the Eight Tribes"
+msgstr "Ostrovy ôsmich kmeňov"
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
+msgid ""
+"This map is designed for a long game! Eight tribes, three islands, and lots "
+"of resources. Colonization and ferries can give you a big advantage, but "
+"this is not necessary to defeat other players. If you want to delay the "
+"fighting, you can turn off the last four players."
+msgstr ""
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -1019,22 +1103,6 @@ msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
 msgstr "Obráňte svoje dopravné trasy alebo obíďte protivníka pomocou lodí. Potom zastavte všetku nepriateľskú činnosť."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr "Ligotavé vlny"
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr "Veľa prekrásnych zelených ostrovov očakáva tých, ktorí sú dostatočne statoční na to, aby prekročili tisícky vĺn ligotajúcich sa na slnku."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:11
-msgid ""
-"Take care not to build your ships in the lagoons. They cannot pass through "
-"the reefs to the main ocean, where your ports are located."
-msgstr ""
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

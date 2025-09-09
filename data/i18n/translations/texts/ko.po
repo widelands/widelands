@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-01 03:04+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -56,8 +56,8 @@ msgstr "저작권 2002 - %1% 와이드랜드 개발 팀."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "이 게임은 무료 및 오픈 소스 (FOSS)이며, GNU 일반 공중 사용 허가서 (GPL) V2.0의 허가서 아래에 있습니다."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -213,22 +213,22 @@ msgid "Elders"
 msgstr "장로"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "그래픽"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:361
-#: ../../../../data/txts/developers.lua:424
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "누리집"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "스크립트를 하고 있음"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:432
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "소리"
 
@@ -260,87 +260,87 @@ msgstr "효과음"
 msgid "Maps and Missions"
 msgstr "지도 및 임무"
 
-#: ../../../../data/txts/developers.lua:258
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "캠패인 이야기"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "야만인들"
 
-#: ../../../../data/txts/developers.lua:270
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "제국"
 
-#: ../../../../data/txts/developers.lua:277
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "아틀란티스인"
 
-#: ../../../../data/txts/developers.lua:285
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "프리지아인들"
 
-#: ../../../../data/txts/developers.lua:293
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "포장업"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "데비안 리눅스"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "페도라 리눅스"
 
-#: ../../../../data/txts/developers.lua:311
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "맨드리바 리눅스"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "프리BSD"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:330
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "맥오에스 엑스"
 
-#: ../../../../data/txts/developers.lua:342
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "윈도우즈"
 
-#: ../../../../data/txts/developers.lua:353
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "제타OS"
 
-#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "누리집 코더"
 
-#: ../../../../data/txts/developers.lua:376
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "문서, 도움말 및 위키"
 
-#: ../../../../data/txts/developers.lua:394
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
 msgstr "추가 기능"
 
-#: ../../../../data/txts/developers.lua:413
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "전직 장로"
 
-#: ../../../../data/txts/developers.lua:439
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "번역"
 
-#: ../../../../data/txts/developers.lua:448
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "기타"
 
-#: ../../../../data/txts/developers.lua:456
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
 
@@ -860,6 +860,12 @@ msgid ""
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "건물이 파괴되면, 일꾼들은 땅길 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

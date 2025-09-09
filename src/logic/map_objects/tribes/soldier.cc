@@ -82,8 +82,9 @@ bool SoldierLevelRange::matches(const Soldier* soldier) const {
 
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
+                           const std::vector<std::string>& attribs,
                            Descriptions& descriptions)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, descriptions),
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, attribs, descriptions),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
@@ -177,7 +178,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 		   image_filenames.size());
 	}
 	for (const std::string& image_filename : image_filenames) {
-		images.push_back(g_image_cache->get(image_filename));
+		images.emplace_back(image_filename, g_image_cache->get(image_filename));
 	}
 }
 

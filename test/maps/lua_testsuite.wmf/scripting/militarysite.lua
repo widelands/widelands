@@ -14,7 +14,7 @@ end
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
 local offset_y = 0
 function militarysite_tests:setup()
-   self.f1 = map:get_field(6, 5 + offset_y) -- move down, to have remaining bobs on a separate field
+   self.f1 = map:get_field(56, 5 + offset_y) -- move down, to have remaining bobs on a separate field
    offset_y = offset_y + 1
 
    self.fortress = player1:place_building("barbarians_fortress", self.f1)
@@ -39,6 +39,10 @@ end
 function militarysite_tests:test_set_soldiers_single_arg()
    self.fortress:set_soldiers({0,0,0,0}, 2)
    assert_equal(2, self.fortress:get_soldiers({0,0,0,0}))
+   -- check call with two args: replaces all other soldiers
+   self.fortress:set_soldiers({0,1,0,0}, 1)
+   assert_equal(0, self.fortress:get_soldiers({0,0,0,0}))
+   assert_equal(1, self.fortress:get_soldiers({0,1,0,0}))
 end
 function militarysite_tests:test_set_soldiers_multi_arg()
    self.fortress:set_soldiers{
@@ -53,6 +57,7 @@ function militarysite_tests:test_set_soldiers_add_and_remove()
    self.fortress:set_soldiers{[{0,0,0,0}] = 3}
    assert_equal(3, _cnt(self.fortress:get_soldiers("all")))
    assert_equal(3, self.fortress:get_soldiers({0,0,0,0}))
+   -- check call with table: replaces all other soldiers
    self.fortress:set_soldiers{[{3,0,0,1}] = 1, [{0,0,0,0}] = 1}
    assert_equal(2, _cnt(self.fortress:get_soldiers("all")))
    assert_equal(1, self.fortress:get_soldiers({0,0,0,0}))
@@ -77,6 +82,14 @@ function militarysite_tests:test_set_soldiers_all_at_once()
       _cnt(self.fortress:get_soldiers("all")))
    assert_equal(self.fortress.max_soldiers,
       self.fortress:get_soldiers({0,0,0,0}))
+   -- repeated key (which is valid for table as key and might happen by accident)
+   self.fortress:set_soldiers({[{0,0,0,0}] = 1, [{0,0,0,0}] = 2, [{0,1,0,0}] = 3})
+   local found = _cnt(self.fortress:get_soldiers("all"))
+   if found == 5 then -- pass when one of the keys is used
+      assert_equal(5, found)
+   else
+      assert_equal(4, found) -- looks like only 1st key is used
+   end
 end
 function militarysite_tests:test_illegal_soldier()
    assert_error("illegal level", function()

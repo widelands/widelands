@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-03-01 03:04+0000\n"
+"POT-Creation-Date: 2025-08-16 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
@@ -52,8 +52,8 @@ msgstr "Ophavsret 2002 - %1% Widelands-udviklingsholdet."
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General Public License (GPL) V2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
+msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -209,22 +209,22 @@ msgid "Elders"
 msgstr "Ældsteråd"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:421
 msgid "Graphics"
 msgstr "Grafik"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:361
-#: ../../../../data/txts/developers.lua:424
+#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:428
 msgid "Homepage"
 msgstr "Hjemmeside"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptopsætning"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:432
+#: ../../../../data/txts/developers.lua:436
 msgid "Sound"
 msgstr "Lyd"
 
@@ -256,87 +256,87 @@ msgstr "Lydeffekter"
 msgid "Maps and Missions"
 msgstr "Kort og Missioner"
 
-#: ../../../../data/txts/developers.lua:258
+#: ../../../../data/txts/developers.lua:262
 msgid "Campaign Story"
 msgstr "Kampagnehistorie"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:266
 msgid "Barbarians"
 msgstr "Barbarer"
 
-#: ../../../../data/txts/developers.lua:270
+#: ../../../../data/txts/developers.lua:274
 msgid "Empire"
 msgstr "Imperiet"
 
-#: ../../../../data/txts/developers.lua:277
+#: ../../../../data/txts/developers.lua:281
 msgid "Atlanteans"
 msgstr "Altantere"
 
-#: ../../../../data/txts/developers.lua:285
+#: ../../../../data/txts/developers.lua:289
 msgid "Frisians"
 msgstr "Friserne"
 
-#: ../../../../data/txts/developers.lua:293
+#: ../../../../data/txts/developers.lua:297
 msgid "Packagers"
 msgstr "Pakkere"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:301
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:307
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:311
+#: ../../../../data/txts/developers.lua:315
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:321
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:327
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:330
+#: ../../../../data/txts/developers.lua:334
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:342
+#: ../../../../data/txts/developers.lua:346
 msgid "Windows"
 msgstr "Vinduer"
 
-#: ../../../../data/txts/developers.lua:353
+#: ../../../../data/txts/developers.lua:357
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:365
+#: ../../../../data/txts/developers.lua:369
 msgid "Homepage Coders"
 msgstr "Hjemmesidekodere"
 
-#: ../../../../data/txts/developers.lua:376
+#: ../../../../data/txts/developers.lua:380
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentation, hjælp og wiki"
 
-#: ../../../../data/txts/developers.lua:394
+#: ../../../../data/txts/developers.lua:398
 msgid "Add-Ons"
-msgstr ""
+msgstr "Udvidelser"
 
-#: ../../../../data/txts/developers.lua:413
+#: ../../../../data/txts/developers.lua:417
 msgid "Former Elders"
 msgstr "Tidligere ældre"
 
-#: ../../../../data/txts/developers.lua:439
+#: ../../../../data/txts/developers.lua:443
 msgid "Translation"
 msgstr "Oversættelse"
 
-#: ../../../../data/txts/developers.lua:448
+#: ../../../../data/txts/developers.lua:452
 msgid "Other"
 msgstr "Andre"
 
-#: ../../../../data/txts/developers.lua:456
+#: ../../../../data/txts/developers.lua:460
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
@@ -415,7 +415,7 @@ msgstr "%s:"
 #: ../../../../data/txts/help/common_helptexts.lua:57
 #: ../../../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -856,6 +856,12 @@ msgid ""
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "Når en bygning bliver ødelagt, så vil bygningens arbejdere kigger efter et nærliggende flag, hvorfra de via en vej kan flytte sig til et forbundet lager. Hvis der ingen sådanne flag er i nærheden, så vil de vandre hvileløst omkring og til sidst dø."
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
