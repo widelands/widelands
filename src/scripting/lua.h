@@ -22,7 +22,9 @@
 #include <cstdint>
 #include <string>
 
-#include "third_party/eris/lua.hpp"
+#include "third_party/eris/lauxlib.h"
+#include "third_party/eris/lua.h"
+#include "third_party/eris/lualib.h"
 
 #define luaL_checkint32(L, n) static_cast<int32_t>(luaL_checkinteger(L, (n)))
 #define luaL_checkuint32(L, n) static_cast<uint32_t>(luaL_checkinteger(L, (n)))
