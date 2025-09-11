@@ -509,7 +509,8 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 
 				// Set default_target_quantity and preciousness (both optional)
 				WorkerDescr* worker_descr = descriptions.get_mutable_worker_descr(workerindex);
-				if (worker_table->has_key("default_target_quantity")) {
+				// if the target quantity was already set by an addon we keep the addon value
+				if (worker_table->has_key("default_target_quantity") && worker_descr->default_target_quantity() == kInvalidWare) {
 					if (!worker_table->has_key("preciousness")) {
 						throw GameDataError(
 						   "It has a default_target_quantity but no preciousness for tribe '%s'",
@@ -518,7 +519,8 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 					worker_descr->set_default_target_quantity(
 					   worker_table->get_int("default_target_quantity"));
 				}
-				if (worker_table->has_key("preciousness")) {
+				// if the preciousness was already set by an addon we keep the addon value
+				if (worker_table->has_key("preciousness") && worker_descr->preciousness(name()) == kInvalidWare) {
 					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
 				}
 
