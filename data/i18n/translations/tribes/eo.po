@@ -1346,30 +1346,30 @@ msgstr "Ĉokoladfarejo"
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "fari ĉokoladon"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "Kakaoplantejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:66
 msgid "planting cocoa"
-msgstr ""
+msgstr "planti kakaon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "rikolti kakaon"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
 msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr ""
+msgstr "La kakaofarmistino laboranta en ĉi tiu kakaoplantejo ne havas senarbustigitan grundon por semi siajn semojn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
