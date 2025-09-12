@@ -85,6 +85,7 @@ public:
 	void set_default_target_quantity(int quantity);
 
 	/// This is an AI hint
+	[[nodiscard]] int preciousness(const std::string& tribename) const;
 	void set_preciousness(const std::string& tribename, int preciousness);
 
 	[[nodiscard]] bool has_demand_check() const {

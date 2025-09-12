@@ -432,11 +432,19 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& descriptions) {
 
 				// Set default_target_quantity (optional) and preciousness
 				WareDescr* ware_descr = descriptions.get_mutable_ware_descr(wareindex);
-				if (ware_table->has_key("default_target_quantity")) {
+				// if the target quantity was already set by an addon we keep the addon value
+				if (ware_table->has_key("default_target_quantity") &&
+				    ware_descr->default_target_quantity(name()) == kInvalidWare) {
 					ware_descr->set_default_target_quantity(
 					   name(), ware_table->get_int("default_target_quantity"));
 				}
-				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
+				int tribe_preciousness = ware_table->get_int("preciousness");
+				// we have a valid value if addon defined it, as it is postloaded first
+				int addon_preciousness = ware_descr->preciousness(name());
+				// if previously defined by an addon set addon preciousnes again
+				ware_descr->set_preciousness(name(), addon_preciousness == kInvalidWare ?
+				                                        tribe_preciousness :
+				                                        addon_preciousness);
 
 				// Add helptexts
 				load_helptexts(ware_descr, *ware_table);
@@ -504,7 +512,9 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 
 				// Set default_target_quantity and preciousness (both optional)
 				WorkerDescr* worker_descr = descriptions.get_mutable_worker_descr(workerindex);
-				if (worker_table->has_key("default_target_quantity")) {
+				// if the target quantity was already set by an addon we keep the addon value
+				if (worker_table->has_key("default_target_quantity") &&
+				    worker_descr->default_target_quantity() == kInvalidWare) {
 					if (!worker_table->has_key("preciousness")) {
 						throw GameDataError(
 						   "It has a default_target_quantity but no preciousness for tribe '%s'",
@@ -513,7 +523,9 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 					worker_descr->set_default_target_quantity(
 					   worker_table->get_int("default_target_quantity"));
 				}
-				if (worker_table->has_key("preciousness")) {
+				// if the preciousness was already set by an addon we keep the addon value
+				if (worker_table->has_key("preciousness") &&
+				    worker_descr->preciousness(name()) == kInvalidWare) {
 					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
 				}
 
