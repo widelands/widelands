@@ -8,7 +8,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Matthias Mast, 2021
-# Simon Heimberg, 2023
+# Simon Heimberg, 2023,2025
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022,2024
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022,2024\n"
+"Last-Translator: Simon Heimberg, 2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -731,7 +731,7 @@ msgstr "Wie du sehen kannst, können Fähren recht schnell gebaut werden, aber d
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr "Solange Fähren Wasserwege besetzen, haben sie eine unbegrenzte Lebensdauer, aber unbeschäftigte Fähren fangen an zu verotten und werden gegebenenfalls sinken."
+msgstr "Solange Fähren Wasserwege besetzen, haben sie eine unbegrenzte Lebensdauer, aber unbeschäftigte Fähren fangen an zu verrotten und werden gegebenenfalls sinken."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
