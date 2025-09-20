@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022,2024-2025\n"
+"Last-Translator: Simon Heimberg, 2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -619,7 +619,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "In unserer Situation möchtest du vielleicht, dass die Bäckereien so schnell wie möglich arbeiten, weil sie unsere Tavernen versorgen; also könntest du in ihnen Wasser auf die höchste Priorität setzen. Die anderen Gebäude (zum Beispiel die Eselfarm) würden dann weniger Wasser erhalten, aber die Bäckerei könnte schneller arbeiten."
+msgstr "In unserer Situation möchtest du vielleicht, dass die Bäckereien so schnell wie möglich arbeiten, weil sie unsere Tavernen versorgen; also könntest du in ihnen Wasser auf die höchste Priorität setzen. Die anderen Gebäude (zum Beispiel die Eselzucht) würden dann weniger Wasser erhalten, aber die Bäckerei könnte schneller arbeiten."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -1099,7 +1099,7 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr "Wenn du mit einem anderen Stamm handelst, können nicht alle Waren ausgetauscht werden. Jeder Stamm hat seine eigene Wirtschaft, und sie benutzen unterschiedliche Waren. Die Friesen zum Beispiel trinken keinen Wein und können keine Häuser mit Marmor bauen; und dein imperialer Stamm kann keine Häuser aus friesischem Ziegelstein bauen und isst auch nicht ihren geräucherten Fisch. Das Fenster zeigt nur Waren, die du und dein vorgesehener Handelspartener gemeinsam benutzen könnt."
+msgstr "Wenn du mit einem anderen Stamm handelst, können nicht alle Waren ausgetauscht werden. Jeder Stamm hat seine eigene Wirtschaft, und sie benutzen unterschiedliche Waren. Die Friesen zum Beispiel trinken keinen Wein und können keine Häuser mit Marmor bauen; und dein imperialer Stamm kann keine Häuser aus friesischem Ziegelstein bauen und isst auch nicht ihren geräucherten Fisch. Das Fenster zeigt nur Waren, die du und dein vorgesehener Handelspartner gemeinsam benutzen könnt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
@@ -1111,7 +1111,7 @@ msgstr "Wähle die Waren im Fenster und benutze die Pfeilschaltflächen darunter
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr "Zum Schluss wähle wieviele Lose der ausgewählten Waren ausgetauscht werden. Du kannst den Handel auch als unendlich laufend markieren, in dem du das Unedlichkeitssymbol benutzt."
+msgstr "Zum Schluss wähle wieviele Lose der ausgewählten Waren ausgetauscht werden. Du kannst den Handel auch als unendlich laufend markieren, in dem du das Unendlichkeitssymbol benutzt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
@@ -1182,7 +1182,7 @@ msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr "Nun haben die Friesen dir auch einen Handel vorgeschlagen. Du kannst eine LIste von allen Handelsangeboten und -vorschlägen als auch von laufenden Handelsbeziehungen im Diplomatiefenster finden. Öffne es mit der Schaltfläche aus dem Hauptmenü. "
+msgstr "Nun haben die Friesen dir auch einen Handel vorgeschlagen. Du kannst eine Liste von allen Handelsangeboten und -vorschlägen als auch von laufenden Handelsbeziehungen im Diplomatiefenster finden. Öffne es mit der Schaltfläche aus dem Hauptmenü. "
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:691
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
