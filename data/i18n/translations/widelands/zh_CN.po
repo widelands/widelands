@@ -8972,7 +8972,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"

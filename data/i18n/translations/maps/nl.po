@@ -343,14 +343,14 @@ msgstr "In deze oefencampagne zal je kennismaken met de zeevaart, hoe je omgaat 
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Economie en handel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "In deze handleiding leer je welke opties Widelands biedt om je economie aan te passen en hoe je met andere spelers kunt handelen. Aanbevolen voor spelers met enige ervaring."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"

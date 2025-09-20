@@ -4056,96 +4056,96 @@ msgstr "Vi jam estas ensalutinta!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "Vi estis malkonektita, ĉar vi sendis superuzantan komandon sen superuzanta permeso. Ĉi tiu incidento estos registrita kaj raportita al la administranto."
 
 #: ../../../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "La konekto estis normale fermita de la kliento."
 
 #: ../../../../src/network/internet_gaming_messages.cc:41
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "La konekto al la metaservilo estis perdita."
 
 #: ../../../../src/network/internet_gaming_messages.cc:42
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "La metaservilo ne respondis."
 
 #: ../../../../src/network/internet_gaming_messages.cc:45
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "Vi estis malkonektita de la metaservilo, ĉar vi ne respondis al PING-peto ĝustatempe."
 
 #: ../../../../src/network/net_addons.cc:895
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Sendante metadatumojn por %s"
 
 #: ../../../../src/network/net_addons.cc:937
 #, c-format
 msgid "Uploading %s"
-msgstr ""
+msgstr "Alŝutante %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
-msgstr ""
+msgstr "La kliento forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:31
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "La kliento paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:32
 msgid "Connection was lost."
-msgstr "Konekto perdiĝis."
+msgstr "La konekto perdiĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:33
 msgid "Server has left the game."
-msgstr ""
+msgstr "La servilo forlasis la ludon."
 
 #: ../../../../src/network/network_gaming_messages.cc:35
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "La ludo komenciĝis tuj post kiam vi provis konektiĝi."
 
 #: ../../../../src/network/network_gaming_messages.cc:36
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "La servilo paneis kaj faris krizsavadon."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "La kliento kaj la gastiganto malsinkroniĝis."
 
 #: ../../../../src/network/network_gaming_messages.cc:38
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Elĵetita de la gastiganto: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr ""
+msgstr "La kliento sendis misformitajn komandojn: %s"
 
 #: ../../../../src/network/network_gaming_messages.cc:41
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s forlasis la ludon (%2$s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%1$sestis anstataŭigita per %2$s "
 
 #: ../../../../src/network/network_gaming_messages.cc:43
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Nekonata uzanto forlasis la ludon (%s)"
 
 #: ../../../../src/network/network_gaming_messages.cc:45
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "La servilo sendis SYNCREQUEST, kvankam neniu ludo estas aktiva."
 
 #: ../../../../src/network/network_gaming_messages.cc:46
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Riceviĝis PLAYERCOMMAND, kvankam neniu ludo estas aktiva."
 
 #: ../../../../src/network/network_gaming_messages.cc:47
 msgid "Unexpectedly received LAUNCH command from server."
@@ -4712,11 +4712,11 @@ msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Via mesaĝo estis sendita al la Evoluigista Teamo de Widelands, kaj ni respondos tuj kiam ni povos. Ne forgesu ofte kontroli vian mesaĝujon en la retejo."
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Ensaluto"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../../../src/ui_fsmenu/addons/manager.cc:484
@@ -4724,7 +4724,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:204
 #: ../../../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
-msgstr ""
+msgstr "Restarigi"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:81
 #: ../../../../src/ui_fsmenu/login_box.cc:71
@@ -4733,11 +4733,11 @@ msgid ""
 "In order to use a registered account, you need an account on the Widelands "
 "website. Please log in at %s and set an online gaming password on your "
 "profile page."
-msgstr ""
+msgstr "Por uzi registritan konton, vi bezonas konton en la retejo de Widelands. Bonvolu ensaluti ĉe  %s kaj agordi pasvorton por reta ludado en via profilpaĝo."
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
-msgstr ""
+msgstr "Uzantnomo:"
 
 #: ../../../../src/ui_fsmenu/addons/login_box.cc:100
 #: ../../../../src/ui_fsmenu/login_box.cc:63
@@ -4747,38 +4747,38 @@ msgstr "Pasvorto:"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:63
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:66
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:69
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:71
 #, c-format
 msgid "%u bytes"
-msgstr "%u bytes"
+msgstr "%u bajtoj"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:141
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Ajna"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:141
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Kvalito ankoraŭ ne taksita"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../../../src/ui_fsmenu/addons/manager.cc:147
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Malbona"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:148
 msgid "This add-on may cause major glitches and errors."
@@ -4788,7 +4788,7 @@ msgstr "Ĉi tiu kromprogramo povas kaŭzi gravajn paneojn kaj erarojn."
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Bona"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:154
 msgid "This add-on works as advertised."
@@ -4798,7 +4798,7 @@ msgstr "Ĉi tiu kromprogramo funkcias kiel anoncite."
 #: ../../../../src/ui_fsmenu/addons/manager.cc:159
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Bonega"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:160
 msgid "This add-on has been decorated for its remarkably high quality."
@@ -4810,7 +4810,7 @@ msgstr "Kromprograma Administrilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:309
 msgid "Verified only"
-msgstr ""
+msgstr "Nur aprobitaj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:310
 msgid "Show only verified add-ons"
@@ -4890,11 +4890,11 @@ msgstr "Ĝisdatigu la liston de kromprogramoj disponeblaj ĉe la servilo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:528
 msgid "Fix dependencies…"
-msgstr ""
+msgstr "Ripari dependecaj"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:529
 msgid "Try to automatically fix the dependency errors"
-msgstr ""
+msgstr "Provu aŭtomate ripari la dependecajn erarojn."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Move selected add-on to top"
@@ -4921,7 +4921,7 @@ msgstr "Lanĉu la kromprograman pakaĵilon…"
 #. Development Team
 #: ../../../../src/ui_fsmenu/addons/manager.cc:585
 msgid "Contact us…"
-msgstr ""
+msgstr "Kontaktu nin…"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:609
 msgid "Tools for Add-Ons Developers"
@@ -4951,7 +4951,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Ĉi tie vi povas alŝuti viajn aldonaĵojn al la servilo por igi ilin disponeblaj al aliaj ludantoj. Per la alŝuto vi konsentas publikigi vian kreaĵon laŭ la kondiĉoj de la Ĝenerala Publika Permesilo GNU (GPL), versio 2 aŭ iu posta versio (la sama permesilo laŭ kiu Widelands mem estas distribuita). Por pliaj informoj pri la GPL, bonvolu konsulti “Pri Widelands” → “Permesilo” en la ĉefa menuo aŭ vidu %s."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:657
 msgid ""
@@ -5011,11 +5011,11 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Foliumu kaj instalu mapojn el la arkivo de mapoj en la retejo widelands.org. Same kiel permane elŝutitaj mapoj, la instalitaj retejaj mapoj konserviĝas en la dosierujo \"%s\" en la hejma dosierujo de Widelands."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:764
 msgid "Development"
-msgstr ""
+msgstr "Evoluigo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:764
 msgid "Tools for add-on developers"
@@ -9014,7 +9014,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1443
 msgctxt "hotkey"
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 #: ../../../../src/wlapplication_options.cc:1445
 msgctxt "hotkey"
