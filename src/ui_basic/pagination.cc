@@ -107,12 +107,12 @@ Pagination::Pagination(Panel* parent,
 }
 
 int32_t Pagination::get_nr_pages() const {
-	int32_t p = nr_items_ / pagesize_;
-	if (p == 0 || p * pagesize_ < nr_items_) {
-		++p;
+	int32_t pages = nr_items_ / pagesize_;
+	if (pages == 0 || pages * pagesize_ < nr_items_) {
+		++pages;
 	}
-	assert(p * pagesize_ >= nr_items_);
-	return p;
+	assert(pages * pagesize_ >= nr_items_);
+	return pages;
 }
 
 void Pagination::set_page(const int32_t page, const bool trigger_signal) {
@@ -213,16 +213,16 @@ void Pagination::update_buttons() {
 	button_cur_.set_title(format_l("%d", current_page_));
 
 	for (size_t i = 0; i < buttons_left_.size(); ++i) {
-		const int32_t p = current_page_ - i - 1;
-		buttons_left_.at(i)->set_enabled(p > 1);
-		buttons_left_.at(i)->set_title(p > 1 ? format_l("%d", p) : std::string());
-		buttons_left_.at(i)->set_tooltip(p > 1 ? format_l("Go to page %d", p) : std::string());
+		const int32_t button_page = current_page_ - i - 1;
+		buttons_left_.at(i)->set_enabled(button_page > 1);
+		buttons_left_.at(i)->set_title(button_page > 1 ? format_l("%d", button_page) : std::string());
+		buttons_left_.at(i)->set_tooltip(button_page > 1 ? format_l("Go to page %d", button_page) : std::string());
 	}
 	for (size_t i = 0; i < buttons_right_.size(); ++i) {
-		const int32_t p = current_page_ + i + 1;
-		buttons_right_.at(i)->set_enabled(p < pages);
-		buttons_right_.at(i)->set_title(p < pages ? format_l("%d", p) : std::string());
-		buttons_right_.at(i)->set_tooltip(p < pages ? format_l("Go to page %d", p) : std::string());
+		const int32_t button_page = current_page_ + i + 1;
+		buttons_right_.at(i)->set_enabled(button_page < pages);
+		buttons_right_.at(i)->set_title(button_page < pages ? format_l("%d", button_page) : std::string());
+		buttons_right_.at(i)->set_tooltip(button_page < pages ? format_l("Go to page %d", button_page) : std::string());
 	}
 }
 

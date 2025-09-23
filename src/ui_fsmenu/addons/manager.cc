@@ -1012,15 +1012,15 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		size_t nr_full_updates = 0;
 
 		for (size_t i = 0; i < remotes_to_show_installed_info_.size(); ++i) {
-			std::shared_ptr<AddOns::AddOnInfo> a = remotes_to_show_.at(i);
+			std::shared_ptr<AddOns::AddOnInfo> remote_info = remotes_to_show_.at(i);
 			const RemoteInstalledInfo& installed_info = remotes_to_show_installed_info_.at(i);
 			if (!installed_info.installed_version.empty()) {
 				const bool full_upgrade =
-				   AddOns::is_newer_version(installed_info.installed_version, a->version);
-				if (full_upgrade || (installed_info.installed_i18n_version < a->i18n_version)) {
-					upgrades.emplace_back(a, full_upgrade);
+				   AddOns::is_newer_version(installed_info.installed_version, remote_info->version);
+				if (full_upgrade || (installed_info.installed_i18n_version < remote_info->i18n_version)) {
+					upgrades.emplace_back(remote_info, full_upgrade);
 					if (full_upgrade) {
-						all_verified &= a->verified;
+						all_verified &= remote_info->verified;
 						++nr_full_updates;
 					}
 				}
@@ -1577,9 +1577,9 @@ void AddOnsCtrl::rebuild_browse() {
 	server_name_.set_text(net().server_descname());
 
 	remotes_to_show_.clear();
-	for (auto& a : remotes_) {
-		if (matches_filter_browse(a)) {
-			remotes_to_show_.emplace_back(a);
+	for (auto& addon : remotes_) {
+		if (matches_filter_browse(addon)) {
+			remotes_to_show_.emplace_back(addon);
 		}
 	}
 	std::sort(remotes_to_show_.begin(), remotes_to_show_.end(),
@@ -1590,13 +1590,13 @@ void AddOnsCtrl::rebuild_browse() {
 
 	std::vector<std::string> has_upgrades;
 	for (size_t i = 0; i < total_count; ++i) {
-		std::shared_ptr<AddOns::AddOnInfo> a = remotes_to_show_.at(i);
+		std::shared_ptr<AddOns::AddOnInfo> remote_info = remotes_to_show_.at(i);
 
 		RemoteInstalledInfo& installed_info = remotes_to_show_installed_info_.at(i);
 		installed_info.installed_version.clear();
 		installed_info.installed_i18n_version = 0;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first->internal_name == a->internal_name) {
+			if (pair.first->internal_name == remote_info->internal_name) {
 				installed_info.installed_version = pair.first->version;
 				installed_info.installed_i18n_version = pair.first->i18n_version;
 				break;
@@ -1604,9 +1604,9 @@ void AddOnsCtrl::rebuild_browse() {
 		}
 
 		if (!installed_info.installed_version.empty() &&
-		    (AddOns::is_newer_version(installed_info.installed_version, a->version) ||
-		     installed_info.installed_i18n_version < a->i18n_version)) {
-			has_upgrades.push_back(a->descname());
+		    (AddOns::is_newer_version(installed_info.installed_version, remote_info->version) ||
+		     installed_info.installed_i18n_version < remote_info->i18n_version)) {
+			has_upgrades.push_back(remote_info->descname());
 		}
 	}
 
@@ -1655,15 +1655,15 @@ void AddOnsCtrl::browse_pagination_changed() {
 		if (index != first) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
-		std::shared_ptr<AddOns::AddOnInfo> a = remotes_to_show_.at(index);
+		std::shared_ptr<AddOns::AddOnInfo> remote_info = remotes_to_show_.at(index);
 
-		auto row_it = cached_browse_rows_.find(a->internal_name);
+		auto row_it = cached_browse_rows_.find(remote_info->internal_name);
 		if (row_it == cached_browse_rows_.end()) {
 			const RemoteInstalledInfo& installed_info = remotes_to_show_installed_info_.at(index);
 
 			row_it =
 			   cached_browse_rows_
-			      .emplace(a->internal_name, new RemoteAddOnRow(&browse_addons_box_, this, a,
+			      .emplace(remote_info->internal_name, new RemoteAddOnRow(&browse_addons_box_, this, remote_info,
 			                                                    installed_info.installed_version,
 			                                                    installed_info.installed_i18n_version))
 			      .first;
@@ -1683,9 +1683,9 @@ void AddOnsCtrl::browse_pagination_changed() {
 
 void AddOnsCtrl::rebuild_maps() {
 	maps_to_show_.clear();
-	for (auto& a : remotes_) {
-		if (matches_filter_maps(a)) {
-			maps_to_show_.push_back(a);
+	for (auto& map : remotes_) {
+		if (matches_filter_maps(map)) {
+			maps_to_show_.push_back(map);
 		}
 	}
 	std::sort(maps_to_show_.begin(), maps_to_show_.end(),
@@ -1719,18 +1719,18 @@ void AddOnsCtrl::maps_pagination_changed() {
 		if (index != first) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		std::shared_ptr<AddOns::AddOnInfo> a = maps_to_show_.at(index);
+		std::shared_ptr<AddOns::AddOnInfo> map_info = maps_to_show_.at(index);
 
-		auto row_it = cached_map_rows_.find(a->internal_name);
+		auto row_it = cached_map_rows_.find(map_info->internal_name);
 		if (row_it == cached_map_rows_.end()) {
 			std::string map_file_path = kMapsDir;
 			map_file_path += FileSystem::file_separator();
 			map_file_path += kDownloadedMapsDir;
-			map_file_path += FileSystem::file_separator() + a->map_file_name;
+			map_file_path += FileSystem::file_separator() + map_info->map_file_name;
 
 			row_it = cached_map_rows_
-			            .emplace(a->internal_name,
-			                     new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path)))
+			            .emplace(map_info->internal_name,
+			                     new MapRow(&maps_box_, this, map_info, g_fs->file_exists(map_file_path)))
 			            .first;
 		}
 
