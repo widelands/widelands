@@ -1017,7 +1017,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			if (!installed_info.installed_version.empty()) {
 				const bool full_upgrade =
 				   AddOns::is_newer_version(installed_info.installed_version, remote_info->version);
-				if (full_upgrade || (installed_info.installed_i18n_version < remote_info->i18n_version)) {
+				if (full_upgrade ||
+				    (installed_info.installed_i18n_version < remote_info->i18n_version)) {
 					upgrades.emplace_back(remote_info, full_upgrade);
 					if (full_upgrade) {
 						all_verified &= remote_info->verified;
@@ -1113,8 +1114,12 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 
-	browse_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) { browse_pagination_changed(change == UI::Pagination::ChangeType::kSize); });
-	maps_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) { maps_pagination_changed(change == UI::Pagination::ChangeType::kSize); });
+	browse_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) {
+		browse_pagination_changed(change == UI::Pagination::ChangeType::kSize);
+	});
+	maps_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) {
+		maps_pagination_changed(change == UI::Pagination::ChangeType::kSize);
+	});
 
 	launch_packager_.sigclicked.connect([this]() {
 		AddOnsPackager a(fsmm_, *this);
@@ -1661,19 +1666,20 @@ void AddOnsCtrl::browse_pagination_changed(const bool changed_size) {
 		if (row_it == cached_browse_rows_.end()) {
 			const RemoteInstalledInfo& installed_info = remotes_to_show_installed_info_.at(index);
 
-			row_it =
-			   cached_browse_rows_
-			      .emplace(remote_info->internal_name, new RemoteAddOnRow(&browse_addons_box_, this, remote_info,
-			                                                    installed_info.installed_version,
-			                                                    installed_info.installed_i18n_version))
-			      .first;
+			row_it = cached_browse_rows_
+			            .emplace(remote_info->internal_name,
+			                     new RemoteAddOnRow(&browse_addons_box_, this, remote_info,
+			                                        installed_info.installed_version,
+			                                        installed_info.installed_i18n_version))
+			            .first;
 		}
 
 		browse_addons_box_.add(row_it->second, UI::Box::Resizing::kFullSize);
 		row_it->second->set_visible(true);
 	}
 
-	if (changed_size && (browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
+	if (changed_size && (browse_addons_inner_wrapper_.get_scrollbar() != nullptr) &&
+	    (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 
@@ -1729,8 +1735,8 @@ void AddOnsCtrl::maps_pagination_changed(const bool changed_size) {
 			map_file_path += FileSystem::file_separator() + map_info->map_file_name;
 
 			row_it = cached_map_rows_
-			            .emplace(map_info->internal_name,
-			                     new MapRow(&maps_box_, this, map_info, g_fs->file_exists(map_file_path)))
+			            .emplace(map_info->internal_name, new MapRow(&maps_box_, this, map_info,
+			                                                         g_fs->file_exists(map_file_path)))
 			            .first;
 		}
 
