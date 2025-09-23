@@ -37,7 +37,8 @@ struct Pagination : public Box {
 	           int32_t nr_items,
 	           int32_t nr_adjacent_buttons_per_side = 3);
 
-	Notifications::Signal<> changed;
+	enum class ChangeType { kPage, kSize };
+	Notifications::Signal<ChangeType> changed;
 
 	[[nodiscard]] int32_t get_current_page() const {
 		return current_page_;

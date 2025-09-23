@@ -177,8 +177,8 @@ private:
 	std::shared_ptr<AddOns::AddOnInfo> selected_installed_addon() const;
 	void focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo>);
 
-	void browse_pagination_changed();
-	void maps_pagination_changed();
+	void browse_pagination_changed(bool changed_size);
+	void maps_pagination_changed(bool changed_size);
 
 	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	// void autofix_dependencies();

@@ -1113,8 +1113,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 
-	browse_pagination_.changed.connect([this]() { browse_pagination_changed(); });
-	maps_pagination_.changed.connect([this]() { maps_pagination_changed(); });
+	browse_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) { browse_pagination_changed(change == UI::Pagination::ChangeType::kSize); });
+	maps_pagination_.changed.connect([this](const UI::Pagination::ChangeType change) { maps_pagination_changed(change == UI::Pagination::ChangeType::kSize); });
 
 	launch_packager_.sigclicked.connect([this]() {
 		AddOnsPackager a(fsmm_, *this);
@@ -1635,7 +1635,7 @@ void AddOnsCtrl::rebuild_browse() {
 	browse_pagination_.set_nr_items(total_count);
 }
 
-void AddOnsCtrl::browse_pagination_changed() {
+void AddOnsCtrl::browse_pagination_changed(const bool changed_size) {
 	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
 	                                browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
 	                                0;
@@ -1673,7 +1673,7 @@ void AddOnsCtrl::browse_pagination_changed() {
 		row_it->second->set_visible(true);
 	}
 
-	if ((browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
+	if (changed_size && (browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 
@@ -1699,7 +1699,7 @@ void AddOnsCtrl::rebuild_maps() {
 	maps_pagination_.set_nr_items(total_count);
 }
 
-void AddOnsCtrl::maps_pagination_changed() {
+void AddOnsCtrl::maps_pagination_changed(const bool changed_size) {
 	const uint32_t scrollpos_m = maps_inner_wrapper_.get_scrollbar() != nullptr ?
 	                                maps_inner_wrapper_.get_scrollbar()->get_scrollpos() :
 	                                0;
@@ -1738,7 +1738,7 @@ void AddOnsCtrl::maps_pagination_changed() {
 		row_it->second->set_visible(true);
 	}
 
-	if ((maps_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_m != 0u)) {
+	if (changed_size && (maps_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_m != 0u)) {
 		maps_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_m);
 	}
 

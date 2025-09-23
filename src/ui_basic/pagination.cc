@@ -119,7 +119,7 @@ void Pagination::set_page(const int32_t page, const bool trigger_signal) {
 	current_page_ = math::clamp(page, 1, get_nr_pages());
 	update_buttons();
 	if (trigger_signal) {
-		changed();
+		changed(ChangeType::kPage);
 	}
 }
 
@@ -169,7 +169,7 @@ void Pagination::set_nr_items(const int32_t items, const bool trigger_signal) {
 	update_pagesizes();
 	update_buttons();
 	if (trigger_signal) {
-		changed();
+		changed(ChangeType::kSize);
 	}
 }
 
