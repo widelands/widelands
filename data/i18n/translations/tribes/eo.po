@@ -1375,12 +1375,12 @@ msgstr "La kakaofarmistino laboranta en ĉi tiu kakaoplantejo ne havas senarbust
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "Vestfarejo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing a tunic because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
-msgstr ""
+msgstr "kudri tunikon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing a light wooden armor
 #. because ...
