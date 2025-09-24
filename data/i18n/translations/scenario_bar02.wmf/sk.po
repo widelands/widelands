@@ -202,7 +202,7 @@ msgstr "Postavte výcvikové stavby"
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr "Postavte zápasnícku arénu a výcvikový tábor na západ od hôr."
+msgstr "Postavte kasárne, zápasnícku arénu a výcvikový tábor na západ od hôr."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""

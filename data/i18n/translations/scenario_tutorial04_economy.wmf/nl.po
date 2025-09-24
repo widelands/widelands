@@ -1108,7 +1108,7 @@ msgstr "Selecteer ten slotte hoeveel batches van de geselecteerde goederen worde
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Een partij wordt in één transport geleverd, waarbij voor elk artikel een ezel nodig is."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""

@@ -7,14 +7,14 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
-# Pavol Gono, 2024
+# Pavol Gono, 2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i artefakt"
 msgstr[1] "%i artefakty"
-msgstr[2] "%i artefaktov"
+msgstr[2] "%i artefaktu"
 msgstr[3] "%i artefaktov"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
@@ -155,7 +155,7 @@ msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Spolu: %i bod"
 msgstr[1] "Spolu: %i body"
-msgstr[2] "Spolu: %i bodov"
+msgstr[2] "Spolu: %i bodu"
 msgstr[3] "Spolu: %i bodov"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:111
@@ -169,7 +169,7 @@ msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
 msgstr[0] "Tímový súčet: %i bod"
 msgstr[1] "Tímový súčet: %i body"
-msgstr[2] "Tímový súčet: %i bodov"
+msgstr[2] "Tímový súčet: %i bodu"
 msgstr[3] "Tímový súčet: %i bodov"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:15
@@ -229,7 +229,7 @@ msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Ak si ho udržíte ešte %i minútu, vyhráte hru."
 msgstr[1] "Ak si ho udržíte ďalšie %i minúty, vyhráte hru."
-msgstr[2] "Ak si ho udržíte ďalších %i minút, vyhráte hru."
+msgstr[2] "Ak si ho udržíte ďalších %i minúty, vyhráte hru."
 msgstr[3] "Ak si ho udržíte ďalších %i minút, vyhráte hru."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:264
@@ -243,7 +243,7 @@ msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Stále máte %i minútu na to, aby ste zabránili víťazstvu."
 msgstr[1] "Stále máte %i minúty na to, aby ste zabránili víťazstvu."
-msgstr[2] "Stále máte %i minút na to, aby ste zabránili víťazstvu."
+msgstr[2] "Stále máte %i minúty na to, aby ste zabránili víťazstvu."
 msgstr[3] "Stále máte %i minút na to, aby ste zabránili víťazstvu."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:18
@@ -385,7 +385,7 @@ msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i strom"
 msgstr[1] "%i stromy"
-msgstr[2] "%i stromov"
+msgstr[2] "%i stromu"
 msgstr[3] "%i stromov"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)

@@ -183,6 +183,7 @@ _concat_files('doc/sphinx/source/autogen_temp_lua_ui.cc', (
 	'src/scripting/ui/lua_tab_panel.cc',
 	'src/scripting/ui/lua_tab.cc',
 	'src/scripting/ui/lua_progress_bar.cc',
+	'src/scripting/ui/lua_pagination.cc',
 ))
 
 

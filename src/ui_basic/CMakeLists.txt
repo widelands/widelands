@@ -33,6 +33,8 @@ wl_library(ui_basic
     mouse_constants.h
     multilinetextarea.cc
     multilinetextarea.h
+    pagination.cc
+    pagination.h
     panel.cc
     panel.h
     progressbar.cc

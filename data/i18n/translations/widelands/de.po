@@ -41,7 +41,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-07-10 03:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
+"Last-Translator: Simon Heimberg, 2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2275,7 +2275,7 @@ msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] "Herrenloser Hafenbauplatz bei%1$s,%3$u Feld %4$s von %5$s, durch %2$sentdeckt"
+msgstr[0] "Herrenloser Hafenbauplatz bei %1$s,%3$u Feld %4$s von %5$s, durch %2$s entdeckt"
 msgstr[1] "Herrenloser Hafenbauplatz bei %1$s, %3$u Felder %4$s von %5$s, durch %2$s entdeckt"
 
 #: ../../../../src/logic/detected_port_space.cc:96
@@ -3126,7 +3126,7 @@ msgstr "Schiff gesunken"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1437
 msgid "An enemy ship has destroyed your warship."
-msgstr "Ein feindliches Schiff hat dein Kriegsschiff zertört."
+msgstr "Ein feindliches Schiff hat dein Kriegsschiff zerstört."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:1600
 msgid "Your coast is under attack from an enemy warship."
@@ -8763,7 +8763,7 @@ msgstr "Expeditionen mit Hafenbauplatz zeigen"
 
 #: ../../../../src/wlapplication_options.cc:806
 msgid "Show Warships"
-msgstr "Zeige Kriegsschife"
+msgstr "Zeige Kriegsschiffe"
 
 #: ../../../../src/wlapplication_options.cc:811
 msgid "Show Ships Being Refitted"
@@ -10138,7 +10138,7 @@ msgstr "Markt um den Handel zu akzeptieren"
 #: ../../../../src/wui/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr "%s (nähester)"
+msgstr "%s (am nächsten)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
@@ -10176,7 +10176,7 @@ msgstr "Es gibt im Moment keine ausstehenden Handelsvorschläge. Du kannst einen
 #: ../../../../src/wui/game_diplomacy_menu.cc:533
 #: ../../../../src/wui/game_diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr "Zentriere die Hauptansicht auf diesen Market"
+msgstr "Zentriere die Hauptansicht auf diesen Markt"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
@@ -10243,7 +10243,7 @@ msgstr "Diesen Handel umziehen…"
 #: ../../../../src/wui/marketwindow.cc:617
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr "Ziehe diesen Handel nach %s (nähester) um"
+msgstr "Ziehe diesen Handel nach %s (an nächsten) um"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:677
 #: ../../../../src/wui/marketwindow.cc:618
@@ -11039,7 +11039,7 @@ msgstr "Artefakte"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:63
 msgid "The map contains artifacts for the Artifacts win condition"
-msgstr "Die Karte enthält Artifakte für die Artifakte Siegbedingung"
+msgstr "Die Karte enthält Artefakte für die Artefakte Siegbedingung"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../../../src/wui/map_tags.cc:68
@@ -11207,7 +11207,7 @@ msgstr "Bitte die Waren auswählen, die du senden und empfangen möchtest."
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
 msgstr[0] "Es ist nicht erlaubt, mehr als %d Ware pro Los auszutauschen."
-msgstr[1] "Es ist nicht erlaubt, mehr als %dWaren pro Los auszutauschen."
+msgstr[1] "Es ist nicht erlaubt, mehr als %d Waren pro Los auszutauschen."
 
 #: ../../../../src/wui/marketwindow.cc:239
 #, c-format
@@ -11769,7 +11769,7 @@ msgstr "Zeige Expeditionen, die einen Hafenbauplatz gefunden haben oder eine Kol
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:612
 msgid "Show warships"
-msgstr "Zeige Kriegsschife"
+msgstr "Zeige Kriegsschiffe"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/wui/seafaring_statistics_menu.cc:617

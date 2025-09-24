@@ -159,11 +159,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Postavte pavúčiu farmu a tkáčovňu"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Výroba pavúčej látky"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""

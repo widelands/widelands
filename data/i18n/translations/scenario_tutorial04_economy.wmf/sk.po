@@ -481,7 +481,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Keď skončíte, zavrite okno encyklopédie."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
@@ -774,7 +774,7 @@ msgstr "Možnosti ekonomiky"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Ukazoval som vám okno Zásoby, ktoré vám umožnilo zistiť, aké výrobky sú v skladoch. Spomínate si?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
@@ -990,7 +990,7 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "Skvelé. Teraz máme dostatok mramorových stĺpov, aby sme v prípade agresora mohli vybudovať opevnenie. Ukázalo sa však, že v tejto pustatine skutočne žije kmeň Frízanov a sú mierumilovní. Požiadali nás o obchodovanie."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
@@ -1010,15 +1010,15 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Postavte tržnicu"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Postavte tržnicu pri pustatine."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Tržnica sa radí medzi veľké budovy."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""

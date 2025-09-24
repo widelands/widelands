@@ -680,7 +680,7 @@ msgstr "Az óramutató járásával megegyező kezdőpozíciók"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr "Szigetek háborúban"
+msgstr "Háborúzó szigetek"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
