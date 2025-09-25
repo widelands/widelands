@@ -310,7 +310,7 @@ msgstr "Môžete skúsiť šťastie a náhodne sa rozširovať, ale je to riskan
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Na začatie prieskumu budeme potrebovať prieskumícku chatrč. Je to malá budova."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
@@ -342,7 +342,7 @@ msgstr "Pripravený na cestu!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Výborne! Vaša prieskumnícka chatrč je postavená. Kým sa náš prieskumník nasťahuje, dozvieme sa o ňom niečo viac."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
@@ -370,7 +370,7 @@ msgstr "Počkajte, kým prieskumník preskúma neviditeľné oblasti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 msgid "Observe your scout."
-msgstr ""
+msgstr "Pozorujte svojho prieskumníka."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"

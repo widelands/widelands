@@ -216,7 +216,7 @@ void Pagination::update_buttons() {
 		const int32_t button_page = current_page_ - i - 1;
 		buttons_left_.at(i)->set_enabled(button_page > 1);
 		buttons_left_.at(i)->set_title(button_page > 1 ? format_l("%d", button_page) : std::string());
-		buttons_left_.at(i)->set_tooltip(button_page > 1 ? format_l("Go to page %d", button_page) :
+		buttons_left_.at(i)->set_tooltip(button_page > 1 ? format_l(_("Go to page %d"), button_page) :
 		                                                   std::string());
 	}
 	for (size_t i = 0; i < buttons_right_.size(); ++i) {
@@ -225,7 +225,7 @@ void Pagination::update_buttons() {
 		buttons_right_.at(i)->set_title(button_page < pages ? format_l("%d", button_page) :
 		                                                      std::string());
 		buttons_right_.at(i)->set_tooltip(
-		   button_page < pages ? format_l("Go to page %d", button_page) : std::string());
+		   button_page < pages ? format_l(_("Go to page %d"), button_page) : std::string());
 	}
 }
 
