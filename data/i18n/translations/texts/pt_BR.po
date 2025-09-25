@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-08-16 03:20+0000\n"
+"POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Frank Carvalho, 2024\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -210,13 +210,13 @@ msgid "Elders"
 msgstr "Velhos"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:422
 msgid "Graphics"
 msgstr "Gráficos"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:366
+#: ../../../../data/txts/developers.lua:429
 msgid "Homepage"
 msgstr "Página inicial"
 
@@ -225,7 +225,7 @@ msgid "Scripting"
 msgstr ""
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:437
 msgid "Sound"
 msgstr "Som"
 
@@ -245,99 +245,99 @@ msgstr "Programadores"
 msgid "Graphicians"
 msgstr "Gráficos"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:190
 msgid "Musicians"
 msgstr "Músicos"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:209
 msgid "Sound Effects"
 msgstr "Efeitos de som"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:225
 msgid "Maps and Missions"
 msgstr "Mapas e Missões"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:263
 msgid "Campaign Story"
 msgstr "Campanha"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:267
 msgid "Barbarians"
 msgstr "Bárbaros"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:275
 msgid "Empire"
 msgstr "Império"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:282
 msgid "Atlanteans"
 msgstr "Atlantes"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:290
 msgid "Frisians"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:298
 msgid "Packagers"
 msgstr "Empacotadores"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:302
 msgid "Debian Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:308
 msgid "Fedora Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:316
 msgid "Mandriva Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:322
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:328
 msgid "Flatpak"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:335
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:347
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:358
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:370
 msgid "Homepage Coders"
 msgstr "Página inicial dos Coders"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:381
 msgid "Documentation, Help and Wiki"
 msgstr "Documentação, Ajuda e Wiki"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:399
 msgid "Add-Ons"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:418
 msgid "Former Elders"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:444
 msgid "Translation"
 msgstr "Tradução"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:453
 msgid "Other"
 msgstr "Outro(s)"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:461
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 

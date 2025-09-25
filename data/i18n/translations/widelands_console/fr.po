@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-03 03:08+0000\n"
+"POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: David D, 2023,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -67,7 +67,7 @@ msgstr "widelands <save.wgf>/<replay.wry>"
 #: ../../../../src/wlapplication_messages.cc:69
 #: ../../../../src/wlapplication_messages.cc:71
 #: ../../../../src/wlapplication_messages.cc:76
-#: ../../../../src/wlapplication_messages.cc:248
+#: ../../../../src/wlapplication_messages.cc:249
 msgid "DIRNAME"
 msgstr "NOMDUDOSSIER"
 
@@ -155,10 +155,11 @@ msgstr "Lance le Script Lua indiqué après initiallisation. Ne fonctionne qu'av
 #: ../../../../src/wlapplication_messages.cc:154
 #: ../../../../src/wlapplication_messages.cc:157
 #: ../../../../src/wlapplication_messages.cc:176
-#: ../../../../src/wlapplication_messages.cc:207
-#: ../../../../src/wlapplication_messages.cc:219
-#: ../../../../src/wlapplication_messages.cc:253
-#: ../../../../src/wlapplication_messages.cc:263
+#: ../../../../src/wlapplication_messages.cc:204
+#: ../../../../src/wlapplication_messages.cc:208
+#: ../../../../src/wlapplication_messages.cc:220
+#: ../../../../src/wlapplication_messages.cc:254
+#: ../../../../src/wlapplication_messages.cc:264
 msgid "n"
 msgstr "n"
 
@@ -182,8 +183,8 @@ msgstr "Démarre le jeu avec le son désactivé."
 #: ../../../../src/wlapplication_messages.cc:179
 #: ../../../../src/wlapplication_messages.cc:188
 #: ../../../../src/wlapplication_messages.cc:201
-#: ../../../../src/wlapplication_messages.cc:242
-#: ../../../../src/wlapplication_messages.cc:251
+#: ../../../../src/wlapplication_messages.cc:243
+#: ../../../../src/wlapplication_messages.cc:252
 msgid "[true*|false]"
 msgstr "[vrai*|faux]"
 
@@ -273,9 +274,9 @@ msgstr "Sauver les fichiers en tant qu'archives zip binaires."
 #: ../../../../src/wlapplication_messages.cc:197
 #: ../../../../src/wlapplication_messages.cc:199
 #: ../../../../src/wlapplication_messages.cc:200
-#: ../../../../src/wlapplication_messages.cc:214
-#: ../../../../src/wlapplication_messages.cc:246
-#: ../../../../src/wlapplication_messages.cc:258
+#: ../../../../src/wlapplication_messages.cc:215
+#: ../../../../src/wlapplication_messages.cc:247
+#: ../../../../src/wlapplication_messages.cc:259
 msgid "[true|false*]"
 msgstr "[vrai|faux*]"
 
@@ -311,11 +312,11 @@ msgstr "Bitmask des drapeaux d'affichage à définir pour les nouveaux jeux."
 #. terminals
 #: ../../../../src/wlapplication_messages.cc:184
 #: ../../../../src/wlapplication_messages.cc:203
-#: ../../../../src/wlapplication_messages.cc:210
 #: ../../../../src/wlapplication_messages.cc:211
 #: ../../../../src/wlapplication_messages.cc:212
 #: ../../../../src/wlapplication_messages.cc:213
-#: ../../../../src/wlapplication_messages.cc:216
+#: ../../../../src/wlapplication_messages.cc:214
+#: ../../../../src/wlapplication_messages.cc:217
 msgid "[...]"
 msgstr "[...]"
 
@@ -347,56 +348,60 @@ msgstr "Afficher le chat dans le jeu avec un fond transparent."
 msgid "Bitmask to set the toolbar location and mode."
 msgstr "Bitmask pour définir l'emplacement et le mode de la barre d'outils."
 
-#: ../../../../src/wlapplication_messages.cc:205
+#: ../../../../src/wlapplication_messages.cc:204
+msgid "Default pagesize for paginated structures."
+msgstr ""
+
+#: ../../../../src/wlapplication_messages.cc:206
 msgid "Networking:"
 msgstr "Réseautage :"
 
-#: ../../../../src/wlapplication_messages.cc:205
+#: ../../../../src/wlapplication_messages.cc:206
 msgid "URI"
 msgstr "URI"
 
-#: ../../../../src/wlapplication_messages.cc:206
+#: ../../../../src/wlapplication_messages.cc:207
 msgid "Connect to a different metaserver for internet gaming."
 msgstr "Connectez-vous à un autre métaserveur pour les jeux sur Internet."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../../../src/wlapplication_messages.cc:209
+#: ../../../../src/wlapplication_messages.cc:210
 msgid "Port number `n` of the metaserver for internet gaming."
 msgstr "Port numéro 'n' du métaserveur pour jouer en ligne."
 
-#: ../../../../src/wlapplication_messages.cc:210
+#: ../../../../src/wlapplication_messages.cc:211
 msgid "The name of the last hosted game."
 msgstr "Nom du dernier jeu hébergé."
 
-#: ../../../../src/wlapplication_messages.cc:211
+#: ../../../../src/wlapplication_messages.cc:212
 msgid "The nickname used for LAN and online games."
 msgstr "Le pseudo utilisé pour les jeux en local et en ligne."
 
-#: ../../../../src/wlapplication_messages.cc:212
+#: ../../../../src/wlapplication_messages.cc:213
 msgid "Name of map author."
 msgstr "Nom de l'auteur de la carte."
 
-#: ../../../../src/wlapplication_messages.cc:213
+#: ../../../../src/wlapplication_messages.cc:214
 msgid "The last host connected to."
 msgstr "Le dernier hôte connecté."
 
-#: ../../../../src/wlapplication_messages.cc:215
+#: ../../../../src/wlapplication_messages.cc:216
 msgid "Whether the used metaserver login is for a registered user."
 msgstr "Si l'identifiant du métaserveur utilisé est pour un utilisateur enregistré."
 
-#: ../../../../src/wlapplication_messages.cc:216
+#: ../../../../src/wlapplication_messages.cc:217
 msgid "The hashed password for online logins."
 msgstr "Le mot de passe haché pour les connexions en ligne."
 
-#: ../../../../src/wlapplication_messages.cc:217
+#: ../../../../src/wlapplication_messages.cc:218
 msgid "IP"
 msgstr "IP"
 
-#: ../../../../src/wlapplication_messages.cc:218
+#: ../../../../src/wlapplication_messages.cc:219
 msgid "Connect to a different server address from the add-ons manager."
 msgstr "Connecter à une adresse de serveur différente depuis le gestionnaire d'add-ons."
 
-#: ../../../../src/wlapplication_messages.cc:220
+#: ../../../../src/wlapplication_messages.cc:221
 msgid "Connect to a different server port from the add-ons manager."
 msgstr "Connecter à un port de serveur différent depuis le gestionnaire d'add-ons."
 
@@ -405,117 +410,117 @@ msgstr "Connecter à un port de serveur différent depuis le gestionnaire d'add-
 #. * multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../../../src/wlapplication_messages.cc:226
+#: ../../../../src/wlapplication_messages.cc:227
 msgid "Create syncstream dump files to help debug network games."
 msgstr "Créez des fichiers de dump syncstream pour aider à déboguer les jeux en réseau."
 
-#: ../../../../src/wlapplication_messages.cc:229
+#: ../../../../src/wlapplication_messages.cc:230
 msgid "Graphic options:"
 msgstr "Options graphiques :"
 
-#: ../../../../src/wlapplication_messages.cc:229
+#: ../../../../src/wlapplication_messages.cc:230
 msgid "Use the whole display for the game screen."
 msgstr "Utiliser l'écran entier pour l'écran du jeu."
 
-#: ../../../../src/wlapplication_messages.cc:231
+#: ../../../../src/wlapplication_messages.cc:232
 msgid "Start the game in a maximized window."
 msgstr "Démarre le jeu dans une fenêtre agrandie au maximum."
 
 #. * TRANSLATORS: A placeholder for window width
-#: ../../../../src/wlapplication_messages.cc:234
+#: ../../../../src/wlapplication_messages.cc:235
 msgid "x"
 msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
-#: ../../../../src/wlapplication_messages.cc:236
+#: ../../../../src/wlapplication_messages.cc:237
 msgid "Width `x` of the window in pixel."
 msgstr "Largeur 'x' de la fenêtre en pixels."
 
 #. * TRANSLATORS: A placeholder for window height
-#: ../../../../src/wlapplication_messages.cc:239
+#: ../../../../src/wlapplication_messages.cc:240
 msgid "y"
 msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
-#: ../../../../src/wlapplication_messages.cc:241
+#: ../../../../src/wlapplication_messages.cc:242
 msgid "Height `y` of the window in pixel."
 msgstr "Hauteur 'y' de la fenêtre en pixels."
 
-#: ../../../../src/wlapplication_messages.cc:243
+#: ../../../../src/wlapplication_messages.cc:244
 msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
 msgstr "Laisser ou non le système dessiner le curseur de la souris. Ne désactiver que si le curseur n'apparait pas correctement, ou s'il vous voulez qu'il soit visible dans les captures d'écran et les diffusions."
 
-#: ../../../../src/wlapplication_messages.cc:246
+#: ../../../../src/wlapplication_messages.cc:247
 msgid "Whether to use sticky tooltips."
 msgstr "Si vous souhaitez utiliser des info-bulles collantes."
 
-#: ../../../../src/wlapplication_messages.cc:249
+#: ../../../../src/wlapplication_messages.cc:250
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
 msgstr "Chemin d'accès au thème d'IU actif, par rapport au répertoire d'accueil de Widelands."
 
-#: ../../../../src/wlapplication_messages.cc:251
+#: ../../../../src/wlapplication_messages.cc:252
 msgid "Options for the internal window manager:"
 msgstr "Options pour le gestionnaire de fenêtre interne :"
 
-#: ../../../../src/wlapplication_messages.cc:252
+#: ../../../../src/wlapplication_messages.cc:253
 msgid "Whether automatic map movements should be animated."
 msgstr "Si les mouvements automatiques de la carte doivent être animés."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../../../src/wlapplication_messages.cc:255
+#: ../../../../src/wlapplication_messages.cc:256
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
 msgstr "Déplace une fenêtre vers le bord de l'écran lorsque le bord de la fenêtre se trouve à une distance `n` du bord de l'écran."
 
-#: ../../../../src/wlapplication_messages.cc:259
+#: ../../../../src/wlapplication_messages.cc:260
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
 msgstr "Élimine la bordure d'une fenêtre vers le bord de l'écran lorsque le bord de la fenêtre est à côté du bord de l'écran."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../../../src/wlapplication_messages.cc:265
+#: ../../../../src/wlapplication_messages.cc:266
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
 msgstr "Déplace une fenêtre vers le bord du panneau lorsque le bord de la fenêtre se trouve à une distance de `n` du bord du panneau."
 
-#: ../../../../src/wlapplication_messages.cc:269
+#: ../../../../src/wlapplication_messages.cc:270
 msgid "Enable verbose debug messages"
 msgstr "Activer les messages de débogage détaillés"
 
-#: ../../../../src/wlapplication_messages.cc:269
+#: ../../../../src/wlapplication_messages.cc:270
 msgid "Others:"
 msgstr "Autres :"
 
-#: ../../../../src/wlapplication_messages.cc:271
+#: ../../../../src/wlapplication_messages.cc:272
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "écrire toutes les chaines de caractères quand elles sont traduites. Ceci aide à identifier les problèmes avec l'internationalisation."
 
-#: ../../../../src/wlapplication_messages.cc:274
+#: ../../../../src/wlapplication_messages.cc:275
 msgid "Only print version and exit."
 msgstr "Juste indiquer la version et quitter."
 
-#: ../../../../src/wlapplication_messages.cc:275
+#: ../../../../src/wlapplication_messages.cc:276
 msgid "Show this help."
 msgstr "Afficher cette aide."
 
-#: ../../../../src/wlapplication_messages.cc:276
+#: ../../../../src/wlapplication_messages.cc:277
 msgid "Show this help with all available config options."
 msgstr "Afficher cette aide avec toutes les options de configurations disponibles."
 
-#: ../../../../src/wlapplication_messages.cc:277
+#: ../../../../src/wlapplication_messages.cc:278
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<save.wgf>/<replay.wry>"
 
-#: ../../../../src/wlapplication_messages.cc:278
+#: ../../../../src/wlapplication_messages.cc:279
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -523,12 +528,12 @@ msgid ""
 msgstr "Charge la sauvegarde indiquée ou la rejoue directement. Utile pour l'association d'extension de fichiers .wgf/.wry. Ne fonctionne pas avec d'autres options. Voir aussi --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../../../src/wlapplication_messages.cc:313
+#: ../../../../src/wlapplication_messages.cc:314
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Ceci est la version%sde Widelands"
 
-#: ../../../../src/wlapplication_messages.cc:371
+#: ../../../../src/wlapplication_messages.cc:372
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

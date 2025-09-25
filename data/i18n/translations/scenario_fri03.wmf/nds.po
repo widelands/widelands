@@ -147,7 +147,7 @@ msgid ""
 " conqueror."
 msgstr ""
 "Aver vergiff mi. Ick hebb mich nich maal vörstellt. Ick bün Claus Lembeck, "
-"de Ridder, well de Insel Föhr regeeert … of dat hebb ick, bit de Winner mi "
+"de Ridder, well de Insel Föhr regeert … of dat hebb ick, bit de Winner mi "
 "utdreven hett."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
@@ -218,11 +218,11 @@ msgid ""
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
 msgstr ""
-"Man sücht licht, dat ick alleen nich to hopen bruukt, deesen mallen Feind to"
-" manntjen. Un deese, well ick faaktieden holpen hebb, könen mi wiss ok nich "
-"hülpen, man dat weer alltieden bannig swaar vlr uns, hüm torüggtoslagen, un "
+"Man sücht licht, dat ick alleen nich to hopen bruuk, deesen mallen Feind to "
+"manntjen. Un deese, well ick faaktieden holpen hebb, könen mi wiss ok nich "
+"hülpen, man dat weer alltieden bannig swaar för uns, hüm torüggtoslagen, un "
 "deese leste Slacht wiest, dat he bit nu nich maal im Eernst versöcht hat, to"
-" winnen. He hett blot mit uns spöölt. Nee, wenn ich eene Kans hebben will, "
+" winnen. He hett blots mit uns spöölt. Nee, wenn ich eene Kans hebben will, "
 "tegen hüm to wünnen, mutt ick eene beter Fors finnen, um mi bitostahn."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
@@ -237,7 +237,7 @@ msgstr ""
 " machtigen freesk Gemeend, mit well ick maal Fründe weer; sien hoogmodig "
 "Stolt un siene unbannige Künne im Kamp gifft dat in elkeen Deel vun de "
 "bekennte Welt nich noch eenmaal. Wenn elkeen tegen Atterdag stahn kann, mutt"
-" ’t hüm sien."
+" ’t hüm wesen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121

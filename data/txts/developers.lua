@@ -181,6 +181,7 @@ function developers() return {
                "DragonAtma",
                "Benedikt Straub (Nordfriese)",
                "Tóth András",
+               "Eugenia Loli",
             },
          },
       },

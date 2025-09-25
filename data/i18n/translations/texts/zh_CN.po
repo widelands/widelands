@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-08-16 03:20+0000\n"
+"POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -207,13 +207,13 @@ msgid "Elders"
 msgstr "先行者"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:422
 msgid "Graphics"
 msgstr "绘图"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:366
+#: ../../../../data/txts/developers.lua:429
 msgid "Homepage"
 msgstr "网站主页"
 
@@ -222,7 +222,7 @@ msgid "Scripting"
 msgstr "脚本"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:437
 msgid "Sound"
 msgstr "声音"
 
@@ -242,99 +242,99 @@ msgstr "程序员"
 msgid "Graphicians"
 msgstr "图形艺术家"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:190
 msgid "Musicians"
 msgstr "音乐家"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:209
 msgid "Sound Effects"
 msgstr "音效"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:225
 msgid "Maps and Missions"
 msgstr "地图和任务"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:263
 msgid "Campaign Story"
 msgstr "战役故事"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:267
 msgid "Barbarians"
 msgstr "蛮族"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:275
 msgid "Empire"
 msgstr "帝国"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:282
 msgid "Atlanteans"
 msgstr "亚特兰蒂斯人"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:290
 msgid "Frisians"
 msgstr "弗里西亚部族"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:298
 msgid "Packagers"
 msgstr "游戏程序集成打包"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:302
 msgid "Debian Linux"
 msgstr "Debian Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:308
 msgid "Fedora Linux"
 msgstr "Fedora Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:316
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:322
 msgid "FreeBSD"
 msgstr "FreeBSD 操作系统"
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:328
 msgid "Flatpak"
 msgstr "Flatpak 操作系统"
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:335
 msgid "Mac OS X"
 msgstr "Mac OS X 操作系统"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:347
 msgid "Windows"
 msgstr "Windows 操作系统"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:358
 msgid "ZetaOS"
 msgstr "Zeta 操作系统"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:370
 msgid "Homepage Coders"
 msgstr "网站主页程序员"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:381
 msgid "Documentation, Help and Wiki"
 msgstr "文档，帮助和维基"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:399
 msgid "Add-Ons"
 msgstr "附加组件"
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:418
 msgid "Former Elders"
 msgstr "前辈"
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:444
 msgid "Translation"
 msgstr "翻译"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:453
 msgid "Other"
 msgstr "其他"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:461
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 

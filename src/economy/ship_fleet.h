@@ -107,6 +107,7 @@ struct ShipFleet : MapObject {
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
+	void split(Game& game);
 
 	void add_ship(EditorGameBase&, Ship* ship);
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
@@ -139,7 +140,6 @@ struct ShipFleet : MapObject {
 	[[nodiscard]] std::vector<PortDock*>& get_ports() {
 		return ports_;
 	}
-
 	[[nodiscard]] Quantity get_ships_target() const {
 		return ships_target_;
 	}
