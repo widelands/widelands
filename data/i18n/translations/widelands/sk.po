@@ -7803,7 +7803,7 @@ msgstr "Zobraziť systémový čas v informačnom paneli"
 
 #: ../../../../src/ui_fsmenu/options.cc:370
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr "Umožňiť diagonálne posúvanie pomocou numerickej klávesnice"
+msgstr "Umožniť diagonálne posúvanie pomocou numerickej klávesnice"
 
 #: ../../../../src/ui_fsmenu/options.cc:375
 msgid "Scroll when the mouse cursor is near the screen edge"

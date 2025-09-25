@@ -108,7 +108,7 @@ msgid ""
 msgstr ""
 "Marcus Caius Injucundus hett över de Störm nich logen. Wi sünd jüüst bi "
 "rechte Tied offahren; up See hett ’t uns inhaalt un wi weren all wiss, dat "
-"uns’ Schipp gliek stückengahn un unnergahn word un keen vun uns’ weer uns’ "
+"uns’ Schipp gliek stückengahn un unnergahn word un keener vun uns weer uns’ "
 "Heimaad to sehn kriegen word."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
