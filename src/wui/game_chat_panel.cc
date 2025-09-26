@@ -440,7 +440,7 @@ void GameChatPanel::prepare_recipients() {
 	assert(chat_.participants_ != nullptr);
 
 	recipient_dropdown_.clear();
-	recipient_dropdown_.add(_("All"), "", g_image_cache->get("images/wui/menus/toggle_minimap.png"));
+	recipient_dropdown_.add(pgettext("all_players", "All"), "", g_image_cache->get("images/wui/menus/toggle_minimap.png"));
 	// Select the "All" entry by default. Do *not* use the add() parameter for selecting it since
 	// it calls the listener for selected()
 	recipient_dropdown_.select("");
