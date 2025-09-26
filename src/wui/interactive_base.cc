@@ -351,11 +351,21 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kZoomMax: {
-		map_view()->zoom_to_max();
+		if (map_view()->zoom_at_max()) {
+			map_view()->zoom_to_saved();
+		} else {
+			map_view()->zoom_save();
+			map_view()->zoom_to_max();
+		}
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kZoomMin: {
-		map_view()->zoom_to_min();
+		if (map_view()->zoom_at_min()) {
+			map_view()->zoom_to_saved();
+		} else {
+			map_view()->zoom_save();
+			map_view()->zoom_to_min();
+		}
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kResetZoom: {

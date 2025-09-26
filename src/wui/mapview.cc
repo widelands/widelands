@@ -196,7 +196,7 @@ std::deque<MapView::TimestampedView> plan_map_transition(const uint32_t start_ti
 	                               Vector2f(width * end.zoom / 2.f, height * end.zoom / 2.f);
 	plan.push_back(
 	   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + duration_ms)),
-	                            MapView::View(end_viewpoint, end.zoom)});
+	                            MapView::View(end_viewpoint, end.zoom, end.zoom_saved)});
 	return plan;
 }
 
@@ -206,14 +206,15 @@ std::deque<MapView::TimestampedView> plan_zoom_transition(const uint32_t start_t
                                                           const Vector2f& center,
                                                           const float start_zoom,
                                                           const float end_zoom,
+                                                          const float zoom_saved,
                                                           const int width,
                                                           const int height) {
 	const SmoothstepInterpolator<float> zoom_t(start_zoom, end_zoom, kShortAnimationMs);
 	std::deque<MapView::TimestampedView> plan;
 	const auto push = [&](const float dt, const float zoom) {
-		plan.push_back(
-		   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + dt)),
-		                            {center - Vector2f(zoom * width, zoom * height) * 0.5f, zoom}});
+		plan.push_back(MapView::TimestampedView{
+		   static_cast<uint32_t>(std::lround(start_time + dt)),
+		   {center - Vector2f(zoom * width, zoom * height) * 0.5f, zoom, zoom_saved}});
 	};
 
 	push(0, start_zoom);
@@ -386,7 +387,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
 		   // Using math::clamp fixes crashes with leaning on the zoom keys and resetting zoom.
-		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom),
+		   plan[1].view.zoom_saved};
 		set_view(new_view, Transition::Jump);
 		break;
 	}
@@ -456,7 +458,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 void MapView::set_centered_view(const View& centered_view, const Transition& transition) {
 	const Vector2f viewpoint = MapviewPixelFunctions::panel_to_map(
 	   centered_view.viewpoint, centered_view.zoom, Vector2f(-get_w() / 2.f, -get_h() / 2.f));
-	set_view(View(viewpoint, centered_view.zoom), transition);
+	set_view(View(viewpoint, centered_view.zoom, centered_view.zoom_saved), transition);
 }
 
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
@@ -474,7 +476,7 @@ void MapView::scroll_to_map_pixel(const Vector2f& pos, const Transition& transit
 	const TimestampedView current = animation_target_view();
 	const Rectf area = get_view_area(current.view, get_w(), get_h());
 	const Vector2f target_view = pos - Vector2f(area.w / 2.f, area.h / 2.f);
-	set_view(View(target_view, current.view.zoom), transition);
+	set_view(View(target_view, current.view.zoom, current.view.zoom_saved), transition);
 }
 
 MapView::ViewArea MapView::view_area() const {
@@ -495,7 +497,9 @@ void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
 	}
-	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
+	set_view(
+	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom, view_.zoom_saved},
+	   transition);
 }
 
 void MapView::stop_dragging() {
@@ -633,7 +637,8 @@ void MapView::zoom_around(float new_zoom,
 		// Zoom around the current mouse position. See
 		// https://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
-		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom},
+		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom,
+		          current.view.zoom_saved},
 		         Transition::Jump);
 		return;
 	}
@@ -649,8 +654,9 @@ void MapView::zoom_around(float new_zoom,
 		}
 		const int w = get_w();
 		const int h = get_h();
-		const auto plan = plan_zoom_transition(
-		   current.t, get_view_area(current.view, w, h).center(), current.view.zoom, new_zoom, w, h);
+		const auto plan =
+		   plan_zoom_transition(current.t, get_view_area(current.view, w, h).center(),
+		                        current.view.zoom, new_zoom, current.view.zoom_saved, w, h);
 		if (!plan.empty()) {
 			view_plans_.push_back(plan);
 		}
@@ -681,6 +687,19 @@ void MapView::decrease_zoom() {
 void MapView::zoom_to_min() {
 	zoom_around(kMaxZoom, Vector2f(get_w() / 2.f, get_h() / 2.f),
 	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
+}
+void MapView::zoom_save() {
+	view_.zoom_saved = view_.zoom;
+}
+void MapView::zoom_to_saved() {
+	zoom_around(view_.zoom_saved, Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
+}
+bool MapView::zoom_at_max() {
+	return view_.zoom_near(1.f / kMaxZoom);
+}
+bool MapView::zoom_at_min() {
+	return view_.zoom_near(kMaxZoom);
 }
 bool MapView::is_dragging() const {
 	return dragging_;
@@ -776,13 +795,23 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomMax, code)) {
 		if (!is_animating()) {
-			zoom_to_max();
+			if (zoom_at_max()) {
+				zoom_to_saved();
+			} else {
+				zoom_save();
+				zoom_to_max();
+			}
 		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomMin, code)) {
 		if (!is_animating()) {
-			zoom_to_min();
+			if (zoom_at_min()) {
+				zoom_to_saved();
+			} else {
+				zoom_save();
+				zoom_to_min();
+			}
 		}
 		return true;
 	}
