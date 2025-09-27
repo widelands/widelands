@@ -336,7 +336,7 @@ msgstr "Bit-Tosamensetten för de Stee un Utsehen vun de Infobalken."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "Normaale Siedengrött för Inhollen mit Sieden"
 
 #: ../../../../src/wlapplication_messages.cc:206
 msgid "Networking:"

@@ -4371,15 +4371,15 @@ msgstr "Nix funnen"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "To eerster Sied gahn"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "To lester Sied gahn"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Dingen pro Sied"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 #: ../../../../src/wui/game_chat_panel.cc:443

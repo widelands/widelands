@@ -41,7 +41,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Simon Heimberg, 2023,2025\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2137,7 +2137,7 @@ msgstr "Startbedingung"
 
 #: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
-msgstr "UI Plugin"
+msgstr "Benutzeroberflächenerweiterung"
 
 #: ../../../../src/logic/addons.cc:120
 #, c-format
@@ -4313,7 +4313,7 @@ msgstr "%1% (%2%)"
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
 #: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
-msgstr "Plugin Fehler"
+msgstr "Erweiterungsfehler"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:86
@@ -4322,7 +4322,7 @@ msgstr "Plugin Fehler"
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr "Fehler in der Pluginausführung:\n%s"
+msgstr "Fehler in der Erweiterungsausführung:\n%s"
 
 #: ../../../../src/ui_basic/color_chooser.cc:259
 msgid "Choose Color…"
@@ -4398,15 +4398,15 @@ msgstr "Keine Treffer"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Gehe zur ersten Seite"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Gehe zur letzten Seite"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Einträge pro Seite"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 #: ../../../../src/wui/game_chat_panel.cc:443
