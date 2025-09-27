@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-25 03:08+0000\n"
+"POT-Creation-Date: 2025-09-27 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -2993,27 +2993,27 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Cha deach stòras a lorg tuilleadh!"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1253
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1274
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1259
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1285
 msgctxt "building"
 msgid "No Shore"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1260
 msgid "Shipyard Without Shore"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1261
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1286
 msgid "Ferry Yard Without Shore"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1276
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1287
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
@@ -3043,200 +3043,218 @@ msgstr ""
 msgid "Your ship has arrived at its destination."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:642
+#. * TRANSLATORS: Ship fleets had to be split
+#: ../../../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+msgctxt "ship"
+msgid "Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+msgid "Ship Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:601
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2236
+msgid ""
+"A ship fleet had to be split, because a terrain change blocked a passage."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../../../src/logic/map_objects/tribes/ship.cc:662
 msgid "An expedition ship arrived at a known port build space."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:644
-#: ../../../../src/logic/map_objects/tribes/ship.cc:652
+#: ../../../../src/logic/map_objects/tribes/ship.cc:663
+#: ../../../../src/logic/map_objects/tribes/ship.cc:671
 msgid "Port Space"
 msgstr "Raon puirt"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:644
+#: ../../../../src/logic/map_objects/tribes/ship.cc:663
 msgid "Port Space Spotted"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:650
+#: ../../../../src/logic/map_objects/tribes/ship.cc:669
 msgid "A warship found a new port build space."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:651
+#: ../../../../src/logic/map_objects/tribes/ship.cc:670
 msgid "An expedition ship found a new port build space."
 msgstr "Lorg triall luinge raon ùr gus port a thogail."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:652
+#: ../../../../src/logic/map_objects/tribes/ship.cc:671
 msgid "Port Space Found"
 msgstr "Chaidh raon airson port a lorg"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../../../src/logic/map_objects/tribes/ship.cc:771
 msgid "Enemy Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../../../src/logic/map_objects/tribes/ship.cc:771
 msgid "Enemy Ship Spotted"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:753
+#: ../../../../src/logic/map_objects/tribes/ship.cc:772
 msgid "A warship spotted an enemy ship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:783
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Destination Unreachable"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:783
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Ship Destination Unreachable"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:784
+#: ../../../../src/logic/map_objects/tribes/ship.cc:803
 msgid "Your ship could not find a path to its destination."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:803
+#: ../../../../src/logic/map_objects/tribes/ship.cc:822
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1599
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1619
 msgid "Enemy Ship Attacking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1598
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1618
 msgid "Naval Attack"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1317
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1337
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
 msgid "Ship Destroyed"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
 msgid "Ship Sunk"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1457
 msgid "An enemy ship has destroyed your warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1620
 msgid "Your coast is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
 msgid "Island Circumnavigated"
 msgstr "Tha eilean air iom-sheòladh"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
 msgctxt "ship"
 msgid "Waiting"
 msgstr "A’ feitheamh"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1833
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1853
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sheòl triall luinge timcheall air eilean gun tachartas sam bith."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
 msgid "Coast Reached"
 msgstr "Chaidh oirthir a ruigsinn"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
 msgid "Land Ahoy!"
 msgstr "Tìr air fàire!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1899
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1919
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ràinig triall luinge oirthir is e a’ feitheamh air òrduighean ùra."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
 msgid "New port construction site is gone"
 msgstr "Chailleadh làrach togail puirt ùr"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
 msgid "Port Lost!"
 msgstr "Port air a chall!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1953
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1973
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Chaidh sgur dhen triall on a dh’fhàillig le dì-luchdadh a’ bhathair."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2011
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2031
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2285
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Triall"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
 msgid "Expedition Ready"
 msgstr "Tha triall deiseil"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2265
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2291
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tha triall luinge a’ feitheamh air d’ òrduighean."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2444
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2474
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2459
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3248,10 +3266,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2475
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2495
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2491
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2521
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3259,7 +3277,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2496
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3267,7 +3285,7 @@ msgstr "Falamh"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2516
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3275,7 +3293,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2528
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3283,14 +3301,14 @@ msgstr "A’ feitheamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2506
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2532
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "A’ rùrachadh"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2536
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3299,7 +3317,7 @@ msgstr "Air raon puirt a lorg"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2515
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2541
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A’ tuineachadh"
@@ -4421,9 +4439,15 @@ msgid "Items per page"
 msgstr ""
 
 #: ../../../../src/ui_basic/pagination.cc:195
-#: ../../../../src/wui/game_chat_panel.cc:443
+msgctxt "all_items"
 msgid "All"
-msgstr "Na h-uile"
+msgstr ""
+
+#: ../../../../src/ui_basic/pagination.cc:219
+#: ../../../../src/ui_basic/pagination.cc:228
+#, c-format
+msgid "Go to page %d"
+msgstr ""
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -7575,7 +7599,7 @@ msgstr "Seòrsa"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:366
-#: ../../../../src/wui/game_chat_panel.cc:449
+#: ../../../../src/wui/game_chat_panel.cc:450
 #: ../../../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Sgioba"
@@ -10061,9 +10085,14 @@ msgid "Recipient"
 msgstr "Faightear"
 
 #: ../../../../src/wui/game_chat_panel.cc:374
-#: ../../../../src/wui/game_chat_panel.cc:498
+#: ../../../../src/wui/game_chat_panel.cc:499
 msgid "Unknown Recipient"
 msgstr "Faightear nach aithne dhuinn"
+
+#: ../../../../src/wui/game_chat_panel.cc:443
+msgctxt "all_players"
+msgid "All"
+msgstr ""
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47

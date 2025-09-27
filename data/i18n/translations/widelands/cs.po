@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-25 03:08+0000\n"
+"POT-Creation-Date: 2025-09-27 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -2999,27 +2999,27 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Nenalezeno nic k těžbě!"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1253
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1274
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1259
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1285
 msgctxt "building"
 msgid "No Shore"
 msgstr "Žádné pobřeží"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1254
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1260
 msgid "Shipyard Without Shore"
 msgstr "Loděnice nemá přístup k pobřeží"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1255
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1261
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr "Tvá loděnice nebyla postavena dostatečně blízko při pobřeží. Takto nebude schopna stavět lodě."
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1275
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1286
 msgid "Ferry Yard Without Shore"
 msgstr "Převoznictví nemá přístup k pobřeží"
 
-#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1276
+#: ../../../../src/logic/map_objects/tribes/productionsite.cc:1287
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
@@ -3049,200 +3049,218 @@ msgstr "Loď dosáhla svého cíle"
 msgid "Your ship has arrived at its destination."
 msgstr "Tvá loď dorazila do cíle své plavby."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:642
+#. * TRANSLATORS: Ship fleets had to be split
+#: ../../../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+msgctxt "ship"
+msgid "Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+msgid "Ship Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:601
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2236
+msgid ""
+"A ship fleet had to be split, because a terrain change blocked a passage."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
 msgstr "Válečná loď dorazila k objevenému místu pro přístav."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../../../src/logic/map_objects/tribes/ship.cc:662
 msgid "An expedition ship arrived at a known port build space."
 msgstr "Výprava dorazila k objevenému místu pro přístav."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:644
-#: ../../../../src/logic/map_objects/tribes/ship.cc:652
+#: ../../../../src/logic/map_objects/tribes/ship.cc:663
+#: ../../../../src/logic/map_objects/tribes/ship.cc:671
 msgid "Port Space"
 msgstr "Místo pro přístav"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:644
+#: ../../../../src/logic/map_objects/tribes/ship.cc:663
 msgid "Port Space Spotted"
 msgstr "Zjištěno místo pro přístav"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:650
+#: ../../../../src/logic/map_objects/tribes/ship.cc:669
 msgid "A warship found a new port build space."
 msgstr "Válečná loď objevila nové místo pro přístav."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:651
+#: ../../../../src/logic/map_objects/tribes/ship.cc:670
 msgid "An expedition ship found a new port build space."
 msgstr "Výprava nalezla nové místo pro stavbu přístavu."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:652
+#: ../../../../src/logic/map_objects/tribes/ship.cc:671
 msgid "Port Space Found"
 msgstr "Nalezeno místo pro přístav"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../../../src/logic/map_objects/tribes/ship.cc:771
 msgid "Enemy Ship"
 msgstr "Nepřátelská loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../../../src/logic/map_objects/tribes/ship.cc:771
 msgid "Enemy Ship Spotted"
 msgstr "Zpozorována nepřátelská loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:753
+#: ../../../../src/logic/map_objects/tribes/ship.cc:772
 msgid "A warship spotted an enemy ship."
 msgstr "Válečná loď zpozorovala nepřátelskou loď."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:783
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Destination Unreachable"
 msgstr "Cíle plavby nelze dosáhnout"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:783
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
+#: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Ship Destination Unreachable"
 msgstr "Cíl plavby je nedostupný"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:784
+#: ../../../../src/logic/map_objects/tribes/ship.cc:803
 msgid "Your ship could not find a path to its destination."
 msgstr "Tvá loď nenašla žádnou trasu pro dosažení cíle plavby."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:803
+#: ../../../../src/logic/map_objects/tribes/ship.cc:822
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr "Tvá loď nenašla žádnou trasu pro dosažení přístavu ‘%s’."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1599
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1619
 msgid "Enemy Ship Attacking"
 msgstr "Nepřátelská loď útočí"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1316
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1598
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1618
 msgid "Naval Attack"
 msgstr "Námořní útok"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1317
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1337
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr "Tvá loď ‘%s’ je pod útokem nepřátelské válečné lodě."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
 msgid "Ship Destroyed"
 msgstr "Loď zničena"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1436
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
 msgid "Ship Sunk"
 msgstr "Loď se potopila"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1437
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1457
 msgid "An enemy ship has destroyed your warship."
 msgstr "Nepřátelská loď zničila tvou válečnou loď."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1600
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1620
 msgid "Your coast is under attack from an enemy warship."
 msgstr "Tvé pobřeží bylo napadeno nepřátelskou válečnou lodí."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
 msgid "Island Circumnavigated"
 msgstr "Ostrov obeplut"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1832
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Čekání"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1833
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1853
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Expediční loď obeplula ostrov bez hlášení."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
 msgid "Coast Reached"
 msgstr "Dosaženo pobřeží"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1898
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
 msgid "Land Ahoy!"
 msgstr "Země na obzoru!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1899
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1919
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Loď zakotvila u břehu a čeká na další rozkazy."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
 msgid "New port construction site is gone"
 msgstr "Stavební místo pro nový přístav je ztraceno"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1952
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
 msgid "Port Lost!"
 msgstr "Přístav ztracen!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1953
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1973
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Vykládání surovin selhalo, výprava je zrušena."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
 msgid "No Port Can Be Built"
 msgstr "Přístav nelze postavit"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2010
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
 msgid "Port Space Lost!"
 msgstr "Místo pro přístav je ztraceno!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2011
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2031
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Objevené místo pro přístav již není dostupné pro stavbu přístavu."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
 msgctxt "ship"
 msgid "Warship"
 msgstr "Válečná loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2258
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
 msgid "Warship Ready"
 msgstr "Válečná loď je připravena"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2259
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2285
 msgid "A warship is waiting for your commands."
 msgstr "Válečná loď čeká na tvé příkazy."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2264
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
 msgid "Expedition Ready"
 msgstr "Výprava je připravena"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2265
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2291
 msgid "An expedition ship is waiting for your commands."
 msgstr "Vypravená loď čeká na tvé rozkazy."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2442
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Potápí se"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2444
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Bojuje"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2448
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2474
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "V přestavbě na přepravní loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "V přestavbě na válečnou loď"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2459
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3254,10 +3272,10 @@ msgstr "Válečná loď"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2465
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2475
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2481
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2495
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2491
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2521
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3265,7 +3283,7 @@ msgstr "Pluje do %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2496
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3273,7 +3291,7 @@ msgstr "Bez nákladu"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2490
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2516
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3281,7 +3299,7 @@ msgstr "Převáží náklad do %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2502
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2528
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3289,14 +3307,14 @@ msgstr "Čeká"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2506
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2532
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Průzkum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2536
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3305,7 +3323,7 @@ msgstr "Nalezeno místo pro přístav"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2515
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2541
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakládání kolonie"
@@ -4427,9 +4445,15 @@ msgid "Items per page"
 msgstr ""
 
 #: ../../../../src/ui_basic/pagination.cc:195
-#: ../../../../src/wui/game_chat_panel.cc:443
+msgctxt "all_items"
 msgid "All"
-msgstr "Vše"
+msgstr ""
+
+#: ../../../../src/ui_basic/pagination.cc:219
+#: ../../../../src/ui_basic/pagination.cc:228
+#, c-format
+msgid "Go to page %d"
+msgstr ""
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -7581,7 +7605,7 @@ msgstr "Typ"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:366
-#: ../../../../src/wui/game_chat_panel.cc:449
+#: ../../../../src/wui/game_chat_panel.cc:450
 #: ../../../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Tým"
@@ -10067,9 +10091,14 @@ msgid "Recipient"
 msgstr "Příjemce"
 
 #: ../../../../src/wui/game_chat_panel.cc:374
-#: ../../../../src/wui/game_chat_panel.cc:498
+#: ../../../../src/wui/game_chat_panel.cc:499
 msgid "Unknown Recipient"
 msgstr "Neznámý příjemce"
+
+#: ../../../../src/wui/game_chat_panel.cc:443
+msgctxt "all_players"
+msgid "All"
+msgstr ""
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
