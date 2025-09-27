@@ -204,9 +204,7 @@ msgstr "Vykonajte ďalší prieskum a postavte prístavy"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
-"Preskúmajte ďalšie ostrovy a hľadajte Prístavné miesta, miesta pre stavbu "
-"prístavov"
+msgstr "Preskúmajte ďalšie ostrovy a hľadajte prístavné miesta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""

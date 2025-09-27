@@ -1904,7 +1904,7 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -4112,7 +4112,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu rozobrať alebo zničiť."
+msgstr "Hlavná žila tejto kamennej bane je vyčerpaná. Očakávajte preto prudko zníženú návratnosť investície. Zvážte, či by nebolo vhodné baňu vylepšiť, rozobrať alebo zničiť."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:8
@@ -5010,31 +5010,31 @@ msgstr "Čiernokoreňové pole (maličké)"
 #: ../../../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (harvested)"
-msgstr ""
+msgstr "Maniokové pole (pozberané)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (medium)"
-msgstr ""
+msgstr "Maniokové pole (stredné)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr ""
+msgstr "Maniokové pole (zrelé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr ""
+msgstr "Maniokové pole (malé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr ""
+msgstr "Maniokové pole (maličké)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5336,22 +5336,22 @@ msgstr "Balzovník (mladý)"
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
-msgstr ""
+msgstr "Kakaovník (dospelý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
-msgstr ""
+msgstr "Kakaovník (starý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
 msgid "Cocoa Tree (pole)"
-msgstr ""
+msgstr "Kakaovník (žrďovina)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
 msgid "Cocoa Tree (sapling)"
-msgstr ""
+msgstr "Kakaovník (mladý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5632,7 +5632,7 @@ msgstr "Úbohý Hamlet"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Začať hru iba so skladom a úplným minimom pre rozbehnutie ekonomiky. Upozornenie: AI sa nebude vedieť úspešne rozvinúť."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5804,7 +5804,7 @@ msgstr "Loď"
 #: ../../../../data/tribes/ships/amazons/init.lua:48
 msgctxt "shipname"
 msgid "Orinoco"
-msgstr ""
+msgstr "Orinoko"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:50
@@ -6968,25 +6968,25 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Achát"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:157
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr ""
+msgstr "Alexandrit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Jantár"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:161
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr ""
+msgstr "Ametyst"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:163
@@ -7004,13 +7004,13 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:167
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Akvamarín"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Atlantídska pevnosť"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../../../data/tribes/ships/atlanteans/init.lua:171
@@ -7022,7 +7022,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Bahama"
-msgstr ""
+msgstr "Bahamy"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:175
@@ -7040,7 +7040,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:179
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Beryl"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:181
@@ -7058,19 +7058,19 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr ""
+msgstr "Kasiterit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:187
 msgctxt "shipname"
 msgid "Cat’s Eye"
-msgstr ""
+msgstr "Mačacie oko"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Citrín"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../../../data/tribes/ships/atlanteans/init.lua:191
@@ -7082,7 +7082,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Dominica"
-msgstr ""
+msgstr "Dominika"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:195
@@ -7274,7 +7274,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:257
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr ""
+msgstr "Tygrie oko"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:259
@@ -7370,7 +7370,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/barbarians/init.lua:59
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Orol"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:61
@@ -7442,7 +7442,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/barbarians/init.lua:83
 msgctxt "shipname"
 msgid "Lynx"
-msgstr ""
+msgstr "Rys"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:85
@@ -7670,7 +7670,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:77
 msgctxt "shipname"
 msgid "Cæsar"
-msgstr ""
+msgstr "Cézar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:79
@@ -7688,7 +7688,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:83
 msgctxt "shipname"
 msgid "Claudius"
-msgstr ""
+msgstr "Klaudius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:85
@@ -7706,7 +7706,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:89
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr ""
+msgstr "Domicián"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:91
@@ -7742,7 +7742,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:101
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiátor"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:103
@@ -7760,7 +7760,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:107
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Július Cézar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../../../data/tribes/ships/empire/init.lua:109
@@ -7838,7 +7838,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:133
 msgctxt "shipname"
 msgid "Neptune"
-msgstr ""
+msgstr "Neptún"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:135
@@ -7952,7 +7952,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:171
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr ""
+msgstr "Tibérius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:173

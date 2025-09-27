@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-08-16 03:20+0000\n"
+"POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -213,13 +213,13 @@ msgid "Elders"
 msgstr "장로"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:422
 msgid "Graphics"
 msgstr "그래픽"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:366
+#: ../../../../data/txts/developers.lua:429
 msgid "Homepage"
 msgstr "누리집"
 
@@ -228,7 +228,7 @@ msgid "Scripting"
 msgstr "스크립트를 하고 있음"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:437
 msgid "Sound"
 msgstr "소리"
 
@@ -248,99 +248,99 @@ msgstr "코더"
 msgid "Graphicians"
 msgstr "그래픽 디자이너"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:190
 msgid "Musicians"
 msgstr "음악 제작자"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:209
 msgid "Sound Effects"
 msgstr "효과음"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:225
 msgid "Maps and Missions"
 msgstr "지도 및 임무"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:263
 msgid "Campaign Story"
 msgstr "캠패인 이야기"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:267
 msgid "Barbarians"
 msgstr "야만인들"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:275
 msgid "Empire"
 msgstr "제국"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:282
 msgid "Atlanteans"
 msgstr "아틀란티스인"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:290
 msgid "Frisians"
 msgstr "프리지아인들"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:298
 msgid "Packagers"
 msgstr "포장업"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:302
 msgid "Debian Linux"
 msgstr "데비안 리눅스"
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:308
 msgid "Fedora Linux"
 msgstr "페도라 리눅스"
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:316
 msgid "Mandriva Linux"
 msgstr "맨드리바 리눅스"
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:322
 msgid "FreeBSD"
 msgstr "프리BSD"
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:328
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:335
 msgid "Mac OS X"
 msgstr "맥오에스 엑스"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:347
 msgid "Windows"
 msgstr "윈도우즈"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:358
 msgid "ZetaOS"
 msgstr "제타OS"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:370
 msgid "Homepage Coders"
 msgstr "누리집 코더"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:381
 msgid "Documentation, Help and Wiki"
 msgstr "문서, 도움말 및 위키"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:399
 msgid "Add-Ons"
 msgstr "추가 기능"
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:418
 msgid "Former Elders"
 msgstr "전직 장로"
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:444
 msgid "Translation"
 msgstr "번역"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:453
 msgid "Other"
 msgstr "기타"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:461
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
 
