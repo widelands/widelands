@@ -7,6 +7,7 @@
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2016-2017
 # Leszek Szary, 2024
+# Marcin S <dzidek1003@o2.pl>, 2025
 # Mateusz Pu <mateusz.pudlo@poczta.onet.pl>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Leszek Szary, 2024\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +60,7 @@ msgstr "Copyright 2002 - %1%Zespół Rozwojowy Widelands."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Niniejsza gra jest wolna i darmowa (FOSS), opublikowana na licencji GNU General Public License (GPL) V2.0 (lub, w razie potrzeby, każda późniejsza wersja)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -867,7 +868,7 @@ msgstr "Po zniszczeniu budynku jego pracownicy zaczną szukać w pobliżu flagi,
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Handel może pomóc Twojej gospodarce i wzmocnić relacje między graczami. Poznaj podstawy w samouczku „Gospodarka i handel”."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

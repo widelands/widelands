@@ -1,1 +1,4 @@
--- Contains nothing. editor_init.lua does all the work.
+-- Test basic functionality of lua, in editor.
+--
+
+include "map:scripting/run_testsuite.lua"

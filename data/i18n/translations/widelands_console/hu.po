@@ -351,7 +351,7 @@ msgstr "Az eszközsor helyének és beállításának bittérképe."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "Alapértelmezett laponkénti elemszám a lapokra osztott listákhoz."
 
 #: ../../../../src/wlapplication_messages.cc:206
 msgid "Networking:"

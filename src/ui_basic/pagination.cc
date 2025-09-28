@@ -192,7 +192,7 @@ void Pagination::update_pagesizes() {
 		}
 	}
 
-	dd_pagesize_.add(_("All"), kShowAll, nullptr, pagesize_ == kShowAll);
+	dd_pagesize_.add(pgettext("all_items", "All"), kShowAll, nullptr, pagesize_ == kShowAll);
 	if (!dd_pagesize_.has_selection()) {
 		dd_pagesize_.select(kValues[0]);
 		assert(dd_pagesize_.has_selection());
