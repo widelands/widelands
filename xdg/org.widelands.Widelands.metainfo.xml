@@ -368,6 +368,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="de">Lade Homepagekarten als Erweiterung</li>
         <li xml:lang="de">Neue Darstellungsmodi im Editor</li>
         <li xml:lang="de">Viele neue Fähigkeiten für Erweiterungsentwickler</li>
+        <li xml:lang="fr">Négociation sur le marché</li>
+        <li xml:lang="fr">Six nouvelles cartes ont été ajoutées et trois anciennes cartes ont été retirées</li>
+        <li xml:lang="fr">économie des districts</li>
+        <li xml:lang="fr">De nombreuses améliorations à l'encyclopédie en jeu</li>
+        <li xml:lang="fr">Téléchargement de cartes et modules du site web...</li>
+        <li xml:lang="fr">Nouveaux modes de visualisation dans l'éditeur</li>
+        <li xml:lang="fr">De nouvelles possibilités pour les développeurs de modules</li>
         <li xml:lang="hu">Kereskedés</li>
         <li xml:lang="hu">A játék hat új térképpel bővült, és három régi térkép el lett távolítva</li>
         <li xml:lang="hu">Raktár körzetek</li>
@@ -410,6 +417,8 @@ Widelands ayrıca size yapay zeka ile meydan okur.
       <description><ul>
         <li>Bugfix release</li>
         <li xml:lang="de">Fehlerbehebung</li>
+        <li xml:lang="fr"> 
+Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
         <li xml:lang="nl">Bugfix-bericht</li>
@@ -442,6 +451,14 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="de">Haftnotizen</li>
         <li xml:lang="de">Direkte Kartenveröffentlichung</li>
         <li xml:lang="de">Verbesserte Fehlerbehandlung</li>
+        <li xml:lang="fr">Nouveau scénario Frisien</li>
+        <li xml:lang="fr">Diplomatie gérée par les joueurs ordinateurs</li>
+        <li xml:lang="fr">Bataille navale (aperçu)</li>
+        <li xml:lang="fr">garnisons pour les ports et les quartiers-généraux.</li>
+        <li xml:lang="fr">UI Plugin</li>
+        <li xml:lang="fr">Notes épinglées</li>
+        <li xml:lang="fr">Publication de carte en direct</li>
+        <li xml:lang="fr">Gestion d'erreur améliorée</li>
         <li xml:lang="hu">Új küldetés a fríz hadjáratban</li>
         <li xml:lang="hu">A számítógépes játékosok is kezelik a diplomáciát</li>
         <li xml:lang="hu">Tengeri hadviselés (előzetes)</li>
@@ -591,6 +608,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <name>The Widelands Development Team</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
+    <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>

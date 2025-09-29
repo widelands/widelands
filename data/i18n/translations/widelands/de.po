@@ -3046,18 +3046,18 @@ msgstr "Dein Schiff ist an seinem Ziel angekommen."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Flotte geteilt"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Schiffsflotte geteilt"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:601
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2236
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "EIne Schiffsflotte musste geteilt werden, da durch eine Veränderung im Gelände eine Durchfahrt blockiert wurde."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
@@ -4429,13 +4429,13 @@ msgstr "Einträge pro Seite"
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Gehe zur Seite %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10028,7 +10028,7 @@ msgstr "Unbekannter Empfänger"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47

@@ -3019,18 +3019,18 @@ msgstr "Dien Schipp is an sienem Enn ankomen."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Flott deelt"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Schipp-Flott deelt"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:601
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2236
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Eene Schipp-Flott muss deelt worden, denn eene Landskupp-Ännern hett eenen Seeweg dichtmaakt."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
@@ -4402,13 +4402,13 @@ msgstr "Dingen pro Sied"
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "All"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "To Sied %d gahn"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10001,7 +10001,7 @@ msgstr "Unbekannte Persoon"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "All"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
