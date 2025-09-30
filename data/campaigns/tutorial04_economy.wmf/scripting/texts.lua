@@ -671,8 +671,20 @@ trading_9 = {
    position = "bottomright",
    title = _("Trade Accepted"),
    body = (
-      p(_([[Well done! The Frisians have accepted your trade offer. Did you notice that the market window now has a new tab? It has one such tab for every active trade at this market. The tab shows more details about the running trade, and also allows you to cancel it at any time.]])) ..
-      p(_([[Soon you will see a caravan of your donkeys leaving the market to bring wares to the Frisians, and a caravan of their reindeer bringing you wares in exchange.]]))
+      p(_([[Well done! The Frisians have accepted your trade offer. Soon you will see a caravan of your donkeys leaving the market to bring wares to the Frisians, and a caravan of their reindeer bringing you wares in exchange.]]))
+   ),
+   h = messagebox_h_step(1),
+}
+
+trading_9a = {
+   position = "bottomright",
+   title = _("Trade Accepted"),
+   body = (
+      p(_([[As you can see, the market window now has a new tab. It has one such tab for every active trade at this market. The tab shows more details about the running trade and the wares waiting to be traded, and also allows you to manage it:]])) ..
+      li_image("images/ui_basic/stop.png", _([[You can pause the trade for a while and resume it when you wish.]])) ..
+      li_image("images/wui/buildings/menu_tab_trade_offers.png", _([[You can move the trade to another of your markets.]])) ..
+      li_image("images/wui/buildings/menu_tab_trade.png", _([[You can propose to extend the trade with more batches.]])) ..
+      li_image("images/wui/menu_abort.png", _([[And you can cancel the trade at any time.]]))
    ),
    h = messagebox_h_step(1),
 }

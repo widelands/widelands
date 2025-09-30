@@ -275,8 +275,8 @@ function trading()
 
    local o = campaign_message_with_objective(trading_8, obj_propose_trade)
 
-   local trade_accepted = false
-   while not trade_accepted do
+   local trade_accepted = nil
+   while trade_accepted == nil do
       sleep(1000)
       for i,trade in ipairs(wl.Game().trades) do
          if trade.state == "proposed" then
@@ -293,7 +293,7 @@ function trading()
                campaign_message_box(trading_rejected)
             else
                p2market:accept_trade(trade.trade_id)
-               trade_accepted = true
+               trade_accepted = trade.trade_id
 
                local num_batches = trade.num_batches
                if num_batches < 0 then  -- infinite
@@ -311,7 +311,9 @@ function trading()
 
    set_objective_done(o)
    mv:click(p1marketpos)
+   mv.windows["building_window_" .. p1marketpos.immovable.serial].tabs["trade_" .. trade_accepted]:click()
    campaign_message_box(trading_9)
+   campaign_message_box(trading_9a)
 
    sleep(15000)
    local new_trade_id = p2market:propose_trade(plr, math.random(3, 20), {
