@@ -32,11 +32,14 @@ function wait_for_window_and_tab_or_complain(
          campaign_message_box(complain_msg)
          while not mv.windows[window_name] do sleep(200) end
          obj_open_window.visible = false
+         sleep(50) -- let the window initialisation finish
       end
 
       -- But it might be closed at any point in time. If it is open and the
       -- correct tab is active, we terminate the loop.
       if mv.windows[window_name] and
+         mv.windows[window_name].tabs and
+         mv.windows[window_name].tabs[tab_name] and
          mv.windows[window_name].tabs[tab_name].active
       then
          break
