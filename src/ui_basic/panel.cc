@@ -1065,7 +1065,7 @@ void Panel::disable_sdl_textinput() {
 	// SDL calls should be made from the thread that initialised SDL, but this may be triggered
 	// by lua ui calls
 	NoteThreadSafeFunction::instantiate(
-	   [this]() {
+	   []() {
 		   if (SDL_IsTextInputActive() != 0u) {
 			   SDL_StopTextInput();
 		   }
@@ -1082,7 +1082,7 @@ void Panel::focus(const bool topcaller) {
 			// SDL calls should be made from the thread that initialised SDL, but this may be
 			// triggered by lua ui calls
 			NoteThreadSafeFunction::instantiate(
-			   [this]() {
+			   []() {
 				   if (SDL_IsTextInputActive() == 0u) {
 					   SDL_StartTextInput();
 				   }

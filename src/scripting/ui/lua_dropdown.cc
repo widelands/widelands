@@ -160,7 +160,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	   "Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	NoteThreadSafeFunction::instantiate(
-	   [desired_item, dropdown{get()}]() {
+	   [dropdown{get()}, desired_item]() {
 		   dropdown->set_list_visibility(true);
 
 		   SDL_Keysym code;
