@@ -841,7 +841,7 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr "Waren up Lager to hebben, is een tweesneidigs Sweert. Up de een Kant sünd Waren im Lager nüttelk, um tiedwies Umswungens in de Weertskupp oftofangen, wat all de Tied passeeren. Up de anner Kant is elkeen Waar, wat in eenem Kraamhuus sitt un nich in wat anners umwannelt word, verklüngelt. Dat Evenwicht tüsken Lagern-Verklüngeln un Produzeren jüüst bi Tied to finnen. is eene von de allerwichtigsten Rutfödderungen, wenn du diene Weertskupp so good as mögelk klaarmaken willst. Im Twiefelsfall köör lever een paar Reserven mehr."
+msgstr "Waren up Lager to hebben, is een tweesneidigs Sweert. Up de een Kant sünd Waren im Lager nüttelk, um tiedwies Umswungens in de Weertskupp oftofangen, wat all de Tied passeeren. Up de anner Kant is elkeen Waar, wat in eenem Kraamhuus sitt un nich in wat anners umwannelt word, verklüngelt. Dat Evenwicht tüsken Lagern-Verklüngeln un Produzeren jüüst bi Tied to finnen, is eene von de allerwichtigsten Rutfödderungen, wenn du diene Weertskupp so good as mögelk klaarmaken willst. Im Twiefelsfall köör lever een paar Reserven mehr."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
@@ -1056,7 +1056,7 @@ msgstr "As du süchst, hett dat Marktfenster dree Listenwesslers. De eerste List
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr "De twede Listenwessler list all Hannels, wat du tovör vun deesem Markt vörslagen hest. Dat us jüüst leeg, denn du hest noch keene Hannels vörslagen."
+msgstr "De twede Listenwessler list all Hannels, wat du tovör vun deesem Markt vörslagen hest. Dat is jüüst leeg, denn du hest noch keene Hannels vörslagen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
@@ -1086,7 +1086,7 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr "Wenn du mit eenem anner Volk hannelst, könen nich all Waren tuuskt worden. Elkeen Volk hett sien eegen Weertskupp, un se bruken unnerschhedelk Waren. To’n Bispööl drinken Fresen keenen Wien un bauen Husen nich mit Marmel; un dien Rieks-Volk kann keene Husen ut freesk Backstenen bauen un ett hör Rökelfiss nich. Dat Paneel wiest blots Waren, wat du un dien tokünftig Hannelspartner beide bruken könen."
+msgstr "Wenn du mit eenem anner Volk hannelst, könen nich all Waren tuuskt worden. Elkeen Volk hett sien eegen Weertskupp, un se bruken unnerschedelk Waren. To’n Bispööl drinken Fresen keenen Wien un bauen Husen nich mit Marmel; un dien Rieks-Volk kann keene Husen ut freesk Backstenen bauen un ett hör Rökelfiss nich. Dat Paneel wiest blots Waren, wat du un dien tokünftig Hannelspartner beide bruken könen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
@@ -1129,7 +1129,7 @@ msgstr "Beed de Fresen eenen Hannel an."
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr "De Fresen worden blots eenen Hannel to hör Vördeel annehmen; datt heet, dat se nich mehr Waren weggeven, as se sülvst kriegen."
+msgstr "De Fresen worden blots eenen Hannel to hör Vördeel annehmen; dat heet, dat se nich mehr Waren weggeven, as se sülvst kriegen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
@@ -1285,4 +1285,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr "Dat is de leste Inföhren, de ick för di maakt hebb. Ick hebb di nu all lehrt, wat ick weet. ’t gifft noch alltied Geheimnissen in deese Welt, de ok ick nich kenn. Ick söök nu eene moje Stee tum verpuusten. Wenn du noch Fragen hest, helpt du wiss de Widelands-Gemeenskupp. Du finnst se unner:"
+msgstr "Dat is de leste Inföhren, de ick för di maakt hebb. Ick hebb di nu all lehrt, wat ick weet. ’t gifft noch alltied Geheimnissen in deese Welt, de ok ick nich kenn. Ick söök nu eene moje Stee tum verpuusten. Wenn du noch Fragen hest, helpt di wiss de Widelands-Gemeenskupp. Du finnst se unner:"

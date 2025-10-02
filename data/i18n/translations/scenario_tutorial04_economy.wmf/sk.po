@@ -485,11 +485,11 @@ msgstr "Keď skončíte, zavrite okno encyklopédie."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Podrobnosti k encyklopédii"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Kategórie encyklopédie"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
@@ -614,7 +614,7 @@ msgstr "Vzhľadom na našu situáciu môže byť žiadúce, aby pekárne pracova
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Otvorte okno Štatistika výrobkov"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
@@ -687,7 +687,7 @@ msgstr "Na tejto karte možno pozorovať rozdiel medzi výrobou a spotrebou, tzv
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Preskúmajte svoje zásoby"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
@@ -750,7 +750,7 @@ msgstr "V opačnom prípade ho znova otvorte a kliknite na štvrtú kartu."
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Otvorte okno „Nastaviť ekonomiku“"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."

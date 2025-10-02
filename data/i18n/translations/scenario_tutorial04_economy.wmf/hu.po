@@ -47,7 +47,7 @@ msgstr "A Widelandsban a gazdaságod felépítése és olajozott működésének
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "Ezt fogom neked bemutatni ebben az oktatójátékban: Milyen lehetőségeid vannak ezeknek az általános feltételeknek a beállítására?"
+msgstr "Ebben az oktatójátékban azt fogom neked bemutatni, hogy milyen lehetőségeid vannak ezeknek az általános feltételeknek a beállítására."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
