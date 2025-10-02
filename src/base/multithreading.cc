@@ -204,6 +204,7 @@ static std::string to_string(const MutexLock::ID i) {
 constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
+constexpr uint32_t kStayResponsiveInterval = 100;
 
 void MutexLock::push_stay_responsive_function(std::function<void()> fn) {
 	MutexLock guard(MutexLock::ID::kMutexInternal);
@@ -332,8 +333,18 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		SDL_Delay(sleeptime);
 	}
 
-	uint32_t last_function_call = 0;
+	uint32_t last_attempt = 0;
 	uint32_t last_log_time = 0;
+	uint32_t last_function_call = start_time;
+	const bool can_run_stay_responsive = is_initializer_thread() &&
+	                                     // this is used to prevent running more than one instances
+	                                     // of the stay responsive function
+	                                     id_ != MutexLock::ID::kMutexInternal &&
+	                                     // these are used all over the place, we shouldn't risk
+	                                     // re-requesting them
+	                                     id_ != MutexLock::ID::kLog &&
+	                                     id_ != MutexLock::ID::kI18N;
+
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
 		if (now - start_time > 1000 && now - last_log_time > 1000) {
@@ -348,27 +359,24 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			}
 		}
 
-		if (now - last_function_call > sleeptime) {
-			if (is_initializer_thread() && id_ != MutexLock::ID::kMutexInternal) {
-				MutexLock guard(MutexLock::ID::kMutexInternal);
-				if (!stay_responsive_.empty()) {
-					// Log and i18n are used all over the place, we shouldn't risk re-requesting them.
-					// They are supposed to be only held for short times anyway.
-					if (id_ == MutexLock::ID::kLog || id_ == MutexLock::ID::kI18N) {
-						std::cout << "WARNING: Mutex locking: " << thread_name(self) << " waiting for "
-						          << to_string(id_) << " -- not running stay_responsive_function"
-						          << std::endl;
-					} else {
-						stay_responsive_.back()();
-					}
-				} else if (id_ != ID::kLog) {
-					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
-				} else if (g_verbose) {
-					std::cout << "WARNING: Mutex locking: No responsiveness function set" << std::endl;
-				}
-			}
+		if (now - last_attempt > sleeptime) {
+			last_attempt = now;
 
-			last_function_call = SDL_GetTicks();
+			if (now - last_function_call > kStayResponsiveInterval) {
+				if (can_run_stay_responsive) {
+					MutexLock guard(MutexLock::ID::kMutexInternal);
+					if (!stay_responsive_.empty()) {
+						stay_responsive_.back()();
+					} else {
+						verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
+					}
+				} else if (id_ == MutexLock::ID::kLog || id_ == MutexLock::ID::kI18N) {
+					std::cout << "WARNING: Mutex locking: " << thread_name(self) << " waiting for "
+					          << to_string(id_) << " -- not running stay_responsive_function"
+					          << std::endl;
+				}
+				last_function_call = SDL_GetTicks();
+			}
 
 			// Check for deadlocks. Does not account for situations involving more than two threads.
 			s_mutex_.lock();
@@ -415,7 +423,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			}
 			s_mutex_.unlock();
 		} else {
-			SDL_Delay(sleeptime - (now - last_function_call));
+			SDL_Delay(sleeptime - (now - last_attempt));
 		}
 
 #ifdef MUTEX_LOCK_DEBUG
