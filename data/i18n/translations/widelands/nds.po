@@ -7656,7 +7656,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr "Wenn du di nich seker büst, laat dat anknipst. Wenn utknipst word de Muuswieser langsaamer neei tekent un schhient bi langen Aktioonen fasttofresen. Knips dat blots dann ut, wenn de Muuswieser nich recht tekent word, of wenn dat in Billschirmfotos of Billschirm-Uptekens to sehn wesen sall."
+msgstr "Wenn du di nich seker büst, laat dat anknipst. Wenn utknipst word de Muuswieser langsaamer neei tekent un schient bi langen Aktioonen fasttofresen. Knips dat blots dann ut, wenn de Muuswieser nich recht tekent word, of wenn dat in Billschirmfotos of Billschirm-Uptekens to sehn wesen sall."
 
 #: ../../../../src/ui_fsmenu/options.cc:179
 msgid "Accessibility mode for tooltips"

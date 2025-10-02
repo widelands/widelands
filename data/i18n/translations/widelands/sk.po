@@ -4430,26 +4430,26 @@ msgstr "Žiadna zhoda"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Prejsť na prvú stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Prejsť na poslednú stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Položiek na stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Všetky"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Prejsť na stránku %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10094,7 +10094,7 @@ msgstr "Neznámy príjemca"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "všetci"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47

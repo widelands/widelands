@@ -341,7 +341,7 @@ msgstr "Bitmask om de locatie en modus van de werkbalk in te stellen."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "Standaard paginagrootte voor gepagineerde structuren."
 
 #: ../../../../src/wlapplication_messages.cc:206
 msgid "Networking:"

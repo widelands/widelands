@@ -3023,18 +3023,18 @@ msgstr "Je schip is aangekomen op zijn bestemming."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Vlootsplitsing"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Scheepsvloot opsplitsing"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:601
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2236
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Een scheepsvloot moest worden opgesplitst, omdat een verandering in het terrein een doorgang blokkeerde."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
@@ -4393,26 +4393,26 @@ msgstr "Geen overeenkomsten"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Ga naar de eerste pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Ga naar de laatste pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Items per pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Ga naar pagina %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10005,7 +10005,7 @@ msgstr "Onbekende Ontvanger"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
