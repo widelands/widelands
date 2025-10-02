@@ -356,7 +356,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 					// They are supposed to be only held for short times anyway.
 					if (id_ == MutexLock::ID::kLog || id_ == MutexLock::ID::kI18N) {
 						std::cout << "WARNING: Mutex locking: " << thread_name(self) << " waiting for "
-									 << to_string(id_) << " -- not running stay_responsive_function"
+						          << to_string(id_) << " -- not running stay_responsive_function"
 						          << std::endl;
 					} else {
 						stay_responsive_.back()();
