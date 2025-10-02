@@ -342,8 +342,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	                                     id_ != MutexLock::ID::kMutexInternal &&
 	                                     // these are used all over the place, we shouldn't risk
 	                                     // re-requesting them
-	                                     id_ != MutexLock::ID::kLog &&
-	                                     id_ != MutexLock::ID::kI18N;
+	                                     id_ != MutexLock::ID::kLog && id_ != MutexLock::ID::kI18N;
 
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
