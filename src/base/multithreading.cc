@@ -337,11 +337,12 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	uint32_t last_log_time = 0;
 	uint32_t last_function_call = start_time;
 	const bool can_run_stay_responsive = is_initializer_thread() &&
-	                                     // this is used to prevent running more than one instances
-	                                     // of the stay responsive function
+	                                     // This is used to prevent running more than one instances
+	                                     // of the stay responsive function.
 	                                     id_ != MutexLock::ID::kMutexInternal &&
-	                                     // these are used all over the place, we shouldn't risk
-	                                     // re-requesting them
+	                                     // These are used all over the place, we shouldn't risk
+	                                     // re-requesting them, and they are supposed to be only
+	                                     // held for short times anyway.
 	                                     id_ != MutexLock::ID::kLog && id_ != MutexLock::ID::kI18N;
 
 	while (!record.mutex.try_lock()) {
