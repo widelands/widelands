@@ -352,7 +352,15 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			if (is_initializer_thread() && id_ != MutexLock::ID::kMutexInternal) {
 				MutexLock guard(MutexLock::ID::kMutexInternal);
 				if (!stay_responsive_.empty()) {
-					stay_responsive_.back()();
+					// Log and i18n are used all over the place, we shouldn't risk re-requesting them.
+					// They are supposed to be only held for short times anyway.
+					if (id_ == MutexLock::ID::kLog || id_ == MutexLock::ID::kI18N) {
+						std::cout << "WARNING: Mutex locking: " << thread_name(self) << " waiting for "
+									 << to_string(id_) << " -- not running stay_responsive_function"
+						          << std::endl;
+					} else {
+						stay_responsive_.back()();
+					}
 				} else if (id_ != ID::kLog) {
 					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
 				} else if (g_verbose) {
