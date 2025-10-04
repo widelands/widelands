@@ -1062,9 +1062,15 @@ void Panel::set_can_focus(bool const yes) {
 }
 
 void Panel::disable_sdl_textinput() {
-	if (SDL_IsTextInputActive() != 0u) {
-		SDL_StopTextInput();
-	}
+	// SDL calls should be made from the thread that initialised SDL, but this may be triggered
+	// by lua ui calls
+	NoteThreadSafeFunction::instantiate(
+	   []() {
+		   if (SDL_IsTextInputActive() != 0u) {
+			   SDL_StopTextInput();
+		   }
+	   },
+	   true);
 }
 /**
  * Grabs the keyboard focus, if it can,
@@ -1073,9 +1079,15 @@ void Panel::disable_sdl_textinput() {
 void Panel::focus(const bool topcaller) {
 	if (topcaller) {
 		if (handles_textinput()) {
-			if (SDL_IsTextInputActive() == 0u) {
-				SDL_StartTextInput();
-			}
+			// SDL calls should be made from the thread that initialised SDL, but this may be
+			// triggered by lua ui calls
+			NoteThreadSafeFunction::instantiate(
+			   []() {
+				   if (SDL_IsTextInputActive() == 0u) {
+					   SDL_StartTextInput();
+				   }
+			   },
+			   true);
 		} else {
 			disable_sdl_textinput();
 		}
