@@ -4443,7 +4443,7 @@ msgstr "Položiek na stránku"
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr "Všetky"
+msgstr "všetky"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
