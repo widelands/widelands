@@ -2,7 +2,7 @@
 	"name": "Widelands",
 	"category": "Gra strategiczna",
 	"tagline": "Strategia czasu rzeczywistego skupiona na rozbudowie",
-	"developer": "The Widelands Development Team",
+	"developer": "Zespół rozwojowy Widelands",
 	"description": [
 		"Stoisz na czele małego plemiona. Twoim zadaniem jest zbudować prosperującą osadę. Każdy członek plemiona pomagać ci będzie w produkcji surowców niezbędnych do tego celu.",
 		"Widelands posiada tryb dla jednego gracza z kampaniami zawierającymi historię plemion i wyzwań, przed jakimi stają w uniwersum Widelands. Prawdziwa gra zaczyna się jednak, gdy razem z przyjaciółmi, poprzez internet lub LAN, budujecie wspólnie królestwa lub obracacie je w pył we wzajemnych wojnach. Spragnionym wyzwania Widelands oferuje także potyczki z SI."
@@ -10,9 +10,9 @@
 	"release_notes": {
 		"1.3": [
 			"Market trading",
-			"Six new maps added and three old maps removed",
+			"Sześć nowych map dodanych i trzy stare usunięte.",
 			"Economy districts",
-			"Many improvements to the in-game Encyclopedia",
+			"Wiele poprawek w wewnętrznej Encyklopedii.",
 			"Download website maps as add-ons",
 			"New visualisation modes in the editor",
 			"Many new capabilities for add-on developers"

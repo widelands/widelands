@@ -361,6 +361,20 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="cs">Mapy z internetu lze nově stahovat prostřednictvím herních rozšíření</li>
         <li xml:lang="cs">V editoru map jsou k dispozici nová zobrazení</li>
         <li xml:lang="cs">Řada nových funkcí pro tvorbu vlastních rozšíření</li>
+        <li xml:lang="de">Handeln mit Märkten</li>
+        <li xml:lang="de">Sechs neue Karten hinzugefügt und drei alte Karten entfernt</li>
+        <li xml:lang="de">Wirtschaftsbezirke</li>
+        <li xml:lang="de">Viele Verbesserungen im Stammeslexikon</li>
+        <li xml:lang="de">Lade Homepagekarten als Erweiterung</li>
+        <li xml:lang="de">Neue Darstellungsmodi im Editor</li>
+        <li xml:lang="de">Viele neue Fähigkeiten für Erweiterungsentwickler</li>
+        <li xml:lang="fr">Négociation sur le marché</li>
+        <li xml:lang="fr">Six nouvelles cartes ont été ajoutées et trois anciennes cartes ont été retirées</li>
+        <li xml:lang="fr">économie des districts</li>
+        <li xml:lang="fr">De nombreuses améliorations à l'encyclopédie en jeu</li>
+        <li xml:lang="fr">Téléchargement de cartes et modules du site web...</li>
+        <li xml:lang="fr">Nouveaux modes de visualisation dans l'éditeur</li>
+        <li xml:lang="fr">De nouvelles possibilités pour les développeurs de modules</li>
         <li xml:lang="hu">Kereskedés</li>
         <li xml:lang="hu">A játék hat új térképpel bővült, és három régi térkép el lett távolítva</li>
         <li xml:lang="hu">Raktár körzetek</li>
@@ -375,6 +389,20 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nds">Lade Internettsied-Kaarten as Verwiederns runner</li>
         <li xml:lang="nds">Neje Wiesaarden im Bewarker</li>
         <li xml:lang="nds">Mennig neje Künnen för Verwiederns-Entwicklers</li>
+        <li xml:lang="nl">Markthandel</li>
+        <li xml:lang="nl">Zes nieuwe kaarten toegevoegd en drie oude kaarten verwijderd</li>
+        <li xml:lang="nl">Economie districten</li>
+        <li xml:lang="nl">Veel verbeteringen aan de Encyclopedie in het spel</li>
+        <li xml:lang="nl">Download websitekaarten als add-ons</li>
+        <li xml:lang="nl">Nieuwe visualisatiemodi in de editor</li>
+        <li xml:lang="nl">Veel nieuwe mogelijkheden voor ontwikkelaars van add-ons</li>
+        <li xml:lang="pl">Market trading</li>
+        <li xml:lang="pl">Sześć nowych map dodanych i trzy stare usunięte.</li>
+        <li xml:lang="pl">Economy districts</li>
+        <li xml:lang="pl">Wiele poprawek w wewnętrznej Encyklopedii.</li>
+        <li xml:lang="pl">Download website maps as add-ons</li>
+        <li xml:lang="pl">New visualisation modes in the editor</li>
+        <li xml:lang="pl">Many new capabilities for add-on developers</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -388,8 +416,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <release date="2024-11-15" version="1.2.1">
       <description><ul>
         <li>Bugfix release</li>
+        <li xml:lang="de">Fehlerbehebung</li>
+        <li xml:lang="fr"> 
+Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
+        <li xml:lang="nl">Bugfix-bericht</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
@@ -411,6 +443,22 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="cs">K mapě připínatelné poznámky</li>
         <li xml:lang="cs">Mapy lze publikovat přímo z editoru</li>
         <li xml:lang="cs">Vylepšena správa chyb</li>
+        <li xml:lang="de">Neues Friesenszenario</li>
+        <li xml:lang="de">Diplomatie mit Computerspielern</li>
+        <li xml:lang="de">Seekriegsführung (Vorschau)</li>
+        <li xml:lang="de">Garnisonen in Häfen und im Hauptquartier</li>
+        <li xml:lang="de">Benutzeroberflächenerweiterungen</li>
+        <li xml:lang="de">Haftnotizen</li>
+        <li xml:lang="de">Direkte Kartenveröffentlichung</li>
+        <li xml:lang="de">Verbesserte Fehlerbehandlung</li>
+        <li xml:lang="fr">Nouveau scénario Frisien</li>
+        <li xml:lang="fr">Diplomatie gérée par les joueurs ordinateurs</li>
+        <li xml:lang="fr">Bataille navale (aperçu)</li>
+        <li xml:lang="fr">garnisons pour les ports et les quartiers-généraux.</li>
+        <li xml:lang="fr">UI Plugin</li>
+        <li xml:lang="fr">Notes épinglées</li>
+        <li xml:lang="fr">Publication de carte en direct</li>
+        <li xml:lang="fr">Gestion d'erreur améliorée</li>
         <li xml:lang="hu">Új küldetés a fríz hadjáratban</li>
         <li xml:lang="hu">A számítógépes játékosok is kezelik a diplomáciát</li>
         <li xml:lang="hu">Tengeri hadviselés (előzetes)</li>
@@ -427,6 +475,14 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nds">Faste Anmarkens</li>
         <li xml:lang="nds">Kaarten stracks publizeren</li>
         <li xml:lang="nds">Beterer Umgang mit Fehlers</li>
+        <li xml:lang="nl">Nieuw Fries scenario</li>
+        <li xml:lang="nl">Diplomatie door computerspelers</li>
+        <li xml:lang="nl">Oorlogsvoering op zee (preview)</li>
+        <li xml:lang="nl">Garnizoenen voor havens en hoofdkwartier</li>
+        <li xml:lang="nl">UI Plugins</li>
+        <li xml:lang="nl">Vastgepinde opmerkingen</li>
+        <li xml:lang="nl">Directe kaart publicatie</li>
+        <li xml:lang="nl">Verbeterde foutverwerking</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>
@@ -551,8 +607,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   <developer id="org.widelands">
     <name>The Widelands Development Team</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
+    <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
+    <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
+    <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
+    <name xml:lang="pl">Zespół rozwojowy Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
   </developer>
   <content_rating type="oars-1.0">

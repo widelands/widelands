@@ -135,6 +135,8 @@ msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Postavte aspoň dve farmy, včelársky dom (vedľa bobuľovej farmy), pekáreň, "
+"pivovar a ďalšiu krčmu."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
@@ -146,7 +148,7 @@ msgstr "Postavte bane a banskú infraštruktúru"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr "Postavte železnorudnú baňu, pec, kováčstvo a malú vyhňu na zbroj."
+msgstr "Postavte železnorudnú baňu, pec, kováčstvo a malú vyhňu na zbroje."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -473,7 +475,7 @@ msgstr "Sklady"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Postavte sklad na východe"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -780,7 +782,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Naši vojaci sú silní"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349

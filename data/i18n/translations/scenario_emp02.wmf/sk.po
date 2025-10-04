@@ -115,7 +115,7 @@ msgstr "Aby ste mohli baníkov zásobiť dobrými a silnými nápojmi, postavte 
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
-msgstr "Možno buete tiež potrebovať chliev, vinicu a nejaké studne."
+msgstr "Možno budete tiež potrebovať chliev, vinohrad a nejaké studne."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
