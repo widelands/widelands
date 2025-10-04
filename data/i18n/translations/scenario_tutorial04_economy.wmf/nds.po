@@ -1151,7 +1151,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Hunnert! De Fresen hebben dien Hannels-Angebood annohmen. Bold worst du sehn, wo eene Heerde vun dienen Langohren de Markt verlett, um Waren to de Fresen to brengen, un wo eene Heerde vun hör Sneeihirsken di Waren tum Tuusk daartegen brengen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1159,23 +1159,23 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "As du süchst, hett dat Marktfenster nu eenen nejen Listenwessler. ’t hett eenen sülken Listenwessler för elkeen lopend Hannel in deesem Markt. De Listenwessler wiest mehr Informatioonen över de lopend Hannel un de Waren, wat daar wachten, dat se weghannelt worden, un ’t verlöövt di ok, de Hannel to verwalten:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Du kannst de Hannel eenige Tied anhollen un ’t wiederlopen laten, wenn du willst."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Du kannst de Hannel to een anner vun dien Markten verschuven."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Du kannst vörslagen, de Hannel mit mehr Bünsels to verlangern."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "Un du kannst de Hannel to elkeen Tied ofbreken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
