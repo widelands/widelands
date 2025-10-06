@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-27 02:59+0000\n"
+"POT-Creation-Date: 2025-10-06 03:07+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jan Lindblom <janlindblom@fastmail.fm>, 2024\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -3464,25 +3464,25 @@ msgstr "En kartfil är ogiltig:\n%s"
 msgid "This objective has no description."
 msgstr "Detta objektiv har ingen beskrivning"
 
-#: ../../../../src/logic/player.cc:2071
+#: ../../../../src/logic/player.cc:2072
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Skepp %d"
 
-#: ../../../../src/logic/player.cc:2091
+#: ../../../../src/logic/player.cc:2092
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Hamn %d"
 
-#: ../../../../src/logic/player.cc:2094
+#: ../../../../src/logic/player.cc:2095
 #, c-format
 msgctxt "market"
 msgid "Market %d"
 msgstr ""
 
-#: ../../../../src/logic/player.cc:2097
+#: ../../../../src/logic/player.cc:2098
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
