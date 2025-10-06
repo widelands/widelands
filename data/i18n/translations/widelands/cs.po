@@ -3054,18 +3054,18 @@ msgstr "Tvá loď dorazila do cíle své plavby."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Přeskupení lodí"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Rozdělení námořní flotily"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:601
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2236
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Námořní flotila musí být rozdělena, protože změna terénu omezuje splavnost."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
@@ -4434,26 +4434,26 @@ msgstr "Žádná shoda"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Přejít na první stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Přejít na poslední stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Položek na stránku"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Přejít na stránku %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10098,7 +10098,7 @@ msgstr "Neznámý příjemce"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
