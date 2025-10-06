@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-27 02:59+0000\n"
+"POT-Creation-Date: 2025-10-06 03:07+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -3465,25 +3465,25 @@ msgstr "Een kaart bestand is ongeldig\n%s"
 msgid "This objective has no description."
 msgstr "Deze doelstelling heeft geen beschrijving."
 
-#: ../../../../src/logic/player.cc:2071
+#: ../../../../src/logic/player.cc:2072
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Schip %d"
 
-#: ../../../../src/logic/player.cc:2091
+#: ../../../../src/logic/player.cc:2092
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Haven %d"
 
-#: ../../../../src/logic/player.cc:2094
+#: ../../../../src/logic/player.cc:2095
 #, c-format
 msgctxt "market"
 msgid "Market %d"
 msgstr "Markt %d"
 
-#: ../../../../src/logic/player.cc:2097
+#: ../../../../src/logic/player.cc:2098
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
