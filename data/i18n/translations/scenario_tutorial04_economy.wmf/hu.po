@@ -1156,7 +1156,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Nagyszerű! A frízek elfogadták a kereskedelmi ajánlatodat. Hamarosan egy szamárkaravánt láthatsz majd elindulni a piactérről, hogy elvigyék az áruidat a frízeknek. Ezzel egy időben egy rénszarvaskaraván fog tőlük is elindulni, ami a csereárukat hozza el neked."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1164,23 +1164,23 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Ahogy látod, a piactér ablakában egy új lap jelent meg. Minden, ezen a piactéren folyamatban lévő üzletnek van egy saját lapja, ahol minden lényeges információt megtalálsz az adott üzletről és az elcserélendő árukról, és ahol kezelheted azt:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Fel tudod függeszteni az üzlet teljesítését egy időre, majd újra tudod indítani, tetszés szerint."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Át tudod helyezni az üzlet teljesítését egy másik piacteredre."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Kérheted az üzlet meghosszabbítását további szállítmányokkal."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "De akár fel is tudod bontani az üzleti megállapodást."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
