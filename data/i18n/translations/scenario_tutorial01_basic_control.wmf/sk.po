@@ -567,7 +567,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Výborne! Pamätajte, že musíme postaviť aj cestu do kameňolomu. Ak chcete prepnúť režim stavania ciest pre ľubovoľnú vlajku, kliknite ľavým tlačidlom myši na vlajku a vyberte symbol stavania cesty."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
@@ -605,7 +605,7 @@ msgstr "Úplne novú cestu postavíte kliknutím na vlajku pred staveniskom, pot
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Ak počas dokončovania cesty podržíte kláves Ctrl alebo Shift+Ctrl, vlajky sa umiestnia automaticky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid ""
@@ -910,7 +910,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Všetky okná v hre (okrem príbehových okien s tlačidlom „OK“) možno zavrieť kliknutím pravým tlačidlom myši. Niektoré okná možno prepnúť pomocou tlačidiel a ponúk na úplnom spodku obrazovky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
@@ -978,7 +978,7 @@ msgstr "Prišli správy!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Dostali ste nejaké správy. Vidíte, ako sa zmenil vzhľad tlačidla v dolnej časti obrazovky?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expand your territory"
@@ -991,7 +991,7 @@ msgstr "Rozšírte svoje územie"
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:622
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Postavte na svojej hranici vojenskú budovu. Vyberte si tú, ktorá sa vám najviac páči."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:623
 msgid ""

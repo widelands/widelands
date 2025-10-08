@@ -612,7 +612,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:576
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosí predmety po vašich cestách."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Ferry
 #: ../../../../data/tribes/initialization/amazons/units.lua:583
@@ -14416,7 +14416,7 @@ msgstr "Zlatá helma slúži k ochrane vojakov. Vyrába sa vo veľkej vyhni na z
 #: ../../../../data/tribes/initialization/frisians/units.lua:624
 msgctxt "frisians_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosí predmety po vašich cestách."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Ferry
 #: ../../../../data/tribes/initialization/frisians/units.lua:631
