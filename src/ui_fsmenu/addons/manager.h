@@ -31,7 +31,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/pagination.h"
-#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
