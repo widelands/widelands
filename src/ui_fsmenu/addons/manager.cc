@@ -343,108 +343,28 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                             UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_players_(&filter_maps_rvbox_min_,
                               "filter_maps_min_players",
-                              0,
-                              0,
-                              0,
-                              150,
-                              1,
-                              1,
-                              kMaxPlayers,
-                              UI::PanelStyle::kFsMenu,
-                              _("Min Players:"),
-                              UI::SpinBox::Units::kNone,
-                              UI::SpinBox::Type::kSmall),
+	         0, 0, 150, 8, kRowButtonSize, _("Min Players"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_w_(&filter_maps_rvbox_min_,
                         "filter_maps_min_w",
-                        0,
-                        0,
-                        0,
-                        150,
-                        0,
-                        0,
-                        0,
-                        UI::PanelStyle::kFsMenu,
-                        _("Min Width:"),
-                        UI::SpinBox::Units::kNone,
-                        UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Min Width"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_h_(&filter_maps_rvbox_min_,
                         "filter_maps_min_h",
-                        0,
-                        0,
-                        0,
-                        150,
-                        0,
-                        0,
-                        0,
-                        UI::PanelStyle::kFsMenu,
-                        _("Min Height:"),
-                        UI::SpinBox::Units::kNone,
-                        UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Min Height"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_size_(&filter_maps_rvbox_min_,
                            "filter_maps_min_size",
-                           0,
-                           0,
-                           0,
-                           150,
-                           0,
-                           0,
-                           0,
-                           UI::PanelStyle::kFsMenu,
-                           _("Min Size:"),
-                           UI::SpinBox::Units::kNone,
-                           UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Min Size"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_max_players_(&filter_maps_rvbox_max_,
                               "filter_maps_max_players",
-                              0,
-                              0,
-                              0,
-                              150,
-                              kMaxPlayers,
-                              1,
-                              kMaxPlayers,
-                              UI::PanelStyle::kFsMenu,
-                              _("Max Players:"),
-                              UI::SpinBox::Units::kNone,
-                              UI::SpinBox::Type::kSmall),
+	         0, 0, 150, 8, kRowButtonSize, _("Max Players"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_max_w_(&filter_maps_rvbox_max_,
                         "filter_maps_max_w",
-                        0,
-                        0,
-                        0,
-                        150,
-                        0,
-                        0,
-                        0,
-                        UI::PanelStyle::kFsMenu,
-                        _("Max Width:"),
-                        UI::SpinBox::Units::kNone,
-                        UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Max Width"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_max_h_(&filter_maps_rvbox_max_,
                         "filter_maps_max_h",
-                        0,
-                        0,
-                        0,
-                        150,
-                        0,
-                        0,
-                        0,
-                        UI::PanelStyle::kFsMenu,
-                        _("Max Height:"),
-                        UI::SpinBox::Units::kNone,
-                        UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Max Height"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_max_size_(&filter_maps_rvbox_max_,
                            "filter_maps_max_size",
-                           0,
-                           0,
-                           0,
-                           150,
-                           0,
-                           0,
-                           0,
-                           UI::PanelStyle::kFsMenu,
-                           _("Max Size:"),
-                           UI::SpinBox::Units::kNone,
-                           UI::SpinBox::Type::kValueList),
+	         0, 0, 150, 8, kRowButtonSize, _("Max Size"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_(&dev_box_,
                    "upload_addon",
                    0,
@@ -875,9 +795,6 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_maps_lvbox_.add_space(kRowButtonSpacing);
 	filter_maps_lvbox_.add(&filter_maps_reset_, UI::Box::Resizing::kFullSize);
 
-	// Spinboxes and their width requirements...
-	filter_maps_rvbox_min_.set_size(300, 100);
-	filter_maps_rvbox_max_.set_size(300, 100);
 	filter_maps_rvbox_min_.add(&filter_maps_min_players_, UI::Box::Resizing::kFullSize);
 	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
 	filter_maps_rvbox_min_.add(&filter_maps_min_w_, UI::Box::Resizing::kFullSize);
@@ -896,19 +813,36 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	maps_buttons_box_.add(&filter_maps_lvbox_, UI::Box::Resizing::kExpandBoth);
 	maps_buttons_box_.add_space(kRowButtonSpacing);
-	maps_buttons_box_.add(&filter_maps_rvbox_min_, UI::Box::Resizing::kFullSize);
+	maps_buttons_box_.add(&filter_maps_rvbox_min_, UI::Box::Resizing::kExpandBoth);
 	maps_buttons_box_.add_space(kRowButtonSpacing);
-	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kFullSize);
+	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kExpandBoth);
 
-	filter_maps_min_w_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_min_h_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_max_w_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_max_h_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_min_size_.set_value_list(Widelands::Map::kMapFieldCounts);
-	filter_maps_max_size_.set_value_list(Widelands::Map::kMapFieldCounts);
-	filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
-	filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
-	filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+	for (auto* dd : {&filter_maps_min_w_, &filter_maps_min_h_, &filter_maps_min_size_}) {
+		dd->add(_("No lower limit"), 0, nullptr, true);
+	}
+
+	for (unsigned i = 0; i <= kMaxPlayers; ++i) {
+		filter_maps_min_players_.add(std::to_string(i), i);
+		filter_maps_max_players_.add(std::to_string(i), i);
+	}
+	filter_maps_min_players_.select(0);
+
+	for (int32_t value : Widelands::kMapDimensions) {
+		const std::string name = format_l(ngettext("%d field", "%d fields", value), value);
+		filter_maps_min_w_.add(name, value);
+		filter_maps_max_w_.add(name, value);
+		filter_maps_min_h_.add(name, value);
+		filter_maps_max_h_.add(name, value);
+	}
+	for (int32_t value : Widelands::Map::kMapFieldCounts) {
+		const std::string name = format_l(ngettext("%d field", "%d fields", value), value);
+		filter_maps_min_size_.add(name, value);
+		filter_maps_max_size_.add(name, value);
+	}
+
+	for (auto* dd : {&filter_maps_max_players_, &filter_maps_max_w_, &filter_maps_max_h_, &filter_maps_max_size_}) {
+		dd->add(_("No upper limit"), std::numeric_limits<uint32_t>::max(), nullptr, true);
+	}
 
 	filter_browse_reset_.set_enabled(false);
 	filter_maps_reset_.set_enabled(false);
@@ -931,35 +865,35 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		rebuild_browse();
 	});
 
-	filter_maps_min_players_.changed.connect([this]() {
+	filter_maps_min_players_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_min_w_.changed.connect([this]() {
+	filter_maps_min_w_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_min_h_.changed.connect([this]() {
+	filter_maps_min_h_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_min_size_.changed.connect([this]() {
+	filter_maps_min_size_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_max_players_.changed.connect([this]() {
+	filter_maps_max_players_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_max_w_.changed.connect([this]() {
+	filter_maps_max_w_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_max_h_.changed.connect([this]() {
+	filter_maps_max_h_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
-	filter_maps_max_size_.changed.connect([this]() {
+	filter_maps_max_size_.selected.connect([this]() {
 		filter_maps_reset_.set_enabled(true);
 		rebuild_maps();
 	});
@@ -992,14 +926,14 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	});
 	filter_maps_reset_.sigclicked.connect([this]() {
 		filter_maps_name_.set_text("");
-		filter_maps_min_players_.set_value(1, false);
-		filter_maps_min_w_.set_value(0, false);
-		filter_maps_min_h_.set_value(0, false);
-		filter_maps_min_size_.set_value(0, false);
-		filter_maps_max_players_.set_value(kMaxPlayers, false);
-		filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
-		filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
-		filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+		filter_maps_min_players_.select(0);
+		filter_maps_min_w_.select(0);
+		filter_maps_min_h_.select(0);
+		filter_maps_min_size_.select(0);
+		filter_maps_max_players_.select(std::numeric_limits<uint32_t>::max());
+		filter_maps_max_w_.select(std::numeric_limits<uint32_t>::max());
+		filter_maps_max_h_.select(std::numeric_limits<uint32_t>::max());
+		filter_maps_max_size_.select(std::numeric_limits<uint32_t>::max());
 		for (auto& pair : filter_maps_world_) {
 			pair.second->set_state(true, false);
 		}
@@ -1483,28 +1417,28 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 		return false;
 	}
 
-	if (info->map_width < filter_maps_min_w_.get_value()) {
+	if (info->map_width < filter_maps_min_w_.get_selected()) {
 		return false;
 	}
-	if (info->map_height < filter_maps_min_h_.get_value()) {
+	if (info->map_height < filter_maps_min_h_.get_selected()) {
 		return false;
 	}
-	if (info->map_nr_players < filter_maps_min_players_.get_value()) {
+	if (info->map_nr_players < filter_maps_min_players_.get_selected()) {
 		return false;
 	}
-	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) {
+	if (info->map_width * info->map_height < filter_maps_min_size_.get_selected()) {
 		return false;
 	}
-	if (info->map_width > filter_maps_max_w_.get_value()) {
+	if (info->map_width > filter_maps_max_w_.get_selected()) {
 		return false;
 	}
-	if (info->map_height > filter_maps_max_h_.get_value()) {
+	if (info->map_height > filter_maps_max_h_.get_selected()) {
 		return false;
 	}
-	if (info->map_nr_players > filter_maps_max_players_.get_value()) {
+	if (info->map_nr_players > filter_maps_max_players_.get_selected()) {
 		return false;
 	}
-	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) {
+	if (info->map_width * info->map_height > filter_maps_max_size_.get_selected()) {
 		return false;
 	}
 

@@ -146,7 +146,7 @@ private:
 	UI::Checkbox filter_browse_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_browse_, sort_order_maps_;
 	UI::Dropdown<uint8_t> filter_browse_quality_;
-	UI::SpinBox filter_maps_min_players_, filter_maps_min_w_, filter_maps_min_h_,
+	UI::Dropdown<uint32_t> filter_maps_min_players_, filter_maps_min_w_, filter_maps_min_h_,
 	   filter_maps_min_size_, filter_maps_max_players_, filter_maps_max_w_, filter_maps_max_h_,
 	   filter_maps_max_size_;
 	UI::Dropdown<std::shared_ptr<AddOns::AddOnInfo>> upload_addon_, upload_screenshot_;
