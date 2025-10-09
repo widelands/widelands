@@ -161,7 +161,7 @@ msgstr "Tahlen över Husen"
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr "Dat us dat Fenster för Tahlen över Husen. ’t wiest du all de Husen, de du hest, na Grött sorteert."
+msgstr "Dat is dat Fenster för Tahlen över Husen. ’t wiest di all de Husen, de du hest, sorteert na Grött."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid "Let me now explain what all those numbers mean:"
