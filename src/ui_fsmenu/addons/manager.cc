@@ -903,7 +903,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kFullSize);
 
 	std::vector<int32_t> field_sizes_max;
-	field_sizes_max.insert(field_sizes_max.end(), Widelands::kMapDimensions.begin(), Widelands::kMapDimensions.end());
+	field_sizes_max.insert(
+	   field_sizes_max.end(), Widelands::kMapDimensions.begin(), Widelands::kMapDimensions.end());
 	field_sizes_max.push_back(kMapFilterUnlimited);
 	std::vector<int32_t> field_sizes_min = field_sizes_max;
 	field_sizes_min.insert(field_sizes_min.begin(), 0);
@@ -915,7 +916,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		}
 	}
 	std::vector<int32_t> field_counts_max;
-	field_counts_max.insert(field_counts_max.end(), field_counts_set.begin(), field_counts_set.end());
+	field_counts_max.insert(
+	   field_counts_max.end(), field_counts_set.begin(), field_counts_set.end());
 	field_counts_max.push_back(kMapFilterUnlimited);
 	std::vector<int32_t> field_counts_min = field_counts_max;
 	field_counts_min.insert(field_counts_min.begin(), 0);
@@ -931,9 +933,12 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_maps_max_size_.set_value(filter_maps_max_size_.get_max(), false);
 
 	filter_maps_max_players_.add_replacement(kMaxPlayers + 1, pgettext("nr_players", "Unlimited"));
-	filter_maps_max_w_.add_replacement(filter_maps_max_w_.get_max(), pgettext("map_size", "Unlimited"));
-	filter_maps_max_h_.add_replacement(filter_maps_max_h_.get_max(), pgettext("map_size", "Unlimited"));
-	filter_maps_max_size_.add_replacement(filter_maps_max_size_.get_max(), pgettext("map_size", "Unlimited"));
+	filter_maps_max_w_.add_replacement(
+	   filter_maps_max_w_.get_max(), pgettext("map_size", "Unlimited"));
+	filter_maps_max_h_.add_replacement(
+	   filter_maps_max_h_.get_max(), pgettext("map_size", "Unlimited"));
+	filter_maps_max_size_.add_replacement(
+	   filter_maps_max_size_.get_max(), pgettext("map_size", "Unlimited"));
 
 	filter_browse_reset_.set_enabled(false);
 	filter_maps_reset_.set_enabled(false);
@@ -1520,13 +1525,16 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) {
 		return false;
 	}
-	if (info->map_width > filter_maps_max_w_.get_value() && filter_maps_max_w_.get_value() < kMapFilterUnlimited) {
+	if (info->map_width > filter_maps_max_w_.get_value() &&
+	    filter_maps_max_w_.get_value() < kMapFilterUnlimited) {
 		return false;
 	}
-	if (info->map_height > filter_maps_max_h_.get_value() && filter_maps_max_h_.get_value() < kMapFilterUnlimited) {
+	if (info->map_height > filter_maps_max_h_.get_value() &&
+	    filter_maps_max_h_.get_value() < kMapFilterUnlimited) {
 		return false;
 	}
-	if (info->map_nr_players > filter_maps_max_players_.get_value() && filter_maps_max_players_.get_value() <= kMaxPlayers) {
+	if (info->map_nr_players > filter_maps_max_players_.get_value() &&
+	    filter_maps_max_players_.get_value() <= kMaxPlayers) {
 		return false;
 	}
 	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) {
