@@ -71,7 +71,9 @@ public:
 	// otherwise you will confuse the user.
 	void set_value_list(const std::vector<int32_t>&);
 	void set_interval(int32_t min, int32_t max, bool trigger_signal_if_changed = true);
-	int32_t get_value() const;
+	[[nodiscard]] int32_t get_value() const;
+	[[nodiscard]] int32_t get_min() const;
+	[[nodiscard]] int32_t get_max() const;
 	void add_replacement(int32_t, const std::string&);
 	const std::vector<UI::Button*>& get_buttons() {
 		return buttons_;

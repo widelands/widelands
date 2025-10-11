@@ -479,6 +479,13 @@ int32_t SpinBox::get_value() const {
 	return sbi_->value;
 }
 
+int32_t SpinBox::get_min() const {
+	return sbi_->min;
+}
+int32_t SpinBox::get_max() const {
+	return sbi_->max;
+}
+
 /**
  * Adds a replacement text for a specific value
  * overwrites an old replacement if one exists.
