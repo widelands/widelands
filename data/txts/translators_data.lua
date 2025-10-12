@@ -906,6 +906,7 @@ function translators() return {
                "Kefir111",
                "Marek Hám",
                "Miroslav Remák",
+               "Pavol Gono",
                "Vladimir",
                "Vladímir Tóth (Ike)",
             },

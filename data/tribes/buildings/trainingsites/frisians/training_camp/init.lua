@@ -39,6 +39,12 @@ wl.Descriptions():new_trainingsite_type {
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {50, 60},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {

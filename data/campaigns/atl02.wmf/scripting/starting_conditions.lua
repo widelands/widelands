@@ -67,7 +67,7 @@
 
 -- Initialize Maletus (Player 2)
    Maletus:allow_buildings("all")
-   Maletus:forbid_buildings("empire_market")
+   Maletus:forbid_buildings({"empire_market"})
 
    sf = map.player_slots[2].starting_field
    Maletus:place_flag(sf.brn,true)
@@ -75,7 +75,7 @@
 
 -- Initialize Kalitath (Player 3)
    Kalitath:allow_buildings("all")
-   Kalitath:forbid_buildings("barbarians_market")
+   Kalitath:forbid_buildings({"barbarians_market"})
 
    sf = map.player_slots[3].starting_field
    Kalitath:place_flag(sf.brn,true)

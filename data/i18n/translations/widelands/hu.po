@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-27 02:59+0000\n"
+"POT-Creation-Date: 2025-10-06 03:07+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -3028,18 +3028,18 @@ msgstr "A hajód megérkezett a kijelölt céljához."
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Flotta szétválasztva"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2235
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Hajóflotta szétválasztva"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:601
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2236
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Az egyik hajóflottádat szétválasztotta egy terepváltoztatás, ami elzárt egy átjárót."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:661
 msgid "A warship arrived at a known port build space."
@@ -3470,25 +3470,25 @@ msgstr "Érvénytelen térképfájl:\n%s"
 msgid "This objective has no description."
 msgstr "Ehhez a célkitűzéshez nincs leírás."
 
-#: ../../../../src/logic/player.cc:2071
+#: ../../../../src/logic/player.cc:2072
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "%d. hajó"
 
-#: ../../../../src/logic/player.cc:2091
+#: ../../../../src/logic/player.cc:2092
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "%d. kikötő"
 
-#: ../../../../src/logic/player.cc:2094
+#: ../../../../src/logic/player.cc:2095
 #, c-format
 msgctxt "market"
 msgid "Market %d"
 msgstr "%d. piactér"
 
-#: ../../../../src/logic/player.cc:2097
+#: ../../../../src/logic/player.cc:2098
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -4398,11 +4398,11 @@ msgstr "Nincs találat"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr "Első lap"
+msgstr "Ugrás az első lapra"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr "Utolsó lap"
+msgstr "Ugrás az utolsó lapra"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
@@ -4411,13 +4411,13 @@ msgstr "Elemek száma laponként"
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "az összes"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Ugrás a(z) %d. lapra"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -10010,7 +10010,7 @@ msgstr "Ismeretlen címzett"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "mindenki"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47

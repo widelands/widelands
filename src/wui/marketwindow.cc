@@ -687,7 +687,7 @@ private:
 	void rebuild_extensions() {
 		extensions_box_.delete_all_children();
 		extensions_box_.set_desired_size(0, 0);
-		set_desired_size(0, 0);
+		set_size(0, 0);
 
 		MutexLock m(MutexLock::ID::kObjects);
 		if (const Widelands::Market* market = market_.get(ibase_.egbase()); market != nullptr) {

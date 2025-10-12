@@ -33,10 +33,16 @@ wl.Descriptions():new_militarysite_type {
    spritesheets = {
       idle = {
          hotspot = {22, 69},
-         frames = 4,
-         columns = 2,
+         frames = 10,
+         columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {22, 69},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {

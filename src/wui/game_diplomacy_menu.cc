@@ -444,7 +444,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 			                   it->second->serial(), it->second->descr().icon(), first,
 			                   format_l(ngettext("%1$s (distance: %2$u field)",
 			                                     "%1$s (distance: %2$u fields)", it->first),
-			                            it->second->get_market_name(), it->first));
+			                            it->second->get_market_name(), it->first / 1800));
 		}
 
 		UI::Button* yes = new UI::Button(
