@@ -905,9 +905,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	std::vector<int32_t> field_sizes_max;
 	field_sizes_max.insert(
 	   field_sizes_max.end(), Widelands::kMapDimensions.begin(), Widelands::kMapDimensions.end());
-	field_sizes_max.push_back(kMapFilterUnlimited);
 	std::vector<int32_t> field_sizes_min = field_sizes_max;
 	field_sizes_min.insert(field_sizes_min.begin(), 0);
+	field_sizes_max.push_back(kMapFilterUnlimited);
 
 	std::set<int32_t> field_counts_set;
 	for (int32_t x : Widelands::kMapDimensions) {
@@ -918,9 +918,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	std::vector<int32_t> field_counts_max;
 	field_counts_max.insert(
 	   field_counts_max.end(), field_counts_set.begin(), field_counts_set.end());
-	field_counts_max.push_back(kMapFilterUnlimited);
 	std::vector<int32_t> field_counts_min = field_counts_max;
 	field_counts_min.insert(field_counts_min.begin(), 0);
+	field_counts_max.push_back(kMapFilterUnlimited);
 
 	filter_maps_min_w_.set_value_list(field_sizes_min);
 	filter_maps_min_h_.set_value_list(field_sizes_min);
@@ -1525,12 +1525,10 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) {
 		return false;
 	}
-	if (info->map_width > filter_maps_max_w_.get_value() &&
-	    filter_maps_max_w_.get_value() < kMapFilterUnlimited) {
+	if (info->map_width > filter_maps_max_w_.get_value()) {
 		return false;
 	}
-	if (info->map_height > filter_maps_max_h_.get_value() &&
-	    filter_maps_max_h_.get_value() < kMapFilterUnlimited) {
+	if (info->map_height > filter_maps_max_h_.get_value()) {
 		return false;
 	}
 	if (info->map_nr_players > filter_maps_max_players_.get_value() &&
