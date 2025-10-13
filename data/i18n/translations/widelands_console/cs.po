@@ -345,7 +345,7 @@ msgstr "Bitová maska k nastavení pozice a módu nástrojové lišty."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "Výchozí velikost stránky při rozvržení na stránky."
 
 #: ../../../../src/wlapplication_messages.cc:206
 msgid "Networking:"

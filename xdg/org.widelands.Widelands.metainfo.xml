@@ -416,6 +416,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <release date="2024-11-15" version="1.2.1">
       <description><ul>
         <li>Bugfix release</li>
+        <li xml:lang="cs">Výpis chyb skriptu</li>
         <li xml:lang="de">Fehlerbehebung</li>
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
