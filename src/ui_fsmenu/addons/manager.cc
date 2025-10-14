@@ -940,6 +940,15 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_maps_max_size_.add_replacement(
 	   filter_maps_max_size_.get_max(), pgettext("map_size", "Unlimited"));
 
+	filter_maps_min_players_.set_min_height(filter_maps_max_players_.get_h());
+	filter_maps_max_players_.set_min_height(filter_maps_min_players_.get_h());
+	filter_maps_min_w_.set_min_height(filter_maps_max_w_.get_h());
+	filter_maps_max_w_.set_min_height(filter_maps_min_w_.get_h());
+	filter_maps_min_h_.set_min_height(filter_maps_max_h_.get_h());
+	filter_maps_max_h_.set_min_height(filter_maps_min_h_.get_h());
+	filter_maps_min_size_.set_min_height(filter_maps_max_size_.get_h());
+	filter_maps_max_size_.set_min_height(filter_maps_min_size_.get_h());
+
 	filter_browse_reset_.set_enabled(false);
 	filter_maps_reset_.set_enabled(false);
 	filter_browse_name_.changed.connect([this]() {

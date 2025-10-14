@@ -79,6 +79,7 @@ public:
 		return buttons_;
 	}
 	void set_unit_width(uint32_t width);
+	void set_min_height(uint32_t height);
 
 	bool handle_key(bool, SDL_Keysym) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
@@ -100,6 +101,7 @@ private:
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
 	uint32_t padding_;
+	uint32_t min_height_ = 0;
 };
 }  // namespace UI
 
