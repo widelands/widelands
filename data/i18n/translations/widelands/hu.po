@@ -4876,35 +4876,35 @@ msgstr "Szükséges minőség"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:354
 msgid "Min Players:"
-msgstr "Játékosok legkisebb száma:"
+msgstr "Játékosok száma legalább:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:367
 msgid "Min Width:"
-msgstr "Legkisebb szélesség:"
+msgstr "Szélesség legalább:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Min Height:"
-msgstr "Legkisebb magasság:"
+msgstr "Magasság legalább:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:393
 msgid "Min Size:"
-msgstr "Legkisebb méret:"
+msgstr "Méret legalább:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:406
 msgid "Max Players:"
-msgstr "Játékosok legnagyobb száma:"
+msgstr "Játékosok száma legfeljebb:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:419
 msgid "Max Width:"
-msgstr "Legnagyobb szélesség:"
+msgstr "Szélesség legfeljebb:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:432
 msgid "Max Height:"
-msgstr "Legnagyobb magasság:"
+msgstr "Magasság legfeljebb:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:445
 msgid "Max Size:"
-msgstr "Legnagyobb méret:"
+msgstr "Méret legfeljebb:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:455
 msgid "Choose add-on to upload…"

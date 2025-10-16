@@ -11,7 +11,7 @@
 # Karol Zygmunt, 2024
 # Lech Lorens <lech.lorens@gmail.com>, 2019
 # Leszek Szary, 2024
-# Marcin S <dzidek1003@o2.pl>, 2021
+# Marcin S <dzidek1003@o2.pl>, 2021,2025
 # Mateusz Pu <mateusz.pudlo@poczta.onet.pl>, 2020
 # b439f035459e0f385cf8827d1a76f480_497be4c <c2ca683ad439533996d91e14a0c79e7e_269278>, 2015
 # Niektóry <niektory@gmail.com>, 2020
@@ -30,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-10-06 03:07+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Gurthg Shae, 2025\n"
+"Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021,2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2766,7 +2766,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Wysłano:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2776,15 +2776,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "Gracz otrzymał:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Otrzymano:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -4445,11 +4445,11 @@ msgstr "Brak dopasowania"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Idź do pierwszej strony"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Idź do ostatniej strony"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
@@ -4458,7 +4458,7 @@ msgstr ""
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Wszystko"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
