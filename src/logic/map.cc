@@ -1868,8 +1868,7 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 				return {f};
 			}
 		} else {
-			bool is_good_water =
-			   (f.field->get_caps() & MOVECAPS_SWIM) != 0;
+			bool is_good_water = (f.field->get_caps() & MOVECAPS_SWIM) != 0;
 
 			// Any immovable here? (especially another portdock)
 			if (is_good_water && (f.field->get_immovable() != nullptr)) {
