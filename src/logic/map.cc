@@ -1105,7 +1105,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
 	queue.push_back(area);
 
 	while (!queue.empty()) {
-		// Pop the last ware from the queue
+		// Pop the last field from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
 		Pathfield& curpf = pathfields->fields[cur.field - fields_.get()];
@@ -1575,6 +1575,11 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	//  walkable.
 	if (cnt_unwalkable < 6) {
 		caps |= MOVECAPS_WALK;
+
+		// But it's only plantable if at least one is not water.
+		if (cnt_water < 6) {
+			caps |= MOVECAPS_PLANT;
+		}
 	}
 
 	//  2b) If all neighbouring triangles are water, the node is swimmable.

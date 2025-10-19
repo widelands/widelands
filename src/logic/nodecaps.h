@@ -57,6 +57,11 @@ enum NodeCaps {
 	/// their path. Without this clause, ports would be kind of impossible ;)
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
+
+	/// Can workers use this field to plant immovables? This requires MOVECAPS_WALK
+	/// and that at least one neighbournig triangle is walkable land. Required to
+	/// prevent planting immovables in the middle of bridgeable water.
+	MOVECAPS_PLANT = 128,
 };
 }  // namespace Widelands
 

@@ -107,7 +107,9 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 		}
 	}
 	NodeCaps const nodecaps = coord.field->nodecaps();
-	const Map& map = egbase.map();
+	if ((nodecaps & MOVECAPS_PLANT) == 0) {
+		return false;
+	}
 
 	switch (size) {
 	case sizeBuild:
@@ -123,6 +125,7 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeSwim: {
+		const Map& map = egbase.map();
 		const Descriptions& world = egbase.descriptions();
 		return ((world.get_terrain_descr(coord.field->terrain_d())->get_is() &
 		         TerrainDescription::Is::kWater) != 0) ||

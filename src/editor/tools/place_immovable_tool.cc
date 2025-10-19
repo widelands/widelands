@@ -82,7 +82,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 			}
 
 			if ((mr.location().field->get_immovable() == nullptr) &&
-			    ((mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK) != 0)) {
+			    ((mr.location().field->nodecaps() & Widelands::MOVECAPS_PLANT) != 0)) {
 				egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
 			}
 			++i;
