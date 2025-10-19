@@ -1869,7 +1869,7 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 			}
 		} else {
 			bool is_good_water =
-			   (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
+			   (f.field->get_caps() & MOVECAPS_SWIM) != 0;
 
 			// Any immovable here? (especially another portdock)
 			if (is_good_water && (f.field->get_immovable() != nullptr)) {
@@ -2693,7 +2693,7 @@ void Map::recalculate_allows_seafaring() {
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(current_position), i, &neighbour);
-				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
+				if ((neighbour.field->get_caps() & MOVECAPS_SWIM) != 0) {
 					auto insert = reachable_from_current_port.insert(neighbour);
 					if (insert.second) {
 						positions_to_check.push(neighbour);

@@ -45,6 +45,9 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 	if (type == "walkable") {
 		return TerrainDescription::Is::kWalkable;
 	}
+	if (type == "bridgeable") {
+		return (TerrainDescription::Is::kWater | TerrainDescription::Is::kWalkable);
+	}
 	if (type == "water") {
 		return (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable);
 	}
