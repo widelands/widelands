@@ -238,6 +238,9 @@ bool CheckStepRoad::allowed(const Map& map,
 		return false;
 	}
 
+	// Waterways are not allowed to join bridges or other waterways
+	const bool prevent_join = (movecaps_ & endcaps & MOVECAPS_SWIM) != 0;
+
 	// Check for blocking immovables
 	if (BaseImmovable const* const imm = map.get_immovable(end)) {
 		if (imm->get_size() >= BaseImmovable::SMALL) {
@@ -245,10 +248,28 @@ bool CheckStepRoad::allowed(const Map& map,
 				return false;
 			}
 
+			// No joining bridges or other waterways
+			if (prevent_join) {
+				return false;
+			}
+
 			return (dynamic_cast<Flag const*>(imm) != nullptr) ||
 			       ((dynamic_cast<Road const*>(imm) != nullptr) && ((endcaps & BUILDCAPS_FLAG) != 0));
 		}
 	}
+
+	// No crossing or joining bridges or other waterways
+	if (prevent_join) {
+		if (end.field->get_road(WalkingDir::WALK_E) != RoadSegment::kNone ||
+		    end.field->get_road(WalkingDir::WALK_SE) != RoadSegment::kNone ||
+		    end.field->get_road(WalkingDir::WALK_SW) != RoadSegment::kNone ||
+		    map.l_n(end).field->get_road(WalkingDir::WALK_E) != RoadSegment::kNone ||
+		    map.tl_n(end).field->get_road(WalkingDir::WALK_SE) != RoadSegment::kNone ||
+		    map.tr_n(end).field->get_road(WalkingDir::WALK_SW) != RoadSegment::kNone) {
+			return false;
+		}
+	}
+
 	return true;
 }
 

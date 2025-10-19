@@ -1615,6 +1615,17 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
 	if ((caps & MOVECAPS_WALK) != 0) {
+		if ((caps & MOVECAPS_SWIM) != 0) {
+			// No flags in the middle of waterways
+			if (f.field->road_east == RoadSegment::kWaterway ||
+			    f.field->road_southeast == RoadSegment::kWaterway ||
+			    f.field->road_southwest == RoadSegment::kWaterway ||
+			    l.field->road_east == RoadSegment::kWaterway ||
+			    tl.field->road_southeast == RoadSegment::kWaterway ||
+			    tr.field->road_southwest == RoadSegment::kWaterway) {
+				return static_cast<NodeCaps>(caps);
+			}
+		}
 		//  4b) Flags must be at least 2 edges apart
 		if (consider_mobs && (find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
 		                                      FindImmovableType(MapObjectType::FLAG)) != 0u)) {

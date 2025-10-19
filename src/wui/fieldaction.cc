@@ -422,7 +422,8 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "build_road", kImgButtonBuildRoad,
 				           &FieldActionWindow::act_buildroad, _("Build road"));
 				if (map_.get_waterway_max_length() >= 2 &&
-				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
+				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_) &&
+				    ((node_.field->maxcaps() & Widelands::MOVECAPS_PLANT) != 0)) {
 					add_button(buildbox, "build_waterway", kImgButtonBuildWaterway,
 					           &FieldActionWindow::act_buildwaterway, _("Build waterway"));
 				}
@@ -1181,9 +1182,11 @@ void show_field_action(InteractiveBase* const ibase,
 				w.add_buttons_road(target != ibase->get_build_road_start() &&
 				                   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			} else {
+				const Widelands::NodeCaps caps = player->get_buildcaps(target);
 				w.add_buttons_waterway(
 				   target != ibase->get_build_road_start() &&
-				   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
+				   ((caps & Widelands::BUILDCAPS_FLAG) != 0) &&
+				   ((caps & Widelands::MOVECAPS_PLANT) != 0));
 			}
 			w.init();
 			return;
