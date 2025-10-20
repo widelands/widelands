@@ -1,5 +1,4 @@
 # Utilize cmake_parse_arguments standard function to parse for common arguments.
-include(CMakeParseArguments)
 macro(_parse_common_args ARGS)
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
