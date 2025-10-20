@@ -33,7 +33,7 @@ foreach(custom_include_dir ${custom_include_directories})
   endif()
 endforeach()
 
-include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+#include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
 # This policy is not known to versions prior 3.27 and would result in errors,
