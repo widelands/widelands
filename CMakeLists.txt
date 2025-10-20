@@ -101,6 +101,14 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 else()
   message(WARNING "You are using an unsupported compiler! Supported are Clang and GCC.")
 endif()
+
+if(OPTION_BUILD_WINSTATIC)
+  if(MSVC)
+    # Set correct MSVC runtime library, this influences compiler flags
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  endif()
+endif()
+
 message(STATUS "Picking up default CXX flags:
     - CMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS}'
     - CMAKE_CXX_FLAGS_RELEASE='${CMAKE_CXX_FLAGS_RELEASE}'
@@ -440,13 +448,8 @@ if(OPTION_BUILD_WINSTATIC)
   if(MSVC)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS libwebp)
     wl_add_static_libs(SDL_STATIC_LIBS charset ${BROTLI})
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      string(REPLACE "/MDd" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-      wl_add_flag(TARGET_COMPILE_FLAGS "/MTd /EHsc")
-    else()
-      string(REPLACE "/MD" "" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
-      wl_add_flag(TARGET_COMPILE_FLAGS "/MT /EHsc")
-    endif()
+    # CMAKE_CXX_FLAGS already contains this flag for Visual Studio 2022, so it probably could be deleted
+    wl_add_flag(TARGET_COMPILE_FLAGS "/EHsc")
   else()
     wl_add_static_libs(SDL_IMG_STATIC_LIBS ${MINGW_SDL_IMG_DEPS})
     wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp xmp wavpack)
