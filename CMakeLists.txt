@@ -163,12 +163,6 @@ if(NOT asio_location OR asio_location STREQUAL "")
 endif()
 add_definitions(-DASIO_STANDALONE)
 
-if (APPLE OR WIN32 OR
-    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-endif()
-
 # Disable no symbols warning on macOS, but only on versions where this is
 # supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
 if (APPLE)
