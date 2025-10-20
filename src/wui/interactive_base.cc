@@ -550,8 +550,10 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	return button;
 }
 
-InteractiveBase::RoadBuildingMode::RoadBuildingMode(
-   Widelands::EditorGameBase& egbase, Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t)
+InteractiveBase::RoadBuildingMode::RoadBuildingMode(Widelands::EditorGameBase& egbase,
+                                                    Widelands::PlayerNumber p,
+                                                    Widelands::Coords s,
+                                                    RoadBuildingType t)
    : player(p), path(s), type(t), work_area(nullptr) {
 	if (type == RoadBuildingType::kRoad) {
 		Widelands::CheckStepRoad cs =
@@ -1304,12 +1306,10 @@ void InteractiveBase::start_build_road(Coords road_start,
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(road_start), len));
 		do {
-			reachable_nodes.insert(
-			   std::make_pair(
-			      mr.location(),
-			      mr.location().field->get_owned_by() ==
-			         player && !mr.location().field->is_border() &&
-			         road_building_mode_->checkstep->reachable_dest(map, mr.location())));
+			reachable_nodes.insert(std::make_pair(
+			   mr.location(), mr.location().field->get_owned_by() == player &&
+			                     !mr.location().field->is_border() &&
+			                     road_building_mode_->checkstep->reachable_dest(map, mr.location())));
 		} while (mr.advance(map));
 		WorkareaPreview::ExtraDataMap wa_data;
 		for (const auto& pair : reachable_nodes) {
@@ -1454,7 +1454,7 @@ InteractiveBase::try_append_build_road(const Widelands::Coords field) const {
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
 		if (map.findpath(result_path.get_end(), field, 0, path, *(road_building_mode_->checkstep),
-		    Map::fpBidiCost) < 0) {
+		                 Map::fpBidiCost) < 0) {
 			return std::nullopt;  // could not find a path
 		}
 		result_path.append(map, path);
@@ -1661,7 +1661,8 @@ void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path
 			continue;
 		}
 
-		if (!(checkstep->allowed(map, endpos, neighb, dir, Widelands::CheckStep::StepId::stepNormal) ||
+		if (!(checkstep->allowed(
+		         map, endpos, neighb, dir, Widelands::CheckStep::StepId::stepNormal) ||
 		      checkstep->allowed(map, endpos, neighb, dir, Widelands::CheckStep::StepId::stepLast))) {
 			// Forbidden as next step
 			continue;

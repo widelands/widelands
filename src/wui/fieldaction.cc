@@ -1183,10 +1183,9 @@ void show_field_action(InteractiveBase* const ibase,
 				                   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			} else {
 				const Widelands::NodeCaps caps = player->get_buildcaps(target);
-				w.add_buttons_waterway(
-				   target != ibase->get_build_road_start() &&
-				   ((caps & Widelands::BUILDCAPS_FLAG) != 0) &&
-				   ((caps & Widelands::MOVECAPS_PLANT) != 0));
+				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
+				                       ((caps & Widelands::BUILDCAPS_FLAG) != 0) &&
+				                       ((caps & Widelands::MOVECAPS_PLANT) != 0));
 			}
 			w.init();
 			return;
