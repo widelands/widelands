@@ -1500,8 +1500,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
 	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
 	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
-	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is()
-	};
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is()};
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unwalkable = 0;
@@ -1533,7 +1532,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	// nothing can be done here.
 	/*
 	if (cnt_unreachable != 0u) {
-		return CAPS_NONE;
+	   return CAPS_NONE;
 	}
 	*/
 
@@ -1545,10 +1544,8 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 		// It's also walkable if a bridge is already built to it.
 
 		// Only bridge segments should be possible here...
-		if (is_bridge_segment(f.field->road_east) ||
-		    is_bridge_segment(f.field->road_southeast) ||
-		    is_bridge_segment(f.field->road_southwest) ||
-		    is_bridge_segment(l.field->road_east) ||
+		if (is_bridge_segment(f.field->road_east) || is_bridge_segment(f.field->road_southeast) ||
+		    is_bridge_segment(f.field->road_southwest) || is_bridge_segment(l.field->road_east) ||
 		    is_bridge_segment(tl.field->road_southeast) ||
 		    is_bridge_segment(tr.field->road_southwest)) {
 			caps |= MOVECAPS_WALK;
