@@ -97,6 +97,11 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 		descname = _("unwalkable");
 		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
+	case Is::kBridgeable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("bridgeable");
+		icon = g_image_cache->get("images/wui/editor/terrain_walkable.png");
+		break;
 	default:
 		NEVER_HERE();
 	}
@@ -276,6 +281,9 @@ const std::vector<TerrainDescription::Type> TerrainDescription::get_types() cons
 	}
 	if ((is_ & Widelands::TerrainDescription::Is::kUnwalkable) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kUnwalkable);
+	}
+	if ((is_ & Widelands::TerrainDescription::Is::kBridgeable) != 0) {
+		terrain_types.emplace_back(TerrainDescription::Is::kBridgeable);
 	}
 	return terrain_types;
 }
