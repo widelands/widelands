@@ -1494,103 +1494,72 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	const FCoords tl = tl_n(f);
 	const FCoords l = l_n(f);
 
-	const TerrainDescription::Is tr_d_terrain_is =
-	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is();
-	const TerrainDescription::Is tl_r_terrain_is =
-	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is();
-	const TerrainDescription::Is tl_d_terrain_is =
-	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is();
-	const TerrainDescription::Is l_r_terrain_is =
-	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is();
-	const TerrainDescription::Is f_d_terrain_is =
-	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is();
-	const TerrainDescription::Is f_r_terrain_is =
-	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is();
+	const std::vector<TerrainDescription::Is> surrounding_terrains = {
+	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is()
+	};
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unwalkable = 0;
 	uint8_t cnt_water = 0;
-	uint8_t cnt_unreachable = 0;
+	// uint8_t cnt_unreachable = 0;
+	uint8_t cnt_bridgeable = 0;
 
-	if ((tr_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-	if ((tl_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-	if ((tl_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-	if ((l_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-	if ((f_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-	if ((f_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
-		++cnt_unwalkable;
-	}
-
-	if ((tr_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-	if ((tl_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-	if ((tl_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-	if ((l_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-	if ((f_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-	if ((f_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
-		++cnt_water;
-	}
-
-	if ((tr_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
-	}
-	if ((tl_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
-	}
-	if ((tl_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
-	}
-	if ((l_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
-	}
-	if ((f_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
-	}
-	if ((f_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
-		++cnt_unreachable;
+	for (const TerrainDescription::Is neighbour_is : surrounding_terrains) {
+		if ((neighbour_is & TerrainDescription::Is::kUnwalkable) != 0) {
+			++cnt_unwalkable;
+		}
+		if ((neighbour_is & TerrainDescription::Is::kWater) != 0) {
+			++cnt_water;
+		}
+		if ((neighbour_is & TerrainDescription::Is::kUnreachable) != 0) {
+			// If any of the neighbouring triangles is really "bad" (such as lava),
+			// nothing can be done here.
+			return CAPS_NONE;
+			// ++cnt_unreachable;
+		}
+		if ((neighbour_is & TerrainDescription::Is::kBridgeable) != 0) {
+			++cnt_bridgeable;
+		}
 	}
 
 	//  2) Passability
 
+	// If any of the neighbouring triangles is really "bad" (such as lava),
+	// nothing can be done here.
+	/*
+	if (cnt_unreachable != 0u) {
+		return CAPS_NONE;
+	}
+	*/
+
 	//  2a) If any of the neigbouring triangles is walkable this node is
 	//  walkable.
-	if (cnt_unwalkable < 6) {
+	if (cnt_unwalkable + cnt_bridgeable < 6) {
 		caps |= MOVECAPS_WALK;
+	} else if (cnt_bridgeable > 0) {
+		// It's also walkable if a bridge is already built to it.
 
-		// But it's only plantable if at least one is not water.
-		if (cnt_water < 6) {
-			caps |= MOVECAPS_PLANT;
+		// Only bridge segments should be possible here...
+		if (is_bridge_segment(f.field->road_east) ||
+		    is_bridge_segment(f.field->road_southeast) ||
+		    is_bridge_segment(f.field->road_southwest) ||
+		    is_bridge_segment(l.field->road_east) ||
+		    is_bridge_segment(tl.field->road_southeast) ||
+		    is_bridge_segment(tr.field->road_southwest)) {
+			caps |= MOVECAPS_WALK;
+		} else {
+			caps |= BUILDCAPS_BRIDGE;
 		}
 	}
 
 	//  2b) If all neighbouring triangles are water, the node is swimmable.
 	if (cnt_water == 6) {
 		caps |= MOVECAPS_SWIM;
-	}
-
-	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
-	// as lava), we can neither walk nor swim to this node.
-	if (cnt_unreachable != 0u) {
-		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 	}
 
 	//  === everything below is used to check buildability ===
@@ -1614,18 +1583,19 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	//  4) Flags
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
-	if ((caps & MOVECAPS_WALK) != 0) {
-		if ((caps & MOVECAPS_SWIM) != 0) {
-			// No flags in the middle of waterways
-			if (f.field->road_east == RoadSegment::kWaterway ||
-			    f.field->road_southeast == RoadSegment::kWaterway ||
-			    f.field->road_southwest == RoadSegment::kWaterway ||
-			    l.field->road_east == RoadSegment::kWaterway ||
-			    tl.field->road_southeast == RoadSegment::kWaterway ||
-			    tr.field->road_southwest == RoadSegment::kWaterway) {
-				return static_cast<NodeCaps>(caps);
-			}
-		}
+	bool flag_possible = (caps & (MOVECAPS_WALK | BUILDCAPS_BRIDGE)) != 0;
+
+	if (((caps & BUILDCAPS_BRIDGE) != 0) && ((caps & MOVECAPS_SWIM) != 0)) {
+		//  4a) No flags on waterways
+		flag_possible = f.field->road_east != RoadSegment::kWaterway &&
+		                f.field->road_southeast != RoadSegment::kWaterway &&
+		                f.field->road_southwest != RoadSegment::kWaterway &&
+		                l.field->road_east != RoadSegment::kWaterway &&
+		                tl.field->road_southeast != RoadSegment::kWaterway &&
+		                tr.field->road_southwest != RoadSegment::kWaterway;
+	}
+
+	if (flag_possible) {
 		//  4b) Flags must be at least 2 edges apart
 		if (consider_mobs && (find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
 		                                      FindImmovableType(MapObjectType::FLAG)) != 0u)) {
@@ -1633,6 +1603,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 		}
 		caps |= BUILDCAPS_FLAG;
 	}
+
 	return static_cast<NodeCaps>(caps);
 }
 

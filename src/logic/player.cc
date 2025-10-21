@@ -645,7 +645,7 @@ Road* Player::build_road(const Path& path) {
 						return nullptr;
 					}
 				}
-				if ((get_buildcaps(fc) & MOVECAPS_WALK) == 0) {
+				if ((get_buildcaps(fc) & (MOVECAPS_WALK | BUILDCAPS_BRIDGE)) == 0) {
 					log_warn_time(
 					   egbase().get_gametime(), "%i: building road, unwalkable\n", player_number());
 					return nullptr;

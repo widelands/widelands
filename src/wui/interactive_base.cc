@@ -1656,8 +1656,8 @@ void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path
 				// Can't extend
 				continue;
 			}
-		} else if ((caps & Widelands::MOVECAPS_WALK) == 0) {
-			// Need to be able to walk there
+		} else if ((caps & (Widelands::MOVECAPS_WALK | Widelands::BUILDCAPS_BRIDGE)) == 0) {
+			// Need to be able to walk or build bridge there
 			continue;
 		}
 

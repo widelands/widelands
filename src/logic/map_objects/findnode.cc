@@ -107,9 +107,6 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 		}
 	}
 	NodeCaps const nodecaps = coord.field->nodecaps();
-	if ((nodecaps & MOVECAPS_PLANT) == 0) {
-		return false;
-	}
 
 	switch (size) {
 	case sizeBuild:

@@ -231,11 +231,20 @@ bool CheckStepRoad::allowed(const Map& map,
                             CheckStep::StepId const id) const {
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
-	// Calculate cost and passability
-	if (((endcaps & movecaps_) == 0) &&
-	    (((endcaps & MOVECAPS_WALK) == 0) ||
-	     ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
-		return false;
+	// Check passability
+	if ((endcaps & movecaps_) == 0) {
+		// Check exceptions
+		if ((movecaps_ & MOVECAPS_WALK) != 0) {
+			if ((endcaps & BUILDCAPS_BRIDGE) == 0) {
+				return false;
+			}
+		} else {
+			assert((movecaps_ & MOVECAPS_SWIM) != 0);
+			if (((endcaps & MOVECAPS_WALK) == 0) ||
+			    ((player_.get_buildcaps(start) & MOVECAPS_SWIM) == 0)) {
+				return false;
+			}
+		}
 	}
 
 	// Waterways are not allowed to join bridges or other waterways
@@ -276,16 +285,17 @@ bool CheckStepRoad::allowed(const Map& map,
 bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if ((caps & movecaps_) == 0) {
-		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
-			return false;
-		}
-		if (!map.can_reach_by_water(dest)) {
-			return false;
-		}
+	if ((caps & movecaps_) != 0) {
+		// We got what we look for
+		return true;
 	}
 
-	return true;
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		return (caps & BUILDCAPS_BRIDGE) != 0;
+	}
+
+	assert((movecaps_ & MOVECAPS_SWIM) != 0);
+	return map.can_reach_by_water(dest);
 }
 
 bool CheckStepLimited::allowed(const Map& /* map */,
