@@ -224,8 +224,15 @@ if(OPTION_ASAN)
   message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
   # See https://clang.llvm.org/docs/AddressSanitizer.html
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
-  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  if(MSVC)
+    # Disabling annotations macros to be able to link glbindingd, icuucd and tinygettext
+    # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
+    add_compile_definitions(_DISABLE_STRING_ANNOTATION)
+    add_compile_definitions(_DISABLE_VECTOR_ANNOTATION)
+  else()
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
+    set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  endif()
   add_definitions(-DUSE_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
