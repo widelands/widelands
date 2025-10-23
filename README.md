@@ -165,7 +165,6 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | data | The game's data files. Images, sounds, music, scripting, maps, campaigns, tribes, ... |
 | debian | Packaging for Debian-based Linux distributions |
 | doc | Sphinx [documentation](https://www.widelands.org/documentation/index.html) |
-| po | Translation files |
 | [src](https://github.com/widelands/widelands/tree/master/src) | C++ source code |
 | test | Scripted maps for our regression test suite |
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
