@@ -168,6 +168,7 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | [src](https://github.com/widelands/widelands/tree/master/src) | C++ source code |
 | test | Scripted maps for our regression test suite |
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
+| xdg | Files related to X Desktop Group Base Directory Specification |
 
 
 ## Obtaining MacOS and MS-Windows builds and testsuite runs
