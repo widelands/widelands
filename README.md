@@ -102,6 +102,7 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | --- | --- | --- | --- |
 | `CMAKE_BUILD_TYPE` | `Debug`/`Release`/`RelWithDebInfo` | `Debug` | Create a release or debug build |
 | `OPTION_ASAN` | `ON`/`OFF` | `ON` for Debug builds /`OFF` for Release builds | Use AddressSanitizer. Switching this off only works once. You will have to clear the `build` directory if you want to switch this off again in a later build. |
+| `OPTION_TSAN` | `ON`/`OFF` | `OFF` | Use ThreadSanitizer. Mutually exclusive with `OPTION_ASAN`. |
 | `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
 | `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
@@ -111,6 +112,7 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
+| `OPTION_BUILD_WINSTATIC` | `ON`/`OFF` | `OFF` | Build a static linked .exe on windows |
 | `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
 | `NEEDS_EXTERNAL_FILESYSTEM` | `ON`/`OFF` | Autodetected from compiler version | Whether `std::filesystem` needs to be linked against an extra library |
 
