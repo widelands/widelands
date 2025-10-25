@@ -4932,35 +4932,35 @@ msgstr "Minimálna kvalita"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:356
 msgid "Min Players:"
-msgstr "Min hráči:"
+msgstr "Min. počet hráčov:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:369
 msgid "Min Width:"
-msgstr "Min šírka:"
+msgstr "Min. šírka:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:382
 msgid "Min Height:"
-msgstr "Min výška:"
+msgstr "Min. výška:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:395
 msgid "Min Size:"
-msgstr "Min veľkosť:"
+msgstr "Min. veľkosť:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:408
 msgid "Max Players:"
-msgstr "Max hráči:"
+msgstr "Max. počet hráčov:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:421
 msgid "Max Width:"
-msgstr "Max šírka:"
+msgstr "Max. šírka:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:434
 msgid "Max Height:"
-msgstr "Max výška:"
+msgstr "Max. výška:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:447
 msgid "Max Size:"
-msgstr "Max veľkosť:"
+msgstr "Max. veľkosť:"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:457
 msgid "Choose add-on to upload…"
@@ -5172,7 +5172,7 @@ msgstr "Filtrovať doplnky podľa mena"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:802
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtrovať mapy podľa mena"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
@@ -5192,14 +5192,14 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:935
 msgctxt "nr_players"
 msgid "Unlimited"
-msgstr ""
+msgstr "neobmedzený"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:937
 #: ../../../../src/ui_fsmenu/addons/manager.cc:939
 #: ../../../../src/ui_fsmenu/addons/manager.cc:941
 msgctxt "map_size"
 msgid "Unlimited"
-msgstr ""
+msgstr "neobmedzená"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1073
 #, c-format
