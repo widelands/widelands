@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         config: [Debug, Release]
-        arch: [x64, x86]
+        arch: [x64, x86, arm64]
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-2022
     env:
