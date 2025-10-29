@@ -11,7 +11,7 @@ jobs:
         config: [Debug, Release]
         arch: [x64, x86, arm64]
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
-    runs-on: windows-2022
+    runs-on: windows-2025
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
