@@ -1909,7 +1909,7 @@ msgstr "Economies"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Acords comercials"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -2403,24 +2403,24 @@ msgstr "S’inicialitza…"
 
 #: ../../../../src/logic/game.cc:1335
 msgid "Trade Offer"
-msgstr "Oferta de canvi"
+msgstr "Oferta d'acord comercial"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Nova oferta d'acord comercial rebuda"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Heu rebut una oferta nova de %s."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Acord comercial acceptat"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Oferta d'acord comercial acceptada"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
@@ -2429,11 +2429,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Acord comercial rebutjat"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Oferta d'acord comercial rebutjada"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
@@ -2442,11 +2442,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Oferta comercial retirada"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "S'ha retirat l'oferta d'acord comercial"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
@@ -2455,11 +2455,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Proposta d'allargament d'acord comercial"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Nova proposta d'allargament d'acord comercial rebuda"
 
 #: ../../../../src/logic/game.cc:1529
 #, c-format
@@ -2468,11 +2468,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "S'ha retirat la proposta d'allargament d'acord comercial"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "S'ha retirat la proposta d'allargament d'acord comercial"
 
 #: ../../../../src/logic/game.cc:1560
 #, c-format
@@ -2481,11 +2481,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Allargament d'acord comercial rebutjat"
 
 #: ../../../../src/logic/game.cc:1601
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "La proposta d'allargament d'acord comercial s'ha rebutjat"
 
 #: ../../../../src/logic/game.cc:1602
 #, c-format
@@ -2494,11 +2494,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "S'ha acceptat l'allargament de l'acord"
 
 #: ../../../../src/logic/game.cc:1656
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "La proposta d'allargament de l'acord comercial s'ha acceptat"
 
 #: ../../../../src/logic/game.cc:1657
 #, c-format
@@ -2601,24 +2601,24 @@ msgstr ""
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u acord comercial"
+msgstr[1] "%u acords comercials"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Acord comercial cancel·lat"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Acord comercial completat"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Acord comercial cancel·lat"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Acord comercial completat"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
@@ -2632,24 +2632,24 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
-msgstr ""
+msgstr "Acord comercial en pausa"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Acord comercial en pausa"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s ha posat en pausa l'acord comercial que havia firmat amb vós a %2$s."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Acord comercial reprès"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "S'ha reprès l'acord comercial"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
@@ -2684,7 +2684,7 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "L'acord es mantindrà indefinidament"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
@@ -2702,29 +2702,29 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
-msgstr ""
+msgstr "En pausa per ambdós jugadors"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
-msgstr ""
+msgstr "En pausa per vós"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:820
 #: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "En pausa per %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Actiu"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
-msgstr ""
+msgstr "El jugador envia:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Vós envieu"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -2734,15 +2734,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "El jugador rep:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Vós rebeu:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -3719,7 +3719,7 @@ msgstr[1] "S’han detectat %u incompatibilitats de complements:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr "%1$s\n•  no s'ha trobat «%2$s», que necessita l'hoste"
+msgstr "%1$s\n• no s'ha trobat «%2$s», que necessita l'hoste"
 
 #: ../../../../src/network/gameclient.cc:837
 #, c-format
@@ -4387,26 +4387,26 @@ msgstr "Sense coincidències"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Vés a la primera pàgina"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Vés a l'última pàgina"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Elements per pàgina"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Tots"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Vés a la pàgina %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -5125,14 +5125,14 @@ msgstr "Mostra/Amaga el món «%s»"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:935
 msgctxt "nr_players"
 msgid "Unlimited"
-msgstr ""
+msgstr "Sense límit"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:937
 #: ../../../../src/ui_fsmenu/addons/manager.cc:939
 #: ../../../../src/ui_fsmenu/addons/manager.cc:941
 msgctxt "map_size"
 msgid "Unlimited"
-msgstr ""
+msgstr "Sense límit"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1073
 #, c-format
@@ -7652,7 +7652,7 @@ msgstr "Mida de la finestra"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Visualització"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7824,7 +7824,7 @@ msgstr "Mai"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Segueix el ratolí"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
@@ -8743,7 +8743,7 @@ msgstr "Mostra només els missatges d’escenari"
 
 #: ../../../../src/wlapplication_options.cc:751
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Mostra només els missatges diplomàtics"
 
 #: ../../../../src/wlapplication_options.cc:756
 msgid "Go to Ship"
@@ -9260,7 +9260,7 @@ msgstr "Voleu renunciar?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Voleu cancel·lar-ho?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
@@ -10011,7 +10011,7 @@ msgstr "Recipient desconegut"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "Tots"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
@@ -10147,7 +10147,7 @@ msgstr "Retracta"
 #: ../../../../src/wui/marketwindow.cc:936
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Ofertes d'acords comercials (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:449
@@ -10295,12 +10295,12 @@ msgstr[1] ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:749
 #: ../../../../src/wui/marketwindow.cc:716
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Rebutja aquesta proposta d'allargament d'acord comercial"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:753
 #: ../../../../src/wui/marketwindow.cc:720
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Accepta aquesta proposta d'extensió d'acord comercial"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:783
 #: ../../../../src/wui/marketwindow.cc:763
@@ -10318,7 +10318,7 @@ msgstr[1] ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:793
 #: ../../../../src/wui/marketwindow.cc:769
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Retira aquesta proposta d'allargament d'acord comercial"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../../../src/wui/game_exit_confirm_box.cc:27
@@ -10402,7 +10402,7 @@ msgstr "Mostra només els missatges d’escenari"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:604
 msgid "Show diplomacy messages only"
-msgstr ""
+msgstr "Mostra només els missatges diplomàtics"
 
 #: ../../../../src/wui/game_message_menu.cc:647
 msgid "Messages: Archive"
@@ -11193,15 +11193,15 @@ msgstr "Nom del mapa"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Proposa"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "La vostra oferta:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "El que demaneu:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
@@ -11255,7 +11255,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Cancel·la aquest acord comercial"
 
 #: ../../../../src/wui/marketwindow.cc:809
 msgid ""
