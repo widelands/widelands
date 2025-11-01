@@ -10,6 +10,13 @@ jobs:
       matrix:
         config: [Debug, Release]
         arch: [x64, x86, arm64]
+        include:
+          - arch: x64
+            archset: x64
+          - arch: x86
+            archset: x86
+          - arch: arm64
+            archset: amd64_arm64 
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-2025
     env:
