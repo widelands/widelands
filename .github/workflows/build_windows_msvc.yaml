@@ -71,7 +71,7 @@ jobs:
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
       with:
-        arch: ${{ matrix.arch }}
+        arch: ${{ matrix.archset }}
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg
