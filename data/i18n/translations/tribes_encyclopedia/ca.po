@@ -11144,7 +11144,7 @@ msgstr "Els ports poden ser atacats i destruïts pels enemics, com també passa 
 #. "Good contracts make good friends."
 #: ../../../../data/tribes/initialization/empire/units.lua:1237
 msgid "Clara pacta, boni amici."
-msgstr ""
+msgstr "Clara pacta, boni amici."
 
 #. TRANSLATORS: Lore helptext for an Empire market: Market
 #. Translation for the classical Latin quote:

@@ -54,17 +54,6 @@
 
 namespace Widelands {
 
-static std::vector<int32_t> gather_map_field_counts() {
-	std::set<int32_t> counts;
-	for (int32_t x : kMapDimensions) {
-		for (int32_t y : kMapDimensions) {
-			counts.insert(x * y);
-		}
-	}
-	return std::vector<int32_t>(counts.begin(), counts.end());
-}
-const std::vector<int32_t> Map::kMapFieldCounts = gather_map_field_counts();
-
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
    {"summer", "greenland", "world/pics/editor_terrain_category_green.png",
     /** TRANSLATORS: A world name for the random map generator in the editor */

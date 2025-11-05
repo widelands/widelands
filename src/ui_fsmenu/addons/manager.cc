@@ -58,6 +58,8 @@ constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/1
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
+constexpr int32_t kMapFilterUnlimited = std::numeric_limits<int32_t>::max();
+
 std::string filesize_string(const uint32_t bytes) {
 	if (bytes > 1000 * 1000 * 1000) {
 		return format_l(_("%.2f GB"), (bytes / (1000.f * 1000.f * 1000.f)));
@@ -347,8 +349,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                               0,
                               0,
                               150,
-                              1,
-                              1,
+                              0,
+                              0,
                               kMaxPlayers,
                               UI::PanelStyle::kFsMenu,
                               _("Min Players:"),
@@ -399,9 +401,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                               0,
                               0,
                               150,
-                              kMaxPlayers,
-                              1,
-                              kMaxPlayers,
+                              kMaxPlayers + 1,
+                              0,
+                              kMaxPlayers + 1,
                               UI::PanelStyle::kFsMenu,
                               _("Max Players:"),
                               UI::SpinBox::Units::kNone,
@@ -900,15 +902,52 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	maps_buttons_box_.add_space(kRowButtonSpacing);
 	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kFullSize);
 
-	filter_maps_min_w_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_min_h_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_max_w_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_max_h_.set_value_list(Widelands::kMapDimensions);
-	filter_maps_min_size_.set_value_list(Widelands::Map::kMapFieldCounts);
-	filter_maps_max_size_.set_value_list(Widelands::Map::kMapFieldCounts);
-	filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
-	filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
-	filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+	std::vector<int32_t> field_sizes_max;
+	field_sizes_max.insert(
+	   field_sizes_max.end(), Widelands::kMapDimensions.begin(), Widelands::kMapDimensions.end());
+	std::vector<int32_t> field_sizes_min = field_sizes_max;
+	field_sizes_min.insert(field_sizes_min.begin(), 0);
+	field_sizes_max.push_back(kMapFilterUnlimited);
+
+	std::set<int32_t> field_counts_set;
+	for (int32_t x : Widelands::kMapDimensions) {
+		for (int32_t y : Widelands::kMapDimensions) {
+			field_counts_set.insert(x * y);
+		}
+	}
+	std::vector<int32_t> field_counts_max;
+	field_counts_max.insert(
+	   field_counts_max.end(), field_counts_set.begin(), field_counts_set.end());
+	std::vector<int32_t> field_counts_min = field_counts_max;
+	field_counts_min.insert(field_counts_min.begin(), 0);
+	field_counts_max.push_back(kMapFilterUnlimited);
+
+	filter_maps_min_w_.set_value_list(field_sizes_min);
+	filter_maps_min_h_.set_value_list(field_sizes_min);
+	filter_maps_max_w_.set_value_list(field_sizes_max);
+	filter_maps_max_h_.set_value_list(field_sizes_max);
+	filter_maps_min_size_.set_value_list(field_counts_min);
+	filter_maps_max_size_.set_value_list(field_counts_max);
+	filter_maps_max_w_.set_value(filter_maps_max_w_.get_max(), false);
+	filter_maps_max_h_.set_value(filter_maps_max_h_.get_max(), false);
+	filter_maps_max_size_.set_value(filter_maps_max_size_.get_max(), false);
+
+	filter_maps_max_players_.add_replacement(kMaxPlayers + 1, pgettext("nr_players", "Unlimited"));
+	filter_maps_max_w_.add_replacement(
+	   filter_maps_max_w_.get_max(), pgettext("map_size", "Unlimited"));
+	filter_maps_max_h_.add_replacement(
+	   filter_maps_max_h_.get_max(), pgettext("map_size", "Unlimited"));
+	filter_maps_max_size_.add_replacement(
+	   filter_maps_max_size_.get_max(), pgettext("map_size", "Unlimited"));
+
+	filter_maps_min_players_.set_min_height(filter_maps_max_players_.get_h());
+	filter_maps_max_players_.set_min_height(filter_maps_min_players_.get_h());
+	filter_maps_min_w_.set_min_height(filter_maps_max_w_.get_h());
+	filter_maps_max_w_.set_min_height(filter_maps_min_w_.get_h());
+	filter_maps_min_h_.set_min_height(filter_maps_max_h_.get_h());
+	filter_maps_max_h_.set_min_height(filter_maps_min_h_.get_h());
+	filter_maps_min_size_.set_min_height(filter_maps_max_size_.get_h());
+	filter_maps_max_size_.set_min_height(filter_maps_min_size_.get_h());
 
 	filter_browse_reset_.set_enabled(false);
 	filter_maps_reset_.set_enabled(false);
@@ -997,9 +1036,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		filter_maps_min_h_.set_value(0, false);
 		filter_maps_min_size_.set_value(0, false);
 		filter_maps_max_players_.set_value(kMaxPlayers, false);
-		filter_maps_max_w_.set_value(Widelands::kMapDimensions.size() - 1, false);
-		filter_maps_max_h_.set_value(Widelands::kMapDimensions.size() - 1, false);
-		filter_maps_max_size_.set_value(Widelands::Map::kMapFieldCounts.size() - 1, false);
+		filter_maps_max_w_.set_value(filter_maps_max_w_.get_max(), false);
+		filter_maps_max_h_.set_value(filter_maps_max_h_.get_max(), false);
+		filter_maps_max_size_.set_value(filter_maps_max_size_.get_max(), false);
 		for (auto& pair : filter_maps_world_) {
 			pair.second->set_state(true, false);
 		}
@@ -1501,7 +1540,8 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->map_height > filter_maps_max_h_.get_value()) {
 		return false;
 	}
-	if (info->map_nr_players > filter_maps_max_players_.get_value()) {
+	if (info->map_nr_players > filter_maps_max_players_.get_value() &&
+	    filter_maps_max_players_.get_value() <= kMaxPlayers) {
 		return false;
 	}
 	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) {

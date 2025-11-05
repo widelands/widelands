@@ -120,7 +120,7 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->label =
 	   new UI::MultilineTextarea(box_, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	box_->add(sbi_->label, Box::Resizing::kFullSize);
+	box_->add(sbi_->label, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 
 	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_size_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
@@ -207,17 +207,17 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		box_->add(sbi_->button_ten_minus);
+		box_->add(sbi_->button_ten_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 		box_->add_space(padding_);
-		box_->add(sbi_->button_minus);
-		box_->add(sbi_->text, Box::Resizing::kFillSpace);
-		box_->add(sbi_->button_plus);
+		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		box_->add(sbi_->text, Box::Resizing::kFillSpace, UI::Align::kBottom);
+		box_->add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 		box_->add_space(padding_);
-		box_->add(sbi_->button_ten_plus);
+		box_->add(sbi_->button_ten_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	} else {
-		box_->add(sbi_->button_minus);
-		box_->add(sbi_->text, Box::Resizing::kFillSpace);
-		box_->add(sbi_->button_plus);
+		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		box_->add(sbi_->text, Box::Resizing::kFillSpace, UI::Align::kBottom);
+		box_->add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	}
 
 	sbi_->button_plus->sigclicked.connect([this]() {
@@ -333,10 +333,16 @@ void SpinBox::layout() {
 		sbi_->label->set_visible(false);
 		box_height = static_cast<int32_t>(button_size_);
 	}
+	box_height = std::max(box_height, min_height_);
 
 	box_->set_size(get_w(), box_height);
 	set_desired_size(get_w(), box_height);
 	set_size(get_w(), box_height);
+}
+
+void SpinBox::set_min_height(uint32_t height) {
+	min_height_ = height;
+	layout();
 }
 
 /**
@@ -477,6 +483,13 @@ int32_t SpinBox::get_value() const {
 		return -1;
 	}
 	return sbi_->value;
+}
+
+int32_t SpinBox::get_min() const {
+	return sbi_->min;
+}
+int32_t SpinBox::get_max() const {
+	return sbi_->max;
 }
 
 /**

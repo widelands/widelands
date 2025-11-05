@@ -1155,7 +1155,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Výborně! Frísové tvou nabídku přijali. Brzy si budeš moci všimnout, jak tvou tržnici opouští karavana oslů, aby doručila Frísům zboží. Tvé zboží pak na oplátku doručí karavana sobů."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1163,23 +1163,23 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Jak vidíš, okno tržnice má novou záložku. Každý probíhající obchod má v odpovídající tržnici takovou záložku. Obsahuje podrobnosti o obchodu jako třeba kolik zboží má být ještě zobchodováno. Také zde lze pozměnit podmínky obchodu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Obchod lze dočasně pozastavit a obnovit, jakmile se ti to opět hodí."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Obchod můžeš kdykoliv přesunout do jiné z tvých tržnic."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Můžeš navrhnout prodloužení obchodu zvýšením počtu dodávek."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "Také můžeš obchod kdykoliv zrušit."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"

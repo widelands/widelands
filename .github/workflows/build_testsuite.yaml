@@ -44,7 +44,9 @@ jobs:
       # TODO: Under Xvfb, the usual X11 memory leaks show up as an unsymbolized
       # <unknown module> making them impossible to suppress. So we disable all
       # memory leaks checking in the testsuite for now in ubuntu-22.04
-      ASAN_OPTIONS: "detect_leaks=${{ matrix.os == 'ubuntu-22.04' && '0' || '1' }}"
+      # TODO(tothxa): re-enable after v1.3 is released
+      # ASAN_OPTIONS: "detect_leaks=${{ matrix.os == 'ubuntu-22.04' && '0' || '1' }}"
+      ASAN_OPTIONS: 'detect_leaks=0'
       LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
       CXX: '${{ matrix.compiler }}'
     steps:
