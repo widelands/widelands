@@ -18,6 +18,7 @@ jobs:
       clang_tidy: ${{ steps.changed_files.outputs.clang_tidy }}
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
       inst_windows_msvc: ${{ steps.changed_files.outputs.inst_windows_msvc }}
+      inst_windows_arm_msvc: ${{ steps.changed_files.outputs.inst_windows_arm_msvc }}
       inst_windows: ${{ steps.changed_files.outputs.inst_windows }}
       inst_macos: ${{ steps.changed_files.outputs.inst_macos }}
       appimage: ${{ steps.changed_files.outputs.appimage }}
@@ -81,6 +82,11 @@ jobs:
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
+          inst_windows_arm_msvc:
+            - *installer
+            # doc/** maybe for some installers TODO(unknown)
+            - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
+            - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows.yaml
@@ -113,6 +119,11 @@ jobs:
     needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
+
+windows-arm-msvc:
+    needs: [changes, pre-build_checks]
+    if: needs.changes.outputs.inst_windows_arm_msvc == 'true'
+    uses: ./.github/workflows/build_windows_arm_msvc.yaml
 
   windows:
     needs: [changes, pre-build_checks]
