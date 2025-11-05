@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 jobs:
-  windows-msvc:
+  windows-arm-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     strategy:
       fail-fast: false
