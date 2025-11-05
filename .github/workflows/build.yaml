@@ -120,7 +120,7 @@ jobs:
     if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
-windows-arm-msvc:
+  windows-arm-msvc:
     needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_windows_arm_msvc == 'true'
     uses: ./.github/workflows/build_windows_arm_msvc.yaml
