@@ -64,7 +64,7 @@ jobs:
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
       with:
-        arch: amd64_arm64
+        arch: arm64
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg
