@@ -86,7 +86,7 @@ jobs:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
-            - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
+            - '.github/workflows/build_windows_arm_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows.yaml
