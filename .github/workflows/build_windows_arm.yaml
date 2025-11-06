@@ -18,9 +18,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
-    - name: Install MSYS2
+    - name: msys2
       uses: msys2/setup-msys2@v2
-      id: msys2
       with:
         location: C:\msys64
         msystem: clangarm64
@@ -34,11 +33,10 @@ jobs:
           mingw-w64-clang-aarch64-SDL2_image
           mingw-w64-clang-aarch64-SDL2
           mingw-w64-clang-aarch64-glew
+    - name: Installing dependencies
       run: |
         $env:MSYS2_LOCATION = ${{ steps.msys2.outputs.msys2-location }}
         echo "$env:MSYS2_LOCATION"
-    - name: Installing dependencies
-      run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
         # bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
         choco install innosetup
