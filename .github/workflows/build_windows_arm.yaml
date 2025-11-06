@@ -26,11 +26,15 @@ jobs:
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
-        bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
+        # bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
         choco install innosetup
     - name: Compiler
       shell: msys2 {0}
       run: |
+        pacman -S mingw-w64-x86_64-toolchain
+        pacman -S mingw-w64-x86_64-cmake mingw-w64-x86_64-asio mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glew
+        pacman -Syyuu --noconfirm
+        pacman -Syyuu --noconfirm
         $env:Path = "C:/msys64/clangarm64/include;C:/msys64/clangarm64/lib;C:/msys64/clangarm64/bin;C:/msys64/usr/bin;$env:Path"
         $env:CC = "C:/msys64/clangarm64/bin/clang.exe"
         $env:CXX = "C:/msys64/clangarm64/bin/clang++.exe"
