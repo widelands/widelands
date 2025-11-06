@@ -34,6 +34,7 @@ jobs:
           mingw-w64-clang-aarch64-SDL2_image
           mingw-w64-clang-aarch64-SDL2
           mingw-w64-clang-aarch64-glew
+          mingw-w64-clang-aarch64-icu
     - name: Installing dependencies
       run: |
         $env:MSYS2_LOCATION = "${{ steps.msys2.outputs.msys2-location }}"
