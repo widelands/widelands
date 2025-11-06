@@ -21,8 +21,9 @@ jobs:
     - name: Install MSYS2
       uses: msys2/setup-msys2@v2
       with:
-        location: C:
+        location: C:\msys64
         msystem: clangarm64
+        update: true
         install: >-
           mingw-w64-clang-aarch64-toolchain
           mingw-w64-clang-aarch64-cmake
@@ -32,7 +33,6 @@ jobs:
           mingw-w64-clang-aarch64-SDL2_image
           mingw-w64-clang-aarch64-SDL2
           mingw-w64-clang-aarch64-glew
-        update: true
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"

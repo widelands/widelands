@@ -39,7 +39,6 @@ echo " "
 echo "Windows:"
 echo "* msys32    MSys 32bit (deprecated)"
 echo "* msys64    MSys 64bit"
-echo "* msysarm   MSys 64bit ARM"
 echo "* vcpkg     MSVC"
 echo " "
 echo "Mac:"
@@ -174,10 +173,6 @@ elif [ "$DISTRO" = "msys32" ]; then
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
    "${WL_DIR}"/utils/windows/install_deps_mingw.sh x86_64 $@
-
-elif [ "$DISTRO" = "msysarm" ]; then
-   echo "Installing dependencies for 64-bit Windows on Arm..."
-   "${WL_DIR}"/utils/windows/install_deps_mingw.sh clang_aarch64 $
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
