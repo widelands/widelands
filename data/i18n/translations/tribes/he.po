@@ -5746,7 +5746,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
-msgstr ""
+msgstr "פריזיאנים"
 
 #: ../../../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
@@ -5762,7 +5762,7 @@ msgstr "גנרל"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "מבוא"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
