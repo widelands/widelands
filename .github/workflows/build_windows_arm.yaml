@@ -22,7 +22,7 @@ jobs:
       id: msys2
       uses: msys2/setup-msys2@v2
       with:
-        location: C:\msys64
+        location: C:\
         msystem: clangarm64
         update: true
         install: >-
