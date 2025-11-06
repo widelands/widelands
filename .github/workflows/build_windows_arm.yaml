@@ -31,8 +31,8 @@ jobs:
     - name: Compiler
       shell: msys2 {0}
       run: |
-        pacman -S mingw-w64-x86_64-toolchain
-        pacman -S mingw-w64-x86_64-cmake mingw-w64-x86_64-asio mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glew
+        pacman -S mingw-w64-clang-aarch64-binutils mingw-w64-clang-aarch64-crt-git mingw-w64-clang-aarch64-gcc mingw-w64-clang-aarch64-headers-git mingw-w64-clang-aarch64-libmangle-git mingw-w64-clang-aarch64-libwinpthread mingw-w64-clang-aarch64-make mingw-w64-clang-aarch64-pkgconf mingw-w64-clang-aarch64-tools-git mingw-w64-clang-aarch64-winpthreads mingw-w64-clang-aarch64-winstorecompat-git
+        pacman -S mingw-w64-clang-aarch64-cmake mingw-w64-clang-aarch64-asio mingw-w64-clang-aarch64-SDL2_ttf mingw-w64-clang-aarch64-SDL2_mixer mingw-w64-clang-aarch64-SDL2_image mingw-w64-clang-aarch64-glew
         pacman -Syyuu --noconfirm
         pacman -Syyuu --noconfirm
         $env:Path = "C:/msys64/clangarm64/include;C:/msys64/clangarm64/lib;C:/msys64/clangarm64/bin;C:/msys64/usr/bin;$env:Path"
