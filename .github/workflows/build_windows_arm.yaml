@@ -33,6 +33,9 @@ jobs:
           mingw-w64-clang-aarch64-SDL2_image
           mingw-w64-clang-aarch64-SDL2
           mingw-w64-clang-aarch64-glew
+      env:
+        MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}
+      run: echo "$env:MSYS2_LOCATION"
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
