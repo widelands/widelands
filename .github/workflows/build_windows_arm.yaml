@@ -18,6 +18,11 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
+    - name: Install MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: clangarm64
+        update: true
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
