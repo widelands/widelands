@@ -607,6 +607,7 @@ Version de correction de bugs</li>
   <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
   <developer id="org.widelands">
     <name>The Widelands Development Team</name>
+    <name xml:lang="ca">L’equip de desenvolupament del Widelands</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
