@@ -36,7 +36,7 @@ jobs:
           mingw-w64-clang-aarch64-glew
     - name: Installing dependencies
       run: |
-        $env:MSYS2_LOCATION = ${{ steps.msys2.outputs.msys2-location }}
+        $env:MSYS2_LOCATION = "${{ steps.msys2.outputs.msys2-location }}"
         echo "$env:MSYS2_LOCATION"
         $env:Path = "C:\msys64\usr\bin;$env:Path"
         # bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
