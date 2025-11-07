@@ -168,9 +168,9 @@ public:
 
 private:
 	enum class Override : uint8_t { kNoOverride = 0, kHidden = 1, kRevealed = 2 };
-	uint16_t value_ : 14;
+	uint8_t value_ : 14;
 	// Not using the Override type for the variable because it causes a warning in GCC<8.4
-	[[clang::preferred_type(Override)]] uint8_t override_ : 2;
+	uint8_t override_ : 2;
 };
 
 }  // namespace Widelands
