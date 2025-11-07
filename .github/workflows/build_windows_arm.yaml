@@ -37,10 +37,9 @@ jobs:
           mingw-w64-clang-aarch64-icu
     - name: Installing dependencies
       run: |
-        $env:MSYS2_LOCATION = "${{ steps.msys2.outputs.msys2-location }}"
-        echo "$env:MSYS2_LOCATION"
         $env:Path = "C:\msys64\usr\bin;$env:Path"
         # bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
+        pacman.exe -U https://mirror.msys2.org/mingw/clangarm64/mingw-w64-clang-aarch64-icu-77.1-1-any.pkg.tar.zst 
         choco install innosetup
     - name: Compiler
       run: |
