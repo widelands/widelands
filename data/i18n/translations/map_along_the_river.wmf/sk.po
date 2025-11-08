@@ -25,9 +25,9 @@ msgstr ""
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
 msgstr[0] "%1% jednotka %2% bola prenesená do vašej ‘%3%’ budovy."
-msgstr[1] "%1% jednotiek %2% bola prenesených do vašej ‘%3%’ budovy."
-msgstr[2] "%1% jednotiek %2% bola prenesených do vašej ‘%3%’ budovy."
-msgstr[3] "%1% jednotka %2% bola prenesená do vašej ‘%3%’ budovy."
+msgstr[1] "%1% jednotky %2% boli prenesené do vašej ‘%3%’ budovy."
+msgstr[2] "%1% jednotiek %2% bolo prenesených do vašej ‘%3%’ budovy."
+msgstr[3] "%1% jednotky %2% bola prenesených do vašej ‘%3%’ budovy."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -70,7 +70,7 @@ msgstr "Postavte prístav"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr "Postavte Prístav na Severe"
+msgstr "Postavte prístav na severe"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
@@ -86,7 +86,7 @@ msgstr "Obsaďte pirátsku strážnicu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr "Obsaďte Pirátsku Strážnicu."
+msgstr "Obsaďte pirátsku strážnicu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
@@ -102,7 +102,7 @@ msgstr "Postavte skladisko"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Postavte skladisko vedľa Pirátskej strážnice"
+msgstr "Postavte skladisko vedľa pirátskej strážnice"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -122,7 +122,7 @@ msgstr "Prineste lopaty."
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Preneste Štyri Lopaty do nového Skladiska"
+msgstr "Preneste štyri lopaty do nového skladiska"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -140,7 +140,7 @@ msgstr "Porazte pirátov"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr "Porazte Pirátov"
+msgstr "Porazte pirátov"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
@@ -154,7 +154,7 @@ msgstr "Vysloboďte nášho prieskumníka z pirátskeho zajatia"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr "Obsaďte Pevnosť na Ostrove"
+msgstr "Obsaďte pevnosť na ostrove"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
@@ -166,7 +166,7 @@ msgstr "Porazte Hjalmara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr "Porazte Hjalmarové armády"
+msgstr "Porazte Hjalmarové vojská"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
@@ -212,7 +212,7 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr "Váš Poradca"
+msgstr "Váš poradca"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
@@ -483,6 +483,8 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Pane, vďaka našej úspešnej snahe pirátov vyhnať, veľa z nich sa dalo na útek"
+" a unikli na malých lodiach. Nevedno, ktorým smerom sa dali."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -494,6 +496,9 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Pane, po dlhom štúdiu a výskume sa našim učencom konečne podarilo rozlúštiť "
+"podivný jazyk Torverových spisov, ktoré sme našli v jeho ústredí. Teraz už "
+"vieme ako stavať lodenice. "
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
@@ -505,6 +510,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Pane, jedného z našich prieskumníkov zajali pirati a odvliekli ho na svoj "
+"ostrov. On jediný pozná cestu cez močariská do krajiny Hjalmara."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -512,6 +519,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Podľa našich rybárov ho väznia v pevnosti na ostrove. Mali by sme využiť "
+"znalosť lodnej konštrukcie, ktorú sme získali od Törvera aby sme postavili "
+"lode a zaútočili s nimi na ich pozície."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
