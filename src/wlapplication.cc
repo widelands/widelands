@@ -411,7 +411,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// The environment variable works with older SDL versions too, but it only became a
 	// hint in 2.0.22.
 	if (SDL_GetHint(SDL_HINT_VIDEODRIVER) == nullptr) {
-		// If somebidy uses Wayland, we can presume they prefer it, but SDL doesn't...
+		// If somebody uses Wayland, we can presume they prefer it, but SDL doesn't...
 		SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11,KMSDRM");
 	}
 #endif
