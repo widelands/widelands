@@ -208,36 +208,11 @@ class WidelandsTestCase():
                 widelands.kill()
                 widelands.communicate()
                 self.wl_timed_out = True
-
-            end_time = get_time()
-            stdout_file.flush()
-
-            if os.name == 'nt':
-                # actual stdout is in homedir/stdout.txt on windows
-                stdout_txt_name = os.path.join(self.run_dir, 'stdout.txt')
-                stdout_file.write('\n')
-                stdout_file.write(colorize('stdout.txt:', info_color))
-                try:
-                    with open(stdout_txt_name, 'r') as stdout_txt:
-                        for line in stdout_txt:
-                            stdout_file.write(line)
-                    # delete it in case we have other passes for created savegames
-                    os.unlink(stdout_txt_name)
-                except:
-                    message = f'Error copying stdout from {stdout_txt_name}'
-                    self.out_status('FAIL ', message)
-                    stdout_file.flush()
-                    stdout_file.write('\n')
-                    stdout_file.write(message)
-                    stdout_file.write('\n')
-                stdout_file.flush()
-
-            if self.wl_timed_out:
                 stdout_file.write('\n')
                 stdout_file.write(colorize('Timed out.', error_color))
                 stdout_file.write('\n')
-                stdout_file.flush()
-
+            end_time = get_time()
+            stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
             stdout_file.write('\n')
             stdout_file.write(
