@@ -57,3 +57,9 @@ jobs:
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
         path: "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
+
+    - name: Regression testing
+      env:
+        SDL_VIDEODRIVER: offscreen
+      run: |
+        ./regression_test.py

@@ -105,3 +105,10 @@ jobs:
         name: Widelands ${{ matrix.config }} Windows ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\${{ env.ARTIFACT_NAME }}.exe
         if-no-files-found: ignore
+    - name: Regression testing
+      shell: bash
+      env:
+        SDL_VIDEODRIVER: offscreen
+      run: |
+        cd $GITHUB_WORKSPACE
+        ./regression_test.py -b build/src/widelands.exe
