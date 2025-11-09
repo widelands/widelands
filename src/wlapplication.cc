@@ -421,7 +421,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// to let it know and so prevent too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
 		log_info(
-			"You may try to use another driver by setting the SDL_VIDEODRIVER environment variable.");
+		   "You may try to use another driver by setting the SDL_VIDEODRIVER environment variable.");
 		log_info("Video drivers supported by your SDL version:");
 		for (int i = 0; i < SDL_GetNumVideoDrivers(); ++i) {
 			log_info("   %s", SDL_GetVideoDriver(i));
