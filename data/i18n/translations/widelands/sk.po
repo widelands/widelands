@@ -308,7 +308,7 @@ msgstr "%1$s opustil tím %2$u a je teraz bez tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:77
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Žiadosť o pripojenie sa do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:78
 msgid "Team Joining Invitation"
@@ -318,18 +318,18 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr "%1$s požiadal o pripojenie sa do tímu %2$s."
+msgstr "Hráč %1$s požiadal o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:81
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr "%1$s pozval %2$s, aby sa pripojil do svojho tímu."
+msgstr "Hráč %1$s pozval hráča %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:120
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr "%1$s prijal %2$s do svojho tímu."
+msgstr "Hráč %1$s prijal hráča %2$s do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format
@@ -339,12 +339,12 @@ msgstr ""
 #: ../../../../src/commands/cmd_diplomacy.cc:127
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s odvolal žiadosť o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:129
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "Hráč %1$s zamietol hráčovi %2$s členstvo vo svojom tíme."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:132
 #, c-format
@@ -358,11 +358,11 @@ msgstr ""
 
 #: ../../../../src/commands/cmd_diplomacy.cc:138
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Zmena tímu prijatá"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:138
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Zmena tímu zamietnutá"
 
 #: ../../../../src/commands/cmd_replay_end.cc:33
 msgid "End of Replay"
@@ -4304,12 +4304,12 @@ msgstr "Klient %1$s neodpovedal dlhšie ako %2$s."
 #: ../../../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Klient %s má povolené funkcie podvádzania!"
 
 #: ../../../../src/network/network_gaming_messages.cc:78
 #, c-format
 msgid "Client %s is cheating!"
-msgstr ""
+msgstr "Klient %s podvádza!"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:80
@@ -10224,7 +10224,7 @@ msgstr "Schváliť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:324
 msgid "Reject"
-msgstr ""
+msgstr "Zamietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:330
 msgid "Accept"
@@ -10236,7 +10236,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:347
 msgid "Retract"
-msgstr ""
+msgstr "Odvolať"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:403
 #: ../../../../src/wui/marketwindow.cc:936
