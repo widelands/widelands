@@ -514,14 +514,14 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 }
 
 void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
-	songs_[Songset::kIngame]->set_song_enabled(filename, on);
+	songs_[current_songset_]->set_song_enabled(filename, on);
 }
 bool SoundHandler::is_music_track_enabled(std::string& filename) {
-	return songs_[Songset::kIngame]->is_song_enabled(filename);
+	return songs_[current_songset_]->is_song_enabled(filename);
 }
 
 std::vector<Song> SoundHandler::get_music_data() {
-	return songs_[Songset::kIngame]->get_song_data();
+	return songs_[current_songset_]->get_song_data();
 }
 
 bool SoundHandler::use_custom_songset() const {
