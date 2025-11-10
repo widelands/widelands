@@ -120,7 +120,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Metallici cum cenae provide"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
@@ -947,7 +947,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Victoria"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""

@@ -115,6 +115,11 @@ void fill_parameter_vector() {
 	      "or "
 	      "--editor."),
 	    false},
+	   {"", "difficulty",
+	    /** TRANSLATORS: A placeholder for a numerical value */
+	    _("n"),
+	    /** TRANSLATORS: `n` references a numerical placeholder */
+	    _("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
 	   /// Misc
 	   {"", "nosound", "", _("Start the game with sound disabled."), false},
 	   {"", "shuffle", "", _("Start the game with shuffle mode for playback of songs"), true},
@@ -124,6 +129,12 @@ void fill_parameter_vector() {
 	   {"", "play_intro_music", _("[true*|false]"),
 	    _("Play the intro music at startup and show splash image until it ends."), true},
 	   {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	   {"", "fail-on-errors", "",
+	    _("Force Widelands to crash when a game or the editor terminates with an error."), false},
+	   {"", "messagebox-timeout",
+	    /** TRANSLATORS: Placeholder for a time value in seconds */
+	    _("<seconds>"),
+	    _("Automatically close modal message boxes after the given number of seconds time."), true},
 	   {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	   {"", "ai_training", "",
 	    _("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
@@ -191,6 +202,7 @@ void fill_parameter_vector() {
 	   {"", "transparent_chat", _("[true*|false]"),
 	    _("Show in-game chat with transparent background."), true},
 	   {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
+	   {"", "pagination_pagesize", _("n"), _("Default pagesize for paginated structures."), true},
 	   /// Networking
 	   {_("Networking:"), "metaserver", _("URI"),
 	    _("Connect to a different metaserver for internet gaming."), false},

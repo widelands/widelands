@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Malay (http://app.transifex.com/widelands/widelands/language/ms/)\n"
@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bina kuari"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
@@ -98,7 +98,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr ""
+msgstr "Bina telaga"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
@@ -247,7 +247,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bina gudang"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
@@ -865,7 +865,7 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
+" longer distance with them and maybe escape from Lutas’s influence."
 msgstr ""
 
 #. TRANSLATORS: Jundlina

@@ -46,6 +46,48 @@ bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) con
 	   });
 }
 
+bool FindNodeOwned::accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
+	return (coords.field->get_owned_by() == owner_);
+}
+
+bool FindNodeSpace::accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	// TODO(unknown): This is an embarrasingly ugly hack to make bug #1796611 happen less
+	// often. But it gives no passability guarantee (that workers will not
+	// get locked in). For example one farmer may call findspace and then,
+	// before he plants anything, another farmer may call findspace, which
+	// may find a space without considering that the first farmer will plant
+	// something. Together they can cause a passability problem. This code
+	// will also allow blocking the shoreline if it is next to the worker's
+	// location. Also, the gap of 2 nodes between 2 farms will be blocked,
+	// because both are next to their farm. The only real solution that I can
+	// think of for this kind of bugs is to only allow unwalkable objects to
+	// be placed on a node if ALL neighbouring nodes are passable. This must
+	// of course be checked at the moment when the object is placed and not,
+	// as in this case, only before a worker starts walking there to place an
+	// object. But that would make it very difficult to find space for things
+	// like farm fileds. So our only option seems to be to keep all farm
+	// fields, trees, rocks and such on triangles and keep the nodes
+	// passable. See code structure issue #1096824.
+
+	if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
+		return false;
+	}
+
+	for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		FCoords const neighb = egbase.map().get_neighbour(coords, dir);
+		if (landbased_) {
+			if ((neighb.field->maxcaps() & MOVECAPS_WALK) == 0) {
+				return false;
+			}
+		} else {
+			if ((neighb.field->nodecaps() & MOVECAPS_SWIM) != 0) {
+				return true;
+			}
+		}
+	}
+	return landbased_;
+}
+
 bool FindNodeCaps::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 

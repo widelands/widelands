@@ -71,7 +71,7 @@ void parse_working_positions(const Descriptions& descriptions,
 			if (!descriptions.worker_exists(woi)) {
 				throw GameDataError("not a worker");
 			}
-			working_positions->push_back(std::make_pair(woi, amount));
+			working_positions->emplace_back(woi, amount);
 		} catch (const WException& e) {
 			throw GameDataError("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
 		}
@@ -94,8 +94,9 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          MapObjectType init_type,
                                          const LuaTable& table,
+                                         const std::vector<std::string>& attribs,
                                          Descriptions& descriptions)
-   : BuildingDescr(init_descname, init_type, table, descriptions),
+   : BuildingDescr(init_descname, init_type, table, attribs, descriptions),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
      is_infinite_production_useful_(false),
@@ -215,8 +216,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
+                                         const std::vector<std::string>& attribs,
                                          Descriptions& descriptions)
-   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, descriptions) {
+   : ProductionSiteDescr(
+        init_descname, MapObjectType::PRODUCTIONSITE, table, attribs, descriptions) {
 }
 
 /**
@@ -449,7 +452,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 
 InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi,
                                        WareWorker const type,
-                                       const Request* /* req */) {
+                                       const Request* /* req */,
+                                       uint32_t /* disambiguator_id */) {
 	for (InputQueue* ip_queue : input_queues_) {
 		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
@@ -1223,6 +1227,8 @@ void ProductionSite::unnotify_player() {
 
 void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
+	// This is the deduplicated "list" of unique fields from a coords search
+	static std::set<Widelands::Coords> processed_fields;
 
 	while (!ship_fleet_interfaces_.empty()) {
 		ship_fleet_interfaces_.front()->remove(egbase);
@@ -1240,8 +1246,12 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(kMinOceanSize));
 
+		processed_fields.clear();
+
 		for (const Coords& coords : result) {
-			ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
+			if (processed_fields.insert(coords).second) {
+				ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
+			}
 		}
 
 		if (ship_fleet_interfaces_.empty()) {
@@ -1261,8 +1271,13 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
 		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeFerry(0));
 
+		processed_fields.clear();
+
 		for (const Coords& coords : result) {
-			ferry_fleet_interfaces_.push_back(FerryFleetYardInterface::create(egbase, *this, coords));
+			if (processed_fields.insert(coords).second) {
+				ferry_fleet_interfaces_.push_back(
+				   FerryFleetYardInterface::create(egbase, *this, coords));
+			}
 		}
 
 		if (ferry_fleet_interfaces_.empty()) {
@@ -1303,7 +1318,7 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 	   new ProductionsiteSettings(descr(), owner().tribe()));
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
-		pair.second.priority = get_priority(wwWARE, pair.first);
+		pair.second.priority = get_priority(wwWARE, pair.first, 0);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
@@ -1317,7 +1332,7 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 		}
 	}
 	for (auto& pair : settings->worker_queues) {
-		pair.second.priority = get_priority(wwWORKER, pair.first);
+		pair.second.priority = get_priority(wwWORKER, pair.first, 0);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());

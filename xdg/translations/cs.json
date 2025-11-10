@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Strategická hra",
 	"tagline": "Real-time budovatelská strategická hra",
-	"description":[
+	"developer": "Tým vývojářů Widelands",
+	"description": [
 		"Jsi vladařem malého kmene. Tvým úkolem je vybudovat fungující a prosperující osídlení. Každý člen tvého kmene má podíl na výrobě surovin, které podpoří další růst.",
 		"Widelands nabízí hru pro jednoho hráče včetně kampaní, které vypráví příběhy kmenů a jejich boje o přežití ve světě Widelands. Opravdový příběh ale začíná ve chvíli, kdy se setkáte s přáteli u hry přes internet nebo LAN a budujete společnou civilizaci nebo vedete zničující válku. Své schopnosti si ve Widelands můžete nechat prověřit i pomocí počítačových soupeřů."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Obchodování",
+			"Přidáno šest nových map a tři odebrány",
+			"Hospodářské oblasti",
+			"Provedena řada vylepšení v rámci Encyklopedie",
+			"Mapy z internetu lze nově stahovat prostřednictvím herních rozšíření",
+			"V editoru map jsou k dispozici nová zobrazení",
+			"Řada nových funkcí pro tvorbu vlastních rozšíření"
+		],
+		"1.2.1": [
+			"Výpis chyb skriptu"
+		],
+		"1.2": [
+			"Nová kampaň pro kmen Frísů",
+			"Hráči řízení počítačem mohou vyvíjet aktivní diplomacii",
+			"Námořní vojenství (zkušební provoz)",
+			"Vojenská posádka v přístavech a hlavní budově",
+			"Zásuvné moduly uživatelského rozhraní",
+			"K mapě připínatelné poznámky",
+			"Mapy lze publikovat přímo z editoru",
+			"Vylepšena správa chyb"
+		]
+	}
 }

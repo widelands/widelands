@@ -36,7 +36,7 @@ msgstr ""
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:213
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
-msgstr ""
+msgstr "規則"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"

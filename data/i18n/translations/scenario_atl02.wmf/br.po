@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Anthony Guéchoum <a.guechoum@proton.me>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (https://app.transifex.com/widelands/teams/35159/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,11 +122,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Ergerzhit an trowardroioù"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Ergerzhit ho trowardroioù"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -133,11 +137,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Astennit ho tomani"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Astenn e zomani"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -239,7 +243,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Pilit Maletus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
@@ -286,7 +290,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Pilit Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
@@ -297,7 +301,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Pilet!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
@@ -355,8 +359,8 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
 
 #. TRANSLATORS: Jundlina - Diary
@@ -734,7 +738,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Pilet eo bet an Impalaerezh"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -927,7 +931,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Gourc'hemennoù"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
@@ -1188,7 +1192,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
-msgstr ""
+msgstr "Pilet eo bet Kalitath"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:754
@@ -1215,7 +1219,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Ti ar sklêrijenner"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
@@ -1240,7 +1244,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trader"
-msgstr ""
+msgstr "Marc'hadour"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
@@ -1273,7 +1277,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr ""
+msgstr "Pezh aour"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8

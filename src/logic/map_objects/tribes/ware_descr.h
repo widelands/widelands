@@ -37,7 +37,9 @@ namespace Widelands {
  */
 class WareDescr : public MapObjectDescr {
 public:
-	WareDescr(const std::string& init_descname, const LuaTable& t);
+	WareDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          const std::vector<std::string>& attribs);
 	~WareDescr() override = default;
 
 	/// AI hints for this ware type
@@ -54,6 +56,7 @@ public:
 	void set_default_target_quantity(const std::string& tribename, int quantity);
 
 	/// This is an AI hint
+	[[nodiscard]] int preciousness(const std::string& tribename) const;
 	void set_preciousness(const std::string& tribename, int preciousness);
 
 	bool has_demand_check(const std::string& tribename) const;

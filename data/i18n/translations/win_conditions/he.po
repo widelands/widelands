@@ -341,7 +341,7 @@ msgstr ""
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
-msgstr ""
+msgstr "סטטוס"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:83

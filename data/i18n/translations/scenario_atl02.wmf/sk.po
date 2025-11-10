@@ -3,15 +3,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Pavol Gono, 2024
+# GunChleoc, 2025
+# MiroslavR <miroslavr256@gmail.com>, 2025
+# Pavol Gono, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2025\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,11 +159,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Postavte pavúčiu farmu a tkáčovňu"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Výroba pavúčej látky"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -364,8 +366,8 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
 
 #. TRANSLATORS: Jundlina - Diary
@@ -938,13 +940,15 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Blahoželáme"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Túto misiu ste splnili. Môžete pokračovať v hre alebo prejsť na ďalšiu "
+"misiu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
@@ -1226,13 +1230,13 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Prieskumnícky dom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "preskúmavanie"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
@@ -1310,13 +1314,15 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
+"Predtým, ako sem môžete poslať prieskumníka, musíte túto vlajku prepojiť s "
+"prieskumníckym domom."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Vykonáva prieskum neznámeho územia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul

@@ -204,6 +204,8 @@ wl_library(scripting_logic
     ui/lua_map_view.h
     ui/lua_multiline_textarea.cc
     ui/lua_multiline_textarea.h
+    ui/lua_pagination.cc
+    ui/lua_pagination.h
     ui/lua_panel.cc
     ui/lua_panel.h
     ui/lua_panel_create_child.cc
@@ -240,7 +242,7 @@ wl_library(scripting_logic
     io_filesystem
     io_profile
     logic
-    logic_commands
+    commands
     logic_constants
     logic_filesystem_constants
     logic_game_controller

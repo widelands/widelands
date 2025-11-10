@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -869,8 +869,8 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Gum blàthaicheadh Satul sibh, a Jundlina. Is mise Ostur agus togaidh mi longan. Tha mi air seòrsa ùr de long a thionnsgnadh: tha iad nas lugha na tha sinn cleachdte ris ach mòran nas treasa. Ma thogas sinn iad mar bu chòir, cha chreid mi nach urrainn dhuinn seòladh mòran nas fhaide air falbh leotha agus ’s dòcha gun dèid leinn teicheadh o bhuaidh Lutais."
+" longer distance with them and maybe escape from Lutas’s influence."
+msgstr ""
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
@@ -938,7 +938,7 @@ msgstr "Meal do naidheachd"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a chluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

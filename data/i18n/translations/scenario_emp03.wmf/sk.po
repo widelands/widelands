@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Karl Vest, 2020
-# Pavol Gono, 2024
+# Pavol Gono, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Pavol Gono, 2024\n"
+"Last-Translator: Pavol Gono, 2025\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,7 +58,7 @@ msgstr "Postavte drevorubačov dom, pílu a kamenársky dom"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "Drevorubač, Píla a Kamenár"
+msgstr "Drevorubač, píla a kamenár"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -110,11 +110,11 @@ msgstr "Lodný priemysel"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr "Postavte prístav, aby ste z tohto ostrova mohli odplávať"
+msgstr "Postavte prístav, aby ste z tohto ostrova mohli odplávať."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr "Postavte lodenicu pre výrobu lodí, na ktorých môžete odplávať"
+msgstr "Postavte lodenicu pre výrobu lodí, na ktorých môžete odplávať."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
@@ -168,8 +168,8 @@ msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Pošli loď na sever, aby si získal nejaké poznatky o Barbaroch. Pokús sa na "
-"ostrove postaviť prístav a vojenskú základňu."
+"Pošlite loď na sever, aby ste získali nejaké poznatky o Barbaroch. Pokúste "
+"sa na ostrove postaviť prístav a pozorovateľňu."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
@@ -196,7 +196,7 @@ msgstr "Porazte nepriateľa"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "Ukončite existenciu Barbarov v tejto časti sveta"
+msgstr "Ukončite existenciu Barbarov v tejto časti sveta."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
@@ -204,9 +204,7 @@ msgstr "Vykonajte ďalší prieskum a postavte prístavy"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
-"Preskúmajte ďalšie ostrovy a hľadajte Prístavné miesta, miesta pre stavbu "
-"prístavov"
+msgstr "Preskúmajte ďalšie ostrovy a hľadajte prístavné miesta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -468,7 +466,7 @@ msgstr "Vstúpi Amalea…"
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr ""
+msgstr "Musím s tebou prebrať dôležité záležitosti… Najprv dobrá správa:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -511,7 +509,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
-msgstr ""
+msgstr "Potrebujeme prístav"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"

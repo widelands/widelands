@@ -297,6 +297,8 @@ function building_help_general_string(tribe, building_description)
       else
          representative_resource = wl.Game():get_worker_description(tribe.name .. "_carrier")
       end
+   elseif (building_description.type_name == "market") then
+      representative_resource = wl.Game():get_ware_description("gold")
    elseif (building_description.type_name == "constructionsite") or (building_description.type_name == "dismantlesite") then
       representative_resource = wl.Game():get_worker_description(tribe.name .. "_builder")
    end
@@ -732,6 +734,7 @@ function building_help_production_section(tribe, building_description)
    local result = h2(_("Production"))
    local checked_programs = {}
    if (building_description.type_name == "trainingsite") then
+      local soldier_descr = wl.Game():get_worker_description(tribe.soldier)
       programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, nil)
       if (not checked_programs[program]) then
          for j, program in ipairs(programs) do
@@ -741,29 +744,33 @@ function building_help_production_section(tribe, building_description)
                result = result .. h3(_("Health improvement:"))
                result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
-               "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[2] .. ".png",
-               "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[3] ..".png"})
+                  soldier_descr:get_health_level_image_filepath(trained[2]),
+                  soldier_descr:get_health_level_image_filepath(trained[3])
+               })
             elseif (trained[1] == "Attack") then
                -- TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
                result = result .. h3(_("Attack training:"))
                result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
-               "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[2] .. ".png",
-               "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[3] ..".png"})
+                  soldier_descr:get_attack_level_image_filepath(trained[2]),
+                  soldier_descr:get_attack_level_image_filepath(trained[3])
+               })
             elseif (trained[1] == "Defense") then
                -- TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
                result = result .. h3(_("Defense training:"))
                result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
-               "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[2] .. ".png",
-               "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[3] ..".png"})
+                  soldier_descr:get_defense_level_image_filepath(trained[2]),
+                  soldier_descr:get_defense_level_image_filepath(trained[3])
+               })
             elseif (trained[1] == "Evade") then
                -- TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
                result = result .. h3(_("Evade training:"))
                result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
-               "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[2] .. ".png",
-               "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[3] ..".png"})
+                  soldier_descr:get_evade_level_image_filepath(trained[2]),
+                  soldier_descr:get_evade_level_image_filepath(trained[3])
+               })
             end
             if (ware_counters[program] > 0) then
                if (ware_counters[program] == 1) then
@@ -863,7 +870,8 @@ function building_help(tribe, building_description)
             -- TODO(GunChleoc) Get them a crew string for the builder
       return building_help_general_string(tribe, building_description)
    elseif (building_description.type_name == "market") then
-      return building_help_general_string(tribe, building_description)
+      return building_help_general_string(tribe, building_description) ..
+         building_help_building_section(building_description)
    else
       return ""
    end

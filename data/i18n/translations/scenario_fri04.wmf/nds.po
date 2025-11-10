@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2022
+# Benedikt Straub <benedikt-straub@web.de>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-06-05 03:23+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,7 +108,7 @@ msgid ""
 msgstr ""
 "Marcus Caius Injucundus hett över de Störm nich logen. Wi sünd jüüst bi "
 "rechte Tied offahren; up See hett ’t uns inhaalt un wi weren all wiss, dat "
-"uns’ Schipp gliek stückengahn un unnergahn word un keen vun uns’ weer uns’ "
+"uns’ Schipp gliek stückengahn un unnergahn word un keener vun uns weer uns’ "
 "Heimaad to sehn kriegen word."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
@@ -542,7 +542,7 @@ msgstr "Daar passeert wat …"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked by vicous strangers, but he died "
+"something about his tribe being attacked by vicious strangers, but he died "
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
@@ -564,8 +564,8 @@ msgstr "Wi sünd to laat"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
 msgid ""
 "We met a wounded soldier near our north-western border today. He gasped "
-"something about his tribe being attacked and vanquished by vicous strangers."
-" With his last breath he told us his leader’s name: Reebaud."
+"something about his tribe being attacked and vanquished by vicious "
+"strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
 "Wi hebben vandag bi uns’ noordwestelk Grenz eenen verwundt Soldaten troffen."
 " He hett wat daaröver japst, dat sien Volk vun naren Frömden angriepen un "

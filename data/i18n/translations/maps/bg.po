@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Любомир Василев, 2016-2018\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -82,7 +82,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Втората империя"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -105,12 +105,12 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Когато Чат'Карут умрял, той вече бил стар човек, баща на трима силни и амбициозни синове и военачалник на армия, която може да победи всеки враг, дръзнал да се изправи срещу древните гори. В края на славното си управление, Чат'Карут избрал най-големия си син, Трон, да го наследи като военачалник на племето – решение, от което двамата му братя не останали доволни. Старият водач знаел това. Както заръчал баща му, Трон напуснал столицата Ал'тунран – домът на Трона сред дърветата – и оттеглил войските си към високите полета, където погребал тялото на баща си. Там той се заклел пред боговете и духа на баща си, че ще се върне, за да възстанови реда. Въпреки че братята му повеждат сляпа война срещу Трон и малкото войска, която той оставил да защитава границите на Ал'тунран, младият военачалник търси начин да помири амбициозните си братя и да накара племената отново да застанат на една и съща страна."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Месеците на изгнание"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
@@ -130,12 +130,12 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Преди шест месеца Луций – млад генерал от Империята – бил изпратен със 150 войници към границата отвъд северните гори, където варварски племена били навлезли в територия, владение на Империята. Задачата му била да защити земите на Империята. Отначало всичко било спокойно. Той дори поговорил с няколко варварски деца и обмислял спокоен живот – съвместно с този древен народ. Той започнал да се чувства в безопасност, а армията му – по-малко подозрителна спрямо потенциалния враг. Това била грешката им. Една мартенска вечер неподготвената му армия била нападната от 100 пехотинци на варварите и била напълно разпиляна. Само той и няколко от войниците му едва оцелели."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Надпреварата за огъня"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -150,12 +150,12 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Когато богът на атландците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атландците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "От вода към лед"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
@@ -186,7 +186,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Животът, зависим от океана, е винаги труден, а още по-труден е той за жителите на брега на фризийската част от Северно море. Последният бурен прилив беше най-унищожителният в историята на човека, но дали това е още един пример за трудностите, с които трябва да се сблъскват фризийците, или знак от боговете, че тъкмо заселилото се племе трябва отново да си търси нов дом?"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -227,7 +227,7 @@ msgstr "Най-накрая корабът бил поправен и хорат
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Отмъщението на Нептун"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -339,14 +339,54 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Икономика"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "В това обучение ще научите какви възможности предлага Widelands за настройка на икономиката Ви. Препоръчва се за играчи, които вече имат някакъв опит."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
+msgid "Accurate Europe 1.2"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
+msgid ""
+"Warning: This map is provided as an experimental preview. Although it is "
+"better in many ways than Europa 1.2 that it replaces, it probably still has "
+"bugs. Furthermore, it is a very large map with more player positions than "
+"generally recommended, so it has high hardware requirements.  —  A map for "
+"roleplaying historical empires. – This map of Europe aims to be as accurate "
+"as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
+"Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
+"German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
+msgstr ""
+
+#: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
+msgid ""
+"The wide rivers are navigable to create a ”trade network”. All players have "
+"their own challenges, but are relatively balanced to be playable: – British "
+"Empire: create sustainable colonies – Russian Empire: Very large distances …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:8
+msgid "Amoebae"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:10
+msgid "You are an Amoeba, expand and conquer all other Amoebae …"
+msgstr ""
+
+#: ../../../../data/maps/Amoebae.wmf/elemental:11
+msgid ""
+"Be aware that you are surrounded by enemies. Disable diplomacy for an easier"
+" game, enable it for a more challenging game. Additionally you can define "
+"the difficulty by playing against different AI teams. Although some players "
+"have more space in the beginning, the map is well balanced."
+msgstr ""
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -471,7 +511,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Перлата на Алпите, планинската верига Доломити е призната за световно наследство  заради девствената си красота. Тази карта е наподобява приблизително местността между Кортина д'Ампецо на североизток и Канацеи на югозапад. Ако трябва да участвате в смъртоносен дуел с враговете си, защо да не го направите на едно красиво място?"
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -482,15 +522,17 @@ msgid ""
 " you can – it’s the only way to find all the precious farm spaces."
 msgstr ""
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:8
-msgid "Elven Forests"
-msgstr "Елфически гори"
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
+msgid "Egyptian Mandala v1.2"
+msgstr ""
 
-#: ../../../../data/maps/Elven_Forests.wmf/elemental:10
+#: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
-msgstr "Спиращата дъха красота на тези изумрудени земи е подмамила много племена, всяко от което иска да бъдат негови."
+"They hardly had time to prepare themselves when they embarked for this "
+"island. According to your explorers, however, things will not go as easily "
+"as you were told earlier. You should expect fierce opposition. Expand your "
+"base and be the first to reach the ring of power."
+msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -502,16 +544,6 @@ msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
-
-#: ../../../../data/maps/Europa.wmf/elemental:8
-msgid "Europa 1.2"
-msgstr ""
-
-#: ../../../../data/maps/Europa.wmf/elemental:10
-msgid ""
-"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
-"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr ""
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
@@ -558,6 +590,16 @@ msgid ""
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
 msgstr "В това изпитание на боговете или нечий зъл план, Вие и племето Ви се събуждате на този остров сред огън и лава? Досега изглеждаше сякаш сте сами, но кой знае какво може да се случи, ако срещнете вражеско племе?"
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
+msgid "Forest Valley v2.0"
+msgstr ""
+
+#: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
+msgid ""
+"A river valley surrounded by mountains with lots of resources except coal. "
+"Plenty of flat building space."
+msgstr ""
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -876,6 +918,36 @@ msgid ""
 "key to control over the whole island."
 msgstr "Легендата гласи, че старите войнствени монаси, живеещи в дори по-старите блата, са ключът към контролирането на целия остров."
 
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
+msgid "Tasmanian Black War"
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
+msgid ""
+"Welcome, intruder! You’re like a European conqueror from the early 1800s "
+"when they settled the Van Diemen land – later known as Tasmania. Between "
+"1828 and 1832 there was a war called the Black War in which the British "
+"Empire eradicated almost the entire Aboriginal population of the Van Diemen "
+"land. – The map simulates a scattered British Empire but without any "
+"advantages – actually it offers some great disadvantages and you will likely"
+" have a hard time conquering Tasmania. During the historical Black War the "
+"ratio between Europeans and Aboriginals was around one against ten, but this"
+" time they’re armed to the teeth for a rematch."
+msgstr ""
+
+#: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
+msgid ""
+"This map is intended to be played by a single player from the blue player’s "
+"starting location as Empire. Choose Barbarians and Amazons for the rival "
+"tribes. If you want a challenge, put them all on the same side and disable "
+"Diplomacy. Or you can play with every player against all others, with a win "
+"condition of Territorial Time. This map isn’t suitable for short games and "
+"one game will likely take more than ten hours. The AI has great capability "
+"on this map. One of the computer players will likely also begin seafaring "
+"and competing for the best harbor places on the Tasmanian coast, so you’ve "
+"been warned!"
+msgstr ""
+
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
 msgstr "Голямото езеро"
@@ -908,6 +980,18 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Някои казват, че непристъпните земи на север плашат дори и най-безстрашните заселници и най-смелите воини. Големи и стари гори, изпълнени с огромни и хищни зверове, пресечени от мочурища и хълмове, и забулени в мистерия. Онези, които са успели да се завърнат, разказват за огромни сгради, украсени с гравюри и злато от могъщите планински вериги някъде в дивото. Много години по-късно, единственото останало са ронливи останки от тези добри времена, покрити с мъх и дървета. Формите им загатват за майсторството на древните строители. Никой не знае те защо (и как) са изчезнали. Никой не знае. Но много ще умрат, разкъсани от вълци, погълнати от блата… обкръжени от вражески племена."
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
+msgid "The Islands of the Eight Tribes"
+msgstr ""
+
+#: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
+msgid ""
+"This map is designed for a long game! Eight tribes, three islands, and lots "
+"of resources. Colonization and ferries can give you a big advantage, but "
+"this is not necessary to defeat other players. If you want to delay the "
+"fighting, you can turn off the last four players."
+msgstr ""
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -1018,22 +1102,6 @@ msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
 msgstr "Защитете транспортните си пътища или използвайте кораби, за да заобиколите противника. След това спрете дейността на врага."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr "Блещукащи вълни"
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr "Много красиви, зелени острови чакат онези, достатъчно смели, за да преплуват хилядата вълни, блещукащи на слънцето."
-
-#: ../../../../data/maps/Twinkling_Waves.wmf/elemental:11
-msgid ""
-"Take care not to build your ships in the lagoons. They cannot pass through "
-"the reefs to the main ocean, where your ports are located."
-msgstr ""
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"

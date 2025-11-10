@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: mfluehr <radick334@yahoo.com>, 2016\n"
 "Language-Team: Latin (http://app.transifex.com/widelands/widelands/language/la/)\n"
@@ -200,7 +200,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr ""
+msgstr "Casam militarem aedifica."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
@@ -870,7 +870,7 @@ msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
-" longer distance with them and maybe escape from Lutas’ influence."
+" longer distance with them and maybe escape from Lutas’s influence."
 msgstr ""
 
 #. TRANSLATORS: Jundlina

@@ -27,12 +27,12 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr ""
+msgstr "גנרל"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "מבוא"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15

@@ -33,10 +33,16 @@ wl.Descriptions():new_militarysite_type {
    spritesheets = {
       idle = {
          hotspot = {22, 69},
-         frames = 4,
-         columns = 2,
+         frames = 10,
+         columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {22, 69},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {
@@ -57,7 +63,7 @@ wl.Descriptions():new_militarysite_type {
 
    messages = {
       -- TRANSLATORS: Message sent by a Frisian military site
-      occupied = pgettext("frisians_building", "Your soldiers have occupied your wooden tower."),
+      occupied = pgettext("frisians_building", "Your soldier has occupied your wooden tower."),
       -- TRANSLATORS: Message sent by a Frisian military site
       aggressor = pgettext("frisians_building", "Your wooden tower discovered an aggressor."),
       -- TRANSLATORS: Message sent by a Frisian military site

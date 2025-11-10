@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Raúl Contreras, 2024
+# fenris <fenris@folksprak.org>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Raúl Contreras, 2024\n"
+"Last-Translator: fenris <fenris@folksprak.org>, 2025\n"
 "Language-Team: Esperanto (https://app.transifex.com/widelands/teams/35159/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,8 +360,8 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
 msgid ""
 "The heavy weight plus the strong current was too much for the ship and it "
-"was pulled below the sea level by Lutas’ forces and we lost most men and all"
-" wares it carried."
+"was pulled below the sea level by Lutas’s forces and we lost most men and "
+"all wares it carried."
 msgstr ""
 
 #. TRANSLATORS: Jundlina - Diary
@@ -1219,7 +1220,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Skolt-kabano"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65

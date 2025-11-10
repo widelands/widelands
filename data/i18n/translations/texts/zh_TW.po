@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Arm Coon <armcoon@gmail.com>, 2016\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/widelands/widelands/language/zh_TW/)\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
+"Public License (GPL) V2.0 (or, at your option, any later version)."
 msgstr ""
 
 #: ../../../../data/txts/LICENSE.lua:18
@@ -206,13 +206,13 @@ msgid "Elders"
 msgstr "長老"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:416
+#: ../../../../data/txts/developers.lua:422
 msgid "Graphics"
 msgstr "圖形"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:360
-#: ../../../../data/txts/developers.lua:423
+#: ../../../../data/txts/developers.lua:366
+#: ../../../../data/txts/developers.lua:429
 msgid "Homepage"
 msgstr "主頁"
 
@@ -221,7 +221,7 @@ msgid "Scripting"
 msgstr ""
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:431
+#: ../../../../data/txts/developers.lua:437
 msgid "Sound"
 msgstr "聲音"
 
@@ -237,103 +237,103 @@ msgstr ""
 msgid "Coders"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:150
+#: ../../../../data/txts/developers.lua:151
 msgid "Graphicians"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:188
+#: ../../../../data/txts/developers.lua:190
 msgid "Musicians"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:207
+#: ../../../../data/txts/developers.lua:209
 msgid "Sound Effects"
 msgstr "音效"
 
-#: ../../../../data/txts/developers.lua:223
+#: ../../../../data/txts/developers.lua:225
 msgid "Maps and Missions"
 msgstr "地圖和任務"
 
-#: ../../../../data/txts/developers.lua:257
+#: ../../../../data/txts/developers.lua:263
 msgid "Campaign Story"
 msgstr "故事模式"
 
-#: ../../../../data/txts/developers.lua:261
+#: ../../../../data/txts/developers.lua:267
 msgid "Barbarians"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:269
+#: ../../../../data/txts/developers.lua:275
 msgid "Empire"
 msgstr "帝國"
 
-#: ../../../../data/txts/developers.lua:276
+#: ../../../../data/txts/developers.lua:282
 msgid "Atlanteans"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:284
+#: ../../../../data/txts/developers.lua:290
 msgid "Frisians"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:292
+#: ../../../../data/txts/developers.lua:298
 msgid "Packagers"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:296
+#: ../../../../data/txts/developers.lua:302
 msgid "Debian Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:308
 msgid "Fedora Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:310
+#: ../../../../data/txts/developers.lua:316
 msgid "Mandriva Linux"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:322
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:328
 msgid "Flatpak"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:329
+#: ../../../../data/txts/developers.lua:335
 msgid "Mac OS X"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:341
+#: ../../../../data/txts/developers.lua:347
 msgid "Windows"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:352
+#: ../../../../data/txts/developers.lua:358
 msgid "ZetaOS"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:364
+#: ../../../../data/txts/developers.lua:370
 msgid "Homepage Coders"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:375
+#: ../../../../data/txts/developers.lua:381
 msgid "Documentation, Help and Wiki"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:393
+#: ../../../../data/txts/developers.lua:399
 msgid "Add-Ons"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:412
+#: ../../../../data/txts/developers.lua:418
 msgid "Former Elders"
 msgstr ""
 
-#: ../../../../data/txts/developers.lua:438
+#: ../../../../data/txts/developers.lua:444
 msgid "Translation"
 msgstr "翻譯"
 
-#: ../../../../data/txts/developers.lua:447
+#: ../../../../data/txts/developers.lua:453
 msgid "Other"
 msgstr "其他"
 
-#: ../../../../data/txts/developers.lua:455
+#: ../../../../data/txts/developers.lua:461
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "介紹"
 
 #: ../../../../data/txts/help/common_helptexts.lua:20
 msgid ""
@@ -852,6 +852,12 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
+msgstr ""
+
+#: ../../../../data/txts/tips/general_game.lua:110
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
 msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4

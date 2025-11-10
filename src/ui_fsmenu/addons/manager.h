@@ -30,6 +30,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/pagination.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
@@ -41,6 +42,7 @@ namespace AddOnsUI {
 
 class InstalledAddOnRow;
 class MapRow;
+class ProgressIndicatorWindow;
 class RemoteAddOnRow;
 
 constexpr int16_t kRowButtonSize = 32;
@@ -90,6 +92,10 @@ public:
 	void install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo>, bool only_translations);
 	void upload_addon(std::shared_ptr<AddOns::AddOnInfo>);
 	void install_map(std::shared_ptr<AddOns::AddOnInfo>);
+	bool install_translations(const std::string& name,
+	                          uint32_t new_i18n_version,
+	                          ProgressIndicatorWindow& progress);
+	void install_websitemaps_translations_if_needed();
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -153,12 +159,26 @@ private:
 	std::map<std::string, InstalledAddOnRow*> cached_installed_rows_;
 	std::map<std::string, RemoteAddOnRow*> cached_browse_rows_;
 	std::map<std::string, MapRow*> cached_map_rows_;
+	UI::Pagination browse_pagination_;
+	UI::Pagination maps_pagination_;
+
+	std::vector<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show_;
+	std::vector<std::shared_ptr<AddOns::AddOnInfo>> maps_to_show_;
+
+	struct RemoteInstalledInfo {
+		AddOns::AddOnVersion installed_version;
+		uint32_t installed_i18n_version = 0;
+	};
+	std::vector<RemoteInstalledInfo> remotes_to_show_installed_info_;
 
 	void category_filter_browse_changed(AddOns::AddOnCategory);
 	void world_filter_maps_changed(const std::string&);
 	void check_enable_move_buttons();
 	std::shared_ptr<AddOns::AddOnInfo> selected_installed_addon() const;
 	void focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo>);
+
+	void browse_pagination_changed(bool changed_size);
+	void maps_pagination_changed(bool changed_size);
 
 	// TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	// void autofix_dependencies();
@@ -171,6 +191,7 @@ private:
 	bool matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo>);
 
 	std::string username_, password_;
+	uint32_t current_i18n_version_{0U};
 };
 
 }  // namespace AddOnsUI

@@ -56,9 +56,11 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
+	                    const std::vector<std::string>& attribs,
 	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
+	                    const std::vector<std::string>& attribs,
 	                    Descriptions& descriptions);
 
 	[[nodiscard]] Building& create_object() const override;
@@ -393,7 +395,8 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+	InputQueue&
+	inputqueue(DescriptionIndex, WareWorker, const Request*, uint32_t disambiguator_id) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -449,6 +452,7 @@ public:
 	}
 	void remove_fleet_interface(EditorGameBase& egbase, const ShipFleetYardInterface* i);
 	void remove_fleet_interface(EditorGameBase& egbase, const FerryFleetYardInterface* i);
+	void init_yard_interfaces(EditorGameBase& egbase);
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
@@ -509,7 +513,6 @@ protected:
 	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
-	void init_yard_interfaces(EditorGameBase& egbase);
 
 	void format_statistics_string();
 	void try_start_working(Game&);

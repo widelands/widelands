@@ -56,6 +56,7 @@ private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const size_t& index_;
 	bool layouting_{false};
+	UI::Panel text_wrapper_;
 	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;

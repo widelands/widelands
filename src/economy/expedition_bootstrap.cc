@@ -79,8 +79,10 @@ void ExpeditionBootstrap::start() {
 
 	// Load the buildcosts for the port building + builder
 	Warehouse* const warehouse = portdock_->get_warehouse();
+	const Widelands::TribeDescr& tribe = warehouse->owner().tribe();
 
-	const std::map<DescriptionIndex, uint8_t>& buildcost = warehouse->descr().buildcost();
+	const std::map<DescriptionIndex, uint8_t>& buildcost =
+	   tribe.get_building_descr(tribe.port())->buildcost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
@@ -180,8 +182,10 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 	queues_.clear();
 }
 
-InputQueue&
-ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional) const {
+InputQueue& ExpeditionBootstrap::inputqueue(DescriptionIndex index,
+                                            WareWorker type,
+                                            bool additional,
+                                            uint32_t /* disambiguator_id */) const {
 	for (const auto& iq : queues_) {
 		if (iq.first->get_index() == index && iq.first->get_type() == type &&
 		    iq.second == additional) {

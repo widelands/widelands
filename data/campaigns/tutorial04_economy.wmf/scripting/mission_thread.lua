@@ -32,11 +32,14 @@ function wait_for_window_and_tab_or_complain(
          campaign_message_box(complain_msg)
          while not mv.windows[window_name] do sleep(200) end
          obj_open_window.visible = false
+         sleep(50) -- let the window initialisation finish
       end
 
       -- But it might be closed at any point in time. If it is open and the
       -- correct tab is active, we terminate the loop.
       if mv.windows[window_name] and
+         mv.windows[window_name].tabs and
+         mv.windows[window_name].tabs[tab_name] and
          mv.windows[window_name].tabs[tab_name].active
       then
          break
@@ -174,6 +177,171 @@ function plan_the_future()
    set_objective_done(o)
 
    -- if the minimum_storage_per_warehouse feature is introduced, use the gold mountain to the northeast for explanation
+
+   trading()
+end
+
+function trading()
+   prefilled_buildings(plr2,
+      { "frisians_headquarters", 39, 89,
+         wares = {
+            log = 40,
+            granite = 50,
+            reed = 50,
+            brick = 80,
+            clay = 30,
+            water = 10,
+            fish = 10,
+            meat = 10,
+            fruit = 10,
+            barley = 5,
+            ration = 20,
+            honey = 10,
+            smoked_meat = 5,
+            smoked_fish = 5,
+            mead = 5,
+            meal = 2,
+            coal = 20,
+            iron = 5,
+            gold = 4,
+            iron_ore = 10,
+            bread_frisians = 15,
+            honey_bread = 5,
+            beer = 5,
+            cloth = 5,
+            fur = 10,
+            fur_garment = 5,
+            sword_short = 5,
+            hammer = 10,
+            fire_tongs = 2,
+            bread_paddle = 2,
+            kitchen_tools = 2,
+            felling_ax = 3,
+            needles = 1,
+            basket = 2,
+            pick = 5,
+            shovel = 5,
+            scythe = 3,
+            hunting_spear = 2,
+            fishing_net = 3,
+         },
+         workers = {
+            frisians_carrier = 100,
+            frisians_reindeer = 100,
+            frisians_farmer = 100,
+         }
+      },
+      { "frisians_sentinel", 51, 85, soldiers = {[{0,0,0,0}] = 1}},
+      { "frisians_farm", 53, 85 },
+      { "frisians_farm", 42, 87 },
+      { "frisians_reindeer_farm", 49, 85 },
+      { "frisians_market", 46, 87 },
+      { "frisians_quarry", 36, 91 },
+      { "frisians_well", 37, 89 },
+      { "frisians_well", 40, 87 },
+      { "frisians_well", 44, 87 },
+      { "frisians_well", 48, 87 }
+   )
+   connected_road("normal", plr2, map:get_field(37, 92).immovable, "tr,tr|r,r|tr,tr|r,r|r,r|r,r|r,r|tr,tr|r,r|r,r")
+
+   sleep(2000)
+   local center_pixel = scroll_to_field(sf2)
+   sleep(500)
+   reveal_concentric(plr, sf2, 5)
+   sleep(3000)
+
+   campaign_message_box(trading_1)
+
+   sleep(500)
+   hide_concentric(plr, sf2, 6, false)
+   hide_concentric(plr, sf2, 6, false)  -- Hide twice and with a higher radius to ensure the big buildings are hidden completely.
+   scroll_to_map_pixel(center_pixel);
+
+   local o = campaign_message_with_objective(trading_2, obj_build_market)
+
+   sleep(50000)
+   campaign_message_box(trading_3)
+
+   while #plr:get_buildings("empire_market") == 0 do sleep(500) end
+   set_objective_done(o)
+   local p1marketpos = plr:get_buildings("empire_market")[1].fields[1]
+   local p2market = plr2:get_buildings("frisians_market")[1]
+   local p2hq = plr2:get_buildings("frisians_headquarters")[1]
+
+   scroll_to_field(p1marketpos)
+   campaign_message_box(trading_4)
+   mv:click(p1marketpos)
+   sleep(3000)
+   campaign_message_box(trading_5)
+   campaign_message_box(trading_6)
+   campaign_message_box(trading_7)
+
+   local o = campaign_message_with_objective(trading_8, obj_propose_trade)
+
+   local trade_accepted = nil
+   while trade_accepted == nil do
+      sleep(1000)
+      for i,trade in ipairs(wl.Game().trades) do
+         if trade.state == "proposed" then
+            local send = 0
+            local receive = 0
+            for ware,amount in pairs(trade.items_to_send) do
+               send = send + amount
+            end
+            for ware,amount in pairs(trade.items_to_receive) do
+               receive = receive + amount
+            end
+            if receive > send then
+               plr2:reject_trade(trade.trade_id)
+               campaign_message_box(trading_rejected)
+            else
+               p2market:accept_trade(trade.trade_id)
+               trade_accepted = trade.trade_id
+
+               local num_batches = trade.num_batches
+               if num_batches < 0 then  -- infinite
+                  num_batches = 106  -- kind of high
+               else
+                  num_batches = num_batches + 3  -- some extra
+               end
+               for ware,amount in pairs(trade.items_to_receive) do
+                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (num_batches)))
+               end
+            end
+         end
+      end
+   end
+
+   set_objective_done(o)
+   mv:click(p1marketpos)
+   mv.windows["building_window_" .. p1marketpos.immovable.serial].tabs["trade_" .. trade_accepted]:click()
+   campaign_message_box(trading_9)
+   campaign_message_box(trading_9a)
+
+   sleep(15000)
+   local new_trade_id = p2market:propose_trade(plr, math.random(3, 20), {
+      granite = 1,
+      water = 4,
+   }, {
+      iron_ore = 1,
+      gold_ore = 1,
+   })
+
+   local o = campaign_message_with_objective(trading_10, obj_open_diplomacy)
+   while not mv.windows.diplomacy do sleep(200) end
+   set_objective_done(o)
+
+   local o = campaign_message_with_objective(trading_11, obj_decide_trade_offer)
+   while true do
+      sleep(1000)
+      local t = wl.Game():get_trade(new_trade_id)
+      if t == nil or t.state ~= "proposed" then
+         break
+      end
+   end
+   set_objective_done(o)
+   campaign_message_box(trading_12)
+
    conclude()
 end
 

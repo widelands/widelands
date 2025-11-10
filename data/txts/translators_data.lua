@@ -694,6 +694,7 @@ function translators() return {
       entries = {
          {
             members = {
+               "Alex Rijckaert",
                "ben2s",
                "BenW",
                "Christian Groenendijk",
@@ -905,6 +906,7 @@ function translators() return {
                "Kefir111",
                "Marek Hám",
                "Miroslav Remák",
+               "Pavol Gono",
                "Vladimir",
                "Vladímir Tóth (Ike)",
             },

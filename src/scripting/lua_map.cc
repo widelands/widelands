@@ -389,7 +389,8 @@ static int do_set_workers(lua_State* L, TMapObject* pi, const WaresWorkersMap& v
 
 	// setpoints is map of index:quantity
 	InputMap setpoints;
-	parse_wares_workers_counted(L, tribe, &setpoints, false);
+	parse_wares_workers_counted(
+	   L, tribe, &setpoints, false, pi->descr().type() == Widelands::MapObjectType::WATERWAY);
 
 	// c_workers is actual statistics, the map index:quantity
 	WaresWorkersMap c_workers;
@@ -532,6 +533,21 @@ int do_get_soldiers(lua_State* L,
                     const Widelands::TribeDescr& tribe) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Invalid arguments!");
+	}
+
+	if (lua_isstring(L, -1) != 0) {
+		if (std::string(luaL_checkstring(L, -1)) == "present") {
+			lua_pushuint32(L, sc.present_soldiers().size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "stationed") {
+			lua_pushuint32(L, sc.stationed_soldiers().size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "associated") {
+			lua_pushuint32(L, sc.associated_soldiers().size());
+			return 1;
+		}
 	}
 
 	const SoldiersList soldiers = sc.stationed_soldiers();
@@ -1028,7 +1044,8 @@ RequestedWareWorker parse_wares_workers_list(lua_State* L,
 RequestedWareWorker parse_wares_workers_counted(lua_State* L,
                                                 const Widelands::TribeDescr& tribe,
                                                 InputMap* ware_workers_list,
-                                                bool is_ware) {
+                                                const bool is_ware,
+                                                const bool allow_ferry) {
 	RequestedWareWorker result = RequestedWareWorker::kUndefined;
 	int32_t nargs = lua_gettop(L);
 	if (nargs != 2 && nargs != 3) {
@@ -1046,13 +1063,19 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 			   std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE),
 			   luaL_checkuint32(L, 3)));
 		} else {
-			if (tribe.worker_index(luaL_checkstring(L, 2)) == Widelands::INVALID_INDEX) {
+			const Widelands::DescriptionIndex worker_index =
+			   tribe.worker_index(luaL_checkstring(L, 2));
+			if (worker_index == Widelands::INVALID_INDEX) {
 				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, 2)),
-			                                 Widelands::WareWorker::wwWORKER),
-			                  luaL_checkuint32(L, 3)));
+			if (worker_index == tribe.soldier()) {
+				report_error(L, "Do not set soldiers via set_workers(), use set_soldiers() instead");
+			}
+			if (worker_index == tribe.ferry() && !allow_ferry) {
+				report_error(L, "This map object can not contain ferries");
+			}
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(worker_index, Widelands::WareWorker::wwWORKER), luaL_checkuint32(L, 3)));
 		}
 	} else {
 		result = RequestedWareWorker::kList;
@@ -1127,6 +1150,14 @@ For objects which consume wares, see: :ref:`has_inputs`.
    ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
    of thin air.
 
+   Setting some wares does not influence other wares for
+
+   - warehouse
+
+   but sets other wares to empty for
+
+   - flag
+
    :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
    :type which: :class:`string` or :class:`table`
    :arg amount: This many units will be available after the call.
@@ -1195,6 +1226,11 @@ workers that do the work, see: :ref:`has_workers`.
    a ware/worker name and an amount to set it to. Or it takes a :class:`table` of
    ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
    economy out of thin air.
+
+   Setting a few wares does not influence other wares for
+
+   - production site
+   - training site
 
    :arg which: name of ware/worker or ``{ware/worker_name=amount}`` :class:`table`
    :type which: :class:`string` or :class:`table`
@@ -1299,6 +1335,20 @@ For workers which are consumed, see: :ref:`has_inputs`.
 .. method:: set_workers(which[, amount])
 
    Similar to :meth:`wl.map.MapObject.set_wares`.
+
+   Note that soldiers must not be set via this method.
+   Use :meth:`wl.map.MapObject.set_soldiers` instead.
+
+   Ferries can not be set by this method either, except for waterways.
+
+   Setting some wares does not influence other wares for
+
+   - warehouse
+
+   but sets other wares to empty for
+
+   - road
+   - productionsite
 */
 
 /* RST
@@ -1358,6 +1408,26 @@ Supported at the time of this writing by
             end
          end
 
+   * The string :const:`"present"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers present
+      in this building.
+
+   * The string :const:`"stationed"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers stationed
+      in this building. Stationed soldiers include present soldiers and the
+      soldiers who left this building to fight.
+
+   * The string :const:`"associated"`.
+      .. versionadded:: 1.3
+
+      Returns an :class:`integer` which is the number of soldiers associated
+      to this building. Associated soldiers include stationed soldiers and
+      soldiers who are coming to this building.
+
    :returns: Number of soldiers that match **descr** or the :class:`table`
       containing all soldiers
    :rtype: :class:`integer` or :class:`table`.
@@ -1369,6 +1439,12 @@ Supported at the time of this writing by
    Analogous to :meth:`wl.map.MapObject.set_workers`, but for soldiers. Instead of
    a name an :class:`array` is used to define the soldier. See
    below for an example.
+
+   Setting some soldiers sets all others to empty for
+
+   - military site
+   - training site
+   - warehouse
 
    :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
       description. In that case amount has to be specified as well.
@@ -1389,7 +1465,7 @@ Supported at the time of this writing by
         [{1,2,3,4}] = 5,
       })
 
-   would add 10 level 0 soldier and 5 soldiers with hit point level 1,
+   would set 10 level 0 soldier and 5 soldiers with hit point level 1,
    attack level 2, defense level 3 and evade level 4 (as long as this is
    legal for the players tribe).
 */

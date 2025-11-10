@@ -45,8 +45,12 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
+	            const std::vector<std::string>& attribs,
 	            Descriptions& descriptions);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	WorkerDescr(const std::string& init_descname,
+	            const LuaTable& t,
+	            const std::vector<std::string>& attribs,
+	            Descriptions& descriptions);
 	~WorkerDescr() override;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -81,6 +85,7 @@ public:
 	void set_default_target_quantity(int quantity);
 
 	/// This is an AI hint
+	[[nodiscard]] int preciousness(const std::string& tribename) const;
 	void set_preciousness(const std::string& tribename, int preciousness);
 
 	[[nodiscard]] bool has_demand_check() const {
