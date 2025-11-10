@@ -94,7 +94,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
                   UI::ButtonStyle::kWuiSecondary,
                   _("Next")),
      checkbox_shuffle_(&hbox_playback_control_,
-                       UI::PanelStyle::kFsMenu,
+                       UI::PanelStyle::kWui,
                        "button_shuffle",
                        Vector2i::zero(),
                        _("Shuffle")),
@@ -132,9 +132,9 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
 
 	hbox_playback_control_.add_space(kSpacing);
-	hbox_playback_control_.add(&button_next_);
+	hbox_playback_control_.add(&button_next_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	hbox_playback_control_.add_space(kSpacing);
-	hbox_playback_control_.add(&checkbox_shuffle_);
+	hbox_playback_control_.add(&checkbox_shuffle_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	hbox_current_track_.add(&label_current_track_);
 
