@@ -170,8 +170,8 @@ void MusicPlayer::think() {
 }
 
 void MusicPlayer::update() {
-	// TODO update the current track when song is changed
-	// TODO update and track playlist after toggling the checkbox for custom/ingame music
+	// update the current track when song is changed
+	// update and track playlist after toggling the checkbox for custom/ingame music
 }
 
 void MusicPlayer::set_shuffle(bool on) {
