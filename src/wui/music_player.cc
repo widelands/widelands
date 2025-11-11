@@ -117,7 +117,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	hbox_current_track_.set_inner_spacing(kSpacing);
 
 	if (g_sh->is_backend_disabled()) {
-		return; // prevent crash if game is started with --nosound parameter
+		return;  // prevent crash if game is started with --nosound parameter
 	}
 
 	std::vector<Song> music_data = g_sh->get_music_data();
@@ -170,7 +170,7 @@ void MusicPlayer::think() {
 }
 
 void MusicPlayer::update() {
-	// TODO update the current track when song is changed 
+	// TODO update the current track when song is changed
 	// TODO update and track playlist after toggling the checkbox for custom/ingame music
 }
 
