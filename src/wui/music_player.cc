@@ -155,10 +155,6 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	// setup event handlers
 	button_next_.sigclicked.connect([this]() {
 		g_sh->change_music();
-		// here, change_music is not done updating
-		// current_song so we get the previous song title
-		std::string title = g_sh->current_song();
-		label_current_track_.set_text(title);
 	});
 	checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
@@ -171,6 +167,8 @@ void MusicPlayer::think() {
 
 void MusicPlayer::update() {
 	// update the current track when song is changed
+	std::string title = g_sh->current_song();
+	label_current_track_.set_text(title);
 	// update and track playlist after toggling the checkbox for custom/ingame music
 }
 
