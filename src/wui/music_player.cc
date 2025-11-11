@@ -153,9 +153,11 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	add(label_spacer);
 
 	// setup event handlers
-	button_next_.sigclicked.connect([]() {
-		g_sh->change_music();
-	});
+<<<<<<< HEAD
+	button_next_.sigclicked.connect([]() { g_sh->change_music(); });
+=======
+	button_next_.sigclicked.connect([this]() { g_sh->change_music(); });
+>>>>>>> 532884a22a5cc63896d14a286fc0b28d3b660834
 	checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
 }
