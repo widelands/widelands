@@ -24,17 +24,16 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 
-/**
- * A box with all sound options.
- * All changes to the sound settings take effect immediately, but are not saved to config.
- */
 struct MusicPlayer : public UI::Box {
 	explicit MusicPlayer(UI::Panel& parent);
+
+	void think() override;
 
 private:
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void set_shuffle(bool on);
+	void update();
 
 	UI::Box vbox_track_playlist_;
 	UI::Box hbox_playback_control_;

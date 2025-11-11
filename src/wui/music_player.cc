@@ -116,6 +116,10 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	vbox_track_playlist_.set_force_scrolling(true);
 	hbox_current_track_.set_inner_spacing(kSpacing);
 
+	if (g_sh->is_backend_disabled()) {
+		return; // prevent crash if game is started with --nosound parameter
+	}
+
 	std::vector<Song> music_data = g_sh->get_music_data();
 	const size_t data_size = music_data.size();
 	std::vector<MusicTrackControl*> music_track_controls;
@@ -158,6 +162,16 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	});
 	checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
+}
+
+void MusicPlayer::think() {
+	UI::Panel::think();
+	update();
+}
+
+void MusicPlayer::update() {
+	// TODO update the current track when song is changed 
+	// TODO update and track playlist after toggling the checkbox for custom/ingame music
 }
 
 void MusicPlayer::set_shuffle(bool on) {
