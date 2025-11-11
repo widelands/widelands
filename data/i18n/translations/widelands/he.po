@@ -64,7 +64,7 @@ msgstr ""
 #: ../../../../src/wui/game_message_menu.cc:71
 #: ../../../../src/wui/game_summary.cc:119
 msgid "Status"
-msgstr ""
+msgstr "סטטוס"
 
 #: ../../../../data/scripting/messages.lua:293
 msgid "New Objective"
@@ -3632,7 +3632,7 @@ msgstr ""
 #: ../../../../src/map_io/map_saver.cc:296
 #: ../../../../src/map_io/widelands_map_loader.cc:425
 msgid "Scripting"
-msgstr ""
+msgstr "כתיבת סקריפטים"
 
 #: ../../../../src/map_io/map_saver.cc:303
 #: ../../../../src/map_io/widelands_map_loader.cc:418
@@ -5411,7 +5411,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2192
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2281
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2085
 #, c-format
@@ -6165,7 +6165,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
 msgid "%1$u / %2$u"
-msgstr ""
+msgstr "%1$u / %2$u"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1001
 msgid "This screenshot could not be fetched from the server due to an error."
@@ -6692,7 +6692,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1009
 #: ../../../../src/wlapplication_options.cc:1068
 msgid "Add-Ons"
-msgstr ""
+msgstr "תוספות"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:310
 msgid "Mouse Scrolling"
@@ -6917,7 +6917,7 @@ msgstr ""
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:457
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "הגדרות משחק מרובה משתתפים"
 
 #: ../../../../src/ui_fsmenu/loadgame.cc:41
 msgid "Choose Game"
@@ -7836,7 +7836,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/options.cc:421
 msgid "Sound"
-msgstr ""
+msgstr "סאונד"
 
 #: ../../../../src/ui_fsmenu/options.cc:422
 msgid "Saving"
@@ -8028,7 +8028,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
-msgstr ""
+msgstr "פרי-BSD"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
@@ -8870,7 +8870,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "מקשי חצים"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:899
@@ -8881,7 +8881,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + מקשי חצים"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:903
@@ -8892,7 +8892,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:905
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + מקשי חצים"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../src/wlapplication_options.cc:907
@@ -11475,7 +11475,7 @@ msgstr ""
 
 #: ../../../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr ""
+msgstr "פנוי"
 
 #: ../../../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"

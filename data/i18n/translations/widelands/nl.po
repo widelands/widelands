@@ -5131,14 +5131,14 @@ msgstr "Wissel Wereld ‘%s’"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:935
 msgctxt "nr_players"
 msgid "Unlimited"
-msgstr ""
+msgstr "Onbeperkt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:937
 #: ../../../../src/ui_fsmenu/addons/manager.cc:939
 #: ../../../../src/ui_fsmenu/addons/manager.cc:941
 msgctxt "map_size"
 msgid "Unlimited"
-msgstr ""
+msgstr "Onbeperkt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1073
 #, c-format
