@@ -533,6 +533,9 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Pane, naši vojaci dobyli ostrov a podarilo sa im oslobodiť nášho "
+"prieskumníka. Ukázalo sa, že piráti nechali na ostrove množstvo zlata, piva "
+"a zbraní."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
@@ -543,6 +546,8 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Pane, náš prieskumník sa vrátil na naše teritórium a ukázal nám cestu "
+"močariskami do krajiny Hjalmara,"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""

@@ -53,7 +53,7 @@ msgstr "Došli skaly"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "V blízkosti vašej štartovacej pozície sa nenachádzajú žiadne skaly. Pre rozbeh vašej ekomomiky dostanete preto extra zdroje."
+msgstr "V blízkosti vašej začiatočnej pozície sa nenachádzajú žiadne skaly. Preto získate dodatočné zdroje na rozbehnutie vašej ekomomiky."
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
@@ -63,7 +63,7 @@ msgstr "Nedostatok stromov v okolí"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr "V blízkosti vašej východiskovej pozície nie je dostatok stromov. Preto získate dodatočné zdroje na rozbehnutie svojej ekonomiky."
+msgstr "V blízkosti vašej začiatočnej pozície nie je dostatok stromov. Preto získate dodatočné zdroje na rozbehnutie vašej ekonomiky."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -1730,7 +1730,7 @@ msgstr "Kmeň sa vyberie náhodne."
 #. position tool
 #: ../../../../src/editor/ui_menus/player_menu.cc:223
 msgid "Set this player’s starting position"
-msgstr "Urči počiatočnú pozíciu tohto hráča"
+msgstr "Urči začiatočnú pozíciu tohto hráča"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:31
 msgid "Height Tools Options"
@@ -2407,14 +2407,14 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:666 ../../../../src/logic/player.cc:260
 msgid "Missing starting position"
-msgstr "Chýbajúca počiatočná pozícia"
+msgstr "Chýbajúca začiatočná pozícia"
 
 #: ../../../../src/logic/game.cc:667 ../../../../src/logic/player.cc:261
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočnú pozíciu.\nTento problém môžete opraviť, ak ju pridáte ručne pomocou editora máp."
+msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu začiatočnú pozíciu.\nTento problém môžete opraviť, ak ju pridáte ručne pomocou editora máp."
 
 #: ../../../../src/logic/game.cc:767
 msgid "Initializing…"
@@ -3779,14 +3779,14 @@ msgstr "/me skontroloval(a) prijatý súbor. Hoci md5 kontrola súčtu bola úsp
 
 #: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
-msgstr ""
+msgstr "Odpojenie"
 
 #: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "Spojenie s hostiteľom bolo stratené z nasledujúceho dôvodu:\n%s"
 
 #: ../../../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
@@ -6962,7 +6962,7 @@ msgstr "Nebolo možné nájsť vybraný súbor. Ak nenastane prenos automaticky,
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:330
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr ""
+msgstr "Nepodarilo sa nahrať skript podmienky výhry zo súboru „%s“."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:457
@@ -7629,7 +7629,7 @@ msgstr "Náhodná AI"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:351
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:353
 msgid "Shared in"
-msgstr "Zdieľaný"
+msgstr "Zdieľané"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:358
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:359
@@ -7654,7 +7654,7 @@ msgstr "Človek"
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:84
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "Zdieľané s hráčom %u"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:284
@@ -10111,13 +10111,13 @@ msgstr "všetci"
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
 msgid "Client got disconnected"
-msgstr ""
+msgstr "Odpojenie klienta"
 
 #: ../../../../src/wui/game_client_disconnected.cc:75
 msgid ""
 "A player disconnected from the game. An automatic save game has been "
 "created. Do you want to continue playing?"
-msgstr ""
+msgstr "Hráč sa odpojil od hry. Hra bola automaticky uložená. Chcete pokračovať v hraní?"
 
 #. * TRANSLATORS: Button text
 #: ../../../../src/wui/game_client_disconnected.cc:87
@@ -11142,7 +11142,7 @@ msgstr "Vyvážené"
 msgid ""
 "Player starting positions were designed to provide equal conditions for all "
 "players"
-msgstr "Počiatočné pozície hráčov boli navrhnuté tak, aby poskytovali rovnaké podmienky pre všetkých hráčov"
+msgstr "Začiatočné pozície hráčov boli navrhnuté tak, aby poskytovali rovnaké podmienky pre všetkých hráčov"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:46
