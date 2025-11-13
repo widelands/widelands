@@ -470,11 +470,11 @@ msgstr "Spojený s počítačovým hráčom (tvár na obrázku, ako aj text po p
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr "Nastavený na zdieľanie počiatočnej pozície s iným hráčom."
+msgstr "Nastavený na zdieľanie začiatočnej pozície s iným hráčom."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
-msgstr "Uzavretý."
+msgstr "Zatvorený."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:22
 msgid ""
