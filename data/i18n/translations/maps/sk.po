@@ -862,7 +862,7 @@ msgstr "Mystické územie plné rozmanitých krajín, ktoré sú všetky skríž
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Popri rieke"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""

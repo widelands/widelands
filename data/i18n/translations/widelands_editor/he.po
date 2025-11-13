@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# ari ploni, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,15 +20,15 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_controls.lua:4
 #: ../../../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
-msgstr ""
+msgstr "בקרים"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "עזרת העורך"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr "גנרל"
+msgstr "כללי"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
@@ -37,39 +38,39 @@ msgstr "מבוא"
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "טיפים"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "שטחים"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
-msgstr ""
+msgstr "עצים"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "העורך של Widelands"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "עורך זה מיועד לשחקנים שרוצים לעצב מפות משלהם לשימוש עם Widelands."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "כפי שאתם יכולים לראות, עורך זה הוא עבודה קשה בתהליך, וככל שהעורך ישתפר ויותר, כך גם הטקסט הזה יתארך ויהיה שלם יותר."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "הוויקי כולל גם מדריך קצר כיצד לבנות מפה."
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "משאבים"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
-msgstr ""
+msgstr "בְּרִירַת מֶחדָל:"
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
@@ -95,12 +96,12 @@ msgstr ""
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "הסתברות לצמיחת עצים"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
-msgstr ""
+msgstr "לא יגדלו כאן עצים."
 
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
@@ -113,4 +114,4 @@ msgstr ""
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr ""
+msgstr "שטחים מועדפים"
