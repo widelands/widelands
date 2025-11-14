@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# ari ploni, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-09-25 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,7 +191,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "אם יש לך משחק שמור או סרטון חוזר (Replay) המדגים את הבעיה (למשל, קריסות שבהן קשה לדעת בדיוק מה גורם להן), אנא צרף גם אותם. למידע נוסף, ראה את סעיף הסרטונים החוזרים למטה."
+msgstr "אם יש לך משחק שמור או Replay המדגים את הבעיה (למשל, קריסות שבהן קשה לדעת בדיוק מה גורם להן), אנא צרף גם אותם. למידע נוסף, ראה את סעיף הסרטונים החוזרים למטה."
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
@@ -258,7 +259,7 @@ msgstr "סיפורי מסע"
 
 #: ../../../../data/txts/developers.lua:267
 msgid "Barbarians"
-msgstr "ברברימ"
+msgstr "ברבריים"
 
 #: ../../../../data/txts/developers.lua:275
 msgid "Empire"
@@ -371,7 +372,7 @@ msgstr "במשחק זה, אתה מתחיל על חתיכת אדמה קטנה ע�
 
 #: ../../../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
-msgstr "סרטונים חוזרים (Replays)"
+msgstr "סרטונים חוזרים"
 
 #: ../../../../data/txts/help/common_helptexts.lua:30
 msgid ""
@@ -379,7 +380,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands מקליט כל משחק שאתה משחק בקובץ סרטון חוזר (Replay) עם סיומת .wry. קובץ זה מכיל משחק שמור ראשוני ואת כל הפקודות שניתנו על ידי כל השחקנים, כגון בניית דרך או תקיפת אויב. שם הקובץ יציין את הזמן שבו התחלת את המשחק."
+msgstr "Widelands מקליט כל משחק שאתה משחק בקובץ סרטון חוזר עם סיומת .wry. קובץ זה מכיל משחק שמור ראשוני ואת כל הפקודות שניתנו על ידי כל השחקנים, כגון בניית דרך או תקיפת אויב. שם הקובץ יציין את הזמן שבו התחלת את המשחק."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
