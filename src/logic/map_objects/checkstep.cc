@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-bool connected_by_bridge(const FCoords& start, const FCoords& end, const int32_t dir) {
+inline bool connected_by_bridge(const FCoords& start, const FCoords& end, const int32_t dir) {
 	const WalkingDir wd = static_cast<WalkingDir>(dir);
 	if (wd == WalkingDir::WALK_E || wd == WalkingDir::WALK_SE || wd == WalkingDir::WALK_SW) {
 		return is_bridge_segment(start.field->get_road(wd));
