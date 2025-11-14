@@ -79,15 +79,34 @@ bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
 CheckStepDefault
 ===============
 */
-bool CheckStepDefault::allowed(const Map& /* map */,
+bool CheckStepDefault::allowed(const Map& map,
                                const FCoords& start,
                                const FCoords& end,
-                               int32_t /* dir */,
+                               int32_t dir,
                                CheckStep::StepId id) const {
+	assert(map.get_neighbour(start, dir) == end);
+
 	NodeCaps const endcaps = end.field->nodecaps();
+	NodeCaps const startcaps = start.field->nodecaps();
 
 	if ((endcaps & movecaps_) != 0) {
 		return true;
+	}
+
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		// Maybe there's a bridge or the carrier tries to escape a dismantled bridge
+		if ((endcaps & BUILDCAPS_BRIDGE) == 0) {
+			return false;
+		}
+		if ((startcaps & BUILDCAPS_BRIDGE) != 0) {
+			return true;
+		}
+
+		const WalkingDir wd = static_cast<WalkingDir>(dir);
+		if (wd == WalkingDir::WALK_E || wd == WalkingDir::WALK_SE || wd == WalkingDir::WALK_SW) {
+			return is_bridge_segment(start.field->get_road(wd));
+		}
+		return is_bridge_segment(end.field->get_road(get_backward_dir(wd)));
 	}
 
 	// Swimming bobs are allowed to move from a water field to a shore field as the last step.
@@ -95,23 +114,37 @@ bool CheckStepDefault::allowed(const Map& /* map */,
 		return false;
 	}
 
-	NodeCaps const startcaps = start.field->nodecaps();
 	return (startcaps & movecaps_ & MOVECAPS_SWIM) != 0;
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if ((caps & movecaps_) == 0) {
-		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
-			return false;
-		}
-		if (!map.can_reach_by_water(dest)) {
-			return false;
-		}
+	if ((caps & movecaps_) != 0) {
+		return true;
 	}
 
-	return true;
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		// Maybe there's a bridge
+		if ((caps & BUILDCAPS_BRIDGE) == 0) {
+			return false;
+		}
+
+		// Only bridge segments should be possible here...
+		return is_bridge_segment(dest.field->get_road(WalkingDir::WALK_E)) ||
+		       is_bridge_segment(dest.field->get_road(WalkingDir::WALK_SE)) ||
+		       is_bridge_segment(dest.field->get_road(WalkingDir::WALK_SW)) ||
+		       is_bridge_segment(map.l_n(dest).field->get_road(WalkingDir::WALK_E)) ||
+		       is_bridge_segment(map.tl_n(dest).field->get_road(WalkingDir::WALK_SE)) ||
+		       is_bridge_segment(map.tr_n(dest).field->get_road(WalkingDir::WALK_SW));
+	}
+
+	assert((movecaps_ & MOVECAPS_SWIM) != 0);
+	if ((caps & MOVECAPS_WALK) == 0) {
+		// Impassable terrain
+		return false;
+	}
+	return map.can_reach_by_water(dest);
 }
 
 /*
@@ -188,13 +221,49 @@ bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
 CheckStepWalkOn
 ===============
 */
-bool CheckStepWalkOn::allowed(const Map& /* map */,
+bool CheckStepWalkOn::allowed(const Map& map,
                               const FCoords& start,
                               const FCoords& end,
-                              int32_t /* dir */,
+                              int32_t dir,
                               CheckStep::StepId const id) const {
-	NodeCaps const startcaps = start.field->nodecaps();
-	NodeCaps const endcaps = end.field->nodecaps();
+	assert(map.get_neighbour(start, dir) == end);
+
+	uint8_t startcaps = start.field->nodecaps();
+	uint8_t endcaps = end.field->nodecaps();
+
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		if ((startcaps & BUILDCAPS_BRIDGE) != 0) {
+			// Maybe there's a bridge
+			const WalkingDir wd = static_cast<WalkingDir>(dir);
+			if (wd == WalkingDir::WALK_E || wd == WalkingDir::WALK_SE || wd == WalkingDir::WALK_SW) {
+				if (is_bridge_segment(start.field->get_road(wd))) {
+					return true;
+				}
+			} else if (is_bridge_segment(end.field->get_road(get_backward_dir(wd)))) {
+				return true;
+			}
+			if (is_bridge_segment(start.field->get_road(WalkingDir::WALK_E)) ||
+			    is_bridge_segment(start.field->get_road(WalkingDir::WALK_SE)) ||
+			    is_bridge_segment(start.field->get_road(WalkingDir::WALK_SW)) ||
+			    is_bridge_segment(map.l_n(start).field->get_road(WalkingDir::WALK_E)) ||
+			    is_bridge_segment(map.tl_n(start).field->get_road(WalkingDir::WALK_SE)) ||
+			    is_bridge_segment(map.tr_n(start).field->get_road(WalkingDir::WALK_SW))) {
+				// Simplify later checks
+				startcaps |= MOVECAPS_WALK;
+			}
+		}
+		if ((endcaps & BUILDCAPS_BRIDGE) !=0) {
+			if (is_bridge_segment(end.field->get_road(WalkingDir::WALK_E)) ||
+			    is_bridge_segment(end.field->get_road(WalkingDir::WALK_SE)) ||
+			    is_bridge_segment(end.field->get_road(WalkingDir::WALK_SW)) ||
+			    is_bridge_segment(map.l_n(end).field->get_road(WalkingDir::WALK_E)) ||
+			    is_bridge_segment(map.tl_n(end).field->get_road(WalkingDir::WALK_SE)) ||
+			    is_bridge_segment(map.tr_n(end).field->get_road(WalkingDir::WALK_SW))) {
+				// Simplify later checks
+				endcaps |= MOVECAPS_WALK;
+			}
+		}
+	}
 
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
 	//  then back onto a walkable node.

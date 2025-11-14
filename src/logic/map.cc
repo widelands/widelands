@@ -1541,17 +1541,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	if (cnt_unwalkable + cnt_bridgeable < 6) {
 		caps |= MOVECAPS_WALK;
 	} else if (cnt_bridgeable > 0) {
-		// It's also walkable if a bridge is already built to it.
-
-		// Only bridge segments should be possible here...
-		if (is_bridge_segment(f.field->road_east) || is_bridge_segment(f.field->road_southeast) ||
-		    is_bridge_segment(f.field->road_southwest) || is_bridge_segment(l.field->road_east) ||
-		    is_bridge_segment(tl.field->road_southeast) ||
-		    is_bridge_segment(tr.field->road_southwest)) {
-			caps |= MOVECAPS_WALK;
-		} else {
-			caps |= BUILDCAPS_BRIDGE;
-		}
+		caps |= BUILDCAPS_BRIDGE;
 	}
 
 	//  2b) If all neighbouring triangles are water, the node is swimmable.
