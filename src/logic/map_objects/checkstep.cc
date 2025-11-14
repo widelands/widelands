@@ -231,7 +231,7 @@ bool CheckStepWalkOn::allowed(const Map& /* map */,
 	NodeCaps const endcaps = end.field->nodecaps();
 
 	if ((movecaps_ & MOVECAPS_WALK) != 0 &&
-       ((startcaps & BUILDCAPS_BRIDGE) != 0 || (endcaps & BUILDCAPS_BRIDGE) != 0)) {
+	    ((startcaps & BUILDCAPS_BRIDGE) != 0 || (endcaps & BUILDCAPS_BRIDGE) != 0)) {
 		// Bridgeable nodes must be accessed on bridges
 		return connected_by_bridge(start, end, dir);
 	}
