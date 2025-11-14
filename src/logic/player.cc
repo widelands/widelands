@@ -576,6 +576,11 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 		     !map.l_n(fc).field->is_interior(player_number_))) {
 			buildcaps &= ~BUILDCAPS_SMALL;
 		}
+	} else if ((buildcaps & BUILDCAPS_BRIDGE) != 0) {
+		// Check if a bridge or waterway is already there
+		if (map.has_route(fc)) {
+			buildcaps &= ~BUILDCAPS_BRIDGE;
+		}
 	}
 
 	return static_cast<NodeCaps>(buildcaps);

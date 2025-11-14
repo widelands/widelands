@@ -491,7 +491,13 @@ public:
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
 	 * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
 	 */
-	[[nodiscard]] bool can_reach_by_water(const Coords&) const;
+	[[nodiscard]] bool can_reach_by_water(const Coords& field) const;
+
+	// Checks whether a road, bridge, or waterway is connected from any of the 6 directions
+	[[nodiscard]] bool has_route(const FCoords& fc) const;
+
+	// Checks whether a bridge is connected from any of the 6 directions
+	[[nodiscard]] bool has_bridge(const FCoords& fc) const;
 
 	/// Sets the height to a value. Recalculates brightness. Changes the
 	/// surrounding nodes if necessary. Returns the radius that covers all

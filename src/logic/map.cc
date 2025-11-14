@@ -1560,7 +1560,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 			    imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable()) {
-					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM | BUILDCAPS_BRIDGE);
 				}
 				return static_cast<NodeCaps>(caps);
 			}
@@ -1570,20 +1570,8 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	//  4) Flags
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
-	bool flag_possible = (caps & (MOVECAPS_WALK | BUILDCAPS_BRIDGE)) != 0;
-
-	if (((caps & BUILDCAPS_BRIDGE) != 0) && ((caps & MOVECAPS_SWIM) != 0)) {
-		//  4a) No flags on waterways
-		flag_possible = f.field->road_east != RoadSegment::kWaterway &&
-		                f.field->road_southeast != RoadSegment::kWaterway &&
-		                f.field->road_southwest != RoadSegment::kWaterway &&
-		                l.field->road_east != RoadSegment::kWaterway &&
-		                tl.field->road_southeast != RoadSegment::kWaterway &&
-		                tr.field->road_southwest != RoadSegment::kWaterway;
-	}
-
-	if (flag_possible) {
-		//  4b) Flags must be at least 2 edges apart
+	if ((caps & MOVECAPS_WALK) != 0) {
+		//  Flags must be at least 2 edges apart
 		if (consider_mobs && (find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
 		                                      FindImmovableType(MapObjectType::FLAG)) != 0u)) {
 			return static_cast<NodeCaps>(caps);
@@ -2379,6 +2367,24 @@ bool Map::can_reach_by_water(const Coords& field) const {
 	}
 
 	return false;
+}
+
+bool Map::has_route(const FCoords& fc) const {
+	return fc.field->get_road(WalkingDir::WALK_E) != RoadSegment::kNone ||
+	       fc.field->get_road(WalkingDir::WALK_SE) != RoadSegment::kNone ||
+	       fc.field->get_road(WalkingDir::WALK_SW) != RoadSegment::kNone ||
+	       l_n(fc).field->get_road(WalkingDir::WALK_E) != RoadSegment::kNone ||
+	       tl_n(fc).field->get_road(WalkingDir::WALK_SE) != RoadSegment::kNone ||
+	       tr_n(fc).field->get_road(WalkingDir::WALK_SW) != RoadSegment::kNone;
+}
+
+bool Map::has_bridge(const FCoords& fc) const {
+	return is_bridge_segment(fc.field->get_road(WalkingDir::WALK_E)) ||
+	       is_bridge_segment(fc.field->get_road(WalkingDir::WALK_SE)) ||
+	       is_bridge_segment(fc.field->get_road(WalkingDir::WALK_SW)) ||
+	       is_bridge_segment(l_n(fc).field->get_road(WalkingDir::WALK_E)) ||
+	       is_bridge_segment(tl_n(fc).field->get_road(WalkingDir::WALK_SE)) ||
+	       is_bridge_segment(tr_n(fc).field->get_road(WalkingDir::WALK_SW));
 }
 
 int32_t Map::change_terrain(const EditorGameBase& egbase,

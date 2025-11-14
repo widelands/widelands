@@ -100,7 +100,7 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	case Is::kBridgeable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("bridgeable");
-		icon = g_image_cache->get("images/wui/editor/terrain_walkable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_bridgeable.png");
 		break;
 	default:
 		NEVER_HERE();

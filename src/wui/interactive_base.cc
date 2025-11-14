@@ -114,6 +114,9 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 	if ((caps & Widelands::BUILDCAPS_FLAG) != 0) {
 		return Widelands::Field::Buildhelp_Flag;
 	}
+	if ((caps & Widelands::BUILDCAPS_BRIDGE) != 0) {
+		return Widelands::Field::Buildhelp_Bridge;
+	}
 	return Widelands::Field::Buildhelp_None;
 }
 
@@ -179,7 +182,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		constexpr const char* filenames[] = {
 		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
 		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
-		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
+		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png",
+		   "images/wui/overlays/bridge.png"};
 		for (uint8_t scale_index = 0; scale_index < ImageCache::kScalesCount; ++scale_index) {
 			const char* const* filename = filenames;
 
