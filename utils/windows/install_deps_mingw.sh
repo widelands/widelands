@@ -3,9 +3,27 @@
 ARCH=${1:-i686}
 shift 1
 PACMAN_ARGS=$@
+ARCHURL=""
 
-URL_MINGW="https://mirror.msys2.org/mingw/$ARCH"
-URL_MSYS="https://mirror.msys2.org/msys/$ARCH"
+if [ "$ARCH" == "i686" ]
+then
+  MINGWURL="mingw32"
+  MSYSURL="i686"
+elif [ "$ARCH" == "x86_64" ]
+then
+  MINGWURL="mingw64"
+  MSYSURL="x86_64"
+elif [ "$ARCH" == "clang-aarch64" ]
+then
+  MINGWURL="clangarm64"
+  MSYSURL="x86_64"
+else 
+  echo "Unsupported mingw Architecture. Valid values are: i686, x86_64 and clang-aarch64."
+fi
+
+URL_MINGW="https://mirror.msys2.org/mingw/$MINGWURL"
+URL_MSYS="https://mirror.msys2.org/msys/$MSYSURL"
+
 
 cd $(dirname "$0")
 curl -L "$URL_MINGW" > mingw

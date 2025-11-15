@@ -25,20 +25,20 @@ jobs:
         location: C:\
         msystem: clangarm64
         update: true
-        install: >-
-          mingw-w64-clang-aarch64-toolchain
-          mingw-w64-clang-aarch64-cmake
-          mingw-w64-clang-aarch64-asio
-          mingw-w64-clang-aarch64-SDL2_ttf
-          mingw-w64-clang-aarch64-SDL2_mixer
-          mingw-w64-clang-aarch64-SDL2_image
-          mingw-w64-clang-aarch64-SDL2
-          mingw-w64-clang-aarch64-glew
+        # install: >-
+          # mingw-w64-clang-aarch64-toolchain
+          # mingw-w64-clang-aarch64-cmake
+          # mingw-w64-clang-aarch64-asio
+          # mingw-w64-clang-aarch64-SDL2_ttf
+          # mingw-w64-clang-aarch64-SDL2_mixer
+          # mingw-w64-clang-aarch64-SDL2_image
+          # mingw-w64-clang-aarch64-SDL2
+          # mingw-w64-clang-aarch64-glew
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
-        # bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
-        pacman.exe --noconfirm -U https://mirror.msys2.org/mingw/clangarm64/mingw-w64-clang-aarch64-icu-77.1-1-any.pkg.tar.zst 
+        bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
+        # pacman.exe --noconfirm -U https://mirror.msys2.org/mingw/clangarm64/mingw-w64-clang-aarch64-icu-77.1-1-any.pkg.tar.zst 
         choco install innosetup
     - name: Compiler
       run: |
