@@ -9,13 +9,13 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        os: [13, 14, 15]
+        os: [13, 14, 15, 15-intel]
         # Check https://github.com/actions/runner-images#available-images
         include:
           - os: 13
             osname: macOS13_x86
-          # - os: 14-large
-            # osname: macOS14_x86
+          - os: 15-intel
+            osname: macOS15_x86
           - os: 14
             osname: macOS14_arm64
           - os: 15

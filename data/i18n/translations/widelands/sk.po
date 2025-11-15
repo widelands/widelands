@@ -4190,7 +4190,7 @@ msgstr "%1$s opustil/-a hru (%2$s)"
 #: ../../../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%2$s nahradzuje hráča %1$s"
 
 #: ../../../../src/network/network_gaming_messages.cc:43
 #, c-format
@@ -10128,21 +10128,21 @@ msgstr "Pokračovať v hre"
 #: ../../../../src/wui/game_client_disconnected.cc:89
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr ""
+msgstr "Nahradiť odpojeného hráča vybranou AI a pokračovať v hraní"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
 #. disconnected from a game
 #: ../../../../src/wui/game_client_disconnected.cc:99
 msgid "AI for the disconnected player"
-msgstr ""
+msgstr "AI namiesto odpojeného hráča"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
 #: ../../../../src/wui/game_client_disconnected.cc:132
 #, c-format
 msgid "Replace player with %s"
-msgstr ""
+msgstr "Doterajšieho hráča nahradí %s"
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
