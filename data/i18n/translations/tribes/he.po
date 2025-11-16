@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# ari ploni, 2025
 # GunChleoc, 2016
 # GunChleoc, 2015
 # maor reuben <maor309@gmail.com>, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2025-10-11 02:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,37 +24,37 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
 msgctxt "amazons_building"
 msgid "Market"
-msgstr ""
+msgstr "שוק"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
 msgctxt "atlanteans_building"
 msgid "Market"
-msgstr ""
+msgstr "שוק"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "שוק"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
 msgctxt "empire_building"
 msgid "Market"
-msgstr ""
+msgstr "שוק"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
 msgctxt "frisians_building"
 msgid "Market"
-msgstr ""
+msgstr "שוק"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "בִיצוּר"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
@@ -89,7 +90,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "מבצר"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:62
@@ -377,7 +378,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Guardhouse"
-msgstr "מחסן"
+msgstr "בית המשמר"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
@@ -449,7 +450,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
 msgctxt "atlanteans_building"
 msgid "High Tower"
-msgstr "מגדל"
+msgstr "מגדל גבוה"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
@@ -956,31 +957,31 @@ msgid "Fortress"
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:65
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:67
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:69
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr ""
@@ -992,31 +993,31 @@ msgid "Outpost"
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:63
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr ""
@@ -1028,31 +1029,31 @@ msgid "Sentinel"
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:61
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:63
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:65
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
 msgstr ""
@@ -1064,31 +1065,31 @@ msgid "Tower"
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:68
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr ""
@@ -1100,31 +1101,31 @@ msgid "Wooden Tower"
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:72
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:74
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
 msgstr ""
@@ -2064,7 +2065,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Charcoal Kiln"
-msgstr "שורף פחם"
+msgstr "כבשן פחם"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
@@ -2133,7 +2134,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Crystal Mine"
-msgstr "מכרה פחם"
+msgstr "מכרה קריסטל"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:95
@@ -2276,7 +2277,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Horse Farm"
-msgstr "סוס"
+msgstr "חוות סוסים"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
@@ -2457,7 +2458,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Smokery"
-msgstr "מאפיה"
+msgstr "בֵּית עִשׁוּן"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
@@ -2482,7 +2483,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "מרכיב נשק"
+msgstr "נפחיית כלים"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -2700,7 +2701,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Brewery"
-msgstr "מבשל"
+msgstr "מבשלת בירה"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
@@ -2712,7 +2713,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr "גרזן קרב"
+msgstr "חוות בקר"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
@@ -2724,7 +2725,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:8
 msgctxt "barbarians_building"
 msgid "Charcoal Kiln"
-msgstr "שורף פחם"
+msgstr "כבשן פחם"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:8
@@ -2750,7 +2751,7 @@ msgstr "מכרה פחם עמוק"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
-msgstr "מכרה פחם עמוק"
+msgstr "מכרה פחם עמוק יותר"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:89
 msgctxt "barbarians_building"
@@ -2794,7 +2795,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr "דיג"
+msgstr "בקתת הדייגים"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:67
 msgctxt "barbarians_building"
@@ -2807,7 +2808,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
-msgstr "מפקח ציד"
+msgstr "בקתת שומר הציד"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:8
@@ -2833,7 +2834,7 @@ msgstr "מכרה זהב עמוק"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:8
 msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
-msgstr "מכרה זהב עמוק"
+msgstr "מכרה זהב עמוק יותר"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:88
 msgctxt "barbarians_building"
@@ -2873,7 +2874,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
 msgctxt "barbarians_building"
 msgid "Helm Smithy"
-msgstr "בית מלאכת נשק"
+msgstr "נַפְּחִיַת קְסָדוֹת"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:79
@@ -2896,7 +2897,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "ציד"
+msgstr "בקתת הציידים"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:74
@@ -2962,7 +2963,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr "כורת עצים"
+msgstr "בקתת חוטב העצים"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
 msgctxt "barbarians_building"
@@ -2997,7 +2998,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Micro Brewery"
-msgstr "מבשל"
+msgstr "מִבְשֶׁלֶת בִּירָה עַמָּמִית"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
@@ -3023,7 +3024,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "שומר-יערות"
+msgstr "עֶמְדַּת קַקַּ\"ל"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
@@ -3136,7 +3137,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Armor Smithy"
-msgstr "בית מלאכת נשק"
+msgstr "בית מלאכת שריון"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
@@ -3184,13 +3185,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/brewery/init.lua:8
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr "מבשל"
+msgstr "מבשלת בירה"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:8
 msgctxt "empire_building"
 msgid "Charcoal Kiln"
-msgstr "שורף פחם"
+msgstr "כבשן פחם"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:8
@@ -3266,7 +3267,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr "יערן"
+msgstr "בֵּית הַיַּעְרָן"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:8
@@ -3498,7 +3499,7 @@ msgstr "מסבאה"
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "מרכיב נשק"
+msgstr "נפחיית כלים"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
@@ -4152,7 +4153,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:8
 msgctxt "frisians_building"
 msgid "Smokery"
-msgstr ""
+msgstr "בֵּית עִשׁוּן"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:8
@@ -4241,8 +4242,8 @@ msgstr ""
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:85
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:45
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:69
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:80
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:79
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:85
 msgid "sleeping"
 msgstr ""
 
@@ -4413,7 +4414,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr "גרזן קרב"
+msgstr "זירת קרב"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
@@ -4600,46 +4601,46 @@ msgid "Training Arena"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:88
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:94
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:110
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:127
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:139
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:145
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:162
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:178
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:175
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr ""
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:177
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:186
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:183
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4651,31 +4652,31 @@ msgid "Training Camp"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:87
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:93
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:109
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:126
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:137
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:143
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:153
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:159
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
@@ -5037,31 +5038,31 @@ msgstr ""
 #: ../../../../data/tribes/immovables/cornfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (harvested)"
-msgstr "שדה תירס"
+msgstr "שדה תירס (נקצר)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cornfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (medium)"
-msgstr "שדה תירס"
+msgstr "שדה תירס (בינוני)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cornfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "שדה תירס"
+msgstr "שדה תירס (בָּשֵׁל)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cornfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (small)"
-msgstr "שדה תירס"
+msgstr "שדה תירס (קטן)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/cornfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "שדה תירס"
+msgstr "שדה תירס (זָעִיר)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/destroyed_building/init.lua:8
@@ -5286,7 +5287,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/shipconstruction_frisians/init.lua:8
 msgctxt "immovable"
 msgid "Ship Under Construction"
-msgstr "אתר בנייה"
+msgstr "ספינה בבנייה"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
@@ -5471,7 +5472,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/init.lua:10
 #: ../../../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
-msgstr "צוות הפיתוח של ווידלנדס"
+msgstr "צוות הפיתוח של Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/amazons/init.lua:13
@@ -5728,7 +5729,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr "ברברימ"
+msgstr "ברברים"
 
 #: ../../../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5746,7 +5747,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
-msgstr ""
+msgstr "פריזיאנים"
 
 #: ../../../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
@@ -5758,19 +5759,19 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:90
 msgid "General"
-msgstr "גנרל"
+msgstr "כללי"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "מבוא"
 
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "בקרים"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "טיפים"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -8242,7 +8243,7 @@ msgstr "גרזן רחב"
 #: ../../../../data/tribes/wares/ax_bronze/init.lua:8
 msgctxt "ware"
 msgid "Bronze Ax"
-msgstr "גרזן ארד"
+msgstr "גרזן ברונזה"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/ax_sharp/init.lua:8
@@ -8332,19 +8333,19 @@ msgstr ""
 #: ../../../../data/tribes/wares/bread_atlanteans/init.lua:8
 msgctxt "atlanteans_ware"
 msgid "Bread"
-msgstr "פטה"
+msgstr "לחם"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_barbarians/init.lua:8
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr "פטה"
+msgstr "לאפה"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_empire/init.lua:8
 msgctxt "empire_ware"
 msgid "Bread"
-msgstr "פטה"
+msgstr "לחם"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/bread_frisians/init.lua:8
@@ -8398,7 +8399,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/cloth/init.lua:8
 msgctxt "ware"
 msgid "Cloth"
-msgstr "אריג"
+msgstr "בד"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/coal/init.lua:8
@@ -8464,7 +8465,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/fishing_rod/init.lua:8
 msgctxt "ware"
 msgid "Fishing Rod"
-msgstr "חכה"
+msgstr "חכת דיג"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/flour/init.lua:8
@@ -8524,7 +8525,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/gold_ore/init.lua:8
 msgctxt "ware"
 msgid "Gold Ore"
-msgstr "מכרה זהב"
+msgstr "עפרת זהב"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/gold_thread/init.lua:8
@@ -8614,7 +8615,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "ציד"
+msgstr "חנית ציד"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/iron/init.lua:8
@@ -8626,7 +8627,7 @@ msgstr "ברזל"
 #: ../../../../data/tribes/wares/iron_ore/init.lua:8
 msgctxt "ware"
 msgid "Iron Ore"
-msgstr "ברזל"
+msgstr "עפרת ברזל"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/ironwood/init.lua:8
@@ -8681,7 +8682,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/meal/init.lua:8
 msgctxt "ware"
 msgid "Meal"
-msgstr "מזון"
+msgstr "אֲרוּחָה"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/meat/init.lua:8
@@ -8711,7 +8712,7 @@ msgstr "מכוש"
 #: ../../../../data/tribes/wares/planks/init.lua:8
 msgctxt "ware"
 msgid "Planks"
-msgstr "לוחות"
+msgstr "קרשים"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/protector_padded/init.lua:8
@@ -8790,7 +8791,7 @@ msgstr ""
 #: ../../../../data/tribes/wares/shovel/init.lua:8
 msgctxt "ware"
 msgid "Shovel"
-msgstr "מעדר"
+msgstr "את חפירה"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/smoked_fish/init.lua:8
@@ -9192,7 +9193,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/armorsmith/init.lua:104
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
-msgstr "מרכיב נשק"
+msgstr "נַפַּח שִׁרְיוֹנוֹת"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/baker/init.lua:8
@@ -9222,7 +9223,7 @@ msgstr "סבל"
 #: ../../../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Charcoal Burner"
-msgstr "שורף"
+msgstr "פַּחָמִי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/farmer/init.lua:8
@@ -9240,13 +9241,13 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Fish Breeder"
-msgstr "דיג"
+msgstr "מגדל דגים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/fisher/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Fisher"
-msgstr "דיג"
+msgstr "דייג"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/forester/init.lua:8
@@ -9300,7 +9301,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/sawyer/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Sawyer"
-msgstr "נסר"
+msgstr "נַסָּר"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/scout/init.lua:8
@@ -9318,7 +9319,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/smelter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Smelter"
-msgstr "מכונן"
+msgstr "מַתִּיךְ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/smoker/init.lua:8
@@ -9342,13 +9343,13 @@ msgstr ""
 #: ../../../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Stonecutter"
-msgstr "אבן"
+msgstr "סַתָת"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "מרכיב נשק"
+msgstr "חָרָשׁ כלים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -9390,19 +9391,19 @@ msgstr "נפח"
 #: ../../../../data/tribes/workers/barbarians/blacksmith_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
-msgstr "נפח"
+msgstr "רב נפחים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/brewer/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Brewer"
-msgstr "מבשל"
+msgstr "בַּשְׁלָן בִּירָה"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/brewer_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
-msgstr "מבשל"
+msgstr "רב בַּשְׁלָני בִּירָה"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/builder/init.lua:8
@@ -9426,7 +9427,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/charcoal_burner/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
-msgstr "שורף"
+msgstr "פַּחָמִי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/farmer/init.lua:8
@@ -9444,7 +9445,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/fisher/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Fisher"
-msgstr "דיג"
+msgstr "דייג"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/gamekeeper/init.lua:8
@@ -9468,7 +9469,7 @@ msgstr "גאולוג"
 #: ../../../../data/tribes/workers/barbarians/helmsmith/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "נפח"
+msgstr "חָרָשׁ קְסָדוֹת"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/hunter/init.lua:8
@@ -9480,7 +9481,7 @@ msgstr "ציד"
 #: ../../../../data/tribes/workers/barbarians/innkeeper/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Innkeeper"
-msgstr "בעל הפונדק"
+msgstr "פּוּנדְקַאִי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/lime_burner/init.lua:8
@@ -9492,7 +9493,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/lumberjack/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
-msgstr "כורת עצים"
+msgstr "חוטב עצים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/miner/init.lua:8
@@ -9504,7 +9505,7 @@ msgstr "כורה"
 #: ../../../../data/tribes/workers/barbarians/miner_chief/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr "כורה"
+msgstr "כורה ראשי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/miner_master/init.lua:8
@@ -9546,7 +9547,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/barbarians/smelter/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Smelter"
-msgstr "מכונן"
+msgstr "מַתִּיךְ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/soldier/init.lua:107
@@ -9576,7 +9577,7 @@ msgstr "אורג"
 #: ../../../../data/tribes/workers/empire/armorsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Armorsmith"
-msgstr "מרכיב נשק"
+msgstr "נַפַּח שִׁרְיוֹנוֹת"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/baker/init.lua:8
@@ -9612,7 +9613,7 @@ msgstr "סבל"
 #: ../../../../data/tribes/workers/empire/charcoal_burner/init.lua:8
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
-msgstr "שורף"
+msgstr "פַּחָמִי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/donkey/init.lua:8
@@ -9666,13 +9667,13 @@ msgstr "ציד"
 #: ../../../../data/tribes/workers/empire/innkeeper/init.lua:8
 msgctxt "empire_worker"
 msgid "Innkeeper"
-msgstr "בעל הפונדק"
+msgstr "פּוּנדְקַאִי"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/lumberjack/init.lua:8
 msgctxt "empire_worker"
 msgid "Lumberjack"
-msgstr "כורת עצים"
+msgstr "חוטב עצים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/miller/init.lua:8
@@ -9744,7 +9745,7 @@ msgstr ""
 #: ../../../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "מרכיב נשק"
+msgstr "חָרָשׁ כלים"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/trainer/init.lua:8

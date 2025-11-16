@@ -416,6 +416,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <release date="2024-11-15" version="1.2.1">
       <description><ul>
         <li>Bugfix release</li>
+        <li xml:lang="cs">Výpis chyb skriptu</li>
         <li xml:lang="de">Fehlerbehebung</li>
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
@@ -606,6 +607,7 @@ Version de correction de bugs</li>
   <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
   <developer id="org.widelands">
     <name>The Widelands Development Team</name>
+    <name xml:lang="ca">L’equip de desenvolupament del Widelands</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
