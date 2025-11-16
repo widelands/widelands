@@ -199,7 +199,7 @@ msgstr "מתרגמי Widelands"
 
 #: ../../../../data/txts/developers.lua:5
 msgid "Chieftains"
-msgstr "צ'יפים"
+msgstr "ראשי השבטים"
 
 #: ../../../../data/txts/developers.lua:18
 msgid "Elders"
@@ -291,11 +291,11 @@ msgstr "מנדריבה לינוקס"
 
 #: ../../../../data/txts/developers.lua:322
 msgid "FreeBSD"
-msgstr "פרי-BSD"
+msgstr "FreeBSD"
 
 #: ../../../../data/txts/developers.lua:328
 msgid "Flatpak"
-msgstr "פלייטפאק"
+msgstr "Flatpak"
 
 #: ../../../../data/txts/developers.lua:335
 msgid "Mac OS X"
@@ -752,7 +752,7 @@ msgstr "השתמש בתפריט 'הגדר כלכלה' כדי להתאים את �
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr "נהל את ההודעות שלך בצורה יעילה יותר: לחץ על ‘%1%’ כדי לגשת לחלון ההודעות, ולאחר מכן השתמש ב- ‘%2%’ למעבר אל (Go To), ובמקש ‘%3%’ לארכיון הודעות."
+msgstr "נהל את ההודעות שלך בצורה יעילה יותר: לחץ על ‘%1%’ כדי לגשת לחלון ההודעות, ולאחר מכן השתמש ב- ‘%2%’ למעבר אל , ובמקש ‘%3%’ לארכיון הודעות."
 
 #: ../../../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
