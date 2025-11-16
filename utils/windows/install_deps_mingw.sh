@@ -3,7 +3,6 @@
 ARCH=${1:-i686}
 shift 1
 PACMAN_ARGS=$@
-ARCHURL=""
 
 if [ "$ARCH" == "i686" ]
 then
