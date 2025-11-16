@@ -25,15 +25,6 @@ jobs:
         location: C:\
         msystem: clangarm64
         update: true
-        # install: >-
-          # mingw-w64-clang-aarch64-toolchain
-          # mingw-w64-clang-aarch64-cmake
-          # mingw-w64-clang-aarch64-asio
-          # mingw-w64-clang-aarch64-SDL2_ttf
-          # mingw-w64-clang-aarch64-SDL2_mixer
-          # mingw-w64-clang-aarch64-SDL2_image
-          # mingw-w64-clang-aarch64-SDL2
-          # mingw-w64-clang-aarch64-glew
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"

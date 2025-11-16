@@ -115,6 +115,10 @@ do
   elif [ $VERSIONPINNED -eq 1 ]
   then
     install_old_pkg
+  # Package whith fixed architecture different from the current
+  elif [ -z "$FINALDEPS" ]
+  then
+    continue
   else
     pacman -S $PACMAN_ARGS mingw-w64-$ARCH-$PKG || install_old_pkg
   fi
