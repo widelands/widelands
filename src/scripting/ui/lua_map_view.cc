@@ -562,7 +562,7 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
       closest to the clicked pixel.
       The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
       The coordinates of the triangle are given by the keys ``"triangle_x"``, ``"triangle_y"``,
-      and ``"triangle_t"``, where ``"triangle_y"`` is one of ``"D"`` and ``"R"``.
+      and ``"triangle_t"``, where ``"triangle_t"`` is one of ``"D"`` and ``"R"``.
 
       :returns: :class:`wl.Subscriber`
 */
@@ -585,7 +585,7 @@ int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
       closest to the mouse pixel.
       The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
       The coordinates of the triangle are given by the keys ``"triangle_x"``, ``"triangle_y"``,
-      and ``"triangle_t"``, where ``"triangle_y"`` is :const:`0` for the R triangle
+      and ``"triangle_t"``, where ``"triangle_t"`` is :const:`0` for the R triangle
       and :const:`1` for the D triangle.
 
       :returns: :class:`wl.Subscriber`
