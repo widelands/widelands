@@ -29,18 +29,22 @@
 Songset::Songset(const std::string& dir, const std::string& basename) {
 	assert(g_fs);
 
-	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
-	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
+	name_ = basename;
 
-	load_songs(basename);
+	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, name_, "mp3");
+	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, name_, "ogg");
+
+	load_songs();
 
 	if (songs_.empty()) {
 		init_songs(mp3_files);
 		init_songs(ogg_files);
-		load_songs(basename);
+		load_songs();
 	}
 
-	current_song_ = 0;
+	// initialize "neg" index to ensure 1st sequential playback starts at 0
+	// in case you wonder, yes this is needed
+	current_song_ = static_cast<uint32_t>(-1);
 }
 
 /**
@@ -54,8 +58,8 @@ void Songset::init_songs(std::vector<std::string> files) {
 }
 
 /// Loads song data from config into memory
-void Songset::load_songs(const std::string& basename) {
-	const std::string& path_basename = "music/" + basename;
+void Songset::load_songs() {
+	const std::string& path_basename = "music/" + name_;
 	try {
 		Section& sec = get_config_section("songs");
 		std::vector<Section::Value> values = sec.get_values();
@@ -130,7 +134,6 @@ std::vector<Song> Songset::get_song_data() {
  *          or an error occurred
  */
 Mix_Music* Songset::get_song(uint32_t random) {
-	std::string filename;
 
 	std::map<std::string, Song> playlist = create_playlist();
 
@@ -138,29 +141,46 @@ Mix_Music* Songset::get_song(uint32_t random) {
 		return nullptr;
 	}
 
-	if (random != 0 && playlist.size() > 1) {
-		// Exclude current_song from playing two times in a row
-		current_song_ += 1 + random % (playlist.size() - 1);
-		current_song_ = current_song_ % playlist.size();
+	const uint32_t playlist_size = static_cast<uint32_t>(playlist.size());
+	
+	// A. Shuffled playback
+	if (random != 0 && playlist_size > 1) {
+		// Calculate the next song index randomly, preventing immediate repetition
+		uint32_t offset = 1 + random % (playlist_size - 1);
+		current_song_ = (current_song_ + offset) % playlist_size;
+	}
+	// B. Sequential playback
+	else {
+		// Increment normally
+		current_song_ = (current_song_ + 1) % playlist_size;
 	}
 
-	// playlist may have shrunk since last call, check bounds
-	if (current_song_ >= playlist.size()) {
-		current_song_ = 0;  // forced wrap
+	// Safety check for wrap-around just in case
+	if (current_song_ >= playlist_size) {
+		current_song_ = 0;
 	}
+
 	auto it = playlist.begin();
 	std::advance(it, current_song_);
-	filename = it->first;
-
-	// current_song is incremented after filename was chosen for two reasons:
-	// 1. so that unshuffled playback starts at 0
-	// 2. to prevent playing same song two times in a row immediately after shuffle is turned off
-	if (++current_song_ >= playlist.size()) {
-		current_song_ = 0;  // wrap
-	}
+	std::string filename = it->first;
 
 	m_ = load_file(filename);
+	
 	return m_;
+}
+
+std::string Songset::get_title() {
+	std::map<std::string, Song> playlist = create_playlist();
+	std::map<std::string, Song>::iterator it = playlist.begin();
+	std::advance(it, current_song_);
+
+	Song song = it->second;
+
+	std::string title = song.title;
+	if (title.empty()) {
+		title = song.filename;
+	}
+	return title;
 }
 
 // Create a map that contains only the user-selected songs
@@ -219,3 +239,4 @@ Mix_Music* Songset::load_file(const std::string& filename) {
 
 	return m_;
 }
+

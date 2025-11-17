@@ -249,7 +249,7 @@ private:
 	std::map<SoundType, SoundOptions> sound_options_;
 
 	/// A collection of songsets
-	std::map<std::string, std::unique_ptr<Songset>> songs_;
+	std::map<std::string, std::unique_ptr<Songset>> songsets_;
 
 	/// A collection of effect sets
 	std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;

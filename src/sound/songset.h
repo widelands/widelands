@@ -48,15 +48,19 @@ struct Songset {
 	~Songset();
 
 	Mix_Music* get_song(uint32_t random = 0);
+	std::string get_title();
 	bool is_song_enabled(std::string& filename);
 	void set_song_enabled(std::string& filename, bool on);
 	std::vector<Song> get_song_data();
 
 private:
 	Mix_Music* load_file(const std::string& filename);
-	void load_songs(const std::string& basename);
+	void load_songs();
 	void init_songs(std::vector<std::string> files);
 	std::map<std::string, Song> create_playlist();
+
+	/// The name of this songset
+	std::string name_;
 
 	/// List of song data
 	std::map<std::string, Song> songs_;
@@ -64,7 +68,7 @@ private:
 	/** Index of the song that is currently playing
 	 *  relative to the playlist of user selected songs.
 	 */
-	uint32_t current_song_;
+	uint32_t current_song_ = 0;
 
 	/// The current song
 	Mix_Music* m_{nullptr};
