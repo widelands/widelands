@@ -312,7 +312,7 @@ msgstr "Žiadosť o pripojenie sa do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:78
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Pozvánka do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:80
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
@@ -334,7 +334,7 @@ msgstr "Hráč %1$s prijal hráča %2$s do svojho tímu."
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s prijal pozvánku o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:127
 #, c-format
@@ -349,12 +349,12 @@ msgstr "Hráč %1$s zamietol hráčovi %2$s členstvo vo svojom tíme."
 #: ../../../../src/commands/cmd_diplomacy.cc:132
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "Hráč %1$s odvolal pozvanie hráča %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:134
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s odmietol pozvánku o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:138
 msgid "Team Change Accepted"
@@ -9347,7 +9347,7 @@ msgstr "Naozaj sa chcete vzdať a stať sa divákom?"
 
 #: ../../../../src/wui/actionconfirm.cc:540
 msgid "Resign?"
-msgstr ""
+msgstr "Vzdávate sa?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
@@ -10216,7 +10216,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Vzdal sa o %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:323
 msgid "Approve"
@@ -10228,11 +10228,11 @@ msgstr "Zamietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:330
 msgid "Accept"
-msgstr ""
+msgstr "Prijať"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:331
 msgid "Refuse"
-msgstr ""
+msgstr "Odmietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:347
 msgid "Retract"
