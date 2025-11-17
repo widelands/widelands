@@ -47,7 +47,7 @@ public:
 	             panel_style_,
 	             "enable",
 	             Vector2i::zero(),
-	             (song.title.empty() ? _("Untitled") : song.title)),
+	             (song.title.empty() ? song.filename : song.title)),
 	     filename_(song.filename) {
 
 		set_inner_spacing(kSpacing);
