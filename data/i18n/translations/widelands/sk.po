@@ -53,7 +53,7 @@ msgstr "Došli skaly"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr "V blízkosti vašej štartovacej pozície sa nenachádzajú žiadne skaly. Pre rozbeh vašej ekomomiky dostanete preto extra zdroje."
+msgstr "V blízkosti vašej začiatočnej pozície sa nenachádzajú žiadne skaly. Preto získate dodatočné zdroje na rozbehnutie vašej ekomomiky."
 
 #: ../../../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
@@ -63,7 +63,7 @@ msgstr "Nedostatok stromov v okolí"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr "V blízkosti vašej východiskovej pozície nie je dostatok stromov. Preto získate dodatočné zdroje na rozbehnutie svojej ekonomiky."
+msgstr "V blízkosti vašej začiatočnej pozície nie je dostatok stromov. Preto získate dodatočné zdroje na rozbehnutie vašej ekonomiky."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -312,7 +312,7 @@ msgstr "Žiadosť o pripojenie sa do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:78
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Pozvánka do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:80
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
@@ -334,7 +334,7 @@ msgstr "Hráč %1$s prijal hráča %2$s do svojho tímu."
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s prijal pozvánku o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:127
 #, c-format
@@ -349,12 +349,12 @@ msgstr "Hráč %1$s zamietol hráčovi %2$s členstvo vo svojom tíme."
 #: ../../../../src/commands/cmd_diplomacy.cc:132
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "Hráč %1$s odvolal pozvanie hráča %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:134
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s odmietol pozvánku o pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:138
 msgid "Team Change Accepted"
@@ -1730,7 +1730,7 @@ msgstr "Kmeň sa vyberie náhodne."
 #. position tool
 #: ../../../../src/editor/ui_menus/player_menu.cc:223
 msgid "Set this player’s starting position"
-msgstr "Urči počiatočnú pozíciu tohto hráča"
+msgstr "Urči začiatočnú pozíciu tohto hráča"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:31
 msgid "Height Tools Options"
@@ -2407,14 +2407,14 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:666 ../../../../src/logic/player.cc:260
 msgid "Missing starting position"
-msgstr "Chýbajúca počiatočná pozícia"
+msgstr "Chýbajúca začiatočná pozícia"
 
 #: ../../../../src/logic/game.cc:667 ../../../../src/logic/player.cc:261
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočnú pozíciu.\nTento problém môžete opraviť, ak ju pridáte ručne pomocou editora máp."
+msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu začiatočnú pozíciu.\nTento problém môžete opraviť, ak ju pridáte ručne pomocou editora máp."
 
 #: ../../../../src/logic/game.cc:767
 msgid "Initializing…"
@@ -3779,14 +3779,14 @@ msgstr "/me skontroloval(a) prijatý súbor. Hoci md5 kontrola súčtu bola úsp
 
 #: ../../../../src/network/gameclient.cc:1368
 msgid "Disconnected"
-msgstr ""
+msgstr "Odpojenie"
 
 #: ../../../../src/network/gameclient.cc:1369
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "Spojenie s hostiteľom bolo stratené z nasledujúceho dôvodu:\n%s"
 
 #: ../../../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
@@ -4190,7 +4190,7 @@ msgstr "%1$s opustil/-a hru (%2$s)"
 #: ../../../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%2$s nahradzuje hráča %1$s"
 
 #: ../../../../src/network/network_gaming_messages.cc:43
 #, c-format
@@ -6962,7 +6962,7 @@ msgstr "Nebolo možné nájsť vybraný súbor. Ak nenastane prenos automaticky,
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:330
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr ""
+msgstr "Nepodarilo sa nahrať skript podmienky výhry zo súboru „%s“."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:457
@@ -7629,7 +7629,7 @@ msgstr "Náhodná AI"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:351
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:353
 msgid "Shared in"
-msgstr "Zdieľaný"
+msgstr "Zdieľané"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:358
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:359
@@ -7654,7 +7654,7 @@ msgstr "Človek"
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:84
 #, c-format
 msgid "Shared in Player %u"
-msgstr ""
+msgstr "Zdieľané s hráčom %u"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:284
@@ -9347,7 +9347,7 @@ msgstr "Naozaj sa chcete vzdať a stať sa divákom?"
 
 #: ../../../../src/wui/actionconfirm.cc:540
 msgid "Resign?"
-msgstr ""
+msgstr "Vzdávate sa?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
@@ -10111,13 +10111,13 @@ msgstr "všetci"
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
 msgid "Client got disconnected"
-msgstr ""
+msgstr "Odpojenie klienta"
 
 #: ../../../../src/wui/game_client_disconnected.cc:75
 msgid ""
 "A player disconnected from the game. An automatic save game has been "
 "created. Do you want to continue playing?"
-msgstr ""
+msgstr "Hráč sa odpojil od hry. Hra bola automaticky uložená. Chcete pokračovať v hraní?"
 
 #. * TRANSLATORS: Button text
 #: ../../../../src/wui/game_client_disconnected.cc:87
@@ -10128,21 +10128,21 @@ msgstr "Pokračovať v hre"
 #: ../../../../src/wui/game_client_disconnected.cc:89
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr ""
+msgstr "Nahradiť odpojeného hráča vybranou AI a pokračovať v hraní"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
 #. disconnected from a game
 #: ../../../../src/wui/game_client_disconnected.cc:99
 msgid "AI for the disconnected player"
-msgstr ""
+msgstr "AI namiesto odpojeného hráča"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
 #: ../../../../src/wui/game_client_disconnected.cc:132
 #, c-format
 msgid "Replace player with %s"
-msgstr ""
+msgstr "Doterajšieho hráča nahradí %s"
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
@@ -10216,7 +10216,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Vzdal sa o %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:323
 msgid "Approve"
@@ -10228,11 +10228,11 @@ msgstr "Zamietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:330
 msgid "Accept"
-msgstr ""
+msgstr "Prijať"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:331
 msgid "Refuse"
-msgstr ""
+msgstr "Odmietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:347
 msgid "Retract"
@@ -11142,7 +11142,7 @@ msgstr "Vyvážené"
 msgid ""
 "Player starting positions were designed to provide equal conditions for all "
 "players"
-msgstr "Počiatočné pozície hráčov boli navrhnuté tak, aby poskytovali rovnaké podmienky pre všetkých hráčov"
+msgstr "Začiatočné pozície hráčov boli navrhnuté tak, aby poskytovali rovnaké podmienky pre všetkých hráčov"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:46
