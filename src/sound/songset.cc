@@ -142,7 +142,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	}
 
 	const uint32_t playlist_size = static_cast<uint32_t>(playlist.size());
-	
+
 	// A. Shuffled playback
 	if (random != 0 && playlist_size > 1) {
 		// Calculate the next song index randomly, preventing immediate repetition
@@ -165,7 +165,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	std::string filename = it->first;
 
 	m_ = load_file(filename);
-	
+
 	return m_;
 }
 
@@ -239,4 +239,3 @@ Mix_Music* Songset::load_file(const std::string& filename) {
 
 	return m_;
 }
-
