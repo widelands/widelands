@@ -414,7 +414,8 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 		return;
 	}
 	if (songsets_.count(basename) == 0) {
-		songsets_.insert(std::make_pair(basename, std::unique_ptr<Songset>(new Songset(dir, basename))));
+		songsets_.insert(
+		   std::make_pair(basename, std::unique_ptr<Songset>(new Songset(dir, basename))));
 	}
 }
 
