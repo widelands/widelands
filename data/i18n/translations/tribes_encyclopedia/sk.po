@@ -13749,7 +13749,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2724
 msgctxt "warehousename"
 msgid "Roma"
-msgstr ""
+msgstr "Rím"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2726
@@ -13887,7 +13887,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2770
 msgctxt "warehousename"
 msgid "Venetiæ"
-msgstr ""
+msgstr "Benátky"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2772

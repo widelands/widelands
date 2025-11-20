@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2014
 # Karl Vest, 2020
+# Marek G, 2025
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-10-11 02:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Marek G, 2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1272,12 +1273,12 @@ msgstr "pracovanie"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:58
 msgid "planting cassava"
-msgstr ""
+msgstr "sadenie manioku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
 msgid "harvesting cassava"
-msgstr ""
+msgstr "zber manioku"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
@@ -1335,7 +1336,7 @@ msgstr "Uhliarska pec"
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr ""
+msgstr "produkcia dreveného uhlia"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
@@ -1357,12 +1358,12 @@ msgstr "Kakaovníková plantáž"
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:66
 msgid "planting cocoa"
-msgstr ""
+msgstr "sadenie kakaovníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "zber kakaovníka"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
 msgctxt "amazons_building"
@@ -1477,7 +1478,7 @@ msgstr "Záhradné centrum"
 #: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:67
 msgid "enhancing the fertility of land"
-msgstr ""
+msgstr "zúrodňovanie pôdy"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
@@ -1545,26 +1546,26 @@ msgstr "Lovecko-zberačská chatrč"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
 msgid "gathering"
-msgstr ""
+msgstr "zber"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
 msgid "gathering meat"
-msgstr ""
+msgstr "získavanie mäsa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
 msgid "gathering fish"
-msgstr ""
+msgstr "lov rýb"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
 msgid "No Game, No Fish"
-msgstr ""
+msgstr "Nie je zver, nie sú ryby"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:77
 msgid "Out of Game and Fish"
-msgstr ""
+msgstr "Minula sa zver a ryby"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:79
@@ -1610,7 +1611,7 @@ msgstr "Chatrč rezačky lián"
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr ""
+msgstr "sa ťaží liana"
 
 #. TRANSLATORS: Short for "No Tree to Cut Lianas" for a resource
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
@@ -1624,7 +1625,7 @@ msgstr "Došli stromy"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "Nie sú stromy na ťažbu lián"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:54
 msgctxt "amazons_building"
@@ -1644,19 +1645,19 @@ msgstr "Chatrč na ťažbu vzácnych drevín"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
-msgstr ""
+msgstr "Ťažba balzy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:54
 msgid "harvesting rubber"
-msgstr ""
+msgstr "Ťažba gumy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
 msgid "harvesting ironwood"
-msgstr ""
+msgstr "Ťažba železného dreva"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
@@ -1668,19 +1669,19 @@ msgstr "Plantáž vzácnych drevín"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:56
 msgid "planting balsa tree"
-msgstr ""
+msgstr "sa sadí balzovník"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:69
 msgid "planting rubber tree"
-msgstr ""
+msgstr "sadiť kaučukovník"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:82
 msgid "planting ironwood tree"
-msgstr ""
+msgstr "sadiť železné drevo"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
@@ -1832,7 +1833,7 @@ msgstr "Kamenárska chatrč"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr ""
+msgstr "ťažiť žulu"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
@@ -1893,11 +1894,11 @@ msgstr "ťaženie kremeňa"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Minul sa kameň"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Hlavná žila kameňa bola vyčerpaná"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -1964,7 +1965,7 @@ msgstr "chovanie rýb"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
 msgid "releasing game"
-msgstr ""
+msgstr "Vypustenie zveri"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
@@ -3874,12 +3875,12 @@ msgstr "Dom staviteľa hrádze"
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
 msgid "diking"
-msgstr ""
+msgstr "hradenie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:77
 msgid "building a dike"
-msgstr ""
+msgstr "budovanie hrádze"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5076,7 +5077,7 @@ msgstr "Zničená budova"
 #: ../../../../data/tribes/immovables/dike/init.lua:8
 msgctxt "immovable"
 msgid "Dike"
-msgstr ""
+msgstr "hrádza"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -5190,13 +5191,13 @@ msgstr "Žiadne zdroje"
 #: ../../../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Trocha kremeňa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Veľa kremeňa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5646,7 +5647,7 @@ msgstr "Buď opatrný"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Máte suroviny na zhotovenie len toľkých nástrojov, koľko je ich potrebných na naštartovanie vašej ekonomiky. Uistite sa, že žiadne zbytočné nátroje nebudú zhotovené."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5810,13 +5811,13 @@ msgstr "Orinoko"
 #: ../../../../data/tribes/ships/amazons/init.lua:50
 msgctxt "shipname"
 msgid "Amazonas"
-msgstr ""
+msgstr "Amazonka"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:52
 msgctxt "shipname"
 msgid "Abacaxis"
-msgstr ""
+msgstr "Abakaksis"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../../../data/tribes/ships/amazons/init.lua:54
@@ -7964,7 +7965,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:175
 msgctxt "shipname"
 msgid "Traianus"
-msgstr ""
+msgstr "Traján"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:177
@@ -7982,7 +7983,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:181
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergílius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:183
