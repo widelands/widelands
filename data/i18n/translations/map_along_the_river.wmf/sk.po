@@ -37,7 +37,7 @@ msgstr "Transport"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
-msgstr "Štyri lopaty na odstránenie bažín boli zhromaždené v skladisku."
+msgstr "Štyri lopaty na odstránenie bažín boli zhromaždené v sklade."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -49,7 +49,7 @@ msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr ""
-"Štyri ďalšie lopaty na odstránenie močarísk boli zhromaždené v skladisku."
+"Štyri ďalšie lopaty na odstránenie močarísk boli zhromaždené v sklade."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
@@ -57,7 +57,7 @@ msgstr "Porazte Törvera"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr "Porazite Törverové armády "
+msgstr "Porazte Törverove armády"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
@@ -86,7 +86,7 @@ msgstr "Obsaďte pirátsku strážnicu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr "Obsaďte pirátsku strážnicu."
+msgstr "Obsaďte pirátsku strážnicu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
@@ -98,11 +98,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr "Postavte skladisko"
+msgstr "Postavte sklad"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Postavte skladisko vedľa pirátskej strážnice"
+msgstr "Postavte sklad vedľa pirátskej strážnice"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -110,19 +110,19 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
-"Postavte skladisko blízko obsadenej pirátskej strážnice, vedľa potoka. "
-"Budeme ho potrebovať ako základňu pre ďalší prieskum. Navyše ho môžeme "
-"využiť na uskladnenie zlata, ktoré vyťažíme z okolitých vrchov. "
+"Postavte sklad blízko obsadenej pirátskej strážnice, vedľa potoka. Budeme ho"
+" potrebovať ako základňu pre ďalší prieskum. Navyše ho môžeme využiť na "
+"uskladnenie zlata, ktoré vyťažíme z okolitých vrchov."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
-msgstr "Prineste lopaty."
+msgstr "Prineste lopaty"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Preneste štyri lopaty do nového skladiska"
+msgstr "Preneste štyri lopaty do nového skladu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -182,7 +182,7 @@ msgstr "Porazte Runara"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr "Porazte Runarové armády"
+msgstr "Porazte Runarove armády"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
@@ -228,9 +228,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Od severu sme ohrozovaný bojovným kmeňom vedeným vojvodcom Törvérom, ktorý "
-"rýchlo buduje svoje armády. Čoskoro budú príliš silné na to aby sme ich boli"
-" schopní poraziť."
+"Od severu sme ohrozovaní bojovným kmeňom vedeným vojvodcom Törverom, ktorý "
+"rýchlo buduje svoje armády. Čoskoro budú príliš silné na to, aby sme ich "
+"boli schopní poraziť."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -318,7 +318,7 @@ msgstr ""
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
-"Možeme potom využiť aj ich prístup k jazeru. aby sme preskumali viac z "
+"Možeme potom využiť aj ich prístup k jazeru, aby sme preskúmali viac z "
 "krajiny."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
@@ -347,7 +347,7 @@ msgid ""
 "give us better opportunities to have contact with other tribes."
 msgstr ""
 "Pane, dobyli sme Törverovu zem, teraz môžeme využiť ich výborný prístup k "
-"priľahlému veľkému jazeru. Pristav na severe nám poskytne príležitosť na "
+"priľahlému veľkému jazeru. Prístav na severe nám poskytne príležitosť na "
 "kontakt s inými kmeňmi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
@@ -358,11 +358,11 @@ msgid ""
 msgstr ""
 "V Törverovej základni sme našli dokumenty popisujúce stavbu lodí. "
 "Naneštastie sú ale tieto texty písané jazykom, ktorý je nám neznámy. Naši "
-"učenci sa pokúsia tieto nápisy rozlúštiť. "
+"učenci sa pokúsia tieto nápisy rozlúštiť."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr "Hľadanie zlata "
+msgstr "Hľadanie zlata"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
@@ -380,9 +380,9 @@ msgid ""
 " here before we proceed."
 msgstr ""
 "Mali by sme byť ale opatrní, ak chceme obsadiť strážnicu. Môže tam byť viac "
-"nepriateľských budov, ktoré zatiaľ nie sú vidieť a je známe, že piráti su "
+"nepriateľských budov, ktoré zatiaľ nie sú vidieť a je známe, že piráti sú "
 "veľmi dobrí bojovníci. Najlepšie bude sústrediť veľkú bojovú silu, predtým "
-"ako budeme pokračovať.   "
+"ako budeme pokračovať."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
@@ -395,8 +395,8 @@ msgid ""
 "transported to our headquarters."
 msgstr ""
 "Pane, v pirátskej strážnici sme našli 25 jednotiek zlatej rudy. Najskôr bola"
-" nakradnutá z okolitých chatrčí baníkov. Zlatá ruda bude prevezená do našho "
-"hlavného stanu. "
+" nakradnutá z okolitých chatrčí baníkov. Zlatá ruda bude prevezená do nášho "
+"ústredia."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -405,8 +405,10 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
-"Keď sme sa úspešne rozšírili do tejto oblasti, mali by zvážiť vybudovanie  skladiska, juhozápadne od strážnice, to by nám umožnilo ďalší prieskum tejto oblast.\n"
-"Vhodné miesto na stavbu sa nachádza len tri kroky od strážnice."
+"Keď sme sa úspešne rozšírili do tejto oblasti, mali by sme zvážiť "
+"vybudovanie skladu juhozápadne od strážnice. To by nám umožnilo ďalší "
+"prieskum tejto oblasti. Vhodné miesto na stavbu sa nachádza len tri kroky od"
+" strážnice."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -422,8 +424,8 @@ msgid ""
 msgstr ""
 "Pane, počas obdobia dažďov sa vytvorili močariská popri potoku na východe, "
 "ktorými nedokážeme prejsť. Aby sme mohli ďalej postupovať, musia byť najprv "
-"odstránené. Ak prenesiete do nového skladiska dostatok lopát dobrovoľnici "
-"močariská odstránia. "
+"odstránené. Ak prenesiete do nového skladu dostatok lopát, dobrovoľnici "
+"močariská odstránia."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -433,7 +435,7 @@ msgid ""
 msgstr ""
 "Pane, všetky lopaty boli vydané dobrovoľníkom, ale ak budú práce napredovať "
 "naďalej týmto tempom, nestihneme močariská odstrániť pred príchodom ďalšieho"
-" obdobia dažďov. Ak prinesiete do nového skladiska ďalšie lopaty, viac "
+" obdobia dažďov. Ak prinesiete do nového skladu ďalšie lopaty, viac "
 "dobrovoľníkov sa bude môcť zapojiť do prác."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
@@ -456,11 +458,11 @@ msgid ""
 " bastion which is now being transferred to our headquarters."
 msgstr ""
 "Pane, podarilo sa nám poraziť pirátov. Zlato, ktoré ukrývali vo svojej "
-"poslednej pevnosti sme previezli do nášho hlavného stanu."
+"poslednej pevnosti, sme previezli do nášho ústredia."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr "Piráti preskupujú svoje sily."
+msgstr "Piráti preskupujú svoje sily"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -475,7 +477,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr "Piráti sa dali na útek."
+msgstr "Piráti sa dali na útek"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -488,7 +490,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr "Schopnosť stavať lodenice."
+msgstr "Schopnosť stavať lodenice"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -497,12 +499,12 @@ msgid ""
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
 "Pane, po dlhom štúdiu a výskume sa našim učencom konečne podarilo rozlúštiť "
-"podivný jazyk Torverových spisov, ktoré sme našli v jeho ústredí. Teraz už "
-"vieme ako stavať lodenice. "
+"podivný jazyk Törverových spisov, ktoré sme našli v jeho ústredí. Teraz už "
+"vieme, ako stavať lodenice."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr "Náš prieskumník padol do zajatia."
+msgstr "Náš prieskumník padol do zajatia"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -520,12 +522,12 @@ msgid ""
 "build ships and attack their positions."
 msgstr ""
 "Podľa našich rybárov ho väznia v pevnosti na ostrove. Mali by sme využiť "
-"znalosť lodnej konštrukcie, ktorú sme získali od Törvera aby sme postavili "
+"znalosť lodnej konštrukcie, ktorú sme získali od Törvera, aby sme postavili "
 "lode a zaútočili s nimi na ich pozície."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr "Ostrov bol dobytý."
+msgstr "Ostrov bol dobytý"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -539,7 +541,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr "Prieskumník sa vrátil."
+msgstr "Prieskumník sa vrátil"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
@@ -554,10 +556,12 @@ msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Upozornil nás, že by sa dalo prejsť okolo hory aj druhou stranou, v prípade,"
+" že by sa nám to tadiaľto nepodarilo, ale tá cesta by bola oveľa ťažšia."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "konečná hranica"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -565,11 +569,16 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Pane, porazili sme takmer všetky vojská a blížime sa k nášmu poslednému "
+"nepriateľovi. Už nás dlho očakáva a bude pripravený na najťažšíu bitku "
+"svojho života."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Uistite sa, že naše vojská sú v plnej sile a potom konajte so všetkou "
+"rozhodnosťou. "
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
@@ -577,7 +586,7 @@ msgstr "Víťazstvo!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Pane, prijmite moju gratuláciu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -585,7 +594,10 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Spnili ste všetky ciele a porazili ste všetkých našich nepriateľov. Nielenže"
+" ste si podrobili rivalské kmene, ale získali ste si aj srdcia vášho "
+"milujúceho ľudu. "
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Vaše meno sa bude pamätať naveky."
