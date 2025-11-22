@@ -2435,7 +2435,7 @@ msgstr "%s vám posiela novú obchodnú ponuku."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Obchod prijatý"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
@@ -2461,7 +2461,7 @@ msgstr "%1$s zamietol vašu obchodnú ponuku v tržnici %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Obchod odvolaný"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
@@ -2631,7 +2631,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Obchod dokončený"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
@@ -2639,17 +2639,17 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Obchodná dohoda dokončená"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Vaša obchodná dohoda z tržnice %s úspešne prebehla."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Vaša obchodná dohoda z tržnice %s bola zrušená."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
@@ -6861,11 +6861,11 @@ msgstr "Všetci hráči dostanú trvalú viditeľnosť celej mapy"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:399
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Námorná vojna je určená scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:401
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Námorná vojna je určená uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:404
 msgid ""
@@ -7659,7 +7659,7 @@ msgstr "Zdieľané s hráčom %u"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:284
 msgid "Start type is set via the scenario"
-msgstr ""
+msgstr "Počiatočné podmienky sú určené scenárom"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:587
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:387
@@ -10337,7 +10337,7 @@ msgstr "Momentálne nie sú žiadne prebiehajúce obchodné dohody."
 #: ../../../../src/wui/marketwindow.cc:570
 #: ../../../../src/wui/marketwindow.cc:578
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Navrhnúť predĺženie tohto obchodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:571
@@ -11338,7 +11338,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Prosím, vyberte tovar, ktorý chcete odoslať a prijať."
 
 #: ../../../../src/wui/marketwindow.cc:230
 #, c-format
@@ -12158,31 +12158,31 @@ msgstr "Vyhodnotiť"
 
 #: ../../../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Porovnanie skladových množstiev s cieľovými množstvami v nastavení ekonomiky"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Red:"
-msgstr ""
+msgstr "Červené:"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "Zásoby sú menšie ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
-msgstr ""
+msgstr "Žlté:"
 
 #: ../../../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
-msgstr ""
+msgstr "Zásoby sú rovnaké ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:66
 msgid "Green:"
-msgstr ""
+msgstr "Zelené:"
 
 #: ../../../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "Zásoby sú väčšie ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
