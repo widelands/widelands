@@ -1857,7 +1857,7 @@ Event Subscribers
        (empty for public messages).
      * ``player`` (:class:`integer`): The sender's player number;
        :const:`0` for spectators and negative for system messages.
-     * ``time`` (:class:`integer`): The realtimestamp in seconds since epoch
+     * ``realtime`` (:class:`integer`): The realtimestamp in seconds since epoch
        when the message was sent.
 
    * ``economy``: An economy was merged or deleted.
@@ -1900,7 +1900,7 @@ Event Subscribers
      Parameters:
 
      * ``object`` (:class:`wl.map.BaseImmovable`): The object.
-     * ``action`` (:class:`string`): What changed; either ``"terrain"`` or ``"immovable"``.
+     * ``action`` (:class:`string`): What changed; either ``"lost"`` or ``"gained"``.
 
    * ``pinned_note_moved``: A pinned note has moved to a different field.
      Parameters:

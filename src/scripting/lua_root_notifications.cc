@@ -261,7 +261,7 @@ template <>
 LuaSubscriber::Message NoteImpl<ChatMessage>::generate_message(const ChatMessage& note) const {
 	return {
 	   {"sender", note.sender},  {"recipient", note.recipient}, {"msg", note.msg},
-	   {"player", note.playern}, {"time", note.time},
+	   {"player", note.playern}, {"realtime", note.time},
 	};
 }
 
