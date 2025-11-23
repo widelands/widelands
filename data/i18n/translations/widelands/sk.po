@@ -312,7 +312,7 @@ msgstr "Žiadosť o pripojenie sa do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:78
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Pozvánka do tímu"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:80
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
@@ -334,7 +334,7 @@ msgstr "Hráč %1$s prijal hráča %2$s do svojho tímu."
 #: ../../../../src/commands/cmd_diplomacy.cc:122
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s prijal pozvánku na pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:127
 #, c-format
@@ -349,12 +349,12 @@ msgstr "Hráč %1$s zamietol hráčovi %2$s členstvo vo svojom tíme."
 #: ../../../../src/commands/cmd_diplomacy.cc:132
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "Hráč %1$s odvolal pozvanie hráča %2$s, aby sa pripojil do svojho tímu."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:134
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "Hráč %1$s odmietol pozvánku na pripojenie sa do tímu hráča %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:138
 msgid "Team Change Accepted"
@@ -2426,25 +2426,25 @@ msgstr "Obchodná ponuka"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Doručenie novej obchodnej ponuky"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "%s vám posiela novú obchodnú ponuku."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Obchod prijatý"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Obchodná ponuka prijatá"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s prijal vašu obchodnú ponuku v tržnici %2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
@@ -2452,25 +2452,25 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Obchodná ponuka zamietnutá"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s zamietol vašu obchodnú ponuku v tržnici %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Obchod odvolaný"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Obchodná ponuka odvolaná"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "%s odvolal obchodnú ponuku."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
@@ -2631,7 +2631,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Obchod dokončený"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
@@ -2639,17 +2639,17 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Obchodná dohoda dokončená"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Vaša obchodná dohoda z tržnice %s úspešne prebehla."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Vaša obchodná dohoda z tržnice %s bola zrušená."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
@@ -2682,28 +2682,28 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Obchodná dohoda s hráčom %2$s z tržnice %1$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr "Obchodná ponuka od %s"
+msgstr "Obchodná ponuka od hráča %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Obchodná ponuka z tržnice %1$s pre hráča %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dávka"
+msgstr[1] "%d dávky"
+msgstr[2] "%d dávky"
+msgstr[3] "%d dávok"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
@@ -2713,19 +2713,19 @@ msgstr ""
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d dodaná dávka"
+msgstr[1] "%d dodané dávky"
+msgstr[2] "%d dodanej dávky"
+msgstr[3] "%d dodaných dávok"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d zostávajúca dávka"
+msgstr[1] "%d zostávajúce dávky"
+msgstr[2] "%d zostávajúcej dávky"
+msgstr[3] "%d zostávajúcich dávok"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
@@ -2743,7 +2743,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Aktívna"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
@@ -6861,11 +6861,11 @@ msgstr "Všetci hráči dostanú trvalú viditeľnosť celej mapy"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:399
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Námorná vojna je určená scenárom"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:401
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Námorná vojna je určená uloženou hrou"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:404
 msgid ""
@@ -7659,7 +7659,7 @@ msgstr "Zdieľané s hráčom %u"
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:284
 msgid "Start type is set via the scenario"
-msgstr ""
+msgstr "Počiatočné podmienky sú určené scenárom"
 
 #: ../../../../src/ui_fsmenu/multiplayersetupgroup.cc:587
 #: ../../../../src/ui_fsmenu/singleplayerdropdown.cc:387
@@ -9347,7 +9347,7 @@ msgstr "Naozaj sa chcete vzdať a stať sa divákom?"
 
 #: ../../../../src/wui/actionconfirm.cc:540
 msgid "Resign?"
-msgstr ""
+msgstr "Vzdávate sa?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
@@ -9561,7 +9561,7 @@ msgstr "Zobraziť ďalšiu budovu"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr ""
+msgstr "Budovy budú považované za neproduktívne, ak ich produktivita klesne pod toto percento"
 
 #: ../../../../src/wui/building_statistics_menu.cc:366
 msgid "Small buildings"
@@ -9788,7 +9788,7 @@ msgstr "Zvýšiť cieľ o 10"
 
 #: ../../../../src/wui/economy_options_window.cc:123
 msgid "Profile to apply to the selected items"
-msgstr ""
+msgstr "Použiť profil na vybrané položky"
 
 #: ../../../../src/wui/economy_options_window.cc:134
 msgid "Save target settings"
@@ -9809,7 +9809,7 @@ msgstr ""
 
 #: ../../../../src/wui/economy_options_window.cc:587
 msgid "Save the profile under this name"
-msgstr ""
+msgstr "Uložiť profil pod týmto menom"
 
 #: ../../../../src/wui/economy_options_window.cc:599
 msgid "The predefined profiles cannot be deleted"
@@ -9817,7 +9817,7 @@ msgstr ""
 
 #: ../../../../src/wui/economy_options_window.cc:602
 msgid "Delete the selected profiles"
-msgstr ""
+msgstr "Odstrániť vybrané profily"
 
 #: ../../../../src/wui/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -10211,12 +10211,12 @@ msgstr "Vyhral o %s"
 #: ../../../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "Lost at %s"
-msgstr ""
+msgstr "Prehral o %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Vzdal sa o %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:323
 msgid "Approve"
@@ -10228,11 +10228,11 @@ msgstr "Zamietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:330
 msgid "Accept"
-msgstr ""
+msgstr "Prijať"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:331
 msgid "Refuse"
-msgstr ""
+msgstr "Odmietnuť"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:347
 msgid "Retract"
@@ -10258,26 +10258,26 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (najbližšie)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1$s (vzdialenosť: %2$u políčko)"
+msgstr[1] "%1$s (vzdialenosť: %2$u políčka)"
+msgstr[2] "%1$s (vzdialenosť: %2$u políčka)"
+msgstr[3] "%1$s (vzdialenosť: %2$u políčok)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:468
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Prijať túto obchodnú ponuku"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:471
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Zamietnuť túto obchodnú ponuku"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
@@ -10303,7 +10303,7 @@ msgstr "Vycentrovať pohľad na túto tržnicu"
 #: ../../../../src/wui/game_diplomacy_menu.cc:536
 #: ../../../../src/wui/marketwindow.cc:339
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Odvolať túto obchodnú ponuku"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:548
 #: ../../../../src/wui/marketwindow.cc:347
@@ -10321,7 +10321,7 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:364
 #: ../../../../src/wui/marketwindow.cc:624
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Nemáte žiadne tržnice, kam by ste mohli tento obchod presunúť."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
@@ -10337,7 +10337,7 @@ msgstr "Momentálne nie sú žiadne prebiehajúce obchodné dohody."
 #: ../../../../src/wui/marketwindow.cc:570
 #: ../../../../src/wui/marketwindow.cc:578
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Navrhnúť predĺženie tohto obchodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:650
 #: ../../../../src/wui/marketwindow.cc:571
@@ -10356,7 +10356,7 @@ msgstr ""
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Zrušiť túto obchodnú dohodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:663
 #: ../../../../src/wui/marketwindow.cc:601
@@ -11063,7 +11063,7 @@ msgstr ""
 
 #: ../../../../src/wui/interactive_player.cc:484
 msgid "No current objectives"
-msgstr ""
+msgstr "Žiadne aktívne úlohy"
 
 #: ../../../../src/wui/interactive_player.cc:500
 #, c-format
@@ -11338,7 +11338,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Prosím, vyberte tovar, ktorý chcete odoslať a prijať."
 
 #: ../../../../src/wui/marketwindow.cc:230
 #, c-format
@@ -11356,7 +11356,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:245
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Navrhnúť nakonfigurovaný obchod vybranému hráčovi"
 
 #: ../../../../src/wui/marketwindow.cc:313
 msgid ""
@@ -11370,7 +11370,7 @@ msgstr "Momentálne nie sú žiadne čakajúce obchodné návrhy."
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Zrušiť tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:809
 msgid ""
@@ -11380,11 +11380,11 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Pozastaviť tento obchod"
 
 #: ../../../../src/wui/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Pred zmenou obchodovaného množstva tovarov je potrebne pozastaviť obchod."
 
 #: ../../../../src/wui/marketwindow.cc:825
 msgid "Pause Trade?"
@@ -12158,31 +12158,31 @@ msgstr "Vyhodnotiť"
 
 #: ../../../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Porovnanie skladových množstiev s cieľovými množstvami v nastavení ekonomiky"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Red:"
-msgstr ""
+msgstr "Červené:"
 
 #: ../../../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "Zásoby sú menšie ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
-msgstr ""
+msgstr "Žlté:"
 
 #: ../../../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
-msgstr ""
+msgstr "Zásoby sú rovnaké ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:66
 msgid "Green:"
-msgstr ""
+msgstr "Zelené:"
 
 #: ../../../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "Zásoby sú väčšie ako cieľová hodnota"
 
 #: ../../../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
