@@ -558,6 +558,13 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
 
       Subscribe to the "field_clicked" signal, which is triggered when the user clicks on a field.
 
+      Note that a user's click on a field can have other, unrelated effects, such as opening a
+      field action window or building window, interacting with road building mode, or
+      (in the editor) performing a tool action.
+      It is not currently possible to suppress these effects.
+      The ability to create custom tools that trigger on a click on a field without other effects
+      is a `planned future addition <https://codeberg.org/wl/widelands/issues/5273>`_.
+
       The signal provides as arguments both the node and the triangle which are
       closest to the clicked pixel.
       The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
@@ -585,8 +592,7 @@ int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
       closest to the mouse pixel.
       The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
       The coordinates of the triangle are given by the keys ``"triangle_x"``, ``"triangle_y"``,
-      and ``"triangle_t"``, where ``"triangle_t"`` is :const:`0` for the R triangle
-      and :const:`1` for the D triangle.
+      and ``"triangle_t"``, where ``"triangle_t"`` is one of ``"D"`` and ``"R"``.
 
       :returns: :class:`wl.Subscriber`
 */
