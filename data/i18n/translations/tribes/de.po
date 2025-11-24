@@ -14,7 +14,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Simon Heimberg, 2023
+# Simon Heimberg, 2023,2025
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2025-10-11 02:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
+"Last-Translator: Simon Heimberg, 2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -973,31 +973,31 @@ msgid "Fortress"
 msgstr "Festung"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr "Deine Krieger haben deine Festung besetzt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
 msgstr "Bei deiner Festung wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:65
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
 msgstr "Deine Festung wird angegriffen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:67
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr "Der Feind hat deine Krieger an der Festung besiegt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:69
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr "Deine Krieger haben den Feind vor der Festung besiegt."
@@ -1009,31 +1009,31 @@ msgid "Outpost"
 msgstr "Außenposten"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr "Deine Krieger haben deinen Außenposten besetzt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
 msgstr "Bei deinem Außenposten wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:63
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
 msgstr "Dein Außenposten wird angegriffen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr "Der Feind hat deine Krieger am Außenposten besiegt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "Deine Krieger haben den Feind vor dem Außenposten besiegt."
@@ -1045,31 +1045,31 @@ msgid "Sentinel"
 msgstr "Vorposten"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
 msgstr "Deine Krieger haben deinen Vorposten besetzt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
 msgstr "Bei deinem Vorposten wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:61
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
 msgstr "Dein Vorposten wird angegriffen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:63
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
 msgstr "Der Feind hat deine Krieger am Vorposten besiegt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:65
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
 msgstr "Deine Krieger haben den Feind vor dem Vorposten besiegt."
@@ -1081,31 +1081,31 @@ msgid "Tower"
 msgstr "Wachturm"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
 msgstr "Deine Krieger haben deinen Wachturm besetzt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
 msgstr "Bei deinem Wachturm wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
 msgstr "Dein Wachturm wird angegriffen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:68
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr "Der Feind hat deine Krieger am Wachturm besiegt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr "Deine Krieger haben den Feind vor dem Wachturm besiegt."
@@ -1117,31 +1117,31 @@ msgid "Wooden Tower"
 msgstr "Holzturm"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
 msgstr "Dein Krieger hat deinen Holzturm besetzt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
 msgstr "Bei deinem Holzturm wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
 msgstr "Dein Holzturm wird angegriffen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:72
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
 msgstr "Der Feind hat deine Krieger am Holzturm besiegt."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:74
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
 msgstr "Deine Krieger haben den Feind vor dem Holzturm besiegt."
@@ -3240,7 +3240,7 @@ msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird s
 #: ../../../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:8
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr "Eselfarm"
+msgstr "Eselzucht"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:55
@@ -4258,8 +4258,8 @@ msgstr "Ausbildungslichtung"
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:85
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:45
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:69
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:80
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:79
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:85
 msgid "sleeping"
 msgstr "Das Schlafen"
 
@@ -4617,46 +4617,46 @@ msgid "Training Arena"
 msgstr "Ausbildungsarena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:88
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:94
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 3 auf 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:110
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 4 auf 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:127
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 5 auf 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:139
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:145
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "Das Verbessern der Verteidigung eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:162
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Das Verbessern der Lebenspunkte eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:178
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:175
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Kein Krieger zur Ausbildung vorhanden!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:177
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:186
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:183
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "Kein Krieger für diese Ausbildungsstufe gefunden!"
@@ -4668,31 +4668,31 @@ msgid "Training Camp"
 msgstr "Ausbildungslager"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:87
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:93
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:109
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:126
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "Das Verbessern des Angriffs eines Kriegers von Stufe 2 auf 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:137
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:143
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Das Verbessern der Lebenspunkte eines Kriegers von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:153
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:159
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "Das Verbessern der Verteidigung eines Kriegers von Stufe 0 auf 1"

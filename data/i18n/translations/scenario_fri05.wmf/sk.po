@@ -106,11 +106,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Postavte aspoň tri drevorubačské domy"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Postavte aspoň štyri horárne."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"

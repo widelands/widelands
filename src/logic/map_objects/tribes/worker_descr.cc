@@ -149,6 +149,10 @@ void WorkerDescr::set_default_target_quantity(int quantity) {
 	default_target_quantity_ = quantity;
 }
 
+int WorkerDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
+}
+
 void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {
 	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }

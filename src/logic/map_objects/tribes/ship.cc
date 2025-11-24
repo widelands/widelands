@@ -582,9 +582,28 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 					      cur.x, cur.y, idx);
 
 					Path subpath(cur);
+
 					while (idx < path.get_nsteps()) {
 						subpath.append(map, path[idx]);
+						map.get_neighbour(cur, path[idx], &cur);
 						idx++;
+						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
+							molog(game.get_gametime(),
+							      "Non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x,
+							      cur.y, destination->serial());
+							fleet_->remove_port(game, destination);
+							fleet_->add_port(game, destination);
+							if (!fleet_->get_path(*lastdock, *destination, path)) {
+								fleet_->split(game);
+								send_message(game,
+								             /** TRANSLATORS: Ship fleets had to be split */
+								             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+								             _("A ship fleet had to be split, because a terrain change "
+								               "blocked a passage."),
+								             descr().icon_filename());
+							}
+							return true;
+						}
 					}
 
 					start_task_movepath(game, subpath, descr().get_sail_anims());
@@ -1119,12 +1138,13 @@ PortDock* Ship::find_nearest_port(Game& game) {
 	for (PortDock* pd : fleet_->get_ports()) {
 		Path path;
 		int32_t d = -1;
-		calculate_sea_route(game, *pd, &path);
-		game.map().calc_cost(path, &d, nullptr);
-		assert(d >= 0);
-		if (nearest == nullptr || d < dist) {
-			dist = d;
-			nearest = pd;
+		if (calculate_sea_route(game, *pd, &path) != std::numeric_limits<uint32_t>::max()) {
+			game.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			if (nearest == nullptr || d < dist) {
+				dist = d;
+				nearest = pd;
+			}
 		}
 	}
 
@@ -2207,8 +2227,14 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	   game.get_gametime(),
 	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
-	if (get_fleet() != nullptr) {
-		get_fleet()->update(game);
+	ShipFleet* fleet = fleet_ != nullptr ? fleet_ : pd.get_fleet();
+	if (fleet != nullptr) {
+		fleet->split(game);
+		send_message(game,
+		             /** TRANSLATORS: Ship fleets had to be split */
+		             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+		             _("A ship fleet had to be split, because a terrain change blocked a passage."),
+		             descr().icon_filename());
 	}
 	return false;
 }
