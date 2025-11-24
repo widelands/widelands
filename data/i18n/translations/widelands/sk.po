@@ -2977,7 +2977,7 @@ msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1924
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Dokončené %s"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:400
 msgid "(stopped)"
@@ -10251,7 +10251,7 @@ msgstr "Momentálne vám nikto neponúkol žiadne obchody."
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Tržnica na prijatie obchodu"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:442
 #: ../../../../src/wui/game_diplomacy_menu.cc:673
