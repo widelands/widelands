@@ -45,7 +45,7 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 		   signal.connect([this](Args... args) { owner->add_message(generate_message(args...)); });
 	}
 
-	~SignalImpl() {
+	~SignalImpl() override {
 		if (std::shared_ptr wrapped = signal_subscriber_.lock(); wrapped != nullptr) {
 			wrapped->get_parent().unsubscribe_owned(wrapped);
 		}
