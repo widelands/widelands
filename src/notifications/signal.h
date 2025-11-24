@@ -89,8 +89,9 @@ public:
 	}
 
 	/** Create a subscriber with the same lifetime as the signal. */
-	inline std::weak_ptr<SignalSubscriber> connect(std::function<void(Args...)> callback,
-	                    SubscriberPosition pos = SubscriberPosition::kBack) const {
+	inline std::weak_ptr<SignalSubscriber>
+	connect(std::function<void(Args...)> callback,
+	        SubscriberPosition pos = SubscriberPosition::kBack) const {
 		std::shared_ptr<SignalSubscriber> sub = subscribe(callback, pos);
 		owned_subscribers_.insert(sub);
 		return sub;
@@ -109,7 +110,8 @@ public:
 	subscribe(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
 		return subscribe([&s](Args... args) { s(args...); }, pos);
 	}
-	inline std::weak_ptr<SignalSubscriber> connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
+	inline std::weak_ptr<SignalSubscriber>
+	connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
 		return connect([&s](Args... args) { s(args...); }, pos);
 	}
 
