@@ -465,7 +465,7 @@ msgstr "Použite encyklopédiu a zistite, ako vycvičiť nových vojakov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "V okne encyklopédie vyberte kartu „Výrobky“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -634,7 +634,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Preskúmajte svoju výrobu a spotrebu tovaru"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
@@ -660,7 +660,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Preskúmajte stav svojej ekonomiky"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
@@ -874,7 +874,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "Vyrobte 20 mramorových stĺpov"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
@@ -924,7 +924,7 @@ msgstr "Teraz si to vyskúšajme: aktuálne cieľové množstvo mramorových st�
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Pošlite na front 20 mramorových stĺpov"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
@@ -1122,11 +1122,11 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "Navrhnite obchod"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Ponúknite Frízanom obchod."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
@@ -1194,7 +1194,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Otvorte okno Diplomacia"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
