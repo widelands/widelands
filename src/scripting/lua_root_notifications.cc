@@ -42,11 +42,17 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 		persistence.type = type;
 
 		signal_subscriber_ =
-		   signal.subscribe([this](Args... args) { owner->add_message(generate_message(args...)); });
+		   signal.connect([this](Args... args) { owner->add_message(generate_message(args...)); });
+	}
+
+	~SignalImpl() {
+		if (std::shared_ptr wrapped = signal_subscriber_.lock(); wrapped != nullptr) {
+			wrapped->get_parent().unsubscribe_owned(wrapped);
+		}
 	}
 
 private:
-	std::unique_ptr<typename Notifications::Signal<Args...>::SignalSubscriber> signal_subscriber_;
+	std::weak_ptr<typename Notifications::Signal<Args...>::SignalSubscriber> signal_subscriber_;
 };
 
 template <typename... Args>
