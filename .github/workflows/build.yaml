@@ -145,7 +145,7 @@ jobs:
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
-    needs: [windows, windows-msvc, macos, appimage]
+    needs: [windows, windows-msvc, windows-arm, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
