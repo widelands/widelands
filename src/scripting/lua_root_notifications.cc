@@ -41,8 +41,12 @@ template <typename... Args> struct SignalImpl : public Wrapper {
 		persistence.serial = serial;
 		persistence.type = type;
 
-		signal.connect([this](Args... args) { owner->add_message(generate_message(args...)); });
+		signal_subscriber_ =
+		   signal.subscribe([this](Args... args) { owner->add_message(generate_message(args...)); });
 	}
+
+private:
+	std::unique_ptr<typename Notifications::Signal<Args...>::SignalSubscriber> signal_subscriber_;
 };
 
 template <typename... Args>
@@ -61,6 +65,7 @@ template <typename Note> struct NoteImpl : public Wrapper {
 
 	[[nodiscard]] LuaSubscriber::Message generate_message(const Note& note) const;
 
+private:
 	std::unique_ptr<Notifications::Subscriber<Note>> subscriber_;
 };
 
