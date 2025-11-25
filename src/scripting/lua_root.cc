@@ -2064,7 +2064,7 @@ void LuaSubscriber::__unpersist(lua_State* L) {
 				   Widelands::get_object_serial_or_zero<Widelands::MapObject>(value, *get_mol(L)));
 			} break;
 			default:
-				report_error(L, "Bad value type %d", datatype);
+				report_error(L, "Bad value type %u", datatype);
 			}
 		}
 
