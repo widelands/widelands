@@ -1,5 +1,13 @@
 add_subdirectory(test)
 
+set_source_files_properties(
+  report_error.cc
+  lua.cc
+  luna_impl
+  PROPERTIES
+    COMPILE_OPTIONS -Wno-old-style-cast  # TODO(somebody): remove this and ignore for header only
+) # because code/src/third_party/eris/lua.h and third_party/eris/luaconf.h cast integer
+
 wl_library(scripting_base
   SRCS
     lua.h
@@ -12,6 +20,7 @@ wl_library(scripting_base
     base_exceptions
     third_party_eris
 )
+set_target_properties(scripting_base PROPERTIES INTERFACE_SYSTEM_INCLUDE_DIRECTORIES ../third_party/eris/)
 
 wl_library(scripting_luna
   SRCS
