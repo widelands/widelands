@@ -396,13 +396,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nl">Download websitekaarten als add-ons</li>
         <li xml:lang="nl">Nieuwe visualisatiemodi in de editor</li>
         <li xml:lang="nl">Veel nieuwe mogelijkheden voor ontwikkelaars van add-ons</li>
-        <li xml:lang="pl">Market trading</li>
+        <li xml:lang="pl">Handel na rynku</li>
         <li xml:lang="pl">Sześć nowych map dodanych i trzy stare usunięte.</li>
-        <li xml:lang="pl">Economy districts</li>
+        <li xml:lang="pl">Dzielnica gospodarcza</li>
         <li xml:lang="pl">Wiele poprawek w wewnętrznej Encyklopedii.</li>
-        <li xml:lang="pl">Download website maps as add-ons</li>
-        <li xml:lang="pl">New visualisation modes in the editor</li>
-        <li xml:lang="pl">Many new capabilities for add-on developers</li>
+        <li xml:lang="pl">Pobierz mapy i dodatki</li>
+        <li xml:lang="pl">Nowe tryby wizualizacji w edytorze</li>
+        <li xml:lang="pl">Wiele nowych możliwości dla twórców dodatków</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -423,6 +423,7 @@ Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
         <li xml:lang="nl">Bugfix-bericht</li>
+        <li xml:lang="pl">Wydanie poprawkowe</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
@@ -484,6 +485,14 @@ Version de correction de bugs</li>
         <li xml:lang="nl">Vastgepinde opmerkingen</li>
         <li xml:lang="nl">Directe kaart publicatie</li>
         <li xml:lang="nl">Verbeterde foutverwerking</li>
+        <li xml:lang="pl">Nowy scenariusz Fryzów</li>
+        <li xml:lang="pl">Obsługa dyplomacji przez graczy komputerowych</li>
+        <li xml:lang="pl">Operacje morskie</li>
+        <li xml:lang="pl">Garnizony dla portów i kwater głównych</li>
+        <li xml:lang="pl">Wtyczki UI</li>
+        <li xml:lang="pl">Przypięte notatki</li>
+        <li xml:lang="pl">Bezpośrednie publikowanie map</li>
+        <li xml:lang="pl">Ulepszona obsługa błędów</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>

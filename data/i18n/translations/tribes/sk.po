@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-10-11 02:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Marek G, 2025\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1278,7 +1278,7 @@ msgstr "sadenie manioku"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
 msgid "harvesting cassava"
-msgstr "zber manioku"
+msgstr "zbieranie manioku"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
@@ -1336,7 +1336,7 @@ msgstr "Uhliarska pec"
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr "produkcia dreveného uhlia"
+msgstr "produkovanie dreveného uhlia"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
@@ -1363,7 +1363,7 @@ msgstr "sadenie kakaovníka"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
 msgid "harvesting cocoa"
-msgstr "zber kakaovníka"
+msgstr "zbieranie kakaovníka"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
 msgctxt "amazons_building"
@@ -1546,7 +1546,7 @@ msgstr "Lovecko-zberačská chatrč"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
 msgid "gathering"
-msgstr "zber"
+msgstr "zberanie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
@@ -1556,7 +1556,7 @@ msgstr "získavanie mäsa"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
 msgid "gathering fish"
-msgstr "lov rýb"
+msgstr "lovenie rýb"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
 msgid "No Game, No Fish"
@@ -1611,7 +1611,7 @@ msgstr "Chatrč rezačky lián"
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
 msgid "cutting lianas"
-msgstr "sa ťaží liana"
+msgstr "rezanie liany"
 
 #. TRANSLATORS: Short for "No Tree to Cut Lianas" for a resource
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
@@ -1625,7 +1625,7 @@ msgstr "Došli stromy"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
 msgid "No Tree to Cut Lianas"
-msgstr "Nie sú stromy na ťažbu lián"
+msgstr "Nie sú stromy na rezanie lián"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:54
 msgctxt "amazons_building"
@@ -1645,19 +1645,19 @@ msgstr "Chatrč na ťažbu vzácnych drevín"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
-msgstr "Ťažba balzy"
+msgstr "zberanie balzy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:54
 msgid "harvesting rubber"
-msgstr "Ťažba gumy"
+msgstr "zberanie kaučuku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
 msgid "harvesting ironwood"
-msgstr "Ťažba železného dreva"
+msgstr "zberanie železného dreva"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
@@ -1669,19 +1669,19 @@ msgstr "Plantáž vzácnych drevín"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:56
 msgid "planting balsa tree"
-msgstr "sa sadí balzovník"
+msgstr "sadenie balzovníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:69
 msgid "planting rubber tree"
-msgstr "sadiť kaučukovník"
+msgstr "sadenie kaučukovníka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:82
 msgid "planting ironwood tree"
-msgstr "sadiť železné drevo"
+msgstr "sadenie leopardieho stromu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
@@ -1833,7 +1833,7 @@ msgstr "Kamenárska chatrč"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr "ťažiť žulu"
+msgstr "ťaženie žuly"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
@@ -1965,7 +1965,7 @@ msgstr "chovanie rýb"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
 msgid "releasing game"
-msgstr "Vypustenie zveri"
+msgstr "vypustenie zveri"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
@@ -4100,7 +4100,7 @@ msgstr "chovanie sobov"
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:101
 msgctxt "frisians_building"
 msgid "producing fur"
-msgstr "výroba kožušiny"
+msgstr "vyrábanie kožušiny"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
@@ -4254,49 +4254,49 @@ msgstr "pozastavenie"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:85
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "vylepšenie uhýbania vojačiek z úrovne 0 na úroveň 1"
+msgstr "vylepšenie uhýbania vojačky z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:99
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "vylepšenie uhýbania vojačiek z úrovne 1 na úroveň 2"
+msgstr "vylepšenie uhýbania vojačky z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:113
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr "vylepšenie uhýbania vojačiek z úrovne 2 na úroveň 3"
+msgstr "vylepšenie uhýbania vojačky z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:128
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojačiek z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojačky z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:142
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "vylepšenie zdravia vojačiek z úrovne 1 na úroveň 2"
+msgstr "vylepšenie zdravia vojačky z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:156
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "vylepšenie zdravia vojačiek z úrovne 2 na úroveň 3"
+msgstr "vylepšenie zdravia vojačky z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:171
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšenie obrany vojačiek z úrovne 0 na úroveň 1"
+msgstr "vylepšenie obrany vojačky z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:185
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšenie obrany vojačiek z úrovne 1 na úroveň 2"
+msgstr "vylepšenie obrany vojačky z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:206
@@ -4323,13 +4323,13 @@ msgstr "Zhromaždenie bojovníčok"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:79
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojačiek z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojačky z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:93
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojačiek z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojačky z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:165
@@ -4341,25 +4341,25 @@ msgstr "Kobka"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:229
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:243
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:257
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie útoku vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie útoku vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
@@ -4387,31 +4387,31 @@ msgstr "Labyrint"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:70
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšenie obrany vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie obrany vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:84
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšenie obrany vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie obrany vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:98
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie uhýbania vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "vylepšenie uhýbania vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie uhýbania vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
@@ -4423,13 +4423,13 @@ msgstr "Zápasnícka aréna"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie uhýbania vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "vylepšenie uhýbania vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie uhýbania vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
@@ -4457,49 +4457,49 @@ msgstr "Výcvikový tábor"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:88
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:116
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie útoku vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:130
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie útoku vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:144
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "vylepšenie útoku vojakov z úrovne 4 na úroveň 5"
+msgstr "vylepšenie útoku vojaka z úrovne 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:171
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "vylepšenie zdravia vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie zdravia vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:185
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "vylepšenie zdravia vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie zdravia vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:8
@@ -4512,7 +4512,7 @@ msgstr "Aréna"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:53
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie uhýbania vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
@@ -4541,7 +4541,7 @@ msgstr "Koloseum"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "vylepšenie uhýbania vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie uhýbania vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:8
@@ -4553,49 +4553,49 @@ msgstr "Výcvikový tábor"
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:77
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie útoku vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:119
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie útoku vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:133
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:146
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "vylepšenie zdravia vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie zdravia vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "vylepšenie zdravia vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie zdravia vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:174
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie zdravia vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:8
@@ -4607,31 +4607,31 @@ msgstr "Výcviková aréna"
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:94
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie útoku vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:110
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "vylepšenie útoku vojakov z úrovne 4 na úroveň 5"
+msgstr "vylepšenie útoku vojaka z úrovne 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:127
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
-msgstr "vylepšenie útoku vojakov z úrovne 5 na úroveň 6"
+msgstr "vylepšenie útoku vojaka z úrovne 5 na úroveň 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:145
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšenie obrany vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie obrany vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:162
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "vylepšenie zdravia vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie zdravia vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
@@ -4658,31 +4658,31 @@ msgstr "Výcvikový tábor"
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:93
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:109
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojaka z úrovne 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:126
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie útoku vojaka z úrovne 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:143
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:159
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšenie obrany vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie obrany vojaka z úrovne 0 na úroveň 1"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
@@ -5077,7 +5077,7 @@ msgstr "Zničená budova"
 #: ../../../../data/tribes/immovables/dike/init.lua:8
 msgctxt "immovable"
 msgid "Dike"
-msgstr "hrádza"
+msgstr "Hrádza"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -5727,7 +5727,7 @@ msgstr "Tento kmeň je známy z najstarších povestí. Synovia a dcéry Atlant�
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr "Pre každý nástroj, ktorý potrebuješ pre rozbeh ekonomiky máš iba jedno železo. Daj pozor, aby sa nevyrobili aj nepotrebné nástroje."
+msgstr "Pre každý nástroj, ktorý potrebujete pre rozbeh ekonomiky, máte iba jedno železo. Uistite sa, že žiadne zbytočné nátroje nebudú zhotovené."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../../../data/tribes/initialization/barbarians/init.lua:12
