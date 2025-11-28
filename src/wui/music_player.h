@@ -24,16 +24,22 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 
+class MusicTrackControl;
+
 struct MusicPlayer : public UI::Box {
 	explicit MusicPlayer(UI::Panel& parent);
 
 	void think() override;
+
+	void rebuild_music_track_controls();
 
 private:
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void set_shuffle(bool on);
 	void update();
+
+	std::vector<MusicTrackControl*> music_track_controls_;
 
 	UI::Box vbox_track_playlist_;
 	UI::Box hbox_playback_control_;

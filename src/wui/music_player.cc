@@ -26,8 +26,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/slider.h"
 
-namespace {
-
 constexpr int kSpacing = 4;
 
 /**
@@ -77,8 +75,6 @@ private:
 	std::string filename_;
 };
 
-}  // namespace
-
 MusicPlayer::MusicPlayer(UI::Panel& parent)
    : UI::Box(&parent, UI::PanelStyle::kWui, "box_music_player", 0, 0, UI::Box::Vertical),
      vbox_track_playlist_(
@@ -120,20 +116,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 		return;  // prevent crash if game is started with --nosound parameter
 	}
 
-	std::vector<Song> music_data = g_sh->get_music_data();
-	const size_t data_size = music_data.size();
-	std::vector<MusicTrackControl*> music_track_controls;
-	music_track_controls.reserve(data_size);
-
-	for (const Song& song : music_data) {
-		music_track_controls.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
-	}
-
-	vbox_track_playlist_.add_space(2);
-	for (MusicTrackControl* control : music_track_controls) {
-		vbox_track_playlist_.add(control);
-	}
-	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
+	rebuild_music_track_controls();
 
 	hbox_playback_control_.add_space(kSpacing);
 	hbox_playback_control_.add(&button_next_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -156,6 +139,30 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	button_next_.sigclicked.connect([]() { g_sh->change_music(); });
 	checkbox_shuffle_.changedto.connect([this](bool on) { set_shuffle(on); });
 	checkbox_shuffle_.set_state(g_sh->is_shuffle());
+}
+
+void MusicPlayer::rebuild_music_track_controls() {
+	std::vector<Song> music_data = g_sh->get_music_data();
+	const size_t data_size = music_data.size();
+
+	vbox_track_playlist_.clear();
+	for (MusicTrackControl* control : music_track_controls_) {
+		delete control;
+	}
+	music_track_controls_.clear();
+	music_track_controls_.reserve(data_size);
+
+	for (const Song& song : music_data) {
+		music_track_controls_.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
+	}
+
+	vbox_track_playlist_.add_space(2);
+	for (MusicTrackControl* control : music_track_controls_) {
+		vbox_track_playlist_.add(control);
+	}
+	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
+
+	initialization_complete();
 }
 
 void MusicPlayer::think() {

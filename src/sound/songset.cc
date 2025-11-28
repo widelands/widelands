@@ -59,7 +59,8 @@ void Songset::init_songs(std::vector<std::string> files) {
 
 /// Loads song data from config into memory
 void Songset::load_songs() {
-	const std::string& path_basename = "music/" + name_;
+	std::string path_basename = "music";
+	path_basename += FileSystem::file_separator() + name_;
 	try {
 		Section& sec = get_config_section("songs");
 		std::vector<Section::Value> values = sec.get_values();
