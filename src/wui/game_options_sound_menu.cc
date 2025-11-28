@@ -41,7 +41,8 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Regi
 	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
 	music_player_.set_border(kMargin, kMargin, kMargin, kMargin);
 
-	sound_options_.get_custom_songset_checkbox().changedto.connect([this](bool /* custom */) { music_player_.rebuild_music_track_controls(); });
+	sound_options_.get_custom_songset_checkbox().changedto.connect(
+	   [this](bool /* custom */) { music_player_.rebuild_music_track_controls(); });
 
 	set_center_panel(&outer_);
 
