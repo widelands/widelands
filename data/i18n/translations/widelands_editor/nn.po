@@ -106,7 +106,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.

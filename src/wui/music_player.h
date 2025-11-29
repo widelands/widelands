@@ -15,27 +15,38 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WL_WUI_SOUND_OPTIONS_H
-#define WL_WUI_SOUND_OPTIONS_H
+#ifndef WL_WUI_MUSIC_PLAYER_H
+#define WL_WUI_MUSIC_PLAYER_H
 
-#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/textarea.h"
 
-/**
- * A box with all sound options.
- * All changes to the sound settings take effect immediately, but are not saved to config.
- */
-struct SoundOptions : public UI::Box {
-	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
+class MusicTrackControl;
 
-	[[nodiscard]] const UI::Checkbox& get_custom_songset_checkbox() const {
-		return custom_songset_;
-	}
+struct MusicPlayer : public UI::Box {
+	explicit MusicPlayer(UI::Panel& parent);
+
+	void think() override;
+
+	void rebuild_music_track_controls();
 
 private:
-	UI::Checkbox custom_songset_;
-	UI::Checkbox play_intro_music_;
+	// Drawing and event handlers
+	void draw(RenderTarget&) override;
+	void set_shuffle(bool on);
+	void update();
+
+	std::vector<MusicTrackControl*> music_track_controls_;
+
+	UI::Box vbox_track_playlist_;
+	UI::Box hbox_playback_control_;
+	UI::Button button_next_;
+	UI::Checkbox checkbox_shuffle_;
+	UI::Box hbox_current_track_;
+	UI::Textarea label_current_track_;
 };
 
-#endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H
+#endif  // WL_WUI_MUSIC_PLAYER_H
