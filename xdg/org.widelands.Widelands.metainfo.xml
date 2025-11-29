@@ -33,6 +33,7 @@
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nds">Een taktisk Speel över ’t Upbauen in Echt-Tied</summary>
   <summary xml:lang="nl">Een realtime bouw strategiespel</summary>
+  <summary xml:lang="nn">Eit sanntidsbyggjestrategispel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="pt_BR">Um jogo em tempo real de estratégia e evolução</summary>
@@ -222,6 +223,12 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
     <p xml:lang="nl">
       Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelands universum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten. Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
     </p>
+    <p xml:lang="nn">
+      Du er regenten for ein liten klan. Oppgåva di er å byggja ein stadig veksande busetnad. Kvart medlem av klanen vil gjera sin del for å produsera fleire ressursar og fremja denne voksteren.
+    </p>
+    <p xml:lang="nn">
+      Widelands tilbyr ein einspelarmodus med kampanjar som fortel historier om stammane og striden deira i Widelands-universet. Men busetjinga byrjar for alvor når du slår deg saman med vener over internett eller lokalt nettverk for å byggja nye imperium saman – eller for å knusa kvarandre i krigens støv. Widelands byr òg på ein dataspelar som kan utfordra deg.
+    </p>
     <p xml:lang="pl">
       Stoisz na czele małego plemiona. Twoim zadaniem jest zbudować prosperującą osadę. Każdy członek plemiona pomagać ci będzie w produkcji surowców niezbędnych do tego celu.
     </p>
@@ -396,6 +403,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nl">Download websitekaarten als add-ons</li>
         <li xml:lang="nl">Nieuwe visualisatiemodi in de editor</li>
         <li xml:lang="nl">Veel nieuwe mogelijkheden voor ontwikkelaars van add-ons</li>
+        <li xml:lang="nn">Marknadshandel</li>
+        <li xml:lang="nn">Seks nye kart er lagde til og tre gamle kart er fjerna</li>
+        <li xml:lang="nn">Økonomidistrikt</li>
+        <li xml:lang="nn">Mange forbetringar i oppslagsverket i spelet</li>
+        <li xml:lang="nn">Last ned kart frå nettsida som tillegg</li>
+        <li xml:lang="nn">Nye visningsmodusar i editoren</li>
+        <li xml:lang="nn">Mange nye moglegheiter for tilleggsutviklarar</li>
         <li xml:lang="pl">Handel na rynku</li>
         <li xml:lang="pl">Sześć nowych map dodanych i trzy stare usunięte.</li>
         <li xml:lang="pl">Dzielnica gospodarcza</li>
@@ -423,6 +437,7 @@ Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
         <li xml:lang="nl">Bugfix-bericht</li>
+        <li xml:lang="nn">Feilrettingsutgåve</li>
         <li xml:lang="pl">Wydanie poprawkowe</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
@@ -485,6 +500,14 @@ Version de correction de bugs</li>
         <li xml:lang="nl">Vastgepinde opmerkingen</li>
         <li xml:lang="nl">Directe kaart publicatie</li>
         <li xml:lang="nl">Verbeterde foutverwerking</li>
+        <li xml:lang="nn">Nytt frisisk scenario</li>
+        <li xml:lang="nn">Diplomatihandtering hjå dataspelarar</li>
+        <li xml:lang="nn">Sjøkrig (førehandsvising)</li>
+        <li xml:lang="nn">Garnisonar for hamner og hovudsete</li>
+        <li xml:lang="nn">Programtillegg for brukargrensesnittet</li>
+        <li xml:lang="nn">Festa notat</li>
+        <li xml:lang="nn">Direkte publisering av kart</li>
+        <li xml:lang="nn">Forbetra feilhandtering</li>
         <li xml:lang="pl">Nowy scenariusz Fryzów</li>
         <li xml:lang="pl">Obsługa dyplomacji przez graczy komputerowych</li>
         <li xml:lang="pl">Operacje morskie</li>
@@ -623,6 +646,7 @@ Version de correction de bugs</li>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
+    <name xml:lang="nn">Widelands utviklarlag</name>
     <name xml:lang="pl">Zespół rozwojowy Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
   </developer>
