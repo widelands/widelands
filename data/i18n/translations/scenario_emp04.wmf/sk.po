@@ -1591,42 +1591,42 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie útoku vojaka z úrovne 0 na úroveň 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie útoku vojaka z úrovne 1 na úroveň 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie útoku vojaka z úrovne 2 na úroveň 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie útoku vojaka z úrovne 3 na úroveň 4"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+msgstr "vylepšenie zdravia vojaka z úrovne 0 na úroveň 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "vylepšenie zdravia vojakov z úrovne 1 na úroveň 2"
+msgstr "vylepšenie zdravia vojaka z úrovne 1 na úroveň 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "vylepšenie zdravia vojakov z úrovne 2 na úroveň 3"
+msgstr "vylepšenie zdravia vojaka z úrovne 2 na úroveň 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
+msgstr "vylepšenie zdravia vojaka z úrovne 3 na úroveň 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177

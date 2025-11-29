@@ -72,6 +72,7 @@ public:
 	int remove(lua_State* L);
 	int destroy(lua_State* L);
 	int has_attribute(lua_State* L);
+	int subscribe_to_removed(lua_State* L);
 
 	/*
 	 * C Methods

@@ -119,7 +119,7 @@
 
 // consistency check for printf arguments
 #ifdef __GNUC__
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__clang__)
 #define PRINTF_FORMAT(b, c) __attribute__((__format__(gnu_printf, b, c)))
 #else
 #define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))

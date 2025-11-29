@@ -578,7 +578,7 @@ msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
 "Uistite sa, že naše vojská sú v plnej sile a potom konajte so všetkou "
-"rozhodnosťou. "
+"rozhodnosťou."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"

@@ -73,6 +73,10 @@ public:
 	int set_keyboard_shortcut(lua_State* L);
 	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
+	int subscribe_to_jump(lua_State* L);
+	int subscribe_to_changeview(lua_State* L);
+	int subscribe_to_track_selection(lua_State* L);
+	int subscribe_to_field_clicked(lua_State* L);
 
 	/*
 	 * C Methods

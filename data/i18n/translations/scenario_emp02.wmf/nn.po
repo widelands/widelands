@@ -30,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bygg eit steinbrot"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
@@ -510,4 +510,4 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du har fullført dette oppdraget. Du kan halda fram med å spela om du vil, elles kan du gå vidare til neste oppdrag."

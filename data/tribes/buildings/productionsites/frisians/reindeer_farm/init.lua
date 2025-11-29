@@ -37,6 +37,12 @@ wl.Descriptions():new_productionsite_type {
          columns = 5,
          rows = 4,
          fps = 10
+      },
+      build = {
+         hotspot = {84, 59},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    },
    animations = {

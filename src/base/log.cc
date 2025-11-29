@@ -56,7 +56,9 @@ std::string get_output_directory() {
 #else
 	char path[MAX_PATH];
 #endif
+	CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 	auto pathlen = GetModuleFileName(NULL, path, MAX_PATH);
+	CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	while (pathlen > 0 && path[pathlen] != '\\') {
 		--pathlen;
 	}
