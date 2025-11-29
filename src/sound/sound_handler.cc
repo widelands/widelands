@@ -21,6 +21,7 @@
 #include <memory>
 
 #include <SDL.h>
+#include <SDL_mixer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -140,7 +141,7 @@ SoundHandler::~SoundHandler() {
 	Mix_ChannelFinished(nullptr);
 	Mix_HookMusicFinished(nullptr);
 	stop_music();
-	songs_.clear();
+	songsets_.clear();
 	fxs_.clear();
 
 	int numtimesopened;
@@ -200,6 +201,7 @@ void SoundHandler::read_config() {
 		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
 	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
+	shuffle_ = get_config_bool("sound", "shuffle", true);
 }
 
 /// Save the current sound options to config cache
@@ -411,8 +413,9 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
-	if (songs_.count(basename) == 0) {
-		songs_.insert(std::make_pair(basename, std::unique_ptr<Songset>(new Songset(dir, basename))));
+	if (songsets_.count(basename) == 0) {
+		songsets_.insert(
+		   std::make_pair(basename, std::unique_ptr<Songset>(new Songset(dir, basename))));
 	}
 }
 
@@ -431,12 +434,14 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
-	if (songs_.count(songset_name) == 0) {
+	if (songsets_.count(songset_name) == 0) {
 		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
-		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
-			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
+		uint32_t n = shuffle_ ? rng_.rand() : 0;
+		if (Mix_Music* const m = songsets_[songset_name]->get_song(n); m != nullptr) {
 			current_songset_ = songset_name;
+			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
+			current_song_ = songsets_[songset_name]->get_title();
 		} else {
 			log_err(
 			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
@@ -457,6 +462,19 @@ void SoundHandler::stop_music(int fadeout_ms) {
 	if (Mix_PlayingMusic() != 0) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
+}
+
+std::string SoundHandler::current_song() {
+	return current_song_;
+}
+
+bool SoundHandler::is_shuffle() const {
+	return shuffle_;
+}
+
+void SoundHandler::set_shuffle(bool on) {
+	shuffle_ = on;
+	set_config_bool("sound", "shuffle", on);
 }
 
 /**
@@ -487,6 +505,28 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		start_music(current_songset_);
 	}
 }
+
+void SoundHandler::set_music_track_enabled(std::string& filename, bool on) {
+	if (SoundHandler::is_backend_disabled()) {
+		return;
+	}
+	songsets_[current_songset_]->set_song_enabled(filename, on);
+}
+bool SoundHandler::is_music_track_enabled(std::string& filename) {
+	if (SoundHandler::is_backend_disabled()) {
+		return false;
+	}
+	return songsets_[current_songset_]->is_song_enabled(filename);
+}
+
+std::vector<Song> SoundHandler::get_music_data() {
+	if (SoundHandler::is_backend_disabled()) {
+		std::vector<Song> v;
+		return v;
+	}
+	return songsets_[current_songset_]->get_song_data();
+}
+
 bool SoundHandler::use_custom_songset() const {
 	return use_custom_songset_instead_ingame_;
 }
