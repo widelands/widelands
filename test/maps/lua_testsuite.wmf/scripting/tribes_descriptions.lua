@@ -36,7 +36,7 @@ function test_descr:test_get_buildings()
    tribe = egbase:get_tribe_description("frisians")
    assert_equal(59, #tribe.buildings)
    tribe = egbase:get_tribe_description("amazons")
-   assert_equal(42, #tribe.buildings)
+   assert_equal(43, #tribe.buildings)
 
    -- Test if buildings have been casted to their correct types
    for i, building in ipairs(tribe.buildings) do
@@ -115,7 +115,7 @@ function test_descr:test_get_workers()
    tribe = egbase:get_tribe_description("frisians")
    assert_equal(37, #tribe.workers)
    tribe = egbase:get_tribe_description("amazons")
-   assert_equal(26, #tribe.workers)
+   assert_equal(27, #tribe.workers)
 end
 
 function test_descr:test_has_building()
