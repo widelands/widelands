@@ -9874,7 +9874,7 @@ msgstr "Akcia"
 
 #: ../../../../src/wui/fieldaction.cc:394
 msgid "Marked for removal by a worker – click to unmark"
-msgstr ""
+msgstr "Označené na odstránenie pracovníkom – kliknutím zrušíte označenie"
 
 #: ../../../../src/wui/fieldaction.cc:395
 #: ../../../../src/wui/fieldaction.cc:402
@@ -9883,7 +9883,7 @@ msgstr "Akcie s nehybnými objektami"
 
 #: ../../../../src/wui/fieldaction.cc:401
 msgid "Mark this immovable for timely removal by a suited worker"
-msgstr ""
+msgstr "Označiť tento nehybný objekt pre včasné odstránenie vhodným pracovníkom"
 
 #: ../../../../src/wui/fieldaction.cc:423
 #: ../../../../src/wui/fieldaction.cc:554
@@ -10523,10 +10523,10 @@ msgstr "Zobraziť schránku"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Obnoviť %d vybranú správu"
+msgstr[1] "Obnoviť %d vybrané správy"
+msgstr[2] "Obnoviť %d vybranej správy"
+msgstr[3] "Obnoviť %d vybraných správ"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:687
@@ -10541,10 +10541,10 @@ msgstr "Obnoviť vybranú správu"
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Archivovať %d vybranú správu"
+msgstr[1] "Archivovať %d vybrané správy"
+msgstr[2] "Archivovať %d vybranej správy"
+msgstr[3] "Archivovať %d vybraných správ"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../../../src/wui/game_message_menu.cc:702
