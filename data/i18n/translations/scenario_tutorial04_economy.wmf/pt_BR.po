@@ -356,30 +356,30 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Você fechou a janela de estoque antes de eu terminar de te ensinar tudo sobre ela. Se você já sabe tudo, fique à vontade para sair desse tutorial a qualquer momento."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "Caso contrário, por favor reabra e dê uma olhada em todas as abas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Você fechou a janela de estoque, mas eu ainda não terminei minha explicação. Por gentileza, poderia reabrir e selecionar a terceira aba?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "Caso contrário, por favor reabra e selecione a terceira aba."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr ""
+msgstr "Construa novas tavernas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
@@ -389,7 +389,7 @@ msgstr "Construa pelo menos duas novas tavernas."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "Enquanto não produzirmos ração, nossos mineiros não vão extrair minérios.  E sem ferro, não poderemos forjar um único capacete."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
