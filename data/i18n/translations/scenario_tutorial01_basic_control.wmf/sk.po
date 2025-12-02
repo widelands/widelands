@@ -722,7 +722,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid "Show the building status"
-msgstr ""
+msgstr "Zobraziť stav budov"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 #, lua-format
@@ -730,7 +730,7 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Ak chcete zobraziť alebo skryť nápisy stavu budov, môžete vybrať položku „Zobraz stav“ z ponuky „Zobraz / Skry“ v dolnej časti alebo stlačiť kláves „%s“ na klávesnici."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
@@ -806,11 +806,11 @@ msgstr "Ak chcete nastaviť nový názov pre svoje ústredie, najprv naň klikni
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "V hornej časti okna sa zobrazí pole na úpravu s názvom."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Stačí vymazať starý názov a zadať nový."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
@@ -843,14 +843,14 @@ msgstr "Teraz archivujte všetky správy v schránke."
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "Klikajte na tlačidlo „Archivovať vybranú správu“, kým nebudú všetky správy archivované a zoznam nebude prázdny."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 #, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Môžete tiež podržať kláves Ctrl alebo Shift na výber viacerých správ, alebo stlačiť %s a vybrať ich všetky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:546
 #, lua-format
@@ -858,7 +858,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Okno so správami môžete prepínať stlačením tlačidla „%s“ alebo kliknutím na druhé tlačidlo z pravej strany úplne dole na obrazovke. Najnovšia správa sa pre vás automaticky označí."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:547
 msgid ""
@@ -914,7 +914,7 @@ msgstr "Všetky okná v hre (okrem príbehových okien s tlačidlom „OK“) mo
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Okná je možné minimalizovať aj tak, že na ne kliknete stredným tlačidlom myši."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
@@ -943,7 +943,7 @@ msgstr "Zničte obe kameňolomy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Zničte kameňolomy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 msgid ""

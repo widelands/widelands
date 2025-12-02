@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-16 03:11+0000\n"
+"POT-Creation-Date: 2025-12-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -786,12 +786,12 @@ msgstr "Weet je zeker dat je de editor wilt afsluiten?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2023
+#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2030
 msgid "Error"
 msgstr "Fout"
 
 #: ../../../../src/editor/editorinteractive.cc:1279
-#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2025
+#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2032
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -3696,7 +3696,7 @@ msgstr "Kaartobjecten achteraf laden"
 #: ../../../../src/network/gameclient.cc:171
 #: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
-#: ../../../../src/wlapplication.cc:909
+#: ../../../../src/wlapplication.cc:916
 msgid "Preparing game…"
 msgstr "Spel Voorbereiden..."
 
@@ -6939,7 +6939,7 @@ msgstr "Bijnaam:"
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
-#: ../../../../src/wlapplication.cc:828
+#: ../../../../src/wlapplication.cc:835
 msgid "nobody"
 msgstr "niemand"
 
@@ -8085,93 +8085,93 @@ msgstr "Alles Markeren"
 msgid "Unmark All"
 msgstr "Alle markeringen weg halen"
 
-#: ../../../../src/wlapplication.cc:959
+#: ../../../../src/wlapplication.cc:966
 msgid "Widelands could not find the last edited map."
 msgstr "Widelands kon de laatst bewerkte kaart niet vinden."
 
-#: ../../../../src/wlapplication.cc:964
+#: ../../../../src/wlapplication.cc:971
 msgid "No Last Edited Map"
 msgstr "Geen Laatst Bewerkte Kaart"
 
-#: ../../../../src/wlapplication.cc:994
+#: ../../../../src/wlapplication.cc:1001
 msgid "No last saved replay."
 msgstr "Geen laatst opgeslagen replay."
 
-#: ../../../../src/wlapplication.cc:996
+#: ../../../../src/wlapplication.cc:1003
 msgid "No last saved game."
 msgstr "Geen laatst opgeslagen game."
 
-#: ../../../../src/wlapplication.cc:1006
+#: ../../../../src/wlapplication.cc:1013
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands kon de file \"%s\" niet vinden."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../../../src/wlapplication.cc:1007 ../../../../src/wlapplication.cc:1012
+#: ../../../../src/wlapplication.cc:1014 ../../../../src/wlapplication.cc:1019
 #: ../../../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Foutboodschap:"
 
-#: ../../../../src/wlapplication.cc:1008
+#: ../../../../src/wlapplication.cc:1015
 msgid "File system error"
 msgstr "Bestandssysteem Fout"
 
-#: ../../../../src/wlapplication.cc:1569
+#: ../../../../src/wlapplication.cc:1576
 #, c-format
 msgid "Command line parameter --%s can not use a value"
 msgstr "Commandoregelparameter --%s kan geen waarde gebruiken"
 
-#: ../../../../src/wlapplication.cc:1574
+#: ../../../../src/wlapplication.cc:1581
 #, c-format
 msgid "Empty value of command line parameter --%s"
 msgstr "Lege waarde van commandoregelparameter --%s"
 
-#: ../../../../src/wlapplication.cc:1580
+#: ../../../../src/wlapplication.cc:1587
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Commandoregel parameters --%1$s en --%2$s kunnen niet worden gecombineerd"
 
-#: ../../../../src/wlapplication.cc:1766
+#: ../../../../src/wlapplication.cc:1773
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Onbekende opdracht regel parameter: %s\nMisschien ontbreekt er een '=' ?"
 
-#: ../../../../src/wlapplication.cc:1785
+#: ../../../../src/wlapplication.cc:1792
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
 msgstr "Niet-gehele waarde voor commandoregelparameter --berichtenbox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1799
+#: ../../../../src/wlapplication.cc:1806
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
 msgstr "Waarde is buiten bereik voor opdrachtregelparameter --berichtbox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1867
+#: ../../../../src/wlapplication.cc:1874
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
 msgstr "Niet-gehele waarde voor opdrachtregelparameter -- moeilijkheidsgraad=%s"
 
-#: ../../../../src/wlapplication.cc:1964
+#: ../../../../src/wlapplication.cc:1971
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Onbekende opdracht regel parameter:  %s"
 
-#: ../../../../src/wlapplication.cc:1998
+#: ../../../../src/wlapplication.cc:2005
 msgid "Incompatible"
 msgstr "Onverenigbaar"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Game ended unexpectedly"
 msgstr "Spel eindigde onverwacht"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Unexpected error during the game"
 msgstr "Onverwachte fout gedurende dit spel"
 
-#: ../../../../src/wlapplication.cc:2041
+#: ../../../../src/wlapplication.cc:2048
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -8185,7 +8185,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Er is een fout opgetreden tijdens het spel. De foutmelding is:\n\n%1$s\n\nMeld dit probleem om ons te helpen Widelands te verbeteren. U vindt gerelateerde berichten in de standaarduitvoer (stdout.txt onder Windows). U gebruikt versie %2$s.\n\nVoeg deze informatie toe aan uw rapport.\n\nWil je dat Widelands probeert een nood savegame te maken? Het is vaak – maar niet altijd – mogelijk om deze te laden en verder te spelen."
 
-#: ../../../../src/wlapplication.cc:2050
+#: ../../../../src/wlapplication.cc:2057
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -8195,11 +8195,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Het spel stopte onverwacht om de volgende reden:\n\n%s\n\nWil je dat Widelands een poging doet om als noodoplossing het spel te bewaren? Het is vaak – maar niet altijd – mogelijk om het weer te laden en verder te spelen."
 
-#: ../../../../src/wlapplication.cc:2084
+#: ../../../../src/wlapplication.cc:2091
 msgid "Emergency save failed"
 msgstr "Noodprocedure Spelbewaren faalde"
 
-#: ../../../../src/wlapplication.cc:2085
+#: ../../../../src/wlapplication.cc:2092
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -11322,6 +11322,14 @@ msgstr "Aanvallen"
 #: ../../../../src/wui/minimap.cc:248
 msgid "Zoom"
 msgstr "Zoomen"
+
+#: ../../../../src/wui/music_player.cc:91
+msgid "Next"
+msgstr ""
+
+#: ../../../../src/wui/music_player.cc:96
+msgid "Shuffle"
+msgstr ""
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"
