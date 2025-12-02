@@ -24,12 +24,9 @@
 - atl01: Don't eat sawdust (GH #6521 / CB #4882)
 - Allow garrison in fri03/fri04 scenario ports (GH #6627 / CB #4987)
 - Forbid markets in all scenarios and tutorials except ToF and tut04 (CB #4988 / GH #6628)
-- Trading Tutorial (CB #4999 / GH #6639, CB #5205 / GH #6846, CB #5216 / GH #6857)
-- Prepare more batches for infinitive trade in tutorial04 (CB #5206 / GH #6847)
-- Explain about trade in tutorial04 that batch is in one transport (CB #5215 / GH #6856)
+- Trading Tutorial (CB #4999 / GH #6639, CB #5205 / GH #6846, CB #5216 / GH #6857, CB #5206 / GH #6847, CB #5215 / GH #6856, CB #5250 / GH #6890)
 - Advertise tutorial about trade in tips (CB #5214 / GH #6855)
 - Fix Lua Functions Usage in atl02 (CB #5249 / GH #6889)
-- Explain market window trade agreement tab in trading tutorial (CB #5250 / GH #6890)
 - tut04: Make `wait_for_window_and_tab_or_complain()` function more robust (CB #5252 / GH #6892)
 
 
@@ -58,7 +55,7 @@
 
 - Remove playername duplicity from Astoria map (CB #4767 / GH #6405)
 - Fix maps requiring "build 22" as minimum version (GH #6693 / CB #5053)
-- New maps 2025 (CB #5138 / GH #6778, CB #5207 / GH #6848)
+- New maps 2025 (CB #5138 / GH #6778)
     - Replaced Europa with AccurateEurope v1.2
     - Added Amoebae
     - Added Egyptian Mandala v1.2
@@ -67,6 +64,7 @@
     - Added The Islands of the Eight Tribes
     - Removed Elven Forests
     - Removed Twinkling Waves
+- Add balancing tag to remaining two official maps (CB #5207 / GH #6848)
 
 
 ### Add-Ons
@@ -261,7 +259,7 @@
 - Workflow testsuite: optimize xvfb (CB #5213 / GH #6854)
 - Doc and test for `set_wares()`, `set_workers()`, ... do to others (CB #5209 / GH #6850)
 - Test: `stable_save` with lunit warns (CB #5220 / GH #6860)
-- "Modernise" appdata → metainfo.xml (CB #5161 / GH #6801)
+- "Modernise" appdata.xml → metainfo.xml (CB #5161 / GH #6801)
 - Optimize `utils/build_deps.py` (CB #5228 / GH #6869)
 - Update debian packaging filepath appdata → metainfo
 - Optimize `utils/find_unused_includes.py` (CB #5229 / GH #6870)
