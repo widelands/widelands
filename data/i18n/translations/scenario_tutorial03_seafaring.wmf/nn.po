@@ -18,60 +18,60 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
-msgstr ""
+msgstr "Sjøfart"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Sjøfartsopplæring"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Velkomen attende. I denne opplæringsdelen skal du læra dei viktigaste tinga om sjøfart; det vil seia skip, hamner og ekspedisjonar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "Men lat meg først gje deg eit oversyn over territoriet ditt: Her i sør har du ein heil økonomi med nesten alt du treng."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr ""
+msgstr "Den nordlege delen"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Her i den nordlege delen har du berre ei gullgruve og eit lager. Sjølv om gruvearbeidarane har god tilgang på mat, finst det ingen måte å frakta gullmalmen til smelteverka våre i den sørlege delen på."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Me har prøvd å byggja ein veg, men fjellet er for breitt og bratt. Difor har me berre éin moglegheit: me må oppretta ein sjøveg mellom desse to delane."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Men eg vil ikkje stressa deg: du har nettopp kome hit og vil sikkert ta ein nærare kikk på leiren din. Eg tek òg ein liten pause og er snart tilbake."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
 msgid "Ports"
-msgstr ""
+msgstr "Hamner"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
 msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
+msgstr "For alt du gjer på havet, treng du ei hamn ved kysten. Hamner er som hovudsete: dei kan lagra varer, arbeidarar og soldatar. Soldatane inne i hamna vil automatisk koma ut når ein fiende angrip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
 msgid ""
@@ -80,221 +80,221 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "I tillegg gjev hamner moglegheit for å frakta varer med skip. Når du klikkar på hamna du allereie har, vil du sjå to ekstra faner: «Varer som ventar på frakt» og «Arbeidarar som ventar på ombordstiging». Dei ventar på eit skip som kan frakta dei til ei anna hamn. Førebels er det ingen der fordi me ikkje har bygd ei hamn nummer to enno. Så lat oss gjera noko med det!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
-msgstr ""
+msgstr "Bygging av hamner"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
-msgstr ""
+msgstr "Korleis byggja ei hamn"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
+msgstr "Hamner er store bygningar, men dei kan berre byggjast på spesielle stader: dei som er merkte med det"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
-msgstr ""
+msgstr "blå hamneplass-ikonet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "Hamneplassar vert bestemde av kartdesigneren, så eit kart har dei anten eller ikkje. Dei kan likevel vera gøymde under tre eller blokkerte av bygningar i nærleiken."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "Du har kanskje allereie lagt merke til at du har eit slikt ikon ved sidan av borga di."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
-msgstr ""
+msgstr "Bygg ei hamn"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "Bygg ei hamn i den nordlege delen av leiren din"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Du treng alltid ei hamn når du vil frakta varer med skip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Bygg ei hamn ved sidan av borga di, på det blå hamneplass-ikonet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "Hamner vert bygde som vanlege bygningar, men er berre tilgjengelege på blå hamneplassar. Berre klikk på eit felt med ikonet, så vil byggjemenyen automatisk tilby deg å byggja ei hamn."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "Sjølv om hamner fungerer som lager, bør du ikkje byggja fleire enn nødvendig: dei kostar kvarts, diamantar og gull, noko som gjer dei ganske dyre."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Constructing ships"
-msgstr ""
+msgstr "Bygging av skip"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Lat oss byggja skip"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "Flott. Medan hamna di vert bygd, kan me byggja nokre skip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "Skip vert bygde ved kysten nær eit skipsverft av ein skipsbyggjar. Me må byggja eit verft ein stad nær stranda."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Bygg eit skipsverft"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Bygg eit skipsverft nær kysten"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "Skip vert produserte av eit skipsverft. Det er ein mellomstor bygning."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Bygg eit skipsverft nær stranda i den sørlege delen av territoriet ditt."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
+msgstr "Skipsverftet er ein mellomstor bygning. Sjølv om det kan byggjast overalt på kartet, arbeider skipsbyggjaren berre når han er nær vatnet og det ikkje er tre eller vegar i strandkanten."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "Ventar på skipa"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
+msgstr "Veldig bra. Skipsverftet ditt er ferdig, og skipsbyggjaren har starta arbeidet med ein gong. For å byggja skip treng han tømmer, plankar og edderkoppty, som vert frakta til verftet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr ""
+msgstr "Skipsbyggjaren tek varene han treng til ein ledig stad i strandkanten og byggjer eit skip der. Når det første skipet er ferdig, vert det sjøsett, og skipsbyggjaren vil byggja eit nytt."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "Me bør venta til me har to skip. Det burde halda for no."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Skip"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Bygg to skip"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
+msgstr "Skip vert bygde automatisk når skipsverftet er ferdig og dei naudsynte varene er leverte."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr ""
+msgstr "Vent til skipsbyggjaren har bygd to skip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "Ikkje gløym å stoppa skipsverftet når du har nok skip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "Shipyard production"
-msgstr ""
+msgstr "Skipsverftproduksjon"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "We have enough ships"
-msgstr ""
+msgstr "Me har nok skip"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "Det andre skipet ditt, «%1%», er klart no."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
+msgstr "Du må stoppa skipsverftet når du har nok skip. Elles vil skipsbyggjaren bruka opp alt tømmeret og edderkopptyet ditt på å laga dusinvis av skip."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
+msgstr "Dette er ikonet for å stoppa produksjonen. Du finn det i bygningsvindauget."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
-msgstr ""
+msgstr "Inkje jern"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
-msgstr ""
+msgstr "Me manglar jern"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "Det andre skipet er kanskje ikkje ferdig enno, men me har eit akutt problem."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
+msgstr "Som du sikkert har merka, er det ikkje jern i fjellet i vest. Me har rikeleg med kol og gullmalm, men utan jernmalm kan me ikkje produsera verktøy."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
+msgstr "Sjølv om det kan ta lang tid, vera dyrt og ikkje utan farar – kven veit kva slags monster som bur i havet? – ser eg ingen annan utveg: Me må leggja ut på ein ekspedisjon til dei ukjende hava."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "Ein tur på sjøen er fri og frank"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Expeditions"
-msgstr ""
+msgstr "Ekspedisjonar"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
+msgstr "Under ein ekspedisjon sender du ut eit skip for å oppdaga nye øyar og kanskje grunnleggja ein koloni der."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -303,82 +303,82 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
+msgstr "Ekspedisjonar kan startast i alle hamner. Då vert alle naudsynte varer frakta til den hamna. Varene er nøyaktig dei stammen din treng for å byggja ei hamn (målet ditt er å byggja ei hamn langt heimefrå, så det er ikkje overraskande), og sjølvsagt treng du ein byggjar òg. Når alt er klart, kjem eit skip og hentar det."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Du kan sjå kva varer som trengst i Ekspedisjon-fana i hamna di (ho dukkar opp til slutt når du har starta ein ekspedisjon)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
-msgstr ""
+msgstr "Prøv dette no. Eg skal fortelja deg kva neste steg er seinare."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "Start ein ekspedisjon i ei av hamnene dine."
 
 #. TRANSLATORS: This refers to a memory game
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "Eg pakka sekken min og la oppi..."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr ""
+msgstr "Ekstra gjenstandar"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Det kan vera lurt å ta med fleire varer enn berre dei som trengst for å byggja ei ny hamn. På den måten kan me starta bygginga av nye bygningar så snart hamna er ferdig."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Du kan ta med ekstra varer, soldatar eller arbeidarar på ein ekspedisjon. Du vel dei ved å fylla dei ledige plassane under dei primære varene for hamnebygging."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "Berre klikk på dei ledige plassane og bla gjennom lista for å velja ekstra gjenstandar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Prøv dette no. Ein liten prikk i grønt, gult eller raudt fortel deg om gjenstanden er komen fram, er på veg eller ikkje er tilgjengeleg."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Ekspedisjon"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Start ein ekspedisjon"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
-msgstr ""
+msgstr "Start ein ekspedisjon."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
+msgstr "For å gjera det, klikk på «Start ekspedisjon»-knappen i ei hamn. Ei ny fane der du kan sjå dei naudsynte varene vil dukka opp."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
-msgstr ""
+msgstr "Til grønare enger"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr ""
+msgstr "Start ekspedisjonen din"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -387,64 +387,64 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Ekspedisjonsskipet ditt er klart. Det ventar på ordrane dine utanfor hamna di. Det fraktar ikkje varer lenger. Bruk knappane for å senda skipet i ei av dei seks hovudretningane på Widelands-kartet. Når det har nådd ein kyst, kan du få det til å segla langs kysten for å sjå etter eigna landingsstader."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "Når ein hamneplass er funnen, kan du byggja ei ny hamn med knappen midt i kontrollvindauget til skipet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
+msgstr "Varene vert då lossa, og skipet går tilbake til å frakta varer igjen. Byggjaren startar arbeidet sitt med å byggja ei hamn."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "Leit etter ei øy med eit fjell, og sjå etter ein hamneplass der. Koloniser øya."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
-msgstr ""
+msgstr "Utforsk"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid "Found a settlement"
-msgstr ""
+msgstr "Grunnlegg ein busetnad"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr ""
+msgstr "Naviger skipet ditt til ei øy som kan innehalda jernmalm."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
+msgstr "Når du klikkar på ekspedisjonsskipet, opnar det seg eit vindauge der du kan styra skipet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "Når du har funne ein eigna hamneplass, bygg ei hamn der."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
-msgstr ""
+msgstr "Ny koloni"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "Kolonien din er grunnlagd"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
+msgstr "Du har leia ekspedisjonen til ein vellukka slutt og grunnlagt en ny koloni. Eg har sendt ut nokre geologar – dei rapporterer alt at dei har funne jernmalm."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:213
 msgid ""
@@ -452,7 +452,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Til no har du lært alt om sjøfart: korleis du byggjer hamner og skip, og korleis du sender ut ein ekspedisjon. Hugs at ekspedisjonar av og til er den raskaste vegen til viktige ressursar – og nokre gonger den einaste."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -460,7 +460,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
+msgstr "Men eg vil koma med ei åtvaring. Hamner er som hovudsete: dei kan angripast av ein fiende i nærleiken. Medan hovudsetet ditt har soldatar til å forsvara seg, har ikkje den nye hamna di det. Du bør difor unngå å slå deg ned like ved ein fiende."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
@@ -470,33 +470,33 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "For å vera sikker på at dei er godt forsvarte, kan du setja det ønskte talet på forsvarssoldatar i Soldatar-fana, akkurat som i militærbygningar. Men sidan dei òg er lager, kan dei husa eit kva som helst tal soldatar. Det ønskte talet syter for at forsvararar vert tilkalla til hamna eller hovudsetet, og når dei først er stasjonerte der, vert dei ikkje sende vekk for å dekkja andre behov."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "På dette kartet er det ingen fiendar å frykta. I andre spel bør du setja av nokre forsvararar til hamnene dine og prioritera å byggja eit par militære festningsverk rundt dei nye koloniane dine."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
-msgstr ""
+msgstr "Oppdraget vårt"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:225
 msgid "Start mining"
-msgstr ""
+msgstr "Start gruvedrift"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "Det var ein lang og dyr jobb å koma hit. Øya har ikkje mykje å by på, men det finst jernmalm i fjellet. Økonomien vår treng jernmalm, så me må byggja ei jerngruve."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "Start utvinning av jernmalm i fjellet."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
@@ -504,15 +504,15 @@ msgstr "Jerngruve"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "Bygg ei jerngruve på øya"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "Økonomien vår manglar ressursar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "Start utvinning av jernmalm i fjella på øya."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
@@ -520,25 +520,25 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid "There is more to it…"
-msgstr ""
+msgstr "Det er meir…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid "Another gold mountain"
-msgstr ""
+msgstr "Endå eit gullfjell"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "Det vil ta litt tid før skipsverftet ditt får bygd nokre skip. Medan me ventar, er det ein annan type vasstransport eg vil læra deg."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Skip har den fordelen at dei kan bera store mengder varer og arbeidarar om gongen, men diverre er reisemåla deira avgrensa til nokre få stader som eignar seg for hamner."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
 msgid ""
@@ -547,53 +547,53 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "Sjå på denne dalen her heilt i sør. Me har funne eit fjell med gull her nede og vil gjerne utvinna malm herfrå òg. Men elvane som skil det frå hovudkolonien vår er for breie til å byggja bruer over, og for smale til at skip kan passera. Vegane våre ville måtta ta lange omvegar, noko som sinkar varetransporten mykje."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "Robåtar og ferjeleie"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "Det er her ferjer kjem inn i biletet. Ferjer er små robåtar som berre kan bera éi vare om gongen, og ingen arbeidarar (bortsett frå han som ror, og han forlèt aldri båten)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Ferjer vert bygde i ferjeleie. Ein robåt kostar to tømmerstokkar og eit stykke ty, og er rask å byggja. Eit ferjeleie er ein mellomstor bygning som må byggjast nær stranda."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "Lat oss byggja eit ferjeleie nær stranda før me går vidare."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "Bygg eit ferjeleie"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "Bygg eit ferjeleie nær stranda"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Ferjer vert bygde av eit ferjeleie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "Du må byggja ferjeleiet nær stranda, elles vil det ikkje kunna byggja ferjer der."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr ""
+msgstr "Vassvegar"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -601,7 +601,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "I motsetnad til skip, som reiser til kva som helst hamn dei trengst, har ferjer faste transportruter kalla vassvegar. Ein vassveg vert bygd akkurat som ein veg: Du klikkar på eit flagg nær stranda, vel «Bygg ein vassveg», og vel ruta for vassvegen nett som du ville gjort for ein veg."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -609,62 +609,62 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "Vassvegar kan byggjast på ope hav så vel som nær land der vatnet er for grunt for store skip. Den einaste regelen er at dei to trekantane som ligg inntil kvart segment av vassvegen må vera vatn, og heile ruta må vera innanfor territoriet ditt."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "Merk òg at vassvegar, i motsetnad til vegar, ikkje kan byggjast så lange som du vil. Kvart kart har ei lengdeavgrensing for vassvegar. På dette kartet er grensa 5 ruter."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "Hugs alltid at ferjer ikkje fraktar arbeidarar. Du kan bruka dei til å få fart på varetransporten, men dei kan aldri heilt erstatta vegar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "Lat meg visa deg korleis du byggjer ein vassveg..."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
-msgstr ""
+msgstr "Gylne bølgjer"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "Som du ser, er det ikkje så vanskeleg. Når du byggjer ein vassveg, vil den næraste ledige ferja ta jobben."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "No er det din tur: Bygg ei gullgruve på fjellet i sør og kople henne til fastlandet ved å byggja vassvegar over elvane."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Bygg ei gullgruve og vassvegar"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Bygg ei gullgruve på fjellet i sør, og kople henne til fastlandet ved å byggja vassvegar over elvane."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Ein vassveg vert bygd akkurat som ein veg: Du klikkar på eit flagg nær stranda, vel «Bygg ein vassveg», og vel ruta for vassvegen nett som du ville gjort for ein veg."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "Men kvart segment av vassvegen må ha to vasstrekantar ved sidan av seg."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
@@ -672,13 +672,13 @@ msgstr "Konklusjon"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "Om ferjer"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Det er berre eit par ting til eg vil at du skal hugsa på når du bruker ferjer."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
@@ -687,7 +687,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Gløym aldri at desse robåtane er for små til å bera arbeidarar. Du kan bruka dei som snarvegar for varetransport innanfor delar av territoriet ditt, men ikkje for å gjera krav på område du verken kan nå med veg eller skip. Kutt aldri alle vegsamband mellom to stader som er kopla saman med vassvegar, med mindre du er sikker på at ingen arbeidar nokosinne må gå der."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -699,28 +699,28 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Og om vassvegane dine utgjer ein betydeleg snarveg mellom vegnetta dine, vil økonomien din ha ein tendens til å senda mange varer over vassvegen. Sidan ein vassveg berre kan ha éi ferje – i motsetnad til vegar, som får ein ekstra berar om dei er travle – og sidan dei ofte er lengre enn dei to-tre felta som er tilrådd for vegar, er det alltid ein risiko for at vassvegar blir alvorlege flaskehalsar i økonomien din. Prøv å byggja fleire av dei parallelt for å fordela belastninga. Om dette ikkje er mogleg, er det i somme tilfelle meir effektivt å ikkje bruka vassvegar i det heile."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid "Ferry yard production"
-msgstr ""
+msgstr "Ferjeleieproduksjon"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
 msgid "More ferries needed?"
-msgstr ""
+msgstr "Trengs det fleire ferjer?"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Som du ser, kan ferjer produserast ganske raskt, men du treng ikkje bekymra deg for sløsing med materialar, fordi ferjeleie vanlegvis berre produserer dei ved behov, når det finst ubetjente vassvegar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Så lenge ei ferje betener ein vassveg, lever ho evig, men arbeidslause ferjer vil rotna og til slutt søkkja."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
@@ -729,17 +729,17 @@ msgstr "Gratulerer"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Du har lært alt som er å læra om skip og ferjer!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "Det finst òg ei anna øy der du kan byggja ei hamn om du ønskjer å prøva å senda ut ein ny ekspedisjon."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Som alltid kan du halda fram med å spela og øva deg litt meir på dette kartet om du vil, eller gjera kapteinslisensen klar og prøva ut dei nye ferdigheitene dine i eit ekte spel…"

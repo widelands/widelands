@@ -435,11 +435,11 @@ msgstr "Keď nájdete vhodné prístavné miesto, postavte tam prístav."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
-msgstr ""
+msgstr "Nová kolónia"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "Vaša kolónia bola založená"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
 msgid ""
@@ -498,7 +498,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "Začnite ťažiť železnú rudu v horách."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
@@ -510,11 +510,11 @@ msgstr "Postavte železnorudnú baňu na ostrove"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "Našej ekonomike chýbajú zdroje."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "Začnite ťažiť železnú rudu v horách na ostrove."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
@@ -603,7 +603,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "Na rozdiel od lodí, ktoré cestujú do akéhokoľvek prístavu, kde sú potrebné, trajekty majú stanovené dopravné trasy nazývané vodné cesty. Vodná cesta sa buduje rovnako ako cesta: kliknete na vlajku blízko brehu, vyberiete možnosť „Postaviť vodnú cestu“ a vyberiete trasu pre vodnú cestu rovnako ako pre cestu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -644,7 +644,7 @@ msgstr ""
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Teraz je rad na vás: postavte zlatú baňu na hore na juhu a spojte ju s pevninou vybudovaním vodných ciest cez vodné prúdy."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
@@ -654,19 +654,19 @@ msgstr "Postavte zlatú baňu a vodné cesty"
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Postavte zlatú baňu na hore na juhu a spojte ju s pevninou vybudovaním vodných ciest cez vodné prúdy."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Vodná cesta sa buduje rovnako ako cesta: kliknete na vlajku blízko brehu, vyberiete možnosť „Postaviť vodnú cestu“ a vyberiete trasu pre vodnú cestu rovnako ako pre cestu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "Každý úsek vodnej cesty však potrebuje vedľa seba dva vodné trojuholníky."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"

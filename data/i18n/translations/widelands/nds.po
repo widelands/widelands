@@ -11321,11 +11321,11 @@ msgstr "Vergrotern"
 
 #: ../../../../src/wui/music_player.cc:91
 msgid "Next"
-msgstr ""
+msgstr "Anner"
 
 #: ../../../../src/wui/music_player.cc:96
 msgid "Shuffle"
-msgstr ""
+msgstr "Misken"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"

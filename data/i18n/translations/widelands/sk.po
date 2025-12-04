@@ -2261,10 +2261,10 @@ msgstr "Loď %2$s objavila neobsadené prístavné miesto o %1$s"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Loď %2$s objavila neobsadené prístavné miesto o %1$s %3$u krok na %4$s od prístavu %5$s"
+msgstr[1] "Loď %2$s objavila neobsadené prístavné miesto o %1$s %3$u kroky na %4$s od prístavu %5$s"
+msgstr[2] "Loď %2$s objavila neobsadené prístavné miesto o %1$s %3$u kroku na %4$s od prístavu %5$s"
+msgstr[3] "Loď %2$s objavila neobsadené prístavné miesto o %1$s %3$u krokov na %4$s od prístavu %5$s"
 
 #: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
@@ -2786,7 +2786,7 @@ msgstr "Strata vojenskej budovy!"
 #. "Success!"
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
-msgstr "Porážka nepriateľa"
+msgstr "Porážka nepriateľa!"
 
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
@@ -3925,7 +3925,7 @@ msgstr "Používatelia označení ako IRC pravdepodobne nebudú reagovať na spr
 
 #: ../../../../src/network/internet_gaming.cc:206
 msgid "Successfully reconnected to the metaserver!"
-msgstr "Podarilo sa úspešne pripojiť na metaserver."
+msgstr "Podarilo sa úspešne pripojiť na metaserver!"
 
 #: ../../../../src/network/internet_gaming.cc:329
 #: ../../../../src/network/network_gaming_messages.cc:40
@@ -6177,7 +6177,7 @@ msgstr "Zatiaľ nehodnotený"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:913
 msgid "No comments yet."
-msgstr "Zatiaľ nekomentovaný"
+msgstr "Zatiaľ nekomentovaný."
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:914
 #, c-format
@@ -9505,7 +9505,7 @@ msgstr "Zničiť cieľ"
 
 #: ../../../../src/wui/attack_window.cc:472
 msgid "Destroy the target building instead of conquering it"
-msgstr ""
+msgstr "Zničiť vybranú budovu namiesto jej dobytia"
 
 #: ../../../../src/wui/attack_window.cc:483
 #: ../../../../src/wui/buildingwindow.cc:426
@@ -10904,7 +10904,7 @@ msgstr "Dĺžka vodnej cesty: %1$u / %2$u"
 
 #: ../../../../src/wui/interactive_base.cc:1865
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Uloženie snímky obrazovky sa nepodarilo!"
 
 #: ../../../../src/wui/interactive_base.cc:1869
 msgid "Screenshot saved"
@@ -11080,7 +11080,7 @@ msgstr "Skratky rýchleho umiestnenia"
 
 #: ../../../../src/wui/load_or_save_game.cc:151
 msgid "Version Mismatch"
-msgstr ""
+msgstr "Nezhoda verzií"
 
 #: ../../../../src/wui/load_or_save_game.cc:152
 msgid ""
@@ -11434,11 +11434,11 @@ msgstr "Priblíženie"
 
 #: ../../../../src/wui/music_player.cc:91
 msgid "Next"
-msgstr ""
+msgstr "Ďalšia"
 
 #: ../../../../src/wui/music_player.cc:96
 msgid "Shuffle"
-msgstr ""
+msgstr "V náhodnom poradí"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"
@@ -12099,7 +12099,7 @@ msgstr "Kliknutím na vojaka ho pošlete preč"
 #. * TRANSLATORS: Tooltip for volume slider in sound options
 #: ../../../../src/wui/sound_options.cc:73
 msgid "Changes the volume. Click to hear a sample."
-msgstr ""
+msgstr "Mení hlasitosť. Kliknite pre vypočutie ukážky."
 
 #: ../../../../src/wui/sound_options.cc:150
 msgid "Play your own music in-game"

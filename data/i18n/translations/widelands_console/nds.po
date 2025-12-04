@@ -160,7 +160,7 @@ msgstr "Dat Speel sünner all Gedrüüs opmaken."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Start the game with shuffle mode for playback of songs"
-msgstr ""
+msgstr "Begünn dat Speel mit de Misken-Modus för de Musik-Weergaav"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the

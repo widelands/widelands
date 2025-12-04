@@ -11330,11 +11330,11 @@ msgstr "Nagyítás"
 
 #: ../../../../src/wui/music_player.cc:91
 msgid "Next"
-msgstr ""
+msgstr "Váltás"
 
 #: ../../../../src/wui/music_player.cc:96
 msgid "Shuffle"
-msgstr ""
+msgstr "Keverve"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"

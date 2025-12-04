@@ -2430,7 +2430,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Negociação Aprovada"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
@@ -2443,7 +2443,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Negociação Rejeitada"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
@@ -8493,7 +8493,7 @@ msgstr "Alternar Mini-Mapa"
 
 #: ../../../../src/wlapplication_options.cc:345
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Enciclopédia"
 
 #: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"
