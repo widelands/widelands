@@ -1,16 +1,20 @@
 [TOC]
 
-## Post-1.2.1 until [git 34eccc1](https://codeberg.org/wl/widelands/commit/34eccc1614dcb4123813f66440eeba782f929b03)
+## Release 1.3
 
 ### Animations, Icons and Overlays
 
 - New icon for Frisians tribe (CB #4942 / GH #6582)
 - Fix double shadow of empire mill (GH #6650 / CB #5010)
+- Market graphics for all five tribes (CB #4998 / GH #6638, CB #5005 / GH #6645, CB #5037 / GH #6677)
+- New Frisian campaign character portraits (GH #6885 / CB #5245)
+- Build animations for most Frisian buildings (CB #5254 / GH #6894, CB #5265 / GH #6905)
 
 
 ### Sounds and Music
 
 - Added the ability to skip to next music track (CB #4928 / GH #6568)
+- Musicplayer UI (CB #4945 / GH #6585)
 
 
 ### Tutorials and Campaigns
@@ -19,6 +23,11 @@
 - Fix empire 4 starting bug (GH #6508 / CB #4869)
 - atl01: Don't eat sawdust (GH #6521 / CB #4882)
 - Allow garrison in fri03/fri04 scenario ports (GH #6627 / CB #4987)
+- Forbid markets in all scenarios and tutorials except ToF and tut04 (CB #4988 / GH #6628)
+- Trading Tutorial (CB #4999 / GH #6639, CB #5205 / GH #6846, CB #5216 / GH #6857, CB #5206 / GH #6847, CB #5215 / GH #6856, CB #5250 / GH #6890)
+- Advertise tutorial about trade in tips (CB #5214 / GH #6855)
+- Fix Lua Functions Usage in atl02 (CB #5249 / GH #6889)
+- tut04: Make `wait_for_window_and_tab_or_complain()` function more robust (CB #5252 / GH #6892)
 
 
 ### Scripting
@@ -31,12 +40,31 @@
 - More functions, properties, and classes for the Lua UI API (GH #6555 / CB #4915)
 - Improvement of the Lua code of some buildings (GH #6730 / CB #5090)
 - Check in tribe loading that buildings don't have more than 3 workareas (CB #5054 / GH #6694)
+- Fix `player.end_result` (CB #5146 / GH #6786)
+- Add trade extensions to Lua interface and testsuite (CB #5140 / GH #6780)
+- Attributes for all map object descriptions (CB #4608 / GH #6269)
+- Add `"descname"` property to `modify_unit()` (CB #5143 / GH #6783)
+- Allow defining custom naming lists per tribe (CB #5042 / GH #6682)
+- Fix Lua doc errors, prevent setting soldiers via `set_workers` and ferries in warehouses (CB #5156 / GH #6796)
+- Lua API: `include()` returns the included script's return value (CB #4553 / GH #6210)
+- Fix global variable requirement in `send_to_all_inboxes` (GH #6865 / CB #5224)
+- Lua Subscribers to signals and notifications (CB #5063 / GH #6703)
 
 
 ### Maps
 
 - Remove playername duplicity from Astoria map (CB #4767 / GH #6405)
 - Fix maps requiring "build 22" as minimum version (GH #6693 / CB #5053)
+- New maps 2025 (CB #5138 / GH #6778)
+    - Replaced Europa with AccurateEurope v1.2
+    - Added Amoebae
+    - Added Egyptian Mandala v1.2
+    - Added Forest Valley v2
+    - Added Tasmanian Black War
+    - Added The Islands of the Eight Tribes
+    - Removed Elven Forests
+    - Removed Twinkling Waves
+- Add balancing tag to remaining two official maps (CB #5207 / GH #6848)
 
 
 ### Add-Ons
@@ -55,6 +83,13 @@
 - Refactor and speedup add-ons manager rebuild (GH #6580 / CB #4940)
 - Fix crash when uninstalling the only add-on (CB #4981 / GH #6621)
 - Translations for Website Maps (CB #4956 / GH #6596)
+- Fixes to Add-On map selection (CB #5030 / GH #6670)
+- Fix layout error in LaunchGame desyncing add-on hint (CB #5107 / GH #6747)
+- Refactor add-on comments layouting efficiently (CB #5131 / GH #6771)
+- Add note and link about GPLv2+ licensing to in-editor map publishing (CB #5153 / GH #6793)
+- Fix add-ons comment editor layout assertion (CB #5163 / GH #6803)
+- Don't overwrite add-on-defined ware and worker target quantity and preciousness (CB #5244 / GH #6884)
+- Add-Ons manager website maps: Allow unbounded filtering (CB #5255 / GH #6895)
 
 
 ### Saveloading
@@ -68,6 +103,7 @@
 ### AI
 
 - Update some buildings' AI hints (GH #6686 / CB #5046)
+- Implement AI response to trade extension proposals (CB #5103 / GH #6743)
 
 
 ### Gameplay
@@ -76,6 +112,23 @@
 - Economic Districts (CB #4708 / GH #6345)
 - Use silk rather than cloth for fishing nets and bows (CB #4866 / GH #6505)
 - Button to evict builder from construction-/dismantlesites (CB #4551 / GH #6208)
+- Let attacking warship decide battle positions for all participants (CB #5091 / GH #6731)
+- Trading (CB #4781 / GH #6419)
+    - Input Queue Priorities, Capacities, and Pausing (CB #5001 / GH #6641)
+    - Allow trades to run indefinitely (CB #5000 / GH #6640)
+    - Moving Trades (CB #5020 / GH #6660)
+    - Disallow recalling trade carriers underway (CB #5028 / GH #6668)
+    - Properly cancel/retract trades when destroying market (CB #5035 / GH #6675)
+    - Extending Trades (CB #5036 / GH #6676)
+    - Set buildcosts for all tribes’ markets (CB #5041 / GH #6681)
+    - Sanity-check trade batch counts and batch sizes (CB #5129 / GH #6769)
+- Fix assertion thrown by ship expedition (CB #5093 / GH #6733)
+- Adjust Frisian Honey Bread Bakery Dismantle Return Wares (GH #6772 / CB #5132)
+- Using the buildcost of the port defined in the tribe instead of the buildcost of actual portdock for expedition. (CB #5136 / GH #6776)
+- Improve warehouse soldier preference handling (CB #4952 / GH #6592)
+- Fix exception on destroying warehouses with garrisons (CB #5151 / GH #6791)
+- Fix crashes with ships finding no path to the destination (CB #5021 / GH #6661)
+- Fix incrementing `last_detectedportspace_serial_` (CB #5259 / GH #6899)
 
 
 ### User Interface
@@ -98,6 +151,13 @@
 - Trim whitespace from map author lists (GH #6646 / CB #5006)
 - Add display selection to graphics options (GH #6342 / CB #4705)
 - Let unique window close itself (CB #5029 / GH #6669)
+- Trading UI in Market windows and Diplomacy window (CB #4781 / GH #6419)
+    - Manage trade offers and proposals in market window (CB #4997 / GH #6637)
+    - Trading boxes layout improvements (CB #5043 / GH #6683)
+    - Add default fastplace binding for markets (CB #5203 / GH #6844)
+    - Market window layout fixes (CB #5253 / GH #6893)
+- Fix rendering issues in ship window pinned note destination dropdown (CB #5160 / GH #6800)
+- UI Pagination Support (GH #6779 / CB #5139)
 
 
 ### Internationalization
@@ -110,6 +170,12 @@
 - Tut02 string fix (CB #4959 / GH #6599)
 - Improvement in some english texts (CB #5018 / GH #6658)
 - Atlantean campaign spelling: Standardize 'Lutas’' to 'Lutas’s' (CB #5055 / GH #6695)
+- Allow separate translation of multiscreen option texts (CB #5101 / GH #6741)
+- Speed up updating translation statistics (CB #5007 / GH #6647)
+- Transifex String Fixes (CB #5130 / GH #6770)
+- Correctly ignore changes of `data/i18n/translation_stats.conf` (GH #6878 / CB #5236)
+- Fix localization markup in some translatable strings (CB #5279 / GH #6919)
+- Allow separate translations for all players and all items (CB #5247 / GH #6887)
 
 
 ### Help and Documentation
@@ -120,6 +186,11 @@
 - Documentation fixes for `lua_global` (CB #4920 / GH #6560)
 - Encyclopedia: Show Experience chain for all workers in the chain (CB #4951 / GH #6591)
 - Update performance helptext for comparable buildings between tribes, big sites (CB #4947 / GH #6587)
+- Update performance helptext for farm-like buildings (CB #4725 / GH #6362)
+- Encyclopedia: Retrieve soldier training attribute level indicator icons via Lua (CB #5145 / GH #6785)
+- Update performance helptext for rest of missing buildings (CB #5040 / GH #6680)
+- Remove parentheses in doc about add-ons (CB #5218 / GH #6859)
+- README fixes (CB #5264 / GH #6904)
 
 
 ### Editor
@@ -172,6 +243,36 @@
 - Update mingw sdl-mixer dependencies (CB #5039 / GH #6679)
 - Mask Eris `main()` to fix windows builds (CB #5050 / GH #6690)
 - Compile C-only libraries with c11 standard (GH #6698 / CB #5058)
+- Test checks for correct window (CB #5094 / GH #6734)
+- Fix an unused variable warning
+- Fixed linking problem under Windows for fprintf (CB #5102 / GH #6742)
+- `check_vcpkg.yaml`: refresh `vcpkg_ref` cache on every run (CB #4957 / GH #6597)
+- CMake: Added rule to use ccache by default if installed (CB #5031 / GH #6671)
+- Fix windows builds ICU dependency (CB #5141 / GH #6781)
+- Testsuite: download tests in separate step (CB #5147 / GH #6787)
+- Update list of files to check in build workflow (CB #5149 / GH #6789)
+- Test: all tribes, remove test of foreign buildings from there (CB #5157 / GH #6797)
+- Test battle (CB #5159 / GH #6799)
+- Workflow testsuite reports memory leak (CB #5165 / GH #6805)
+- Regression test: Improve LSan report (CB #5166 / GH #6806)
+- Test for aborting expedition after selecting a destination (CB #5164 / GH #6804)
+- Workflow testsuite: optimize xvfb (CB #5213 / GH #6854)
+- Doc and test for `set_wares()`, `set_workers()`, ... do to others (CB #5209 / GH #6850)
+- Test: `stable_save` with lunit warns (CB #5220 / GH #6860)
+- "Modernise" appdata.xml → metainfo.xml (CB #5161 / GH #6801)
+- Optimize `utils/build_deps.py` (CB #5228 / GH #6869)
+- Update debian packaging filepath appdata → metainfo
+- Optimize `utils/find_unused_includes.py` (CB #5229 / GH #6870)
+- Fix development version date generation in `update_metainfo.py` (CB #5233 / GH #6874)
+- PPA: Do not require license file to equal system-wide one (debian bug 1106308)
+- Testsuite skip irrelevant testruns (CB #4677 / GH #6314)
+- Testsuite: `check_error` checks exception type (CB #5231 / GH #6872)
+- Test editor tests once (CB #5148 / GH #6788)
+- Revert enabling LSAN reports until the release (CB #5261 / GH #6901)
+- Update vcpkg cache workflow: Fix storing the reference (CB #5256 / GH #6896)
+- Add macOS15 intel builds (GH #6908 / CB #5268)
+- Remove glbinding from MSYS2 dependency list (GH #6914 / CB #5274)
+- Windows ARM support with MSYS2 (CB #5271 / GH #6911)
 
 
 ### Other Issues
@@ -199,6 +300,11 @@
 - Fix or categorize new checks in clang-tidy-19 (CB #5011 / GH #6651)
 - Remove duplicate clang-tidy checks (CB #5014 / GH #6654)
 - Bump AppImage and compiler targets in the CI to Ubuntu Jammy (GH #6673 / CB #5033, CB #5034 / GH #6674)
+- Fix error format string in ZipFilesystem (GH #6736 / CB #5096)
+- Use 32-bit integer for trade batch counts (CB #5027 / GH #6667)
+- Utils: lua style checker, ignore config and fix SyntaxWarning (CB #5221 / GH #6862)
+- Threading and locking fixes (CB #5251 / GH #6891)
+- Don't use the setup-python workflow action (CB #5269 / GH #6909)
 
 
 ## Release 1.2.1
