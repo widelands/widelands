@@ -15,9 +15,9 @@ configuration:
   - Release
   - Debug
 
-branches:
-  only:
-    - appveyor_macos
+# branches:
+  # only:
+    # - appveyor_macos
 
 skip_tags: true
 
@@ -26,6 +26,10 @@ for:
   matrix:
     only:
       - image: Visual Studio 2022
+    
+    platform:
+      - x64
+      - x86
     
     init:
     - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
@@ -50,11 +54,6 @@ for:
       - cmd: "bash --login -c \"%APPVEYOR_BUILD_FOLDER:\\=/%/install-dependencies.sh msys%BITS% --noconfirm\""
       # Downgrade incompatible packages to working version
       # - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/mingw%BITS%/mingw-w64-%MINGWSUFFIX%-SDL2_image-2.8.0-1-any.pkg.tar.zst\""
-    
-    platform:
-      - x64
-      - x86
-
 
     build_script:
       - cmd: cd %APPVEYOR_BUILD_FOLDER%
