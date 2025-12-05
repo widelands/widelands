@@ -9,17 +9,18 @@ image:
   - macos-monterey
   - macos-ventura
 
-shallow_clone: false
-
 configuration:
   - Release
   - Debug
 
-# branches:
-  # only:
-    # - appveyor_macos
+branches:
+  only:
+    - master
+    - appveyor_macos
 
 skip_tags: true
+
+shallow_clone: false
 
 for:
 -
