@@ -51,7 +51,7 @@ msgstr "Postavte drevorubačský dom na symbole červeného domu, južne od vá�
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr "Postavte dva drevorubačské domy a pílu"
+msgstr "Postavte 2 drevorubačské domy a pílu"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"

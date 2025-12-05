@@ -7113,7 +7113,7 @@ msgstr "„Tichý ako panter,<br> obratný ako lasica,<br> rýchly ako šíp,<br
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1224
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "„Umenie loviť“"
+msgstr "„Umenie lovu“"
 
 #. TRANSLATORS: Note helptext for a Barbarian production site: Hunter's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1228
@@ -14295,7 +14295,7 @@ msgstr "Rybárske siete sú nástrojom, ktorý používajú rybári."
 #: ../../../../data/tribes/initialization/frisians/units.lua:457
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr "Lovecké oštepy sa vyrábajú v kováčstve."
+msgstr "Lovecké oštepy sa vyrábajú v kováčstve"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:470

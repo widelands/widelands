@@ -290,7 +290,7 @@ msgid ""
 "situation. Törver has a very bad reputation."
 msgstr ""
 "Buďte trpezlivý a uznajte, že silné vojsko je v tejto situácii "
-"nepostrádateľné. Törver má veľmi zlu reputáciu. "
+"nepostrádateľné. Törver má veľmi zlu reputáciu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
@@ -302,7 +302,7 @@ msgid ""
 "expanding his front line and approaching our territory."
 msgstr ""
 "Pane, dostali sme znepokojujúcu správu od našich prieskumníkov. Törver "
-"rozširuje frontovú líniu a približuje sa k nášmu teritóriu. "
+"rozširuje frontovú líniu a približuje sa k nášmu teritóriu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -310,8 +310,8 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
-"Nemôžeme sa vyhýbať útoku na ich vojská večne. Ak sa nám podarí  dobiť nášho"
-" severného nepriateľa, rozšírime naše teritórium a nájdeme zdroje na "
+"Nemôžeme sa vyhýbať útoku na ich vojská večne. Ak sa nám podarí dobiť nášho "
+"severného nepriateľa, rozšírime naše teritórium a nájdeme zdroje na "
 "posilnenie našich vojsk."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
@@ -446,7 +446,7 @@ msgid ""
 msgstr ""
 "Pane, teraz keď sme získali prístup k pirátskej skrýši, mali by sme ju dobyť"
 " a už ich doraziť. Možno sa na ich teritóriu nachádza ešte viac skrytých "
-"pokladov. "
+"pokladov."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
@@ -561,7 +561,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr "konečná hranica"
+msgstr "Konečná hranica"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -586,7 +586,7 @@ msgstr "Víťazstvo!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr "Pane, prijmite moju gratuláciu."
+msgstr "Pane, prijmite moju gratuláciu!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -596,7 +596,7 @@ msgid ""
 msgstr ""
 "Spnili ste všetky ciele a porazili ste všetkých našich nepriateľov. Nielenže"
 " ste si podrobili rivalské kmene, ale získali ste si aj srdcia vášho "
-"milujúceho ľudu. "
+"milujúceho ľudu."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."

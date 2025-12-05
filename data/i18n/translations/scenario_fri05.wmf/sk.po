@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr "Postavte aspoň tri drevorubačské domy"
+msgstr "Postavte aspoň tri drevorubačské domy."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
@@ -566,7 +566,7 @@ msgstr "Víťazstvo"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Porážka nepriateľa"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:307

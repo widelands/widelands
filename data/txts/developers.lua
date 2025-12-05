@@ -143,6 +143,7 @@ function developers() return {
                "aDiscoverer",
                "cake>pie",
                "Christoph Elsenhans (frosch)",
+               "andersand",
             },
          },
       },
