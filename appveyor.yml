@@ -3,9 +3,6 @@
 #                                 #
 #   Appveyor build configuration  #
 ###################################
-platform:
-  - x64
-
 image: 
   - Visual Studio 2022
   - macos-monterey
@@ -13,6 +10,9 @@ image:
 
 shallow_clone: false
 
+platform:
+  - x64
+  
 configuration:
   - Release
   - Debug
