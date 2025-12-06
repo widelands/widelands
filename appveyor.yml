@@ -28,11 +28,9 @@ for:
   matrix:
     only:
       - image: Visual Studio 2022
-    
-    init:
-      - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
 
     install:
+      - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
       # Installing various utilities
       # As of 2019-12-06 we have to install 'chocolatey-core.extension' beforehand.
       # Otherwise installing 'InnoSetup' will fail.
