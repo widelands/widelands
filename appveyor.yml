@@ -32,9 +32,9 @@ install:
 
 shallow_clone: false
 
-branches:
-  only:
-    - master
+# branches:
+ # only:
+    # - master
 
 skip_tags: true
 
