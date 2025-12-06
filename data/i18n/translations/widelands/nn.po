@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-12-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Thorbjørn Bruarøy, 2015,2025\n"
+"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025\n"
 "Language-Team: Norwegian Nynorsk (http://app.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -496,7 +496,7 @@ msgstr "Avslutt redigeringsprogram"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:300
 msgid "Change height"
-msgstr "Endre høgd"
+msgstr "Endra høgd"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:303
@@ -585,7 +585,7 @@ msgstr "Spelarar"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../../../src/editor/editorinteractive.cc:373
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr "Set talet på spelarar og namna, stammane og startposisjonane deira"
+msgstr "Vel talet på spelarar og namna, stammane og startposisjonane deira"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/editor/editorinteractive.cc:377
@@ -2005,7 +2005,7 @@ msgstr "OpenGL"
 
 #: ../../../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr "Skyggeleggingsspråk"
+msgstr "Skuggeleggingsspråk"
 
 #: ../../../../src/graphic/text/rt_render.cc:1421
 msgid "Copy link to clipboard"
@@ -3761,17 +3761,17 @@ msgstr "/help  -  Viser denne hjelpa"
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr "/announce <mld>  -  Send ei pratemelding som kunngjering (systemprat)"
+msgstr "/announce <msg>  -  Send ei pratemelding som kunngjering (systemprat)"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <namn> <årsak>  -  Åtvar brukaren <namn> på grunn av <årsak>"
+msgstr "/warn <name> <reason>  -  Åtvar brukar <name> på grunn av <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:126
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
-msgstr "/kick <namn> <årsak>  -  Spark ut brukaren <namn> på grunn av <årsak>"
+msgstr "/kick <name> <reason>  -  Spark ut brukaren <name> på grunn av <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../../../src/network/gamehost.cc:128
@@ -3785,11 +3785,11 @@ msgstr "/endForcedPause        -  Set spelet tilbake til normal fart."
 
 #: ../../../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Feil bruk, skal vera: /announce <melding>"
+msgstr "Feil bruk, skal vera: /announce <message>"
 
 #: ../../../../src/network/gamehost.cc:148
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Feil bruk, skal vera: /warn <namn> <årsak>"
+msgstr "Feil bruk, skal vera: /warn <name> <reason>"
 
 #: ../../../../src/network/gamehost.cc:152
 #: ../../../../src/network/gamehost.cc:176
@@ -3799,7 +3799,7 @@ msgstr "Fann ikkje klienten %s."
 
 #: ../../../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Feil bruk, skal vera: /kick <namn> <årsak>"
+msgstr "Feil bruk, skal vera: /kick <name> <reason>"
 
 #: ../../../../src/network/gamehost.cc:174
 msgid "You can not kick yourself!"
@@ -3826,7 +3826,7 @@ msgstr "Spark-stadfesting avbroten: Ingen namn oppgjeve!"
 
 #: ../../../../src/network/gamehost.cc:191
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Feil bruk, skal vera: /ack_kick <namn>"
+msgstr "Feil bruk, skal vera: /ack_kick <name>"
 
 #: ../../../../src/network/gamehost.cc:197
 msgid "Kick acknowledgement cancelled: Wrong name given!"
@@ -4009,23 +4009,23 @@ msgstr "Støtta administratorkommandoar:"
 
 #: ../../../../src/network/internet_gaming.cc:903
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr "/motd <mld> - Set ei permanent helsingsmelding"
+msgstr "/motd <msg> - Set ei permanent helsingsmelding"
 
 #: ../../../../src/network/internet_gaming.cc:904
 msgid "/announce <msg> - Send a one time system message"
-msgstr "/announce <mld> - Send ei eingongs systemmelding"
+msgstr "/announce <msg> - Send ei eingongs systemmelding"
 
 #: ../../../../src/network/internet_gaming.cc:907
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr "/warn <brukar> <mld> - Send ei privat systemmelding til den gjevne brukaren"
+msgstr "/warn <user> <msg> - Send ei privat systemmelding til den gjevne brukaren"
 
 #: ../../../../src/network/internet_gaming.cc:910
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr "/kick <brukar|spel> - Fjern den gjevne brukaren eller spelet frå metatenaren"
+msgstr "/kick <user|game> - Fjern den gjevne brukaren eller spelet frå metatenaren"
 
 #: ../../../../src/network/internet_gaming.cc:912
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr "/ban <brukar> - Utvis ein brukar frå metatenaren i 24 timar"
+msgstr "/ban <user> - Utvis ein brukar frå metatenaren i 24 timar"
 
 #: ../../../../src/network/internet_gaming.cc:991
 msgid "Conversion error"
@@ -7475,7 +7475,7 @@ msgstr "Konflikt i rulleinnstillingar"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr "‘%1$s’, ‘%2$s’ eller ‘%3$s’ er i konflikt med dei tilrådde innstillingane. Endra dei motstridande innstillingane òg?"
+msgstr "‘%1$s’, ‘%2$s’ eller ‘%3$s’ er i konflikt med dei tilrådde innstillingane. Endra dei motstridande innstilling(ane) òg?"
 
 #: ../../../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -11978,7 +11978,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr "Du kan spela di eiga musikk i spelet ved å leggja dine eigne musikkfiler i ‘<Widelands Heimemappe>/music/custom_XX.*’ (der ‘XX’ er sekvensielle tosifra tal som startar med 00). Støtta filformat er ‘.mp3’ og ‘.ogg’."
+msgstr "Du kan spela di eiga musikk i spelet ved å leggja dine eigne musikkfiler i ‘<Widelands Home Directory>/music/custom_XX.*’ (der ‘XX’ er sekvensielle tosifra tal som startar med 00). Støtta filformat er ‘.mp3’ og ‘.ogg’."
 
 #: ../../../../src/wui/sound_options.cc:161
 msgid "Play the intro music at startup"

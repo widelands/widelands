@@ -2211,42 +2211,42 @@ msgstr[3] "%u použitých doplnkov týkajúcich sa hry:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:47
 msgid "northwest"
-msgstr ""
+msgstr "severozápad"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../../../src/logic/detected_port_space.cc:51
 msgid "northeast"
-msgstr ""
+msgstr "severovýchod"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:55
 msgid "southwest"
-msgstr ""
+msgstr "juhozápad"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../../../src/logic/detected_port_space.cc:59
 msgid "southeast"
-msgstr ""
+msgstr "juhovýchod"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../../../src/logic/detected_port_space.cc:63
 msgid "north"
-msgstr ""
+msgstr "sever"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../../../src/logic/detected_port_space.cc:67
 msgid "south"
-msgstr ""
+msgstr "juh"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../../../src/logic/detected_port_space.cc:71
 msgid "west"
-msgstr ""
+msgstr "západ"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../../../src/logic/detected_port_space.cc:75
 msgid "east"
-msgstr ""
+msgstr "východ"
 
 #: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
@@ -3680,7 +3680,7 @@ msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
 "are sorry, but this savegame seems to be broken beyond repair."
-msgstr ""
+msgstr "Stroj prijal signál SIGABRT, ktorý bol s najväčšou pravdepodobnosťou vyvolaný poškodenou uloženou hrou. Zatiaľ nebolo implementované žiadne riešenie tejto chyby. Je nám ľúto, ale táto uložená hra sa zdá byť neopraviteľne poškodená."
 
 #: ../../../../src/map_io/s2map.cc:422
 #: ../../../../src/map_io/widelands_map_loader.cc:196
@@ -9448,28 +9448,28 @@ msgstr "Útočníci:"
 
 #: ../../../../src/wui/attack_window.cc:424
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Kliknite na loď, čím ju odstránite zo zoznamu útočníkov"
 
 #: ../../../../src/wui/attack_window.cc:425
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Kliknite na vojaka, čím ho odstránite zo zoznamu útočníkov"
 
 #: ../../../../src/wui/attack_window.cc:427
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Podržte kláves Ctrl, ak chcete odstrániť všetky lode zo zoznamu"
 
 #: ../../../../src/wui/attack_window.cc:428
 msgid "Hold down Ctrl to remove all soldiers from the list"
-msgstr ""
+msgstr "Podržte kláves Ctrl, ak chcete odstrániť všetkých vojakov zo zoznamu"
 
 #: ../../../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Podržte kláves Shift, ak chcete odstrániť všetky lode až po tú, na ktorú ukazujete"
 
 #: ../../../../src/wui/attack_window.cc:433
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Podržte kláves Shift, ak chcete odstrániť všetkých vojakov až po toho, na ktorého ukazujete"
 
 #: ../../../../src/wui/attack_window.cc:440
 msgid "Not attacking:"
@@ -9477,27 +9477,27 @@ msgstr "Neútočiaci:"
 
 #: ../../../../src/wui/attack_window.cc:446
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Kliknite na loď, čím ju pridáte do zoznamu útočníkov"
 
 #: ../../../../src/wui/attack_window.cc:447
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Kliknite na vojaka, čím ho pridáte do zoznamu útočníkov"
 
 #: ../../../../src/wui/attack_window.cc:449
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Podržte kláves Ctrl, ak chcete pridať všetky lode do zoznamu"
 
 #: ../../../../src/wui/attack_window.cc:450
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "Podržte kláves Ctrl, ak chcete pridať všetkých vojakov do zoznamu"
 
 #: ../../../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Podržte kláves Shift, ak chcete pridať všetky lode až po tú, na ktorú ukazujete"
 
 #: ../../../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Podržte kláves Shift, ak chcete pridať všetkých vojakov až po toho, na ktorého ukazujete"
 
 #: ../../../../src/wui/attack_window.cc:471
 msgid "Destroy target"
@@ -9521,7 +9521,7 @@ msgstr "Vycentrovať sem pohľad"
 #: ../../../../src/wui/attack_window.cc:630
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  ZD: %2$u/%3$u  ÚT: +%4$u%%"
 
 #: ../../../../src/wui/attack_window.cc:635
 #: ../../../../src/wui/soldierlist.cc:558
@@ -11508,19 +11508,19 @@ msgstr "(Prázdna)"
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../../../src/wui/portdockwaresdisplay.cc:157
 msgid "Present"
-msgstr ""
+msgstr "prítomná"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
 #: ../../../../src/wui/portdockwaresdisplay.cc:161
 msgid "Missing"
-msgstr ""
+msgstr "chýba"
 
 #. * TRANSLATORS: Tooltip for a ware that is not present in the
 #. building, but already being transported there
 #: ../../../../src/wui/portdockwaresdisplay.cc:164
 msgid "Coming"
-msgstr ""
+msgstr "prichádza"
 
 #: ../../../../src/wui/productionsitewindow.cc:113
 msgid "Exp"

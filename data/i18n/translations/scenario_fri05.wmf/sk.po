@@ -30,6 +30,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Zdá sa, že ste nedokončili predchádzajúcu misiu. Stále môžete hrať tento "
+"scenár, ale budete v nevýhode. Odporúčam vám najskôr dokončiť predchádzajúci"
+" scenár a potom reštartovať túto misiu."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7

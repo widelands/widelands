@@ -169,7 +169,7 @@ msgstr "Spustí hru bez zvuku."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Start the game with shuffle mode for playback of songs"
-msgstr ""
+msgstr "V rámci nové hry přehrávat hudbu na pozadí náhodně"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
