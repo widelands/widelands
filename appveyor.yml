@@ -69,23 +69,23 @@ for:
     - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\%WIDELANDS_SETUP_NAME%.exe
 
 install:
-  - sh: bash export ICU_ROOT="$(brew --prefix icu4c)"
+  - sh: export ICU_ROOT="$(brew --prefix icu4c)"
   # Suppress warnings about installing formulas instead of casks. Casks would raise another
   # warning about disabling macos gatekeeper.
-  - sh: bash ./install-dependencies.sh homebrew --formula
+  - sh: ./install-dependencies.sh homebrew --formula
   # temporary fix for macos-14 arm failures
-  - sh: bash brew install --quiet icu4c
+  - sh: brew install --quiet icu4c
 
 build_script:
-  - sh: bash cd %APPVEYOR_BUILD_FOLDER%
-  - sh: bash mkdir build_wl
-  - sh: bash cd build_wl/
-  - sh: bash ../utils/macos/build_app.sh "--%CONFIGURATION%" "--clang" "--no-website"
-  - sh: bash grep -v REVDETECT-BROKEN ../build/VERSION
+  - sh: cd %APPVEYOR_BUILD_FOLDER%
+  - sh: mkdir build_wl
+  - sh: cd build_wl/
+  - sh: ../utils/macos/build_app.sh "--%CONFIGURATION%" "--clang" "--no-website"
+  - sh: grep -v REVDETECT-BROKEN ../build/VERSION
 
 on_success:
-  - sh: bash export DMGPATH="$(pwd)"
-  - sh: bash export DMGFILE="$(ls *.dmg)"
-  #- sh: bash echo "DMG file is: %DMGPATH%/%DMGFILE%"
-  - sh: bash mv "%DMGFILE%" "Widelands-%WIDELANDS_NEXT_VERSION%~git%APPVEYOR_REPO_COMMIT:~0,7%-%IMAGE%-%CONFIGURATION%-clang.dmg"
-  - sh: bash appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\%DMGFILE%.exe
+  - sh: export DMGPATH="$(pwd)"
+  - sh: export DMGFILE="$(ls *.dmg)"
+  - sh: echo "DMG file is: %DMGPATH%/%DMGFILE%"
+  - sh: mv "%DMGFILE%" "Widelands-%WIDELANDS_NEXT_VERSION%~git%APPVEYOR_REPO_COMMIT:~0,7%-%IMAGE%-%CONFIGURATION%-clang.dmg"
+  - sh: appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\%DMGFILE%.exe
