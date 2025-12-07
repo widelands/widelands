@@ -80,7 +80,7 @@ build_script:
   - sh: bash mkdir build_wl
   - sh: bash cd build_wl/
   - sh: bash ../utils/macos/build_app.sh "--%CONFIGURATION%" "--clang" "--no-website"
-  grep -v REVDETECT-BROKEN ../build/VERSION
+  - sh: bash grep -v REVDETECT-BROKEN ../build/VERSION
 
 on_success:
   - sh: bash DMGPATH="$(pwd)"
