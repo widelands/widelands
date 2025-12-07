@@ -4,8 +4,8 @@
 #   Appveyor build configuration  #
 ###################################
 image: 
-  - Visual Studio 2022
-  - macos-monterey
+  #- Visual Studio 2022
+  #- macos-monterey
   - macos-ventura
 
 shallow_clone: false
