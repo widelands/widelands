@@ -1063,7 +1063,7 @@ msgstr "Traja bojovníci"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr "Mohutné hory rozdeľujú toto územie na tri úrodné údolia. Tieto údolia sú však spojené cestou, a preto sa zdá, že boju sa nevyhnete."
+msgstr "Mohutné hory rozdeľujú toto územie na tri úrodné údolia. Tieto údolia sú však spojené cestou, a preto sa zdá, že boju sa nevyhnete!"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."

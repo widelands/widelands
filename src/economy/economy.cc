@@ -671,11 +671,7 @@ void Economy::merge(Economy& e) {
 		}
 	}
 
-	//  If the options window for e is open, but not the one for this, the user
-	//  should still have an options window after the merge.
-	if ((e.get_options_window() != nullptr) && (get_options_window() == nullptr)) {
-		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
-	}
+	Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i != 0u;) {
 		assert(i == e.get_nrflags());

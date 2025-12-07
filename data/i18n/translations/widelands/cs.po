@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-16 03:11+0000\n"
+"POT-Creation-Date: 2025-12-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -787,12 +787,12 @@ msgstr "Opravdu chceš opustit editor?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2023
+#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2030
 msgid "Error"
 msgstr "Chyba"
 
 #: ../../../../src/editor/editorinteractive.cc:1279
-#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2025
+#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2032
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -3731,7 +3731,7 @@ msgstr "Donačítání prvků mapy"
 #: ../../../../src/network/gameclient.cc:171
 #: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
-#: ../../../../src/wlapplication.cc:909
+#: ../../../../src/wlapplication.cc:916
 msgid "Preparing game…"
 msgstr "Příprava hry…"
 
@@ -7028,7 +7028,7 @@ msgstr "Přezdívka:"
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
-#: ../../../../src/wlapplication.cc:828
+#: ../../../../src/wlapplication.cc:835
 msgid "nobody"
 msgstr "bezejmena"
 
@@ -8174,93 +8174,93 @@ msgstr "Označit vše"
 msgid "Unmark All"
 msgstr "Zrušit označení"
 
-#: ../../../../src/wlapplication.cc:959
+#: ../../../../src/wlapplication.cc:966
 msgid "Widelands could not find the last edited map."
 msgstr "Widelands se nepodařilo najít naposledy upravovanou mapu."
 
-#: ../../../../src/wlapplication.cc:964
+#: ../../../../src/wlapplication.cc:971
 msgid "No Last Edited Map"
 msgstr "Žádná naposledy upravovaná mapa"
 
-#: ../../../../src/wlapplication.cc:994
+#: ../../../../src/wlapplication.cc:1001
 msgid "No last saved replay."
 msgstr "Žádný naposledy uložený záznam."
 
-#: ../../../../src/wlapplication.cc:996
+#: ../../../../src/wlapplication.cc:1003
 msgid "No last saved game."
 msgstr "Žádná naposledy uložená hra."
 
-#: ../../../../src/wlapplication.cc:1006
+#: ../../../../src/wlapplication.cc:1013
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Hře Widelands se nepodařilo nalézt soubor \"%s\"."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../../../src/wlapplication.cc:1007 ../../../../src/wlapplication.cc:1012
+#: ../../../../src/wlapplication.cc:1014 ../../../../src/wlapplication.cc:1019
 #: ../../../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Chybová zpráva:"
 
-#: ../../../../src/wlapplication.cc:1008
+#: ../../../../src/wlapplication.cc:1015
 msgid "File system error"
 msgstr "Chyba systému souborů"
 
-#: ../../../../src/wlapplication.cc:1569
+#: ../../../../src/wlapplication.cc:1576
 #, c-format
 msgid "Command line parameter --%s can not use a value"
 msgstr "Nepoužitelná hodnota parametru příkazového řádku --%s"
 
-#: ../../../../src/wlapplication.cc:1574
+#: ../../../../src/wlapplication.cc:1581
 #, c-format
 msgid "Empty value of command line parameter --%s"
 msgstr "Prázdná hodnota parametru příkazového řádku --%s"
 
-#: ../../../../src/wlapplication.cc:1580
+#: ../../../../src/wlapplication.cc:1587
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Parametry příkazového řádku --%1$s a --%2$s nelze kombinovat"
 
-#: ../../../../src/wlapplication.cc:1766
+#: ../../../../src/wlapplication.cc:1773
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Neznámý parametr: %s\nMožná chybí \"=\"?"
 
-#: ../../../../src/wlapplication.cc:1785
+#: ../../../../src/wlapplication.cc:1792
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
 msgstr "Parametr  --messagebox-timeout=%s nemá číselný formát integer"
 
-#: ../../../../src/wlapplication.cc:1799
+#: ../../../../src/wlapplication.cc:1806
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
 msgstr "Hodnota parametru --messagebox-timeout=%s je mimo povolený rozsah"
 
-#: ../../../../src/wlapplication.cc:1867
+#: ../../../../src/wlapplication.cc:1874
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
 msgstr "Parametr  --difficulty=%s nemá číselný formát integer"
 
-#: ../../../../src/wlapplication.cc:1964
+#: ../../../../src/wlapplication.cc:1971
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Neznámý parametr: %s"
 
-#: ../../../../src/wlapplication.cc:1998
+#: ../../../../src/wlapplication.cc:2005
 msgid "Incompatible"
 msgstr "Nekompatibilní"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Game ended unexpectedly"
 msgstr "Hra byla neočekávaně ukončena"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Unexpected error during the game"
 msgstr "V průběhu hry se vyskytla neočekávaná chyba"
 
-#: ../../../../src/wlapplication.cc:2041
+#: ../../../../src/wlapplication.cc:2048
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -8274,7 +8274,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlas tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardním výstupu (stdout.txt pro Windows). Používáš verzi %2$s.\n\nProsím uveď tuto informaci v hlášení.\n\nPřeješ si, aby se hra Widelands pokusila o nouzové uložení? Často (bohužel ne vždy) je pak možné hru nově nahrát a pokračovat v ní."
 
-#: ../../../../src/wlapplication.cc:2050
+#: ../../../../src/wlapplication.cc:2057
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -8284,11 +8284,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hra byla neočekávaně ukončena:\n\n%s\n\nMá být proveden pokus o nouzové uložení hry? Nouzové uložení nemusí být vždy úspěšné."
 
-#: ../../../../src/wlapplication.cc:2084
+#: ../../../../src/wlapplication.cc:2091
 msgid "Emergency save failed"
 msgstr "Nouzové ukládání selhalo"
 
-#: ../../../../src/wlapplication.cc:2085
+#: ../../../../src/wlapplication.cc:2092
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -11435,6 +11435,14 @@ msgstr "Útoky"
 #: ../../../../src/wui/minimap.cc:248
 msgid "Zoom"
 msgstr "Přiblížení"
+
+#: ../../../../src/wui/music_player.cc:91
+msgid "Next"
+msgstr "Další"
+
+#: ../../../../src/wui/music_player.cc:96
+msgid "Shuffle"
+msgstr "Náhodné pořadí"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"

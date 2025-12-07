@@ -540,6 +540,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
+	// Mark playlist config values as used to prevent errors with the options system
+	// for these auto-generated config keys
+	Section* sec = get_config_section_ptr("songs");
+	if (sec != nullptr) {
+		sec->mark_values();
+	}
+
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 

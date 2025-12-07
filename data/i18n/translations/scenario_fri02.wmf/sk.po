@@ -31,42 +31,48 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Zdá sa, že ste nedokončili predchádzajúcu misiu. Stále môžete hrať tento "
+"scenár, ale budete v nevýhode. Odporúčam vám najskôr dokončiť predchádzajúci"
+" scenár a potom reštartovať túto misiu."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Vybudujte základnú ekonomiku"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Zabezpečte všetky základné materiály"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Postavte kameňolom, trstinovú záhradu, jamu na hlinu, studňu, uhliarsku pec,"
+" tehliarsku pec a domy pre drevorubača a horára."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
-msgstr ""
+msgstr "Rozšírte sa na juh"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Rozšírte svoje územie a preskúmajte juh"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:36
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"Sever pre nás nevyzerá veľmi užitočne, ale kto vie, čo môžeme nájsť na juhu?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
-msgstr ""
+msgstr "Cvičte a recyklujte"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Recyklujte zbrane na získanie kovu"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -74,6 +80,9 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Keď vojaci trénujú, ich staré zbrane sa vyradia. V recyklačnom centre sa "
+"dajú premeniť na kov. Použite zbrane v sklade na výcvik vojakov a "
+"zrecyklujte nejaký kovový šrot."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid ""
@@ -82,6 +91,9 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
+"Kováčstvo vyrába krompáč až v druhom výrobnom cykle. Ak je zásobované len "
+"jedným železom naraz, tento cyklus nemusí nikdy dosiahnuť. Musíte zastaviť "
+"kováčstvo, kým sa v jeho vstupnom rade neuskladnia aspoň dve železá."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
@@ -89,7 +101,7 @@ msgstr "Postavte vodnú farmu"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Postavte vodnú farmu a začnite produkovať ryby"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -97,20 +109,25 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Postavte vodnú farmu na produkciu rýb. Vodná farma potrebuje jamy, ktoré "
+"zostali po jame na hlinu, aby ich využila ako rybníky na chov rýb. Z týchto "
+"rybníkov môže loviť iba rybár pracujúci na vodnej farme."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Rozhodnite sa, či chcete spolupracovať s Impériom"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Zhromaždite tovar ako dar alebo zničte sklad Impéria"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Rozhodnite sa, či chcete spolupracovať s Muriliom proti Barbarom. Ak áno, "
+"naplňte jeho sklad týmto tovarom:"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
@@ -122,11 +139,11 @@ msgstr "40 x Žula"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Ryby"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Pivo"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
@@ -154,11 +171,11 @@ msgstr "20 × Železo"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr "20 × zlatá ruda"
+msgstr "20 × Zlatá ruda"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Zlato"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -169,51 +186,56 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"V opačnom prípade sklad jednoducho zničte a riskujte, že si z Murilia "
+"spravíte nepriateľa. Zakázal vám rozširovať územie, kým nebude tovar "
+"odovzdaný."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Špehujte Murilia"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Pošlite prieskumníka špehovať Impérium"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Postavte prieskumnícky dom blízko hraníc, aby ste odhalili tajomstvá "
+"Impéria."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Rozlúštite báseň"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Pochopte báseň, ktorú našiel prieskumník v Impériu"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:336
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "Koľko je miest, kde vojak býva,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:339
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "koľko miest, ktorým vládneš ty,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:342
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "hoci ich polohu nevidí,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:345
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "ten, čo tu rozkazuje ti!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
@@ -226,38 +248,43 @@ msgstr "Porazte Barbarov"
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Porazte nepriateľský kmeň žijúci severozápadne od pozorovateľne Impéria!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Porazte Murilia!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr ""
+msgstr "Porazte arogantnú pozorovateľňu Impéria"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"Jediný spôsob, ako ukončiť túžbu Impéria ukradnúť nám slobodu, je zničiť "
+"túto pozorovateľňu raz a navždy. Dobite celé jej územie."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Dobite každé jedno políčko, ktoré stále patrí Muriliovi."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Porazte Murilia a Barbarov!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Porazte Barbarov a kolóniu Impéria"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
+"Barbari a Impérium sú príliš nebezpeční na to, aby sme im dovolili žiť v "
+"našej blízkosti. Musíme poraziť oboch."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:128
@@ -265,6 +292,8 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Začal som veriť, že cesta nikdy neskončí. Nemám potuchy, ako dlho sme boli "
+"na mori, zmietaní závistlivými búrkami… museli to byť mesiace."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -275,6 +304,10 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Búrky pevne zvierali loď počas celej našej plavby. Sotva prešiel deň, kedy "
+"sme nepremýšľali, či nebude náš posledný. Boli sme nútení hodiť drahé kovy, "
+"ktoré sme viezli so sebou, cez palubu, aby sme stabilizovali loď, s pocitom,"
+" že je to úbohá obeta bohom za nádej žiť o pár hodín dlhšie."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -284,6 +317,10 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Tých pár nástrojov, ktoré sa nám podarilo zachrániť z Langeness, to "
+"nezvládlo dobre. Krompáče baníkov sa ukázali ako obzvlášť zraniteľné a "
+"museli sme ich hodiť do oceánu, keď bolo zrejmé, že skorodovali kvôli "
+"morskej soli natoľko, že by sme s nimi už nikdy nič nevyťažili."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -291,12 +328,14 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Ale prežili sme. Nakoniec sme dorazili k ústiu pokojnejšieho fjordu. Plavili"
+" sme sa proti prúdu rieky a dorazili sme sem."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:140
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Vitajte späť!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
@@ -310,6 +349,8 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Žila tu malá skupina cudzincov. Privítali nás mávaním sekerami a kričali "
+"nezrozumiteľným jazykom."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -318,6 +359,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Naša loď nebola v stave pokračovať v plavbe, takže sme miestnych zabili a "
+"zabrali ich pôdu. Len dúfam, že ich tu nie je viac, aby sme mohli žiť v "
+"mieri."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:157
@@ -325,6 +369,8 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
+"Toto miesto vyzerá bezútešne a pusté, hovoria moji spoločníci, ale ja si "
+"myslím, že vyzerá… krásne."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:160
@@ -332,6 +378,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Moji prieskumníci už nehlásia žiadne známky živých tvorov v okolí. Tu "
+"začneme budovať náš nový domov."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -342,14 +390,19 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Musíme začať výstavbou všetkých základných budov. Nevidím blízko žiadne "
+"hory, kde by sme mohli ťažiť uhlie. Radšej postavme uhliarsku pec na pálenie"
+" kmeňov na drevené uhlie. Pece vylepšujeme hlinou, aby nespotrebovali toľko "
+"dreva. Naši susedia nám túto šikovnú techniku závideli, no nedokázali ju "
+"skopírovať."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
-msgstr ""
+msgstr "Choďte na juh"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Rozširujte sa a dobýjajte"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:171
@@ -357,6 +410,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"V tejto nádhernej krajine sme si vybudovali domov. Ale ako sa náš kmeň "
+"rozrastá, potrebujeme viac priestoru. Mali by sme začať rozširovať naše "
+"územie."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:174
@@ -365,17 +421,19 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Prieskumníci hlásili, že krajina na severe sú drsné kopce, krásne na pohľad,"
+" ale nevhodné na stavby. Poďme zistiť, čo môžeme objaviť na juhu."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:188
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Nedostatok kovu"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
-msgstr ""
+msgstr "Došli nám kovy"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
@@ -384,6 +442,9 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"Náčelník Reebaud! Máme vážny problém. Objavili sme horu, kde by sme mohli "
+"začať ťažiť uhlie a železo, ale nemáme žiadnych baníkov, ani krompáče, "
+"ktorými by sme ich vybavili."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:185
@@ -391,11 +452,13 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"A nezostalo nám žiadne železo. Musíme nájsť spôsob, ako získať nejaký kov na"
+" ukovanie nových krompáčov. Bohužiaľ, netuším ako to urobiť."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
-msgstr ""
+msgstr "Získavanie nového kovu"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:191
@@ -403,6 +466,8 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"To sú strašné správy! Bez železa alebo prostriedkov na jeho výrobu sme takto"
+" navždy uviazli! Musíš prísť s riešením."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:194
@@ -411,10 +476,12 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"V našich skladoch som videl nejaké pokročilé zbrane. Možno by sa dali "
+"roztaviť späť na kov? Ale to vyzerá ako plytvanie vzácnymi mečmi…"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
-msgstr ""
+msgstr "Nový kov"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:200
@@ -423,6 +490,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Teraz mám nápad: Keď sú naši vojaci vycvičení, sú vybavení novými mečmi a "
+"staré zbrane sa vyhodia. Tieto sú nevhodné na použitie v boji, takže by "
+"nebolo plytvaním roztaviť ich."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -431,6 +501,9 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"To musíme urobiť. Použijeme naše zbrane na výcvik vojakov, potom roztavíme "
+"kovový šrot na železo a zlato. A potom môžu naši kováči vyrobiť krompáče pre"
+" baníkov. Hneď na to dohliadnem!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -441,14 +514,19 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Nie tak zbrklo! Na vybudovanie výcvikového tábora budeme najprv potrebovať "
+"zlato, a žiadne nemáme. Musíme najskôr rozobrať náš prístav, čo nám dá "
+"akurát dosť zlata na výcvikový tábor. Nepáči sa mi to, ale je to jediná "
+"cesta. Samozrejme, pred rozobratím prístavu musíme všetok tovar presunúť do "
+"skladu."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
-msgstr ""
+msgstr "Výroba kovu"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
-msgstr ""
+msgstr "Bane pracujú"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:217
@@ -456,6 +534,8 @@ msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
+"Naše bane začali pracovať. Teraz musíme postaviť už len pec a výroba kovov "
+"pobeží hladko."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:220
@@ -465,15 +545,18 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Máme už sobiu farmu? Ak nie, mali by sme ju teraz postaviť. Potrebujeme viac"
+" sobov na preplnené cesty a mohli by sme už začať šiť kožušinové odevy na "
+"vystrojenie nových vojakov. Kto vie, či budeme musieť nakoniec bojovať?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:233
 msgid "Fishing"
-msgstr ""
+msgstr "Rybolov"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 msgid "We need fish"
-msgstr ""
+msgstr "Potrebujeme ryby"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:226
@@ -483,6 +566,11 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Náčelník Reebaud, mám ďalšie zlé správy. V okolitých vodách nie sú takmer "
+"žiadne ryby. Hoci môžeme pripravovať prídely len s použitím ovocia alebo "
+"chleba, výcvik vojakov vyžaduje veľa údeného mäsa alebo rýb. Zvyšky mäsa, "
+"ktoré sobia farma vyprodukuje ako vedľajší produkt pri výrobe kožušín, "
+"nestačia."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -492,10 +580,14 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Našťastie jeden z našich rybárov vymyslel riešenie. Naše jamy na hlinu "
+"zanechávajú v zemi veľké diery; rybár by ich mohol naplniť vodou a chovať v "
+"týchto rybníkoch ryby. Bude potrebovať len veľa vody do rybníkov a ovocie na"
+" kŕmenie rýb."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
-msgstr ""
+msgstr "Znova máme ryby"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:236
@@ -504,6 +596,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Výborne. Postavili sme vodnú farmu a naša banská ekonomika je zatiaľ "
+"stabilná. Baníci mi však hovoria, že zdroje sú už nízke a bane sa môžu "
+"čoskoro úplne vyprázdniť."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:239
@@ -512,14 +607,17 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Bane budú môcť vyrábať aj potom, ale ťažba rúd alebo uhlia bude trvať asi "
+"dvadsaťkrát dlhšie – desaťkrát, ak ide o hlbinnú baňu. Pravdepodobne sa "
+"budete chcieť pripraviť na zvyšujúce sa nároky na čas a jedlo."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
-msgstr ""
+msgstr "Verbovanie"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Naša ekonomika je kompletná"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:245
@@ -527,6 +625,8 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Máš pravdu – mali by sme postaviť viac bobuľových fariem, domov zberateľov "
+"ovocia a krčiem, ako aj pijáreň a pokročilé pekárne a pivovary."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:248
@@ -536,6 +636,9 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"Už sa však môžeme začať sústrediť na verbovanie a výcvik vojakov. Teraz si "
+"môžeme dovoliť použiť kov na zbrane, helmy a odevy. Navrhujem teraz postaviť"
+" vyhne na zbroj, kasárne, výcvikovú arénu a krajčírstvo."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -547,7 +650,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Nie sme sami"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -557,7 +660,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -568,24 +671,26 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
+"sum. Vos nominate!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
-msgstr ""
+msgstr "Cudzinci"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "…rozumie niekto tomu, čo hovorí?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:268
 msgid "Do they not even speak the noble language of the Empire?"
-msgstr ""
+msgstr "To nehovoria ani vznešeným jazykom Impéria?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:271
@@ -594,6 +699,8 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Cudzinci! Ja, Murilius, prokonzul Severných krajín, provincie Impéria, "
+"žiadam vedieť, kto ste a čo pohľadávate v týchto krajinách!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. Frisian greeting, nothing more.
@@ -603,6 +710,9 @@ msgid ""
 "tribe. All we want is to settle down here, build our home and live our lives"
 " in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
+"Mier, zástupca Impéria! Som Reebaud, náčelník tohto kmeňa. Všetko, čo "
+"chceme, je usadiť sa tu, vybudovať si domov a žiť naše životy v mieri. "
+"Nehľadáme problémy, ale ani sa nebojíme bojovať."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -612,6 +722,8 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"V tom prípade, Reebaude, musím ťa informovať o prítomnosti nehostinného, "
+"nepriateľského kmeňa Barbarov v blízkosti tejto pozorovateľne Impéria."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -620,6 +732,8 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Ak tu chcete žiť v mieri, nemáte na výber, či im dovolíte tu žiť – ste "
+"povinní pomôcť Impériu pri ich vyháňaní."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:292
@@ -629,6 +743,9 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"Taktiež, ako prejav vašich dobrých úmyslov, žiadame dar priateľstva pre "
+"Impérium. Ako ste si mali všimnúť, daroval som vám nový sklad. Naplňte ho "
+"požadovanými darmi na odovzdanie. Dovoľujem vám dať nám tento tovar:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -637,6 +754,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 kmeňov, 40 kusov žuly, 30 rýb, 30 krígľov piva, 150 vedier vody, 40 "
+"prídelov, 10 obedov, 30 kusov uhlia, 40 kusov železnej rudy, 20 železných "
+"ingotov, 20 kusov zlatej rudy a 10 zlatých tehličiek."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:301
@@ -646,6 +766,10 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"Náčelník Reebaud – požiadavky tohto arogantného prokonzula Impéria sú "
+"jednoducho nehorázne. Správa sa k nám, akoby sme boli jeho sluhovia. A "
+"určite si nemôžeme dovoliť obetovať toľko tovaru jemu na pomoc. Navrhujem, "
+"aby sme zničili ten škaredý sklad a nechali ho bojovať jeho vlastné bitky."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:307
@@ -655,6 +779,10 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Ak tento tovar nedodáte, Impérium s vami bude zaobchádzať ako s nepriateľmi."
+" A aby som vám zabránil plytvať vaším vzácnym kovom, zakazujem vám od tohto "
+"momentu rozširovať vaše územie, kým nám neodovzdáte váš dar. Ak "
+"neuposlúchnete, Impérium s vami bude zaobchádzať ako s nepriateľmi."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -665,6 +793,10 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Budete musieť bojovať s tými Barbarmi, ak máte v úmysle žiť v tejto oblasti;"
+" určite vidíte, že bojovať proti nim spolu s Impériom je jednoduchšie ako "
+"osamote? A naozaj nechcete mať Impérium za nepriateľa. Hoci ste Barbari, "
+"verím, že po zvážení si uvedomíte pravdivosť mojich slov."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -673,6 +805,9 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Toto je najväčšia nehoráznosť zo všetkých. Ako sa opovažuje nám rozkazovať, "
+"aby sme prestali rozširovať naše územie, keď všetko, čo chceme, je vybudovať"
+" nový domov, a vyhrážať sa nám vojnou, ak odmietneme byť jeho otrokmi?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:320
@@ -682,6 +817,10 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Rád by som povedal, že by sme na neho mali zaútočiť hneď teraz, ale obávam "
+"sa, že ešte nie sme dosť silní, aby sme proti nemu obstáli v boji. Mali by "
+"sme urýchliť výcvik vojakov a predstierať, že zhromažďujeme jeho takzvaný "
+"dar. To by nám získalo nejaký čas."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -689,14 +828,16 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"Čo sa týka expanzie – zaujímalo by ma, ako prísne nás dokáže kontrolovať. "
+"Možno by sme mali poslať prieskumníka, aby ho špehoval…"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Prieskumník niečo objavil"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
-msgstr ""
+msgstr "Náš prieskumník sa vrátil"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:333
@@ -706,6 +847,9 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Náčelník Reebaud! Náš prieskumník sa práve vrátil. Našiel báseň v tom cudzom"
+" jazyku, ktorým hovorí tento prokonzul. S istými ťažkosťami som ju preložil "
+"do nášho jazyka. Ak som to nepreložil zle, znie takto:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:348
@@ -713,11 +857,13 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Neviem, čo to znamená, ale som si istý, že je to dôležité. Možno ti to bude "
+"dávať nejaký zmysel."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:353
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Impérium sa hnevá"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -725,7 +871,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:355
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid "Hostes Imperii estis!"
-msgstr ""
+msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:357
@@ -733,12 +879,14 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"Barbari! Odmietli ste moju ponuku priateľstva tým najnezdvorilejším "
+"spôsobom, keď ste zničili krásnu budovu, ktorú sme vám darovali!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:360
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "You are enemies of the Empire, and I shall treat you as such!"
-msgstr ""
+msgstr "Ste nepriatelia Impéria a tak s vami budem aj zaobchádzať!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -747,10 +895,12 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbari! Odmietli ste moju ponuku priateľstva tým najnezdvorilejším "
+"spôsobom, keď ste podlo mrhali vašimi vzácnymi zdrojmi na expanziu!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
-msgstr ""
+msgstr "Dvaja nepriatelia"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
@@ -762,6 +912,8 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Murilius dal celkom jasne najavo, že nás nenechá na pokoji. Obávam sa, že ho"
+" musíme poraziť a zničiť jeho kolóniu, ak tu niekedy chceme mať mier."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:378
@@ -770,17 +922,20 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
+"Barbarský kmeň, ktorý spomínal, je tiež hrozbou. Nechcem sa o túto zem s "
+"nikým deliť, pretože zdieľanie vedie len ku konfliktom a bitkám, ako sme "
+"videli v našom starom domove. Musíme poraziť aj Barbarov."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Impérium je vďačné"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
@@ -788,6 +943,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Cudzinci! Vidím, že ste dodržali slovo. Impérium odmeňuje svojich priateľov,"
+" preto vás odmením priateľstvom Impéria!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -799,16 +956,20 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Teraz vám dovoľujem pomôcť nám pri dobýjaní Barbarov, ktorí žijú v chránenom"
+" údolí severozápadne od nás. Poverujem vás, rozšírte sa pozdĺž severného "
+"konca hôr obklopujúcich túto pozorovateľňu; nájdete tam Barbarov – zaútočte "
+"na nich! My budeme odrážať útoky nepriateľa."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Odmena za vaše služby"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:397
@@ -816,6 +977,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Počínali ste si dobre, cudzinci! Ako som vám už povedal, budete odmenení "
+"priateľstvom Impéria!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:400
@@ -826,14 +989,18 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Navrhujem, aby ste začali vyslaním legátov do hlavného mesta, aby ste "
+"zistili najnovšie politické aktivity. Keď tam budú, môžu prijať pokyny pre "
+"váš kmeň od senátu. Taktiež budete musieť zistiť, akú daň bude od vás hlavné"
+" mesto požadovať, a samozrejme, kto bude kráľom vášho kmeňa."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
-msgstr ""
+msgstr "Ďalší nepriateľ"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Porazte Impérium!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:406
@@ -843,6 +1010,10 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"Rozumel som mu správne? Po tom všetkom, čo sme pre neho urobili, po tom, čo "
+"toľko mojich vojakov položilo životy kvôli nemu, chce, aby sme boli sluhami "
+"tohto Impéria a vzali mi moje vodcovstvo? A tento pokrytec sa to odvažuje "
+"nazývať odmenou?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:409
@@ -851,6 +1022,9 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Potrestáme tohto samozvaného prokonzula za jeho zradu! Vypálim celú jeho "
+"kolóniu a zabijem každého jedného človeka v jeho ríši. Bude veľmi ľutovať, "
+"že takto urazil náš kmeň."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
@@ -866,6 +1040,9 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Porazili sme všetkých našich nepriateľov! Teraz sa už žiadny iný kmeň "
+"neodváži usadiť tu znova. Sme v bezpečí a konečne môžeme žiť naše životy v "
+"mieri."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
@@ -893,4 +1070,4 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Sklad Impéria"

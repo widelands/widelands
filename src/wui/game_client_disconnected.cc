@@ -129,7 +129,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 		                   false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
-		                   format(_("Replace player with %s"), impl->descname));
+		                   format(_("Replace player with %s"), _(impl->descname)));
 	}
 
 	// Set default mode to normal AI

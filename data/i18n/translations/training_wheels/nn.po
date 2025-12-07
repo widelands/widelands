@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025\n"
 "Language-Team: Norwegian Nynorsk (https://app.transifex.com/widelands/teams/35159/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,32 +25,32 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "Byggjeplassar"
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "Me vil plassera bygningar slik at me kan produsera varer."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Så lat oss finna ut kvar me har plass til dei."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "Klikk på «Vis / Gøym»-menyen."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Vel «Vis byggjeplassar»."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "No kan me sjå kvar det er mogleg å plassera bygningar og flagg."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr ""
+msgstr "Klikk «OK» for å halda fram."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/flags.lua:60
@@ -54,50 +58,50 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/flags.lua:83
 #: ../../../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "Flagg"
 
 #: ../../../../data/scripting/training_wheels/flags.lua:63
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
-msgstr ""
+msgstr "Berarane dine kan frakta varene dine raskare om dei deler på lasta."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Klikk på flaggsymbolet."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "Klikk på flaggknappen."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "Sjekk no om du kan plassera endå fleire flagg på vegane dine."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr ""
+msgstr "Klikk «OK» når du er ferdig."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "Velkomen"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:147
 #: ../../../../data/scripting/training_wheels/objectives.lua:22
 #: ../../../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "Mål"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Tømmer og vegar"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "Stein"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:115
 #: ../../../../data/scripting/training_wheels/rocks.lua:115
@@ -105,6 +109,8 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
+"Klikk på ein liten, mellomstor eller stor byggjeplass, og vel deretter "
+"bygningen frå fana for små bygningar."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:117
 #: ../../../../data/scripting/training_wheels/rocks.lua:117
@@ -112,6 +118,8 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
+"Klikk på ein mellomstor eller stor byggjeplass, og vel deretter bygningen "
+"frå fana for mellomstore bygningar."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:119
 #: ../../../../data/scripting/training_wheels/rocks.lua:119
@@ -119,23 +127,28 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
+"Klikk på ein stor byggjeplass, og vel deretter bygningen frå fana for store "
+"bygningar."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Om du held nede «Ctrl»-tasten medan du klikkar på det andre flagget, vil "
+"dette òg plassera fleire flagg på vegen din om mogleg."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:125
 #: ../../../../data/scripting/training_wheels/logs.lua:175
 msgid "Logs"
-msgstr ""
+msgstr "Tømmer"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:128
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
+"Du må forsyna stammen din med tømmer. Ver venleg og bygg følgjande bygning:"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:138
 #: ../../../../data/scripting/training_wheels/logs.lua:149
@@ -144,36 +157,39 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/rocks.lua:152
 #: ../../../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
-msgstr ""
+msgstr "Vegar"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:141
 #: ../../../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr ""
+msgstr "Klikk på flagget framfor bygningen for å byrja å plassera ein veg."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
 msgstr ""
+"Klikk på «Bygg veg»-knappen, og klikk deretter på det indikerte flagget."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:164
 #: ../../../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Klikk på knappen til bygningen…"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…klikk deretter på flagget framfor målbygningen."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"Godt jobba! Me vil snart byrja å produsera tømmer, noko me treng for å "
+"byggja fleire bygningar."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr ""
+msgstr "Opne Mål-vindauget"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -181,59 +197,73 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"Klikk på knappen pila peikar på, eller trykk «%s» for å sjå måla for "
+"gjeldande spel."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "Lukk dette vindauget"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr ""
+msgstr "Lukkar dette vindauget"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"Du kan opna og lukka dette vindauget ved å klikka på «Mål»-knappen i "
+"verktøylinja nedst på skjermen."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"Som med alle andre vindauge, kan du òg lukka «Mål»-vindauget ved å "
+"høgreklikka på det."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"Medan du gjer det, sjekk markørane for å gjera vegen så flat som mogleg:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
+"Terrenget er flatt her. Berarane dine vil vera veldig raske i dette "
+"terrenget."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Det er ein liten bakke opp til dette feltet. Det tyder at arbeidarane dine "
+"vil gå raskare nedoverbakke enn oppoverbakke."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"Sambandet mellom felta er ekstremt bratt. Fartsauken i éi retning er enorm, "
+"medan nedbremsinga i den andre òg er monaleg."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:128
 #: ../../../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "Granitt"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
+"Du må forsyna stammen din med granitt. Ver venleg og bygg følgjande bygning:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:155
 msgid ""
@@ -241,24 +271,30 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Klikk på «Bygg veg»-knappen. Klikk deretter på dei farga markørane på kartet"
+" for å styra vegen til du når flagget framfor målbygningen."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…klikk deretter på dei farga markørane på kartet for å styra vegen til du "
+"når flagget framfor målbygningen."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"Godt jobba! Me vil snart byrja å produsera granitt, noko me treng for å "
+"byggja fleire bygningar."
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:20
 #: ../../../../data/scripting/training_wheels/welcome.lua:24
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Velkomen til Widelands!"
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "Følg pilene for å læra korleis du spelar."
