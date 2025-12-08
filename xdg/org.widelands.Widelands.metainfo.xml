@@ -417,13 +417,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="pl">Pobierz mapy i dodatki</li>
         <li xml:lang="pl">Nowe tryby wizualizacji w edytorze</li>
         <li xml:lang="pl">Wiele nowych możliwości dla twórców dodatków</li>
-        <li xml:lang="pt_BR">Market trading</li>
+        <li xml:lang="pt_BR">Trocas comerciais</li>
         <li xml:lang="pt_BR">Seis novos mapas foram adicionados e três mapas antigos removidos</li>
-        <li xml:lang="pt_BR">Economy districts</li>
-        <li xml:lang="pt_BR">Many improvements to the in-game Encyclopedia</li>
-        <li xml:lang="pt_BR">Download website maps as add-ons</li>
+        <li xml:lang="pt_BR">Distritos econômicos</li>
+        <li xml:lang="pt_BR">Muitas melhorias na enciclopédia do jogo</li>
+        <li xml:lang="pt_BR">Baixe mapas do site como add-ons</li>
         <li xml:lang="pt_BR">Novos modos de visualização no editor</li>
-        <li xml:lang="pt_BR">Many new capabilities for add-on developers</li>
+        <li xml:lang="pt_BR">Muitas novas funcionalidades para desenvolvedores de add-ons</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -524,14 +524,14 @@ Version de correction de bugs</li>
         <li xml:lang="pl">Przypięte notatki</li>
         <li xml:lang="pl">Bezpośrednie publikowanie map</li>
         <li xml:lang="pl">Ulepszona obsługa błędów</li>
-        <li xml:lang="pt_BR">New Frisian scenario</li>
-        <li xml:lang="pt_BR">Diplomacy handling by computer players</li>
-        <li xml:lang="pt_BR">Naval Warfare (preview)</li>
-        <li xml:lang="pt_BR">Garrisons for ports and headquarters</li>
+        <li xml:lang="pt_BR">Novo cenário dos Frísios</li>
+        <li xml:lang="pt_BR">Controle de diplomacia por jogadores artificiais</li>
+        <li xml:lang="pt_BR">Batalha Naval (pré-visualização)</li>
+        <li xml:lang="pt_BR">Guarnições para portos e sedes.</li>
         <li xml:lang="pt_BR">Plugins de interface</li>
         <li xml:lang="pt_BR">Notas fixadas</li>
-        <li xml:lang="pt_BR">Direct map publishing</li>
-        <li xml:lang="pt_BR">Enhanced error handling</li>
+        <li xml:lang="pt_BR">Publicação direta de mapas</li>
+        <li xml:lang="pt_BR">Tratamento de erros melhorado</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>
@@ -664,7 +664,7 @@ Version de correction de bugs</li>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
     <name xml:lang="nn">Widelands utviklarlag</name>
     <name xml:lang="pl">Zespół rozwojowy Widelands</name>
-    <name xml:lang="pt_BR">Time de Desenvolvimento de Widelands</name>
+    <name xml:lang="pt_BR">Equipe de Desenvolvimento de Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
   </developer>
   <content_rating type="oars-1.0">
