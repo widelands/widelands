@@ -2448,7 +2448,7 @@ msgstr "%1$s prijal vašu obchodnú ponuku v tržnici %2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Obchod zamietnutý"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
