@@ -514,6 +514,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
                                    const Flag* flag) const {
 	Quantity const target_global = target_quantity(ware_or_worker_type).permanent;
 	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
+	std::vector<std::pair<const Warehouse*, const Quantity>> warehouses_with_stock;
 
 	if (target_global > 0 && !warehouses_.empty()) {
 		// We have a target quantity set.
@@ -554,6 +555,15 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 					this_district_has_prefer |= policy == StockPolicy::kPrefer;
 				} else {
 					other_district_has_prefer |= policy == StockPolicy::kPrefer;
+
+					// We may have to check nearby warehouses too, because the produced wares may end up
+					// there. We don't know yet the distances, so we remember the ones that have some
+					// stock to speak of, so we won't have to waste time calculating routes to empty ones.
+					// / 2 is arbitrary. Higher threshold means less calculations but bigger possible
+					// unnecessary overshoot in case of multiple close neighbours.
+					if (stock > target_district / 2) {
+						warehouses_with_stock.emplace_back(std::make_pair(wh, stock));
+					}
 				}
 
 				if (quantity_district >= target_district && quantity_global >= target_global) {
@@ -574,6 +584,35 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 			}
 			if (other_district_has_prefer && !this_district_has_prefer) {
 				return false;  // another district would take it all.
+			}
+
+			// Or maybe some nearby warehouse has it...
+			if (!warehouses_with_stock.empty()) {
+				Map* map = owner().egbase().mutable_map();
+				Route r;
+				Flag* f = const_cast<Flag*>(flag);
+				Warehouse* wh = const_cast<Warehouse*>(flag->get_district_center(type_));
+				if (!router_->find_route(*f, wh->base_flag(), &r, type_, -1, *map)) {
+					// No route to own district center. Will be fixed by next scheduled districts update.
+					return false;
+				}
+
+				static constexpr int32_t kMinAllowance = 8 * 1800;  // 8 nodes
+				static constexpr int32_t kAllowanceRatio = 5;
+				const int32_t cost_to_center = r.get_totalcost();
+				const int32_t cost_cutoff =
+				   cost_to_center + std::max(kMinAllowance, cost_to_center / kAllowanceRatio);
+
+				for (const auto& wh_and_stock : warehouses_with_stock) {
+					wh = const_cast<Warehouse*>(wh_and_stock.first);
+					if (router_->find_route(*f, wh->base_flag(), &r, type_, cost_cutoff, *map)) {
+						quantity_district += wh_and_stock.second;
+
+						if (quantity_district >= target_district) {
+							return false;
+						}
+					}
+				}
 			}
 		}
 
