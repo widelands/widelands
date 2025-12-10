@@ -562,7 +562,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 					// ones. / 2 is arbitrary. Higher threshold means less calculations but bigger
 					// possible unnecessary overshoot in case of multiple close neighbours.
 					if (stock > target_district / 2) {
-						warehouses_with_stock.emplace_back(std::make_pair(wh, stock));
+						warehouses_with_stock.emplace_back(wh, stock);
 					}
 				}
 
