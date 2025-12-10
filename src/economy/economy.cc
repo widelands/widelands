@@ -558,9 +558,9 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 
 					// We may have to check nearby warehouses too, because the produced wares may end up
 					// there. We don't know yet the distances, so we remember the ones that have some
-					// stock to speak of, so we won't have to waste time calculating routes to empty ones.
-					// / 2 is arbitrary. Higher threshold means less calculations but bigger possible
-					// unnecessary overshoot in case of multiple close neighbours.
+					// stock to speak of, so we won't have to waste time calculating routes to empty
+					// ones. / 2 is arbitrary. Higher threshold means less calculations but bigger
+					// possible unnecessary overshoot in case of multiple close neighbours.
 					if (stock > target_district / 2) {
 						warehouses_with_stock.emplace_back(std::make_pair(wh, stock));
 					}
