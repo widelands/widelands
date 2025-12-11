@@ -2113,7 +2113,7 @@ msgstr "Počiatočné podmienky"
 
 #: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
-msgstr ""
+msgstr "Rozšírenie používateľského rozhrania"
 
 #: ../../../../src/logic/addons.cc:120
 #, c-format
@@ -4345,7 +4345,7 @@ msgstr "%1% (%2%)"
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:85
 #: ../../../../src/wui/plugins.cc:42
 msgid "Plugin Error"
-msgstr ""
+msgstr "Chyba rozšírenia"
 
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:64
 #: ../../../../src/scripting/ui/lua_panel_create_child.cc:86

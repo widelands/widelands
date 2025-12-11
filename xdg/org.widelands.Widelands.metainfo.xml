@@ -447,6 +447,7 @@ Version de correction de bugs</li>
         <li xml:lang="nn">Feilrettingsutgåve</li>
         <li xml:lang="pl">Wydanie poprawkowe</li>
         <li xml:lang="pt_BR">Lançamento de correção de bugs</li>
+        <li xml:lang="sk">Vydanie opravy chýb</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
@@ -532,6 +533,14 @@ Version de correction de bugs</li>
         <li xml:lang="pt_BR">Notas fixadas</li>
         <li xml:lang="pt_BR">Publicação direta de mapas</li>
         <li xml:lang="pt_BR">Tratamento de erros melhorado</li>
+        <li xml:lang="sk">Nový scenár Frízanov</li>
+        <li xml:lang="sk">Riešenie diplomacie počítačovými hráčmi</li>
+        <li xml:lang="sk">Námorná vojna (ukážka)</li>
+        <li xml:lang="sk">Posádky pre prístavy a ústredia</li>
+        <li xml:lang="sk">Rozšírenia používateľského rozhrania</li>
+        <li xml:lang="sk">Pripnuté poznámky</li>
+        <li xml:lang="sk">Mapy sa dajú zverejňovať priamo z editora</li>
+        <li xml:lang="sk">Vylepšené spracovanie chýb</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
     </release>

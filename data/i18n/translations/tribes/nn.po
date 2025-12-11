@@ -3127,7 +3127,7 @@ msgstr "Beraren som jobbar ved denne brønnen finn ikkje noko vatn i han."
 #: ../../../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
 msgctxt "barbarians_building"
 msgid "Wood Hardener"
-msgstr "Treherder"
+msgstr "Treherdar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
@@ -5252,7 +5252,7 @@ msgstr "Mange krystallar"
 #: ../../../../data/tribes/immovables/resi/frisians/water/init.lua:8
 msgctxt "resource_indicator"
 msgid "Water"
-msgstr "Vat"
+msgstr "Vatn"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/barbarians/stones_1/init.lua:8

@@ -1211,7 +1211,7 @@ msgstr "Vising"
 #: ../../../../src/wui/pinned_note.cc:51
 #: ../../../../src/wui/story_message_box.cc:72
 msgid "OK"
-msgstr "Greitt"
+msgstr "OK"
 
 #: ../../../../src/editor/ui_menus/main_menu_load_or_save_map.cc:113
 #: ../../../../src/editor/ui_menus/main_menu_map_options.cc:258
@@ -7715,7 +7715,7 @@ msgstr "Lagre historikk over sende pratemeldingar i ei fil"
 #: ../../../../src/ui_fsmenu/options.cc:307
 #: ../../../../src/wui/interactive_gamebase.cc:278
 msgid "Show Census"
-msgstr "Vis folketeljing"
+msgstr "Vis bygningsnamn"
 
 #: ../../../../src/ui_fsmenu/options.cc:309
 #: ../../../../src/wui/interactive_gamebase.cc:287
@@ -8620,7 +8620,7 @@ msgstr "Start scenario eller reprise på nytt"
 
 #: ../../../../src/wlapplication_options.cc:603
 msgid "Toggle Census"
-msgstr "Slå av/på folketeljing"
+msgstr "Slå av/på bygningsnamn"
 
 #: ../../../../src/wlapplication_options.cc:608
 msgid "Toggle Status Labels"
@@ -10844,7 +10844,7 @@ msgstr "Er du sikker på at du vil starta dette scenariet på nytt?"
 #. building names are shown
 #: ../../../../src/wui/interactive_gamebase.cc:278
 msgid "Hide Census"
-msgstr "Gøym folketeljing"
+msgstr "Gøym bygningsnamn"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
