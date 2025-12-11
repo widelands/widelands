@@ -199,6 +199,10 @@ elseif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelW
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
+    if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+      # Workaround for buggy MSVC behavior with default /Ob1
+      set(WL_OPTIMIZE_FLAGS "/Ob2")
+    endif()
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif()

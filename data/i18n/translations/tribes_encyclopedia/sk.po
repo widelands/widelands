@@ -1098,7 +1098,7 @@ msgctxt "amazons_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojačkám."
 
 #. TRANSLATORS: Note helptext for an Amazon warehouse: Port
 #: ../../../../data/tribes/initialization/amazons/units.lua:1282
@@ -4219,7 +4219,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Atlantean warehouse: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1462
@@ -6914,7 +6914,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Barbarian warehouse: Port
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1123
@@ -11156,7 +11156,7 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Empire warehouse: Port
 #: ../../../../data/tribes/initialization/empire/units.lua:1225
@@ -14796,7 +14796,7 @@ msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for a Frisian warehouse: Port
 #: ../../../../data/tribes/initialization/frisians/units.lua:1545

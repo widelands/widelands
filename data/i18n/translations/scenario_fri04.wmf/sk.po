@@ -150,7 +150,7 @@ msgstr "Cudzinci"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Kto sú?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -458,7 +458,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr ""
+msgstr "Prehrali ste"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -467,6 +467,8 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Prehrali ste a nemôžete pokračovať v hre. Nech máte viac šťastia, keď budete"
+" tento scenár opakovať. Kliknite na OK pre návrat do hlavného menu."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
