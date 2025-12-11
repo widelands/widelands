@@ -6,6 +6,7 @@
 # Frank Carvalho, 2024
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# Pedro Supriano, 2025
 # Willian Francisco Urbano, 2022
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Frank Carvalho, 2024\n"
+"Last-Translator: Pedro Supriano, 2025\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -202,7 +203,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr "Isso ainda não vai acontecer. Ainda preciso conectar a cabana do lenhador ao quartel-general. Depois de encomendar o canteiro de obras, fui automaticamente colocado no modo de construção de estradas, então tudo o que preciso fazer é clicar na bandeira azul em frente à minha sede."
+msgstr "Isso ainda não vai acontecer. Ainda preciso conectar a cabana do lenhador à sede. Depois de encomendar o canteiro de obras, fui automaticamente colocado no modo de construção de estradas, então tudo o que preciso fazer é clicar na bandeira azul em frente à minha sede."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
@@ -212,7 +213,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "Isso ainda não vai acontecer. Ainda preciso conectar a cabana do lenhador ao quartel-general. Você desativou a opção ‘Iniciar construção de estrada após colocar uma bandeira’ (para alterar isso, escolha ‘Opções’ no menu principal de Widelands). Portanto, entrei no modo de construção de estradas manualmente. Mais tarde lhe direi como fazer isso. Para construir a estrada, basta clicar na bandeira azul em frente à minha sede."
+msgstr "Isso ainda não vai acontecer. Ainda preciso conectar a cabana do lenhador à sede. Você desativou a opção ‘Iniciar construção de estrada após colocar uma bandeira’ (para alterar isso, escolha ‘Opções’ no menu principal de Widelands). Portanto, entrei no modo de construção de estradas manualmente. Mais tarde lhe direi como fazer isso. Para construir a estrada, basta clicar na bandeira azul em frente à minha sede."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:187
@@ -756,75 +757,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Você deve ter notado que a linha censo do Quartel-general é diferente. Isto porque ele é um tipo de construção chamado Armazém. Armazéns são construções onde seus trabalhadores podem descansar até que sejam atribuídos à um local de trabalho e também onde seus recursos podem ser armazenados até que sejam necessários em algum lugar. Então eles funcionam como um centro de cidade, e para representar isso, eles recebem nomes únicos."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "As pequenas coroas ao lado do nome indicam que esta é sua sede. Enquanto jogar Widelands, você verá três tipos de armazéns, marcados com pequenos ícones:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "As sedes são onde você normalmente inicia o jogo. Ele é marcado por pequenas coroas: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Armazéns comuns que simplesmente armazenam recursos e trabalhadores, para mantê-los bem distribuídos por todo seu território. Eles são marcados por pequenas casas: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Portos que você usará nas navegações. Eles não apenas armazenam seus recursos e trabalhadores como também os carregam em navios para enviá-los além-mar. Eles são marcados por pequenas âncoras: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Todos eles são nomeados automaticamente correspondendo a cada tribo, mas você pode mudar os nomes ao seu gosto."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Renomeie sua pequena vila"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Renomeie sua sede"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Para renomear sua sede, primeiramente clique nela para abrir sua janela."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Você verá uma caixa de edição no topo da janela mostrando o nome."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Tudo o que você precisa fazer é apagar o nome anterior e digitar o novo nome."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Quando terminar, apenas feche a janela."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Seja criativo"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Percebi que você fechou a janela sei editar o nome. Tenho certeza que você pode ser criativo. Mas se você não quiser, pelo menos apague o nome anterior, por favor, para me mostrar que você encontrou a caixa e edição."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"

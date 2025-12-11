@@ -4,6 +4,8 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# GunChleoc, 2014
+# Karl Vest, 2020
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Pavol Gono, 2024-2025
@@ -348,13 +350,13 @@ msgstr "Výborne! Vaša prieskumnícka chatrč je postavená. Kým sa náš prie
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "V prvom rade si bude musieť na svoje prieskumné cesty zobrať nejaké jedlo. Našťastie máme v sklade nejaké prídely."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Keď dostane jedlo, bude sa náhodne prechádzať po okolí. Mali by ste sledovať jeho pohyb, kým to, čo videl, nezahalí vojnová hmla."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
@@ -362,7 +364,7 @@ msgstr "Prieskumník"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
-msgstr ""
+msgstr "Preskúmajte mapu"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Wait for the scout to explore unseen areas."
@@ -374,27 +376,27 @@ msgstr "Pozorujte svojho prieskumníka."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"
-msgstr ""
+msgstr "Prieskumník urobil pokrok"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid "New horizons?"
-msgstr ""
+msgstr "Nové obzory?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Ako vidíte, prieskumníci dokážu zájsť dosť ďaleko. Dobrou správou je, že nablízku nie sú žiadni nepriatelia."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Na sledovanie postupu prieskumu môžete použiť minimapu."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Nezabúdajte, že prieskum je ťažká práca, a preto sa nezaobíde bez dodávok jedla."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
@@ -495,7 +497,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Vaše ústredie má niektoré schopnosti vojenských budov: zaberá územie, nepriateľ naň môže priamo zaútočiť a v ňom ubytovaní vojaci ho v prípade útoku bránia spolu s okolím. Na druhej strane je tu aj rozdiel: s vojakmi v ústredí nemôžete začať útok."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -503,12 +505,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Vojenské schopnosti ústredia predstavujú veľký rozdiel oproti obyčajným skladom, ktoré nezaberajú územie a na obranu potrebujú blízke vojenské budovy. Vojaci ubytovaní v obyčajných skladoch sa nezúčastňujú bojov a na obyčajné sklady nemožno priamo zaútočiť."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Nastavenia vojakov v ústredí"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -519,7 +521,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Hoci všetci vojaci, ktorí sa práve nachádzajú vo vašom ústredí, pomáhajú pri jeho obrane, nie sú mu trvalo pridelení, takže môžu byť kedykoľvek odoslaní preč, keď nejaká vojenská budova potrebuje vojaka. Našťastie môžete niektorých vojakov prideliť na obranu ústredia rovnako, ako nastavujete kapacitu a preferencie vojakov pre vojenské budovy. Ak tak urobíte, ústredie dovolí poslať do iných budov len prebytočných vojakov, ale nie vojakov z pridelenej posádky."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -530,7 +532,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Ak sa pozriete na stavové nápisy, uvidíte, že v sklade nič nie je, ale vaše ústredie má na začiatku znak „—“. To znamená, že na ochranu ústredia nie je určená žiadna posádka, hoci tam stále môžu byť ubytovaní nejakí vojaci. Ak zvýšite požadovaný počet vojakov na viac ako nulu, ústredie v stave zobrazí rovnaké informácie o vojakoch ako vojenské budovy. Prebytoční vojaci sa v stave nikdy nezobrazujú."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
@@ -578,7 +580,7 @@ msgstr "Túto príležitosť môžete využiť na to, aby ste sa oboznámili aj 
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Vojaci, rozchod!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
 msgid "Dismantle your north-western sentry"
