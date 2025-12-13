@@ -1,6 +1,6 @@
 # Widelands Release History
 
-## Widelands 1.3~git
+## Widelands 1.3
 
  - Market trading
  - Six new maps added and three old maps removed
