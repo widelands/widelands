@@ -422,7 +422,7 @@ msgstr "pbuczny@gmail.com – edited by Nordfriese"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Dlhá hra s dôrazom na ekonomiku v prekrásnej krajine. Vyskúšajte ju hrať za každého hráča!"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"

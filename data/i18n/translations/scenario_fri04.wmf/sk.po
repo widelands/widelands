@@ -4,7 +4,6 @@
 # 
 # Translators:
 # GunChleoc, 2025
-# MiroslavR <miroslavr256@gmail.com>, 2025
 # Pavol Gono, 2025
 # 
 msgid ""
@@ -39,53 +38,56 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Nájdite Reebauda"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
+"Rozširujte svoje územie, kým nestretnete svojho starého priateľa Reebauda."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Porazte cudzincov"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Porazte cudzincov"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Porazte nepriateľský kmeň."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Porazte Impérium"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Porazte imperiálneho legáta"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Porazte Marcusa Caiusa Iniucundusa."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Verbovať a cvičiť"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Naverbujte a vycvičte svojich vojakov"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Cvičte svojich vojakov, kým čakáte, až Reebaud vyhlási svojich vojakov za "
+"pripravených na boj."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
-msgstr ""
+msgstr "Máte jednu hodinu na vycvičenie toľkých vojakov, koľko len dokážete."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
@@ -97,7 +99,7 @@ msgstr "Vitajte späť!"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Konečne sme dorazili"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -106,6 +108,9 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Iniucundus o búrke neklamal. Vyrazili sme práve včas; zastihla "
+"nás na mori a všetci sme si boli istí, že sa naša loď rozlomí a potopí a "
+"nikto z nás už neuvidí svoj domov."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -115,6 +120,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Ale Boh bol milosrdný a naše početné modlitby ho primäli, aby nás ušetril. "
+"Museli sme pristáť na pustom, neobývanom pobreží a opraviť loď, kým sme "
+"mohli pokračovať v plavbe. Nakoniec sme dorazili tak ďaleko na sever, ako sa"
+" len dá loďou dostať."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -127,6 +136,12 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"Legát a ja už spolu nemáme žiadne záležitosti. Znepáčila sa mi jeho "
+"nadradenosť počas cesty a najmä pohŕdavý spôsob, akým zaobchádzal so svojimi"
+" galejníkmi. Zdalo sa, že mu ani nenapadlo, že sú to ľudské bytosti ako on a"
+" ja; alebo ak áno, správal sa, akoby si za svoje nešťastie mohli sami. "
+"Neľutujem, že ho už pravdepodobne neuvidím. Postavil svoj tábor v určitej "
+"vzdialenosti od môjho, aby sme si navzájom neprekážali."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -136,6 +151,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Ale teraz, keď sme už tak blízko, som príliš netrpezlivý na to, aby som "
+"nečinne sedel a premýšľal o minulosti. Rýchlo! Poďme hľadať môjho priateľa. "
+"Hoci som tu ešte nevidel žiadne známky ľudského osídlenia, nepochybujem, že "
+"ho čoskoro nájdeme."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -158,6 +177,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Naši vojaci zbadali cudzincov – prvých domorodcov v tejto pustej krajine. "
+"Možno vedia, kde nájdeme Reebauda?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -166,11 +187,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Mier a pozdravy, dobrí ľudia! Som Claus Lembeck a toto je môj syn Henneke. "
+"Prichádzame hľadať môjho priateľa Reebauda. Smiem sa spýtať, či viete, kde "
+"by sme ho mohli nájsť?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Nepriatelia"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -178,10 +202,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Naši vojaci zbadali cudzincov. To musia byť tí votrelci, ktorých spomínal "
+"Reebaud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Narušitelia"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -190,11 +216,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"My – Amazonky. Vy – cudzinci. Zem – tu – vlastniť – my. Vy – narušitelia. Vy"
+" – nepriatelia. My – vás – všetkých – spraviť – mŕtvi!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Nie práve najpriateľskejší ľudia…"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -209,7 +237,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Starý priateľ"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -224,13 +252,14 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Konečne sme sa stretli"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"Konečne! Budovy týchto ľudí vyzerajú povedome. Musí to byť Reebaudov kmeň."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -238,6 +267,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Klamú ma oči, alebo si so mnou nejaký duch robí žarty? Určite to nemôže byť "
+"môj starý priateľ Claus, koho stretávam tak ďaleko od domova!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -246,6 +277,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Nie je to trik ani klam, som to naozaj ja, Claus Lembeck! Môj syn Henneke a "
+"ja sme merali cestu až sem, aby sme ťa vyhľadali. Ani neviem povedať, aký "
+"som rád, že som ťa konečne našiel."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -255,6 +289,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Teší ma, že si si dal takú námahu, len aby si ma stretol. Ale neurobil si to"
+" len preto, aby si sa so mnou znova porozprával. Čo ťa trápi? Tak ako si ty "
+"kedysi pomohol mne odraziť holštajnskú inváziu, pomôžem teraz ja svojmu "
+"priateľovi, ak budem môcť."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -265,6 +303,11 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"Naozaj som prišiel požiadať o tvoju pomoc. Iste si spomínaš na Atterdaga, "
+"kráľa Dánov, ktorý nám Frízanom mnohokrát spôsobil veľké ťažkosti. Ty sám si"
+" s ním nikdy nebojoval, keďže bol príliš opatrný na tvoju povesť, aby na "
+"teba zaútočil priamo; ale ja som si z neho urobil úhlavného nepriateľa tým, "
+"že som často pomáhal tým, ktorých sa snažil podmaniť."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -276,6 +319,12 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Asi pred tromi alebo štyrmi mesiacmi – na dlhej plavbe som stratil pojem o "
+"čase – vylodil svojich vojakov na mojom ostrove Föhr. Ušetrím ťa opisu "
+"bitky, ktorá trvala päť týždňov a ani o deň menej. Krátka a trpká pravda je,"
+" že som bol porazený a nútený utiecť. Nemal som nádej, že by mi moji "
+"priatelia na pevnine mohli pomôcť, pretože Atterdagove armády sú tak "
+"neskutočne početné, že som vedel, že by nemali šancu."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -285,6 +334,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Len ty máš povesť najúžasnejších vojenských činov. Si pravdepodobne jediný "
+"žijúci človek, ktorý dokáže poraziť toho zlého Dána. Prosím ťa, poď so mnou "
+"na juh a osloboď Föhr, alebo so mnou aspoň pošli oddiel svojich chýrnych "
+"vojakov."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -298,6 +351,13 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Keby si prišiel o týždeň skôr, okamžite by som tvojej prosbe vyhovel. Teraz "
+"sa však na obzore objavila nepríjemnosť. Myslím to doslova; zďaleka prišli "
+"cudzinci a snažia sa nás vyhnať a prevziať naše územia, tak ako sme ich my "
+"sami, hnaní núdzou, zabrali nepriateľským ľuďom, ktorí tu žili. Bojovní "
+"Barbari a imperiálny naničhodník menom Murilius, ktorý mal tie najhoršie "
+"požiadavky. Všetkých sme ich porazili a verili sme, že sme konečne našli "
+"mier. A štyri dlhé roky bol život naozaj pokojný."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -314,6 +374,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Ale teraz, ako som hovoril, s príchodom krátkeho letného obdobia, počas "
+"ktorého sa na niektorých miestach topí sneh a je možné cestovať na vzdialené"
+" miesta, sa objavili cudzinci a zapojili sa s nami do boja. Prekvapili nás, "
+"život bez bojov nás urobil neopatrnými. Mnoho dobrých vojakov padlo pod ich "
+"kopijami, vrátane Haukeho, môjho najlepšieho priateľa a najváženejšieho "
+"radcu, a Fieteho, môjho jediného syna a dediča. Ich zákerné bojové ťahy boli"
+" pre nás novinkou, hoci teraz, keď vieme, proti čomu stojíme, niet pochýb, "
+"že ich nakoniec porazíme. Ale obávam sa, že to ešte nejaký čas potrvá, kým "
+"budú porazení a bude pre mňa bezpečné cestovať s tebou na juh. Počas tohto "
+"obdobia sa ti samozrejme dostane všetkej pohostinnosti a láskavosti, ktorú "
+"môžeme ponúknuť."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -330,6 +401,17 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Ale teraz, ako som hovoril, s príchodom krátkeho letného obdobia, počas "
+"ktorého sa na niektorých miestach topí sneh a je možné cestovať na vzdialené"
+" miesta, sa objavili cudzinci a zapojili sa s nami do boja. Prekvapili nás, "
+"život bez bojov nás urobil neopatrnými. Mnoho dobrých vojakov padlo pod ich "
+"kopijami, vrátane Haukeho, môjho najlepšieho priateľa a najváženejšieho "
+"radcu, a Fieteho, môjho jediného syna a dediča. Ich zákerné bojové ťahy boli"
+" pre nás novinkou, hoci teraz, keď sme vedeli, proti čomu stojíme, podarilo "
+"sa nám ich nakoniec poraziť. Všetci naši vojaci sú však stále ubolení a "
+"zranení z ťažkých bojov a budú potrebovať nejaký čas na zotavenie, kým ich "
+"budeme môcť poslať znova do boja. Počas tohto obdobia sa ti samozrejme "
+"dostane všetkej pohostinnosti a láskavosti, ktorú môžeme ponúknuť."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -339,6 +421,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Verím, že sme týchto votrelcov už stretli. Bolo by neslušné sedieť a "
+"vychutnávať si džbány medoviny, kým vy bojujete o život. V duchu nášho "
+"priateľstva a na počesť dobrých mužov, ktorých ste stratili, budeme bojovať "
+"proti útočníkom po vašom boku!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -348,6 +434,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Veru, bolo by nanajvýš neslušné sedieť a vychutnávať si džbány medoviny, kým"
+" vy bojujete o život. V duchu nášho priateľstva a na počesť dobrých mužov, "
+"ktorých ste stratili, vyhľadáme týchto útočníkov a budeme s nimi bojovať po "
+"vašom boku!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -360,18 +450,24 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Som takmer sklamaný, že tvoja povesť nepresahuje skutočnosť, lebo keď si "
+"opisoval útočníkov, tešil som sa, že budem proti nim bojovať po tvojom boku."
+" Je mi ľúto tvojich strát a najmä toho, že nikdy nestretnem chýrneho "
+"Haukeho, ktorého meno bude žiť v sláve ďalej. Kým sa tvoji vojaci zotavujú, "
+"ujmem sa organizovania výcviku pre našich vlastných vojakov, aby sa mohli "
+"učiť od tvojich a stali sa čo najsilnejšími, kým sa vrátime do našej vlasti."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Starý nepriateľ"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Zrada"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -379,6 +475,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Počkajte chvíľu, vy dvaja. Čo ste to povedali? Napadli ste a zavraždili "
+"Murilia, prokonzula Impéria?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -388,6 +486,10 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"To je nanajvýš neprijateľné. Som Marcus Caius Iniucundus, legát Impéria. "
+"Pomyslieť len, že ma poslali vyšetriť, či Murilius zanedbal platenie daní z "
+"núdze alebo chamtivosti, a teraz som zistil, že on a všetci jeho muži boli "
+"podlo zavraždení arogantnými útočníkmi!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -398,6 +500,11 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Svojím činom ste na seba privolali hnev Impéria a prisahám pri Jupiterovi "
+"Optimovi Maximovi, že nespočiniem, kým vy a vaši nebudete ležať vo vlastnej "
+"krvi. Budem milosrdný len k tým, ktorí boli príliš mladí na to, aby sa vtedy"
+" zúčastnili bojov, ktorých nechám nažive, aby nahradili hŕstku galejníkov, "
+"ktorí neprežili poslednú cestu."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -406,6 +513,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Ó, teraz sa bojím. Povedz mi, dobrý muž, je hlúposť podmienkou vymenovania "
+"za zástupcu Impéria? Claus, načo ste so sebou brali toho poľutovaniahodného "
+"šaša?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -415,10 +525,14 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Ospravedlňujem sa. Ponúkol nám cestu na svojej lodi a nemal som ako vedieť, "
+"ani dôvod predpokladať, že bude s tebou vyvolávať hádky. Ale keďže som to "
+"ja, kto ti priniesol tieto problémy, najmenej, čo môžem urobiť, je prevziať "
+"zodpovednosť za to, že ťa ho zbavím."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr ""
+msgstr "Niečo sa deje…"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -428,15 +542,19 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Dnes sme pri našej severozápadnej hranici stretli zraneného vojaka. Vydýchol"
+" niečo o tom, že jeho kmeň napadli krutí cudzinci, ale zomrel skôr, než nám "
+"stihol povedať viac. Jeho zbroj a výzbroj vyzerali prekvapivo povedome. Som "
+"zvedavý, či je Reebaudov kmeň v nebezpečenstve?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Musíme sa ponáhľať."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Prišli sme neskoro"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -445,6 +563,9 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Dnes sme pri našej severozápadnej hranici stretli zraneného vojaka. Vydýchol"
+" niečo o tom, že jeho kmeň napadli a porazili krutí cudzinci. Svojím "
+"posledným dychom nám povedal meno svojho vodcu: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -453,6 +574,9 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Prišli sme neskoro. Reebaud bol už na dosah a bol porazený len pár hodín "
+"predtým, ako sme sa s ním mohli stretnúť. Na tomto svete pre nikoho z nás "
+"niet nádeje."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
@@ -473,12 +597,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Porážka"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Prehrali sme"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -489,6 +613,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"Nepriatelia zničili náš posledný sklad. Žiadny kmeň by nemohol prežiť pri "
+"takej presile a všetko, čo teraz môžeme urobiť, je čeliť nášmu istému osudu "
+"so vztýčenou hlavou. Mojou jedinou ľútosťou je, že nebudem môcť pomôcť "
+"svojmu starému priateľovi Clausovi v jeho ťažkostiach. Nech sa nad ním "
+"bohovia zľutujú, ale obávam sa, že všetka nádej je stratená."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -499,14 +628,19 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Boli sme tak blízko, ale teraz nepriatelia zničili náš posledný sklad. Možno"
+" bolo odo mňa hlúpe predpokladať, že dokážem poraziť Atterdaga, keď som "
+"nebol súperom ani pre týchto bezvýznamných cudzincov. Boh neschvaľuje túto "
+"moju pýchu a On, nie nejaká náhodná banda cudzincov, spečatil náš smutný "
+"osud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Expanzia"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Odrezávajú nás"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -515,6 +649,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Iniucundus rýchlo rozširuje svoje územie. Hoci je na to plne "
+"oprávnený, obávam sa, že by sme mohli byť odrezaní od Reebaudovej zeme, ak "
+"si nedáme pozor."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -523,6 +660,9 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Mali by sme zrýchliť tempo našej expanzie. Bez toho, aby sme vedeli, ktorým "
+"smerom musíme ísť, by som radil zamerať sa nateraz na šírenie smerom na "
+"západ, skôr než nás Marcus Caius Iniucundus na tejto hranici zablokuje."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -534,7 +674,7 @@ msgstr "Víťazstvo"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Votrelci porazení"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -542,10 +682,11 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Títo votrelci neboli takí silní, ako si mysleli. Už vás nebudú obťažovať."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Cudzinci porazení"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -553,21 +694,24 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Títo cudzinci neboli takí silní, ako si mysleli. Nech to bol ktokoľvek, už "
+"nás nebudú obťažovať."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legát porazený"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Pokus postaviť sa mi bolo to posledné, čo si kedy urobil, hlúpy legát."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Vyhrali sme"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -576,6 +720,9 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Nepriatelia sú porazení. Teraz pôjdem s tebou na juh spolu so všetkými "
+"mojimi vojakmi, okrem malej posádky na ochranu mojich území, a znovu "
+"dobyjeme tvoj ostrov!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:308
@@ -599,6 +746,9 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Naši vojaci sa zotavili a ty si dobre využil čas na zvýšenie sily svojej "
+"armády. Teraz pôjdem s tebou na juh spolu so všetkými mojimi vojakmi, okrem "
+"malej posádky na ochranu mojich území, a znovu dobyjeme tvoj ostrov!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -614,4 +764,4 @@ msgid ""
 "soldiers, wares and tools."
 msgstr ""
 "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje"
-" vašich vojakov, výrobky a nástroje."
+" vaše výrobky, nástroje a poskytuje prístrešie vojakom."
