@@ -28,7 +28,7 @@ cache:
   /usr/local/Cellar
 
 environment:
-  - APPVEYOR_SAVE_CACHE_ON_ERROR: true
+  APPVEYOR_SAVE_CACHE_ON_ERROR: true
 
 for:
 -
