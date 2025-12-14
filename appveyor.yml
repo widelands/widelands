@@ -24,6 +24,9 @@ branches:
 
 skip_tags: true
 
+environment:
+  - APPVEYOR_SAVE_CACHE_ON_ERROR: true
+
 for:
 -
   matrix:
@@ -71,6 +74,7 @@ for:
 
 install:
   - sh: export ICU_ROOT="$(brew --prefix icu4c)"
+  - sh: export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
   # Suppress warnings about installing formulas instead of casks. Casks would raise another
   # warning about disabling macos gatekeeper.
   - sh: brew update --auto-update
