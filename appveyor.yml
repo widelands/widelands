@@ -15,8 +15,8 @@ platform:
   - x64
   
 configuration:
-  - Release
-  - Debug
+  - release
+  - debug
 
 branches:
   only:
