@@ -1,6 +1,5 @@
 asio
 git
-cmake
 glew
 icu4c
 jpeg
