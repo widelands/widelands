@@ -86,15 +86,15 @@ install:
   - sh: brew install --quiet icu4c
 
 build_script:
-  - sh: cd $env:APPVEYOR_BUILD_FOLDER
+  - sh: cd $APPVEYOR_BUILD_FOLDER
   - sh: mkdir build_wl
   - sh: cd build_wl/
-  - sh: ../utils/macos/build_app.sh "--$env:CONFIGURATION" "--clang" "--no-website"
+  - sh: ../utils/macos/build_app.sh "--$CONFIGURATION" "--clang" "--no-website"
   - sh: grep -v REVDETECT-BROKEN ../build/VERSION
 
 on_success:
   - sh: export DMGPATH="$(pwd)"
   - sh: export DMGFILE="$(ls *.dmg)"
   #- sh: echo "DMG file is: %DMGPATH%/%DMGFILE%"
-  - sh: mv "$env:DMGFILE" "Widelands-1.3~git$env:APPVEYOR_REPO_COMMIT:~-$env:CONFIGURATION-clang.dmg"
-  - sh: appveyor PushArtifact $env:APPVEYOR_BUILD_FOLDER\%DMGFILE%.exe
+  - sh: mv "$DMGFILE" "Widelands-1.3~git$APPVEYOR_REPO_COMMIT:~-$CONFIGURATION-clang.dmg"
+  - sh: appveyor PushArtifact $APPVEYOR_BUILD_FOLDER\$DMGFILE.exe
