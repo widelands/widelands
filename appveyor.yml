@@ -86,7 +86,7 @@ install:
   - sh: brew install --quiet icu4c
 
 build_script:
-  - sh: cd %APPVEYOR_BUILD_FOLDER%
+  # - sh: cd %APPVEYOR_BUILD_FOLDER%
   - sh: mkdir build_wl
   - sh: cd build_wl/
   - sh: ../utils/macos/build_app.sh "--%CONFIGURATION%" "--clang" "--no-website"
