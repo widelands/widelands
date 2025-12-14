@@ -24,6 +24,9 @@ branches:
 
 skip_tags: true
 
+cache:
+  /usr/local/Cellar
+
 environment:
   - APPVEYOR_SAVE_CACHE_ON_ERROR: true
 
