@@ -20,6 +20,10 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
       SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+      if [ ! -d "$SDK_DIRECTORY" ]; then
+         # If the SDK for the current macOS Version still can't be found, try to see what path is used
+         SDK_DIRECTORY="$( xcrun --show-sdk-path)"
+      fi
    fi
 fi
 
