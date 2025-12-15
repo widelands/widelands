@@ -1621,25 +1621,49 @@ void Ship::battle_update(Game& game) {
 				   Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
 			}
 
-			// If the portspace is blocked, find a walkable node as closely nearby as possible.
-			Coords representative_location;
-			if ((portspace_field.nodecaps() & MOVECAPS_WALK) != 0) {
-				representative_location = portspace;
-			} else if (Coords brn = map.br_n(portspace); (map[brn].nodecaps() & MOVECAPS_WALK) != 0) {
-				representative_location = brn;
-			} else {
-				for (;;) {
-					Coords coords = game.random_location(portspace, 2);
-					const Field& field = map[coords];
-					if ((field.nodecaps() & MOVECAPS_WALK) != 0) {
-						representative_location = coords;
-						break;
+			// We will scatter the soldiers on walkable fields around the portspace.
+			// If that's blocked, we try to find a walkable node as closely nearby as possible.
+
+			Coords representative_location = portspace;
+
+			WalkingDir nextdir = WALK_SE;
+			int radius = 1;
+			int step = -1;
+			constexpr uint16_t kTooFar = 3;
+			while (radius < kTooFar && (map[representative_location].nodecaps() & MOVECAPS_WALK) == 0) {
+				representative_location = map.get_neighbour(representative_location, nextdir);
+				if (step < 0) {
+					// start new circle
+					nextdir = WALK_W;
+					step = 0;
+				} else if (++step >= radius) {
+					step = 0;
+					nextdir = get_cw_neighbour(nextdir);
+					if (nextdir == WALK_W) {
+						// finished the circle, we need a bigger one
+						nextdir = WALK_SE;
+						++radius;
+						step = -1;
 					}
 				}
 			}
+			if (radius >= kTooFar) {
+				// no suitable location found
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending message
+				NEVER_HERE();
+			}
 
-			CheckStepDefault worker_checkstep(MOVECAPS_WALK);
-			Path unused_path;
+			std::vector<Coords> drop_locations;
+			const FindNodeInvasion findnode;
+			CheckStepDefault checkstep(MOVECAPS_WALK);
+			uint32_t nr_fields = map.find_reachable_fields(game, Area<FCoords>(map.get_fcoords(representative_location), 4), &drop_locations, checkstep, findnode);
+
+			if (nr_fields == 0) {
+				// no suitable drop locations found
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending message
+				NEVER_HERE();
+			}
+			assert(nr_fields == drop_locations.size());
 
 			assert(!battles_.back().attack_soldier_serials.empty());
 			for (Serial serial : battles_.back().attack_soldier_serials) {
@@ -1659,21 +1683,7 @@ void Ship::battle_update(Game& game) {
 				it->set_location(game, nullptr);
 				it->end_shipping(game);
 
-				// Distribute the soldiers on walkable fields around the point of invasion.
-				// Do not drop them off directly on a flag as that would interfere with battle code.
-				for (;;) {
-					Coords coords = game.random_location(current_battle.attack_coords, 4);
-					const Field& field = map[coords];
-					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
-					    (field.get_immovable() == nullptr ||
-					     field.get_immovable()->descr().type() != MapObjectType::FLAG) &&
-					    map.findpath(
-					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
-						worker->set_position(game, coords);
-						break;
-					}
-				}
-
+				worker->set_position(game, drop_locations.at(game.logic_rand() % nr_fields));
 				worker->reset_tasks(game);
 				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, portspace);
 
