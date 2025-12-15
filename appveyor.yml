@@ -81,7 +81,7 @@ install:
   # Suppress warnings about installing formulas instead of casks. Casks would raise another
   # warning about disabling macos gatekeeper.
   - sh: brew update --auto-update
-  - sh: brew upgrade --auto-update
+  - sh: brew upgrade
   - sh: ./install-dependencies.sh homebrew --formula
   # temporary fix for macos-14 arm failures
   - sh: brew install --quiet icu4c
