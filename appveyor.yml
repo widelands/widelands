@@ -97,5 +97,5 @@ on_success:
   - sh: export DMGPATH="$(pwd)"
   - sh: export DMGFILE="$(ls *.dmg)"
   - sh: echo "DMG file is $DMGPATH/$DMGFILE"
-  - sh: mv "$DMGFILE" "Widelands-1.3~git$APPVEYOR_REPO_COMMIT:~-$CONFIGURATION-clang.dmg"
+  # - sh: mv $DMGFILE "$Widelands-1.3~git$APPVEYOR_REPO_COMMIT:~-$CONFIGURATION-clang.dmg"
   - sh: appveyor PushArtifact $APPVEYOR_BUILD_FOLDER/build_wl/$DMGFILE.exe
