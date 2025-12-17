@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_UI_GAME_CHAT_PANEL_H
-#define WL_UI_GAME_CHAT_PANEL_H
+#ifndef WL_UI_SHARED_CHAT_PANEL_H
+#define WL_UI_SHARED_CHAT_PANEL_H
 
 #include <memory>
 
@@ -93,4 +93,4 @@ private:
 	std::unique_ptr<Notifications::Signal<>::SignalSubscriber> update_signal_connection_;
 };
 
-#endif  // end of include guard: WL_UI_GAME_CHAT_PANEL_H
+#endif  // end of include guard: WL_UI_SHARED_CHAT_PANEL_H

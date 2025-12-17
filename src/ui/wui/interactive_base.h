@@ -35,7 +35,7 @@
 #include "ui/wui/debugconsole.h"
 #include "ui/wui/mapview.h"
 #include "ui/wui/minimap.h"
-#include "ui/wui/plugins.h"
+#include "ui/shared/plugins.h"
 #include "ui/game/quicknavigation.h"
 
 class InfoPanel;

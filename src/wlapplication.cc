@@ -89,7 +89,7 @@
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
-#include "ui/game/chat_panel.h"
+#include "ui/shared/chat_panel.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/interactive_spectator.h"
 #include "ui/shared/maptable.h"

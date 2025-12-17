@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/wui/plugins.h"
+#include "ui/shared/plugins.h"
 
 #include <SDL_timer.h>
 

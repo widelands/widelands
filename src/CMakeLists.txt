@@ -144,7 +144,7 @@ wl_library(widelands_ball_of_mud
     ui_basic
     ui_editor
     ui_fsmenu
-    ui_game_chat
+    ui_shared_chat
     ui_shared_maps_ui
     widelands_options
     wui_interactive

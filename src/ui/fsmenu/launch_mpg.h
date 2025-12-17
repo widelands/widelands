@@ -26,7 +26,7 @@
 #include "ui/fsmenu/helpwindow.h"
 #include "ui/fsmenu/launch_game.h"
 #include "ui/fsmenu/multiplayersetupgroup.h"
-#include "ui/game/chat_panel.h"
+#include "ui/shared/chat_panel.h"
 
 struct ChatProvider;
 struct MapData;

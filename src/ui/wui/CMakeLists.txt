@@ -67,6 +67,7 @@ wl_library(wui_interactive
     note_sound
     ui_game_statistics
     wui_mapviewpixelfunctions
+    ui_shared_plugins
     ui_shared_unique_windows
     ui_game_help
     graphic_text_layout
@@ -78,8 +79,6 @@ wl_library(wui_main_ui
     info_panel.h
     mapview.cc
     mapview.h
-    plugins.cc
-    plugins.h
     toolbar.cc
     toolbar.h
   USES_SDL2
@@ -100,7 +99,6 @@ wl_library(wui_main_ui
     base_time_string
     graphic_text_layout
     graphic
-    base
     widelands_options
     graphic_toolbar_imageset
     wui_mapviewpixelfunctions

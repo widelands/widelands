@@ -30,7 +30,7 @@
 #include "ui/basic/textarea.h"
 #include "ui/basic/textinput.h"
 #include "ui/fsmenu/menu.h"
-#include "ui/game/chat_panel.h"
+#include "ui/shared/chat_panel.h"
 
 namespace Widelands {
 struct TribeBasicInfo;

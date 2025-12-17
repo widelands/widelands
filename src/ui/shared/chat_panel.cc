@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/chat_panel.h"
+#include "ui/shared/chat_panel.h"
 
 #include <SDL_keycode.h>
 #include <SDL_mouse.h>
@@ -68,8 +68,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          25,
                          _("Recipient"),
                          UI::DropdownType::kPictorial,
-                         UI::PanelStyle::kFsMenu,
-                         UI::ButtonStyle::kFsMenuSecondary),
+                         style,
+                         style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary),
      editbox(&hbox_, "input", 28, 0, w - 28, style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {

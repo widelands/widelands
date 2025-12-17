@@ -99,18 +99,18 @@ wl_library(ui_fsmenu
     ui_basic
     sound
     ui_addons
+    ui_shared_chat
     ui_shared_sound_options
     ui_shared_maps_ui
     ui_shared_savegames_data
     ui_shared_savegames_ui
     ui_shared_map_tags
-    ui_game_chat
+    ui_shared_plugins
     ui_shared_suggested_teams
     ui_editor
     ui_shared_maps_data
     ui_shared_unique_windows
     wui_interactive
-    wui_main_ui
     widelands_ball_of_mud
     widelands_options
   USES_SDL2

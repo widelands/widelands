@@ -101,6 +101,33 @@ wl_library(ui_shared_map_tags
     base
 )
 
+wl_library(ui_shared_plugins
+  SRCS
+    plugins.cc
+    plugins.h
+  USES_SDL2
+  DEPENDS
+    base
+    ui_basic
+    widelands_options
+)
+
+wl_library(ui_shared_chat
+  SRCS
+    chat_panel.cc
+    chat_panel.h
+  USES_SDL2
+  DEPENDS
+    graphic
+    ui_game_chat
+    chat
+    base
+    network
+    ui_basic
+    sound
+    graphic_playercolor
+)
+
 wl_library(ui_shared_unique_windows
   SRCS
     unique_window_handler.cc

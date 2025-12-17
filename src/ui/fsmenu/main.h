@@ -27,7 +27,7 @@
 #include "ui/basic/textarea.h"
 #include "ui/basic/unique_window.h"
 #include "ui/fsmenu/menu.h"
-#include "ui/wui/plugins.h"
+#include "ui/shared/plugins.h"
 #include "ui/shared/unique_window_handler.h"
 
 namespace Widelands {

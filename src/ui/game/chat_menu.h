@@ -20,7 +20,7 @@
 #define WL_UI_GAME_CHAT_MENU_H
 
 #include "ui/basic/unique_window.h"
-#include "ui/game/chat_panel.h"
+#include "ui/shared/chat_panel.h"
 
 /**
  * Provides a window with chat message scrollback and the possibility to

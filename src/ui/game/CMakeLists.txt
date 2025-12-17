@@ -117,15 +117,12 @@ wl_library(ui_game_chat
     chat_overlay.h
     chat_menu.cc
     chat_menu.h
-    chat_panel.cc
-    chat_panel.h
-  USES_SDL2
   DEPENDS
     ui_basic
     graphic_fonthandler
     chat
     graphic_text
-    network
+    ui_shared_chat
     graphic_playercolor
     base_exceptions
     graphic
