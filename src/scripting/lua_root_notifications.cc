@@ -28,9 +28,9 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "scripting/globals.h"
-#include "wui/economy_options_window.h"
-#include "wui/interactive_base.h"
-#include "wui/quicknavigation.h"
+#include "ui/game/economy_options_window.h"
+#include "ui/wui/interactive_base.h"
+#include "ui/game/quicknavigation.h"
 
 namespace LuaRoot::LuaNotifications {
 

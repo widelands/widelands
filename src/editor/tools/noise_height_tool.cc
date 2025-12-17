@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <sstream>
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"

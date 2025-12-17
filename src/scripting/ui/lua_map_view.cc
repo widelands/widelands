@@ -23,7 +23,7 @@
 #include "scripting/lua_root_notifications.h"
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_flag.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace LuaUi {
 

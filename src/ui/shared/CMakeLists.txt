@@ -1,0 +1,139 @@
+wl_library(ui_shared_savegames_data
+  SRCS
+    savegamedata.cc
+    savegamedata.h
+    savegameloader.cc
+    savegameloader.h
+  DEPENDS
+    io_filesystem
+    logic
+    logic_constants
+    base_time_string
+    base
+    logic_game_controller
+    logic_addons
+    game_io
+    graphic_text_layout
+)
+
+wl_library(ui_shared_maps_data
+  SRCS
+    mapauthordata.h
+    mapdata.cc
+    mapdata.h
+  DEPENDS
+    base
+    io_profile
+    logic_map
+    io_filesystem
+    logic_filesystem_constants
+)
+
+wl_library(ui_shared_maps_ui
+  SRCS
+    mapdetails.cc
+    mapdetails.h
+    maptable.cc
+    maptable.h
+  DEPENDS
+    io_filesystem
+    base
+    logic_map
+    base_exceptions
+    ui_shared_maps_data
+    logic_game_settings
+    ui_basic
+    graphic
+    graphic_minimap_renderer
+    ui_shared_suggested_teams
+    logic
+    graphic_text_layout
+    map_io_map_loader
+    ui_shared_map_tags
+    logic_exceptions
+)
+
+wl_library(ui_shared_savegames_ui
+  SRCS
+    gamedetails.cc
+    gamedetails.h
+    load_or_save_game.cc
+    load_or_save_game.h
+    savegamedeleter.cc
+    savegamedeleter.h
+    savegametable.cc
+    savegametable.h
+  DEPENDS
+    io_filesystem
+    ui_basic
+    logic
+    map_io_map_loader
+    graphic_text_layout
+    graphic
+    base
+    graphic_minimap_renderer
+    io_filesystem
+    ui_basic
+    graphic_styles
+    graphic_mouse_cursor
+    logic_filesystem_constants
+    map_io_map_loader
+    base_macros
+    graphic_minimap_renderer
+    graphic_image_io
+    ui_shared_savegames_data
+    logic
+    graphic_surface
+    build_info
+    graphic
+    base
+    logic_game_controller
+    logic_addons
+    graphic_text_layout
+)
+
+wl_library(ui_shared_map_tags
+  SRCS
+    map_tags.cc
+    map_tags.h
+  DEPENDS
+    ui_basic
+    base
+)
+
+wl_library(ui_shared_unique_windows
+  SRCS
+    unique_window_handler.cc
+    unique_window_handler.h
+  DEPENDS
+    ui_basic
+    base_macros
+    ui_game_buildingwindows
+)
+
+wl_library(ui_shared_suggested_teams
+  SRCS
+    suggested_teams_box.cc
+    suggested_teams_box.h
+  DEPENDS
+    graphic_playercolor
+    ui_basic
+    graphic
+    base
+    logic_constants
+)
+
+wl_library(ui_shared_sound_options
+  SRCS
+    sound_options.cc
+    sound_options.h
+  DEPENDS
+    ui_basic
+    graphic_styles
+    graphic_fonthandler
+    base
+    widelands_options
+    sound
+    graphic_text_layout
+)
+

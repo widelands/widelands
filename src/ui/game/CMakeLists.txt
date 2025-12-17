@@ -1,0 +1,396 @@
+wl_library(ui_game_buildingwindows
+  SRCS
+    buildingwindow.cc
+    buildingwindow.h
+    constructionsitewindow.cc
+    constructionsitewindow.h
+    dismantlesitewindow.cc
+    dismantlesitewindow.h
+    marketwindow.cc
+    marketwindow.h
+    militarysitewindow.cc
+    militarysitewindow.h
+    productionsitewindow.cc
+    productionsitewindow.h
+    trainingsitewindow.cc
+    trainingsitewindow.h
+    warehousewindow.cc
+    warehousewindow.h
+  DEPENDS
+    ui_basic
+    wui_interactive
+    logic_map_objects
+    graphic_fonthandler
+    ui_game_soldierlist
+    base_macros
+    ui_game_economy_options
+    ui_game_actionconfirm
+    logic_exceptions
+    ui_game_wares_displays
+    logic
+    commands
+    graphic_surface
+    economy
+    ui_game_debug
+    graphic
+    widelands_options
+    base
+    ui_game_statistics
+    ui_shared_unique_windows
+    ui_game_help
+    graphic_text_layout
+)
+
+wl_library(ui_game_actionconfirm
+  SRCS
+    actionconfirm.cc
+    actionconfirm.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    graphic_fonthandler
+    logic
+    economy
+    logic_constants
+    base_macros
+)
+
+wl_library(ui_game_attack
+  SRCS
+    attack_window.cc
+    attack_window.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic
+    ui_game_debug
+    map_io
+    graphic
+    base
+    graphic_text_layout
+)
+
+wl_library(ui_game_statistics
+  SRCS
+    building_statistics_menu.cc
+    building_statistics_menu.h
+    general_statistics_menu.cc
+    general_statistics_menu.h
+    seafaring_statistics_menu.cc
+    seafaring_statistics_menu.h
+    soldier_statistics_menu.cc
+    soldier_statistics_menu.h
+    stock_menu.cc
+    stock_menu.h
+    ware_statistics_menu.cc
+    ware_statistics_menu.h
+  DEPENDS
+    ui_basic
+    graphic_styles
+    logic_map_objects
+    ui_game_map_object_windows
+    wui_interactive
+    graphic_color
+    scripting_lua_interface
+    wui_plot_area
+    graphic_playercolor
+    logic_exceptions
+    ui_game_wares_displays
+    logic
+    logic_constants
+    economy
+    graphic
+    widelands_options
+    base
+    scripting_lua_table
+    graphic_text_layout
+)
+
+wl_library(ui_game_chat
+  SRCS
+    chat_msg_layout.cc
+    chat_msg_layout.h
+    chat_overlay.cc
+    chat_overlay.h
+    game_chat_menu.cc
+    game_chat_menu.h
+    game_chat_panel.cc
+    game_chat_panel.h
+  USES_SDL2
+  DEPENDS
+    ui_basic
+    graphic_fonthandler
+    chat
+    graphic_text
+    network
+    graphic_playercolor
+    base_exceptions
+    graphic
+    widelands_options
+    base
+    sound
+    graphic_text_layout
+)
+
+wl_library(ui_game_economy_options
+  SRCS
+    economy_options_window.cc
+    economy_options_window.h
+    fleet_options_window.cc
+    fleet_options_window.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    notifications
+    graphic_fonthandler
+    commands
+    logic
+    logic_map_objects
+    logic_filesystem_constants
+    economy
+    map_io
+    graphic
+    base
+    logic_exceptions
+    ui_game_wares_displays
+    io_profile
+)
+
+wl_library(ui_game_sound_options
+  SRCS
+    game_options_sound_menu.cc
+    game_options_sound_menu.h
+    music_player.cc
+    music_player.h
+  DEPENDS
+    ui_shared_sound_options
+    ui_basic
+    graphic
+    base
+    sound
+)
+
+wl_library(ui_game_wares_displays
+  SRCS
+    inputqueuedisplay.cc
+    inputqueuedisplay.h
+    itemwaresdisplay.cc
+    itemwaresdisplay.h
+    portdockwaresdisplay.cc
+    portdockwaresdisplay.h
+    waresdisplay.cc
+    waresdisplay.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    graphic_fonthandler
+    ui_game_buildingwindows
+    ui_game_actionconfirm
+    logic
+    economy
+    logic_constants
+    base_exceptions
+    graphic_animation
+    graphic
+    widelands_options
+    base
+    graphic_text_layout
+)
+
+wl_library(ui_game_help
+  SRCS
+    helpwindow.cc
+    helpwindow.h
+    tribal_encyclopedia.cc
+    tribal_encyclopedia.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic
+    scripting_lua_interface
+    wui_encyclopedia
+    base
+    logic_game_controller
+    scripting_lua_table
+    scripting_coroutine
+    graphic_text_layout
+)
+
+wl_library(ui_game_soldierlist
+  SRCS
+    soldiercapacitycontrol.cc
+    soldiercapacitycontrol.h
+    soldierlist.cc
+    soldierlist.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    graphic_fonthandler
+    logic
+    base_macros
+    graphic
+    widelands_options
+)
+
+wl_library(ui_game_navigation
+  SRCS
+    quicknavigation.cc
+    quicknavigation.h
+    watchwindow.cc
+    watchwindow.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    ui_shared_unique_windows
+    base_macros
+    logic_widelands_geometry
+    logic_exceptions
+    logic
+    base_geometry
+    map_io
+    graphic_text_layout
+    widelands_options
+    base
+    wui_mapviewpixelfunctions
+    wui_main_ui
+    logic_map
+)
+
+wl_library(ui_game_toplevel_windows
+  SRCS
+    game_diplomacy_menu.cc
+    game_diplomacy_menu.h
+    game_message_menu.cc
+    game_message_menu.h
+    game_objectives_menu.cc
+    game_objectives_menu.h
+    story_message_box.cc
+    story_message_box.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic_objectives
+    graphic_fonthandler
+    ui_game_actionconfirm
+    logic_exceptions
+    logic
+    commands
+    base_time_string
+    base_exceptions
+    graphic
+    widelands_options
+    base
+    logic_game_controller
+    graphic_text_layout
+)
+
+wl_library(ui_game_map_object_windows
+  SRCS
+    pinned_note.cc
+    pinned_note.h
+    shipwindow.cc
+    shipwindow.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic
+    ui_game_soldierlist
+    economy
+    ui_game_debug
+    map_io
+    base_macros
+    graphic_animation
+    ui_game_actionconfirm
+    logic_exceptions
+    ui_game_wares_displays
+)
+
+wl_library(ui_game_fieldaction
+  SRCS
+    fieldaction.cc
+    fieldaction.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic
+    ui_game_navigation
+    economy
+    ui_game_debug
+    base_macros
+    graphic
+    base
+    ui_game_economy_options
+    ui_game_actionconfirm
+    ui_game_wares_displays
+    logic_map
+)
+
+wl_library(ui_game_savegame
+  SRCS
+    game_main_menu_save_game.cc
+    game_main_menu_save_game.h
+  DEPENDS
+    io_filesystem
+    wui_interactive
+    ui_basic
+    logic
+    ui_shared_savegames_ui
+    logic_filesystem_constants
+    logic_generic_save_handler
+    widelands_options
+    base
+    io_filesystem_illegal_filename_check
+    logic_game_controller
+    game_io
+)
+
+wl_library(ui_game_notice_boxes
+  SRCS
+    game_client_disconnected.cc
+    game_client_disconnected.h
+    game_exit_confirm_box.cc
+    game_exit_confirm_box.h
+    game_summary.cc
+    game_summary.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic
+    logic_game_settings
+    base_time_string
+    network
+    graphic_playercolor
+    base
+    logic_game_controller
+    ai
+)
+
+wl_library(ui_game_debug
+  SRCS
+    game_debug_ui.cc
+    game_debug_ui.h
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    logic
+    logic_widelands_geometry
+    base
+    logic_map
+)
+

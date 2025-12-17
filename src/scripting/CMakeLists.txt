@@ -263,7 +263,10 @@ wl_library(scripting_logic
     third_party_eris
     ui_basic
     ui_fsmenu
+    ui_game_economy_options
+    ui_game_navigation
+    ui_game_toplevel_windows
     widelands_options
-    wui
-    wui_mapview_pixelfunctions
+    wui_interactive
+    wui_mapviewpixelfunctions
 )

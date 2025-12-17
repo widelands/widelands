@@ -18,7 +18,7 @@
 
 #include "editor/tools/history.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "editor/tools/action_args.h"
 #include "editor/tools/tool_action.h"
 

@@ -18,7 +18,7 @@
 
 #include "editor/tools/set_port_space_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/mapfringeregion.h"

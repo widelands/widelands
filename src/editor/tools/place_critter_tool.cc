@@ -18,7 +18,7 @@
 
 #include "editor/tools/place_critter_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"

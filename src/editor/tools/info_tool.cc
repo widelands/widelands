@@ -18,9 +18,9 @@
 
 #include "editor/tools/info_tool.h"
 
-#include "editor/ui_menus/field_info_window.h"
+#include "ui/editor/field_info_window.h"
 #include "graphic/style_manager.h"
-#include "wui/unique_window_handler.h"
+#include "ui/shared/unique_window_handler.h"
 
 constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.

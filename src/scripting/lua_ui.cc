@@ -47,9 +47,9 @@
 #include "scripting/ui/lua_text_input_panel.h"
 #include "scripting/ui/lua_textarea.h"
 #include "scripting/ui/lua_window.h"
-#include "ui_basic/messagebox.h"
+#include "ui/basic/messagebox.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace LuaUi {
 

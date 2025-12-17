@@ -32,7 +32,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
-#include "wui/mapviewpixelfunctions.h"
+#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace {
 

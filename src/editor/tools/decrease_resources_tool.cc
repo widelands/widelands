@@ -18,7 +18,7 @@
 
 #include "editor/tools/decrease_resources_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/field.h"

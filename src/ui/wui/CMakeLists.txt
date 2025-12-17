@@ -1,0 +1,185 @@
+wl_library(wui_mapviewpixelfunctions
+  SRCS
+    mapviewpixelconstants.cc
+    mapviewpixelconstants.h
+    mapviewpixelfunctions.cc
+    mapviewpixelfunctions.h
+  DEPENDS
+    logic_map
+    base_geometry
+    logic_widelands_geometry
+)
+
+wl_library(wui_interactive
+  SRCS
+    interactive_base.cc
+    interactive_base.h
+    interactive_gamebase.cc
+    interactive_gamebase.h
+    interactive_player.cc
+    interactive_player.h
+    interactive_spectator.cc
+    interactive_spectator.h
+  USES_SDL2
+  DEPENDS
+    ui_basic
+    logic_map_objects
+    graphic_fonthandler
+    ui_game_map_object_windows
+    wui_minimap
+    ui_game_buildingwindows
+    logic_widelands_geometry
+    ui_game_economy_options
+    ui_game_notice_boxes
+    logic_exceptions
+    ui_game_wares_displays
+    graphic_render_queue
+    sound
+    ui_game_toplevel_windows
+    ui_game_savegame
+    wui_encyclopedia
+    graphic
+    base
+    widelands_options
+    wui_main_ui
+    io_profile
+    logic_game_controller
+    logic_map
+    graphic_mouse_cursor
+    ui_game_navigation
+    graphic_color
+    ui_game_sound_options
+    chat
+    wui_debugconsole
+    scripting_lua_interface
+    network
+    base_macros
+    game_io
+    ui_game_fieldaction
+    graphic_game_renderer
+    logic
+    economy
+    ui_game_chat
+    ui_game_attack
+    base_math
+    ui_game_debug
+    base_time_string
+    note_sound
+    ui_game_statistics
+    wui_mapviewpixelfunctions
+    ui_shared_unique_windows
+    ui_game_help
+    graphic_text_layout
+)
+
+wl_library(wui_main_ui
+  SRCS
+    info_panel.cc
+    info_panel.h
+    mapview.cc
+    mapview.h
+    plugins.cc
+    plugins.h
+    toolbar.cc
+    toolbar.h
+  USES_SDL2
+  DEPENDS
+    ui_basic
+    wui_interactive
+    logic_map_objects
+    graphic_fonthandler
+    base_macros
+    logic_widelands_geometry
+    widelands_ball_of_mud
+    graphic_game_renderer
+    logic
+    graphic_fields_to_draw
+    commands
+    base_geometry
+    base_math
+    base_time_string
+    graphic_text_layout
+    graphic
+    base
+    widelands_options
+    graphic_toolbar_imageset
+    wui_mapviewpixelfunctions
+    logic_map
+)
+
+wl_library(wui_minimap
+  SRCS
+    minimap.cc
+    minimap.h
+  USES_SDL2
+  DEPENDS
+    wui_interactive
+    ui_basic
+    logic_map
+    graphic_surface
+    graphic
+    base
+    logic_exceptions
+    graphic_minimap_renderer
+)
+
+wl_library(wui_game_tips
+  SRCS
+    game_tips.cc
+    game_tips.h
+  USES_SDL2
+  DEPENDS
+    io_filesystem
+    ui_basic
+    graphic_fonthandler
+    logic_filesystem_constants
+    scripting_lua_interface
+    graphic_functions
+    base_random
+    graphic
+    base
+    scripting_lua_table
+    logic_tribe_basic_info
+)
+
+wl_library(wui_encyclopedia
+  SRCS
+    encyclopedia_window.cc
+    encyclopedia_window.h
+  DEPENDS
+    io_filesystem
+    wui_interactive
+    ui_basic
+    logic_map_objects
+    scripting_lua_interface
+    graphic
+    base
+    logic_exceptions
+    scripting_lua_table
+    scripting_coroutine
+    graphic_text_layout
+)
+
+wl_library(wui_plot_area
+  SRCS
+    plot_area.cc
+    plot_area.h
+  DEPENDS
+    graphic_color
+    ui_basic
+    base_exceptions
+    graphic_fonthandler
+    graphic
+    base
+    graphic_text_layout
+)
+
+wl_library(wui_debugconsole
+  SRCS
+    debugconsole.cc
+    debugconsole.h
+  DEPENDS
+    chat
+    base
+)
+

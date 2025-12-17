@@ -23,7 +23,7 @@
 
 #include "editor/tools/draw_tool.h"
 #include "editor/tools/tool.h"
-#include "ui_basic/button.h"
+#include "ui/basic/button.h"
 
 /**
  * The all actions done with an editor tool are saved on a stack to

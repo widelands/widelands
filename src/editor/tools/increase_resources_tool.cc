@@ -18,7 +18,7 @@
 
 #include "editor/tools/increase_resources_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"

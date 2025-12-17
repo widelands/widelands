@@ -215,7 +215,7 @@ wl_library(graphic_minimap_renderer
     logic_constants
     logic_map
     logic_map_objects
-    wui_mapview_pixelfunctions
+    wui_mapviewpixelfunctions
 )
 
 wl_library(graphic_fields_to_draw
@@ -231,7 +231,7 @@ wl_library(graphic_fields_to_draw
     logic_constants
     logic_map_objects
     logic_widelands_geometry
-    wui_mapview_pixelfunctions
+    wui_mapviewpixelfunctions
 )
 
 wl_library(graphic_terrain_programs
@@ -260,7 +260,7 @@ wl_library(graphic_terrain_programs
     logic
     logic_map_objects
     logic_map_objects_description_maintainer
-    wui_mapview_pixelconstants
+    wui_mapviewpixelfunctions
 )
 
 

@@ -18,7 +18,7 @@
 
 #include "editor/tools/set_starting_pos_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 
 // global variable to pass data from callback to class

@@ -1,0 +1,105 @@
+/*
+ * Copyright (C) 2002-2025 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+#ifndef WL_UI_FSMENU_MAPSELECT_H
+#define WL_UI_FSMENU_MAPSELECT_H
+
+#include <memory>
+
+#include "logic/game.h"
+#include "ui/basic/box.h"
+#include "ui/basic/checkbox.h"
+#include "ui/basic/dropdown.h"
+#include "ui/fsmenu/menu.h"
+#include "ui/shared/mapdetails.h"
+#include "ui/shared/maptable.h"
+
+struct GameSettingsProvider;
+
+namespace FsMenu {
+
+class LaunchMPG;
+
+/**
+ * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
+ */
+class MapSelect : public TwoColumnsFullNavigationMenu {
+public:
+	MapSelect(MenuCapsule&,
+	          LaunchMPG* /* nullptr for single player */,
+	          GameSettingsProvider*,
+	          GameController*,
+	          std::shared_ptr<Widelands::Game> for_preview);
+	~MapSelect() override;
+
+	MapData const* get_map() const;
+	void think() override;
+
+protected:
+	void clicked_ok() override;
+	void clicked_back() override;
+	void entry_selected();
+	void fill_table();
+
+private:
+	LaunchMPG* parent_screen_;
+
+	/// Updates buttons and text labels and returns whether a table entry is selected.
+	bool set_has_selection();
+	void navigate_directory(const std::vector<std::string>& filenames,
+	                        const std::string& localized_name);
+	UI::Checkbox* add_tag_checkbox(UI::Box* box, const std::string& tag);
+	void tagbox_changed(int32_t, bool);
+	void clear_filter();
+	void rebuild_balancing_dropdown();
+
+	std::shared_ptr<Widelands::Game> game_for_preview_;
+
+	UI::Box checkboxes_;
+
+	MapTable table_;
+	MapDetails map_details_;
+
+	Widelands::Map::ScenarioTypes scenario_types_;
+
+	const std::string basedir_;
+	std::vector<std::string> curdir_;
+
+	GameSettingsProvider* settings_;
+	GameController* ctrl_;
+
+	UI::Checkbox* cb_dont_localize_mapnames_;
+	bool has_translated_mapname_{false};
+
+	UI::Button* show_all_maps_;
+	std::vector<UI::Checkbox*> tags_checkboxes_;
+
+	UI::Dropdown<std::string>* official_tags_dropdown_;
+
+	UI::Dropdown<std::string>* balancing_tags_dropdown_;
+	bool unspecified_balancing_found_{false};  // Backwards compatibility
+
+	UI::Dropdown<std::string>* team_tags_dropdown_;
+
+	std::vector<std::string> tags_ordered_;
+	std::set<uint32_t> req_tags_;
+
+	bool update_map_details_{false};
+};
+}  // namespace FsMenu
+#endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

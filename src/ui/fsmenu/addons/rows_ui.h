@@ -1,0 +1,97 @@
+/*
+ * Copyright (C) 2021-2025 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+#ifndef WL_UI_FSMENU_ADDONS_ROWS_UI_H
+#define WL_UI_FSMENU_ADDONS_ROWS_UI_H
+
+#include <memory>
+
+#include "logic/addons.h"
+#include "ui/basic/button.h"
+#include "ui/basic/icon.h"
+#include "ui/basic/multilinetextarea.h"
+#include "ui/basic/textarea.h"
+
+namespace AddOnsUI {
+
+class AddOnsCtrl;
+
+class InstalledAddOnRow : public UI::Panel {
+public:
+	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
+	~InstalledAddOnRow() override = default;
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
+		return info_;
+	}
+	void layout() override;
+	void draw(RenderTarget&) override;
+
+private:
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	bool enabled_;
+	UI::Button uninstall_, toggle_enabled_;
+	UI::Icon icon_, category_;
+	UI::Textarea version_;
+	UI::MultilineTextarea txt_;
+};
+
+class RemoteAddOnRow : public UI::Panel {
+public:
+	RemoteAddOnRow(Panel*,
+	               AddOnsCtrl*,
+	               std::shared_ptr<AddOns::AddOnInfo>,
+	               const AddOns::AddOnVersion& installed_version,
+	               uint32_t installed_i18n_version);
+	~RemoteAddOnRow() override = default;
+	void layout() override;
+	void draw(RenderTarget&) override;
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
+		return info_;
+	}
+
+private:
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	UI::Button install_, upgrade_, uninstall_, interact_;
+	UI::Icon icon_, category_, verified_, quality_;
+	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
+	UI::MultilineTextarea txt_;
+
+	const bool full_upgrade_possible_;
+};
+
+class MapRow : public UI::Panel {
+public:
+	MapRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool installed);
+	~MapRow() override = default;
+	void layout() override;
+	void draw(RenderTarget&) override;
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
+		return info_;
+	}
+
+private:
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	UI::Icon minimap_;
+	UI::Button install_, uninstall_, interact_;
+	UI::MultilineTextarea txt_;
+	UI::Textarea bottom_row_;
+};
+
+}  // namespace AddOnsUI
+
+#endif  // end of include guard: WL_UI_FSMENU_ADDONS_ROWS_UI_H

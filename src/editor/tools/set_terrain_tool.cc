@@ -20,7 +20,7 @@
 
 #include <sstream>
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/maptriangleregion.h"
 

@@ -20,7 +20,7 @@
 
 #include <sstream>
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
 

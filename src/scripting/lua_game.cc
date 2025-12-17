@@ -36,8 +36,8 @@
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_tribe_description.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/story_message_box.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/game/story_message_box.h"
 
 namespace LuaGame {
 
