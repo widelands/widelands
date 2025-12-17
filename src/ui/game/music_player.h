@@ -15,8 +15,8 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WL_WUI_MUSIC_PLAYER_H
-#define WL_WUI_MUSIC_PLAYER_H
+#ifndef WL_UI_GAME_MUSIC_PLAYER_H
+#define WL_UI_GAME_MUSIC_PLAYER_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
@@ -49,4 +49,4 @@ private:
 	UI::Textarea label_current_track_;
 };
 
-#endif  // WL_WUI_MUSIC_PLAYER_H
+#endif  // WL_UI_GAME_MUSIC_PLAYER_H

@@ -15,8 +15,8 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
-#ifndef WL_WUI_INFO_PANEL_H
-#define WL_WUI_INFO_PANEL_H
+#ifndef WL_UI_WUI_INFO_PANEL_H
+#define WL_UI_WUI_INFO_PANEL_H
 
 #include <list>
 #include <memory>
@@ -126,4 +126,4 @@ private:
 	std::string speed_string_;
 };
 
-#endif  // end of include guard: WL_WUI_INFO_PANEL_H
+#endif  // end of include guard: WL_UI_WUI_INFO_PANEL_H

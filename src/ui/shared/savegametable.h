@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SAVEGAMETABLE_H
-#define WL_WUI_SAVEGAMETABLE_H
+#ifndef WL_UI_SHARED_SAVEGAMETABLE_H
+#define WL_UI_SHARED_SAVEGAMETABLE_H
 
 #include "ui/basic/table.h"
 #include "ui/shared/savegamedata.h"
@@ -85,4 +85,4 @@ private:
 	                        const SavegameData& savegame) override;
 };
 
-#endif  // WL_WUI_SAVEGAMETABLE_H
+#endif  // WL_UI_SHARED_SAVEGAMETABLE_H

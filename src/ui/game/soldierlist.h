@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SOLDIERLIST_H
-#define WL_WUI_SOLDIERLIST_H
+#ifndef WL_UI_GAME_SOLDIERLIST_H
+#define WL_UI_GAME_SOLDIERLIST_H
 
 class InteractiveBase;
 
@@ -32,4 +32,4 @@ class MapObject;
 UI::Panel*
 create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::MapObject& building_or_ship);
 
-#endif  // end of include guard: WL_WUI_SOLDIERLIST_H
+#endif  // end of include guard: WL_UI_GAME_SOLDIERLIST_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPTABLE_H
-#define WL_WUI_MAPTABLE_H
+#ifndef WL_UI_SHARED_MAPTABLE_H
+#define WL_UI_SHARED_MAPTABLE_H
 
 #include <optional>
 #include <string>
@@ -79,4 +79,4 @@ struct MapEntry {
 void find_maps(const std::string& directory, std::vector<MapEntry>& results);
 std::optional<MapData> newest_edited_map();
 
-#endif  // end of include guard: WL_WUI_MAPTABLE_H
+#endif  // end of include guard: WL_UI_SHARED_MAPTABLE_H

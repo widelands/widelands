@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_UNIQUE_WINDOW_HANDLER_H
-#define WL_WUI_UNIQUE_WINDOW_HANDLER_H
+#ifndef WL_UI_SHARED_UNIQUE_WINDOW_HANDLER_H
+#define WL_UI_SHARED_UNIQUE_WINDOW_HANDLER_H
 
 #include <map>
 
@@ -45,4 +45,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(UniqueWindowHandler);
 };
 
-#endif  // end of include guard: WL_WUI_UNIQUE_WINDOW_HANDLER_H
+#endif  // end of include guard: WL_UI_SHARED_UNIQUE_WINDOW_HANDLER_H

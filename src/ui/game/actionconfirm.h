@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ACTIONCONFIRM_H
-#define WL_WUI_ACTIONCONFIRM_H
+#ifndef WL_UI_GAME_ACTIONCONFIRM_H
+#define WL_UI_GAME_ACTIONCONFIRM_H
 
 #include <functional>
 
@@ -68,4 +68,4 @@ void show_resume_trade_confirm(InteractivePlayer& player,
 
 void show_trade_extension_dialog(InteractivePlayer& player, Widelands::TradeID trade_id);
 
-#endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H
+#endif  // end of include guard: WL_UI_GAME_ACTIONCONFIRM_H

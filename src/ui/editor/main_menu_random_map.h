@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
+#ifndef WL_UI_EDITOR_MAIN_MENU_RANDOM_MAP_H
+#define WL_UI_EDITOR_MAIN_MENU_RANDOM_MAP_H
 
 #include <memory>
 
@@ -154,4 +154,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
+#endif  // end of include guard: WL_UI_EDITOR_MAIN_MENU_RANDOM_MAP_H

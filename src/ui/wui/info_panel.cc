@@ -82,7 +82,7 @@ void MessagePreview::draw(RenderTarget& r) {
 		return;
 	}
 
-	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get("ui/game/windows/background.png"),
+	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get("wui/windows/background.png"),
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
@@ -207,7 +207,7 @@ void InfoPanel::rebuild_dropdown() {
 	toggle_mode_.clear();
 
 	toggle_mode_.add(_("Pin"), UI::ToolbarDisplayMode::kPinned,
-	                 g_image_cache->get("ui/game/windows/pin.png"),
+	                 g_image_cache->get("wui/windows/pin.png"),
 	                 display_mode_ == UI::ToolbarDisplayMode::kPinned);
 	toggle_mode_.add(_("Follow mouse"), UI::ToolbarDisplayMode::kOnMouse_Visible,
 	                 g_image_cache->get("images/ui_basic/fsel.png"),
@@ -215,13 +215,13 @@ void InfoPanel::rebuild_dropdown() {
 	                    display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden);
 	toggle_mode_.add(
 	   _("Hide"), UI::ToolbarDisplayMode::kMinimized,
-	   g_image_cache->get(on_top_ ? "ui/game/windows/minimize.png" : "ui/game/windows/maximize.png"),
+	   g_image_cache->get(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png"),
 	   display_mode_ == UI::ToolbarDisplayMode::kMinimized);
 
 	toggle_mode_.add(
 	   on_top_ ? _("Move panel to bottom") : _("Move panel to top"),
 	   UI::ToolbarDisplayMode::kCmdSwap,
-	   g_image_cache->get(on_top_ ? "ui/game/windows/maximize.png" : "ui/game/windows/minimize.png"));
+	   g_image_cache->get(on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png"));
 
 	toggle_mode_.selected.connect([this]() {
 		update_mode();

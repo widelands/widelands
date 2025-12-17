@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAME_TIPS_H
-#define WL_WUI_GAME_TIPS_H
+#ifndef WL_UI_WUI_GAME_TIPS_H
+#define WL_UI_WUI_GAME_TIPS_H
 
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "ui/basic/progresswindow.h"
@@ -49,4 +49,4 @@ private:
 	std::vector<Tip> tips_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_TIPS_H
+#endif  // end of include guard: WL_UI_WUI_GAME_TIPS_H

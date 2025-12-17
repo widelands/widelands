@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SAVEGAMEDELETER_H
-#define WL_WUI_SAVEGAMEDELETER_H
+#ifndef WL_UI_SHARED_SAVEGAMEDELETER_H
+#define WL_UI_SHARED_SAVEGAMEDELETER_H
 
 #include <string>
 #include <vector>
@@ -69,4 +69,4 @@ private:
 	try_to_delete(const std::vector<SavegameData>& to_be_deleted) const override;
 };
 
-#endif  // WL_WUI_SAVEGAMEDELETER_H
+#endif  // WL_UI_SHARED_SAVEGAMEDELETER_H

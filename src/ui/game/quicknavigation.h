@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_QUICKNAVIGATION_H
-#define WL_WUI_QUICKNAVIGATION_H
+#ifndef WL_UI_GAME_QUICKNAVIGATION_H
+#define WL_UI_GAME_QUICKNAVIGATION_H
 
 #include <memory>
 
@@ -116,4 +116,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteQuicknavChangedEvent>> subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H
+#endif  // end of include guard: WL_UI_GAME_QUICKNAVIGATION_H

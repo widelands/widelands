@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#ifndef WL_UI_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#define WL_UI_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
@@ -55,4 +55,4 @@ private:
 	void clicked_ok();
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#endif  // end of include guard: WL_UI_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H

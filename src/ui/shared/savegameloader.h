@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SAVEGAMELOADER_H
-#define WL_WUI_SAVEGAMELOADER_H
+#ifndef WL_UI_SHARED_SAVEGAMELOADER_H
+#define WL_UI_SHARED_SAVEGAMELOADER_H
 
 #include <optional>
 #include <string>
@@ -106,4 +106,4 @@ private:
 
 std::optional<SavegameData> newest_saved_game_or_replay(bool find_replay = false);
 
-#endif  // WL_WUI_SAVEGAMELOADER_H
+#endif  // WL_UI_SHARED_SAVEGAMELOADER_H

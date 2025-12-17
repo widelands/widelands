@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAME_SUMMARY_H
-#define WL_WUI_GAME_SUMMARY_H
+#ifndef WL_UI_GAME_GAME_SUMMARY_H
+#define WL_UI_GAME_GAME_SUMMARY_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
@@ -62,4 +62,4 @@ private:
 	UI::Table<const Widelands::PlayerEndStatus&>* players_table_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_SUMMARY_H
+#endif  // end of include guard: WL_UI_GAME_GAME_SUMMARY_H

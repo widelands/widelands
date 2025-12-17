@@ -17,8 +17,8 @@
  */
 // UI classes for real-time game debugging
 
-#ifndef WL_WUI_GAME_DEBUG_UI_H
-#define WL_WUI_GAME_DEBUG_UI_H
+#ifndef WL_UI_GAME_GAME_DEBUG_UI_H
+#define WL_UI_GAME_GAME_DEBUG_UI_H
 
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
@@ -91,4 +91,4 @@ private:
 	UI::Listselect<intptr_t> ui_bobs_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_DEBUG_UI_H
+#endif  // end of include guard: WL_UI_GAME_GAME_DEBUG_UI_H

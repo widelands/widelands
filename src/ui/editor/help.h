@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_HELP_H
-#define WL_EDITOR_UI_MENUS_HELP_H
+#ifndef WL_UI_EDITOR_HELP_H
+#define WL_UI_EDITOR_HELP_H
 
 #include "scripting/lua_interface.h"
 #include "ui/basic/unique_window.h"
@@ -29,4 +29,4 @@ struct EditorHelp : public UI::EncyclopediaWindow {
 	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_HELP_H
+#endif  // end of include guard: WL_UI_EDITOR_HELP_H

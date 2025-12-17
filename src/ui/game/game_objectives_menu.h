@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
-#define WL_WUI_GAME_OBJECTIVES_MENU_H
+#ifndef WL_UI_GAME_GAME_OBJECTIVES_MENU_H
+#define WL_UI_GAME_GAME_OBJECTIVES_MENU_H
 
 #include "logic/game.h"
 #include "ui/basic/box.h"
@@ -55,4 +55,4 @@ private:
 	UI::MultilineTextarea objective_text_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H
+#endif  // end of include guard: WL_UI_GAME_GAME_OBJECTIVES_MENU_H

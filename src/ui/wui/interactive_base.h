@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_INTERACTIVE_BASE_H
-#define WL_WUI_INTERACTIVE_BASE_H
+#ifndef WL_UI_WUI_INTERACTIVE_BASE_H
+#define WL_UI_WUI_INTERACTIVE_BASE_H
 
 #include <map>
 #include <memory>
@@ -509,4 +509,4 @@ private:
 	bool screenshot_failed_{false};
 };
 
-#endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H
+#endif  // end of include guard: WL_UI_WUI_INTERACTIVE_BASE_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_TRIBAL_ENCYCLOPEDIA_H
-#define WL_WUI_TRIBAL_ENCYCLOPEDIA_H
+#ifndef WL_UI_GAME_TRIBAL_ENCYCLOPEDIA_H
+#define WL_UI_GAME_TRIBAL_ENCYCLOPEDIA_H
 
 #include "scripting/lua_interface.h"
 #include "ui/basic/unique_window.h"
@@ -29,4 +29,4 @@ struct TribalEncyclopedia : public UI::EncyclopediaWindow {
 	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
-#endif  // end of include guard: WL_WUI_TRIBAL_ENCYCLOPEDIA_H
+#endif  // end of include guard: WL_UI_GAME_TRIBAL_ENCYCLOPEDIA_H

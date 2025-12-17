@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_WAREHOUSEWINDOW_H
-#define WL_WUI_WAREHOUSEWINDOW_H
+#ifndef WL_UI_GAME_WAREHOUSEWINDOW_H
+#define WL_UI_GAME_WAREHOUSEWINDOW_H
 
 #include "logic/map_objects/tribes/warehouse.h"
 #include "ui/game/buildingwindow.h"
@@ -41,4 +41,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseWindow);
 };
 
-#endif  // end of include guard: WL_WUI_WAREHOUSEWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_WAREHOUSEWINDOW_H

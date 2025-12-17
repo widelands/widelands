@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
+#ifndef WL_UI_EDITOR_TOOL_TOOLHISTORY_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_TOOLHISTORY_OPTIONS_MENU_H
 
 #include "editor/tools/tool_action.h"
 #include "ui/editor/tool_options_menu.h"
@@ -47,4 +47,4 @@ private:
 	UI::Listselect<std::string> list_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_TOOLHISTORY_OPTIONS_MENU_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_TOOLBAR_H
-#define WL_WUI_TOOLBAR_H
+#ifndef WL_UI_WUI_TOOLBAR_H
+#define WL_UI_WUI_TOOLBAR_H
 
 #include "graphic/toolbar_imageset.h"
 #include "ui/basic/box.h"
@@ -47,4 +47,4 @@ private:
 	int repeat_{0};
 };
 
-#endif  // end of include guard: WL_WUI_TOOLBAR_H
+#endif  // end of include guard: WL_UI_WUI_TOOLBAR_H

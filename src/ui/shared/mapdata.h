@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPDATA_H
-#define WL_WUI_MAPDATA_H
+#ifndef WL_UI_SHARED_MAPDATA_H
+#define WL_UI_SHARED_MAPDATA_H
 
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
@@ -89,4 +89,4 @@ public:
 	std::string minimum_required_widelands_version;
 };
 
-#endif  // end of include guard: WL_WUI_MAPDATA_H
+#endif  // end of include guard: WL_UI_SHARED_MAPDATA_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_FIELDACTION_H
-#define WL_WUI_FIELDACTION_H
+#ifndef WL_UI_GAME_FIELDACTION_H
+#define WL_UI_GAME_FIELDACTION_H
 
 #include "ui/basic/unique_window.h"
 
@@ -40,4 +40,4 @@ void show_ship_selection_window(InteractiveBase* ibase,
                                 const std::vector<Widelands::Ship*>& manageable,
                                 const std::vector<Widelands::Ship*>& attackable);
 
-#endif  // end of include guard: WL_WUI_FIELDACTION_H
+#endif  // end of include guard: WL_UI_GAME_FIELDACTION_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MINIMAP_H
-#define WL_WUI_MINIMAP_H
+#ifndef WL_UI_WUI_MINIMAP_H
+#define WL_UI_WUI_MINIMAP_H
 
 #include <memory>
 
@@ -136,4 +136,4 @@ private:
 	UI::Button button_zoom;
 };
 
-#endif  // end of include guard: WL_WUI_MINIMAP_H
+#endif  // end of include guard: WL_UI_WUI_MINIMAP_H

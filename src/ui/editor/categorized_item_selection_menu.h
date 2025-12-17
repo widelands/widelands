@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
-#define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
+#ifndef WL_UI_EDITOR_CATEGORIZED_ITEM_SELECTION_MENU_H
+#define WL_UI_EDITOR_CATEGORIZED_ITEM_SELECTION_MENU_H
 
 #include <memory>
 
@@ -214,4 +214,4 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_selection()
 	protect_against_recursive_select_ = false;
 }
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_CATEGORIZED_ITEM_SELECTION_MENU_H

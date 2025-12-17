@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPVIEWPIXELFUNCTIONS_H
-#define WL_WUI_MAPVIEWPIXELFUNCTIONS_H
+#ifndef WL_UI_WUI_MAPVIEWPIXELFUNCTIONS_H
+#define WL_UI_WUI_MAPVIEWPIXELFUNCTIONS_H
 
 #include "base/vector.h"
 #include "logic/field.h"
@@ -96,4 +96,4 @@ inline Vector2f to_map_pixel_with_normalization(const Widelands::Map& map,
 
 }  // namespace MapviewPixelFunctions
 
-#endif  // end of include guard: WL_WUI_MAPVIEWPIXELFUNCTIONS_H
+#endif  // end of include guard: WL_UI_WUI_MAPVIEWPIXELFUNCTIONS_H

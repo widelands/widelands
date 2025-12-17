@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
+#ifndef WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
 
 #include "ui/editor/editorinteractive.h"
 #include "editor/tools/tool.h"
@@ -64,4 +64,4 @@ protected:
 	EditorTool& current_tool_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_OPTIONS_MENU_H

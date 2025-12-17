@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_H
+#ifndef WL_UI_EDITOR_MAIN_MENU_LOAD_MAP_H
+#define WL_UI_EDITOR_MAIN_MENU_LOAD_MAP_H
 
 #include "ui/editor/editorinteractive.h"
 #include "ui/editor/main_menu_load_or_save_map.h"
@@ -37,4 +37,4 @@ private:
 	void entry_selected();
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_H
+#endif  // end of include guard: WL_UI_EDITOR_MAIN_MENU_LOAD_MAP_H

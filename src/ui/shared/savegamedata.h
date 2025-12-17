@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SAVEGAMEDATA_H
-#define WL_WUI_SAVEGAMEDATA_H
+#ifndef WL_UI_SHARED_SAVEGAMEDATA_H
+#define WL_UI_SHARED_SAVEGAMEDATA_H
 
 #include <string>
 
@@ -101,4 +101,4 @@ private:
 	SavegameType type_{SavegameType::kSavegame};
 };
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
-#endif  // WL_WUI_SAVEGAMEDATA_H
+#endif  // WL_UI_SHARED_SAVEGAMEDATA_H

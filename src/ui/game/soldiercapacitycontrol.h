@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SOLDIERCAPACITYCONTROL_H
-#define WL_WUI_SOLDIERCAPACITYCONTROL_H
+#ifndef WL_UI_GAME_SOLDIERCAPACITYCONTROL_H
+#define WL_UI_GAME_SOLDIERCAPACITYCONTROL_H
 
 class InteractiveBase;
 
@@ -33,4 +33,4 @@ UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
                                            InteractiveBase&,
                                            Widelands::MapObject& building_or_ship);
 
-#endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H
+#endif  // end of include guard: WL_UI_GAME_SOLDIERCAPACITYCONTROL_H

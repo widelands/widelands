@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_PLAYER_MENU_H
-#define WL_EDITOR_UI_MENUS_PLAYER_MENU_H
+#ifndef WL_UI_EDITOR_PLAYER_MENU_H
+#define WL_UI_EDITOR_PLAYER_MENU_H
 
 #include <memory>
 
@@ -70,4 +70,4 @@ private:
 	std::vector<std::unique_ptr<PlayerEditRow>> rows_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_PLAYER_MENU_H

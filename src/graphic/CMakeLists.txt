@@ -305,6 +305,7 @@ wl_library(graphic_wordwrap
     graphic_fonthandler
     graphic_text
     graphic_text_layout
+    ui_basic
 )
 
 

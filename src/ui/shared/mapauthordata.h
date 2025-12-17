@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPAUTHORDATA_H
-#define WL_WUI_MAPAUTHORDATA_H
+#ifndef WL_UI_SHARED_MAPAUTHORDATA_H
+#define WL_UI_SHARED_MAPAUTHORDATA_H
 
 #include "base/i18n.h"
 #include "base/string.h"
@@ -67,4 +67,4 @@ private:
 	size_t number_;
 };
 
-#endif  // end of include guard: WL_WUI_MAPAUTHORDATA_H
+#endif  // end of include guard: WL_UI_SHARED_MAPAUTHORDATA_H

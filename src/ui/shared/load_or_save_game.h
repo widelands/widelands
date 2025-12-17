@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_LOAD_OR_SAVE_GAME_H
-#define WL_WUI_LOAD_OR_SAVE_GAME_H
+#ifndef WL_UI_SHARED_LOAD_OR_SAVE_GAME_H
+#define WL_UI_SHARED_LOAD_OR_SAVE_GAME_H
 
 #include <memory>
 
@@ -121,4 +121,4 @@ private:
 	void select_item_and_scroll_to_it(std::set<uint32_t>& selections);
 };
 
-#endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H
+#endif  // end of include guard: WL_UI_SHARED_LOAD_OR_SAVE_GAME_H

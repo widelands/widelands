@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_PLUGINS_H
-#define WL_WUI_PLUGINS_H
+#ifndef WL_UI_WUI_PLUGINS_H
+#define WL_UI_WUI_PLUGINS_H
 
 #include <cstdint>
 #include <functional>
@@ -110,4 +110,4 @@ private:
 	std::map<std::pair<KeyboardShortcut, bool /*down*/>, CustomKeyboardShortcut> keyboard_shortcuts_;
 };
 
-#endif  // end of include guard: WL_WUI_PLUGINS_H
+#endif  // end of include guard: WL_UI_WUI_PLUGINS_H

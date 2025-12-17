@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_STOCK_MENU_H
-#define WL_WUI_STOCK_MENU_H
+#ifndef WL_UI_GAME_STOCK_MENU_H
+#define WL_UI_GAME_STOCK_MENU_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/checkbox.h"
@@ -61,4 +61,4 @@ private:
 	StockMenuWaresDisplay* warehouse_workers_;
 };
 
-#endif  // end of include guard: WL_WUI_STOCK_MENU_H
+#endif  // end of include guard: WL_UI_GAME_STOCK_MENU_H

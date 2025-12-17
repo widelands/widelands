@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SEAFARING_STATISTICS_MENU_H
-#define WL_WUI_SEAFARING_STATISTICS_MENU_H
+#ifndef WL_UI_GAME_SEAFARING_STATISTICS_MENU_H
+#define WL_UI_GAME_SEAFARING_STATISTICS_MENU_H
 
 #include <memory>
 
@@ -161,4 +161,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_SEAFARING_STATISTICS_MENU_H
+#endif  // end of include guard: WL_UI_GAME_SEAFARING_STATISTICS_MENU_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_DISMANTLESITEWINDOW_H
-#define WL_WUI_DISMANTLESITEWINDOW_H
+#ifndef WL_UI_GAME_DISMANTLESITEWINDOW_H
+#define WL_UI_GAME_DISMANTLESITEWINDOW_H
 
 #include <vector>
 
@@ -51,4 +51,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteWindow);
 };
 
-#endif  // end of include guard: WL_WUI_DISMANTLESITEWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_DISMANTLESITEWINDOW_H

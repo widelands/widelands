@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#ifndef WL_UI_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
 #include <memory>
 
@@ -43,4 +43,4 @@ private:
 	UI::Button* auto_trees_button_{nullptr};
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

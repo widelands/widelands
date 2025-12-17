@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
+#ifndef WL_UI_EDITOR_MAIN_MENU_MAP_OPTIONS_H
+#define WL_UI_EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
 #include "logic/map.h"
 #include "ui/basic/box.h"
@@ -118,4 +118,4 @@ private:
 	void update();
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
+#endif  // end of include guard: WL_UI_EDITOR_MAIN_MENU_MAP_OPTIONS_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SOLDIER_STATISTICS_MENU_H
-#define WL_WUI_SOLDIER_STATISTICS_MENU_H
+#ifndef WL_UI_GAME_SOLDIER_STATISTICS_MENU_H
+#define WL_UI_GAME_SOLDIER_STATISTICS_MENU_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/icon.h"
@@ -68,4 +68,4 @@ private:
 	std::vector<UI::Textarea*> labels_detail_;
 };
 
-#endif  // end of include guard: WL_WUI_SOLDIER_STATISTICS_MENU_H
+#endif  // end of include guard: WL_UI_GAME_SOLDIER_STATISTICS_MENU_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPVIEW_H
-#define WL_WUI_MAPVIEW_H
+#ifndef WL_UI_WUI_MAPVIEW_H
+#define WL_UI_WUI_MAPVIEW_H
 
 #include "base/rect.h"
 #include "base/vector.h"
@@ -228,4 +228,4 @@ private:
 	std::deque<std::deque<TimestampedMouse>> mouse_plans_;
 };
 
-#endif  // end of include guard: WL_WUI_MAPVIEW_H
+#endif  // end of include guard: WL_UI_WUI_MAPVIEW_H

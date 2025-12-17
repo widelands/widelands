@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_INTERACTIVE_PLAYER_H
-#define WL_WUI_INTERACTIVE_PLAYER_H
+#ifndef WL_UI_WUI_INTERACTIVE_PLAYER_H
+#define WL_UI_WUI_INTERACTIVE_PLAYER_H
 
 #include <memory>
 
@@ -159,4 +159,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H
+#endif  // end of include guard: WL_UI_WUI_INTERACTIVE_PLAYER_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_PORTDOCKWARESDISPLAY_H
-#define WL_WUI_PORTDOCKWARESDISPLAY_H
+#ifndef WL_UI_GAME_PORTDOCKWARESDISPLAY_H
+#define WL_UI_GAME_PORTDOCKWARESDISPLAY_H
 
 #include "ui/basic/box.h"
 #include "ui/game/buildingwindow.h"
@@ -38,4 +38,4 @@ UI::Box* create_portdock_expedition_display(UI::Panel* parent,
                                             InteractiveGameBase&,
                                             BuildingWindow::CollapsedState* priority_collapsed);
 
-#endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H
+#endif  // end of include guard: WL_UI_GAME_PORTDOCKWARESDISPLAY_H

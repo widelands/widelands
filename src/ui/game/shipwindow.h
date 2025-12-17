@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_SHIPWINDOW_H
-#define WL_WUI_SHIPWINDOW_H
+#ifndef WL_UI_GAME_SHIPWINDOW_H
+#define WL_UI_GAME_SHIPWINDOW_H
 
 #include <functional>
 #include <memory>
@@ -104,4 +104,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 
-#endif  // end of include guard: WL_WUI_SHIPWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_SHIPWINDOW_H

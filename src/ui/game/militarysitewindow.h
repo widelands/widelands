@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MILITARYSITEWINDOW_H
-#define WL_WUI_MILITARYSITEWINDOW_H
+#ifndef WL_UI_GAME_MILITARYSITEWINDOW_H
+#define WL_UI_GAME_MILITARYSITEWINDOW_H
 
 #include "logic/map_objects/tribes/militarysite.h"
 #include "ui/game/buildingwindow.h"
@@ -40,4 +40,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteWindow);
 };
 
-#endif  // end of include guard: WL_WUI_MILITARYSITEWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_MILITARYSITEWINDOW_H

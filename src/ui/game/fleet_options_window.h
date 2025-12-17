@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_FLEET_OPTIONS_WINDOW_H
-#define WL_WUI_FLEET_OPTIONS_WINDOW_H
+#ifndef WL_UI_GAME_FLEET_OPTIONS_WINDOW_H
+#define WL_UI_GAME_FLEET_OPTIONS_WINDOW_H
 
 #include "logic/map_objects/bob.h"
 #include "ui/basic/box.h"
@@ -71,4 +71,4 @@ private:
 	UI::Textarea* txt_waterways_lacking_{nullptr};
 };
 
-#endif  // end of include guard: WL_WUI_FLEET_OPTIONS_WINDOW_H
+#endif  // end of include guard: WL_UI_GAME_FLEET_OPTIONS_WINDOW_H

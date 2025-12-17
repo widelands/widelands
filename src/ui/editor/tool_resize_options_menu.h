@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
+#ifndef WL_UI_EDITOR_TOOL_RESIZE_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_RESIZE_OPTIONS_MENU_H
 
 #include "ui/editor/map_size_box.h"
 #include "ui/editor/tool_options_menu.h"
@@ -40,4 +40,4 @@ private:
 	UI::MultilineTextarea text_area_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_RESIZE_OPTIONS_MENU_H

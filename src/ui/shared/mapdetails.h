@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPDETAILS_H
-#define WL_WUI_MAPDETAILS_H
+#ifndef WL_UI_SHARED_MAPDETAILS_H
+#define WL_UI_SHARED_MAPDETAILS_H
 
 #include <memory>
 
@@ -66,4 +66,4 @@ private:
 	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
-#endif  // end of include guard: WL_WUI_MAPDETAILS_H
+#endif  // end of include guard: WL_UI_SHARED_MAPDETAILS_H

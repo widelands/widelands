@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_WARE_STATISTICS_MENU_H
-#define WL_WUI_WARE_STATISTICS_MENU_H
+#ifndef WL_UI_GAME_WARE_STATISTICS_MENU_H
+#define WL_UI_GAME_WARE_STATISTICS_MENU_H
 
 #include "logic/widelands.h"
 #include "ui/basic/unique_window.h"
@@ -65,4 +65,4 @@ private:
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };
 
-#endif  // end of include guard: WL_WUI_WARE_STATISTICS_MENU_H
+#endif  // end of include guard: WL_UI_GAME_WARE_STATISTICS_MENU_H

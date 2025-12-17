@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAMEDETAILS_H
-#define WL_WUI_GAMEDETAILS_H
+#ifndef WL_UI_SHARED_GAMEDETAILS_H
+#define WL_UI_SHARED_GAMEDETAILS_H
 
 #include <memory>
 
@@ -76,4 +76,4 @@ private:
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
 };
 
-#endif  // end of include guard: WL_WUI_GAMEDETAILS_H
+#endif  // end of include guard: WL_UI_SHARED_GAMEDETAILS_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ATTACK_WINDOW_H
-#define WL_WUI_ATTACK_WINDOW_H
+#ifndef WL_UI_GAME_ATTACK_WINDOW_H
+#define WL_UI_GAME_ATTACK_WINDOW_H
 
 #include <memory>
 
@@ -220,4 +220,4 @@ private:
 	std::unique_ptr<UI::Checkbox> do_not_conquer_;
 };
 
-#endif  // end of include guard: WL_WUI_ATTACK_WINDOW_H
+#endif  // end of include guard: WL_UI_GAME_ATTACK_WINDOW_H

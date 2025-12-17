@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
+#ifndef WL_UI_EDITOR_TOOLSIZE_MENU_H
+#define WL_UI_EDITOR_TOOLSIZE_MENU_H
 
 #include "ui/basic/spinbox.h"
 #include "ui/basic/unique_window.h"
@@ -50,4 +50,4 @@ private:
 	bool is_updating_{false};
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOLSIZE_MENU_H

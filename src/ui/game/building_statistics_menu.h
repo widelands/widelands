@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_BUILDING_STATISTICS_MENU_H
-#define WL_WUI_BUILDING_STATISTICS_MENU_H
+#ifndef WL_UI_GAME_BUILDING_STATISTICS_MENU_H
+#define WL_UI_GAME_BUILDING_STATISTICS_MENU_H
 
 #include "graphic/color.h"
 #include "graphic/styles/building_statistics_style.h"
@@ -146,4 +146,4 @@ private:
 	const Widelands::DescriptionIndex nr_building_types_;
 };
 
-#endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
+#endif  // end of include guard: WL_UI_GAME_BUILDING_STATISTICS_MENU_H

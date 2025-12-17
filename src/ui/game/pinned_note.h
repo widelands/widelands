@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_PINNED_NOTE_H
-#define WL_WUI_PINNED_NOTE_H
+#ifndef WL_UI_GAME_PINNED_NOTE_H
+#define WL_UI_GAME_PINNED_NOTE_H
 
 #include <memory>
 
@@ -58,4 +58,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NotePinnedNoteMoved>> subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_PINNED_NOTE_H
+#endif  // end of include guard: WL_UI_GAME_PINNED_NOTE_H

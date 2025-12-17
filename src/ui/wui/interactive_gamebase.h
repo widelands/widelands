@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
-#define WL_WUI_INTERACTIVE_GAMEBASE_H
+#ifndef WL_UI_WUI_INTERACTIVE_GAMEBASE_H
+#define WL_UI_WUI_INTERACTIVE_GAMEBASE_H
 
 #include <memory>
 
@@ -169,4 +169,4 @@ private:
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
 };
 
-#endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H
+#endif  // end of include guard: WL_UI_WUI_INTERACTIVE_GAMEBASE_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAPVIEWPIXELCONSTANTS_H
-#define WL_WUI_MAPVIEWPIXELCONSTANTS_H
+#ifndef WL_UI_WUI_MAPVIEWPIXELCONSTANTS_H
+#define WL_UI_WUI_MAPVIEWPIXELCONSTANTS_H
 
 // These are constants with the unit map pixel, i.e. at zoom = 1 a triangle on
 // screen is kTriangleWidth pixels wide. Map pixelspace is used in many places
@@ -30,4 +30,4 @@ constexpr int kHeightFactor = 5;
 constexpr float kHeightFactorFloat =
    5.0f;  // Same a kHeightFactor to avoid implict upcasts to double
 
-#endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H
+#endif  // end of include guard: WL_UI_WUI_MAPVIEWPIXELCONSTANTS_H

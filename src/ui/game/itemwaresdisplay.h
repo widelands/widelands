@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ITEMWARESDISPLAY_H
-#define WL_WUI_ITEMWARESDISPLAY_H
+#ifndef WL_UI_GAME_ITEMWARESDISPLAY_H
+#define WL_UI_GAME_ITEMWARESDISPLAY_H
 
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
@@ -74,4 +74,4 @@ private:
 	std::vector<Item> items_;
 };
 
-#endif  // end of include guard: WL_WUI_ITEMWARESDISPLAY_H
+#endif  // end of include guard: WL_UI_GAME_ITEMWARESDISPLAY_H

@@ -16,12 +16,12 @@
  *
  */
 
-#ifndef WL_WUI_CHAT_MSG_LAYOUT_H
-#define WL_WUI_CHAT_MSG_LAYOUT_H
+#ifndef WL_UI_GAME_CHAT_MSG_LAYOUT_H
+#define WL_UI_GAME_CHAT_MSG_LAYOUT_H
 
 #include "chat/chat.h"
 
 // Formats 'chat_message' as richtext.
 std::string format_as_richtext(const ChatMessage& chat_message, const ChatColorForPlayer& fn);
 
-#endif  // end of include guard: WL_WUI_CHAT_MSG_LAYOUT_H
+#endif  // end of include guard: WL_UI_GAME_CHAT_MSG_LAYOUT_H

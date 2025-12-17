@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_INPUTQUEUEDISPLAY_H
-#define WL_WUI_INPUTQUEUEDISPLAY_H
+#ifndef WL_UI_GAME_INPUTQUEUEDISPLAY_H
+#define WL_UI_GAME_INPUTQUEUEDISPLAY_H
 
 #include <functional>
 #include <vector>
@@ -194,4 +194,4 @@ private:
 	void hide_from_view();
 };
 
-#endif  // end of include guard: WL_WUI_INPUTQUEUEDISPLAY_H
+#endif  // end of include guard: WL_UI_GAME_INPUTQUEUEDISPLAY_H

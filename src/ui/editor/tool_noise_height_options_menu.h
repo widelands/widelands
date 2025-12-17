@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
+#ifndef WL_UI_EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
 
 #include "ui/editor/tool_options_menu.h"
 #include "ui/basic/box.h"
@@ -45,4 +45,4 @@ private:
 	UI::SpinBox set_to_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H

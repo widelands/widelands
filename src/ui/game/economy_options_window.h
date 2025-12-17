@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ECONOMY_OPTIONS_WINDOW_H
-#define WL_WUI_ECONOMY_OPTIONS_WINDOW_H
+#ifndef WL_UI_GAME_ECONOMY_OPTIONS_WINDOW_H
+#define WL_UI_GAME_ECONOMY_OPTIONS_WINDOW_H
 
 #include <memory>
 
@@ -209,4 +209,4 @@ private:
 	Widelands::Descriptions* descriptions_;
 };
 
-#endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
+#endif  // end of include guard: WL_UI_GAME_ECONOMY_OPTIONS_WINDOW_H

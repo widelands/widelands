@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAP_SIZE_BOX_H
-#define WL_EDITOR_UI_MENUS_MAP_SIZE_BOX_H
+#ifndef WL_UI_EDITOR_MAP_SIZE_BOX_H
+#define WL_UI_EDITOR_MAP_SIZE_BOX_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/dropdown.h"
@@ -58,4 +58,4 @@ private:
 	UI::Dropdown<uint32_t> height_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAP_SIZE_BOX_H
+#endif  // end of include guard: WL_UI_EDITOR_MAP_SIZE_BOX_H

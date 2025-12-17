@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
-#define WL_WUI_ENCYCLOPEDIA_WINDOW_H
+#ifndef WL_UI_WUI_ENCYCLOPEDIA_WINDOW_H
+#define WL_UI_WUI_ENCYCLOPEDIA_WINDOW_H
 
 #include <memory>
 
@@ -81,4 +81,4 @@ private:
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H
+#endif  // end of include guard: WL_UI_WUI_ENCYCLOPEDIA_WINDOW_H

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MARKETWINDOW_H
-#define WL_WUI_MARKETWINDOW_H
+#ifndef WL_UI_GAME_MARKETWINDOW_H
+#define WL_UI_GAME_MARKETWINDOW_H
 
 #include "logic/map_objects/tribes/market.h"
 #include "ui/game/buildingwindow.h"
@@ -47,4 +47,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MarketWindow);
 };
 
-#endif  // end of include guard: WL_WUI_MARKETWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_MARKETWINDOW_H

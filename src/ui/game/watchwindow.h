@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_WATCHWINDOW_H
-#define WL_WUI_WATCHWINDOW_H
+#ifndef WL_UI_GAME_WATCHWINDOW_H
+#define WL_UI_GAME_WATCHWINDOW_H
 
 #include <string>
 
@@ -108,4 +108,4 @@ private:
 
 WatchWindow* show_watch_window(InteractiveGameBase&, const Widelands::Coords&);
 
-#endif  // end of include guard: WL_WUI_WATCHWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_WATCHWINDOW_H

@@ -15,8 +15,8 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WL_WUI_SOUND_OPTIONS_H
-#define WL_WUI_SOUND_OPTIONS_H
+#ifndef WL_UI_SHARED_SOUND_OPTIONS_H
+#define WL_UI_SHARED_SOUND_OPTIONS_H
 
 #include "graphic/styles/text_panel_style.h"
 #include "ui/basic/box.h"
@@ -38,4 +38,4 @@ private:
 	UI::Checkbox play_intro_music_;
 };
 
-#endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H
+#endif  // end of include guard: WL_UI_SHARED_SOUND_OPTIONS_H

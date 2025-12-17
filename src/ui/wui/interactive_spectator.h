@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_INTERACTIVE_SPECTATOR_H
-#define WL_WUI_INTERACTIVE_SPECTATOR_H
+#ifndef WL_UI_WUI_INTERACTIVE_SPECTATOR_H
+#define WL_UI_WUI_INTERACTIVE_SPECTATOR_H
 
 #include "io/profile.h"
 #include "ui/wui/interactive_gamebase.h"
@@ -55,4 +55,4 @@ private:
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 };
 
-#endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H
+#endif  // end of include guard: WL_UI_WUI_INTERACTIVE_SPECTATOR_H

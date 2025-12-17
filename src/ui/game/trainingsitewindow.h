@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_TRAININGSITEWINDOW_H
-#define WL_WUI_TRAININGSITEWINDOW_H
+#ifndef WL_UI_GAME_TRAININGSITEWINDOW_H
+#define WL_UI_GAME_TRAININGSITEWINDOW_H
 
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "ui/game/productionsitewindow.h"
@@ -40,4 +40,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);
 };
 
-#endif  // end of include guard: WL_WUI_TRAININGSITEWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_TRAININGSITEWINDOW_H

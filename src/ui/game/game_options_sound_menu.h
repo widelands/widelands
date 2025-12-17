@@ -15,8 +15,8 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef WL_WUI_GAME_OPTIONS_SOUND_MENU_H
-#define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#ifndef WL_UI_GAME_GAME_OPTIONS_SOUND_MENU_H
+#define WL_UI_GAME_GAME_OPTIONS_SOUND_MENU_H
 
 #include "ui/basic/unique_window.h"
 #include "ui/game/music_player.h"
@@ -36,4 +36,4 @@ private:
 	MusicPlayer music_player_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H
+#endif  // end of include guard: WL_UI_GAME_GAME_OPTIONS_SOUND_MENU_H

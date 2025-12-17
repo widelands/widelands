@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAME_CLIENT_DISCONNECTED_H
-#define WL_WUI_GAME_CLIENT_DISCONNECTED_H
+#ifndef WL_UI_GAME_GAME_CLIENT_DISCONNECTED_H
+#define WL_UI_GAME_GAME_CLIENT_DISCONNECTED_H
 
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
@@ -56,4 +56,4 @@ private:
 	UI::Button exit_game_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_CLIENT_DISCONNECTED_H
+#endif  // end of include guard: WL_UI_GAME_GAME_CLIENT_DISCONNECTED_H

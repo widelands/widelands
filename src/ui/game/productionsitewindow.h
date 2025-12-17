@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
-#define WL_WUI_PRODUCTIONSITEWINDOW_H
+#ifndef WL_UI_GAME_PRODUCTIONSITEWINDOW_H
+#define WL_UI_GAME_PRODUCTIONSITEWINDOW_H
 
 #include <memory>
 
@@ -58,4 +58,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 
-#endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H
+#endif  // end of include guard: WL_UI_GAME_PRODUCTIONSITEWINDOW_H

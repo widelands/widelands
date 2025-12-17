@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_DEBUGCONSOLE_H
-#define WL_WUI_DEBUGCONSOLE_H
+#ifndef WL_UI_WUI_DEBUGCONSOLE_H
+#define WL_UI_WUI_DEBUGCONSOLE_H
 
 #include <functional>
 #include <string>
@@ -82,4 +82,4 @@ ChatProvider* get_chat_provider();
 void write(const std::string& text);
 }  // namespace DebugConsole
 
-#endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H
+#endif  // end of include guard: WL_UI_WUI_DEBUGCONSOLE_H

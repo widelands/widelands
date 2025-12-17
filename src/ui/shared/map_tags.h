@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_MAP_TAGS_H
-#define WL_WUI_MAP_TAGS_H
+#ifndef WL_UI_SHARED_MAP_TAGS_H
+#define WL_UI_SHARED_MAP_TAGS_H
 
 #include <string>
 
@@ -41,4 +41,4 @@ const TagTexts localize_tag(const std::string& tag);
 /// Add an entry to 'dropdown' for 'tag' with the localized name and tooltip
 void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string& tag);
 
-#endif  // end of include guard: WL_WUI_MAP_TAGS_H
+#endif  // end of include guard: WL_UI_SHARED_MAP_TAGS_H

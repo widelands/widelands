@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_STORY_MESSAGE_BOX_H
-#define WL_WUI_STORY_MESSAGE_BOX_H
+#ifndef WL_UI_GAME_STORY_MESSAGE_BOX_H
+#define WL_UI_GAME_STORY_MESSAGE_BOX_H
 
 #include "logic/game.h"
 #include "ui/basic/box.h"
@@ -76,4 +76,4 @@ private:
 	uint32_t start_time_;    // For timeout check
 };
 
-#endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H
+#endif  // end of include guard: WL_UI_GAME_STORY_MESSAGE_BOX_H

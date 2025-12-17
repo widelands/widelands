@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_PLOT_AREA_H
-#define WL_WUI_PLOT_AREA_H
+#ifndef WL_UI_WUI_PLOT_AREA_H
+#define WL_UI_WUI_PLOT_AREA_H
 
 #include <map>
 #include <memory>
@@ -219,4 +219,4 @@ private:
 	std::map<unsigned, ReducedPlotData> negative_plotdata_;
 };
 
-#endif  // end of include guard: WL_WUI_PLOT_AREA_H
+#endif  // end of include guard: WL_UI_WUI_PLOT_AREA_H

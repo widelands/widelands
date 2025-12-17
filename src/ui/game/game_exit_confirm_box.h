@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GAME_EXIT_CONFIRM_BOX_H
-#define WL_WUI_GAME_EXIT_CONFIRM_BOX_H
+#ifndef WL_UI_GAME_GAME_EXIT_CONFIRM_BOX_H
+#define WL_UI_GAME_GAME_EXIT_CONFIRM_BOX_H
 
 #include "ui/basic/messagebox.h"
 #include "ui/wui/interactive_gamebase.h"
@@ -41,4 +41,4 @@ private:
 	InteractiveGameBase& igb_;
 };
 
-#endif  // end of include guard: WL_WUI_GAME_EXIT_CONFIRM_BOX_H
+#endif  // end of include guard: WL_UI_GAME_GAME_EXIT_CONFIRM_BOX_H

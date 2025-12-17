@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
-#define WL_WUI_GENERAL_STATISTICS_MENU_H
+#ifndef WL_UI_GAME_GENERAL_STATISTICS_MENU_H
+#define WL_UI_GAME_GENERAL_STATISTICS_MENU_H
 
 #include <memory>
 
@@ -75,4 +75,4 @@ private:
 	void save_state_to_registry();
 };
 
-#endif  // end of include guard: WL_WUI_GENERAL_STATISTICS_MENU_H
+#endif  // end of include guard: WL_UI_GAME_GENERAL_STATISTICS_MENU_H
