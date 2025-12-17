@@ -16,37 +16,41 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
-#define WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
+#ifndef WL_UI_SHARED_ADDONS_PROGRESS_H
+#define WL_UI_SHARED_ADDONS_PROGRESS_H
 
 #include "ui/basic/box.h"
-#include "ui/basic/button.h"
-#include "ui/basic/textinput.h"
+#include "ui/basic/progressbar.h"
+#include "ui/basic/textarea.h"
 #include "ui/basic/window.h"
 
 namespace AddOnsUI {
 
-class AddOnsLoginBox : public UI::Window {
+class ProgressIndicatorWindow : public UI::Window {
 public:
-	explicit AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style);
+	ProgressIndicatorWindow(UI::Panel* parent, UI::WindowStyle style, const std::string& title);
+	~ProgressIndicatorWindow() override = default;
 
-	const std::string& get_username() const;
-	std::string get_password() const;
-
-	bool handle_key(bool down, SDL_Keysym code) override;
-
-	void think() override;
+	void set_message_1(const std::string& msg) {
+		txt1_.set_text(msg);
+	}
+	void set_message_2(const std::string& msg) {
+		txt2_.set_text(msg);
+	}
+	void set_message_3(const std::string& msg) {
+		txt3_.set_text(msg);
+	}
+	UI::ProgressBar& progressbar() {
+		return progress_;
+	}
 
 private:
-	const std::string password_sha1_;
-	UI::Box box_, hbox_, left_box_, right_box_, buttons_box_;
-	UI::EditBox username_, password_;
-	UI::Button ok_, cancel_, reset_;
-
-	void ok();
-	void reset();
+	UI::Panel::ModalGuard modal_;
+	UI::Box box_, hbox_;
+	UI::Textarea txt1_, txt2_, txt3_;
+	UI::ProgressBar progress_;
 };
 
 }  // namespace AddOnsUI
 
-#endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
+#endif  // end of include guard: WL_UI_SHARED_ADDONS_PROGRESS_H

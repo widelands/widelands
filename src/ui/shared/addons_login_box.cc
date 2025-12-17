@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/fsmenu/addons/login_box.h"
+#include "ui/shared/addons_login_box.h"
 
 #include "base/crypto.h"
 #include "base/string.h"

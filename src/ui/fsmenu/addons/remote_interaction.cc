@@ -31,6 +31,7 @@
 #include "ui/basic/color_chooser.h"
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
+#include "ui/shared/addons_constants.h"
 
 namespace AddOnsUI {
 

@@ -27,6 +27,7 @@
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
 #include "ui/fsmenu/addons/remote_interaction.h"
+#include "ui/shared/addons_constants.h"
 #include "wlapplication_options.h"
 
 namespace AddOnsUI {

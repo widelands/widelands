@@ -81,8 +81,8 @@ wl_library(ui_editor
     scripting_lua_interface
     scripting_lua_table
     sound
-    ui_addons
     ui_basic
+    ui_shared_addons
     ui_shared_map_tags
     ui_shared_maps_ui
     widelands_options

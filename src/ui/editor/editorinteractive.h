@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_EDITOR_EDITORINTERACTIVE_H
-#define WL_EDITOR_EDITORINTERACTIVE_H
+#ifndef WL_UI_EDITOR_EDITORINTERACTIVE_H
+#define WL_UI_EDITOR_EDITORINTERACTIVE_H
 
 #include <map>
 #include <memory>
@@ -319,4 +319,4 @@ private:
 	   field_terrain_changed_subscriber_;
 };
 
-#endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H
+#endif  // end of include guard: WL_UI_EDITOR_EDITORINTERACTIVE_H

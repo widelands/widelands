@@ -128,6 +128,22 @@ wl_library(ui_shared_chat
     graphic_playercolor
 )
 
+wl_library(ui_shared_addons
+  SRCS
+    addons_constants.h
+    addons_login_box.cc
+    addons_login_box.h
+    addons_progress.cc
+    addons_progress.h
+  DEPENDS
+    base
+    base_crypto
+    graphic
+    graphic_text_layout
+    ui_basic
+    widelands_options
+)
+
 wl_library(ui_shared_unique_windows
   SRCS
     unique_window_handler.cc

@@ -26,7 +26,7 @@
 #include "ui/basic/textinput.h"
 #include "ui/fsmenu/addons/manager.h"
 #include "ui/fsmenu/addons/packager_box.h"
-#include "ui/fsmenu/addons/progress.h"
+#include "ui/shared/addons_progress.h"
 
 namespace AddOnsUI {
 

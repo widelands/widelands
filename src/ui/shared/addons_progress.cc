@@ -16,9 +16,9 @@
  *
  */
 
-#include "ui/fsmenu/addons/progress.h"
+#include "ui/shared/addons_progress.h"
 
-#include "ui/fsmenu/addons/manager.h"
+#include "ui/shared/addons_constants.h"
 
 namespace AddOnsUI {
 

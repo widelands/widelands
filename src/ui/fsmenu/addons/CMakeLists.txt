@@ -2,16 +2,12 @@ wl_library(ui_addons
   SRCS
     contact.cc
     contact.h
-    login_box.cc
-    login_box.h
     manager.cc
     manager.h
     packager.cc
     packager.h
     packager_box.cc
     packager_box.h
-    progress.cc
-    progress.h
     remote_interaction.cc
     remote_interaction.h
     rows_ui.cc
@@ -19,7 +15,6 @@ wl_library(ui_addons
     screenshot_upload.cc
     screenshot_upload.h
   DEPENDS
-    base_crypto
     base_time_string
     scripting_lua_table
     logic_filesystem_constants
@@ -39,5 +34,6 @@ wl_library(ui_addons
     logic_addons
     network
     graphic
+    ui_shared_addons
     ui_shared_maps_ui
 )
