@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_objectives_menu.h"
+#include "ui/game/objectives_menu.h"
 
 #include "logic/game_data_error.h"
 #include "logic/objective.h"

@@ -35,7 +35,7 @@
 #include "logic/player.h"
 #include "ui/basic/tabpanel.h"
 #include "ui/game/actionconfirm.h"
-#include "ui/game/game_debug_ui.h"
+#include "ui/game/debug_ui.h"
 #include "ui/game/helpwindow.h"
 #include "ui/game/inputqueuedisplay.h"
 #include "ui/wui/interactive_player.h"

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_UI_GAME_GAME_MAIN_MENU_SAVE_GAME_H
-#define WL_UI_GAME_GAME_MAIN_MENU_SAVE_GAME_H
+#ifndef WL_UI_GAME_MAIN_MENU_SAVE_GAME_H
+#define WL_UI_GAME_MAIN_MENU_SAVE_GAME_H
 
 #include <memory>
 
@@ -99,4 +99,4 @@ private:
 	const std::string illegal_filename_tooltip_;
 };
 
-#endif  // end of include guard: WL_UI_GAME_GAME_MAIN_MENU_SAVE_GAME_H
+#endif  // end of include guard: WL_UI_GAME_MAIN_MENU_SAVE_GAME_H

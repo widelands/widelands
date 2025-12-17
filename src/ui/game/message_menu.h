@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_UI_GAME_GAME_MESSAGE_MENU_H
-#define WL_UI_GAME_GAME_MESSAGE_MENU_H
+#ifndef WL_UI_GAME_MESSAGE_MENU_H
+#define WL_UI_GAME_MESSAGE_MENU_H
 
 #include "base/i18n.h"
 #include "logic/message.h"
@@ -97,4 +97,4 @@ private:
 	Widelands::Message::Type message_filter_;
 };
 
-#endif  // end of include guard: WL_UI_GAME_GAME_MESSAGE_MENU_H
+#endif  // end of include guard: WL_UI_GAME_MESSAGE_MENU_H

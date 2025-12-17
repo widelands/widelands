@@ -16,13 +16,13 @@
  *
  */
 
-#include "ui/game/game_client_disconnected.h"
+#include "ui/game/client_disconnected.h"
 
 #include "ai/computer_player.h"
 #include "ai/defaultai.h"
 #include "base/i18n.h"
 #include "network/gamehost.h"
-#include "ui/game/game_exit_confirm_box.h"
+#include "ui/game/exit_confirm_box.h"
 #include "ui/wui/interactive_gamebase.h"
 
 namespace {

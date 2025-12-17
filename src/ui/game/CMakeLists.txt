@@ -115,10 +115,10 @@ wl_library(ui_game_chat
     chat_msg_layout.h
     chat_overlay.cc
     chat_overlay.h
-    game_chat_menu.cc
-    game_chat_menu.h
-    game_chat_panel.cc
-    game_chat_panel.h
+    chat_menu.cc
+    chat_menu.h
+    chat_panel.cc
+    chat_panel.h
   USES_SDL2
   DEPENDS
     ui_basic
@@ -161,8 +161,8 @@ wl_library(ui_game_economy_options
 
 wl_library(ui_game_sound_options
   SRCS
-    game_options_sound_menu.cc
-    game_options_sound_menu.h
+    options_sound_menu.cc
+    options_sound_menu.h
     music_player.cc
     music_player.h
   DEPENDS
@@ -268,12 +268,12 @@ wl_library(ui_game_navigation
 
 wl_library(ui_game_toplevel_windows
   SRCS
-    game_diplomacy_menu.cc
-    game_diplomacy_menu.h
-    game_message_menu.cc
-    game_message_menu.h
-    game_objectives_menu.cc
-    game_objectives_menu.h
+    diplomacy_menu.cc
+    diplomacy_menu.h
+    message_menu.cc
+    message_menu.h
+    objectives_menu.cc
+    objectives_menu.h
     story_message_box.cc
     story_message_box.h
   USES_SDL2
@@ -341,8 +341,8 @@ wl_library(ui_game_fieldaction
 
 wl_library(ui_game_savegame
   SRCS
-    game_main_menu_save_game.cc
-    game_main_menu_save_game.h
+    main_menu_save_game.cc
+    main_menu_save_game.h
   DEPENDS
     io_filesystem
     wui_interactive
@@ -360,12 +360,12 @@ wl_library(ui_game_savegame
 
 wl_library(ui_game_notice_boxes
   SRCS
-    game_client_disconnected.cc
-    game_client_disconnected.h
-    game_exit_confirm_box.cc
-    game_exit_confirm_box.h
-    game_summary.cc
-    game_summary.h
+    client_disconnected.cc
+    client_disconnected.h
+    exit_confirm_box.cc
+    exit_confirm_box.h
+    summary.cc
+    summary.h
   USES_SDL2
   DEPENDS
     wui_interactive
@@ -382,8 +382,8 @@ wl_library(ui_game_notice_boxes
 
 wl_library(ui_game_debug
   SRCS
-    game_debug_ui.cc
-    game_debug_ui.h
+    debug_ui.cc
+    debug_ui.h
   DEPENDS
     wui_interactive
     ui_basic

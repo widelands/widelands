@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_chat_panel.h"
+#include "ui/game/chat_panel.h"
 
 #include <SDL_keycode.h>
 #include <SDL_mouse.h>

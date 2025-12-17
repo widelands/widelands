@@ -16,11 +16,11 @@
  *
  */
 
-#ifndef WL_UI_GAME_GAME_CHAT_MENU_H
-#define WL_UI_GAME_GAME_CHAT_MENU_H
+#ifndef WL_UI_GAME_CHAT_MENU_H
+#define WL_UI_GAME_CHAT_MENU_H
 
 #include "ui/basic/unique_window.h"
-#include "ui/game/game_chat_panel.h"
+#include "ui/game/chat_panel.h"
 
 /**
  * Provides a window with chat message scrollback and the possibility to
@@ -69,4 +69,4 @@ private:
 	bool close_on_send_{false};
 };
 
-#endif  // end of include guard: WL_UI_GAME_GAME_CHAT_MENU_H
+#endif  // end of include guard: WL_UI_GAME_CHAT_MENU_H

@@ -33,7 +33,7 @@
 #include "ui/basic/box.h"
 #include "ui/basic/messagebox.h"
 #include "ui/game/actionconfirm.h"
-#include "ui/game/game_debug_ui.h"
+#include "ui/game/debug_ui.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/game/soldierlist.h"
 

@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_summary.h"
+#include "ui/game/summary.h"
 
 #include <vector>
 

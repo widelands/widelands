@@ -17,7 +17,7 @@
  */
 // UI classes for real-time game debugging
 
-#include "ui/game/game_debug_ui.h"
+#include "ui/game/debug_ui.h"
 
 #include "base/i18n.h"
 #include "logic/field.h"

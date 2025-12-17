@@ -31,7 +31,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "ui/game/game_debug_ui.h"
+#include "ui/game/debug_ui.h"
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 constexpr int kSpacing = 8;

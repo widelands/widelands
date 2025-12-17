@@ -15,7 +15,7 @@
  * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "ui/game/game_options_sound_menu.h"
+#include "ui/game/options_sound_menu.h"
 
 #include "base/i18n.h"
 #include "sound/sound_handler.h"

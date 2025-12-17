@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_message_menu.h"
+#include "ui/game/message_menu.h"
 
 #include "base/time_string.h"
 #include "base/wexception.h"

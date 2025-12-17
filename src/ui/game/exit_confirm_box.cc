@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_exit_confirm_box.h"
+#include "ui/game/exit_confirm_box.h"
 
 #include "base/i18n.h"
 

@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_chat_menu.h"
+#include "ui/game/chat_menu.h"
 
 #include "base/i18n.h"
 #include "base/wexception.h"

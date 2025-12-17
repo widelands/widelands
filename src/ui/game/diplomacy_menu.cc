@@ -16,7 +16,7 @@
  *
  */
 
-#include "ui/game/game_diplomacy_menu.h"
+#include "ui/game/diplomacy_menu.h"
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
