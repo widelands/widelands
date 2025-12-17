@@ -27,9 +27,9 @@
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
-#include "wlapplication_options.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/toolbar.h"
+#include "wlapplication_options.h"
 
 constexpr int8_t kSpacing = 4;
 

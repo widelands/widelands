@@ -19,10 +19,10 @@
 #include "ui/editor/tool_change_height_options_menu.h"
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
 #include "logic/widelands_geometry.h"
+#include "ui/editor/editorinteractive.h"
 
 EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
    EditorInteractive& parent,

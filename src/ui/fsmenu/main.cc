@@ -31,7 +31,6 @@
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "ui/editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "graphic/graphic_functions.h"
 #include "graphic/style_manager.h"
@@ -43,6 +42,7 @@
 #include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
 #include "ui/basic/messagebox.h"
+#include "ui/editor/editorinteractive.h"
 #include "ui/fsmenu/about.h"
 #include "ui/fsmenu/addons/manager.h"
 #include "ui/fsmenu/campaign_select.h"
@@ -54,10 +54,10 @@
 #include "ui/fsmenu/options.h"
 #include "ui/fsmenu/random_game.h"
 #include "ui/fsmenu/scenario_select.h"
-#include "wlapplication.h"
-#include "wlapplication_options.h"
 #include "ui/shared/maptable.h"
 #include "ui/shared/savegameloader.h"
+#include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 

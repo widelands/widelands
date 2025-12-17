@@ -38,9 +38,9 @@
 #include "ui/game/debug_ui.h"
 #include "ui/game/helpwindow.h"
 #include "ui/game/inputqueuedisplay.h"
-#include "ui/wui/interactive_player.h"
-#include "ui/shared/unique_window_handler.h"
 #include "ui/game/waresdisplay.h"
+#include "ui/shared/unique_window_handler.h"
+#include "ui/wui/interactive_player.h"
 
 constexpr const char* const kImgBulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 constexpr const char* const kImgDismantle = "images/wui/buildings/menu_bld_dismantle.png";

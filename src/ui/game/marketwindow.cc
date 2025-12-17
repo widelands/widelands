@@ -32,8 +32,8 @@
 #include "ui/basic/textinput.h"
 #include "ui/game/actionconfirm.h"
 #include "ui/game/inputqueuedisplay.h"
-#include "ui/wui/interactive_player.h"
 #include "ui/game/waresdisplay.h"
+#include "ui/wui/interactive_player.h"
 
 constexpr int kButtonSize = 34;
 constexpr int kSpacing = 8;

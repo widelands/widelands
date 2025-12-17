@@ -51,10 +51,10 @@
 #include "ui/basic/progresswindow.h"
 #include "ui/fsmenu/launch_mpg.h"
 #include "ui/fsmenu/main.h"
-#include "wlapplication.h"
-#include "wlapplication_options.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/interactive_spectator.h"
+#include "wlapplication.h"
+#include "wlapplication_options.h"
 
 struct AddOnsMismatchException : WLWarning {
 	explicit AddOnsMismatchException(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {

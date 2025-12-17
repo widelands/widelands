@@ -22,9 +22,9 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
-#include "wlapplication_mousewheel_options.h"
 #include "ui/game/actionconfirm.h"
 #include "ui/wui/interactive_player.h"
+#include "wlapplication_mousewheel_options.h"
 
 constexpr int8_t kButtonSize = 25;
 

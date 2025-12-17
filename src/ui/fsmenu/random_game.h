@@ -21,11 +21,11 @@
 
 #include <memory>
 
-#include "ui/editor/main_menu_random_map.h"
 #include "logic/game.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "ui/basic/icon.h"
 #include "ui/basic/progresswindow.h"
+#include "ui/editor/main_menu_random_map.h"
 #include "ui/fsmenu/menu.h"
 
 namespace FsMenu {

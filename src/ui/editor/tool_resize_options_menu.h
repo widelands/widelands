@@ -19,10 +19,10 @@
 #ifndef WL_UI_EDITOR_TOOL_RESIZE_OPTIONS_MENU_H
 #define WL_UI_EDITOR_TOOL_RESIZE_OPTIONS_MENU_H
 
-#include "ui/editor/map_size_box.h"
-#include "ui/editor/tool_options_menu.h"
 #include "ui/basic/box.h"
 #include "ui/basic/multilinetextarea.h"
+#include "ui/editor/map_size_box.h"
+#include "ui/editor/tool_options_menu.h"
 
 class EditorInteractive;
 struct EditorResizeTool;

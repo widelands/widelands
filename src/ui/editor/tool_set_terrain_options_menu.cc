@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
@@ -30,6 +29,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "ui/basic/checkbox.h"
 #include "ui/basic/panel.h"
+#include "ui/editor/editorinteractive.h"
 
 namespace {
 

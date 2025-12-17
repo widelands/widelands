@@ -19,9 +19,9 @@
 #ifndef WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
 #define WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
 
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/editorinteractive.h"
 
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu(EditorInteractive& parent,

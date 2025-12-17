@@ -34,8 +34,8 @@
 #include "ui/basic/messagebox.h"
 #include "ui/game/actionconfirm.h"
 #include "ui/game/debug_ui.h"
-#include "ui/wui/interactive_player.h"
 #include "ui/game/soldierlist.h"
+#include "ui/wui/interactive_player.h"
 
 namespace {
 constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";

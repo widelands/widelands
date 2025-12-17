@@ -18,12 +18,12 @@
 
 #include "editor/tools/decrease_resources_tool.h"
 
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Decrease the resources of the current field by the given value if

@@ -20,15 +20,15 @@
 
 #include "base/i18n.h"
 #include "base/string.h"
-#include "ui/editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/note_map_options.h"
 #include "ui/basic/textarea.h"
 #include "ui/basic/textinput.h"
-#include "wlapplication_options.h"
+#include "ui/editor/editorinteractive.h"
 #include "ui/shared/map_tags.h"
+#include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());

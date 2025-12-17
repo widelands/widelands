@@ -19,9 +19,9 @@
 #ifndef WL_UI_EDITOR_FIELD_INFO_WINDOW_H
 #define WL_UI_EDITOR_FIELD_INFO_WINDOW_H
 
-#include "ui/editor/editorinteractive.h"
 #include "ui/basic/multilinetextarea.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/editorinteractive.h"
 
 struct FieldInfoWindow : public UI::UniqueWindow {
 	static constexpr int16_t kWidth = 400;

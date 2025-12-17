@@ -21,10 +21,10 @@
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "ui/basic/textinput.h"
-#include "wlapplication_options.h"
+#include "ui/game/watchwindow.h"
 #include "ui/wui/interactive_gamebase.h"
 #include "ui/wui/mapviewpixelfunctions.h"
-#include "ui/game/watchwindow.h"
+#include "wlapplication_options.h"
 
 /* Logic backend. */
 

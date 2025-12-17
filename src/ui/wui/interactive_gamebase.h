@@ -26,8 +26,8 @@
 #include "ui/basic/dropdown.h"
 #include "ui/basic/unique_window.h"
 #include "ui/game/general_statistics_menu.h"
-#include "ui/wui/interactive_base.h"
 #include "ui/game/stock_menu.h"
+#include "ui/wui/interactive_base.h"
 
 class InteractiveGameBase : public InteractiveBase {
 public:

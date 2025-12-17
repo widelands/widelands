@@ -25,7 +25,6 @@
 #include "base/log.h"
 #include "base/random.h"
 #include "base/wexception.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
@@ -33,6 +32,7 @@
 #include "logic/map.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "ui/basic/messagebox.h"
+#include "ui/editor/editorinteractive.h"
 #include "wlapplication_options.h"
 
 namespace {

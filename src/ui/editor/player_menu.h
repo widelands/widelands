@@ -21,12 +21,12 @@
 
 #include <memory>
 
-#include "ui/editor/tool_options_menu.h"
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
 #include "ui/basic/dropdown.h"
 #include "ui/basic/textinput.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/tool_options_menu.h"
 
 class EditorInteractive;
 

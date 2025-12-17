@@ -19,11 +19,11 @@
 #ifndef WL_UI_EDITOR_MAIN_MENU_LOAD_OR_SAVE_MAP_H
 #define WL_UI_EDITOR_MAIN_MENU_LOAD_OR_SAVE_MAP_H
 
-#include "ui/editor/editorinteractive.h"
 #include "logic/filesystem_constants.h"
 #include "ui/basic/button.h"
 #include "ui/basic/textarea.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/editorinteractive.h"
 #include "ui/shared/mapdetails.h"
 #include "ui/shared/maptable.h"
 

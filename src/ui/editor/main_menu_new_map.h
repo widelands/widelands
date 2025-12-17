@@ -19,12 +19,12 @@
 #ifndef WL_UI_EDITOR_MAIN_MENU_NEW_MAP_H
 #define WL_UI_EDITOR_MAIN_MENU_NEW_MAP_H
 
-#include "ui/editor/map_size_box.h"
 #include "logic/widelands.h"
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
 #include "ui/basic/listselect.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/map_size_box.h"
 
 class EditorInteractive;
 

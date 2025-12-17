@@ -69,7 +69,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          _("Recipient"),
                          UI::DropdownType::kPictorial,
                          style,
-                         style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary),
+                         style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                            UI::ButtonStyle::kWuiSecondary),
      editbox(&hbox_, "input", 28, 0, w - 28, style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {

@@ -41,9 +41,9 @@
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "ui/fsmenu/training_wheel_options.h"
 #endif
+#include "ui/wui/interactive_base.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "ui/wui/interactive_base.h"
 
 namespace {
 

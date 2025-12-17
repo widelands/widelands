@@ -20,9 +20,9 @@
 
 #include <sstream>
 
-#include "ui/editor/editorinteractive.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/maptriangleregion.h"
+#include "ui/editor/editorinteractive.h"
 
 using Widelands::TCoords;
 

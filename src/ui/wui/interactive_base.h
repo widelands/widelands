@@ -32,11 +32,11 @@
 #include "ui/basic/dropdown.h"
 #include "ui/basic/unique_window.h"
 #include "ui/game/chat_overlay.h"
+#include "ui/game/quicknavigation.h"
+#include "ui/shared/plugins.h"
 #include "ui/wui/debugconsole.h"
 #include "ui/wui/mapview.h"
 #include "ui/wui/minimap.h"
-#include "ui/shared/plugins.h"
-#include "ui/game/quicknavigation.h"
 
 class InfoPanel;
 class MainToolbar;

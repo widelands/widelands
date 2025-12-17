@@ -20,11 +20,11 @@
 
 #include <sstream>
 
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                EditorActionArgs* args,

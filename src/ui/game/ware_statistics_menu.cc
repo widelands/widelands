@@ -30,9 +30,9 @@
 #include "ui/basic/checkbox.h"
 #include "ui/basic/slider.h"
 #include "ui/basic/tabpanel.h"
+#include "ui/game/waresdisplay.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/plot_area.h"
-#include "ui/game/waresdisplay.h"
 
 constexpr int kPlotHeight = 145;
 constexpr int kPlotWidth = 250;

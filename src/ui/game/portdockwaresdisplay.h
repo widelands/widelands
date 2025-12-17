@@ -21,8 +21,8 @@
 
 #include "ui/basic/box.h"
 #include "ui/game/buildingwindow.h"
-#include "ui/wui/interactive_gamebase.h"
 #include "ui/game/waresdisplay.h"
+#include "ui/wui/interactive_gamebase.h"
 
 namespace Widelands {
 class PortDock;

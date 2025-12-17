@@ -22,7 +22,6 @@
 
 #include "base/i18n.h"
 #include "base/string.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
@@ -30,6 +29,7 @@
 #include "logic/widelands.h"
 #include "ui/basic/checkbox.h"
 #include "ui/basic/multilinetextarea.h"
+#include "ui/editor/editorinteractive.h"
 #include "wlapplication_options.h"
 
 namespace {

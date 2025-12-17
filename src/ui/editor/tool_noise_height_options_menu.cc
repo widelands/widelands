@@ -19,11 +19,11 @@
 #include "ui/editor/tool_noise_height_options_menu.h"
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/noise_height_tool.h"
 #include "logic/widelands_geometry.h"
 #include "ui/basic/textarea.h"
+#include "ui/editor/editorinteractive.h"
 
 EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,

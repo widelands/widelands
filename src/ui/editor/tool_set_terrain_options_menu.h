@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "logic/map_objects/world/terrain_description.h"
 #include "ui/editor/categorized_item_selection_menu.h"
 #include "ui/editor/tool_options_menu.h"
-#include "logic/map_objects/world/terrain_description.h"
 
 class EditorInteractive;
 struct EditorSetTerrainTool;

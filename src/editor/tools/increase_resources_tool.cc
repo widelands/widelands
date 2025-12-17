@@ -18,12 +18,12 @@
 
 #include "editor/tools/increase_resources_tool.h"
 
-#include "ui/editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                        EditorActionArgs* args,

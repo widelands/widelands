@@ -20,9 +20,9 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/resize_tool.h"
 #include "logic/map.h"
+#include "ui/editor/editorinteractive.h"
 
 inline EditorInteractive& EditorToolResizeOptionsMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());

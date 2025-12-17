@@ -21,13 +21,13 @@
 
 #include <memory>
 
-#include "ui/editor/editorinteractive.h"
-#include "ui/editor/main_menu_load_or_save_map.h"
-#include "ui/editor/main_menu_map_options.h"
 #include "logic/note_map_options.h"
 #include "ui/basic/button.h"
 #include "ui/basic/textarea.h"
 #include "ui/basic/textinput.h"
+#include "ui/editor/editorinteractive.h"
+#include "ui/editor/main_menu_load_or_save_map.h"
+#include "ui/editor/main_menu_map_options.h"
 
 /**
  * Choose a filename and save your brand new created map

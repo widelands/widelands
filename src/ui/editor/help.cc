@@ -20,10 +20,10 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "ui/editor/editorinteractive.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui/basic/messagebox.h"
+#include "ui/editor/editorinteractive.h"
 
 EditorHelp::EditorHelp(EditorInteractive& parent,
                        UI::UniqueWindow::Registry& registry,

@@ -18,10 +18,10 @@
 
 #include "editor/tools/delete_critter_tool.h"
 
-#include "ui/editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Deletes the bob at the given location

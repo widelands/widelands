@@ -18,9 +18,9 @@
 
 #include "editor/tools/history.h"
 
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/action_args.h"
 #include "editor/tools/tool_action.h"
+#include "ui/editor/editorinteractive.h"
 
 // === EditorActionArgs === //
 

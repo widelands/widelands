@@ -19,13 +19,13 @@
 #include "ui/editor/tool_place_critter_options_menu.h"
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/place_critter_tool.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
 #include "ui/basic/box.h"
 #include "ui/basic/checkbox.h"
+#include "ui/editor/editorinteractive.h"
 
 namespace {
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent,

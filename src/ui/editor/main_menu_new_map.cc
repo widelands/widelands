@@ -20,7 +20,6 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
-#include "ui/editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"
@@ -29,6 +28,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "ui/basic/textarea.h"
+#include "ui/editor/editorinteractive.h"
 #include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {

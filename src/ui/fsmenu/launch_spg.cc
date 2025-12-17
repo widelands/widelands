@@ -28,9 +28,9 @@
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/main.h"
 #include "ui/fsmenu/mapselect.h"
+#include "ui/wui/interactive_player.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "ui/wui/interactive_player.h"
 
 namespace FsMenu {
 

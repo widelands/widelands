@@ -115,9 +115,9 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui/basic/progresswindow.h"
-#include "wlapplication_options.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/interactive_spectator.h"
+#include "wlapplication_options.h"
 
 namespace Widelands {
 

@@ -24,8 +24,6 @@
 #include "base/log.h"
 #include "base/string.h"
 #include "base/wexception.h"
-#include "ui/editor/editorinteractive.h"
-#include "ui/editor/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/illegal_filename_check.h"
@@ -37,9 +35,11 @@
 #include "map_io/widelands_map_loader.h"
 #include "ui/basic/messagebox.h"
 #include "ui/basic/progresswindow.h"
-#include "wlapplication_options.h"
+#include "ui/editor/editorinteractive.h"
+#include "ui/editor/main_menu_save_map_make_directory.h"
 #include "ui/shared/mapdetails.h"
 #include "ui/shared/maptable.h"
+#include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuSaveMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());

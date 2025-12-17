@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "ui/editor/map_size_box.h"
 #include "logic/addons.h"
 #include "ui/basic/box.h"
 #include "ui/basic/checkbox.h"
@@ -31,6 +30,7 @@
 #include "ui/basic/textarea.h"
 #include "ui/basic/textinput.h"
 #include "ui/basic/unique_window.h"
+#include "ui/editor/map_size_box.h"
 
 namespace Widelands {
 class EditorGameBase;

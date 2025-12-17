@@ -30,8 +30,8 @@
 #include "ui/basic/textarea.h"
 #include "ui/basic/textinput.h"
 #include "ui/basic/unique_window.h"
-#include "ui/wui/interactive_base.h"
 #include "ui/game/itemwaresdisplay.h"
+#include "ui/wui/interactive_base.h"
 
 /**
  * Display information about a ship.

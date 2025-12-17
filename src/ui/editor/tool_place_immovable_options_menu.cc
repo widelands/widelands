@@ -21,12 +21,12 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "ui/basic/box.h"
 #include "ui/basic/checkbox.h"
+#include "ui/editor/editorinteractive.h"
 
 namespace {
 

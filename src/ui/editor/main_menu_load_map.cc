@@ -22,10 +22,10 @@
 
 #include "base/i18n.h"
 #include "base/string.h"
-#include "ui/editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/widelands_map_loader.h"
+#include "ui/editor/editorinteractive.h"
 #include "ui/shared/mapdetails.h"
 #include "ui/shared/maptable.h"
 

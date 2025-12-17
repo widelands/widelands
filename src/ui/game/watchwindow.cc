@@ -32,11 +32,11 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wlapplication_options.h"
+#include "ui/shared/unique_window_handler.h"
 #include "ui/wui/interactive_gamebase.h"
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/mapviewpixelfunctions.h"
-#include "ui/shared/unique_window_handler.h"
+#include "wlapplication_options.h"
 
 constexpr Duration kRefreshInterval(5000);
 

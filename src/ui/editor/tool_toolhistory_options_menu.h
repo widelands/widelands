@@ -20,9 +20,9 @@
 #define WL_UI_EDITOR_TOOL_TOOLHISTORY_OPTIONS_MENU_H
 
 #include "editor/tools/tool_action.h"
-#include "ui/editor/tool_options_menu.h"
 #include "ui/basic/box.h"
 #include "ui/basic/listselect.h"
+#include "ui/editor/tool_options_menu.h"
 
 class EditorInteractive;
 struct EditorHistoryTool;

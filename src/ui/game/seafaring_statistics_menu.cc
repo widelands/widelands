@@ -26,9 +26,9 @@
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "ui/basic/box.h"
-#include "wlapplication_options.h"
-#include "ui/wui/interactive_player.h"
 #include "ui/game/shipwindow.h"
+#include "ui/wui/interactive_player.h"
+#include "wlapplication_options.h"
 
 inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());

@@ -21,11 +21,11 @@
 #include <memory>
 
 #include "logic/map_objects/tribes/militarysite.h"
-#include "wlapplication_mousewheel_options.h"
-#include "wlapplication_options.h"
 #include "ui/game/actionconfirm.h"
 #include "ui/game/inputqueuedisplay.h"
 #include "ui/wui/interactive_player.h"
+#include "wlapplication_mousewheel_options.h"
+#include "wlapplication_options.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_settings[] = "images/wui/menus/statistics_stock.png";

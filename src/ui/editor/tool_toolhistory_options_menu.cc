@@ -22,7 +22,6 @@
 #include <vector>
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/history.h"
 #include "editor/tools/tool.h"
 #include "editor/tools/toolhistory_tool.h"
@@ -30,6 +29,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "ui/editor/editorinteractive.h"
 
 inline EditorInteractive& EditorToolhistoryOptionsMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());

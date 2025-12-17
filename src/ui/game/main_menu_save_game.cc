@@ -33,8 +33,8 @@
 #include "logic/generic_save_handler.h"
 #include "logic/playersmanager.h"
 #include "ui/basic/messagebox.h"
-#include "wlapplication_options.h"
 #include "ui/wui/interactive_gamebase.h"
+#include "wlapplication_options.h"
 
 struct TypeInfo {
 	std::string window_name;

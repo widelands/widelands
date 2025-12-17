@@ -26,8 +26,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
 #include "sound/sound_handler.h"
-#include "wlapplication_options.h"
 #include "ui/game/chat_msg_layout.h"
+#include "wlapplication_options.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.

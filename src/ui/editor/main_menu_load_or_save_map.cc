@@ -22,10 +22,10 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "ui/editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "ui/editor/editorinteractive.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,

@@ -28,10 +28,10 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/descriptions.h"
+#include "ui/wui/mapviewpixelfunctions.h"
 #include "wlapplication.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
-#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace {
 

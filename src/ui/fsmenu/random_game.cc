@@ -18,8 +18,8 @@
 
 #include "ui/fsmenu/random_game.h"
 
-#include "ui/editor/editorinteractive.h"
 #include "ui/basic/messagebox.h"
+#include "ui/editor/editorinteractive.h"
 #include "ui/fsmenu/launch_spg.h"
 #include "ui/fsmenu/main.h"
 

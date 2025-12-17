@@ -24,8 +24,8 @@
 #include "ui/basic/button.h"
 #include "ui/basic/radiobutton.h"
 #include "ui/basic/textarea.h"
-#include "wlapplication_mousewheel_options.h"
 #include "ui/wui/interactive_base.h"
+#include "wlapplication_mousewheel_options.h"
 
 /**
  * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite

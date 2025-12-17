@@ -19,10 +19,10 @@
 #include "editor/tools/delete_immovable_tool.h"
 
 #include "base/macros.h"
-#include "ui/editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Deletes the immovable at the given location

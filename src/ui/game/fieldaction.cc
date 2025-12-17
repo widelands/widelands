@@ -41,12 +41,12 @@
 #include "ui/basic/tabpanel.h"
 #include "ui/basic/unique_window.h"
 #include "ui/game/actionconfirm.h"
+#include "ui/game/debug_ui.h"
 #include "ui/game/economy_options_window.h"
 #include "ui/game/fleet_options_window.h"
-#include "ui/game/debug_ui.h"
-#include "ui/wui/interactive_player.h"
 #include "ui/game/waresdisplay.h"
 #include "ui/game/watchwindow.h"
+#include "ui/wui/interactive_player.h"
 
 namespace Widelands {
 class BuildingDescr;

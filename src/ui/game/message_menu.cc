@@ -26,8 +26,8 @@
 #include "logic/game_data_error.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "wlapplication_options.h"
 #include "ui/wui/interactive_player.h"
+#include "wlapplication_options.h"
 
 using Widelands::Message;
 using Widelands::MessageId;

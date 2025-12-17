@@ -25,10 +25,10 @@
 #include "logic/replay_game_controller.h"
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/main.h"
-#include "wlapplication.h"
-#include "wlapplication_options.h"
 #include "ui/shared/gamedetails.h"
 #include "ui/wui/interactive_spectator.h"
+#include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 

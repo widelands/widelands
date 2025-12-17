@@ -19,8 +19,8 @@
 #include "ui/editor/toolsize_menu.h"
 
 #include "base/i18n.h"
-#include "ui/editor/editorinteractive.h"
 #include "editor/tools/tool.h"
+#include "ui/editor/editorinteractive.h"
 
 inline EditorInteractive& EditorToolsizeMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
