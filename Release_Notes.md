@@ -10,7 +10,7 @@
  - New visualisation modes in the editor
  - Many new capabilities for add-on developers
 
-[More info](https://codeberg.org/wl/widelands/milestone/4647?type=all&state=closed&sort=recentupdate)
+[More info](https://www.widelands.org/news/2025/Dec/21/widelands-1-3-released/)
 
 
 ## Widelands 1.2.1
