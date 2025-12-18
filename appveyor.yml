@@ -25,7 +25,7 @@ branches:
 skip_tags: true
 
 cache:
-  /usr/local/Cellar -> appyeyor.yml
+  /usr/local/Cellar -> appveyor.yml
 
 environment:
   APPVEYOR_SAVE_CACHE_ON_ERROR: true
