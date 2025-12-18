@@ -10,7 +10,5 @@ libvorbis
 ninja
 python
 sdl2
-sdl2_mixer
-sdl2_ttf
 zlib
 dylibbundler
