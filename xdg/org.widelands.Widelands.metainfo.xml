@@ -352,7 +352,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-08-20" version="1.3~git">
+    <release date="2025-08-20" version="1.4~git">
+      <description><ul>
+      </ul></description>
+      <url type="details">https://codeberg.org/wl/widelands/milestone/6040?type=all&amp;amp;state=closed&amp;amp;sort=recentupdate</url>
+    </release>
+    <release date="2025-12-21" version="1.3">
       <description><ul>
         <li>Market trading</li>
         <li>Six new maps added and three old maps removed</li>
@@ -432,7 +437,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="sk">Nové zobrazenia v editore</li>
         <li xml:lang="sk">Veľa nových funkcií pre vývoj doplnkov</li>
       </ul></description>
-      <url type="details">https://codeberg.org/wl/widelands/milestone/4647?type=all&amp;state=closed&amp;sort=recentupdate</url>
+      <url type="details">https://www.widelands.org/news/2025/Dec/21/widelands-1-3-released/</url>
     </release>
     <release date="2024-11-15" version="1.2.1">
       <description><ul>
@@ -451,99 +456,7 @@ Version de correction de bugs</li>
       </ul></description>
       <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
     </release>
-    <release date="2024-03-30" version="1.2">
-      <description><ul>
-        <li>New Frisian scenario</li>
-        <li>Diplomacy handling by computer players</li>
-        <li>Naval Warfare (preview)</li>
-        <li>Garrisons for ports and headquarters</li>
-        <li>UI Plugins</li>
-        <li>Pinned notes</li>
-        <li>Direct map publishing</li>
-        <li>Enhanced error handling</li>
-        <li xml:lang="cs">Nová kampaň pro kmen Frísů</li>
-        <li xml:lang="cs">Hráči řízení počítačem mohou vyvíjet aktivní diplomacii</li>
-        <li xml:lang="cs">Námořní vojenství (zkušební provoz)</li>
-        <li xml:lang="cs">Vojenská posádka v přístavech a hlavní budově</li>
-        <li xml:lang="cs">Zásuvné moduly uživatelského rozhraní</li>
-        <li xml:lang="cs">K mapě připínatelné poznámky</li>
-        <li xml:lang="cs">Mapy lze publikovat přímo z editoru</li>
-        <li xml:lang="cs">Vylepšena správa chyb</li>
-        <li xml:lang="de">Neues Friesenszenario</li>
-        <li xml:lang="de">Diplomatie mit Computerspielern</li>
-        <li xml:lang="de">Seekriegsführung (Vorschau)</li>
-        <li xml:lang="de">Garnisonen in Häfen und im Hauptquartier</li>
-        <li xml:lang="de">Benutzeroberflächenerweiterungen</li>
-        <li xml:lang="de">Haftnotizen</li>
-        <li xml:lang="de">Direkte Kartenveröffentlichung</li>
-        <li xml:lang="de">Verbesserte Fehlerbehandlung</li>
-        <li xml:lang="fr">Nouveau scénario Frisien</li>
-        <li xml:lang="fr">Diplomatie gérée par les joueurs ordinateurs</li>
-        <li xml:lang="fr">Bataille navale (aperçu)</li>
-        <li xml:lang="fr">garnisons pour les ports et les quartiers-généraux.</li>
-        <li xml:lang="fr">UI Plugin</li>
-        <li xml:lang="fr">Notes épinglées</li>
-        <li xml:lang="fr">Publication de carte en direct</li>
-        <li xml:lang="fr">Gestion d'erreur améliorée</li>
-        <li xml:lang="hu">Új küldetés a fríz hadjáratban</li>
-        <li xml:lang="hu">A számítógépes játékosok is kezelik a diplomáciát</li>
-        <li xml:lang="hu">Tengeri hadviselés (előzetes)</li>
-        <li xml:lang="hu">Helyőrség a kikötőkben és a főhadiszálláson</li>
-        <li xml:lang="hu">Kezelői felület bővítmények</li>
-        <li xml:lang="hu">Térképjelölők</li>
-        <li xml:lang="hu">Térképek feltöltése a szerkesztőből</li>
-        <li xml:lang="hu">Jobb hibakezelés</li>
-        <li xml:lang="nds">Neje Fresen-Rutfödderung</li>
-        <li xml:lang="nds">Künstelk Spelers regeren Betreckens</li>
-        <li xml:lang="nds">Seekrieg (Utkiek)</li>
-        <li xml:lang="nds">Mannskuppen in Muden un Raadhusen</li>
-        <li xml:lang="nds">Schnittstee-Inschuvens</li>
-        <li xml:lang="nds">Faste Anmarkens</li>
-        <li xml:lang="nds">Kaarten stracks publizeren</li>
-        <li xml:lang="nds">Beterer Umgang mit Fehlers</li>
-        <li xml:lang="nl">Nieuw Fries scenario</li>
-        <li xml:lang="nl">Diplomatie door computerspelers</li>
-        <li xml:lang="nl">Oorlogsvoering op zee (preview)</li>
-        <li xml:lang="nl">Garnizoenen voor havens en hoofdkwartier</li>
-        <li xml:lang="nl">UI Plugins</li>
-        <li xml:lang="nl">Vastgepinde opmerkingen</li>
-        <li xml:lang="nl">Directe kaart publicatie</li>
-        <li xml:lang="nl">Verbeterde foutverwerking</li>
-        <li xml:lang="nn">Nytt frisisk scenario</li>
-        <li xml:lang="nn">Diplomatihandtering hjå dataspelarar</li>
-        <li xml:lang="nn">Sjøkrig (førehandsvising)</li>
-        <li xml:lang="nn">Garnisonar for hamner og hovudsete</li>
-        <li xml:lang="nn">Programtillegg for brukargrensesnittet</li>
-        <li xml:lang="nn">Festa notat</li>
-        <li xml:lang="nn">Direkte publisering av kart</li>
-        <li xml:lang="nn">Forbetra feilhandtering</li>
-        <li xml:lang="pl">Nowy scenariusz Fryzów</li>
-        <li xml:lang="pl">Obsługa dyplomacji przez graczy komputerowych</li>
-        <li xml:lang="pl">Operacje morskie</li>
-        <li xml:lang="pl">Garnizony dla portów i kwater głównych</li>
-        <li xml:lang="pl">Wtyczki UI</li>
-        <li xml:lang="pl">Przypięte notatki</li>
-        <li xml:lang="pl">Bezpośrednie publikowanie map</li>
-        <li xml:lang="pl">Ulepszona obsługa błędów</li>
-        <li xml:lang="pt_BR">Novo cenário dos Frísios</li>
-        <li xml:lang="pt_BR">Controle de diplomacia por jogadores artificiais</li>
-        <li xml:lang="pt_BR">Batalha Naval (pré-visualização)</li>
-        <li xml:lang="pt_BR">Guarnições para portos e sedes.</li>
-        <li xml:lang="pt_BR">Plugins de interface</li>
-        <li xml:lang="pt_BR">Notas fixadas</li>
-        <li xml:lang="pt_BR">Publicação direta de mapas</li>
-        <li xml:lang="pt_BR">Tratamento de erros melhorado</li>
-        <li xml:lang="sk">Nový scenár Frízanov</li>
-        <li xml:lang="sk">Riešenie diplomacie počítačovými hráčmi</li>
-        <li xml:lang="sk">Námorná vojna (ukážka)</li>
-        <li xml:lang="sk">Posádky pre prístavy a ústredia</li>
-        <li xml:lang="sk">Rozšírenia používateľského rozhrania</li>
-        <li xml:lang="sk">Pripnuté poznámky</li>
-        <li xml:lang="sk">Mapy sa dajú zverejňovať priamo z editora</li>
-        <li xml:lang="sk">Vylepšené spracovanie chýb</li>
-      </ul></description>
-      <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
-    </release>
+    <release date="2024-03-30" version="1.2"/>
     <release date="2022-10-23" version="1.1"/>
     <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="~Build 21"/>
