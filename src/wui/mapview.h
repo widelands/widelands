@@ -62,7 +62,11 @@ public:
 	};
 
 	struct View {
-		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
+		View(Vector2f init_viewpoint, float init_zoom, float init_zoom_saved)
+		   : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom_saved) {
+		}
+		View(Vector2f init_viewpoint, float init_zoom)
+		   : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom) {
 		}
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
@@ -78,6 +82,9 @@ public:
 
 		// Current zoom value.
 		float zoom;
+
+		// Saved zoom value in case of toggle max/min zoom
+		float zoom_saved;
 	};
 
 	// Time in milliseconds since the game was launched. Animations always
@@ -166,6 +173,14 @@ public:
 	void zoom_to_max();
 	// Zoom to min
 	void zoom_to_min();
+	// Save current zoom value
+	void zoom_save();
+	// Zoom to saved zoom value
+	void zoom_to_saved();
+	// Is zoom at maximum?
+	bool zoom_at_max();
+	// Is zoom at minimum?
+	bool zoom_at_min();
 
 	// True if the user is currently dragging the map.
 	bool is_dragging() const;
