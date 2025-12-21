@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 by the Widelands Development Team
+ * Copyright (C) 2022-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::PINNED_NOTE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attribs*/) {
 	}
 
 	[[nodiscard]] Bob& create_object() const override {
@@ -47,6 +48,14 @@ private:
 static const PinnedNoteDescr g_descr("pinned_note", "Pinned Note");
 
 PinnedNote::PinnedNote() : Bob(g_descr) {
+	owner_changed.connect([this](Player* old_owner, Player* new_owner) {
+		if (old_owner != nullptr) {
+			old_owner->unregister_pinned_note(this);
+		}
+		if (new_owner != nullptr) {
+			new_owner->register_pinned_note(this);
+		}
+	});
 }
 
 // static
@@ -58,9 +67,9 @@ PinnedNote& PinnedNote::create(EditorGameBase& egbase,
 	PinnedNote& note = *new PinnedNote();
 	note.set_text(text);
 	note.set_rgb(rgb);
-	note.set_owner(&owner);
 	note.set_position(egbase, pos);
 	note.init(egbase);
+	note.set_owner(&owner);
 	return note;
 }
 
@@ -82,6 +91,11 @@ void PinnedNote::draw(const EditorGameBase& egbase,
                       const Coords& coords,
                       float scale,
                       RenderTarget* dst) const {
+	if (get_owner() == nullptr) {
+		// Note not yet fully initialized, can happen during creation
+		return;
+	}
+
 	if (egbase.is_game()) {
 		const InteractivePlayer* ipl = dynamic_cast<const Game&>(egbase).get_ipl();
 		if (ipl != nullptr) {

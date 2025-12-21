@@ -27,6 +27,12 @@ wl.Descriptions():new_productionsite_type {
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {40, 55},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {
@@ -49,6 +55,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
          descname = _("planting bushes"),
          actions = {
+            -- time of worker: 12.2-30.2 sec
+            -- min. time total: 12.2 + 21 = 33.2 sec
+            -- max. time total: 30.2 + 21 = 51.2 sec
             "callworker=plant",
             "sleep=duration:21s"
          }

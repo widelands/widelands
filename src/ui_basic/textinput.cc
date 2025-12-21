@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -201,8 +201,8 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        with_caret && mode == Data::Mode::kSelection,
 	        owner.should_expand_selection() ?
-              std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
-              std::nullopt,
+	           std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
+	           std::nullopt,
 	        start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
@@ -224,7 +224,7 @@ const std::string& AbstractTextInputPanel::get_text() const {
 /**
  * Replace the currently stored text with something else.
  */
-void AbstractTextInputPanel::set_text(const std::string& text) {
+void AbstractTextInputPanel::set_text(const std::string& text, bool send_signal) {
 	if (text == d_->text) {
 		return;
 	}
@@ -238,7 +238,9 @@ void AbstractTextInputPanel::set_text(const std::string& text) {
 	d_->update();
 	scroll_cursor_into_view();
 
-	changed();
+	if (send_signal) {
+		changed();
+	}
 }
 
 /**
@@ -368,6 +370,28 @@ std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::paragraph_boundary(u
 	return {start, end};
 }
 
+bool AbstractTextInputPanel::show_default_context_menu(Vector2i pos) {
+	show_context_menu(
+	   pos, {
+	           {_("Cut"), _("Cut the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCut, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_cut(); }},
+	           {_("Copy"), _("Copy the selected text to the clipboard"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextCopy, false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { handle_copy(); }},
+	           {_("Paste"), _("Paste the clipboard content"),
+	            shortcut_string_for(KeyboardShortcut::kCommonTextPaste, false), nullptr,
+	            SDL_HasClipboardText() != 0, [this]() { handle_paste(); }},
+	           {_("Delete"), _("Delete the selected text"),
+	            shortcut_string_for(keysym(SDLK_DELETE), false), nullptr,
+	            d_->mode == Data::Mode::kSelection, [this]() { delete_selected_text(); }},
+	           {_("Select All"), _("Select the entire text"),
+	            shortcut_string_for(KeyboardShortcut::kCommonSelectAll, false), nullptr, true,
+	            [this]() { handle_select_all(); }},
+	        });
+	return true;
+}
+
 /**
  * The mouse was clicked on this editbox
  */
@@ -402,8 +426,9 @@ bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int
 		clicked();
 		return true;
 	}
+
 #if HAS_PRIMARY_SELECTION_BUFFER
-	else if (btn == SDL_BUTTON_MIDDLE) {
+	if (btn == SDL_BUTTON_MIDDLE) {
 		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
 		const uint32_t old_caret_pos = d_->cursor_pos;
 		const uint32_t old_selection_start = d_->selection_start;
@@ -444,7 +469,7 @@ bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int
 	}
 #endif
 
-	return false;
+	return Panel::handle_mousepress(btn, x, y);
 }
 bool AbstractTextInputPanel::handle_mousemove(
    uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
@@ -539,35 +564,54 @@ void AbstractTextInputPanel::set_caret_pos(const size_t caret) const {
 	d_->set_cursor_pos(d_->snap_to_char(caret));
 }
 
+void AbstractTextInputPanel::handle_cut() {
+	if (d_->mode == Data::Mode::kSelection) {
+		copy_selected_text();
+		delete_selected_text();
+	}
+}
+
+void AbstractTextInputPanel::handle_copy() {
+	if (d_->mode == Data::Mode::kSelection) {
+		copy_selected_text();
+	}
+}
+
+void AbstractTextInputPanel::handle_paste() {
+	if (SDL_HasClipboardText() != 0) {
+		if (d_->mode == Data::Mode::kSelection) {
+			delete_selected_text();
+		}
+		handle_textinput(SDL_GetClipboardText());
+	}
+}
+
+void AbstractTextInputPanel::handle_select_all() {
+	d_->selection_start = 0;
+	d_->selection_end = d_->text.size();
+	d_->mode = Data::Mode::kSelection;
+	update_primary_selection_buffer();
+}
+
 /**
  * This is called by the UI code whenever a key press or release arrives
  */
 bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) &&
-		    (SDL_HasClipboardText() != 0u)) {
-			if (d_->mode == Data::Mode::kSelection) {
-				delete_selected_text();
-			}
-			handle_textinput(SDL_GetClipboardText());
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code)) {
+			handle_paste();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
-		    d_->mode == Data::Mode::kSelection) {
-			copy_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code)) {
+			handle_copy();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
-		    d_->mode == Data::Mode::kSelection) {
-			copy_selected_text();
-			delete_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code)) {
+			handle_cut();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
-			d_->selection_start = 0;
-			d_->selection_end = d_->text.size();
-			d_->mode = Data::Mode::kSelection;
-			update_primary_selection_buffer();
+			handle_select_all();
 			return true;
 		}
 
@@ -586,7 +630,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_BACKSPACE:
 			if (d_->mode == Data::Mode::kSelection) {
@@ -599,7 +643,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				changed();
 			}
-			break;
+			return true;
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
@@ -631,7 +675,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->prev_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 		}
 
 		case SDLK_RIGHT:
@@ -660,7 +704,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->next_char(d_->cursor_pos));
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
@@ -698,7 +742,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
@@ -733,7 +777,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(0);
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -756,7 +800,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				}
 				d_->set_cursor_pos(d_->ww.line_offset(cursorline));
 			}
-			break;
+			return true;
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
@@ -789,7 +833,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					d_->set_cursor_pos(d_->text.size());
 				}
 			}
-			break;
+			return true;
 
 		case SDLK_ESCAPE:
 			cancel();
@@ -797,17 +841,16 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_RETURN:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				return false;
+				break;
 			}
 			d_->insert(d_->cursor_pos, "\n");
 			d_->reset_selection();
 			changed();
-			break;
+			return true;
 
 		default:
 			break;
 		}
-		return true;
 	}
 
 	return Panel::handle_key(down, code);

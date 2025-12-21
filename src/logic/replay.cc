@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,11 @@
 #include <memory>
 
 #include "base/log.h"
-#include "base/md5.h"
 #include "base/random.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
-#include "build_info.h"
+#include "commands/cmd_replay_sync_read.h"
+#include "commands/cmd_replay_sync_write.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
@@ -36,9 +36,7 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
-#include "logic/playercommand.h"
 #include "logic/save_handler.h"
-#include "ui_basic/messagebox.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
@@ -54,63 +52,8 @@ static inline void delete_temp_file(const std::string& temp_file) {
 // File format definitions
 constexpr uint32_t kReplayMagic = 0x2E21A102;
 constexpr uint8_t kCurrentPacketVersion = 4;
-constexpr Duration kSyncInterval(200);
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
-
-class CmdReplaySyncRead : public Command {
-public:
-	CmdReplaySyncRead(const Time& init_duetime, const Md5Checksum& hash)
-	   : Command(init_duetime), hash_(hash) {
-	}
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kReplaySyncRead;
-	}
-
-	void execute(Game& game) override {
-		if (reported_desync_for_ == &game) {
-			// We already know there was a desync
-			return;
-		}
-
-		const Md5Checksum myhash = game.get_sync_hash();
-
-		if (hash_ != myhash) {
-			reported_desync_for_ = &game;
-			log_err_time(game.get_gametime(),
-			             "REPLAY: Lost synchronization at time %u\n"
-			             "I have:     %s\n"
-			             "Replay has: %s\n",
-			             duetime().get(), myhash.str().c_str(), hash_.str().c_str());
-
-			// In case syncstream logging is on, save it for analysis
-			game.save_syncstream(true);
-
-			// There has to be a better way to do this.
-			game.game_controller()->set_desired_speed(0);
-
-			UI::WLMessageBox m(
-			   game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
-			   format(_("The replay has desynced and the game was paused.\n"
-			            "You are probably watching a replay created with another version of "
-			            "Widelands, which is not supported.\n\n"
-			            "If you are certain that the replay was created with the same version "
-			            "of Widelands, %1$s, please report this problem as a bug.\n"
-			            "You will find related messages in the standard output (stdout.txt on "
-			            "Windows). Please add this information to your report."),
-			          build_ver_details()),
-			   UI::WLMessageBox::MBoxType::kOk);
-			m.run<UI::Panel::Returncodes>();
-		}
-	}
-
-private:
-	Md5Checksum hash_;
-
-	static const Game* reported_desync_for_;
-};
-const Game* CmdReplaySyncRead::reported_desync_for_(nullptr);
 
 /**
  * Load the savegame part of the given replay and open the command log.
@@ -151,6 +94,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		game.set_win_condition_displayname(gpdp.get_win_condition());
+		game.set_win_condition_duration(gpdp.get_win_condition_duration());
 		gl.load_game();
 		game.postload_addons();
 
@@ -204,15 +148,15 @@ Command* ReplayReader::get_next_command(const Time& time) {
 
 		case pkt_syncreport: {
 			Time duetime(cmdlog_->unsigned_32());
-			Md5Checksum hash;
-			cmdlog_->data(hash.data, sizeof(hash.data));
+			crypto::MD5Checksum hash;
+			cmdlog_->data(hash.value.data(), hash.value.size());
 
 			return new CmdReplaySyncRead(duetime, hash);
 		}
 
 		case pkt_end: {
 			Time endtime(cmdlog_->unsigned_32());
-			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
+			verb_log_info_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;
@@ -236,28 +180,6 @@ Command* ReplayReader::get_next_command(const Time& time) {
 bool ReplayReader::end_of_replay() {
 	return cmdlog_ == nullptr;
 }
-
-/**
- * Command / timer that regularly inserts synchronization hashes into
- * the replay.
- */
-class CmdReplaySyncWrite : public Command {
-public:
-	explicit CmdReplaySyncWrite(const Time& init_duetime) : Command(init_duetime) {
-	}
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kReplaySyncWrite;
-	}
-
-	void execute(Game& game) override {
-		if (ReplayWriter* const rw = game.get_replaywriter()) {
-			rw->send_sync(game.get_sync_hash());
-
-			game.enqueue_command(new CmdReplaySyncWrite(duetime() + kSyncInterval));
-		}
-	}
-};
 
 /**
  * Start a replay at the given filename (the caller must add the suffix).
@@ -304,7 +226,7 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	verb_log_info("Done reloading the game from replay");
 	delete_temp_file(temp_savegame);
 
-	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
+	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kReplaySyncInterval));
 
 	game.rng().write_state(*cmdlog_);
 }
@@ -338,10 +260,10 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::send_sync(const Md5Checksum& hash) {
+void ReplayWriter::send_sync(const crypto::MD5Checksum& hash) {
 	cmdlog_->unsigned_8(pkt_syncreport);
 	cmdlog_->unsigned_32(game_.get_gametime().get());
-	cmdlog_->data(hash.data, sizeof(hash.data));
+	cmdlog_->data(hash.value.data(), hash.value.size());
 	cmdlog_->flush();
 }
 
@@ -358,6 +280,8 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	if (magic != kReplayMagic) {
 		throw wexception("%s not a valid replay file", source_file_.c_str());
 	}
+
+	is_replay_ = true;
 
 	const uint8_t packet_version = fr.unsigned_8();
 	if (packet_version != kCurrentPacketVersion) {

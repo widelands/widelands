@@ -39,6 +39,12 @@ wl.Descriptions():new_trainingsite_type {
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {50, 60},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {
@@ -70,6 +76,10 @@ wl.Descriptions():new_trainingsite_type {
    },
 
    programs = {
+      -- Calculation of complete training of one soldier:
+      -- each partial training takes additional 6 sec - see TrainingSite::TrainingSite()
+      -- according to measurements, additional 4*6 seconds are spent for 4 events "no_soldier_for_level"
+      -- time total: 4 * 6 + 5 * 36 = 204 sec
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _("sleeping"),
@@ -82,6 +92,7 @@ wl.Descriptions():new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
+            -- time: 12.4 + 14 + 3.6 + 6 = 36 sec
             "checksoldier=soldier:attack level:0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has sword_long",
             "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
@@ -97,6 +108,7 @@ wl.Descriptions():new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
+            -- time: 10.8 + 12 + 2 * 3.6 + 6 = 36 sec
             "checksoldier=soldier:attack level:1",
             "return=failed unless site has sword_broad",
             "return=failed unless site has bread_frisians",
@@ -113,6 +125,7 @@ wl.Descriptions():new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
+            -- time: 10.8 + 12 + 2 * 3.6 + 6 = 36 sec
             "checksoldier=soldier:attack level:2",
             "return=failed unless site has sword_double",
             "return=failed unless site has beer",
@@ -129,6 +142,7 @@ wl.Descriptions():new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
+            -- time: 15 + 15 + 6 = 36 sec
             "checksoldier=soldier:health level:0",
             "return=failed unless site has helmet",
             "return=failed unless site has bread_frisians,beer",
@@ -144,6 +158,7 @@ wl.Descriptions():new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
+            -- time: 12.4 + 14 + 3.6 + 6 = 36 sec
             "checksoldier=soldier:defense level:0",
             "return=failed unless site has fur_garment_studded",
             "return=failed unless site has bread_frisians,beer",

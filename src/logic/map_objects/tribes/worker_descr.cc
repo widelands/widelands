@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,9 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          MapObjectType init_type,
                          const LuaTable& table,
+                         const std::vector<std::string>& attribs,
                          Descriptions& descriptions)
-   : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
+   : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table, attribs),
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
                       Vector2i(0, 15)),
@@ -119,8 +120,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
+                         const std::vector<std::string>& attribs,
                          Descriptions& descriptions)
-   : WorkerDescr(init_descname, MapObjectType::WORKER, table, descriptions) {
+   : WorkerDescr(init_descname, MapObjectType::WORKER, table, attribs, descriptions) {
 }
 
 WorkerDescr::~WorkerDescr() {  // NOLINT
@@ -145,6 +147,10 @@ void WorkerDescr::set_default_target_quantity(int quantity) {
 		   "default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
 	}
 	default_target_quantity_ = quantity;
+}
+
+int WorkerDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
 }
 
 void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {

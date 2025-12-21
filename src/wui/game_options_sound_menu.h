@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #define WL_WUI_GAME_OPTIONS_SOUND_MENU_H
 
 #include "ui_basic/unique_window.h"
+#include "wui/music_player.h"
 #include "wui/sound_options.h"
 
 /**
@@ -30,7 +31,9 @@ struct GameOptionsSoundMenu : public UI::UniqueWindow {
 	~GameOptionsSoundMenu() override;
 
 private:
+	UI::Box outer_;
 	SoundOptions sound_options_;
+	MusicPlayer music_player_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OPTIONS_SOUND_MENU_H

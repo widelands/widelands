@@ -1,0 +1,830 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2025 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# GunChleoc, 2025
+# Pavol Gono, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Pavol Gono, 2025\n"
+"Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:31
+msgid "Get to the North"
+msgstr "Dostaňte sa na sever"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:33
+msgid "Go North"
+msgstr "Choďte na sever"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:34
+msgid "Sail to the North as far as possible, as fast as you can."
+msgstr ""
+"Plavte sa na sever tak ďaleko, ako je to možné, tak rýchlo, ako dokážete."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:40
+msgid "Destroy Angadthur’s Palace"
+msgstr "Zničte Angadthurov palác"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:42
+msgid "Destroy the Atlantean Headquarters and Build a Port"
+msgstr "Zničte atlantídske ústredie a postavte prístav"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:43
+msgid ""
+"Build a port on the northern shore of the island. The port space is located "
+"under Angadthur’s Headquarters."
+msgstr ""
+"Postavte prístav na severnom pobreží ostrova. Prístavné miesto sa nachádza "
+"pod Angadthurovým ústredím."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:51
+msgid "Pay or Fight"
+msgstr "Zaplatiť alebo bojovať"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:53
+msgid "Pay the Empire or Destroy Their Port"
+msgstr "Zaplaťte Impériu alebo zničte ich prístav"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:54
+#, lua-format
+msgid ""
+"Gather %d gold bar in your northernmost port to obtain a passage from Marcus"
+" Caius Iniucundus."
+msgid_plural ""
+"Gather %d gold bars in your northernmost port to obtain a passage from "
+"Marcus Caius Iniucundus."
+msgstr[0] ""
+"Zhromaždite %d zlatú tehličku vo svojom najsevernejšom prístave, aby ste "
+"získali prechod od Marcusa Caiusa Iniucundusa."
+msgstr[1] ""
+"Zhromaždite %d zlaté tehličky vo svojom najsevernejšom prístave, aby ste "
+"získali prechod od Marcusa Caiusa Iniucundusa."
+msgstr[2] ""
+"Zhromaždite %d zlatej tehličky vo svojom najsevernejšom prístave, aby ste "
+"získali prechod od Marcusa Caiusa Iniucundusa."
+msgstr[3] ""
+"Zhromaždite %d zlatých tehličiek vo svojom najsevernejšom prístave, aby ste "
+"získali prechod od Marcusa Caiusa Iniucundusa."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:57
+msgid ""
+"Alternatively, you can destroy his port to build one of your own in it’s "
+"place."
+msgstr ""
+"Prípadne môžete zničiť jeho prístav a postaviť na jeho mieste svoj vlastný."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:58
+msgid ""
+"All soldiers who are present on the Northern island when you embark will "
+"accompany you."
+msgstr ""
+"Všetci vojaci, ktorí budú prítomní na severnom ostrove pri nalodení, pôjdu s"
+" vami."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:59
+msgid "You have two hours to accomplish this objective."
+msgstr "Na splnenie tejto úlohy máte dve hodiny."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:71
+msgid "Introduction"
+msgstr "Úvod"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:72
+msgid "Welcome back!"
+msgstr "Vitajte späť!"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:74
+msgid ""
+"We have been sailing North for weeks until we reached this shore. Not one of"
+" my numerous seamaps gives me the information what lies beyond this point."
+msgstr ""
+"Celé týždne sme sa plavili na sever, kým sme nedorazili k tomuto brehu. Ani "
+"jedna z mojich početných námorných máp mi neposkytuje informácie o tom, čo "
+"leží za týmto bodom."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:77
+msgid ""
+"Only one thing is certain: We must find a port space on the northern coast "
+"of this land belt to launch an expedition and continue sailing North."
+msgstr ""
+"Iba jedna vec je istá: Musíme nájsť prístavné miesto na severnom pobreží "
+"tohto pásu zeme, aby sme mohli spustiť výpravu a pokračovať v plavbe na "
+"sever."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:80
+msgid ""
+"I want to find my old friend Reebaud as fast as I can. Every minute of "
+"idleness pains me as I imagine Atterdag gleefully trampling the green "
+"marshes of my Föhr under his dastard foot… Let’s make haste."
+msgstr ""
+"Chcem nájsť svojho starého priateľa Reebauda tak rýchlo, ako sa len dá. "
+"Každá minúta nečinnosti ma bolí, keď si predstavujem, ako Atterdag "
+"škodoradostne šliape svojou podlou nohou po zelených močiaroch môjho Föhru… "
+"Poponáhľajme sa."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:85
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:94
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:103
+msgid "Eight Weeks Ago"
+msgstr "Pred ôsmimi týždňami"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:86
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:95
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:104
+msgid "An unfair fight"
+msgstr "Nespravodlivý boj"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 2
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:88
+msgid ""
+"But forgive me. I did not even introduce myself yet. I am Claus Lembeck, the"
+" knight who rules the island of Föhr… or I did until I was forced out by the"
+" conqueror."
+msgstr ""
+"Ale odpustite mi. Ešte som sa ani nepredstavil. Som Claus Lembeck, rytier, "
+"ktorý vládne ostrovu Föhr… alebo som vládol, kým ma nevyhnal dobyvateľ."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 2
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:91
+msgid ""
+"The island was prospering under my rule, and my subjects loved and respected"
+" me. They even built me a new castle as a gift. And then Atterdag came."
+msgstr ""
+"Ostrov pod mojou vládou prekvital a moji poddaní ma milovali a rešpektovali."
+" Dokonca mi ako dar postavili nový hrad. A potom prišiel Atterdag."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 3
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:97
+msgid ""
+"Atterdag! The King of the Danish Empire, and my sworn enemy. Many times did "
+"I aid the dukes of the mainland as they defended themselves against his "
+"thirst for war and conquest, and most times we fought him off. But eight "
+"weeks ago he landed with some of his allies and a large and well-trained "
+"army on my own island, Föhr, and sought to seize it."
+msgstr ""
+"Atterdag! Kráľ Dánskeho impéria a môj úhlavný nepriateľ. Mnohokrát som "
+"pomáhal vojvodom z pevniny, keď sa bránili proti jeho chuti po vojne a "
+"dobývaní, a väčšinou sme ho odrazili. Ale pred ôsmimi týždňami pristál s "
+"niektorými svojimi spojencami a veľkou, dobre vycvičenou armádou na mojom "
+"vlastnom ostrove, Föhri, a pokúsil sa ho zmocniť."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 3
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:100
+msgid ""
+"And I must speak the bitter admission – he succeeded. The fighting lasted "
+"five and thirty days, and every morning and evening yet another ship arrived"
+" from Denmark bringing in another troop of soldiers. How could I hope to "
+"compete against such odds? In the end I had no choice but to escape with my "
+"son Henneke and a few of my closest followers while Atterdag now calls Föhr "
+"another piece of his growing empire."
+msgstr ""
+"A musím vysloviť trpké priznanie – uspel. Boje trvali tridsaťpäť dní a každé"
+" ráno a večer prichádzala z Dánska ďalšia loď, ktorá privážala ďalší oddiel "
+"vojakov. Ako som mohol dúfať, že budem súperiť proti takej presile? Nakoniec"
+" som nemal inú možnosť, len utiecť so svojím synom Hennekem a niekoľkými "
+"mojimi najbližšími stúpencami, zatiaľ čo Atterdag teraz nazýva Föhr ďalším "
+"kúskom svojho rastúceho impéria."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 4
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:106
+msgid "But I will not accept defeat!"
+msgstr "Ale ja nepríjmem porážku!"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:109
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:118
+msgid "Dark Future"
+msgstr "Temná budúcnosť"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:110
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:119
+msgid "Reconquest"
+msgstr "Znovudobytie"
+
+#. TRANSLATORS: Claus Lembeck – Introduction 5
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:112
+msgid ""
+"It is evident that alone, I cannot hope to defeat this arch-enemy. Nor would"
+" those I fought alongside many a time be able to help me, seeing that we "
+"were always hard-pressed to repel Atterdag; and this latest assault of his "
+"proved that he was never even truly trying to win until now. He was merely "
+"toying with us. No, if I am to stand a chance of winning against him I need "
+"to find a greater force to aid my cause."
+msgstr ""
+"Je zrejmé, že sám nemôžem dúfať v porážku tohto úhlavného nepriateľa. Ani "
+"tí, po boku ktorých som bojoval mnohokrát, by mi neboli schopní pomôcť, "
+"keďže sme mali vždy čo robiť, aby sme Atterdaga odrazili; a tento jeho "
+"posledný útok dokázal, že sa doteraz nikdy naozaj nesnažil vyhrať. Iba sa s "
+"nami zahrával. Nie, ak mám mať šancu proti nemu vyhrať, musím nájsť väčšiu "
+"silu, ktorá by pomohla mojej veci."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 5
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:115
+msgid ""
+"And such a force it is I am seeking out now. Reebaud, the chieftain of a "
+"small but strong Frisian community whom I once befriended; his haughty pride"
+" and his tremendous skill in battle are unmatched in all parts of the known "
+"world. If anyone can stand up to Atterdag, it must be him."
+msgstr ""
+"A práve takúto silu teraz hľadám. Reebaud, náčelník malej, ale silnej "
+"komunity Frízanov, s ktorým som sa kedysi spriatelil; jeho povýšenecká pýcha"
+" a jeho ohromná zručnosť v boji nemajú v známych končinách sveta páru. Ak sa"
+" niekto dokáže postaviť Atterdagovi, musí to byť on."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121
+msgid ""
+"When I went to ask him for his help I was met with a sore disappointment "
+"though. He and his men no longer live in Northern Frisia but have chosen to "
+"found a new settlement in the far North where no men have ever dared to "
+"settle before. The bravery for so bold an undertaking is also something I "
+"would expect from nobody but him."
+msgstr ""
+"Keď som ho však šiel požiadať o pomoc, stretlo ma trpké sklamanie. On a jeho"
+" muži už nežijú v Severnom Frízsku, ale rozhodli sa založiť novú osadu na "
+"ďalekom severe, kde sa doteraz žiadni ľudia neodvážili usadiť. Odvaha na "
+"takýto odvážny počin je tiež niečo, čo by som neočakával od nikoho iného, "
+"len od neho."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:124
+msgid ""
+"It is a bravery we must attempt to copy, for there is but one course of "
+"action we can take. We must sail to the North and find my old friend "
+"Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
+" the evil Dane."
+msgstr ""
+"Je to odvaha, ktorú sa musíme pokúsiť napodobniť, pretože nám ostáva len "
+"jeden možný postup. Musíme sa plaviť na sever a nájsť môjho starého priateľa"
+" Reebauda, a presvedčiť ho, aby so mnou poslal vojakov na oslobodenie môjho "
+"drahého Föhru od zlého Dána."
+
+#. TRANSLATORS: Claus Lembeck – Introduction 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:127
+msgid "We must not fail. The future of my people depends on me."
+msgstr "Nesmieme zlyhať. Budúcnosť môjho ľudu závisí odo mňa."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:131
+msgid "Diking"
+msgstr "Stavba hrádzí"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:132
+msgid "Gaining Land"
+msgstr "Získavanie zeme"
+
+#. TRANSLATORS: Claus Lembeck – Diker
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:134
+msgid ""
+"This island is a bit too small and cramped for my liking. There is an "
+"experienced diker among my people, and he has suggested to use some logs to "
+"construct breakwaters, which will allow us to seize some extra land from the"
+" sea. It will be a slow and expensive business, and I hope we will not stay "
+"on this island much, but at least we should consider it."
+msgstr ""
+"Tento ostrov je na môj vkus trochu primalý a stiesnený. Medzi mojimi ľuďmi "
+"je skúsený staviteľ hrádzí a navrhol použiť nejaké kmene na vybudovanie "
+"vlnolamov, čo nám umožní získať nejakú zem navyše z mora. Bude to pomalá a "
+"drahá záležitosť a dúfam, že na tomto ostrove nebudeme dlho, ale aspoň by "
+"sme to mali zvážiť."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:138
+msgid "Port Space Found"
+msgstr "Nájdené prístavné miesto"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:139
+msgid "One step closer to the North"
+msgstr "O krok bližšie k severu"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:141
+msgid ""
+"My soldiers report they have found a port space! Now we need to build a port"
+" and start an expedition. Of course, we’ll have to build a complete "
+"seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
+" too much time perfecting our economy – all that matters is that we get to "
+"the North soon."
+msgstr ""
+"Moji vojaci hlásia, že našli prístavné miesto! Teraz musíme postaviť prístav"
+" a začať výpravu. Samozrejme, najprv budeme musieť vybudovať kompletnú "
+"námornú ekonomiku s lodenicou a tkáčovňou. Ale nestrácajte príliš veľa času "
+"zdokonaľovaním našej ekonomiky – záleží len na tom, aby sme sa čoskoro "
+"dostali na sever."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
+msgid "A Strange Island"
+msgstr "Podivný ostrov"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:145
+msgid "An apprehension"
+msgstr "Obava"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 2
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:147
+msgid ""
+"We have landed on a strange island. The ground is hard and black and steep, "
+"and the air smells burnt. The beach is the color of ashes, and the sand "
+"itself feels malevolent, as though a lindworm was cowering beneath it, "
+"waiting to pounce on any living creature foolish enough to come here. I can "
+"hardly put into words my feeling of apprehension. I do not know what there "
+"is to be afraid of, but we must be very cautious in any case as we cross it."
+" Hopefully, we will reach the opposite side of the island soon."
+msgstr ""
+"Pristáli sme na podivnom ostrove. Zem je tu tvrdá, čierna a strmá a vo "
+"vzduchu cítiť spáleninu. Pláž má farbu popola a samotný piesok pôsobí "
+"zlomyseľne, akoby sa pod ním krčil drak čakajúci na to, aby sa vrhol na "
+"akéhokoľvek živého tvora, ktorý je natoľko hlúpy, že sem príde. Len ťažko "
+"dokážem slovami vyjadriť svoj pocit obavy. Neviem, čoho sa tu máme báť, ale "
+"pri prechode ostrovom musíme byť v každom prípade veľmi opatrní. Dúfajme, že"
+" čoskoro dorazíme na opačnú stranu ostrova."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:151
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:157
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:163
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:169
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:175
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:181
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:232
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:238
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:244
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:250
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:256
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:264
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:283
+msgid "Strangers"
+msgstr "Cudzinci"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:152
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:233
+msgid "Who are they?"
+msgstr "Kto sú?"
+
+#. TRANSLATORS: Henneke Lembeck – Strangers 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:154
+msgid ""
+"Our soldiers have sighted strangers. Their buildings do not look like any I "
+"have seen before. I wonder who they are."
+msgstr ""
+"Naši vojaci zbadali cudzincov. Ich budovy nevyzerajú ako žiadne, ktoré som "
+"doteraz videl. Zaujímalo by ma, kto sú."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:158
+msgid "Who are you?"
+msgstr "Kto ste?"
+
+#. TRANSLATORS: Angadthur – Strangers 2
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:160
+msgid ""
+"Be greeted, foreigners! I am Angadthur, the King of this miraculous island, "
+"a descendant of the legendary King Ajanthul the First of Atlantis himself. "
+"Be welcome to me, if you will be our friends!"
+msgstr ""
+"Buďte pozdravení, cudzinci! Som Angadthur, kráľ tohto zázračného ostrova, "
+"potomok samotného legendárneho kráľa Ajanthula Prvého z Atlantídy. Buďte u "
+"mňa vítaní, ak budete našimi priateľmi!"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:164
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:176
+msgid "Greetings to the King!"
+msgstr "Pozdravy kráľovi!"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 3
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:166
+msgid ""
+"Peace, King Angadthur! I am Claus Lembeck, and this is my son Henneke. We "
+"are searching for my old friend Reebaud, who has left our country several "
+"years ago to seek out a new home in the far North. If I may ask, have you "
+"heard of him before, and can you tell us where to find him?"
+msgstr ""
+"Mier, kráľ Angadthur! Som Claus Lembeck a toto je môj syn Henneke. Hľadáme "
+"môjho starého priateľa Reebauda, ktorý pred niekoľkými rokmi opustil našu "
+"krajinu, aby si hľadal nový domov na ďalekom severe. Ak sa smiem opýtať, "
+"počuli ste už o ňom a viete nám povedať, kde ho nájdeme?"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:170
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:182
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:251
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:265
+msgid "Greetings"
+msgstr "Pozdravy"
+
+#. TRANSLATORS: Angadthur – Strangers 4
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:172
+msgid ""
+"Of course you may ask. Ask whatever you like. Why do you ask whether you may"
+" ask?"
+msgstr ""
+"Samozrejme, že sa smiete opýtať. Pýtajte sa, na čo chcete. Prečo sa pýtate, "
+"či sa smiete opýtať?"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 5
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:178
+msgid ""
+"It’s a figure of speech that is considered polite among our people, that’s "
+"all. Very well, I’ll ask properly: Do you know where we can find my friend "
+"Reebaud?"
+msgstr ""
+"Je to slovný zvrat, ktorý sa medzi mojimi ľuďmi považuje za zdvorilý, to je "
+"všetko. Tak dobre, opýtam sa poriadne: Viete, kde môžeme nájsť môjho "
+"priateľa Reebauda?"
+
+#. TRANSLATORS: Angadthur – Strangers 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:184
+msgid ""
+"I am sorry to disappoint you, Sir Lembeck, but I have never heard this name "
+"before and can therefore give you no news of him. As for your intent of "
+"travelling to the North – I am afraid there is but one suitable location for"
+" a port on this island other than the one where you did land, and it is "
+"located directly under my palace."
+msgstr ""
+"Je mi ľúto, že vás musím sklamať, pán Lembeck, ale toto meno som nikdy "
+"predtým nepočul, a preto vám o ňom nemôžem podať žiadne správy. Čo sa týka "
+"vášho zámeru cestovať na sever – obávam sa, že na tomto ostrove je okrem "
+"toho, kde ste pristáli, len jedno vhodné miesto na prístav, a to sa nachádza"
+" priamo pod mojím palácom."
+
+#. TRANSLATORS: Angadthur – Strangers 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:187
+msgid ""
+"As it so happens, my soldiers are bored with never having anything to do. "
+"Let us perform a contest of arms, shall we? You may send your soldiers to "
+"try and destroy my palace. I am certain that you will not stand a chance, "
+"and therefore I promise I will pray to the gods to bless your journey if you"
+" do succeed."
+msgstr ""
+"Zhodou okolností sa moji vojaci nudia, pretože nemajú nikdy čo robiť. Dáme "
+"si súboj zbraní, čo vy na to? Môžete poslať svojich vojakov, aby sa pokúsili"
+" zničiť môj palác. Som si istý, že nebudete mať šancu, a preto sľubujem, že "
+"ak uspejete, budem sa modliť k bohom, aby požehnali vašu cestu."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:191
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:298
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:307
+msgid "Congratulations"
+msgstr "Blahoželáme"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:192
+msgid "May Satul bless you"
+msgstr "Nech ťa žehná Satul"
+
+#. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:194
+msgid ""
+"You have gotten past my best guards and burnt down my palace, which I "
+"believed to be impossible. You must be very powerful, and favoured by the "
+"gods. You have most certainly deserved your victory. I congratulate you and "
+"wish you well for your voyage. May Satul keep you safe!"
+msgstr ""
+"Dostali ste sa cez moje najlepšie stráže a vypálili ste môj palác, čo som "
+"považoval za nemožné. Musíte byť veľmi mocní a bohovia vám prajú. Svoje "
+"víťazstvo ste si s určitosťou zaslúžili. Blahoželám vám a prajem vám všetko "
+"dobré na vašej plavbe. Nech vás Satul ochraňuje!"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:198
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:204
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:211
+msgid "In the Ice Desert"
+msgstr "V ľadovej púšti"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:199
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:205
+msgid "The next island"
+msgstr "Ďalší ostrov"
+
+#. TRANSLATORS: Henneke Lembeck – Port Space 3
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:201
+msgid ""
+"We seem to be getting closer to the North. A desert of ice! I did not know "
+"such a thing even exists. But I doubt anybody could live here; I fear we "
+"will not discover anything useful on this island."
+msgstr ""
+"Zdá sa, že sa blížime k severu. Púšť z ľadu! Netušil som, že niečo také "
+"vôbec existuje. Ale pochybujem, že by tu niekto mohol žiť; obávam sa, že na "
+"tomto ostrove neobjavíme nič užitočné."
+
+#. TRANSLATORS: Claus Lembeck – Port Space 4
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:207
+msgid ""
+"It doesn’t matter. Let’s just find the next port space quickly, so we can "
+"continue our journey."
+msgstr ""
+"Na tom nezáleží. Rýchlo nájdime ďalšie prístavné miesto, aby sme mohli "
+"pokračovať v ceste."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
+msgid "Port space found"
+msgstr "Nájdené prístavné miesto"
+
+#. TRANSLATORS: Claus Lembeck – Port Space 5
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:214
+msgid ""
+"We have found a port space on the island. Now we can leave this cold and "
+"bleak ice desert and continue sailing."
+msgstr ""
+"Našli sme na ostrove prístavné miesto. Teraz môžeme opustiť túto chladnú a "
+"pochmúrnu ľadovú púšť a pokračovať v plavbe."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:218
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:224
+msgid "The North"
+msgstr "Sever"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:219
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:225
+msgid "In the North"
+msgstr "Na severe"
+
+#. TRANSLATORS: Henneke Lembeck – Port Space 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:221
+msgid ""
+"Yes, this looks more like what I imagine the North should look like. The "
+"meadows are still green here, but the patches of snow are getting larger and"
+" larger the further North one can look."
+msgstr ""
+"Áno, toto vyzerá viac tak, ako si predstavujem, že by mal vyzerať sever. "
+"Lúky sú tu ešte zelené, ale škvrny snehu sú čoraz väčšie a väčšie, čím viac "
+"človek hľadí na sever ."
+
+#. TRANSLATORS: Claus Lembeck – Port Space 7
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:227
+msgid ""
+"It does look good, but it might be just another island. Let’s continue "
+"travelling quickly."
+msgstr ""
+"Vyzerá to dobre, ale môže to byť len ďalší ostrov. Rýchlo pokračujme v "
+"ceste."
+
+#. TRANSLATORS: Henneke Lembeck – Strangers 1
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:235
+msgid ""
+"Our soldiers have sighted strangers again. I wonder whether they are similar"
+" to the strange King who congratulated us on destroying his palace."
+msgstr ""
+"Naši vojaci opäť zbadali cudzincov. Zaujímalo by ma, či sú podobní tomu "
+"čudnému kráľovi, ktorý nám blahoželal k zničeniu jeho paláca."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:239
+msgid "No troubles, please"
+msgstr "Žiadne problémy, prosím"
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 2
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:241
+msgid ""
+"Greetings, Strangers! I am Marcus Caius Iniucundus, a legate of the Empire. "
+"Is this your island? We are only passing through, I hope you don’t mind. We "
+"don’t want any trouble."
+msgstr ""
+"Zdravím vás, cudzinci! Som Marcus Caius Iniucundus, legát Impéria. Je toto "
+"váš ostrov? My len prechádzame, dúfam, že vám to nevadí. Nechceme žiadne "
+"problémy."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:245
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:257
+msgid "Travellers"
+msgstr "Cestovatelia"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 3
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:247
+msgid ""
+"Peace, Sir Iniucundus! I am Claus Lembeck, and this is my son Henneke. We "
+"are just passing through as well. You are a legate, you say? You must be "
+"getting around a lot. Have you heard news of my old friend Reebaud? I only "
+"know that he is living in the North, can you tell us where to find him?"
+msgstr ""
+"Mier, pán Iniucundus! Som Claus Lembeck a toto je môj syn Henneke. Aj my len"
+" prechádzame. Hovoríte, že ste legát? Musíte veľa cestovať. Počuli ste "
+"správy o mojom starom priateľovi Reebaudovi? Viem len, že žije na severe, "
+"viete nám povedať, kde ho nájdeme?"
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 4
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:253
+msgid ""
+"I am glad to hear you want peace. I am sorry, but I have not heard the name "
+"of Reebaud before. If you want to go to the North, however, we have the same"
+" destination, for that is exactly where I am travelling on official business"
+" from the Capital. We are currently preparing a ship to set sail. We can "
+"take you with us if you wish, provided you can pay for the passage."
+msgstr ""
+"Som rád, že počujem, že chcete mier. Je mi ľúto, ale meno Reebaud som "
+"predtým nepočul. Ak však chcete ísť na sever, máme rovnaký cieľ, lebo presne"
+" tam cestujem v úradnej záležitosti z hlavného mesta. Práve pripravujeme loď"
+" na vyplávanie. Môžeme vás vziať so sebou, ak si želáte, za predpokladu, že "
+"dokážete zaplatiť za plavbu."
+
+#. TRANSLATORS: Claus Lembeck – Strangers 5
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:259
+msgid ""
+"We thank you for your offer! What is the price you demand? And, if you don’t"
+" mind my asking, may I know what business you are employed on?"
+msgstr ""
+"Ďakujeme vám za vašu ponuku! Akú cenu žiadate? A, ak vám nevadí moja otázka,"
+" smiem vedieť, akou záležitosťou ste poverený?"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:266
+#, lua-format
+msgid "%d piece of gold."
+msgid_plural "%d pieces of gold."
+msgstr[0] "%d kus zlata."
+msgstr[1] "%d kusy zlata."
+msgstr[2] "%d kusa zlata."
+msgstr[3] "%d kusov zlata."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:268
+msgid ""
+"I know it seems much, but the Senate did not furnish me with much money for "
+"this expedition, so I must admit I am in need of some."
+msgstr ""
+"Viem, že sa to zdá veľa, ale Senát mi na túto výpravu neposkytol veľa "
+"peňazí, takže musím priznať, že nejaké potrebujem."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:271
+msgid ""
+"The purpose of my journey is to seek out the Proconsule of the Province The "
+"Northern Lands, who has neglected to pay his taxes for several years "
+"running. My task is to give this Murilius a good telling-off, and if I "
+"discover he failed to pay out of greed rather than necessity, I am to bring "
+"him back to the Capital in chains. I must say, I am rather happy to be given"
+" this task, for I have a good chance of being appointed Proconsule in his "
+"stead if I succeed."
+msgstr ""
+"Cieľom mojej cesty je vyhľadať prokonzula provincie Severné krajiny, ktorý "
+"už niekoľko rokov po sebe zanedbáva platenie daní. Mojou úlohou je tohto "
+"Murilia poriadne pokarhať, a ak zistím, že neplatil z chamtivosti a nie z "
+"núdze, mám ho priviesť späť do hlavného mesta v reťaziach. Musím povedať, že"
+" som celkom rád, že som dostal túto úlohu, lebo ak uspejem, mám dobrú šancu "
+"byť vymenovaný za prokonzula namiesto neho."
+
+#. TRANSLATORS: M. C. Iniucundus – Strangers 6
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:274
+msgid ""
+"But back to the topic of your passage. There is only one place on the "
+"northern coast of this island where a port can be built. So you do not "
+"really have an alternative to purchasing a passage on my galley. But my "
+"astrologers report that a terrible storm is gathering that will make sea "
+"travel impossible for a long time. We must set sail within two hours, and "
+"whoever is still on the island after that time will not leave it anytime "
+"soon."
+msgstr ""
+"Ale späť k téme vašej plavby. Na severnom pobreží tohto ostrova je len jedno"
+" miesto, kde sa dá postaviť prístav. Takže v skutočnosti nemáte inú možnosť,"
+" ako si zakúpiť plavbu na mojej galére. Ale moji astrológovia hlásia, že sa "
+"zbiera strašná búrka, ktorá znemožní plavbu po mori na dlhý čas. Musíme "
+"vyplávať do dvoch hodín a kto po tomto čase ostane na ostrove, tak skoro ho "
+"neopustí."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:284
+msgid "Decide"
+msgstr "Rozhodnite sa"
+
+#. TRANSLATORS: Claus Lembeck – Strangers 7
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:286
+msgid ""
+"He seems happy enough to offer us a passage, but the price is exorbitant. We"
+" may as well destroy his port and build one of our own. I wonder what would "
+"be better…"
+msgstr ""
+"Zdá sa byť dosť šťastný, že nám ponúka odvoz, ale cena je prehnaná. Mohli by"
+" sme rovnako dobre zničiť jeho prístav a postaviť namiesto neho vlastný. "
+"Zaujímalo by ma, čo by bolo lepšie…"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:294
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:303
+msgid "Victory"
+msgstr "Víťazstvo"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:295
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:304
+msgid "Victory!"
+msgstr "Víťazstvo!"
+
+#. TRANSLATORS: Claus Lembeck – victory
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:297
+msgid ""
+"We have conquered the port! We are already building a ship, and then, we "
+"will finally be travelling to the actual far North. Although we still heard "
+"no news of Reebaud, I am confident that we will find him soon. Then he will "
+"grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
+msgstr ""
+"Dobyli sme prístav! Už staviame loď a potom budeme konečne cestovať na "
+"skutočný ďaleký sever. Hoci sme o Reebaudovi stále nepočuli žiadne správy, "
+"som presvedčený, že ho čoskoro nájdeme. Potom nám poskytne pomoc a ja "
+"znovudobyjem Föhr od uzurpátora Atterdaga!"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:299
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:308
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Túto misiu ste splnili. Môžete pokračovať v hre alebo prejsť na ďalšiu "
+"misiu."
+
+#. TRANSLATORS: M. C. Iniucundus – victory
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:306
+msgid ""
+"You have paid for the passage with pure gold. Now it is only right that you "
+"get it. Our ship is ready, you may embark!"
+msgstr ""
+"Zaplatili ste za plavbu čistým zlatom. Teraz je len správne, že ju "
+"dostanete. Naša loď je pripravená, môžete sa nalodiť!"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:312
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:316
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:320
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:324
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:328
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:335
+msgid "You Have Lost"
+msgstr "Prehrali ste"
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:313
+msgid "Goodbye!"
+msgstr "Dovidenia!"
+
+#. TRANSLATORS: M. C. Iniucundus – lost
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:315
+msgid ""
+"You have taken too long. We must set sail now, and then the storm will not "
+"permit you to leave this island. I am sorry for you, but the weather doesn’t"
+" wait. Goodbye."
+msgstr ""
+"Trvalo vám to príliš dlho. Musíme teraz vyplávať a potom vám búrka nedovolí "
+"opustiť tento ostrov. Je mi vás ľúto, ale počasie nečaká. Dovidenia."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:317
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:325
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:336
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
+msgstr ""
+"Prehrali ste a nemôžete pokračovať v hre. Nech máte viac šťastia, keď budete"
+" tento scenár opakovať. Kliknite na OK pre návrat do hlavného menu."
+
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:321
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:329
+msgid "Stuck"
+msgstr "Uviaznutí"
+
+#. TRANSLATORS: M. C. Iniucundus – lost
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:323
+msgid ""
+"Now see where your foolishness has led us. The storm has broken and we’re "
+"all stuck here since you burnt down our port. The gods are just – even "
+"though you appear to be more powerful in combat than us, they force you to "
+"remain on this island for such a long time that you will never accomplish "
+"the objective of your futile journey. Despair in your triumph!"
+msgstr ""
+"Teraz vidíte, kam nás doviedla vaša pochabosť. Búrka vypukla a všetci sme tu"
+" uviazli, odkedy ste vypálili náš prístav. Bohovia sú spravodliví – hoci sa "
+"zdá, že ste v boji mocnejší ako my, nútia vás zostať na tomto ostrove tak "
+"dlho, že nikdy nesplníte cieľ vašej márnej cesty. Zúfajte vo svojom triumfe!"
+
+#. TRANSLATORS: Claus Lembeck – lost
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:331
+msgid ""
+"This is a disaster! We have reached another shore, but another tribe has "
+"already settled there. They won’t allow us to land on their coast."
+msgstr ""
+"To je katastrofa! Dorazili sme k inému brehu, ale už sa tam usadil iný kmeň."
+" Nedovolia nám pristáť na ich pobreží."
+
+#. TRANSLATORS: Claus Lembeck – lost
+#: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:334
+msgid ""
+"We were too slow. We dawdled and dallied and this is the result. There is no"
+" way forward. None of us will ever see our home again!"
+msgstr ""
+"Boli sme príliš pomalí. Zdržiavali sme sa a otáľali a toto je výsledok. "
+"Neexistuje cesta vpred. Nikto z nás už nikdy neuvidí náš domov!"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
+msgctxt "empire_building"
+msgid "Port"
+msgstr "Prístav"
+
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
+#: ../../../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
+msgctxt "empire_building"
+msgid ""
+"Serves as a base for overseas colonization and trade. Also stores your "
+"soldiers, wares and tools."
+msgstr ""
+"Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje"
+" vaše výrobky, nástroje a poskytuje prístrešie vojakom."

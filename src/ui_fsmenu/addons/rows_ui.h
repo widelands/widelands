@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,10 +63,6 @@ public:
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
-	bool upgradeable() const;
-	bool full_upgrade_possible() const {
-		return full_upgrade_possible_;
-	}
 
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
@@ -76,6 +72,24 @@ private:
 	UI::MultilineTextarea txt_;
 
 	const bool full_upgrade_possible_;
+};
+
+class MapRow : public UI::Panel {
+public:
+	MapRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool installed);
+	~MapRow() override = default;
+	void layout() override;
+	void draw(RenderTarget&) override;
+	const std::shared_ptr<AddOns::AddOnInfo> info() const {
+		return info_;
+	}
+
+private:
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	UI::Icon minimap_;
+	UI::Button install_, uninstall_, interact_;
+	UI::MultilineTextarea txt_;
+	UI::Textarea bottom_row_;
 };
 
 }  // namespace AddOnsUI

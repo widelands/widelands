@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2024 by the Widelands Development Team
+ * Copyright (C) 2020-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,31 +45,36 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false, true}},
    {AddOnCategory::kTribes,
     AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
-   {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
-                                             "images/wui/menus/toggle_immovables.png", true}},
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true, false}},
+   {AddOnCategory::kWorld,
+    AddOnCategoryInfo{"world", []() { return _("World"); },
+                      "images/wui/menus/toggle_immovables.png", true, false}},
    {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png", true}},
+                                              "images/logos/WL-Editor-32.png", true, false}},
+   {AddOnCategory::kSingleMap,
+    AddOnCategoryInfo{
+       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", true, true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", true}},
+                                            "images/wui/menus/toggle_minimap.png", true, false}},
    {AddOnCategory::kMapGenerator,
     AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
-                      "images/wui/editor/menus/new_random_map.png", false}},
-   {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                                                "images/wui/messages/messages_warfare.png", false}},
+                      "images/wui/editor/menus/new_random_map.png", false, false}},
+   {AddOnCategory::kCampaign,
+    AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
+                      "images/wui/messages/messages_warfare.png", false, false}},
    {AddOnCategory::kWinCondition,
     AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
-                      "images/wui/menus/objectives.png", true}},
+                      "images/wui/menus/objectives.png", true, false}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true, false}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", false}},
-   {AddOnCategory::kUIPlugin,
-    AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", false}}};
+                                             "images/wui/menus/main_menu.png", false, false}},
+   {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
+                                                "images/plugin.png", false, false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -83,14 +88,17 @@ const AddOnInfo* find_addon(const std::string& name) {
 }
 
 i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const std::string& dflt) {
-	if (const AddOnInfo* a = find_addon(addon)) {
-		return new i18n::AddOnTextdomain(addon, a->i18n_version);
+	if (find_addon(addon) != nullptr) {
+		return new i18n::AddOnTextdomain(addon);
 	}
 	return dflt.empty() ? nullptr : new i18n::Textdomain(dflt);
 }
 
 i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {
-	if (mapfilename.compare(0, kAddOnDir.size(), kAddOnDir) != 0) {
+	if (!starts_with(mapfilename, kAddOnDir)) {
+		if (starts_with(mapfilename, kDownloadedMapsDirFull)) {
+			return new i18n::AddOnTextdomain("websitemaps");
+		}
 		return new i18n::Textdomain("maps");
 	}
 
@@ -175,6 +183,7 @@ bool order_matters(AddOnCategory base, AddOnCategory dependency) {
 
 bool require_enabled(AddOnCategory base, AddOnCategory dependency) {
 	switch (base) {
+	case AddOnCategory::kSingleMap:
 	case AddOnCategory::kMaps:
 	case AddOnCategory::kCampaign:
 		// Maps enable their own world add-ons automatically
@@ -272,7 +281,7 @@ AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
 	}
 	AddOnConflict result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result.first = format(_("%1$s<br>· %2$s (version %3$s)"), result.first, pair.first,
+		result.first = format(_("%1$s<br>• %2$s (version %3$s)"), result.first, pair.first,
 		                      version_to_string(pair.second));
 	}
 	return result;
@@ -371,7 +380,7 @@ bool AddOnInfo::requires_texture_atlas_rebuild() const {
 	}
 }
 
-void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
@@ -399,7 +408,8 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	case UpdateThemeAction::kLoadFromConfig:
 		arg = get_config_string("theme", "");
 		if (arg.empty()) {
-			return set_template_dir("");
+			set_template_dir("");
+			return;
 		}
 		for (AddOnState* s : installed) {
 			if (s->first->internal_name == arg) {
@@ -420,8 +430,20 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 		set_config_string("theme", previously_enabled->first->internal_name);
 		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
 		return;
+
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
+}
+
+void update_ui_theme(const UpdateThemeAction action, std::string arg) {
+	do_update_ui_theme(action, arg);
+
+	// Save splash image realpath and intro font to the config, because start up needs it before
+	// addon themes are initialized
+	set_config_string("splash_image", resolve_template_image_filename(kSplashImage));
+	set_config_string(
+	   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 }
 
 bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
@@ -486,21 +508,21 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->min_wl_version = s.get_string("min_wl_version", "");
 	i->max_wl_version = s.get_string("max_wl_version", "");
 	i->descname = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_descname);
 	};
 	i->description = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_description);
 	};
 	i->author = [i]() {
-		i18n::AddOnTextdomain td(i->internal_name, i->i18n_version);
+		i18n::AddOnTextdomain td(i->internal_name);
 		return i18n::translate(i->unlocalized_author);
 	};
 	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
-                                   kAddOnDir + FileSystem::file_separator() + name +
+	                                kAddOnDir + FileSystem::file_separator() + name +
 	                                   FileSystem::file_separator() + kAddOnIconFile :
-                                   kAddOnCategories.at(i->category).icon);
+	                                kAddOnCategories.at(i->category).icon);
 
 	if (i->category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());

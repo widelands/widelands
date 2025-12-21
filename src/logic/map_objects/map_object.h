@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include <atomic>
 
 #include "base/macros.h"
+#include "commands/command.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
@@ -54,11 +54,13 @@ public:
 
 	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname,
+	               const std::vector<std::string>& attribs);
 	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
-	               const LuaTable& table);
+	               const LuaTable& table,
+	               const std::vector<std::string>& attribs);
 	virtual ~MapObjectDescr();
 
 	[[nodiscard]] const std::string& name() const {
@@ -71,6 +73,10 @@ public:
 	// Type of the MapObjectDescr.
 	[[nodiscard]] MapObjectType type() const {
 		return type_;
+	}
+
+	void set_descname(std::string dn) {
+		descname_ = dn;
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
@@ -128,9 +134,9 @@ private:
 	static std::map<std::string, AttributeIndex> attribute_names_;
 	Attributes attribute_ids_;
 
-	const MapObjectType type_;    /// Subclasses pick from the enum above
-	std::string const name_;      /// The name for internal reference
-	std::string const descname_;  /// A localized Descriptive name
+	const MapObjectType type_;  /// Subclasses pick from the enum above
+	std::string const name_;    /// The name for internal reference
+	std::string descname_;      /// A localized Descriptive name
 
 	/// Tribe-specific helptexts. Format: <tribename, <category, localized_text>>
 	std::map<std::string, std::map<std::string, std::string>> helptexts_;
@@ -275,6 +281,7 @@ public:
 		HeaderPinnedNote = 13,
 		HeaderShipFleetInterface = 14,
 		HeaderFerryFleetInterface = 15,
+		HeaderNavalInvasionBase = 16,
 	};
 
 	/**
@@ -507,41 +514,6 @@ private:
 	ObjectPointer m;
 };
 
-struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(Time()) {
-	}  ///< For savegame loading
-	CmdDestroyMapObject(const Time&, MapObject&);
-	void execute(Game&) override;
-
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kDestroyMapObject;
-	}
-
-private:
-	Serial obj_serial{0U};
-};
-
-struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(Time()) {
-	}  ///< For savegame loading
-	CmdAct(const Time& t, MapObject&, int32_t a);
-
-	void execute(Game&) override;
-
-	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
-	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
-
-	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kAct;
-	}
-
-private:
-	Serial obj_serial{0U};
-	int32_t arg{0};
-};
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

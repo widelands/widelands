@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,10 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	SoldierDescr(const std::string& init_descname,
+	             const LuaTable& t,
+	             const std::vector<std::string>& attribs,
+	             Descriptions& descriptions);
 	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {
@@ -116,19 +119,36 @@ public:
 
 	const Image* get_health_level_pic(uint32_t const level) const {
 		assert(level <= get_max_health_level());
-		return health_.images[level];
+		return health_.images.at(level).second;
 	}
 	const Image* get_attack_level_pic(uint32_t const level) const {
 		assert(level <= get_max_attack_level());
-		return attack_.images[level];
+		return attack_.images.at(level).second;
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
 		assert(level <= get_max_defense_level());
-		return defense_.images[level];
+		return defense_.images.at(level).second;
 	}
 	const Image* get_evade_level_pic(uint32_t const level) const {
 		assert(level <= get_max_evade_level());
-		return evade_.images[level];
+		return evade_.images.at(level).second;
+	}
+
+	const std::string& get_health_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_health_level());
+		return health_.images.at(level).first;
+	}
+	const std::string& get_attack_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_attack_level());
+		return attack_.images.at(level).first;
+	}
+	const std::string& get_defense_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_defense_level());
+		return defense_.images.at(level).first;
+	}
+	const std::string& get_evade_level_image_filepath(uint32_t const level) const {
+		assert(level <= get_max_evade_level());
+		return evade_.images.at(level).first;
 	}
 
 	uint16_t get_max_anim_height() const {
@@ -148,11 +168,11 @@ private:
 	struct BattleAttribute {
 		explicit BattleAttribute(std::unique_ptr<LuaTable> table);
 
-		uint32_t base;                     // Base value
-		uint32_t maximum;                  // Maximum value for randomizing attack values
-		uint32_t increase;                 // Per level increase
-		uint32_t max_level;                // Maximum level
-		std::vector<const Image*> images;  // Level images
+		uint32_t base;       // Base value
+		uint32_t maximum;    // Maximum value for randomizing attack values
+		uint32_t increase;   // Per level increase
+		uint32_t max_level;  // Maximum level
+		std::vector<std::pair<std::string, const Image*>> images;  // Level images
 	};
 
 	BattleAttribute health_;
@@ -199,6 +219,8 @@ enum CombatWalkingDir {
 };
 
 enum CombatFlags {
+	/// No special commands.
+	CF_NONE = 0,
 	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
 	/// When current health points drop below a fixed percentage, soldier will flee
@@ -215,6 +237,9 @@ class Soldier : public Worker {
 
 public:
 	enum class InfoMode { kWalkingAround, kInBuilding };
+
+	static constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
+	static constexpr int kPortSpaceRadius = 2;
 
 	explicit Soldier(const SoldierDescr&);
 
@@ -317,11 +342,12 @@ public:
 
 	void set_battle(Game&, Battle*);
 
-	void start_task_attack(Game& game, Building&);
+	void start_task_attack(Game& game, Building&, CombatFlags flags);
 	void start_task_defense(Game& game, bool stayhome);
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
+	void start_task_naval_invasion(Game& game, const Coords& coords);
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
 	get_walking_animations_cache() {
@@ -338,6 +364,7 @@ private:
 	void move_in_battle_update(Game&, State&);
 	void die_update(Game&, State&);
 	void die_pop(Game&, State&);
+	void naval_invasion_update(Game&, State&);
 
 	void send_space_signals(Game&);
 	bool stay_home();
@@ -345,13 +372,14 @@ private:
 	// Pop the current task or, if challenged, start the fighting task.
 	void pop_task_or_fight(Game&);
 
-protected:
+public:
 	static Task const taskAttack;
 	static Task const taskDefense;
 	static Task const taskBattle;
 	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
+	static Task const taskNavalInvasion;
 
 	bool is_evict_allowed() override;
 
@@ -406,6 +434,7 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIER_H

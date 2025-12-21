@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 by the Widelands Development Team
+ * Copyright (C) 2019-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,8 +29,13 @@
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
 
+	[[nodiscard]] const UI::Checkbox& get_custom_songset_checkbox() const {
+		return custom_songset_;
+	}
+
 private:
 	UI::Checkbox custom_songset_;
+	UI::Checkbox play_intro_music_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

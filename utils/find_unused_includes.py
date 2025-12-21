@@ -4,9 +4,11 @@
 """Script to find unused includes.
 
 Call from src directory.
+
 """
 
 import copy
+import functools
 import os.path
 import re
 import sys
@@ -36,12 +38,13 @@ FUNCTION_REGEX = re.compile(
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h',
-                 'base/format/abstract_node.h'}
+                 'base/format/abstract_node.h',
+                 'third_party/tinygettext/include/tinygettext/tinygettext.hpp'}
 
 # Headers files with contents that need to be detected by functions
-DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h',
+DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h', 'wlapplication_options.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h',
-                   'wlapplication_options.h'}
+                   'third_party/libmd/include/sha2.h'}
 
 # Remove overgenerated symbols
 FUNCTION_EXCLUDES = {'_Pragma',
@@ -55,6 +58,7 @@ FUNCTION_EXCLUDES = {'_Pragma',
 INCLUDE_GUARD_REGEX = re.compile(r'WL_[A-Z_]+_H')
 
 
+@functools.lru_cache(512)
 def find_classes(file_to_check, include_functions, special_regex, special_regex_group):
     """Returns a set of classes defined by this file."""
     classes = set()
@@ -109,6 +113,7 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
 def find_includes(file_to_check):
     """Returns a set of includes."""
     files = set()
+    not_found_includes = set()
     with open(file_to_check, 'r', encoding='utf-8') as f:
         for line in f.readlines():
             line = line.strip()
@@ -121,6 +126,20 @@ def find_includes(file_to_check):
                 include_file = match.groups()[0]
                 if os.path.isfile(include_file):
                     files.add(include_file)
+                elif '/third_party/' not in file_to_check and \
+                        not os.path.isfile(include_file + '.cmake'):
+                    # include file not found, probably in the wrong directory
+                    not_found_includes.add(include_file)
+    if not_found_includes:
+        print(f'include files not found for {file_to_check}:')
+        for file in not_found_includes:
+            print(f'\t{file}')
+        if files:
+            print('Hint: Some include files found. Are the others wrong?')
+        else:
+            print('Hint: No include file found. Did you call this util from "src/" directory?')
+        print('Abort')
+        sys.exit(5)  # io error, well, kind of
 
     return files
 
@@ -213,9 +232,11 @@ def main():
     """Script to find unused includes and print them to console.
 
     Call from src directory.
+
     """
 
     error_count = 0
+    checked_f = 0
 
     print('Tool to check for superfluous includes in header files. Call from src directory.')
     print('Checking...')
@@ -233,9 +254,11 @@ def main():
                     for hit in forward_declarations:
                         print('\t' + hit)
                     error_count = error_count + len(forward_declarations)
+                checked_f += 1
 
             elif filename.endswith('.cc'):
                 hits = check_file(full_path, True)
+                checked_f += 1
 
             if hits:
                 print('\nSuperfluous includes in ' + full_path)
@@ -247,7 +270,7 @@ def main():
         print('\nFound %d error(s).' % error_count)
         return 1
     else:
-        print('\nDone, files are clean.')
+        print(f'\nDone, {checked_f} files are clean.')
 
     return 0
 

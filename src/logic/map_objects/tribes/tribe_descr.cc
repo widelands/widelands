@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -432,11 +432,19 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& descriptions) {
 
 				// Set default_target_quantity (optional) and preciousness
 				WareDescr* ware_descr = descriptions.get_mutable_ware_descr(wareindex);
-				if (ware_table->has_key("default_target_quantity")) {
+				// if the target quantity was already set by an addon we keep the addon value
+				if (ware_table->has_key("default_target_quantity") &&
+				    ware_descr->default_target_quantity(name()) == kInvalidWare) {
 					ware_descr->set_default_target_quantity(
 					   name(), ware_table->get_int("default_target_quantity"));
 				}
-				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
+				int tribe_preciousness = ware_table->get_int("preciousness");
+				// we have a valid value if addon defined it, as it is postloaded first
+				int addon_preciousness = ware_descr->preciousness(name());
+				// if previously defined by an addon set addon preciousnes again
+				ware_descr->set_preciousness(name(), addon_preciousness == kInvalidWare ?
+				                                        tribe_preciousness :
+				                                        addon_preciousness);
 
 				// Add helptexts
 				load_helptexts(ware_descr, *ware_table);
@@ -499,17 +507,14 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			try {
 				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
-					if (workername == "frisians_diker") {
-						// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
-						continue;
-					}
-
-					throw GameDataError("Duplicate definition of worker");
+					throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
 				}
 
 				// Set default_target_quantity and preciousness (both optional)
 				WorkerDescr* worker_descr = descriptions.get_mutable_worker_descr(workerindex);
-				if (worker_table->has_key("default_target_quantity")) {
+				// if the target quantity was already set by an addon we keep the addon value
+				if (worker_table->has_key("default_target_quantity") &&
+				    worker_descr->default_target_quantity() == kInvalidWare) {
 					if (!worker_table->has_key("preciousness")) {
 						throw GameDataError(
 						   "It has a default_target_quantity but no preciousness for tribe '%s'",
@@ -518,12 +523,20 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 					worker_descr->set_default_target_quantity(
 					   worker_table->get_int("default_target_quantity"));
 				}
-				if (worker_table->has_key("preciousness")) {
+				// if the preciousness was already set by an addon we keep the addon value
+				if (worker_table->has_key("preciousness") &&
+				    worker_descr->preciousness(name()) == kInvalidWare) {
 					worker_descr->set_preciousness(name(), worker_table->get_int("preciousness"));
 				}
 
 				// Add helptexts
 				load_helptexts(worker_descr, *worker_table);
+
+				// Register at promoted worker
+				const DescriptionIndex& becomes = worker_descr->becomes();
+				if (becomes != INVALID_INDEX) {
+					descriptions.get_mutable_worker_descr(becomes)->set_promoted_from(workerindex);
+				}
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -577,11 +590,6 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 		try {
 			DescriptionIndex index = descriptions.load_building(buildingname);
 			if (has_building(index)) {
-				if (buildingname == "frisians_dikers_house") {
-					// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
-					continue;
-				}
-
 				throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 			}
 			buildings_.insert(index);
@@ -793,6 +801,15 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
+std::string TribeDescr::get_soldiers_format_string(const CapacityStringIndex index,
+                                                   const int number_to_format) const {
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_addon(basic_info().addon, "tribes_encyclopedia"));
+	const int i = static_cast<int>(index);
+	return npgettext(soldier_context_.c_str(), soldier_capacity_strings_sg_[i].c_str(),
+	                 soldier_capacity_strings_pl_[i].c_str(), number_to_format);
+}
+
 /*
 ==============
 Find the best matching indicator for the given amount.
@@ -825,8 +842,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	if (lowest < amount) {
-		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
-		                    "possible amount is %i)!",
+		throw GameDataError("Tribe '%s' has no indicators for amount %u of resource '%s' (highest "
+		                    "possible amount is %u)!",
 		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
@@ -969,6 +986,12 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
 		    building->type() != MapObjectType::DISMANTLESITE) {
 			building->set_owning_tribe(name());
+		}
+
+		if (building->workarea_info().size() > 3) {
+			// InteractiveBase cannot visualize more than 3 workarea rings
+			throw GameDataError("%s: Building cannot have more than 3 workareas, found %" PRIuS,
+			                    name().c_str(), building->workarea_info().size());
 		}
 
 		// Calculate largest possible workarea radius

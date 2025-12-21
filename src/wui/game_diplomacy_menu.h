@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 by the Widelands Development Team
+ * Copyright (C) 2022-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,12 @@
 #ifndef WL_WUI_GAME_DIPLOMACY_MENU_H
 #define WL_WUI_GAME_DIPLOMACY_MENU_H
 
+#include <memory>
+
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/listselect.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
@@ -44,7 +46,14 @@ public:
 private:
 	InteractiveGameBase& igbase_;
 	InteractivePlayer* iplayer_;
+
+	void update(bool always);
 	void update_diplomacy_details();
+	void update_trades_offers(bool always);
+	void update_trades_proposed(bool always);
+	void update_trades_active(bool always);
+
+	void propose_extending_trade(Widelands::TradeID trade_id);
 
 	UI::Box diplomacy_box_;
 
@@ -54,6 +63,18 @@ private:
 	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
 	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;
 	std::list<Widelands::Game::PendingDiplomacyAction> cached_diplomacy_actions_;
+
+	UI::TabPanel trades_tabs_;
+	UI::Box trades_box_offers_;
+	UI::Box trades_box_proposed_;
+	UI::Box trades_box_active_;
+	std::vector<Widelands::TradeID> cached_trades_offers_;
+	std::vector<Widelands::TradeID> cached_trades_proposed_;
+	std::vector<Widelands::TradeID> cached_trades_active_;
+	bool needs_update_{false};
+
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTradeChanged>>
+	   trade_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_DIPLOMACY_MENU_H

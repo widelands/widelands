@@ -27,6 +27,12 @@ wl.Descriptions():new_productionsite_type {
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {40, 56},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {
@@ -49,6 +55,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time of worker: 17.2-38.8 sec
+            -- min. time total: 17.2 + 45 = 62.2 sec
+            -- max. time total: 38.8 + 45 = 83.8 sec
             "callworker=bees",
             "sleep=duration:45s"
          }

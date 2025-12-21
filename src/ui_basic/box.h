@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2024 by the Widelands Development Team
+ * Copyright (C) 2003-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct Box : public Panel {
 	void set_scrolling(bool scroll);
 	void set_force_scrolling(bool);
 
-	int32_t get_nritems() const {
+	[[nodiscard]] int32_t get_nritems() const {
 		return items_.size();
 	}
 
@@ -67,9 +67,36 @@ struct Box : public Panel {
 	/// Sets the maximum dimensions and calls set_desired_size()
 	virtual void set_max_size(int w, int h);
 
+	[[nodiscard]] uint32_t get_orientation() const {
+		return orientation_;
+	}
+	[[nodiscard]] bool is_scrolling() const {
+		return scrolling_;
+	}
+	[[nodiscard]] bool is_force_scrolling() const {
+		return force_scrolling_;
+	}
+	[[nodiscard]] uint32_t get_inner_spacing() const {
+		return inner_spacing_;
+	}
+	[[nodiscard]] uint32_t get_min_desired_breadth() const {
+		return mindesiredbreadth_;
+	}
+	[[nodiscard]] int get_max_x() const {
+		return max_x_;
+	}
+	[[nodiscard]] int get_max_y() const {
+		return max_y_;
+	}
+
 	// Forget all our entries. Does not delete or even remove them.
 	void clear() {
 		items_.clear();
+	}
+	void delete_all_children() {
+		scrollbar_.reset();
+		free_children();
+		clear();
 	}
 
 	Scrollbar* get_scrollbar() {
@@ -89,12 +116,14 @@ private:
 	void set_item_pos(uint32_t idx, int32_t pos);
 	bool is_item_visible(uint32_t idx);
 	void scrollbar_moved(int32_t);
-	void update_positions();
 	void on_death(Panel* p) override;
 	void on_visibility_changed() override;
 
 	// Don't resize beyond this size
 	int max_x_, max_y_;
+
+public:
+	void update_positions();
 
 	struct Item {
 		enum Type {
@@ -117,6 +146,11 @@ private:
 		int assigned_var_depth;
 	};
 
+	[[nodiscard]] const Item& at(size_t i) const {
+		return items_.at(i);
+	}
+
+private:
 	bool scrolling_{false};
 	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;

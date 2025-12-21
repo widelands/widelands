@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ struct Carrier;
 class RoadBaseDescr : public MapObjectDescr {
 public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
-	   : MapObjectDescr(mot, init_name, init_descname) {
+	   : MapObjectDescr(mot, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~RoadBaseDescr() override = default;
 
@@ -65,6 +65,7 @@ struct RoadBase : public PlayerImmovable {
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 
 	int32_t get_cost(FlagId fromflag);
 	const Path& get_path() const {

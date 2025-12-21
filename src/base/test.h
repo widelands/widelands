@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,7 +161,7 @@ inline bool compare(const double a,
 #define check_equal(a, b) do_check_equal(__FILE__, __LINE__, a, b)
 template <typename T1, typename T2>
 inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) {
-	log_info("Running testcase %s:%d\n", f, l);
+	log_info("Running testcase %s:%u\n", f, l);
 	if (!compare(a, b)) {
 		std::ostringstream oss;
 		oss << "Check failed: (";
@@ -174,18 +174,24 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 	}
 }
 
-#define check_error(what, fn) do_check_error(__FILE__, __LINE__, what, fn)
+#define check_error(type, what, fn) do_check_error<type>(__FILE__, __LINE__, #type, what, fn)
+template <typename ExceptionType>
 inline void do_check_error(const char* f,
                            uint32_t l,
+                           const char* err_type,
                            const std::string& what,
                            const std::function<void()>& fn) {
-	log_info("Running testcase %s:%d\n", f, l);
+	log_info("Running testcase %s:%u\n", f, l);
 	try {
 		fn();
-	} catch (...) {
+	} catch (const ExceptionType& e) {
+		if (!contains(e.what(), what, false)) {
+			throw WException(f, l, "Error of type %s with wrong message: Expected '%s', received '%s'",
+			                 err_type, what.c_str(), e.what());
+		}
 		return;
 	}
-	throw WException(f, l, "Error not detected: %s", what.c_str());
+	throw WException(f, l, "Error of type %s not detected: %s", err_type, what.c_str());
 }
 }  // namespace WLTestsuite
 

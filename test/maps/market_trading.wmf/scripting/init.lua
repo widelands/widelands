@@ -19,18 +19,21 @@ function full_headquarters(player, x, y)
       hq:set_wares(descr.name, 350)
    end
    for idx,descr in ipairs(game:get_tribe_description("barbarians").workers) do
-      hq:set_workers(descr.name, 50)
+      if descr.type_name ~= "soldier" and descr.type_name ~= "ferry" then
+         hq:set_workers(descr.name, 50)
+      end
    end
+   hq:set_soldiers({0,0,0,0}, 30)
 end
 
 function place_markets()
-   prefilled_buildings(p1, { "barbarians_market", 22, 27 })
-   market_p1 = map:get_field(22, 27).immovable
-   connected_road("normal", p1, market_p1.flag, "tr,tl|", true)
+   prefilled_buildings(p1, { "barbarians_market", 22, 28 })
+   market_p1 = map:get_field(22, 28).immovable
+   connected_road("normal", p1, market_p1.flag, "tr,tr,tl|", true)
 
-   prefilled_buildings(p2, { "barbarians_market", 31, 27 })
-   market_p2 = map:get_field(31, 27).immovable
-   connected_road("normal", p2, market_p2.flag, "tr,tl|", true)
+   prefilled_buildings(p2, { "barbarians_market", 31, 28 })
+   market_p2 = map:get_field(31, 28).immovable
+   connected_road("normal", p2, market_p2.flag, "tr,tr,tl|", true)
 end
 
 full_headquarters(p1, 22, 25)

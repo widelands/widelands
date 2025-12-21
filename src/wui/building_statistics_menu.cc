@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	std::vector<Widelands::DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (Widelands::DescriptionIndex index : tribe.buildings()) {
-		if (own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways)) {
+		if (own_tribe_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways)) {
 			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
@@ -378,10 +378,13 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	initialization_complete();
 }
 
-bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player,
-                                                   Widelands::DescriptionIndex index,
-                                                   bool map_allows_seafaring,
-                                                   bool map_allows_waterways) const {
+bool BuildingStatisticsMenu::own_tribe_building_is_valid(const Widelands::Player& player,
+                                                         Widelands::DescriptionIndex index,
+                                                         bool map_allows_seafaring,
+                                                         bool map_allows_waterways) const {
+	if (!player.tribe().has_building(index)) {
+		return false;
+	}
 	const Widelands::BuildingDescr& descr = *player.tribe().get_building_descr(index);
 
 	if (!descr.is_useful_on_map(map_allows_seafaring, map_allows_waterways) &&
@@ -392,10 +395,8 @@ bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& play
 	    descr.type() == Widelands::MapObjectType::DISMANTLESITE) {
 		return false;
 	}
-	// Only add allowed buildings or buildings that are owned by the player.
-	return (
-	   (player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
-	   !player.get_building_statistics(index).empty());
+	// Only add allowed buildings of the player's tribe
+	return (player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced()));
 }
 
 bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
@@ -439,7 +440,7 @@ void BuildingStatisticsMenu::update_building_list() {
 	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
 	for (Widelands::DescriptionIndex index = 0; index < nr_building_types_; ++index) {
 		const bool should_have_this_building =
-		   own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways) ||
+		   own_tribe_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways) ||
 		   foreign_tribe_building_is_valid(player, index);
 		const bool has_this_building = building_buttons_[index] != nullptr;
 		if (should_have_this_building != has_this_building) {
@@ -602,6 +603,9 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		}
 		break;
 	}
+
+	default:
+		NEVER_HERE();
 	}
 
 	if (found) {
@@ -619,7 +623,7 @@ void BuildingStatisticsMenu::think() {
 	// Update statistics
 	const Time& gametime = iplayer().game().get_gametime();
 
-	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if (!is_minimal() && (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs)) {
 		update_building_list();
 		update();
 		lastupdate_ = gametime;
@@ -712,10 +716,10 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (percent < low_production_) ? style_.low_color() :
 				   (percent < ((low_production_ < 50) ?
-                              2 * low_production_ :
-                              low_production_ + ((100 - low_production_) / 2))) ?
-                                             style_.medium_color() :
-                                             style_.high_color();
+				                  2 * low_production_ :
+				                  low_production_ + ((100 - low_production_) / 2))) ?
+				                                 style_.medium_color() :
+				                                 style_.high_color();
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
@@ -724,7 +728,7 @@ void BuildingStatisticsMenu::update() {
 			}
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-                                                                  "");
+				                                                      "");
 				b_next_unproductive_.set_enabled(nr_unproductive > 0);
 				b_prev_unproductive_.set_enabled(nr_unproductive > 0);
 				hbox_unproductive_.set_visible(true);
@@ -735,14 +739,14 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (total_stationed_soldiers < total_soldier_capacity / 2) ? style_.low_color() :
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
-                                                                         style_.high_color();
+				                                                             style_.high_color();
 				const std::string perc_str =
 				   format(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
-                                                                  "");
+				                                                      "");
 				b_next_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				b_prev_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				hbox_unproductive_.set_visible(true);
@@ -855,7 +859,7 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* m
 	fw.unsigned_8(tab_panel_.active());
 	fw.string(
 	   current_building_type_ == Widelands::INVALID_INDEX ?
-         "" :
-         iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
+	      "" :
+	      iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }

@@ -16,6 +16,7 @@ import os
 import subprocess
 import sys
 from time import strftime, gmtime
+import json
 
 try:
     maketrans = ''.maketrans
@@ -26,68 +27,70 @@ except AttributeError:
 from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
-# corresponding source paths list. Note that paths MUST be relative to po/pot,
+# corresponding source paths list. Note that paths MUST be relative to the POT file
+# (at data/i18n/translations/<dirname>/<filename>.pot),
 # to let .po[t] comments point to somewhere useful
+BASEDIR = '../../../..'
 MAINPOTS = [
     ('maps/maps', [
-        '../../data/maps/*/elemental',
-        '../../data/maps/*/*/elemental',
-        '../../data/campaigns/*.lua',
-        '../../data/campaigns/*/elemental'
+        BASEDIR + '/data/maps/*/elemental',
+        BASEDIR + '/data/maps/*/*/elemental',
+        BASEDIR + '/data/campaigns/*.lua',
+        BASEDIR + '/data/campaigns/*/elemental'
     ]),
-    ('texts/texts', ['../../data/txts/*.lua',
-                     '../../data/txts/*/*.lua',
-                     '../../data/txts/tips/*.tip']),
+    ('texts/texts', [BASEDIR + '/data/txts/*.lua',
+                     BASEDIR + '/data/txts/*/*.lua',
+                     BASEDIR + '/data/txts/tips/*.tip']),
     ('widelands/widelands', [
-        '../../src/wlapplication.cc',
-        '../../src/wlapplication_options.cc',
-        '../../src/*/*.cc',
-        '../../src/*/*/*.cc',
-        '../../src/*/*/*/*.cc',
-        '../../src/*/*/*/*/*.cc',
-        '../../src/*/*/*/*/*/*.cc',
-        '../../src/wlapplication.h',
-        '../../src/*/*.h',
-        '../../src/*/*/*.h',
-        '../../src/*/*/*/*.h',
-        '../../src/*/*/*/*/*.h',
-        '../../src/*/*/*/*/*/*.h',
-        '../../data/scripting/*.lua',
+        BASEDIR + '/src/wlapplication.cc',
+        BASEDIR + '/src/wlapplication_options.cc',
+        BASEDIR + '/src/*/*.cc',
+        BASEDIR + '/src/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*.cc',
+        BASEDIR + '/src/*/*/*/*/*/*.cc',
+        BASEDIR + '/src/wlapplication.h',
+        BASEDIR + '/src/*/*.h',
+        BASEDIR + '/src/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*.h',
+        BASEDIR + '/src/*/*/*/*/*/*.h',
+        BASEDIR + '/data/scripting/*.lua',
     ]),
     ('widelands_console/widelands_console', [
-        '../../src/wlapplication_messages.cc',
-        '../../src/wlapplication_messages.h',
+        BASEDIR + '/src/wlapplication_messages.cc',
+        BASEDIR + '/src/wlapplication_messages.h',
     ]),
     ('win_conditions/win_conditions', [
-        '../../data/scripting/win_conditions/*.lua',
+        BASEDIR + '/data/scripting/win_conditions/*.lua',
     ]),
     ('training_wheels/training_wheels', [
-        '../../data/scripting/training_wheels/*.lua',
+        BASEDIR + '/data/scripting/training_wheels/*.lua',
     ]),
     ('world/world', [
-        '../../data/world/*.lua',
-        '../../data/world/*/*.lua',
-        '../../data/world/*/*/*.lua',
-        '../../data/world/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*.lua',
-        '../../data/world/*/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*.lua',
+        BASEDIR + '/data/world/*/*.lua',
+        BASEDIR + '/data/world/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*.lua',
+        BASEDIR + '/data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/initialization/*/military_capacity.lua',
-        '../../data/tribes/initialization/*/starting_conditions/*.lua',
-        '../../data/tribes/economy_profiles/*',
-        '../../data/tribes/*/init.lua',
-        '../../data/tribes/*/*/init.lua',
-        '../../data/tribes/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/init.lua',
-        '../../data/tribes/*/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/initialization/*/military_capacity.lua',
+        BASEDIR + '/data/tribes/initialization/*/starting_conditions/*.lua',
+        BASEDIR + '/data/tribes/economy_profiles/*',
+        BASEDIR + '/data/tribes/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/init.lua',
+        BASEDIR + '/data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
-        '../../data/tribes/initialization/*/units.lua',
-        '../../data/tribes/scripting/help/*.lua',
+        BASEDIR + '/data/tribes/initialization/*/units.lua',
+        BASEDIR + '/data/tribes/scripting/help/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
-        '../../data/scripting/editor/*.lua',
+        BASEDIR + '/data/scripting/editor/*.lua',
     ]),
 ]
 
@@ -99,26 +102,26 @@ MAINPOTS = [
 #       - target .pot file mask
 #       - base directory to scan for catalogs (referred to Widelands' base dir)
 #       - List of source paths for catalog creation: tells the program which
-#         files to use for building .pot files (referred to
-#         "po/pot/<path_to_pot/" dir, so the file pointers inside .pot files
-#         actually point somewhere useful)
+#         files to use for building .pot files (relative to the
+#         "data/i18n/translations/<dirname>/<filename>.pot", so the file pointers inside .pot files
+#         actually point somewhere useful).
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
     ('scenario_%(name)s/scenario_%(name)s', 'data/campaigns/',
-     ['../../data/campaigns/%(name)s/extra_data',
-      '../../data/campaigns/%(name)s/objective',
-      '../../data/campaigns/%(name)s/scripting/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*.lua',
-      '../../data/campaigns/%(name)s/scripting/*/*/*.lua',
+     [BASEDIR + '/data/campaigns/%(name)s/extra_data',
+      BASEDIR + '/data/campaigns/%(name)s/objective',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*.lua',
+      BASEDIR + '/data/campaigns/%(name)s/scripting/*/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/SP_Scenarios',
-     ['../../data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
     ('mp_scenario_%(name)s/mp_scenario_%(name)s', 'data/maps/MP_Scenarios/',
-     ['../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
+     [BASEDIR + '/data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
 ]
 
@@ -170,10 +173,10 @@ class BuildcatError(Exception):
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory."""
-    if (not os.path.isdir('po')):
-        print("Error: no 'po/' subdir found.\n")
+    if (not os.path.isdir('data/i18n/translations')):
+        print("Error: no 'data/i18n/translations/' subdir found.\n")
         print('This script needs to access translations placed ' +
-              "under 'po/' subdir, but these seem unavailable. Check " +
+              "under 'data/i18n/translations/' subdir, but these seem unavailable. Check " +
               "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
 
@@ -182,6 +185,7 @@ def do_makedirs(dirs):
     """Create subdirectories.
 
     Ignore errors
+
     """
     try:
         os.makedirs(dirs)
@@ -196,6 +200,7 @@ def pot_modify_header(potfile_in, potfile_out, header):
     Returns whether or not the header was successfully modified.
 
     Note: potfile_in and potfile_out must not point to the same file!
+
     """
     class State:
         (start,
@@ -266,6 +271,7 @@ def do_compile(potfile, srcfiles):
     strings.
 
     Merge the results and write out the corresponding pot file.
+
     """
     files = []
     for i in srcfiles:
@@ -366,7 +372,7 @@ def do_update_potfiles():
     dangerous_chars = "'\" "  # Those chars are replaced via '_'
     for pot, srcfiles in potfiles:
         pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars) * '_'))
-        path = os.path.normpath('po/' + os.path.dirname(pot))
+        path = os.path.normpath('data/i18n/translations/' + os.path.dirname(pot))
         do_makedirs(path)
         oldcwd = os.getcwd()
         os.chdir(path)
@@ -376,7 +382,7 @@ def do_update_potfiles():
         os.chdir(oldcwd)
 
         if succ:
-            print('\tpo/%s.pot' % pot)
+            print('\tdata/i18n/translations/%s.pot' % pot)
         else:
             os.rmdir(path)
 
@@ -437,7 +443,7 @@ def do_update_po(lang, files):
 
     for f in files:
         # File names to use
-        pot = os.path.normpath('po/%s' % f)
+        pot = os.path.normpath('data/i18n/translations/%s' % f)
         po = os.path.join(os.path.dirname(pot), lang + '.po')
         tmp = 'tmp.po'
 
@@ -466,6 +472,96 @@ def do_update_po(lang, files):
     sys.stdout.write('\n')
 
 
+##############################################################################
+#
+# Update release highlights translation source
+#
+##############################################################################
+#
+# Release notes for the last three releases are collected from Release_Notes.md
+# and updated in xdg/translations/appdata.json and xdg/release_urls.json
+#
+# For this to work, Release_Notes.md must use a limited subset of markdown like
+# this for each release:
+#
+# >## Widelands <version_number>
+# >
+# > - Release highlight 1
+# > - Release highlight 2
+# >
+# >[More info](https://www.widelands.org/news/...)
+#
+# <version_number> must match a release listed in the metainfo stub.
+# Each highlight must fit on one line.
+#
+##############################################################################
+def update_appdata_json():
+    print('Reading release notes:')
+
+    release_notes_filename = 'Release_Notes.md'
+    if (not os.path.isfile(release_notes_filename)):
+        raise BuildcatError('File ' + release_notes_filename + ' not found.')
+
+    appdata_catalog_filename = 'xdg/translations/appdata.json'
+    if (not os.path.isfile(appdata_catalog_filename)):
+        raise BuildcatError('File ' + appdata_catalog_filename + ' not found.')
+
+    release_urls_filename = 'xdg/release_urls.json'
+    if (not os.path.isfile(release_urls_filename)):
+        raise BuildcatError('File ' + release_urls_filename + ' not found.')
+
+    release_heading = '## Widelands '
+    item_bullet = ' - '
+    url_text = '[More info]('
+    dev_version_suffix = '~git'
+
+    releases = {}
+    release_urls = {}
+    version = ''
+    with open(release_notes_filename, 'r', encoding = 'utf-8') as release_notes_file:
+        for line in release_notes_file.readlines():
+            if line.startswith(release_heading):
+                if len(releases) >= 3:
+                    # we only include the last 3 in the metainfo
+                    break
+                version = line[len(release_heading):].strip()
+                if version.endswith(dev_version_suffix):
+                    if len(releases) > 0:
+                        raise BuildcatError('Development version is not first one in Release_Notes.md')
+                    version = version[:-len(dev_version_suffix)]
+                if version in releases:
+                    raise BuildcatError('Duplicate version in Release_Notes.md: ' + version)
+                releases[version] = []
+            elif line.startswith(item_bullet):
+                if version == '':
+                    raise BuildcatError('List item without release header')
+                releases[version] += [line[len(item_bullet):].strip()]
+            elif line.startswith(url_text):
+                link = line.rstrip()[len(url_text):-1]
+                # Plain '&' causes xml error, link with %26 doesn't work.
+                # Maybe this?
+                release_urls[version] = link.replace('&', '&amp;')
+    print('\t' + release_notes_filename)
+
+    with open(appdata_catalog_filename, 'r', encoding = 'utf-8') as appdata_catalog_file:
+        appdata_catalog = json.load(appdata_catalog_file)
+
+    if appdata_catalog['release_notes'] != releases:
+        appdata_catalog['release_notes'] = releases
+        with open(appdata_catalog_filename, 'w', encoding = 'utf-8') as appdata_catalog_file:
+            json.dump(appdata_catalog, appdata_catalog_file, ensure_ascii = False, indent = '\t')
+        print('\t' + appdata_catalog_filename)
+
+    with open(release_urls_filename, 'r', encoding = 'utf-8') as release_urls_file:
+        old_release_urls = json.load(release_urls_file)
+
+    if old_release_urls != release_urls:
+        with open(release_urls_filename, 'w', encoding = 'utf-8') as release_urls_file:
+            json.dump(release_urls, release_urls_file, ensure_ascii = False, indent = '\t')
+        print('\t' + release_urls_filename)
+
+
+##############################################################################
 if __name__ == '__main__':
     # Sanity checks
     are_we_in_root_directory()
@@ -473,6 +569,7 @@ if __name__ == '__main__':
     # Make sure .pot files are up to date.
     try:
         do_update_potfiles()
+        update_appdata_json()
     except BuildcatError as err_msg:
         sys.stderr.write('Error: %s\n' % err_msg)
         sys.exit(1)

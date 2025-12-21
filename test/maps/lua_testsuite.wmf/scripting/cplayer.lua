@@ -21,6 +21,18 @@ function player_tests:test_number_property()
    assert_equal(3, player3.number)
 end
 
+function player_tests:test_ai_type()
+   local default_ai = "very_weak"
+   local no_ai_human = ""
+   if egbase == editor then
+      default_ai = nil
+      no_ai_human = nil
+   end
+   assert_equal(no_ai_human, player1.ai_type, "human player")
+   assert_equal(default_ai, player2.ai_type, "ai player (2)")
+   assert_equal(default_ai, player3.ai_type, "ai player (3)")
+end
+
 -- =================
 -- place_flag tests
 -- =================
@@ -197,5 +209,11 @@ end
 function place_building_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
       player1:place_building("kjhsfjkh", map:get_field(10,10))
+   end)
+end
+
+function place_building_tests:test_foreign_building()
+   assert_error("Should not be able to place a building that the tribe can't use", function()
+      player1:place_building("amazons_warehouse", self.f, false, true)
    end)
 end

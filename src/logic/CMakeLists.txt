@@ -68,9 +68,8 @@ wl_library(logic_game_controller
     ai
     base_times
     logic
-    logic_commands
+    commands
     logic_game_settings
-    ui_basic
     widelands_options
     wui
 )
@@ -80,6 +79,8 @@ wl_library(logic_constants
     vision.h
     widelands.cc
     widelands.h
+  DEPENDS
+    base_exceptions
 )
 
 wl_library(logic_filesystem_constants
@@ -139,6 +140,8 @@ wl_library(logic_map
     field.h
     map.cc
     map.h
+    map_compassdir.cc
+    map_compassdir.h
     map_revision.cc
     map_revision.h
     mapastar.cc
@@ -184,49 +187,6 @@ wl_library(logic_map
     wui_mapview_pixelconstants
 )
 
-wl_library(logic_commands
-  SRCS
-    cmd_calculate_statistics.cc
-    cmd_calculate_statistics.h
-    cmd_delete_message.cc
-    cmd_delete_message.h
-    cmd_incorporate.cc
-    cmd_incorporate.h
-    cmd_luacoroutine.cc
-    cmd_luacoroutine.h
-    cmd_luascript.cc
-    cmd_luascript.h
-    cmd_queue.cc
-    cmd_queue.h
-    queue_cmd_factory.cc
-    queue_cmd_factory.h
-    queue_cmd_ids.h
-    playercommand.cc
-    playercommand.h
-  DEPENDS
-    base
-    base_exceptions
-    base_macros
-    base_times
-    economy # TODO(GunChleoc): Circular dependency
-    graphic_text_layout
-    io_fileread
-    io_stream
-    logic # TODO(GunChleoc): Circular dependency
-    logic_constants
-    logic_exceptions
-    logic_game_controller
-    logic_map
-    logic_map_objects
-    logic_widelands_geometry_io
-    map_io
-    scripting_coroutine
-    scripting_logic # TODO(GunChleoc): Circular dependency
-    scripting_lua_table
-    wui
-)
-
-
 wl_library(logic_training_wheels
   SRCS
     training_wheels.cc
@@ -244,6 +204,8 @@ wl_library(logic
   SRCS
     ai_dna_handler.cc
     ai_dna_handler.h
+    detected_port_space.cc
+    detected_port_space.h
     editor_game_base.cc
     editor_game_base.h
     game.cc
@@ -266,16 +228,15 @@ wl_library(logic
   USES_ATOMIC
   DEPENDS
     base
+    base_crypto
     base_exceptions
     base_macros
-    base_md5
     base_random
     base_scoped_timer
     base_time_string
     base_times
     build_info
     economy
-    editor  # TODO(Nordfriese): Needed only for an ugly temporary hack
     game_io
     graphic
     graphic_color
@@ -285,7 +246,7 @@ wl_library(logic
     io_profile
     io_stream
     logic_addons
-    logic_commands
+    commands
     logic_constants
     logic_exceptions
     logic_filesystem_constants

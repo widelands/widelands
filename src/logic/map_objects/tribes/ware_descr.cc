@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,10 @@ namespace Widelands {
  * The contents of 'table' are documented in
  * /data/tribes/wares/armor/init.lua
  */
-WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
-   : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
+WareDescr::WareDescr(const std::string& init_descname,
+                     const LuaTable& table,
+                     const std::vector<std::string>& attribs)
+   : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table, attribs),
      ai_hints_(new AI::WareWorkerHints()) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Ware %s has no idle animation", name().c_str());
@@ -54,6 +56,10 @@ void WareDescr::set_default_target_quantity(const std::string& tribename, int qu
 		                    quantity, tribename.c_str(), name().c_str());
 	}
 	default_target_quantities_[tribename] = quantity;
+}
+
+int WareDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
 }
 
 void WareDescr::set_preciousness(const std::string& tribename, int preciousness) {

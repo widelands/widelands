@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,6 +45,7 @@ static const char pic_stock_policy_button_remove[] =
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
 constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
+constexpr int8_t kButtonSize = 34;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
@@ -104,6 +105,8 @@ void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,
 	case Widelands::StockPolicy::kNormal:
 		// No icon for the normal policy
 		return;
+	default:
+		NEVER_HERE();
 	}
 	assert(pic);
 	dst.blit(ware_position(ware), pic);
@@ -150,6 +153,19 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 	ensure_box_can_hold_input_queues(box);
 	add_wares_queues(construction_site, box);
+
+	if (ibase()->can_act(construction_site->owner().player_number())) {
+		UI::Box& builder_caps =
+		   *new UI::Box(&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
+		builder_caps.add_inf_space();
+		UI::Button& evict_button = *new UI::Button(
+		   &builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+		   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+		   _("Send the builder away"));
+		evict_button.sigclicked.connect([this]() { evict_builder(); });
+		builder_caps.add(&evict_button);
+		box.add(&builder_caps, UI::Box::Resizing::kFullSize);
+	}
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -242,50 +258,6 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		settings_box->add_space(6);
 		cs_stopped_->set_enabled(can_act);
 	} break;
-	case Widelands::MapObjectType::MILITARYSITE: {
-		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
-		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
-		   settings_box.get(), ms->desired_capacity, 1, ms->max_capacity, can_act);
-		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		settings_box->add_space(8);
-		cs_soldier_capacity_->changed.connect([this]() {
-			if (game_ != nullptr) {
-				game_->send_player_change_soldier_capacity(
-				   *construction_site_.get(ibase()->egbase()), cs_soldier_capacity_->get_current());
-			} else {
-				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-			}
-		});
-
-		UI::Box& soldier_preference_box =
-		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_preference_box", 0, 0,
-		                UI::Box::Horizontal);
-		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		Panel& soldier_preference_panel = *new Panel(
-		   &soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0, 64, 32);
-		soldier_preference_box.add(&soldier_preference_panel);
-		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
-		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
-		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
-		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies", Vector2i(32, 0),
-		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
-		if (can_act) {
-			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-				if (game_ != nullptr) {
-					game_->send_player_militarysite_set_soldier_preference(
-					   *construction_site_.get(ibase()->egbase()),
-					   state != 0 ? Widelands::SoldierPreference::kRookies :
-                               Widelands::SoldierPreference::kHeroes);
-				} else {
-					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-				}
-			});
-		}
-		settings_box->add_space(8);
-	} break;
 	case Widelands::MapObjectType::WAREHOUSE: {
 		upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 		auto add_tab = [this, construction_site, can_act](
@@ -357,9 +329,81 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			settings_box->add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
 			settings_box->add_space(6);
 			cs_launch_expedition_->set_enabled(can_act);
-		} else {
-			nothing_added = true;
 		}
+	}
+		if (construction_site->get_info().becomes->get_conquers() == 0) {
+			nothing_added = true;
+			break;
+		}
+		FALLS_THROUGH;
+	case Widelands::MapObjectType::MILITARYSITE: {
+		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
+		upcast(Widelands::WarehouseSettings, wh, construction_site->get_settings());
+		assert((ms != nullptr) ^ (wh != nullptr));
+		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
+		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
+		   ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : wh->max_garrison, can_act);
+		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		settings_box->add_space(8);
+		cs_soldier_capacity_->changed.connect([this]() {
+			if (game_ != nullptr) {
+				game_->send_player_change_soldier_capacity(
+				   *construction_site_.get(ibase()->egbase()), cs_soldier_capacity_->get_current());
+			} else {
+				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			}
+		});
+
+		UI::Box& soldier_preference_box =
+		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_preference_box", 0, 0,
+		                UI::Box::Horizontal);
+		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		// TODO(Nordfriese): Use box layout
+		Panel& soldier_preference_panel =
+		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0,
+		              kButtonSize * 3, kButtonSize);
+		soldier_preference_box.add(&soldier_preference_panel);
+		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
+		// Make sure the creation order is consistent with enum SoldierPreference!
+		cs_prefer_heroes_rookies_->add_button(
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies",
+		   Vector2i(kButtonSize * 2, 0),
+		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+		cs_prefer_heroes_rookies_->add_button(
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes",
+		   Vector2i(kButtonSize * 1, 0), g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
+		   _("Prefer heroes"));
+		cs_prefer_heroes_rookies_->add_button(
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_any",
+		   Vector2i(kButtonSize * 0, 0), g_image_cache->get("images/wui/buildings/prefer_any.png"),
+		   _("No preference"));
+		cs_prefer_heroes_rookies_->set_state(
+		   static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference),
+		   false);
+		if (can_act) {
+			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
+				if (game_ != nullptr) {
+					game_->send_player_set_soldier_preference(
+					   *construction_site_.get(ibase()->egbase()),
+					   static_cast<Widelands::SoldierPreference>(state));
+				} else {
+					if (upcast(Widelands::MilitarysiteSettings, ms_settings,
+					           construction_site_.get(ibase()->egbase())->get_settings())) {
+						ms_settings->soldier_preference =
+						   static_cast<Widelands::SoldierPreference>(state);
+					} else if (upcast(Widelands::WarehouseSettings, wh_settings,
+					                  construction_site_.get(ibase()->egbase())->get_settings())) {
+						wh_settings->soldier_preference =
+						   static_cast<Widelands::SoldierPreference>(state);
+					}
+				}
+			});
+		}
+		settings_box->add_space(8);
+	} break;
+	case Widelands::MapObjectType::MARKET: {
+		// Nothing to do currently.
+		nothing_added = true;
 	} break;
 	default:
 		NEVER_HERE();
@@ -401,6 +445,24 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	}
 }
 
+void ConstructionSiteWindow::evict_builder() {
+	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
+
+	if (construction_site == nullptr) {
+		return;
+	}
+	std::vector<Widelands::Worker*> workers = construction_site->get_workers();
+	if (workers.empty()) {
+		return;
+	}
+	if (game_ != nullptr) {
+		Widelands::Worker* builder = workers.front();
+		game_->send_player_evict_worker(*builder);
+	} else {
+		NEVER_HERE();
+	}
+}
+
 /*
 ===============
 Make sure the window is redrawn when necessary.
@@ -422,17 +484,17 @@ void ConstructionSiteWindow::think() {
 	// InputQueueDisplay and FakeWaresDisplay update themselves – we need to refresh the other
 	// settings
 	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
-		assert(cs_stopped_);
+		assert(cs_stopped_ != nullptr);
 		cs_stopped_->set_state(ps->stopped);
 	}
 	if (upcast(Widelands::TrainingsiteSettings, ts, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_);
+		assert(cs_soldier_capacity_ != nullptr);
 		cs_soldier_capacity_->refresh(ts->desired_capacity, ts->max_capacity, can_act);
 	} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_);
-		assert(cs_prefer_heroes_rookies_);
+		assert(cs_soldier_capacity_ != nullptr);
+		assert(cs_prefer_heroes_rookies_ != nullptr);
 		cs_soldier_capacity_->refresh(ms->desired_capacity, ms->max_capacity, can_act);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
+		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ms->soldier_preference), false);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_ != nullptr) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);
@@ -442,6 +504,10 @@ void ConstructionSiteWindow::think() {
 			assert(!ws->launch_expedition);
 		}
 #endif
+		if (cs_soldier_capacity_ != nullptr) {
+			cs_soldier_capacity_->refresh(ws->desired_capacity, ws->max_garrison, can_act);
+			cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ws->soldier_preference), false);
+		}
 	}
 }
 
@@ -562,6 +628,8 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
+		default:
+			NEVER_HERE();
 		}
 	}
 	return UI::Box::handle_key(down, code);

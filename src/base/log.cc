@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,9 @@ std::string get_output_directory() {
 #else
 	char path[MAX_PATH];
 #endif
+	CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 	auto pathlen = GetModuleFileName(NULL, path, MAX_PATH);
+	CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	while (pathlen > 0 && path[pathlen] != '\\') {
 		--pathlen;
 	}
@@ -161,12 +163,15 @@ static const char* to_string(const LogType& type) {
 		return "INFO";
 	case LogType::kDebug:
 		return "DEBUG";
+	case LogType::kLua:
+		return "LUA";
 	case LogType::kWarning:
 		return "WARNING";
 	case LogType::kError:
 		return "ERROR";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {

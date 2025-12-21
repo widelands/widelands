@@ -30,6 +30,12 @@ wl.Descriptions():new_productionsite_type {
          rows = 2,
          fps = 10
       },
+      build = {
+         hotspot = {43, 56},
+         frames = 3,
+         columns = 3,
+         rows = 1,
+      }
    },
 
    animations = {
@@ -56,6 +62,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- min. time total: 37.2 + 30.2 = 67.4 sec
+            -- max. time total: 69.6 + 62.6 = 132.2 sec
             "call=erect_stack",
             "call=collect_coal",
          },
@@ -64,6 +72,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack because ...
          descname = _("making a charcoal stack"),
          actions = {
+            -- time of worker: 22.2-54.6 sec
+            -- min. time: 22.2 + 15 = 37.2 sec
+            -- max. time: 54.6 + 15 = 69.6 sec
             "return=skipped unless economy needs coal",
             "callworker=find_pond",
             "consume=log:3",
@@ -75,6 +86,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
          descname = _("collecting coal"),
          actions = {
+            -- time of worker: 15.2-47.6 sec
+            -- min. time: 15 + 15.2 = 30.2 sec
+            -- max. time: 15 + 47.6 = 62.6 sec
             "sleep=duration:15s",
             "callworker=collect_coal",
          },

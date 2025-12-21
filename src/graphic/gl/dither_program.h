@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,8 @@ public:
 	          const FieldsToDraw& fields_to_draw,
 	          float z_value,
 	          const Widelands::Player*);
+
+	void set_dither_mask(const std::string& filepath);
 
 private:
 	enum class TrianglePoint {

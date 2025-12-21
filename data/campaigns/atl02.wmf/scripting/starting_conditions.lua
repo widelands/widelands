@@ -8,7 +8,7 @@
 
 -- Initializing p1 (the scenario player)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"atlanteans_scouts_house", "atlanteans_temple_of_satul"}
+   p1:forbid_buildings{"atlanteans_scouts_house", "atlanteans_temple_of_satul", "atlanteans_market"}
    p1:allow_workers("all")
 
    if #campaign_data.shipnames > 2 then
@@ -67,6 +67,7 @@
 
 -- Initialize Maletus (Player 2)
    Maletus:allow_buildings("all")
+   Maletus:forbid_buildings({"empire_market"})
 
    sf = map.player_slots[2].starting_field
    Maletus:place_flag(sf.brn,true)
@@ -74,6 +75,7 @@
 
 -- Initialize Kalitath (Player 3)
    Kalitath:allow_buildings("all")
+   Kalitath:forbid_buildings({"barbarians_market"})
 
    sf = map.player_slots[3].starting_field
    Kalitath:place_flag(sf.brn,true)

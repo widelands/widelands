@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,8 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		case Widelands::BaseImmovable::BIG:
 			tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
 			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 

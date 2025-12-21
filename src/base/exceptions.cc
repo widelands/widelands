@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,14 @@
 #include <sstream>
 
 bool g_fail_on_lua_error(false);
+bool g_fail_on_errors(false);
 
 /*
  * class WException implementation
  */
 #undef wexception
-WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...) {
+WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...)
+   : file_(file), line_(line) {
 	char buffer[512];
 	{
 		va_list va;
@@ -39,10 +41,6 @@ WException::WException(char const* const file, uint32_t const line, char const* 
 	std::ostringstream ost;
 	ost << '[' << file << ':' << line << "] " << buffer;
 	what_ = ost.str();
-}
-
-char const* WException::what() const noexcept {
-	return what_.c_str();
 }
 
 /*

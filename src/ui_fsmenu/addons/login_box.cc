@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,10 +18,10 @@
 
 #include "ui_fsmenu/addons/login_box.h"
 
+#include "base/crypto.h"
 #include "base/string.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
-#include "third_party/sha1/sha1.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
@@ -76,27 +76,27 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 	m->set_text(as_richtext(
 	   g_style_manager
 	      ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
-                                                          UI::FontStyle::kWuiInfoPanelParagraph)
+	                                                       UI::FontStyle::kWuiInfoPanelParagraph)
 	      .as_font_tag(format(
 	         _("In order to use a registered account, you need an account on the Widelands website. "
 	           "Please log in at %s and set an online gaming password on your profile page."),
 	         g_style_manager
 	            ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsTooltip :
-                                                                UI::FontStyle::kWuiTooltip)
+	                                                             UI::FontStyle::kWuiTooltip)
 	            .as_font_tag(as_url_hyperlink(kRegisterURL))))));
 
 	left_box_.add_inf_space();
 	left_box_.add(
 	   new UI::Textarea(&left_box_, panel_style_, "label_username",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
-                                                           UI::FontStyle::kWuiInfoPanelHeading,
+	                                                        UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Username:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 	left_box_.add(
 	   new UI::Textarea(&left_box_, panel_style_, "label_password",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
-                                                           UI::FontStyle::kWuiInfoPanelHeading,
+	                                                        UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Password:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();

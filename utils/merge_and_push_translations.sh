@@ -31,8 +31,8 @@ if [ ! -f "utils/buildcat.py" ]; then
 fi
 
 # Ensure that our git is clean
-rm -f po/*/*.pot.*~
-rm -f po/*/*.po.*~
+rm -f data/i18n/translations/*/*.pot.*~
+rm -f data/i18n/translations/*/*.po.*~
 
 if [ -n "$(git status -s)" ]; then
   echo "git status must be empty to prevent accidental commits etc."
@@ -71,12 +71,12 @@ update_authors() {
   python3 utils/fix_formatting.py --lua --dir data/txts
 }
 
-update_appdata() {
-  # Update appdata
-  if python3 utils/update_appdata.py; then
-    echo "Updated appdata"
+update_metainfo() {
+  # Update metainfo
+  if python3 utils/update_metainfo.py; then
+    echo "Updated MetaInfo"
   else
-    echo "Failed updating appdata"
+    echo "Failed updating MetaInfo"
     exit 1
   fi
 }
@@ -97,8 +97,8 @@ gitAddGeneratedFiles() {
   git add 'data/txts/*.lua' || true
   # - Locale data
   git add 'data/i18n/*.lua' || true
-  # - Appdata
-  git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
+  # - MetaInfo
+  git add xdg/org.widelands.Widelands.metainfo.xml xdg/org.widelands.Widelands.desktop || true
   # - Statistics
   git add data/i18n/translation_stats.conf || true
 }
@@ -106,7 +106,7 @@ gitAddGeneratedFiles() {
 undo_oneliner_diffs() {
   # Undo one-liner diffs of pure timestamps with no other content
   set +x
-  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+  for entry in $(git diff --numstat data/i18n/translations/ | sed -En 's/^1\t1\t//p'); do
     if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
     then # no other diff line remaining
       echo "Skipping changes to $entry"
@@ -133,13 +133,14 @@ undo_oneliner_diffs
 
 # These may have changes either from git or from transifex
 update_authors
-update_appdata
+update_metainfo
 
 if [ -n "$(git status -s)" ]; then
   update_statistics
 
   # Stage translations
-  git add 'po/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json' \
+          'xdg/release_urls.json'
   # and generated files
   gitAddGeneratedFiles
 
@@ -176,13 +177,13 @@ if [ -n "$(git status -s)" ]; then
 
   # in case translations were edited while this script was running
   update_authors
-  update_appdata
+  update_metainfo
   # and this also changes by a catalog change
   update_statistics
 
   # Stage changes
   # - Translations and templates
-  git add 'po/*/*.po' 'po/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/translations/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
   # - generated files
   gitAddGeneratedFiles
 

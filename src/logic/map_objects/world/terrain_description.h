@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,11 +127,15 @@ public:
 	[[nodiscard]] std::string enhancement(const std::string& category) const;
 	void set_enhancement(const std::string& category, const std::string& terrain);
 
+	void set_descname(std::string dn) {
+		descname_ = dn;
+	}
+
 	void replace_textures(const LuaTable&);
 
 private:
 	const std::string name_;
-	const std::string descname_;
+	std::string descname_;
 	Is is_;
 	std::vector<DescriptionIndex> valid_resources_;
 	DescriptionIndex default_resource_index_;

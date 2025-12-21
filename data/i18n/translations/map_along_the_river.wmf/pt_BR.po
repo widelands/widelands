@@ -1,0 +1,610 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2025 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Daniel Martins <danieljogo982@gmail.com>, 2023
+# tiu lau, 2024
+# Pedro Supriano, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: Pedro Supriano, 2025\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/widelands/teams/35159/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
+msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "Transport"
+msgstr "Transporte "
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+msgid ""
+"Four shovels for removing the swamps have been collected at the warehouse."
+msgstr "Quatro pás para remoção dos pântanos foram recolhidas no armazém."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
+msgid "Shovels"
+msgstr "Pás"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
+msgid ""
+"Four more shovels for removing the swamps have been collected at the "
+"warehouse."
+msgstr ""
+"Mais quatro pás para remoção dos pântanos foram recolhidas no armazém."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
+msgid "Defeat Törver"
+msgstr "Derrote Törver"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
+msgid "Defeat the Armies of Törver"
+msgstr "Derrote o exército de Töver"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
+msgid ""
+"Törver is the enemy in the North, who is fighting under the red banner."
+msgstr ""
+"Törver é o inimigo no norte, que está lutando sob a bandeira vermelha."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
+msgid "Build a port"
+msgstr "Construa um porto"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
+msgid "Build a Port in the North"
+msgstr "Construa um porto ao norte"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
+msgid ""
+"We should build a port in Törver’s former land to be ready to send an "
+"expedition as soon as we found out how to build ships."
+msgstr ""
+"Devíamos construir um porto nas antigas terras de Törver para estarmos "
+"prontos para enviar uma expedição assim que descobrirmos como construir "
+"navios."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
+msgid "Conquer pirate sentry"
+msgstr "Conquiste a sentinela pirata"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
+msgid "Conquer the Pirate Sentry"
+msgstr "Conquiste o Sentinela Pirata"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
+msgid ""
+"Conquer the pirate sentry near the brook to the East. Hopefully we will find"
+" out what happened to the gold in this area."
+msgstr ""
+"Conquiste a sentinela pirata perto do riacho a leste. Esperamos descobrir o "
+"que aconteceu com o ouro nesta área."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
+msgid "Build warehouse"
+msgstr "Construa um armazém "
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
+msgid "Build a Warehouse near the Pirate Sentry"
+msgstr "Construa um armazém perto da sentinela pirata"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
+msgid ""
+"Build a warehouse close to the conquered pirate sentry near the brook. We "
+"will need it as a basis for further exploration. Furthermore we could use it"
+" to store some gold that we will mine from the surrounding hills."
+msgstr ""
+"Construa um armazém perto da sentinela pirata conquistada, perto do riacho. "
+"Precisaremos dela como base para futuras explorações. Além disso, poderíamos"
+" usá-lo para armazenar algum ouro que extrairemos das colinas em volta."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
+msgid "Bring shovels"
+msgstr "Traga pás"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
+msgid "Bring Four Shovels to the new Warehouse"
+msgstr "Leve quatro pás para o novo armazém"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
+msgid "They will be handed out to some volunteers for drying up the swamps."
+msgstr "Elas serão entregues a alguns voluntários para secar os pântanos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
+msgid ""
+"They will be handed out to additional volunteers for drying up the swamps."
+msgstr "Elas serão entregues a voluntários adicionais para secar os pântanos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
+msgid "Defeat the pirates"
+msgstr "Derrote os piratas"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
+msgid "Defeat the Pirates"
+msgstr "Derrote os Piratas"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
+msgid ""
+"Free our neighbourhood from the pirate menace. The pirates are fighting "
+"under the grey banner."
+msgstr ""
+"Liberte a nossa vizinhança da ameaça pirata. Os piratas estão lutando sob a "
+"bandeira cinza."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
+msgid "Free our scout from the pirates"
+msgstr "Liberte nosso explorador dos piratas"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
+msgid "Conquer the Stronghold on the Island"
+msgstr "Conquiste a Fortaleza da Ilha"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
+msgid "This is where the scout is held captive."
+msgstr "É aqui que o explorador é mantido em cativeiro."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
+msgid "Defeat Hjalmar"
+msgstr "Derrote Hjalmar"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
+msgid "Defeat the Armies of Hjalmar"
+msgstr "Derrote os exércitos de Hjalmar"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
+msgid ""
+"Hjalmar is the enemy north of the former pirates, who is fighting under the "
+"green banner."
+msgstr ""
+"Hjalmar é o inimigo ao norte dos antigos piratas, que luta sob a bandeira "
+"verde."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
+msgid "Defeat Runar"
+msgstr "Derrote Runar"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
+msgid "Defeat the Armies of Runar"
+msgstr "Derrote os exércitos de Runar"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
+msgid ""
+"Runar is the enemy south-east of the former pirates, who is fighting under "
+"the yellow banner."
+msgstr ""
+"Runar é o inimigo a sudeste dos antigos piratas, que luta sob a bandeira "
+"amarela."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:34
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:45
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:51
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:60
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:69
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:78
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:85
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:92
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:99
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:105
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:111
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:117
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:123
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:132
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:138
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
+msgid "Your Advisor"
+msgstr "Seu conselheiro"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
+msgid "Along the River"
+msgstr "Ao longo do rio"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
+msgid "Sire, let me inform you about the surrounding tribes."
+msgstr "Senhor, deixe-me informá-lo sobre as tribos das redondezas."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
+msgid ""
+"From the North we are endangered by a belligerent tribe, led by warlord "
+"Törver, that is rapidly building up its armies. They may soon have become "
+"too strong to be defeated."
+msgstr ""
+"Do Norte, somos ameaçados por uma tribo beligerante, liderada pelo senhor da"
+" guerra Törver, que está a aumentar rapidamente os seus exércitos. Em breve "
+"eles podem  se tornarem fortes demais para serem derrotados."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
+msgid ""
+"A large area to the north-east is agonized by a wild horde of unfettered "
+"pirates, led by their insane Arvid. Their presence blocks our ways to other "
+"tribes."
+msgstr ""
+"Uma grande área ao nordeste é atormentada por uma horda selvagem de piratas "
+"desenfreados, liderados pelo seu insano Arvid. A presença deles bloqueia "
+"nosso caminho para outras tribos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
+msgid ""
+"Over the river lies the prosperous land of the mysterious king Runar. We "
+"have been in war with him before the pirates occupied the eastern area. His "
+"strength is based on his vast industry and large armies."
+msgstr ""
+"Do outro lado do rio fica a próspera terra do misterioso rei Runar. "
+"Estivemos em guerra com ele antes dos piratas ocuparem a área oriental. Sua "
+"força é baseada em sua vasta indústria e grandes exércitos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
+msgid ""
+"The area beyond the pirates belongs to a developed tribe led by their mighty"
+" chieftain Hjalmar. They have had a long time of preparement to build up "
+"their deterring armies."
+msgstr ""
+"A área além dos piratas pertence a uma tribo desenvolvida liderada por seu "
+"poderoso chefe Hjalmar. Eles tiveram um longo período de preparação para "
+"formar seus exércitos dissuasores."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
+msgid ""
+"The situation looks quite perilous and my advice is that we direct our "
+"efforts towards building up a strong army."
+msgstr ""
+"A situação parece bastante perigosa e o meu conselho é que direcionemos os "
+"nossos esforços para a criar um exército forte."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
+msgid "Our northern enemy"
+msgstr "Nosso inimigo ao norte"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
+msgid ""
+"Sire, although our soldiers would face any enemy without the slightest fear,"
+" our rival in the North is still stronger than all our armies combined. We "
+"should avoid a conflict until we are able to defeat them."
+msgstr ""
+"Senhor, embora os nossos soldados enfrentem qualquer inimigo sem o menor "
+"medo, o nosso rival no Norte ainda é mais forte do que todos o nosso "
+"exército junto. Devemos evitar um conflito até sermos capazes de derrotá-lo."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
+msgid ""
+"Be patient and recognize that a strong army is indispensable in this "
+"situation. Törver has a very bad reputation."
+msgstr ""
+"Tenha paciência e reconheça que um exército forte é indispensável nesta "
+"situação. Törver tem uma reputação muito ruim."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
+msgid "Peril from the North"
+msgstr "Risco do Norte"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
+msgid ""
+"Sire, we received an alarming message from one of our explorers. Törver is "
+"expanding his front line and approaching our territory."
+msgstr ""
+"Senhor, recebemos uma mensagem alarmante de um dos nossos exploradores. "
+"Törver está expandindo sua linha de frente e se aproximando do nosso "
+"território."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
+msgid ""
+"We cannot avoid attacking their armies forever. If we manage to conquer our "
+"northern enemy, we will enlarge our territory and find more resources to "
+"strengthen our armies."
+msgstr ""
+"Não podemos evitar de atacar os seus exércitos para sempre. Se conseguirmos "
+"conquistar o nosso inimigo do Norte, ampliaremos o nosso território e "
+"encontraremos mais recursos para fortalecer os nossos exércitos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
+msgid ""
+"We can then also use their access to the lake in order to explore more land."
+msgstr ""
+"Poderemos também usar o acesso deles ao lago para explorar mais terras."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
+msgid "On the good way"
+msgstr "Por um bom caminho"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
+msgid ""
+"Sire, the battle with Törver progresses gloriously and we have already "
+"beaten the strongest part of his army. But this enemy will not be defeated "
+"easily. In a desperate move Törver has called in a group of hardened "
+"mercenaries."
+msgstr ""
+"Senhor, a batalha com Törver progride gloriosamente e já derrotamos a parte "
+"mais forte do seu exército. Mas ele não será derrotado facilmente. Num "
+"movimento desesperado, Törver convocou um grupo de mercenários experientes."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
+msgid "The great lake"
+msgstr "O grande lago"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
+msgid ""
+"Sire, now that we have conquered the land of Törver, we can make use of "
+"their excellent access to the adjacent great lake. A port in the North will "
+"give us better opportunities to have contact with other tribes."
+msgstr ""
+"Senhor, agora que conquistamos as terras do Törver, podemos aproveitar o "
+"excelente acesso ao grande lago adjacente. Um porto no Norte nos dará "
+"melhores oportunidades de contato com outras tribos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
+msgid ""
+"In Törver’s headquarters we found papers describing the construction of "
+"ships. Unfortunately, the texts are written in a language that is unknown to"
+" us. Our wise men will try to translate these descriptions."
+msgstr ""
+"Na sede do Törver encontramos documentos descrevendo a construção de navios."
+" Infelizmente, os textos estão escritos em uma linguagem que desconhecemos. "
+"Nossos sábios tentarão traduzir-los."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
+msgid "Searching for gold"
+msgstr "Procurando ouro"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
+msgid ""
+"Sire, our men have located an isolated enemy pirate sentry. The abandoned "
+"huts indicate that there is gold nearby."
+msgstr ""
+"Senhor, os nossos homens localizaram uma sentinela pirata isolada. As "
+"cabanas abandonadas indicam que há ouro por perto."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
+msgid ""
+"We should however be careful if we want to conquer the sentry. There can be "
+"more enemy buildings that are still out of sight, and the pirates are known "
+"to be very good fighters. It is best to establish a strong military presence"
+" here before we proceed."
+msgstr ""
+"Devemos, no entanto, ter cuidado se quisermos conquistar a sentinela. Pode "
+"haver mais edifícios inimigos que ainda estão fora de vista, e os piratas "
+"são conhecidos por serem guerreiros muito bons. É melhor estabelecer uma "
+"forte presença militar aqui antes de prosseguirmos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
+msgid "Found a treasure"
+msgstr "Encontramos um tesouro"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
+msgid ""
+"Sire, we have found 25 units of gold ore inside the pirate sentry. They may "
+"have been looted from the gold diggers’ huts nearby. This gold ore will be "
+"transported to our headquarters."
+msgstr ""
+"Senhor, encontramos 25 unidades de minério de ouro dentro da sentinela "
+"pirata. Eles podem ter sido saqueados das cabanas dos garimpeiros nas "
+"proximidades. Esse minério de ouro será transportado para nosso Quartel-"
+"general."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
+msgid ""
+"With our successful expansion into this area we should consider building a "
+"warehouse to the direct southwest of the sentry in order to further explore "
+"this area. There is a good building spot only three steps away from the "
+"sentry."
+msgstr ""
+"Com a nossa expansão bem-sucedida nesta área, deveríamos considerar a "
+"construção de um armazém diretamente a sudoeste da sentinela, a fim de "
+"explorar ainda mais esta área. Há um bom local para construção a apenas três"
+" passos da sentinela."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
+msgid "Removing the swamps"
+msgstr "Removendo os pântanos"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
+msgid ""
+"Sire, the wet season has created swamps along the brook to the East and we "
+"are unable to pass through them. They have to be removed before we can "
+"continue. If you bring enough shovels to the new warehouse then volunteers "
+"will remove the swamps."
+msgstr ""
+"Senhor, a estação das chuvas criou pântanos ao longo do riacho a leste e não"
+" conseguimos passar por eles. Eles precisam ser removidos antes de podermos "
+"continuar. Se você trouxer pás suficientes para o novo armazém, os "
+"voluntários removerão os pântanos."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
+msgid ""
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
+msgstr ""
+"Senhor, todas as pás foram entregues, mas se continuarmos neste ritmo não "
+"conseguiremos remover oa pântanos antes da próxima estação chuvosa. Se você "
+"trouxer mais pás para o novo armazém, mais voluntários irão participar."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
+msgid ""
+"Sire, now that we have access to the pirates’ hideout, we should conquer it "
+"and finish them off. Maybe there are even more treasures hidden in their "
+"territory."
+msgstr ""
+"Senhor, agora que temos acesso ao esconderijo dos piratas, devemos "
+"conquistá-los e acabar com eles. Talvez existam ainda mais tesouros "
+"escondidos em seu território."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
+msgid "The pirates were defeated."
+msgstr "Os piratas foram derrotados."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
+msgid ""
+"Sire, we have defeated the pirates. They have hidden some gold in their last"
+" bastion which is now being transferred to our headquarters."
+msgstr ""
+"Senhor, derrotamos os piratas. Eles esconderam algum ouro no seu último "
+"bastião, que agora está sendo transferido para o nosso quartel-general."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
+msgid "Pirates are regrouping"
+msgstr "Os Piratas estão se reagrupando"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
+msgid ""
+"Sire, as a result of our attacks on the pirates they have started to regroup"
+" with pirates from other tribes. They could regain much of their previously "
+"lost strength. Our dwindling resources can become a problem with such a "
+"mighty enemy in front of us."
+msgstr ""
+"Senhor, como resposta dos nossos ataques aos piratas, eles começaram a se "
+"reagrupar com piratas de outras tribos. Eles poderiam recuperar grande parte"
+" da força anteriormente perdida. Nossos recursos cada vez menores podem se "
+"tornar um problema com um inimigo tão poderoso à nossa frente."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
+msgid "Pirates on the run"
+msgstr "Os Piratas estão fugindo"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
+msgid ""
+"Sire, thanks to our successful efforts to drive out the pirates, lots of "
+"them have fled and moved away in small boats. It is unknown in which "
+"direction they have escaped."
+msgstr ""
+"Senhor, graças aos nossos esforços bem-sucedidos para expulsar os piratas, "
+"muitos deles fugiram e partiram em pequenos barcos. Não se sabe pra qual "
+"direção eles foram."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
+msgid "Ability to build shipyards"
+msgstr "Capacidade para construir estaleiros"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
+msgid ""
+"Sire, after long study and research our wise men have finally managed to "
+"decipher the strange language in Törver’s descriptions that we had found in "
+"his headquarters. From now on we are able to build shipyards."
+msgstr ""
+"Senhor, depois de muito estudo e pesquisa, nossos sábios finalmente "
+"conseguiram decifrar a estranha linguagem nos documentos que encontramos no"
+"  quartel-general de Törver. A partir de agora podemos construir estaleiros."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
+msgid "Our scout has been captured"
+msgstr "Nosso Explorador foi capturado"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
+msgid ""
+"Sire, one of our scouts has been captured by the pirates and brought to "
+"their island. He is the only person who knows the way through the swamps "
+"towards Hjalmar."
+msgstr ""
+"Senhor, um dos nossos batedores foi capturado pelos piratas e levado para a "
+"ilha deles. Ele é a única pessoa que conhece o caminho através dos pântanos "
+"em direção a Hjalmar."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
+msgid ""
+"According to our fishermen he is locked up in the stronghold on the island. "
+"We should use the knowledge about shipbuilding that we took from Törver to "
+"build ships and attack their positions."
+msgstr ""
+"Segundo os nossos pescadores ele está trancado no forte da ilha. Deveríamos "
+"usar o conhecimento sobre construção naval que obtivemos de Törver para "
+"construir navios e atacar as suas posições."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
+msgid "Island conquered"
+msgstr "Ilha conquistada"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
+msgid ""
+"Sire, our soldiers have conquered the island and managed to free the scout. "
+"It turns out that the pirates have left a large amount of gold, beer, and "
+"weapons on the island."
+msgstr ""
+"Senhor, nossos soldados conquistaram a ilha e conseguiram libertar o "
+"batedor. Acontece que os piratas deixaram uma grande quantidade de ouro, "
+"cerveja e armas na ilha."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
+msgid "The scout returns"
+msgstr "O explorador retornou"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
+msgid ""
+"Sire, our scout has returned to our territory, and he has shown us the road "
+"through the swamps towards Hjalmar."
+msgstr ""
+"Senhor, nosso explorador retornou ao nosso território e nos mostrou o "
+"caminho através dos pântanos em direção a Hjalmar."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
+msgid ""
+"He noticed that we can also move along the other side of the mountain, in "
+"case we might fail here, but it will be much more difficult to do."
+msgstr ""
+"Ele percebeu que também podemos avançar pelo outro lado da montanha, caso "
+"falhemos, mas será muito mais difícil."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
+msgid "The last frontier"
+msgstr "A última fronteira"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
+msgid ""
+"Sire, we have almost defeated all armies and we are now approaching our "
+"final enemy. They have been expecting us for a long time and will be "
+"prepared for the heaviest battle in their lifetime."
+msgstr ""
+"Senhor, quase derrotamos todos os exércitos e agora estamos nos aproximando "
+"do nosso inimigo final. Eles estão nos esperando há muito tempo e estarão "
+"preparados para a batalha mais difícil das suas vidas."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
+msgid ""
+"Make sure that our armies are at full strength and then act decisively."
+msgstr ""
+"Certifique-se de que nossos exércitos estejam com força total e então aja de"
+" forma decisiva."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
+msgid "Victory!"
+msgstr "Vitória!"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
+msgid "Sire, my congratulations!"
+msgstr "Senhor, meus parabéns!"
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
+msgid ""
+"You have completed all goals and defeated all our enemies. You have not only"
+" conquered our rivalling tribes, but you have also captured the hearts of "
+"your loving people."
+msgstr ""
+"Você completou todos os objetivos e derrotou todos os nossos inimigos. Você "
+"não apenas conquistou nossas tribos rivais, mas também conquistou os "
+"corações de seu amoroso povo."
+
+#: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
+msgid "Your name will be remembered forever."
+msgstr "Seu nome será lembrado para sempre."

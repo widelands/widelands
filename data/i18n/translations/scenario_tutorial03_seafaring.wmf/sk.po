@@ -1,0 +1,747 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2025 Widelands Development Team
+# 
+# Translators:
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
+# Pavol Gono, 2024-2025
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"PO-Revision-Date: 2015-02-03 14:48+0000\n"
+"Last-Translator: Pavol Gono, 2024-2025\n"
+"Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
+msgid "Seafaring"
+msgstr "Moreplavba"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
+msgid "Seafaring Tutorial"
+msgstr "Tutoriál o moreplavbe"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
+msgid ""
+"Welcome back. In this tutorial, you are going to learn the most important "
+"things about seafaring, that is ships, ports, and expedition."
+msgstr "Vitajte späť. V tomto tutoriáli sa dozviete to najdôležitejšie o moreplavbe, čiže o lodiach, prístavoch a výpravách."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
+msgid ""
+"But let me first give you an overview about your territory: here in the "
+"south, you have a whole economy with almost everything you need."
+msgstr "Najprv mi však dovoľte uviesť prehľad o vašom území: tu na juhu funguje úplná ekonomika, ktorá ponúka takmer všetko, čo potrebujete."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
+msgid "The Northern Part"
+msgstr "Severná časť"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
+msgid ""
+"Here in the northern part, you only have a goldmine and a warehouse. While "
+"the miners are supplied well with food, there is no way to transport the "
+"gold ore to our smelting works in the southern part."
+msgstr "Tu v severnej časti máte len zlatú baňu a sklad. Baníci sú síce dobre zásobovaní jedlom, ale nijakým spôsobom nie je zabezpečená preprava zlatej rudy do taviarne v južnej časti."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
+msgid ""
+"We have tried to build a road, but the mountain is too wide and too steep. "
+"We therefore have only one possibility: we need to establish a sea lane "
+"between these two parts."
+msgstr "Skúšali sme postaviť cestu, no hora je príliš strmá a široká. Zostáva nám preto iba jedna možnosť: medzi oboma časťami musíme zriadiť námornú trasu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
+msgid ""
+"But I don’t want to rush you: you have just arrived here and you would "
+"probably like to have a closer look at your camp. I will also take a short "
+"break and be back soon."
+msgstr "Nie je však dôvod ponáhľať sa: len teraz ste sem dorazili a asi by ste si chceli prezrieť svoj tábor. Budeme pokračovať po krátkej prestávke."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
+msgid "Ports"
+msgstr "Prístavy"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
+msgid ""
+"For everything you do on the high seas, you need a port at the shore. Ports "
+"are like headquarters: they can store wares, workers and soldiers. The "
+"soldiers inside will automatically come out when an enemy attacks the port."
+msgstr "Na vykonávanie všetkých námorných činností je nutné na brehu postaviť prístav. Prístavy sú ako ústredia: uskladňujú výrobky, pracovníkov a vojakov. Keď na prístav zaútočí nepriateľ, vojaci vo vnútri automaticky vyjdú von."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
+msgid ""
+"Additionally, ports offer the possibility of transporting wares via ships. "
+"When you click on the port you already have, you will notice two additional "
+"tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
+"are waiting for a ship to transport them to another port. Currently, there "
+"are none because we have not yet built a second port. So let’s change this!"
+msgstr "Prístavy navyše ponúkajú možnosť prepravy výrobkov pomocou lodí. Ak kliknete na prístav, ktorý je už postavený, môžete si všimnúť ďalšie dve karty: „Výrobky, ktoré sa majú dopraviť“ a „Pracovníci čakajúci na nalodenie“. Čakajú na loď, ktorá ich dopraví do ďalšieho prístavu. Momentálne tam nie sú žiadne výrobky ani pracovníci, lebo sme ešte nepostavili druhý prístav. Tak to napravme!"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
+msgid "Building ports"
+msgstr "Stavba prístavov"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
+msgid "How to build a port"
+msgstr "Ako postaviť prístav"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
+msgid ""
+"Ports are big buildings, but they can only be built at special locations: "
+"those marked with the"
+msgstr "Prístavy sa radia medzi veľké budovy, ale postaviť ich možno len na špeciálnych miestach, označených"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
+msgid "blue port space icon."
+msgstr "modrou ikonou prístavného miesta."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
+msgid ""
+"Port spaces are set by the map designer, so a map will either contain them "
+"or not. They might, however, be hidden under trees or be blocked by "
+"surrounding buildings."
+msgstr "Prístavné miesta určuje dizajnér mapy, takže mapa ich môže, ale nemusí obsahovať. Môžu ich však zakrývať stromy alebo ich môžu blokovať okolité budovy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
+msgid ""
+"You might already have noticed that you have such an icon next to your "
+"castle."
+msgstr "Možno ste si už všimli, že takáto ikona je vedľa vášho hradu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
+msgid "Build a port"
+msgstr "Postavte prístav"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
+msgid "Build a port in the northern part of your camp"
+msgstr "Postavte prístav v severnej časti vášho tábora"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
+msgid "You always need a port when you want to transport wares with a ship."
+msgstr "Ak chcete prepravovať tovar loďou, potrebujete prístav."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
+msgid "Build a port next to your castle, on the blue port space icon."
+msgstr "Postavte prístav vedľa hradu, na prístavnom mieste označenom modrou ikonou."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
+msgid ""
+"Ports are built like normal buildings, but are only available on blue port "
+"spaces. Just click on a field with the icon and the building menu "
+"automatically offers you to build a port."
+msgstr "Prístavy možno stavať ako obyčajné budovy, len s tým rozdielom, že sú dostupné iba na prístavných miestach označených modrou farbou. Jednoducho kliknite na políčko s takouto ikonou a stavebné menu vám automaticky ponúkne postaviť prístav."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
+msgid ""
+"Although ports act as warehouses, you should not build more than necessary: "
+"they cost quartz, diamonds and gold, which makes them quite expensive."
+msgstr "Hoci sa prístavy správajú ako sklady, nemali by ste ich stavať viac, ako potrebujete: keďže stoja kremene, diamanty a zlato, sú dosť drahé."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
+msgid "Constructing ships"
+msgstr "Stavba lodí"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
+msgid "Let’s build ships"
+msgstr "Postavme lode"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
+msgid "Great. While your port is being constructed, let’s build some ships."
+msgstr "Skvelé. Kým sa stavia váš prístav, postavme nejaké lode."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
+msgid ""
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
+msgstr "Lode stavia lodiar na pobreží pri lodenici. Blízko pobrežia musíme jednu postaviť."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
+msgid "Build a shipyard"
+msgstr "Postavte lodenicu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+msgid "Build a shipyard close to the coast"
+msgstr "Postavte lodenicu blízko brehu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
+msgid "Ships are produced by a shipyard. It is a medium building."
+msgstr "Lode sa vyrábajú v lodenici. Radí sa medzi stredné budovy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
+msgid ""
+"Build a shipyard close to the shore of the southern part of your territory."
+msgstr "Neďaleko pobrežia v južnej časti územia postavte lodenicu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
+msgid ""
+"The shipyard is a medium building. Although it can be built everywhere on "
+"the map, the shipwright only works when he is close to the water and there "
+"are no trees or roads at the shoreline."
+msgstr "Lodenica sa radí medzi stredné budovy. Hoci ju možno postaviť hocikde na mape, lodiar bude pracovať len v blízkosti vody a keď breh neblokujú stromy ani cesty."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
+msgid "Waiting for the ships"
+msgstr "Čaká sa na lode"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
+msgid ""
+"Very good. Your shipyard is finished and your shipwright immediately started"
+" working. For the construction of ships, he needs logs, planks and "
+"spidercloth, which will be transported to the shipyard."
+msgstr "Výborne. Lodenica je hotová a lodiar začal ihneď pracovať. Na stavbu lodí potrebuje kmene, dosky a pavúčiu látku, ktoré sa donesú do lodenice."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
+msgid ""
+"The shipwright will take the ware he needs to a free spot at the shoreline "
+"and build a ship there. When the first ship is finished, it will launch onto"
+" the sea, and the shipwright will construct another one."
+msgstr "Lodiar potrebné výrobky prenesie na voľné miesto na brehu a postaví tam loď. Keď sa dokončí prvá loď, spustí sa na vodu a lodiar začne stavať ďalšiu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
+msgid "We should wait until we have two ships. That should be enough for now."
+msgstr "Počkajme, kým budeme mať dve lode. To by malo zatiaľ stačiť."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
+msgid "Ships"
+msgstr "Lode"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
+msgid "Construct two ships"
+msgstr "Postavte dve lode"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
+msgid ""
+"Ships are constructed automatically when the shipyard is complete and the "
+"needed wares have been delivered."
+msgstr "Ak má hotová lodenica k dispozícii všetky potrebné výrobky, stavba lodí začne automaticky."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
+msgid "Wait until the shipwright has constructed two ships."
+msgstr "Počkajte, kým lodiar postaví dve lode."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
+msgid "Do not forget to stop your shipyard when you have enough ships."
+msgstr "Nezabudnite pozastaviť produkciu v lodenici, keď budete mať dosť lodí."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
+msgid "Shipyard production"
+msgstr "Produkcia lodenice"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
+msgid "We have enough ships"
+msgstr "Máme dostatok lodí"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
+msgid "Your second ship, \"%1%\", is ready now."
+msgstr "Vaša druhá loď „%1%“ je pripravená."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
+msgid ""
+"You need to stop your shipyard when you have enough ships. Otherwise, your "
+"shipwright will consume all your logs and spidercloth, producing dozens of "
+"ships."
+msgstr "Keď budete mať dosť lodí, zastavte produkciu v lodenici. Lodiar by inak spotreboval všetky vaše kmene a pavúčiu látku na výrobu tuctov lodí."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
+msgid ""
+"This is the icon for stopping production. You will find it in the building "
+"window."
+msgstr "Takto vyzerá ikona na zastavenie produkcie. Nájdete ju v okne budovy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
+msgid "No Iron"
+msgstr "Bez železa"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
+msgid "We lack iron"
+msgstr "Chýba nám železo"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
+msgid ""
+"The second ship might not be finished yet, but we have an urgent problem."
+msgstr "Druhá loď ešte síce nie je dokončená, ale vyskytol sa vážny problém."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
+msgid ""
+"As you surely have already noticed, there is no iron in the mountain in the "
+"west. We have plenty of coal and gold ore, but without iron ore, we cannot "
+"produce any tools."
+msgstr "Ako ste si už iste všimli, hora na západe neponúka ani jedno ložisko železnej rudy. Uhlia a zlatej rudy je zato požehnane, ale bez železnej rudy nemôžeme vyrábať nástroje."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
+msgid ""
+"Although it might take long and be expensive and not without dangers – who "
+"knows what monsters live in the sea? – I see no other possibility: we will "
+"have to undertake an expedition to the unknown seas."
+msgstr "Aj keď to môže trvať dlho, byť drahé a nebezpečné – ktovie, aké príšery sa ukrývajú pod morskou hladinou – inú možnosť nevidím: budeme musieť podstúpiť výpravu do neznámych vôd."
+
+#. TRANSLATORS: This shall be the beginning of a poem
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
+msgid "A trip by the sea, what fun it can be"
+msgstr "Výprava po mori zábave dvere otvorí"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
+msgid "Expeditions"
+msgstr "Výpravy"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
+msgid ""
+"During an expedition, you send a ship out to discover new islands and maybe "
+"found a colony there."
+msgstr "Pri výprave vyšlete loď s cieľom hľadať nové ostrovy, na ktorých by ste mohli založiť kolóniu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
+msgid ""
+"Expeditions can be started in every port. Then, all needed wares are "
+"transported to that port. The wares are exactly those your tribe needs to "
+"build a port (your goal is to build a port far away from home, so this is "
+"not surprising), and of course you need a builder, too. When everything is "
+"prepared, a ship will come and pick it up."
+msgstr "Výpravy možno začínať z hociktorého prístavu. Do tohto prístavu sa následne donesú všetky potrebné výrobky. Ide o presne tie isté výrobky, aké vášmu kmeňu treba na stavbu prístavu (čo nie je prekvapujúce vzhľadom na to, že cieľom je niekde ďaleko od domova postaviť prístav). Samozrejme, požiadavkou je i stavbár. Keď bude všetko pripravené, tovar príde naložiť loď."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
+msgid ""
+"You can check out the needed wares in the Expedition tab of your port (it "
+"will appear in the last place when you’ve started an expedition)."
+msgstr "Potrebné výrobky si môžete pozrieť na karte Výprava vo vašom prístave (zobrazí sa na poslednom mieste, keď začnete výpravu)."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
+msgid "Now try this out. I will tell you later what the next steps are."
+msgstr "Teraz si to vyskúšajte. O ďalších krokoch budem hovoriť neskôr."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
+msgid "Start an expedition in any of your ports."
+msgstr "Začnite výpravu z hociktorého prístavu."
+
+#. TRANSLATORS: This refers to a memory game
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
+msgid "I packed my bag and in it I put …"
+msgstr "Pobalil som si tašku a vložil som do nej…"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
+msgid "Additional Items"
+msgstr "Ďalšie položky"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
+msgid ""
+"It might be useful to take some more wares with us than just the ones to "
+"build a new port. That way we will be able to start constructing new "
+"buildings as soon as the port has been constructed."
+msgstr "Môže byť užitočné zobrať so sebou viac výrobkov, než len tie na stavbu nového prístavu. Tak budeme môcť začať stavať nové budovy hneď po dokončení prístavu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
+msgid ""
+"You can take some additional wares, soldiers, or workers with you on an "
+"expedition. You can define them by filling the empty slots below the primary"
+" wares to build the port."
+msgstr "Na výpravu si môžete vziať aj ďalšie výrobky, vojakov alebo pracovníkov. Môžete ich určiť vyplnením prázdnych miest pod primárnymi výrobkami na stavbu prístavu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
+msgid ""
+"Just click on the empty slots and then scroll through the list to choose the"
+" additional item."
+msgstr "Stačí kliknúť na prázdne miesta a potom prechádzaním zoznamu vybrať ďalšiu položku."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
+msgid ""
+"Now try this out. A small dot in green, yellow, or red tells you whether the"
+" item has arrived, is on its way or is not available respectively."
+msgstr "Teraz si to vyskúšajte. Malá bodka zelenej, žltej alebo červenej farby vám napovie, či položka dorazila, je na ceste, alebo nie je k dispozícii."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
+msgid "Expedition"
+msgstr "Výprava"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
+msgid "Start an expedition"
+msgstr "Začnite výpravu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
+msgid "Start an expedition."
+msgstr "Začnite výpravu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
+msgid ""
+"To do so, click on the ‘Start Expedition’ button in any port. A new tab "
+"where you can see the needed wares will appear."
+msgstr "Vykonáte tak kliknutím na tlačidlo „Začať výpravu“ v hociktorom prístave. V okne pribudne nová karta, kde sú znázornené všetky potrebné výrobky."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
+msgid "Off to greener pastures"
+msgstr "Cesta k zelenším pastvinám"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
+msgid "Start your expedition"
+msgstr "Začnite výpravu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
+msgid ""
+"Your expedition ship is ready. It is waiting for your orders in front of "
+"your port. It isn’t transporting wares anymore. Use its buttons to send your"
+" ship in any of the six main directions of the Widelands map. When it has "
+"reached a coastline, you can make it travel around the coast, where it will "
+"look for suitable places for landing."
+msgstr "Expedičná loď je pripravená a čaká na rozkazy pred prístavom. Výrobky už neprepravuje. Pomocou tlačidiel na ovládanie lode ju môžete vyslať šiestimi hlavnými smermi na mape. Po dosiahnutí pobrežia možno prikázať, aby sa okolo neho plavila a hľadala vhodné miesto na pristátie."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
+msgid ""
+"Once a port space has been found, you can construct a new port with the "
+"button in the center of the ship’s control window."
+msgstr "Hneď ako objaví prístavné miesto, budete tam môcť postaviť nový prístav kliknutím na tlačidlo v strede okna na riadenie lode."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
+msgid ""
+"The wares will then be unloaded, and the ship will take up the task of "
+"transporting wares once again. The builder will start his work and build a "
+"port."
+msgstr "Loď následne vyloží výrobky a vráti sa späť k prepravnej činnosti. Stavbár začne pracovať na prístave."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
+msgid ""
+"Search for an island with a mountain, and look for a port space there. "
+"Colonize the island."
+msgstr "Pátrajte po ostrove s horou a tam po prístavnom mieste. Ostrov kolonizujte."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
+msgid "Explore"
+msgstr "Preskúmať"
+
+#. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
+msgid "Found a settlement"
+msgstr "Založte osadu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
+msgid "Navigate your ship to an island that could contain iron ore."
+msgstr "Loď doveďte k ostrovu, na ktorom by sa mohla vyskytovať železná ruda."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
+msgid ""
+"When you click on the expedition ship, a window opens where you can control "
+"your ship."
+msgstr "Keď kliknete na expedičnú loď, otvorí sa okno, ktoré vám umožní ju ovládať."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
+msgid "When you have found a suitable port space, build a port there."
+msgstr "Keď nájdete vhodné prístavné miesto, postavte tam prístav."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
+msgid "New colony"
+msgstr "Nová kolónia"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
+msgid "Your colony has been founded"
+msgstr "Vaša kolónia bola založená"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
+msgid ""
+"You’ve lead the expedition to a successful end and founded a new colony. "
+"I’ve sent out some geologists – they already report that they’ve found some "
+"iron ore."
+msgstr "Výpravu ste úspešne doviedli do konca a založili novú kolóniu. Vyslal som tam geológov – hlásia, že našli niekoľko ložísk železnej rudy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:213
+msgid ""
+"So far you have learned everything about seafaring: how to build ports and "
+"ships and how to send out an expedition. Remember that expeditions are "
+"sometimes the fastest way to reach essential resources – and sometimes the "
+"only one."
+msgstr "Doteraz ste sa oboznámili so všetkým o moreplavbe: ako stavať prístavy a lode a ako vyslať loď na výpravu. Treba si zapamätať, že výpravy sú niekedy najrýchlejším spôsobom, ako zabezpečiť prístup k nevyhnutným zdrojom – niekedy i jediným."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
+msgid ""
+"But I want to speak a word of warning. Ports are like headquarters: they can"
+" be attacked by a nearby enemy. While your headquarters has soldiers to "
+"defend it, your newly built port won’t. You should therefore avoid settling "
+"next to an enemy."
+msgstr "Musím vás však upozorniť na istú podobnosť medzi prístavom a ústredím: na obe môže zaútočiť nepriateľ. Zatiaľ čo ústredie bránia vojaci, novopostavený prístav nemá obranu. Snažte sa preto vyhýbať kolonizácii vedľa nepriateľa."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
+msgid ""
+"To make sure they are properly defended, you can set the desired number of "
+"defending soldiers for both in the Soldiers tab, similar to military "
+"buildings. But they are also warehouses at the same time, so they can hold "
+"any number of soldiers. The desired number makes sure that defenders are "
+"requested by the port or headquarters, and once they are garrisoned there, "
+"they don't get sent away to serve other needs."
+msgstr "Aby ste sa uistili, že sú riadne chránené, môžete nastaviť požadovaný počet brániacich vojakov pre obe budovy na karte Vojaci, podobne ako pri vojenských budovách. Sú to však zároveň sklady, takže môžu pojať ľubovoľný počet vojakov. Požadovaný počet zaisťuje, že prístav alebo ústredie požiada o obrancov, a keď sú tam už umiestnení, nebudú poslaní preč plniť iné potreby."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
+msgid ""
+"On this map, there is no enemy to fear. In other games, you should set some "
+"defenders for your ports and make building one or two military "
+"fortifications around your new colonies a priority."
+msgstr "Na tejto mape niet nepriateľa, ktorého by ste sa mali báť. V iných hrách by ste mali pre svoje prístavy umiestniť obrancov a prioritou by malo byť vybudovanie jedného alebo dvoch vojenských opevnení okolo vašich nových kolónií."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
+msgid "Our mission"
+msgstr "Naša misia"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:225
+msgid "Start mining"
+msgstr "Začnite ťažiť"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
+msgid ""
+"It was a long and expensive job to get here. The island has not much to "
+"offer, but there is some iron ore inside its mountain. Our economy needs "
+"iron ore, so we have to build an iron mine."
+msgstr "Dostať sa sem bola dlhá a nákladná úloha. Ostrov toho veľa neponúka, ale v jeho horách je trochu železnej rudy. Naša ekonomika potrebuje železnú rudu, preto musíme postaviť železnorudnú baňu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
+msgid "Start mining iron ore in the mountain."
+msgstr "Začnite ťažiť železnú rudu v horách."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
+msgid "Iron Mine"
+msgstr "Železnorudná baňa"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
+msgid "Build an iron mine on the island"
+msgstr "Postavte železnorudnú baňu na ostrove"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
+msgid "Our economy lacks resources."
+msgstr "Našej ekonomike chýbajú zdroje."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
+msgid "Start mining iron ore in mountains on the island."
+msgstr "Začnite ťažiť železnú rudu v horách na ostrove."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:279
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
+msgid "There is more to it…"
+msgstr "Je toho viac…"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
+msgid "Another gold mountain"
+msgstr "Ďalšia zlatá hora"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
+msgid ""
+"It will take some time for your shipyard to build some ships. While we’re "
+"waiting for them, there is another way of water-based transport I would like"
+" to teach you."
+msgstr "Bude chvíľu trvať, kým vaša lodenica postaví nejaké lode. Kým na ne budeme čakať, rád by som vás naučil iný spôsob vodnej dopravy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
+msgid ""
+"Ships have the advantage that they can carry large quantities of wares and "
+"workers at a time, but unfortunately their destinations are limited to a "
+"handful of spaces suited for a port."
+msgstr "Lode majú tú výhodu, že môžu prepravovať veľké množstvá výrobkov a pracovníkov naraz, ale nanešťastie sú ich ciele obmedzené na hŕstku miest vhodných pre prístav."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
+msgid ""
+"Look at this valley here in the far south. We have found a mountain with "
+"gold down here and would like to mine ores from it as well. But the streams "
+"separating it from our main colony are too wide to build bridges and too "
+"narrow for ships to pass them. Our roads would have to take long curves, "
+"which slows down ware transport a lot."
+msgstr "Pozrite sa na toto údolie tu ďaleko na juhu. Našli sme tu horu so zlatom a chceli by sme z nej ťažiť rudu. Vodné prúdy, ktoré ju oddeľujú od našej hlavnej kolónie, sú však príliš široké na stavbu mostov a príliš úzke na to, aby nimi prešli lode. Naše cesty by museli robiť dlhé obchádzky, čo by výrazne spomalilo prepravu výrobkov."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
+msgid "Rowboats & Ferry Yards"
+msgstr "Veslice a trajektové dvory"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
+msgid ""
+"This is where ferries come in. Ferries are small rowboats that can carry "
+"only one ware at a time, and no workers (other than the one who rows it and "
+"who never leaves his boat)."
+msgstr "Tu prichádzajú na rad trajekty. Trajekty sú malé veslice, ktoré unesú naraz len jeden výrobok a žiadnych pracovníkov (okrem toho, ktorý vesluje a nikdy neopúšťa svoj čln)."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
+msgid ""
+"Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"of cloth and is quickly constructed. A ferry yard is a medium-sized building"
+" that needs to be built close to the shore."
+msgstr "Trajekty sa stavajú v trajektových dvoroch, jedna veslica stojí dva kmene a jeden kus látky a je rýchlo postavená. Trajektový dvor je stredne veľká budova, ktorá musí byť postavená v blízkosti brehu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
+msgid "Let’s build a ferry yard close to the shore before we will continue."
+msgstr "Kým budeme pokračovať, postavme blízko brehu trajektový dvor."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
+msgid "Build a ferry yard"
+msgstr "Postavte trajektový dvor"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
+msgid "Build a ferry yard close to the shore"
+msgstr "Postavte trajektový dvor blízko brehu"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
+msgid "Ferries are constructed by a ferry yard."
+msgstr "Trajekty sa stavajú v trajektovom dvore."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
+msgid ""
+"You need to build the ferry yard close to the shore, otherwise it won’t be "
+"able to build ferries there."
+msgstr "Trajektový dvor musíte postaviť blízko brehu, inak tam nebude možné stavať trajekty."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
+msgid "Waterways"
+msgstr "Vodné cesty"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
+msgid ""
+"Unlike ships which travel to any port where they’re needed, ferries have "
+"fixed transport routes called waterways. A waterway is built just like a "
+"road: You click on a flag near the shore, choose ‘Build a waterway’, and "
+"select the path for the waterway just as you would do for a road."
+msgstr "Na rozdiel od lodí, ktoré cestujú do akéhokoľvek prístavu, kde sú potrebné, trajekty majú stanovené dopravné trasy nazývané vodné cesty. Vodná cesta sa buduje rovnako ako cesta: kliknete na vlajku blízko brehu, vyberiete možnosť „Postaviť vodnú cestu“ a vyberiete trasu pre vodnú cestu rovnako ako pre cestu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
+msgid ""
+"Waterways can be built on the open sea as well as close to the shore where "
+"the water is too shallow for big ships. The only rule is that the two "
+"triangles directly adjacent to each segment of the waterway have to be "
+"water, and the entire path needs to be within your territory."
+msgstr "Vodné cesty možno budovať na otvorenom mori, ako aj blízko pobrežia, kde je voda príliš plytká pre veľké lode. Jediným pravidlom je, že dva trojuholníky priamo susediace s každým segmentom vodnej cesty musia byť voda a celá trasa musí byť na vašom území."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
+msgid ""
+"Also note that waterways, unlike roads, may not be built quite as long as "
+"you want them to. Every map has a length restriction for waterways. On this "
+"map, this is 5 tiles."
+msgstr "Všimnite si tiež, že vodné cesty, na rozdiel od ciest, nemôžu byť také dlhé, ako by ste chceli. Každá mapa má obmedzenie dĺžky vodných ciest. Na tejto mape je to 5 políčok."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
+msgid ""
+"Always keep in mind that ferries do not transport workers. You can use them "
+"to speed up ware transport, but they can never entirely replace roads."
+msgstr "Vždy majte na pamäti, že trajekty neprepravujú pracovníkov. Môžete ich použiť na zrýchlenie prepravy výrobkov, ale nikdy nemôžu úplne nahradiť cesty."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
+msgid "Allow me to show you how to build a waterway…"
+msgstr "Dovoľte mi ukázať vám, ako postaviť vodnú cestu…"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
+msgid "Golden waves"
+msgstr "Zlaté vlny"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
+msgid ""
+"As you can see, it is not that hard. When you build a waterway, the closest "
+"idle ferry will assign itself to it."
+msgstr "Ako vidíte, nie je to také ťažké. Keď postavíte vodnú cestu, priradí sa k nej najbližší nečinný trajekt."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
+msgid ""
+"Now it’s your turn: Build a gold mine on the mountain in the south and "
+"connect it to the main land by building waterways over the streams."
+msgstr "Teraz je rad na vás: postavte zlatú baňu na hore na juhu a spojte ju s pevninou vybudovaním vodných ciest cez vodné prúdy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
+msgid "Build a gold mine and waterways"
+msgstr "Postavte zlatú baňu a vodné cesty"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
+msgid ""
+"Build a gold mine on the mountain in the south, and connect it to the "
+"mainland by building waterways over the streams."
+msgstr "Postavte zlatú baňu na hore na juhu a spojte ju s pevninou vybudovaním vodných ciest cez vodné prúdy."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
+msgid ""
+"A waterway is built just like a road: You click on a flag near the shore, "
+"choose ‘Build a waterway’, and select the path for the waterway just as you "
+"would do for a road."
+msgstr "Vodná cesta sa buduje rovnako ako cesta: kliknete na vlajku blízko brehu, vyberiete možnosť „Postaviť vodnú cestu“ a vyberiete trasu pre vodnú cestu rovnako ako pre cestu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
+msgid ""
+"However, each segment of the waterway needs two water triangles next to it."
+msgstr "Každý úsek vodnej cesty však potrebuje vedľa seba dva vodné trojuholníky."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
+msgid "Conclusion"
+msgstr "Záver"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
+msgid "About Ferries"
+msgstr "O trajektoch"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
+msgid ""
+"Now there are only a few more things I would like you to keep in mind "
+"whenever using ferries."
+msgstr "Už je len pár vecí, ktoré by som chcel, aby ste mali na pamäti pri používaní trajektov."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
+msgid ""
+"Never forget that these rowboats are too small to carry workers. You can use"
+" them as shortcuts for ware transport within parts of your territory, but "
+"not to claim regions you can reach neither by road nor by ship. Never cut "
+"all your roads between two places connected by waterways unless you are "
+"certain no worker will ever have to walk there."
+msgstr "Nikdy nezabúdajte, že tieto veslice sú príliš malé na prepravu pracovníkov. Môžete ich použiť ako skratky na prepravu výrobkov v rámci častí vášho územia, ale nie na zaberanie oblastí, kam sa nedostanete po ceste ani loďou. Nikdy neprerušte všetky cesty medzi dvoma miestami spojenými vodnými cestami, pokiaľ si nie ste istí, že tam nikdy nebude musieť ísť žiadny pracovník."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
+msgid ""
+"And if your waterways present a significant shortcut between your road "
+"networks, your economy will tend to send many wares over the waterway. As a "
+"waterway can hold only one ferry – unlike roads, which receive a second "
+"carrier if they are very busy –, and as they often tend to be rather longer "
+"than the two or three fields recommended for roads, there is always a risk "
+"of waterways becoming severe bottlenecks in your economy. Try to build "
+"several of them in parallel to distribute the strain. If this is not "
+"possible, it is in some cases even more efficient not to use waterways."
+msgstr "A ak vaše vodné cesty predstavujú významnú skratku medzi vašimi cestnými sieťami, vaša ekonomika bude mať tendenciu posielať cez vodnú cestu veľa výrobkov. Keďže vodná cesta pojme len jeden trajekt – na rozdiel od ciest, ktoré dostanú druhého nosiča, ak sú veľmi vyťažené – a keďže bývajú často dlhšie ako dve alebo tri políčka odporúčané pre cesty, vždy existuje riziko, že sa vodné cesty stanú vážnym úzkym miestom vašej ekonomiky. Pokúste sa ich postaviť niekoľko paralelne, aby ste rozložili záťaž. Ak to nie je možné, v niektorých prípadoch je dokonca efektívnejšie vodné cesty nepoužívať."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
+msgid "Ferry yard production"
+msgstr "Produkcia trajektového dvora"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
+msgid "More ferries needed?"
+msgstr "Treba viac trajektov?"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
+msgid ""
+"As you can see, ferries can be produced quite quickly, but you don't need to"
+" worry about wasted materials, because ferry yards normally only produce "
+"them on demand, when there are unserviced waterways."
+msgstr "Ako vidíte, trajekty sa dajú vyrobiť pomerne rýchlo, ale nemusíte sa obávať plytvania materiálom, pretože trajektové dvory ich zvyčajne vyrábajú len na požiadanie, keď existujú neobsluhované vodné cesty."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
+msgid ""
+"As long as a ferry services a waterway, its lifetime is unlimited, but "
+"unemployed ferries will rot away and eventually sink."
+msgstr "Pokiaľ trajekt obsluhuje vodnú cestu, jeho životnosť je neobmedzená, ale nezamestnané trajekty zhnijú a nakoniec sa potopia."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
+msgid "Congratulations"
+msgstr "Blahoželáme"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
+msgid "You have learnt all there is to learn about ships and ferries!"
+msgstr "Naučili ste sa všetko, čo sa dalo o lodiach a trajektoch!"
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
+msgid ""
+"There is also another island where you can build a port if you wish to try "
+"launching another expedition."
+msgstr "Je tu aj ďalší ostrov, kde môžete postaviť prístav, ak chcete skúsiť vyslať ďalšiu výpravu."
+
+#: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
+msgid ""
+"As always, you can continue playing and practice a bit more on this map if "
+"you like, or get your captain’s license ready and try out your new skills in"
+" a real game…"
+msgstr "Ako vždy, ak chcete, môžete pokračovať v hraní a ešte trochu potrénovať na tejto mape, alebo si pripraviť kapitánsky preukaz a vyskúšať svoje nové zručnosti v skutočnej hre…"

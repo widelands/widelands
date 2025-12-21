@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
 	uint16_t const x = fr->unsigned_16();
 	uint16_t const y = fr->unsigned_16();
 	const Coords result(x, y);
-	if (result) {
+	if (result.valid()) {
 		if (extent.w <= x) {
 			throw ExceededWidth(extent.w, x);
 		}

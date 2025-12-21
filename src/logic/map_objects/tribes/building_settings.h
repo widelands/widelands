@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@ class FileWrite;
 namespace Widelands {
 
 class Game;
+class MarketDescr;
 class MilitarySiteDescr;
 class ProductionSiteDescr;
 enum class StockPolicy;
@@ -87,7 +88,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
-	bool prefer_heroes;
+	SoldierPreference soldier_preference;
 };
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
@@ -114,6 +115,18 @@ struct WarehouseSettings : public BuildingSettings {
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
 	bool launch_expedition{false};
+	uint32_t desired_capacity{0U};
+	const uint32_t max_garrison;
+	SoldierPreference soldier_preference{SoldierPreference::kAny};
+};
+
+struct MarketSettings : public BuildingSettings {
+	MarketSettings(const MarketDescr&, const TribeDescr& tribe);
+	~MarketSettings() override = default;
+	void apply(const BuildingSettings&) override;
+
+	void save(const Game&, FileWrite&) const override;
+	void read(const Game&, FileRead&) override;
 };
 
 }  // namespace Widelands

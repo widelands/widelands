@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
-                                                     _("Return to the single player menu"));
+		                                               _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 

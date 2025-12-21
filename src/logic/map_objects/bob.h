@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,11 +44,13 @@ public:
 	BobDescr(const std::string& init_descname,
 	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type,
-	         const LuaTable& table);
+	         const LuaTable& table,
+	         const std::vector<std::string>& attribs);
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
 	         MapObjectType type,
-	         MapObjectDescr::OwnerType owner_type);
+	         MapObjectDescr::OwnerType owner_type,
+	         const std::vector<std::string>& attribs);
 
 	~BobDescr() override = default;
 
@@ -226,8 +228,9 @@ public:
 	[[nodiscard]] Vector2f
 	calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
+	Notifications::Signal<Player* /* old_owner */, Player* /* new_owner */> owner_changed;
 
-	void set_position(EditorGameBase&, const Coords&);
+	virtual void set_position(EditorGameBase&, const Coords&);
 	[[nodiscard]] const FCoords& get_position() const {
 		return position_;
 	}

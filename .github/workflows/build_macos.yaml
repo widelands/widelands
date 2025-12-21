@@ -5,34 +5,53 @@ on:
 jobs:
   macos:
     strategy:
+      fail-fast: false
       matrix:
         config: [debug, release]
         compiler: [clang]
-    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-11
+        os: [14, 15, 15-intel]
+        # Check https://github.com/actions/runner-images#available-images
+        include:
+          - os: 15-intel
+            osname: macOS15_x86
+          - os: 14
+            osname: macOS14_arm64
+          - os: 15
+            osname: macOS15_arm64
+    name: ${{ matrix.osname}} ${{ matrix.config }} 
+    # ${{ matrix.compiler }}
+    runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Installing dependencies
       run: |
-        export ICU_ROOT="$(brew --prefix icu4c)" && \
-        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        ./install-dependencies.sh homebrew ccache dylibbundler
+        export ICU_ROOT="$(brew --prefix icu4c)"
+        # Suppress warnings about installing formulas instead of casks. Casks would raise another
+        # warning about disabling macos gatekeeper.
+        ./install-dependencies.sh homebrew --formula
+        # temporary fix for macos-14 arm failures
+        brew install --quiet icu4c
     - name: Building
+      env:
+        # Exports for build_app.sh
+        MATRIX_OS: ${{ matrix.os }}
+        TYPE: ${{ matrix.config }}
+        COMPILER: ${{ matrix.compiler }}
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website"
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
-        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
+        mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
 
     - name: Uploading DMG
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
+        path: "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"

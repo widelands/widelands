@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -172,21 +172,28 @@ TESTCASE(string_formatting) {
 	check_equal("Hello World", format("%2% %1%", format_impl::ArgsVector{p1, p2}));
 	check_equal("World Hello", format("%2% %1%", format_impl::ArgsVector{p2, p1}));
 
-	check_error("invalid placeholder", []() { format("%q", 1); });
-	check_error("invalid placeholder", []() { format("%lf", 1); });
-	check_error("invalid character after %", []() { format("%|1$d|", 1); });
-	check_error("end of string", []() { format("%02.7", 4); });
-	check_error("missing placeholder", []() { format("%2% %3$i", 2, 3); });
-	check_error("duplicate placeholder", []() { format("%1% %1$d", 1, 1); });
-	check_error("mixed placeholders", []() { format("%4d %2%", 123, 123); });
-	check_error("too many args", []() { format("%u %li %lld", 1, 2, 3, 4); });
-	check_error("too few args", []() { format("%lu %llu %lli", 1, 2); });
-	check_error("wrong arg type", []() { format("%s", 1); });
-	check_error("wrong arg type", []() { format("%i", "foo"); });
-	check_error("float too large", []() { format("%f", 12345678901234567890.f); });
-	check_error("int too large", []() { format("%ld", 0x876543210fedcba9); });
-	check_error("invalid flag combination", []() { format("%-05d", 123); });
-	check_error("repeated flag", []() { format("%+0+5d", 123); });
+	check_error(WException, "unrecognized format type character", []() { format("%q", 1); });
+	check_error(WException, "invalid format type character", []() { format("%lf", 1); });
+	check_error(WException, "unrecognized format type character", []() { format("%|1$d|", 1); });
+	check_error(WException, "unrecognized format type character", []() { format("%02.7", 4); });
+	check_error(WException, "index 1 is unused", []() { format("%2% %3$i", 2, 3); });
+	check_error(WException, "duplicate use of index 1", []() { format("%1% %1$d", 1, 1); });
+	check_error(WException, "Cannot mix positional and unpositional placeholders",
+	            []() { format("%4d %2%", 123, 123); });
+	check_error(WException, "Too many arguments provided (expected only 3)",
+	            []() { format("%u %li %lld", 1, 2, 3, 4); });
+	check_error(WException, "Too few arguments provided: 3 required but only 2 passed",
+	            []() { format("%lu %llu %lli", 1, 2); });
+	check_error(
+	   WException, "Wrong argument type: expected string, found int", []() { format("%s", 1); });
+	check_error(
+	   WException, "Wrong argument type: expected int, found string", []() { format("%i", "foo"); });
+	check_error(
+	   WException, "Floating point value too large", []() { format("%f", 12345678901234567890.f); });
+	check_error(
+	   WException, "Unsigned integral value too large", []() { format("%ld", 0x876543210fedcba9); });
+	check_error(WException, "can not be combined", []() { format("%-05d", 123); });
+	check_error(WException, "Repeated flag", []() { format("%+0+5d", 123); });
 }
 
 TESTSUITE_END()

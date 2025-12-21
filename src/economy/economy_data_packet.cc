@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2024 by the Widelands Development Team
+ * Copyright (C) 2004-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,11 +37,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError(
-				   "Representative flag/ship has economy serial %d, but the data packet has %d",
+				   "Representative flag/ship has economy serial %u, but the data packet has %u",
 				   eco_->serial_, saved_serial);
 			}
 			Economy* other_eco = nullptr;
-			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (const uint32_t last_modified = fr.unsigned_32()) {
@@ -118,6 +117,8 @@ void EconomyDataPacket::read(FileRead& fr) {
 							         type_name, tribe.name().c_str());
 						}
 						break;
+					default:
+						NEVER_HERE();
 					}
 				}
 			} catch (const WException& e) {

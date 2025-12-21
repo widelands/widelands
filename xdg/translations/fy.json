@@ -2,8 +2,33 @@
 	"name": "Widelands",
 	"category": "Strategyspultsje",
 	"tagline": "In strategysk bouwspultsje mei rinnende tiid",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Do bist de hearsker oer in stam. Dyn taak is om in lyts doarpke útgroeie te litten ta in machtige stêd. Eltsenien yn de stam wurket hurd om grûnstoffen te produsearjen en dizze groei mooglik te meitsjen.",
 		"Yn Widelands is it mooglik om tsjin de kompjûter in kampanje te spyljen wêryn't de ferhalen and swierichheden fan de stammen yn de Widelands-wrâld fertelt wurde, mar it begjint pas echt ynteressant te wurden wannearsto dy mei dyn freonen op it ynternet as in lokaal netwurk ferienest om tegearre nei riken op te bouwen of inoar te befjochtsjen yn in kriich."
-	]
+	],
+	"release_notes": {
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		],
+		"1.2": [
+			"New Frisian scenario",
+			"Diplomacy handling by computer players",
+			"Naval Warfare (preview)",
+			"Garrisons for ports and headquarters",
+			"UI Plugins",
+			"Pinned notes",
+			"Direct map publishing",
+			"Enhanced error handling"
+		]
+	}
 }

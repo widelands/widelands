@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2024 by the Widelands Development Team
+ * Copyright (C) 2007-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <string>
 #include <vector>
 
 namespace Widelands {
@@ -72,6 +73,9 @@ constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max()
 using Serial = uint32_t;  /// Serial number for MapObject.
 constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
+using TradeID = uint32_t;
+constexpr TradeID kInvalidTrade = std::numeric_limits<TradeID>::max();
+
 using Direction = uint8_t;
 
 struct SoldierStrength {
@@ -88,6 +92,16 @@ struct SoldierStrength {
 		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
 	}
 };
+
+// It is assumed elsewhere that enum SoldierPreference fits to uint8_t.
+// These constants are written to savegames.
+enum class SoldierPreference : uint8_t {
+	kRookies = 0,
+	kHeroes = 1,
+	kAny = 2,
+};
+
+std::string soldier_preference_icon(SoldierPreference p);
 
 // For suggested teams info during map preload
 using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team

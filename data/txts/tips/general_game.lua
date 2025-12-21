@@ -108,7 +108,10 @@ tips = {
       text = _("When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die."),
       seconds = 7
    },
-
+   {
+      text = _("Trading can help your economy and strengthen relationships between players. Learn the basics in the tutorial ‘Economy and Trading’."),
+      seconds = 5
+   },
 }
 pop_textdomain()
 return tips

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024 by the Widelands Development Team
+ * Copyright (C) 2021-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -426,8 +426,8 @@ void AddOnsPackager::clicked_delete_addon() {
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
 	   format(ctrl_.is_remote(name) ?
-                _("Do you really want to delete the add-on ‘%s’?") :
-                _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
+	             _("Do you really want to delete the add-on ‘%s’?") :
+	             _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
 	               "add-on can not be downloaded again from the server."),
 	          name),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
@@ -457,7 +457,7 @@ void AddOnsPackager::die() {
 		             addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 
 		UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Quit Packager"), msg,
@@ -484,7 +484,7 @@ void AddOnsPackager::clicked_discard_changes() {
 		                   addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 
@@ -509,7 +509,7 @@ void AddOnsPackager::clicked_write_changes() {
 		            addons_with_changes_.size()),
 		   addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 	msg += "\n\n";
@@ -552,7 +552,7 @@ void AddOnsPackager::clicked_write_changes() {
 		addon_selected();
 
 		// Update the global catalogue
-		WLApplication::initialize_g_addons();
+		WLApplication::get().initialize_g_addons();
 
 		progress_window_.set_visible(false);
 	}
@@ -611,12 +611,12 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 			UI::WLMessageBox mbox(
 			   get_parent(), UI::WindowStyle::kFsMenu, _("Version Requirement"),
 			   nominal_min.empty() ?
-               format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
+			      format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
 			               "None of the contained maps can be loaded with a Widelands version older "
 			               "than %2$s. "
 			               "The minimum version requirement will automatically be set accordingly."),
 			             addon, AddOns::version_to_string(actual_min)) :
-               format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
+			      format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
 			               "However, none of the contained maps can be loaded with a Widelands "
 			               "version older than %3$s. "
 			               "The version requirement will automatically be changed accordingly."),

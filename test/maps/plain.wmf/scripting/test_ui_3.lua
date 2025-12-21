@@ -2,6 +2,9 @@ game.desired_speed = 1000
 
 run(function()
 
+   assert_equal(true, wl.ui:shortcut_exists("fullscreen"))
+   assert_equal(false, wl.ui:shortcut_exists("this_does_not_exist"))
+
    wl.ui.MapView():create_child({
       widget   = "unique_window",
       registry = "uipluginstestwindow",
@@ -120,11 +123,13 @@ run(function()
                                  value = "first",
                                  label = "First Item",
                                  tooltip = "Tooltip for i1",
+                                 hotkey = "quicknav_gui",
                               },
                               {
                                  value = "second",
                                  label = "2nd Item",
                                  tooltip = "Tooltip for i2",
+                                 enable = false,
                               },
                               {
                                  value = "third",
@@ -257,6 +262,7 @@ run(function()
                                           value = "third",
                                           label = "3. Item",
                                           tooltip = "Tooltip for i3",
+                                          hotkey = "game_showhide_census",
                                        },
                                     },
                                     on_selected = [=[ dropdown_changed() ]=]
@@ -431,7 +437,7 @@ run(function()
    button.enabled = false
    radiogroup.state = 2
    dropdown:add("New Item", "fourth")
-   listselect:add("New Item", "fourth", nil, "", true, 2)
+   listselect:add("New Item", "fourth", nil, "", true, 2, true, "game_msg_filter_seafaring")
    tabpanel.active = 1
    table:add(1234, false, true, {{text = "Invalid"}, {text = "1234"}, {icon = "images/ui_basic/menu_help.png"}})
 
@@ -451,6 +457,16 @@ run(function()
    assert_equal("listselect", listselect.name)
    assert_equal(1, tabpanel.active)
    assert_equal(8, table.no_of_rows)
+
+   assert_equal("first", dropdown:get_value_at(1))
+   assert_equal("2nd Item", dropdown:get_label_at(2))
+   assert_equal("Tooltip for i3", dropdown:get_tooltip_at(3))
+   assert_equal("second", listselect:get_value_at(2))
+   assert_equal("3. Item", listselect:get_label_at(3))
+   assert_equal("Tooltip for i1", listselect:get_tooltip_at(1))
+   assert_equal(0, listselect:get_indent_at(1))
+   assert_equal(false, listselect:get_enable_at(2))
+   assert_equal(true, listselect:get_enable_at(3))
 
    button.enabled = true
    sleep(1000)

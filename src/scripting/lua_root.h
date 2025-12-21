@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2024 by the Widelands Development Team
+ * Copyright (C) 2006-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,17 @@
 #ifndef WL_SCRIPTING_LUA_ROOT_H
 #define WL_SCRIPTING_LUA_ROOT_H
 
+#include <memory>
+
 #include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
 
 namespace LuaRoot {
+
+namespace LuaNotifications {
+struct Wrapper;
+}  // namespace LuaNotifications
 
 /*
  * Base class for all classes in wl
@@ -64,19 +70,25 @@ public:
 	int get_scenario_difficulty(lua_State*);
 	int get_allow_diplomacy(lua_State*);
 	int set_allow_diplomacy(lua_State*);
+	int get_allow_naval_warfare(lua_State*);
+	int set_allow_naval_warfare(lua_State*);
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);
+	int get_trades(lua_State*);
+	int get_trade_extension_proposals(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
 	int launch_coroutine(lua_State*);
 	int save(lua_State*);
+	int get_trade(lua_State*);
 
 	/*
 	 * C methods
 	 */
+	void push_trade(lua_State* L, Widelands::TradeID id);
 };
 
 class LuaEditor : public LuaBases::LuaEditorGameBase {
@@ -126,6 +138,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_all_tribes_names(lua_State* L);
 	int get_tribes_descriptions(lua_State* L);
 	int get_immovable_descriptions(lua_State* L);
 	int get_building_descriptions(lua_State* L);
@@ -165,6 +178,7 @@ public:
 	void do_modify_trainingsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_productionsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_militarysite(lua_State* L, const std::string&, const std::string&);
+	void do_modify_market(lua_State* L, const std::string&, const std::string&);
 	void do_modify_warehouse(lua_State* L, const std::string&, const std::string&);
 	void do_modify_worker(lua_State* L, const std::string&, const std::string&);
 	void do_modify_ware(lua_State* L, const std::string&, const std::string&);
@@ -175,47 +189,71 @@ public:
 	void do_modify_ship(lua_State* L, const std::string&, const std::string&);
 };
 
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaWorld : public LuaRootModuleClass {
+class LuaSubscriber : public LuaRootModuleClass {
 public:
-	LUNA_CLASS_HEAD(LuaWorld);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaWorld() = default;
-	explicit LuaWorld(lua_State*) {
-	}
+	struct Value {
+		enum class Type : uint8_t {
+			kInt = 1,
+			kString = 2,
+			kMapObject = 3,
+		};
+		Type type{Type::kInt};
+		int32_t int_val{0};
+		std::string string_val;
+
+		Value() = default;
+		Value(std::string str)  // NOLINT(google-explicit-constructor)
+		   : type(Type::kString), string_val(str) {
+		}
+		Value(int32_t i) : type(Type::kInt), int_val(i) {  // NOLINT(google-explicit-constructor)
+		}
+		Value(const Widelands::MapObject* mo)  // NOLINT(google-explicit-constructor)
+		   : type(Type::kMapObject), int_val(mo != nullptr ? mo->serial() : 0) {
+		}
+		Value(Type t, int32_t i) : type(t), int_val(i) {
+		}
+	};
+
+	using Message = std::map<std::string, Value>;
+
+	LUNA_CLASS_HEAD(LuaSubscriber);
+
+	LuaSubscriber() = default;
+	explicit LuaSubscriber(const Widelands::EditorGameBase& egbase, LuaNotifications::Wrapper* impl);
+	explicit LuaSubscriber(lua_State* L);
+	~LuaSubscriber() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
+	void __persist(lua_State* L) override;
+	void __unpersist(lua_State* L) override;
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
-};
 
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaTribes : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaTribes);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaTribes() = default;
-	explicit LuaTribes(lua_State*) {
-	}
+	/*
+	 * Properties
+	 */
+	int get_size(lua_State* L);
 
-	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
-	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+	/*
+	 * Lua methods
+	 */
+	int get(lua_State* L);
+	int pop(lua_State* L);
+	int clear(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+	void add_message(Message msg);
+
+private:
+	MutexLock::ID mutex_{MutexLock::create_custom_mutex()};
+	const Widelands::EditorGameBase* egbase_{nullptr};
+	std::unique_ptr<LuaNotifications::Wrapper> impl_;
+	std::deque<Message> queue_;
 };
 
 void luaopen_wlroot(lua_State*, bool in_editor);
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
 }  // namespace LuaRoot
+
+#endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H

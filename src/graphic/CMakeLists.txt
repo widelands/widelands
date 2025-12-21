@@ -23,6 +23,7 @@ wl_library(graphic_align
     align.cc
   DEPENDS
     base_geometry
+    base_exceptions
 )
 
 wl_library(graphic_color
@@ -32,6 +33,16 @@ wl_library(graphic_color
   DEPENDS
     base
   USES_SDL2
+)
+
+wl_library(graphic_color_palette
+  SRCS
+    color_palette.h
+    color_palette.cc
+  DEPENDS
+    base
+    base_exceptions
+    graphic_color
 )
 
 wl_library(graphic_playercolor
@@ -151,7 +162,9 @@ wl_library(graphic_draw_programs
   DEPENDS
     base_exceptions
     base_macros
+    base_math
     base_geometry
+    graphic_fields_to_draw
     graphic_gl_utils
     graphic_color
 )
@@ -320,6 +333,7 @@ wl_library(graphic_functions
     graphic
     graphic_fonthandler
     graphic_text_layout
+    widelands_options
 )
 
 # Base library

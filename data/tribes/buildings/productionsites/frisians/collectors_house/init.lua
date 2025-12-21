@@ -27,6 +27,12 @@ wl.Descriptions():new_productionsite_type {
          columns = 5,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {40, 55},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {
@@ -49,6 +55,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
          descname = _("gathering berries"),
          actions = {
+            -- time of worker: 16.2-41.4 sec
+            -- min. time total: 21 + 16.2 = 37.2 sec
+            -- max. time total: 21 + 41.4 = 62.4 sec
             "sleep=duration:21s",
             "callworker=harvest",
          }

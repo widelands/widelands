@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2024 by the Widelands Development Team
+ * Copyright (C) 2011-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,8 @@ class ShipFleetYardInterface;
 class ShipFleetDescr : public MapObjectDescr {
 public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname) {
+	   : MapObjectDescr(
+	        MapObjectType::SHIP_FLEET, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~ShipFleetDescr() override = default;
 
@@ -53,7 +54,8 @@ public:
 	   : BobDescr(init_name,
 	              init_descname,
 	              MapObjectType::SHIP_FLEET_YARD_INTERFACE,
-	              MapObjectDescr::OwnerType::kTribe) {
+	              MapObjectDescr::OwnerType::kTribe,
+	              std::vector<std::string>() /*no attrib*/) {
 	}
 	~ShipFleetYardInterfaceDescr() override = default;
 	[[nodiscard]] Bob& create_object() const override;
@@ -105,6 +107,7 @@ struct ShipFleet : MapObject {
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
+	void split(Game& game);
 
 	void add_ship(EditorGameBase&, Ship* ship);
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
@@ -137,7 +140,6 @@ struct ShipFleet : MapObject {
 	[[nodiscard]] std::vector<PortDock*>& get_ports() {
 		return ports_;
 	}
-
 	[[nodiscard]] Quantity get_ships_target() const {
 		return ships_target_;
 	}

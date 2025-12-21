@@ -4,8 +4,25 @@ ARCH=${1:-i686}
 shift 1
 PACMAN_ARGS=$@
 
-URL_MINGW="https://mirror.msys2.org/mingw/$ARCH"
-URL_MSYS="https://mirror.msys2.org/msys/$ARCH"
+if [ "$ARCH" == "i686" ]
+then
+  MINGWURL="mingw32"
+  MSYSURL="i686"
+elif [ "$ARCH" == "x86_64" ]
+then
+  MINGWURL="mingw64"
+  MSYSURL="x86_64"
+elif [ "$ARCH" == "clang-aarch64" ]
+then
+  MINGWURL="clangarm64"
+  MSYSURL="x86_64"
+else 
+  echo "Unsupported mingw Architecture. Valid values are: i686, x86_64 and clang-aarch64."
+fi
+
+URL_MINGW="https://mirror.msys2.org/mingw/$MINGWURL"
+URL_MSYS="https://mirror.msys2.org/msys/$MSYSURL"
+
 
 cd $(dirname "$0")
 curl -L "$URL_MINGW" > mingw
@@ -15,7 +32,7 @@ install_old_pkg()
 {
   INSTALL_U=()
   INSTALL_S=()
-  for DEP in ${DEPS[@]}
+  for DEP in ${FINALDEPS[@]}
   do
     if [ "${DEP%%-*}" = "host" ]
     then
@@ -65,10 +82,42 @@ do
   PKG=$(echo $LINE | cut -d ':' -f 1)
   DEPS=($(echo $LINE | cut -d ':' -f 2))
   DEPS+=($PKG)
+  FINALDEPS=()
+  VERSIONPINNED=0
+  for DEP in ${DEPS[@]}
+  do
+    # Check for fixed architecture
+    FIXEDARCH=$(echo $DEP | cut -d '!' -f 1)
+    if [ "$FIXEDARCH" == "$DEP" ]
+    then
+      FINALDEPS+=($DEP)
+    else
+      if [ "$FIXEDARCH" == "$ARCH" ]
+      then
+        FINALDEPS+=($(echo $DEP | cut -d '!' -f 2))
+      fi
+    fi
+  done
+  for DEP in ${FINALDEPS[@]}
+  do
+    # Check for fixed version
+    VERSION=$(echo $DEP | cut -d '=' -f 2)
+    if [ "$VERSION" != "$DEP" ]
+    then
+      VERSIONPINNED=1
+    fi
+  done
   if [ "${PKG%%-*}" = "host" ]
   then
     # Host packages should still be supported
     pacman -S $PACMAN_ARGS ${PKG#host-}
+  elif [ $VERSIONPINNED -eq 1 ]
+  then
+    install_old_pkg
+  # Package whith fixed architecture different from the current
+  elif [ -z "$FINALDEPS" ]
+  then
+    continue
   else
     pacman -S $PACMAN_ARGS mingw-w64-$ARCH-$PKG || install_old_pkg
   fi

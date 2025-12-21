@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2024 by the Widelands Development Team
+ * Copyright (C) 2017-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
@@ -34,6 +35,9 @@ static std::string g_template_dir;
 static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);       // points to an entry in `g_style_managers`
 static StyleManager* default_style(nullptr);  // points to the default style in `g_style_managers`
+
+const std::string kSplashImage("loadscreens/splash.jpg");
+const std::string kFallbackImage("images/novalue.png");
 
 const std::string& template_dir() {
 	return g_template_dir;
@@ -78,6 +82,8 @@ void set_template_dir(std::string dir) {
 			default_style = g_style_manager;
 		}
 	}
+
+	RenderQueue::instance().set_dither_mask(resolve_template_image_filename("world/pics/edge.png"));
 }
 
 std::string resolve_template_image_filename(const std::string& path) {
@@ -107,7 +113,7 @@ std::string resolve_template_image_filename(const std::string& path) {
 
 	/* If all else fails (e.g. a missing template sprite): Default image. */
 	log_warn("Template image '%s' not found, using fallback image", path.c_str());
-	return "images/novalue.png";
+	return kFallbackImage;
 }
 
 namespace {
@@ -546,6 +552,7 @@ StyleManager::StyleManager() {
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	                "map_plateau_message_pos_y");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
+	add_styled_size(UI::StyledSize::kUIDefaultIndent, *element_table, "ui_default_indent");
 	add_styled_size(UI::StyledSize::kToolbarButtonSize, *element_table, "toolbar_button_size");
 	check_completeness("styled_sizes", styled_sizes_.size(),
 	                   static_cast<size_t>(UI::StyledSize::kToolbarButtonSize));
@@ -898,10 +905,17 @@ void StyleManager::add_window_style(UI::WindowStyle style,
 		   g_image_cache->get(style_table->get_string("border_bottom")),
 		   g_image_cache->get(style_table->get_string("border_right")),
 		   g_image_cache->get(style_table->get_string("border_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_left")),
+		   g_image_cache->get(style_table->get_string("corner_bottom_right")),
+		   g_image_cache->get(style_table->get_string("corner_top_left")),
+		   g_image_cache->get(style_table->get_string("corner_top_right")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_left")),
+		   g_image_cache->get(style_table->get_string("corner_minimal_right")),
 		   g_image_cache->get(style_table->get_string("background")),
 		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
 		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
-		   style_table->get_string("button_close"));
+		   style_table->get_string("button_close"),
+		   style_table->get_int_with_default("button_spacing", 1));
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));
@@ -957,8 +971,8 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
 		fail_if_doing_default_style("font style", table_key);
 		fontstyle = new UI::FontStyleInfo(default_style->font_style(font_key));
 	}
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle)));
-	fontstyle_keys_.emplace(std::make_pair(table_key, font_key));
+	fontstyles_.emplace(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle));
+	fontstyle_keys_.emplace(table_key, font_key);
 }
 
 void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
@@ -971,30 +985,29 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
 		fail_if_doing_default_style("paragraph style", table_key);
 		p_style = new UI::ParagraphStyleInfo(default_style->paragraph_style(style));
 	}
-	paragraphstyles_.emplace(
-	   std::make_pair(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style)));
-	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
+	paragraphstyles_.emplace(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style));
+	paragraphstyle_keys_.emplace(table_key, style);
 }
 
 void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key) {
 	if (table.has_key(key)) {
 		const std::unique_ptr<LuaTable> color_table(table.get_table(key));
-		colors_.emplace(std::make_pair(id, read_rgb_color(*color_table)));
+		colors_.emplace(id, read_rgb_color(*color_table));
 	} else {
 		fail_if_doing_default_style("color style", key);
-		colors_.emplace(std::make_pair(id, default_style->color(id)));
+		colors_.emplace(id, default_style->color(id));
 	}
-	color_keys_.emplace(std::make_pair(key, id));
+	color_keys_.emplace(key, id);
 }
 
 void StyleManager::add_styled_size(UI::StyledSize id,
                                    const LuaTable& table,
                                    const std::string& key) {
 	if (table.has_key(key)) {
-		styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
+		styled_sizes_.emplace(id, table.get_int(key));
 	} else {
 		fail_if_doing_default_style("styled size", key);
-		styled_sizes_.emplace(std::make_pair(id, default_style->styled_size(id)));
+		styled_sizes_.emplace(id, default_style->styled_size(id));
 	}
-	styled_size_keys_.emplace(std::make_pair(key, id));
+	styled_size_keys_.emplace(key, id);
 }

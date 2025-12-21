@@ -11,6 +11,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant_ironwood = {
+         -- steps from building to tree: 2-8, mean 4.94
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 1 + 1 = 11.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 2 + 1 + 1 = 32.8 sec
+         -- mean worker time: 2 * 4.94 * 1.8 + 2 + 1 + 1 = 21.784 sec
          "findspace=size:any radius:5 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig duration:2s",
@@ -20,6 +24,10 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       plant_rubber = {
+         -- steps from building to tree: 2-8, mean 4.94
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 1 + 1 = 11.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 2 + 1 + 1 = 32.8 sec
+         -- mean worker time: 2 * 4.94 * 1.8 + 2 + 1 + 1 = 21.784 sec
          "findspace=size:any radius:5 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig duration:2s",
@@ -29,6 +37,10 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       plant_balsa = {
+         -- steps from building to tree: 2-8, mean 4.94
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 1 + 1 = 11.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 2 + 1 + 1 = 32.8 sec
+         -- mean worker time: 2 * 4.94 * 1.8 + 2 + 1 + 1 = 21.784 sec
          "findspace=size:any radius:5 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig duration:2s",
@@ -41,6 +53,9 @@ wl.Descriptions():new_worker_type {
          "findspace=size:any radius:6 terraform:amazons",
       },
       terraform = {
+         -- steps from building to place of terraform: 2-9
+         -- min. worker time: 2 * 2 * 1.8 + 2 + 2 = 11.2 sec
+         -- max. worker time: 2 * 9 * 1.8 + 2 + 2 = 36.4 sec
          "findspace=size:any radius:6 terraform:amazons",
          "walk=coords",
          "animate=dig duration:2s",

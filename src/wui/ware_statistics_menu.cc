@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,28 +159,23 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	// Register statistics data
 	for (Widelands::DescriptionIndex cur_ware : player_tribe.wares()) {
 		plot_production_->register_plot_data(
-		   cur_ware,
-		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   cur_ware, parent.get_player()->get_ware_production_statistics(cur_ware),
 		   colors[kInactiveColorIndex]);
 
-		plot_consumption_->register_plot_data(cur_ware,
-		                                      parent.get_player()->get_ware_consumption_statistics(
-		                                         Widelands::DescriptionIndex(cur_ware)),
-		                                      colors[kInactiveColorIndex]);
+		plot_consumption_->register_plot_data(
+		   cur_ware, parent.get_player()->get_ware_consumption_statistics(cur_ware),
+		   colors[kInactiveColorIndex]);
 
 		plot_economy_->register_plot_data(
-		   cur_ware,
-		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   cur_ware, parent.get_player()->get_ware_production_statistics(cur_ware),
 		   colors[kInactiveColorIndex]);
 
 		plot_economy_->register_negative_plot_data(
-		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
-		                Widelands::DescriptionIndex(cur_ware)));
+		   cur_ware, parent.get_player()->get_ware_consumption_statistics(cur_ware));
 
-		plot_stock_->register_plot_data(
-		   cur_ware,
-		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
-		   colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(cur_ware,
+		                                parent.get_player()->get_ware_stock_statistics(cur_ware),
+		                                colors[kInactiveColorIndex]);
 	}
 
 	display_ = new StatisticWaresDisplay(

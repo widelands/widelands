@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -197,6 +197,7 @@ public:
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
 	                           const Widelands::Player*,
 	                           const Workareas& workarea,
+	                           bool height_heat_map,
 	                           bool grid,
 	                           RenderTarget* dst);
 

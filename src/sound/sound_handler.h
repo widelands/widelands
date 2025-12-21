@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2024 by the Widelands Development Team
+ * Copyright (C) 2005-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include <cassert>
 #include <map>
 #include <memory>
+#include <tuple>
+#include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>
@@ -134,7 +136,7 @@
  * stop_music() (or change_music()) we just start the fadeout. The
  * callback then tells us when the audio has actually stopped and we can start
  * the next music. To differentiate between the two states we can just take a
- * peek with Mix_MusicPlaying() if there is music running. To make sure that
+ * peek with Mix_PlayingMusic() if there is music running. To make sure that
  * nothing bad happens, that check is not only required in change_music()
  * but also in start_music(), which causes the seemingly recursive call to
  * change_music() from inside start_music(). It really is not recursive, trust
@@ -185,17 +187,26 @@ public:
 
 	void register_songs(const std::string& dir, const std::string& basename);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
+	std::string current_song();
+	[[nodiscard]] bool is_shuffle() const;
+	void set_shuffle(bool on);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+	void set_music_track_enabled(std::string& filename, bool on);
+	bool is_music_track_enabled(std::string& filename);
+	std::vector<Song> get_music_data();
+
 	void use_custom_songset(bool on);
 	[[nodiscard]] bool use_custom_songset() const;
-
 	[[nodiscard]] const std::string current_songset() const;
 
 	[[nodiscard]] bool is_sound_enabled(SoundType type) const;
 	void set_enable_sound(SoundType type, bool enable);
 	[[nodiscard]] int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
+	[[nodiscard]] inline bool is_sound_audible(SoundType type) const {
+		return !is_backend_disabled() && is_sound_enabled(type) && get_volume(type) > 0;
+	}
 
 	[[nodiscard]] int32_t get_max_volume() const;
 
@@ -210,6 +221,7 @@ private:
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);
+	void notify_song_title_changed(const std::string& song_name);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -237,7 +249,7 @@ private:
 	std::map<SoundType, SoundOptions> sound_options_;
 
 	/// A collection of songsets
-	std::map<std::string, std::unique_ptr<Songset>> songs_;
+	std::map<std::string, std::unique_ptr<Songset>> songsets_;
 
 	/// A collection of effect sets
 	std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;
@@ -253,6 +265,9 @@ private:
 	 * if there actually is a song playing \e right \e now.
 	 */
 	std::string current_songset_;
+
+	/// The title of the current (or most recently played) son
+	std::string current_song_;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
@@ -270,6 +285,7 @@ private:
 	 */
 	static bool backend_is_disabled_;
 	bool use_custom_songset_instead_ingame_;
+	bool shuffle_;
 };
 
 extern SoundHandler* g_sh;

@@ -30,6 +30,12 @@ wl.Descriptions():new_productionsite_type {
          rows = 2,
          fps = 10
       },
+      build = {
+         hotspot = {75, 76},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
    },
    animations = {
       unoccupied = {
@@ -51,6 +57,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- min. time total: 107.2 + 3 * 127.2 = 488.8 sec
+            -- max. time total: 132.4 + 3 * 152.4 = 589.6 sec
             "call=build_dike",
             "call=dike",
             "call=dike",
@@ -61,6 +69,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start diking because ...
          descname = _("diking"),
          actions = {
+            -- time of worker: 97.2-122.4 sec
+            -- min. time:  97.2 + 30 = 127.2 sec
+            -- max. time: 122.4 + 30 = 152.4 sec
             "callworker=check_dike",
             "consume=log:2",
             "callworker=dike",
@@ -71,6 +82,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
          descname = _("building a dike"),
          actions = {
+            -- time of worker: 77.2-102.4 sec
+            -- min. time:  77.2 + 30 = 107.2 sec
+            -- max. time: 102.4 + 30 = 132.4 sec
             "callworker=check_build",
             "consume=log:4",
             "callworker=build",

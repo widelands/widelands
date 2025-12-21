@@ -86,7 +86,7 @@ init = {
 
       place_building_in_region(plr, "atlanteans_toolsmithy", sf:region(7), {
          inputs = {log = 5 ,
-      spidercloth = 3 ,
+      spider_silk = 3 ,
       iron = 5
    },
       })

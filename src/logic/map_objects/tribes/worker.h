@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2024 by the Widelands Development Team
+ * Copyright (C) 2002-2025 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,7 @@ class Worker : public Bob {
 		int32_t iparam6;
 		int32_t iparam7;
 		std::string sparam1;
+		std::string sparam2;
 
 		std::vector<std::string> sparamv;
 	};
@@ -152,7 +153,13 @@ public:
 
 	void start_task_shipping(Game&, PortDock*);
 	void end_shipping(Game&);
-	bool is_shipping();
+	bool is_shipping() const;
+	void set_ship_serial(Serial s) {
+		ship_serial_ = s;
+	}
+	Serial get_ship_serial() const {
+		return ship_serial_;
+	}
 
 	void start_task_buildingwork(Game&);
 	void update_task_buildingwork(Game&);
@@ -254,7 +261,6 @@ private:
 	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
 	bool run_createbob(Game&, State&, const Action&);
-	bool run_buildferry(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
 	bool run_repeatsearch(Game&, State&, const Action&);
 	bool run_findresources(Game&, State&, const Action&);
@@ -262,6 +268,10 @@ private:
 	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 	bool run_terraform(Game&, State&, const Action&);
+	bool run_script(Game&, State&, const Action&);
+
+	// Helper function to prevent terraforming a possible portdock field
+	bool terraform_prevented(const FCoords&, Game&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
@@ -282,10 +292,10 @@ private:
 	// scout
 	void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
 	void check_visible_sites(const Map& map, const Player& player);
-	void add_sites(Game& game,
-	               const Map& map,
-	               const Player& player,
-	               const std::vector<ImmovableFound>& found_sites);
+	void scout_add_sites(Game& game,
+	                     const Map& map,
+	                     const Player& player,
+	                     const std::vector<ImmovableFound>& found_sites);
 	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
@@ -296,6 +306,7 @@ private:
 	IdleWorkerSupply* supply_{nullptr};  ///< supply while gowarehouse and not transfer
 	Transfer* transfer_{nullptr};        ///< where we are currently being sent
 	int32_t current_exp_{0};             ///< current experience
+	Serial ship_serial_{0};              ///< Ship the worker is currently on, if any
 
 	// saving and loading
 protected:
