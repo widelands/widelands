@@ -9,26 +9,26 @@
 	],
 	"release_notes": {
 		"1.3": [
-			"Market trading",
+			"Handel na rynku",
 			"Sześć nowych map dodanych i trzy stare usunięte.",
-			"Economy districts",
+			"Dzielnica gospodarcza",
 			"Wiele poprawek w wewnętrznej Encyklopedii.",
-			"Download website maps as add-ons",
-			"New visualisation modes in the editor",
-			"Many new capabilities for add-on developers"
+			"Pobierz mapy i dodatki",
+			"Nowe tryby wizualizacji w edytorze",
+			"Wiele nowych możliwości dla twórców dodatków"
 		],
 		"1.2.1": [
-			"Bugfix release"
+			"Wydanie poprawkowe"
 		],
 		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
+			"Nowy scenariusz Fryzów",
+			"Obsługa dyplomacji przez graczy komputerowych",
+			"Operacje morskie",
+			"Garnizony dla portów i kwater głównych",
+			"Wtyczki UI",
+			"Przypięte notatki",
+			"Bezpośrednie publikowanie map",
+			"Ulepszona obsługa błędów"
 		]
 	}
 }
