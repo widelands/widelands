@@ -114,10 +114,10 @@
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_spectator.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 

@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_MAP_VIEW_H
 
 #include "scripting/ui/lua_panel.h"
-#include "wui/interactive_base.h"
+#include "ui/wui/interactive_base.h"
 
 namespace LuaUi {
 

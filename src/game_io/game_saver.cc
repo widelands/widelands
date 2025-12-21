@@ -31,7 +31,7 @@
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
 
 namespace Widelands {
 

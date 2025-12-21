@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_LISTSELECT_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/listselect.h"
+#include "ui/basic/listselect.h"
 
 namespace LuaUi {
 

@@ -21,7 +21,7 @@
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "wui/mapviewpixelconstants.h"
+#include "ui/wui/mapviewpixelconstants.h"
 
 namespace std {
 

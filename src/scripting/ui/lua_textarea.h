@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_TEXTAREA_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/textarea.h"
+#include "ui/basic/textarea.h"
 
 namespace LuaUi {
 

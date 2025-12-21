@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_SLIDER_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/slider.h"
+#include "ui/basic/slider.h"
 
 namespace LuaUi {
 

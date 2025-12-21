@@ -45,7 +45,7 @@
 #include "scripting/map/lua_immovable_description.h"
 #include "scripting/map/lua_terrain_description.h"
 #include "scripting/map/lua_tribe_description.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace LuaRoot {
 

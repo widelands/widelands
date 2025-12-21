@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_WINDOW_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/window.h"
+#include "ui/basic/window.h"
 
 namespace LuaUi {
 

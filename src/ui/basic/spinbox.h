@@ -1,0 +1,108 @@
+/*
+ * Copyright (C) 2009-2025 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+#ifndef WL_UI_BASIC_SPINBOX_H
+#define WL_UI_BASIC_SPINBOX_H
+
+#include "ui/basic/box.h"
+#include "ui/basic/button.h"
+
+namespace UI {
+
+struct SpinBoxImpl;
+
+/// A spinbox is an UI element for setting the integer value of a variable.
+/// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
+/// unit_w is the width alotted for all buttons and the text between them (the actual spinbox).
+/// label_text is a text that precedes the actual spinbox.
+/// The current implementation does not allow minval or maxval to be near the numeric limits of
+/// int32_t.
+class SpinBox : public Panel {
+public:
+	enum class Type {
+		kSmall,     // Displays buttons for small steps
+		kBig,       // Displays buttons for small and big steps
+		kValueList  // Uses the values that are set by set_value_list().
+	};
+
+	enum class Units { kNone, kPixels, kMinutes, kWeeks, kPercent, kFields };
+
+	/**
+	 * Text conventions: Sentence case for the 'label_text' and for all values
+	 */
+	SpinBox(Panel*,
+	        const std::string& name,
+	        int32_t x,
+	        int32_t y,
+	        uint32_t w,
+	        uint32_t unit_w,
+	        int32_t startval,
+	        int32_t minval,
+	        int32_t maxval,
+	        UI::PanelStyle style,
+	        const std::string& label_text = std::string(),
+	        const Units& unit = Units::kNone,
+	        SpinBox::Type = SpinBox::Type::kSmall,
+	        // The amount by which units are increased/decreased for small and big steps when a
+	        // button is pressed.
+	        int32_t step_size = 1,
+	        int32_t big_step_size = 10);
+	~SpinBox() override;
+
+	Notifications::Signal<> changed;
+
+	void set_value(int32_t, bool trigger_signal = true);
+	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,
+	// otherwise you will confuse the user.
+	void set_value_list(const std::vector<int32_t>&);
+	void set_interval(int32_t min, int32_t max, bool trigger_signal_if_changed = true);
+	[[nodiscard]] int32_t get_value() const;
+	[[nodiscard]] int32_t get_min() const;
+	[[nodiscard]] int32_t get_max() const;
+	void add_replacement(int32_t, const std::string&);
+	const std::vector<UI::Button*>& get_buttons() {
+		return buttons_;
+	}
+	void set_unit_width(uint32_t width);
+	void set_min_height(uint32_t height);
+
+	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
+private:
+	void layout() override;
+	void update();
+	void change_value(int32_t);
+	// Format value or change step with unit.
+	const std::string unit_text(int32_t value, bool change = false) const;
+	void calculate_big_step();
+
+	const SpinBox::Type type_;
+	SpinBoxImpl* sbi_;
+	std::vector<UI::Button*> buttons_;
+	UI::Box* box_;
+	uint32_t unit_width_;
+	uint32_t button_size_;
+	uint32_t big_step_button_width_;
+	uint32_t buttons_width_;
+	uint32_t padding_;
+	uint32_t min_height_ = 0;
+};
+}  // namespace UI
+
+#endif  // end of include guard: WL_UI_BASIC_SPINBOX_H

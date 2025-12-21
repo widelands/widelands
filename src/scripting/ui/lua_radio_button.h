@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_RADIO_BUTTON_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/radiobutton.h"
+#include "ui/basic/radiobutton.h"
 
 namespace LuaUi {
 

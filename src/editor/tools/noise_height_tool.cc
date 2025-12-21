@@ -21,12 +21,12 @@
 #include <cstdlib>
 #include <sstream>
 
-#include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
