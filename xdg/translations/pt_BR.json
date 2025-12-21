@@ -2,33 +2,33 @@
 	"name": "Widelands",
 	"category": "Jogo de estratégia",
 	"tagline": "Um jogo em tempo real de estratégia e evolução",
-	"developer": "The Widelands Development Team",
+	"developer": "Equipe de Desenvolvimento de Widelands",
 	"description": [
 		"Você é o governante de um pequeno clã. Sua meta é construir um assentamento em constante crescimento. Cada membro do seu clã fará sua parte para produzir recursos de forma a sustentar esse crescimento.",
 		"Widelands têm um modo de único jogador com campanhas que contam estórias das tribos e sua luta no universo Widelands. No entanto, o verdadeiro jogo começa quando se une os amigos pela Internet ou pela LAN para construir novos impérios juntos - ou aniquilar uns aos outros. Widelands também disponibiliza uma inteligência artificial para desafiar você."
 	],
 	"release_notes": {
 		"1.3": [
-			"Market trading",
-			"Six new maps added and three old maps removed",
-			"Economy districts",
-			"Many improvements to the in-game Encyclopedia",
-			"Download website maps as add-ons",
-			"New visualisation modes in the editor",
-			"Many new capabilities for add-on developers"
+			"Trocas comerciais",
+			"Seis novos mapas foram adicionados e três mapas antigos removidos",
+			"Distritos econômicos",
+			"Muitas melhorias na enciclopédia do jogo",
+			"Baixe mapas do site como add-ons",
+			"Novos modos de visualização no editor",
+			"Muitas novas funcionalidades para desenvolvedores de add-ons"
 		],
 		"1.2.1": [
-			"Bugfix release"
+			"Lançamento de correção de bugs"
 		],
 		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
+			"Novo cenário dos Frísios",
+			"Controle de diplomacia por jogadores artificiais",
+			"Batalha Naval (pré-visualização)",
+			"Guarnições para portos e sedes.",
+			"Plugins de interface",
+			"Notas fixadas",
+			"Publicação direta de mapas",
+			"Tratamento de erros melhorado"
 		]
 	}
 }

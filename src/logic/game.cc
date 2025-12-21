@@ -1763,7 +1763,7 @@ Serial Game::generate_economy_serial() {
 	return last_economy_serial_++;
 }
 Serial Game::generate_detectedportspace_serial() {
-	return last_detectedportspace_serial_++;
+	return ++last_detectedportspace_serial_;
 }
 void Game::notify_economy_serial(Serial serial) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial + 1);
