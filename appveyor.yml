@@ -5,8 +5,8 @@
 ###################################
 image: 
   #- Visual Studio 2022
-  - macos-monterey
-  #- macos-ventura
+  #- macos-monterey
+  - macos-ventura
   #- macos-sonoma
 
 shallow_clone: false
