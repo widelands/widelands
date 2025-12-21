@@ -273,6 +273,12 @@ GameClient::~GameClient() {
 	}
 
 	delete d;
+
+	// delete pointers from pending_player_commands_
+	for (Widelands::PlayerCommand* pc : pending_player_commands_) {
+		delete pc;
+	}
+	pending_player_commands_.clear();
 }
 
 void GameClient::run() {
