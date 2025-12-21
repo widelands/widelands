@@ -18,17 +18,17 @@
 			"Veľa nových funkcií pre vývoj doplnkov"
 		],
 		"1.2.1": [
-			"Bugfix release"
+			"Vydanie opravy chýb"
 		],
 		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
+			"Nový scenár Frízanov",
+			"Riešenie diplomacie počítačovými hráčmi",
+			"Námorná vojna (ukážka)",
+			"Posádky pre prístavy a ústredia",
+			"Rozšírenia používateľského rozhrania",
+			"Pripnuté poznámky",
+			"Mapy sa dajú zverejňovať priamo z editora",
+			"Vylepšené spracovanie chýb"
 		]
 	}
 }

@@ -406,6 +406,12 @@ GameHost::~GameHost() {
 	d->net.reset();
 	d->promoter.reset();
 	delete d;
+
+	// delete pointers from pending_player_commands_
+	for (Widelands::PlayerCommand* pc : pending_player_commands_) {
+		delete pc;
+	}
+	pending_player_commands_.clear();
 }
 
 const std::string& GameHost::get_local_playername() const {

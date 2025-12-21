@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-16 03:11+0000\n"
+"POT-Creation-Date: 2025-12-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -809,12 +809,12 @@ msgstr "Möchtest du den Editor wirklich verlassen?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2023
+#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2030
 msgid "Error"
 msgstr "Fehler"
 
 #: ../../../../src/editor/editorinteractive.cc:1279
-#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2025
+#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2032
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -3719,7 +3719,7 @@ msgstr "Kartenobjekte nachladen"
 #: ../../../../src/network/gameclient.cc:171
 #: ../../../../src/network/gamehost.cc:574
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
-#: ../../../../src/wlapplication.cc:909
+#: ../../../../src/wlapplication.cc:916
 msgid "Preparing game…"
 msgstr "Spiel wird vorbereitet …"
 
@@ -5154,14 +5154,14 @@ msgstr "Welt „%s“ umschalten"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:935
 msgctxt "nr_players"
 msgid "Unlimited"
-msgstr ""
+msgstr "Unbegrenzt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:937
 #: ../../../../src/ui_fsmenu/addons/manager.cc:939
 #: ../../../../src/ui_fsmenu/addons/manager.cc:941
 msgctxt "map_size"
 msgid "Unlimited"
-msgstr ""
+msgstr "Unbegrenzt"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1073
 #, c-format
@@ -6962,7 +6962,7 @@ msgstr "Spielername:"
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
-#: ../../../../src/wlapplication.cc:828
+#: ../../../../src/wlapplication.cc:835
 msgid "nobody"
 msgstr "niemand"
 
@@ -8108,93 +8108,93 @@ msgstr "Alles markieren"
 msgid "Unmark All"
 msgstr "Alle Markierungen aufheben"
 
-#: ../../../../src/wlapplication.cc:959
+#: ../../../../src/wlapplication.cc:966
 msgid "Widelands could not find the last edited map."
 msgstr "Widelands konnte die letzte editierte Karte nicht finden."
 
-#: ../../../../src/wlapplication.cc:964
+#: ../../../../src/wlapplication.cc:971
 msgid "No Last Edited Map"
 msgstr "Keine letzte editierte Karte"
 
-#: ../../../../src/wlapplication.cc:994
+#: ../../../../src/wlapplication.cc:1001
 msgid "No last saved replay."
 msgstr "Keine letzte gespeicherte Aufzeichnung."
 
-#: ../../../../src/wlapplication.cc:996
+#: ../../../../src/wlapplication.cc:1003
 msgid "No last saved game."
 msgstr "Kein letztes gespeichertes Spiel."
 
-#: ../../../../src/wlapplication.cc:1006
+#: ../../../../src/wlapplication.cc:1013
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands konnte die Datei „%s“ nicht finden."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../../../src/wlapplication.cc:1007 ../../../../src/wlapplication.cc:1012
+#: ../../../../src/wlapplication.cc:1014 ../../../../src/wlapplication.cc:1019
 #: ../../../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Fehlermeldung:"
 
-#: ../../../../src/wlapplication.cc:1008
+#: ../../../../src/wlapplication.cc:1015
 msgid "File system error"
 msgstr "Dateisystemfehler"
 
-#: ../../../../src/wlapplication.cc:1569
+#: ../../../../src/wlapplication.cc:1576
 #, c-format
 msgid "Command line parameter --%s can not use a value"
 msgstr "Der Kommandozeilenparameter --%s kann keine Werte verarbeiten"
 
-#: ../../../../src/wlapplication.cc:1574
+#: ../../../../src/wlapplication.cc:1581
 #, c-format
 msgid "Empty value of command line parameter --%s"
 msgstr "Es fehlt ein Wert für den Kommandozeilenparameter --%s"
 
-#: ../../../../src/wlapplication.cc:1580
+#: ../../../../src/wlapplication.cc:1587
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Die Kommandozeilenparameter --%1$s und --%2$s können nicht kombiniert werden"
 
-#: ../../../../src/wlapplication.cc:1766
+#: ../../../../src/wlapplication.cc:1773
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Unbekannter Kommandozeilenparameter:%s\nVielleicht fehlt ein „=“?"
 
-#: ../../../../src/wlapplication.cc:1785
+#: ../../../../src/wlapplication.cc:1792
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
 msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --messagebox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1799
+#: ../../../../src/wlapplication.cc:1806
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
 msgstr "Wert außerhalb des Wertebereichs für Kommandozeilenparameter --messagebox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1867
+#: ../../../../src/wlapplication.cc:1874
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
 msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --difficulty=%s"
 
-#: ../../../../src/wlapplication.cc:1964
+#: ../../../../src/wlapplication.cc:1971
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Unbekannter Kommandozeilenparameter: %s"
 
-#: ../../../../src/wlapplication.cc:1998
+#: ../../../../src/wlapplication.cc:2005
 msgid "Incompatible"
 msgstr "Inkompatibel"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Game ended unexpectedly"
 msgstr "Das Spiel endete unerwartet"
 
-#: ../../../../src/wlapplication.cc:2038
+#: ../../../../src/wlapplication.cc:2045
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler während des Spiels"
 
-#: ../../../../src/wlapplication.cc:2041
+#: ../../../../src/wlapplication.cc:2048
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -8208,7 +8208,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Ein Fehler ist während des Spiels aufgetreten. Die Fehlermeldung lautet:\n\n%1$s\n\nBitte melde dieses Problem um uns zu helfen Widelands zu verbessern. Du findest zugehörige Meldungen in der Standardausgabe (stdout.txt bei Windows). Du benutzt Version %2$s.\n\nBitte füge diese Informationen deiner Meldung hinzu.\n\nMöchtest du, dass Widelands eine Notfallspeicherung versucht? Es ist oft – wenn auch nicht immer – möglich, das so gespeicherte Spiel zu laden und weiterzuspielen."
 
-#: ../../../../src/wlapplication.cc:2050
+#: ../../../../src/wlapplication.cc:2057
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -8218,11 +8218,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Das Spiel endete unerwartet aus folgendem Grund:\n\n%s\n\nMöchtest du, dass Widelands versucht den Spielstand für diesen Notfall zu speichern? Es ist oft – wenn auch nicht immer – möglich, das Spiel wieder zu laden und weiterzuspielen."
 
-#: ../../../../src/wlapplication.cc:2084
+#: ../../../../src/wlapplication.cc:2091
 msgid "Emergency save failed"
 msgstr "Notfallspeicherung fehlgeschlagen"
 
-#: ../../../../src/wlapplication.cc:2085
+#: ../../../../src/wlapplication.cc:2092
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -11345,6 +11345,14 @@ msgstr "Angriffe"
 #: ../../../../src/wui/minimap.cc:248
 msgid "Zoom"
 msgstr "Vergrößerung"
+
+#: ../../../../src/wui/music_player.cc:91
+msgid "Next"
+msgstr "Weiter"
+
+#: ../../../../src/wui/music_player.cc:96
+msgid "Shuffle"
+msgstr "Zufällig"
 
 #: ../../../../src/wui/pinned_note.cc:76
 msgid "Change color…"

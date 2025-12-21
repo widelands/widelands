@@ -3,6 +3,8 @@
 # 
 # Translators:
 # GunChleoc, 2016
+# GunChleoc, 2016
+# Karl Vest, 2020
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Pavol Gono, 2024-2025
@@ -12,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-10-02 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,7 +361,7 @@ msgstr "Zavreli ste okno Zásoby ešte skôr, ako som vám o ňom stihol všetko
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "V opačnom prípade ho znova otvorte a pozrite si všetky jeho karty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
@@ -412,12 +414,12 @@ msgstr "Otvorte okno pomoci v hre"
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Okno encyklopédie obsahuje pomoc v hre a encyklopédiu kmeňa, za ktorý práve hráte."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Otvorte ho. Dostanete sa doň pomocou tlačidla v spodnej časti obrazovky."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
@@ -436,7 +438,7 @@ msgstr "Ako získať pomoc"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Samozrejme, je ťažké zapamätať si všetky moje poznámky a rady. Napríklad sa môžete pýtať sami seba: „Prečo potrebujeme prídely na získanie vojakov?“"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -444,7 +446,7 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Keď budete hrať často, všetky tieto veci budete ovládať naspamäť. Dovtedy, alebo ak si nie ste istí potrebami a schopnosťami svojho kmeňa a tým, ako fungujú jeho budovy a pracovníci, môžete si to jednoducho vyhľadať v encyklopédii svojho kmeňa, ktorá je súčasťou pomoci v hre."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
@@ -457,7 +459,7 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Vojak potrebuje drevenú kopiju a helmu – od tohto bodu môžete hľadať smerom dozadu a nájsť výrobky a budovy potrebné na zásobovanie kasární, kde sa verbuje vojak. Keď skončíte, jednoducho zatvorte okno encyklopédie."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
@@ -471,13 +473,13 @@ msgstr "V okne encyklopédie vyberte kartu „Výrobky“."
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Zistite, čo je potrebné na výrobu helmy a čo na výrobu drevenej kopije."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Ak chcete, môžete ďalej zisťovať, čo je potrebné na výrobu výrobkov, ktoré ste práve vyhľadali."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
@@ -493,39 +495,39 @@ msgstr "Kategórie encyklopédie"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Encyklopédia má päť kariet:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Karta „Všeobecné“ obsahuje informácie o všetkých základných prvkoch ovládania rozhrania hry Widelands. Okrem toho tam nájdete tipy relevantné pre váš kmeň."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "Karta „Výrobky“ zobrazuje informácie o výrobkoch, ktoré váš kmeň potrebuje, vrátane krátkeho pomocného textu, zoznamu budov, ktoré daný výrobok vyrábajú, potrebných surovín na jeho výrobu a miesta, kde sa výrobok spotrebúva."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "Karta „Pracovníci“ zobrazuje informácie o pracovníkoch vášho kmeňa podobným spôsobom ako pri výrobkoch na druhej karte."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Karta „Budovy“ obsahuje všetky potrebné informácie o budovách vášho kmeňa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "A nakoniec karta „Nehybné objekty“ zobrazuje informácie o špecifických nehybných objektoch, ktoré pracovníci vášho kmeňa môžu umiestniť na mapu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
@@ -536,7 +538,7 @@ msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Zavreli ste okno encyklopédie, ale nevšimol som si, že by ste sa snažili zistiť, ktoré výrobky sú potrebné na naverbovanie vojaka. Mohli by ste ho, prosím, znova otvoriť a urobiť tak?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
@@ -548,12 +550,12 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Zavreli ste okno encyklopédie bez toho, aby ste vyhľadali potrebné informácie. Ak už všetko viete, pokojne tento tutoriál kedykoľvek opustite."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "V opačnom prípade, prosím, znova otvorte okno encyklopédie a vyberte druhú kartu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -581,27 +583,27 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "Keď posuniete posúvač do modrej oblasti na ľavej strane (nízka priorita), príslušný výrobok sa bude dodávať menej často. Červená (pravá strana) znamená, že do tejto budovy by sa malo dodať čo najviac výrobkov, možno preto, že vyrába niečo dôležité."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "Skutočný stav zásobovania je naznačený rôznymi farbami samotných ikon výrobkov:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Výrobky uskladnené v budove sú zobrazené v plných farbách."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Chýbajúce výrobky sú sivé."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Výrobky, ktoré sa v budove ešte nenachádzajú, ale už sa tam prepravujú, sú zobrazené tmavšou sivou farbou."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -629,7 +631,7 @@ msgstr "Štatistika výrobkov"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Pozrime sa, ako je na tom naša výroba výrobkov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
@@ -644,18 +646,18 @@ msgstr "Na prvých dvoch kartách sa zobrazuje výroba a spotreba vybraných vý
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Keď ste videli dosť, prepnite na tretiu kartu („Stav ekonomiky“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "V tomto okne môžete vybrať výrobky a zistiť, ako sa ich výroba alebo spotreba menila v čase. Vyskúšajte si to s niektorými výrobkami."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Budem pokračovať, hneď ako kliknete na tretiu kartu („Stav ekonomiky“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
@@ -674,7 +676,7 @@ msgstr "Teraz si to vyskúšajte. Tento rozdiel ďalej môžete porovnať s pred
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Keď ste videli dosť, prepnite na štvrtú kartu („Zásoby“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -760,7 +762,7 @@ msgstr "Otvorte okno „Nastaviť ekonomiku“."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Do okna sa dostanete kliknutím na ktorúkoľvek vlajku, ktorú vlastníte, alebo z okien skladov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -781,7 +783,7 @@ msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Teraz vám poviem, ako môžete určiť, koľko výrobkov chcete mať. Okno na tento účel je dostupné cez akúkoľvek vlajku a volá sa „Nastaviť ekonomiku tejto vlajky“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -789,7 +791,7 @@ msgstr "Má takúto ikonu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Rovnaké tlačidlo je dostupné aj v oknách skladov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -798,7 +800,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares."
-msgstr ""
+msgstr "Všimnite si, že tlačidlá sa volajú „Nastaviť ekonomiku tejto vlajky/budovy“ nie bez dôvodu. Ekonomika pozostáva zo všetkých budov a vlajok prepojených cestami, trajektmi alebo loďami, takže môžete mať viac ako jednu ekonomiku, ak ich vlajky nie sú prepojené žiadnym dopravným prostriedkom. V takom prípade môžu mať vaše oddelené ekonomiky rôzne nastavenia pre výrobky."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
@@ -844,14 +846,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Hromadenie zásob výrobkov je dvojsečná zbraň. Na jednej strane sú zásoby výrobkov užitočné na vyrovnanie dočasných výkyvov v ekonomike, ktoré sa zvyknú diať neustále. Na druhej strane, akýkoľvek výrobok, ktorý leží v sklade namiesto toho, aby bol spracovaný na niečo iné, je premrhaný. Nájdenie rovnováhy medzi plytvaním formou hromadenia zásob a výrobou „just-in-time“ (práve včas) vo vašich dodávateľských reťazcoch je jednou z najzásadnejších výziev pri zdokonaľovaní vašej ekonomiky. V prípade pochybností sa prikloňte k vytvoreniu určitých rezerv navyše."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Na uľahčenie procesu prepínania medzi rôznymi ekonomickými situáciami môžete uložiť a použiť profily ekonomiky v spodnej časti okna možností ekonomiky. Sú tam prednastavené profily pre hromadenie zásob a pre efektivitu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -860,7 +862,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "Väčšinu času sú možnosti ekonomiky užitočným nástrojom na zabezpečenie toho, aby sa zdroje neplytvali na výrobu výrobkov, ktoré vaša ekonomika v skutočnosti nepotrebuje. Niekedy však môže byť užitočné hromadiť výrobok vo veľmi veľkých množstvách. Aby ste to dosiahli, okno možností ekonomiky vám umožňuje nastaviť cieľ pre výrobok na nekonečno, takže sa bude vyrábať neustále."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -869,7 +871,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Rovnaké tlačidlo nájdete aj v oknách výrobných budov. Tam spôsobí, že len táto jedna prevádzka bude vyrábať donekonečna, bez ohľadu na nastavenia ekonomiky. To môže byť užitočné napríklad na zabezpečenie toho, aby sa viac stavebných materiálov vyrábalo v blízkosti hraníc, aj keď ich je ďaleko vo vašej domovine v zásobe dostatok."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
@@ -892,7 +894,7 @@ msgstr "Kamenár nebude vyrábať mramorové stĺpy, pokiaľ nie sú potrebné. 
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "Ak tak chcete urobiť, kliknite na akúkoľvek vlajku a vyberte „Nastaviť ekonomiku tejto vlajky“. V tomto okne sa môžete rozhodnúť, koľko výrobkov každého typu si želáte mať na sklade."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
@@ -997,7 +999,7 @@ msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Keďže vo Widelands ide skôr o budovanie než o ničenie, obchodovanie je oveľa lepší spôsob interakcie s inými kmeňmi než invázia do ich krajiny. Takže poďme obchodovať."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1005,7 +1007,7 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "Obchody sa vykonávajú prostredníctvom tržníc. Keď máte tržnicu, vy a druhý hráč vyjednávate o tom, ktoré výrobky si chcete navzájom vymeniť a v akom množstve. Týmto procesom vás prevediem krok za krokom. Najprv musíte postaviť tržnicu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
@@ -1025,13 +1027,13 @@ msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "V rámci vášho územia prenášajú výrobky nosiči. Obchody sa však môžu uskutočňovať na veľké vzdialenosti, príliš veľké na to, aby ich prešli vaši nosiči. Preto na prepravu našich výrobkov namiesto nich využívame karavánu oslov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "Osly sa chovajú na oslej farme. V tomto scenári tu už jednu máte."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1039,47 +1041,47 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "Okrem prepravy obchodných výrobkov sa osly používajú aj na výpomoc na frekventovaných cestách: Keď je cesta veľmi vyťažená, jej nosič požiada o pomoc osla, takže za rovnaký čas možno prepraviť dvojnásobok výrobkov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "Tržnica je teraz hotová a môžeme začať vytvárať obchodný návrh pre Frízanov. Robí sa to v okne tržnice. Dovoľte mi, aby som vám ho otvoril."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "Ako vidíte, okno tržnice obsahuje tri karty. Prvá karta je pre nás momentálne najzaujímavejšia: Tu môžete nakonfigurovať a navrhnúť nový obchod."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "Druhá karta zobrazuje zoznam obchodov, ktoré ste z tejto tržnice navrhli v minulosti. Momentálne je prázdna, keďže ste zatiaľ žiadne obchody nenavrhli."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
 "The third tab lists trade offers that you received from other players, and "
 "allows you to accept or reject them. This, too, is empty, since the Frisians"
 " are waiting for you to make the first move."
-msgstr ""
+msgstr "Tretia karta zobrazuje obchodné ponuky, ktoré ste dostali od iných hráčov, a umožňuje vám ich prijať alebo zamietnuť. Aj táto je prázdna, keďže Frízania čakajú, kým urobíte prvý krok."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:625
 msgid ""
 "Proposing a trade is straightforward. The first step is to select the player"
 " you want to trade with from the dropdown. In this case, there is only one "
 "other player, and he is automatically preselected for you."
-msgstr ""
+msgstr "Navrhnutie obchodu je priamočiare. Prvým krokom je vybrať hráča, s ktorým chcete obchodovať, z rozbaľovacieho zoznamu. V tomto prípade je tu len jeden ďalší hráč a je pre vás automaticky predvolený."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:633
 msgid ""
 "Next, you select the wares you want to send and receive respectively from "
 "the large double panel in the center of the market window."
-msgstr ""
+msgstr "Ďalej vyberiete výrobky, ktoré chcete poslať a prijať, z veľkého dvojitého panelu v strede okna tržnice."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:634
 msgid ""
@@ -1089,35 +1091,35 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr ""
+msgstr "Keď obchodujete s iným kmeňom, nie všetky výrobky sa dajú vymieňať. Každý kmeň má svoju vlastnú ekonomiku a používa iné výrobky. Frízania napríklad nepijú víno a nemôžu stavať domy z mramoru; a váš imperiálny kmeň nemôže stavať domy z frízskych tehál a neje ich údené ryby. Panel zobrazuje iba výrobky, ktoré vy a váš potenciálny obchodný partner môžete obaja použiť."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "Vyberte výrobky v paneli a použite tlačidlá so šípkami pod ním na zvýšenie alebo zníženie množstva výrobkov na výmenu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr ""
+msgstr "Nakoniec vyberte, koľko dávok vybraných výrobkov sa vymení. Obchod môžete nastaviť aj na neurčito pomocou ikony nekonečna."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Dávka bude doručená v rámci jednej prepravy, pričom každý výrobok potrebuje osla."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
-msgstr ""
+msgstr "Keď máte všetko nastavené, kliknite na tlačidlo „Navrhnúť“ a odošlite obchodnú ponuku druhému hráčovi. Ten sa potom môže rozhodnúť, či váš návrh prijme alebo zamietne."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "Vyskúšajte to!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
@@ -1132,17 +1134,17 @@ msgstr "Ponúknite Frízanom obchod."
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Frízania prijmú len taký obchod, ktorý je pre nich výhodný; to znamená, že nedajú viac výrobkov, ako dostanú."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Obchod zamietnutý"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Frízania vašu obchodnú ponuku zamietli. Neprijmú obchod, ktorý by pre nich mohol byť nevýhodný. Pošlite im nový obchodný návrh."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
@@ -1154,7 +1156,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Výborne! Frízania vašu obchodnú ponuku prijali. Čoskoro uvidíte karavánu vašich oslov opúšťať tržnicu, aby doniesli výrobky Frízanom, a výmenou za to karavánu ich sobov, ktorá prinesie výrobky vám."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1162,34 +1164,34 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Ako vidíte, v okne tržnice pribudla nová karta. Takúto kartu má pre každý aktívny obchod na tejto tržnici. Karta zobrazuje viac podrobností o prebiehajúcom obchode a výrobkoch čakajúcich na zobchodovanie a zároveň vám umožňuje ho spravovať:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Obchod môžete na chvíľu pozastaviť a znova ho spustiť, keď budete chcieť."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Obchod môžete presunúť na inú z vašich tržníc."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Môžete navrhnúť rozšírenie obchodu o ďalšie dávky."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "A obchod môžete kedykoľvek zrušiť."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "Ponúknutý obchod"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "Teraz vám obchod ponúkli aj Frízania. Zoznam všetkých obchodných ponúk a návrhov, ako aj prebiehajúcich obchodov nájdete v okne diplomacie. Otvorte ho tlačidlom na hlavnom paneli nástrojov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
@@ -1200,34 +1202,34 @@ msgstr "Otvorte okno Diplomacia"
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "Okno diplomacie vám poskytuje prehľad o všetkých vašich obchodoch, obchodných ponukách a obchodných návrhoch."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Môžete ho otvoriť týmto tlačidlom z hlavného panela nástrojov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "Okno Diplomacia"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "V hornej polovici okna diplomacie vidíte všetkých hráčov a ich tímy. Tu môžete pozvať ostatných hráčov, aby sa pridali k vášmu tímu, alebo požiadať o pripojenie k ich tímu. Byť v tíme však nie je podmienkou obchodovania."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "Nás viac zaujíma spodná polovica okna. Tu vidíte vami ponúkané, navrhované a aktívne obchody."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "Práve teraz máte jednu obchodnú ponuku – tú, ktorú vám práve poslali Frízania. Prezrite si ju a potom použite tlačidlá vedľa nej na jej prijatie alebo zamietnutie."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1235,39 +1237,39 @@ msgid ""
 "market you want to use for this trade, as you can have multiple markets. You"
 " can also manage the offer directly from the window of the market where you "
 "want to accept the trade."
-msgstr ""
+msgstr "Ak si želáte prijať obchod, musíte z rozbaľovacieho zoznamu vybrať, ktorú tržnicu chcete na tento obchod použiť, keďže môžete mať viacero tržníc. Ponuku môžete spravovať aj priamo z okna tržnice, v ktorej chcete obchod prijať."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "Rozhodnite o obchodnej ponuke"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "Prijmite alebo zamietnite obchodnú ponuku Frízanov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "Môžete tak urobiť buď v okne Diplomacia, alebo v okne tržnice."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "Výborne! To je v podstate všetko; teraz viete, ako posielať a spravovať obchodné návrhy a ponuky."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr ""
+msgstr "Môžete mať ľubovoľný počet aktívnych obchodov s ľubovoľným počtom hráčov; na tej istej tržnici alebo na viacerých, podľa vlastného uváženia."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "Ak chcete skutočne ovládnuť umenie obchodovania, pamätajte si toto: Hodnota akéhokoľvek výrobku do veľkej miery závisí od okolností a tiež od kmeňa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1276,14 +1278,14 @@ msgid ""
 "in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal "
 "much more efficiently than the Empire. Therefore, trading Imperial meals "
 "against Frisian coal is a trade from which both parties can benefit greatly."
-msgstr ""
+msgstr "Napríklad frízski baníci s radosťou prijmú akékoľvek jedlo bez ohľadu na to, či bolo lacno vyrobené v imperiálnom hostinci alebo s oveľa vyššími nákladmi vo frízskej pijárni. Na druhej strane, Frízania dokážu páliť drevené uhlie oveľa efektívnejšie ako Impérium. Preto je výmena imperiálnych obedov za frízske uhlie obchodom, z ktorého môžu mať obe strany veľký úžitok."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
-msgstr ""
+msgstr "Ako získate viac skúseností s rôznymi kmeňmi vo Widelands, nadobudnete dôkladné pochopenie relatívnych nákladov a hodnoty každého výrobku pre každý kmeň. Tieto znalosti sú pri rozhodovaní o obchodoch neoceniteľné."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
@@ -1296,7 +1298,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "Týmto sa náš tutoriál končí! Dúfam, že som vás naučil, ako ovládať ekonomiku vo Widelands. Existuje mnoho možností a spočiatku môžu byť mätúce. Aj keď ste pochopili len zopár konceptov, nesmiete sa vzdávať. Vyskúšajte si ich v niekoľkých hrách, oboznámte sa s nimi a vyskúšajte si možnosti. Potom sa vráťte k tomuto tutoriálu a doučte sa zvyšok!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:751
 msgid ""

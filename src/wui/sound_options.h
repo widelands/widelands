@@ -29,6 +29,10 @@
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
 
+	[[nodiscard]] const UI::Checkbox& get_custom_songset_checkbox() const {
+		return custom_songset_;
+	}
+
 private:
 	UI::Checkbox custom_songset_;
 	UI::Checkbox play_intro_music_;

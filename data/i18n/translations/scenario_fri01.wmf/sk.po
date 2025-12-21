@@ -27,7 +27,7 @@ msgstr "Veľká potopa (Automatická záloha)"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -105,6 +105,8 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Nezabudnite, že pre väčšinu týchto tovarov môžete v nastaveniach ekonomiky "
+"nastaviť cieľové množstvá."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
@@ -170,11 +172,11 @@ msgstr "Preskúmajte ostrov"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr "Expandujte a objavujte"
+msgstr "Rozširujte sa a objavujte"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr "Expandujte ešte viac a objavte z ostrova ešte viac."
+msgstr "Rozširujte sa ďalej a objavte z ostrova ešte viac."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
@@ -197,6 +199,9 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Vycvičte vojaka na najvyššiu možnú úroveň. Vojaci sa cvičia vo výcvikových "
+"táboroch a výcvikových arénach. Budeme potrebovať zlatú baňu, krajčírstvo na"
+" šitie pevnejších odevov a veľkú vyhňu na zbroj pre lepšie zbrane a helmy."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
@@ -231,6 +236,8 @@ msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"Prístav môžete postaviť buď na najvýchodnejšom cípe ostrova alebo na mieste,"
+" kde stálo ústredie nepriateľa."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -238,6 +245,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Ak ste sa na zvládnutie tejto výzvy nepripravili včas dostatočne dobre, "
+"môžete si scenár načítať zo záložnej uloženej hry, ktorá sa automaticky "
+"vytvorila krátko predtým, ako ste dosiahli nepriateľské ústredie."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -270,9 +280,9 @@ msgid ""
 " this untouched island."
 msgstr ""
 "Môj kmeň a ja sme odišli z pevniny a práve sme dorazili. Bojovali sme tam s "
-"Dánmi na severe, so Schauenburgerskými a Holsteinerskými na východe a "
-"juhu... Rozhodol som sa preto môj kmeň odtiaľ odviesť a začať tichý a "
-"pokojný život na tomto nedotknutom ostrove."
+"Dánmi na severe, so Schauenburgerskými a Holštajnskými na východe a juhu… "
+"Rozhodol som sa preto môj kmeň odtiaľ odviesť a začať tichý a pokojný život "
+"na tomto nedotknutom ostrove."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
@@ -358,6 +368,10 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"Naše zásoby dreva a trstiny sú zaistené. Teraz sa musíme postarať o zásoby "
+"tehiel. Tehly sa pália v tehliarskej peci zo žuly a hliny, takže najskôr ich"
+" musíme vyrobiť. Na pevnine sme zvykli tesať žulu zo skál, ale tu žiadne "
+"nevidím. Možno tieto kopce obsahujú dosť kameňa na vyťaženie nejakej žuly."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -367,6 +381,10 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"Hlina sa vyrába ľahko: hlinokopáč pracujúci v jame na hlinu jednoducho "
+"vykope zeminu a zmieša ju s vodou. Len sa uistite, že má okolo svojej jamy "
+"na hlinu dostatok priestoru na kopanie. Možno by bolo dobré postaviť nejaké "
+"strážnice na rozšírenie územia."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -375,6 +393,10 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Na vypaľovanie tehiel potrebuje tehliarska pec oheň. Ako palivo musíme "
+"použiť uhlie. Postavte uhoľnú baňu, aby sme sa uistili, že sa nám neminie. "
+"Žiadne uhlie znamená žiadne tehly, žiadne tehly znamenajú žiadne bane, "
+"žiadne bane znamenajú žiadne uhlie… vidíte ten problém."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -396,10 +418,13 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Viedol si si dobre. Celá naša výroba stavebných materiálov teraz funguje. "
+"Počkajme, kým nazhromaždíme viac materiálov. Mohli by sme trochu rozšíriť "
+"naše územie, aby sme zistili, čo iné sa na tomto ostrove nachádza."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Nedostatok trstiny"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
@@ -413,16 +438,22 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"Všimol som si, že už nejaký čas máme nedostatok trstiny. Zdá sa, že naše "
+"budovy jej potrebujú dosť veľa. Mali by sme postaviť jednu alebo dve ďalšie "
+"trstinové záhrady. Trstina sa používa aj na výrobu rybárskych sietí a iných "
+"nástrojov; preto by vyriešenie tohto nedostatku malo byť prioritou."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"V okne staveniska by ste mali novej trstinovej záhrade priradiť najvyššiu "
+"prioritu pre trstinu."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Nedostatok hliny"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
@@ -436,6 +467,10 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"Naši tehlári sa už nejaký čas sťažujú na nedostatok hliny. Žiadna hlina "
+"znamená, že sa nedajú vyrábať tehly, takže tento nedostatok nás veľmi "
+"spomaľuje. Bolo by lepšie postaviť jednu alebo dve ďalšie jamy na hlinu a "
+"studne na ich zásobovanie vodou."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -444,10 +479,14 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"Hlina sa používa aj pri stavbe lodí a na vylepšovanie uhliarskych pecí. Ak "
+"budeme niekedy potrebovať postaviť loď, alebo nám bane nebudú môcť poskytnúť"
+" dostatok uhlia, budeme potrebovať viac hliny, takže nedostatok sa musí "
+"vyriešiť."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Nedostatok tehiel"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
@@ -462,12 +501,18 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"Všimol som si, že nám dochádzajú tehly. To veľmi spomaľuje výstavbu našich "
+"budov, keďže potrebujeme toľko tehiel. Naozaj by sme mali začať stavať "
+"ďalšiu tehliarsku pec a v okne staveniska jej priradiť najvyššiu prioritu "
+"pre tehly, aby sme nedostatok vyriešili čo najskôr."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"V okne staveniska by ste mali novej tehliarskej peci priradiť najvyššiu "
+"prioritu pre tehly."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -486,6 +531,11 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Naše územie rozširujeme čoraz ďalej na východ a tovary treba prepravovať na "
+"dlhšie vzdialenosti. Mali by sme postaviť sklady v určitých vzdialenostiach "
+"blízko našej východnej hranice a v tom najvýchodnejšom prednostne skladovať "
+"stavebné materiály. Naše ústredie je príliš ďaleko na západe, aby bolo "
+"užitočné na dlhodobé skladovanie tovaru."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -502,6 +552,8 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"Náčelník Reebaud! Prinášam zlé správy. Baníci pracujú tak tvrdo, že nemajú "
+"čas pripraviť si vlastné jedlo. Dožadujú sa, aby sme ich ním zásobovali."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -511,6 +563,10 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Potrebujeme postaviť krčmu na prípravu prídelov. Aby sme získali surové "
+"jedlo, musíme postaviť rybársky dom, a keďže nikto nemá rád surové ryby, "
+"udiareň na ich vyúdenie. Ďalej postavte bobuľovú farmu, ktorá vysadí kríky s"
+" bobuľami, a dom zberateľa ovocia, aby sa kríky obrali."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -518,6 +574,8 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Mali by sme začať rozširovať naše územie rýchlejšie, aby sme mali dostatok "
+"priestoru pre mnoho bobuľových fariem a dlhšie pobrežie na rybolov."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
@@ -525,12 +583,12 @@ msgstr "Vylepšovanie potravinovej ekonomiky"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Kŕmenie vojakov"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "Výborne. Baníci sú spokojní a začali opäť pracovať."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -539,6 +597,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"Ale keď bude treba bane vylepšiť, prídely neudržia baníkov šťastných. Radšej"
+" urobte preventívne opatrenia – postavte druhú krčmu a potom zvážte "
+"vylepšenie jednej na pijáreň."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -549,6 +610,11 @@ msgid ""
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
 msgstr ""
+"Pijáreň potrebuje lepšie jedlo. Postavte pekáreň, pivovar a dve alebo tri "
+"farmy, aby ste začali pestovať jačmeň. Majte na pamäti, že jačmeň rastie "
+"veľmi pomaly; preto týchto pár fariem nebude stačiť, keď budeme naozaj "
+"potrebovať chlieb a pivo. Mali by sme sa rýchlo rozširovať, aby sme mali "
+"viac miesta na farmárčenie."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -558,14 +624,18 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"Pekáreň a pivovar by sa mali vylepšiť, len čo budú mať pracovníci dostatok "
+"skúseností. Potom môžu vyrábať medovinu a chlieb sladený medom. Postavte "
+"včelársky dom vedľa bobuľovej farmy na výrobu medu, ktorý môžeme skladovať, "
+"kým ho nebudeme potrebovať."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Vybudujte banícku ekonomiku"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "Banícka ekonomika"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -573,6 +643,8 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Teraz môžeme vyrábať všetky druhy potravín, na ktoré sme zvyknutí. Zaujímalo"
+" by ma, aké poklady môžu tieto kopce ukrývať? Mali by sme to zistiť."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -583,11 +655,16 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
+"Postavte železnorudnú baňu a možno aj zlatú baňu. Keďže produkujú iba rudy, "
+"budeme potrebovať pec na ich vytavenie. Tiež postavte kováčstvo, aby sme sa "
+"uistili, že nám nedôjdu nástroje – a áno, aj malú vyhňu na zbroj. Vyrába "
+"helmy aj meče. Dúfam, že tu nestretneme nepriateľov, ale je lepšie byť "
+"pripravený."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Buďte pripravení"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -595,6 +672,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Naše bane fungujú dobre. Teraz môžeme vyrábať všetky nástroje, ktoré "
+"potrebujeme, a tiež nejaké zbrane."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -604,6 +683,10 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"Tieto zbrane by sme mohli použiť na vyzbrojenie nových vojakov. Dúfam, že tu"
+" nenájdeme nepriateľov, ale vždy je lepšie byť pripravený. Noví vojaci sú v "
+"kasárňach vystrojení krátkym mečom a kožušinovým odevom, uniformou všetkých "
+"čestných bojovníkov."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -613,6 +696,10 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"Budeme potrebovať samozrejme kasárne; sobiu farmu na produkciu kožušín a "
+"šiciu dielňu na ušitie odevov z kožušín. Sobia farma produkuje trochu mäsa "
+"ako vedľajší produkt kožušiny a cvičí aj soby, ktoré pomáhajú našim nosičom "
+"na rušných cestách."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -621,6 +708,10 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"Odporúčam postaviť všetky tieto budovy v krátkej vzdialenosti od seba a "
+"postaviť v blízkosti dva sklady: Jeden by mal byť nastavený na skladovanie "
+"iba zbraní, zbroje, rúd, kovov a uhlia; druhý na skladovanie stavebných "
+"materiálov."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -630,20 +721,24 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"Mali by sme v blízkosti postaviť aj ďalšie súvisiace budovy, ako je pec a "
+"niekoľko studní a fariem na zásobovanie sobej farmy. Tento dizajn zefektívni"
+" našu vojenskú ekonomiku, pretože skráti čakanie na tovary v "
+"spracovateľských budovách."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "Preskúmajte ostrov"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Rozširovanie"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "Naše kasárne začali fungovať a teraz verbujeme nových vojakov."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -651,6 +746,8 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"Ale zatiaľ si nemôžeme byť istí, že sme tu v bezpečí. Bolo by lepšie "
+"rozširovať sa ďalej na východ, aby sme zistili, či sme tu naozaj sami."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -658,6 +755,9 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"Rozširovanie by tiež poskytlo viac priestoru na farmárčenie. Mohli by sme "
+"použiť nejaký jačmeň navyše na vycvičenie viacerých sobov, keďže naše cesty "
+"sú dosť vyťažené."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
@@ -669,12 +769,12 @@ msgstr "Nepriatelia!"
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "Nepriateľ na dohľad!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "Ďalší kmeň! Na NAŠOM ostrove! Čo tu robíte, votrelci?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -685,6 +785,8 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"Toto je MÔJ ostrov! VY ste tu votrelcami! Modlím sa k jedinému a pravému "
+"Bohu, aby sme vás všetkých pobili a vaše duše boli navždy mučené v pekle!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -692,10 +794,12 @@ msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr ""
+"Neveriaci! Modlím sa k NAŠIM bohom, aby bol tento bezbožný kmeň úplne "
+"zničený! Do boja s nimi!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "Silnejší v boji"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -703,6 +807,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
+"Vojakov verbujeme pomerne ľahko, ale sú dosť slabí. Ak majú poraziť "
+"nepriateľa, musíme našich vojakov vycvičiť."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -710,10 +816,12 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"Vojaci sú cvičení v základnom útoku, zdraví a obrane vo výcvikovom tábore. "
+"Jemnejším zručnostiam sa môžu priučiť vo výcvikovej aréne."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Frízsky boj"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -722,6 +830,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"Vojaci sú cvičení v dvoch krokoch v obrane a zdraví. Dostávajú kožušinové "
+"odevy zdobené železom a tiež zlatom na tlmenie úderov; a helmy kované zo "
+"železa a tiež zo zlata, aby sa predĺžil ich život v boji."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -732,6 +843,11 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"Učia sa útočiť tromi rôznymi mečmi: dlhým mečom, širokým mečom a dvojsečným "
+"mečom. Posledné dva obsahujú zlato a všetky obsahujú železo. Pokročilí "
+"vojaci sa učia používať dva meče naraz: Ponechajú si svoj prvý dvojsečný meč"
+" a do druhej ruky dostanú rôzne iné meče. To predstavuje šesť krokov výcviku"
+" útoku."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -740,10 +856,13 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"Vojakov necvičíme, aby sa útokom uhýbali; skutočný bojovník dokáže "
+"zablokovať súperove údery šikovným otočením meča, namiesto toho, aby "
+"odskakoval ako zbabelec."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Plánovanie výcvikového strediska"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -754,6 +873,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Budeme potrebovať krajčírstvo na šitie ochranejších odevov a ďalšiu šiciu "
+"dielňu, aby sme mohli naďalej vyrábať bežné kožušinové odevy. Mali by ste "
+"tiež vylepšiť malú vyhňu na zbroj, aby vyrábala lepšie zbrane a helmy, a "
+"postaviť novú malú, aby sme stále získavali základné zbrane. Teraz "
+"potrebujeme aspoň jednu zlatú baňu, pretože najlepšie zbrane a zbroj "
+"používajú zlato."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -764,6 +889,11 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"Tieto budovy by sme mali postaviť v blízkosti kasární, pretože, ako som už "
+"spomínal, je oveľa efektívnejšie centralizovať všetky naše vojenské "
+"zariadenia v jednom náborovom a výcvikovom stredisku, než keby boli "
+"roztrúsené na veľkej vzdialenosti. Postavte tam tretí sklad, ktorý bude "
+"skladovať iba jedlo potrebné na výcvik."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -772,6 +902,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Keď vojaci trénujú používanie nových zbraní, ich staré vybavenie sa vyhodí. "
+"Berte do úvahy, že zbytočný šrot bude zapratávať vaše cesty, kým sa niekde "
+"neuskladní v sklade."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -779,6 +912,8 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Odporúčam vycvičiť aspoň jedného vojaka na najvyššiu úroveň v zdraví, obrane"
+" a útoku. Dovtedy je pre nás nepriateľ príliš silný."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
@@ -787,11 +922,11 @@ msgstr "Naši vojaci sú silní"
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
-msgstr ""
+msgstr "Konečne máme nášho prvého plne vycvičeného vojaka. Zaútočme!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Sú naši vojaci dosť silní?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -801,10 +936,15 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"S úctou, Náčelník, prosím, nebuď taký unáhlený! Nepriatelia sú veľmi silní a"
+" stále nie som presvedčený, že ich dokážeme poraziť. Nerád by som posielal "
+"nejakých vojakov do bitky, ktorú pravdepodobne prehrajú. Radšej by som "
+"počkal o niečo dlhšie, kým budeme môcť s istotou poraziť nepriateľa bez "
+"straty vojakov."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Naši vojaci sú dosť silní"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -814,16 +954,20 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"Samozrejme, aj ja uprednostňujem udržať našich vojakov nažive, ale nemôžeme "
+"zachrániť každý život. Vojaci v boji zomierajú, tak to proste chodí. Môžeš "
+"sa rozhodnúť, ako dlho čakať s útokom, ale netrvaj príliš dlho, inak "
+"nepriatelia využijú našu slabosť."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "Pozor!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "Nedostatočne silní"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -832,6 +976,9 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
+"Náčelník Reebaud! Naši prieskumníci hlásia, že nepriateľ rýchlo postupuje. "
+"Obávam sa, že ešte nie sme dosť silní na to, aby sme sa ubránili, ak zaútočí"
+" prvý. Musíš vymyslieť niečo, čím ho zdržíš."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -841,6 +988,9 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"Prieskumníci ma informovali, že nepriateľ nevie stavať veže. Mohli by sme "
+"postaviť pevnosť, čo je budova, ktorá posunie hranicu čo najďalej na východ "
+"naraz. Nepriateľ ju uvidí iba vtedy, ak postaví pevnosť priamo na hranici."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -850,16 +1000,20 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"Tomu môžeme zabrániť, alebo to aspoň sťažiť, ak prikážeme horárom, aby na "
+"hranici vysadili stromy. Nepriateľ ich bude musieť veľa vyrúbať, aby si "
+"urobil miesto, takže môžeme byť v bezpečí, kým nezačneme bitku v čase, ktorý"
+" si sami zvolíme."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Porážka nepriateľa"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Porážka nepriateľa!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
@@ -867,6 +1021,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"Sú porazení! Ďakujem vám, všetci moji bohovia, že ste nám dopriali víťazstvo"
+" nad neveriacimi!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -874,16 +1030,18 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Modlím sa k Bohu, aby vypočul moje posledné slová. Nedovoľ falošnému "
+"zloduchovi zvíťaziť! Potrestaj ich za tento nešľachetný čin!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "Potopa"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "Ostrov sa zaplavuje!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -891,6 +1049,8 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
+"Jeho Boh splnil jeho želanie! Oceán stúpa! Ostrov je takmer plochý – všetci "
+"sa utopíme!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -900,6 +1060,10 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"Nezúfajte, videl som istú nádej! Najvýchodnejší cíp ostrova, ako aj miesto, "
+"kde stálo ústredie zloduchov, sa zdá byť vhodné na vybudovanie prístavu. Ak "
+"sa nám podarí postaviť loď a naplniť ju všetkým, čo potrebujeme na "
+"vybudovanie novej osady, možno sa nám podarí uniknúť."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -910,14 +1074,18 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"Zdá sa, že potopa prichádza zo západu. Ak sa poponáhľame, stihneme to! "
+"Musíme len postaviť prístav a lodenicu – ach, a tkáčovňu na utkanie odolnej "
+"látky na plachty, ktorá sa vyrába z trstiny a kožušiny. Potom môžeme z "
+"prístavu spustiť expedíciu. Modlite sa k bohom a ponáhľajte sa!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Nezabudnite na vojakov"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Vojaci do prístavu!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -939,15 +1107,45 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"V tom zhone som takmer zabudol – kdekoľvek pristaneme, budeme potrebovať "
+"nejaké stavebné materiály na začiatok a vojakov na zabezpečenie a rozšírenie"
+" našej novej kolónie. Aj po naložení expedície by mala mať loď dostatok "
+"voľného miesta pre niekoľko tovarov a pracovníkov. Okrem toho by tam malo "
+"byť miesto až pre %d vojaka, ak nikomu nebude vadiť, že sa budú tlačiť. "
+"Pošlime do prístavu nejaké stavebné zásoby a našich najlepších mužov, keď "
+"bude dokončený, aby boli pripravení nalodiť sa, keď vyplávame!"
 msgstr[1] ""
+"V tom zhone som takmer zabudol – kdekoľvek pristaneme, budeme potrebovať "
+"nejaké stavebné materiály na začiatok a vojakov na zabezpečenie a rozšírenie"
+" našej novej kolónie. Aj po naložení expedície by mala mať loď dostatok "
+"voľného miesta pre niekoľko tovarov a pracovníkov. Okrem toho by tam malo "
+"byť miesto až pre %d vojakov, ak nikomu nebude vadiť, že sa budú tlačiť. "
+"Pošlime do prístavu nejaké stavebné zásoby a našich najlepších mužov, keď "
+"bude dokončený, aby boli pripravení nalodiť sa, keď vyplávame!"
 msgstr[2] ""
+"V tom zhone som takmer zabudol – kdekoľvek pristaneme, budeme potrebovať "
+"nejaké stavebné materiály na začiatok a vojakov na zabezpečenie a rozšírenie"
+" našej novej kolónie. Aj po naložení expedície by mala mať loď dostatok "
+"voľného miesta pre niekoľko tovarov a pracovníkov. Okrem toho by tam malo "
+"byť miesto až pre %d vojaka, ak nikomu nebude vadiť, že sa budú tlačiť. "
+"Pošlime do prístavu nejaké stavebné zásoby a našich najlepších mužov, keď "
+"bude dokončený, aby boli pripravení nalodiť sa, keď vyplávame!"
 msgstr[3] ""
+"V tom zhone som takmer zabudol – kdekoľvek pristaneme, budeme potrebovať "
+"nejaké stavebné materiály na začiatok a vojakov na zabezpečenie a rozšírenie"
+" našej novej kolónie. Aj po naložení expedície by mala mať loď dostatok "
+"voľného miesta pre niekoľko tovarov a pracovníkov. Okrem toho by tam malo "
+"byť miesto až pre %d vojakov, ak nikomu nebude vadiť, že sa budú tlačiť. "
+"Pošlime do prístavu nejaké stavebné zásoby a našich najlepších mužov, keď "
+"bude dokončený, aby boli pripravení nalodiť sa, keď vyplávame!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Všetky tovary a pracovníci, ktorí sú naložení na expedíciu, ako aj niektorí "
+"vojaci v prístave, sa prenesú do ďalšieho scenára."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
@@ -955,7 +1153,7 @@ msgstr "Víťazstvo"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "Unikli sme!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -964,6 +1162,8 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
+"Bohovia vyslyšali naše modlitby. Unikneme potopeniu ostrova a som si istý, "
+"že si budeme môcť opäť vybudovať nový domov v pokojnejšom kúte tohto sveta!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
@@ -975,3 +1175,5 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"Dokončili ste túto misiu. Teraz môžete prejsť na ďalší scenár a pomôcť nám "
+"vybudovať nový domov, ďaleko od pomstychtivého dosahu falošného boha…"
