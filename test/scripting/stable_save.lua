@@ -13,7 +13,9 @@ function stable_save(game, savename, desired_speed)
       -- lunit is currently running (it is loaded and started running and did not not finish)
       print("WARNING: a testcase is probably running while saving. This might fail!")
    end
-   assert_true(game.allow_saving, "stable_save() would hang if saving is not allowed")
+   if not game.allow_saving then
+     error("stable_save() would hang if saving is not allowed")
+   end
 
    sleep(1000)
    game:save(savename)
