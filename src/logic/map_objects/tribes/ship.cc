@@ -42,6 +42,7 @@
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/naval_invasion_base.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -334,7 +335,6 @@ bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
 		return false;
 	}
 
-	constexpr int kPortSpaceGeneralAreaRadius = 5;
 	MapRegion<Area<Coords>> mr(map, Area<Coords>(coords, kPortSpaceGeneralAreaRadius));
 	do {
 		const Field& field = map[mr.location()];
@@ -1666,6 +1666,31 @@ void Ship::battle_update(Game& game) {
 			assert(nr_fields == drop_locations.size());
 
 			assert(!battles_.back().attack_soldier_serials.empty());
+
+			NavalInvasionBase* camp = nullptr;
+
+			// Let's see whether this is a reinforcement
+			{
+				std::vector<Bob*> camps;
+				// I don't think it's possible to have 2 portspaces within 5 steps that can not be
+				// reached from each other by walking, unless blocked by buildings.
+				map.find_bobs(game,
+				              Area<FCoords>(map.get_fcoords(portspace), kPortSpaceGeneralAreaRadius),
+				              &camps,
+				              FindBobByType(MapObjectType::NAVAL_INVASION_BASE));
+				for (Bob* bob : camps) {
+					if (bob->get_owner() == get_owner()) {
+						camp = dynamic_cast<NavalInvasionBase*>(bob);
+						assert(camp != nullptr);
+						break;
+					}
+				}
+			}
+
+			if (camp == nullptr) {
+				camp = NavalInvasionBase::create(game, get_owner(), portspace);
+			}
+
 			for (Serial serial : battles_.back().attack_soldier_serials) {
 				auto it = std::find_if(items_.begin(), items_.end(), [serial](const ShippingItem& si) {
 					return si.get_object_serial() == serial;
@@ -1685,7 +1710,10 @@ void Ship::battle_update(Game& game) {
 
 				worker->set_position(game, drop_locations.at(game.logic_rand() % nr_fields));
 				worker->reset_tasks(game);
-				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, portspace);
+
+				Soldier* soldier = dynamic_cast<Soldier*>(worker);
+				camp->add_soldier(soldier);
+				soldier->start_task_naval_invasion(game, camp);
 
 				items_.erase(it);
 			}

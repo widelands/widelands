@@ -33,6 +33,7 @@ namespace Widelands {
 
 class EditorGameBase;
 class Battle;
+class NavalInvasionBase;
 
 struct SoldierLevelRange {
 	SoldierLevelRange() = default;
@@ -229,6 +230,9 @@ enum CombatFlags {
 	/// Attackers would try avoid entering combat with others soldiers but 'flag
 	/// defenders'.
 	CF_AVOID_COMBAT = 4,
+	/// Allow longer detours for pathfinding. Used by naval invasion when we know
+	/// that the target is reachable.
+	CF_ALLOW_LONG_WALK = 8,
 };
 
 class Soldier : public Worker {
@@ -347,7 +351,7 @@ public:
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
-	void start_task_naval_invasion(Game& game, const Coords& coords);
+	void start_task_naval_invasion(Game& game, NavalInvasionBase* camp);
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
 	get_walking_animations_cache() {

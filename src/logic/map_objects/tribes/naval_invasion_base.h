@@ -19,9 +19,15 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_NAVAL_INVASION_BASE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_NAVAL_INVASION_BASE_H
 
+#include <set>
+#include <vector>
+
+#include "base/times.h"
 #include "logic/map_objects/tribes/soldier.h"
 
 namespace Widelands {
+
+constexpr int kPortSpaceGeneralAreaRadius = 5;
 
 class NavalInvasionBaseDescr : public BobDescr {
 public:
@@ -42,24 +48,38 @@ private:
 class NavalInvasionBase : public Bob {
 public:
 	NavalInvasionBase();
-	static NavalInvasionBase* create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
+	static NavalInvasionBase* create(EditorGameBase& egbase, Player* owner, const Coords& pos);
 
 	const NavalInvasionBaseDescr& descr() const;
 	void init_auto_task(Game& game) override;
 	void cleanup(EditorGameBase&) override;
 	void log_general_info(const EditorGameBase&) const override;
 
-	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
+	void add_soldier(Soldier* soldier);
+	void remove_soldier(Soldier* soldier);
 
 	[[nodiscard]] const std::set<OPtr<Soldier>>& get_soldiers() const {
 		return soldiers_;
 	}
+
+	void needs_update() {
+		last_update_ = Time(0);
+	}
+
+	[[nodiscard]] const std::vector<std::pair<Serial, Coords>>& get_enemy_buildings(Game& game);
+	[[nodiscard]] const std::vector<OPtr<Soldier>>& get_enemy_soldiers() const;
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 private:
 	std::set<OPtr<Soldier>> soldiers_;
+	std::vector<std::pair<Serial, Coords>> enemy_buildings_;
+	std::vector<OPtr<Soldier>> enemy_soldiers_;
+	Time last_update_{0};
+	bool did_conquer_{false};
+
+	void check_enemies(Game& game);
 
 	void check_unconquer();
 

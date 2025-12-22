@@ -124,6 +124,10 @@ bool FindBobByName::accept(Bob* b) const {
 	assert(b);
 	return b->descr().name() == name_;
 }
+bool FindBobByType::accept(Bob* b) const {
+	assert(b);
+	return b->descr().type() == type_;
+}
 
 /*
 ==============================================================================
