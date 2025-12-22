@@ -78,10 +78,10 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	if (camp == nullptr) {
-		throw(wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
+		throw (wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
 		                 state.coords.y));
 	}
-	assert(camp->owner() == owner());
+	assert(camp->get_owner() == get_owner());
 
 	/*
 	 * Soldiers in a naval invasion are based around `state.objvar1` and seek to eliminate

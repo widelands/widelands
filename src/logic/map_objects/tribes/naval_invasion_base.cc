@@ -125,7 +125,7 @@ const std::vector<std::pair<Serial, Coords>>& NavalInvasionBase::get_enemy_build
 const std::vector<OPtr<Soldier>>& NavalInvasionBase::get_enemy_soldiers() const {
 	// get_enemy_soldiers() should only be called after get_enemy_buildings(), when there are no
 	// more buildings left.
-	assert(game.get_gametime() <= last_update_ + kCheckEnemiesInterval);
+	assert(get_owner()->egbase().get_gametime() <= last_update_ + kCheckEnemiesInterval);
 	assert(enemy_buildings_.empty());
 
 	return enemy_soldiers_;
