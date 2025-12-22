@@ -13,54 +13,29 @@ function stable_save(game, savename, desired_speed)
       -- lunit is currently running (it is loaded and started running and did not not finish)
       print("WARNING: a testcase is probably running while saving. This might fail!")
    end
+   if not game.allow_saving then
+     error("stable_save() would hang if saving is not allowed")
+   end
 
    sleep(1000)
+   game:save(savename)
+   game.desired_speed = 1000
 
-   local tries = 0
-   local saved_game = false
+   -- Wait until save was finished
+   repeat
+      sleep(200)
+   until game.last_save_time ~= last_save_time
+   print("###### stable_save: new save time " .. game.last_save_time)
 
-   while true do
-      if game.allow_saving then
-         game:save(savename)
-
-         game.desired_speed = 1000
-
-         -- Wait until save was finished
-         repeat
-            sleep(200)
-         until game.last_save_time ~= last_save_time
-         print("###### stable_save: new save time " .. game.last_save_time)
-
-         saved_game = true
-         break
-      else
-         tries = tries + 1
-         if tries < 5 then
-            print("Saving game is not allowed, retry after 1s...")
-            sleep(1000)
-         else
-            break
-         end
-      end
+   -- Give the loaded game a chance to catch up
+   local mapview = wl.ui.MapView()
+   local counter = 0
+   while mapview.average_fps < 20 and counter < 100 do
+      sleep(200)
+      counter = counter + 1
    end
 
-   if saved_game then
-      sleep(1000)
-
-      -- Give the loaded game a chance to catch up
-      local mapview = wl.ui.MapView()
-      local counter = 0
-      while mapview.average_fps < 20 and counter < 100 do
-         sleep(200)
-         counter = counter + 1
-      end
-
-      sleep(1000)
-
-   else
-      print("WARNING: stable_save() skipped because saving the game is not allowed!")
-   end
-
+   sleep(1000)
    game.desired_speed = desired_speed
    sleep(100)
 end
