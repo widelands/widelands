@@ -1630,7 +1630,8 @@ void Ship::battle_update(Game& game) {
 			int radius = 1;
 			int step = -1;
 			constexpr uint16_t kTooFar = 3;
-			while (radius < kTooFar && (map[representative_location].nodecaps() & MOVECAPS_WALK) == 0) {
+			while (radius < kTooFar &&
+			       (map[representative_location].nodecaps() & MOVECAPS_WALK) == 0) {
 				representative_location = map.get_neighbour(representative_location, nextdir);
 				if (step < 0) {
 					// start new circle
@@ -1649,18 +1650,22 @@ void Ship::battle_update(Game& game) {
 			}
 			if (radius >= kTooFar) {
 				// no suitable location found
-				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending message
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending
+				// message
 				NEVER_HERE();
 			}
 
 			std::vector<Coords> drop_locations;
 			const FindNodeInvasion findnode;
 			CheckStepDefault checkstep(MOVECAPS_WALK);
-			uint32_t nr_fields = map.find_reachable_fields(game, Area<FCoords>(map.get_fcoords(representative_location), 4), &drop_locations, checkstep, findnode);
+			uint32_t nr_fields = map.find_reachable_fields(
+			   game, Area<FCoords>(map.get_fcoords(representative_location), 4), &drop_locations,
+			   checkstep, findnode);
 
 			if (nr_fields == 0) {
 				// no suitable drop locations found
-				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending message
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending
+				// message
 				NEVER_HERE();
 			}
 			assert(nr_fields == drop_locations.size());
@@ -1676,8 +1681,7 @@ void Ship::battle_update(Game& game) {
 				// reached from each other by walking, unless blocked by buildings.
 				map.find_bobs(game,
 				              Area<FCoords>(map.get_fcoords(portspace), kPortSpaceGeneralAreaRadius),
-				              &camps,
-				              FindBobByType(MapObjectType::NAVAL_INVASION_BASE));
+				              &camps, FindBobByType(MapObjectType::NAVAL_INVASION_BASE));
 				for (Bob* bob : camps) {
 					if (bob->get_owner() == get_owner()) {
 						camp = dynamic_cast<NavalInvasionBase*>(bob);

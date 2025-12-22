@@ -284,7 +284,8 @@ void Soldier::attack_update(Game& game, State& state) {
 
 		if (State* invasion_state = get_state(taskNavalInvasion); invasion_state != nullptr) {
 			// Either persist = 10 is not enough, or the path got blocked.
-			log_warn_time(game.get_gametime(), "Naval invasion soldier failed to find path to target building.");
+			log_warn_time(
+			   game.get_gametime(), "Naval invasion soldier failed to find path to target building.");
 			upcast(NavalInvasionBase, camp, invasion_state->objvar1.get(game));
 			if (camp != nullptr) {
 				camp->needs_update();

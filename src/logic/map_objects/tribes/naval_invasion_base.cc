@@ -72,8 +72,8 @@ void NavalInvasionBase::init_auto_task(Game& game) {
 			continue;
 		}
 		if (state->objvar1.serial() != serial()) {
-			molog(game.get_gametime(), "Soldier %u at different invasion (%u)!",
-			      soldier->serial(), state->objvar1.serial());
+			molog(game.get_gametime(), "Soldier %u at different invasion (%u)!", soldier->serial(),
+			      state->objvar1.serial());
 			it = soldiers_.erase(it);
 			continue;
 		}
@@ -138,7 +138,8 @@ void NavalInvasionBase::check_enemies(Game& game) {
 	const Map& map = game.map();
 	CheckStepWalkOn checkstep(MOVECAPS_WALK, false);
 	const FCoords portspace_fcoords = map.get_fcoords(get_position());
-	const int32_t port_radius = game.descriptions().get_building_descr(owner().tribe().port())->get_conquers();
+	const int32_t port_radius =
+	   game.descriptions().get_building_descr(owner().tribe().port())->get_conquers();
 	const int32_t max_radius = game.descriptions().get_largest_workarea();
 
 	std::vector<ImmovableFound> results;

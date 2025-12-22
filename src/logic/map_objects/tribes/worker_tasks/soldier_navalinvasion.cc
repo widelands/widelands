@@ -45,7 +45,8 @@ void Soldier::start_task_naval_invasion(Game& game, NavalInvasionBase* camp) {
 	//    Be careful if you want to reuse them before v1.5.
 	//    Remove this reminder in v1.5.
 
-	molog(game.get_gametime(), "[naval_invasion] Starting at %3dx%3d\n", invasion_state.coords.x, invasion_state.coords.y);
+	molog(game.get_gametime(), "[naval_invasion] Starting at %3dx%3d\n", invasion_state.coords.x,
+	      invasion_state.coords.y);
 }
 
 void Soldier::naval_invasion_update(Game& game, State& state) {
@@ -77,7 +78,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	if (camp == nullptr) {
-		throw(wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x, state.coords.y));
+		throw(wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
+		                 state.coords.y));
 	}
 	assert(camp->owner() == owner());
 
@@ -147,14 +149,17 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	// Check if another enemy wants our port space as well
 	if (get_battle() == nullptr) {
 		std::vector<OPtr<Soldier>> hostile_soldiers = camp->get_enemy_soldiers();
-		std::sort(hostile_soldiers.begin(), hostile_soldiers.end(), [this, &game, &map](OPtr<Soldier> a, OPtr<Soldier> b) {
-			const uint32_t distance_a = map.calc_distance(get_position(), a.get(game)->get_position());
-			const uint32_t distance_b = map.calc_distance(get_position(), b.get(game)->get_position());
-			if (distance_a != distance_b) {
-				return distance_a < distance_b;
-			}
-			return a.serial() < b.serial();
-		});
+		std::sort(hostile_soldiers.begin(), hostile_soldiers.end(),
+		          [this, &game, &map](OPtr<Soldier> a, OPtr<Soldier> b) {
+			          const uint32_t distance_a =
+			             map.calc_distance(get_position(), a.get(game)->get_position());
+			          const uint32_t distance_b =
+			             map.calc_distance(get_position(), b.get(game)->get_position());
+			          if (distance_a != distance_b) {
+				          return distance_a < distance_b;
+			          }
+			          return a.serial() < b.serial();
+		          });
 		for (const OPtr<Soldier>& soldier_optr : hostile_soldiers) {
 			Soldier* soldier = soldier_optr.get(game);
 			if (soldier->can_be_challenged() && soldier->get_battle() == nullptr &&
