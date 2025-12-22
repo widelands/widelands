@@ -78,8 +78,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	if (camp == nullptr) {
-		throw(wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
-		                 state.coords.y));
+		throw wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
+		                 state.coords.y);
 	}
 	assert(camp->get_owner() == get_owner());
 
