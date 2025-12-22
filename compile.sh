@@ -42,7 +42,7 @@ print_help () {
     echo " "
     echo "Omission options and their overrides:"
     echo " "
-    echo "-w or --no-website    Omit building of website binaries."
+    echo "-w or --no-website    Omit building of miscellaneous binaries. See +w."
     echo "+w or --with-website  Enable building of website binaries including the"
     echo "                      wl_create_spritesheet binary (default)."
     echo " "
