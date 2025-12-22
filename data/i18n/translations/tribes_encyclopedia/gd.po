@@ -7911,7 +7911,7 @@ msgstr "Bidh fiodh math gu leòr gus do thaigh a chumail blàth, ach a thaobh ob
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn seo gual gach %s sa chuibheas."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -17138,17 +17138,17 @@ msgstr "Fhad ’s a bhios tu a’ toirt bratach air falbh: Thoir air falbh gach 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Beag"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Meadhanach"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Mòr"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17226,7 +17226,7 @@ msgstr "Adhbhar"
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
-msgstr ""
+msgstr "An aire"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
@@ -17234,7 +17234,7 @@ msgstr "Riatanasan"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Meud"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."

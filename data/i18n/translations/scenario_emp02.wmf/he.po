@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
-msgstr ""
+msgstr "שיש"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."

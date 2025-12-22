@@ -14453,7 +14453,7 @@ msgstr "조선소에서 일하고 새로운 선박을 건조합니다."
 #: ../../../../data/tribes/initialization/frisians/units.lua:727
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 방파제를 건설합니다."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../../../data/tribes/initialization/frisians/units.lua:737
@@ -15899,7 +15899,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "바다에서 새로운 땅을 얻기 위해 근처에 방파제를 건설합니다."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2091
@@ -17076,17 +17076,17 @@ msgstr "깃발을 제거할 때: 첫번째 교차로까지 모든 깃발 제거"
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "작음"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "중간"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "큼"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17172,7 +17172,7 @@ msgstr "요구사항"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."

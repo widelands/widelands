@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Ukrainian (http://app.transifex.com/widelands/widelands/language/uk/)\n"
@@ -132,7 +132,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Шість місяців тому, Люциус - молодий полководець Імперії - вирушив з 150 солдатами до північного лісу. де Варвари переходили на землі, якими володіла Імперія. Його завданням було захистити Імперські землі. Спочатку все було спокійно. Він навіть розмовляв з декількома дітьми варварів, та подумував про мирне життя, пліч о пліч з цим народом. Він став спокійніше, і його армія почала приділяти менше уваги потенційному супернику. Це було їх помилкою. В одну з березневих ночей, його непідготовлена армія була атакована варварами, в кількості 100 чоловік, та повністю розбита. Тільки завдяки його мирному життю, йому та частині його солдат вдалося вижити."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
@@ -196,11 +196,11 @@ msgstr "Ще не впроваджено"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
-msgstr ""
+msgstr "Нікого"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Вибачте, цю мапу ще не закінчено"
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -341,13 +341,14 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
+msgid "Economy and Trading"
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
 msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8

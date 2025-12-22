@@ -28,6 +28,12 @@ wl.Descriptions():new_militarysite_type {
          columns = 2,
          rows = 2,
          fps = 10
+      },
+      build = {
+         hotspot = {28, 45},
+         frames = 3,
+         columns = 3,
+         rows = 1,
       }
    },
    animations = {

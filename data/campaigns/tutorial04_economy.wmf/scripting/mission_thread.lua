@@ -32,11 +32,14 @@ function wait_for_window_and_tab_or_complain(
          campaign_message_box(complain_msg)
          while not mv.windows[window_name] do sleep(200) end
          obj_open_window.visible = false
+         sleep(50) -- let the window initialisation finish
       end
 
       -- But it might be closed at any point in time. If it is open and the
       -- correct tab is active, we terminate the loop.
       if mv.windows[window_name] and
+         mv.windows[window_name].tabs and
+         mv.windows[window_name].tabs[tab_name] and
          mv.windows[window_name].tabs[tab_name].active
       then
          break
@@ -275,8 +278,8 @@ function trading()
 
    local o = campaign_message_with_objective(trading_8, obj_propose_trade)
 
-   local trade_accepted = false
-   while not trade_accepted do
+   local trade_accepted = nil
+   while trade_accepted == nil do
       sleep(1000)
       for i,trade in ipairs(wl.Game().trades) do
          if trade.state == "proposed" then
@@ -293,10 +296,16 @@ function trading()
                campaign_message_box(trading_rejected)
             else
                p2market:accept_trade(trade.trade_id)
-               trade_accepted = true
+               trade_accepted = trade.trade_id
 
+               local num_batches = trade.num_batches
+               if num_batches < 0 then  -- infinite
+                  num_batches = 106  -- kind of high
+               else
+                  num_batches = num_batches + 3  -- some extra
+               end
                for ware,amount in pairs(trade.items_to_receive) do
-                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (trade.num_batches + 3)))
+                  p2hq:set_wares(ware, math.max(p2hq:get_wares(ware), amount * (num_batches)))
                end
             end
          end
@@ -305,7 +314,9 @@ function trading()
 
    set_objective_done(o)
    mv:click(p1marketpos)
+   mv.windows["building_window_" .. p1marketpos.immovable.serial].tabs["trade_" .. trade_accepted]:click()
    campaign_message_box(trading_9)
+   campaign_message_box(trading_9a)
 
    sleep(15000)
    local new_trade_id = p2market:propose_trade(plr, math.random(3, 20), {

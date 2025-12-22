@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2025-11-27 03:16+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: TaeMin An, 2017,2019\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "시장"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
@@ -956,31 +956,31 @@ msgid "Fortress"
 msgstr "요새"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr "당신의 군인들이 당신의 요새에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
 msgstr "당신의 요새가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:65
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
 msgstr "당신의 요새가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:67
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr "적이 요새에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
+#: ../../../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:69
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr "당신의 군인들이 요새에 있는 적을 물리쳤습니다."
@@ -992,31 +992,31 @@ msgid "Outpost"
 msgstr "전선 기지"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
 msgstr "당신의 감시 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:63
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
 msgstr "당신의 감시 초소가 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr "적이 감시 초소에 있는 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
+#: ../../../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "당신의 군인들이 감시 초소에 있는 적을 물리쳤습니다."
@@ -1028,31 +1028,31 @@ msgid "Sentinel"
 msgstr "감시 초소"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
 msgstr "당신의 군인들이 감시 초소에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
 msgstr "당신의 감시 초소가 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:61
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
 msgstr "당신의 감시 초소가 공격 받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:63
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
 msgstr "적이 감시 초소에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
+#: ../../../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:65
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
 msgstr "당신의 군인들이 감시 탑에 있는 적을 패배시켰습니다."
@@ -1064,31 +1064,31 @@ msgid "Tower"
 msgstr "탑"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
 msgstr "당신의 군인들이 당신의 탑에 주둔했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
 msgstr "당신의 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
 msgstr "당신의 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:68
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr "적이 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr "당신의 군인들이 탑에 있는 적을 물리쳤습니다."
@@ -1100,31 +1100,31 @@ msgid "Wooden Tower"
 msgstr "목재 탑"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
 msgstr ""
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
 msgstr "당신의 목재 탑이 침략자를 발견했습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:64
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:70
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
 msgstr "당신의 목재 탑이 공격받고 있습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:72
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
 msgstr "적이 목재 탑에 있는 당신의 군인들을 물리쳤습니다."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
+#: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:74
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
 msgstr "당신의 군인들이 목재 탑에 있는 적을 물리쳤습니다."
@@ -1241,13 +1241,13 @@ msgstr "카사바 농장"
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:72
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:48
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:55
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:77
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:56
@@ -1255,8 +1255,8 @@ msgstr "카사바 농장"
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:70
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:82
 #: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
@@ -1285,7 +1285,7 @@ msgstr "카사바를 수확하고 있음"
 #: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:109
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:100
 msgid "No Fields"
 msgstr "밭이 없음"
 
@@ -1298,7 +1298,7 @@ msgstr "밭이 없음"
 #: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:110
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:101
 msgid "Out of Fields"
 msgstr "밭이 부족함"
 
@@ -1495,7 +1495,7 @@ msgstr "금 채취꾼이 사는곳"
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:65
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:72
 msgid "mining gold"
@@ -1508,7 +1508,7 @@ msgstr "금 캐고 있음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:83
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:90
 msgid "No Gold"
 msgstr "금 없음"
@@ -1520,7 +1520,7 @@ msgstr "금 없음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:91
 msgid "Main Gold Vein Exhausted"
 msgstr "알짜 금 광산맥 고갈"
@@ -1594,7 +1594,7 @@ msgstr "정글 보호자의 오두막"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
-#: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:55
 msgid "planting trees"
 msgstr "나무를 심고 있음"
 
@@ -1615,7 +1615,7 @@ msgstr "덩굴 나무를 자르고 있음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:66
 msgid "No Trees"
 msgstr "나무 없음"
 
@@ -1705,8 +1705,8 @@ msgstr "정찰대의 오두막"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:68
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:63
-#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
-#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:70
 msgid "scouting"
 msgstr "정찰하고 있음"
 
@@ -1835,7 +1835,7 @@ msgstr "화강암 자르고 있음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:60
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:66
 msgid "No Rocks"
 msgstr "바위 없음"
 
@@ -1843,7 +1843,7 @@ msgstr "바위 없음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:67
 msgid "Out of Rocks"
 msgstr "바위 부족"
 
@@ -1874,8 +1874,8 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:75
 msgid "mining granite"
@@ -1954,7 +1954,7 @@ msgstr "야생 지킴이의 천막"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:71
 msgid "breeding fish"
 msgstr "물고기를 키우고 있음"
 
@@ -1974,7 +1974,7 @@ msgstr "나무꾼의 오두막"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:53
 msgid "felling trees"
 msgstr "나무를 베고 있음"
 
@@ -1982,7 +1982,7 @@ msgstr "나무를 베고 있음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:67
 msgid "Out of Trees"
 msgstr "나무 부족"
 
@@ -2093,8 +2093,8 @@ msgstr "석탄 광산"
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:101
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:74
 msgid "mining coal"
@@ -2106,7 +2106,7 @@ msgstr "석탄을 파고 있음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:113
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:92
 msgid "No Coal"
 msgstr "석탄 없음"
@@ -2117,7 +2117,7 @@ msgstr "석탄 없음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:114
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:93
 msgid "Main Coal Vein Exhausted"
 msgstr "알짜 석탄 광맥이 고갈됨"
@@ -2194,7 +2194,7 @@ msgstr "물고기 키우는 이의 집"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:69
 msgid "No Fish"
 msgstr "물고기 없음"
 
@@ -2202,7 +2202,7 @@ msgstr "물고기 없음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:70
 msgid "Out of Fish"
 msgstr "물고기가 부족함"
 
@@ -2229,8 +2229,8 @@ msgstr "어부의 집"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:80
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:86
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:56
 msgid "fishing"
 msgstr "물고기 잡고 있음"
 
@@ -2294,14 +2294,14 @@ msgstr "사냥꾼의 집"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:42
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:55
 msgid "hunting"
 msgstr "사냥하고 있음"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:77
 msgid "No Game"
 msgstr "사냥감 없음"
 
@@ -2309,7 +2309,7 @@ msgstr "사냥감 없음"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:72
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:79
 msgid "Out of Game"
 msgstr "사냥감 부족"
 
@@ -2339,7 +2339,7 @@ msgstr "철 광산"
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:74
 msgid "mining iron"
@@ -2351,7 +2351,7 @@ msgstr "철 캐고 있음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "No Iron"
 msgstr "철 없음"
@@ -2362,7 +2362,7 @@ msgstr "철 없음"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:93
 msgid "Main Iron Vein Exhausted"
 msgstr "알짜 철 광산맥 고갈"
@@ -2400,7 +2400,7 @@ msgstr "채석장"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:53
 msgid "quarrying granite"
 msgstr "화강암을 캐고 있음"
 
@@ -2850,13 +2850,13 @@ msgid "Granite Mine"
 msgstr "화강암 광산"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:116
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:93
 msgid "No Granite"
 msgstr "화강암 없음"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:117
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:94
 msgid "Main Granite Vein Exhausted"
 msgstr "알짜 화강암 광산맥 고갈"
@@ -3033,13 +3033,13 @@ msgstr "갈대 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:77
 msgid "planting reed"
 msgstr "갈대 심고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:69
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:88
 msgid "harvesting reed"
 msgstr "갈대를 수확하고 있음"
 
@@ -3600,16 +3600,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "양어장"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:108
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:108
 msgid "No Ponds"
 msgstr "연못 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:109
 msgid "Out of Fish Ponds"
 msgstr "연못에 물고기 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:104
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:110
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3684,15 +3684,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "벌 키우는 집"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:69
 msgid "No Flowers"
 msgstr "꽃 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:70
 msgid "Out of Flowers"
 msgstr "꽃이 떨어짐"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
@@ -3707,7 +3707,7 @@ msgid "Berry Farm"
 msgstr "딸기 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:56
 msgid "planting bushes"
 msgstr "덤불 심고 있음"
 
@@ -3753,20 +3753,20 @@ msgstr "숯가마 장인의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:73
 msgid "making a charcoal stack"
 msgstr "숯 더미 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:87
 msgid "collecting coal"
 msgstr "석탄을 모우고 있음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:103
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:109
 msgid "Out of Clay Ponds"
 msgstr "찰흙이 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:104
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:110
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
@@ -3788,20 +3788,20 @@ msgid "Clay Pit"
 msgstr "찰흙 파는 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:67
 msgid "making clay"
 msgstr "찰흙 만들고 있음"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:86
 msgid "No Ground"
 msgstr "땅 부족함"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:87
 msgid "No Level Ground"
 msgstr "고른 땅이 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:88
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -3815,7 +3815,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "석탄 광산"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:116
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:122
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3843,19 +3843,19 @@ msgid "Fruit Collector’s House"
 msgstr "과일 따는 이의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:56
 msgid "gathering berries"
 msgstr "딸기 따고 있음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:69
 msgid "No Bushes"
 msgstr "덤불 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:70
 msgid "Out of Berries"
 msgstr "딸기 없음"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -3866,15 +3866,15 @@ msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에�
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "제방꾼의 집"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:70
 msgid "diking"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:83
 msgid "building a dike"
 msgstr ""
 
@@ -3918,7 +3918,7 @@ msgctxt "frisians_building"
 msgid "Fisher’s House"
 msgstr "어부의 집"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3943,7 +3943,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr "금 광산"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3983,7 +3983,7 @@ msgid "Hunter’s House"
 msgstr "사냥꾼의 집"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:81
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3996,7 +3996,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr "철 광산"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4035,7 +4035,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:68
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -4072,7 +4072,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "갈대 농장"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -4086,14 +4086,14 @@ msgid "Reindeer Farm"
 msgstr "순록 농장"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:83
 msgctxt "frisians_building"
 msgid "rearing reindeer"
 msgstr "순록 키우고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:89
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:107
 msgctxt "frisians_building"
 msgid "producing fur"
 msgstr "털가죽 만들고 있음"
@@ -4104,7 +4104,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "암석 광산"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:119
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:125
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4217,7 +4217,7 @@ msgctxt "frisians_building"
 msgid "Woodcutter’s House"
 msgstr "나무꾼의 집"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:68
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -4241,8 +4241,8 @@ msgstr "번역확인-> 빈터를 훈련시키고 있음"
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:85
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:45
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:69
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:80
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:79
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:86
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:85
 msgid "sleeping"
 msgstr "잠을 자고 있음"
 
@@ -4600,46 +4600,46 @@ msgid "Training Arena"
 msgstr "모의 전투 하고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:88
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:94
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "군인이 공격력을 훈련하고 있음: 3→4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:110
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "군인 공격력 훈련하고 있음: 4→5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:127
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "군인 공격력 훈련하고 있음: 5→6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:139
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:145
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "군인 방어력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:162
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "군인 체력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:178
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:175
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "훈련할 군인이 없습니다!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:177
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:186
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:183
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
@@ -4651,31 +4651,31 @@ msgid "Training Camp"
 msgstr "훈련소"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:87
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:93
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "군인 공격력 훈련하고 있음: 0→1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:109
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "군인 공격력 훈련하고 있음: 1→2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:126
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "군인이 공격력을 훈련하고 있음: 2→3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:137
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:143
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "군인의 체력을 훈련시키고 있음: 수준 0 → 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:153
+#: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:159
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "군인 방어력 훈련하고 있음: 0→1"
@@ -9858,7 +9858,7 @@ msgstr "진흙 파는 이"
 #: ../../../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "제방꾼"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/frisians/farmer/init.lua:8

@@ -34,7 +34,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Вступ"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
@@ -71,7 +71,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "Ресурси"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25

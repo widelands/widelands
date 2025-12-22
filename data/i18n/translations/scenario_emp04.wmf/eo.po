@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# fenris <fenris@folksprak.org>, 2025
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: fenris <fenris@folksprak.org>, 2025\n"
 "Language-Team: Esperanto (https://app.transifex.com/widelands/teams/35159/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1379,7 +1383,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Bier-farejo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
@@ -1389,7 +1393,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Farmo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
@@ -1422,11 +1426,13 @@ msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"La farmisto, kiu laboras ĉe tiu ĉi farmo, ne povas trovi taŭgan grundon por "
+"planti sian semaĵon."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Arbarist-kabano"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
@@ -1519,7 +1525,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Arb-hakist-kabano"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
@@ -1543,11 +1549,14 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"La arb-hakisto, kiu laboras ĉe tiu ĉi kabano, ne povas trovi arbojn en sia "
+"labor-regiono. Eble estus pli bone malkonstrui aŭ detrui la konstruaĵon aŭ "
+"konstrui arborist-kabanon."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Muelejo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
@@ -1563,7 +1572,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Ekzercejo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
@@ -1573,42 +1582,42 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "altiganta soldatan atak-gradon de 0 al 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "altiganta soldatan atak-gradon de 1 al 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "altiganta soldatan atak-gradon de 2 al 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "altiganta soldatan atak-gradon de 3 al 4"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "altiganta soldatan san-gradon de 0 al 1"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "altiganta soldatan sanon de 1 al 2"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "altiganta soldatan san-gradon de 2 al 3"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "altiganta soldatan san-gradon de 3 al 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
@@ -1626,7 +1635,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Puto"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
@@ -1642,3 +1651,4 @@ msgstr ""
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
+"La portisto, kiu laboras ĉe tiu ĉi puto, ne povas trovi akvon en sia puto."

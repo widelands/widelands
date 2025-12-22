@@ -2,8 +2,24 @@
 	"name": "Widelands",
 	"category": "Strategispil",
 	"tagline": "Et realtids opbygningsstrategispil",
-	"description":[
+	"developer": "The Widelands Development Team",
+	"description": [
 		"Du er leder af en lille klan. Din opgave er at opbygge en stadig voksende bebyggelse. Hvert medlem af din klan vil udføre sin del for at fremstille flere ressourcer til understøttelse af denne vækst.",
 		"Widelands tilbyder en tilstand for en spiller med kampagner med historier om stammer og deres kamp i universet Widelands. Det bliver dog først rigtig spændende når du bliver forenet med venner over internettet eller LAN for sammen at bygge nye imperier sammen -- eller knuse hinanden i krigens støv. Widelands tilbyder også en kunstig intelligens, som kan udfordre dig."
-	]
+	],
+	"release_notes": {
+		"1.4": [],
+		"1.3": [
+			"Market trading",
+			"Six new maps added and three old maps removed",
+			"Economy districts",
+			"Many improvements to the in-game Encyclopedia",
+			"Download website maps as add-ons",
+			"New visualisation modes in the editor",
+			"Many new capabilities for add-on developers"
+		],
+		"1.2.1": [
+			"Bugfix release"
+		]
+	}
 }

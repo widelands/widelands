@@ -74,11 +74,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "Φτιάξτε ένα λατομείο"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
-msgstr ""
+msgstr "Λατομείο"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
@@ -379,7 +379,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
-msgstr ""
+msgstr "Αποστολή Εξετελέσθη"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:224
@@ -403,13 +403,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Νίκη"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ολοκληρώσατε αυτήν την αποστολή. Εάν το επιθυμείτε, μπορείτε να συνεχίσετε να παίζετε, αλλιώς συνεχίστε με την επόμενη αποστολή."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"

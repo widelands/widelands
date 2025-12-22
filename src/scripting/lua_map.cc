@@ -685,22 +685,21 @@ void parse_wares_workers(lua_State* L,
 	luaL_checktype(L, table_index, LUA_TTABLE);
 	lua_pushnil(L);
 	while (lua_next(L, table_index) != 0) {
+		const std::string unit_name = luaL_checkstring(L, -2);
 		if (is_ware) {
-			if (tribe.ware_index(luaL_checkstring(L, -2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
+			if (tribe.ware_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", unit_name.c_str());
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
-			                                 Widelands::WareWorker::wwWARE),
-			                  luaL_checkuint32(L, -1)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(tribe.ware_index(unit_name), Widelands::WareWorker::wwWARE),
+			   luaL_checkuint32(L, -1)));
 		} else {
-			if (tribe.worker_index(luaL_checkstring(L, -2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+			if (tribe.worker_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", unit_name.c_str());
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
-			                                 Widelands::WareWorker::wwWORKER),
-			                  luaL_checkuint32(L, -1)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(tribe.worker_index(unit_name), Widelands::WareWorker::wwWORKER),
+			   luaL_checkuint32(L, -1)));
 		}
 		lua_pop(L, 1);
 	}
@@ -1054,19 +1053,19 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 	// We either received, two items string,int:
 	if (nargs == 3) {
+		const std::string unit_name = luaL_checkstring(L, 2);
 		result = RequestedWareWorker::kSingle;
 		if (is_ware) {
-			if (tribe.ware_index(luaL_checkstring(L, 2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal ware %s", luaL_checkstring(L, 2));
+			if (tribe.ware_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", unit_name.c_str());
 			}
 			ware_workers_list->insert(std::make_pair(
-			   std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE),
+			   std::make_pair(tribe.ware_index(unit_name), Widelands::WareWorker::wwWARE),
 			   luaL_checkuint32(L, 3)));
 		} else {
-			const Widelands::DescriptionIndex worker_index =
-			   tribe.worker_index(luaL_checkstring(L, 2));
+			const Widelands::DescriptionIndex worker_index = tribe.worker_index(unit_name);
 			if (worker_index == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
+				report_error(L, "Illegal worker %s", unit_name.c_str());
 			}
 			if (worker_index == tribe.soldier()) {
 				report_error(L, "Do not set soldiers via set_workers(), use set_soldiers() instead");
@@ -1150,6 +1149,14 @@ For objects which consume wares, see: :ref:`has_inputs`.
    ``{ware_name=amount}`` pairs. Wares are created and added to an economy out
    of thin air.
 
+   Setting some wares does not influence other wares for
+
+   - warehouse
+
+   but sets other wares to empty for
+
+   - flag
+
    :arg which: Name of ware or a :const:`table` of `{ware_name=amount}`` pairs.
    :type which: :class:`string` or :class:`table`
    :arg amount: This many units will be available after the call.
@@ -1218,6 +1225,11 @@ workers that do the work, see: :ref:`has_workers`.
    a ware/worker name and an amount to set it to. Or it takes a :class:`table` of
    ``{ware/worker_name=amount}`` pairs. Wares are created and added to an
    economy out of thin air.
+
+   Setting a few wares does not influence other wares for
+
+   - production site
+   - training site
 
    :arg which: name of ware/worker or ``{ware/worker_name=amount}`` :class:`table`
    :type which: :class:`string` or :class:`table`
@@ -1327,6 +1339,15 @@ For workers which are consumed, see: :ref:`has_inputs`.
    Use :meth:`wl.map.MapObject.set_soldiers` instead.
 
    Ferries can not be set by this method either, except for waterways.
+
+   Setting some wares does not influence other wares for
+
+   - warehouse
+
+   but sets other wares to empty for
+
+   - road
+   - productionsite
 */
 
 /* RST
@@ -1418,6 +1439,12 @@ Supported at the time of this writing by
    a name an :class:`array` is used to define the soldier. See
    below for an example.
 
+   Setting some soldiers sets all others to empty for
+
+   - military site
+   - training site
+   - warehouse
+
    :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
       description. In that case amount has to be specified as well.
    :type which: :class:`table` or :class:`array`.
@@ -1437,7 +1464,7 @@ Supported at the time of this writing by
         [{1,2,3,4}] = 5,
       })
 
-   would add 10 level 0 soldier and 5 soldiers with hit point level 1,
+   would set 10 level 0 soldier and 5 soldiers with hit point level 1,
    attack level 2, defense level 3 and evade level 4 (as long as this is
    legal for the players tribe).
 */

@@ -122,6 +122,7 @@ void fill_parameter_vector() {
 	    _("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
 	   /// Misc
 	   {"", "nosound", "", _("Start the game with sound disabled."), false},
+	   {"", "shuffle", "", _("Start the game with shuffle mode for playback of songs"), true},
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	   /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
 	   /** TRANSLATORS: * marks the default value */
@@ -201,6 +202,7 @@ void fill_parameter_vector() {
 	   {"", "transparent_chat", _("[true*|false]"),
 	    _("Show in-game chat with transparent background."), true},
 	   {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
+	   {"", "pagination_pagesize", _("n"), _("Default pagesize for paginated structures."), true},
 	   /// Networking
 	   {_("Networking:"), "metaserver", _("URI"),
 	    _("Connect to a different metaserver for internet gaming."), false},

@@ -179,6 +179,7 @@ static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
 	KeyboardShortcutInfo({KeyboardShortcutScope::kGame}, keysym(SDLK_UNKNOWN),                      \
 	                     kFastplaceGroupPrefix + name, descname)
+   FP("market", gettext_noop("Market")),
    FP("warehouse", gettext_noop("Warehouse")),
    FP("port", gettext_noop("Port")),
    FP("training_small", gettext_noop("Minor Training Site")),
@@ -418,6 +419,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_MINUS, kDefaultCtrlModifier),
                          "zoom_out",
                          gettext_noop("Zoom Out"))},
+   {KeyboardShortcut::kCommonZoomMax,
+    KeyboardShortcutInfo({KeyboardShortcutScope::kGame, KeyboardShortcutScope::kEditor},
+                         keysym(SDLK_PLUS, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "zoom_max",
+                         gettext_noop("Maximum Zoom"))},
+   {KeyboardShortcut::kCommonZoomMin,
+    KeyboardShortcutInfo({KeyboardShortcutScope::kGame, KeyboardShortcutScope::kEditor},
+                         keysym(SDLK_MINUS, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "zoom_min",
+                         gettext_noop("Minimum Zoom"))},
    {KeyboardShortcut::kCommonZoomReset,
     KeyboardShortcutInfo({KeyboardShortcutScope::kGame, KeyboardShortcutScope::kEditor},
                          keysym(SDLK_0, kDefaultCtrlModifier),

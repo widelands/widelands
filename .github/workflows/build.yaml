@@ -18,6 +18,7 @@ jobs:
       clang_tidy: ${{ steps.changed_files.outputs.clang_tidy }}
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
       inst_windows_msvc: ${{ steps.changed_files.outputs.inst_windows_msvc }}
+      inst_windows_arm: ${{ steps.changed_files.outputs.inst_windows_arm }}
       inst_windows: ${{ steps.changed_files.outputs.inst_windows }}
       inst_macos: ${{ steps.changed_files.outputs.inst_macos }}
       appimage: ${{ steps.changed_files.outputs.appimage }}
@@ -32,6 +33,7 @@ jobs:
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
+        #   pattern: https://github.com/micromatch/picomatch?tab=readme-ov-file#globbing-features
         filters: |
           _anchors: # to define yaml anchors in one place
             - &src_cmake_dependencies
@@ -60,7 +62,15 @@ jobs:
             - '.clang-tidy'
           test_suite:
             - *ubuntu_dependencies
-            - 'data/**' # TODO(aDiscoverer) list what needs to be checked
+            # data/ except of some subdirectories
+            - 'data/!(campaigns|i18n|maps|music|sound)/**'
+            # but track parts of them
+            - 'data/i18n/!(translations|translation_stats.conf)/**'  # exclude translations ...
+              # ... and files created by them, because they are updated frequently
+            - 'data/maps/Crater.wmf/**' # for test/template/test_alldefaults.wgt
+            - 'data/maps/Lesser_Ring.wmf/**' # for test/template/*.wgt
+            - 'data/maps/Wisent_Valley.wmf/**' # for test/template/test_fortified_vi*-artifacts.wgt
+            # changes of other files
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
@@ -72,6 +82,11 @@ jobs:
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
+          inst_windows_arm:
+            - *installer
+            # doc/** maybe for some installers TODO(unknown)
+            - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
+            - '.github/workflows/build_windows_arm.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
             - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows.yaml
@@ -105,6 +120,11 @@ jobs:
     if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
+  windows-arm:
+    needs: [changes, pre-build_checks]
+    if: needs.changes.outputs.inst_windows_arm == 'true'
+    uses: ./.github/workflows/build_windows_arm.yaml
+
   windows:
     needs: [changes, pre-build_checks]
     if: needs.changes.outputs.inst_windows == 'true'
@@ -125,7 +145,7 @@ jobs:
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
-    needs: [windows, windows-msvc, macos, appimage]
+    needs: [windows, windows-msvc, windows-arm, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
