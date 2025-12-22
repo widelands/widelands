@@ -74,11 +74,13 @@ tips = {
       seconds = 7
    },
    {
-      text = _("Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."):bformat(
-         wl.ui.get_shortcut("zoom_in"),
-         wl.ui.get_shortcut("zoom_out"),
-         wl.ui.get_shortcut("zoom_reset")),
-      seconds = 3
+      text = _("Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for maximum/minimum zoom level. Press %5% to reset the zoom."):bformat(
+        wl.ui.get_shortcut("zoom_in"),
+        wl.ui.get_shortcut("zoom_out"),
+        wl.ui.get_shortcut("zoom_max"),
+        wl.ui.get_shortcut("zoom_min"),
+        wl.ui.get_shortcut("zoom_reset")),
+      seconds = 5
    },
    {
       text = _("Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited locations."):bformat(wl.ui.get_shortcut("quicknav_prev"), wl.ui.get_shortcut("quicknav_next")),

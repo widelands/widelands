@@ -126,6 +126,8 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonGeneral_Begin,
 	kCommonZoomIn = kCommonGeneral_Begin,
 	kCommonZoomOut,
+	kCommonZoomMax,
+	kCommonZoomMin,
 	kCommonZoomReset,
 	kCommonContextMenu,
 	kCommonTextCut,

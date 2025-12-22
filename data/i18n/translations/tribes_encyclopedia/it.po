@@ -13991,9 +13991,9 @@ msgstr[2] ""
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% soldato"
+msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -14002,9 +14002,9 @@ msgstr[2] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% (+ %2%) soldato (+ %3%)"
+msgstr[1] "%1% (+ %2%) soldati (+ %3%)"
+msgstr[2] "%1% (+ %2%) soldati (+ %3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -14012,9 +14012,9 @@ msgstr[2] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1%(+%2%) soldato "
+msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+ %2%) soldati"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:99

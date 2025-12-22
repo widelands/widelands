@@ -8,6 +8,7 @@
 		"Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Men bosättandet börjar verkligen på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

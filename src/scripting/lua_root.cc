@@ -39,6 +39,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_game.h"
+#include "scripting/lua_root_notifications.h"
 #include "scripting/lua_table.h"
 #include "scripting/map/lua_building_description.h"
 #include "scripting/map/lua_immovable_description.h"
@@ -1804,6 +1805,419 @@ void LuaDescriptions::do_modify_warehouse(lua_State* L,
 	}
 }
 
+/* RST
+Event Subscribers
+-----------------
+
+.. class:: Subscriber
+
+   .. versionadded:: 1.3
+
+   Subscribers allow you to receive notifications about certain events
+   in the Widelands game logic and the user interface.
+
+   Instances of an event are called **notifications**.
+   Each subscriber attaches to a specific type of event and maintains a queue of all notifications
+   received from this event, with new notifications being appended at the end of the queue.
+   Individual notifications can be retrieved from the queue using :meth:`pop` or :meth:`get`.
+   The number of notifications in the queue can be retrieved via :attr:`size`.
+
+   An individual notification is a table of key-value pairs.
+   Every notification is tagged with the ``"time"`` key denoting the gametime when the
+   notification was sent, and possibly other type-specific properties.
+
+   Subscribers can be created in two different ways depending on the type of subscription.
+
+   Some kinds of objects publish object-specific notifications called **signals**
+   and provide methods to create subscribers for events on this specific object;
+   see for instance
+   :meth:`wl.map.MapObject.subscribe_to_removed`,
+   :meth:`wl.map.Building.subscribe_to_muted`, and
+   :meth:`wl.ui.MapView.subscribe_to_field_clicked`.
+   See the documentation of these methods for details about the respective notification.
+
+   Other event types are not tied to a specific object and available globally.
+   These are called **notes**.
+   Such subscribers can be constructed directly with the event type as argument.
+   The following events are available:
+
+   * ``building``: A building changed state.
+     Parameters:
+
+     * ``object`` (:class:`wl.map.Building`): The building.
+     * ``action`` (:class:`string`): The action; one of
+       ``"changed"``, ``"start_warp"``, ``"finish_warp"``, and ``"workers_changed"``.
+
+   * ``chat_message``: A chat message was sent or received.
+     Parameters:
+
+     * ``msg`` (:class:`string`): The message.
+     * ``sender`` (:class:`string`): The player who sent the message.
+     * ``recipient`` (:class:`string`): The player who received the message
+       (empty for public messages).
+     * ``player`` (:class:`integer`): The sender's player number;
+       :const:`0` for spectators and negative for system messages.
+     * ``realtime`` (:class:`integer`): The realtimestamp in seconds since epoch
+       when the message was sent.
+
+   * ``economy``: An economy was merged or deleted.
+     Parameters:
+
+     * ``old_economy`` (:class:`integer`): The old serial of the economy.
+     * ``new_economy`` (:class:`integer`): The new serial of the economy.
+     * ``action`` (:class:`string`): The action; either ``"merged"`` or ``"deleted"``.
+
+   * ``economy_profile``: The saved economy profiles were modified.
+     No additional parameters.
+
+   * ``expedition_cancelled``: An expedition has been cancelled at the port dock.
+     No additional parameters.
+
+   * ``field_possession``: Ownership of a field has changed.
+     Parameters:
+
+     * ``x`` (:class:`integer`): The x coordinate of the field.
+     * ``y`` (:class:`integer`): The y coordinate of the field.
+     * ``player`` (:class:`integer`): The player number of the player who gained or lost ownership.
+     * ``ownership`` (:class:`string`): Whether the player ``"lost"`` or ``"gained"`` the field.
+
+   * ``field_terrain_changed``: The terrain or immovable on a field has changed.
+     Parameters:
+
+     * ``x`` (:class:`integer`): The x coordinate of the field.
+     * ``y`` (:class:`integer`): The y coordinate of the field.
+     * ``action`` (:class:`string`): What changed; either ``"terrain"`` or ``"immovable"``.
+
+   * ``graphic_resolution_changed``: The Widelands main window was resized.
+     Parameters:
+
+     * ``old_w`` (:class:`integer`): The previous window width.
+     * ``old_h`` (:class:`integer`): The previous window height.
+     * ``new_w`` (:class:`integer`): The new window width.
+     * ``new_h`` (:class:`integer`): The new window height.
+
+   * ``immovable``: An immovable was created or destroyed.
+     Parameters:
+
+     * ``object`` (:class:`wl.map.BaseImmovable`): The object.
+     * ``action`` (:class:`string`): What changed; either ``"lost"`` or ``"gained"``.
+
+   * ``pinned_note_moved``: A pinned note has moved to a different field.
+     Parameters:
+
+     * ``old_x`` (:class:`integer`): The x coordinate of the pinned note's former field.
+     * ``old_y`` (:class:`integer`): The y coordinate of the pinned note's former field.
+     * ``new_x`` (:class:`integer`): The x coordinate of the pinned note's new field.
+     * ``new_y`` (:class:`integer`): The y coordinate of the pinned note's new field.
+     * ``player`` (:class:`integer`): The player number of the pinned note's owner.
+
+   * ``player_details``: The presentation of a player's details has changed.
+     Parameters:
+
+     * ``player`` (:class:`integer`): The player number of the player whose details changed.
+
+   * ``production_site_out_of_resources``: A production site can not find any more resources.
+     Parameters:
+
+     * ``object`` (:class:`wl.map.ProductionSite`): The production site.
+
+   * ``quicknav_changed``: The quick navigation landmarks were edited.
+     No additional parameters.
+
+   * ``ship``: A ship has changed state.
+     Parameters:
+
+     * ``object`` (:class:`wl.map.Ship`): The ship.
+     * ``action`` (:class:`string`): The action; one of
+       ``"destination_changed"``, ``"waiting_for_command"``, ``"no_port_left"``,
+       ``"lost"``, and ``"gained"``.
+
+   * ``trade_changed``: A trade was created, changed, or was cancelled.
+     Parameters:
+
+     * ``trade_id`` (:class:`integer`): The trade's unique ID.
+     * ``action`` (:class:`string`): The action; one of
+       ``"proposed"``, ``"accepted"``, ``"rejected"``, ``"retracted"``,
+       ``"cancelled"``, ``"completed"``, ``"ware_arrived"``,
+       ``"paused"``, ``"unpaused"``, ``"moved"``, and ``"extension_proposal"``.
+
+   * ``training_site_soldier_trained``: A soldier was trained in a training site.
+     Parameters:
+
+     * ``object`` (:class:`wl.map.TrainingSite`): The training site.
+
+*/
+
+const char LuaSubscriber::className[] = "Subscriber";
+const MethodType<LuaSubscriber> LuaSubscriber::Methods[] = {
+   METHOD(LuaSubscriber, get),
+   METHOD(LuaSubscriber, pop),
+   METHOD(LuaSubscriber, clear),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaSubscriber> LuaSubscriber::Properties[] = {
+   PROP_RO(LuaSubscriber, size),
+   {nullptr, nullptr, nullptr},
+};
+
+LuaSubscriber::LuaSubscriber(const Widelands::EditorGameBase& egbase,
+                             LuaNotifications::Wrapper* impl)
+   : egbase_(&egbase), impl_(impl) {
+	impl_->owner = this;
+}
+
+LuaSubscriber::LuaSubscriber(lua_State* L) : egbase_(&get_egbase(L)) {
+	std::string type = luaL_checkstring(L, -1);
+	impl_.reset(LuaNotifications::create(type));
+	if (impl_ == nullptr) {
+		report_error(L, "Invalid notification type '%s'", type.c_str());
+	}
+	impl_->owner = this;
+}
+
+void LuaSubscriber::__persist(lua_State* L) {
+	MutexLock m(mutex_);
+
+	Widelands::MapObjectSaver& mos = *get_mos(L);
+
+	uint32_t idx = 0;
+	if (Widelands::MapObject* obj = egbase_->objects().get_object(impl_->persistence.serial);
+	    obj != nullptr) {
+		idx = mos.get_object_file_index(*obj);
+	}
+
+	PERS_UINT32("file_index", idx);
+	PERS_STRING("type", impl_->persistence.type);
+
+	PERS_UINT32("size", queue_.size());
+	for (size_t i = 0; i < queue_.size(); ++i) {
+		const Message& msg = queue_.at(i);
+		PERS_UINT32(format("size_%u", i).c_str(), msg.size());
+		auto it = msg.begin();
+		for (size_t j = 0; j < msg.size(); ++j, ++it) {
+			PERS_STRING(format("key_%u_%u", i, j).c_str(), it->first);
+			PERS_UINT32(format("type_%u_%u", i, j).c_str(), it->second.type);
+
+			switch (it->second.type) {
+			case LuaSubscriber::Value::Type::kString:
+				PERS_STRING(format("value_%u_%u", i, j).c_str(), it->second.string_val);
+				break;
+			case LuaSubscriber::Value::Type::kInt:
+				PERS_INT32(format("value_%u_%u", i, j).c_str(), it->second.int_val);
+				break;
+			case LuaSubscriber::Value::Type::kMapObject:
+				if (Widelands::MapObject* obj = egbase_->objects().get_object(it->second.int_val);
+				    obj != nullptr) {
+					idx = mos.get_object_file_index(*obj);
+				} else {
+					idx = 0;
+				}
+				PERS_UINT32(format("value_%u_%u", i, j).c_str(), idx);
+				break;
+			default:
+				report_error(L, "Bad value type %d", static_cast<int>(it->second.type));
+			}
+		}
+	}
+}
+void LuaSubscriber::__unpersist(lua_State* L) {
+	MutexLock m(mutex_);
+
+	egbase_ = &get_egbase(L);
+	queue_.clear();
+	impl_.reset();
+
+	uint32_t serial;
+	std::string type;
+	UNPERS_UINT32("file_index", serial)
+	UNPERS_STRING("type", type)
+
+	uint32_t size;
+	UNPERS_UINT32("size", size)
+	for (uint32_t i = 0; i < size; ++i) {
+		uint32_t msg_size;
+		UNPERS_UINT32(format("size_%u", i).c_str(), msg_size)
+		Message msg;
+
+		for (size_t j = 0; j < msg_size; ++j) {
+			std::string key;
+			UNPERS_STRING(format("key_%u_%u", i, j).c_str(), key)
+
+			uint32_t datatype;
+			UNPERS_UINT32(format("type_%u_%u", i, j).c_str(), datatype)
+			switch (static_cast<LuaSubscriber::Value::Type>(datatype)) {
+			case LuaSubscriber::Value::Type::kString: {
+				std::string str;
+				UNPERS_STRING(format("value_%u_%u", i, j).c_str(), str)
+				msg[key] = str;
+			} break;
+			case LuaSubscriber::Value::Type::kInt: {
+				int32_t value;
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value)
+				msg[key] = value;
+			} break;
+			case LuaSubscriber::Value::Type::kMapObject: {
+				uint32_t value;
+				UNPERS_UINT32(format("value_%u_%u", i, j).c_str(), value)
+				msg[key] = LuaSubscriber::Value(
+				   LuaSubscriber::Value::Type::kMapObject,
+				   Widelands::get_object_serial_or_zero<Widelands::MapObject>(value, *get_mol(L)));
+			} break;
+			default:
+				report_error(L, "Bad value type %u", datatype);
+			}
+		}
+
+		queue_.push_back(msg);
+	}
+
+	impl_.reset(LuaNotifications::create(type));
+	if (impl_ == nullptr) {
+		if (type == LuaNotifications::PersistenceInfo::kMapViewJump) {
+			impl_.reset(LuaNotifications::create_mapview_jump(L));
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewChangeview) {
+			impl_.reset(LuaNotifications::create_mapview_changeview(L));
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewFieldClicked) {
+			impl_.reset(LuaNotifications::create_mapview_field_clicked(L));
+		} else if (type == LuaNotifications::PersistenceInfo::kMapViewTrackSelection) {
+			impl_.reset(LuaNotifications::create_mapview_track_selection(L));
+		} else if (type == LuaNotifications::PersistenceInfo::kMapObjectRemoved) {
+			impl_.reset(LuaNotifications::create_map_object_removed(
+			   get_mol(L)->get<Widelands::MapObject>(serial)));
+		} else if (type == LuaNotifications::PersistenceInfo::kBuildingMuted) {
+			impl_.reset(
+			   LuaNotifications::create_building_muted(get_mol(L)->get<Widelands::Building>(serial)));
+		}
+	}
+
+	if (impl_ == nullptr) {
+		report_error(L, "Unrecognized subscriber type '%s' with serial %u", type.c_str(), serial);
+	}
+
+	impl_->owner = this;
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+   .. attribute:: size
+
+      (RO) The number of notifications in the queue.
+*/
+int LuaSubscriber::get_size(lua_State* L) {
+	MutexLock m(mutex_);
+	lua_pushint32(L, queue_.size());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+   .. method:: get(index)
+
+      Get the notification at the specified index in the queue.
+      The newest notification has index :attr:`size`
+      and the oldest notification has index :const:`1`.
+
+      This does not delete the notification from the queue.
+
+      :arg index: queue index to query
+      :type index: :class:`integer`
+
+      :returns: :const:`table`
+
+      :see also: :meth:`pop`
+*/
+int LuaSubscriber::get(lua_State* L) {
+	MutexLock m(mutex_);
+
+	const uint32_t index = luaL_checkuint32(L, 2);
+	if (index < 1 || index > queue_.size()) {
+		report_error(L, "Index %u out of bounds for queue size %u", index,
+		             static_cast<unsigned>(queue_.size()));
+	}
+
+	lua_newtable(L);
+	for (const auto& pair : queue_.at(index - 1)) {
+		lua_pushstring(L, pair.first.c_str());
+
+		switch (pair.second.type) {
+		case LuaSubscriber::Value::Type::kString:
+			lua_pushstring(L, pair.second.string_val.c_str());
+			break;
+		case LuaSubscriber::Value::Type::kInt:
+			lua_pushinteger(L, pair.second.int_val);
+			break;
+		case LuaSubscriber::Value::Type::kMapObject:
+			if (LuaMaps::upcasted_map_object_to_lua(
+			       L, egbase_->objects().get_object(pair.second.int_val)) == 0) {
+				lua_pushinteger(L, pair.second.int_val);
+			}
+			break;
+		default:
+			report_error(L, "Bad value type %d", static_cast<int>(pair.second.type));
+		}
+
+		lua_settable(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
+   .. method:: pop(index)
+
+      Get the notification at the specified index in the queue,
+      and remove the notification from the queue.
+      The newest notification has index :attr:`size`
+      and the oldest notification has index :const:`1`.
+
+      :arg index: queue index to query
+      :type index: :class:`integer`
+
+      :returns: :const:`table`
+
+      :see also: :meth:`get`
+*/
+int LuaSubscriber::pop(lua_State* L) {
+	MutexLock m(mutex_);
+	const uint32_t index = luaL_checkuint32(L, 2);
+	const int retval = get(L);
+	queue_.erase(queue_.begin() + (index - 1));
+	return retval;
+}
+
+/* RST
+   .. method:: clear()
+
+      Delete all notifications from the queue.
+*/
+int LuaSubscriber::clear(lua_State* /*L*/) {
+	MutexLock m(mutex_);
+	queue_.clear();
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+void LuaSubscriber::add_message(Message msg) {
+	MutexLock m(mutex_);
+	msg["time"] = egbase_->get_gametime().get();
+	queue_.push_back(msg);
+}
+
 const static struct luaL_Reg wlroot[] = {{nullptr, nullptr}};
 
 void luaopen_wlroot(lua_State* L, bool in_editor) {
@@ -1820,7 +2234,9 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1);  // Pop the meta table
 	}
+
 	register_class<LuaDescriptions>(L, "", false);
+	register_class<LuaSubscriber>(L, "", false);
 }
 
 }  // namespace LuaRoot

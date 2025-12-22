@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-25 03:08+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Juanjo, 2015-2023,2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -208,13 +208,13 @@ msgid "Elders"
 msgstr "Ancians"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:422
+#: ../../../../data/txts/developers.lua:423
 msgid "Graphics"
 msgstr "Gràfics"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:366
-#: ../../../../data/txts/developers.lua:429
+#: ../../../../data/txts/developers.lua:367
+#: ../../../../data/txts/developers.lua:430
 msgid "Homepage"
 msgstr "Pàgina inicial"
 
@@ -223,7 +223,7 @@ msgid "Scripting"
 msgstr "Seqüències d’ordres (scripting)"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:437
+#: ../../../../data/txts/developers.lua:438
 msgid "Sound"
 msgstr "So"
 
@@ -239,103 +239,103 @@ msgstr "Idiomes"
 msgid "Coders"
 msgstr "Programadors"
 
-#: ../../../../data/txts/developers.lua:151
+#: ../../../../data/txts/developers.lua:152
 msgid "Graphicians"
 msgstr "Grafistes"
 
-#: ../../../../data/txts/developers.lua:190
+#: ../../../../data/txts/developers.lua:191
 msgid "Musicians"
 msgstr "Músics"
 
-#: ../../../../data/txts/developers.lua:209
+#: ../../../../data/txts/developers.lua:210
 msgid "Sound Effects"
 msgstr "Efectes de so"
 
-#: ../../../../data/txts/developers.lua:225
+#: ../../../../data/txts/developers.lua:226
 msgid "Maps and Missions"
 msgstr "Mapes i missions"
 
-#: ../../../../data/txts/developers.lua:263
+#: ../../../../data/txts/developers.lua:264
 msgid "Campaign Story"
 msgstr "Històries de les campanyes"
 
-#: ../../../../data/txts/developers.lua:267
+#: ../../../../data/txts/developers.lua:268
 msgid "Barbarians"
 msgstr "Bàrbars"
 
-#: ../../../../data/txts/developers.lua:275
+#: ../../../../data/txts/developers.lua:276
 msgid "Empire"
 msgstr "L’Imperi"
 
-#: ../../../../data/txts/developers.lua:282
+#: ../../../../data/txts/developers.lua:283
 msgid "Atlanteans"
 msgstr "Atlants"
 
-#: ../../../../data/txts/developers.lua:290
+#: ../../../../data/txts/developers.lua:291
 msgid "Frisians"
 msgstr "Frisons"
 
-#: ../../../../data/txts/developers.lua:298
+#: ../../../../data/txts/developers.lua:299
 msgid "Packagers"
 msgstr "Empaquetadors"
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:303
 msgid "Debian Linux"
 msgstr "Debian"
 
-#: ../../../../data/txts/developers.lua:308
+#: ../../../../data/txts/developers.lua:309
 msgid "Fedora Linux"
 msgstr "Fedora"
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:317
 msgid "Mandriva Linux"
 msgstr "Mandriva"
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:323
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:328
+#: ../../../../data/txts/developers.lua:329
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:335
+#: ../../../../data/txts/developers.lua:336
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:347
+#: ../../../../data/txts/developers.lua:348
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:358
+#: ../../../../data/txts/developers.lua:359
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:370
+#: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
 msgstr "Programadors de la pàgina d’inici"
 
-#: ../../../../data/txts/developers.lua:381
+#: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
 msgstr "Documentació, ajuda i wiki"
 
-#: ../../../../data/txts/developers.lua:399
+#: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
 msgstr "Complements"
 
-#: ../../../../data/txts/developers.lua:418
+#: ../../../../data/txts/developers.lua:419
 msgid "Former Elders"
 msgstr "Primers ancians"
 
-#: ../../../../data/txts/developers.lua:444
+#: ../../../../data/txts/developers.lua:445
 msgid "Translation"
 msgstr "Traducció"
 
-#: ../../../../data/txts/developers.lua:453
+#: ../../../../data/txts/developers.lua:454
 msgid "Other"
 msgstr "Altres"
 
-#: ../../../../data/txts/developers.lua:461
+#: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "i molts, molts més (gràcies a tots per la feina que heu fet)"
 
@@ -805,42 +805,43 @@ msgstr "Alguns edificis, com les masoveries, tenen una àrea de treball molt pet
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr "Apropa/Allunya la vista amb la roda del ratolí o %1%/%2%. Premeu %3% per reiniciar l’apropament de la vista."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
+msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "Useu les tecles «%1$s» i «%2$s» per saltar ràpidament a alguns llocs visitats recentment."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "Accelereu o alentiu la partida amb %1%/%2%. Useu %3%/%4% per accelerar-la. %5%/%6% l’alentirà."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Tecles de cursor"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl+Tecles de cursor"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Moveu el mapa amb %1%. Amb %2% el moureu més de pressa i amb %3% el moureu més a poc a poc."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Maj+Tecles de cursor"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -848,7 +849,7 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr "Si jugueu amb un portàtil amb ratolí tàctil, podeu assignar-li funcions amb el menú «Opcions → Edita les accions de teclat i ratolí». Per exemple, per a moure la vista del mapa pot ser més còmode amb un desplaçament en lloc de fer servir el botó dret del ratolí."
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -856,7 +857,7 @@ msgid ""
 "eventually die."
 msgstr "Quan es destrueix un edifici, els seus treballadors buscaran una bandera que estigui prop i llavors es mouran pels camins cap a un magatzem connectat. Si no hi ha banderes prop, continuaran donant voltes fins a trobar una bandera o fins que morin."
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."

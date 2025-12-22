@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Karl Vest, 2020
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2017
 # Miroslav Remák <Unknown>, 2014
 # Pavol Gono, 2024-2025
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-09-25 03:08+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Miroslav Remák <Unknown>, 2014\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,13 +210,13 @@ msgid "Elders"
 msgstr "Rada starších"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:422
+#: ../../../../data/txts/developers.lua:423
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:366
-#: ../../../../data/txts/developers.lua:429
+#: ../../../../data/txts/developers.lua:367
+#: ../../../../data/txts/developers.lua:430
 msgid "Homepage"
 msgstr "Domovská stránka"
 
@@ -224,7 +225,7 @@ msgid "Scripting"
 msgstr "Skriptovanie"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:437
+#: ../../../../data/txts/developers.lua:438
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -240,105 +241,105 @@ msgstr "Jazyky"
 msgid "Coders"
 msgstr "Programátori"
 
-#: ../../../../data/txts/developers.lua:151
+#: ../../../../data/txts/developers.lua:152
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../../../data/txts/developers.lua:190
+#: ../../../../data/txts/developers.lua:191
 msgid "Musicians"
 msgstr "Hudobníci"
 
-#: ../../../../data/txts/developers.lua:209
+#: ../../../../data/txts/developers.lua:210
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-#: ../../../../data/txts/developers.lua:225
+#: ../../../../data/txts/developers.lua:226
 msgid "Maps and Missions"
 msgstr "Mapy a misie"
 
-#: ../../../../data/txts/developers.lua:263
+#: ../../../../data/txts/developers.lua:264
 msgid "Campaign Story"
 msgstr "Kampane"
 
-#: ../../../../data/txts/developers.lua:267
+#: ../../../../data/txts/developers.lua:268
 msgid "Barbarians"
 msgstr "Barbari"
 
-#: ../../../../data/txts/developers.lua:275
+#: ../../../../data/txts/developers.lua:276
 msgid "Empire"
 msgstr "Impérium"
 
-#: ../../../../data/txts/developers.lua:282
+#: ../../../../data/txts/developers.lua:283
 msgid "Atlanteans"
 msgstr "Atlantíďania"
 
-#: ../../../../data/txts/developers.lua:290
+#: ../../../../data/txts/developers.lua:291
 msgid "Frisians"
 msgstr "Frízania"
 
-#: ../../../../data/txts/developers.lua:298
+#: ../../../../data/txts/developers.lua:299
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
-#: ../../../../data/txts/developers.lua:302
+#: ../../../../data/txts/developers.lua:303
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:308
+#: ../../../../data/txts/developers.lua:309
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:316
+#: ../../../../data/txts/developers.lua:317
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:322
+#: ../../../../data/txts/developers.lua:323
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:328
+#: ../../../../data/txts/developers.lua:329
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:335
+#: ../../../../data/txts/developers.lua:336
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:347
+#: ../../../../data/txts/developers.lua:348
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:358
+#: ../../../../data/txts/developers.lua:359
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:370
+#: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
 msgstr "Domovskú stránku napísali"
 
-#: ../../../../data/txts/developers.lua:381
+#: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentácia, pomoc a wiki"
 
-#: ../../../../data/txts/developers.lua:399
+#: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
 msgstr "Doplnky"
 
-#: ../../../../data/txts/developers.lua:418
+#: ../../../../data/txts/developers.lua:419
 msgid "Former Elders"
 msgstr "Bývalá rada starších"
 
-#: ../../../../data/txts/developers.lua:444
+#: ../../../../data/txts/developers.lua:445
 msgid "Translation"
 msgstr "Preklad"
 
-#: ../../../../data/txts/developers.lua:453
+#: ../../../../data/txts/developers.lua:454
 msgid "Other"
 msgstr "Ostatní"
 
-#: ../../../../data/txts/developers.lua:461
+#: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "a mnoho, mnoho ďalších (ďakujeme za všetko, čo ste urobili)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -506,66 +507,66 @@ msgstr "Na pravej strane nájdete informácie o vybranej mape alebo uloženej hr
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Amazonky milujú stromy. Postavte dostatok chatrčí strážkyne džungle, aby ste ich mali dosť."
 
 #: ../../../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Vzácne drevo je chrbticou ekonomiky Amazoniek. Postavte plantáže vzácnych drevín na vysádzanie špeciálnych stromov pre toto drevo."
 
 #: ../../../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Vzácne stromy stínajú skúsené drevorubačky v drevorubačských chatrčiach vylepšených na chatrče na ťažbu vzácnych drevín. Tie však prestanú stínať bežné stromy. Naplánujte ich umiestnenie vopred."
 
 #: ../../../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Jedlo sa suší na ohni z dreveného uhlia. Zabezpečte jeho plynulú dodávku."
 
 #: ../../../../data/txts/tips/amazons.lua:20
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Rezačky lián získavajú liany z okolitých stromov, pričom stromy pri tomto procese nie sú poškodené."
 
 #: ../../../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Voda je pre Amazonky život. Nosičky vody vykonávajú pre svoj kmeň dôležitú službu."
 
 #: ../../../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Ryžovanie zlata si vyžaduje stály prúd vody, ktorú je kvôli efektivite a čerstvosti najlepšie čerpať čo najbližšie."
 
 #: ../../../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "Ochrankyne divočiny zabezpečujú čerstvú zver na lov a ryby na rybolov. Zver sa vypúšťa len v blízkosti stromov neobývaných strážnicami."
 
 #: ../../../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Stav zásob vzácneho dreva monitorujú plantáže vzácnych drevín a majsterky džungle budú vysádzať stromy podľa ekonomických požiadaviek."
 
 #: ../../../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "Laná sú nevyhnutné na zabezpečenie pevných budov, šitie odolného oblečenia a zväzovanie kanoe pri stavbe lodí."
 
 #: ../../../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Majsterky džungle získavajú svoje zručnosti prácou ako strážkyne džungle predtým, ako začnú pracovať v záhradných centrách alebo na plantážach vzácnych drevín."
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -611,7 +612,7 @@ msgstr "Najviac vylepšené budovy potrebujú skúsených pracovníkov. Nevylep�
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands vytvára núdzové uloženie, takže môžete pokračovať v hraní presne tam, kde sa hra ukončila."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/editor.lua:8
@@ -743,7 +744,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Použite posúvače priority v oknách budov na úpravu dodávok konkrétneho tovaru. Podržaním klávesu Shift počas kliknutia upravíte všetky tovary naraz."
 
 #: ../../../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -755,7 +756,7 @@ msgstr "Na prispôsobenie cieľového množstva výrobkov využite ponuku „Nas
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Spravujte svoje správy efektívnejšie: stlačením „%1%“ otvorte okno správ, potom použite „%2%“ na prejdenie k cieľu a kláves „%3%“ na archiváciu správ."
 
 #: ../../../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -782,7 +783,7 @@ msgstr "Kliknutím na tlačidlá na vylepšenie, rozobratie alebo zničenie budo
 #: ../../../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Stlačením „%s“ rýchlo prepnete zobrazenie zásob."
 
 #: ../../../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -796,7 +797,7 @@ msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "Môžete mať viacero ekonomík, ak ich vlajky nie sú spojené žiadnym dopravným prostriedkom. Preto je ponuka Nastaviť ekonomiku prístupná len z vlajok a skladov, nie z hlavného menu hráča."
 
 #: ../../../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -806,50 +807,51 @@ msgstr "Niektoré budovy, ako napríklad farma, majú veľmi malú pracovnú obl
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Pomocou klávesov „%1$s“ a „%2$s“ môžete rýchlo preskakovať medzi naposledy navštívenými miestami."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Zrýchlite alebo spomaľte hru pomocou %1%/%2%. Použite %3%/%4% na rýchlu zmenu; %5%/%6% upraví rýchlosť plynule."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Klávesy šípiek"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + šípky"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + šípky"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Ak hráte na laptope s touchpadom, môžete priradiť funkcie rolovaniu touchpadom v menu „Možnosti“ → „Upraviť akcie klávesnice a myši“. Napríklad posúvanie pohľadu na mapu môže byť oveľa pohodlnejšie rolovaním namiesto ťahania pravým tlačidlom myši."
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -857,11 +859,11 @@ msgid ""
 "eventually die."
 msgstr "Keď dôjde k zničeniu budovy, jej pracovníci začnú hľadať v okolí vlajku, od ktorej by sa po ceste dostali k najbližšiemu skladu. Ak sa v okolí takéto vlajky nenachádzajú, budú sa potulovať naokolo a po čase zomrú."
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Obchodovanie môže pomôcť vašej ekonomike a posilniť vzťahy medzi hráčmi. Základy sa naučíte v tutoriáli „Ekonomika a obchod“."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -885,7 +887,7 @@ msgstr "Ak chcete odoslať správu len jednému hráčovi, na jej začiatok vlo�
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Ak hra spadne, nezúfajte! Hra sa automaticky uloží, takže ju potom môžete znova načítať."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/singleplayer.lua:7
@@ -893,4 +895,4 @@ msgstr ""
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Sú počítačoví hráči príliš nudní? Navštívte našu webovú stránku %s a stretnite sa s inými hráčmi, s ktorými si môžete zahrať online."

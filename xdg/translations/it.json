@@ -8,6 +8,7 @@
 		"Widelands offre una modalità giocatore singolo con campagne che raccontano le storie delle tribù e la loro lotta nell'universo di Widelands. Tuttavia, l'insediamento inizia davvero quando ti unisci con gli amici su Internet o LAN per costruire nuovi imperi insieme - o per frantumarsi a vicenda nella polvere della guerra. Widelands offre anche un'intelligenza artificiale per metterti alla prova."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }
