@@ -352,7 +352,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-08-20" version="1.4~git">
+    <release date="2025-12-21" version="1.4~git">
       <description><ul>
       </ul></description>
       <url type="details">https://codeberg.org/wl/widelands/milestone/6040?type=all&amp;amp;state=closed&amp;amp;sort=recentupdate</url>

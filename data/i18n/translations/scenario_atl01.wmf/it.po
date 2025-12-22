@@ -881,7 +881,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Che Satul ti scaldi, Jundlina. Mi chiamo Ostur e costruisco navi. Ho inventato un nuovo tipo di nave: più piccola di quelle a cui siamo abituati, ma molto più robusta. Se le costruiamo correttamente, sono sicuro che potremo navigare per distanze molto più lunghe e forse sfuggire all'influenza di Lutas."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
