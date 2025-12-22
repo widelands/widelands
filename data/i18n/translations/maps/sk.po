@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Karl Vest, 2020
+# Marek G, 2025
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # Pavol Gono, 2024-2025
@@ -10,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -38,7 +39,7 @@ msgstr "Ďalší boj o nový domov"
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Po náhlivom úteku z potápajúceho sa ostrova, Atlantíďania vedení Jundlínou čelia novým výzvam."
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -212,7 +213,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Po prehranej významnej bitke s Barbarmi, čo viedlo k strate veľkej časti Imperiálneho teritória, opustil Lutius Fremil, aby začal nový život. Ale osud ho zaviedol do silnej búrky, ktorá ho takmer pripravila o život. Len s veľkým šťastím sa mu podarilo pristáť s poškodenou loďou na neznámom pobreží a zachrániť tak svojich ľudí. Nateraz."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -228,7 +229,7 @@ msgstr "Po opravení lode sa Lutius a jeho ľud vrátili k pátraniu po vhodnom 
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptúnova pomsta"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -245,7 +246,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Po svojom návrate domov, čelí Lutius a jeho posádka zruinovanej ekonomike. Vyriešiť ekonomické problémy bude vrcholne dôležitým krokom na ceste k znovuobnoveniu slávy Impéria."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -278,35 +279,35 @@ msgstr "Reebaud a jeho kmeň dorazil na sever. Ich príchod však medzi zamrznut
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Priatelia v núdzi"
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Zatiaľ čo Reebaud a jeho kmeň vedú šťastný život na Severe, krajinu, ktorú opustili, sužuje vojna a starý priateľ zúfalo potrebuje ich pomoc…"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Dvaja priatelia sa znova stretávajú"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus a Henneke Lembeckovci konečne dorazili na Sever. Budú ale schopní presvedčiť Reebauda, aby im poslal pomoc?"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Znovudobytie"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Konečne späť v severnom Frízsku pripravujú sa Claus, Henneke a Reebaud na boj s nájazdníkmi. Musia zhromaždiť spojencov a naplánovať stratégiu, ale nepriateľ nie je nikdy ďaleko…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -340,18 +341,19 @@ msgid ""
 msgstr "V tomto tutoriáli spoznáte moreplavbu, čo predstavuje spôsob ako narábať s loďami a prístavmi a ako používať prevozníkov a vodné cesty."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Ekonomika"
+msgid "Economy and Trading"
+msgstr "Ekonomika a obchod"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "V tomto tutoriáli sa dozviete, aké možnosti Widelands ponúka na prispôsobenie ekonomiky. Odporúča sa hráčom, ktorí majú už nejaké skúsenosti."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr "V tomto tutoriáli sa dozviete, aké možnosti Widelands ponúka na prispôsobenie ekonomiky a ako obchodovať s ostatnými hráčmi. Odporúča sa hráčom, ktorí majú už nejaké skúsenosti."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Presná Európa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -374,7 +376,7 @@ msgstr ""
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Meňavky"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
@@ -420,7 +422,7 @@ msgstr "pbuczny@gmail.com – edited by Nordfriese"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Dlhá hra s dôrazom na ekonomiku v prekrásnej krajine. Vyskúšajte ju hrať za každého hráča!"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -511,7 +513,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Pohorie Dolomity, klenot Álp, bolo vyhlásené za svetové dedičstvo vďaka svojej nenarušenej kráse. Táto mapa je do rozumnej miery vernou rekonštrukciou územia, ktoré ohraničuje Cortina d’Ampezzo na severovýchode a Canazei na juhozápade. Keď už musíte čeliť nepriateľom v boji na život a na smrť, nech sa to aspoň koná na peknom mieste."
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -520,11 +522,11 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Hory sú plné rovného terénu. Poväčšine však, nanešťastie, ide o úbočia. Priestoru na stavbu je málo, preto ho využite rozumne. Pevnosť naspodku úzkeho priesmyku môže pre nepriateľskú armádu znamenať ťažko prekonateľnú prekážku – využite terén vo svoj prospech. Vysekajte všetky stromy a rozšírte sa kdekoľvek môžete – je to jediný spôsob ako nájsť tých málo miest, kde sa dajú postaviť farmy."
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Egyptská mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -536,7 +538,7 @@ msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr "Escher_Goose_Fish"
+msgstr "Escherove husy a ryby"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -593,7 +595,7 @@ msgstr "Je to skúška bohov alebo zlomyseľný plán niekoho iného, že ste sa
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Lesné údolie v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
@@ -740,7 +742,7 @@ msgstr "Štyri kmene bojujú o nadvládu v nehostinnom kraji. Zdroje sú roztrú
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Menší prsteň 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -817,11 +819,11 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Táto mapa je určená ako sólová výzva pre veľmi skúsených hráčov, ktorí považujú hru jeden proti šesť AI za príliš jednoduchú. Modrý hráč nemá žiadne železo (okrem trochy na rozbeh ekonomiky), takže sa budeš musieť spoľahnúť na 5% produkciu vyčerpanej bane. A stále hráš 1v6 (samozrejme stále môžeš nejaké AI odstrániť a spraviť si to jednoduchším). Veľa štastia!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr "Rendezvous"
+msgstr "Stretnutie"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
@@ -861,7 +863,7 @@ msgstr "Mystické územie plné rozmanitých krajín, ktoré sú všetky skríž
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Popri rieke"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -888,7 +890,7 @@ msgstr "Stojíte na ostrove korunovanom mohutnými horami, ktoré vo svojom vnú
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Piesočné úžiny"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -920,7 +922,7 @@ msgstr "Hovorí sa, že starí vojnoví mnísi, žijúci v ešte starších moč
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Tasmánska čierna vojna"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -983,7 +985,7 @@ msgstr "Povráva sa, že nepreniknuteľné krajiny na ďalekom severe odradili a
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Ostrovy ôsmich kmeňov"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -1061,7 +1063,7 @@ msgstr "Traja bojovníci"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr "Mohutné hory rozdeľujú toto územie na tri úrodné údolia. Tieto údolia sú však spojené cestou, a preto sa zdá, že boju sa nevyhnete."
+msgstr "Mohutné hory rozdeľujú toto územie na tri úrodné údolia. Tieto údolia sú však spojené cestou, a preto sa zdá, že boju sa nevyhnete!"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."

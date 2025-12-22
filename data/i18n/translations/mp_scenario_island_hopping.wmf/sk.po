@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
+# Pavol Gono, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Pavol Gono, 2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "Skákanie po ostrovoch je tradičný turnaj v atlantídskej kultúre. Pravidlá hry sú jednoduché: začínate s ústredím na jednom ostrove. Keď dokončíte hrad na konci prvého ostrova, získate druhé ústredie na druhom ostrove, ktoré dostane všetky výrobky, pracovníkov a vojakov presunutím z ústredia a skladov prvého ostrova."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -63,7 +64,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Ak dokončíte hrad v cieľovej oblasti na druhom ostrove, získate tretie ústredie na treťom ostrove, so všetkými výrobkami, pracovníkmi a vojakmi znova presunutými z predchádzajúcich ústredí a skladov. Aby ste zvíťazili, musíte postaviť a udržať si hrad v centre tretieho ostrova na 20 minút."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (http://app.transifex.com/widelands/widelands/language/br/)\n"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Ket c'hoazh emblementet"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Digarezit, ar gartenn-mañ n'emañ ket c'hoazh emblementet."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Buhez Merdeer"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -339,13 +339,14 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "An armerzh"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
 msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
@@ -774,7 +775,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Floderien"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""

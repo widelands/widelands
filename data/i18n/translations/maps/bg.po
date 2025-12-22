@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Любомир Василев, 2016-2018\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -82,7 +82,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Втората империя"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -105,12 +105,12 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Когато Чат'Карут умрял, той вече бил стар човек, баща на трима силни и амбициозни синове и военачалник на армия, която може да победи всеки враг, дръзнал да се изправи срещу древните гори. В края на славното си управление, Чат'Карут избрал най-големия си син, Трон, да го наследи като военачалник на племето – решение, от което двамата му братя не останали доволни. Старият водач знаел това. Както заръчал баща му, Трон напуснал столицата Ал'тунран – домът на Трона сред дърветата – и оттеглил войските си към високите полета, където погребал тялото на баща си. Там той се заклел пред боговете и духа на баща си, че ще се върне, за да възстанови реда. Въпреки че братята му повеждат сляпа война срещу Трон и малкото войска, която той оставил да защитава границите на Ал'тунран, младият военачалник търси начин да помири амбициозните си братя и да накара племената отново да застанат на една и съща страна."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Месеците на изгнание"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
@@ -130,12 +130,12 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Преди шест месеца Луций – млад генерал от Империята – бил изпратен със 150 войници към границата отвъд северните гори, където варварски племена били навлезли в територия, владение на Империята. Задачата му била да защити земите на Империята. Отначало всичко било спокойно. Той дори поговорил с няколко варварски деца и обмислял спокоен живот – съвместно с този древен народ. Той започнал да се чувства в безопасност, а армията му – по-малко подозрителна спрямо потенциалния враг. Това била грешката им. Една мартенска вечер неподготвената му армия била нападната от 100 пехотинци на варварите и била напълно разпиляна. Само той и няколко от войниците му едва оцелели."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Надпреварата за огъня"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -150,12 +150,12 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Когато богът на атландците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атландците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "От вода към лед"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
@@ -186,7 +186,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Животът, зависим от океана, е винаги труден, а още по-труден е той за жителите на брега на фризийската част от Северно море. Последният бурен прилив беше най-унищожителният в историята на човека, но дали това е още един пример за трудностите, с които трябва да се сблъскват фризийците, или знак от боговете, че тъкмо заселилото се племе трябва отново да си търси нов дом?"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -227,7 +227,7 @@ msgstr "Най-накрая корабът бил поправен и хорат
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Отмъщението на Нептун"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -339,14 +339,15 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "Икономика"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "В това обучение ще научите какви възможности предлага Widelands за настройка на икономиката Ви. Препоръчва се за играчи, които вече имат някакъв опит."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
@@ -510,7 +511,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Перлата на Алпите, планинската верига Доломити е призната за световно наследство  заради девствената си красота. Тази карта е наподобява приблизително местността между Кортина д'Ампецо на североизток и Канацеи на югозапад. Ако трябва да участвате в смъртоносен дуел с враговете си, защо да не го направите на едно красиво място?"
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""

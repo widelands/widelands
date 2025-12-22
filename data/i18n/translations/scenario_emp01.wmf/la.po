@@ -99,7 +99,7 @@ msgstr "Nox obscura"
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Diarium Luitii"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:78

@@ -58,6 +58,10 @@ void WareDescr::set_default_target_quantity(const std::string& tribename, int qu
 	default_target_quantities_[tribename] = quantity;
 }
 
+int WareDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
+}
+
 void WareDescr::set_preciousness(const std::string& tribename, int preciousness) {
 	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }

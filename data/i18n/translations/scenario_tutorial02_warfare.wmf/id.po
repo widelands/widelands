@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
-msgstr ""
+msgstr "Pengantar"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"

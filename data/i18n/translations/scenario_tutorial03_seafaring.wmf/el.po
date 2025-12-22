@@ -211,11 +211,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Πλοία"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Φτιάξτε δύο πλοία"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
-msgstr ""
+msgstr "Καθόλου Σίδηρος"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
@@ -358,11 +358,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Αποστολή"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Έναρξη αποστολής"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -670,7 +670,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "Συμπέρασμα"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"

@@ -1004,7 +1004,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:939
 #: ../../../../data/tribes/initialization/frisians/units.lua:1276
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "В земята тук няма никакви ресурси."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:1209
@@ -1025,7 +1025,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:978
 #: ../../../../data/tribes/initialization/frisians/units.lua:1315
 msgid "There is only a little bit of gold here."
-msgstr ""
+msgstr "Тук има съвсем малко злато."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:1220
@@ -1050,7 +1050,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1022
 #: ../../../../data/tribes/initialization/frisians/units.lua:1359
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Тук има много злато."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:1244
@@ -3963,7 +3963,7 @@ msgstr "Разузнавачите като Рачо разузнавача ра
 #: ../../../../data/tribes/initialization/empire/units.lua:946
 #: ../../../../data/tribes/initialization/frisians/units.lua:1283
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
+msgstr "В земята тук има вода, която може да бъде извадена чрез кладенец."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Coal, part 1
@@ -3978,7 +3978,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1291
 #: ../../../../data/tribes/initialization/frisians/units.lua:1335
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "Въглищните запаси съдържат въглища, които могат да бъдат изкопани чрез мини за въглища."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Coal part 2
@@ -3989,7 +3989,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:956
 #: ../../../../data/tribes/initialization/frisians/units.lua:1293
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "Тук има съвсем малко въглища."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Iron, part 1
@@ -4004,7 +4004,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1302
 #: ../../../../data/tribes/initialization/frisians/units.lua:1346
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "Железните запаси съдържат желязна руда, която може да бъде изкопана чрез мини за желязо."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Iron, part 2
@@ -4015,7 +4015,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:967
 #: ../../../../data/tribes/initialization/frisians/units.lua:1304
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Тук има съвсем малко желязо."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Gold, part 1
@@ -4030,7 +4030,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1313
 #: ../../../../data/tribes/initialization/frisians/units.lua:1357
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "Златните запаси съдържат златна руда, която може да бъде изкопана чрез златни мини."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 1
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1274
@@ -4038,12 +4038,12 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Ценните камъни се използват при строителството на големи сгради. Те могат да бъдат изкопани чрез кристална мина. От нея ще получавате и гранит."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1276
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "Тук има съвсем малко ценни камъни."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Coal, part 2
@@ -4054,7 +4054,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1000
 #: ../../../../data/tribes/initialization/frisians/units.lua:1337
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Тук има много въглища."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Iron, part 2
@@ -4065,12 +4065,12 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1011
 #: ../../../../data/tribes/initialization/frisians/units.lua:1348
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Тук има много желязо."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1320
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "Тук има много ценни камъни."
 
 #. TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa
 #. Tree
@@ -6802,21 +6802,21 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:970
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "Гранитът е основен строителен материал и може да бъде изкопан чрез мина за гранит."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:928
 #: ../../../../data/tribes/initialization/frisians/units.lua:1326
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "Тук има съвсем малко гранит."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:972
 #: ../../../../data/tribes/initialization/frisians/units.lua:1370
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Тук има много гранит."
 
 #. TRANSLATORS: Lore helptext for a Barbarian warehouse: Headquarters
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1084
@@ -7893,7 +7893,7 @@ msgstr "Дървото може и да става за домашното ог�
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Ако запасите от храна са достатъчни и постоянни, тази мина може да произвежда въглища средно за %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -10641,7 +10641,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:443
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Те се произвеждат от ковача на инструменти."
 
 #. TRANSLATORS: Helptext for an Empire ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:456
@@ -10988,17 +10988,17 @@ msgstr "Тези лози са готови за обиране."
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "Мраморът е основен строителен материал и може да бъде изкопан чрез мина за мрамор. От нея ще получавате и гранит."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:989
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "Тук има съвсем малко мрамор."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:1033
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Тук има много мрамор."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -17094,17 +17094,17 @@ msgstr "При премахване на флаг: премахване на в�
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Малки"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Средно"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Големи"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17190,7 +17190,7 @@ msgstr "Изисквания"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."

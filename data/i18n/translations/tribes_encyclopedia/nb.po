@@ -16990,7 +16990,7 @@ msgstr "Ytelse:"
 #: ../../../../data/tribes/scripting/help/controls.lua:7
 #: ../../../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: ../../../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -17043,7 +17043,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + Click"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:30
@@ -17055,7 +17055,7 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + Click"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../../../data/tribes/scripting/help/controls.lua:34
@@ -17093,17 +17093,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Mellomstor"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Stor"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17189,7 +17189,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17213,20 +17213,20 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
-msgstr ""
+msgstr "Introduksjon"
 
 #: ../../../../data/tribes/scripting/help/init.lua:107
 #: ../../../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Varer"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
-msgstr ""
+msgstr "Bygninger"
 
 #: ../../../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
@@ -17238,7 +17238,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
-msgstr ""
+msgstr "Om Widelands"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:26
 #: ../../../../data/tribes/scripting/help/time_strings.lua:62
@@ -17258,15 +17258,15 @@ msgstr[1] "%d minutter"
 
 #: ../../../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
-msgstr ""
+msgstr "%1% og %2%"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:52
 msgid "Single Player"
-msgstr ""
+msgstr "Enspiller"
 
 #: ../../../../data/tribes/scripting/help/tips.lua:55
 msgid "Multiplayer"
-msgstr ""
+msgstr "Flerspiller"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
@@ -17332,7 +17332,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
-msgstr ""
+msgstr "Helse"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:191
@@ -17359,7 +17359,7 @@ msgstr[1] ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
-msgstr ""
+msgstr "Angrep"
 
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../../../data/tribes/scripting/help/worker_help.lua:202
@@ -17368,7 +17368,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
-msgstr ""
+msgstr "Forsvar"
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:213
 #: ../../../../data/tribes/scripting/help/worker_help.lua:221
@@ -17389,4 +17389,4 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
-msgstr ""
+msgstr "Unnvik"

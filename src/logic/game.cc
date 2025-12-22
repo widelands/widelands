@@ -191,8 +191,8 @@ Game::Game()
 	last_detectedportspace_serial_ = 0;
 }
 
-Game::~Game() {  // NOLINT
-	              // ReplayWriter needs this
+Game::~Game() {
+	delete_pending_player_commands();
 }
 
 void Game::sync_reset() {
@@ -1755,7 +1755,7 @@ Serial Game::generate_economy_serial() {
 	return last_economy_serial_++;
 }
 Serial Game::generate_detectedportspace_serial() {
-	return last_detectedportspace_serial_++;
+	return ++last_detectedportspace_serial_;
 }
 void Game::notify_economy_serial(Serial serial) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial + 1);

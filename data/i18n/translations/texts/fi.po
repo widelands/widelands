@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -214,13 +214,13 @@ msgid "Elders"
 msgstr "Vanhimmat"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:423
 msgid "Graphics"
 msgstr "Grafiikka"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:367
+#: ../../../../data/txts/developers.lua:430
 msgid "Homepage"
 msgstr "Kotisivu"
 
@@ -229,7 +229,7 @@ msgid "Scripting"
 msgstr "Ohjelmakoodisyöttö"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:438
 msgid "Sound"
 msgstr "Ääni"
 
@@ -245,103 +245,103 @@ msgstr "Kielet"
 msgid "Coders"
 msgstr "Ohjelmoijat"
 
-#: ../../../../data/txts/developers.lua:151
+#: ../../../../data/txts/developers.lua:152
 msgid "Graphicians"
 msgstr "Graafikot"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:191
 msgid "Musicians"
 msgstr "Muusikot"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:210
 msgid "Sound Effects"
 msgstr "Äänitehosteet"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:226
 msgid "Maps and Missions"
 msgstr "Kartat ja missiot"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:264
 msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:268
 msgid "Barbarians"
 msgstr "Barbaarit"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:276
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:283
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:291
 msgid "Frisians"
 msgstr "Vapaamieliset"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:299
 msgid "Packagers"
 msgstr "Paketoijat"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:303
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:309
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:317
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:323
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:329
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:336
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:348
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:359
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
 msgstr "Kotisivun koodarit"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentaatio, Ohje ja Wiki"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
 msgstr "Lisäosat"
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:419
 msgid "Former Elders"
 msgstr "Entiset vanhimmat"
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:445
 msgid "Translation"
 msgstr "Käännökset"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:454
 msgid "Other"
 msgstr "Muut"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "ja monia, monia muita lisää (kiitokset kaikesta mitä olet tehnyt)"
 
@@ -811,42 +811,43 @@ msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr "Kohdenna hiiren rullan avulla sisään/ulos tai %1%/%2%. paina %3% nollataksesi kohdennuksen."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
+msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "Käytä ‘%1$s’ ja ‘%2$s’ näppäimiä hyppiäksesi nopeasti viimeksi vierailtujen määränpäiden välillä."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "Nopeuta tai hidasta peliä näppäimillä %1%/%2%. Käytä %3%/%4% pikamuutokselle; %5%/%6% säätää nopeutta jouhevasti."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Nuolinäppäimet"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + nuolinäppäimet"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift-vaihtonäppäin + nuolinäppäimet"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -854,13 +855,19 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "Kun rakennus tuhotaan, sen työntekijät käyvät etsimään lähistöltä lippua, mistä he voivat kulkea tietä pitkin tieverkostossa olevalle varastolle. Jos lähistöllä ei ole sellaista lippua, he jatkavat kuljeskelua ja lopulta kuolevat."
+
+#: ../../../../data/txts/tips/general_game.lua:112
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr ""
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

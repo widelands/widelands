@@ -4,9 +4,12 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# GunChleoc, 2014
+# Karl Vest, 2020
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Pavol Gono, 2024-2025
+# Viliam Molo, 2023
 # Viliam Molo, 2023
 msgid ""
 msgstr ""
@@ -14,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Viliam Molo, 2023\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -374,7 +377,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Pohybovanie pravým tlačidlom myši môže byť nepraktické, ak hráte na notebooku s touchpadom. Pohyb po mape pomocou rolovania touchpadom môžete povoliť v hlavnej ponuke Widelands: vyberte „Možnosti“, potom stlačte „Upraviť akcie klávesnice a myši“ a vyberte kartu „Posúvanie kolieskom myši“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
@@ -411,7 +414,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Keď budete pripravení pokračovať, zatvorte minimapu výberom možnosti „Skryť minimapu“ v ponuke „Zobrazenie mapy“ alebo stlačením tlačidla „%s“. Samozrejme, funguje aj kliknutie pravým tlačidlom myši."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
@@ -425,18 +428,18 @@ msgstr "Použitie minimapy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "Veľmi dobre. A teraz k minimape."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Môžete ju otvoriť výberom položky „Ukázať minimapu“ v ponuke „Zobrazenie mapy“ v dolnej časti obrazovky alebo jednoducho pomocou klávesovej skratky „%s“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid "I will open it for you."
-msgstr ""
+msgstr "Otvorím vám ju."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
@@ -567,7 +570,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Výborne! Pamätajte, že musíme postaviť aj cestu do kameňolomu. Ak chcete prepnúť režim stavania ciest pre ľubovoľnú vlajku, kliknite ľavým tlačidlom myši na vlajku a vyberte symbol stavania cesty."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
@@ -592,7 +595,7 @@ msgstr "Pripojte stavenisko"
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Pripojte stavenisko kameňolomu k vášmu ústrediu cestou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
@@ -605,7 +608,7 @@ msgstr "Úplne novú cestu postavíte kliknutím na vlajku pred staveniskom, pot
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Ak počas dokončovania cesty podržíte kláves Ctrl alebo Shift+Ctrl, vlajky sa umiestnia automaticky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid ""
@@ -646,7 +649,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Vaši pracovníci neradi chodia pešo cez krajinu. Musíte postaviť cestu zo svojho ústredia na stavenisko, aby mohli nosiči prepravovať výrobky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid "You Destroyed the Construction Site!"
@@ -657,7 +660,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Zdá sa, že ste zničili stavenisko kameňolomu, ktorý sme chceli postaviť. Našťastie nám tentoraz ostalo dosť kmeňov, takže jednoducho môžete postaviť ďalší."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
 msgid ""
@@ -665,7 +668,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Hru môžete načítať aj z predchádzajúcej uloženej hry. Našťastie sa z času na čas vytvárajú. Ak tak chcete urobiť, musíte sa vrátiť do hlavného menu a zvoliť „Hra jedného hráča…“ → „Načítať hru“. A nabudúce buďte, prosím, trochu opatrnejší."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:443
@@ -705,7 +708,7 @@ msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Kým čakáme, v rýchlosti vám ukážem ďalšiu užitočnú funkciu. Niekedy je ťažké rozoznať od seba všetky budovy. Widelands ponúka funkciu na zobrazenie textových nápisov nad budovami, ktoré sa nazývajú „názvy budov“."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
 #, lua-format
@@ -713,16 +716,16 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Ak chcete zobraziť alebo skryť nápisy s názvami budov, môžete vybrať položku „Zobraz názvy budov“ / „Skry názvy budov“ z menu „Zobraz / Skry“ v dolnej časti alebo stlačiť kláves „%s“ na klávesnici."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Dovoľte mi zapnúť názvy budov za vás."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid "Show the building status"
-msgstr ""
+msgstr "Zobraziť stav budov"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 #, lua-format
@@ -730,20 +733,20 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Ak chcete zobraziť alebo skryť nápisy stavu budov, môžete vybrať položku „Zobraz stav“ z ponuky „Zobraz / Skry“ v dolnej časti alebo stlačiť kláves „%s“ na klávesnici."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "Nebolo by teraz fajn skontrolovať postup našich kameňolomov bez toho, aby sme museli otvárať ich okná?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr ""
+msgstr "Okrem názvov budov môžete aktivovať aj nápisy s ich stavom. Zobrazia sa tak informácie o produktivite budov alebo o postupe prác na staveniskách."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -757,75 +760,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Možno ste si všimli, že názov ústredia je iný. Je to preto, že ide o špeciálny typ budovy nazývaný sklad. Sklady sú budovy, v ktorých si vaši pracovníci môžu oddýchnuť, kým nie sú pridelení na pracovisko, a kde možno uskladniť ľubovoľné množstvo výrobkov, kým nie sú niekde potrebné. Fungujú teda ako akési mestské centrum, a aby sa to zdôraznilo, dostávajú jedinečné mená."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Malé korunky vedľa názvu ho označujú ako vaše ústredie. Pri hraní Widelands uvidíte tri druhy skladov označené malými ikonami:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Ústredie, s ktorým zvyčajne začínate hru. Je označené malými korunkami: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Obyčajné sklady, ktoré jednoducho uchovávajú výrobky a pracovníkov, aby boli rovnomerne rozmiestnení po celom vašom území. Sú označené malými domčekmi: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Prístavy, ktoré využijete pri moreplavbe. Nielenže uskladňujú vaše výrobky a pracovníkov, ale môžu ich aj nakladať na vaše lode a posielať cez moria. Sú označené malými kotvami: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Všetkým sa automaticky priraďujú mená, ktoré zodpovedajú kmeňu, ale ich názvy si môžete zmeniť aj podľa vlastného uváženia."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Zmeňte názov vašej malej dediny"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Zmeňte názov vášho ústredia"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Ak chcete nastaviť nový názov pre svoje ústredie, najprv naň kliknite, čím otvoríte jeho okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "V hornej časti okna sa zobrazí pole na úpravu s názvom."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Stačí vymazať starý názov a zadať nový."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Keď skončíte, jednoducho zatvorte okno."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Buďte kreatívni"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Vidím, že ste zatvorili okno bez zmeny názvu. Určite na niečo prídete. Ale ak sa vám nechce, aspoň prosím vymažte starý názov, aby ste mi ukázali, že ste našli pole na úpravu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"
@@ -843,14 +846,14 @@ msgstr "Teraz archivujte všetky správy v schránke."
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "Klikajte na tlačidlo „Archivovať vybranú správu“, kým nebudú všetky správy archivované a zoznam nebude prázdny."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 #, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Môžete tiež podržať kláves Ctrl alebo Shift na výber viacerých správ, alebo stlačiť %s a vybrať ich všetky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:546
 #, lua-format
@@ -858,7 +861,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Okno so správami môžete prepínať stlačením tlačidla „%s“ alebo kliknutím na druhé tlačidlo z pravej strany úplne dole na obrazovke. Najnovšia správa sa pre vás automaticky označí."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:547
 msgid ""
@@ -910,11 +913,11 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Všetky okná v hre (okrem príbehových okien s tlačidlom „OK“) možno zavrieť kliknutím pravým tlačidlom myši. Niektoré okná možno prepnúť pomocou tlačidiel a ponúk na úplnom spodku obrazovky."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Okná je možné minimalizovať aj tak, že na ne kliknete stredným tlačidlom myši."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
@@ -927,7 +930,7 @@ msgstr "Zatváranie okien"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Výborne. Teraz sa musíme sústrediť na iné veci."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
 msgid ""
@@ -943,7 +946,7 @@ msgstr "Zničte obe kameňolomy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Zničte kameňolomy"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 msgid ""
@@ -978,7 +981,7 @@ msgstr "Prišli správy!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Dostali ste nejaké správy. Vidíte, ako sa zmenil vzhľad tlačidla v dolnej časti obrazovky?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expand your territory"
@@ -991,7 +994,7 @@ msgstr "Rozšírte svoje územie"
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:622
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Postavte na svojej hranici vojenskú budovu. Vyberte si tú, ktorá sa vám najviac páči."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:623
 msgid ""

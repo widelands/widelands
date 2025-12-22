@@ -19,7 +19,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_controls.lua:4
 #: ../../../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
-msgstr ""
+msgstr "控制"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
@@ -27,21 +27,21 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr ""
+msgstr "常规的"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "提示"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "地形"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
-msgstr ""
+msgstr "资源"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
@@ -89,7 +89,7 @@ msgstr ""
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
 #: ../../../../data/scripting/editor/terrain_help.lua:57
@@ -106,7 +106,7 @@ msgstr ""
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
