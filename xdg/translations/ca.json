@@ -8,6 +8,7 @@
 		"El Widelands ofereix un mode d’un sol jugador amb campanyes que narren les històries de les tribus i la seva lluita en l’univers propi del joc. A més a més, els modes multijugador, a través d’Internet o de xarxes LAN, permeten que construïu imperis junts o enfrontar-vos fins que només quedi un jugador. El Widelands també disposa d’una intel·ligència artificial que fa les partides més interessants."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

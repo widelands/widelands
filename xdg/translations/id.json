@@ -8,6 +8,7 @@
 		"Widelands menawarkan mode pemain tunggal dengan kampanye yang menceritakan kisah suku-suku dan perjuangan mereka di alam semesta Widelands. Namun, penyelesaian benar-benar dimulai ketika anda bersatu dengan teman-teman melalui Internet dan LAN untuk membangun kerajaan baru bersama – atau untuk saling menghancurkan dalam debu perang. Widelands juga menawarkan kecerdasan buatan untuk menantang anda."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

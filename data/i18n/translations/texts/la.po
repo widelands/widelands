@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-01 03:54+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Leonard Noack, 2016\n"
 "Language-Team: Latin (http://app.transifex.com/widelands/widelands/language/la/)\n"
@@ -805,42 +805,43 @@ msgstr ""
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -848,7 +849,7 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -856,7 +857,7 @@ msgid ""
 "eventually die."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
