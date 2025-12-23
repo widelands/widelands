@@ -1838,12 +1838,12 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 
 	// NOCOM for testing
 	if (ts.current_training_attribute() != training_.attribute) {
-		log_err_time(game.get_gametime(), "ActTrain attribute mismatch: site: %d program: %d",
+		log_err_time(game.get_gametime(), "ActTrain attribute mismatch: site: %u program: %u",
 		             static_cast<unsigned>(ts.current_training_attribute()),
 		             static_cast<unsigned>(training_.attribute));
 	}
 	if (training_.level != current_level + 1) {
-		log_err_time(game.get_gametime(), "ActTrain level mismatch: train %d from %d to %d",
+		log_err_time(game.get_gametime(), "ActTrain level mismatch: train %u from %u to %u",
 		             static_cast<unsigned>(training_.attribute), current_level, training_.level);
 	}
 
