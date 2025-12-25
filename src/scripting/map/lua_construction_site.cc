@@ -51,6 +51,7 @@ const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
    PROP_RW(LuaConstructionSite, has_builder),
    PROP_RW(LuaConstructionSite, setting_soldier_capacity),
    PROP_RW(LuaConstructionSite, setting_soldier_preference),
+   PROP_RW(LuaConstructionSite, setting_build_heroes),
    PROP_RW(LuaConstructionSite, setting_launch_expedition),
    PROP_RW(LuaConstructionSite, setting_stopped),
    {nullptr, nullptr, nullptr},
@@ -161,6 +162,7 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 
       (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer
       heroes after completion; ``"rookies"`` for rookies; ``"any"`` for no predilection.
+
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
@@ -177,6 +179,37 @@ int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
 	}
 	try {
 		ms->soldier_preference = string_to_soldier_preference(luaL_checkstring(L, -1));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+   .. attribute:: setting_build_heroes
+
+      .. versionadded:: 1.4
+
+      (RW) Only valid for trainingsites under construction. ``"heroes"`` if this site will prefer
+      training the stronger soldiers after completion; ``"rookies"`` for the weaker soldiers;
+      ``"any"`` for no predilection.
+
+*/
+int LuaConstructionSite::get_setting_build_heroes(lua_State* L) {
+	if (upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings())) {
+		lua_pushstring(L, soldier_preference_to_string(ts->build_heroes).c_str());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+int LuaConstructionSite::set_setting_build_heroes(lua_State* L) {
+	upcast(Widelands::TrainingsiteSettings, ts, get(L, get_egbase(L))->get_settings());
+	if (ts == nullptr) {
+		report_error(L, "This constructionsite will not become a trainingsite");
+	}
+	try {
+		ts->build_heroes = string_to_soldier_preference(luaL_checkstring(L, -1));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
