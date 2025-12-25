@@ -8509,13 +8509,13 @@ msgstr "Zoom ut"
 #: ../../../../src/wlapplication_options.cc:426
 #: ../../../../src/wui/interactive_base.cc:349
 msgid "Maximum Zoom"
-msgstr ""
+msgstr "Maks zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wlapplication_options.cc:431
 #: ../../../../src/wui/interactive_base.cc:354
 msgid "Minimum Zoom"
-msgstr ""
+msgstr "Zooma heilt ut"
 
 #: ../../../../src/wlapplication_options.cc:436
 msgid "Reset Zoom"
