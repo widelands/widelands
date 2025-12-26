@@ -125,34 +125,89 @@ endif()
 
 find_package (Python3 REQUIRED)
 
-find_package(OpenGL REQUIRED)
-find_package(PNG 1.6 REQUIRED)
+if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+  set(USE_FLAGS "-pthread \
+  --use-port=sdl2 \
+  --use-port=sdl2_image:formats=png,jpg --use-port=libpng --use-port=libjpeg \
+  --use-port=sdl2_mixer -sSDL2_MIXER_FORMATS=ogg \
+  --use-port=sdl2_ttf \
+  --use-port=zlib \
+  -sNO_DISABLE_EXCEPTION_CATCHING")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS} \
+  -sASYNCIFY -sASYNCIFY_STACK_SIZE=32768 \
+  -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=512mb -sMEMORY_GROWTH_LINEAR_STEP=256mb \
+  -sENVIRONMENT=web,worker \
+  -sMODULARIZE \
+  -lidbfs.js \
+  -lwebsocket.js \
+  -sEXPORTED_RUNTIME_METHODS=callMain,addRunDependency,removeRunDependency \
+  -sEXPORT_ALL \
+  -sEXIT_RUNTIME \
+  -Wno-pthreads-mem-growth")
+else()
+  find_package(OpenGL REQUIRED)
+  find_package(PNG 1.6 REQUIRED)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(ZLIB REQUIRED)
+  find_package(SDL2 REQUIRED)
+  find_package(SDL2_image REQUIRED)
+  find_package(SDL2_mixer REQUIRED)
+  find_package(SDL2_ttf REQUIRED)
+  find_package(ZLIB REQUIRED)
+endif()
+
 if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
     find_package(ICU_old REQUIRED)
 else()
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-port=icu")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --use-port=icu")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --use-port=icu")
+  else()
     find_package(ICU REQUIRED COMPONENTS uc dt)
+  endif()
 endif()
 if(OPTION_USE_GLBINDING)
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    message(FATAL_ERROR "glbinding not supported in emscripten sdk")
+  endif()
   find_package(glbinding REQUIRED)
 else()
-  find_package(GLEW REQUIRED)
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2")
+  else()
+    find_package(GLEW REQUIRED)
+  endif()
 endif()
 
 # Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
 if(NOT asio_location OR asio_location STREQUAL "")
   unset(asio_location CACHE)
+  if (CMAKE_SYSTEM_NAME MATCHES "Emscripten")
+    if(CMAKE_VERSION VERSION_GREATER "3.24.0")
+      cmake_policy(SET CMP0135 NEW)
+    endif ()
+    include(ExternalProject)
+    ExternalProject_Add(asio
+      PREFIX "asio"
+      URL "https://sourceforge.net/projects/asio/files/asio/1.34.2%20%28Stable%29/asio-1.34.2.tar.bz2/download"
+      BUILD_IN_SOURCE true
+      CONFIGURE_COMMAND ""
+      BUILD_COMMAND ""
+      INSTALL_COMMAND ""
+    )
+    set(asio_location "${CMAKE_BINARY_DIR}/asio/src/asio/include")
+    include_directories(${asio_location})
+  endif()
+
   find_path(asio_location "asio.hpp")
   if(asio_location)
     message(STATUS "Found Asio in '${asio_location}'.")
   else()
     message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
   endif()
+
 endif()
 add_definitions(-DASIO_STANDALONE)
 
@@ -602,9 +657,9 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-if (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE AND NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
   add_subdirectory(xdg)
-endif (UNIX AND NOT APPLE)
+endif (UNIX AND NOT APPLE AND NOT CMAKE_SYSTEM_NAME MATCHES "Emscripten")
 
 # uninstall target
 # see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
