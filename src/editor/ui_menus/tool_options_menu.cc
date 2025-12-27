@@ -37,7 +37,8 @@ void EditorToolOptionsMenu::select_correct_tool() {
 }
 
 bool EditorToolOptionsMenu::picker_is_active() const {
-	return &parent_.tools()->current() == &parent_.tools()->picker && parent_.tools()->picker.get_linked_tool() == this;
+	return &parent_.tools()->current() == &parent_.tools()->picker &&
+	       parent_.tools()->picker.get_linked_tool() == this;
 }
 
 void EditorToolOptionsMenu::activate_picker() {

@@ -90,10 +90,16 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
    EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool),
-   terrain_tool_(tool),
-   main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
-   picker_(&main_box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick terrain from map …"))
-   {
+     terrain_tool_(tool),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     picker_(&main_box_,
+             "picker",
+             0,
+             0,
+             0,
+             0,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Pick terrain from map …")) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
@@ -125,9 +131,11 @@ void EditorToolSetTerrainOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
 }
 
-bool EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+bool EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map,
+                                                      const Widelands::NodeAndTriangle<>& center) {
 	const Widelands::Field& field = map[center.triangle.node];
-	const Widelands::DescriptionIndex terrain_index = center.triangle.t == Widelands::TriangleIndex::D ? field.terrain_d() : field.terrain_r();
+	const Widelands::DescriptionIndex terrain_index =
+	   center.triangle.t == Widelands::TriangleIndex::D ? field.terrain_d() : field.terrain_r();
 
 	terrain_tool_.disable_all();
 	terrain_tool_.enable(terrain_index, true);

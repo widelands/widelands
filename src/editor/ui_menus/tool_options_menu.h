@@ -57,7 +57,8 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return current_tool_;
 	}
 
-	virtual bool pick_from_field(const Widelands::Map& /*map*/, const Widelands::NodeAndTriangle<>& /*center*/) {
+	virtual bool pick_from_field(const Widelands::Map& /*map*/,
+	                             const Widelands::NodeAndTriangle<>& /*center*/) {
 		NEVER_HERE();
 	}
 	void activate_picker();

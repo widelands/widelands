@@ -36,7 +36,8 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	void update_window() override;
 	void think() override;
 
-	bool pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) override;
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center) override;
 
 private:
 	EditorPlaceImmovableTool& immovable_tool_;

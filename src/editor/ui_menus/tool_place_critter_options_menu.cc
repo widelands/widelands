@@ -45,10 +45,16 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
 EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
    EditorInteractive& parent, EditorPlaceCritterTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals"), tool),
-   critter_tool_(tool),
-   main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
-   picker_(&main_box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick animal from map …"))
-    {
+     critter_tool_(tool),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     picker_(&main_box_,
+             "picker",
+             0,
+             0,
+             0,
+             0,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Pick animal from map …")) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
@@ -79,11 +85,13 @@ void EditorToolPlaceCritterOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
 }
 
-bool EditorToolPlaceCritterOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+bool EditorToolPlaceCritterOptionsMenu::pick_from_field(
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
 	const Widelands::Field& field = map[center.triangle.node];
 
 	std::set<Widelands::DescriptionIndex> indices;
-	for (const Widelands::Bob* bob = field.get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+	for (const Widelands::Bob* bob = field.get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
 		if (bob->descr().type() == Widelands::MapObjectType::CRITTER) {
 			indices.insert(parent_.egbase().descriptions().safe_critter_index(bob->descr().name()));
 		}

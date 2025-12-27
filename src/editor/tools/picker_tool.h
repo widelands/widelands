@@ -52,7 +52,7 @@ struct EditorPickerTool : public EditorTool {
 	[[nodiscard]] bool operates_on_triangles() const override;
 
 private:
-	EditorToolOptionsMenu* linked_tool_window_ {nullptr};
+	EditorToolOptionsMenu* linked_tool_window_{nullptr};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_PICKER_TOOL_H

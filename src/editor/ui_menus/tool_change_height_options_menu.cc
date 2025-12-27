@@ -66,7 +66,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              _("Set height to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
-   picker_(&box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick height from map …")) {
+     picker_(
+        &box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick height from map …")) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/
 	   _("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
@@ -117,10 +118,12 @@ void EditorToolChangeHeightOptionsMenu::update_window() {
 	set_to_.set_value(increase_tool_.set_tool().get_interval().min);
 }
 
-bool EditorToolChangeHeightOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+bool EditorToolChangeHeightOptionsMenu::pick_from_field(
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
 	const Widelands::Field& field = map[center.triangle.node];
 
-	increase_tool_.set_tool().set_interval(Widelands::HeightInterval(field.get_height(), field.get_height()));
+	increase_tool_.set_tool().set_interval(
+	   Widelands::HeightInterval(field.get_height(), field.get_height()));
 
 	select_correct_tool();
 	update_window();

@@ -36,7 +36,8 @@ struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
-	bool pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) override;
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center) override;
 
 private:
 	EditorSetTerrainTool& terrain_tool_;

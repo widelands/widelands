@@ -87,7 +87,14 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                     0,
                     "",
                     UI::Align::kCenter),
-   picker_(&box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick resource from map …")) {
+     picker_(&box_,
+             "picker",
+             0,
+             0,
+             0,
+             0,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Pick resource from map …")) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -194,7 +201,8 @@ void EditorToolChangeResourcesOptionsMenu::update_window() {
 	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
 }
 
-bool EditorToolChangeResourcesOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
 	const Widelands::Field& field = map[center.triangle.node];
 	const Widelands::DescriptionIndex resource_index = field.get_resources();
 	const int amount = field.get_resources_amount();
