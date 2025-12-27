@@ -120,7 +120,7 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 std::string
-as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
+as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle style, bool add_rt_tag = true);
 
 /// Insert vertical space. Returns an empty string if gap is zero or negative.
 [[nodiscard]] std::string as_vspace(int gap);
