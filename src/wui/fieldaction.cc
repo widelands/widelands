@@ -110,7 +110,9 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 	if (shortcuts.empty()) {
 		descname = descr.descname();
 	} else {
-		descname = as_tooltip_text_with_hotkey(descr.descname(), i18n::localize_list(shortcuts, i18n::ConcatenateWith::COMMA), UI::PanelStyle::kWui, false);
+		descname = as_tooltip_text_with_hotkey(
+		   descr.descname(), i18n::localize_list(shortcuts, i18n::ConcatenateWith::COMMA),
+		   UI::PanelStyle::kWui, false);
 	}
 
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),

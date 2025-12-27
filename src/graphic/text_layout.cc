@@ -245,12 +245,12 @@ std::string as_tooltip_text_with_hotkey(const std::string& text,
 		result = "<rt>";
 	}
 	result += format("<p>%s %s</p>",
-	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
-	                                                          UI::FontStyle::kFsTooltip,
-	                          text),
-	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
-	                                                          UI::FontStyle::kFsTooltipHotkey,
-	                          "(" + hotkey + ")"));
+	                 as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+	                                                             UI::FontStyle::kFsTooltip,
+	                             text),
+	                 as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
+	                                                             UI::FontStyle::kFsTooltipHotkey,
+	                             "(" + hotkey + ")"));
 	if (add_rt_tag) {
 		result += "</rt>";
 	}
