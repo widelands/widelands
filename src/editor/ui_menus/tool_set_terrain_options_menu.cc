@@ -125,7 +125,7 @@ void EditorToolSetTerrainOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
 }
 
-void EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+bool EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
 	const Widelands::Field& field = map[center.triangle.node];
 	const Widelands::DescriptionIndex terrain_index = center.triangle.t == Widelands::TriangleIndex::D ? field.terrain_d() : field.terrain_r();
 
@@ -134,4 +134,6 @@ void EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map,
 
 	select_correct_tool();
 	update_window();
+
+	return true;
 }

@@ -24,8 +24,9 @@ int32_t EditorPickerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
                                             EditorActionArgs* /* args */,
                                             Widelands::Map* map) {
 	if (linked_tool_window_ != nullptr) {
-		linked_tool_window_->pick_from_field(*map, center);
-		linked_tool_window_ = nullptr;
+		if (linked_tool_window_->pick_from_field(*map, center)) {
+			linked_tool_window_ = nullptr;
+		}
 	}
 	return 0;
 }
