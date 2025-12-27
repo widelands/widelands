@@ -36,7 +36,12 @@ struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	void pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) override;
+
 private:
+	EditorSetTerrainTool& terrain_tool_;
+	UI::Box main_box_;
+	UI::Button picker_;
 	std::unique_ptr<
 	   CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>>
 	   multi_select_menu_;

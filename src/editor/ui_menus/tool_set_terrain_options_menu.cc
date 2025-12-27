@@ -89,22 +89,49 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
    EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool),
+   terrain_tool_(tool),
+   main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+   picker_(&main_box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick terrain from map …"))
+   {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, "terrains", parent.editor_categories(Widelands::MapObjectType::TERRAIN),
+	      &main_box_, "terrains", parent.editor_categories(Widelands::MapObjectType::TERRAIN),
 	      descriptions.terrains(),
 	      [this, lua](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, lua, terrain_descr, &offscreen_images_);
 	      },
 	      [this] { select_correct_tool(); }, &tool));
-	set_center_panel(multi_select_menu_.get());
+
+	picker_.sigclicked.connect([this]() {
+		if (picker_is_active()) {
+			select_correct_tool();
+		} else {
+			activate_picker();
+		}
+	});
+
+	main_box_.add(multi_select_menu_.get(), UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(spacing());
+	main_box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	set_center_panel(&main_box_);
 
 	initialization_complete();
 }
 
 void EditorToolSetTerrainOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
+}
+
+void EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+	const Widelands::Field& field = map[center.triangle.node];
+	const Widelands::DescriptionIndex terrain_index = center.triangle.t == Widelands::TriangleIndex::D ? field.terrain_d() : field.terrain_r();
+
+	terrain_tool_.disable_all();
+	terrain_tool_.enable(terrain_index, true);
+
+	select_correct_tool();
+	update_window();
 }

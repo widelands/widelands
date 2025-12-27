@@ -53,6 +53,12 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return spacing();
 	}
 
+	virtual void pick_from_field(const Widelands::Map& /*map*/, const Widelands::NodeAndTriangle<>& /*center*/) {
+		NEVER_HERE();
+	}
+	void activate_picker();
+	bool picker_is_active() const;
+
 	/**
 	 * Update window options to match tool settings
 	 */

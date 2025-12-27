@@ -35,3 +35,12 @@ EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
 void EditorToolOptionsMenu::select_correct_tool() {
 	parent_.select_tool(current_tool_, EditorTool::First);
 }
+
+bool EditorToolOptionsMenu::picker_is_active() const {
+	return &parent_.tools()->current() == &parent_.tools()->picker && parent_.tools()->picker.get_linked_tool() == this;
+}
+
+void EditorToolOptionsMenu::activate_picker() {
+	parent_.tools()->picker.set_linked_tool(this);
+	parent_.select_tool(parent_.tools()->picker, EditorTool::First);
+}
