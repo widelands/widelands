@@ -210,6 +210,7 @@ bool EditorToolChangeResourcesOptionsMenu::pick_from_field(const Widelands::Map&
 
 	select_correct_tool();
 	update_window();
+	update();
 
 	return true;
 }

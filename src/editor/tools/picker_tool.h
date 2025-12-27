@@ -42,12 +42,14 @@ struct EditorPickerTool : public EditorTool {
 	}
 
 	[[nodiscard]] const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_resize.png");  // NOCOM
+		return g_image_cache->get("images/wui/editor/fsel_editor_pick.png");
 	}
 
 	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
+
+	[[nodiscard]] bool operates_on_triangles() const override;
 
 private:
 	EditorToolOptionsMenu* linked_tool_window_ {nullptr};

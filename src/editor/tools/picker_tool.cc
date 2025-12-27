@@ -30,3 +30,7 @@ int32_t EditorPickerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
 	}
 	return 0;
 }
+
+bool EditorPickerTool::operates_on_triangles() const {
+	return linked_tool_window_ != nullptr && linked_tool_window_->current_tool().operates_on_triangles();
+}
