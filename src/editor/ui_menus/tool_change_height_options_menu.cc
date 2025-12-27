@@ -28,7 +28,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseHeightTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options"), increase_tool),
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Height Tools Options"), increase_tool),
      eia_(parent),
      increase_tool_(increase_tool),
      box_(this,
@@ -44,7 +44,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 "change_by",
                 0,
                 0,
-                get_inner_w() - 2 * hmargin(),
+                80,
                 80,
                 increase_tool_.get_change_by(),
                 1,
@@ -57,7 +57,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              "set_to",
              0,
              0,
-             get_inner_w() - 2 * hmargin(),
+             80,
              80,
              increase_tool_.set_tool().get_interval().min,
              0,
@@ -65,7 +65,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              UI::PanelStyle::kWui,
              _("Set height to:"),
              UI::SpinBox::Units::kNone,
-             UI::SpinBox::Type::kSmall) {
+             UI::SpinBox::Type::kSmall),
+   picker_(&box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick terrain from map …")) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/
 	   _("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
@@ -76,10 +77,19 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	change_by_.changed.connect([this]() { update_change_by(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	box_.add(&change_by_);
-	box_.add(&set_to_);
-	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
-	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
+	picker_.sigclicked.connect([this]() {
+		if (picker_is_active()) {
+			select_correct_tool();
+		} else {
+			activate_picker();
+		}
+	});
+
+	box_.set_size(350, 50);
+	box_.add(&change_by_, UI::Box::Resizing::kFullSize);
+	box_.add(&set_to_, UI::Box::Resizing::kFullSize);
+	box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	set_center_panel(&box_);
 
 	initialization_complete();
 }
@@ -105,4 +115,13 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 void EditorToolChangeHeightOptionsMenu::update_window() {
 	change_by_.set_value(increase_tool_.get_change_by());
 	set_to_.set_value(increase_tool_.set_tool().get_interval().min);
+}
+
+void EditorToolChangeHeightOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+	const Widelands::Field& field = map[center.triangle.node];
+
+	increase_tool_.set_tool().set_interval(Widelands::HeightInterval(field.get_height(), field.get_height()));
+
+	select_correct_tool();
+	update_window();
 }
