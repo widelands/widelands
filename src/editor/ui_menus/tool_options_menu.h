@@ -37,21 +37,32 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	 */
 	void select_correct_tool();
 
-	uint32_t spacing() const {
+	[[nodiscard]] uint32_t spacing() const {
 		return 5;
 	}
-	uint32_t hspacing() const {
+	[[nodiscard]] uint32_t hspacing() const {
 		return spacing();
 	}
-	uint32_t vspacing() const {
+	[[nodiscard]] uint32_t vspacing() const {
 		return spacing();
 	}
-	uint32_t hmargin() const {
+	[[nodiscard]] uint32_t hmargin() const {
 		return spacing();
 	}
-	uint32_t vmargin() const {
+	[[nodiscard]] uint32_t vmargin() const {
 		return spacing();
 	}
+
+	[[nodiscard]] const EditorTool& current_tool() const {
+		return current_tool_;
+	}
+
+	virtual bool pick_from_field(const Widelands::Map& /*map*/,
+	                             const Widelands::NodeAndTriangle<>& /*center*/) {
+		NEVER_HERE();
+	}
+	void activate_picker();
+	bool picker_is_active() const;
 
 	/**
 	 * Update window options to match tool settings
