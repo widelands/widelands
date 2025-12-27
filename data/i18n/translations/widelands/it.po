@@ -301,7 +301,7 @@ msgstr "Diplomazia"
 #: ../../../../src/commands/cmd_diplomacy.cc:56
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s si è arreso e ora è uno spettatore."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:56
 msgid "Player Resigned"
@@ -945,7 +945,7 @@ msgstr ""
 #: ../../../../src/editor/tools/place_critter_tool.cc:127
 #, c-format
 msgid "Critter: %1$s"
-msgstr ""
+msgstr "Creatura: %1$s"
 
 #: ../../../../src/editor/tools/place_immovable_tool.cc:141
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:95
@@ -1142,7 +1142,7 @@ msgstr "Descrizione: %s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:251
 msgctxt "addons"
 msgid "(none)"
-msgstr ""
+msgstr "(nessuno)"
 
 #: ../../../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -1152,7 +1152,7 @@ msgstr "%1$s; %2$s"
 #: ../../../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Abilita Add-On: %s"
+msgstr "Add-on abilitati: %s"
 
 #: ../../../../src/editor/ui_menus/help.cc:36
 #: ../../../../src/ui_fsmenu/login_box.cc:255
@@ -1893,11 +1893,11 @@ msgstr "Dimensione:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Spazi vuoti:"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Raggio dello strumento attivo"
 
 #: ../../../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
@@ -2428,25 +2428,25 @@ msgstr "Offerta Commerciale"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Nuova offerta di scambio ricevuta"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Hai ricevuto una nuova offerta di scambio da %s."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Scambio accettato"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Offerta di scambio accettata"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s ha accettato la tua offerta di scambio a %2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
@@ -2454,12 +2454,12 @@ msgstr "Scambio rifiutato"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Offerta di scambio rifiutata"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s ha rifiutato la tua offerta di scambio a %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
@@ -2467,7 +2467,7 @@ msgstr "Scambio ritirato"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
-msgstr ""
+msgstr "Offerta di scambio ritirata"
 
 #: ../../../../src/logic/game.cc:1415
 #, c-format
@@ -2476,7 +2476,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Proposta di estensione degli scambi"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
@@ -2616,7 +2616,7 @@ msgstr "%u%% smantellato"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "È stato aggiunto un nuovo mercato alla tua economia."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
@@ -2632,15 +2632,15 @@ msgstr "Scambio annullato"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Scambio completato"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Accordo di scambio annullato"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
-msgstr ""
+msgstr "Accordo di scambio completato"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
@@ -2658,7 +2658,7 @@ msgstr "Scambio in pausa"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:548
 msgid "Trade agreement paused"
-msgstr ""
+msgstr "Accordo di scambio messo in pausa"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
@@ -2671,7 +2671,7 @@ msgstr "Scambio ripreso"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Accordo di scambio ripreso"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
@@ -2688,22 +2688,22 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Offerta di scambio da %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Offerta di scambio da %1$s a %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d lotto"
+msgstr[1] "%d lotti"
+msgstr[2] "%d lotti"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
@@ -3018,15 +3018,15 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Destination Gone"
-msgstr ""
+msgstr "Destinazione sparita"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:402
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Destinazione della nave scomparsa"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:403
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "La destinazione della tua nave è scomparsa."
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:430
 msgid "Ship Arrived"
@@ -3034,11 +3034,11 @@ msgstr "Nave arrivata"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:430
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "La nave ha raggiunto la destinazione"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:431
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "La tua nave è arrivata alla sua destinazione."
 
 #. * TRANSLATORS: Ship fleets had to be split
 #: ../../../../src/logic/map_objects/tribes/ship.cc:600
@@ -3102,12 +3102,12 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
 #: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Destinazione irraggiungibile"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:802
 #: ../../../../src/logic/map_objects/tribes/ship.cc:821
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Destinazione della nave irraggiungibile"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:803
 msgid "Your ship could not find a path to its destination."
@@ -3211,7 +3211,7 @@ msgstr "Nave da guerra"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2284
 msgid "Warship Ready"
-msgstr ""
+msgstr "Nave da guerra pronta"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:2285
 msgid "A warship is waiting for your commands."
@@ -3390,14 +3390,14 @@ msgstr "Lavoratori in arrivo"
 #. experienced worker missing.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "Esperto mancante"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "Esperti mancanti"
 
 #: ../../../../src/logic/map_objects/tribes/warehouse.cc:602
 msgid "A new port was added to your economy."
@@ -3503,7 +3503,7 @@ msgstr "Porto %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Mercato %d"
 
 #: ../../../../src/logic/player.cc:2098
 #, c-format
@@ -4420,26 +4420,26 @@ msgstr "Nessuna corrispondenza"
 
 #: ../../../../src/ui_basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Vai alla prima pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Vai all'ultima pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:56
 msgid "Items per page"
-msgstr ""
+msgstr "Oggetti per pagina"
 
 #: ../../../../src/ui_basic/pagination.cc:195
 msgctxt "all_items"
 msgid "All"
-msgstr ""
+msgstr "Tutto"
 
 #: ../../../../src/ui_basic/pagination.cc:219
 #: ../../../../src/ui_basic/pagination.cc:228
 #, c-format
 msgid "Go to page %d"
-msgstr ""
+msgstr "Vai alla pagina %d"
 
 #: ../../../../src/ui_basic/panel.cc:325
 msgid "Please wait…"
@@ -4683,11 +4683,11 @@ msgstr "Incolla"
 
 #: ../../../../src/ui_basic/textinput.cc:382
 msgid "Paste the clipboard content"
-msgstr ""
+msgstr "Incolla il contenuto degli appunti"
 
 #: ../../../../src/ui_basic/textinput.cc:385
 msgid "Delete the selected text"
-msgstr ""
+msgstr "Elimina il testo selezionato"
 
 #: ../../../../src/ui_basic/textinput.cc:388
 #: ../../../../src/wlapplication_options.cc:365
@@ -4739,15 +4739,15 @@ msgstr ""
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Pin the window"
-msgstr ""
+msgstr "Fissa la finestra"
 
 #: ../../../../src/ui_basic/window.cc:857
 msgid "Unpin the window"
-msgstr ""
+msgstr "Sblocca la finestra"
 
 #: ../../../../src/ui_basic/window.cc:862
 msgid "Close the window"
-msgstr ""
+msgstr "Chiudi la finestra"
 
 #: ../../../../src/ui_fsmenu/about.cc:38 ../../../../src/ui_fsmenu/main.cc:534
 msgid "About Widelands"
@@ -4889,7 +4889,7 @@ msgstr "Questo add-on è stato premiato per l'alto livello di qualità."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:174
 msgid "Add-On Manager"
-msgstr ""
+msgstr "Gestore degli add-on"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:311
 msgid "Verified only"
@@ -4997,7 +4997,7 @@ msgstr "Sposta add-on selezionato in fondo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:576
 msgid "Launch the add-ons packager…"
-msgstr "Avvia il package di estensioni..."
+msgstr "Avvia il packager degli add-on..."
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
@@ -5150,7 +5150,7 @@ msgstr "Filtra estensioni per nome"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:802
 msgid "Filter maps by name"
-msgstr ""
+msgstr "Filtra mappe per nome"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
@@ -5160,7 +5160,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:829
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:705
 msgid "One World"
-msgstr ""
+msgstr "Un mondo"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:837
 #, c-format
@@ -5170,14 +5170,14 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:935
 msgctxt "nr_players"
 msgid "Unlimited"
-msgstr ""
+msgstr "Illimitato"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:937
 #: ../../../../src/ui_fsmenu/addons/manager.cc:939
 #: ../../../../src/ui_fsmenu/addons/manager.cc:941
 msgctxt "map_size"
 msgid "Unlimited"
-msgstr ""
+msgstr "Illimitato"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1073
 #, c-format
@@ -5278,7 +5278,7 @@ msgstr "Il nome utente o la password sono errati.\n%s"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1423
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Recupero degli add-on in corso... (%.1f%%)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1426
 msgid "Connecting to the server…"
@@ -5292,7 +5292,7 @@ msgstr "Errore di connessione al server"
 #. Error <br> by %s"
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1451
 msgid "a networking bug"
-msgstr ""
+msgstr "un bug di rete"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1452
 #, c-format
@@ -5304,7 +5304,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1609
 #, c-format
 msgid "Installed (%u)"
-msgstr ""
+msgstr "Installato (%u)"
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:1659
 msgid "Translations for website maps"
@@ -5470,7 +5470,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2171
 #, c-format
 msgid "Downloading ‘%s’…"
-msgstr ""
+msgstr "Download di '%s' in corso..."
 
 #: ../../../../src/ui_fsmenu/addons/manager.cc:2208
 #, c-format
@@ -5526,7 +5526,7 @@ msgstr "Salva le modifiche"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:136
 msgid "Writing Add-Ons…"
-msgstr ""
+msgstr "Scrittura degli add-on in corso..."
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Please be patient while your changes are written."
@@ -5544,11 +5544,11 @@ msgstr "Versione:"
 #: ../../../../src/ui_fsmenu/addons/packager.cc:177
 #: ../../../../src/wui/mapdetails.cc:201 ../../../../src/wui/mapdetails.cc:206
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Versione minima di Widelands:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:183
 msgid "Maximum Widelands Version:"
-msgstr ""
+msgstr "Versione massima di Widelands:"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
@@ -5556,7 +5556,7 @@ msgstr "Nuova estensione"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "Inserisci il nome del nuovo add-on."
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
@@ -5674,11 +5674,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
-msgstr ""
+msgstr "Conferma il salvataggio"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
-msgstr ""
+msgstr "Requisito di versione non valido"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
@@ -5699,7 +5699,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
-msgstr ""
+msgstr "Requisito di versione"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
@@ -5719,7 +5719,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
-msgstr ""
+msgstr "Errore nella scrittura dell'add-on"
 
 #: ../../../../src/ui_fsmenu/addons/packager.cc:642
 #, c-format
@@ -5739,12 +5739,12 @@ msgstr "Nome troppo lungo"
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:63
 #, c-format
 msgid "Invalid character ‘%c’"
-msgstr ""
+msgstr "Carattere non valido '%c'"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:68
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr ""
+msgstr "Il nome del file non può contenere '%s'"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:154
 msgid "Add selected map"
@@ -5813,7 +5813,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:295
 msgctxt "version"
 msgid "(none)"
-msgstr ""
+msgstr "(nessuna)"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:325
 msgid "Top-level directory"
@@ -5863,7 +5863,7 @@ msgstr "Difficoltà:"
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:528
 msgid "The campaigns difficulty. One word."
-msgstr ""
+msgstr "La difficoltà delle campagne. Una parola."
 
 #: ../../../../src/ui_fsmenu/addons/packager_box.cc:529
 msgid "Short description, which will be appended to the difficulty."
@@ -5898,37 +5898,37 @@ msgstr "Scrivi commento"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgctxt "markup"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:234
 msgid "Bold"
-msgstr ""
+msgstr "Grassetto"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgctxt "markup"
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:238
 msgid "Italic"
-msgstr ""
+msgstr "Corsivo"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgid "Underline"
-msgstr ""
+msgstr "Sottolineato"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:242
 msgctxt "markup"
 msgid "_"
-msgstr ""
+msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgctxt "markup"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgid "Shadow"
@@ -6030,17 +6030,17 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:432
 msgctxt "priority"
 msgid "Low"
-msgstr ""
+msgstr "Bassa"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:433
 msgctxt "priority"
 msgid "Normal"
-msgstr ""
+msgstr "Normale"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:434
 msgctxt "priority"
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:503
 msgid "Please explain why you are deleting this add-on."
@@ -6056,7 +6056,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:491
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:525
 msgid "Verified"
-msgstr ""
+msgstr "Verificato"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:528
@@ -6074,11 +6074,11 @@ msgstr "Il tuo voto"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:701
 msgid "Next screenshot"
-msgstr ""
+msgstr "Prossimo screenshot"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:710
 msgid "Previous screenshot"
-msgstr ""
+msgstr "Screenshot precedente"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:718
 msgid "Write a comment…"
@@ -6086,18 +6086,18 @@ msgstr "Scrivi un commento..."
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:728
 msgid "Administrator actions"
-msgstr ""
+msgstr "Azioni dell'amministratore"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:735
 msgid "Not voted"
-msgstr ""
+msgstr "Non votato"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:746
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Non è stato possibile inviare il voto. Codice dell'errore: %s"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:810
 #, c-format
@@ -6136,9 +6136,9 @@ msgstr "Voti (%u)"
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Valutazione media: %1$.3f (%2$u voto)"
+msgstr[1] "Valutazione media: %1$.3f (%2$u voti)"
+msgstr[2] "Valutazione media: %1$.3f (%2$u voti)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:590
@@ -6161,22 +6161,22 @@ msgstr[2] "%u commenti:"
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:925
 #, c-format
 msgid "%1$s (edited on %2$s)"
-msgstr ""
+msgstr "%1$s (modificato il %2$s)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:931
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
-msgstr ""
+msgstr "%1$s (modificato da '%2$s' il %3$s)"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:938
 #, c-format
 msgid "‘%1$s’ commented:"
-msgstr ""
+msgstr "'%1$s' ha commentato:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:939
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
-msgstr ""
+msgstr "'%1$s' ha commentato la versione %2$s:"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:965
 #, c-format
@@ -6189,11 +6189,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1019
 msgid "Please log in to comment"
-msgstr ""
+msgstr "Per favore, accedi per commentare"
 
 #: ../../../../src/ui_fsmenu/addons/remote_interaction.cc:1021
 msgid "Please log in to vote"
-msgstr ""
+msgstr "Per favore, accedi per votare"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:46
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:206
@@ -6308,7 +6308,7 @@ msgstr "(%s)"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:694
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "di %s"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:289
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:563
@@ -6345,7 +6345,7 @@ msgstr "Commenti e voti"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:438
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
-msgstr ""
+msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:466
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:695
@@ -6382,7 +6382,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:571
 msgid "Verified by the Widelands Development Team"
-msgstr ""
+msgstr "Verificato dal Team di sviluppo di Widelands"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:572
 msgid ""
@@ -6395,9 +6395,9 @@ msgstr ""
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Dimensione totale: %u byte"
+msgstr[1] "Dimensione totale: %u byte"
+msgstr[2] "Dimensione totale: %u byte"
 
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:585
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:756
@@ -6428,14 +6428,14 @@ msgstr[2] "%u screenshot"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:700
 #, c-format
 msgid "Size: %1$u×%2$u • Max Players: %3$u • %4$s"
-msgstr ""
+msgstr "Dimensione: %1$u×%2$u • Giocatori massimi: %3$u • %4$s"
 
 #. * TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
 #. Number of comments
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:721
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -6498,7 +6498,7 @@ msgstr "Predefinita"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Dettagli del rapporto del crash"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:62
 #: ../../../../src/ui_fsmenu/crash_report.cc:149
@@ -6518,11 +6518,11 @@ msgstr "Copia il rapporto"
 #: ../../../../src/ui_fsmenu/crash_report.cc:69
 #: ../../../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Copia il rapporto completo negli appunti"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:98
 msgid "Crash Report"
-msgstr ""
+msgstr "Rapporto del crash"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:132
 #, c-format
@@ -6540,11 +6540,11 @@ msgstr "Mostra i dettagli..."
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Visualizza il rapporto dettagliato del crash"
 
 #: ../../../../src/ui_fsmenu/crash_report.cc:159
 msgid "Remind me later"
-msgstr ""
+msgstr "Ricordamelo più tardi"
 
 #: ../../../../src/ui_fsmenu/helpwindow.cc:46
 #: ../../../../src/wui/helpwindow.cc:48
@@ -6580,7 +6580,7 @@ msgstr "Avvia nuova partita"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:128
 msgid "Leave Lobby"
-msgstr ""
+msgstr "Lascia la lobby"
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:184
 msgid "User Status"
@@ -6617,7 +6617,7 @@ msgstr "Partita"
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:440
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr ""
+msgstr "La partita %s è già in esecuzione. Per favore, scegli un nome diverso."
 
 #: ../../../../src/ui_fsmenu/internet_lobby.cc:453
 msgid ""
@@ -6654,19 +6654,19 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
-msgstr ""
+msgstr "(inutilizzato)"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Modifica le azioni della tastiera e del mouse"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
-msgstr ""
+msgstr "Reimposta tutto"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:224
 msgid "Reset all to defaults"
-msgstr ""
+msgstr "Reimposta tutto ai valori predefiniti"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
@@ -6708,7 +6708,7 @@ msgstr ""
 #: ../../../../src/wlapplication_options.cc:1019
 #: ../../../../src/wlapplication_options.cc:1078
 msgid "Add-Ons"
-msgstr "Estensioni (Add-Ons)"
+msgstr "Add-on"
 
 #: ../../../../src/ui_fsmenu/keyboard_options.cc:310
 msgid "Mouse Scrolling"
@@ -6741,7 +6741,7 @@ msgstr "Modalità pacifica"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:125
 msgid "No fog of war"
-msgstr ""
+msgstr "Nessuna nebbia di guerra"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:133
 msgid "Forbid diplomacy"
@@ -6757,7 +6757,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:157
 msgid "Write Replay"
-msgstr ""
+msgstr "Scrivi il replay"
 
 #: ../../../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
@@ -7065,7 +7065,7 @@ msgstr "Carica una partita"
 
 #: ../../../../src/ui_fsmenu/main.cc:391
 msgid "Continue a saved game"
-msgstr ""
+msgstr "Continua una partita salvata"
 
 #: ../../../../src/ui_fsmenu/main.cc:402
 #: ../../../../src/wlapplication_options.cc:301
@@ -7117,11 +7117,11 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:438
 msgid "Create a new empty map"
-msgstr ""
+msgstr "Crea una nuova mappa vuota"
 
 #: ../../../../src/ui_fsmenu/main.cc:441
 msgid "Create a new random map"
-msgstr ""
+msgstr "Crea una nuova mappa casuale"
 
 #: ../../../../src/ui_fsmenu/main.cc:443
 msgid "Edit an existing map"
@@ -7142,7 +7142,7 @@ msgstr "Carica il replay"
 
 #: ../../../../src/ui_fsmenu/main.cc:475
 msgid "Watch the replay of an old game"
-msgstr ""
+msgstr "Guarda il replay di una vecchia partita"
 
 #: ../../../../src/ui_fsmenu/main.cc:483
 msgid "Watch last saved replay"
@@ -7174,7 +7174,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:520
 msgid "Launch the map editor"
-msgstr ""
+msgstr "Avvia l'editor delle mappe"
 
 #: ../../../../src/ui_fsmenu/main.cc:523
 msgid "Watch again a recorded earlier game"
@@ -7182,7 +7182,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:528
 msgid "Install and manage add-ons"
-msgstr ""
+msgstr "Installa e gestisci gli add-on"
 
 #: ../../../../src/ui_fsmenu/main.cc:530
 #: ../../../../src/ui_fsmenu/options.cc:89
@@ -7196,7 +7196,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/main.cc:536
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Leggimi, licenza e crediti"
 
 #: ../../../../src/ui_fsmenu/main.cc:538
 #: ../../../../src/wlapplication_options.cc:305
@@ -7220,11 +7220,11 @@ msgstr "Versione %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C)%1%-%2% dal Team di sviluppo di Widelands • Rilasciato sotto la GNU General Public License V2.0"
 
 #: ../../../../src/ui_fsmenu/main.cc:890
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Clicca per aprire il menù principale"
 
 #: ../../../../src/ui_fsmenu/main.cc:968
 msgid "Desyncing Add-On Found"
@@ -7338,7 +7338,7 @@ msgstr ""
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "Bilanciata & Non bilanciata"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:409
 msgid "Show both balanced and unbalanced maps"
@@ -7347,7 +7347,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/mapselect.cc:414
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "Non specificato"
 
 #: ../../../../src/ui_fsmenu/mapselect.cc:415
 msgid "The map does not specify whether it is balanced"
@@ -7709,7 +7709,7 @@ msgstr "Dimensione della finestra"
 #: ../../../../src/ui_fsmenu/options.cc:159
 msgctxt "multiscreen"
 msgid "Display"
-msgstr ""
+msgstr "Schermo"
 
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui_fsmenu/options.cc:168
@@ -7743,7 +7743,7 @@ msgstr "Distanza per l'aggancio delle finestre dai bordi:"
 
 #: ../../../../src/ui_fsmenu/options.cc:225
 msgid "Edit keyboard and mouse actions…"
-msgstr ""
+msgstr "Modifica le azioni della tastiera e del mouse..."
 
 #: ../../../../src/ui_fsmenu/options.cc:241
 msgid "Save game automatically every:"
@@ -7759,7 +7759,7 @@ msgstr "Cancella i replay dopo:"
 
 #: ../../../../src/ui_fsmenu/options.cc:281
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Salta i salvataggi automatici mentre si è inattivi"
 
 #: ../../../../src/ui_fsmenu/options.cc:288
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -7772,7 +7772,7 @@ msgstr ""
 #: ../../../../src/ui_fsmenu/options.cc:307
 #: ../../../../src/wui/interactive_gamebase.cc:278
 msgid "Show Census"
-msgstr ""
+msgstr "Mostra il conteggio della popolazione"
 
 #: ../../../../src/ui_fsmenu/options.cc:309
 #: ../../../../src/wui/interactive_gamebase.cc:287
@@ -7782,7 +7782,7 @@ msgstr "Mostra lo stato"
 #: ../../../../src/ui_fsmenu/options.cc:314
 #: ../../../../src/wui/interactive_gamebase.cc:296
 msgid "Show Soldier Levels"
-msgstr "Mostrai livelli dei soldati"
+msgstr "Mostra i livelli dei soldati"
 
 #: ../../../../src/ui_fsmenu/options.cc:316
 #: ../../../../src/wui/interactive_gamebase.cc:305
@@ -7864,7 +7864,7 @@ msgstr "Nuove partite"
 
 #: ../../../../src/ui_fsmenu/options.cc:424
 msgid "In-Game"
-msgstr ""
+msgstr "Dentro alla partita"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui_fsmenu/options.cc:525
@@ -7881,13 +7881,13 @@ msgstr "Mai"
 #: ../../../../src/ui_fsmenu/options.cc:583
 msgctxt "multiscreen"
 msgid "Follow mouse"
-msgstr ""
+msgstr "Segui il mouse"
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
 #: ../../../../src/ui_fsmenu/options.cc:589
 msgid "#%1% (%2%, %3%, %4%, %5%)"
-msgstr ""
+msgstr "#%1% (%2%, %3%, %4%, %5%)"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../../../src/ui_fsmenu/options.cc:604
@@ -8104,7 +8104,7 @@ msgstr "Cartella eseguibili:"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Add-on abilitati:"
 
 #: ../../../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
@@ -8260,7 +8260,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Mercato"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
@@ -8432,7 +8432,7 @@ msgstr "Miniera d'oro"
 
 #: ../../../../src/wlapplication_options.cc:225
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Produttore agricolo"
 
 #: ../../../../src/wlapplication_options.cc:226
 msgid "Primary Agricultural Consumer"
@@ -8488,7 +8488,7 @@ msgstr "A riguardo"
 
 #: ../../../../src/wlapplication_options.cc:325
 msgid "Internet Login"
-msgstr "Accesso ad internet"
+msgstr "Accesso ad Internet"
 
 #: ../../../../src/wlapplication_options.cc:335
 msgid "Toggle Building Spaces"
@@ -8504,7 +8504,7 @@ msgstr "Enciclopedia"
 
 #: ../../../../src/wlapplication_options.cc:349
 msgid "Context Menu"
-msgstr ""
+msgstr "Menù del contesto"
 
 #: ../../../../src/wlapplication_options.cc:353
 msgid "Cut Text"
@@ -8532,7 +8532,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:382
 msgid "Take Screenshot"
-msgstr ""
+msgstr "Acquisire uno screenshot"
 
 #: ../../../../src/wlapplication_options.cc:386
 msgid "Change Music"
@@ -8556,27 +8556,27 @@ msgstr "Esci"
 
 #: ../../../../src/wlapplication_options.cc:416
 msgid "Zoom In"
-msgstr ""
+msgstr "Aumenta lo zoom"
 
 #: ../../../../src/wlapplication_options.cc:421
 msgid "Zoom Out"
-msgstr ""
+msgstr "Riduci lo zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wlapplication_options.cc:426
 #: ../../../../src/wui/interactive_base.cc:349
 msgid "Maximum Zoom"
-msgstr ""
+msgstr "Zoom massimo"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wlapplication_options.cc:431
 #: ../../../../src/wui/interactive_base.cc:354
 msgid "Minimum Zoom"
-msgstr ""
+msgstr "Zoom minimo"
 
 #: ../../../../src/wlapplication_options.cc:436
 msgid "Reset Zoom"
-msgstr ""
+msgstr "Azzera lo zoom"
 
 #: ../../../../src/wlapplication_options.cc:441
 msgid "Jump to Next Location"
@@ -8737,35 +8737,35 @@ msgstr "Statistiche sui viaggi marittimi"
 
 #: ../../../../src/wlapplication_options.cc:677
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Riduci la velocità di gioco di 1x"
 
 #: ../../../../src/wlapplication_options.cc:682
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Riduci la velocità di gioco di 0,25x"
 
 #: ../../../../src/wlapplication_options.cc:687
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Riduci la velocità di gioco di 10x"
 
 #: ../../../../src/wlapplication_options.cc:692
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Aumenta la velocità di gioco di 1x"
 
 #: ../../../../src/wlapplication_options.cc:697
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Aumenta la velocità di gioco di 0,25x"
 
 #: ../../../../src/wlapplication_options.cc:702
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Aumenta la velocità di gioco di 10x"
 
 #: ../../../../src/wlapplication_options.cc:706
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Azzera la velocità del gioco"
 
 #: ../../../../src/wlapplication_options.cc:710
 msgid "Pause The Game"
-msgstr ""
+msgstr "Metti in pausa il gioco"
 
 #: ../../../../src/wlapplication_options.cc:715
 msgid "Scroll to Starting Field"
@@ -9237,7 +9237,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:1502
 msgid "(disabled)"
-msgstr ""
+msgstr "(disabilitato)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -9246,7 +9246,7 @@ msgstr ""
 #: ../../../../src/wui/waresdisplay.cc:646
 #, c-format
 msgid "%1$s%2$s"
-msgstr ""
+msgstr "%1$s%2$s"
 
 #: ../../../../src/wlapplication_options.cc:1561
 #, c-format
@@ -9329,7 +9329,7 @@ msgstr "Arrendersi?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Cancel?"
-msgstr ""
+msgstr "Annullare?"
 
 #: ../../../../src/wui/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
@@ -9337,7 +9337,7 @@ msgstr ""
 
 #: ../../../../src/wui/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Estendi lo scambio"
 
 #: ../../../../src/wui/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
@@ -9351,11 +9351,11 @@ msgstr ""
 #: ../../../../src/wui/actionconfirm.cc:604
 #: ../../../../src/wui/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Lotti:"
 
 #: ../../../../src/wui/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Togliere la pausa?"
 
 #: ../../../../src/wui/actionconfirm.cc:640
 msgid ""
@@ -9576,7 +9576,7 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../../../src/wui/building_statistics_menu.cc:754
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "Mancano soldati:"
 
 #: ../../../../src/wui/buildingwindow.cc:218
 msgid "Muted – click to unmute"
@@ -9773,7 +9773,7 @@ msgstr "Salva le impostazioni del bersaglio"
 #. * TRANSLATORS: Infinite number of wares or workers
 #: ../../../../src/wui/economy_options_window.cc:313
 msgid "∞"
-msgstr ""
+msgstr "∞"
 
 #: ../../../../src/wui/economy_options_window.cc:583
 msgid "The profile name cannot be empty"
@@ -9838,7 +9838,7 @@ msgstr "Costruisci un edificio piccolo"
 
 #: ../../../../src/wui/fieldaction.cc:236
 msgid "Build big building"
-msgstr ""
+msgstr "Costruisci edificio grande"
 
 #: ../../../../src/wui/fieldaction.cc:236
 msgid "Build port building"
@@ -10082,7 +10082,7 @@ msgstr "Destinatario sconosciuto"
 #: ../../../../src/wui/game_chat_panel.cc:443
 msgctxt "all_players"
 msgid "All"
-msgstr ""
+msgstr "Tutti"
 
 #. * TRANSLATORS: Window label
 #: ../../../../src/wui/game_client_disconnected.cc:47
@@ -10111,7 +10111,7 @@ msgstr ""
 #. disconnected from a game
 #: ../../../../src/wui/game_client_disconnected.cc:99
 msgid "AI for the disconnected player"
-msgstr ""
+msgstr "IA per il giocatore disconnesso"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
@@ -10128,7 +10128,7 @@ msgstr "Campo di debug"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:107
 msgid "Leave"
-msgstr ""
+msgstr "Lascia"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:108
 msgid "Leave your current team and become teamless"
@@ -10182,17 +10182,17 @@ msgstr "Squadra %u"
 #: ../../../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
 msgid "Won at %s"
-msgstr ""
+msgstr "Vinto a %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "Lost at %s"
-msgstr ""
+msgstr "Perso a %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Arreso a %s"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:323
 msgid "Approve"
@@ -10218,7 +10218,7 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:936
 #, c-format
 msgid "Trade Offers (%u)"
-msgstr ""
+msgstr "Offerte di scambio (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:414
 #: ../../../../src/wui/marketwindow.cc:449
@@ -10234,7 +10234,7 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s (più vicino)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:445
 #, c-format
@@ -10247,12 +10247,12 @@ msgstr[2] ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:452
 #: ../../../../src/wui/marketwindow.cc:468
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Accetta questa offerta di scambio"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:455
 #: ../../../../src/wui/marketwindow.cc:471
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Rifiuta questa offerta di scambio"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
@@ -10262,7 +10262,7 @@ msgstr ""
 #: ../../../../src/wui/marketwindow.cc:930
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Scambi proposti (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:509
 msgid ""
@@ -10301,7 +10301,7 @@ msgstr ""
 #: ../../../../src/wui/game_diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Scambi attivi (%u)"
 
 #: ../../../../src/wui/game_diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
@@ -10872,7 +10872,7 @@ msgstr ""
 
 #: ../../../../src/wui/interactive_base.cc:1893
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Salvataggio dello screenshot fallito!"
 
 #: ../../../../src/wui/interactive_base.cc:1897
 msgid "Screenshot saved"
@@ -10923,7 +10923,7 @@ msgstr "Sei sicuro di desiderare di riavviare questo scenario?"
 #. building names are shown
 #: ../../../../src/wui/interactive_gamebase.cc:278
 msgid "Hide Census"
-msgstr ""
+msgstr "Nascondi il conteggio della popolazione"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
@@ -11103,7 +11103,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../../../src/wui/map_tags.cc:40
 msgid "Balanced"
-msgstr ""
+msgstr "Bilanciata"
 
 #: ../../../../src/wui/map_tags.cc:43
 msgid ""
@@ -11273,31 +11273,31 @@ msgstr "Nome della mappa"
 
 #: ../../../../src/wui/marketwindow.cc:80
 msgid "Propose"
-msgstr ""
+msgstr "Proponi"
 
 #: ../../../../src/wui/marketwindow.cc:96
 msgid "You offer:"
-msgstr ""
+msgstr "Tu offri:"
 
 #: ../../../../src/wui/marketwindow.cc:100
 msgid "You demand:"
-msgstr ""
+msgstr "Tu domandi:"
 
 #: ../../../../src/wui/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Riduci quantità di 10"
 
 #: ../../../../src/wui/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Riduci la quantità"
 
 #: ../../../../src/wui/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Aumenta la quantità"
 
 #: ../../../../src/wui/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Aumenta la quantità di 10"
 
 #: ../../../../src/wui/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
@@ -11336,7 +11336,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:587
 msgid "Cancel this trade"
-msgstr ""
+msgstr "Annulla questo scambio"
 
 #: ../../../../src/wui/marketwindow.cc:809
 msgid ""
@@ -11346,7 +11346,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Metti in pausa questo scambio"
 
 #: ../../../../src/wui/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
@@ -11354,7 +11354,7 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:825
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Mettere in pausa lo scambio?"
 
 #: ../../../../src/wui/marketwindow.cc:826
 msgid ""
@@ -11364,19 +11364,19 @@ msgstr ""
 
 #: ../../../../src/wui/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Proponi scambio"
 
 #: ../../../../src/wui/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Scambi proposti"
 
 #: ../../../../src/wui/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Offerte di scambio"
 
 #: ../../../../src/wui/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Scambio attivo"
 
 #: ../../../../src/wui/minimap.cc:169
 msgid "Owner"
@@ -11979,7 +11979,7 @@ msgstr "Questa spedizione non può essere annullata perché la nave non ha alcun
 #: ../../../../src/wui/shipwindow.cc:364
 msgctxt "destination"
 msgid "(none)"
-msgstr ""
+msgstr "(nessuna)"
 
 #: ../../../../src/wui/shipwindow.cc:434 ../../../../src/wui/shipwindow.cc:439
 #: ../../../../src/wui/shipwindow.cc:444
@@ -12060,7 +12060,7 @@ msgstr ""
 
 #: ../../../../src/wui/sound_options.cc:150
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "Riproduci la tua propria musica dentro alla partita"
 
 #: ../../../../src/wui/sound_options.cc:152
 msgid ""
@@ -12175,7 +12175,7 @@ msgstr "Inizia ora la prossima missione"
 
 #: ../../../../src/wui/story_message_box.cc:128
 msgid "Continue playing this mission"
-msgstr "Continua questa missione"
+msgstr "Continua a giocare questa missione"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../../../src/wui/suggested_teams_box.cc:85
