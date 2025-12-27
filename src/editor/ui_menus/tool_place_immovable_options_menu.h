@@ -36,7 +36,12 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	void update_window() override;
 	void think() override;
 
+	bool pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) override;
+
 private:
+	EditorPlaceImmovableTool& immovable_tool_;
+	UI::Box main_box_;
+	UI::Button picker_;
 	std::unique_ptr<
 	   CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
 	   multi_select_menu_;

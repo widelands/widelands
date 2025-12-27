@@ -77,12 +77,16 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 
 EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
    EditorInteractive& parent, EditorPlaceImmovableTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool),
+   immovable_tool_(tool),
+   main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+   picker_(&main_box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick immovable from map …"))
+   {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, "immovables", parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
+	      &main_box_, "immovables", parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
 	      descriptions.immovables(),
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
@@ -117,7 +121,18 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	                               auto_immovables_box, _("Automatic Immovable Placement"), 0);
 	multi_select_menu_->tabs().activate(0);
 
-	set_center_panel(multi_select_menu_.get());
+	picker_.sigclicked.connect([this]() {
+		if (picker_is_active()) {
+			select_correct_tool();
+		} else {
+			activate_picker();
+		}
+	});
+
+	main_box_.add(multi_select_menu_.get(), UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(spacing());
+	main_box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	set_center_panel(&main_box_);
 
 	initialization_complete();
 }
@@ -131,4 +146,24 @@ void EditorToolPlaceImmovableOptionsMenu::think() {
 	auto_trees_button_->set_perm_pressed(
 	   parent_.tools()->current_pointer == &current_tool_ &&
 	   dynamic_cast<EditorPlaceImmovableTool&>(current_tool_).is_enabled(kAutoTreesIndex));
+}
+
+bool EditorToolPlaceImmovableOptionsMenu::pick_from_field(const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+	const Widelands::Field& field = map[center.triangle.node];
+
+	if (field.get_immovable() == nullptr) {
+		return false;
+	}
+	const Widelands::DescriptionIndex immovable_index = parent_.egbase().descriptions().immovable_index(field.get_immovable()->descr().name());
+	if (immovable_index == Widelands::INVALID_INDEX) {
+		return false;
+	}
+
+	immovable_tool_.disable_all();
+	immovable_tool_.enable(immovable_index, true);
+
+	select_correct_tool();
+	update_window();
+
+	return true;
 }
