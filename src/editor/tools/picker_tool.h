@@ -37,7 +37,7 @@ struct EditorPickerTool : public EditorTool {
 	void set_linked_tool(EditorToolOptionsMenu* window) {
 		linked_tool_window_ = window;
 	}
-	const EditorToolOptionsMenu* get_linked_tool() const {
+	[[nodiscard]] const EditorToolOptionsMenu* get_linked_tool() const {
 		return linked_tool_window_;
 	}
 
