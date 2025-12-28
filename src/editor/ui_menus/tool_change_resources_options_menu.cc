@@ -202,8 +202,7 @@ void EditorToolChangeResourcesOptionsMenu::update_window() {
 }
 
 bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
-	                     const bool multiselect) {
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center, const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 	const Widelands::DescriptionIndex resource_index = field.get_resources();
 	const int amount = field.get_resources_amount();

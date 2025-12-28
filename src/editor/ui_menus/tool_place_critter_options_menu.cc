@@ -85,9 +85,9 @@ void EditorToolPlaceCritterOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
 }
 
-bool EditorToolPlaceCritterOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
-	                     const bool multiselect) {
+bool EditorToolPlaceCritterOptionsMenu::pick_from_field(const Widelands::Map& map,
+                                                        const Widelands::NodeAndTriangle<>& center,
+                                                        const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 
 	std::set<Widelands::DescriptionIndex> indices;
