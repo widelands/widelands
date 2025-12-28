@@ -30,6 +30,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	                      uint32_t height,
 	                      const std::string& title,
 	                      EditorTool& tool);
+	~EditorToolOptionsMenu() override;
 
 	/**
 	 * Selects the correct tool from the parent.
@@ -56,12 +57,17 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	[[nodiscard]] const EditorTool& current_tool() const {
 		return current_tool_;
 	}
+	[[nodiscard]] EditorTool& current_tool() {
+		return current_tool_;
+	}
 
 	virtual bool pick_from_field(const Widelands::Map& /*map*/,
-	                             const Widelands::NodeAndTriangle<>& /*center*/) {
+	                             const Widelands::NodeAndTriangle<>& /*center*/,
+	                             bool /*multiselect*/) {
 		NEVER_HERE();
 	}
 	void activate_picker();
+	void deactivate_picker();
 	bool picker_is_active() const;
 
 	/**

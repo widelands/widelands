@@ -155,7 +155,8 @@ void EditorToolPlaceImmovableOptionsMenu::think() {
 }
 
 bool EditorToolPlaceImmovableOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
+	                     const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 
 	if (field.get_immovable() == nullptr) {
@@ -167,11 +168,15 @@ bool EditorToolPlaceImmovableOptionsMenu::pick_from_field(
 		return false;
 	}
 
-	immovable_tool_.disable_all();
+	if (!multiselect) {
+		immovable_tool_.disable_all();
+	}
 	immovable_tool_.enable(immovable_index, true);
 
-	select_correct_tool();
+	if (!multiselect) {
+		select_correct_tool();
+	}
 	update_window();
 
-	return true;
+	return !multiselect;
 }

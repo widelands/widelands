@@ -24,7 +24,7 @@ int32_t EditorPickerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
                                             EditorActionArgs* /* args */,
                                             Widelands::Map* map) {
 	if (linked_tool_window_ != nullptr) {
-		if (linked_tool_window_->pick_from_field(*map, center)) {
+		if (linked_tool_window_->pick_from_field(*map, center, (SDL_GetModState() & KMOD_CTRL) != 0)) {
 			linked_tool_window_ = nullptr;
 		}
 	}
@@ -35,3 +35,12 @@ bool EditorPickerTool::operates_on_triangles() const {
 	return linked_tool_window_ != nullptr &&
 	       linked_tool_window_->current_tool().operates_on_triangles();
 }
+
+Widelands::NodeCaps EditorPickerTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                           const Widelands::EditorGameBase& egbase) {
+	if (linked_tool_window_ == nullptr) {
+		return EditorTool::nodecaps_for_buildhelp(fcoords, egbase);
+	}
+	return linked_tool_window_->current_tool().nodecaps_for_buildhelp(fcoords, egbase);
+}
+

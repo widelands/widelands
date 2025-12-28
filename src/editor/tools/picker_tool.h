@@ -51,6 +51,9 @@ struct EditorPickerTool : public EditorTool {
 
 	[[nodiscard]] bool operates_on_triangles() const override;
 
+	[[nodiscard]] Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override;
+
 private:
 	EditorToolOptionsMenu* linked_tool_window_{nullptr};
 };

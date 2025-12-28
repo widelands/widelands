@@ -86,7 +86,8 @@ void EditorToolPlaceCritterOptionsMenu::update_window() {
 }
 
 bool EditorToolPlaceCritterOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
+	                     const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 
 	std::set<Widelands::DescriptionIndex> indices;
@@ -101,13 +102,17 @@ bool EditorToolPlaceCritterOptionsMenu::pick_from_field(
 		return false;
 	}
 
-	critter_tool_.disable_all();
+	if (!multiselect) {
+		critter_tool_.disable_all();
+	}
 	for (Widelands::DescriptionIndex critter_index : indices) {
 		critter_tool_.enable(critter_index, true);
 	}
 
-	select_correct_tool();
+	if (!multiselect) {
+		select_correct_tool();
+	}
 	update_window();
 
-	return true;
+	return !multiselect;
 }

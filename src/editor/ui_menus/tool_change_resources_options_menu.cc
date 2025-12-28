@@ -202,7 +202,8 @@ void EditorToolChangeResourcesOptionsMenu::update_window() {
 }
 
 bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
+	                     const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 	const Widelands::DescriptionIndex resource_index = field.get_resources();
 	const int amount = field.get_resources_amount();
@@ -216,9 +217,11 @@ bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
 	increase_tool_.set_cur_res(resource_index);
 	increase_tool_.decrease_tool().set_cur_res(resource_index);
 
-	select_correct_tool();
+	if (!multiselect) {
+		select_correct_tool();
+	}
 	update_window();
 	update();
 
-	return true;
+	return !multiselect;
 }

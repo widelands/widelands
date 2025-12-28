@@ -119,14 +119,17 @@ void EditorToolChangeHeightOptionsMenu::update_window() {
 }
 
 bool EditorToolChangeHeightOptionsMenu::pick_from_field(
-   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center) {
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center,
+	                     const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 
 	increase_tool_.set_tool().set_interval(
 	   Widelands::HeightInterval(field.get_height(), field.get_height()));
 
-	select_correct_tool();
+	if (!multiselect) {
+		select_correct_tool();
+	}
 	update_window();
 
-	return true;
+	return !multiselect;
 }

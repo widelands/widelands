@@ -34,7 +34,8 @@ struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
 	void update_window() override;
 
 	bool pick_from_field(const Widelands::Map& map,
-	                     const Widelands::NodeAndTriangle<>& center) override;
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     bool multiselect) override;
 
 private:
 	EditorInteractive& eia_;
