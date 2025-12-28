@@ -75,7 +75,8 @@ void CmdDiplomacy::execute(Game& game) {
 	case DiplomacyAction::kInvite: {
 		bool fall_through_to_acceptance = false;
 		bool found_identical = false;
-		for (auto it = game.pending_diplomacy_actions().begin(); it != game.pending_diplomacy_actions().end();) {
+		for (auto it = game.pending_diplomacy_actions().begin();
+		     it != game.pending_diplomacy_actions().end();) {
 			if (it->other == sender() && it->sender == other_player_) {
 				if (action_ == DiplomacyAction::kJoin && it->action == DiplomacyAction::kInvite) {
 					fall_through_to_acceptance = true;
@@ -100,11 +101,11 @@ void CmdDiplomacy::execute(Game& game) {
 			if (!found_identical) {
 				broadcast_message(
 				   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
-						                               _("Team Joining Invitation"),
+				                                       _("Team Joining Invitation"),
 				   format(action_ == DiplomacyAction::kJoin ?
-						     _("%1$s has requested to join the team of %2$s.") :
-						     _("%1$s has invited %2$s to join their team."),
-						  sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
+				             _("%1$s has requested to join the team of %2$s.") :
+				             _("%1$s has invited %2$s to join their team."),
+				          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
 				game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
 			}
 
