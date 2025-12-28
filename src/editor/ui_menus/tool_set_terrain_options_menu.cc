@@ -142,6 +142,7 @@ bool EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map,
 		terrain_tool_.disable_all();
 	}
 	terrain_tool_.enable(terrain_index, true);
+	multi_select_menu_->activate_tab_for_item(terrain_index);
 
 	if (!multiselect) {
 		select_correct_tool();

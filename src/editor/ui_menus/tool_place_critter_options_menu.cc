@@ -108,6 +108,7 @@ bool EditorToolPlaceCritterOptionsMenu::pick_from_field(
 	for (Widelands::DescriptionIndex critter_index : indices) {
 		critter_tool_.enable(critter_index, true);
 	}
+	multi_select_menu_->activate_tab_for_item(*indices.rend());
 
 	if (!multiselect) {
 		select_correct_tool();

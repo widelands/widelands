@@ -172,6 +172,7 @@ bool EditorToolPlaceImmovableOptionsMenu::pick_from_field(
 		immovable_tool_.disable_all();
 	}
 	immovable_tool_.enable(immovable_index, true);
+	multi_select_menu_->activate_tab_for_item(immovable_index);
 
 	if (!multiselect) {
 		select_correct_tool();
