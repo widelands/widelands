@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
 # D M <kamera001dm@gmail.com>, 2021,2023
 # GunChleoc, 2018
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +112,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Försvaret är den procentandel som dras av från attackvärdet. Barbarer kan inte träna denna färdighet och har därför alltid försvarsnivå 0, vilket innebär att skadan alltid reduceras med %1%%%. Om en angripare med ett attackvärde på 3500 poäng träffar en barbarisk soldat, förlorar barbaren 3500×%2%%% = %3% hälsa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
@@ -487,7 +488,7 @@ msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Soldater i högkvarteret"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -495,7 +496,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Ditt högkvarter har vissa egenskaper som liknar militära anläggningar: Det erövrar viss mark, fienden kan attackera det direkt och de soldater som finns där försvarar det och dess omgivningar när det attackeras. Å andra sidan finns det också en skillnad: du kan inte inleda en attack med soldaterna i ditt högkvarter."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -503,12 +504,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga lagerlokaler som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i vanliga lagerlokaler deltar inte i några strider, och vanliga lagerlokaler kan inte attackeras direkt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Soldatinställningar för högkvarteret"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -519,7 +520,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Alla soldater som råkar befinna sig i ditt högkvarter hjälper till att försvara det, men de är inte permanent tilldelade högkvarteret, så de kan skickas iväg när som helst när en militär anläggning behöver en soldat. Lyckligtvis kan du också tilldela vissa soldater till försvaret av högkvarteret på samma sätt som du ställer in soldatkapacitet och preferenser för militära anläggningar. Om du gör det kommer högkvarteret endast att låta överskottsoldater skickas till andra byggnader, men inte soldater från den tilldelade garnisonen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -530,7 +531,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Om du tittar på statusraderna kan du se att ditt lager är tomt, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

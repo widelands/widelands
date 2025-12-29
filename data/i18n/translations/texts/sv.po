@@ -54,7 +54,7 @@ msgstr "Copyright 2002 - %1% av Widelands utvecklingsteam"
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Detta spel är gratis och öppen källkod (FOSS), licensierat under GNU General Public License (GPL) V2.0 (eller, om du föredrar det, någon senare version)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -151,11 +151,11 @@ msgstr "Rapportera buggar"
 
 #: ../../../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Om du upptäcker en bugg, var vänlig och rapportera det till vår felsökare:"
+msgstr "Om du upptäcker en bugg, rapportera det till vår felsökare:"
 
 #: ../../../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr "Var vänlig och bidra med tillräcklig bakgrundsinformation. Berätta:"
+msgstr "Bidra med tillräcklig bakgrundsinformation. Berätta:"
 
 #: ../../../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
@@ -178,7 +178,7 @@ msgstr "Vilken version av Widelands du kör (d.v.s. antingen vilken revision ell
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "Var också vänlig och inkludera vilket operativsystem du kör Wideleands under, eftersom en del buggar kan påverkas av det."
+msgstr "Inkludera gärna vilket operativsystem du kör Widelands på, eftersom en del buggar kan påverkas av det."
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
@@ -195,7 +195,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t. ex. att det kraschar där det kan vara svårt att veta vad som utlöser det), var vänlig och inkludera det också. För mer information, se avsnittet om svar nedan."
+msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t. ex. att det kraschar där det kan vara svårt att veta vad som utlöser det), inkludera det också. För mer information, se avsnittet om svar nedan."
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
@@ -319,7 +319,7 @@ msgstr "Webbplatens kodare"
 
 #: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
-msgstr "Dokumentation, hjälp och uppslagsbok"
+msgstr "Dokumentation, hjälp och wiki"
 
 #: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
@@ -809,19 +809,19 @@ msgstr "Vissa byggnader, som bondgården, har mycket små arbetsområden. Om des
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Zooma in/ut med mushjulet eller %1%/%2%. Tryck på %3%/%4% för maximal/minimal zoomnivå. Tryck på %5% för att återställa zoomen."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Använd tangenterna ”%1$s” och ”%2$s” för att snabbt hoppa mellan platser som du nyligen har besökt."
 
 #: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Öka eller minska spelets hastighet med %1%/%2%. Använd %3%/%4% för snabb förändring; %5%/%6% justerar hastigheten smidigt."
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
@@ -836,7 +836,7 @@ msgstr "Ctrl och Piltangenter"
 #: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Flytta kartvyn med %1%. %2% flyttar vyn snabbare, %3% flyttar den långsammare."
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
@@ -863,7 +863,7 @@ msgstr "När en byggnad förstörs kommer dess arbetare att börja leta efter en
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Handel kan hjälpa din ekonomi och stärka relationerna mellan spelarna. Lär dig grunderna i handledningen ”Ekonomi och handel”."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -875,7 +875,7 @@ msgstr "Du kan använda 'pgup' och 'pgdn' knapparna för att justera spelets has
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Du kan använda '/me' i början av ett chatmeddelande: '/me är trött' kommer att skrivas ut som '->Användarnamn är trött'."
+msgstr "Du kan använda '/me' i början av ett chattmeddelande: '/me är trött' kommer att skrivas ut som '->Användarnamn är trött'."
 
 #: ../../../../data/txts/tips/multiplayer.lua:12
 msgid ""

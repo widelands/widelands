@@ -2,11 +2,13 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2023
+# D M <kamera001dm@gmail.com>, 2017,2023
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
+# GunChleoc, 2014,2018
 # GunChleoc, 2014
 # Niklas Nordgren, 2022-2023
 msgid ""
@@ -15,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Niklas Nordgren, 2022-2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,25 +60,25 @@ msgstr "Välkommen till Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr "Widelands är ett långsamt byggnadssttategispel med mer fokus på uppbyggnad snarare än på destruktion"
+msgstr "Widelands är ett långsamt byggnadsstrategispel med mer fokus på uppbyggnad snarare än på förstörelse."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "You will be guided through this tutorial by objectives."
-msgstr "Handledningen kommer att bygga på uppdrag."
+msgstr "Du kommer att guidas genom denna handledning utifrån olika mål."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Objectives and how to handle them"
-msgstr "Uppdrag och hur du hanterar dem"
+msgstr "Mål och hur du hanterar dem"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Handling of the ‘Objectives’ window"
-msgstr "Hantering av 'Uppdrag'-fönstret"
+msgstr "Hantering av 'Mål'-fönstret"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Du kan öppna och stänga 'Uppdrag'-fönstret genom att klicka på knappen 'Uppdrag' i verktygsraden längst ner på skärmen."
+msgstr "Du kan öppna och stänga 'Mål'-fönstret genom att klicka på knappen 'Mål' i verktygsraden längst ner på skärmen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid ""
@@ -86,16 +88,16 @@ msgstr "Som de flesta andra fönster kan du stänga fönstret genom att högerkl
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Du kan också minimera fönster genom att klicka på dem med mittknappen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr "När du har slutfört ett uppdrag försvinner det från listan."
+msgstr "När du har slutfört ett mål försvinner det från listan."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Stäng nu fönstret ”Mål” för att fortsätta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
@@ -204,7 +206,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Det räcker inte ännu. Jag måste fortfarande ansluta skogshuggarnas stuga till högkvarteret. Efter att ha beställt byggarbetsplatsen hamnade jag automatiskt i vägbyggnadsläget, så allt jag behöver göra är att klicka på den blå flaggan framför mitt högkvarter."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
@@ -375,7 +377,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Att flytta runt med höger musknapp kan vara obekvämt om du spelar på en bärbar dator med pekplatta. Du kan aktivera kartflyttning med pekplattans rullningsfunktion i Widelands huvudmeny: Välj \"Alternativ\", tryck sedan på \"Redigera tangentbords- och musåtgärder\" och välj fliken \"Musrullning\"."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
@@ -396,7 +398,7 @@ msgstr "Granit kan brytas i granitgruvor, men ett enklare sätt är att bygga et
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:283
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Learn to use the minimap"
-msgstr "Lär dig att använda minikartan."
+msgstr "Lär dig att använda minikartan"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:286
 msgid "Try moving around by clicking on the minimap"
@@ -452,7 +454,7 @@ msgstr "Vidare till stenbrottet"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Great. Now about that quarry…"
-msgstr "Jättebra. Nu, när det gäller stenbrottet..."
+msgstr "Jättebra. Nu, när det gäller stenbrottet…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid "Build a quarry next to the rocks"
@@ -568,7 +570,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Utmärkt! Kom ihåg att vi också måste bygga en väg till stenbrottet. För att gå in i vägbyggnadsläget för en flagga, vänsterklicka på en flagga och välj vägbyggnadssymbolen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
@@ -758,75 +760,75 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Du kanske har märkt att folkräkningsraden för högkvarteret är annorlunda. Det beror på att det är en speciell byggnadstyp som kallas lager. Lagerlokaler är byggnader där dina arbetare kan vila tills de tilldelas en arbetsplats och där ett obegränsat antal varor kan lagras tills de behövs någonstans. De fungerar alltså som ett slags centrum, och för att markera detta får de unika namn."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "De små kronorna bredvid namnet markerar det som ditt högkvarter. När du spelar Widelands kommer du att se tre typer av lager, markerade med små ikoner:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Högkvarteret där du vanligtvis startar spelet. Det är markerat med små kronor: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Vanliga lagerlokaler som endast innehåller varor och arbetare som distribuerar dem över hela ditt territorium. De markeras med små hus: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Hamnar som du kommer att använda vid sjöfart. De lagrar inte bara dina varor och arbetare, utan kan också lasta dem på dina fartyg för att skicka dem över haven. De markeras med små ankare: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Alla får automatiskt namn som matchar stammen, men du kan också ändra deras namn efter eget tycke."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Ändra namnet på din lilla by"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Ändra namnet på ditt högkvarter"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "För att ange ett nytt namn för ditt högkvarter, klicka först på det för att öppna fönstret."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Du ser ett redigeringsfält längst upp i fönstret som visar namnet."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Allt du behöver göra är att radera det gamla namnet och skriva in det nya."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "När du är klar stänger du bara fönstret."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Var kreativ"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Jag ser att du stängde fönstret utan att ändra namnet. Jag är säker på att du kan komma på något. Men om du inte vill, ta åtminstone bort det gamla namnet, så att jag ser att du har hittat redigeringsrutan."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"
@@ -881,7 +883,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr "Hej, det är jag igen! Den här gången har jag skickat ett meddelande till dig. Meddelanden skickas till dig från Widelands för att informera om viktiga händelser: tömda gruvor, attacker mot din stam, besegrade eller förlorade militära byggnader, hittade resurser..."
+msgstr "Hej, det är jag igen! Den här gången har jag skickat ett meddelande till dig. Meddelanden skickas till dig från Widelands för att informera om viktiga händelser: tömda gruvor, attacker mot din stam, besegrade eller förlorade militära byggnader, hittade resurser…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:556
 msgid ""
@@ -896,7 +898,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr "För tillfället har du två meddelanden. Detta, som du just nu läser, och det som informerade dig om att ett nytt högkvarter  hade adderats till din ekonomi. Nu ska vi lära oss hur man arkiverar meddelanden: "
+msgstr "För tillfället har du två meddelanden. Detta, som du just nu läser, och det som informerade dig om att ett nytt högkvarter hade adderats till din ekonomi. Nu ska vi lära oss hur man arkiverar meddelanden:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Close the messages window"
@@ -915,7 +917,7 @@ msgstr "Alla fönster i Widelands (utom historieberättelsefönster innehålland
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Fönstren kan också minimeras genom att klicka på dem med mittknappen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
