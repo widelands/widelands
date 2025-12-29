@@ -12116,7 +12116,7 @@ msgstr "Produzeren"
 
 #: ../../../../src/wui/ware_statistics_menu.cc:139
 msgid "Consumption"
-msgstr "Verbruuk"
+msgstr "Bruuk"
 
 #: ../../../../src/wui/ware_statistics_menu.cc:146
 msgid "Economy health"
