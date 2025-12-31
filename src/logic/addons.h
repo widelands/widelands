@@ -124,7 +124,8 @@ struct AddOnInfo {
 	uint8_t quality = 0;               ///< Quality rating.
 	uint32_t total_file_size = 0;      ///< Total size of all files, in bytes.
 	std::string upload_username;       ///< Who uploaded (may be different from author).
-	std::time_t upload_timestamp = 0;  ///< Date and time when this version was uploaded.
+	std::time_t upload_timestamp = 0;  ///< Date and time when the add-on was first uploaded.
+	std::time_t edit_timestamp = 0;    ///< Date and time when the most recent version was uploaded.
 
 	uint32_t download_count = 0;       ///< Total times downloaded.
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.

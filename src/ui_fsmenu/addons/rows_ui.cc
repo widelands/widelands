@@ -419,7 +419,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                       0,
                       0,
                       0,
-                      time_string(info->upload_timestamp),
+                      info->upload_timestamp == info->edit_timestamp ?
+                          time_string(info->upload_timestamp) :
+                         format(
+                             /** TRANSLATORS: Upload timestamp • Edit timestamp */
+                             _("%1$s   ✎ %2$s"), time_string(info->upload_timestamp), time_string(info->edit_timestamp)
+                         )
+                      ,
                       UI::Align::kLeft),
      bottom_row_right_(
         this,
