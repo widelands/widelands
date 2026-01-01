@@ -56,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Nya soldater skapas på ett annat sätt än övriga arbetare. Rekryter går från ett magasin (eller ditt högkvarter) till kasernen där de får grundläggande träning och blir soldater. Nyutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
+msgstr "Nya soldater skapas på ett annat sätt än övriga arbetare. Rekryter går från en lagerbyggnad (eller ditt högkvarter) till kasernen där de får grundläggande träning och blir soldater. Nyutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -349,7 +349,7 @@ msgstr "Bra gjort! Din spejarkoja har byggts. Medan vår spanare flyttar in kan 
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några matbitar i vårt magasin."
+msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några ransoner i vår lagerbyggnad."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
@@ -483,7 +483,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (1 + 5 + 2) som du vill ha här kan två ha dött. De kommer att ersättas av nya soldater från dina lager, om möjligt."
+msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (1 + 5 + 2) som du vill ha här kan två ha dött. De kommer att ersättas av nya soldater från din lagerbyggnad, om möjligt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
@@ -504,7 +504,7 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga lagerlokaler som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i vanliga lagerlokaler deltar inte i några strider, och vanliga lagerlokaler kan inte attackeras direkt."
+msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga lagerbyggnader som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i vanliga lagerbyggnader deltar inte i några strider, och vanliga lagerbyggnader kan inte attackeras direkt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
@@ -531,7 +531,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr "Om du tittar på statusraderna kan du se att ditt lager är tomt, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
+msgstr "Om du tittar på statusraderna kan du se att din lagerbyggnad är tom, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

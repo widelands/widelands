@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: GunChleoc, 2014,2018\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -239,11 +239,11 @@ msgstr "Bygg en fängelsehåla och en labyrint"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
-msgstr "Bygg ett magasin och en hästgård"
+msgstr "Bygg en lagerbyggnad och en hästgård"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
-msgstr "Magasin och hästgård"
+msgstr "Lagerbyggnad och hästgård"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
@@ -251,11 +251,11 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Allt eftersom ditt vägnät blir längre och mer komplicerat bör du sända ut hästar för att hjälpa dina bärare. Hästar avlas på hästgårdar med hjälp av vatten och majs. Ett magasin hjälper också till att säkerställa att transportsystemet inte faller samman."
+msgstr "Allt eftersom ditt vägnät blir längre och mer komplicerat bör du sända ut hästar för att hjälpa dina bärare. Hästar avlas på hästgårdar med hjälp av vatten och majs. En lagerbyggnad hjälper också till att säkerställa att transportsystemet inte faller samman."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr "Bygg ett magasin"
+msgstr "Bygg en lagerbyggnad"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
@@ -778,7 +778,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Ett annat sätt att lätta på belastningen av vägarna är att bygga magasin. Vi har tagit berget i anspråk nu, så det verkar som en bra idé att bygga ett magasin på platån för att slippa behöva transportera allt upp och ner för sluttningarna."
+msgstr "Ett annat sätt att lätta på belastningen av vägarna är att bygga lagerbyggnader. Vi har tagit berget i anspråk nu, så det verkar som en bra idé att bygga en lagerbyggnad på platån för att slippa behöva transportera allt upp och ner för sluttningarna."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
@@ -911,7 +911,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Snabba ryck, vi behöver ett hus åt Ostur precis vid sjön, och vi behöver brädor, trädstammar och spindeltyg för byggandet. Glöm allt annat, vi måste ta upp de där sakerna till bergets topp innan alla våra magasin slukas av havet."
+msgstr "Snabba ryck, vi behöver ett hus åt Ostur precis vid sjön, och vi behöver brädor, trädstammar och spindeltyg för byggandet. Glöm allt annat, vi måste ta upp de där sakerna till bergets topp innan alla våra lagerbyggnader slukas av havet."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgid "Jundlina is Relieved"

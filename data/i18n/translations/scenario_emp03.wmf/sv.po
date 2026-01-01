@@ -528,7 +528,7 @@ msgid ""
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
 "Jag märkte att vår stenhuggare äntligen har börjat sitt arbete. Han kommer "
-"att hugga det antal marmorkolonner som vi begär i våra grundläggande "
+"att hugga det antal marmorpelare som vi begär i våra grundläggande "
 "ekonomiska inställningar."
 
 #. TRANSLATORS: Amalea
@@ -651,7 +651,7 @@ msgid ""
 msgstr ""
 "För att kunna skicka ut ett expeditionsfartyg behöver vi först ett fartyg. "
 "Tyvärr har vi bara fem balar tyg kvar, som vi behöver för att bygga hamnen "
-"och varvet."
+"och skeppsvarvet."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:369
@@ -929,8 +929,8 @@ msgid ""
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
-"Bra gjort hittills. Nu kommer vi inte att producera fler marmorkolonner än "
-"vad som behövs. Jag tror verkligen att vi kommer att behöva denna "
+"Bra gjort hittills. Nu kommer vi inte att producera fler marmorpelare än vad"
+" som behövs. Jag tror verkligen att vi kommer att behöva denna "
 "ekonomifunktion ganska ofta för att justera vår ekonomi. Kom ihåg att vår "
 "industri endast kommer att arbeta tills den angivna mängden i "
 "ekonomiinställningarna har uppnåtts."

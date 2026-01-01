@@ -106,7 +106,7 @@ msgstr "Visa byggnadsytor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr "Aktivera 'Visa Byggnadsytor'. Det kan göras på två sätt:"
+msgstr "Aktivera 'Visa byggnadsytor'. Det kan göras på två sätt:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #, lua-format
@@ -760,13 +760,13 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr "Du kanske har märkt att folkräkningsraden för högkvarteret är annorlunda. Det beror på att det är en speciell byggnadstyp som kallas lager. Lagerlokaler är byggnader där dina arbetare kan vila tills de tilldelas en arbetsplats och där ett obegränsat antal varor kan lagras tills de behövs någonstans. De fungerar alltså som ett slags centrum, och för att markera detta får de unika namn."
+msgstr "Du kanske har märkt att folkräkningsraden för högkvarteret är annorlunda. Det beror på att det är en speciell byggnadstyp som kallas lagerbyggnad. Lagerbyggnader är byggnader där dina arbetare kan vila tills de tilldelas en arbetsplats och där ett obegränsat antal varor kan lagras tills de behövs någonstans. De fungerar alltså som ett slags centrum, och för att markera detta får de unika namn."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr "De små kronorna bredvid namnet markerar det som ditt högkvarter. När du spelar Widelands kommer du att se tre typer av lager, markerade med små ikoner:"
+msgstr "De små kronorna bredvid namnet markerar det som ditt högkvarter. När du spelar Widelands kommer du att se tre typer av lagerbyggnader, markerade med små ikoner:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
@@ -778,7 +778,7 @@ msgstr "Högkvarteret där du vanligtvis startar spelet. Det är markerat med sm
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr "Vanliga lagerlokaler som endast innehåller varor och arbetare som distribuerar dem över hela ditt territorium. De markeras med små hus: ⟰"
+msgstr "Vanliga lagerbyggnader som endast innehåller varor och arbetare som distribuerar dem över hela ditt territorium. De markeras med små hus: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""

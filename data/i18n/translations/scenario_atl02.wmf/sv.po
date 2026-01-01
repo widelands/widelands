@@ -359,8 +359,8 @@ msgid ""
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
 "Aaaargh, Jundlina. Jag vet inte hur detta kunde hända, men Satul kunde inte "
-"skydda oss från fienden. De har förstört vårt sista lager. Därmed har vi "
-"förlorat denna strid och vårt folk är dömt!"
+"skydda oss från fienden. De har förstört vår sista lagerbyggnad. Därmed har "
+"vi förlorat denna strid och vårt folk är dömt!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
@@ -1465,7 +1465,7 @@ msgid ""
 " doomed!"
 msgstr ""
 "Aaaargh. Jag vet inte hur detta kunde hända, men Satul kunde inte skydda vår"
-" allierade från fienden. Han förlorade sitt sista lagerhus och vår ädla "
+" allierade från fienden. Han förlorade sin sista lagerbyggnad och vår ädla "
 "prinsessa omkom tillsammans med honom. Därmed har vi förlorat denna strid "
 "och vårt folk är dömt!"
 

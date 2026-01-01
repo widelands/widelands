@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2017\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "För att etablera en smugglingsrutt behöver du bygga ett magasin vid en avsändar-/mottagar-plats, medan din medspelare måste bygga ett vid motsvarande avsändar-/mottagar-plats. En vara transporteras sedan var 10e sekund."
+msgstr "För att etablera en smugglingsrutt behöver du bygga en lagerbyggnad vid en avsändar-/mottagarplats, medan din medspelare måste bygga ett vid motsvarande avsändar-/mottagarplats. En vara transporteras sedan var 10e sekund."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12

@@ -566,8 +566,8 @@ msgstr ""
 "Lutius, enligt min mening kommer detta återigen att bli en mycket svår "
 "utmaning. Men jag är rädd att vi är dömda att hantera denna situation. För "
 "att göra saken ännu värre möttes jag av en obehaglig överraskning i våra "
-"lager: de är helt tomma. Det finns knappt ett dammkorn kvar där inne: inga "
-"varor, inga verktyg, inga arbetare och inga soldater heller."
+"lagerbyggnader: de är helt tomma. Det finns knappt ett dammkorn kvar där "
+"inne: inga varor, inga verktyg, inga arbetare och inga soldater heller."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:317
@@ -1274,7 +1274,8 @@ msgid ""
 "empire!"
 msgstr ""
 "Åh nej, Lutius, jag vet inte hur detta kunde hända, men barbarerna har "
-"förstört vårt sista lager. Så vi har förlorat denna strid och vårt imperium!"
+"förstört vår sista lagerbyggnad. Så vi har förlorat denna strid och vårt "
+"imperium!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
