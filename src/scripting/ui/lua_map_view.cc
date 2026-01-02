@@ -403,8 +403,8 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 }
 
 /* RST
-   .. method:: override_field_selector([image_path = nil[, triangles = false[, radius = 0[,
-   gap_percent = 0]]]])
+   .. method:: override_field_selector( \
+      [image_path = nil[, triangles = false[, radius = 0[, gap_percent = 0]]]])
 
       .. versionadded:: 1.4
 
