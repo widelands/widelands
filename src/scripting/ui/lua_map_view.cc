@@ -51,6 +51,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
+   METHOD(LuaMapView, override_field_selector),
    METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
    METHOD(LuaMapView, set_keyboard_shortcut),
@@ -398,6 +399,37 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 int LuaMapView::mouse_to_field(lua_State* L) {
 	get()->map_view()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: override_field_selector([image_path = nil[, triangles = false[, radius = 0[, gap_percent = 0]]]])
+
+      .. versionadded:: 1.4
+
+      Override the default field selector with custom properties.
+
+      Call without arguments to restore the default selector.
+
+      :arg image_path: Path to the image file to use.
+      :type image_path: :class:`string`
+      :arg triangles: Whether the selector operates on triangles or nodes.
+      :type triangles: :class:`boolean`
+      :arg radius: The tool radius.
+      :type radius: :class:`integer`
+      :arg gap_percent: The percentage of gaps in the tool area (0..100).
+      :type gap_percent: :class:`integer`
+*/
+int LuaMapView::override_field_selector(lua_State* L) {
+	if (lua_gettop(L) < 2) {
+		get()->unset_selector_override();
+	} else {
+		const Image* pic = g_image_cache->get(luaL_checkstring(L, 2));
+		const bool triangles = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
+		const int radius = lua_gettop(L) >= 4 ? luaL_checkuint32(L, 4) : 0;
+		const int gap_percent = lua_gettop(L) >= 5 ? luaL_checkuint32(L, 5) : 0;
+		get()->set_selector_override(pic, triangles, radius, gap_percent);
+	}
 	return 0;
 }
 
