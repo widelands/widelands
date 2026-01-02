@@ -268,6 +268,13 @@ public:
 		plugin_actions_.set_keyboard_shortcut(name, action, failsafe, down);
 	}
 
+	[[nodiscard]] bool is_field_clicked_blocked() const {
+		return field_clicked_blocked_;
+	}
+	void set_field_clicked_blocked(bool block) {
+		field_clicked_blocked_ = block;
+	}
+
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
@@ -507,6 +514,7 @@ private:
 	uint64_t last_target_gamespeed_{0U};
 	uint64_t gamespeed_last_change_time_{0U};
 
+	bool field_clicked_blocked_{false};
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

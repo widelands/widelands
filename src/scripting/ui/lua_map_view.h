@@ -54,6 +54,8 @@ public:
 	int get_is_building_road(lua_State* L);
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
+	int get_field_clicked_blocked(lua_State*);
+	int set_field_clicked_blocked(lua_State*);
 	int get_toolbar(lua_State* L);
 
 	/*

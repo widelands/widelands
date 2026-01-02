@@ -199,6 +199,10 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  * Observer has clicked on the given node; bring up the context menu.
  */
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
+	if (is_field_clicked_blocked()) {
+		return;
+	}
+
 	// Special case for buildings
 	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
 	if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {

@@ -71,6 +71,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, is_building_road),
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
+   PROP_RW(LuaMapView, field_clicked_blocked),
    PROP_RO(LuaMapView, toolbar),
    {nullptr, nullptr, nullptr},
 };
@@ -202,6 +203,30 @@ int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, static_cast<int>(get()->map_view()->is_animating()));
 	return 1;
+}
+
+/* RST
+   .. attribute:: field_clicked_blocked
+
+      .. versionadded:: 1.4
+
+      (RW) Whether the default action for clicking on a field is suppressed.
+
+      When this property is set to :const:`true`, clicking on a field only moves the node selector
+      but takes no further action. The ``field_clicked`` signal is still triggered.
+
+      This can be used in scripts to create custom tools with click actions.
+
+      :see also: :meth:`set_user_input_allowed`
+      :see also: :meth:`subscribe_to_field_clicked`
+*/
+int LuaMapView::get_field_clicked_blocked(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_field_clicked_blocked()));
+	return 1;
+}
+int LuaMapView::set_field_clicked_blocked(lua_State* L) {
+	get()->set_field_clicked_blocked(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*
@@ -561,9 +586,7 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
       Note that a user's click on a field can have other, unrelated effects, such as opening a
       field action window or building window, interacting with road building mode, or
       (in the editor) performing a tool action.
-      It is not currently possible to suppress these effects.
-      The ability to create custom tools that trigger on a click on a field without other effects
-      is a `planned future addition <https://codeberg.org/wl/widelands/issues/5273>`_.
+      Use :attr:`field_clicked_blocked` to suppress these default actions.
 
       The signal provides as arguments both the node and the triangle which are
       closest to the clicked pixel.
