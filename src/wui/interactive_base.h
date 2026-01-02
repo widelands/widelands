@@ -278,7 +278,8 @@ public:
 	void unset_selector_override() {
 		sel_.data_override_.reset();
 	}
-	void set_selector_override(const Image* pic, bool triangles, uint32_t radius, uint16_t gap_percent) {
+	void
+	set_selector_override(const Image* pic, bool triangles, uint32_t radius, uint16_t gap_percent) {
 		sel_.data_override_ = SelData::Data(triangles, radius, gap_percent, pic);
 	}
 
@@ -446,14 +447,13 @@ private:
 		                 const uint32_t Radius = 0,
 		                 const uint16_t Gap = 0,
 		                 const Image* Pic = nullptr)
-		   : freeze(Freeze),
-		     pos(Pos),
-		     data_default_(Triangles, Radius, Gap, Pic) {
+		   : freeze(Freeze), pos(Pos), data_default_(Triangles, Radius, Gap, Pic) {
 		}
 
 		struct Data {
 			Data(bool t, uint32_t r, uint16_t g, const Image* p)
-			: triangles(t), radius(r), gap_percent(g), pic(p) {}
+			   : triangles(t), radius(r), gap_percent(g), pic(p) {
+			}
 
 			bool triangles;  //  otherwise nodes
 			uint32_t radius;
@@ -461,7 +461,7 @@ private:
 			const Image* pic;
 		};
 
-		bool freeze;     // don't change sel, even if mouse moves
+		bool freeze;  // don't change sel, even if mouse moves
 		Widelands::NodeAndTriangle<> pos;
 
 		[[nodiscard]] const Data& data() const {
