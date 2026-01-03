@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2017,2021,2023
+# D M <kamera001dm@gmail.com>, 2017,2021,2023,2026
 # GunChleoc, 2016
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # Greger Cronquist, 2021
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11956,7 +11956,7 @@ msgstr "Försvar: %u"
 #: ../../../../src/wui/soldier_statistics_menu.cc:230
 #, c-format
 msgid "Evade: %u"
-msgstr "Hoppa undan: %u"
+msgstr "Parera: %u"
 
 #: ../../../../src/wui/soldier_statistics_menu.cc:241
 msgid "By Attribute"

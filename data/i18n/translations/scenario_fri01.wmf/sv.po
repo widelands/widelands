@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# D M <kamera001dm@gmail.com>, 2023
+# D M <kamera001dm@gmail.com>, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -863,9 +863,9 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
-"Vi tränar inte soldaterna att hoppa undan när fienden attackerar, en riktig "
-"krigare kan blockera motståndarens slag med en skicklig vridning av svärdet "
-"istället för att hoppa undan som en fegis."
+"Vi tränar inte soldaterna i att parera när fienden attackerar. En riktig "
+"krigare går till attack istället för att undvika motståndarens attacker som "
+"en fegis."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
