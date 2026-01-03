@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2017,2021,2023
+# D M <kamera001dm@gmail.com>, 2017,2021,2023,2026
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
 # GunChleoc, 2016
 # GunChleoc, 2014,2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-11-27 03:16+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2005,2025\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4256,19 +4256,19 @@ msgstr "sova"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:85
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:99
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:113
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 2 till 3"
+msgstr "uppgradera soldats förmåga att parera från nivå 2 till 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:128
@@ -4407,13 +4407,13 @@ msgstr "uppgradera soldats hälsonivå från 0 till 1"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
@@ -4425,13 +4425,13 @@ msgstr "Stridsarena"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
@@ -4514,7 +4514,7 @@ msgstr "Arena"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:53
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
@@ -4543,7 +4543,7 @@ msgstr "Colosseum"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:8
@@ -4702,7 +4702,7 @@ msgstr "Hamn"
 #: ../../../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr "Lagerbyggnad"
+msgstr "Magasin"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:83
@@ -4720,7 +4720,7 @@ msgstr "Hamn"
 #: ../../../../data/tribes/buildings/warehouses/atlanteans/warehouse/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Warehouse"
-msgstr "Lagerbyggnad"
+msgstr "Magasin"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/barbarians/headquarters/init.lua:8
@@ -4739,7 +4739,7 @@ msgstr "Hamn"
 #: ../../../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:8
 msgctxt "barbarians_building"
 msgid "Warehouse"
-msgstr "Lagerbyggnad"
+msgstr "Magasin"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/empire/headquarters/init.lua:8
@@ -4763,7 +4763,7 @@ msgstr "Hamn"
 #: ../../../../data/tribes/buildings/warehouses/empire/warehouse/init.lua:8
 msgctxt "empire_building"
 msgid "Warehouse"
-msgstr "Lagerbyggnad"
+msgstr "Magasin"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:8
