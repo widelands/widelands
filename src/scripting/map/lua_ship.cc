@@ -119,7 +119,8 @@ int LuaShip::set_destination(lua_State* L) {
 	if (lua_isnil(L, -1)) {
 		ship->set_destination(egbase, nullptr, true);
 	} else {
-		ship->set_destination(egbase, (*get_base_user_class<LuaMapObject>(L, -1))->get(L, egbase), true);
+		ship->set_destination(
+		   egbase, (*get_base_user_class<LuaMapObject>(L, -1))->get(L, egbase), true);
 	}
 
 	return 0;
@@ -409,7 +410,8 @@ int LuaShip::get_warship_soldier_capacity(lua_State* L) {
 int LuaShip::set_warship_soldier_capacity(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	if (upcast(Widelands::Game, game, &egbase)) {
-		get(L, egbase)->warship_command(*game, Widelands::WarshipCommand::kSetCapacity, {luaL_checkuint32(L, -1)});
+		get(L, egbase)->warship_command(
+		   *game, Widelands::WarshipCommand::kSetCapacity, {luaL_checkuint32(L, -1)});
 	} else {
 		get(L, egbase)->set_warship_soldier_capacity(luaL_checkuint32(L, -1));
 	}
@@ -758,8 +760,8 @@ int LuaShip::attack(lua_State* L) {
 
       :arg field: The field to invade. Must be a portspace.
       :type field: :class:`~wl.map.Field`
-      :arg soldiers: The invasion soldiers. At least one soldier must be provided, and all soldiers must currently be on this ship.
-      :type soldiers: :class:`array` of :class:`~wl.map.Soldier`
+      :arg soldiers: The invasion soldiers. At least one soldier must be provided, and all soldiers
+   must currently be on this ship. :type soldiers: :class:`array` of :class:`~wl.map.Soldier`
 
       :returns: :const:`nil`
 */

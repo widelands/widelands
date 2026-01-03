@@ -1004,7 +1004,8 @@ int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::Player& player = get(L, egbase);
 
 	const Widelands::ShipDescr* descr = egbase.descriptions().get_ship_descr(player.tribe().ship());
-	Widelands::Ship& ship = dynamic_cast<Widelands::Ship&>(egbase.create_ship(c->coords(), descr->name(), &player));
+	Widelands::Ship& ship =
+	   dynamic_cast<Widelands::Ship&>(egbase.create_ship(c->coords(), descr->name(), &player));
 
 	if (ship_type == "warship") {
 		ship.set_ship_type(egbase, Widelands::ShipType::kWarship);
