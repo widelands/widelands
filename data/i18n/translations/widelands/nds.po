@@ -8511,13 +8511,13 @@ msgstr "Verkleenern"
 #: ../../../../src/wlapplication_options.cc:426
 #: ../../../../src/wui/interactive_base.cc:349
 msgid "Maximum Zoom"
-msgstr ""
+msgstr "Gröttste Sicht"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wlapplication_options.cc:431
 #: ../../../../src/wui/interactive_base.cc:354
 msgid "Minimum Zoom"
-msgstr ""
+msgstr "Lüttste Sicht"
 
 #: ../../../../src/wlapplication_options.cc:436
 msgid "Reset Zoom"
@@ -12116,7 +12116,7 @@ msgstr "Produzeren"
 
 #: ../../../../src/wui/ware_statistics_menu.cc:139
 msgid "Consumption"
-msgstr "Verbruuk"
+msgstr "Bruuk"
 
 #: ../../../../src/wui/ware_statistics_menu.cc:146
 msgid "Economy health"

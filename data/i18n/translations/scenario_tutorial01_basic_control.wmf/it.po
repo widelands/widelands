@@ -10,7 +10,7 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2017,2021
+# Guybrush88 <erpizzo@alice.it>, 2015-2017,2021,2025
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
 # Mirco Scottà <mscotta@libero.it>, 2019
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
@@ -20,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2021\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2021,2025\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1074,7 +1074,7 @@ msgstr "Questo conclude il primo tutorial. Per imparare di più sul gioco, puoi 
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr "Tuttavia, siccome adesso sai controllare Widelands, puoi anche cominciare una partita, o continuare questa, e scoprire di più per conto tuo."
+msgstr "Tuttavia, siccome adesso sai come controllare Widelands, puoi anche cominciare una partita (o continuare questa) e scoprire di più da solo."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:661
 msgid "To leave this game and return to the main menu:"
