@@ -1142,7 +1142,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Scambio rifiutato"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
@@ -1153,7 +1153,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Scambio accettato"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""

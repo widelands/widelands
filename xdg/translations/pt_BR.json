@@ -8,6 +8,7 @@
 		"Widelands têm um modo de único jogador com campanhas que contam estórias das tribos e sua luta no universo Widelands. No entanto, o verdadeiro jogo começa quando se une os amigos pela Internet ou pela LAN para construir novos impérios juntos - ou aniquilar uns aos outros. Widelands também disponibiliza uma inteligência artificial para desafiar você."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Trocas comerciais",
 			"Seis novos mapas foram adicionados e três mapas antigos removidos",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Lançamento de correção de bugs"
-		],
-		"1.2": [
-			"Novo cenário dos Frísios",
-			"Controle de diplomacia por jogadores artificiais",
-			"Batalha Naval (pré-visualização)",
-			"Guarnições para portos e sedes.",
-			"Plugins de interface",
-			"Notas fixadas",
-			"Publicação direta de mapas",
-			"Tratamento de erros melhorado"
 		]
 	}
 }

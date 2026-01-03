@@ -8,6 +8,7 @@
 		"Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aver eerst dann würrelk an, wenn du mit dienen Frünnen över ’t Internett of LAN tosamen neje Rieken baust – of hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Hannel in Markten",
 			"Sess neje Kaarten hentoföögt un dree olle Kaarten wegdaan",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Fehler-Ofhelpens-Publizeren"
-		],
-		"1.2": [
-			"Neje Fresen-Rutfödderung",
-			"Künstelk Spelers regeren Betreckens",
-			"Seekrieg (Utkiek)",
-			"Mannskuppen in Muden un Raadhusen",
-			"Schnittstee-Inschuvens",
-			"Faste Anmarkens",
-			"Kaarten stracks publizeren",
-			"Beterer Umgang mit Fehlers"
 		]
 	}
 }
