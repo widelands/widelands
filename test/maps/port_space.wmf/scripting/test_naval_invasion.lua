@@ -1,3 +1,5 @@
+include "test/scripting/stable_save.lua"
+
 run(function()
    -- We need a slightly larger island for this testcase
    local portspace = map:get_field(7, 10)
@@ -45,6 +47,8 @@ run(function()
    for i = 6, 20 do soldiers[i] = nil end
    assert_equal(5, #soldiers)
    ship:invade(portspace, soldiers)
+
+   stable_save(game, "naval_invasion", 100 * 1000)
 
    sleep(1000 * 120)
 

@@ -1,3 +1,5 @@
+include "test/scripting/stable_save.lua"
+
 run(function()
    local ship = create_infrastructure(63, 10, true)
 
@@ -23,6 +25,8 @@ run(function()
 
    -- Fight!
    ship:attack(enemy_ship)
+
+   stable_save(game, "naval_battle", 100 * 1000)
 
    sleep(1000 * 120)
 
