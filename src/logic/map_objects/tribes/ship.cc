@@ -1671,7 +1671,8 @@ void Ship::battle_update(Game& game) {
 					    map.findpath(
 					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
-						molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial, coords.x, coords.y);
+						molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial,
+						      coords.x, coords.y);
 						break;
 					}
 				}
