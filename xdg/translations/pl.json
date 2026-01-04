@@ -8,6 +8,7 @@
 		"Widelands posiada tryb dla jednego gracza z kampaniami zawierającymi historię plemion i wyzwań, przed jakimi stają w uniwersum Widelands. Prawdziwa gra zaczyna się jednak, gdy razem z przyjaciółmi, poprzez internet lub LAN, budujecie wspólnie królestwa lub obracacie je w pył we wzajemnych wojnach. Spragnionym wyzwania Widelands oferuje także potyczki z SI."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Handel na rynku",
 			"Sześć nowych map dodanych i trzy stare usunięte.",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Wydanie poprawkowe"
-		],
-		"1.2": [
-			"Nowy scenariusz Fryzów",
-			"Obsługa dyplomacji przez graczy komputerowych",
-			"Operacje morskie",
-			"Garnizony dla portów i kwater głównych",
-			"Wtyczki UI",
-			"Przypięte notatki",
-			"Bezpośrednie publikowanie map",
-			"Ulepszona obsługa błędów"
 		]
 	}
 }

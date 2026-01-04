@@ -8,6 +8,7 @@
 		"Widelands - Širozemlje - nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite međusobno u pepelu rata. Widelands takođe u ponudi ima i AI da te izazove."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }
