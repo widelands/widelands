@@ -813,7 +813,7 @@ msgstr "Sommige gebouwen, zoals de boerderij, hebben een heel klein werkgebied. 
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Zoom in/uit met het muiswiel of %1%/%2%. Druk op %3%/%4% voor het maximale/minimale zoomniveau. Druk op %5% om het zoomniveau te resetten."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
