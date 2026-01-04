@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2025 by the Widelands Development Team
+ * Copyright (C) 2012-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +122,7 @@ void fill_parameter_vector() {
 	    _("Start the scenario with difficulty `n`. Only valid with --scenario."), false},
 	   /// Misc
 	   {"", "nosound", "", _("Start the game with sound disabled."), false},
+	   {"", "shuffle", "", _("Start the game with shuffle mode for playback of songs"), true},
 	   /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	   /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
 	   /** TRANSLATORS: * marks the default value */

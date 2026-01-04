@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -539,6 +539,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// We do it here to ensure that the sound handler has been created first, and we only want to
 	// register it once.
 	UI::Panel::register_click();
+
+	// Mark playlist config values as used to prevent errors with the options system
+	// for these auto-generated config keys
+	Section* sec = get_config_section_ptr("songs");
+	if (sec != nullptr) {
+		sec->mark_values();
+	}
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();

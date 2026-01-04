@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2025 by the Widelands Development Team
+ * Copyright (C) 2004-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -552,15 +552,15 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 
 					this_district_has_normal |= policy == StockPolicy::kNormal;
 					this_district_has_prefer |= policy == StockPolicy::kPrefer;
-
-					if (quantity_district >= target_district && quantity_global >= target_global) {
-						// If a district is specified, the ware is needed if the district lacks it
-						// even if the global stock is above target.
-						// If the global stock is below target we also need it.
-						return false;
-					}
 				} else {
 					other_district_has_prefer |= policy == StockPolicy::kPrefer;
+				}
+
+				if (quantity_district >= target_district && quantity_global >= target_global) {
+					// If a district is specified, the ware is needed if the district lacks it
+					// even if the global stock is above target.
+					// If the global stock is below target we also need it.
+					return false;
 				}
 			} else if (quantity_global >= target_global) {
 				return false;
@@ -671,11 +671,7 @@ void Economy::merge(Economy& e) {
 		}
 	}
 
-	//  If the options window for e is open, but not the one for this, the user
-	//  should still have an options window after the merge.
-	if ((e.get_options_window() != nullptr) && (get_options_window() == nullptr)) {
-		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
-	}
+	Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i != 0u;) {
 		assert(i == e.get_nrflags());
