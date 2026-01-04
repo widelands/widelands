@@ -63,8 +63,10 @@ print_help () {
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
-    echo "-o or --no-codecheck  If in debug mode, switch off codecheck."
+    echo "-o or --no-codecheck  Switch off codecheck."
+    echo "+o or --codecheck     Switch on codecheck for debug mode (default)."
     echo " "
+    echo "-t or --no-static     Build a dynamically linked .exe on windows (default)."
     echo "+t or --static        Build a static linked .exe on windows."
     echo " "
     echo "Compiler options:"
@@ -313,6 +315,16 @@ do
     ;;
     -o|--no-codecheck)
       USE_CODECHECK="OFF"
+    shift
+    ;;
+    +o|--codecheck)
+      if [ "$BUILD_TYPE" = "Debug" ]; then
+        USE_CODECHECK="ON"
+      fi
+    shift
+    ;;
+    -t|--no-static)
+      BUILD_STATIC="OFF"
     shift
     ;;
     +t|--static)
