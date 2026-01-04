@@ -44,20 +44,20 @@ run(function()
    ship.destination = nil
    local soldiers = ship:get_workers("")
    assert_equal(20, #soldiers)
-   for i = 6, 20 do soldiers[i] = nil end
-   assert_equal(5, #soldiers)
+   for i = 7, 20 do soldiers[i] = nil end
+   assert_equal(6, #soldiers)
    ship:invade(portspace, soldiers)
 
    stable_save(game, "naval_invasion", 100 * 1000)
 
-   sleep(1000 * 60 * 5)
+   sleep(1000 * 60 * 3)
 
    -- We should have won
    assert_equal(false, enemy_port.exists)
    assert_equal(false, enemy_tower.exists)
    assert_true(ship.exists)
    assert_true(ship.hitpoints == 50000)
-   assert_equal(15, ship:get_workers("barbarians_soldier"))
+   assert_equal(14, ship:get_workers("barbarians_soldier"))
    assert_equal(portspace.owner, p1)
    assert_equal(milsitespace.owner, p1)
    local new_tower = milsitespace.immovable

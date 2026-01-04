@@ -1646,12 +1646,14 @@ void Ship::battle_update(Game& game) {
 					return si.get_object_serial() == serial;
 				});
 				if (it == items_.end()) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not on ship", serial);
 					continue;
 				}
 
 				Worker* worker;
 				it->get(game, nullptr, &worker);
 				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not a soldier", serial);
 					continue;
 				}
 
@@ -1669,6 +1671,7 @@ void Ship::battle_update(Game& game) {
 					    map.findpath(
 					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
+						molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial, coords.x, coords.y);
 						break;
 					}
 				}
@@ -2891,6 +2894,14 @@ void Ship::Loader::load_pointers() {
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
 			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
+		}
+	}
+
+	for (Battle& battle : battles_) {
+		for (uint32_t& serial : battle.attack_soldier_serials) {
+			// Convert file indices to actual serials
+			Soldier& soldier = mol().get<Soldier>(serial);
+			serial = soldier.serial();
 		}
 	}
 

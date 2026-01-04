@@ -28,7 +28,7 @@ run(function()
 
    stable_save(game, "naval_battle", 100 * 1000)
 
-   sleep(1000 * 60 * 5)
+   sleep(1000 * 60 * 3)
 
    -- We should have won
    assert_equal(false, enemy_ship.exists)
