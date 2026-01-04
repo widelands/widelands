@@ -502,11 +502,16 @@ fi
 echo " "
 if [ $USE_CODECHECK = "ON" ]; then
   echo "Will perform codecheck."
+  CMD_ADD "--codecheck"
 else
   echo "Codecheck is disabled."
+  CMD_ADD "--no-codecheck"
 fi
 if [ $BUILD_STATIC = "ON" ]; then
   echo "Building a static linked .exe on windows."
+  CMD_ADD "--static"
+else
+  CMD_ADD "--no-static"
 fi
 echo " "
 echo "###########################################################"
