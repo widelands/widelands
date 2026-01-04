@@ -128,7 +128,7 @@ msgstr "Bau eene Jaggtkaat, eene Deertentüchterkaat un eene Kneipe"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr "Diene Bargwarkskeerls bruuken Spiesen tum Arbeiden."
+msgstr "Diene Bargwarkskeerls bruken Spiesen tum Arbeiden."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -214,14 +214,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Utbaute Husen bruuken meestens mehr Waren as dat normaale Huus – to ’n Bispööl, Deepe Bargwarken bruuken Spiesen un nich Happen. Du mutt diene Kneipe to eenem Kroog utbauen, um Spiesen ut Pitta-Brood UN eener annern Aard vun Eten (Fleesk of Fiss) UN Beer to produzeren."
+msgstr "Utbaute Husen bruken meestens mehr Waren as dat normaale Huus – to ’n Bispööl, Deepe Bargwarken bruken Spiesen un nich Happen. Du mutt diene Kneipe to eenem Kroog utbauen, um Spiesen ut Pitta-Brood UN eener annern Aard vun Eten (Fleesk of Fiss) UN Beer to produzeren."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Natürelk kannst du all Bargwarken stracks utbauen, wenn du de nödigen Arbeiders hest – deepe Bargwarken arbeiden een bietje gauer, lütte Bargwarken bruuken billigers Eten. Du maakst of, wat di lever is."
+msgstr "Natürelk kannst du all Bargwarken stracks utbauen, wenn du de nödigen Arbeiders hest – deepe Bargwarken arbeiden een bietje gauer, lütte Bargwarken bruken billigers Eten. Du maakst of, wat di lever is."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
@@ -236,7 +236,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Grote un betere Husen – un alle Soldateree-Boen – bruuken betern Baukraam. Se könen nich blot mit Boomstammen baut worden – de Boomstammen mutten eerst vun eener Holtharderee to Haartholt verbetert worden. Bau immer tiedig eene Holtharderee, denn wenn du keen Haartholt mehr hest, kannst du dien Gewest nich mehr vergrotern."
+msgstr "Grote un betere Husen – un alle Soldateree-Boen – bruken betern Baukraam. Se könen nich blot mit Boomstammen baut worden – de Boomstammen mutten eerst vun eener Holtharderee to Haartholt verbetert worden. Bau immer tiedig eene Holtharderee, denn wenn du keen Haartholt mehr hest, kannst du dien Gewest nich mehr vergrotern."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -252,7 +252,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Grotere Husen bruuken noch anner gode Kraam as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
+msgstr "Grotere Husen bruken noch anner gode Kraam as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -895,7 +895,7 @@ msgstr "Hunnert! Uns’ Dacken drüppeln nich mehr, un nu hebben wi all Kraam, w
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
-msgstr "Wi bruuken Ossen!"
+msgstr "Wi bruken Ossen!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:478

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,6 +73,10 @@ public:
 	int set_keyboard_shortcut(lua_State* L);
 	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
+	int subscribe_to_jump(lua_State* L);
+	int subscribe_to_changeview(lua_State* L);
+	int subscribe_to_track_selection(lua_State* L);
+	int subscribe_to_field_clicked(lua_State* L);
 
 	/*
 	 * C Methods

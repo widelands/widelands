@@ -8,6 +8,7 @@
 		"Widelandsのシングルプレイモードであるキャンペーンでは、各部族の物語とWidelands世界における彼らの奮闘が語られることでしょう。それも楽しい体験となるでしょうが、ネットワーク越しにトモダチと協力して新たな帝国を作り上げること、もしくはその相手を戦場の塵とするべく戦うこと、それこそがWidelandsの本当の醍醐味です。また、それら他のプレイヤー相手とのゲームに加えて、AIとのプレイも可能です。"
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

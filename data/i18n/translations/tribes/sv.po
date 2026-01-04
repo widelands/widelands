@@ -1,21 +1,23 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2005
+# Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021,2023
-# GunChleoc, 2016
-# GunChleoc, 2014
+# D M <kamera001dm@gmail.com>, 2017,2021,2023,2026
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
+# GunChleoc, 2016
+# GunChleoc, 2014,2016
+# efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
+# Niklas Nordgren, 2022
 # Niklas Nordgren, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-11 02:59+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,31 +29,31 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
 msgctxt "amazons_building"
 msgid "Market"
-msgstr ""
+msgstr "Marknad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
 msgctxt "atlanteans_building"
 msgid "Market"
-msgstr ""
+msgstr "Marknad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Marknad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
 msgctxt "empire_building"
 msgid "Market"
-msgstr ""
+msgstr "Marknad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
 msgctxt "frisians_building"
 msgid "Market"
-msgstr ""
+msgstr "Marknad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -219,7 +221,7 @@ msgstr "Ditt torn har upptäckt en angripare."
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:63
 msgctxt "amazons_building"
 msgid "Your tower is under attack."
-msgstr "Ditt torn är under attack-"
+msgstr "Ditt torn är under attack."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/tower/init.lua:65
@@ -243,7 +245,7 @@ msgstr "Trädtoppsbefästning"
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldier has occupied your treetop sentry."
-msgstr ""
+msgstr "Din soldat har ockuperat din vaktpost i trädkronorna."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
@@ -315,7 +317,7 @@ msgstr "Slott"
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr "Dina soldater har ockuperat ditt slott"
+msgstr "Dina soldater har ockuperat ditt slott."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
@@ -747,7 +749,7 @@ msgstr "Blockhus"
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldier has occupied your blockhouse."
-msgstr ""
+msgstr "Din soldat har ockuperat din blockhus."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -783,7 +785,7 @@ msgstr "Slott"
 #: ../../../../data/tribes/buildings/militarysites/empire/castle/init.lua:31
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr "Dina soldater har ockuperat ditt slott"
+msgstr "Dina soldater har ockuperat ditt slott."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
@@ -1107,7 +1109,7 @@ msgstr "Trätorn"
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
-msgstr ""
+msgstr "Din soldat har ockuperat ditt trätorn."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
@@ -1245,13 +1247,13 @@ msgstr "Kassavaplantage"
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:72
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:48
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:55
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:77
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:56
@@ -1259,8 +1261,8 @@ msgstr "Kassavaplantage"
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:75
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:70
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:82
 #: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
@@ -1289,7 +1291,7 @@ msgstr "skörda kassava"
 #: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:109
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:100
 msgid "No Fields"
 msgstr "Inga fält"
 
@@ -1302,7 +1304,7 @@ msgstr "Inga fält"
 #: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:110
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:101
 msgid "Out of Fields"
 msgstr "Fälten är slut"
 
@@ -1499,7 +1501,7 @@ msgstr "Guldgrävarstuga"
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:65
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:72
 msgid "mining gold"
@@ -1512,7 +1514,7 @@ msgstr "bryta guldmalm"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:83
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:90
 msgid "No Gold"
 msgstr "Inget guld"
@@ -1524,7 +1526,7 @@ msgstr "Inget guld"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:91
 msgid "Main Gold Vein Exhausted"
 msgstr "Guldgruvans huvudsakliga åder är tömd"
@@ -1598,7 +1600,7 @@ msgstr "Djungelbevararhydda"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
-#: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:55
 msgid "planting trees"
 msgstr "plantera träd"
 
@@ -1619,7 +1621,7 @@ msgstr "skära lianer"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:66
 msgid "No Trees"
 msgstr "Inga träd"
 
@@ -1709,8 +1711,8 @@ msgstr "Scouthydda"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:68
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:63
-#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
-#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:70
 msgid "scouting"
 msgstr "utforska"
 
@@ -1804,7 +1806,7 @@ msgstr "göra en stenskål"
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "tillverkning av eldstenar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
@@ -1839,7 +1841,7 @@ msgstr "hugga granit"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:60
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:66
 msgid "No Rocks"
 msgstr "Inga stenar"
 
@@ -1847,7 +1849,7 @@ msgstr "Inga stenar"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:67
 msgid "Out of Rocks"
 msgstr "Stenarna är slut"
 
@@ -1867,7 +1869,7 @@ msgstr "Stengruva"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "gruvdrift"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1878,8 +1880,8 @@ msgstr ""
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
 #: ../../../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:75
 msgid "mining granite"
@@ -1894,11 +1896,11 @@ msgstr "bryta kvarts"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Inga stenar"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Huvudstenådern uttömd"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -1958,7 +1960,7 @@ msgstr "Vildmarksvaktshydda"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:71
 msgid "breeding fish"
 msgstr "plantera ut fisk"
 
@@ -1978,7 +1980,7 @@ msgstr "Skogshuggarkoja"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:53
 msgid "felling trees"
 msgstr "fälla träd"
 
@@ -1986,7 +1988,7 @@ msgstr "fälla träd"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:67
 msgid "Out of Trees"
 msgstr "Träden är slut"
 
@@ -2014,7 +2016,7 @@ msgstr "smida en stålsköld"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:235
 msgid "forging an advanced shield"
-msgstr "smida en avancerad sköld."
+msgstr "smida en avancerad sköld"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:8
@@ -2097,8 +2099,8 @@ msgstr "Kolgruva"
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:67
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:101
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:74
 msgid "mining coal"
@@ -2110,7 +2112,7 @@ msgstr "bryta kol"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:113
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:92
 msgid "No Coal"
 msgstr "Inget kol"
@@ -2121,7 +2123,7 @@ msgstr "Inget kol"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
 #: ../../../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:114
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
 #: ../../../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:93
 msgid "Main Coal Vein Exhausted"
 msgstr "Kolgruvans huvudsakliga åder är tömd"
@@ -2192,13 +2194,13 @@ msgstr "Båtsnickeri"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
-msgstr "Fiskodling"
+msgstr "Fiskodlarens hus"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:69
 msgid "No Fish"
 msgstr "Ingen fisk"
 
@@ -2206,7 +2208,7 @@ msgstr "Ingen fisk"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:70
 msgid "Out of Fish"
 msgstr "Fisken är slut"
 
@@ -2233,8 +2235,8 @@ msgstr "Fiskestuga"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:80
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:86
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:56
 msgid "fishing"
 msgstr "fiska"
 
@@ -2298,14 +2300,14 @@ msgstr "Jaktstuga"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:42
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:55
 msgid "hunting"
 msgstr "jaga"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:77
 msgid "No Game"
 msgstr "Inget vilt"
 
@@ -2313,7 +2315,7 @@ msgstr "Inget vilt"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:72
 #: ../../../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:79
 msgid "Out of Game"
 msgstr "De vilda djuren är slut"
 
@@ -2343,7 +2345,7 @@ msgstr "Järngruva"
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:84
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:90
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:74
 msgid "mining iron"
@@ -2355,7 +2357,7 @@ msgstr "bryta järnmalm"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:86
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:84
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:98
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "No Iron"
 msgstr "Inget järn"
@@ -2366,7 +2368,7 @@ msgstr "Inget järn"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
 #: ../../../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:93
 msgid "Main Iron Vein Exhausted"
 msgstr "Järngruvans huvudsakliga åder är tömd"
@@ -2404,7 +2406,7 @@ msgstr "Stenbrott"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:53
 msgid "quarrying granite"
 msgstr "bryta granit"
 
@@ -2854,13 +2856,13 @@ msgid "Granite Mine"
 msgstr "Granitgruva"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:116
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:93
 msgid "No Granite"
 msgstr "Ingen granit"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:93
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:117
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
 #: ../../../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:94
 msgid "Main Granite Vein Exhausted"
 msgstr "Granitgruvans huvudsakliga åder är tömd"
@@ -2871,7 +2873,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "Denna granitgruvas huvudsakliga åder är tömd. Förvänta dig starkt minskat utbyte från dina investeringar. Gruvan kan inte byggas ut mer så du borde överväga att demontera eller förstöra den"
+msgstr "Denna granitgruvas huvudsakliga åder är tömd. Förvänta dig starkt minskat utbyte från dina investeringar. Gruvan kan inte byggas ut mer så du borde överväga att demontera eller förstöra den."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
@@ -3021,7 +3023,7 @@ msgstr "Stenbrott"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Stenhuggaren som jobbar i detta stenbrott kan inte hitta några stenar inom sitt arbetsområde"
+msgstr "Stenhuggaren som jobbar i detta stenbrott kan inte hitta några stenar inom sitt arbetsområde."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3037,13 +3039,13 @@ msgstr "Vassfält"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:58
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:71
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:77
 msgid "planting reed"
 msgstr "plantera vass"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:69
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:88
 msgid "harvesting reed"
 msgstr "skörda vass"
 
@@ -3443,7 +3445,7 @@ msgstr "bryta marmor"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Stenhuggaren som jobbar i detta stenbrott kan inte hitta några stenar inom sitt arbetsområde"
+msgstr "Stenhuggaren som jobbar i detta stenbrott kan inte hitta några stenar inom sitt arbetsområde."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3490,7 +3492,7 @@ msgstr "Stenhuggeri"
 #. because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
-msgstr "hugga ut en marmorpelare"
+msgstr "skulpterar en marmorpelare"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/empire/tavern/init.lua:8
@@ -3604,16 +3606,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "Fiskodling"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:108
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:108
 msgid "No Ponds"
 msgstr "Inga dammar"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:109
 msgid "Out of Fish Ponds"
 msgstr "Fiskdammarna är slut"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:104
+#: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:110
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3688,15 +3690,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Bigård"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:69
 msgid "No Flowers"
 msgstr "Inga blommor"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:70
 msgid "Out of Flowers"
 msgstr "Slut på blommor"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
@@ -3711,7 +3713,7 @@ msgid "Berry Farm"
 msgstr "Bärodling"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:56
 msgid "planting bushes"
 msgstr "planterar buskar"
 
@@ -3757,27 +3759,27 @@ msgstr "Kolugn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:73
 msgid "making a charcoal stack"
 msgstr "gör en hög träkol"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:87
 msgid "collecting coal"
 msgstr "samlar kol"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:103
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:109
 msgid "Out of Clay Ponds"
 msgstr "Slut på lergropar"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:104
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:110
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Kolaren som arbetar i denna byggnad kan inte hitta några lergropar inom sitt arbetsområde. Se till att det finns ett aktivt lertag i närheten och att kolarens hus har tillgång till alla nödvändiga varor. I annat fall, överväg att demontera eller förstöra byggnaden. "
+msgstr "Kolaren som arbetar i denna byggnad kan inte hitta några lergropar inom sitt arbetsområde. Se till att det finns ett aktivt lertag i närheten och att kolarens hus har tillgång till alla nödvändiga varor. I annat fall, överväg att demontera eller förstöra byggnaden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3792,20 +3794,20 @@ msgid "Clay Pit"
 msgstr "Lertag"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:61
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:67
 msgid "making clay"
 msgstr "gräver lera"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:86
 msgid "No Ground"
 msgstr "Ingen oanvänd mark"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:81
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:87
 msgid "No Level Ground"
 msgstr "Ingen jämn mark"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:88
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -3819,7 +3821,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Kolgruva"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:116
+#: ../../../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:122
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3847,19 +3849,19 @@ msgid "Fruit Collector’s House"
 msgstr "Fruktplockarbostad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:56
 msgid "gathering berries"
 msgstr "plockar bär"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:69
 msgid "No Bushes"
 msgstr "Inga buskar"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:70
 msgid "Out of Berries"
 msgstr "Slut på bär"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -3873,12 +3875,12 @@ msgid "Diker’s House"
 msgstr "Dikesgrävarbostad"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:70
 msgid "diking"
 msgstr "gräver dike"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:83
 msgid "building a dike"
 msgstr "gräver ett dike"
 
@@ -3922,7 +3924,7 @@ msgctxt "frisians_building"
 msgid "Fisher’s House"
 msgstr "Fiskarstuga"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3947,7 +3949,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr "Guldgruva"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3987,7 +3989,7 @@ msgid "Hunter’s House"
 msgstr "Jaktstuga"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:81
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -4000,7 +4002,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr "Järngruva"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4039,7 +4041,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Stenbrott"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:68
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -4076,7 +4078,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "Vassodling"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:96
+#: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -4090,14 +4092,14 @@ msgid "Reindeer Farm"
 msgstr "Renuppfödningsplats"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:83
 msgctxt "frisians_building"
 msgid "rearing reindeer"
 msgstr "föder upp renar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:89
-#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:101
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:95
+#: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:107
 msgctxt "frisians_building"
 msgid "producing fur"
 msgstr "producerar djurskinn"
@@ -4108,7 +4110,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "Stenblocksgruva"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:119
+#: ../../../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:125
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4221,7 +4223,7 @@ msgctxt "frisians_building"
 msgid "Woodcutter’s House"
 msgstr "Skogshuggarstuga"
 
-#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:68
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -4254,19 +4256,19 @@ msgstr "sova"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:85
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:99
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:113
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 2 till 3"
+msgstr "uppgradera soldats förmåga att parera från nivå 2 till 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:128
@@ -4311,7 +4313,7 @@ msgstr "Ingen soldat att träna!"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:115
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr "Ingen soldat hittades för denna träningsnivå."
+msgstr "Ingen soldat hittades för denna träningsnivå!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
@@ -4375,7 +4377,7 @@ msgstr "Ingen soldat att träna!"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr "Ingen soldat hittades för denna träningsnivå."
+msgstr "Ingen soldat hittades för denna träningsnivå!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4405,13 +4407,13 @@ msgstr "uppgradera soldats hälsonivå från 0 till 1"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
@@ -4423,13 +4425,13 @@ msgstr "Stridsarena"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
@@ -4445,7 +4447,7 @@ msgstr "Ingen soldat att träna!"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr "Ingen soldat hittades för denna träningsnivå."
+msgstr "Ingen soldat hittades för denna träningsnivå!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4512,7 +4514,7 @@ msgstr "Arena"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:53
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 0 till 1"
+msgstr "uppgradera soldats förmåga att parera från nivå 0 till 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
@@ -4529,7 +4531,7 @@ msgstr "Ingen soldat att träna!"
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:195
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr "Ingen soldat hittades för denna träningsnivå."
+msgstr "Ingen soldat hittades för denna träningsnivå!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4541,7 +4543,7 @@ msgstr "Colosseum"
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "uppgradera soldats förmåga att hoppa undan från nivå 1 till 2"
+msgstr "uppgradera soldats förmåga att parera från nivå 1 till 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:8
@@ -4646,7 +4648,7 @@ msgstr "Ingen soldat att träna!"
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:183
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr "Ingen soldat hittades för denna träningsnivå."
+msgstr "Ingen soldat hittades för denna träningsnivå!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -5191,13 +5193,13 @@ msgstr "Inga resurser"
 #: ../../../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Några kvarts"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Mycket kvarts"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5557,7 +5559,7 @@ msgstr "Upptäckare"
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Starta spelet med tre skepp på havet och bara en liten mängd förnödenheter."
+msgstr "Starta spelet med tre skepp på havet och bara en liten mängd förnödenheter"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5612,7 +5614,7 @@ msgstr "Ny värld"
 #: ../../../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr "Starta spelet med sju skepp på havet, fulla av varor."
+msgstr "Starta spelet med sju skepp på havet, fulla av varor"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:11
@@ -5633,7 +5635,7 @@ msgstr "Fattig by"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Starta spelet med bara ett magasin innehållande minsta tänkbara mängd förnödenheter för att få igång en ekonomi. Varning: AI-spelarna klarar inte av att starta härifrån."
+msgstr "Starta spelet med bara en lagerbyggnad innehållande minsta tänkbara mängd förnödenheter för att få igång en ekonomi. Varning: AI-spelarna klarar inte av att starta härifrån."
 
 #: ../../../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -8038,7 +8040,7 @@ msgstr "Amrum"
 #: ../../../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr "Nordstrand"
+msgstr "Alt-Nordstrand"
 
 #. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
@@ -8450,7 +8452,7 @@ msgstr "Smidestång"
 #: ../../../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Eldstenar"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/fish/init.lua:8

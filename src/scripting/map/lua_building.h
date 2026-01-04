@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,7 @@ public:
 	 */
 	int dismantle(lua_State* L);
 	int enhance(lua_State* L);
+	int subscribe_to_muted(lua_State* L);
 
 	/*
 	 * C Methods

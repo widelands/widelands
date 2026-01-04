@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "economy/flag.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
+#include "scripting/lua_root_notifications.h"
 
 namespace LuaMaps {
 
@@ -39,6 +40,7 @@ const char LuaBuilding::className[] = "Building";
 const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    METHOD(LuaBuilding, dismantle),
    METHOD(LuaBuilding, enhance),
+   METHOD(LuaBuilding, subscribe_to_muted),
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
@@ -119,6 +121,25 @@ int LuaBuilding::enhance(lua_State* L) {
 	bld->get_owner()->enhance_building(
 	   bld, enhancement, lua_gettop(L) > 1 && luaL_checkboolean(L, 2));
 	return 0;
+}
+
+/* RST
+   .. method:: subscribe_to_muted()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "muted" signal, which is triggered when the building is muted.
+
+      The signal provides the building as a parameter named ``"object"``.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaBuilding::subscribe_to_muted(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         egbase, LuaRoot::LuaNotifications::create_building_muted(*get(L, egbase))));
+	return 1;
 }
 
 /*
