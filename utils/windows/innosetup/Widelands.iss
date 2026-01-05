@@ -22,7 +22,7 @@
 
 ;Version String
 #define Name "Widelands"
-#define Copyright "Widelands Development Team 2001-2025"
+#define Copyright "Widelands Development Team 2001-2026"
 
 ;General String
 #define Publisher "Widelands Development Team"
