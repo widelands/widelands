@@ -46,7 +46,10 @@ protected:
 	void think() override;
 
 private:
-	FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::MapObject* interface);
+	FleetOptionsWindow(UI::Panel* parent,
+	                   InteractiveBase& ibase,
+	                   Type t,
+	                   Widelands::MapObject* interface);
 
 	void set_target(Widelands::Quantity target);
 	Widelands::Quantity get_current_target() const;

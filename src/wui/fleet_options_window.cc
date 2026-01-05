@@ -54,14 +54,14 @@ static Widelands::OPtr<Widelands::FerryFleet> get_ferry_fleet(Widelands::MapObje
 	NEVER_HERE();
 }
 
-FleetOptionsWindow&
-FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands::MapObject* interface) {
+FleetOptionsWindow& FleetOptionsWindow::create(UI::Panel* parent,
+                                               InteractiveBase& ibase,
+                                               Widelands::MapObject* interface) {
 	MutexLock m(MutexLock::ID::kObjects);
 
-	const Type type = (
-		interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ||
-		interface->descr().type() == Widelands::MapObjectType::PORTDOCK
-		) ?
+	const Type type =
+	   (interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ||
+	    interface->descr().type() == Widelands::MapObjectType::PORTDOCK) ?
 	      Type::kShip :
 	      Type::kFerry;
 
@@ -242,7 +242,9 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 		if (type_ == Type::kShip) {
 			get_ship_fleet(*object)->set_ships_target(ibase_.egbase(), target);
 		} else {
-			get_ferry_fleet(*object).get(ibase_.egbase())->set_idle_ferries_target(ibase_.egbase(), target);
+			get_ferry_fleet(*object)
+			   .get(ibase_.egbase())
+			   ->set_idle_ferries_target(ibase_.egbase(), target);
 		}
 	}
 }

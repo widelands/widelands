@@ -523,8 +523,8 @@ void FieldActionWindow::add_buttons_auto() {
 
 	if (has_ship_fleet || has_ferry_fleet) {
 		if (buildbox == nullptr) {
-			buildbox = new UI::Box(
-			   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
+			buildbox =
+			   new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 		}
 		if (has_ship_fleet) {
 			add_button(
@@ -854,13 +854,16 @@ void FieldActionWindow::act_configure_ship_fleet() {
 
 void FieldActionWindow::act_configure_ferry_fleet() {
 	upcast(InteractivePlayer, ipl, &ibase());
-	if (node_.field->get_immovable() != nullptr && node_.field->get_immovable()->descr().type() == Widelands::MapObjectType::WATERWAY && (ipl == nullptr || node_.field->get_immovable()->owner().player_number() == ipl->player_number())) {
+	if (node_.field->get_immovable() != nullptr &&
+	    node_.field->get_immovable()->descr().type() == Widelands::MapObjectType::WATERWAY &&
+	    (ipl == nullptr ||
+	     node_.field->get_immovable()->owner().player_number() == ipl->player_number())) {
 		FleetOptionsWindow::create(get_parent(), ibase(), node_.field->get_immovable());
 	} else {
 		for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
-			 bob = bob->get_next_bob()) {
+		     bob = bob->get_next_bob()) {
 			if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
-				(ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 				FleetOptionsWindow::create(get_parent(), ibase(), bob);
 				break;
 			}

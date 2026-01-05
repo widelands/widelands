@@ -195,12 +195,12 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 
 	if (wh.get_portdock() != nullptr) {
 		b = new UI::Button(buttons, "configure_ship_fleet", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			               g_image_cache->get("images/wui/fieldaction/menu_tab_ship_targets.png"), _("Configure this ocean’s ship fleet"));
+		                   g_image_cache->get("images/wui/fieldaction/menu_tab_ship_targets.png"),
+		                   _("Configure this ocean’s ship fleet"));
 		buttons->add(b);
 
-		b->sigclicked.connect([this, &ib, &wh, type]() {
-			FleetOptionsWindow::create(&ib, ib, wh.get_portdock());
-		});
+		b->sigclicked.connect(
+		   [this, &ib, &wh, type]() { FleetOptionsWindow::create(&ib, ib, wh.get_portdock()); });
 	}
 
 	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
