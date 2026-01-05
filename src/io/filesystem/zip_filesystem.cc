@@ -44,6 +44,7 @@ ZipFilesystem::ZipFile::~ZipFile() {
 void ZipFilesystem::ZipFile::close() {
 	if (state_ == State::kZipping) {
 		zipClose(write_handle_, nullptr);
+		do_sync_idbfs();
 	} else if (state_ == State::kUnzipping) {
 		unzClose(read_handle_);
 	}
