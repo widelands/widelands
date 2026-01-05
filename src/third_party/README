@@ -4,6 +4,9 @@ with the Widelands source code for transparent compilation.
 Changes
 -------
 
+Eris:
+- Removed luac.c and lua.c. These sources are used only for stand-alone CLI tools, not usable for game functionality.
+
 Tinygettext:
 - Not using the base repository but the fork at `https://github.com/SuperTux/tinygettext`
   (commit 3a90f67ea59e5b792d634ed159526b040b2ce268 2024-02-16 20:24:54 UTC)
