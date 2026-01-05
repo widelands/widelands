@@ -13,7 +13,6 @@ endif()
 
 wl_library(third_party_eris
   THIRD_PARTY
-  C_LIBRARY
   SRCS
     eris/eris.c
     eris/eris.h
@@ -78,6 +77,13 @@ wl_library(third_party_eris
     eris/lvm.h
     eris/lzio.c
     eris/lzio.h
+)
+file(GLOB ERIS_SRC eris/*.c)
+file(GLOB ERIS_H eris/*.h)
+set_source_files_properties(${ERIS_SRC} PROPERTIES LANGUAGE CXX)
+set_source_files_properties(${ERIS_SRC} ${ERIS_H}
+  DIRECTORY . ..
+  PROPERTIES COMPILE_OPTIONS -Wno-old-style-cast
 )
 
 wl_library(third_party_libmd
