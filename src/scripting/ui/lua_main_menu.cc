@@ -93,7 +93,7 @@ int LuaMainMenu::set_keyboard_shortcut(lua_State* L) {
       after having been previously pressed.
       This replaces any existing action associated with releasing the shortcut.
 
-      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+      You don't need this in normal cases. When in doubt, use only :meth:`set_keyboard_shortcut`.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`

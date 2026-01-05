@@ -216,6 +216,10 @@ int LuaMapView::get_is_animating(lua_State* L) {
       When this property is set to :const:`true`, clicking on a field only moves the node selector
       but takes no further action. The ``field_clicked`` signal is still triggered.
 
+      The block affects all click actions, regardless of whether they have been triggered by
+      the user physically pressing the mouse button or programatically via the UI scripting API
+      using :meth:`click` or similar functions.
+
       This can be used in scripts to create custom tools with click actions.
 
       :see also: :meth:`set_user_input_allowed`
@@ -516,7 +520,7 @@ int LuaMapView::set_keyboard_shortcut(lua_State* L) {
       after having been previously pressed.
       This replaces any existing action associated with releasing the shortcut.
 
-      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+      You don't need this in normal cases. When in doubt, use only :meth:`set_keyboard_shortcut`.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
