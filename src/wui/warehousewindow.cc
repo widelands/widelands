@@ -200,7 +200,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		buttons->add(b);
 
 		b->sigclicked.connect(
-		   [this, &ib, &wh, type]() { FleetOptionsWindow::create(&ib, ib, wh.get_portdock()); });
+		   [&ib, &wh]() { FleetOptionsWindow::create(&ib, ib, wh.get_portdock()); });
 	}
 
 	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
