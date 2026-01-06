@@ -39,12 +39,9 @@ MainMenu
 */
 const char LuaMainMenu::className[] = "MainMenu";
 const MethodType<LuaMainMenu> LuaMainMenu::Methods[] = {
-   METHOD(LuaMainMenu, set_keyboard_shortcut),
-   METHOD(LuaMainMenu, set_keyboard_shortcut_release),
-   METHOD(LuaMainMenu, add_plugin_timer),
-   METHOD(LuaMainMenu, get_plugin_timer),
-   METHOD(LuaMainMenu, remove_plugin_timer),
-   {nullptr, nullptr},
+   METHOD(LuaMainMenu, set_keyboard_shortcut), METHOD(LuaMainMenu, set_keyboard_shortcut_release),
+   METHOD(LuaMainMenu, add_plugin_timer),      METHOD(LuaMainMenu, get_plugin_timer),
+   METHOD(LuaMainMenu, remove_plugin_timer),   {nullptr, nullptr},
 };
 const PropertyType<LuaMainMenu> LuaMainMenu::Properties[] = {
    PROP_RO(LuaMainMenu, plugin_timers),
@@ -235,7 +232,8 @@ int LuaMainMenu::add_plugin_timer(lua_State* L) {
 		report_error(L, "Timer interval must be non-zero");
 	}
 
-	PluginActions::Timer& timer = get()->add_plugin_timer(name, action, interval, count, true, failsafe);
+	PluginActions::Timer& timer =
+	   get()->add_plugin_timer(name, action, interval, count, true, failsafe);
 	to_lua<LuaTimer>(L, new LuaTimer(&timer));
 	return 1;
 }

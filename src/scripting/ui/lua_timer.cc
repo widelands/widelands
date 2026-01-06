@@ -45,14 +45,9 @@ const MethodType<LuaTimer> LuaTimer::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaTimer> LuaTimer::Properties[] = {
-   PROP_RW(LuaTimer, active),
-   PROP_RW(LuaTimer, failsafe),
-   PROP_RW(LuaTimer, remaining_count),
-   PROP_RW(LuaTimer, name),
-   PROP_RW(LuaTimer, action),
-   PROP_RW(LuaTimer, interval),
-   PROP_RW(LuaTimer, next_run),
-   {nullptr, nullptr, nullptr},
+   PROP_RW(LuaTimer, active),   PROP_RW(LuaTimer, failsafe), PROP_RW(LuaTimer, remaining_count),
+   PROP_RW(LuaTimer, name),     PROP_RW(LuaTimer, action),   PROP_RW(LuaTimer, interval),
+   PROP_RW(LuaTimer, next_run), {nullptr, nullptr, nullptr},
 };
 
 /*

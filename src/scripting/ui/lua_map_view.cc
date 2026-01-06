@@ -562,7 +562,8 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
 		report_error(L, "Timer interval must be non-zero");
 	}
 
-	PluginActions::Timer& timer = get_egbase(L).get_ibase()->add_plugin_timer(name, action, interval, count, true, failsafe);
+	PluginActions::Timer& timer =
+	   get_egbase(L).get_ibase()->add_plugin_timer(name, action, interval, count, true, failsafe);
 	to_lua<LuaTimer>(L, new LuaTimer(&timer));
 	return 1;
 }
@@ -585,7 +586,8 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
       :see also: :meth:`remove_plugin_timer`
 */
 int LuaMapView::get_plugin_timer(lua_State* L) {
-	PluginActions::Timer* timer = get_egbase(L).get_ibase()->get_plugin_actions().get_timer(luaL_checkstring(L, 2));
+	PluginActions::Timer* timer =
+	   get_egbase(L).get_ibase()->get_plugin_actions().get_timer(luaL_checkstring(L, 2));
 	if (timer != nullptr) {
 		to_lua<LuaTimer>(L, new LuaTimer(timer));
 	} else {

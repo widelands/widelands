@@ -74,11 +74,11 @@ public:
 	void think();
 
 	Timer& add_plugin_timer(const std::string& name,
-	                      const std::string& action,
-	                      uint32_t interval,
-	                      uint32_t count,
-	                      bool active,
-	                      bool failsafe) {
+	                        const std::string& action,
+	                        uint32_t interval,
+	                        uint32_t count,
+	                        bool active,
+	                        bool failsafe) {
 		timers_.emplace_back(new Timer(name, action, interval, count, active, failsafe));
 		return *timers_.back();
 	}
