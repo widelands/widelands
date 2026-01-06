@@ -259,8 +259,16 @@ public:
 	                        const std::string& label,
 	                        const std::string& tt,
 	                        const std::string& hotkey);
-	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
-		plugin_actions_.add_plugin_timer(action, interval, failsafe);
+	PluginActions::Timer& add_plugin_timer(const std::string& name,
+	                      const std::string& action,
+	                      uint32_t interval,
+	                      uint32_t count,
+	                      bool active,
+	                      bool failsafe) {
+		return plugin_actions_.add_plugin_timer(name, action, interval, count, active, failsafe);
+	}
+	PluginActions& get_plugin_actions() {
+		return plugin_actions_;
 	}
 
 	void

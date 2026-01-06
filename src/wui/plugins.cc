@@ -47,27 +47,27 @@ bool PluginActions::plugin_action(const std::string& action, bool failsafe) {
 }
 
 PluginActions::Timer* PluginActions::get_timer(const std::string& name) {
-	for (Timer& timer : timers_) {
-		if (timer.name == name) {
-			return &timer;
+	for (auto& timer : timers_) {
+		if (timer->name == name) {
+			return timer.get();
 		}
 	}
 	return nullptr;
 }
 
 const PluginActions::Timer* PluginActions::get_timer(const std::string& name) const {
-	for (const Timer& timer : timers_) {
-		if (timer.name == name) {
-			return &timer;
+	for (const auto& timer : timers_) {
+		if (timer->name == name) {
+			return timer.get();
 		}
 	}
 	return nullptr;
 }
 
-uint32_t PluginActions::remove_timer(const std::string& name, bool all) {
+uint32_t PluginActions::remove_timer(const std::optional<std::string> name, bool all) {
 	uint32_t erased = 0;
 	for (auto timer = timers_.begin(); timer != timers_.end();) {
-		if (timer->name == name) {
+		if (!name.has_value() || (*timer)->name == *name) {
 			timer = timers_.erase(timer);
 			++erased;
 			if (!all) {
@@ -82,26 +82,27 @@ uint32_t PluginActions::remove_timer(const std::string& name, bool all) {
 
 void PluginActions::think() {
 	const uint32_t curtime = SDL_GetTicks();
-	for (auto timer = timers_.begin(); timer != timers_.end();) {
-		if (curtime >= timer->next_run) {
-			timer->next_run = curtime + timer->interval;
-			if (timer->active) {
-				if (!plugin_action(timer->action, timer->failsafe)) {
+	for (auto it = timers_.begin(); it != timers_.end();) {
+		Timer& timer = **it;
+		if (curtime >= timer.next_run) {
+			timer.next_run = curtime + timer.interval;
+			if (timer.active) {
+				if (!plugin_action(timer.action, timer.failsafe)) {
 					// In case of an error, remove it from the queue
 					log_err("Unregistering defective plugin timer");
-					timer = timers_.erase(timer);
+					it = timers_.erase(it);
 					continue;
 				}
 
-				if (timer->remaining_count != 0) {
-					--timer->remaining_count;
-					if (timer->remaining_count == 0) {
-						timer->active = false;
+				if (timer.remaining_count != 0) {
+					--timer.remaining_count;
+					if (timer.remaining_count == 0) {
+						timer.active = false;
 					}
 				}
 			}
 		}
-		++timer;
+		++it;
 	}
 }
 

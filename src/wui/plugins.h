@@ -22,6 +22,8 @@
 #include <cstdint>
 #include <functional>
 #include <map>
+#include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -71,16 +73,14 @@ public:
 
 	void think();
 
-	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
-		timers_.emplace_back(std::string(), action, interval, 0, true, failsafe);
-	}
-	void add_plugin_timer(const std::string& name,
+	Timer& add_plugin_timer(const std::string& name,
 	                      const std::string& action,
 	                      uint32_t interval,
 	                      uint32_t count,
 	                      bool active,
 	                      bool failsafe) {
-		timers_.emplace_back(name, action, interval, count, active, failsafe);
+		timers_.emplace_back(new Timer(name, action, interval, count, active, failsafe));
+		return *timers_.back();
 	}
 
 	[[nodiscard]] Timer* get_timer(const std::string& name);
@@ -88,8 +88,11 @@ public:
 	[[nodiscard]] size_t count_timers() const {
 		return timers_.size();
 	}
+	[[nodiscard]] std::vector<std::unique_ptr<Timer>>& all_timers() {
+		return timers_;
+	}
 
-	uint32_t remove_timer(const std::string& name, bool all);
+	uint32_t remove_timer(std::optional<std::string> name, bool all);
 
 	bool check_keyboard_shortcut_action(SDL_Keysym code, bool down);
 
@@ -105,7 +108,7 @@ private:
 	UI::Panel* root_panel_;
 	RunLuaCommandFn lua_;
 
-	std::vector<Timer> timers_;
+	std::vector<std::unique_ptr<Timer>> timers_;
 
 	std::map<std::pair<KeyboardShortcut, bool /*down*/>, CustomKeyboardShortcut> keyboard_shortcuts_;
 };
