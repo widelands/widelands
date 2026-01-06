@@ -36,20 +36,6 @@ endforeach()
 #include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-# This policy is not known to versions prior 3.27 and would result in errors,
-# if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.27 or newer  by using:
-# cmake_policy(VERSION 3.27)
-if(POLICY CMP0148)
-  cmake_policy(SET CMP0148 NEW)
-endif(POLICY CMP0148)
-if(POLICY CMP0153)
-  cmake_policy(SET CMP0153 NEW)
-endif(POLICY CMP0153)
-if(POLICY CMP0177)  # Added in CMake 3.31
-  cmake_policy(SET CMP0177 NEW)
-endif(POLICY CMP0177)
-
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
   message(STATUS "Building with XDG support")
