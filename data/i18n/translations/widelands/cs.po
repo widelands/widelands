@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
@@ -11,15 +11,15 @@
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# Ondřej Itřech, 2020-2021,2024-2025
+# Ondřej Itřech, 2020-2021,2024-2026
 # Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Ondřej Itřech, 2020-2021,2024-2025\n"
+"Last-Translator: Ondřej Itřech, 2020-2021,2024-2026\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8604,13 +8604,13 @@ msgstr "Oddálit"
 #: ../../../../src/wlapplication_options.cc:426
 #: ../../../../src/wui/interactive_base.cc:349
 msgid "Maximum Zoom"
-msgstr ""
+msgstr "Maximální přiblížení"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/wlapplication_options.cc:431
 #: ../../../../src/wui/interactive_base.cc:354
 msgid "Minimum Zoom"
-msgstr ""
+msgstr "Maximální oddálení"
 
 #: ../../../../src/wlapplication_options.cc:436
 msgid "Reset Zoom"

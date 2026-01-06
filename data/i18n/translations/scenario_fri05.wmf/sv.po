@@ -483,8 +483,9 @@ msgstr ""
 " att göra denna vidsträckta platå nästan omöjlig att erövra. Även om fienden"
 " skulle lyckas ta hela den nedre delen av ön, skulle vi kunna hålla ut där i"
 " flera år, förutsatt att vi i förväg lagrar tillräckligt med förnödenheter i"
-" magasinen på Uplands. Naturligtvis skulle vi vara avskurna från hamnarna "
-"och handelsvägarna, så vi bör försöka undvika att hamna i den situationen."
+" lagerbyggnaderna på Uplands. Naturligtvis skulle vi vara avskurna från "
+"hamnarna och handelsvägarna, så vi bör försöka undvika att hamna i den "
+"situationen."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
@@ -678,8 +679,8 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
-"Våra skogsvaktare och skogsarbetare har påbörjat sitt arbete. Det kommer att"
-" ta lite tid innan vi har en stabil tillgång på timmer, men det akuta "
+"Våra skogsvaktare och skogshuggare har påbörjat sitt arbete. Det kommer att "
+"ta lite tid innan vi har en stabil tillgång på timmer, men det akuta "
 "problemet har avvärjts."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
