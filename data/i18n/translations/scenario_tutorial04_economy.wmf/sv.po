@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2017,2026
 # GunChleoc, 2018
 # GunChleoc, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-02 03:03+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: GunChleoc, 2018\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -293,7 +293,7 @@ msgstr "Ta en titt på de två första flikarna i lagerfönstret. De visar alla 
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr "När du har sett tillräckligt, växla tillbaka till den tredje fliken (”Varor i lager”)."
+msgstr "När du har sett tillräckligt, växla tillbaka till den tredje fliken (”Varor i lagerbyggnader”)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -319,7 +319,7 @@ msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "Den tredje fliken visar dig varorna som finns lagrade i ditt högkvarter, dina magasin och dina hamnar. De är inte efterfrågade någonstans och finns därför i ditt lager."
+msgstr "Den tredje fliken visar dig varorna som finns lagrade i ditt högkvarter, dina lagerbyggnader och dina hamnar. De är inte efterfrågade någonstans och finns därför i ditt lager."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
@@ -761,7 +761,7 @@ msgstr "Öppna 'Ställ in ekonomi' fönstret."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr "Fönstret kan öppnas genom att klicka på valfri flagga som du äger eller från lagerfönstren."
+msgstr "Fönstret kan öppnas genom att klicka på valfri flagga som du äger eller från lagerbyggnadsfönstren."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -775,7 +775,7 @@ msgstr "Ekonomiinställningar"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr "Jag har visat dig vårt lagerfönster, där du kan se vilka varor som finns i lagren. Minns du det?"
+msgstr "Jag har visat dig vårt lagerfönster, där du kan se vilka varor som finns i lagerbyggnaderna. Minns du det?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
@@ -790,7 +790,7 @@ msgstr "Detta är ikonen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr "Samma knapp finns även i lagerfönstren."
+msgstr "Samma knapp finns även i lagerbyggnadsfönstren."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -818,7 +818,7 @@ msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr "De flesta byggnader producerar bara någonting när lagernivån i dina lager understiger målnivån. Därför behöver du ange hur många du vill lagra i reserv."
+msgstr "De flesta byggnader producerar bara någonting när lagernivån i dina lagerbyggnader understiger målnivån. Därför behöver du ange hur många du vill lagra i reserv."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -845,7 +845,7 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr "Att lagra varor är ett tveeggat svärd. Å ena sidan är varor i lager användbara för att dämpa tillfälliga fluktuationer i ekonomin, som tenderar att uppstå hela tiden. Å andra sidan är alla varor som ligger i ett lager istället för att bearbetas till något annat slöseri. Att hitta balansen mellan slösaktig lagring och just-in-time-produktion i dina leveranskedjor är en av de största utmaningarna när det gäller att perfekta din ekonomi. Om du är osäker, luta dig mot att ha några extra reserver."
+msgstr "Att lagra varor är ett tveeggat svärd. Å ena sidan är varor i lager användbara för att dämpa tillfälliga fluktuationer i ekonomin, som tenderar att uppstå hela tiden. Å andra sidan är alla varor som ligger i en lagerbyggnad istället för att bearbetas till något annat slöseri. Att hitta balansen mellan slösaktig lagring och just-in-time-produktion i dina leveranskedjor är en av de största utmaningarna när det gäller att perfekta din ekonomi. Om du är osäker, luta dig mot att ha några extra reserver."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
@@ -875,7 +875,7 @@ msgstr "Samma knapp finns också i byggfönstret för produktionsanläggningar. 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
-msgstr "Producera 20 marmorkolonner"
+msgstr "Producera 20 marmorpelare"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
@@ -925,12 +925,12 @@ msgstr "Låt oss nu testa detta: Nuvarande målnivå för marmorpelare är 10. �
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
-msgstr "Leverera 20 marmorkolonner till frontlinjen"
+msgstr "Leverera 20 marmorpelare till frontlinjen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr "Leverera alla 20 marmorkolonner till lagret nära frontlinjen."
+msgstr "Leverera alla 20 marmorpelare till magasinet nära frontlinjen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
@@ -947,7 +947,7 @@ msgstr "Bär sedan ut marmorpelarna från ditt högkvarter. För att göra det m
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
-msgstr "Lagerinställningar"
+msgstr "Inställningar för lagerbyggnad"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
@@ -964,14 +964,14 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "Normalt fraktas producerade varor till det närmaste lagret, om de inte behövs på någon annan plats. I detta fall blir det högkvarteret, men vi skulle vilja ha dem i magasinet nära vår fästning."
+msgstr "Normalt fraktas producerade varor till den närmaste lagerbyggnaden, om de inte behövs på någon annan plats. I detta fall blir det högkvarteret, men vi skulle vilja ha dem i magasinet nära vår fästning."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr "Varje lagringsplats har fyra knappar för att ställa in hur vi vill att de agerar. Om du flyttar din muspekare över dem kommer du att se information om vad knapparna gör."
+msgstr "Varje lagerbyggnad har fyra knappar för att ställa in hur vi vill att de agerar. Om du flyttar din muspekare över dem kommer du att se information om vad knapparna gör."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:565
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:575
@@ -991,7 +991,7 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr "Utmärkt. Vi har nu tillräckligt med marmorkolonner för att kunna bygga upp våra befästningar i händelse av ett angrepp. Det visar sig dock att det faktiskt finns en stam friser som bor i denna ödemark, och de är fredliga. De har bett om att få handla med oss."
+msgstr "Utmärkt. Vi har nu tillräckligt med marmorpelare för att kunna bygga upp våra befästningar i händelse av ett angrepp. Det visar sig dock att det faktiskt finns en stam friser som bor i denna ödemark, och de är fredliga. De har bett om att få handla med oss."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""

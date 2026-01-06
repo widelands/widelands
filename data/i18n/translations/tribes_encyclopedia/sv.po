@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2017,2021,2023
+# D M <kamera001dm@gmail.com>, 2017,2021,2023,2026
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2018
 # GunChleoc, 2016,2018
 # GunChleoc, 2014,2016,2018
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2005,2025\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,7 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr "Amazonernas skogsarbetare fäller träd och djungelbevarare planterar nya. De resulterande stockarna används av stenhuggaren. Kolugnen behöver också stockar för att producera kol."
+msgstr "Amazonernas skogshuggare fäller träd och djungelbevarare planterar nya. De resulterande stockarna används av stenhuggaren. Kolugnen behöver också stockar för att producera kol."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -590,7 +590,7 @@ msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
 "feet. They are produced by the dressmaker and used to train soldiers’ evade "
 "from level 0 to level 1."
-msgstr "Robusta stövlar är utmärkt fotbeklädnad för soldater som vill vara snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas undvikande från nivå 0 till nivå 1."
+msgstr "Robusta stövlar är utmärkt fotbeklädnad för soldater som vill vara snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas förmåga att parera från nivå 0 till nivå 1."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Swift Boots
 #: ../../../../data/tribes/initialization/amazons/units.lua:548
@@ -599,7 +599,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr "Swift boots är lätta och slitstarka skor som gör soldaterna snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas undvikande från nivå 1 till nivå 2."
+msgstr "Swift boots är lätta och slitstarka skor som gör soldaterna snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas förmåga att parera från nivå 1 till nivå 2."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Hero Boots
 #: ../../../../data/tribes/initialization/amazons/units.lua:559
@@ -607,7 +607,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Hero boots! The only suitable footwear for a real hero. They are produced by"
 " the dressmaker and used to train soldiers’ evade from level 2 to level 3."
-msgstr "Hjältestövlar! Det enda lämpliga skodonet för en riktig hjälte. De tillverkas av sömmerskan och används för att träna soldaternas undvikande från nivå 2 till nivå 3."
+msgstr "Hjältestövlar! Det enda lämpliga skodonet för en riktig hjälte. De tillverkas av sömmerskan och används för att träna soldaternas förmåga att parera från nivå 2 till nivå 3."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Carrier
 #: ../../../../data/tribes/initialization/amazons/units.lua:576
@@ -683,7 +683,7 @@ msgstr "Arbetar på byggarbetsplatser för att uppföra nya byggnader."
 #: ../../../../data/tribes/initialization/amazons/units.lua:658
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbetar på varvet och bygger nya fartyg."
+msgstr "Arbetar på skeppsvarvet och bygger nya fartyg."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Hunter-Gatherer
 #: ../../../../data/tribes/initialization/amazons/units.lua:668
@@ -841,7 +841,7 @@ msgstr "Detta balsaträd är fullvuxet. Lianer kan samlas in från det."
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Detta balsaträd är redo att skördas av en mästerskurare. Andra stammar kan skörda det för vanliga stockar."
+msgstr "Detta balsaträd är redo att skördas av en mästerskogshuggare. Andra stammar kan skörda det för vanliga stockar."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:914
@@ -875,7 +875,7 @@ msgstr "Detta järnträd är fullvuxet. Lianer kan samlas in från det."
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Detta järnträd är redo att skördas av en mästerskurare. Andra stammar kan skörda det för vanliga stockar."
+msgstr "Detta järnträd är redo att skördas av en mästerskogshuggare. Andra stammar kan skörda det för vanliga stockar."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:1026
@@ -909,7 +909,7 @@ msgstr "Detta gummiträd är fullvuxet. Lianer kan samlas in från det."
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Detta gummiträd är redo att skördas av en mästerskurare. Andra stammar kan skörda det för vanliga stockar."
+msgstr "Detta gummiträd är redo att skördas av en mästerskogshuggare. Andra stammar kan skörda det för vanliga stockar."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
@@ -1201,7 +1201,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr "Denna byggnad kan producera en stock mellan %1$s och %2$s (med mästerskurare mellan %3$s och %4$s), beroende på hur långt skäraren måste gå."
+msgstr "Denna byggnad kan producera en stock mellan %1$s och %2$s (med mästerskogshuggare mellan %3$s och %4$s), beroende på hur långt skogshuggaren måste gå."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1822,7 +1822,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
 "necessary equipment and armor parts."
-msgstr "Tränar soldater i undvikande, försvar och hälsa. Utrustar soldaterna med all nödvändig utrustning och rustningsdelar."
+msgstr "Tränar soldater i parering, försvar och hälsa. Utrustar soldaterna med all nödvändig utrustning och rustningsdelar."
 
 #. TRANSLATORS: Performance helptext for an Amazon training site: Training
 #. Glade, part 1
@@ -1833,7 +1833,7 @@ msgid ""
 "soldier to the first level in evade or health, or both defense levels in "
 "%1$s on average. The rest of evade and health levels are trained in %2$s "
 "each."
-msgstr "Om alla nödvändiga varor levereras i tid kan en träningsglänta i genomsnitt träna en soldat till första nivån i undvikande eller hälsa, eller båda försvarsnivåerna i %1$s. Resten av undvikande- och hälsonivåerna tränas i %2$s vardera."
+msgstr "Om alla nödvändiga varor levereras i tid kan en träningsglänta i genomsnitt träna en soldat till första nivån i parering eller hälsa, eller båda försvarsnivåerna i %1$s. Resten av parering- och hälsonivåerna tränas i %2$s vardera."
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Treetop Sentry
@@ -3341,7 +3341,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "shipyard. Also some higher developed buildings need spidercloth for their "
 "construction."
-msgstr "Spindelväv tillverkas av spindeltråd i en vävfabrik. Den används i varvet. Även vissa mer avancerade byggnader behöver spindelväv för sin konstruktion."
+msgstr "Spindelväv tillverkas av spindeltråd i en vävfabrik. Den används i skeppsvarvet. Även vissa mer avancerade byggnader behöver spindelväv för sin konstruktion."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fish
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:490
@@ -3894,7 +3894,7 @@ msgstr "Bakar bröd till arbetarna."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1052
 msgctxt "atlanteans_worker"
 msgid "Discovers resources for mining."
-msgstr "Letar efter förutsättningar för gruvdrift."
+msgstr "Upptäck resurser för gruvdrift."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Miner
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1059
@@ -4202,7 +4202,7 @@ msgstr "Du kanske tycker att det är tråkigt att lagra, räkna och hämta alla 
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1452
 msgctxt "atlanteans_building"
 msgid "Head of the warehouse"
-msgstr "Lagerchef"
+msgstr "Chef för magasinet"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1460
@@ -4393,7 +4393,7 @@ msgstr "”Först när det sista trädet har fällts<br>Först när den sista sk
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1531
 msgctxt "atlanteans_building"
 msgid "Prophecy of the foresters’ guild"
-msgstr "Skogsvaktarnas gilles profetia"
+msgstr "Profetian för skogsvaktarnas skrå"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Forester's House, part 1
@@ -4449,7 +4449,7 @@ msgstr "Ta ditt nät och kom till havet<br>Tidigt på morgonen kan du fortfarand
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1559
 msgctxt "atlanteans_building"
 msgid "A song from the fishers’ guild"
-msgstr "En sång från fiskargillet"
+msgstr "En sång från fiskarnas skrå"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Fisher's House, part 1
@@ -4813,7 +4813,7 @@ msgstr "Du kan inte jämföra vårt bröd med något från de andra stammarna. D
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1723
 msgctxt "atlanteans_building"
 msgid "Head of the bakers’ guild"
-msgstr "Ordförande för bagargillet"
+msgstr "Ordförande för bagarskået"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Bakery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1725
@@ -5128,7 +5128,7 @@ msgstr "Hemligheten bakom atlantidernas hälsa och styrka ligger gömd i dessa r
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1852
 msgctxt "atlanteans_building"
 msgid "Blackroot farmer asked by a foreigner"
-msgstr "Blackroot-bonde tillfrågad av en utlänning"
+msgstr "Svartrotsbonde tillfrågad av en utlänning"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 1
@@ -5137,7 +5137,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr "Blackroot-bonden sår och skördar ett knippe blackroot mellan %1$s och %2$s, beroende på hur långt han måste gå."
+msgstr "Svartrotsbonden sår och skördar ett knippe svartrot mellan %1$s och %2$s, beroende på hur långt han måste gå."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5147,7 +5147,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr "Blackroot Farm behöver minst %s för att kunna arbeta med full produktivitet under större delen av tiden."
+msgstr "Svartrotsgården behöver minst %s för att kunna arbeta med full produktivitet under större delen av tiden."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1865
@@ -5435,7 +5435,7 @@ msgstr "En soldats fullständiga utbildning tar i genomsnitt %s."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1983
 msgctxt "atlanteans_building"
 msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
-msgstr "Tränar soldaterna i 'Försvar', 'Hoppa undan' och 'Hälsa'."
+msgstr "Tränar soldaterna i 'Försvar', 'Parering' och 'Hälsa'."
 
 #. TRANSLATORS: Lore helptext for an Atlantean training site: Labyrinth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1988
@@ -5459,7 +5459,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, a labyrinth can train one soldier"
 " one level in defense, evade or health in %s on average."
-msgstr "Om alla nödvändiga varor levereras i tid kan en labyrint i genomsnitt träna en soldat en nivå i försvar, undvikande eller hälsa i %s."
+msgstr "Om alla nödvändiga varor levereras i tid kan en labyrint i genomsnitt träna en soldat en nivå i försvar, parering eller hälsa i %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhall
@@ -5580,7 +5580,7 @@ msgstr "Ibland måste även vi atlanter använda råstyrka, men vi använder den
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2084
 msgctxt "atlanteans_building"
 msgid "‘Wisdom of the Fight’ by the warriors’ guild"
-msgstr "\"Kampens visdom\" av krigargillet"
+msgstr "\"Kampens visdom\" av krigarnas skrå"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
@@ -6315,7 +6315,7 @@ msgid ""
 "that the whole power of the Barbarians lies in this ale. It helps to train "
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
-msgstr "Bara denna öl är bra nog för soldaterna i stridsarenan. Vissa säger att hela kraften hos barbarerna ligger i deras öl. Den hjälper till att träna upp soldaternas förmåga att hoppa undan från nivå 0 till 1 och sedan upp till 2. Starköl används också till måltider tillagade i stora värdshus."
+msgstr "Bara denna öl är bra nog för soldaterna i stridsarenan. Vissa säger att hela kraften hos barbarerna ligger i deras öl. Den hjälper till att träna upp soldaternas förmåga att parera från nivå 0 till 1 och sedan upp till 2. Starköl används också till måltider tillagade i stora värdshus."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Ration, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Ration, part 1
@@ -6715,7 +6715,7 @@ msgstr "Tillreder mat åt gruvarbetarna."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:697
 msgctxt "barbarians_worker"
 msgid "Discovers resources for mining."
-msgstr "Letar efter förutsättningar för gruvdrift."
+msgstr "Upptäck resurser för gruvdrift."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Miner
 #. TRANSLATORS: Helptext for a Barbarian worker: Chief Miner
@@ -6858,7 +6858,7 @@ msgstr "Högkvarteret är din huvudbyggnad."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1106
 msgctxt "barbarians_building"
 msgid "‘Who still owns a warehouse is not yet defeated!’"
-msgstr "\"Den som fortfarande äger ett lager är ännu inte besegrad!\""
+msgstr "\"Den som fortfarande äger ett magasin är ännu inte besegrad!\""
 
 #. TRANSLATORS: Lore author helptext for a Barbarian warehouse: Warehouse
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1108
@@ -7283,7 +7283,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr "Vassgården behöver minst %s för att kunna arbeta med full produktivitet under större delen av tiden."
+msgstr "Vassodlingen behöver minst %s för att kunna arbeta med full produktivitet under större delen av tiden."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1328
@@ -7754,7 +7754,7 @@ msgstr "”Se åkrarna som sträcker sig från här till horisonten. De är ett 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1542
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
-msgstr "Rad ur skördesången ”The Wealth of the Fields” (Fältens rikedom)"
+msgstr "Rad ur skördesången ”The Wealth of the Fields”"
 
 #. TRANSLATORS: Purpose helptext for production site: Farm
 #. TRANSLATORS: Purpose helptext for an Empire production site: Farm
@@ -7999,7 +7999,7 @@ msgstr "Påstås komma från Neidhardt, den kända tränaren."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1723
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Evade’."
-msgstr "Tränar soldaterna i att 'Hoppa undan'."
+msgstr "Tränar soldaterna i att 'Parera'."
 
 #. TRANSLATORS: Purpose helptext for a Barbarian training site: Battle Arena,
 #. part 2
@@ -8008,7 +8008,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "'Hoppa undan' ökar soldatens chans att inte träffas av fienden och därmed kunna fortsätta helt opåverkad."
+msgstr "'Parera' ökar soldatens chans att inte träffas av fienden och därmed kunna fortsätta helt opåverkad."
 
 #. TRANSLATORS: Note helptext for a Barbarian training site: Battle Arena
 #. TRANSLATORS: Note helptext for a Barbarian building: Training Camp
@@ -8028,7 +8028,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train one "
 "soldier one level in evade in %s on average."
-msgstr "Om alla nödvändiga varor levereras i tid kan en stridsarena i genomsnitt träna en soldat en nivå i undvikande i %s."
+msgstr "Om alla nödvändiga varor levereras i tid kan en stridsarena i genomsnitt träna en soldat en nivå i parering i %s."
 
 #. TRANSLATORS: Performance helptext for a Barbarian training site: Battle
 #. Arena, part 2
@@ -10902,7 +10902,7 @@ msgstr "Tillreder mat åt gruvarbetare."
 #: ../../../../data/tribes/initialization/empire/units.lua:765
 msgctxt "empire_worker"
 msgid "Discovers resources for mining."
-msgstr "Letar efter förutsättningar för gruvdrift."
+msgstr "Upptäck resurser för gruvdrift."
 
 #. TRANSLATORS: Helptext for an Empire worker: Miner
 #. TRANSLATORS: Helptext for an Empire worker: Master Miner
@@ -11092,7 +11092,7 @@ msgstr "Den som ger snabbt, ger dubbelt, den som ger sent, ger ingenting."
 #: ../../../../data/tribes/initialization/empire/units.lua:1199
 msgctxt "empire_building"
 msgid "Proverb written over the doors of a warehouse"
-msgstr "Ordspråk skrivet över dörrarna till ett lager"
+msgstr "Ordspråk skrivet över dörrarna till ett magasin"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../../../data/tribes/initialization/empire/units.lua:1201
@@ -11341,7 +11341,7 @@ msgstr "Fisken ruttnar först från huvudet."
 #: ../../../../data/tribes/initialization/empire/units.lua:1348
 msgctxt "empire_building"
 msgid "A fisherman criticising the Grand Master of the Fishermans’ Guild"
-msgstr "En fiskare som kritiserar fiskargillets stormästare"
+msgstr "En fiskare som kritiserar stormästaren för fiskarnas skrå"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Fisher's House
 #: ../../../../data/tribes/initialization/empire/units.lua:1350
@@ -11506,7 +11506,7 @@ msgstr "Sinnet flyttar stenblock."
 #: ../../../../data/tribes/initialization/empire/units.lua:1459
 msgctxt "empire_building"
 msgid "Motto of the Stonemasons’ Guild"
-msgstr "Stenhuggargillets motto"
+msgstr "Mottot för stenhuggarnas skrå"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Stonemason's
 #. House
@@ -11522,7 +11522,7 @@ msgstr "Hugger ut marmorpelare ur marmorblock."
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr "Stenhuggarens hus behöver i genomsnitt %s för att producera en marmorkolonn."
+msgstr "Stenhuggarens hus behöver i genomsnitt %s för att producera en marmorpelare."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11543,7 +11543,7 @@ msgstr "Sågen gör ingenting om den inte drivs av konst."
 #: ../../../../data/tribes/initialization/empire/units.lua:1480
 msgctxt "empire_building"
 msgid "Motto of the Carpenters’ Guild"
-msgstr "Timmermansgillets motto"
+msgstr "Mottot för timmermännens skrå"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Sawmill
 #: ../../../../data/tribes/initialization/empire/units.lua:1484
@@ -12464,7 +12464,7 @@ msgstr "Imperiets historia, del X – nedgången"
 #: ../../../../data/tribes/initialization/empire/units.lua:2124
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Evade’."
-msgstr "Tränar soldaterna i att 'Hoppa undan'."
+msgstr "Tränar soldaterna i att 'Parera'."
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Arena, part 2
 #. TRANSLATORS: Purpose helptext for an Empire training site: Colosseum, part
@@ -12475,7 +12475,7 @@ msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
-msgstr "'Hoppa undan' ökar soldatens chans att inte träffas av fienden och därmed kunna fortsätta helt opåverkad."
+msgstr "'Parera' ökar soldatens chans att inte träffas av fienden och därmed kunna fortsätta helt opåverkad."
 
 #. TRANSLATORS: Note helptext for an Empire training site: Arena
 #. TRANSLATORS: Note helptext for an Empire training site: Colosseum
@@ -12496,7 +12496,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, an arena can train one soldier to"
 " the first level in evade in %s on average."
-msgstr "Om alla nödvändiga varor levereras i tid kan en arena i genomsnitt träna en soldat till första nivån i undvikande på %s."
+msgstr "Om alla nödvändiga varor levereras i tid kan en arena i genomsnitt träna en soldat till första nivån i parering på %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12527,7 +12527,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, a colosseum can train one soldier"
 " one level in evade in %s on average."
-msgstr "Om alla nödvändiga varor levereras i tid kan ett colosseum i genomsnitt träna en soldat en nivå i undvikande i %s."
+msgstr "Om alla nödvändiga varor levereras i tid kan ett colosseum i genomsnitt träna en soldat en nivå i parering i %s."
 
 #. TRANSLATORS: Performance helptext for an Empire training site: Colosseum,
 #. part 2
@@ -14463,7 +14463,7 @@ msgstr "Syr rustningar av pälskläder och metall."
 #: ../../../../data/tribes/initialization/frisians/units.lua:720
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbetar på varvet och bygger nya fartyg."
+msgstr "Arbetar på skeppsvarvet och bygger nya fartyg."
 
 #. TRANSLATORS: Purpose helptext for a Frisian worker: Diker
 #: ../../../../data/tribes/initialization/frisians/units.lua:727
@@ -16052,7 +16052,7 @@ msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
 "level."
-msgstr "Frisiska soldater kan inte tränas i att hoppa undan och kommer att stanna kvar på sin ursprungliga nivå."
+msgstr "Frisiska soldater kan inte tränas i att parera och kommer att stanna kvar på sin ursprungliga nivå."
 
 #. TRANSLATORS: Performance helptext for a Frisian training site: Training
 #. Camp, part 1
@@ -16954,7 +16954,7 @@ msgstr "Försvarsutbildning:"
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:768
 msgid "Evade training:"
-msgstr "Undvikande träning:"
+msgstr "Pareringsträning:"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:778
@@ -17197,11 +17197,11 @@ msgstr "Storlek"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
-msgstr "Arbetare och djur kan gå över fälten med denna orörliga sak."
+msgstr "Arbetare och djur kan gå över fält med detta hinder."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
-msgstr "Arbetare och djur kan inte gå över fälten med denna orörliga konstruktion."
+msgstr "Arbetare och djur kan inte gå över fält med detta fasta hinder."
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"
@@ -17393,4 +17393,4 @@ msgstr "Denna soldat kan inte tränas i 'Försvar'."
 
 #: ../../../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
-msgstr "Hoppa undan"
+msgstr "Parera"

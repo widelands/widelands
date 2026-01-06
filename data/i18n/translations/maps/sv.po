@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-07-26 03:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Niklas Nordgren, 2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,12 +87,12 @@ msgstr "Utmanande."
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr "Den Andra Imperiet"
+msgstr "Det andra imperiet"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr "Introducerar Barbarerna."
+msgstr "Introducerar barbarerna."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52
@@ -160,7 +160,7 @@ msgstr "När deras gud förlorade tron på Atlanterna och dränkte deras ö blev
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr "Från Vatten till Is"
+msgstr "Från vatten till is"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
@@ -175,12 +175,12 @@ msgstr "Sjöman (komplicerad)"
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
-msgstr "Rorsman (Väldigt Svår)"
+msgstr "Rorsman (väldigt svår)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
-msgstr "Kapten (Omöjlig)"
+msgstr "Kapten (omöjlig)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:125
@@ -232,7 +232,7 @@ msgstr "Till sist reparerades skeppet, så Lutius och hans folk fortsatte sitt s
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr "Neptunus Hämnd"
+msgstr "Neptunus hämnd"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -253,7 +253,7 @@ msgstr "När Lutius och hans mannar återvänder hem finner de en ekonomi på ru
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr "Den Stora Stormfloden"
+msgstr "Den stora stormfloden"
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -272,7 +272,7 @@ msgstr "Detta scenario utspelar sig i en historisk kontext, men det mesta av han
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr "Ett Kyligt Välkomnande"
+msgstr "Ett kyligt välkomnande"
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
@@ -745,7 +745,7 @@ msgstr "Fyra stammar kämpar för dominans i ett kalt område. Resurser är utsp
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr "Mindre Ring 1.2"
+msgstr "Mindre ring 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -813,7 +813,7 @@ msgstr "Två stora frågor kretsar kring platsen: Vem skapade denna otroligt sto
 
 #: ../../../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr "Ingen Metall utmaning v2"
+msgstr "Ingen metallutmaning v2"
 
 #: ../../../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
@@ -893,7 +893,7 @@ msgstr "Du står på en ö, krönt av mäktiga berg, vars mitt döljer en underb
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr "Sandiga Passager"
+msgstr "Sandiga passager"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -925,7 +925,7 @@ msgstr "Det sägs att de gamla krigsmunkarna som bor i de ännu äldre träsken 
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr "Tasmanska Black War"
+msgstr "Tasmanska svarta kriget"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
