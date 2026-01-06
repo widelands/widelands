@@ -4,6 +4,7 @@ map="maps/Lesser_Ring.wmf"
 # random tribe is not working in multiplayer
 multiplayer="false"
 interactive_player="1"
+random_seed="0"
 
 win_condition="endless_game.lua"
 

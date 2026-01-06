@@ -2,6 +2,7 @@
 map="maps/Wisent_Valley.wmf"
 multiplayer="true"
 interactive_player="0"
+random_seed="0"
 
 win_condition="artifacts.lua"
 

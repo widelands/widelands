@@ -5,6 +5,7 @@ map="maps/Lesser_Ring.wmf"
 # The player number of the interactive/host player. Default: 1.
 # Use 0 in multiplayer game for a pure AI game
 interactive_player="1"
+random_seed="0"
 
 win_condition="defeat_all.lua"
 
