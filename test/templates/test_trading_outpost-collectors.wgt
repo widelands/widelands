@@ -2,7 +2,6 @@
 map="maps/Lesser_Ring.wmf"
 multiplayer="true"
 interactive_player="0"
-random_seed="0"
 win_condition="collectors.lua"
 win_condition_duration=3
 
