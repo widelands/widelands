@@ -38,6 +38,9 @@ struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	[[nodiscard]] bool uses_picker() const override {
+		return true;
+	}
 	bool pick_from_field(const Widelands::Map& map,
 	                     const Widelands::NodeAndTriangle<>& center,
 	                     bool multiselect) override;

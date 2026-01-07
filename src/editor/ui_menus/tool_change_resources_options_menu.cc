@@ -24,6 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -94,7 +95,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              0,
              0,
              UI::ButtonStyle::kWuiSecondary,
-             _("Pick resource from map …")) {
+             _("Pick resource from map …"),
+             as_tooltip_text_with_hotkey(_("Select a resource type by clicking on it on the map"), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
+             ) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -133,13 +136,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	radiogroup_.changed.connect([this]() { change_resource(); });
 	radiogroup_.clicked.connect([this]() { change_resource(); });
 
-	picker_.sigclicked.connect([this]() {
-		if (picker_is_active()) {
-			select_correct_tool();
-		} else {
-			activate_picker();
-		}
-	});
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
 
 	// Add label
 	cur_selection_.set_fixed_width(box_.get_inner_w());

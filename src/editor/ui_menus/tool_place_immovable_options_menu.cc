@@ -23,6 +23,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_immovable_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "ui_basic/box.h"
@@ -87,7 +88,9 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
              0,
              0,
              UI::ButtonStyle::kWuiSecondary,
-             _("Pick immovable from map …")) {
+             _("Pick immovable from map …"),
+             as_tooltip_text_with_hotkey(_("Select an immovable type by clicking on it on the map. Hold down Ctrl to select multiple immovables."), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
+             ) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
@@ -128,13 +131,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	multi_select_menu_->tabs().activate(0);
 	multi_select_menu_->notify_tab_added(0);
 
-	picker_.sigclicked.connect([this]() {
-		if (picker_is_active()) {
-			select_correct_tool();
-		} else {
-			activate_picker();
-		}
-	});
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
 
 	main_box_.add(multi_select_menu_.get(), UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(spacing());

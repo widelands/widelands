@@ -22,6 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/widelands_geometry.h"
 
 EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
@@ -67,7 +68,9 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      picker_(
-        &box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick height from map …")) {
+        &box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick height from map …"),
+             as_tooltip_text_with_hotkey(_("Select the height of a field by clicking on it on the map"), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
+             ) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/
 	   _("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
@@ -78,13 +81,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	change_by_.changed.connect([this]() { update_change_by(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	picker_.sigclicked.connect([this]() {
-		if (picker_is_active()) {
-			select_correct_tool();
-		} else {
-			activate_picker();
-		}
-	});
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
 
 	box_.set_size(350, 50);
 	box_.add(&change_by_, UI::Box::Resizing::kFullSize);

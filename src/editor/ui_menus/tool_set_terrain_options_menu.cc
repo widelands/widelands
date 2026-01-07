@@ -24,6 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_terrain_tool.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
@@ -99,7 +100,9 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
              0,
              0,
              UI::ButtonStyle::kWuiSecondary,
-             _("Pick terrain from map …")) {
+             _("Pick terrain from map …"),
+             as_tooltip_text_with_hotkey(_("Select a terrain type by clicking on it on the map. Hold down Ctrl to select multiple terrains."), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
+             ) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
@@ -111,13 +114,7 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 
-	picker_.sigclicked.connect([this]() {
-		if (picker_is_active()) {
-			select_correct_tool();
-		} else {
-			activate_picker();
-		}
-	});
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
 
 	main_box_.add(multi_select_menu_.get(), UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(spacing());

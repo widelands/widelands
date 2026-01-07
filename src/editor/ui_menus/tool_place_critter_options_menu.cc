@@ -21,6 +21,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_critter_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
@@ -54,7 +55,9 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
              0,
              0,
              UI::ButtonStyle::kWuiSecondary,
-             _("Pick animal from map …")) {
+             _("Pick animal from map …"),
+             as_tooltip_text_with_hotkey(_("Select an animal type by clicking on it on the map. Hold down Ctrl to select multiple animals."), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
+             ) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
@@ -65,13 +68,7 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 
-	picker_.sigclicked.connect([this]() {
-		if (picker_is_active()) {
-			select_correct_tool();
-		} else {
-			activate_picker();
-		}
-	});
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
 
 	main_box_.add(multi_select_menu_.get(), UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(spacing());

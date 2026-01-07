@@ -39,6 +39,19 @@ EditorToolOptionsMenu::~EditorToolOptionsMenu() {
 	assert(!picker_is_active());
 }
 
+/**
+ * Handle message menu hotkeys.
+ */
+bool EditorToolOptionsMenu::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		if (uses_picker() && matches_shortcut(KeyboardShortcut::kEditorPicker, code)) {
+			toggle_picker();
+			return true;
+		}
+	}
+	return UI::UniqueWindow::handle_key(down, code);
+}
+
 void EditorToolOptionsMenu::select_correct_tool() {
 	parent_.select_tool(current_tool_, EditorTool::First);
 }
@@ -57,4 +70,12 @@ void EditorToolOptionsMenu::deactivate_picker() {
 	assert(picker_is_active());
 	parent_.tools()->picker.set_linked_tool(nullptr);
 	select_correct_tool();
+}
+
+void EditorToolOptionsMenu::toggle_picker() {
+	if (picker_is_active()) {
+		select_correct_tool();
+	} else {
+		activate_picker();
+	}
 }

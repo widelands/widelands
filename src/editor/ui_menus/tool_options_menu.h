@@ -61,14 +61,20 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return current_tool_;
 	}
 
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 	virtual bool pick_from_field(const Widelands::Map& /*map*/,
 	                             const Widelands::NodeAndTriangle<>& /*center*/,
 	                             bool /*multiselect*/) {
 		NEVER_HERE();
 	}
+	[[nodiscard]] virtual bool uses_picker() const {
+		return false;
+	}
 	void activate_picker();
 	void deactivate_picker();
-	bool picker_is_active() const;
+	void toggle_picker();
+	[[nodiscard]] bool picker_is_active() const;
 
 	/**
 	 * Update window options to match tool settings
