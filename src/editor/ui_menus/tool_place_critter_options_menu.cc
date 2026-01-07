@@ -102,6 +102,8 @@ bool EditorToolPlaceCritterOptionsMenu::pick_from_field(const Widelands::Map& ma
 		return false;
 	}
 
+	UI::Panel::play_click();
+
 	if (!multiselect) {
 		critter_tool_.disable_all();
 	}

@@ -211,6 +211,8 @@ bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
 		return false;
 	}
 
+	UI::Panel::play_click();
+
 	increase_tool_.set_tool().set_set_to(field.get_resources_amount());
 	increase_tool_.set_tool().set_cur_res(resource_index);
 	increase_tool_.set_cur_res(resource_index);

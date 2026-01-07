@@ -138,6 +138,8 @@ bool EditorToolSetTerrainOptionsMenu::pick_from_field(const Widelands::Map& map,
 	const Widelands::DescriptionIndex terrain_index =
 	   center.triangle.t == Widelands::TriangleIndex::D ? field.terrain_d() : field.terrain_r();
 
+	UI::Panel::play_click();
+
 	if (!multiselect) {
 		terrain_tool_.disable_all();
 	}

@@ -67,6 +67,14 @@ public:
 		descname_overrides_.emplace(index, name);
 	}
 
+	void notify_tab_added(const int tabpos) {
+		for (auto& pair : tab_indices_) {
+			if (pair.second >= tabpos) {
+				++pair.second;
+			}
+		}
+	}
+
 private:
 	// Called when an item was selected.
 	void selected(int32_t, bool);

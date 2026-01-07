@@ -123,6 +123,8 @@ bool EditorToolChangeHeightOptionsMenu::pick_from_field(const Widelands::Map& ma
                                                         const bool multiselect) {
 	const Widelands::Field& field = map[center.triangle.node];
 
+	UI::Panel::play_click();
+
 	increase_tool_.set_tool().set_interval(
 	   Widelands::HeightInterval(field.get_height(), field.get_height()));
 

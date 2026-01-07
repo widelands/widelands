@@ -126,6 +126,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	                               g_image_cache->get("images/wui/editor/tools/immovables.png"),
 	                               auto_immovables_box, _("Automatic Immovable Placement"), 0);
 	multi_select_menu_->tabs().activate(0);
+	multi_select_menu_->notify_tab_added(0);
 
 	picker_.sigclicked.connect([this]() {
 		if (picker_is_active()) {
@@ -166,6 +167,8 @@ bool EditorToolPlaceImmovableOptionsMenu::pick_from_field(
 	if (immovable_index == Widelands::INVALID_INDEX) {
 		return false;
 	}
+
+	UI::Panel::play_click();
 
 	if (!multiselect) {
 		immovable_tool_.disable_all();
