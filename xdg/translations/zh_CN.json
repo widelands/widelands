@@ -8,6 +8,7 @@
 		"Widelands提供了单人游戏模式，讲述了部族的战役和他们在Widelands世界中挣扎求存的故事。然而，当你通过互联网或局域网与朋友联合起来一起建立新的帝国时 – 或者是在战争的沙场中互相残杀时，定居就从真正意义上开始了。Widelands也提供了人工智能前来向你发起挑战。"
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

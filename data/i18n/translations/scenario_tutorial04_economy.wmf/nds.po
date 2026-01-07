@@ -637,7 +637,7 @@ msgstr "Produzeren un Bruken vun Waren ankieken"
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr "De eersten twee Listenwessler wiesen, waar vööl vun elkeen Waar produzeert un verbruukt word. Du kannst se wiesen of verbargen, indeem du se anklickst."
+msgstr "De eersten twee Listenwessler wiesen, waar vööl vun elkeen Waar produzeert un bruukt word. Du kannst se wiesen of verbargen, indeem du se anklickst."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
@@ -647,7 +647,7 @@ msgstr "Wenn du genoog sehn hest, köör de darden Listenwessler (»Weertskupp-U
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr "In deesem Fenster kannst du Waren utkören, um to sehn, wo sik hör Produzeren un Verbruuk över de Tied ännert. Versöök ’t mit een paar Waren."
+msgstr "In deesem Fenster kannst du Waren utkören, um to sehn, wo sik hör Produzeren un Bruuk över de Tied ännert. Versöök ’t mit een paar Waren."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
@@ -679,7 +679,7 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat verbruukt word. Dat heet »Weertskupp-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt of minnert word."
+msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat bruukt word. Dat heet »Weertskupp-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt of minnert word."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
@@ -909,7 +909,7 @@ msgstr "Indeem du de Enn-Tahl ännerst kannst du fastleggen, to wat för Waren o
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to ’n Bispööl Buurdereen of Wellen) arbeiden alltied."
+msgstr "Blot Husen, de Waren bruken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to ’n Bispööl Buurdereen of Wellen) arbeiden alltied."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""

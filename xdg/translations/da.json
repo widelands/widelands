@@ -8,6 +8,7 @@
 		"Widelands tilbyder en tilstand for en spiller med kampagner med historier om stammer og deres kamp i universet Widelands. Det bliver dog først rigtig spændende når du bliver forenet med venner over internettet eller LAN for sammen at bygge nye imperier sammen -- eller knuse hinanden i krigens støv. Widelands tilbyder også en kunstig intelligens, som kan udfordre dig."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

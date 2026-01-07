@@ -8,6 +8,7 @@
 		"Widelands bietet einen Einzelspielermodus mit Kampagnen, die Geschichten der Stämme und ihren Schwierigkeiten im Widelands-Universum erzählen. Dennoch beginnt das eigentliche Siedeln erst, wenn du dich mit Freunden über Internet oder LAN verbindest, um gemeinsam neue Imperien zu errichten – oder um euch gegenseitig zu vernichten. Widelands bietet zusätzlich eine künstliche Intelligenz, um dich herauszufordern."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Handeln mit Märkten",
 			"Sechs neue Karten hinzugefügt und drei alte Karten entfernt",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Fehlerbehebung"
-		],
-		"1.2": [
-			"Neues Friesenszenario",
-			"Diplomatie mit Computerspielern",
-			"Seekriegsführung (Vorschau)",
-			"Garnisonen in Häfen und im Hauptquartier",
-			"Benutzeroberflächenerweiterungen",
-			"Haftnotizen",
-			"Direkte Kartenveröffentlichung",
-			"Verbesserte Fehlerbehandlung"
 		]
 	}
 }

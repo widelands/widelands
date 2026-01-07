@@ -8,6 +8,7 @@
 		"To Widelands παρέχει λειτουργία ενός παίκτη με αποστολές που εξιστορούν τις ιστορίες των φυλών και τις μάχες τους, στο σύμπαν του παιχνιδιού. Ωστόσο, η αποίκιση ξεκινά πραγματικά, όταν ενωθείς με τους φίλους σου μέσω διαδικτύου ή LAN, για να δημιουργήσετε μαζί νέες αυτοκρατορίες - ή για να συντρίψετε ο ένας τον άλλο στις φλόγες του πολέμου. Το Widelands επίσης προσφέρει ΤΝ για να αυξήσει την πρόκληση."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

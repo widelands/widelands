@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -72,6 +73,7 @@ private:
 	void mousein_slot(int32_t idx);
 
 	Widelands::Player* plr_;
+	std::vector<FastplaceShortcut> fastplace_shortcuts_;
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
@@ -83,7 +85,8 @@ BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32
                   kBuildGridCellSize,
                   kBuildGridCellSize,
                   cols),
-     plr_(plr) {
+     plr_(plr),
+     fastplace_shortcuts_(get_active_fastplace_shortcuts(plr_->tribe().name())) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
 	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i); });
@@ -97,9 +100,24 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(Widelands::DescriptionIndex id) {
 	const Widelands::BuildingDescr& descr = *plr_->tribe().get_building_descr(id);
 
+	std::vector<std::string> shortcuts;
+	for (const FastplaceShortcut& fp : fastplace_shortcuts_) {
+		if (fp.building == descr.name()) {
+			shortcuts.push_back(fp.hotkey);
+		}
+	}
+	std::string descname;
+	if (shortcuts.empty()) {
+		descname = descr.descname();
+	} else {
+		descname = as_tooltip_text_with_hotkey(
+		   descr.descname(), i18n::localize_list(shortcuts, i18n::ConcatenateWith::COMMA),
+		   UI::PanelStyle::kWui, false);
+	}
+
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
-	                  descr.descname() + "<br>" +
+	                  descname + "<br>" +
 	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 	                        .header_font()
 	                        .as_font_tag(_("Construction costs:")) +

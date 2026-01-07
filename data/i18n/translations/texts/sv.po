@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-01 03:54+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -48,13 +48,13 @@ msgstr "Licensinformation för Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "Copyright 2002 - %1% av Widelands utvecklingsteam"
+msgstr "Copyright 2002 - %1% Widelands utvecklingsteam"
 
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Detta spel är gratis och öppen källkod (FOSS), licensierat under GNU General Public License (GPL) V2.0 (eller, om du föredrar det, någon senare version)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -151,11 +151,11 @@ msgstr "Rapportera buggar"
 
 #: ../../../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Om du upptäcker en bugg, var vänlig och rapportera det till vår felsökare:"
+msgstr "Om du upptäcker en bugg, rapportera det till vår felsökare:"
 
 #: ../../../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr "Var vänlig och bidra med tillräcklig bakgrundsinformation. Berätta:"
+msgstr "Bidra med tillräcklig bakgrundsinformation. Berätta:"
 
 #: ../../../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
@@ -165,7 +165,7 @@ msgstr "Detaljerade information om hur man får felet att uppstå, om möjligt."
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "Vad du förväntade dig skulle hända när när du gjorde det du gjorde och vad som istället hände."
+msgstr "Vad du förväntade dig skulle hända när du gjorde det du gjorde och vad som istället hände."
 
 #: ../../../../data/txts/README.lua:30
 msgid ""
@@ -178,7 +178,7 @@ msgstr "Vilken version av Widelands du kör (d.v.s. antingen vilken revision ell
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "Var också vänlig och inkludera vilket operativsystem du kör Wideleands under, eftersom en del buggar kan påverkas av det."
+msgstr "Inkludera gärna vilket operativsystem du kör Widelands på, eftersom en del buggar kan påverkas av det."
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
@@ -195,7 +195,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t. ex. att det kraschar där det kan vara svårt att veta vad som utlöser det), var vänlig och inkludera det också. För mer information, se avsnittet om svar nedan."
+msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t. ex. att det kraschar där det kan vara svårt att veta vad som utlöser det), inkludera det också. För mer information, se avsnittet om svar nedan."
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
@@ -315,11 +315,11 @@ msgstr "ZetaOS"
 
 #: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
-msgstr "Webbplatens kodare"
+msgstr "Webbplatskodare"
 
 #: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
-msgstr "Dokumentation, hjälp och uppslagsbok"
+msgstr "Dokumentation, hjälp och wiki"
 
 #: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
@@ -339,7 +339,7 @@ msgstr "Övriga"
 
 #: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr "och många många fler (tack för allting ni har gjort)"
+msgstr "och många, många fler (tack för allting ni har gjort)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -363,7 +363,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands är ett gratis realtids strategispel med fri källkod. Det innehåller korståg och kartor för en spelare och ett läge för flera spelare. Spelet inspirerades av Settlers II men har innehåller mycket mer variation och djup. Samtidigt är det lätt att komma igång med hjälp av spelbara handledningar."
+msgstr "Widelands är ett gratis, öppen källkodsbaserat realtidsstrategispel med kampanjer för en spelare och ett flerspelarläge. Spelet är inspirerat av Settlers II, men har betydligt större variation och djup. Det är ändå lätt att komma igång tack vare spelbara handledningar."
 
 #: ../../../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -372,7 +372,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "I detta spel startar du på en liten bit land med bara lite resurser. Du använder dem för att skapa ett imperium med tusentals innevånare. På din väg mot detta mål måste du etablera en ekonomisk infrastruktur, utforska landet runt omkring dig och möta rivaliserande stammar."
+msgstr "I det här spelet börjar du på en liten bit mark med bara några få resurser. Med hjälp av dessa ska du skapa ett imperium med tusentals invånare. På vägen mot detta mål måste du bygga upp en ekonomisk infrastruktur, utforska markerna omkring dig och möta rivaliserande stammar."
 
 #: ../../../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -384,7 +384,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands spelar in varje spel du spelar i en uppspelningsfil med filnamnstillägget .wry. Den här filen innehåller ett första sparspel och alla kommandon som utfärdades av alla spelare, till exempel att bygga en väg eller attackera en fiende. Filnamnet berättar när du startade spelet."
+msgstr "Widelands sparar varje spel du spelar i en reprisfil med filändelsen .wry. Denna fil innehåller ett initialt sparat spel och alla kommandon som har utfärdats av alla spelare, såsom att bygga en väg eller attackera en fiende. Filnamnet visar vilken tid du startade spelet."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -394,7 +394,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "När du använder 'Se repris' kommandot i huvudmenyn kommer ett tidigare spelat spel att exakt återskapas för dig att titta på. Notera, dock, att även små förändringar i spelets datafiler eller Widelands körbara fil kan få reprisen att bli inkompatibel och osynkroniserad. Detta liknar de synkroniseringsproblem som nätverksspel kan få om en av spelarna har en annorlunda version av spelet."
+msgstr "Med hjälp av alternativet Se repris i huvudmenyn kan du se en exakt rekonstruktion av ett tidigare spelat spel. Observera dock att även små förändringar i speldatafilerna eller Widelands-programfilen kan göra att omspelningen blir inkompatibel och ”synkroniseras”. Detta liknar hur nätverksspel drabbas av synkroniseringsproblem om en av spelarna har en annan version av spelet."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
 #, lua-format
@@ -403,7 +403,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Repriser är ett mycket användbart verktyg för att hitta fel i spelets logik, så det kan vara bra att bifoga dem till felrapporter. Reprisfilerna sparas i %s foldern på Linux and Mac OS X. På Windows finns de i underkatalogen 'replays' i din Widelandsinstallation."
+msgstr "Repriser är ett mycket användbart verktyg för att hitta buggar i spellogiken, så de kan vara användbara som bilagor till buggrapporter. Reprisfilerna sparas i katalogen %s på Linux och Mac OS X. På Windows finns de i underkatalogen ”replays” i din Widelands-installation."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:41
@@ -420,7 +420,7 @@ msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr "Spelinställningar för flerspelarspel"
+msgstr "Inställningar för flerspelarspel"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
@@ -797,7 +797,7 @@ msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr "Du kan ha mer än en ekonomi om deras flaggor inte är förbundna med något transportmedel. Det är därför som menyn Konfigurera ekonomi endast kan nås från flaggor och lager, inte från spelarens huvudmeny."
+msgstr "Du kan ha mer än en ekonomi om deras flaggor inte är förbundna med något transportmedel. Det är därför som menyn Konfigurera ekonomi endast kan nås från flaggor och lagerbyggnader, inte från spelarens huvudmeny."
 
 #: ../../../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -807,42 +807,43 @@ msgstr "Vissa byggnader, som bondgården, har mycket små arbetsområden. Om des
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr "Zooma in/ut med mushjulet eller %1%/%2%. Tryck på %3% för att återställa zoomen."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
+msgstr "Zooma in/ut med mushjulet eller %1%/%2%. Tryck på %3%/%4% för maximal/minimal zoomnivå. Tryck på %5% för att återställa zoomen."
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Använd tangenterna ”%1$s” och ”%2$s” för att snabbt hoppa mellan platser som du nyligen har besökt."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Öka eller minska spelets hastighet med %1%/%2%. Använd %3%/%4% för snabb förändring; %5%/%6% justerar hastigheten smidigt."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Piltangenter"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr "Ctrl och Piltangenter"
+msgstr "Ctrl + piltangenter"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Flytta kartvyn med %1%. %2% flyttar vyn snabbare, %3% flyttar den långsammare."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr "Shift och Piltangenter"
+msgstr "Skift + piltangenter"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -850,19 +851,19 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr "Om du spelar på en bärbar dator med pekplatta kan du tilldela funktionalitet till rullning med pekplattan i menyn ”Alternativ” → ”Redigera tangentbords- och musåtgärder”. Det kan t.ex. vara mycket bekvämare att flytta kartvyn genom att rulla istället för att dra med höger musknapp."
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr "När en byggnad förstörs kommer dess arbetare att börja leta efter en närbelägen flagga, från vilken de kan följa vägen till en lagerbyggnad. Om det inte finns någon sådan flagga i närheten kommer de fortsätta att vandra omkring och till slut dö."
+msgstr "När en byggnad förstörs kommer dess arbetare att börja leta efter en närbelägen flagga, från vilken de kan följa vägen till en ansluten lagerbyggnad. Om det inte finns någon sådan flagga i närheten kommer de fortsätta att vandra omkring och till slut dö."
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Handel kan hjälpa din ekonomi och stärka relationerna mellan spelarna. Lär dig grunderna i handledningen ”Ekonomi och handel”."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -874,7 +875,7 @@ msgstr "Du kan använda 'pgup' och 'pgdn' knapparna för att justera spelets has
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Du kan använda '/me' i början av ett chatmeddelande: '/me är trött' kommer att skrivas ut som '->Användarnamn är trött'."
+msgstr "Du kan använda '/me' i början av ett chattmeddelande: '/me är trött' kommer att skrivas ut som '->Användarnamn är trött'."
 
 #: ../../../../data/txts/tips/multiplayer.lua:12
 msgid ""

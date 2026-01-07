@@ -351,7 +351,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "Networking:"
-msgstr ""
+msgstr "Rete:"
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "URI"
@@ -380,7 +380,7 @@ msgstr "Nome dell'autore della mappa."
 
 #: ../../../../src/wlapplication_messages.cc:215
 msgid "The last host connected to."
-msgstr ""
+msgstr "L'ultimo host a cui ci si è connessi."
 
 #: ../../../../src/wlapplication_messages.cc:217
 msgid "Whether the used metaserver login is for a registered user."

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-01 03:54+0000\n"
+"POT-Creation-Date: 2025-12-22 03:36+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -810,42 +810,43 @@ msgstr "농장과 같은 몇몇 건물은 작업 공간이 매우 작습니다. 
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr "마우스 휠 또는 %1%/%2%키로 확대/축소합니다. %3%키를 눌러 확대/축소를 다시 설정하십시오."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
+msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "‘%1$s’ 키와 ‘%2$s’ 키를 사용하여 최근에 방문한 위치 사이를 빠르게 이동할 수 있습니다."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "%1%/%2%키로 놀이 속도를 빠르게하거나 늦춥니다. %3%/%4% 키로 빠르게 바꿀 수 있고, %5%/%6%키로 속도를 부드럽게 조정합니다."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "화살키"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "컨트롤 + 화살키"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "%1%를 사용하여 지도 보기 이동하십시오. %2%는 보기를 더 빠르게 이동하고 %3%는 느리게 이동합니다."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "쉬프트 + 화살키"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -853,7 +854,7 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -861,7 +862,7 @@ msgid ""
 "eventually die."
 msgstr "건물이 파괴되면, 일꾼들은 땅길 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."

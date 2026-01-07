@@ -8,6 +8,7 @@
 		"와이드랜드는 부족들의 이야기와 와이드랜드 세계에서 그들의 투쟁에 대한 캠페인이 포함된 혼자 놀기 모드를 제공합니다. 하지만, 당신이 인터넷이나 랜을 통해 친구와 함께 새로운 제국을 만들거나 또는 서로 싸울때 비로소 진정한 정착이 시작됩니다. 또한 와이드랜드는 당신과 맞설수있는 인공 지능도 제공합니다."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

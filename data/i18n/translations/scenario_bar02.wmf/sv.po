@@ -1,20 +1,22 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021
+# D M <kamera001dm@gmail.com>, 2017,2021,2026
 # GunChleoc, 2016,2018
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
+# GunChleoc, 2014,2016,2018
 # GunChleoc, 2014
 # Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +28,7 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Ondun"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
@@ -68,7 +70,7 @@ msgstr "Bygg upp en liten livsmedelsekonomi"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Bygg upp en grundläggande livsmedelsekonomi för att förse ditt folk med mat"
+msgstr "Bygg upp en grundläggande livsmedelsekonomi för att förse ditt folk med mat."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
@@ -155,7 +157,7 @@ msgstr "Bygg en träningsinfrastruktur"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Bygg en kasern för att träna några nya soldater"
+msgstr "Bygg en kasern för att träna några nya soldater."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -193,7 +195,7 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Magasin liknar ditt högkvarter, med den enda skillnaden att de inte försvaras av soldater. Det är ofta klokt att bygga ett magasin när ditt område växer och vägarna till ditt högkvarter blir längre och längre."
+msgstr "Magasin liknar ditt högkvarter, med den enda skillnaden att de inte försvaras av soldater. Det är ofta klokt att bygga en lagerbyggnad när ditt område växer och vägarna till ditt högkvarter blir längre och längre."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:110
@@ -216,7 +218,7 @@ msgstr "Kaserner tränar nya soldater, medan träningsanläggningar som träning
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr "Egenskaperna är: hälsa, attack, försvar och att väja undan."
+msgstr "Egenskaperna är: hälsa, attack, försvar och att parera."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
@@ -263,7 +265,7 @@ msgstr "Nästan hemma"
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr "Thron verkar bekymrad..."
+msgstr "Thron verkar bekymrad…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:158
@@ -303,7 +305,7 @@ msgstr "Tvivel"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr "Boldreth skakar på huvudet..."
+msgstr "Boldreth skakar på huvudet…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:178

@@ -8,6 +8,7 @@
 		"Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.\nWidelands ayrıca size yapay zeka ile meydan okur."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

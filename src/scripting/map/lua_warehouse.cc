@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -355,7 +355,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 
 	// takes either "all", a name or an array of names
 	if (lua_isstring(L, 2) != 0) {
-		const std::string& what = luaL_checkstring(L, -1);
+		const std::string what = luaL_checkstring(L, -1);
 		if (what == "all") {
 			for (const Widelands::DescriptionIndex& i : tribe.wares()) {
 				do_set_ware_policy(wh, i, p);
@@ -375,7 +375,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		luaL_checktype(L, 2, LUA_TTABLE);
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
-			const std::string& what = luaL_checkstring(L, -1);
+			const std::string what = luaL_checkstring(L, -1);
 			if (!do_set_ware_policy(wh, what, p) && !do_set_worker_policy(wh, what, p)) {
 				// Note that this will change the policy for entries earlier in the list
 				// but when the user provides broken data its his own fault
@@ -473,7 +473,7 @@ int LuaWarehouse::get_warehouse_policies(lua_State* L) {
 			// Stack is: ... input_table new_table nil input_key input_value
 			// input_value is the name of the ware or worker and will be added into the new table
 			// input_key is an index and is dropped by the next call of lua_next()
-			const std::string& what = luaL_checkstring(L, -1);
+			const std::string what = luaL_checkstring(L, -1);
 			if (!do_get_ware_policy(L, wh, what) && !do_get_worker_policy(L, wh, what)) {
 				// Note that this will change the policy for entries earlier in the list
 				// but when the user provides broken data its his own fault

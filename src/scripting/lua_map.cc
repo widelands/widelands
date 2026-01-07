@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -685,22 +685,21 @@ void parse_wares_workers(lua_State* L,
 	luaL_checktype(L, table_index, LUA_TTABLE);
 	lua_pushnil(L);
 	while (lua_next(L, table_index) != 0) {
+		const std::string unit_name = luaL_checkstring(L, -2);
 		if (is_ware) {
-			if (tribe.ware_index(luaL_checkstring(L, -2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal ware %s", luaL_checkstring(L, -2));
+			if (tribe.ware_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", unit_name.c_str());
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(tribe.ware_index(luaL_checkstring(L, -2)),
-			                                 Widelands::WareWorker::wwWARE),
-			                  luaL_checkuint32(L, -1)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(tribe.ware_index(unit_name), Widelands::WareWorker::wwWARE),
+			   luaL_checkuint32(L, -1)));
 		} else {
-			if (tribe.worker_index(luaL_checkstring(L, -2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal worker %s", luaL_checkstring(L, -2));
+			if (tribe.worker_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal worker %s", unit_name.c_str());
 			}
-			ware_workers_list->insert(
-			   std::make_pair(std::make_pair(tribe.worker_index(luaL_checkstring(L, -2)),
-			                                 Widelands::WareWorker::wwWORKER),
-			                  luaL_checkuint32(L, -1)));
+			ware_workers_list->insert(std::make_pair(
+			   std::make_pair(tribe.worker_index(unit_name), Widelands::WareWorker::wwWORKER),
+			   luaL_checkuint32(L, -1)));
 		}
 		lua_pop(L, 1);
 	}
@@ -1054,19 +1053,19 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 
 	// We either received, two items string,int:
 	if (nargs == 3) {
+		const std::string unit_name = luaL_checkstring(L, 2);
 		result = RequestedWareWorker::kSingle;
 		if (is_ware) {
-			if (tribe.ware_index(luaL_checkstring(L, 2)) == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal ware %s", luaL_checkstring(L, 2));
+			if (tribe.ware_index(unit_name) == Widelands::INVALID_INDEX) {
+				report_error(L, "Illegal ware %s", unit_name.c_str());
 			}
 			ware_workers_list->insert(std::make_pair(
-			   std::make_pair(tribe.ware_index(luaL_checkstring(L, 2)), Widelands::WareWorker::wwWARE),
+			   std::make_pair(tribe.ware_index(unit_name), Widelands::WareWorker::wwWARE),
 			   luaL_checkuint32(L, 3)));
 		} else {
-			const Widelands::DescriptionIndex worker_index =
-			   tribe.worker_index(luaL_checkstring(L, 2));
+			const Widelands::DescriptionIndex worker_index = tribe.worker_index(unit_name);
 			if (worker_index == Widelands::INVALID_INDEX) {
-				report_error(L, "Illegal worker %s", luaL_checkstring(L, 2));
+				report_error(L, "Illegal worker %s", unit_name.c_str());
 			}
 			if (worker_index == tribe.soldier()) {
 				report_error(L, "Do not set soldiers via set_workers(), use set_soldiers() instead");

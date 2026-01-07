@@ -8,6 +8,7 @@
 		"Widelands možete igrati sami protiv umjetne inteligencije u fino razrađenim i ispričanim pohodima (kampanjama) smještenim u Widelands svijet. Ipak, zabava stvarno počinje kad se udružite sa vašim prijateljima i zaigrate preko interneta ili LAN-a, stvarajte nova carstva zajedno ili se uništite u sveopćem ratu!"
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

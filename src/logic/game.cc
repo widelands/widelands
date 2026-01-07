@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,8 +192,8 @@ Game::Game()
 	last_detectedportspace_serial_ = 0;
 }
 
-Game::~Game() {  // NOLINT
-	              // ReplayWriter needs this
+Game::~Game() {
+	delete_pending_player_commands();
 }
 
 void Game::sync_reset() {

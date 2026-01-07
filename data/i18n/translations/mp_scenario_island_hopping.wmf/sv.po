@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2025 Widelands Development Team
 # 
 # Translators:
+# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
 # D M <kamera001dm@gmail.com>, 2023
 # GunChleoc, 2016
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-01-02 02:52+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr "Ö-hoppningen är en traditionell tävling i den atlantiska kulturen.  Spelets regler är enkla. Du startar med ett högkvarter på en ö. När du har byggt färdigt ett slott i änden av den första ön får du ett andra högkvarter på en andra ö, vilket kommer att få alla varor, arbetare och soldater flyttat till sig från ditt högkvarter och dina magasin på den första ön."
+msgstr "Ö-hoppningen är en traditionell tävling i den atlantiska kulturen.  Spelets regler är enkla. Du startar med ett högkvarter på en ö. När du har byggt färdigt ett slott i änden av den första ön får du ett andra högkvarter på en andra ö, vilket kommer att få alla varor, arbetare och soldater flyttat till sig från ditt högkvarter och dina lagerbyggnader på den första ön."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -64,7 +65,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr "Om du gör färdigt ett slott i målområdet på den andra ön får du ett tredje högkvarter på den tredje ön och alla varor flyttas återigen till ditt nya högkvarter från ditt förra högkvarter och dina tidigare magasin. Du måste bygga ett slott i mitten av den tredje ön och hålla det i 20 minuter för att vinna spelet."
+msgstr "Om du gör färdigt ett slott i målområdet på den andra ön får du ett tredje högkvarter på den tredje ön och alla varor flyttas återigen till ditt nya högkvarter från ditt förra högkvarter och dina tidigare lagerbyggnader. Du måste bygga ett slott i mitten av den tredje ön och hålla det i 20 minuter för att vinna spelet."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

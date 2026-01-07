@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2020
 # Ole Laursen <ole.laursen@gmail.com>, 2016
+# runesoeknudsen, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2025-04-19 03:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2020\n"
+"Last-Translator: runesoeknudsen, 2025\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +91,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "De to andre vigtige fødevarer er røget fisk og rødt kød. Råt kød leveres fra en jæger. En fisker får fisken op af havet, mens en fiskeopdrætter sørger for, at en fiskestime ikke uddør ved at opdrætte flere. Rygningen foregår i et rygehus, og du vil have brug for mindst to af dem."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -660,18 +661,18 @@ msgstr "Jeg har overvejet dette, Sidolus. Jeg synes det er på tide. Vi vil oppr
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor Rapporter"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Må Satul varme dig, Jundlina! Vi har færdiggjort et værktøjsmedje, og nu vil vores værktøjsmede producere nyt værktøj på et øjeblik."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlina minder"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -680,7 +681,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Må Satul også varme dig, Loftomor. Det er gode nyheder at høre. Husk dog, at vores værktøjsmagere skal være udstyret med en sav. At lave værktøj er en kunst for os, der kræver et præcist redskab som en sav, ikke en brutal hammer som til de andre stammer."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -870,7 +871,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Må Satul varme dig, Jundlina. Mit navn er Ostur, og jeg bygger skibe. Jeg har opfundet en ny slags skib: mindre end dem, vi er vant til, men meget mere robuste. Hvis vi bygger dem korrekt, er jeg sikker på, at vi kan sejle en meget længere distance med dem og måske undslippe Lutas' indflydelse."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

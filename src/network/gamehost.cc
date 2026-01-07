@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2025 by the Widelands Development Team
+ * Copyright (C) 2008-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -406,6 +406,12 @@ GameHost::~GameHost() {
 	d->net.reset();
 	d->promoter.reset();
 	delete d;
+
+	// delete pointers from pending_player_commands_
+	for (Widelands::PlayerCommand* pc : pending_player_commands_) {
+		delete pc;
+	}
+	pending_player_commands_.clear();
 }
 
 const std::string& GameHost::get_local_playername() const {

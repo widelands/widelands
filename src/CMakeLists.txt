@@ -17,12 +17,8 @@ add_dependencies(codecheck run_build_deps)
 # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
-#include the cmake version dependend macro _include_directories
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectoriesOld.cmake)
-else (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
-endif (CMAKE_VERSION VERSION_LESS 2.8.11)
+#include macro _include_directories
+include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
 
 wl_library(build_info
   SRCS

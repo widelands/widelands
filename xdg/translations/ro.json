@@ -8,6 +8,7 @@
 		"Widelands ofera un mod single-player cu campanii care spun povești ale triburilor și lupta lor în universul Widelands. Cu toate acestea, stabilirea începe într-adevăr atunci când te întâlneşti cu prietenii pe Internet sau LAN pentru a construi noi imperii împreună - sau pentru a vă zdrobi reciproc în prafurile războiului. Widelands oferă, de asemenea, o inteligență artificială pentru a vă provoca."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

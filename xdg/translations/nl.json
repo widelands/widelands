@@ -8,6 +8,7 @@
 		"Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelands universum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten. Widelands biedt ook een artificiële intelligentie waarop je kan oefenen."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Markthandel",
 			"Zes nieuwe kaarten toegevoegd en drie oude kaarten verwijderd",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix-bericht"
-		],
-		"1.2": [
-			"Nieuw Fries scenario",
-			"Diplomatie door computerspelers",
-			"Oorlogsvoering op zee (preview)",
-			"Garnizoenen voor havens en hoofdkwartier",
-			"UI Plugins",
-			"Vastgepinde opmerkingen",
-			"Directe kaart publicatie",
-			"Verbeterde foutverwerking"
 		]
 	}
 }

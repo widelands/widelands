@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -278,7 +278,15 @@ public:
 
 protected:
 	// For referencing the items in mapviewmenu_
-	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
+	enum class MapviewMenuEntry {
+		kMinimap,
+		kIncreaseZoom,
+		kZoomMax,
+		kDecreaseZoom,
+		kZoomMin,
+		kResetZoom,
+		kQuicknav
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
