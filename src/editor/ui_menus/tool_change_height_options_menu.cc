@@ -68,9 +68,17 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      picker_(
-        &box_, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick height from map …"),
-             as_tooltip_text_with_hotkey(_("Select the height of a field by clicking on it on the map"), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
-             ) {
+        &box_,
+        "picker",
+        0,
+        0,
+        0,
+        0,
+        UI::ButtonStyle::kWuiSecondary,
+        _("Pick height from map …"),
+        as_tooltip_text_with_hotkey(_("Select the height of a field by clicking on it on the map"),
+                                    shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                    UI::PanelStyle::kWui)) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/
 	   _("Click on the map to increase, Shift + Click on the map to decrease terrain height"));

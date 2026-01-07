@@ -56,8 +56,10 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
              0,
              UI::ButtonStyle::kWuiSecondary,
              _("Pick animal from map …"),
-             as_tooltip_text_with_hotkey(_("Select an animal type by clicking on it on the map. Hold down Ctrl to select multiple animals."), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
-             ) {
+             as_tooltip_text_with_hotkey(_("Select an animal type by clicking on it on the map. "
+                                           "Hold down Ctrl to select multiple animals."),
+                                         shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                         UI::PanelStyle::kWui)) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(

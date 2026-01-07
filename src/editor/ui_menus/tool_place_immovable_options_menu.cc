@@ -89,8 +89,10 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
              0,
              UI::ButtonStyle::kWuiSecondary,
              _("Pick immovable from map …"),
-             as_tooltip_text_with_hotkey(_("Select an immovable type by clicking on it on the map. Hold down Ctrl to select multiple immovables."), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
-             ) {
+             as_tooltip_text_with_hotkey(_("Select an immovable type by clicking on it on the map. "
+                                           "Hold down Ctrl to select multiple immovables."),
+                                         shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                         UI::PanelStyle::kWui)) {
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(

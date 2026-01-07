@@ -96,8 +96,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              0,
              UI::ButtonStyle::kWuiSecondary,
              _("Pick resource from map …"),
-             as_tooltip_text_with_hotkey(_("Select a resource type by clicking on it on the map"), shortcut_string_for(KeyboardShortcut::kEditorPicker, true), UI::PanelStyle::kWui)
-             ) {
+             as_tooltip_text_with_hotkey(_("Select a resource type by clicking on it on the map"),
+                                         shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                         UI::PanelStyle::kWui)) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
