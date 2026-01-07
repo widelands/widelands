@@ -69,8 +69,7 @@ FleetOptionsWindow& FleetOptionsWindow::create(UI::Panel* parent,
 	// We can't cache the fleet serial or pointer, they can change around a lot.
 	for (FleetOptionsWindow* window : living_fleet_option_windows) {
 		Widelands::MapObject* window_interface = window->interface_.get(ibase.egbase());
-		if (window_interface == nullptr ||
-		    window_interface->descr().type() != interface->descr().type()) {
+		if (window_interface == nullptr || window->type_ != type) {
 			continue;  // Different type of window
 		}
 		if (type == Type::kShip) {
