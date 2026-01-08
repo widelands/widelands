@@ -2,20 +2,20 @@
 	"name": "Widelands",
 	"category": "Jogo de Estratégia",
 	"tagline": "Um jogo de construção estratégica em tempo real",
-	"developer": "The Widelands Development Team",
+	"developer": "A Equipa de Desenvolvimento The Widelands",
 	"description": [
-		"Tu és o chefe dum pequeno clã. A tua tarefa é de construir um campo que se está sempre a desenvolver. Cada membro do clã vai fazer a sua parte para produzir o necessário para continuar o desenvolvimento.",
-		"Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar."
+		"Tu és o chefe de um pequeno clã. A tua tarefa é construir uma povoação em constante crescimento. Cada membro do teu clã vai fazer a sua parte para produzir mais recursos necessários para continuar o crescimento.",
+		"Widelands oferece um modo de jogo solitário com campanhas que contam as histórias das tribos e os seus esforços no universo de Widelands. No entanto, a verdadeira adaptação começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se esmagarem mutuamente nas poeiras da guerra. Widelands também oferece uma inteligência artificial para o desafiar."
 	],
 	"release_notes": {
 		"1.4": [],
 		"1.3": [
-			"Market trading",
-			"Six new maps added and three old maps removed",
-			"Economy districts",
+			"Trocas de Mercado",
+			"Seis novos mapas foram adicionados e três mapas velhos removidos",
+			"Distritos Económicos ",
 			"Many improvements to the in-game Encyclopedia",
-			"Download website maps as add-ons",
-			"New visualisation modes in the editor",
+			"Descarregar mapas do website como add-ons",
+			"Novos modos de visualização no editor",
 			"Many new capabilities for add-on developers"
 		],
 		"1.2.1": [
