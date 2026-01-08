@@ -77,7 +77,7 @@ void GridProgram::draw(uint32_t texture_id,
 		constexpr std::array<std::array<float, 3>, Widelands::kDefaultMaxFieldHeightDiff + 1>
 		   kColors = {{
 		      {0.f, 0.64f, 0.f},
-		      {0.48, 0.68f, 0.f},
+		      {0.48f, 0.68f, 0.f},
 		      {0.95f, 0.72f, 0.f},
 		      {0.87f, 0.36f, 0.f},
 		      {0.79f, 0.f, 0.f},
