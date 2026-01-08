@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-08 03:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Marcin S <dzidek1003@o2.pl>, 2021,2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -2031,7 +2031,7 @@ msgstr "Język cienowania"
 msgid "Copy link to clipboard"
 msgstr "Skopiuj link do schowka"
 
-#: ../../../../src/graphic/text_layout.cc:278
+#: ../../../../src/graphic/text_layout.cc:287
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
@@ -9671,7 +9671,7 @@ msgid "Enhance to %s"
 msgstr "Ulepsz do: %s"
 
 #: ../../../../src/wui/buildingwindow.cc:337
-#: ../../../../src/wui/fieldaction.cc:105
+#: ../../../../src/wui/fieldaction.cc:123
 msgid "Construction costs:"
 msgstr "Koszty budowy:"
 
@@ -9879,191 +9879,191 @@ msgstr "Uszkodzony link"
 msgid "This hyperlink seems to be broken."
 msgstr "To hiperłącze jest uszkodzone."
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build medium building"
 msgstr "Zbuduj średni budynek"
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build small building"
 msgstr "Zbuduj mały budynek"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build big building"
 msgstr "Zbuduj duży budynek"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build port building"
 msgstr "Zbuduj budynek portu"
 
-#: ../../../../src/wui/fieldaction.cc:268
+#: ../../../../src/wui/fieldaction.cc:286
 msgid "Action"
 msgstr "Akcja"
 
-#: ../../../../src/wui/fieldaction.cc:394
+#: ../../../../src/wui/fieldaction.cc:412
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "Oznaczone do usunięcia przez pracownika – kliknij, aby odznaczyć"
 
-#: ../../../../src/wui/fieldaction.cc:395
-#: ../../../../src/wui/fieldaction.cc:402
+#: ../../../../src/wui/fieldaction.cc:413
+#: ../../../../src/wui/fieldaction.cc:420
 msgid "Immovable Actions"
 msgstr "Działania na obiektach nieruchomych"
 
-#: ../../../../src/wui/fieldaction.cc:401
+#: ../../../../src/wui/fieldaction.cc:419
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Oznacz ten obiekt, by został szybko usunięty przez odpowiedniego pracownika"
 
-#: ../../../../src/wui/fieldaction.cc:423
-#: ../../../../src/wui/fieldaction.cc:554
+#: ../../../../src/wui/fieldaction.cc:441
+#: ../../../../src/wui/fieldaction.cc:572
 msgid "Build road"
 msgstr "Buduj drogę"
 
-#: ../../../../src/wui/fieldaction.cc:427
+#: ../../../../src/wui/fieldaction.cc:445
 msgid "Build waterway"
 msgstr "Zbuduj drogę wodną"
 
-#: ../../../../src/wui/fieldaction.cc:435
+#: ../../../../src/wui/fieldaction.cc:453
 msgid "Destroy this flag"
 msgstr "Zniszcz flagę"
 
-#: ../../../../src/wui/fieldaction.cc:442
+#: ../../../../src/wui/fieldaction.cc:460
 msgid "Configure this flag’s economy"
 msgstr "Konfiguruj gospodarkę tej flagi"
 
-#: ../../../../src/wui/fieldaction.cc:445
+#: ../../../../src/wui/fieldaction.cc:463
 msgid "Send geologist to explore site"
 msgstr "Wyślij geologa do zbadania miejsca"
 
-#: ../../../../src/wui/fieldaction.cc:451
-#: ../../../../src/wui/fieldaction.cc:471
+#: ../../../../src/wui/fieldaction.cc:469
+#: ../../../../src/wui/fieldaction.cc:489
 msgid "Send scout to explore surroundings"
 msgstr "Wyślij zwiadowcę, aby zbadał okolicę"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../../../src/wui/fieldaction.cc:463
+#: ../../../../src/wui/fieldaction.cc:481
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "Musisz połączyć tę flagę z budynkiem zwiadowców, zanim będziesz mógł wysłać zwiadowcę tutaj."
 
-#: ../../../../src/wui/fieldaction.cc:491
+#: ../../../../src/wui/fieldaction.cc:509
 msgid "Place a flag"
 msgstr "Umieść flagę"
 
-#: ../../../../src/wui/fieldaction.cc:496
+#: ../../../../src/wui/fieldaction.cc:514
 msgid "Destroy a road"
 msgstr "Zniszcz drogę"
 
-#: ../../../../src/wui/fieldaction.cc:501
+#: ../../../../src/wui/fieldaction.cc:519
 msgid "Destroy a waterway"
 msgstr "Zniszcz drogę wodną"
 
-#: ../../../../src/wui/fieldaction.cc:521
+#: ../../../../src/wui/fieldaction.cc:539
 msgid "Configure this ocean’s ship fleet"
 msgstr "Skonfiguruj flotę statków na tym oceanie"
 
-#: ../../../../src/wui/fieldaction.cc:532
+#: ../../../../src/wui/fieldaction.cc:550
 msgid "Configure this ocean’s ferry fleet"
 msgstr "Skonfiguruj flotę promów na tym oceanie"
 
-#: ../../../../src/wui/fieldaction.cc:539
+#: ../../../../src/wui/fieldaction.cc:557
 msgid "Watch field in a separate window"
 msgstr "Obserwuj miejsce w oddzielnym oknie"
 
-#: ../../../../src/wui/fieldaction.cc:544
+#: ../../../../src/wui/fieldaction.cc:562
 msgid "Pinned note"
 msgstr "Przypięta notatka"
 
-#: ../../../../src/wui/fieldaction.cc:549
+#: ../../../../src/wui/fieldaction.cc:567
 msgid "Show debug window"
 msgstr "Pokaż okno debugowania"
 
-#: ../../../../src/wui/fieldaction.cc:557
+#: ../../../../src/wui/fieldaction.cc:575
 #: ../../../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Obserwacja"
 
-#: ../../../../src/wui/fieldaction.cc:674
+#: ../../../../src/wui/fieldaction.cc:692
 msgid "Build mines"
 msgstr "Zbuduj kopalnię"
 
-#: ../../../../src/wui/fieldaction.cc:689
-#: ../../../../src/wui/fieldaction.cc:716
+#: ../../../../src/wui/fieldaction.cc:707
+#: ../../../../src/wui/fieldaction.cc:734
 msgid "Build flag"
 msgstr "Postaw flagę"
 
-#: ../../../../src/wui/fieldaction.cc:693
+#: ../../../../src/wui/fieldaction.cc:711
 msgid "Cancel road"
 msgstr "Anuluj budowę drogi"
 
-#: ../../../../src/wui/fieldaction.cc:695
+#: ../../../../src/wui/fieldaction.cc:713
 msgid "Go to road"
 msgstr "Idź do drogi"
 
-#: ../../../../src/wui/fieldaction.cc:703
+#: ../../../../src/wui/fieldaction.cc:721
 msgid "Cancel road and start building waterway"
 msgstr "Anuluj drogę i rozpocznij budowanie drogi wodnej"
 
-#: ../../../../src/wui/fieldaction.cc:707
+#: ../../../../src/wui/fieldaction.cc:725
 msgid "Build roads"
 msgstr "Buduj drogę"
 
-#: ../../../../src/wui/fieldaction.cc:720
+#: ../../../../src/wui/fieldaction.cc:738
 msgid "Cancel waterway"
 msgstr "Anuluj drogę wodną"
 
-#: ../../../../src/wui/fieldaction.cc:722
+#: ../../../../src/wui/fieldaction.cc:740
 msgid "Go to waterway"
 msgstr "Idź do drogi wodnej"
 
-#: ../../../../src/wui/fieldaction.cc:725
+#: ../../../../src/wui/fieldaction.cc:743
 msgid "Cancel waterway and start building road"
 msgstr "Anuluj drogę wodną i rozpocznij budowanie drogi"
 
-#: ../../../../src/wui/fieldaction.cc:728
+#: ../../../../src/wui/fieldaction.cc:746
 msgid "Build waterways"
 msgstr "Buduj drogi wodne"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
-#: ../../../../src/wui/fieldaction.cc:1252
+#: ../../../../src/wui/fieldaction.cc:1270
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
 msgstr "Okręt wojenny - HP %1$u%% NA + %2$u%%"
 
-#: ../../../../src/wui/fieldaction.cc:1256
+#: ../../../../src/wui/fieldaction.cc:1274
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
 msgstr "Wrogi statek transportowy"
 
-#: ../../../../src/wui/fieldaction.cc:1258
+#: ../../../../src/wui/fieldaction.cc:1276
 msgctxt "ship_state"
 msgid "Expedition"
 msgstr "Ekspedycja"
 
-#: ../../../../src/wui/fieldaction.cc:1260
+#: ../../../../src/wui/fieldaction.cc:1278
 msgctxt "ship_state"
 msgid "Transport"
 msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../../../src/wui/fieldaction.cc:1262
+#: ../../../../src/wui/fieldaction.cc:1280
 #: ../../../../src/wui/interactive_gamebase.cc:626
 #: ../../../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../../../src/wui/fieldaction.cc:1272
+#: ../../../../src/wui/fieldaction.cc:1290
 msgid "Select Ship"
 msgstr "Wybór statku"
 
-#: ../../../../src/wui/fieldaction.cc:1295
+#: ../../../../src/wui/fieldaction.cc:1313
 msgid "Own Ships"
 msgstr "Swoje statki"
 
-#: ../../../../src/wui/fieldaction.cc:1309
+#: ../../../../src/wui/fieldaction.cc:1327
 msgid "Attackable Ships"
 msgstr "Statki możliwe do ataku"
 

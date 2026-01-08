@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-08 03:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -2014,7 +2014,7 @@ msgstr "그림자 언어"
 msgid "Copy link to clipboard"
 msgstr ""
 
-#: ../../../../src/graphic/text_layout.cc:278
+#: ../../../../src/graphic/text_layout.cc:287
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
@@ -9519,7 +9519,7 @@ msgid "Enhance to %s"
 msgstr "%s 로 향상"
 
 #: ../../../../src/wui/buildingwindow.cc:337
-#: ../../../../src/wui/fieldaction.cc:105
+#: ../../../../src/wui/fieldaction.cc:123
 msgid "Construction costs:"
 msgstr "건설 비용:"
 
@@ -9727,191 +9727,191 @@ msgstr ""
 msgid "This hyperlink seems to be broken."
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build medium building"
 msgstr "중간 건물 짓기"
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build small building"
 msgstr "작은 건물 짓기"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build big building"
 msgstr "큰 건물 짓기"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build port building"
 msgstr "항구 건물 짓기"
 
-#: ../../../../src/wui/fieldaction.cc:268
+#: ../../../../src/wui/fieldaction.cc:286
 msgid "Action"
 msgstr "행동"
 
-#: ../../../../src/wui/fieldaction.cc:394
+#: ../../../../src/wui/fieldaction.cc:412
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "일꾼이 제거하도록 표시했습니다 – 표시를 해제하려면 클릭하십시오"
 
-#: ../../../../src/wui/fieldaction.cc:395
-#: ../../../../src/wui/fieldaction.cc:402
+#: ../../../../src/wui/fieldaction.cc:413
+#: ../../../../src/wui/fieldaction.cc:420
 msgid "Immovable Actions"
 msgstr "부동산 행동"
 
-#: ../../../../src/wui/fieldaction.cc:401
+#: ../../../../src/wui/fieldaction.cc:419
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "적합한 일꾼이 제때에 제거할 수 있도록 이 부동 상태를 표시하십시오"
 
-#: ../../../../src/wui/fieldaction.cc:423
-#: ../../../../src/wui/fieldaction.cc:554
+#: ../../../../src/wui/fieldaction.cc:441
+#: ../../../../src/wui/fieldaction.cc:572
 msgid "Build road"
 msgstr "땅길 건설"
 
-#: ../../../../src/wui/fieldaction.cc:427
+#: ../../../../src/wui/fieldaction.cc:445
 msgid "Build waterway"
 msgstr "물길 만들기"
 
-#: ../../../../src/wui/fieldaction.cc:435
+#: ../../../../src/wui/fieldaction.cc:453
 msgid "Destroy this flag"
 msgstr "깃발을 파괴"
 
-#: ../../../../src/wui/fieldaction.cc:442
+#: ../../../../src/wui/fieldaction.cc:460
 msgid "Configure this flag’s economy"
 msgstr "이 깃발의 경제를 구성"
 
-#: ../../../../src/wui/fieldaction.cc:445
+#: ../../../../src/wui/fieldaction.cc:463
 msgid "Send geologist to explore site"
 msgstr "지질학자를 탐사 장소로 파견"
 
-#: ../../../../src/wui/fieldaction.cc:451
-#: ../../../../src/wui/fieldaction.cc:471
+#: ../../../../src/wui/fieldaction.cc:469
+#: ../../../../src/wui/fieldaction.cc:489
 msgid "Send scout to explore surroundings"
 msgstr "정찰대를 보내 주변을 탐색합니다"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../../../src/wui/fieldaction.cc:463
+#: ../../../../src/wui/fieldaction.cc:481
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "여기에 정찰대를 보내려면 먼저 이 깃발을 정찰대 건물에 연결해야 합니다."
 
-#: ../../../../src/wui/fieldaction.cc:491
+#: ../../../../src/wui/fieldaction.cc:509
 msgid "Place a flag"
 msgstr "깃발 건설"
 
-#: ../../../../src/wui/fieldaction.cc:496
+#: ../../../../src/wui/fieldaction.cc:514
 msgid "Destroy a road"
 msgstr "땅길을 파괴"
 
-#: ../../../../src/wui/fieldaction.cc:501
+#: ../../../../src/wui/fieldaction.cc:519
 msgid "Destroy a waterway"
 msgstr "물길을 파괴"
 
-#: ../../../../src/wui/fieldaction.cc:521
+#: ../../../../src/wui/fieldaction.cc:539
 msgid "Configure this ocean’s ship fleet"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:532
+#: ../../../../src/wui/fieldaction.cc:550
 msgid "Configure this ocean’s ferry fleet"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:539
+#: ../../../../src/wui/fieldaction.cc:557
 msgid "Watch field in a separate window"
 msgstr "분리된 창에 지역 주시하기"
 
-#: ../../../../src/wui/fieldaction.cc:544
+#: ../../../../src/wui/fieldaction.cc:562
 msgid "Pinned note"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:549
+#: ../../../../src/wui/fieldaction.cc:567
 msgid "Show debug window"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:557
+#: ../../../../src/wui/fieldaction.cc:575
 #: ../../../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "주시하기"
 
-#: ../../../../src/wui/fieldaction.cc:674
+#: ../../../../src/wui/fieldaction.cc:692
 msgid "Build mines"
 msgstr "광산 건설"
 
-#: ../../../../src/wui/fieldaction.cc:689
-#: ../../../../src/wui/fieldaction.cc:716
+#: ../../../../src/wui/fieldaction.cc:707
+#: ../../../../src/wui/fieldaction.cc:734
 msgid "Build flag"
 msgstr "깃발 건설"
 
-#: ../../../../src/wui/fieldaction.cc:693
+#: ../../../../src/wui/fieldaction.cc:711
 msgid "Cancel road"
 msgstr "땅길 취소"
 
-#: ../../../../src/wui/fieldaction.cc:695
+#: ../../../../src/wui/fieldaction.cc:713
 msgid "Go to road"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:703
+#: ../../../../src/wui/fieldaction.cc:721
 msgid "Cancel road and start building waterway"
 msgstr "땅길을 취소하고 물길을 만들기 시작합니다"
 
-#: ../../../../src/wui/fieldaction.cc:707
+#: ../../../../src/wui/fieldaction.cc:725
 msgid "Build roads"
 msgstr "땅길 건설"
 
-#: ../../../../src/wui/fieldaction.cc:720
+#: ../../../../src/wui/fieldaction.cc:738
 msgid "Cancel waterway"
 msgstr "물길을 취소"
 
-#: ../../../../src/wui/fieldaction.cc:722
+#: ../../../../src/wui/fieldaction.cc:740
 msgid "Go to waterway"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:725
+#: ../../../../src/wui/fieldaction.cc:743
 msgid "Cancel waterway and start building road"
 msgstr "물길을 취소하고 땅길을 만들기 시작합니다"
 
-#: ../../../../src/wui/fieldaction.cc:728
+#: ../../../../src/wui/fieldaction.cc:746
 msgid "Build waterways"
 msgstr "물길 만들기"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
-#: ../../../../src/wui/fieldaction.cc:1252
+#: ../../../../src/wui/fieldaction.cc:1270
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:1256
+#: ../../../../src/wui/fieldaction.cc:1274
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:1258
+#: ../../../../src/wui/fieldaction.cc:1276
 msgctxt "ship_state"
 msgid "Expedition"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:1260
+#: ../../../../src/wui/fieldaction.cc:1278
 msgctxt "ship_state"
 msgid "Transport"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../../../src/wui/fieldaction.cc:1262
+#: ../../../../src/wui/fieldaction.cc:1280
 #: ../../../../src/wui/interactive_gamebase.cc:626
 #: ../../../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../../../src/wui/fieldaction.cc:1272
+#: ../../../../src/wui/fieldaction.cc:1290
 msgid "Select Ship"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:1295
+#: ../../../../src/wui/fieldaction.cc:1313
 msgid "Own Ships"
 msgstr ""
 
-#: ../../../../src/wui/fieldaction.cc:1309
+#: ../../../../src/wui/fieldaction.cc:1327
 msgid "Attackable Ships"
 msgstr ""
 
