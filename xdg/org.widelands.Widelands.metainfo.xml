@@ -236,10 +236,10 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
       Widelands posiada tryb dla jednego gracza z kampaniami zawierającymi historię plemion i wyzwań, przed jakimi stają w uniwersum Widelands. Prawdziwa gra zaczyna się jednak, gdy razem z przyjaciółmi, poprzez internet lub LAN, budujecie wspólnie królestwa lub obracacie je w pył we wzajemnych wojnach. Spragnionym wyzwania Widelands oferuje także potyczki z SI.
     </p>
     <p xml:lang="pt">
-      Tu és o chefe dum pequeno clã. A tua tarefa é de construir um campo que se está sempre a desenvolver. Cada membro do clã vai fazer a sua parte para produzir o necessário para continuar o desenvolvimento.
+      Tu és o chefe de um pequeno clã. A tua tarefa é construir uma povoação em constante crescimento. Cada membro do teu clã vai fazer a sua parte para produzir mais recursos necessários para continuar o crescimento.
     </p>
     <p xml:lang="pt">
-      Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar.
+      Widelands oferece um modo de jogo solitário com campanhas que contam as histórias das tribos e os seus esforços no universo de Widelands. No entanto, a verdadeira adaptação começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se esmagarem mutuamente nas poeiras da guerra. Widelands também oferece uma inteligência artificial para o desafiar.
     </p>
     <p xml:lang="pt_BR">
       Você é o governante de um pequeno clã. Sua meta é construir um assentamento em constante crescimento. Cada membro do seu clã fará sua parte para produzir recursos de forma a sustentar esse crescimento.
@@ -429,6 +429,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="pl">Pobierz mapy i dodatki</li>
         <li xml:lang="pl">Nowe tryby wizualizacji w edytorze</li>
         <li xml:lang="pl">Wiele nowych możliwości dla twórców dodatków</li>
+        <li xml:lang="pt">Trocas de Mercado</li>
+        <li xml:lang="pt">Seis novos mapas foram adicionados e três mapas velhos removidos</li>
+        <li xml:lang="pt">Distritos Económicos </li>
+        <li xml:lang="pt">Many improvements to the in-game Encyclopedia</li>
+        <li xml:lang="pt">Descarregar mapas do website como add-ons</li>
+        <li xml:lang="pt">Novos modos de visualização no editor</li>
+        <li xml:lang="pt">Many new capabilities for add-on developers</li>
         <li xml:lang="pt_BR">Trocas comerciais</li>
         <li xml:lang="pt_BR">Seis novos mapas foram adicionados e três mapas antigos removidos</li>
         <li xml:lang="pt_BR">Distritos econômicos</li>
@@ -601,6 +608,7 @@ Version de correction de bugs</li>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
     <name xml:lang="nn">Widelands utviklarlag</name>
     <name xml:lang="pl">Zespół rozwojowy Widelands</name>
+    <name xml:lang="pt">A Equipa de Desenvolvimento The Widelands</name>
     <name xml:lang="pt_BR">Equipe de Desenvolvimento de Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
     <name xml:lang="sv">Widelands utvecklingsteam</name>

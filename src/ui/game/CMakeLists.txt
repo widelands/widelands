@@ -329,6 +329,7 @@ wl_library(ui_game_fieldaction
     ui_game_debug
     base_macros
     graphic
+    graphic_text_layout
     base
     ui_game_economy_options
     ui_game_actionconfirm
