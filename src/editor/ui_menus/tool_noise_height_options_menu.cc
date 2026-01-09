@@ -32,27 +32,10 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
-     box_(this,
-          UI::PanelStyle::kWui,
-          "main_box",
-          hmargin(),
-          vmargin(),
-          UI::Box::Vertical),
-     lower_box_(&box_,
-          UI::PanelStyle::kWui,
-          "lower_box",
-          0, 0,
-          UI::Box::Horizontal),
-     upper_box_(&box_,
-          UI::PanelStyle::kWui,
-          "upper_box",
-          0, 0,
-          UI::Box::Horizontal),
-     set_to_box_(&box_,
-          UI::PanelStyle::kWui,
-          "set_box",
-          0, 0,
-          UI::Box::Horizontal),
+     box_(this, UI::PanelStyle::kWui, "main_box", hmargin(), vmargin(), UI::Box::Vertical),
+     lower_box_(&box_, UI::PanelStyle::kWui, "lower_box", 0, 0, UI::Box::Horizontal),
+     upper_box_(&box_, UI::PanelStyle::kWui, "upper_box", 0, 0, UI::Box::Horizontal),
+     set_to_box_(&box_, UI::PanelStyle::kWui, "set_box", 0, 0, UI::Box::Horizontal),
      lower_(&lower_box_,
             "lower",
             0,
@@ -131,12 +114,13 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 
 		std::string tooltip = _("Select the height of a field by clicking on it on the map");
 		if (box == &set_to_box_) {
-			tooltip = as_tooltip_text_with_hotkey(tooltip,
-                                    shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
-                                    UI::PanelStyle::kWui);
+			tooltip = as_tooltip_text_with_hotkey(
+			   tooltip, shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+			   UI::PanelStyle::kWui);
 		}
 
-		UI::Button* picker = new UI::Button(box, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick …"), tooltip);
+		UI::Button* picker = new UI::Button(
+		   box, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick …"), tooltip);
 		box->add_space(hmargin());
 		box->add(picker, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
