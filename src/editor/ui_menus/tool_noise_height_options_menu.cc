@@ -22,6 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/noise_height_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
 
@@ -29,22 +30,34 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
    EditorNoiseHeightTool& noise_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options"), noise_tool),
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
      box_(this,
           UI::PanelStyle::kWui,
           "main_box",
           hmargin(),
           vmargin(),
-          UI::Box::Vertical,
-          0,
-          0,
-          vspacing()),
-     lower_(&box_,
+          UI::Box::Vertical),
+     lower_box_(&box_,
+          UI::PanelStyle::kWui,
+          "lower_box",
+          0, 0,
+          UI::Box::Horizontal),
+     upper_box_(&box_,
+          UI::PanelStyle::kWui,
+          "upper_box",
+          0, 0,
+          UI::Box::Horizontal),
+     set_to_box_(&box_,
+          UI::PanelStyle::kWui,
+          "set_box",
+          0, 0,
+          UI::Box::Horizontal),
+     lower_(&lower_box_,
             "lower",
             0,
             0,
-            get_inner_w() - 2 * hmargin(),
+            330,
             80,
             noise_tool_.get_interval().min,
             1,
@@ -53,11 +66,11 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             _("Minimum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
-     upper_(&box_,
+     upper_(&upper_box_,
             "upper",
             0,
             0,
-            get_inner_w() - 2 * hmargin(),
+            330,
             80,
             noise_tool_.get_interval().max,
             0,
@@ -66,11 +79,11 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             _("Maximum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
-     set_to_(&box_,
+     set_to_(&set_to_box_,
              "set_to",
              0,
              0,
-             get_inner_w() - 2 * hmargin(),
+             330,
              80,
              noise_tool_.set_tool().get_interval().min,
              0,
@@ -79,6 +92,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              _("Set height to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall) {
+	box_.set_size(330, 50);
+
 	lower_.set_tooltip(
 	   /** TRANSLATORS: Editor random height access key. **/
 	   _("Click on the map to set terrain height to a random value within the specified range"));
@@ -96,23 +111,42 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	UI::Textarea* label =
 	   new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_random", UI::FontStyle::kWuiLabel, 0, 0,
 	                    0, 0, _("Random height"), UI::Align::kCenter);
-	label->set_fixed_width(get_inner_w() - 2 * hmargin());
-	box_.add(label);
-	box_.add(&upper_);
-	box_.add(&lower_);
+	box_.add(label, UI::Box::Resizing::kFullSize);
+	upper_box_.add(&upper_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	lower_box_.add(&lower_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	box_.add(&upper_box_, UI::Box::Resizing::kFullSize);
+	box_.add_space(vspacing());
+	box_.add(&lower_box_, UI::Box::Resizing::kFullSize);
 
 	box_.add_space(2 * vspacing());
 	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_fixed", UI::FontStyle::kWuiLabel, 0,
 	                         0, 0, 0, _("Fixed height"), UI::Align::kCenter);
-	label->set_fixed_width(get_inner_w() - 2 * hmargin());
-	box_.add(label);
-	box_.add(&set_to_);
+	box_.add(label, UI::Box::Resizing::kFullSize);
+	set_to_box_.add(&set_to_);
+	box_.add(&set_to_box_, UI::Box::Resizing::kFullSize);
 
-	box_.set_size(get_inner_w() - 2 * hmargin(), upper_.get_h() + lower_.get_h() + set_to_.get_h() +
-	                                                2 * label->get_h() + 7 * vspacing());
+	for (UI::Box* box : {&upper_box_, &lower_box_, &set_to_box_}) {
+		UI::SpinBox* spinbox = dynamic_cast<UI::SpinBox*>(box->get_first_child());
+		assert(spinbox != nullptr);
 
-	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
+		std::string tooltip = _("Select the height of a field by clicking on it on the map");
+		if (box == &set_to_box_) {
+			tooltip = as_tooltip_text_with_hotkey(tooltip,
+                                    shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                    UI::PanelStyle::kWui);
+		}
 
+		UI::Button* picker = new UI::Button(box, "picker", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Pick …"), tooltip);
+		box->add_space(hmargin());
+		box->add(picker, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+		picker->sigclicked.connect([this, spinbox]() {
+			toggle_picker();
+			picker_target_ = spinbox;
+		});
+	}
+
+	set_center_panel(&box_);
 	initialization_complete();
 }
 
@@ -160,4 +194,26 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 void EditorToolNoiseHeightOptionsMenu::update_window() {
 	lower_.set_value(noise_tool_.get_interval().min);
 	upper_.set_value(noise_tool_.get_interval().max);
+}
+
+void EditorToolNoiseHeightOptionsMenu::toggle_picker() {
+	EditorToolOptionsMenu::toggle_picker();
+	picker_target_ = &set_to_;
+}
+
+bool EditorToolNoiseHeightOptionsMenu::pick_from_field(const Widelands::Map& map,
+                                                       const Widelands::NodeAndTriangle<>& center,
+                                                       const bool multiselect) {
+	const Widelands::Field& field = map[center.triangle.node];
+
+	UI::Panel::play_click();
+
+	picker_target_->set_value(field.get_height());
+
+	if (!multiselect) {
+		select_correct_tool();
+	}
+	update_window();
+
+	return !multiselect;
 }

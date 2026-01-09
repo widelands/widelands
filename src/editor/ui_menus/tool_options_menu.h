@@ -73,7 +73,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	}
 	void activate_picker();
 	void deactivate_picker();
-	void toggle_picker();
+	virtual void toggle_picker();
 	[[nodiscard]] bool picker_is_active() const;
 
 	/**
