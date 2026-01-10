@@ -90,6 +90,49 @@
           "type": "BOOL"
         }
       ]
+    },
+    {
+      "name": "x64-RelWithDebInfo-static",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\build\\${name}-install",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "VCPKG_TARGET_TRIPLET",
+          "value": "x64-windows-static",
+          "type": "STRING"
+        },
+        {
+          "name": "OPTION_BUILD_WEBSITE_TOOLS",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_BUILD_WINSTATIC",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_ASAN",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_USE_GLBINDING",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_BUILD_TESTS",
+          "value": "False",
+          "type": "BOOL"
+        }
+      ]
     }
   ]
 }
