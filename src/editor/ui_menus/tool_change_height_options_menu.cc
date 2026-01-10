@@ -119,14 +119,14 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 }
 
 void EditorToolChangeHeightOptionsMenu::update_window() {
-	change_by_.set_value(increase_tool_.get_change_by());
-	set_to_.set_value(increase_tool_.set_tool().get_interval().min);
+	change_by_.set_value(increase_tool_.get_change_by(), false);
+	set_to_.set_value(increase_tool_.set_tool().get_interval().min, false);
 }
 
 bool EditorToolChangeHeightOptionsMenu::pick_from_field(const Widelands::Map& map,
                                                         const Widelands::NodeAndTriangle<>& center,
                                                         const bool multiselect) {
-	const Widelands::Field& field = map[center.triangle.node];
+	const Widelands::Field& field = map[center.node];
 
 	UI::Panel::play_click();
 

@@ -195,13 +195,13 @@ void EditorToolChangeResourcesOptionsMenu::update() {
 
 void EditorToolChangeResourcesOptionsMenu::update_window() {
 	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
-	change_by_.set_value(increase_tool_.get_change_by());
-	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
+	change_by_.set_value(increase_tool_.get_change_by(), false);
+	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()), false);
 }
 
 bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
    const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center, const bool multiselect) {
-	const Widelands::Field& field = map[center.triangle.node];
+	const Widelands::Field& field = map[center.node];
 	const Widelands::DescriptionIndex resource_index = field.get_resources();
 	const int amount = field.get_resources_amount();
 

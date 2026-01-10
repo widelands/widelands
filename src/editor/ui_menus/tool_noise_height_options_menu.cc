@@ -125,7 +125,13 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 		box->add(picker, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		picker->sigclicked.connect([this, spinbox]() {
-			toggle_picker();
+			if (picker_is_active()) {
+				if (spinbox == picker_target_) {
+					deactivate_picker();
+				}
+			} else {
+				activate_picker();
+			}
 			picker_target_ = spinbox;
 		});
 	}
@@ -161,10 +167,13 @@ void EditorToolNoiseHeightOptionsMenu::update_interval(int32_t lower, int32_t up
 	Widelands::HeightInterval height_interval(lower, upper);
 	assert(height_interval.valid());
 
-	lower_.set_value(height_interval.min);
-	upper_.set_value(height_interval.max);
+	lower_.set_value(height_interval.min, false);
+	upper_.set_value(height_interval.max, false);
 	noise_tool_.set_interval(height_interval);
-	select_correct_tool();
+
+	if (!picker_is_active()) {
+		select_correct_tool();
+	}
 }
 
 void EditorToolNoiseHeightOptionsMenu::update_set_to() {
@@ -172,12 +181,14 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 	assert(set_to >= 0);
 	assert(set_to <= MAX_FIELD_HEIGHT);
 	noise_tool_.set_tool().set_interval(Widelands::HeightInterval(set_to, set_to));
-	select_correct_tool();
+	if (!picker_is_active()) {
+		select_correct_tool();
+	}
 }
 
 void EditorToolNoiseHeightOptionsMenu::update_window() {
-	lower_.set_value(noise_tool_.get_interval().min);
-	upper_.set_value(noise_tool_.get_interval().max);
+	lower_.set_value(noise_tool_.get_interval().min, false);
+	upper_.set_value(noise_tool_.get_interval().max, false);
 }
 
 void EditorToolNoiseHeightOptionsMenu::toggle_picker() {

@@ -87,7 +87,7 @@ void EditorToolPlaceCritterOptionsMenu::update_window() {
 bool EditorToolPlaceCritterOptionsMenu::pick_from_field(const Widelands::Map& map,
                                                         const Widelands::NodeAndTriangle<>& center,
                                                         const bool multiselect) {
-	const Widelands::Field& field = map[center.triangle.node];
+	const Widelands::Field& field = map[center.node];
 
 	std::set<Widelands::DescriptionIndex> indices;
 	for (const Widelands::Bob* bob = field.get_first_bob(); bob != nullptr;

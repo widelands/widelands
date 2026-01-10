@@ -74,7 +74,7 @@ void EditorToolOptionsMenu::deactivate_picker() {
 
 void EditorToolOptionsMenu::toggle_picker() {
 	if (picker_is_active()) {
-		select_correct_tool();
+		deactivate_picker();
 	} else {
 		activate_picker();
 	}
