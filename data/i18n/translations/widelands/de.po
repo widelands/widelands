@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # 11432e78848bb4940138532ffe479e21, 2015
@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-10 03:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -809,12 +809,12 @@ msgstr "Möchtest du den Editor wirklich verlassen?"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:575
 #: ../../../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #: ../../../../src/ui_fsmenu/launch_mpg.cc:328
-#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2030
+#: ../../../../src/ui_fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2033
 msgid "Error"
 msgstr "Fehler"
 
 #: ../../../../src/editor/editorinteractive.cc:1279
-#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2032
+#: ../../../../src/ui_fsmenu/main.cc:289 ../../../../src/wlapplication.cc:2035
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -2040,7 +2040,7 @@ msgstr "Shading Language"
 msgid "Copy link to clipboard"
 msgstr "Verknüpfung in die Zwischenablage kopieren"
 
-#: ../../../../src/graphic/text_layout.cc:278
+#: ../../../../src/graphic/text_layout.cc:287
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
@@ -3337,7 +3337,7 @@ msgstr "Schiffe"
 #: ../../../../src/wui/general_statistics_menu.cc:165
 #: ../../../../src/wui/interactive_player.cc:329
 #: ../../../../src/wui/productionsitewindow.cc:90
-#: ../../../../src/wui/warehousewindow.cc:295
+#: ../../../../src/wui/warehousewindow.cc:306
 msgid "Wares"
 msgstr "Waren"
 
@@ -3348,7 +3348,7 @@ msgstr "Waren"
 #: ../../../../src/wui/economy_options_window.cc:78
 #: ../../../../src/wui/general_statistics_menu.cc:156
 #: ../../../../src/wui/productionsitewindow.cc:110
-#: ../../../../src/wui/warehousewindow.cc:299
+#: ../../../../src/wui/warehousewindow.cc:310
 msgid "Workers"
 msgstr "Arbeiter"
 
@@ -3719,7 +3719,7 @@ msgstr "Kartenobjekte nachladen"
 #: ../../../../src/network/gameclient.cc:171
 #: ../../../../src/network/gamehost.cc:580
 #: ../../../../src/ui_fsmenu/launch_spg.cc:174
-#: ../../../../src/wlapplication.cc:916
+#: ../../../../src/wlapplication.cc:919
 msgid "Preparing game…"
 msgstr "Spiel wird vorbereitet …"
 
@@ -6962,7 +6962,7 @@ msgstr "Spielername:"
 #. * and must not be "team".
 #: ../../../../src/ui_fsmenu/login_box.cc:119
 #: ../../../../src/ui_fsmenu/netsetup_lan.cc:140
-#: ../../../../src/wlapplication.cc:835
+#: ../../../../src/wlapplication.cc:837
 msgid "nobody"
 msgstr "niemand"
 
@@ -8108,93 +8108,93 @@ msgstr "Alles markieren"
 msgid "Unmark All"
 msgstr "Alle Markierungen aufheben"
 
-#: ../../../../src/wlapplication.cc:966
+#: ../../../../src/wlapplication.cc:969
 msgid "Widelands could not find the last edited map."
 msgstr "Widelands konnte die letzte editierte Karte nicht finden."
 
-#: ../../../../src/wlapplication.cc:971
+#: ../../../../src/wlapplication.cc:974
 msgid "No Last Edited Map"
 msgstr "Keine letzte editierte Karte"
 
-#: ../../../../src/wlapplication.cc:1001
+#: ../../../../src/wlapplication.cc:1004
 msgid "No last saved replay."
 msgstr "Keine letzte gespeicherte Aufzeichnung."
 
-#: ../../../../src/wlapplication.cc:1003
+#: ../../../../src/wlapplication.cc:1006
 msgid "No last saved game."
 msgstr "Kein letztes gespeichertes Spiel."
 
-#: ../../../../src/wlapplication.cc:1013
+#: ../../../../src/wlapplication.cc:1016
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands konnte die Datei „%s“ nicht finden."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../../../src/wlapplication.cc:1014 ../../../../src/wlapplication.cc:1019
+#: ../../../../src/wlapplication.cc:1017 ../../../../src/wlapplication.cc:1022
 #: ../../../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Fehlermeldung:"
 
-#: ../../../../src/wlapplication.cc:1015
+#: ../../../../src/wlapplication.cc:1018
 msgid "File system error"
 msgstr "Dateisystemfehler"
 
-#: ../../../../src/wlapplication.cc:1576
+#: ../../../../src/wlapplication.cc:1579
 #, c-format
 msgid "Command line parameter --%s can not use a value"
 msgstr "Der Kommandozeilenparameter --%s kann keine Werte verarbeiten"
 
-#: ../../../../src/wlapplication.cc:1581
+#: ../../../../src/wlapplication.cc:1584
 #, c-format
 msgid "Empty value of command line parameter --%s"
 msgstr "Es fehlt ein Wert für den Kommandozeilenparameter --%s"
 
-#: ../../../../src/wlapplication.cc:1587
+#: ../../../../src/wlapplication.cc:1590
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
 msgstr "Die Kommandozeilenparameter --%1$s und --%2$s können nicht kombiniert werden"
 
-#: ../../../../src/wlapplication.cc:1773
+#: ../../../../src/wlapplication.cc:1776
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Unbekannter Kommandozeilenparameter:%s\nVielleicht fehlt ein „=“?"
 
-#: ../../../../src/wlapplication.cc:1792
+#: ../../../../src/wlapplication.cc:1795
 #, c-format
 msgid "Non-integer value for command line parameter --messagebox-timeout=%s"
 msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --messagebox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1806
+#: ../../../../src/wlapplication.cc:1809
 #, c-format
 msgid ""
 "Value is out of range for command line parameter --messagebox-timeout=%s"
 msgstr "Wert außerhalb des Wertebereichs für Kommandozeilenparameter --messagebox-timeout=%s"
 
-#: ../../../../src/wlapplication.cc:1874
+#: ../../../../src/wlapplication.cc:1877
 #, c-format
 msgid "Non-integer value for command line parameter --difficulty=%s"
 msgstr "Nicht ganzzahliger Wert für Kommandozeilenparameter --difficulty=%s"
 
-#: ../../../../src/wlapplication.cc:1971
+#: ../../../../src/wlapplication.cc:1974
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Unbekannter Kommandozeilenparameter: %s"
 
-#: ../../../../src/wlapplication.cc:2005
+#: ../../../../src/wlapplication.cc:2008
 msgid "Incompatible"
 msgstr "Inkompatibel"
 
-#: ../../../../src/wlapplication.cc:2045
+#: ../../../../src/wlapplication.cc:2048
 msgid "Game ended unexpectedly"
 msgstr "Das Spiel endete unerwartet"
 
-#: ../../../../src/wlapplication.cc:2045
+#: ../../../../src/wlapplication.cc:2048
 msgid "Unexpected error during the game"
 msgstr "Unerwarteter Fehler während des Spiels"
 
-#: ../../../../src/wlapplication.cc:2048
+#: ../../../../src/wlapplication.cc:2051
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -8208,7 +8208,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Ein Fehler ist während des Spiels aufgetreten. Die Fehlermeldung lautet:\n\n%1$s\n\nBitte melde dieses Problem um uns zu helfen Widelands zu verbessern. Du findest zugehörige Meldungen in der Standardausgabe (stdout.txt bei Windows). Du benutzt Version %2$s.\n\nBitte füge diese Informationen deiner Meldung hinzu.\n\nMöchtest du, dass Widelands eine Notfallspeicherung versucht? Es ist oft – wenn auch nicht immer – möglich, das so gespeicherte Spiel zu laden und weiterzuspielen."
 
-#: ../../../../src/wlapplication.cc:2057
+#: ../../../../src/wlapplication.cc:2060
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -8218,11 +8218,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Das Spiel endete unerwartet aus folgendem Grund:\n\n%s\n\nMöchtest du, dass Widelands versucht den Spielstand für diesen Notfall zu speichern? Es ist oft – wenn auch nicht immer – möglich, das Spiel wieder zu laden und weiterzuspielen."
 
-#: ../../../../src/wlapplication.cc:2091
+#: ../../../../src/wlapplication.cc:2094
 msgid "Emergency save failed"
 msgstr "Notfallspeicherung fehlgeschlagen"
 
-#: ../../../../src/wlapplication.cc:2092
+#: ../../../../src/wlapplication.cc:2095
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -9590,7 +9590,7 @@ msgid "Enhance to %s"
 msgstr "Erweitern zu %s"
 
 #: ../../../../src/wui/buildingwindow.cc:337
-#: ../../../../src/wui/fieldaction.cc:105
+#: ../../../../src/wui/fieldaction.cc:123
 msgid "Construction costs:"
 msgstr "Baukosten:"
 
@@ -9646,22 +9646,22 @@ msgid "Stop this building’s work after completion"
 msgstr "Gebäudearbeit nach Fertigstellung stoppen"
 
 #: ../../../../src/wui/constructionsitewindow.cc:276
-#: ../../../../src/wui/warehousewindow.cc:157
+#: ../../../../src/wui/warehousewindow.cc:158
 msgid "Normal policy"
 msgstr "Standardeinstellung"
 
 #: ../../../../src/wui/constructionsitewindow.cc:280
-#: ../../../../src/wui/warehousewindow.cc:158
+#: ../../../../src/wui/warehousewindow.cc:159
 msgid "Preferably store selected wares here"
 msgstr "Ausgewählte Waren bevorzugt hier einlagern"
 
 #: ../../../../src/wui/constructionsitewindow.cc:284
-#: ../../../../src/wui/warehousewindow.cc:159
+#: ../../../../src/wui/warehousewindow.cc:160
 msgid "Do not store selected wares here"
 msgstr "Ausgewählte Waren nicht hier einlagern"
 
 #: ../../../../src/wui/constructionsitewindow.cc:288
-#: ../../../../src/wui/warehousewindow.cc:160
+#: ../../../../src/wui/warehousewindow.cc:161
 msgid "Remove selected wares from here"
 msgstr "Ausgewählte Waren von hier auslagern"
 
@@ -9798,239 +9798,240 @@ msgstr "Defekte Verknüpfung"
 msgid "This hyperlink seems to be broken."
 msgstr "Diese Verknüpfung scheint nicht mehr zu funktionieren."
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build medium building"
 msgstr "Baue mittlere Gebäude"
 
-#: ../../../../src/wui/fieldaction.cc:235
+#: ../../../../src/wui/fieldaction.cc:253
 msgid "Build small building"
 msgstr "Baue kleine Gebäude"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build big building"
 msgstr "Baue große Gebäude"
 
-#: ../../../../src/wui/fieldaction.cc:236
+#: ../../../../src/wui/fieldaction.cc:254
 msgid "Build port building"
 msgstr "Baue Hafengebäude"
 
-#: ../../../../src/wui/fieldaction.cc:268
+#: ../../../../src/wui/fieldaction.cc:286
 msgid "Action"
 msgstr "Aktion"
 
-#: ../../../../src/wui/fieldaction.cc:394
+#: ../../../../src/wui/fieldaction.cc:412
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "Für die Entfernung durch einen Arbeiter markiert – klicken, um Markierung aufzuheben"
 
-#: ../../../../src/wui/fieldaction.cc:395
-#: ../../../../src/wui/fieldaction.cc:402
+#: ../../../../src/wui/fieldaction.cc:413
+#: ../../../../src/wui/fieldaction.cc:420
 msgid "Immovable Actions"
 msgstr "Aktionen für unbewegliche Objekte"
 
-#: ../../../../src/wui/fieldaction.cc:401
+#: ../../../../src/wui/fieldaction.cc:419
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Dieses unbewegliche Objekt für die zeitnahe Entfernung durch einen geeigneten Arbeiter markieren"
 
-#: ../../../../src/wui/fieldaction.cc:423
-#: ../../../../src/wui/fieldaction.cc:554
+#: ../../../../src/wui/fieldaction.cc:444
+#: ../../../../src/wui/fieldaction.cc:577
 msgid "Build road"
 msgstr "Baue Straße"
 
-#: ../../../../src/wui/fieldaction.cc:427
+#: ../../../../src/wui/fieldaction.cc:448
 msgid "Build waterway"
 msgstr "Baue Wasserweg"
 
-#: ../../../../src/wui/fieldaction.cc:435
+#: ../../../../src/wui/fieldaction.cc:456
 msgid "Destroy this flag"
 msgstr "Flagge abreißen"
 
-#: ../../../../src/wui/fieldaction.cc:442
+#: ../../../../src/wui/fieldaction.cc:463
 msgid "Configure this flag’s economy"
 msgstr "Wirtschaft dieser Flagge konfigurieren"
 
-#: ../../../../src/wui/fieldaction.cc:445
+#: ../../../../src/wui/fieldaction.cc:466
 msgid "Send geologist to explore site"
 msgstr "Sende einen Geologen, um die Fläche zu untersuchen"
 
-#: ../../../../src/wui/fieldaction.cc:451
-#: ../../../../src/wui/fieldaction.cc:471
+#: ../../../../src/wui/fieldaction.cc:472
+#: ../../../../src/wui/fieldaction.cc:492
 msgid "Send scout to explore surroundings"
 msgstr "Sende einen Kundschafter, um die Umgebung zu untersuchen"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../../../src/wui/fieldaction.cc:463
+#: ../../../../src/wui/fieldaction.cc:484
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "Du musst diese Flagge mit einem Kundschaftergebäude verbinden, bevor du einen Kundschafter hierher senden kannst."
 
-#: ../../../../src/wui/fieldaction.cc:491
+#: ../../../../src/wui/fieldaction.cc:512
 msgid "Place a flag"
 msgstr "Setze eine Flagge"
 
-#: ../../../../src/wui/fieldaction.cc:496
+#: ../../../../src/wui/fieldaction.cc:517
 msgid "Destroy a road"
 msgstr "Straße zerstören"
 
-#: ../../../../src/wui/fieldaction.cc:501
+#: ../../../../src/wui/fieldaction.cc:522
 msgid "Destroy a waterway"
 msgstr "Wasserweg zerstören"
 
-#: ../../../../src/wui/fieldaction.cc:521
+#: ../../../../src/wui/fieldaction.cc:550
+#: ../../../../src/wui/warehousewindow.cc:199
 msgid "Configure this ocean’s ship fleet"
 msgstr "Schiffsflotte dieses Ozeans konfigurieren"
 
-#: ../../../../src/wui/fieldaction.cc:532
+#: ../../../../src/wui/fieldaction.cc:555
 msgid "Configure this ocean’s ferry fleet"
 msgstr "Fährenflotte dieses Ozeans konfigurieren"
 
-#: ../../../../src/wui/fieldaction.cc:539
+#: ../../../../src/wui/fieldaction.cc:562
 msgid "Watch field in a separate window"
 msgstr "Beobachte das Feld in einem separaten Fenster"
 
-#: ../../../../src/wui/fieldaction.cc:544
+#: ../../../../src/wui/fieldaction.cc:567
 msgid "Pinned note"
 msgstr "Haftnotiz"
 
-#: ../../../../src/wui/fieldaction.cc:549
+#: ../../../../src/wui/fieldaction.cc:572
 msgid "Show debug window"
 msgstr "Zeige das Debugfenster"
 
-#: ../../../../src/wui/fieldaction.cc:557
+#: ../../../../src/wui/fieldaction.cc:580
 #: ../../../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Beobachten"
 
-#: ../../../../src/wui/fieldaction.cc:674
+#: ../../../../src/wui/fieldaction.cc:697
 msgid "Build mines"
 msgstr "Baue Minen"
 
-#: ../../../../src/wui/fieldaction.cc:689
-#: ../../../../src/wui/fieldaction.cc:716
+#: ../../../../src/wui/fieldaction.cc:712
+#: ../../../../src/wui/fieldaction.cc:739
 msgid "Build flag"
 msgstr "Setze Flagge"
 
-#: ../../../../src/wui/fieldaction.cc:693
+#: ../../../../src/wui/fieldaction.cc:716
 msgid "Cancel road"
 msgstr "Straßenbau abbrechen"
 
-#: ../../../../src/wui/fieldaction.cc:695
+#: ../../../../src/wui/fieldaction.cc:718
 msgid "Go to road"
 msgstr "Gehe zur Straße"
 
-#: ../../../../src/wui/fieldaction.cc:703
+#: ../../../../src/wui/fieldaction.cc:726
 msgid "Cancel road and start building waterway"
 msgstr "Straßenbau abbrechen und Wasserweg bauen"
 
-#: ../../../../src/wui/fieldaction.cc:707
+#: ../../../../src/wui/fieldaction.cc:730
 msgid "Build roads"
 msgstr "Baue Straßen"
 
-#: ../../../../src/wui/fieldaction.cc:720
+#: ../../../../src/wui/fieldaction.cc:743
 msgid "Cancel waterway"
 msgstr "Wasserwegebau abbrechen"
 
-#: ../../../../src/wui/fieldaction.cc:722
+#: ../../../../src/wui/fieldaction.cc:745
 msgid "Go to waterway"
 msgstr "Gehe zum Wasserweg"
 
-#: ../../../../src/wui/fieldaction.cc:725
+#: ../../../../src/wui/fieldaction.cc:748
 msgid "Cancel waterway and start building road"
 msgstr "Wasserwegebau abbrechen und Straße bauen"
 
-#: ../../../../src/wui/fieldaction.cc:728
+#: ../../../../src/wui/fieldaction.cc:751
 msgid "Build waterways"
 msgstr "Baue Wasserwege"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
-#: ../../../../src/wui/fieldaction.cc:1252
+#: ../../../../src/wui/fieldaction.cc:1282
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
 msgstr "Kriegsschiff · Leben %1$u%% · Angr. +%2$u%%"
 
-#: ../../../../src/wui/fieldaction.cc:1256
+#: ../../../../src/wui/fieldaction.cc:1286
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
 msgstr "Feindliches Transportschiff"
 
-#: ../../../../src/wui/fieldaction.cc:1258
+#: ../../../../src/wui/fieldaction.cc:1288
 msgctxt "ship_state"
 msgid "Expedition"
 msgstr "Expedition"
 
-#: ../../../../src/wui/fieldaction.cc:1260
+#: ../../../../src/wui/fieldaction.cc:1290
 msgctxt "ship_state"
 msgid "Transport"
 msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../../../src/wui/fieldaction.cc:1262
+#: ../../../../src/wui/fieldaction.cc:1292
 #: ../../../../src/wui/interactive_gamebase.cc:626
 #: ../../../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../../../src/wui/fieldaction.cc:1272
+#: ../../../../src/wui/fieldaction.cc:1302
 msgid "Select Ship"
 msgstr "Schiff wählen"
 
-#: ../../../../src/wui/fieldaction.cc:1295
+#: ../../../../src/wui/fieldaction.cc:1325
 msgid "Own Ships"
 msgstr "Eigene Schiffe"
 
-#: ../../../../src/wui/fieldaction.cc:1309
+#: ../../../../src/wui/fieldaction.cc:1339
 msgid "Attackable Ships"
 msgstr "Angreifbare Schiffe"
 
-#: ../../../../src/wui/fleet_options_window.cc:94
+#: ../../../../src/wui/fleet_options_window.cc:111
 msgid "Ferry Fleet Options"
 msgstr "Fährenflottenoptionen"
 
-#: ../../../../src/wui/fleet_options_window.cc:94
+#: ../../../../src/wui/fleet_options_window.cc:111
 msgid "Ship Fleet Options"
 msgstr "Schiffsflottenoptionen"
 
-#: ../../../../src/wui/fleet_options_window.cc:124
+#: ../../../../src/wui/fleet_options_window.cc:141
 msgid "Toggle infinite production"
 msgstr "Unendliche Produktion an/aus"
 
-#: ../../../../src/wui/fleet_options_window.cc:134
+#: ../../../../src/wui/fleet_options_window.cc:151
 msgid "Fleet Statistics"
 msgstr "Flottenstatistik"
 
-#: ../../../../src/wui/fleet_options_window.cc:158
+#: ../../../../src/wui/fleet_options_window.cc:175
 msgid "Ports:"
 msgstr "Häfen:"
 
-#: ../../../../src/wui/fleet_options_window.cc:159
+#: ../../../../src/wui/fleet_options_window.cc:176
 msgid "Ships:"
 msgstr "Schiffe:"
 
-#: ../../../../src/wui/fleet_options_window.cc:161
+#: ../../../../src/wui/fleet_options_window.cc:178
 msgid "Total waterways:"
 msgstr "Alle Wasserwege:"
 
-#: ../../../../src/wui/fleet_options_window.cc:162
+#: ../../../../src/wui/fleet_options_window.cc:179
 msgid "Unserviced waterways:"
 msgstr "Unbesetzte Wasserwege:"
 
-#: ../../../../src/wui/fleet_options_window.cc:163
+#: ../../../../src/wui/fleet_options_window.cc:180
 msgid "Total ferries:"
 msgstr "Alle Fähren:"
 
-#: ../../../../src/wui/fleet_options_window.cc:164
+#: ../../../../src/wui/fleet_options_window.cc:181
 msgid "Unemployed ferries:"
 msgstr "Ungenutzte Fähren:"
 
-#: ../../../../src/wui/fleet_options_window.cc:175
+#: ../../../../src/wui/fleet_options_window.cc:192
 msgid "Desired number of transport ships:"
 msgstr "Gewünschte Menge an Transportschiffen:"
 
-#: ../../../../src/wui/fleet_options_window.cc:176
+#: ../../../../src/wui/fleet_options_window.cc:193
 msgid "Desired number of unemployed ferries:"
 msgstr "Gewünschte Menge ungenutzter Fähren:"
 
@@ -10967,7 +10968,7 @@ msgstr "Seefahrt"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../../../src/wui/interactive_player.cc:314
 #: ../../../../src/wui/militarysitewindow.cc:40
-#: ../../../../src/wui/warehousewindow.cc:326
+#: ../../../../src/wui/warehousewindow.cc:337
 msgid "Soldiers"
 msgstr "Soldaten"
 
@@ -12149,35 +12150,35 @@ msgstr "Verbrauch"
 msgid "Economy health"
 msgstr "Wirtschaftszustand"
 
-#: ../../../../src/wui/warehousewindow.cc:165
+#: ../../../../src/wui/warehousewindow.cc:166
 msgid "Remove 10 wares"
 msgstr "Entferne 10 Waren"
 
-#: ../../../../src/wui/warehousewindow.cc:172
+#: ../../../../src/wui/warehousewindow.cc:173
 msgid "Remove a ware"
 msgstr "Entferne eine Ware"
 
-#: ../../../../src/wui/warehousewindow.cc:179
+#: ../../../../src/wui/warehousewindow.cc:180
 msgid "Add a ware"
 msgstr "Füge eine Ware hinzu"
 
-#: ../../../../src/wui/warehousewindow.cc:186
+#: ../../../../src/wui/warehousewindow.cc:187
 msgid "Add 10 wares"
 msgstr "Füge 10 Waren hinzu"
 
-#: ../../../../src/wui/warehousewindow.cc:197
+#: ../../../../src/wui/warehousewindow.cc:208
 msgid "Configure this building’s economy"
 msgstr "Wirtschaft dieses Gebäudes konfigurieren"
 
-#: ../../../../src/wui/warehousewindow.cc:331
+#: ../../../../src/wui/warehousewindow.cc:342
 msgid "Wares waiting to be shipped"
 msgstr "Waren, die verladen werden sollen"
 
-#: ../../../../src/wui/warehousewindow.cc:334
+#: ../../../../src/wui/warehousewindow.cc:345
 msgid "Workers waiting to embark"
 msgstr "Arbeiter, die an Bord gehen wollen"
 
-#: ../../../../src/wui/warehousewindow.cc:340
+#: ../../../../src/wui/warehousewindow.cc:351
 msgid "Expedition"
 msgstr "Expedition"
 
