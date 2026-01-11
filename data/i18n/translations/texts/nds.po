@@ -807,7 +807,7 @@ msgstr "Eenige Husen, to ’n Bispööl de Buurderee, hebben een bannig lüttes 
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Maak de Sicht mit de Muusraad of %1%/%2% groter of lütter. Drück %3%/%4% för de gröttste of lüttste Sicht. Drück %5%, um dat Vergrotern torüggtosetten."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""

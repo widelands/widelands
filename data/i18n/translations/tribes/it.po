@@ -34,13 +34,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
 msgctxt "amazons_building"
 msgid "Market"
-msgstr ""
+msgstr "Mercato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
 msgctxt "atlanteans_building"
 msgid "Market"
-msgstr ""
+msgstr "Mercato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
@@ -52,13 +52,13 @@ msgstr "Mercato"
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
 msgctxt "empire_building"
 msgid "Market"
-msgstr ""
+msgstr "Mercato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
 msgctxt "frisians_building"
 msgid "Market"
-msgstr ""
+msgstr "Mercato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -4318,7 +4318,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:115
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
@@ -4382,7 +4382,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4452,7 +4452,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4536,7 +4536,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:195
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4653,7 +4653,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:183
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -5305,7 +5305,7 @@ msgstr "Cantiere navale"
 #: ../../../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
 #: ../../../../data/tribes/immovables/trees/balsa/mature/winter/init.lua:11
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "Albero di balsa (maturo)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
@@ -5313,7 +5313,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
 #: ../../../../data/tribes/immovables/trees/balsa/old/winter/init.lua:11
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "Albero di balsa (vecchio)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
@@ -5321,7 +5321,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
 #: ../../../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Albero di balsa"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
@@ -5412,7 +5412,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
 #: ../../../../data/tribes/immovables/trees/rubber/mature/winter/init.lua:11
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "Albero di gomma (maturo)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
@@ -5420,7 +5420,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
 #: ../../../../data/tribes/immovables/trees/rubber/old/winter/init.lua:11
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "Albero di gomma (vecchio)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
@@ -5428,7 +5428,7 @@ msgstr ""
 #: ../../../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
 #: ../../../../data/tribes/immovables/trees/rubber/old/winter/init.lua:13
 msgid "Rubber Tree"
-msgstr ""
+msgstr "Albero di gomma"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
@@ -7042,31 +7042,31 @@ msgstr "Barbados"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:177
 msgctxt "shipname"
 msgid "Barbuda"
-msgstr ""
+msgstr "Barbuda"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:179
 msgctxt "shipname"
 msgid "Beryl"
-msgstr ""
+msgstr "Beryl"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:181
 msgctxt "shipname"
 msgid "Blanquilla"
-msgstr ""
+msgstr "Blanquilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:183
 msgctxt "shipname"
 msgid "Caicos"
-msgstr ""
+msgstr "Caicos"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr ""
+msgstr "Cassiterite"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:187
@@ -7078,25 +7078,25 @@ msgstr "Occhio del gatto"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Citrine"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../../../data/tribes/ships/atlanteans/init.lua:191
 msgctxt "shipname"
 msgid "Colionder"
-msgstr ""
+msgstr "Colionder"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:195
 msgctxt "shipname"
 msgid "Eleuthera"
-msgstr ""
+msgstr "Eleuthera"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:197
@@ -7108,31 +7108,31 @@ msgstr "Smeraldo"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:203
 msgctxt "shipname"
 msgid "Inagua"
-msgstr ""
+msgstr "Inagua"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../../../data/tribes/ships/atlanteans/init.lua:205
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Juventud"
-msgstr ""
+msgstr "Juventud"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../../../data/tribes/ships/atlanteans/init.lua:209
@@ -7156,49 +7156,49 @@ msgstr "Kitts"
 #: ../../../../data/tribes/ships/atlanteans/init.lua:215
 msgctxt "shipname"
 msgid "Loftomor"
-msgstr ""
+msgstr "Loftomor"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:217
 msgctxt "shipname"
 msgid "Malachite"
-msgstr ""
+msgstr "Malachite"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:221
 msgctxt "shipname"
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:223
 msgctxt "shipname"
 msgid "Moonstone"
-msgstr ""
+msgstr "Pietra lunare"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:225
 msgctxt "shipname"
 msgid "Mystic Quartz"
-msgstr ""
+msgstr "Quarzo mistico"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:227
 msgctxt "shipname"
 msgid "Nassau"
-msgstr ""
+msgstr "Nassau"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../../../data/tribes/ships/atlanteans/init.lua:229
 msgctxt "shipname"
 msgid "Nevis"
-msgstr ""
+msgstr "Nevis"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:231
@@ -7276,7 +7276,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/atlanteans/init.lua:255
 msgctxt "shipname"
 msgid "Sunstone"
-msgstr ""
+msgstr "Pietra solare"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../../../data/tribes/ships/atlanteans/init.lua:257
@@ -7402,7 +7402,7 @@ msgstr "Hagbard"
 #: ../../../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:69
@@ -7546,7 +7546,7 @@ msgstr "Valchiria"
 #: ../../../../data/tribes/ships/barbarians/init.lua:115
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Wisent"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:117
@@ -7576,13 +7576,13 @@ msgstr "Mare Adriatico"
 #: ../../../../data/tribes/ships/empire/init.lua:43
 msgctxt "shipname"
 msgid "Adamas"
-msgstr ""
+msgstr "Adamas"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:45
 msgctxt "shipname"
 msgid "Agrippa"
-msgstr ""
+msgstr "Agrippa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:47
@@ -7612,7 +7612,7 @@ msgstr "Apollo"
 #: ../../../../data/tribes/ships/empire/init.lua:55
 msgctxt "shipname"
 msgid "Aquila"
-msgstr ""
+msgstr "Aquila"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:57
@@ -7624,13 +7624,13 @@ msgstr "Augustus"
 #: ../../../../data/tribes/ships/empire/init.lua:59
 msgctxt "shipname"
 msgid "Aurum"
-msgstr ""
+msgstr "Aurum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:61
 msgctxt "shipname"
 msgid "Azurea Sea"
-msgstr ""
+msgstr "Azurea Sea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:63
@@ -7672,7 +7672,7 @@ msgstr "Carrara"
 #: ../../../../data/tribes/ships/empire/init.lua:75
 msgctxt "shipname"
 msgid "Cato"
-msgstr ""
+msgstr "Cato"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:77
@@ -7684,19 +7684,19 @@ msgstr "Cesare"
 #: ../../../../data/tribes/ships/empire/init.lua:79
 msgctxt "shipname"
 msgid "Cervus"
-msgstr ""
+msgstr "Cervus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:81
 msgctxt "shipname"
 msgid "Cicero"
-msgstr ""
+msgstr "Cicero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:83
 msgctxt "shipname"
 msgid "Claudius"
-msgstr ""
+msgstr "Claudius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:85
@@ -7708,19 +7708,19 @@ msgstr "Diana"
 #: ../../../../data/tribes/ships/empire/init.lua:87
 msgctxt "shipname"
 msgid "Delphinus"
-msgstr ""
+msgstr "Delphinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:89
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr ""
+msgstr "Domitianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:91
 msgctxt "shipname"
 msgid "Etna"
-msgstr ""
+msgstr "Etna"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:93
@@ -7732,7 +7732,7 @@ msgstr "Faustulus"
 #: ../../../../data/tribes/ships/empire/init.lua:95
 msgctxt "shipname"
 msgid "Ferrum"
-msgstr ""
+msgstr "Ferrum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:97
@@ -7750,13 +7750,13 @@ msgstr "Gallus"
 #: ../../../../data/tribes/ships/empire/init.lua:101
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiatore"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:103
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr ""
+msgstr "Gloria Imperii"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:105
@@ -7768,43 +7768,43 @@ msgstr "Ianus"
 #: ../../../../data/tribes/ships/empire/init.lua:107
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Iulius Cæsar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../../../data/tribes/ships/empire/init.lua:109
 msgctxt "shipname"
 msgid "Iuno"
-msgstr ""
+msgstr "Iuno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../../../data/tribes/ships/empire/init.lua:111
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr ""
+msgstr "Iupiter"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:113
 msgctxt "shipname"
 msgid "Latium"
-msgstr ""
+msgstr "Latium"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:115
 msgctxt "shipname"
 msgid "Latonia"
-msgstr ""
+msgstr "Latonia"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:117
 msgctxt "shipname"
 msgid "Leo"
-msgstr ""
+msgstr "Leo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:119
 msgctxt "shipname"
 msgid "Lepus"
-msgstr ""
+msgstr "Lepus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:121
@@ -7816,7 +7816,7 @@ msgstr "Liguria"
 #: ../../../../data/tribes/ships/empire/init.lua:123
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:125
@@ -7858,7 +7858,7 @@ msgstr "Nerone"
 #: ../../../../data/tribes/ships/empire/init.lua:137
 msgctxt "shipname"
 msgid "Nerva"
-msgstr ""
+msgstr "Nerva"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:139
@@ -7870,7 +7870,7 @@ msgstr "Ottaviano"
 #: ../../../../data/tribes/ships/empire/init.lua:141
 msgctxt "shipname"
 msgid "Otho"
-msgstr ""
+msgstr "Otho"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../../../data/tribes/ships/empire/init.lua:143
@@ -7882,19 +7882,19 @@ msgstr "Plutone"
 #: ../../../../data/tribes/ships/empire/init.lua:145
 msgctxt "shipname"
 msgid "Portus Bellus"
-msgstr ""
+msgstr "Portus Bellus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:147
 msgctxt "shipname"
 msgid "Præda"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:149
 msgctxt "shipname"
 msgid "Quirinus"
-msgstr ""
+msgstr "Quirinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:151
@@ -7912,13 +7912,13 @@ msgstr "Romolo"
 #: ../../../../data/tribes/ships/empire/init.lua:155
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr ""
+msgstr "Sagitta"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../../../data/tribes/ships/empire/init.lua:157
 msgctxt "shipname"
 msgid "Saledus"
-msgstr ""
+msgstr "Saledus"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
 #: ../../../../data/tribes/ships/empire/init.lua:159
@@ -7948,7 +7948,7 @@ msgstr "Siena"
 #: ../../../../data/tribes/ships/empire/init.lua:167
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr ""
+msgstr "Spiculum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:169
@@ -7978,7 +7978,7 @@ msgstr "Traiano"
 #: ../../../../data/tribes/ships/empire/init.lua:177
 msgctxt "shipname"
 msgid "Venator"
-msgstr ""
+msgstr "Venator"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:179
@@ -7990,13 +7990,13 @@ msgstr "Venere"
 #: ../../../../data/tribes/ships/empire/init.lua:181
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergilius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:183
 msgctxt "shipname"
 msgid "Vespa"
-msgstr ""
+msgstr "Vespa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:185
@@ -8008,7 +8008,7 @@ msgstr "Vespasiano"
 #: ../../../../data/tribes/ships/empire/init.lua:187
 msgctxt "shipname"
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:189
@@ -8020,13 +8020,13 @@ msgstr "Vesuvio"
 #: ../../../../data/tribes/ships/empire/init.lua:191
 msgctxt "shipname"
 msgid "Vinea"
-msgstr ""
+msgstr "Vinea"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:193
 msgctxt "shipname"
 msgid "Vitellius"
-msgstr ""
+msgstr "Vitellius"
 
 #. TRANSLATORS: This is the Frisians' ship's name used in lists of units
 #: ../../../../data/tribes/ships/frisians/init.lua:8
@@ -8038,168 +8038,168 @@ msgstr "Nave"
 #: ../../../../data/tribes/ships/frisians/init.lua:48
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Amrum"
 
 #. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr ""
+msgstr "Alt-Nordstrand"
 
 #. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:52
 msgctxt "shipname"
 msgid "Eiderstedt"
-msgstr ""
+msgstr "Eiderstedt"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:54
 msgctxt "shipname"
 msgid "Föhr"
-msgstr ""
+msgstr "Föhr"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:56
 msgctxt "shipname"
 msgid "Gröde"
-msgstr ""
+msgstr "Gröde"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Habel"
-msgstr ""
+msgstr "Habel"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Hamburger Hallig"
-msgstr ""
+msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This Frisian ship is named after an island in the North Sea
 #: ../../../../data/tribes/ships/frisians/init.lua:62
 msgctxt "shipname"
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:64
 msgctxt "shipname"
 msgid "Hever"
-msgstr ""
+msgstr "Hever"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:66
 msgctxt "shipname"
 msgid "Hooge"
-msgstr ""
+msgstr "Hooge"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Japsand"
-msgstr ""
+msgstr "Japsand"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:70
 msgctxt "shipname"
 msgid "Kormoransand"
-msgstr ""
+msgstr "Kormoransand"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:74
 msgctxt "shipname"
 msgid "Norderaue"
-msgstr ""
+msgstr "Norderaue"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:76
 msgctxt "shipname"
 msgid "Norderoog"
-msgstr ""
+msgstr "Norderoog"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:78
 msgctxt "shipname"
 msgid "Norderoogsand"
-msgstr ""
+msgstr "Norderoogsand"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:80
 msgctxt "shipname"
 msgid "Nordstrand"
-msgstr ""
+msgstr "Nordstrand"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:82
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
-msgstr ""
+msgstr "Nordstrandischmoor"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:84
 msgctxt "shipname"
 msgid "Oland"
-msgstr ""
+msgstr "Oland"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:86
 msgctxt "shipname"
 msgid "Pellworm"
-msgstr ""
+msgstr "Pellworm"
 
 #. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:88
 msgctxt "shipname"
 msgid "Strand"
-msgstr ""
+msgstr "Strand"
 
 #. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:90
 msgctxt "shipname"
 msgid "Süderaue"
-msgstr ""
+msgstr "Süderaue"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:92
 msgctxt "shipname"
 msgid "Süderoog"
-msgstr ""
+msgstr "Süderoog"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:94
 msgctxt "shipname"
 msgid "Süderoogsand"
-msgstr ""
+msgstr "Süderoogsand"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:96
 msgctxt "shipname"
 msgid "Südfall"
-msgstr ""
+msgstr "Südfall"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:98
 msgctxt "shipname"
 msgid "Sylt"
-msgstr ""
+msgstr "Sylt"
 
 #. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../../../data/tribes/ships/frisians/init.lua:100
 msgctxt "shipname"
 msgid "Uthlande"
-msgstr ""
+msgstr "Uthlande"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/armor/init.lua:77
