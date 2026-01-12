@@ -389,7 +389,7 @@ if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
 if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
   # Only tested on Linux. Might work also on other platforms.
   # If tested and found good, remove this check
-  if (CMAKE_SYSTEM MATCHES "Linux")
+  if (CMAKE_SYSTEM MATCHES "Linux" OR WIN32)
     # Usage of -flto tested only with gcc 8.3 and 9.3 (2020-04); when in doubt, leaving it out..
     if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0))
       #
@@ -404,7 +404,7 @@ if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithD
       SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto")
       message(STATUS "Enabling link-time optimizations")
     endif()
-  endif(CMAKE_SYSTEM MATCHES "Linux")
+  endif(CMAKE_SYSTEM MATCHES "Linux" OR WIN32)
 endif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
 endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
 
