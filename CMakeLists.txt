@@ -387,14 +387,14 @@ if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
 # Cross-compile-unit optimization not supported by gcc with debug on!
 # Therefore, this may only be done with Release builds.
 if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-  # Only tested on Linux. Might work also on other platforms.
+  # Tested on Linux, MSYS2+MINGW64 and MSYS2+UCRT64. Might work also on other platforms.
   # If tested and found good, remove this check
   if (CMAKE_SYSTEM MATCHES "Linux" OR WIN32)
-    # Usage of -flto tested only with gcc 8.3 and 9.3 (2020-04); when in doubt, leaving it out..
+    # The oldest versions of tested gcc with -flto are 8.3 and 9.3 (2020-04)
     if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0))
       #
-      # The execution jumps between compile units rather often. -flot allows optimization across
-      # comple units. Binary size reduced by >15% on tested environments. This does not directly
+      # The execution jumps between compile units rather often. -flto allows optimization across
+      # compile units. Binary size reduced by >15% on tested environments. This does not directly
       # translate to execution speed, but might still be noticeable.
       #
       # This is not related to -O2 or -O3 discussion, and not enable by either.
