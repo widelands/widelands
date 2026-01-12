@@ -383,7 +383,7 @@ endif()
 
 # Cross-compile-unit optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
-if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
+if(USE_FLTO_IF_AVAILABLE)
 # Cross-compile-unit optimization not supported by gcc with debug on!
 # Therefore, this may only be done with Release builds.
 if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
@@ -406,7 +406,7 @@ if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithD
     endif()
   endif(CMAKE_SYSTEM MATCHES "Linux" OR WIN32)
 endif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
+endif(USE_FLTO_IF_AVAILABLE)
 
 IF (WIN32)
   add_definitions(-D_WIN32_WINNT=0x0601)
