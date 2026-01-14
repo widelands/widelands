@@ -17,8 +17,8 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       pinned_note = { hotspot = {18, 67} },
-      bridge_normal_e = { hotspot = {0, 17} },
-      bridge_busy_e = { hotspot = {0, 17} },
+      bridge_normal_e = { hotspot = {6, 17} },
+      bridge_busy_e = { hotspot = {6, 17} },
       bridge_normal_se = { hotspot = {8, 8} },
       bridge_busy_se = { hotspot = {8, 8} },
       bridge_normal_sw = { hotspot = {40, 8} },
