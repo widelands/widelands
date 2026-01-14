@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	                      uint32_t height,
 	                      const std::string& title,
 	                      EditorTool& tool);
+	~EditorToolOptionsMenu() override;
 
 	/**
 	 * Selects the correct tool from the parent.
@@ -37,21 +38,43 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	 */
 	void select_correct_tool();
 
-	uint32_t spacing() const {
+	[[nodiscard]] uint32_t spacing() const {
 		return 5;
 	}
-	uint32_t hspacing() const {
+	[[nodiscard]] uint32_t hspacing() const {
 		return spacing();
 	}
-	uint32_t vspacing() const {
+	[[nodiscard]] uint32_t vspacing() const {
 		return spacing();
 	}
-	uint32_t hmargin() const {
+	[[nodiscard]] uint32_t hmargin() const {
 		return spacing();
 	}
-	uint32_t vmargin() const {
+	[[nodiscard]] uint32_t vmargin() const {
 		return spacing();
 	}
+
+	[[nodiscard]] const EditorTool& current_tool() const {
+		return current_tool_;
+	}
+	[[nodiscard]] EditorTool& current_tool() {
+		return current_tool_;
+	}
+
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+	virtual bool pick_from_field(const Widelands::Map& /*map*/,
+	                             const Widelands::NodeAndTriangle<>& /*center*/,
+	                             bool /*multiselect*/) {
+		NEVER_HERE();
+	}
+	[[nodiscard]] virtual bool uses_picker() const {
+		return false;
+	}
+	void activate_picker();
+	void deactivate_picker();
+	virtual void toggle_picker();
+	[[nodiscard]] bool picker_is_active() const;
 
 	/**
 	 * Update window options to match tool settings

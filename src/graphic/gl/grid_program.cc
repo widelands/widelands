@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ void GridProgram::draw(uint32_t texture_id,
 		constexpr std::array<std::array<float, 3>, Widelands::kDefaultMaxFieldHeightDiff + 1>
 		   kColors = {{
 		      {0.f, 0.64f, 0.f},
-		      {0.48, 0.68f, 0.f},
+		      {0.48f, 0.68f, 0.f},
 		      {0.95f, 0.72f, 0.f},
 		      {0.87f, 0.36f, 0.f},
 		      {0.79f, 0.f, 0.f},

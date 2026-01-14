@@ -51,7 +51,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Neje Soldaten worden nich as anner Arbeiders anhüürt: Lehrwichter gahn vun eenem Kraamhuus (of dienem Raadhuus) to eener Kasern, waar se de Grundlagen büffeln un Soldaten worden. Neje Soldaten vun de Willen Lüü bruuken keenen Wapenrock, blot eene Ext."
+msgstr "Neje Soldaten worden nich as anner Arbeiders anhüürt: Lehrwichter gahn vun eenem Kraamhuus (of dienem Raadhuus) to eener Kasern, waar se de Grundlagen büffeln un Soldaten worden. Neje Soldaten vun de Willen Lüü bruken keenen Wapenrock, blot eene Ext."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -264,7 +264,7 @@ msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Um im Övens-Lager to öven bruuken de Soldaten Spiesen as im Slachtenring, aver keen Deftigs Beer. In Stee daarvun bruuken se verschedene Exten, um Angriff to öven, und Helms, um hör Gesundheid to verbetern."
+msgstr "Um im Övens-Lager to öven bruken de Soldaten Spiesen as im Slachtenring, aver keen Deftigs Beer. In Stee daarvun bruken se verschedene Exten, um Angriff to öven, und Helms, um hör Gesundheid to verbetern."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
@@ -570,7 +570,7 @@ msgstr "Riet se platt."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Du kannst deese Kans bruuken, um de annern Instellens to kennen to kreigen: Dat Vörtrecken vun Helden of Snöttbaarten un de Tahl vun Steden."
+msgstr "Du kannst deese Kans bruken, um de annern Instellens to kennen to kreigen: Dat Vörtrecken vun Helden of Snöttbaarten un de Tahl vun Steden."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
