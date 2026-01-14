@@ -134,11 +134,13 @@ SDL_GLContext initialize(
 	// coming from the graphics drivers
 
 #ifdef GLEW_ERROR_NO_GLX_DISPLAY
-	// err == GLEW_ERROR_NO_GLX_DISPLAY is a workaround for crash on wayland
+	// err == GLEW_ERROR_NO_GLX_DISPLAY can safely be ignored when not running on X11, see:
 	// https://github.com/nigels-com/glew/issues/172
-	if (err == GLEW_ERROR_NO_GLX_DISPLAY &&
-	    std::strcmp(SDL_GetCurrentVideoDriver(), "wayland") == 0) {
-		log_info("Using glewInit workaround for Wayland\n");
+	if (err == GLEW_ERROR_NO_GLX_DISPLAY) {
+		const char* drv = SDL_GetCurrentVideoDriver();
+		if (std::strcmp(SDL_GetCurrentVideoDriver(), "x11") != 0) {
+			log_info("Ignoring GLEW_ERROR_NO_GLX_DISPLAY for %s\n", drv);
+		}
 	} else
 #endif
 	   if (err != GLEW_OK) {
