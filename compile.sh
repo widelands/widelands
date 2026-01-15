@@ -121,7 +121,7 @@ print_help () {
 BUILD_WEBSITE="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
-USE_FLTO="yes"
+USE_FLTO="ON"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
@@ -239,11 +239,11 @@ do
     shift
     ;;
     -c|--no-cross-opt)
-      USE_FLTO="no"
+      USE_FLTO="OFF"
     shift
     ;;
     +c|--with-cross-opt)
-      USE_FLTO="yes"
+      USE_FLTO="ON"
     shift
     ;;
     -s|--skip-tests)
@@ -391,7 +391,7 @@ else
 fi
 echo " "
 
-if [ $USE_FLTO = "yes" ]; then
+if [ $USE_FLTO = "ON" ]; then
   echo "Using cross compile unit optimization if available."
   CMD_ADD "--with-cross-opt"
 else
