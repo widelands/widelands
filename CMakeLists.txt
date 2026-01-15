@@ -14,6 +14,7 @@ option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
+option(USE_FLTO_IF_AVAILABLE "Use link-time optimization" ON)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 set(CMAKE_FIND_FRAMEWORK LAST)
