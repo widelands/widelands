@@ -33,6 +33,14 @@ struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	[[nodiscard]] bool uses_picker() const override {
+		return true;
+	}
+	void toggle_picker() override;
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     bool multiselect) override;
+
 private:
 	void update_interval(int32_t lower, int32_t upper);
 	void update_upper();
@@ -40,9 +48,10 @@ private:
 	void update_set_to();
 
 	EditorNoiseHeightTool& noise_tool_;
-	UI::Box box_;
+	UI::Box box_, lower_box_, upper_box_, set_to_box_;
 	UI::SpinBox lower_, upper_;
 	UI::SpinBox set_to_;
+	UI::SpinBox* picker_target_ = nullptr;
 };
 
 #endif  // end of include guard: WL_UI_EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H

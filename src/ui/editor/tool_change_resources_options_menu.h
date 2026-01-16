@@ -35,6 +35,13 @@ struct EditorToolChangeResourcesOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	[[nodiscard]] bool uses_picker() const override {
+		return true;
+	}
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     bool multiselect) override;
+
 private:
 	EditorInteractive& eia();
 	void change_resource();
@@ -49,6 +56,7 @@ private:
 	UI::Box resources_box_;
 	UI::Radiogroup radiogroup_;
 	UI::Textarea cur_selection_;
+	UI::Button picker_;
 };
 
 #endif  // end of include guard: WL_UI_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H

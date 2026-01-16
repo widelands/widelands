@@ -26,6 +26,8 @@ wl_library(editor
     tools/multi_select.h
     tools/noise_height_tool.cc
     tools/noise_height_tool.h
+    tools/picker_tool.cc
+    tools/picker_tool.h
     tools/place_critter_tool.cc
     tools/place_critter_tool.h
     tools/place_immovable_tool.cc
