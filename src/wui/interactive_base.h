@@ -372,9 +372,10 @@ protected:
 
 	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingMode {
-		RoadBuildingMode(Widelands::PlayerNumber p, Widelands::Coords s, RoadBuildingType t)
-		   : player(p), path(s), type(t), work_area(nullptr) {
-		}
+		RoadBuildingMode(Widelands::EditorGameBase& egbase,
+		                 Widelands::PlayerNumber p,
+		                 Widelands::Coords s,
+		                 RoadBuildingType t);
 		const Widelands::PlayerNumber player;
 		Widelands::CoordPath path;
 		std::optional<Widelands::CoordPath> preview_path;
@@ -384,6 +385,7 @@ protected:
 		PreviewPathMap overlay_road_previews;
 		PreviewPathMap overlay_roadpreview_previews;
 		std::map<Widelands::Coords, const Image*> overlay_steepness_indicators;
+		std::unique_ptr<Widelands::CheckStep> checkstep;
 	};
 	RoadBuildingMode::PreviewPathMap road_building_preview_overlays() const;
 	RoadBuildingMode::PreviewPathMap road_building_preview_preview_overlays() const;
