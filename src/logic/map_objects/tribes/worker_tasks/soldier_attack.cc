@@ -24,6 +24,7 @@
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/naval_invasion_base.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 
@@ -273,12 +274,24 @@ void Soldier::attack_update(Game& game, State& state) {
 	// At this point, we know that the enemy building still stands,
 	// and that we're outside in the plains.
 	if (get_position() != enemy->base_flag().get_position()) {
-		if (start_task_movepath(game, enemy->base_flag().get_position(), 3,
+		if (start_task_movepath(game, enemy->base_flag().get_position(),
+		                        (state.ivar1 & CF_ALLOW_LONG_WALK) == 0 ? 3 : 10,
 		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 			return;
 		}
 		molog(game.get_gametime(), "[attack] failed to move towards building flag, cancel attack "
 		                           "and return home!\n");
+
+		if (State* invasion_state = get_state(taskNavalInvasion); invasion_state != nullptr) {
+			// Either persist = 10 is not enough, or the path got blocked.
+			log_warn_time(
+			   game.get_gametime(), "Naval invasion soldier failed to find path to target building.");
+			upcast(NavalInvasionBase, camp, invasion_state->objvar1.get(game));
+			if (camp != nullptr) {
+				camp->needs_update();
+			}
+		}
+
 		state.coords = Coords::null();
 		state.objvar1 = nullptr;
 		state.ivar2 = 1;

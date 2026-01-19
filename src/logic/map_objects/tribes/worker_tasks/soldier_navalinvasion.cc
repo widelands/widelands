@@ -28,23 +28,25 @@
 
 namespace Widelands {
 
-constexpr int kPortSpaceGeneralAreaRadius = 5;
-
 Bob::Task const Soldier::taskNavalInvasion = {
    "naval_invasion", static_cast<Bob::Ptr>(&Soldier::naval_invasion_update), nullptr, nullptr,
    true};
 
-void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
+void Soldier::start_task_naval_invasion(Game& game, NavalInvasionBase* camp) {
 	push_task(game, taskNavalInvasion);
 	State& invasion_state = top_state();
 
-	invasion_state.coords = coords;
+	invasion_state.objvar1 = camp;
+	invasion_state.coords = camp->get_position();
 	invasion_state.ivar1 = 0;
-	invasion_state.ivar2 =
-	   game.descriptions().get_building_descr(owner().tribe().port())->get_conquers();
-	invasion_state.ivar3 = game.descriptions().get_largest_workarea();
 
-	molog(game.get_gametime(), "[naval_invasion] Starting at %3dx%3d\n", coords.x, coords.y);
+	// TODO(tothxa): Compatibility with v1.3:
+	//    invasion_state.ivar2 and invasion_state.ivar3 were used before v1.4.
+	//    Be careful if you want to reuse them before v1.5.
+	//    Remove this reminder in v1.5.
+
+	molog(game.get_gametime(), "[naval_invasion] Starting at %3dx%3d\n", invasion_state.coords.x,
+	      invasion_state.coords.y);
 }
 
 void Soldier::naval_invasion_update(Game& game, State& state) {
@@ -58,12 +60,37 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return start_task_battle(game);
 	}
 
+	NavalInvasionBase* camp = dynamic_cast<NavalInvasionBase*>(state.objvar1.get(game));
+
+	// TODO(tothxa): Saveloading compatibility with v1.3.
+	//    The invasion base is stored in state.objvar1 only since v1.4, so it may be empty
+	//    when an old savegame is loaded. Maybe this can be removed in v1.5...
+	if (camp == nullptr) {
+		for (Bob* bob = game.map()[state.coords].get_first_bob(); bob != nullptr;
+		     bob = bob->get_next_bob()) {
+			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE &&
+			    bob->get_owner() == get_owner()) {
+				camp = dynamic_cast<NavalInvasionBase*>(bob);
+				assert(camp != nullptr);
+				break;
+			}
+		}
+	}
+
+	if (camp == nullptr) {
+		throw wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
+		                 state.coords.y);
+	}
+	assert(camp->get_owner() == get_owner());
+
 	/*
-	 * Soldiers in a naval invasion are based around `state.coords` and seek to eliminate
-	 * all enemy influence within a radius of `state.ivar2 + state.ivar3` (where ivar2 is the
-	 * conquer radius of our planned port and ivar3 the biggest possible enemy conquer radius).
-	 * When such influence is found, the target building serial is stored in `state.ivar1`.
-	 * Otherwise, they stay at the flag and wait indefinitely until an own port
+	 * Soldiers in a naval invasion are based around `state.objvar1` and seek to eliminate
+	 * all enemy influence within the conquer radius of our planned port and the biggest
+	 * possible enemy conquer radius. Enemy buildings with influence within this area are
+	 * tracked by the invasion base. (this is a performance optimisation, it allows fewer
+	 * expensive searches)
+	 * When such influence exists, the target building serial is stored in `state.ivar1`.
+	 * Otherwise, the soldiers stay at the flag and wait indefinitely until an own port
 	 * has been built at their location.
 	 */
 
@@ -78,7 +105,12 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 			return schedule_act(game, Duration(10));
 		}
 
-		start_task_attack(game, *enemy, CF_NONE);
+		// Normal pathfinding in task attack gives up too early when the enemy building
+		// is on the other side of a bay, creating an endless loop of starting attack -
+		// cancelling attack. Since the invasion base only keeps track of reachable enemy
+		// buildings, we should increase the pathfinding limit for attacks started from
+		// invasions.
+		start_task_attack(game, *enemy, CF_ALLOW_LONG_WALK);
 		return schedule_act(game, Duration(10));
 	}
 
@@ -87,51 +119,49 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	CheckStepWalkOn checkstep(descr().movecaps(), false);
 	const FCoords portspace_fcoords = map.get_fcoords(state.coords);
 
-	std::vector<ImmovableFound> results;
-	map.find_reachable_immovables(game, Area<FCoords>(portspace_fcoords, state.ivar2 + state.ivar3),
-	                              &results, checkstep, FindImmovableAttackTarget());
+	std::vector<std::pair<Serial, Coords>> enemy_buildings = camp->get_enemy_buildings(game);
+
 	// Consider closest targets first (estimate by air distance to us, not to the port space)
-	std::sort(results.begin(), results.end(),
-	          [this, &map](const ImmovableFound& a, const ImmovableFound& b) {
-		          const uint32_t distance_a = map.calc_distance(get_position(), a.coords);
-		          const uint32_t distance_b = map.calc_distance(get_position(), b.coords);
+	std::sort(enemy_buildings.begin(), enemy_buildings.end(),
+	          [this, &map](const std::pair<Serial, Coords>& a, const std::pair<Serial, Coords>& b) {
+		          const uint32_t distance_a = map.calc_distance(get_position(), a.second);
+		          const uint32_t distance_b = map.calc_distance(get_position(), b.second);
 		          if (distance_a != distance_b) {
 			          return distance_a < distance_b;
 		          }
-		          return a.object->serial() < b.object->serial();
+		          return a.first < b.first;
 	          });
 
-	for (const ImmovableFound& result : results) {
-		Building& bld = dynamic_cast<Building&>(*result.object);
-		if (!owner().is_hostile(bld.owner()) || bld.attack_target() == nullptr ||
-		    !bld.attack_target()->can_be_attacked() ||
-		    bld.descr().get_conquers() + state.ivar2 <
-		       map.calc_distance(bld.get_position(), state.coords)) {
+	for (const auto& enemy : enemy_buildings) {
+		Building* bld = dynamic_cast<Building*>(game.objects().get_object(enemy.first));
+		if (bld == nullptr || !owner().is_hostile(bld->owner()) || bld->attack_target() == nullptr ||
+		    !bld->attack_target()->can_be_attacked()) {
 			continue;
 		}
 
 		// Attack in next cycle
 		molog(game.get_gametime(), "[naval_invasion] Attack target selected (%s at %3dx%3d)\n",
-		      bld.descr().name().c_str(), bld.get_position().x, bld.get_position().y);
-		state.ivar1 = bld.serial();
+		      bld->descr().name().c_str(), enemy.second.x, enemy.second.y);
+		state.ivar1 = enemy.first;
 		return schedule_act(game, Duration(10));
 	}
 
 	// Check if another enemy wants our port space as well
 	if (get_battle() == nullptr) {
-		std::vector<Bob*> hostile_soldiers;
-		map.find_reachable_bobs(game, Area<FCoords>(portspace_fcoords, state.ivar2),
-		                        &hostile_soldiers, checkstep, FindBobEnemySoldier(get_owner()));
-		std::sort(hostile_soldiers.begin(), hostile_soldiers.end(), [this, &map](Bob* a, Bob* b) {
-			const uint32_t distance_a = map.calc_distance(get_position(), a->get_position());
-			const uint32_t distance_b = map.calc_distance(get_position(), b->get_position());
-			if (distance_a != distance_b) {
-				return distance_a < distance_b;
-			}
-			return a->serial() < b->serial();
-		});
-		for (Bob* bob : hostile_soldiers) {
-			upcast(Soldier, soldier, bob);
+		std::vector<OPtr<Soldier>> hostile_soldiers = camp->get_enemy_soldiers();
+		std::sort(hostile_soldiers.begin(), hostile_soldiers.end(),
+		          [this, &game, &map](OPtr<Soldier> a, OPtr<Soldier> b) {
+			          const uint32_t distance_a =
+			             map.calc_distance(get_position(), a.get(game)->get_position());
+			          const uint32_t distance_b =
+			             map.calc_distance(get_position(), b.get(game)->get_position());
+			          if (distance_a != distance_b) {
+				          return distance_a < distance_b;
+			          }
+			          return a.serial() < b.serial();
+		          });
+		for (const OPtr<Soldier>& soldier_optr : hostile_soldiers) {
+			Soldier* soldier = soldier_optr.get(game);
 			if (soldier->can_be_challenged() && soldier->get_battle() == nullptr &&
 			    soldier->get_state(taskNavalInvasion) != nullptr) {
 				molog(game.get_gametime(),
@@ -175,27 +205,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	if (map.calc_distance(get_position(), state.coords) <= kPortSpaceGeneralAreaRadius) {
-		// The target should be unguarded now, conquer the port space.
-
-		bool has_invasion_base = false;
-		for (Bob* bob = map[state.coords].get_first_bob(); bob != nullptr;
-		     bob = bob->get_next_bob()) {
-			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE &&
-			    bob->get_owner() == get_owner()) {
-				upcast(NavalInvasionBase, invasion, bob);
-				assert(invasion != nullptr);
-				has_invasion_base = true;
-				invasion->add_soldier(game, this);  // add ourself if not present already
-				break;
-			}
-		}
-
-		if (!has_invasion_base) {
-			NavalInvasionBase::create(game, *this, state.coords);
-			return start_task_idle(game, descr().get_animation("idle", this), 1000);
-		}
-
-		// Stationed soldiers heal very slowly.
+		// Invasion soldiers heal very slowly.
 		if (current_health_ < get_max_health()) {
 			constexpr unsigned kStationaryHealPerSecond = 10;
 			heal(kStationaryHealPerSecond);
