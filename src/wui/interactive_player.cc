@@ -775,6 +775,10 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
+	if (is_field_clicked_blocked()) {
+		return;
+	}
+
 	if (player().is_picking_custom_starting_position()) {
 		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
 			unset_sel_picture();

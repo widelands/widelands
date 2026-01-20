@@ -54,6 +54,8 @@ public:
 	int get_is_building_road(lua_State* L);
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
+	int get_field_clicked_blocked(lua_State*);
+	int set_field_clicked_blocked(lua_State*);
 	int get_toolbar(lua_State* L);
 
 	/*
@@ -68,6 +70,7 @@ public:
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);
+	int override_field_selector(lua_State* L);
 	int add_toolbar_plugin(lua_State* L);
 	int update_toolbar(lua_State* L);
 	int set_keyboard_shortcut(lua_State* L);

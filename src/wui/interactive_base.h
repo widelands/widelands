@@ -145,17 +145,17 @@ public:
 	 * (False meas that it selects nodes.)
 	 */
 	bool get_sel_triangles() const {
-		return sel_.triangles;
+		return sel_.data().triangles;
 	}
 	void set_sel_triangles(const bool yes) {
-		sel_.triangles = yes;
+		sel_.data_default_.triangles = yes;
 	}
 
 	uint32_t get_sel_radius() const {
-		return sel_.radius;
+		return sel_.data().radius;
 	}
 	uint16_t get_sel_gap_percent() const {
-		return sel_.gap_percent;
+		return sel_.data().gap_percent;
 	}
 	virtual void set_sel_pos(Widelands::NodeAndTriangle<>);
 	void set_sel_freeze(const bool yes) {
@@ -163,7 +163,7 @@ public:
 	}
 	void set_sel_radius(uint32_t);
 	void set_sel_gap_percent(uint16_t gap) {
-		sel_.gap_percent = gap;
+		sel_.data_default_.gap_percent = gap;
 	}
 
 	//  display flags
@@ -268,6 +268,21 @@ public:
 		plugin_actions_.set_keyboard_shortcut(name, action, failsafe, down);
 	}
 
+	[[nodiscard]] bool is_field_clicked_blocked() const {
+		return field_clicked_blocked_;
+	}
+	void set_field_clicked_blocked(bool block) {
+		field_clicked_blocked_ = block;
+	}
+
+	void unset_selector_override() {
+		sel_.data_override_.reset();
+	}
+	void
+	set_selector_override(const Image* pic, bool triangles, uint32_t radius, uint16_t gap_percent) {
+		sel_.data_override_ = SelData::Data(triangles, radius, gap_percent, pic);
+	}
+
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
@@ -349,7 +364,7 @@ protected:
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
 	const Image* get_sel_picture() const {
-		return sel_.pic;
+		return sel_.data().pic;
 	}
 
 	ChatOverlay* chat_overlay() {
@@ -432,20 +447,31 @@ private:
 		                 const uint32_t Radius = 0,
 		                 const uint16_t Gap = 0,
 		                 const Image* Pic = nullptr)
-		   : freeze(Freeze),
-		     triangles(Triangles),
-		     pos(Pos),
-		     radius(Radius),
-		     gap_percent(Gap),
-		     pic(Pic) {
+		   : freeze(Freeze), pos(Pos), data_default_(Triangles, Radius, Gap, Pic) {
 		}
-		bool freeze;     // don't change sel, even if mouse moves
-		bool triangles;  //  otherwise nodes
+
+		struct Data {
+			Data(bool t, uint32_t r, uint16_t g, const Image* p)
+			   : triangles(t), radius(r), gap_percent(g), pic(p) {
+			}
+
+			bool triangles;  //  otherwise nodes
+			uint32_t radius;
+			uint16_t gap_percent;
+			const Image* pic;
+		};
+
+		bool freeze;  // don't change sel, even if mouse moves
 		Widelands::NodeAndTriangle<> pos;
-		uint32_t radius;
-		uint16_t gap_percent;
-		const Image* pic;
-	} sel_;
+
+		[[nodiscard]] const Data& data() const {
+			return data_override_.has_value() ? *data_override_ : data_default_;
+		}
+
+		Data data_default_;
+		std::optional<Data> data_override_;
+	};
+	SelData sel_;
 
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
@@ -507,6 +533,7 @@ private:
 	uint64_t last_target_gamespeed_{0U};
 	uint64_t gamespeed_last_change_time_{0U};
 
+	bool field_clicked_blocked_{false};
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

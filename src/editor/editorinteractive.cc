@@ -659,6 +659,9 @@ void EditorInteractive::exit(const bool force) {
 
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
+	if (is_field_clicked_blocked()) {
+		return;
+	}
 
 	EditorTool& current_tool = tools_->current();
 	EditorTool::ToolIndex subtool_idx = tools_->use_tool;
