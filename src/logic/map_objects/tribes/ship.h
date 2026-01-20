@@ -64,8 +64,11 @@ public:
 	[[nodiscard]] Bob& create_object() const override;
 
 	[[nodiscard]] uint32_t movecaps() const override;
-	[[nodiscard]] const DirAnimations& get_sail_anims() const {
-		return sail_anims_;
+	[[nodiscard]] const DirAnimations& get_sail_anims_transport() const {
+		return sail_anims_transport_;
+	}
+	[[nodiscard]] const DirAnimations& get_sail_anims_warship() const {
+		return sail_anims_warship_;
 	}
 
 	[[nodiscard]] Quantity get_default_capacity() const {
@@ -84,7 +87,8 @@ public:
 	const uint32_t heal_per_second_;
 
 private:
-	DirAnimations sail_anims_;
+	DirAnimations sail_anims_transport_;
+	DirAnimations sail_anims_warship_;
 	Quantity default_capacity_;
 	std::vector<std::string> ship_names_;
 
@@ -145,6 +149,14 @@ struct Ship : Bob {
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
+
+	[[nodiscard]] inline uint32_t idle_animation() const {
+		return descr().get_animation(ship_type_ == ShipType::kWarship ? "warship" : "idle", this);
+	}
+	[[nodiscard]] inline const DirAnimations& get_sail_anims() const {
+		return ship_type_ == ShipType::kWarship ? descr().get_sail_anims_warship() :
+		                                          descr().get_sail_anims_transport();
+	}
 
 	void start_task_ship(Game&);
 	bool start_task_movetodock(Game&, PortDock&);
