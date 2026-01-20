@@ -682,7 +682,9 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 		}
 	}
 
-	tool_settings_changed_ = false;
+	if (&tools_->current() == &current_tool) {
+		tool_settings_changed_ = false;
+	}
 }
 
 void EditorInteractive::update_tool_history_window() {

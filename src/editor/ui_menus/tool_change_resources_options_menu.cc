@@ -24,6 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -38,7 +39,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseResourcesTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
      box_(this,
           UI::PanelStyle::kWui,
@@ -53,7 +54,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 "change_by",
                 0,
                 0,
-                get_inner_w() - 2 * hmargin(),
+                80,
                 80,
                 increase_tool_.get_change_by(),
                 1,
@@ -66,7 +67,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              "set_to",
              0,
              0,
-             get_inner_w() - 2 * hmargin(),
+             80,
              80,
              increase_tool_.set_tool().get_set_to(),
              0,
@@ -86,7 +87,18 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                     0,
                     0,
                     "",
-                    UI::Align::kCenter) {
+                    UI::Align::kCenter),
+     picker_(&box_,
+             "picker",
+             0,
+             0,
+             0,
+             0,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Pick resource from map …"),
+             as_tooltip_text_with_hotkey(_("Select a resource type by clicking on it on the map"),
+                                         shortcut_string_for(KeyboardShortcut::kEditorPicker, true),
+                                         UI::PanelStyle::kWui)) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -100,9 +112,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	change_by_.changed.connect([this]() { update_change_by(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	box_.add(&change_by_);
-	box_.add(&set_to_);
-	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
+	box_.set_size(350, 50);
+	box_.add(&change_by_, UI::Box::Resizing::kFullSize);
+	box_.add(&set_to_, UI::Box::Resizing::kFullSize);
 
 	// Add resource buttons
 	resources_box_.add_inf_space();
@@ -119,19 +131,20 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	box_.add_space(vspacing());
 	box_.add(&resources_box_, UI::Box::Resizing::kFullSize);
-	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
 	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
 
 	radiogroup_.changed.connect([this]() { change_resource(); });
 	radiogroup_.clicked.connect([this]() { change_resource(); });
 
+	picker_.sigclicked.connect([this]() { toggle_picker(); });
+
 	// Add label
 	cur_selection_.set_fixed_width(box_.get_inner_w());
-	box_.add(&cur_selection_);
+	box_.add(&cur_selection_, UI::Box::Resizing::kFullSize);
+	box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + cur_selection_.get_h());
-	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
+	set_center_panel(&box_);
 	update();
 
 	initialization_complete();
@@ -182,6 +195,32 @@ void EditorToolChangeResourcesOptionsMenu::update() {
 
 void EditorToolChangeResourcesOptionsMenu::update_window() {
 	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
-	change_by_.set_value(increase_tool_.get_change_by());
-	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
+	change_by_.set_value(increase_tool_.get_change_by(), false);
+	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()), false);
+}
+
+bool EditorToolChangeResourcesOptionsMenu::pick_from_field(
+   const Widelands::Map& map, const Widelands::NodeAndTriangle<>& center, const bool multiselect) {
+	const Widelands::Field& field = map[center.node];
+	const Widelands::DescriptionIndex resource_index = field.get_resources();
+	const int amount = field.get_resources_amount();
+
+	if (amount <= 0) {
+		return false;
+	}
+
+	UI::Panel::play_click();
+
+	increase_tool_.set_tool().set_set_to(field.get_resources_amount());
+	increase_tool_.set_tool().set_cur_res(resource_index);
+	increase_tool_.set_cur_res(resource_index);
+	increase_tool_.decrease_tool().set_cur_res(resource_index);
+
+	if (!multiselect) {
+		select_correct_tool();
+	}
+	update_window();
+	update();
+
+	return !multiselect;
 }
