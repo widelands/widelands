@@ -99,7 +99,8 @@ public:
 	[[nodiscard]] std::string canonicalize_name(const std::string& path) const;
 	[[nodiscard]] bool is_path_absolute(const std::string& path) const;
 
-	void recursive_copy(FileSystem& dest_fs, const std::string& src_path, const std::string& dest_path);
+	void
+	recursive_copy(FileSystem& dest_fs, const std::string& src_path, const std::string& dest_path);
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();

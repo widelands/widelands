@@ -1033,8 +1033,10 @@ void GameHost::set_map(const std::string& mapname,
 	bool can_send = true;
 	if (g_fs->is_directory(mapfilename)) {
 		g_fs->ensure_directory_exists(kTempFileDir);
-		mapfilename = g_fs->create_unique_temp_file_path(kTempFileDir, FileSystem::filename_ext(original_file));
-		verb_log_dbg("Gamehost: Zipping mapdirectory %s to %s for sending", original_file.c_str(), mapfilename.c_str());
+		mapfilename =
+		   g_fs->create_unique_temp_file_path(kTempFileDir, FileSystem::filename_ext(original_file));
+		verb_log_dbg("Gamehost: Zipping mapdirectory %s to %s for sending", original_file.c_str(),
+		             mapfilename.c_str());
 
 		std::unique_ptr<FileSystem> map_fs(g_fs->make_sub_file_system(original_file));
 		if (map_fs == nullptr) {
@@ -1042,7 +1044,8 @@ void GameHost::set_map(const std::string& mapname,
 			can_send = false;
 
 		} else {
-			std::unique_ptr<FileSystem> zip_fs(g_fs->create_sub_file_system(mapfilename, FileSystem::Type::ZIP));
+			std::unique_ptr<FileSystem> zip_fs(
+			   g_fs->create_sub_file_system(mapfilename, FileSystem::Type::ZIP));
 			if (zip_fs == nullptr) {
 				log_err("Unable to create zipfile for sending: %s", mapfilename.c_str());
 				can_send = false;

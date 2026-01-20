@@ -408,7 +408,9 @@ std::vector<std::string> FileSystem::get_sequential_files(const std::string& dir
 	return result;
 }
 
-void FileSystem::recursive_copy(FileSystem& dest_fs, const std::string& src_path, const std::string& dest_path) {
+void FileSystem::recursive_copy(FileSystem& dest_fs,
+                                const std::string& src_path,
+                                const std::string& dest_path) {
 	std::string dest_filename;
 	if (!dest_path.empty()) {
 		dest_filename = dest_path;
