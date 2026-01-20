@@ -1023,11 +1023,36 @@ bool GameHost::can_launch() {
 }
 
 void GameHost::set_map(const std::string& mapname,
-                       const std::string& mapfilename,
+                       std::string mapfilename,
                        const std::string& theme,
                        const std::string& bg,
                        uint32_t const maxplayers,
                        bool const savegame) {
+	// If the map/save is a directory, zip it and use the created zipfile instead.
+	const std::string original_file = mapfilename;
+	bool can_send = true;
+	if (g_fs->is_directory(mapfilename)) {
+		g_fs->ensure_directory_exists(kTempFileDir);
+		mapfilename = g_fs->create_unique_temp_file_path(kTempFileDir, FileSystem::filename_ext(original_file));
+		verb_log_dbg("Gamehost: Zipping mapdirectory %s to %s for sending", original_file.c_str(), mapfilename.c_str());
+
+		std::unique_ptr<FileSystem> map_fs(g_fs->make_sub_file_system(original_file));
+		if (map_fs == nullptr) {
+			log_err("Unable to create mapfilesystem for sending: %s", original_file.c_str());
+			can_send = false;
+
+		} else {
+			std::unique_ptr<FileSystem> zip_fs(g_fs->create_sub_file_system(mapfilename, FileSystem::Type::ZIP));
+			if (zip_fs == nullptr) {
+				log_err("Unable to create zipfile for sending: %s", mapfilename.c_str());
+				can_send = false;
+
+			} else {
+				g_fs->recursive_copy(*zip_fs, original_file, "");
+			}
+		}
+	}
+
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
@@ -1135,10 +1160,7 @@ void GameHost::set_map(const std::string& mapname,
 		}
 	}
 
-	// If possible, offer the map / saved game as transfer
-	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
-	// in place or such ...
-	if (!g_fs->is_directory(mapfilename)) {
+	if (can_send) {
 		// Read in the file
 		FileRead fr;
 		fr.open(*g_fs, mapfilename);
@@ -1652,11 +1674,7 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
  * \returns true if the data was written, else false
  */
 bool GameHost::write_map_transfer_info(SendPacket& packet, const std::string& mapfilename) {
-	// TODO(unknown): not yet able to handle directory type maps / savegames
-	if (g_fs->is_directory(mapfilename)) {
-		log_warn("Map/Save is a directory! No way for making it available a.t.m.!\n");
-		return false;
-	}
+	assert(!g_fs->is_directory(mapfilename));
 
 	// Write the new map/save file information, so client can decide whether it
 	// needs the file.
