@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-01 03:54+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2022,2024-2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
