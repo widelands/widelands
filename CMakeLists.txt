@@ -14,6 +14,7 @@ option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
+option(USE_FLTO_IF_AVAILABLE "Use link-time optimization" ON)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 set(CMAKE_FIND_FRAMEWORK LAST)
@@ -383,30 +384,16 @@ endif()
 
 # Cross-compile-unit optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
-if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
-# Cross-compile-unit optimization not supported by gcc with debug on!
-# Therefore, this may only be done with Release builds.
-if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-  # Only tested on Linux. Might work also on other platforms.
-  # If tested and found good, remove this check
-  if (CMAKE_SYSTEM MATCHES "Linux")
-    # Usage of -flto tested only with gcc 8.3 and 9.3 (2020-04); when in doubt, leaving it out..
-    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0))
-      #
-      # The execution jumps between compile units rather often. -flot allows optimization across
-      # comple units. Binary size reduced by >15% on tested environments. This does not directly
-      # translate to execution speed, but might still be noticeable.
-      #
-      # This is not related to -O2 or -O3 discussion, and not enable by either.
-      #
-      # If using lto, it needs to happen both during compile and link, else no benefits.
-      wl_add_flag(WL_GENERIC_CXX_FLAGS "-flto")
-      SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto")
-      message(STATUS "Enabling link-time optimizations")
-    endif()
-  endif(CMAKE_SYSTEM MATCHES "Linux")
-endif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
+if(USE_FLTO_IF_AVAILABLE)
+  include(CheckIPOSupported)
+  check_ipo_supported(RESULT result OUTPUT output LANGUAGES C CXX)
+  if(result)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+    message(STATUS "Enabling link-time optimizations")
+  else()
+    message(WARNING "Link-time optimizations are not supported: ${output}")
+  endif()
+endif()
 
 IF (WIN32)
   add_definitions(-D_WIN32_WINNT=0x0601)
