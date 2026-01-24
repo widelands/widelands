@@ -373,6 +373,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="cs">Mapy z internetu lze nově stahovat prostřednictvím herních rozšíření</li>
         <li xml:lang="cs">V editoru map jsou k dispozici nová zobrazení</li>
         <li xml:lang="cs">Řada nových funkcí pro tvorbu vlastních rozšíření</li>
+        <li xml:lang="da">Markedshandel</li>
+        <li xml:lang="da">Seks nye kort tilføjet og tre gamle kort fjernet</li>
+        <li xml:lang="da">Økonomidistrikter</li>
+        <li xml:lang="da">Mange forbedringer til encyklopædien i spillet</li>
+        <li xml:lang="da">Hent kort fra internettet som en udvidelse</li>
+        <li xml:lang="da">Nye visualiseringstilstande i redigeringsprogrammet</li>
+        <li xml:lang="da">Mange nye funktioner for udviklere af udvidelser</li>
         <li xml:lang="de">Handeln mit Märkten</li>
         <li xml:lang="de">Sechs neue Karten hinzugefügt und drei alte Karten entfernt</li>
         <li xml:lang="de">Wirtschaftsbezirke</li>
@@ -464,6 +471,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
       <description><ul>
         <li>Bugfix release</li>
         <li xml:lang="cs">Výpis chyb skriptu</li>
+        <li xml:lang="da">Udgivelse med fejlrettelser</li>
         <li xml:lang="de">Fehlerbehebung</li>
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
@@ -601,6 +609,7 @@ Version de correction de bugs</li>
     <name>The Widelands Development Team</name>
     <name xml:lang="ca">L’equip de desenvolupament del Widelands</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
+    <name xml:lang="da">Widelands' udviklingshold</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
