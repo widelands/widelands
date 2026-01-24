@@ -24,6 +24,12 @@ wl.Descriptions():new_productionsite_type {
       unoccupied = {hotspot = {39, 46}},
    },
    spritesheets = {
+      build = {
+         hotspot = {39, 46},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      },
       working = {
          hotspot = {39, 46},
          fps = 15,
