@@ -85,6 +85,15 @@ struct Road : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
+	const OPtr<Carrier> get_carrier(uint8_t slot) const {
+		assert(slot <= carrier_slots_.size());
+		return carrier_slots_[slot].carrier;
+	}
+	OPtr<Carrier> get_carrier(uint8_t slot) {
+		assert(slot <= carrier_slots_.size());
+		return carrier_slots_[slot].carrier;
+	}
+
 	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_busy() const {
