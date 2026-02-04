@@ -385,8 +385,6 @@ endif()
 # Cross-compile-unit optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
 
-# set safe default value, in case user doesn't specify USE_FLTO_IF_AVAILABLE
-set(DEFAULT_LTO ON)
 if(NOT (
         # after successful tests add here other platforms from https://cmake.org/cmake/help/latest/variable/CMAKE_SYSTEM_NAME.html
         CMAKE_SYSTEM_NAME STREQUAL "Linux" OR
@@ -395,14 +393,12 @@ if(NOT (
   if(USE_FLTO_IF_AVAILABLE)
     message(WARNING "Link-time optimizations are experimental on this platform.")
   endif()
-  set(DEFAULT_LTO OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
   # Example of problem on MSYS2+MINGW64, gcc 15.2.0, Debug build:
   # lto1.exe: error: two or more sections for .gnu.lto__ZNSt11_Deque_baseISt10unique_ptrIN8AddOnsUI20AddOnSortingCriteriaESt14default_deleteIS2_EESaIS5_EE17_M_deallocate_mapEPPS5_y.167901
   if(USE_FLTO_IF_AVAILABLE)
     message(WARNING "Debug build with link-time optimizations is not recommended.")
   endif()
-  set(DEFAULT_LTO OFF)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
   # Example of problem on Ubuntu 24.04, clang 18.1.3, linker GNU ld 2.42, using AddressSanitizer:
   # /usr/bin/ld: error: Failed to link module libwidelands_ball_of_mud.a.llvm.54194.wlapplication.cc: Expected at most one ThinLTO module per bitcode file
@@ -412,17 +408,17 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
                     " Hint: to specify non-default linker (in this example lld), extend CMAKE_EXE_LINKER_FLAGS with -fuse-ld=lld"
                     " (for cmake 3.29+ set CMAKE_LINKER_TYPE to LLD).")
   endif()
-  set(DEFAULT_LTO OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo" AND MSVC)
+  # Tested with Visual Studio 2022 and 2026
   if(USE_FLTO_IF_AVAILABLE)
     message(WARNING " RelWithDebInfo build with link-time optimizations may produce invalid binary, see bug"
                     " https://codeberg.org/wl/widelands/issues/5283")
   endif()
-  set(DEFAULT_LTO OFF)
-endif()
-
-if(NOT DEFINED USE_FLTO_IF_AVAILABLE)
-  set(USE_FLTO_IF_AVAILABLE ${DEFAULT_LTO})
+else()
+  if(NOT DEFINED USE_FLTO_IF_AVAILABLE)
+    # In case user doesn't specify USE_FLTO_IF_AVAILABLE, it is safe to turn it on
+    set(USE_FLTO_IF_AVAILABLE ON)
+  endif()
 endif()
 
 if(USE_FLTO_IF_AVAILABLE)
