@@ -121,7 +121,6 @@ print_help () {
 BUILD_WEBSITE="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
-USE_FLTO="ON"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
@@ -391,12 +390,16 @@ else
 fi
 echo " "
 
-if [ $USE_FLTO = "ON" ]; then
-  echo "Using cross compile unit optimization if available."
+if [ "x$USE_FLTO" = "xON" ]; then
+  echo "Using cross compile unit optimization."
   CMD_ADD "--with-cross-opt"
-else
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=ON"
+elif [ "x$USE_FLTO" = "xOFF" ]; then
   echo "Not using cross compile unit optimization."
   CMD_ADD "--no-cross-opt"
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=OFF"
+else
+  echo "Autodetect cross compile unit optimization availability."
 fi
 echo " "
 
@@ -534,7 +537,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
                -DUSE_XDG=$USE_XDG                              \
-               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+               $FLTO_STRING
 
     $RUN $buildtool -j $CORES
 
