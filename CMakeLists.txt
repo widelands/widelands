@@ -381,7 +381,7 @@ if(NOT MSVC)
   wl_add_flag(WL_GENERIC_C_LIBRARY_FLAGS "-std=c11")
 endif()
 
-# Cross-compile-unit optimization slows linking significantly.
+# Link-time optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
 
 if(NOT (
@@ -390,19 +390,19 @@ if(NOT (
         WIN32
        ))
   if(USE_FLTO_IF_AVAILABLE)
-    message(WARNING "Link-time optimizations are experimental on this platform.")
+    message(WARNING "Link-time optimization is experimental on this platform.")
   endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
   # Example of problem on MSYS2+MINGW64, gcc 15.2.0, Debug build:
   # lto1.exe: error: two or more sections for .gnu.lto__ZNSt11_Deque_baseISt10unique_ptrIN8AddOnsUI20AddOnSortingCriteriaESt14default_deleteIS2_EESaIS5_EE17_M_deallocate_mapEPPS5_y.167901
   if(USE_FLTO_IF_AVAILABLE)
-    message(WARNING "Debug build with link-time optimizations is not recommended.")
+    message(WARNING "Debug build with link-time optimization is not recommended.")
   endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
   # Example of problem on Ubuntu 24.04, clang 18.1.3, linker GNU ld 2.42, using AddressSanitizer:
   # /usr/bin/ld: error: Failed to link module libwidelands_ball_of_mud.a.llvm.54194.wlapplication.cc: Expected at most one ThinLTO module per bitcode file
   if(USE_FLTO_IF_AVAILABLE)
-    message(WARNING " Link-time optimizations may fail if you use AddressSanitizer together with Clang compiler and GNU ld linker."
+    message(WARNING " Link-time optimization may fail if you use AddressSanitizer together with Clang compiler and GNU ld linker."
                     " In case your build fails, you can try installing another linker (e.g. lld, mold or gold).\n"
                     " Hint: to specify non-default linker (in this example lld), extend CMAKE_EXE_LINKER_FLAGS with -fuse-ld=lld"
                     " (for cmake 3.29+ set CMAKE_LINKER_TYPE to LLD).")
@@ -410,7 +410,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo" AND MSVC)
   # Tested with Visual Studio 2022 and 2026
   if(USE_FLTO_IF_AVAILABLE)
-    message(WARNING " RelWithDebInfo build with link-time optimizations may produce invalid binary, see bug"
+    message(WARNING " RelWithDebInfo build with link-time optimization may produce invalid binary, see bug"
                     " https://codeberg.org/wl/widelands/issues/5283")
   endif()
 else()
@@ -425,9 +425,9 @@ if(USE_FLTO_IF_AVAILABLE)
   check_ipo_supported(RESULT result OUTPUT output LANGUAGES C CXX)
   if(result)
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
-    message(STATUS "Enabling link-time optimizations")
+    message(STATUS "Enabling link-time optimization")
   else()
-    message(WARNING "Link-time optimizations are not supported: ${output}")
+    message(WARNING "Link-time optimization is not supported: ${output}")
   endif()
 endif()
 

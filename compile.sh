@@ -78,10 +78,9 @@ print_help () {
     echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
     if which g++ >/dev/null; then # gcc specific
-    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
-    echo "                      even if available."
+    echo "-c or --no-cross-opt  Do not use link-time optimization, even if available."
     echo "+c or --with-cross-opt"
-    echo "                      Use cross compile unit optimization if available."
+    echo "                      Use link-time optimization."
     echo " "
     fi
     echo "--gcc                 Try to build with GCC rather than the system default."
@@ -391,15 +390,15 @@ fi
 echo " "
 
 if [ "x$USE_FLTO" = "xON" ]; then
-  echo "Using cross compile unit optimization."
+  echo "Using link-time optimization."
   CMD_ADD "--with-cross-opt"
   FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=ON"
 elif [ "x$USE_FLTO" = "xOFF" ]; then
-  echo "Not using cross compile unit optimization."
+  echo "Not using link-time optimization."
   CMD_ADD "--no-cross-opt"
   FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=OFF"
 else
-  echo "Autodetect cross compile unit optimization availability."
+  echo "Autodetect link-time optimization availability."
 fi
 echo " "
 
