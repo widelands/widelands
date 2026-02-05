@@ -407,10 +407,10 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
                     " Hint: to specify non-default linker (in this example lld), extend CMAKE_EXE_LINKER_FLAGS with -fuse-ld=lld"
                     " (for cmake 3.29+ set CMAKE_LINKER_TYPE to LLD).")
   endif()
-elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo" AND MSVC)
-  # Tested with Visual Studio 2022 and 2026
+elseif(MSVC)
+  # Tested with Visual Studio 2022 and 2026, both Release and RelWithDebInfo build types
   if(USE_FLTO_IF_AVAILABLE)
-    message(WARNING " RelWithDebInfo build with link-time optimization may produce invalid binary, see bug"
+    message(WARNING " Release and RelWithDebInfo builds with link-time optimization may produce invalid binary, see bug"
                     " https://codeberg.org/wl/widelands/issues/5283")
   endif()
 else()
