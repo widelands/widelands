@@ -1751,12 +1751,12 @@ msgstr "Nastavit výšku na:"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:78
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Nastav výšku podle mapy …"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:79
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:115
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Zvol výšku nástroje kliknutím na pole na mapě"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:84
@@ -1781,11 +1781,11 @@ msgstr "Nastavit množství na:"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:98
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Vyber zdroj pomocí mapy …"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:99
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Nastav měněný zdroj kliknutím na pole na mapě"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:105
@@ -1827,17 +1827,17 @@ msgstr "Neměnná výška"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Vyber …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Vyber zvíře podle mapy …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Nastav druh zvěře v nástroji kliknutím na mapu. Přidrž Ctrl pro vícenásobný výběr."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -1872,13 +1872,13 @@ msgstr "%1$s (potřebuje velké stavební místo)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Vyber pevný předmět podle mapy …"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Nastav druh pevného předmětu v nástroji kliknutím na mapu. Přidrž Ctrl pro vícenásobný výběr."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1915,13 +1915,13 @@ msgstr "%1%: %2%"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Vyber terén podle mapy …"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Nastav druh terénu v nástroji kliknutím na mapu. Přidrž Ctrl pro vícenásobný výběr."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
@@ -8681,7 +8681,7 @@ msgstr "Zveřejnit mapu online"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Nastav podle mapy"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Toggle Tools Menu"
