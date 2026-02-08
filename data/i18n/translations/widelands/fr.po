@@ -1765,12 +1765,12 @@ msgstr "Fixer l' élévation à :"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:78
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Prendre la hauteur depuis la carte ..."
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:79
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:115
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Sélectionnez la hauteur d'un champ en cliquant dessus sur la carte"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:84
@@ -1795,11 +1795,11 @@ msgstr "Fixer le montant à :"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:98
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Prendre une ressource sur la carte ..."
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:99
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Sélectionnez un type de ressource en cliquant dessus sur la carte ..."
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:105
@@ -1841,17 +1841,17 @@ msgstr "Élévation fixe"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Prendre ..."
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Prendre un animal sur la carte ..."
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Sélectionnez un type d'animal en cliquant dessus sur la carte. Maintenez Ctrl enfoncé pour sélectionner de multiples animaux."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -1886,13 +1886,13 @@ msgstr "%1$s (nécessite un grand espace de construction)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Prendre un immobile depuis la carte ..."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Sélectionnez un type d'immobile en cliquant dessus sur la carte. Maintenez Ctrl enfoncé pour sélectionner de multiples immobiles."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1929,13 +1929,13 @@ msgstr "%1% : %2%"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Prendre un terrain depuis la carte ..."
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Sélectionnez un type de terrain en cliquant dessus sur la carte. Maintenez Ctrl enfoncé pour sélectionner de multiples terrains."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
@@ -8652,7 +8652,7 @@ msgstr "Publier la carte en ligne"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Prendre depuis la carte"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Toggle Tools Menu"
