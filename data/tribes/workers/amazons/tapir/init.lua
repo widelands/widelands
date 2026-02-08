@@ -7,7 +7,7 @@ wl.Descriptions():new_carrier_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Tapir"),
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 0,
 
    animation_directory = dirname,
    spritesheets = {

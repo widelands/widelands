@@ -8,7 +8,7 @@ wl.Descriptions():new_carrier_type {
    descname = pgettext("atlanteans_worker", "Horse"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 0,
 
    ware_hotspot = {-2, 12},
 
