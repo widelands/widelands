@@ -43,6 +43,12 @@ wl.Descriptions():new_productionsite_type {
          rows = 2,
          fps = 10
       },
+      build = {
+         hotspot = {50, 60},
+         frames = 3,
+         columns = 3,
+         rows = 1,
+      },
       working = {
          hotspot = {50, 80},
          frames = 10,

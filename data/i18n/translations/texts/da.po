@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # Jacob Rasmussen (BlackThorneDK) <jacobvrasmussen@gmail.com>, 2018
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021,2026
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019-2021,2026\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr "Ophavsret 2002 - %1% Widelands-udviklingsholdet."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General Public License (GPL) V2.0 (eller, efter dit valg enhver senere version)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -338,7 +338,7 @@ msgstr "Andre"
 
 #: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "og mange, mange flere (tak for alt du har gjort)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -383,7 +383,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands optager hvert spil i en fil med endelsen .wry. Filen indeholder et oprindeligt gemt spil og alle kommandoer der blev udstedt af alle spillere, såsom bygning af en vej eller et angreb på en fjende. Filnavnet vil fortælle hvornår du startede spillet."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -894,4 +894,4 @@ msgstr ""
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Er vores computerspillere for kedelige? Besøg vores hjemmeside %s og mød andre spillere på nettet."
