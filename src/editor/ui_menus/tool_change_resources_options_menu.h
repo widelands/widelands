@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,13 @@ struct EditorToolChangeResourcesOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	[[nodiscard]] bool uses_picker() const override {
+		return true;
+	}
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     bool multiselect) override;
+
 private:
 	EditorInteractive& eia();
 	void change_resource();
@@ -49,6 +56,7 @@ private:
 	UI::Box resources_box_;
 	UI::Radiogroup radiogroup_;
 	UI::Textarea cur_selection_;
+	UI::Button picker_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H

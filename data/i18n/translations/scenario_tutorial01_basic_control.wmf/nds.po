@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2025
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -361,7 +361,7 @@ msgstr "Över de anner Kant kannst du de rechte Muustaste enerwegens up de Kaart
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr "Of du kannst de Lütte Kaart bruuken. Dat is besünners för grote Ofstannen gadelk."
+msgstr "Of du kannst de Lütte Kaart bruken. Dat is besünners för grote Ofstannen gadelk."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 msgid ""
@@ -944,7 +944,7 @@ msgstr "De Flintslagerhusen ofrieten"
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr "Uns’ Flintslagerhusen sünd nu unnütz, du kannst se ofrieten un de Rüümte naher weer bruuken."
+msgstr "Uns’ Flintslagerhusen sünd nu unnütz, du kannst se ofrieten un de Rüümte naher weer bruken."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid ""
@@ -1014,7 +1014,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Een Ding will ick di noch verklaren: Dien Gewest vergrotern. De Rüümte um uns’ Raadhuus, waar wi mit anfangen hebben, is jüüst genoog, um eene slichte Weertskupp to bauen, un wi hebben keene Bargen, wat wi bruuken, um Köhle un Mineraalen oftoboen. Also mutten wi uns’ Gewest vergrotern."
+msgstr "Een Ding will ick di noch verklaren: Dien Gewest vergrotern. De Rüümte um uns’ Raadhuus, waar wi mit anfangen hebben, is jüüst genoog, um eene slichte Weertskupp to bauen, un wi hebben keene Bargen, wat wi bruken, um Köhle un Mineraalen oftoboen. Also mutten wi uns’ Gewest vergrotern."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:632
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,17 @@ struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 
 	void update_window() override;
 
+	[[nodiscard]] bool uses_picker() const override {
+		return true;
+	}
+	bool pick_from_field(const Widelands::Map& map,
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     bool multiselect) override;
+
 private:
+	EditorPlaceCritterTool& critter_tool_;
+	UI::Box main_box_;
+	UI::Button picker_;
 	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>>
 	   multi_select_menu_;
 };

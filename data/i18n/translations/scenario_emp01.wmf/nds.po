@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2021,2023,2025
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021,2023,2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -87,7 +87,7 @@ msgstr "Bau een Flintslagerhuus im Süden, um Flint un Marmel vun de Stenen ofto
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Wi könen se villicht naher för Husen bruuken."
+msgstr "Wi könen se villicht naher för Husen bruken."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
@@ -266,7 +266,7 @@ msgstr "Moin Lutjus! Ick hebb jüüst Saledus buten Döör truffen."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "He hett mi vun de Wachters-Kamerke vertellt. Nu, ick gloov nich, dat wi noch mehr Wachters-Kamerkes bruuken – wi könen uns nu um anner Dingen kümmern."
+msgstr "He hett mi vun de Wachters-Kamerke vertellt. Nu, ick gloov nich, dat wi noch mehr Wachters-Kamerkes bruken – wi könen uns nu um anner Dingen kümmern."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -296,7 +296,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för ’t Schipp un all grotern Husen bruuken. Also sallen wi eene Saagmöhlen bauen – sobold wi daar genoog Rüümte för hebben."
+msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för ’t Schipp un all grotern Husen bruken. Also sallen wi eene Saagmöhlen bauen – sobold wi daar genoog Rüümte för hebben."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"

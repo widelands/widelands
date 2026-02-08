@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -12,14 +12,15 @@
 # Guybrush88 <erpizzo@alice.it>, 2021
 # Log Merger, 2022
 # Samuele Battarra, 2023
+# Daniel Savoia, 2026
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Samuele Battarra, 2023\n"
+"Last-Translator: Daniel Savoia, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,8 +57,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
-"Costruisci una cava accanto all'abbondanza di rocce per liberare spazi di "
-"costruzione ed ottenere risorse importanti."
+"Costruisci una cava accanto all'abbondanza di rocce per liberare alcuni "
+"lotti edificabili e ottenere risorse preziose."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -66,7 +67,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "Boscaiolo, segheria e scalpellino"
+msgstr "Boscaiolo, Segheria e Scalpellino"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -130,11 +131,11 @@ msgstr "Costruisci un porto per salpare da quest'isola."
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
 msgstr ""
-"Costruisci un cantiere navale per costruire delle navi su cui salpare."
+"Costruisci un cantiere navale per costruire delle navi su cui navigare."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr "Produci del grano"
+msgstr "Produrre grano"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
@@ -144,8 +145,8 @@ msgstr "Produzione di grano"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
-"Produci almeno 50 covoni di grano per poter poter iniziare la produzione "
-"della lana."
+"Produci almeno 50 covoni di grano per poter avviare la produzione della "
+"lana."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
@@ -160,6 +161,9 @@ msgid ""
 "Now build a sheep farm and use all the wheat to produce at least 50 bales of"
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Ora costruisci un allevamento di pecore e usa tutto il grano per produrre "
+"almeno 50 balle di lana. Dopodiché usa la lana per tessere la stoffa "
+"necessaria a costruire una nave."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
