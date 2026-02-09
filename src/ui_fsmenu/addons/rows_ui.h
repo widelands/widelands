@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 by the Widelands Development Team
+ * Copyright (C) 2021-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,10 +62,6 @@ public:
 	void draw(RenderTarget&) override;
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
-	}
-	bool upgradeable() const;
-	bool full_upgrade_possible() const {
-		return full_upgrade_possible_;
 	}
 
 private:

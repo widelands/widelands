@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2015
@@ -23,16 +23,16 @@
 # Paulo Paulo <paulletilly@gmail.com>, 2021
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2016-2022,2024-2025
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022,2025
 # syl_, 2017
 # Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: David D, 2018,2023,2025\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1309,7 +1309,7 @@ msgctxt "amazons_building"
 msgid ""
 "The liana cutter harvests liana from fully matured trees within the work "
 "area which are not being used as lookouts."
-msgstr "Le coupeur de lianes récolte les lianes sur les arbres pleinement matures situés dans la zone de travail et qui ne sont pas utilisés comme vigies."
+msgstr "La coupeuse de lianes récolte les lianes sur les arbres pleinement matures situés dans la zone de travail et qui ne sont pas utilisés comme vigies."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Liana
 #. Cutter's Hut, part 1
@@ -1318,7 +1318,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire une liane entre %1$s et %2$s, en fonction de la distance que la coupeuse de liane doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -5322,7 +5322,7 @@ msgstr "Chanson de la guilde des mineurs"
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon en %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5354,7 +5354,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire un minerai de fer en %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5400,7 +5400,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement de nourriture est stable, cette mine peut produire un minerai d'or en %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -5450,7 +5450,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Compléter l'entraînement d'un soldat prend %s en moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -6937,7 +6937,7 @@ msgstr "Comme pour les quatiers généraux, un port peut être attaqué et détr
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1132
 msgctxt "barbarians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Un marché permet de commercer avec d'autres tribus."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Quarry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1141
@@ -6970,7 +6970,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un granit toutes les %1$sà %2$s, suivant la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -7001,7 +7001,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1869
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "En cas de pentes ou d'obstacles sur le chemin, le temps est augmenté."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -7034,7 +7034,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un tronc toutes les %1$s à %2$s, suivant la distance que le bucheron doit parcourir."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1180
@@ -7065,7 +7065,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Le garde forestier plante un arbre toutes les %1$sà %2$s, suivant la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1199
@@ -7137,7 +7137,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire une viande toutes les %1$s à %2$s, suivant la distance que le chasseur doit parcourir."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -7199,7 +7199,7 @@ msgstr "Le porteur a besoin de %s pour remplir un seau d'eau."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Si la ressource en eau s'épuise, le transporteur a besoin en moyenne de %s."
 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
@@ -7228,7 +7228,7 @@ msgstr "Chat’Karuthat<br>à la cérémonie du serment de la première troupe d
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1283
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Chaque voyage d'exploration d'un éclaireur prend entre %1$s et %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1295
@@ -7565,7 +7565,7 @@ msgstr "La chanson des charbonniers"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Le four à charbon a besoin de %s en moyenne pour produire un charbon."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1444
@@ -7720,7 +7720,7 @@ msgstr "‘Ne demande pas ce que ta tribu peut faire pour toi, demande ce que tu
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1513
 msgctxt "barbarians_building"
 msgid "Famous Barbarian recruitment poster"
-msgstr ""
+msgstr "Fameuse affiche de recrutement Barbare"
 
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Barracks
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1515
@@ -7733,7 +7733,7 @@ msgstr "Équipez vos recrues et entraînez les en tant que soldats."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Las casernes ont besoin de %s en moyenne pour recruter un soldat."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Cattle Farm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1526
@@ -8065,7 +8065,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Compléter l'entraînement d'un soldat prend %s en moyenne."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Training Camp
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1741
@@ -8255,7 +8255,7 @@ msgstr "Tissez de l'étoffe à partir de roseau."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "La filature a besoin de %s en moyenne pour produire un  tissu."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1915
@@ -10666,7 +10666,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Les géologues, les constructeurs, les armuriers, les frabriquants d'armures et les charpentiers de marine ont tous besoin d'un marteau. Assurez-vous d'en avoir toujours en réserve ! Ils sont fabriqués par le forgeron."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -10763,7 +10763,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Le casque est la défense basique d'un soldat. Il est produit à la fabrique d'armures. En combinaison avec la lance en bois, c'est l'équipement pour habiller les jeunes soldats. Les casques sont aussi utilisés aux champs d'entraînement – avec de la nourriture – pour entrainer la santé des soldats du niveau 0 au niveau 1."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:567
@@ -11349,7 +11349,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Le garde forestier plante un arbre toutes les %1$sà %2$s, suivant la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11400,7 +11400,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un poisson toutes les %1$s a %2$s, suivant la distance que le pêcheur doit parcourir."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11437,7 +11437,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire une viande toutes les %1$s à %2$s, suivant la distance que le chasseur doit parcourir."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11469,7 +11469,7 @@ msgstr "Proverbe Impérial"
 #, lua-format
 msgctxt "empire_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Un porteur d'eau a besoin de %spour obtenir un seau d'eau."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 2
@@ -11477,7 +11477,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Si la ressource en eau s'épuise, le transporteur a besoin en moyenne de %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11513,7 +11513,7 @@ msgstr "Vous devez connecter ce drapeau à une maison d'éclaireur avant de pouv
 #: ../../../../data/tribes/initialization/empire/units.lua:1437
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Chaque voyage d'exploration d'un éclaireur prend entre %1$s et %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11580,7 +11580,7 @@ msgstr "La devise de la guilde des charpentiers"
 #, lua-format
 msgctxt "empire_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "La scierie à besoin en moyenne de %s pour produire une planche."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12324,7 +12324,7 @@ msgstr ""
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire du charbon en %s en moyenne."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12380,7 +12380,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produire un minerai de fer en %s en moyenne."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12434,7 +12434,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Si l'approvisionnement de nourriture est stable, cette mine peut produire un minerai d'or en %s en moyenne."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12568,7 +12568,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Compléter l'entraînement d'un soldat prend %s en moyenne."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.

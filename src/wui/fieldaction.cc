@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -72,6 +73,7 @@ private:
 	void mousein_slot(int32_t idx);
 
 	Widelands::Player* plr_;
+	std::vector<FastplaceShortcut> fastplace_shortcuts_;
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
@@ -83,7 +85,8 @@ BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32
                   kBuildGridCellSize,
                   kBuildGridCellSize,
                   cols),
-     plr_(plr) {
+     plr_(plr),
+     fastplace_shortcuts_(get_active_fastplace_shortcuts(plr_->tribe().name())) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
 	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i); });
@@ -97,9 +100,24 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(Widelands::DescriptionIndex id) {
 	const Widelands::BuildingDescr& descr = *plr_->tribe().get_building_descr(id);
 
+	std::vector<std::string> shortcuts;
+	for (const FastplaceShortcut& fp : fastplace_shortcuts_) {
+		if (fp.building == descr.name()) {
+			shortcuts.push_back(fp.hotkey);
+		}
+	}
+	std::string descname;
+	if (shortcuts.empty()) {
+		descname = descr.descname();
+	} else {
+		descname = as_tooltip_text_with_hotkey(
+		   descr.descname(), i18n::localize_list(shortcuts, i18n::ConcatenateWith::COMMA),
+		   UI::PanelStyle::kWui, false);
+	}
+
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
-	                  descr.descname() + "<br>" +
+	                  descname + "<br>" +
 	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 	                        .header_font()
 	                        .as_font_tag(_("Construction costs:")) +
@@ -408,6 +426,9 @@ void FieldActionWindow::add_buttons_auto() {
 
 	const Widelands::PlayerNumber owner = node_.field->get_owned_by();
 
+	bool has_ship_fleet = false;
+	bool has_ferry_fleet = false;
+
 	if ((igbase == nullptr) || igbase->can_see(owner)) {
 		Widelands::BaseImmovable* const imm = map_.get_immovable(node_);
 		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
@@ -499,34 +520,36 @@ void FieldActionWindow::add_buttons_auto() {
 			if (can_act && (dynamic_cast<const Widelands::Waterway*>(imm) != nullptr)) {
 				add_button(buildbox, "destroy_waterway", kImgButtonRemoveWaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
+				has_ferry_fleet = true;
 			}
 		}
 	}
 
 	// Fleet target settings
-	bool has_ship_fleet = false;
-	bool has_ferry_fleet = false;
 	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
 	     bob = bob->get_next_bob()) {
 		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE &&
 		    !has_ship_fleet &&
 		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
-			if (buildbox == nullptr) {
-				buildbox = new UI::Box(
-				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
-			}
 			has_ship_fleet = true;
-			add_button(
-			   buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
-			   &FieldActionWindow::act_configure_ship_fleet, _("Configure this ocean’s ship fleet"));
 		} else if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
 		           !has_ferry_fleet &&
 		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
-			if (buildbox == nullptr) {
-				buildbox = new UI::Box(
-				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
-			}
 			has_ferry_fleet = true;
+		}
+	}
+
+	if (has_ship_fleet || has_ferry_fleet) {
+		if (buildbox == nullptr) {
+			buildbox =
+			   new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
+		}
+		if (has_ship_fleet) {
+			add_button(
+			   buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
+			   &FieldActionWindow::act_configure_ship_fleet, _("Configure this ocean’s ship fleet"));
+		}
+		if (has_ferry_fleet) {
 			add_button(
 			   buildbox, "configure_ferry_fleet", "images/wui/fieldaction/menu_tab_ferry_targets.png",
 			   &FieldActionWindow::act_configure_ferry_fleet, _("Configure this ocean’s ferry fleet"));
@@ -849,12 +872,19 @@ void FieldActionWindow::act_configure_ship_fleet() {
 
 void FieldActionWindow::act_configure_ferry_fleet() {
 	upcast(InteractivePlayer, ipl, &ibase());
-	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
-	     bob = bob->get_next_bob()) {
-		if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
-		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
-			FleetOptionsWindow::create(get_parent(), ibase(), bob);
-			break;
+	if (node_.field->get_immovable() != nullptr &&
+	    node_.field->get_immovable()->descr().type() == Widelands::MapObjectType::WATERWAY &&
+	    (ipl == nullptr ||
+	     node_.field->get_immovable()->owner().player_number() == ipl->player_number())) {
+		FleetOptionsWindow::create(get_parent(), ibase(), node_.field->get_immovable());
+	} else {
+		for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+		     bob = bob->get_next_bob()) {
+			if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+			    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+				FleetOptionsWindow::create(get_parent(), ibase(), bob);
+				break;
+			}
 		}
 	}
 	die();

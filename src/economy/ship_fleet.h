@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2025 by the Widelands Development Team
+ * Copyright (C) 2011-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,6 +107,7 @@ struct ShipFleet : MapObject {
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&);
+	void split(Game& game);
 
 	void add_ship(EditorGameBase&, Ship* ship);
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
@@ -139,7 +140,6 @@ struct ShipFleet : MapObject {
 	[[nodiscard]] std::vector<PortDock*>& get_ports() {
 		return ports_;
 	}
-
 	[[nodiscard]] Quantity get_ships_target() const {
 		return ships_target_;
 	}

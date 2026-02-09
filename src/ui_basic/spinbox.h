@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2025 by the Widelands Development Team
+ * Copyright (C) 2009-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,12 +71,15 @@ public:
 	// otherwise you will confuse the user.
 	void set_value_list(const std::vector<int32_t>&);
 	void set_interval(int32_t min, int32_t max, bool trigger_signal_if_changed = true);
-	int32_t get_value() const;
+	[[nodiscard]] int32_t get_value() const;
+	[[nodiscard]] int32_t get_min() const;
+	[[nodiscard]] int32_t get_max() const;
 	void add_replacement(int32_t, const std::string&);
 	const std::vector<UI::Button*>& get_buttons() {
 		return buttons_;
 	}
 	void set_unit_width(uint32_t width);
+	void set_min_height(uint32_t height);
 
 	bool handle_key(bool, SDL_Keysym) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
@@ -98,6 +101,7 @@ private:
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
 	uint32_t padding_;
+	uint32_t min_height_ = 0;
 };
 }  // namespace UI
 

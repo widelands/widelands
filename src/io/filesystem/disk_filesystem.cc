@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -357,7 +357,7 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 	//       which would then also work with errno instead of GetLastError(),
 	//       but I am not sure if this is available (and works properly)
 	//       on all windows platforms or only with Visual Studio.
-	if (!CreateDirectory(fspath.c_str(), NULL)) {
+	if (!CreateDirectory(fspath.c_str(), nullptr)) {
 		throw FileError(
 		   "RealFSImpl::make_directory", fspath,
 		   std::string("file error (Windows error code ") + std::to_string(GetLastError()) + ")");
@@ -565,7 +565,7 @@ unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
 
-	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
+	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, nullptr, nullptr) ?
 	          // If more than 2G free space report that much
 	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
 	                                   freeavailable.LowPart :
@@ -575,6 +575,6 @@ unsigned long long RealFSImpl::disk_space() {  // NOLINT
 	if (statvfs(root_.c_str(), &svfs) != -1) {
 		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;  // NOLINT
 	}
-#endif
 	return 0;  //  can not check disk space
+#endif
 }

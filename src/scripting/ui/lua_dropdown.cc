@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,23 +159,27 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	verb_log_info(
 	   "Highlighting item %u in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
-	get()->set_list_visibility(true);
+	NoteThreadSafeFunction::instantiate(
+	   [dropdown{get()}, desired_item]() {
+		   dropdown->set_list_visibility(true);
 
-	SDL_Keysym code;
-	// Ensure that we're at the top
-	code.sym = SDLK_UP;
-	code.scancode = SDL_SCANCODE_UP;
-	code.mod = KMOD_NONE;
-	code.unused = 0;
-	for (size_t i = 1; i < get()->size(); ++i) {
-		get()->handle_key(true, code);
-	}
-	// Press arrow down until the desired item is highlighted
-	code.sym = SDLK_DOWN;
-	code.scancode = SDL_SCANCODE_DOWN;
-	for (size_t i = 1; i < desired_item; ++i) {
-		get()->handle_key(true, code);
-	}
+		   SDL_Keysym code;
+		   // Ensure that we're at the top
+		   code.sym = SDLK_UP;
+		   code.scancode = SDL_SCANCODE_UP;
+		   code.mod = KMOD_NONE;
+		   code.unused = 0;
+		   for (size_t i = 1; i < dropdown->size(); ++i) {
+			   dropdown->handle_key(true, code);
+		   }
+		   // Press arrow down until the desired item is highlighted
+		   code.sym = SDLK_DOWN;
+		   code.scancode = SDL_SCANCODE_DOWN;
+		   for (size_t i = 1; i < desired_item; ++i) {
+			   dropdown->handle_key(true, code);
+		   }
+	   },
+	   true);
 	return 0;
 }
 

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Frank Tang <roadtang@gmail.com>, 2015
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-08-16 03:20+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -207,13 +207,13 @@ msgid "Elders"
 msgstr "先行者"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:423
 msgid "Graphics"
 msgstr "绘图"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:367
+#: ../../../../data/txts/developers.lua:430
 msgid "Homepage"
 msgstr "网站主页"
 
@@ -222,7 +222,7 @@ msgid "Scripting"
 msgstr "脚本"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:438
 msgid "Sound"
 msgstr "声音"
 
@@ -238,103 +238,103 @@ msgstr "语言"
 msgid "Coders"
 msgstr "程序员"
 
-#: ../../../../data/txts/developers.lua:151
+#: ../../../../data/txts/developers.lua:152
 msgid "Graphicians"
 msgstr "图形艺术家"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:191
 msgid "Musicians"
 msgstr "音乐家"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:210
 msgid "Sound Effects"
 msgstr "音效"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:226
 msgid "Maps and Missions"
 msgstr "地图和任务"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:264
 msgid "Campaign Story"
 msgstr "战役故事"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:268
 msgid "Barbarians"
 msgstr "蛮族"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:276
 msgid "Empire"
 msgstr "帝国"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:283
 msgid "Atlanteans"
 msgstr "亚特兰蒂斯人"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:291
 msgid "Frisians"
 msgstr "弗里西亚部族"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:299
 msgid "Packagers"
 msgstr "游戏程序集成打包"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:303
 msgid "Debian Linux"
 msgstr "Debian Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:309
 msgid "Fedora Linux"
 msgstr "Fedora Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:317
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux 操作系统"
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:323
 msgid "FreeBSD"
 msgstr "FreeBSD 操作系统"
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:329
 msgid "Flatpak"
 msgstr "Flatpak 操作系统"
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:336
 msgid "Mac OS X"
 msgstr "Mac OS X 操作系统"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:348
 msgid "Windows"
 msgstr "Windows 操作系统"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:359
 msgid "ZetaOS"
 msgstr "Zeta 操作系统"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
 msgstr "网站主页程序员"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
 msgstr "文档，帮助和维基"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
 msgstr "附加组件"
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:419
 msgid "Former Elders"
 msgstr "前辈"
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:445
 msgid "Translation"
 msgstr "翻译"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:454
 msgid "Other"
 msgstr "其他"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr ""
 
@@ -804,42 +804,43 @@ msgstr ""
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -847,7 +848,7 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -855,7 +856,7 @@ msgid ""
 "eventually die."
 msgstr ""
 
-#: ../../../../data/txts/tips/general_game.lua:110
+#: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."

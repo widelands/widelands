@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -185,8 +185,6 @@ public:
 	friend struct MapGenerator;
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
-
-	static const std::vector<int32_t> kMapFieldCounts;
 
 	struct OldWorldInfo {
 		// What we call it now (used for the gameloading UI's themes

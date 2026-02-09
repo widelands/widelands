@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include "logic/game_controller.h"
 #include "scripting/globals.h"
+#include "scripting/lua_root_notifications.h"
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_flag.h"
 #include "wui/interactive_player.h"
@@ -55,6 +56,10 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, set_keyboard_shortcut),
    METHOD(LuaMapView, set_keyboard_shortcut_release),
    METHOD(LuaMapView, add_plugin_timer),
+   METHOD(LuaMapView, subscribe_to_jump),
+   METHOD(LuaMapView, subscribe_to_changeview),
+   METHOD(LuaMapView, subscribe_to_track_selection),
+   METHOD(LuaMapView, subscribe_to_field_clicked),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
@@ -503,6 +508,99 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
 
 	get_egbase(L).get_ibase()->add_plugin_timer(action, interval, failsafe);
 	return 0;
+}
+
+/* RST
+   .. method:: subscribe_to_jump()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "jump" signal, which is triggered when
+      the viewport jumps immediately to a different position.
+
+      This signal is not triggered by animated map transitions.
+
+      This signal provides no arguments.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaMapView::subscribe_to_jump(lua_State* L) {
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L,
+	   new LuaRoot::LuaSubscriber(get_egbase(L), LuaRoot::LuaNotifications::create_mapview_jump(L)));
+	return 1;
+}
+
+/* RST
+   .. method:: subscribe_to_changeview()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "changeview" signal, which is triggered when the viewport moves.
+
+      This signal is triggered repeatedly by animated map transitions.
+
+      This signal provides no arguments.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaMapView::subscribe_to_changeview(lua_State* L) {
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_changeview(L)));
+	return 1;
+}
+
+/* RST
+   .. method:: subscribe_to_field_clicked()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "field_clicked" signal, which is triggered when the user clicks on a field.
+
+      Note that a user's click on a field can have other, unrelated effects, such as opening a
+      field action window or building window, interacting with road building mode, or
+      (in the editor) performing a tool action.
+      It is not currently possible to suppress these effects.
+      The ability to create custom tools that trigger on a click on a field without other effects
+      is a `planned future addition <https://codeberg.org/wl/widelands/issues/5273>`_.
+
+      The signal provides as arguments both the node and the triangle which are
+      closest to the clicked pixel.
+      The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
+      The coordinates of the triangle are given by the keys ``"triangle_x"``, ``"triangle_y"``,
+      and ``"triangle_t"``, where ``"triangle_t"`` is one of ``"D"`` and ``"R"``.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_field_clicked(L)));
+	return 1;
+}
+
+/* RST
+   .. method:: subscribe_to_track_selection()
+
+      .. versionadded:: 1.3
+
+      Subscribe to the "track_selection" signal, which is triggered when
+      the field under the mouse cursor changes.
+
+      The signal provides as arguments both the node and the triangle which are
+      closest to the mouse pixel.
+      The coordinates of the node are given by the keys ``"node_x"`` and ``"node_y"``.
+      The coordinates of the triangle are given by the keys ``"triangle_x"``, ``"triangle_y"``,
+      and ``"triangle_t"``, where ``"triangle_t"`` is one of ``"D"`` and ``"R"``.
+
+      :returns: :class:`wl.Subscriber`
+*/
+int LuaMapView::subscribe_to_track_selection(lua_State* L) {
+	to_lua<LuaRoot::LuaSubscriber>(
+	   L, new LuaRoot::LuaSubscriber(
+	         get_egbase(L), LuaRoot::LuaNotifications::create_mapview_track_selection(L)));
+	return 1;
 }
 
 /*

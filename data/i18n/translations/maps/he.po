@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# ari ploni, 2025
 # GunChleoc, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-07-26 03:32+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: GunChleoc, 2015\n"
+"Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr "הארץ הזאת ארץ שלנו"
+msgstr "האדמה הזאת היא אדמה שלנו"
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -422,7 +423,7 @@ msgstr ""
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr "אטול"
+msgstr "אי טבעת"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
@@ -441,7 +442,7 @@ msgstr ""
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
-msgstr "מט"
+msgstr "שחמט"
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:10
 msgid ""
@@ -452,7 +453,7 @@ msgstr ""
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
-msgstr "שביט איילנד"
+msgstr "אי השביט"
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:9
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:9

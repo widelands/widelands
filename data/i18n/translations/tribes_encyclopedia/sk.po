@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024-2025\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -612,7 +612,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:576
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosí predmety po vašich cestách."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Ferry
 #: ../../../../data/tribes/initialization/amazons/units.lua:583
@@ -1098,7 +1098,7 @@ msgctxt "amazons_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojačkám."
 
 #. TRANSLATORS: Note helptext for an Amazon warehouse: Port
 #: ../../../../data/tribes/initialization/amazons/units.lua:1282
@@ -4219,7 +4219,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Atlantean warehouse: Port
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1462
@@ -6914,7 +6914,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Barbarian warehouse: Port
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1123
@@ -7113,7 +7113,7 @@ msgstr "„Tichý ako panter,<br> obratný ako lasica,<br> rýchly ako šíp,<br
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1224
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
-msgstr "„Umenie loviť“"
+msgstr "„Umenie lovu“"
 
 #. TRANSLATORS: Note helptext for a Barbarian production site: Hunter's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1228
@@ -11156,7 +11156,7 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vašich vojakov, výrobky a nástroje."
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for an Empire warehouse: Port
 #: ../../../../data/tribes/initialization/empire/units.lua:1225
@@ -13749,7 +13749,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2724
 msgctxt "warehousename"
 msgid "Roma"
-msgstr ""
+msgstr "Rím"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2726
@@ -13887,7 +13887,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2770
 msgctxt "warehousename"
 msgid "Venetiæ"
-msgstr ""
+msgstr "Benátky"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../../../data/tribes/initialization/empire/units.lua:2772
@@ -14295,7 +14295,7 @@ msgstr "Rybárske siete sú nástrojom, ktorý používajú rybári."
 #: ../../../../data/tribes/initialization/frisians/units.lua:457
 msgctxt "frisians_ware"
 msgid "Hunting spears are produced by the blacksmithy"
-msgstr "Lovecké oštepy sa vyrábajú v kováčstve."
+msgstr "Lovecké oštepy sa vyrábajú v kováčstve"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:470
@@ -14416,7 +14416,7 @@ msgstr "Zlatá helma slúži k ochrane vojakov. Vyrába sa vo veľkej vyhni na z
 #: ../../../../data/tribes/initialization/frisians/units.lua:624
 msgctxt "frisians_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosí predmety po vašich cestách."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Ferry
 #: ../../../../data/tribes/initialization/frisians/units.lua:631
@@ -14796,7 +14796,7 @@ msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Slúži ako zámorská kolonizačná základňa a obchodný uzol. Popritom uskladňuje vaše výrobky, nástroje a poskytuje prístrešie vojakom."
 
 #. TRANSLATORS: Note helptext for a Frisian warehouse: Port
 #: ../../../../data/tribes/initialization/frisians/units.lua:1545

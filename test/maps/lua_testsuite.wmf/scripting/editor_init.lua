@@ -1,3 +1,6 @@
-include "map:scripting/common_init.lua"
+print("INFO: running editor_init.lua")  -- printed to show that the script runs twice
 
-include "map:scripting/init.lua" -- Run the ordinary testsuite
+if player1 then -- was loaded before
+   print("(quit again)")
+   wl.ui.MapView():close() -- was done by editor_test_*.lua, but must be repeated
+end

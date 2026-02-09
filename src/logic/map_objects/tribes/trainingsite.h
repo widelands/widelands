@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -292,7 +292,7 @@ struct NoteTrainingSiteSoldierTrained {
 	// The trainingsite from where soldier is leaving.
 	TrainingSite* ts;
 
-	// The player that owns the ttraining site.
+	// The player that owns the training site.
 	Player* player;
 
 	NoteTrainingSiteSoldierTrained(TrainingSite* const init_ts, Player* init_player)
