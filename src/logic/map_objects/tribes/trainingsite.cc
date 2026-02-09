@@ -614,8 +614,13 @@ void TrainingSite::drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned 
 
 	if (build_heroes_ != SoldierPreference::kAny) {
 		std::sort(v.begin(), v.end(), [this](Soldier* a, Soldier* b) {
+			const unsigned level_a = a->get_total_level();
+			const unsigned level_b = b->get_total_level();
+			if (level_a == level_b) {
+				return a->serial() < b->serial();
+			}
 			// Sort in order of decreasing desirability, so we can use pop_back()
-			return !compare_levels(a->get_total_level(), b->get_total_level());
+			return !compare_levels(level_a, level_b);
 		});
 	}
 	for (; number_to_drop > 0; --number_to_drop) {
