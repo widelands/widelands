@@ -252,5 +252,10 @@ private:
 	const PlayerNumber player_who_needs_ferry_;
 };
 
+/// Accepts nodes suitable as drop points for invasion soldiers
+struct FindNodeInvasion {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const;
+};
+
 }  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H
