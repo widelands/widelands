@@ -30,6 +30,11 @@ public:
 
 	static void register_signal_handler();
 	static std::string get_signal_description(int sig);
+	static void set_crash_dir(const std::string& homedir);
+	static std::string get_crash_dir();
+
+private:
+	static std::string crash_dir;
 };
 
 #endif  // end of include guard: WL_BASE_BACKTRACE_PROVIDER_H

@@ -35,7 +35,6 @@ wl_library(base
     io_filesystem
     logic_filesystem_constants
     notifications
-    widelands_ball_of_mud
 )
 
 wl_library(base_macros

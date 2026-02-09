@@ -35,7 +35,8 @@
 #include "base/time_string.h"
 #include "build_info.h"
 #include "logic/filesystem_constants.h"
-#include "wlapplication.h"
+
+std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 
 // Taken from https://stackoverflow.com/a/77336
 // TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
@@ -60,16 +61,8 @@
 	   << std::endl
 	   << "##############################" << std::endl;
 
-	std::string filename;
-	if (WLApplication::segfault_backtrace_dir.empty()) {
-		filename = "./widelands_crash_report_";
-	} else {
-		filename = WLApplication::segfault_backtrace_dir;
-		filename += "/";
-	}
-
 	const std::string timestr = timestring();
-	filename += timestr;
+	std::string filename = BacktraceProvider::get_crash_dir() + timestr;
 
 	std::string thread_name;
 	if (is_initializer_thread()) {
@@ -143,4 +136,12 @@ std::string BacktraceProvider::get_signal_description(int sig) {
 #endif
 
 	return s.str();
+}
+
+void BacktraceProvider::set_crash_dir(const std::string& homedir) {
+	crash_dir = homedir + "/" + kCrashDir + "/";
+}
+
+std::string BacktraceProvider::get_crash_dir() {
+	return crash_dir;
 }
