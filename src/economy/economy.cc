@@ -602,9 +602,14 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 				const int32_t cost_to_center = r.get_totalcost();
 				const int32_t cost_cutoff =
 				   cost_to_center + std::max(kMinAllowance, cost_to_center / kAllowanceRatio);
+				const uint32_t dist_cutoff = cost_cutoff / 1800;
+				const Coords flag_pos = flag->get_position();
 
 				for (const auto& wh_and_stock : warehouses_with_stock) {
 					wh = const_cast<Warehouse*>(wh_and_stock.first);
+					if (map->calc_distance(wh->get_position(), flag_pos) > dist_cutoff) {
+						continue;
+					}
 					if (router_->find_route(*f, wh->base_flag(), &r, type_, cost_cutoff, *map)) {
 						quantity_district += wh_and_stock.second;
 
