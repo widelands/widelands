@@ -1,24 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
-# Guybrush88 <erpizzo@alice.it>, 2022
 # Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2025
 # GunChleoc, 2025
 # Samuele Battarra, 2025
 # ilmaren, 2025
 # xno, 2025
+# Guybrush88 <erpizzo@alice.it>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: xno, 2025\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2025\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,7 +272,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:184
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Hai bisogno di aumentare la tua forza militare."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:190
 msgid "Build a training camp and enhance the arena"
@@ -280,7 +280,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:192
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Edifici di addestramento più efficienti"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:193
 msgid "Build a training camp and enhance your arena to a colosseum."
@@ -612,7 +612,7 @@ msgstr "Amalea è in un qualche modo rincuorata"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:366
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalea sta sospirando profondamente…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:368
@@ -934,7 +934,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea Looks Thoughtful"
-msgstr ""
+msgstr "Amalea sembra pensierosa"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is sorrowful…"
@@ -1648,7 +1648,7 @@ msgstr "Nessun soldato da addestrare!"
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nessun soldato trovato per questo livello di addestramento!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2025\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
@@ -348,7 +348,7 @@ msgid ""
 "start growing reed fields."
 msgstr ""
 "Un wi mutten fix eene Reitbuurderee bauen. Ok Reitbuurdereen bruken tum "
-"Bauen Reit, daarum mutten wi uppassen, dat wi nich all uns’ Reit verbruken, "
+"Bauen Reit, daarum mutten wi uppassen, dat wi nich all uns’ Reit upbruken, "
 "ehr wi wat anbauen könen. Reit antobauen is licht; de Reitbuur bruukt daar "
 "nix anners för."
 
@@ -391,9 +391,9 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
-"Um Backstenen to brannen bruukt de Backsteenbranneree een Füür. Daar bruuken"
-" wi Köhle för. Bau een Köhle-Bargwark, daarmit wi genoog hebben. Sünner "
-"Köhle gifft ’t keene Backstenen, sünner Backstenen keene Bargwarken, sünner "
+"Um Backstenen to brannen bruukt de Backsteenbranneree een Füür. Daar bruken "
+"wi Köhle för. Bau een Köhle-Bargwark, daarmit wi genoog hebben. Sünner Köhle"
+" gifft ’t keene Backstenen, sünner Backstenen keene Bargwarken, sünner "
 "Bargwarken keene Köhle … du süchst dat Probleem."
 
 #. TRANSLATORS: Hauke – Introduction 4

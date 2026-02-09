@@ -8,6 +8,7 @@
 		"Widelands предлага режим на самостоятелна игра, с кампании, разказващи историите на племената и тяхната борба в света на Widelands. Истинското заселване започва когато се обедините с приятелите си по Интернет или локалната мрежа, за да създавате нови империи заедно, или да се побеждавате взаимно. Widelands предлага и изкуствен интелект, срещу който може да играете."
 	],
 	"release_notes": {
+		"1.4": [],
 		"1.3": [
 			"Market trading",
 			"Six new maps added and three old maps removed",
@@ -19,16 +20,6 @@
 		],
 		"1.2.1": [
 			"Bugfix release"
-		],
-		"1.2": [
-			"New Frisian scenario",
-			"Diplomacy handling by computer players",
-			"Naval Warfare (preview)",
-			"Garrisons for ports and headquarters",
-			"UI Plugins",
-			"Pinned notes",
-			"Direct map publishing",
-			"Enhanced error handling"
 		]
 	}
 }

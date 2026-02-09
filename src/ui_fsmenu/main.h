@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -186,7 +186,7 @@ private:
 	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
 
-	void internet_login(bool launch_metaserver);
+	bool internet_login(bool launch_metaserver);
 
 	// Values from internet login window
 	std::string nickname_;

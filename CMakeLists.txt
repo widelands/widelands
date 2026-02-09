@@ -1,5 +1,4 @@
-cmake_minimum_required (VERSION 3.12)
-cmake_policy(VERSION 3.12)
+cmake_minimum_required (VERSION 3.15...3.31)
 
 project (widelands)
 
@@ -34,22 +33,8 @@ foreach(custom_include_dir ${custom_include_directories})
   endif()
 endforeach()
 
-include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+#include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
-
-# This policy is not known to versions prior 3.27 and would result in errors,
-# if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.27 or newer  by using:
-# cmake_policy(VERSION 3.27)
-if(POLICY CMP0148)
-  cmake_policy(SET CMP0148 NEW)
-endif(POLICY CMP0148)
-if(POLICY CMP0153)
-  cmake_policy(SET CMP0153 NEW)
-endif(POLICY CMP0153)
-if(POLICY CMP0177)  # Added in CMake 3.31
-  cmake_policy(SET CMP0177 NEW)
-endif(POLICY CMP0177)
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
@@ -102,6 +87,14 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 else()
   message(WARNING "You are using an unsupported compiler! Supported are Clang and GCC.")
 endif()
+
+if(OPTION_BUILD_WINSTATIC)
+  if(MSVC)
+    # Set correct MSVC runtime library, this influences compiler flags
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  endif()
+endif()
+
 message(STATUS "Picking up default CXX flags:
     - CMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS}'
     - CMAKE_CXX_FLAGS_RELEASE='${CMAKE_CXX_FLAGS_RELEASE}'
@@ -133,11 +126,7 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
-if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
-    find_package(ICU_old REQUIRED)
-else()
-    find_package(ICU REQUIRED COMPONENTS uc dt)
-endif()
+find_package(ICU REQUIRED COMPONENTS uc dt)
 if(OPTION_USE_GLBINDING)
   find_package(glbinding REQUIRED)
 else()
@@ -155,12 +144,6 @@ if(NOT asio_location OR asio_location STREQUAL "")
   endif()
 endif()
 add_definitions(-DASIO_STANDALONE)
-
-if (APPLE OR WIN32 OR
-    CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-endif()
 
 # Disable no symbols warning on macOS, but only on versions where this is
 # supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
@@ -199,6 +182,10 @@ elseif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelW
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
+    if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+      # Workaround for buggy MSVC behavior with default /Ob1
+      set(WL_OPTIMIZE_FLAGS "/Ob2")
+    endif()
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif()
@@ -227,8 +214,15 @@ if(OPTION_ASAN)
   message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
   # See https://clang.llvm.org/docs/AddressSanitizer.html
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
-  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  if(MSVC)
+    # Disabling annotations macros to be able to link glbindingd, icuucd and tinygettext
+    # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
+    add_compile_definitions(_DISABLE_STRING_ANNOTATION)
+    add_compile_definitions(_DISABLE_VECTOR_ANNOTATION)
+  else()
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
+    set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  endif()
   add_definitions(-DUSE_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
@@ -446,13 +440,8 @@ if(OPTION_BUILD_WINSTATIC)
   if(MSVC)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS libwebp)
     wl_add_static_libs(SDL_STATIC_LIBS charset ${BROTLI})
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      string(REPLACE "/MDd" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-      wl_add_flag(TARGET_COMPILE_FLAGS "/MTd /EHsc")
-    else()
-      string(REPLACE "/MD" "" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
-      wl_add_flag(TARGET_COMPILE_FLAGS "/MT /EHsc")
-    endif()
+    # CMAKE_CXX_FLAGS already contains this flag for Visual Studio 2022, so it probably could be deleted
+    wl_add_flag(TARGET_COMPILE_FLAGS "/EHsc")
   else()
     wl_add_static_libs(SDL_IMG_STATIC_LIBS ${MINGW_SDL_IMG_DEPS})
     wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp xmp wavpack)
@@ -604,13 +593,11 @@ endif (UNIX AND NOT APPLE)
 
 # uninstall target
 # see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
-if(NOT TARGET uninstall)
-  configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake"
-    IMMEDIATE @ONLY)
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake"
+  IMMEDIATE @ONLY)
 
-  add_custom_target(uninstall
-    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
-endif()
+add_custom_target(wl_uninstall
+  COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
 

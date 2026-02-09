@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2025
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -6294,7 +6294,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Nüms kann deeses platte, leckere Pitta-Brood beter maken as de Willen Backers. ’t word na eenem gehemen Rezept ut Weit un Water maakt. Pitta-Brood word in Kneipen, Kröög un Weertshusen bruukt, um Happen, Spiesen un Mahltieden torecttomaken. ’t word ok vun Övens-Boen (Övens-Lager un Slachtenring) verbruukt."
+msgstr "Nüms kann deeses platte, leckere Pitta-Brood beter maken as de Willen Backers. ’t word na eenem gehemen Rezept ut Weit un Water maakt. Pitta-Brood word in Kneipen, Kröög un Weertshusen bruukt, um Happen, Spiesen un Mahltieden torecttomaken. ’t word ok vun Övens-Boen (Övens-Lager un Slachtenring) bruukt."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../../../data/tribes/initialization/barbarians/units.lua:213
@@ -10452,7 +10452,7 @@ msgctxt "empire_ware"
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
 " smithy."
-msgstr "Eenige Husen bruken Stoff. ’t word ok vun de Panzersmee verbruukt."
+msgstr "Eenige Husen bruken Stoff. ’t word ok vun de Panzersmee bruukt."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fish
 #: ../../../../data/tribes/initialization/empire/units.lua:170
@@ -10502,7 +10502,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "De Rieks-Backers maken bannig leckeres Brood ut Mehl un Water. ’t word in Kneipen un Weertshusen bruukt, um Happen un Mahltieden torechttomaken. Brood word ok vun Övens-Boen (Ring, Groter Ring, Övens-Lager) verbruukt."
+msgstr "De Rieks-Backers maken bannig leckeres Brood ut Mehl un Water. ’t word in Kneipen un Weertshusen bruukt, um Happen un Mahltieden torechttomaken. Brood word ok vun Övens-Boen (Ring, Groter Ring, Övens-Lager) bruukt."
 
 #. TRANSLATORS: Helptext for an Empire ware: Beer
 #: ../../../../data/tribes/initialization/empire/units.lua:234
@@ -17280,13 +17280,13 @@ msgstr "Produzeert vun"
 #. consumes a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr "Verbruuker"
+msgstr "Bruuker"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:128
 msgid "Consumers"
-msgstr "Verbruukers"
+msgstr "Bruukers"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../../../data/tribes/scripting/help/worker_help.lua:53

@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Niklas Nordgren, 2022
 # D M <kamera001dm@gmail.com>, 2023
+# Daniel Nylander <po@danielnylander.se>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
 "Fyra spadar att användas för att ta bort träsken har samlats ihop i "
-"magasinet."
+"lagerbyggnaden."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -50,7 +51,7 @@ msgid ""
 "warehouse."
 msgstr ""
 "Ytterligare fyra spadar för att ta bort träsken har samlats ihop i "
-"magasinet."
+"lagerbyggnaden."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
@@ -99,11 +100,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr "Bygg ett magasin"
+msgstr "Bygg lagerbyggnad"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Bygg ett magasin nära piratvaktposten"
+msgstr "Bygg en lagerbyggnad nära piratvaktposten"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -111,8 +112,8 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
-"Bygg ett magasin nära den övertagna piratvaktposten vid bäcken. Vi kommer "
-"att behöva det för att ha en bas för vidare utforskning. Vi kan också "
+"Bygg en lagerbyggnad nära den erövrade piratvaktposten vid bäcken. Vi kommer"
+" att behöva det för att ha en bas för vidare utforskning. Vi kan också "
 "använda det till att lagra guld som vi bryter i de omkringliggande kullarna."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
@@ -123,7 +124,7 @@ msgstr "Transportera spadar"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Transportera fyra spadar till det nya magasinet"
+msgstr "Transportera fyra spadar till den nya lagerbyggnaden"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -428,8 +429,8 @@ msgid ""
 msgstr ""
 "Ers höghet, det blöta vädret har skapat träsk längs med bäcken i öster och "
 "vi kan inte komma över dem. De måste tas bort innan vi kan fortsätta. Om du "
-"får hit nog med spadar till det nya magasinet kommer volontärer att dika ur "
-"träsken."
+"får hit nog med spadar till den nya lagerbyggnaden kommer volontärer att "
+"dika ur träsken."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -439,8 +440,8 @@ msgid ""
 msgstr ""
 "Ers höghet, alla spadar har nu delats ut men om vi fortsätter i denna takten"
 " kommer inte träsken att vara borttagna förrän nästa regnperiod. Om du kan "
-"transportera fler spadar till det nya magasinet kommer flera volontärer att "
-"hjälpa till."
+"transportera fler spadar till den nya lagerbyggnaden kommer flera volontärer"
+" att hjälpa till."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

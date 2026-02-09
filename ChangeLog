@@ -109,7 +109,7 @@
 ### Gameplay
 
 - Fix soldier request for expedition ships (CB #4765 / GH #6403)
-- Economic Districts (CB #4708 / GH #6345)
+- Economic Districts (CB #4708 / GH #6345, CB #5282 / GH #6922)
 - Use silk rather than cloth for fishing nets and bows (CB #4866 / GH #6505)
 - Button to evict builder from construction-/dismantlesites (CB #4551 / GH #6208)
 - Let attacking warship decide battle positions for all participants (CB #5091 / GH #6731)
@@ -273,6 +273,8 @@
 - Add macOS15 intel builds (GH #6908 / CB #5268)
 - Remove glbinding from MSYS2 dependency list (GH #6914 / CB #5274)
 - Windows ARM support with MSYS2 (CB #5271 / GH #6911)
+- Drop CI builds for MacOS 13 as it has been dropped by GH Actions (GH #6925 / CB #5285)
+- Workaround for MSVC optimizer bug in the RelWithDebInfo builds (CB #5284 / GH #6924)
 
 
 ### Other Issues

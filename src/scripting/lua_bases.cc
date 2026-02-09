@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -906,7 +906,7 @@ int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
       :returns: The object of the building created.
 */
 int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made const
-	const std::string& name = luaL_checkstring(L, 2);
+	const std::string name = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	bool constructionsite = false;
 	bool force = false;

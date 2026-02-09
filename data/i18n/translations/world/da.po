@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2020
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2020,2026
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2020\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2020,2026\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,7 +347,7 @@ msgstr "Dødt træ"
 
 #: ../../../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
-msgstr ""
+msgstr "Fældet træ"
 
 #: ../../../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
@@ -1011,15 +1011,15 @@ msgstr "Isflager 2"
 
 #: ../../../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Sneskov 1"
 
 #: ../../../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Sneskov 2"
 
 #: ../../../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Sneskov 3"
 
 #: ../../../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"

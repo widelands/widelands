@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
+"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025\n"
 "Language-Team: Norwegian Nynorsk (http://app.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,7 +237,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Større og betre bygningar – inkludert alle militære – krev betre byggjemateriale. Dei kan ikkje byggjast av enkle tømmerstokkar – stokkane må først foredlast til svarteved av ein treherdar. Hugs alltid å byggja ein treherdar før du går tom for svarteved, for utan det kan du ikkje utvida."
+msgstr "Større og betre bygningar – inkludert alle militære – krev betre byggjemateriale. Dei kan ikkje byggjast av enkle tømmerstokkar – stokkane må først foredlast til svartved av ein treherdar. Hugs alltid å byggja ein treherdar før du går tom for svartved, for utan det kan du ikkje utvida."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -252,7 +253,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Betre bygningar kan òg krevja andre forbetra materialar i tillegg til svarteved. Eitt av desse er mørtel, som vert produsert av granitt, vatn og kol av ein kalkbrennar."
+msgstr "Betre bygningar kan òg krevja andre forbetra materialar i tillegg til svartved. Eitt av desse er mørtel, som vert produsert av granitt, vatn og kol av ein kalkbrennar."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -348,7 +349,7 @@ msgstr "Me kan sjå dei rasande flammene som sluker Al’thunran herfrå, milevi
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr "Dei raude lysa blinkar i mørkret og dansar til rytmen av krigstrommene som hjemsøkjer meg sjølv i mareritta mine."
+msgstr "Lyset frå flammane blenkjer i mørkret og dansar til rytmen av krigstrommene som heimsøkjer meg, til og med i mareritta mine."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -356,7 +357,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Beina til far min kviler fredfullt i jorda der han ein gong gjorde slutt på den meiningslause blodsutgytinga som hadde oppstått mellom oss. Det smertar meg at freden hans berre varte i éin generasjon."
+msgstr "Knoklane til far min kviler fredfullt i jorda der han ein gong gjorde slutt på den meiningslause blodsutgytinga som føregjekk mellom oss. Det gjer meg vondt å tenkja på at freden han fekk i stand berre varte i éin generasjon."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -365,7 +366,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr "Boldreth, min trufaste følgjesven og ven, er ei kjelde til fred og trøyst for meg i desse mørke tider. Han held motet mitt oppe og krigarane mine vakne, og hindrar grådigskap eller fortviling i å øydeleggja banda mellom oss òg."
+msgstr "Boldreth, min trufaste felag og ven, er ei kjelde til trøyst for meg i desse mørke tider. Han held motet mitt oppe og krigarane mine årvakne. Det å ha han her hindrar grådigskap eller fortviling i å øydeleggja banda mellom oss òg."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -411,7 +412,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "I dag førte jegerane mine fram for meg menn, kvinner og små born som hadde gøymt seg i skogane, i forsøk på å unnsleppa krigen, hatet og omnen som rasar mellom stammane. Dei kjempar mot kvarandre som i gamle dagar, då me ikkje var meir enn ville dyr drivne og styrte av instinkt. Ingen av brørne mine vil nokosinne vinna og halda kontroll over tretrona; ingen av stammane vil vera sterke nok til å underleggja seg dei andre. Det vil ikkje bli nokon ende på denne slaktinga, med mindre… er dette det? Slik far fortalde meg?"
+msgstr "I dag førte jegerane mine fram for meg menn, kvinner og små born som hadde gøymt seg i skogane, i forsøk på å unnsleppa krigen, hatet og hemnen som rasar mellom stammane. Dei kjempar mot kvarandre som i gamle dagar, då me ikkje var meir enn ville dyr drivne og styrte av instinkt. Ingen av brørne mine vil nokosinne vinna og halda kontroll over tretrona; ingen av stammane vil vera sterke nok til å underleggja seg dei andre. Det vil ikkje bli nokon ende på denne slaktinga, med mindre… er dette det? Slik far fortalde meg?"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:205
@@ -432,7 +433,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth verkar meir og meir riven med etter kvart som dagane går. Motet til felagane mine søkk når den kalde årstida nærmar seg, og me bur framleis ikkje i anna enn hytter og brakker. Eg hadde aldri til hensikt å bli verande her ute i villmarka så lenge – men eg trudde heller aldri at brørne mine ville halda fram med denne meiningslause striden så lenge."
+msgstr "Boldreth verkar meir og meir medriven etter kvart som dagane går. Motet til felagane mine søkk når den kalde årstida nærmar seg, og me bur framleis ikkje i anna enn hytter og brakker. Eg hadde aldri tenkt å bli verande her ute i villmarka så lenge – men eg trudde heller aldri at brørne mine ville halda fram med denne meiningslause striden så lenge."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -496,7 +497,7 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr "Men gløym aldri – desse skogane er arva vår, gjeve til oss av forfedrane våre. Me må alltid respektera og ta vare på dei. Det me tek, må me gje tilbake."
+msgstr "Men gløym aldri – desse skogane er arven vår, gjeve til oss av forfedrane våre. Me må alltid respektera og ta vare på dei. Det me tek, må me gje tilbake."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:243
@@ -520,7 +521,7 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr "I enda ei søvnlaus natt gjekk eg opp på høgda og skoda mot nord. Brannane herjar framleis, og mettar svolt si på arva etter far min."
+msgstr "Ei svevnlaus natt gjekk eg opp på høgda og skoda mot nord. Brannane herjar framleis, og mettar svolten sin etter arven etter far min."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:255
@@ -539,7 +540,7 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr "Nok ein gong gjekk eg opp til grava åt far min, i ein heilag lund ved foten av det store spiret til Kal’mavrath. Eg vart berre ståande der og merka korkje timane som gjekk eller det kalde regnet som strøymde ned frå den mørke himmelen…"
+msgstr "Nok ein gong gjekk eg opp til grava åt far min, i ei heilag lund ved foten av det store Kal’mavrath-tinden. Eg vart berre ståande der og merka korkje timane som gjekk eller det kalde regnet som strøymde ned frå den mørke himmelen…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:269
@@ -561,7 +562,7 @@ msgstr "Thron seier ettertenksamt…"
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr "For ei tid sidan kom Boldreth til meg. Rådet hans var å flytta til ein stad nærare heimen – for å slå til ved første teikn på at brørne mine sine styrkar vaklar."
+msgstr "For ei tid sidan kom Boldreth til meg. Han rådde meg til å flytta til ein stad nærare heimstaden min – for å slå til med éin gong styrkane til brørne mine byrja å vakla."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -586,7 +587,7 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr "I dag plukka krigarane mine opp ein gammal mann som vandra sjuk og såra gjennom den mørke skogen. Me lytta med gru då han fortalde om uhyrligheitene som går føre seg i Al’thunran."
+msgstr "I dag plukka krigarane mine opp ein gammal mann som vandra sjuk og såra gjennom den mørke skogen. Me lytta med gru då han fortalde om alt det fæle som går føre seg i Al’thunran."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:294
@@ -616,7 +617,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr "Så du vil bu oss på eit lengre opphald i desse skogane, Thron? Vel, eg ser visdomen i det, men hjartet mitt lengtar etter ein ærerik retur til Al’thunran. Altfor lenge har me venta medan brørne våre har kjempa på slagmarka, og øksene og sverda våre har rusta med tida."
+msgstr "Så du vil bu oss på eit lengre opphald i desse skogane, Thron? Vel, det kan vera noko i det, men hjartet mitt lengtar etter å koma attende til Al’thunran med ære. Altfor lenge har me venta medan brørne våre har kjempa på slagmarka, og øksene og sverda våre har rusta med tida."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
@@ -724,7 +725,7 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Det ser ut til å vera mykje dyr i skogane her – me kan berre jakta på fleire av dei. Og folket ville sjølvsagt jubla over ei ny kro – hei, me kan kalla henne «Throns stoltheit» eller noko slikt om du vil!"
+msgstr "Det ser ut til å vera mykje dyr i skogane her – me kan jakta på fleire av dei. Og folket ville sjølvsagt jubla over ei ny kro – hei, me kan kalla henne «Throns byrgskap» eller noko slikt om du vil!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
@@ -792,7 +793,7 @@ msgstr "Ei kro opna for folket vårt i går. Sjølv om eg knapt er i humør til 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr "Kanskje me faktisk er i ferd med å skapa ein stad her som me kan… kalla heim."
+msgstr "Kanskje me faktisk er i ferd med å skapa ein stad her som me kan… kalla heime."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
@@ -837,7 +838,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Eg oppdaga nettopp at me held på å gå tom for svarteved! Me kan ikkje stua krigarane våre inn i falleferdige rønner, og særleg ikkje i så farlege tider som no!"
+msgstr "Eg oppdaga nettopp at me held på å gå tom for svartved! Me kan ikkje stua krigarane våre inn i falleferdige rønner, og særleg ikkje i så farlege tider som no!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:441
