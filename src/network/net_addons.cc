@@ -65,8 +65,8 @@ namespace AddOns {
  */
 
 constexpr unsigned kCurrentProtocolVersion = 8;
-static const std::string kCmdList = "3:CMD_LIST";
-static const std::string kCmdInfo = "3:CMD_INFO";
+static const std::string kCmdList = "4:CMD_LIST";
+static const std::string kCmdInfo = "4:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
 static const std::string kCmdI18N = "2:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
@@ -541,6 +541,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	}
 	a.total_file_size = math::to_long(read_line());
 	a.upload_timestamp = math::to_long(read_line());
+	a.edit_timestamp = math::to_long(read_line());
 	a.download_count = math::to_long(read_line());
 	for (uint32_t& vote_ref : a.votes) {
 		vote_ref = math::to_long(read_line());

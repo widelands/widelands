@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023-2025
+# Alex Rijckaert, 2023-2026
 # CrisiusXIII <chris@cborn.nl>, 2021
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-12 04:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Alex Rijckaert, 2023-2025\n"
+"Last-Translator: Alex Rijckaert, 2023-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1748,12 +1748,12 @@ msgstr "Stel terreinhoogte in op:"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:78
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Kies hoogte op kaart "
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:79
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:115
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Selecteer de hoogte van een veld door erop te klikken op de kaart."
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:84
@@ -1778,11 +1778,11 @@ msgstr "Stel hoeveelheid in op:"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:98
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Kies bron uit kaart …"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:99
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Selecteer een type bron door erop te klikken op de kaart."
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:105
@@ -1824,17 +1824,17 @@ msgstr "Vaste hoogte"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Kies …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Kies een dier op de kaart …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Selecteer een diersoort door erop te klikken op de kaart. Houd Ctrl ingedrukt om meerdere dieren te selecteren."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -1869,13 +1869,13 @@ msgstr "%1$s (heeft een groot bouwperceel nodig)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Kies onroerend goed van kaart ..."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Selecteer een onroerend goed door erop te klikken op de kaart. Houd Ctrl ingedrukt om meerdere onroerende goederen te selecteren."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1912,13 +1912,13 @@ msgstr "%1%: %2%"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Kies terrein op kaart …"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Selecteer een terreintype door erop te klikken op de kaart. Houd Ctrl ingedrukt om meerdere terreinen te selecteren."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
@@ -8592,7 +8592,7 @@ msgstr "Publish Map Online"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Kies op de Kaart"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Toggle Tools Menu"
