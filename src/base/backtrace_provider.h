@@ -31,7 +31,7 @@ public:
 	static void register_signal_handler();
 	static std::string get_signal_description(int sig);
 	static void set_crash_dir(const std::string& homedir);
-	static std::string get_crash_dir();
+	static const std::string& get_crash_dir();
 
 private:
 	static std::string crash_dir;

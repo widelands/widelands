@@ -142,6 +142,6 @@ void BacktraceProvider::set_crash_dir(const std::string& homedir) {
 	crash_dir = homedir + "/" + kCrashDir + "/";
 }
 
-std::string BacktraceProvider::get_crash_dir() {
+const std::string& BacktraceProvider::get_crash_dir() {
 	return crash_dir;
 }
