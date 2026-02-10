@@ -24,6 +24,7 @@ wl_library(base
     string.h
     string.cc
   USES_ATOMIC
+  USES_CPPTRACE
   USES_SDL2
   USES_TINYGETTEXT
   DEPENDS

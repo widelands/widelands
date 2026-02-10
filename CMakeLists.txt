@@ -117,6 +117,9 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
 endif()
 
+# Set to ON when at least one FetchContent_Declare is used
+set(USE_FETCHCONTENT OFF)
+
 find_package (Python3 REQUIRED)
 
 find_package(OpenGL REQUIRED)
@@ -145,6 +148,30 @@ if(NOT asio_location OR asio_location STREQUAL "")
   endif()
 endif()
 add_definitions(-DASIO_STANDALONE)
+
+if(OPTION_CPPTRACE)
+  find_package(cpptrace CONFIG)
+  if(cpptrace_FOUND)
+    message(STATUS "Adding crash self-diagnosis handler using installed cpptrace.")
+  else()
+    include(FetchContent)
+    set(CPPTRACE_ENABLE_LIBDWARF_COMPRESSION_SUPPORT OFF)
+    FetchContent_Declare(
+      cpptrace
+      GIT_REPOSITORY https://github.com/gpalino/cpptrace.git
+      GIT_TAG        644544b567ba379c83bf180e8b20cb3d2f8030fd
+    )
+    FetchContent_MakeAvailable(cpptrace)
+    message(STATUS "Adding crash self-diagnosis handler using downloaded cpptrace.")
+    set(USE_FETCHCONTENT ON)
+  endif()
+  add_definitions(-DPRINT_BACKTRACE_CPPTRACE)
+endif()
+
+if(USE_FETCHCONTENT)
+  # Prevent clang-tidy checks in external code.
+  file(WRITE ${CMAKE_BINARY_DIR}/.clang-tidy "Checks: '-*'\n")
+endif()
 
 # Disable no symbols warning on macOS, but only on versions where this is
 # supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
@@ -450,11 +477,11 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
-if(NOT OPTION_ASAN)
+if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN)
   # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
-    message(STATUS "Adding crash self-diagnosis handler.")
+    message(STATUS "Adding crash self-diagnosis handler using execinfo.")
     add_definitions(-DPRINT_BACKTRACE_EXECINFO)
     if(NOT WIN32)
       # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114

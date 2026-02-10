@@ -26,7 +26,9 @@
 #include <sstream>
 #include <thread>
 
-#ifdef PRINT_BACKTRACE_EXECINFO
+#ifdef PRINT_BACKTRACE_CPPTRACE
+#include <cpptrace/cpptrace.hpp>
+#elif defined(PRINT_BACKTRACE_EXECINFO)
 #include <execinfo.h>
 #include <unistd.h>
 #endif
@@ -38,9 +40,10 @@
 
 std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 
-// Taken from https://stackoverflow.com/a/77336
-// TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
-[[maybe_unused]] static void segfault_handler(const int sig) {
+#if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
+// Execinfo implementation taken from https://stackoverflow.com/a/77336
+// Cpptrace implementation described in https://github.com/jeremy-rifkin/cpptrace
+static void segfault_handler(const int sig) {
 	const std::string signal_description = BacktraceProvider::get_signal_description(sig);
 
 	std::cout << std::endl
@@ -48,7 +51,11 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 	          << "FATAL ERROR: Received signal " << signal_description << std::endl
 	          << "Backtrace:" << std::endl;
 
-#ifdef PRINT_BACKTRACE_EXECINFO
+#ifdef PRINT_BACKTRACE_CPPTRACE
+	std::ostringstream stacktrace;
+	cpptrace::generate_trace().print(stacktrace, false);
+	std::cout << stacktrace.str();
+#elif defined(PRINT_BACKTRACE_EXECINFO)
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
@@ -92,7 +99,9 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 		   file, "Crash report for Widelands %s %s at %s, signal %s\n\n**** BEGIN BACKTRACE ****\n",
 		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(),
 		   signal_description.c_str());
-#ifdef PRINT_BACKTRACE_EXECINFO
+#ifdef PRINT_BACKTRACE_CPPTRACE
+		fputs(stacktrace.str().c_str(), file);
+#elif defined(PRINT_BACKTRACE_EXECINFO)
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
 		fflush(file);
@@ -105,17 +114,18 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 
 	::exit(sig);
 }
+#endif  // PRINT_BACKTRACE_CPPTRACE || PRINT_BACKTRACE_EXECINFO
 
 BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
-#if defined PRINT_BACKTRACE_EXECINFO || defined _WIN32
+#if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
 	signal(SIGABRT, segfault_handler);
 #else
 	signal(SIGABRT, SIG_DFL);
-#endif  // PRINT_BACKTRACE_EXECINFO || _WIN32
+#endif
 }
 
 void BacktraceProvider::register_signal_handler() {
-#if defined PRINT_BACKTRACE_EXECINFO || defined _WIN32
+#if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
 	for (int s : {
 #ifdef SIGBUS
 	        SIGBUS,  // Not available on all systems
@@ -123,16 +133,16 @@ void BacktraceProvider::register_signal_handler() {
 	        SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
-#endif  // PRINT_BACKTRACE_EXECINFO || _WIN32
+#endif  // PRINT_BACKTRACE_CPPTRACE || PRINT_BACKTRACE_EXECINFO
 }
 
 std::string BacktraceProvider::get_signal_description(int sig) {
 	std::ostringstream s;
 
-#ifdef PRINT_BACKTRACE_EXECINFO
-	s << sig << " (" << strsignal(sig) << ")";
-#else
+#ifdef _WIN32
 	s << sig;
+#else
+	s << sig << " (" << strsignal(sig) << ")";
 #endif
 
 	return s.str();
