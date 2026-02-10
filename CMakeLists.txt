@@ -455,7 +455,7 @@ if(NOT OPTION_ASAN)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
     message(STATUS "Adding crash self-diagnosis handler.")
-    add_definitions(-DPRINT_SEGFAULT_BACKTRACE)
+    add_definitions(-DPRINT_BACKTRACE_EXECINFO)
     if(NOT WIN32)
       # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
       SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")

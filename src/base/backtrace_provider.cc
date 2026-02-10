@@ -26,7 +26,7 @@
 #include <sstream>
 #include <thread>
 
-#ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef PRINT_BACKTRACE_EXECINFO
 #include <execinfo.h>
 #include <unistd.h>
 #endif
@@ -48,7 +48,7 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 	          << "FATAL ERROR: Received signal " << signal_description << std::endl
 	          << "Backtrace:" << std::endl;
 
-#ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef PRINT_BACKTRACE_EXECINFO
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
@@ -92,7 +92,7 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 		   file, "Crash report for Widelands %s %s at %s, signal %s\n\n**** BEGIN BACKTRACE ****\n",
 		   build_ver_details().c_str(), thread_name.c_str(), timestr.c_str(),
 		   signal_description.c_str());
-#ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef PRINT_BACKTRACE_EXECINFO
 		fflush(file);
 		backtrace_symbols_fd(array, size, fileno(file));
 		fflush(file);
@@ -107,15 +107,15 @@ std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 }
 
 BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
-#if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
+#if defined PRINT_BACKTRACE_EXECINFO || defined _WIN32
 	signal(SIGABRT, segfault_handler);
 #else
 	signal(SIGABRT, SIG_DFL);
-#endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32
+#endif  // PRINT_BACKTRACE_EXECINFO || _WIN32
 }
 
 void BacktraceProvider::register_signal_handler() {
-#if defined PRINT_SEGFAULT_BACKTRACE || defined _WIN32
+#if defined PRINT_BACKTRACE_EXECINFO || defined _WIN32
 	for (int s : {
 #ifdef SIGBUS
 	        SIGBUS,  // Not available on all systems
@@ -123,13 +123,13 @@ void BacktraceProvider::register_signal_handler() {
 	        SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
 		signal(s, segfault_handler);
 	}
-#endif  // PRINT_SEGFAULT_BACKTRACE || _WIN32
+#endif  // PRINT_BACKTRACE_EXECINFO || _WIN32
 }
 
 std::string BacktraceProvider::get_signal_description(int sig) {
 	std::ostringstream s;
 
-#ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef PRINT_BACKTRACE_EXECINFO
 	s << sig << " (" << strsignal(sig) << ")";
 #else
 	s << sig;
