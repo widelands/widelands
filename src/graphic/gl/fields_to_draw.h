@@ -96,7 +96,7 @@ public:
 	}
 
 	// Returns the field at 'index' if it is valid, otherwise returns nullptr.
-	inline const Field* check_field(const int index) const {
+	[[nodiscard]] inline const Field* check_field(const int index) const {
 		if (index == kInvalidIndex) {
 			return nullptr;
 		}
