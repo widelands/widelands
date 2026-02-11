@@ -1074,28 +1074,95 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 }
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
+                                   const FieldsToDraw* fields_to_draw,
                                    const FieldsToDraw::Field* f,
                                    const Time& gametime,
                                    float scale) const {
 	if (f->obscured_by_slope) {
 		return;
 	}
+
+	// Also draws pillars on bridgeable water nodes if the tribe defines them.
+	// Pillars fill the gaps between bridge segments so the bridge looks continuous when
+	// the bridge segment joints need a gap to look right. They are not needed on shore
+	// (=walkable) nodes.
+	//
+	// Pillars must be drawn under the bridge segments to not cover the ends, so some
+	// extra steps are needed to make sure we only draw them for the first time a bridge
+	// to a node is drawn.
+	// Note that any bridgeable field can have either 0 or exactly 2 bridge segments
+	// connected to it. The only other possible road type is a waterway, also with exactly
+	// 2 segments, but that's exclusive of bridge segments too.
+	// Also note that the road building code always replaces consequent segments in
+	// neighbouring directions with a shortcut, so sharp corners are not possible.
+	// All this, and the drawing order of the map means that we usually have to draw a
+	// pillar at the far end of the bridge, and we usually don't have to draw it at the
+	// near end ("f"), with the following exceptions:
+	//
+	//  - the only practically possible configuration where we have to draw the pillar at
+	//    "f" is when it has bridges to E and SW
+	//  - the far end of an E segment can have a previous SW segment connected from its TR
+	//    neighbour (SE from TL would be a sharp corner)
+
 	if (Widelands::is_bridge_segment(f->road_e)) {
+		const bool busy = f->road_e == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillars if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->rn_index);
+		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const FieldsToDraw::Field* f_tr = fields_to_draw->check_field(f_end->trn_index);
+			if (f_tr == nullptr || f_tr->road_sw == Widelands::RoadSegment::kNone) {
+				const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+				if (pillar != 0) {
+					dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
+					                    pillar, gametime, &f_end->owner->get_playercolor());
+				}
+			}
+		}
+		if ((f->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0 &&
+		    f->road_sw != Widelands::RoadSegment::kNone) {
+			const uint32_t pillar = f->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+				                    pillar, gametime, &f->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_E, busy),
 		                    gametime, &f->owner->get_playercolor());
 	}
+
 	if (Widelands::is_bridge_segment(f->road_sw)) {
+		const bool busy = f->road_sw == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillar if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->bln_index);
+		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
+				                    pillar, gametime, &f_end->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SW, busy),
 		                    gametime, &f->owner->get_playercolor());
 	}
+
 	if (Widelands::is_bridge_segment(f->road_se)) {
+		const bool busy = f->road_se == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillar if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->brn_index);
+		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
+				                    pillar, gametime, &f_end->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SE, busy),
 		                    gametime, &f->owner->get_playercolor());
 	}
 }

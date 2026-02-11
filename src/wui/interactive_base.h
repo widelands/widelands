@@ -338,6 +338,7 @@ protected:
 	                        float opacity = 1.f);
 
 	void draw_bridges(RenderTarget* dst,
+	                  const FieldsToDraw* fields_to_draw,
 	                  const FieldsToDraw::Field* f,
 	                  const Time& gametime,
 	                  float scale) const;

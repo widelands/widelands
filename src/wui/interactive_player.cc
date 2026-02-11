@@ -565,7 +565,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			draw_road_building(dst, *f, gametime, scale);
 
 			draw_bridges(
-			   dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);
+			   dst, fields_to_draw, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Draw immovables and bobs.

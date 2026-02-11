@@ -349,8 +349,21 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			                             directional_name, animation_directory, animation_type);
 		}
 	};
+	const auto load_pillar_if_present = [this](const LuaTable& animations_table,
+	                                           const std::string& animation_directory,
+	                                           Animation::Type animation_type,
+	                                           const std::string& s_type,
+	                                           uint32_t* id) {
+		const std::string type_name("bridge_pillar_" + s_type);
+		if (animations_table.has_key(type_name)) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(type_name);
+			*id =
+			   g_animation_manager->load(name_ + std::string("_") + type_name, *animation_table,
+			                             type_name, animation_directory, animation_type);
+		}
+	};
 	// Frontier and flag animations can be a mix of file and spritesheet animations
-	const auto load_animations = [this, load_bridge_if_present](
+	const auto load_animations = [this, load_bridge_if_present, load_pillar_if_present](
 	                                const LuaTable& animations_table,
 	                                const std::string& animation_directory,
 	                                Animation::Type animation_type) {
@@ -384,6 +397,10 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		   animations_table, animation_directory, animation_type, "se", "busy", &bridges_busy_.se);
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "sw", "busy", &bridges_busy_.sw);
+		load_pillar_if_present(
+		   animations_table, animation_directory, animation_type, "normal", &bridge_pillar_normal_animation_id_);
+		load_pillar_if_present(
+		   animations_table, animation_directory, animation_type, "busy", &bridge_pillar_busy_animation_id_);
 	};
 
 	std::string animation_directory = table.get_string("animation_directory");
@@ -403,6 +420,17 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	}
 	if (pinned_note_animation_id_ == 0U) {
 		throw GameDataError("Tribe has no pinned note animation.");
+	}
+	if (bridges_normal_.e == 0U || bridges_normal_.se == 0U || bridges_normal_.sw == 0U) {
+		throw GameDataError("Tribe has no normal bridge animation.");
+	}
+	if (bridges_busy_.e == 0U || bridges_busy_.se == 0U || bridges_busy_.sw == 0U) {
+		throw GameDataError("Tribe has no busy bridge animation.");
+	}
+	if (bridge_pillar_normal_animation_id_ == 0U || bridge_pillar_busy_animation_id_ == 0U) {
+		// Not fatal yet for the sake of add-on compatibility, so callers of bridge_pillar_animation()
+		// have to handle it gracefully.
+		log_warn("Tribe has no bridge pillar animation.");
 	}
 }
 
@@ -791,6 +819,9 @@ uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	default:
 		NEVER_HERE();
 	}
+}
+uint32_t TribeDescr::bridge_pillar_animation(bool busy) const {
+	return busy ? bridge_pillar_busy_animation_id_ : bridge_pillar_normal_animation_id_;
 }
 
 uint32_t TribeDescr::bridge_height() const {
