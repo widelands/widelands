@@ -1108,13 +1108,14 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
 		const bool busy = f->road_e == Widelands::RoadSegment::kBridgeBusy;
 		// Draw pillars if needed
 		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->rn_index);
-		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
 			const FieldsToDraw::Field* f_tr = fields_to_draw->check_field(f_end->trn_index);
 			if (f_tr == nullptr || f_tr->road_sw == Widelands::RoadSegment::kNone) {
 				const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
 				if (pillar != 0) {
-					dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
-					                    pillar, gametime, &f_end->owner->get_playercolor());
+					dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar,
+					                    gametime, &f_end->owner->get_playercolor());
 				}
 			}
 		}
@@ -1122,48 +1123,50 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
 		    f->road_sw != Widelands::RoadSegment::kNone) {
 			const uint32_t pillar = f->owner->tribe().bridge_pillar_animation(busy);
 			if (pillar != 0) {
-				dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-				                    pillar, gametime, &f->owner->get_playercolor());
+				dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale, pillar, gametime,
+				                    &f->owner->get_playercolor());
 			}
 		}
 		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(Widelands::WALK_E, busy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_E, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
 
 	if (Widelands::is_bridge_segment(f->road_sw)) {
 		const bool busy = f->road_sw == Widelands::RoadSegment::kBridgeBusy;
 		// Draw pillar if needed
 		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->bln_index);
-		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
 			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
 			if (pillar != 0) {
-				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
-				                    pillar, gametime, &f_end->owner->get_playercolor());
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar, gametime,
+				                    &f_end->owner->get_playercolor());
 			}
 		}
 		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(Widelands::WALK_SW, busy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SW, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
 
 	if (Widelands::is_bridge_segment(f->road_se)) {
 		const bool busy = f->road_se == Widelands::RoadSegment::kBridgeBusy;
 		// Draw pillar if needed
 		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->brn_index);
-		if (f_end != nullptr && (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
 			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
 			if (pillar != 0) {
-				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale,
-				                    pillar, gametime, &f_end->owner->get_playercolor());
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar, gametime,
+				                    &f_end->owner->get_playercolor());
 			}
 		}
 		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(Widelands::WALK_SE, busy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SE, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
 }
 

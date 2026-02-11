@@ -349,19 +349,16 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			                             directional_name, animation_directory, animation_type);
 		}
 	};
-	const auto load_pillar_if_present = [this](const LuaTable& animations_table,
-	                                           const std::string& animation_directory,
-	                                           Animation::Type animation_type,
-	                                           const std::string& s_type,
-	                                           uint32_t* id) {
-		const std::string type_name("bridge_pillar_" + s_type);
-		if (animations_table.has_key(type_name)) {
-			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(type_name);
-			*id =
-			   g_animation_manager->load(name_ + std::string("_") + type_name, *animation_table,
-			                             type_name, animation_directory, animation_type);
-		}
-	};
+	const auto load_pillar_if_present =
+	   [this](const LuaTable& animations_table, const std::string& animation_directory,
+	          Animation::Type animation_type, const std::string& s_type, uint32_t* id) {
+		   const std::string type_name("bridge_pillar_" + s_type);
+		   if (animations_table.has_key(type_name)) {
+			   std::unique_ptr<LuaTable> animation_table = animations_table.get_table(type_name);
+			   *id = g_animation_manager->load(name_ + std::string("_") + type_name, *animation_table,
+			                                   type_name, animation_directory, animation_type);
+		   }
+	   };
 	// Frontier and flag animations can be a mix of file and spritesheet animations
 	const auto load_animations = [this, load_bridge_if_present, load_pillar_if_present](
 	                                const LuaTable& animations_table,
@@ -397,10 +394,10 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		   animations_table, animation_directory, animation_type, "se", "busy", &bridges_busy_.se);
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "sw", "busy", &bridges_busy_.sw);
-		load_pillar_if_present(
-		   animations_table, animation_directory, animation_type, "normal", &bridge_pillar_normal_animation_id_);
-		load_pillar_if_present(
-		   animations_table, animation_directory, animation_type, "busy", &bridge_pillar_busy_animation_id_);
+		load_pillar_if_present(animations_table, animation_directory, animation_type, "normal",
+		                       &bridge_pillar_normal_animation_id_);
+		load_pillar_if_present(animations_table, animation_directory, animation_type, "busy",
+		                       &bridge_pillar_busy_animation_id_);
 	};
 
 	std::string animation_directory = table.get_string("animation_directory");
