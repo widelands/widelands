@@ -51,6 +51,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
+   METHOD(LuaMapView, override_field_selector),
    METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
    METHOD(LuaMapView, set_keyboard_shortcut),
@@ -71,6 +72,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, is_building_road),
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
+   PROP_RW(LuaMapView, field_clicked_blocked),
    PROP_RO(LuaMapView, toolbar),
    {nullptr, nullptr, nullptr},
 };
@@ -202,6 +204,34 @@ int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, static_cast<int>(get()->map_view()->is_animating()));
 	return 1;
+}
+
+/* RST
+   .. attribute:: field_clicked_blocked
+
+      .. versionadded:: 1.4
+
+      (RW) Whether the default action for clicking on a field is suppressed.
+
+      When this property is set to :const:`true`, clicking on a field only moves the node selector
+      but takes no further action. The ``field_clicked`` signal is still triggered.
+
+      The block affects all click actions, regardless of whether they have been triggered by
+      the user physically pressing the mouse button or programatically via the UI scripting API
+      using :meth:`click` or similar functions.
+
+      This can be used in scripts to create custom tools with click actions.
+
+      :see also: :meth:`set_user_input_allowed`
+      :see also: :meth:`subscribe_to_field_clicked`
+*/
+int LuaMapView::get_field_clicked_blocked(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_field_clicked_blocked()));
+	return 1;
+}
+int LuaMapView::set_field_clicked_blocked(lua_State* L) {
+	get()->set_field_clicked_blocked(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*
@@ -377,6 +407,38 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 }
 
 /* RST
+   .. method:: override_field_selector( \
+      [image_path = nil[, triangles = false[, radius = 0[, gap_percent = 0]]]])
+
+      .. versionadded:: 1.4
+
+      Override the default field selector with custom properties.
+
+      Call without arguments to restore the default selector.
+
+      :arg image_path: Path to the image file to use.
+      :type image_path: :class:`string`
+      :arg triangles: Whether the selector operates on triangles or nodes.
+      :type triangles: :class:`boolean`
+      :arg radius: The tool radius.
+      :type radius: :class:`integer`
+      :arg gap_percent: The percentage of gaps in the tool area (0..100).
+      :type gap_percent: :class:`integer`
+*/
+int LuaMapView::override_field_selector(lua_State* L) {
+	if (lua_gettop(L) < 2) {
+		get()->unset_selector_override();
+	} else {
+		const Image* pic = g_image_cache->get(luaL_checkstring(L, 2));
+		const bool triangles = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
+		const int radius = lua_gettop(L) >= 4 ? luaL_checkuint32(L, 4) : 0;
+		const int gap_percent = lua_gettop(L) >= 5 ? luaL_checkuint32(L, 5) : 0;
+		get()->set_selector_override(pic, triangles, radius, gap_percent);
+	}
+	return 0;
+}
+
+/* RST
    .. method:: update_toolbar()
 
       .. versionadded:: 1.2
@@ -458,7 +520,7 @@ int LuaMapView::set_keyboard_shortcut(lua_State* L) {
       after having been previously pressed.
       This replaces any existing action associated with releasing the shortcut.
 
-      You don't need this in normal cases. When in doubt, use only meth:`set_keyboard_shortcut`.
+      You don't need this in normal cases. When in doubt, use only :meth:`set_keyboard_shortcut`.
 
       :arg internal_name: The internal name of the keyboard shortcut.
       :type internal_name: :class:`string`
@@ -561,9 +623,7 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
       Note that a user's click on a field can have other, unrelated effects, such as opening a
       field action window or building window, interacting with road building mode, or
       (in the editor) performing a tool action.
-      It is not currently possible to suppress these effects.
-      The ability to create custom tools that trigger on a click on a field without other effects
-      is a `planned future addition <https://codeberg.org/wl/widelands/issues/5273>`_.
+      Use :attr:`field_clicked_blocked` to suppress these default actions.
 
       The signal provides as arguments both the node and the triangle which are
       closest to the clicked pixel.

@@ -501,8 +501,8 @@ void InteractiveBase::finalize_toolbar() {
  * Set the current sel selection radius.
  */
 void InteractiveBase::set_sel_radius(const uint32_t n) {
-	if (n != sel_.radius) {
-		sel_.radius = n;
+	if (n != sel_.data_default_.radius) {
+		sel_.data_default_.radius = n;
 		set_sel_pos(get_sel_pos());  //  redraw
 	}
 }
@@ -511,7 +511,7 @@ void InteractiveBase::set_sel_radius(const uint32_t n) {
  * Set/Unset sel picture
  */
 void InteractiveBase::set_sel_picture(const Image* image) {
-	sel_.pic = image;
+	sel_.data_default_.pic = image;
 	set_sel_pos(get_sel_pos());  //  redraw
 }
 
