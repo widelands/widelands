@@ -169,6 +169,11 @@ if(OPTION_CPPTRACE)
   if(OPTION_ASAN AND NOT WIN32)
     message(WARNING "Handling crashes of AddressSanitizer has priority over cpptrace.")
   endif()
+  if((CMAKE_BUILD_TYPE STREQUAL "Release") AND WIN32)
+    # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
+    # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
+    message(WARNING "cpptrace needs debugging symbols to produce meaningful backtrace, consider RelWithDebInfo build type.")
+  endif()
 endif()
 
 if(USE_FETCHCONTENT)
