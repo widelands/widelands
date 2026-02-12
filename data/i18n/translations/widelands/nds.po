@@ -6343,7 +6343,7 @@ msgstr "Kommentaren un Beweertens"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:426
 #, c-format
 msgid "%1$s   ✎ %2$s"
-msgstr ""
+msgstr "%1$s   ✎ %2$s"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
