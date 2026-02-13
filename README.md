@@ -159,7 +159,11 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 
 ### AI-Generated Content Policy
 
-Please do not submit content generated purely or largely by or with Artificial Intelligence, Machine Learning, or Large Language Models (AI, ML, LLMs). We will not accept such content as it conflicts with the objectives of the Widelands community and project.
+Please do not submit content generated purely or largely by or with Artificial Intelligence, Machine Learning, or Large Language Models (AI, ML, LLMs). We will not accept such content as it conflicts with the objectives of the Widelands project.
+
+We hold that AI-generated content generally stands on dubious ethical and legal grounds, as it violates the copyright of creators whose work was scraped for the AI's training data set without their permission and without due attribution. Also, we find that it is frequently of low overall quality and/or is overly generic and fails to embrace requirements specific to Widelands.
+
+Widelands is created by people, for people.
 
 ## Directory Structure
 
