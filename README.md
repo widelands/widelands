@@ -157,6 +157,10 @@ For helping with testing, see https://www.widelands.org/wiki/TestingBranches/
 
 For helping with issue management, see https://www.widelands.org/wiki/TriagingBugs/
 
+### AI-Generated Content Policy
+
+Please do not submit content generated purely or largely by or with Artificial Intelligence, Machine Learning, or Large Language Models (AI, ML, LLMs). We will not accept such content as it conflicts with the objectives of the Widelands community and project.
+
 ## Directory Structure
 
 | Directory | Contents |
