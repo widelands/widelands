@@ -760,8 +760,9 @@ int LuaShip::attack(lua_State* L) {
 
       :arg field: The field to invade. Must be a portspace.
       :type field: :class:`~wl.map.Field`
-      :arg soldiers: The invasion soldiers. At least one soldier must be provided, and all soldiers
-   must currently be on this ship. :type soldiers: :class:`array` of :class:`~wl.map.Soldier`
+      :arg soldiers: The invasion soldiers. At least one soldier must be provided,
+         and all soldiers must currently be on this ship.
+      :type soldiers: :class:`array` of :class:`~wl.map.Soldier`
 
       :returns: :const:`nil`
 */
