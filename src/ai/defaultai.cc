@@ -822,8 +822,9 @@ void DefaultAI::late_initialization() {
 				}
 				const auto& first_resource_it = collected_resources.begin();
 				if (first_resource_it == collected_resources.end()) {
-					log_warn("AI %u: The mine '%s' does not mine any resources!",
-					         static_cast<unsigned>(player_number()), bo.name);
+					verb_log_dbg_time(gametime,
+					                  "AI %u: The mine '%s' does not mine any resources.",
+					                  static_cast<unsigned>(player_number()), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
@@ -3164,7 +3165,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						continue;
 					}
 
-					if (mf->coords.field->get_resources() != bo.mines) {
+					if (bo.mines != Widelands::INVALID_INDEX &&
+					    mf->coords.field->get_resources() != bo.mines) {
 						continue;
 					}
 
@@ -3174,19 +3176,25 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					}
 
 					int32_t prio = 0;
-					Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-					   map, Widelands::Area<Widelands::FCoords>(mf->coords, 2));
-					do {
-						if (bo.mines == mr.location().field->get_resources()) {
-							prio += mr.location().field->get_resources_amount();
+					if (bo.mines != Widelands::INVALID_INDEX) {
+						// Actual mine: priority based on nearby resource amount
+						Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+						   map, Widelands::Area<Widelands::FCoords>(mf->coords, 2));
+						do {
+							if (bo.mines == mr.location().field->get_resources()) {
+								prio += mr.location().field->get_resources_amount();
+							}
+						} while (mr.advance(map));
+
+						prio /= 10;
+
+						// Only build mines on locations where some material can be mined
+						if (prio < 1) {
+							continue;
 						}
-					} while (mr.advance(map));
-
-					prio /= 10;
-
-					// Only build mines_ on locations where some material can be mined
-					if (prio < 1) {
-						continue;
+					} else {
+						// Mine-sized building without mining - just needs any mine spot
+						prio = 1;
 					}
 
 					// applying nearnest penalty
