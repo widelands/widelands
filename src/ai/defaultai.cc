@@ -2533,7 +2533,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				continue;
 			}  // add randomnes and ease AI
 
-			if (bo.type == BuildingObserver::Type::kMine) {
+			if (bo.desc->get_ismine()) {
 				continue;
 			}
 
@@ -3147,16 +3147,34 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					break;
 				}
 
-				if (bo.type != BuildingObserver::Type::kMine) {
+				if (!bo.desc->get_ismine()) {
 					continue;
 				}
 
-				assert(bo.new_building != BuildingNecessity::kAllowed);
-
-				// skip if a mine is not required
-				if (bo.new_building != BuildingNecessity::kNeeded &&
-				    bo.new_building != BuildingNecessity::kForced) {
-					continue;
+				// skip if building is not required
+				if (bo.type == BuildingObserver::Type::kMilitarysite) {
+					if (bo.new_building != BuildingNecessity::kNeeded &&
+					    bo.new_building != BuildingNecessity::kForced &&
+					    bo.new_building != BuildingNecessity::kAllowed) {
+						continue;
+					}
+				} else if (bo.type == BuildingObserver::Type::kMine &&
+				           bo.mines == Widelands::INVALID_INDEX) {
+					// Non-mining mine buildings use the general productionsite
+					// necessity which can return kNeededPending. Unlike regular
+					// productionsites, they can't retry in Phase 1 (buildable_fields),
+					// so we accept kNeededPending here.
+					if (bo.new_building != BuildingNecessity::kNeeded &&
+					    bo.new_building != BuildingNecessity::kForced &&
+					    bo.new_building != BuildingNecessity::kNeededPending) {
+						continue;
+					}
+				} else {
+					assert(bo.new_building != BuildingNecessity::kAllowed);
+					if (bo.new_building != BuildingNecessity::kNeeded &&
+					    bo.new_building != BuildingNecessity::kForced) {
+						continue;
+					}
 				}
 
 				// iterating over fields
@@ -3195,20 +3213,33 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					} else {
 						// Mine-sized building without mining - just needs any mine spot
 						prio = 1;
+						// Prefer fields without resources the tribe actually mines
+						if (mf->coords.field->get_resources_amount() > 0 &&
+						    mines_per_type.count(mf->coords.field->get_resources()) > 0) {
+							prio -= 10;
+						}
 					}
 
-					// applying nearnest penalty
-					prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
+					if (bo.mines != Widelands::INVALID_INDEX) {
+						// applying nearness penalty
+						prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
+						// prefer mines in the middle of mine fields of the same type
+						prio += mf->same_mine_fields_nearby;
+					}
 
-					// applying max needed
-					prio += bo.primary_priority;
-
-					// prefer mines in the middle of mine fields of the
-					// same type, so we add a small bonus here
-					// depending on count of same mines nearby,
-					// though this does not reflects how many resources
-					// are (left) in nearby mines
-					prio += mf->same_mine_fields_nearby;
+					if (bo.type == BuildingObserver::Type::kMilitarysite) {
+						prio = bo.primary_priority;
+						if (bo.mountain_conqueror) {
+							prio += mf->same_mine_fields_nearby;
+						}
+						// Apply military score threshold
+						if (prio <= persistent_data->target_military_score) {
+							continue;
+						}
+					} else {
+						// applying max needed
+						prio += bo.primary_priority;
+					}
 
 					// Continue if field is blocked at the moment
 					if (blocked_fields.is_blocked(mf->coords)) {
@@ -3218,7 +3249,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Prefer road side fields
 					prio += mf->preferred ? 1 : 0;
 
-					prio += bo.primary_priority;
+					if (bo.type != BuildingObserver::Type::kMilitarysite) {
+						prio += bo.primary_priority;
+					}
 
 					if (prio > proposed_priority) {
 						best_building = &bo;
@@ -3226,7 +3259,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						proposed_coords = mf->coords;
 					}
 
-					if (prio > highest_nonmil_prio_) {
+					if (bo.type != BuildingObserver::Type::kMilitarysite &&
+					    prio > highest_nonmil_prio_) {
 						highest_nonmil_prio_ = prio;
 					}
 				}  // end of evaluation of field
@@ -5217,6 +5251,13 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 		return false;
 	}
 
+	// Non-mining mine buildings (e.g. vineyards) report "out of resources" when
+	// they can't find suitable fields to work on. Unlike actual mines, this is
+	// not permanent resource depletion — don't dismantle based on it.
+	if (site.bo->mines == Widelands::INVALID_INDEX) {
+		return false;
+	}
+
 	// Out of resources, first check whether a mine is not needed for critical mine
 	if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
 		initiate_dismantling(site, gametime);
@@ -6004,7 +6045,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_preciousness = 0;
 			return BuildingNecessity::kForbidden;
 		}
-		if (bo.type == BuildingObserver::Type::kMine) {
+		if (bo.type == BuildingObserver::Type::kMine && bo.mines != Widelands::INVALID_INDEX) {
 			bo.primary_priority = bo.max_needed_preciousness;
 			const uint32_t current_stats_threshold =
 			   85 + std::abs(management_data.get_military_number_at(129)) / 10;
