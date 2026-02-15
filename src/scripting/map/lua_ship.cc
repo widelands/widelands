@@ -344,8 +344,7 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
       .. versionchanged:: 1.2
          Read-only in 1.1 and older.
 
-   (RW) The name of the ship as :class:`string`.
-
+      (RW) The name of the ship as :class:`string`.
 
 */
 int LuaShip::get_shipname(lua_State* L) {
@@ -362,11 +361,11 @@ int LuaShip::set_shipname(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
-   (RW) The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
-   description.
+      (RW) The ship's current capacity.
+      Defaults to the capacity defined in the tribe's singleton ship description.
 
-   Do not change this value if the ship is currently shipping more items than the new capacity
-   allows.
+      Do not change this value if the ship is currently shipping
+      more items than the new capacity allows.
 */
 int LuaShip::get_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_capacity());
@@ -386,9 +385,9 @@ int LuaShip::set_capacity(lua_State* L) {
 /* RST
    .. attribute:: min_warship_soldier_capacity
 
-   (RO) The minimum number of soldiers who currently have to be stationed on this warship.
+      (RO) The minimum number of soldiers who currently have to be stationed on this warship.
 
-   :see also: :attr:`warship_soldier_capacity`
+      :see also: :attr:`warship_soldier_capacity`
 */
 int LuaShip::get_min_warship_soldier_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->min_warship_soldier_capacity());
@@ -398,10 +397,10 @@ int LuaShip::get_min_warship_soldier_capacity(lua_State* L) {
 /* RST
    .. attribute:: warship_soldier_capacity
 
-   (RW) The desired number of soldiers who should be stationed on this warship.
+      (RW) The desired number of soldiers who should be stationed on this warship.
 
-   Do not set this value lower than :attr:`min_warship_soldier_capacity`
-   or higher than :attr:`capacity`.
+      Do not set this value lower than :attr:`min_warship_soldier_capacity`
+      or higher than :attr:`capacity`.
 */
 int LuaShip::get_warship_soldier_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_warship_soldier_capacity());
@@ -421,7 +420,7 @@ int LuaShip::set_warship_soldier_capacity(lua_State* L) {
 /* RST
    .. attribute:: hitpoints
 
-   (RW) The number of health hitpoints this ship has left.
+      (RW) The number of health hitpoints this ship has left.
 */
 int LuaShip::get_hitpoints(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_hitpoints());
