@@ -1,5 +1,9 @@
 # Widelands Release History
 
+## Widelands 1.3.1
+
+ - Bugfix release
+
 ## Widelands 1.3
 
  - Market trading
