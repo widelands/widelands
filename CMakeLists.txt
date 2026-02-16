@@ -206,8 +206,10 @@ if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 if(OPTION_MINIMAL_DEBUG_INFO)
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
+     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
       # Override default -g option with -g1, to reduce size of binary.
       # It is still enough to produce full crash backtrace.
       wl_add_flag(WL_DEBUG_FLAGS "-g1")
