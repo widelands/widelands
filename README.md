@@ -113,7 +113,9 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
 | `OPTION_BUILD_WINSTATIC` | `ON`/`OFF` | `OFF` | Build a static linked .exe on windows |
+| `OPTION_CPPTRACE` | `ON`/`OFF` | `OFF` | Build with cpptrace library for crash handling |
 | `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
+| `OPTION_MINIMAL_DEBUG_INFO` | `ON`/`OFF` | `OFF` | Build with minimal debugging info. Unused for Release build. |
 | `NEEDS_EXTERNAL_FILESYSTEM` | `ON`/`OFF` | Autodetected from compiler version | Whether `std::filesystem` needs to be linked against an extra library |
 
 #### make/ninja targets
