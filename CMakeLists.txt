@@ -170,7 +170,7 @@ if(OPTION_CPPTRACE)
   if(OPTION_ASAN AND NOT WIN32)
     message(WARNING "Handling crashes of AddressSanitizer has priority over cpptrace.")
   endif()
-  if((CMAKE_BUILD_TYPE STREQUAL "Release") AND WIN32)
+  if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
     # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
     # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
     message(WARNING "cpptrace needs debugging symbols to produce meaningful backtrace, consider RelWithDebInfo build type.")
@@ -206,8 +206,8 @@ if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
 if(OPTION_MINIMAL_DEBUG_INFO)
-  if((CMAKE_BUILD_TYPE STREQUAL "Debug") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
       # Override default -g option with -g1, to reduce size of binary.
       # It is still enough to produce full crash backtrace.
       wl_add_flag(WL_DEBUG_FLAGS "-g1")
