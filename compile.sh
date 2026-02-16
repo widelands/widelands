@@ -77,12 +77,10 @@ print_help () {
     echo "                      unless overridden locally."
     echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
-    if which g++ >/dev/null; then # gcc specific
     echo "-c or --no-cross-opt  Do not use link-time optimization, even if available."
     echo "+c or --with-cross-opt"
     echo "                      Use link-time optimization."
     echo " "
-    fi
     echo "--gcc                 Try to build with GCC rather than the system default."
     echo "                      If you built with Clang before, you will have to clean"
     echo "                      your build directory before switching compilers."
