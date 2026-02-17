@@ -58,6 +58,9 @@ const PropertyType<LuaTimer> LuaTimer::Properties[] = {
    .. attribute:: active
 
       (RW) Whether the timer is currently active.
+
+      Note that reactivating an expired timer will turn it into an endless timer
+      unless you explicitly set :attr:`remaining_count` as well.
 */
 int LuaTimer::get_active(lua_State* L) {
 	lua_pushboolean(L, static_cast<int>(get()->active));

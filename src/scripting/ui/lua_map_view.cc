@@ -574,7 +574,7 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
       .. versionadded:: 1.4
 
       Find a timer by its internal name.
-      If multiple timers with the name exists, the first one is returned.
+      If multiple timers with the name exist, the first one is returned.
       If no timer with the name exists, :const:`nil` is returned.
 
       :arg name: The internal name of the timer to find.
@@ -597,15 +597,16 @@ int LuaMapView::get_plugin_timer(lua_State* L) {
 }
 
 /* RST
-   .. method:: remove_plugin_timer([name = nil[, all = false]])
+   .. method:: remove_plugin_timer([name = nil[, only_first = false]])
 
       .. versionadded:: 1.4
 
       Remove one or several plugin timers.
 
-      If the parameter ``all`` is set to :const:`true`,
-      all timers matching the name will be removed; otherwise, only the first matching timer
-      (if any) is removed.
+      If the parameter ``only_first`` is set to :const:`true`,
+      only the first timer matching the name (if any) will be removed;
+      otherwise, all matching timers are removed.
+      ``only_first`` may only be used if a ``name`` is provided.
 
       If ``name`` is not :const:`nil`, this method looks for a timer with the given internal name;
       otherwise all timers are matched.
@@ -614,8 +615,8 @@ int LuaMapView::get_plugin_timer(lua_State* L) {
 
       :arg name: The internal name of the timer to remove, or :const:`nil` for any.
       :type name: :class:`string`
-      :arg all: Whether to remove all matching timers.
-      :type all: :class:`boolean`
+      :arg only_first: Whether to remove at most one timer.
+      :type only_first: :class:`boolean`
       :returns: :class:`int`
 
       :see also: :attr:`plugin_timers`
@@ -623,12 +624,14 @@ int LuaMapView::get_plugin_timer(lua_State* L) {
       :see also: :meth:`get_plugin_timer`
 */
 int LuaMapView::remove_plugin_timer(lua_State* L) {
-	const bool all = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
+	const bool only_first = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
 	std::optional<std::string> name;
 	if (lua_gettop(L) >= 2 && !lua_isnil(L, 2)) {
 		name = luaL_checkstring(L, 2);
+	} else if (only_first) {
+		report_error(L, "Cannot remove first plugin timer if no name is given");
 	}
-	lua_pushuint32(L, get_egbase(L).get_ibase()->get_plugin_actions().remove_timer(name, all));
+	lua_pushuint32(L, get_egbase(L).get_ibase()->get_plugin_actions().remove_timer(name, only_first));
 	return 1;
 }
 

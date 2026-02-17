@@ -64,13 +64,13 @@ const PluginActions::Timer* PluginActions::get_timer(const std::string& name) co
 	return nullptr;
 }
 
-uint32_t PluginActions::remove_timer(const std::optional<std::string> name, bool all) {
+uint32_t PluginActions::remove_timer(const std::optional<std::string> name, const bool only_first) {
 	uint32_t erased = 0;
 	for (auto timer = timers_.begin(); timer != timers_.end();) {
 		if (!name.has_value() || (*timer)->name == *name) {
 			timer = timers_.erase(timer);
 			++erased;
-			if (!all) {
+			if (only_first) {
 				break;
 			}
 		} else {

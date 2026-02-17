@@ -92,7 +92,7 @@ public:
 		return timers_;
 	}
 
-	uint32_t remove_timer(std::optional<std::string> name, bool all);
+	uint32_t remove_timer(std::optional<std::string> name, bool only_first);
 
 	bool check_keyboard_shortcut_action(SDL_Keysym code, bool down);
 

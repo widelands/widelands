@@ -12,7 +12,7 @@ run(function()
    end
 
    local timer1 = mv:add_plugin_timer("timer_action_1()", 500, "timer_action_one", 3)
-   local timer2 = mv:add_plugin_timer("this lua snippet would raise a syntax error", 100, "timer_action_two", 0, false)
+   local timer2 = mv:add_plugin_timer("this lua snippet would raise a syntax error", 1000, "timer_action_two", 0, false)
    timer2.active = false
 
    assert_equal(2, #mv.plugin_timers)
@@ -28,7 +28,7 @@ run(function()
    assert_not_nil(mv:get_plugin_timer("timer_action_one"))
    assert_equal(500, mv:get_plugin_timer("timer_action_one").interval)
 
-   local removed = mv:remove_plugin_timer("helloworld", true)
+   local removed = mv:remove_plugin_timer("helloworld")
    assert_equal(0, removed)
    assert_equal(2, #mv.plugin_timers)
    removed = mv:remove_plugin_timer("timer_action_two", true)
@@ -44,6 +44,8 @@ run(function()
    removed = mv:remove_plugin_timer()
    assert_equal(1, removed)
    assert_equal(0, #mv.plugin_timers)
+
+   assert_error("can't remove one arbitrary timer", function() mv:remove_plugin_timer(nil, true) end)
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
