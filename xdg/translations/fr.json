@@ -8,6 +8,9 @@
 		"Widelands offre un mode de jeu solo avec des campagnes qui vous raconteront l'histoire des tribus et leur lutte dans l'univers de Widelands. Ceci dit, le jeu commence vraiment quand vous vous unissez avec vos amis sur internet ou en réseau pour bâtir de nouveaux empires ensemble – ou pour vous détruire les uns les autres dans les poussières de la guerre. Widelands offre aussi une intelligence artificielle pour vous mettre au défi."
 	],
 	"release_notes": {
+		"1.3.1": [
+			"Version de correction de bugs"
+		],
 		"1.3": [
 			"Négociation sur le marché",
 			"Six nouvelles cartes ont été ajoutées et trois anciennes cartes ont été retirées",
