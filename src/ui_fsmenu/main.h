@@ -194,7 +194,7 @@ private:
 	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
 
-	void internet_login(bool launch_metaserver);
+	bool internet_login(bool launch_metaserver);
 
 	// Values from internet login window
 	std::string nickname_;

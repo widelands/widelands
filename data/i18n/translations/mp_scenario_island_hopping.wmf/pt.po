@@ -6,7 +6,7 @@
 # GunChleoc, 2015-2016
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Luis Neves <luisjneves@gmail.com>, 2016
+# 57f8a054f94ee794a7f6fa3d2dbe37a9_8aecd8b <48ab2e0af8c6bfde12dde6b6b463ab81_211523>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
