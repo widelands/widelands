@@ -572,11 +572,11 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
                -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
                -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
-               -DOPTION_BUILD_CODECHECK=$USE_CODECHECK         \
-               -DOPTION_BUILD_WINSTATIC=$BUILD_STATIC          \
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
                -DUSE_XDG=$USE_XDG                              \
+               -DOPTION_BUILD_CODECHECK=$USE_CODECHECK         \
+               -DOPTION_BUILD_WINSTATIC=$BUILD_STATIC          \
                -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $RUN $buildtool -j $CORES
