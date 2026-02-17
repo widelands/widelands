@@ -4,6 +4,9 @@
 
  - Bugfix release
 
+[More info](https://www.widelands.org/news/2026/Feb/22/widelands-1-3-1-released/)
+
+
 ## Widelands 1.3
 
  - Market trading
