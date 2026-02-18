@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config: [Debug, Release]
+        config: [Debug, RelWithDebInfo]
         arch: [x64, x86]
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-2022
@@ -71,7 +71,7 @@ jobs:
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON -DOPTION_CPPTRACE=ON
         if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
@@ -79,7 +79,7 @@ jobs:
         }
         cd src
         C:\"Program Files"\7-Zip\7z.exe a -tzip ..\..\$env:ARTIFACT_NAME.zip widelands.exe
-        if ("${{ matrix.config }}" -Match "Debug") {
+        if ("${{ matrix.config }}" -Match "Debug" || "${{ matrix.config }}" -Match "RelWithDebInfo") {
           C:\"Program Files"\7-Zip\7z.exe a -tzip ..\..\$env:ARTIFACT_NAME.zip widelands.pdb
         }
     - name: Uploading executable
