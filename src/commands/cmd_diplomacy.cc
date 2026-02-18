@@ -74,7 +74,6 @@ void CmdDiplomacy::execute(Game& game) {
 	case DiplomacyAction::kJoin:
 	case DiplomacyAction::kInvite: {
 		bool fall_through_to_acceptance = false;
-		bool found_identical = false;
 		for (auto it = game.pending_diplomacy_actions().begin();
 		     it != game.pending_diplomacy_actions().end();) {
 			if (it->other == sender() && it->sender == other_player_) {
@@ -98,16 +97,14 @@ void CmdDiplomacy::execute(Game& game) {
 		}
 
 		if (!fall_through_to_acceptance) {
-			if (!found_identical) {
-				broadcast_message(
-				   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
-				                                       _("Team Joining Invitation"),
-				   format(action_ == DiplomacyAction::kJoin ?
-				             _("%1$s has requested to join the team of %2$s.") :
-				             _("%1$s has invited %2$s to join their team."),
-				          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
-				game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
-			}
+			broadcast_message(
+			   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
+			                                       _("Team Joining Invitation"),
+			   format(action_ == DiplomacyAction::kJoin ?
+			             _("%1$s has requested to join the team of %2$s.") :
+			             _("%1$s has invited %2$s to join their team."),
+			          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
+			game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
 
 			break;
 		}
@@ -198,6 +195,20 @@ void CmdDiplomacy::execute(Game& game) {
 			}
 		}
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
+
+		// Clean up no-op requests and invites
+		for (auto it = game.pending_diplomacy_actions().begin(); it != game.pending_diplomacy_actions().end();) {
+			if (it->action == DiplomacyAction::kJoin || it->action == DiplomacyAction::kInvite) {
+				const TeamNumber t1 = game.player(it->sender).team_number();
+				const TeamNumber t2 = game.player(it->other).team_number();
+				if (t1 == t2 && t1 != 0) {
+					it = game.pending_diplomacy_actions().erase(it);
+					continue;
+				}
+			}
+			++it;
+		}
+
 		break;
 	}
 
