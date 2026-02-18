@@ -39,6 +39,7 @@
 int main(int argc, char* argv[]) {
 	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 
+	BacktraceProvider::parseErrorHandling(argc, argv);
 	// Handle several types of fatal crashes with a useful backtrace on supporting systems.
 	BacktraceProvider::register_signal_handler();
 

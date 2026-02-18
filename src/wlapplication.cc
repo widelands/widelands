@@ -1957,6 +1957,9 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
+	// Handling of this flag is done earlier in main()
+	check_commandline_flag("no-error-handling");
+
 	// If it hasn't been handled yet it's probably an attempt to
 	// override a conffile setting
 	for (const auto& pair : commandline_) {

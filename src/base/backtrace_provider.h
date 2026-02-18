@@ -28,12 +28,17 @@ public:
 		~DefaultAbortGuard();
 	};
 
+	// parse cmdline parameters, search for --no-error-handling
+	// return true if error handling is enabled (default)
+	static bool parseErrorHandling(int argc, char* argv[]);
 	static void register_signal_handler();
 	static std::string get_signal_description(int sig);
 	static void set_crash_dir(const std::string& homedir);
 	static const std::string& get_crash_dir();
 
 private:
+	// filled according to cmdline parameters
+	static bool error_handling;
 	static std::string crash_dir;
 };
 

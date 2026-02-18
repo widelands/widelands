@@ -131,8 +131,7 @@ void fill_parameter_vector() {
 	   {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
 	   {"", "fail-on-errors", "",
 	    _("Force Widelands to crash when a game or the editor terminates with an error."), false},
-	   {"", "no-error-handling", "", _("Disable crash reports and top-level exception handling."),
-	    true},
+	   {"", "no-error-handling", "", _("Disable crash handling."), true},
 	   {"", "messagebox-timeout",
 	    /** TRANSLATORS: Placeholder for a time value in seconds */
 	    _("<seconds>"),

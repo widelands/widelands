@@ -38,6 +38,7 @@
 #include "build_info.h"
 #include "logic/filesystem_constants.h"
 
+bool BacktraceProvider::error_handling = true;
 std::string BacktraceProvider::crash_dir = "./widelands_crash_report_";
 
 #if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
@@ -118,14 +119,34 @@ static void segfault_handler(const int sig) {
 
 BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
 #if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
-	signal(SIGABRT, segfault_handler);
+	if (error_handling) {
+		signal(SIGABRT, segfault_handler);
+	} else {
+		signal(SIGABRT, SIG_DFL);
+	}
 #else
 	signal(SIGABRT, SIG_DFL);
 #endif
 }
 
+bool BacktraceProvider::parseErrorHandling(int argc, char* argv[]) {
+	// This is simplified argument parsing, which we need before
+	// WLApplication::parse_commandline().
+	const std::string arg("--no-error-handling");
+	for (int i = 1; i < argc; ++i) {
+		if (arg == argv[i]) {
+			error_handling = false;
+			break;
+		}
+	}
+	return error_handling;
+}
+
 void BacktraceProvider::register_signal_handler() {
 #if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
+	if (!error_handling) {
+		return;
+	}
 	for (int s : {
 #ifdef SIGBUS
 	        SIGBUS,  // Not available on all systems
