@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/trainingsite.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/i18n.h"
@@ -49,6 +50,19 @@ std::string training_attribute_to_string(Widelands::TrainingAttribute attribute)
 		return "unknown";
 	}
 }
+
+inline Widelands::TypeAndLevel upgrade_key(const Widelands::TrainingAttribute attr,
+                                           const uint16_t level) {
+	// We want them ordered by level first
+	return (static_cast<uint32_t>(level) << 8) + static_cast<uint32_t>(attr);
+}
+inline Widelands::TrainingAttribute type_from_key(const Widelands::TypeAndLevel key) {
+	constexpr uint32_t kBase = 1 << 8;
+	return static_cast<Widelands::TrainingAttribute>(key % kBase);
+}
+inline uint16_t level_from_key(const Widelands::TypeAndLevel key) {
+	return key >> 8;
+}
 }  // namespace
 
 namespace Widelands {
@@ -72,23 +86,6 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
 	std::unique_ptr<LuaTable> items_table;
-
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier health")) {
-		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier attack")) {
-		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier defense")) {
-		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n", name().c_str());
-	}
-	// TODO(hessenfarmer): Compatibility, remove these after v1.2
-	if (table.has_key("soldier evade")) {
-		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n", name().c_str());
-	}
 
 	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
 	for (const auto& program : programs()) {
@@ -117,13 +114,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				if (from_checksoldier.attribute != checkme.attribute) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' "
-					   "checked "
-					   "for soldier attribute '%s' in program '%s'",
+					   "checked for soldier attribute '%s' in program '%s'",
 					   name().c_str(), training_attribute_to_string(from_checksoldier.attribute).c_str(),
 					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
 				}
 				// All clear, let's add the training information
 				update_level(from_checksoldier.attribute, from_checksoldier.level, checkme.level);
+				training_costs_.emplace(
+				   upgrade_key(from_checksoldier.attribute, from_checksoldier.level),
+				   program.second->consumed_wares_workers());
 			}
 		}
 	}
@@ -186,38 +185,15 @@ unsigned TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	}
 }
 
-/**
- * Return the maximum level that can be trained, both by school type
- * and resourcing.
- */
-int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
-                                            const TrainingSiteDescr& tsd) const {
-	const int32_t max = tsd.get_max_level(at);
-	const int32_t min = tsd.get_min_level(at);
-	int32_t lev = min;
-	int32_t rtv = min;
-	while (++lev < max) {
-		TypeAndLevel train_tl(at, lev);
-		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
-		if (max_stall_val_ > tstep->second.first) {
-			rtv = lev;
-		} else {
-			lev = max;
-		}
-	}
-
-	return rtv;
-}
-
 void TrainingSiteDescr::update_level(TrainingAttribute attrib,
                                      unsigned from_level,
                                      unsigned to_level) {
+	trained_attributes_.emplace(attrib);
 	switch (attrib) {
 	case TrainingAttribute::kHealth:
 		min_health_ = std::min(min_health_, from_level);
 		max_health_ = std::max(max_health_, to_level);
 		train_health_ = true;
-
 		return;
 	case TrainingAttribute::kAttack:
 		min_attack_ = std::min(min_attack_, from_level);
@@ -274,30 +250,9 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
 	if (training_site_->capacity_ == capacity) {
 		return;  // Nothing to do
 	}
-	// Said in github issue #3869 discussion:
-	//
-	// > the problem will always be if the capacity of a training site will be
-	// > increased AND you don't see soldiers leaving the warehouse while you
-	// > know they are there you will be confused. So we should keep this very
-	// > short anything more then 5 sec will cause confusion I believe.
-	//
-	// This piece implements this demand. If we add more control buttons to the
-	// UI later, side-effects like this could go away.
-	if (capacity > training_site_->capacity_) {
-		// This is the capacity increased part from above.
-		// Splitting a bit futher.
-		if (0 == training_site_->capacity_ && 1 == capacity) {
-			// If the site had a capacity of zero, then the player probably micromanages
-			// and wants a partially trained soldier, if available. Resetting the state.
-			training_site_->repeated_layoff_ctr_ = 0;
-			training_site_->latest_trainee_was_kickout_ = false;
-		} else {
-			// Now the player just wants soldier. Any soldiers.
-			training_site_->recent_capacity_increase_ = true;
-		}
-	}
+
 	training_site_->capacity_ = std::min(capacity, max_soldier_capacity());
-	training_site_->update_soldier_request(false);
+	training_site_->update_soldier_request(true);
 }
 
 /**
@@ -342,12 +297,11 @@ int TrainingSite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 	}
 
 	// Bind the worker into this house, hide him on the map
-	if (upcast(Game, game, &egbase)) {
+	if (upcast(Game, game, &egbase); game != nullptr) {
 		s.start_task_idle(*game, 0, -1);
 	}
 
 	// Make sure the request count is reduced or the request is deleted.
-
 	training_site_->update_soldier_request(true);
 
 	return 0;
@@ -362,47 +316,16 @@ class TrainingSite
 */
 
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
-   : ProductionSite(d),
-     soldier_control_(this),
+   : ProductionSite(d), soldier_control_(this), capacity_(descr().get_max_number_of_soldiers()) {
 
-     capacity_(descr().get_max_number_of_soldiers()) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
-	calc_upgrades();
-	current_upgrade_ = nullptr;
+	init_upgrades();
+	current_upgrade_ = upgrades_.end();
 	set_post_timer(Duration(6000));
-	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
-	highest_trainee_level_seen_ = 1;
-	latest_trainee_kickout_level_ = 1;
-	latest_trainee_was_kickout_ = false;
-	requesting_weak_trainees_ = false;
-	request_open_since_ = Time(0);
-	trainee_general_lower_bound_ = 2;
-	repeated_layoff_ctr_ = 0;
-	repeated_layoff_inc_ = false;
-	recent_capacity_increase_ = false;
-
-	if (d.get_train_health()) {
-		init_kick_state(TrainingAttribute::kHealth, d);
-	}
-	if (d.get_train_attack()) {
-		init_kick_state(TrainingAttribute::kAttack, d);
-	}
-	if (d.get_train_defense()) {
-		init_kick_state(TrainingAttribute::kDefense, d);
-	}
-	if (d.get_train_evade()) {
-		init_kick_state(TrainingAttribute::kEvade, d);
-	}
-}
-void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
-	// Now with kick-out state saving implemented, initializing is an overkill
-	for (unsigned t = d.get_min_level(art); t < d.get_max_level(art); t++) {
-		training_attempted(art, t);
-	}
 }
 
 /**
@@ -421,7 +344,7 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 			soldier->start_task_idle(*game, 0, -1);
 		}
 	}
-	update_soldier_request(false);
+	update_soldier_request(true);
 	return true;
 }
 
@@ -467,11 +390,6 @@ void TrainingSite::add_worker(Worker& w) {
 	}
 }
 
-void TrainingSite::switch_heroes() {
-	build_heroes_ = !build_heroes_;
-	molog(owner().egbase().get_gametime(), "BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
-}
-
 void TrainingSite::remove_worker(Worker& w) {
 	upcast(Game, game, &get_owner()->egbase());
 
@@ -500,223 +418,157 @@ bool TrainingSite::is_present(Worker& worker) const {
 	       worker.get_position() == get_position();
 }
 
+Soldier*
+TrainingSite::get_selected_soldier(Game& game, const TrainingAttribute attr, const unsigned level) {
+	Soldier* soldier = selected_soldier_.get(game);
+	if (soldier != nullptr && is_present(*soldier) && soldier->get_level(attr) == level) {
+		return soldier;
+	}
+
+	// The player changed something while we were sleeping, we can't trust the cache, but it's not
+	// worth rebuilding either.
+	soldier = pick_another_soldier(attr, level);
+	// nullptr is OK for both
+	selected_soldier_ = soldier;
+	return soldier;
+}
+
+// Only called when we can't trust the cache. Just make sure that the level matches.
+Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const unsigned level) {
+	if (soldiers_.empty()) {
+		return nullptr;
+	}
+
+	auto upgrade_it = upgrades_.find(upgrade_key(attr, level));
+	if (upgrade_it == upgrades_.end()) {
+		// TODO(tothxa): throw exception after v1.4
+		// May happen after loading old savegame
+		return nullptr;
+		// throw wexception("Invalid use of pick_soldier(): %s cannot train attribute %s at level %u",
+		//                  descr_->descname().c_str(), training_attribute_to_string(attr).c_str(),
+		//                  level);
+	}
+
+	Soldier* best_soldier = nullptr;
+	unsigned best_level = (build_heroes_ == SoldierPreference::kRookies) ?
+	                         soldiers_.front()->descr().get_max_total_level() :
+	                         0;
+	unsigned current_level;
+
+	for (Soldier* soldier : soldiers_) {
+		if (soldier->get_level(attr) != level) {
+			continue;
+		}
+		if (build_heroes_ == SoldierPreference::kAny) {
+			return soldier;
+		}
+		current_level = soldier->get_total_level();
+		if (compare_levels(best_level, current_level)) {
+			best_soldier = soldier;
+			best_level = current_level;
+		}
+	}
+
+	return best_soldier;
+}
+
+inline bool TrainingSite::compare_levels(const unsigned first, const unsigned second) const {
+	switch (build_heroes_) {
+	case SoldierPreference::kAny:
+		return false;
+	case SoldierPreference::kHeroes:
+		return (second > first);
+	case SoldierPreference::kRookies:
+		return (second < first);
+	default:
+		NEVER_HERE();
+	}
+}
+
 /**
  * Request soldiers up to capacity, or let go of surplus soldiers.
- *
- * Now, we attempt to intelligently select most suitable soldiers
- * (either already somwhat trained, or if training stalls, less
- * trained ones). If no luck, the criteria is made relaxed until
- * somebody shows up.
  */
-void TrainingSite::update_soldier_request(bool did_incorporate) {
-	Game* game = get_owner() != nullptr ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
-	bool rebuild_request = false;
-	bool need_more_soldiers = false;
-	Duration dynamic_timeout = acceptance_threshold_timeout;
-	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max() - 1;
-	bool limit_upper_bound = false;
-
-	if (soldiers_.size() < capacity_) {
-		// If not full, I need more soldiers.
-		need_more_soldiers = true;
-	}
-
-	// Usually, we prefer already partially trained soldiers here.
-	// In some conditions, this can lead to same soldiers walking back and forth.
-	// this tries to break that cycle. The goal is that this code only kicks in
-	// in those specific conditions. This if statement is true if we repeatedly
-	// incorporate and release soldiers, without training them at all.
-	if (kUpperBoundThreshold_ < repeated_layoff_ctr_) {
-		if (repeated_layoff_ctr_ > kUpperBoundThreshold_ + highest_trainee_level_seen_) {
-			repeated_layoff_ctr_ = 0;
-		} else {
-			trainee_general_upper_bound =
-			   kUpperBoundThreshold_ + highest_trainee_level_seen_ - repeated_layoff_ctr_;
-			limit_upper_bound = true;
-		}
-		if (did_incorporate) {
-			rebuild_request = need_more_soldiers;
-		}
-	}
-	// This boolean ensures that kicking out many soldiers in a row does not count as
-	// soldiers entering and leaving without training. We need to repeatedly incorporate
-	// and release for the last resort to kick in. I need this boolean, to detect that
-	// a soldier was incorporated between soldiers leaving.
-	if (did_incorporate) {
-		repeated_layoff_inc_ = true;
-	}
-
-	const Time& timeofgame = game != nullptr ? game->get_gametime() : Time(0);
-
-	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
-		// If type of desired recruits has been changed, the request is rebuild after incorporate
-		// even if (wrong/old) type recruits are on the way.
-		rebuild_request = need_more_soldiers;
-		requesting_weak_trainees_ = latest_trainee_was_kickout_;
-	}
-
-	if (did_incorporate) {
-		// If we got somebody in, lets become picky again.
-		// Request is not regenerated at this point. Should it?
-		if (requesting_weak_trainees_) {
-			trainee_general_lower_bound_ = latest_trainee_kickout_level_;
-		} else {
-			trainee_general_lower_bound_ = static_cast<uint8_t>(std::max<unsigned>(
-			   1, (std::min<unsigned>(highest_trainee_level_seen_,
-			                          (static_cast<unsigned>(trainee_general_lower_bound_) + 1 +
-			                           static_cast<unsigned>(highest_trainee_level_seen_)) /
-			                             2))));
-		}
-		request_open_since_ = timeofgame;
-	}
-	if ((soldier_request_ != nullptr) && need_more_soldiers) {
-		if ((!requesting_weak_trainees_) && (!limit_upper_bound)) {
-			// If requesting strong folks, the acceptance time can sometimes grow unbearable large
-			// without this.
-			// In request weak mode, resources are typically thin and this harms less, In addition,
-			// the starting value tends to be much smaller in request-weak mode.
-			dynamic_timeout =
-			   acceptance_threshold_timeout /
-			   std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
-			// In the special case of training not working at all, there is no need for this speedup
-			// (hence the 2nd check)
-		}
-		if (0 == soldier_request_->get_num_transfers() &&
-		    timeofgame > request_open_since_ + dynamic_timeout) {
-			// Timeout: We have been asking for certain type of soldiers, nobody is answering the call.
-			// Relaxing the criteria (and thus rebuild the request)
-			rebuild_request = need_more_soldiers;
-			if (0 < trainee_general_lower_bound_) {
-				trainee_general_lower_bound_--;
-				dynamic_timeout =
-				   acceptance_threshold_timeout /
-				   std::max<uint32_t>(1, static_cast<unsigned>(trainee_general_lower_bound_));
-			} else if (requesting_weak_trainees_) {
-				// If requesting weak trainees, and no people show up:
-				// set the state back to request_strong, which will allow everybody in
-				// when threshold is zero. Hopefully, you are fine with this misuse
-				// of variable names.
-				requesting_weak_trainees_ = false;
-				latest_trainee_was_kickout_ = false;
-			}
-			if (kUpperBoundThreshold_ <= repeated_layoff_ctr_ && soldiers_.empty()) {
-				// Repeated layoff ctr breaks the cycle when same few soldiers pendle back and forth.
-				// If no soldiers are arriving and none are present, this cannot be the case.
-				// Trainingsites without soldiers for long confuse players, thus retracting.
-				repeated_layoff_ctr_ = 0;
-				requesting_weak_trainees_ = false;
-				latest_trainee_was_kickout_ = false;
-			}
-		}
-	}
-
-	if (soldier_request_ == nullptr) {
-		rebuild_request = need_more_soldiers;
-	}
-
-	if (rebuild_request) {
-		// I've changed my acceptance criteria
+void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
+	if (soldiers_.size() >= capacity_) {
 		if (soldier_request_ != nullptr) {
 			delete soldier_request_;
 			soldier_request_ = nullptr;
+			force_rebuild_soldier_requests_ = true;
 		}
 
-		assert(need_more_soldiers);
-		if (recent_capacity_increase_) {
-			// See comments in TrainingSite::SoldierControl::set_soldier_capacity() for details
-			// In short: If user interacts, I accept anybody regardless of state.
-			requesting_weak_trainees_ = false;
-			limit_upper_bound = false;
-			trainee_general_lower_bound_ = 0;
-			recent_capacity_increase_ = false;
+		if (needs_update_statuses && soldiers_.size() > capacity_) {
+			update_upgrade_statuses(false);
+			drop_all_soldiers_from_vector(untrainable_soldiers_);
+			if (soldiers_.size() <= capacity_) {
+				// Let next run deal with refilling
+				return;
+			}
 		}
 
-		soldier_request_ = new SoldierRequest(
-		   *this, owner().tribe().soldier(), TrainingSite::request_soldier_callback, wwWORKER,
-		   requesting_weak_trainees_ ? SoldierPreference::kRookies : SoldierPreference::kHeroes);
+		if (soldiers_.size() > capacity_) {
+			// TODO(tothxa): For the sake of simplicity, this drops the least preferred soldiers first,
+			//               even if they can be trained right away, and keeps the most preferred ones
+			//               even if they're stalled.
+			//               Should this be reversed? Or use a penalty system?
+			std::vector<Soldier*> soldiers_copy(soldiers_);
+			if (capacity_ == 0) {
+				drop_all_soldiers_from_vector(soldiers_copy);
+			} else {
+				drop_soldiers_from_vector(soldiers_copy, soldiers_.size() - capacity_);
+			}
+		}
+
+		return;
+	}
+
+	bool shortage = false;
+
+	if (force_rebuild_soldier_requests_ && soldier_request_ != nullptr) {
+		shortage = soldier_request_->get_num_transfers() == 0;
+		delete soldier_request_;
+		soldier_request_ = nullptr;
+	}
+
+	if (soldier_request_ == nullptr) {
+		if (needs_update_statuses) {
+			update_upgrade_statuses(false);
+		}
+
+		soldier_request_ =
+		   new SoldierRequest(*this, owner().tribe().soldier(),
+		                      TrainingSite::request_soldier_callback, wwWORKER, build_heroes_);
 
 		RequireOr r;
 
-		// set requirements to match this site
-		if (descr().get_train_attack()) {
-			// In "request weak trainees" mode, we ask for soldiers that are below stalled level
-			if (requesting_weak_trainees_) {
-				r.add(RequireAttribute(TrainingAttribute::kAttack,
-				                       descr().get_min_level(TrainingAttribute::kAttack),
-				                       get_max_unstall_level(TrainingAttribute::kAttack, descr())));
-			} else {
-				r.add(RequireAttribute(TrainingAttribute::kAttack,
-				                       descr().get_min_level(TrainingAttribute::kAttack),
-				                       descr().get_max_level(TrainingAttribute::kAttack) - 1));
-			}
+		// Default: Request whatever the player set to be trained.
+		Upgrade::Status min_status = Upgrade::Status::kNotPossible;
+
+		if (!shortage && max_possible_status_ >= Upgrade::Status::kWait) {
+			// We seem to be pretty good, we have free soldiers and supply for at least
+			// some of the wares. Let's try to be more specific for quickly trainable
+			// soldiers.
+			min_status = Upgrade::Status::kWait;
 		}
-		if (descr().get_train_defense()) {
-			if (requesting_weak_trainees_) {
-				r.add(RequireAttribute(TrainingAttribute::kDefense,
-				                       descr().get_min_level(TrainingAttribute::kDefense),
-				                       get_max_unstall_level(TrainingAttribute::kDefense, descr())));
-			} else {
-				r.add(RequireAttribute(TrainingAttribute::kDefense,
-				                       descr().get_min_level(TrainingAttribute::kDefense),
-				                       descr().get_max_level(TrainingAttribute::kDefense) - 1));
-			}
-		}
-		if (descr().get_train_evade()) {
-			if (requesting_weak_trainees_) {
-				r.add(RequireAttribute(TrainingAttribute::kEvade,
-				                       descr().get_min_level(TrainingAttribute::kEvade),
-				                       get_max_unstall_level(TrainingAttribute::kEvade, descr())));
-			} else {
-				r.add(RequireAttribute(TrainingAttribute::kEvade,
-				                       descr().get_min_level(TrainingAttribute::kEvade),
-				                       descr().get_max_level(TrainingAttribute::kEvade) - 1));
-			}
-		}
-		if (descr().get_train_health()) {
-			if (requesting_weak_trainees_) {
-				r.add(RequireAttribute(TrainingAttribute::kHealth,
-				                       descr().get_min_level(TrainingAttribute::kHealth),
-				                       get_max_unstall_level(TrainingAttribute::kHealth, descr())));
-			} else {
-				r.add(RequireAttribute(TrainingAttribute::kHealth,
-				                       descr().get_min_level(TrainingAttribute::kHealth),
-				                       descr().get_max_level(TrainingAttribute::kHealth) - 1));
+
+		// We could try to merge consecutive levels, but that's probably more trouble
+		// than it's worth. We certainly must allow gaps.
+		for (const auto& upgrade : upgrades_) {
+			if (upgrade.second.status >= min_status) {
+				const TrainingAttribute attr = type_from_key(upgrade.first);
+				uint16_t level = level_from_key(upgrade.first);
+				r.add(RequireAttribute(attr, level, level));
 			}
 		}
 
-		// The above selects everybody that could be trained here. If I am picky, then also exclude
-		// those
-		// that I could train but do not wish to spend time & resources on.
-		if (limit_upper_bound) {
-			RequireAnd qr;
-			qr.add(RequireAttribute(TrainingAttribute::kTotal, 0, trainee_general_upper_bound));
-			qr.add(r);
-			soldier_request_->set_requirements(qr);
-		} else if (0 < trainee_general_lower_bound_) {
-			RequireAnd qr;
-			qr.add(RequireAttribute(TrainingAttribute::kTotal, trainee_general_lower_bound_ + 1,
-			                        std::numeric_limits<uint8_t>::max() - 1));
-			qr.add(r);
-			soldier_request_->set_requirements(qr);
-			if (game != nullptr) {
-				schedule_act(*game, dynamic_timeout + Duration(1));
-			}
-		} else {
-			soldier_request_->set_requirements(r);
-		}
-		soldier_request_->set_count(capacity_ - soldiers_.size());
-		request_open_since_ = timeofgame;
+		soldier_request_->set_requirements(r);
 
-	} else if (!need_more_soldiers) {
-		delete soldier_request_;
-		soldier_request_ = nullptr;
+		force_rebuild_soldier_requests_ = false;
 
-		while (soldiers_.size() > capacity_) {
-			soldier_control_.drop_soldier(**soldiers_.rbegin());
-		}
 	} else {
-		soldier_request_->set_count(capacity_ - soldiers_.size());
+		soldier_request_->set_preference(build_heroes_);
 	}
+
+	soldier_request_->set_count(capacity_ - soldiers_.size());
 }
 
 /**
@@ -739,123 +591,90 @@ void TrainingSite::request_soldier_callback(Game& game,
 	assert(tsite.soldier_request_ == &rq);
 
 	tsite.soldier_control_.incorporate_soldier(game, s);
+
+	// Restart trainer patience to prevent dropping freshly arrived soldiers
+	tsite.failures_count_ = 0;
+}
+
+// soldiers_ itself must not be passed directly, pass a copy of it if needed
+inline void TrainingSite::drop_all_soldiers_from_vector(std::vector<Soldier*>& v) {
+	while (!v.empty()) {
+		soldier_control_.drop_soldier(*v.back());
+		v.pop_back();
+	}
+}
+
+// soldiers_ itself must not be passed directly, pass a copy of it if needed
+void TrainingSite::drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned number_to_drop) {
+	if (number_to_drop >= v.size()) {
+		log_warn("TrainingSite::drop_soldiers_from_vector(): Use drop_all_soldiers_from_vector()");
+		drop_all_soldiers_from_vector(v);
+		return;
+	}
+
+	if (build_heroes_ != SoldierPreference::kAny) {
+		std::sort(v.begin(), v.end(), [this](Soldier* a, Soldier* b) {
+			const unsigned level_a = a->get_total_level();
+			const unsigned level_b = b->get_total_level();
+			if (level_a == level_b) {
+				return a->serial() < b->serial();
+			}
+			// Sort in order of decreasing desirability, so we can use pop_back()
+			return !compare_levels(level_a, level_b);
+		});
+	}
+	for (; number_to_drop > 0; --number_to_drop) {
+		soldier_control_.drop_soldier(*v.back());
+		v.pop_back();
+	}
 }
 
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
 void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
-	std::vector<Soldier*> droplist;
-
-	for (Soldier* soldier : soldiers_) {
-		std::vector<Upgrade>::iterator it = upgrades_.begin();
-		for (; it != upgrades_.end(); ++it) {
-			int32_t level = soldier->get_level(it->attribute);
-			if (level >= it->min && level <= it->max) {
-				break;
-			}
-		}
-
-		if (it == upgrades_.end()) {
-			droplist.push_back(soldier);
-		}
-	}
-
-	// Drop soldiers only now, so that changes in the soldiers array don't
-	// mess things up
-	for (Soldier* soldier : droplist) {
-		uint8_t level = soldier->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_) {
-			highest_trainee_level_seen_ = level;
-		}
-
-		soldier_control_.drop_soldier(*soldier);
-		repeated_layoff_ctr_ = 0;  // redundant, but safe (also reset whenever level increases)
-		if (latest_trainee_was_kickout_) {
-			// If I am calling in weaklings: Stop that. Immediately.
-			latest_trainee_was_kickout_ = false;
-			update_soldier_request(true);
-		}
-		repeated_layoff_inc_ = false;
-	}
+	drop_all_soldiers_from_vector(untrainable_soldiers_);
 }
 
 /**
  * Drop all the soldiers that can not be upgraded further at this level of resourcing.
- *
  */
 void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
-	Soldier* soldier_to_drop = nullptr;
-	uint8_t highest_soldier_level_seen = 0;
-
-	for (Soldier* soldier : soldiers_) {
-		uint8_t this_soldier_level = soldier->get_level(TrainingAttribute::kTotal);
-
-		bool this_soldier_is_safe = false;
-		if (this_soldier_level <= highest_soldier_level_seen) {
-			// Skip the innermost loop for soldiers that would not be kicked out anyway.
-			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
-			this_soldier_is_safe = true;
-		} else {
-			for (const Upgrade& upgrade : upgrades_) {
-				if (!this_soldier_is_safe) {
-					// Soldier is safe, if he:
-					//  - is below maximum, and
-					//  - is not in a stalled state
-					// Check done separately for each art.
-					const unsigned level = soldier->get_level(upgrade.attribute);
-
-					// Below maximum -check
-					if (static_cast<int32_t>(level) > upgrade.max) {
-						continue;
-					}
-
-					TypeAndLevel train_tl(upgrade.attribute, level);
-					TrainFailCount::iterator tstep = training_failure_count_.find(train_tl);
-					if (tstep == training_failure_count_.end()) {
-						log_warn("TrainingSite::drop_stalled_soldiers: training step %u,%u "
-						         "not found in this school!\n",
-						         static_cast<unsigned int>(upgrade.attribute), level);
-						break;
-					}
-
-					tstep->second.second = 1;  // a soldier is present at this level
-
-					// Stalled state -check
-					if (max_stall_val_ > tstep->second.first) {
-						this_soldier_is_safe = true;
-						break;
-					}
-				}
-			}
-		}
-		if (!this_soldier_is_safe) {
-			// Make this soldier a kick-out candidate
-			soldier_to_drop = soldier;
-			highest_soldier_level_seen = this_soldier_level;
-		}
+	if (failures_count_ <= max_stall_val_) {
+		// Trainer is still patient
+		return;
 	}
 
-	// Finally drop the soldier.
-	if (nullptr != soldier_to_drop) {
-		verb_log_info("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
-		uint8_t level = soldier_to_drop->get_level(TrainingAttribute::kTotal);
-		if (level > highest_trainee_level_seen_) {
-			highest_trainee_level_seen_ = level;
-		}
-		latest_trainee_kickout_level_ = level;
-		soldier_control_.drop_soldier(*soldier_to_drop);
-		latest_trainee_was_kickout_ = true;
-		// We can enter into state where same soldiers repeatedly enter the site
-		// even if they cannot be promited (lack of gold, lack of an equipmentsmith
-		// of some kind or so). The repeated_layoff_ctr_ works around that.
-		//
-		// Only repeated drops with incorporating new soldiers in between causes this to happen!
-		if (std::numeric_limits<uint8_t>::max() - 1 > repeated_layoff_ctr_ && repeated_layoff_inc_) {
-			repeated_layoff_ctr_++;
-			repeated_layoff_inc_ = false;
-		}
+	failures_count_ = 0;
+
+	if (soldier_request_ != nullptr && soldier_request_->get_count() > 0 &&
+	    soldier_request_->get_num_transfers() == 0) {
+		// Maybe our soldier requirements are outdated?
+		force_rebuild_soldier_requests_ = true;
 	}
+
+	if (max_possible_status_ <= Upgrade::Status::kNotPossible) {
+		// There's a shortage of wares, we can't do anything about it.
+		return;
+	}
+
+	// First kick out the ones who are waiting for unavailable wares, let the rest wait some more.
+	if (!stalled_soldiers_.empty()) {
+		drop_all_soldiers_from_vector(stalled_soldiers_);
+		return;
+	}
+
+	if (max_possible_status_ < Upgrade::Status::kCanStart || waiting_soldiers_.empty()) {
+		// No point in replacing trainees if we can't train the new ones either.
+		// We just have to wait some more until the needed wares arrive.
+		return;
+	}
+
+	// We may be able to request replacement soldiers whose next upgrade already has the wares here.
+	drop_all_soldiers_from_vector(waiting_soldiers_);
+
+	// Make sure that our soldier requirements are updated too.
+	force_rebuild_soldier_requests_ = true;
 }
 
 std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings() const {
@@ -864,6 +683,7 @@ std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings()
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	settings->build_heroes = build_heroes_;
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
@@ -877,255 +697,258 @@ std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings()
 void TrainingSite::act(Game& game, uint32_t const data) {
 	// unit of gametime is [ms].
 	ProductionSite::act(game, data);
-	update_soldier_request(false);
+	update_soldier_request(true);
 }
 
 void TrainingSite::program_end(Game& game, ProgramResult const result) {
-	result_ = result;
+	if (result != ProgramResult::kCompleted) {
+		++failures_count_;
+	} else if (top_state().program->name() != "sleep") {
+		failures_count_ = 0;
+	}
+
+	update_upgrade_statuses(false);
+
+	drop_unupgradable_soldiers(game);
+	drop_stalled_soldiers(game);
+	update_soldier_request(false);
+
 	ProductionSite::program_end(game, result);
-	// For unknown reasons sometimes there is a fully upgraded soldier
-	// that failed to be send away, so at the end of this function
-	// we test for such soldiers, unless another drop_soldiers
-	// function were run
-	bool leftover_soldiers_check = true;
-
-	if (current_upgrade_ != nullptr) {
-		if (result_ == ProgramResult::kCompleted) {
-			drop_unupgradable_soldiers(game);
-			leftover_soldiers_check = false;
-			current_upgrade_->lastsuccess = true;
-			current_upgrade_->failures = 0;
-
-			// I try to already somewhat trained soldiers here, except when
-			// no training happens. Now some training has happened, hence zero.
-			// read in update_soldier_request
-			repeated_layoff_ctr_ = 0;
-			repeated_layoff_inc_ = false;
-		} else {
-			current_upgrade_->failures++;
-			drop_stalled_soldiers(game);
-			leftover_soldiers_check = false;
-		}
-		current_upgrade_ = nullptr;
-	}
-
-	if (leftover_soldiers_check) {
-		drop_unupgradable_soldiers(game);
-	}
-
-	training_done();
 }
 
 /**
  * Find and start the next training program.
- *
- * Prioritize such that if UpgradeA.prio is twice UpgradeB.prio, then
- * start_upgrade will be called twice as often for UpgradeA.
- * If all priorities are zero, nothing will happen.
  */
 void TrainingSite::find_and_start_next_program(Game& game) {
-	checked_soldier_training_.level = INVALID_INDEX;
-	checked_soldier_training_.attribute = TrainingAttribute::kTotal;
-	for (;;) {
-		uint32_t maxprio = 0;
-		uint32_t maxcredit = 0;
-
-		for (Upgrade& upgrade : upgrades_) {
-			if (upgrade.credit >= 10) {
-				upgrade.credit -= 10;
-				return start_upgrade(game, upgrade);
-			}
-
-			if (maxprio < upgrade.prio) {
-				maxprio = upgrade.prio;
-			}
-			if (maxcredit < upgrade.credit) {
-				maxcredit = upgrade.credit;
-			}
-		}
-
-		if (maxprio == 0) {
-			return program_start(game, "sleep");
-		}
-
-		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
-
-		for (Upgrade& upgrade : upgrades_) {
-			upgrade.credit += multiplier * upgrade.prio;
-		}
-	}
-}
-
-/**
- * The prioritizer decided that the given type of upgrade should run.
- * Let's do our worst.
- */
-void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
-	int32_t minlevel = upgrade.max;
-	int32_t maxlevel = upgrade.min;
-
-	for (Soldier* soldier : soldiers_) {
-		int32_t const level = soldier->get_level(upgrade.attribute);
-
-		if (level > upgrade.max || level < upgrade.min) {
-			continue;
-		}
-		if (level < minlevel) {
-			minlevel = level;
-		}
-		if (level > maxlevel) {
-			maxlevel = level;
-		}
+	if (is_stopped() || capacity_ == 0) {
+		program_start(game, "sleep");
+		return;
 	}
 
-	if (minlevel > maxlevel) {
-		return program_start(game, "sleep");
-	}
-
-	int32_t level;
-
-	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
-		// Start greedily on the first ever attempt, and restart greedily
-		// after a sucessful upgrade
-		if (build_heroes_) {
-			level = maxlevel;
-		} else {
-			level = minlevel;
+	if (soldiers_.empty()) {
+		if (soldier_request_ != nullptr && soldier_request_->get_count() > 0 &&
+		    soldier_request_->get_num_transfers() == 0) {
+			++failures_count_;
 		}
-	} else {
-		// The last attempt wasn't successful;
-		// This happens e.g. when lots of low-level soldiers are present,
-		// but the prerequisites for improving them aren't.
-		if (build_heroes_) {
-			level = upgrade.lastattempt - 1;
-			if (level < minlevel) {
-				level = maxlevel;
-			}
-		} else {
-			level = upgrade.lastattempt + 1;
-			if (level > maxlevel) {
-				level = minlevel;
-			}
-		}
+		program_start(game, "sleep");
+		return;
 	}
 
-	current_upgrade_ = &upgrade;
-	upgrade.lastattempt = level;
-	upgrade.lastsuccess = false;
+	update_upgrade_statuses(true);
 
-	return program_start(game, format("%s%i", upgrade.prefix, level));
-}
-
-TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {
-	for (Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			return &upgrade;
-		}
-	}
-	return nullptr;
-}
-
-/**
- * Gets the priority of given attribute
- */
-int32_t TrainingSite::get_pri(TrainingAttribute atr) {
-	for (const Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			return upgrade.prio;
-		}
-	}
-	return 0;
-}
-
-/**
- * Sets the priority of given attribute
- */
-void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio) {
-	if (prio < 0) {
-		prio = 0;
+	if (max_possible_status_ < Upgrade::Status::kCanStart) {
+		++failures_count_;
+		program_start(game, "sleep");
+		return;
 	}
 
-	for (Upgrade& upgrade : upgrades_) {
-		if (upgrade.attribute == atr) {
-			upgrade.prio = prio;
+	if (build_heroes_ != SoldierPreference::kAny) {
+		// update_upgrade_statuses() picked the soldier and the training step for us,
+		// unless there are no soldiers for the possible training steps
+		if (selected_soldier_.get(game) == nullptr) {
+			++failures_count_;
+			program_start(game, "sleep");
 			return;
 		}
+		assert(current_upgrade_ != upgrades_.end());
+		program_start(game, current_upgrade_->second.program_name);
+		return;
 	}
-}
 
-/**
- * Only called from \ref calc_upgrades
- */
-void TrainingSite::add_upgrade(TrainingAttribute const atr, const std::string& prefix) {
-	Upgrade u;
-	u.attribute = atr;
-	u.prefix = prefix;
-	u.min = descr().get_min_level(atr);
-	u.max = descr().get_max_level(atr) - 1;
-	u.prio = 6;
-	u.credit = 0;
-	u.lastattempt = -1;
-	u.lastsuccess = false;
-	u.failures = 0;
-	upgrades_.push_back(u);
+	// We know there are wares for at least one upgrade, and we know there is at least one
+	// soldier, but we don't know if they actually match. We also need wrap-around.
+	// So we need this to prevent infinite loops.
+	const TypeAndLevel last_upgrade =
+	   current_upgrade_ != upgrades_.end() ? current_upgrade_->first : upgrades_.rbegin()->first;
+
+	do {
+		if (current_upgrade_ != upgrades_.end()) {
+			++current_upgrade_;
+		}
+		if (current_upgrade_ == upgrades_.end()) {
+			current_upgrade_ = upgrades_.begin();
+		}
+	} while (!current_upgrade_->second.has_wares_and_candidate() &&
+	         current_upgrade_->first != last_upgrade);
+
+	if (!current_upgrade_->second.has_wares_and_candidate()) {
+		++failures_count_;
+		program_start(game, "sleep");
+		return;
+	}
+
+	selected_soldier_ = current_upgrade_->second.candidates.front();
+	program_start(game, current_upgrade_->second.program_name);
 }
 
 /**
  * Called once at initialization to populate \ref upgrades_.
  */
-void TrainingSite::calc_upgrades() {
+void TrainingSite::init_upgrades() {
 	assert(upgrades_.empty());
 
-	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
-	//  soldier type name.
 	if (descr().get_train_health()) {
-		add_upgrade(TrainingAttribute::kHealth, "upgrade_soldier_health_");
+		add_upgrades(TrainingAttribute::kHealth);
 	}
 	if (descr().get_train_attack()) {
-		add_upgrade(TrainingAttribute::kAttack, "upgrade_soldier_attack_");
+		add_upgrades(TrainingAttribute::kAttack);
 	}
 	if (descr().get_train_defense()) {
-		add_upgrade(TrainingAttribute::kDefense, "upgrade_soldier_defense_");
+		add_upgrades(TrainingAttribute::kDefense);
 	}
 	if (descr().get_train_evade()) {
-		add_upgrade(TrainingAttribute::kEvade, "upgrade_soldier_evade_");
-	}
-}
-
-void TrainingSite::training_attempted(TrainingAttribute type, uint32_t level) {
-	TypeAndLevel key(type, level);
-	checked_soldier_training_.level = level;
-	checked_soldier_training_.attribute = type;
-	if (training_failure_count_.find(key) == training_failure_count_.end()) {
-		training_failure_count_[key] = std::make_pair(training_state_multiplier_, 0);
-	} else {
-		training_failure_count_[key].first += training_state_multiplier_;
+		add_upgrades(TrainingAttribute::kEvade);
 	}
 }
 
 /**
- * Called whenever it was possible to promote another guy
+ * Only called from \ref init_upgrades
  */
+void TrainingSite::add_upgrades(TrainingAttribute const attr) {
+	int32_t min = descr().get_min_level(attr);
+	int32_t max = descr().get_max_level(attr);
 
-void TrainingSite::training_successful(TrainingAttribute type, uint32_t level) {
-	TypeAndLevel key(type, level);
-	// Here I assume that key exists: training has been attempted before it can succeed.
-	training_failure_count_[key].first = 0;
+	for (int32_t level = min; level < max; ++level) {
+		const TypeAndLevel key = upgrade_key(attr, level);
+		upgrades_.emplace(key, Upgrade(attr, level));
+	}
 }
 
-void TrainingSite::training_done() {
-	for (auto& fail_and_presence : training_failure_count_) {
-		// If a soldier is present at this training level and site is running, deteoriate
-		if ((fail_and_presence.second.second != 0u) && (!is_stopped())) {
-			fail_and_presence.second.first++;
-			fail_and_presence.second.second = 0;
-		} else if (0 < fail_and_presence.second.first) {  // If no soldier, let's become optimistic
-			fail_and_presence.second.first--;
+TrainingSite::Upgrade::Upgrade(const TrainingAttribute attr, const uint16_t level)
+   : key(upgrade_key(attr, level)),
+     program_name(format("upgrade_soldier_%s_%d", training_attribute_to_string(attr), level)) {
+}
+
+unsigned TrainingSite::current_training_level() const {
+	if (current_upgrade_ == upgrades_.end()) {
+		// This should only be possible when saving the game
+		constexpr unsigned kRandomInvalidLevel = 99;
+		return kRandomInvalidLevel;
+	}
+	return level_from_key(current_upgrade_->first);
+}
+TrainingAttribute TrainingSite::current_training_attribute() const {
+	if (current_upgrade_ == upgrades_.end()) {
+		// This should only be possible when saving the game
+		return TrainingAttribute::kTotal;
+	}
+	return type_from_key(current_upgrade_->first);
+}
+
+// Only for loading from savegame
+void TrainingSite::set_current_training_step(const uint8_t attr, const uint16_t level) {
+	// upgrades_.end() is fine if inputs are invalid
+	current_upgrade_ = upgrades_.find(upgrade_key(static_cast<TrainingAttribute>(attr), level));
+}
+
+void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
+	max_possible_status_ = Upgrade::Status::kDisabled;
+
+	for (auto& upgrade_it : upgrades_) {
+		Upgrade& upgrade = upgrade_it.second;
+		upgrade.candidates.clear();
+		const bool was_enabled = upgrade.status != Upgrade::Status::kDisabled;
+
+		upgrade.status = Upgrade::Status::kCanStart;
+		const ProductionProgram::Groups& costs = descr().get_training_cost(upgrade.key);
+
+		for (const ProductionProgram::WareTypeGroup& group : costs) {
+			uint32_t max = 0;
+			uint32_t here = 0;
+			uint32_t soon = 0;
+			for (const auto& ware : group.first) {
+				const InputQueue& iq = inputqueue(ware.first, ware.second, nullptr, 0);
+				max += iq.get_max_fill();
+				here += iq.get_filled();
+				soon += iq.get_max_fill() - iq.get_missing();
+			}
+			if (max < group.second) {
+				upgrade.status = Upgrade::Status::kDisabled;
+				break;
+			}
+			if (here >= group.second) {
+				continue;
+			}
+			if (soon < group.second) {
+				upgrade.status = Upgrade::Status::kNotPossible;
+			} else if (upgrade.status == Upgrade::Status::kCanStart) {
+				upgrade.status = Upgrade::Status::kWait;
+			}
+		}
+
+		if (upgrade.status > max_possible_status_) {
+			max_possible_status_ = upgrade.status;
+		}
+
+		const bool is_enabled = upgrade.status != Upgrade::Status::kDisabled;
+		if (was_enabled != is_enabled) {
+			force_rebuild_soldier_requests_ = true;
+		}
+	}
+
+	untrainable_soldiers_.clear();
+	stalled_soldiers_.clear();
+	waiting_soldiers_.clear();
+
+	if (soldiers_.empty()) {
+		selected_soldier_ = nullptr;
+		return;
+	}
+
+	if (select_next_step) {
+		selected_soldier_ = nullptr;
+	}
+	unsigned best_total_level = (build_heroes_ == SoldierPreference::kRookies) ?
+	                               soldiers_.front()->descr().get_max_total_level() :
+	                               0;
+
+	for (Soldier* soldier : soldiers_) {
+		Upgrade::Status best_status = Upgrade::Status::kDisabled;
+		std::map<TypeAndLevel, Upgrade>::iterator possible_upgrade = upgrades_.end();
+		unsigned lowest_level = 0;
+
+		for (const TrainingAttribute attr : descr().trained_attributes()) {
+			const unsigned level = soldier->get_level(attr);
+			const auto upgrade_it = upgrades_.find(upgrade_key(attr, level));
+			if (upgrade_it != upgrades_.end()) {
+				upgrade_it->second.candidates.emplace_back(soldier);
+				best_status = std::max(best_status, upgrade_it->second.status);
+				if (select_next_step && upgrade_it->second.status == Upgrade::Status::kCanStart) {
+					if (lowest_level > level || possible_upgrade == upgrades_.end()) {
+						possible_upgrade = upgrade_it;
+						lowest_level = level;
+					}
+				}
+			}
+		}
+
+		switch (best_status) {
+		case Upgrade::Status::kCanStart:
+			if (select_next_step && build_heroes_ != SoldierPreference::kAny) {
+				const unsigned this_total_level = soldier->get_total_level();
+				if (compare_levels(best_total_level, this_total_level) ||
+				    selected_soldier_ == nullptr) {
+					best_total_level = this_total_level;
+					// Already set these here to avoid repeating the iterations in
+					// find_and_start_next_program()
+					selected_soldier_ = soldier;
+					current_upgrade_ = possible_upgrade;
+				}
+			}
+			break;
+		case Upgrade::Status::kDisabled:
+			untrainable_soldiers_.emplace_back(soldier);
+			break;
+		case Upgrade::Status::kNotPossible:
+			stalled_soldiers_.emplace_back(soldier);
+			break;
+		case Upgrade::Status::kWait:
+			waiting_soldiers_.emplace_back(soldier);
+			break;
+		default:
+			NEVER_HERE();
 		}
 	}
 }
 
-ProductionProgram::Action::TrainingParameters TrainingSite::checked_soldier_training() const {
-	return checked_soldier_training_;
-}
 }  // namespace Widelands

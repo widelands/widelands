@@ -23,6 +23,7 @@
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -49,11 +50,15 @@ void CmdSetSoldierPreference::execute(Game& game) {
 	if (upcast(ConstructionSite, cs, mo)) {
 		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
 			ms->soldier_preference = preference;
+		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
+			ts->build_heroes = preference;
 		} else if (upcast(WarehouseSettings, wh, cs->get_settings())) {
 			wh->soldier_preference = preference;
 		}
 	} else if (upcast(MilitarySite, ms, mo)) {
 		ms->set_soldier_preference(preference);
+	} else if (upcast(TrainingSite, ts, mo)) {
+		ts->set_build_heroes(preference);
 	} else if (upcast(Warehouse, wh, mo)) {
 		wh->set_soldier_preference(preference);
 	} else if (upcast(Ship, ship, mo)) {

@@ -288,6 +288,8 @@ wl_library(wui
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
+    soldier_preference_control.cc
+    soldier_preference_control.h
     soldier_statistics_menu.cc
     soldier_statistics_menu.h
     stock_menu.cc

@@ -114,6 +114,7 @@ void TrainingsiteSettings::apply(const BuildingSettings& bs) {
 	if (upcast(const TrainingsiteSettings, s, &bs)) {
 		desired_capacity =
 		   new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
+		build_heroes = s->build_heroes;
 	}
 }
 
@@ -161,14 +162,15 @@ void MarketSettings::apply(const BuildingSettings& bs) {
  * Militarysite: 1: v1.1
  * Productionsite: 2: v1.1
  * Trainingsite: 1: v1.1
+ *   - 2: v1.4 Added soldier preference
  * Warehouse: 2: v1.1
- *   - 3: Added soldier preference and capacity
+ *   - 3: v1.2 Added soldier preference and capacity
  */
 constexpr uint8_t kCurrentPacketVersion = 2;
 constexpr uint8_t kCurrentPacketVersionMarket = 1;
 constexpr uint8_t kCurrentPacketVersionMilitarysite = 1;
 constexpr uint8_t kCurrentPacketVersionProductionsite = 2;
-constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
+constexpr uint8_t kCurrentPacketVersionTrainingsite = 2;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 3;
 
 // static
@@ -319,8 +321,11 @@ void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
 	ProductionsiteSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionTrainingsite) {
+		if (packet_version <= kCurrentPacketVersionTrainingsite) {
 			desired_capacity = fr.unsigned_32();
+			if (packet_version >= 2) {
+				build_heroes = static_cast<SoldierPreference>(fr.unsigned_8());
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "TrainingsiteSettings", packet_version, kCurrentPacketVersionTrainingsite);
@@ -334,6 +339,7 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	ProductionsiteSettings::save(game, fw);
 	fw.unsigned_8(kCurrentPacketVersionTrainingsite);
 	fw.unsigned_32(desired_capacity);
+	fw.unsigned_8(static_cast<uint8_t>(build_heroes));
 }
 
 void WarehouseSettings::read(const Game& game, FileRead& fr) {
