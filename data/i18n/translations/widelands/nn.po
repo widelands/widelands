@@ -3,7 +3,7 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025
+# Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025-2026
 # Thorbjørn Bruarøy, 2015,2025
 # Thorbjørn Bruarøy, 2015,2025
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-02-09 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025\n"
+"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2025-2026\n"
 "Language-Team: Norwegian Nynorsk (http://app.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1742,12 +1742,12 @@ msgstr "Set høgda til:"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:78
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Vel høgde frå kart …"
 
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:79
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:115
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Vel høgda på eit felt ved å trykkja på det på kartet"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_height_options_menu.cc:84
@@ -1772,11 +1772,11 @@ msgstr "Set mengda til:"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:98
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Vel råvare frå kartet …"
 
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:99
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Vel ein råvaretype ved å trykkja på den på kartet"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/editor/ui_menus/tool_change_resources_options_menu.cc:105
@@ -1818,17 +1818,17 @@ msgstr "Fast høgd"
 
 #: ../../../../src/editor/ui_menus/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Vel …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Vel dyr frå kartet …"
 
 #: ../../../../src/editor/ui_menus/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Vel eit dyreslag ved å trykkja på det på kartet. Hald inne Ctrl for å velja fleire dyr."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -1863,13 +1863,13 @@ msgstr "%1$s (treng ei stor tomt)"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Vel fast objekt frå kartet …"
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Vel eit fast objekt ved å trykkja på det på kartet. Hald inne Ctrl for å velja fleire på ein gong."
 
 #: ../../../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -1906,13 +1906,13 @@ msgstr "%1%: %2%"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Vel terreng frå kartet …"
 
 #: ../../../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Vel ein terrengtype ved å trykkja på det på kartet. Hald inne Ctrl for å velja fleire terreng på ein gong."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
@@ -6341,7 +6341,7 @@ msgstr "Kommentarar og røyster"
 #: ../../../../src/ui_fsmenu/addons/rows_ui.cc:426
 #, c-format
 msgid "%1$s   ✎ %2$s"
-msgstr ""
+msgstr "%1$s   ✎ %2$s"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
@@ -8592,7 +8592,7 @@ msgstr "Publiser kartet på nettet"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Vel frå kart"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Toggle Tools Menu"
