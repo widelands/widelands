@@ -20,7 +20,7 @@ wl.Descriptions():new_immovable_type {
    },
    animations = {
       idle = {
-         hotspot = {8, 5}
+         hotspot = {15, 8}
       }
    }
 }
