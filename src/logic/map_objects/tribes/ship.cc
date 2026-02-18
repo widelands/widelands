@@ -471,17 +471,12 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 					wh->incorporate_worker(game, worker);
 				}
 			}
-			items_.clear();
 
-			ship_type_ = pending_refit_;
-			erase_warship_soldier_request_manager();
-
+			set_ship_type(game, pending_refit_);
 			if (ship_type_ == ShipType::kWarship) {
-				start_task_expedition(game);
 				set_destination(game, dest);
-			} else {
-				exp_cancel(game);
 			}
+
 		} else {
 			// Destination vanished, try to find a new one
 			molog(game.get_gametime(), "Refit failed, retry\n");
@@ -1085,18 +1080,22 @@ bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
 
-#ifndef NDEBUG
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
-	assert(!egbase.is_game());
+	items_.clear();
+
 	ship_type_ = t;
 	pending_refit_ = ship_type_;
+
+	erase_warship_soldier_request_manager();
+
+	if (upcast(Game, game, &egbase)) {
+		if (ship_type_ == ShipType::kWarship) {
+			start_task_expedition(*game);
+		} else {
+			exp_cancel(*game);
+		}
+	}
 }
-#else
-void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
-	ship_type_ = t;
-	pending_refit_ = ship_type_;
-}
-#endif
 
 void Ship::refit(Game& game, const ShipType type) {
 	if (!can_refit(type)) {
@@ -1647,12 +1646,14 @@ void Ship::battle_update(Game& game) {
 					return si.get_object_serial() == serial;
 				});
 				if (it == items_.end()) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not on ship", serial);
 					continue;
 				}
 
 				Worker* worker;
 				it->get(game, nullptr, &worker);
 				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not a soldier", serial);
 					continue;
 				}
 
@@ -1670,6 +1671,8 @@ void Ship::battle_update(Game& game) {
 					    map.findpath(
 					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
+						molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial,
+						      coords.x, coords.y);
 						break;
 					}
 				}
@@ -2892,6 +2895,14 @@ void Ship::Loader::load_pointers() {
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
 			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
+		}
+	}
+
+	for (Battle& battle : battles_) {
+		for (uint32_t& serial : battle.attack_soldier_serials) {
+			// Convert file indices to actual serials
+			Soldier& soldier = mol().get<Soldier>(serial);
+			serial = soldier.serial();
 		}
 	}
 

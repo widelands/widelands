@@ -118,8 +118,16 @@ public:
 	}
 
 	void reinit_plugins();
-	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
-		plugin_actions_->add_plugin_timer(action, interval, failsafe);
+	PluginActions::Timer& add_plugin_timer(const std::string& name,
+	                                       const std::string& action,
+	                                       uint32_t interval,
+	                                       uint32_t count,
+	                                       bool active,
+	                                       bool failsafe) {
+		return plugin_actions_->add_plugin_timer(name, action, interval, count, active, failsafe);
+	}
+	PluginActions& get_plugin_actions() {
+		return *plugin_actions_;
 	}
 
 	// Signal ending immediately from any phase
@@ -186,7 +194,7 @@ private:
 	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
 
-	void internet_login(bool launch_metaserver);
+	bool internet_login(bool launch_metaserver);
 
 	// Values from internet login window
 	std::string nickname_;
