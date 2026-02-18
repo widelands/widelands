@@ -168,7 +168,7 @@ if(OPTION_CPPTRACE)
   endif()
   add_definitions(-DPRINT_BACKTRACE_CPPTRACE)
   if(OPTION_ASAN AND NOT WIN32)
-    message(WARNING "Handling crashes of AddressSanitizer has priority over cpptrace.")
+    message(WARNING "Both AddressSanitizer and cpptrace are handling crashes, consider turning off one of them.")
   endif()
   if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
     # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
