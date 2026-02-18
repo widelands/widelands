@@ -24,6 +24,8 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
+#include "scripting/map/lua_field.h"
+#include "scripting/map/lua_soldier.h"
 
 namespace LuaMaps {
 
@@ -46,19 +48,24 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
    METHOD(LuaShip, refit),
+   METHOD(LuaShip, attack),
+   METHOD(LuaShip, invade),
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, debug_ware_economy),
    PROP_RO(LuaShip, debug_worker_economy),
    PROP_RO(LuaShip, last_portdock),
-   PROP_RO(LuaShip, destination),
+   PROP_RW(LuaShip, destination),
    PROP_RO(LuaShip, state),
-   PROP_RO(LuaShip, type),
+   PROP_RW(LuaShip, type),
    PROP_RW(LuaShip, scouting_direction),
    PROP_RW(LuaShip, island_explore_direction),
    PROP_RW(LuaShip, shipname),
    PROP_RW(LuaShip, capacity),
+   PROP_RO(LuaShip, min_warship_soldier_capacity),
+   PROP_RW(LuaShip, warship_soldier_capacity),
+   PROP_RW(LuaShip, hitpoints),
    {nullptr, nullptr, nullptr},
 };
 
@@ -80,7 +87,10 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
 /* RST
    .. attribute:: destination
 
-      (RO) Either :const:`nil` if there is no current destination, otherwise
+      .. versionchanged:: 1.4
+         Read-only in 1.3 and older.
+
+      (RW) Either :const:`nil` if there is no current destination, otherwise
       the :class:`PortDock`, :class:`Ship`, or :class:`PinnedNote`.
 */
 // UNTESTED
@@ -100,6 +110,20 @@ int LuaShip::get_destination(lua_State* L) {
 
 	lua_pushnil(L);
 	return 1;
+}
+
+int LuaShip::set_destination(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+
+	if (lua_isnil(L, -1)) {
+		ship->set_destination(egbase, nullptr, true);
+	} else {
+		ship->set_destination(
+		   egbase, (*get_base_user_class<LuaMapObject>(L, -1))->get(L, egbase), true);
+	}
+
+	return 0;
 }
 
 /* RST
@@ -167,7 +191,10 @@ int LuaShip::get_state(lua_State* L) {
 
       .. versionadded:: 1.2
 
-      (RO) The state the ship is in as :const:`string`:
+      .. versionchanged:: 1.4
+         Read-only in 1.3 and older.
+
+      (RW) The state the ship is in as :const:`string`:
       :const:`"transport"` or :const:`"warship"`.
 */
 int LuaShip::get_type(lua_State* L) {
@@ -183,6 +210,19 @@ int LuaShip::get_type(lua_State* L) {
 		NEVER_HERE();
 	}
 	return 1;
+}
+int LuaShip::set_type(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+	const std::string type = luaL_checkstring(L, -1);
+	if (type == "transport") {
+		ship->set_ship_type(egbase, Widelands::ShipType::kTransport);
+	} else if (type == "warship") {
+		ship->set_ship_type(egbase, Widelands::ShipType::kWarship);
+	} else {
+		report_error(L, "Invalid ship type '%s'", type.c_str());
+	}
+	return 0;
 }
 
 /* RST
@@ -301,11 +341,10 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 /* RST
    .. attribute:: shipname
 
-   .. versionchanged:: 1.2
-      Read-only in 1.1 and older.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
 
-   (RW) The name of the ship as :class:`string`.
-
+      (RW) The name of the ship as :class:`string`.
 
 */
 int LuaShip::get_shipname(lua_State* L) {
@@ -322,11 +361,11 @@ int LuaShip::set_shipname(lua_State* L) {
 /* RST
    .. attribute:: capacity
 
-   (RW) The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship
-   description.
+      (RW) The ship's current capacity.
+      Defaults to the capacity defined in the tribe's singleton ship description.
 
-   Do not change this value if the ship is currently shipping more items than the new capacity
-   allows.
+      Do not change this value if the ship is currently shipping
+      more items than the new capacity allows.
 */
 int LuaShip::get_capacity(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->get_capacity());
@@ -340,6 +379,55 @@ int LuaShip::set_capacity(lua_State* L) {
 		             s.get_nritems(), c);
 	}
 	s.set_capacity(c);
+	return 0;
+}
+
+/* RST
+   .. attribute:: min_warship_soldier_capacity
+
+      (RO) The minimum number of soldiers who currently have to be stationed on this warship.
+
+      :see also: :attr:`warship_soldier_capacity`
+*/
+int LuaShip::get_min_warship_soldier_capacity(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->min_warship_soldier_capacity());
+	return 1;
+}
+
+/* RST
+   .. attribute:: warship_soldier_capacity
+
+      (RW) The desired number of soldiers who should be stationed on this warship.
+
+      Do not set this value lower than :attr:`min_warship_soldier_capacity`
+      or higher than :attr:`capacity`.
+*/
+int LuaShip::get_warship_soldier_capacity(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_warship_soldier_capacity());
+	return 1;
+}
+int LuaShip::set_warship_soldier_capacity(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	if (upcast(Widelands::Game, game, &egbase)) {
+		get(L, egbase)->warship_command(
+		   *game, Widelands::WarshipCommand::kSetCapacity, {luaL_checkuint32(L, -1)});
+	} else {
+		get(L, egbase)->set_warship_soldier_capacity(luaL_checkuint32(L, -1));
+	}
+	return 0;
+}
+
+/* RST
+   .. attribute:: hitpoints
+
+      (RW) The number of health hitpoints this ship has left.
+*/
+int LuaShip::get_hitpoints(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_hitpoints());
+	return 1;
+}
+int LuaShip::set_hitpoints(lua_State* L) {
+	get(L, get_egbase(L))->set_hitpoints(luaL_checkuint32(L, -1));
 	return 0;
 }
 
@@ -620,6 +708,95 @@ int LuaShip::refit(lua_State* L) {
 	} else {
 		report_error(L, "Invalid ship refit type '%s'", type.c_str());
 	}
+	return 0;
+}
+
+/* RST
+   .. method:: attack(ship)
+
+      .. versionadded:: 1.4
+
+      Order the ship to attack the given other warship.
+
+      Only allowed for warships.
+
+      :arg ship: The ship to attack
+      :type ship: :class:`~wl.map.Ship`
+
+      :returns: :const:`nil`
+*/
+int LuaShip::attack(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments to Ship.attack!");
+	}
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship_self = get(L, game);
+	Widelands::Ship* ship_enemy = (*get_user_class<LuaShip>(L, 2))->get(L, game);
+
+	if (ship_self->get_ship_type() != Widelands::ShipType::kWarship) {
+		report_error(L, "Ship.attack: Self is not a warship");
+	}
+	if (ship_enemy->get_ship_type() != Widelands::ShipType::kWarship) {
+		report_error(L, "Ship.attack: Enemy is not a warship");
+	}
+	if (!ship_self->owner().is_hostile(ship_enemy->owner())) {
+		report_error(L, "Ship.attack: Cannot attack allied player");
+	}
+
+	ship_self->warship_command(game, Widelands::WarshipCommand::kAttack, {ship_enemy->serial()});
+
+	return 0;
+}
+
+/* RST
+   .. method:: invade(field, soldiers)
+
+      .. versionadded:: 1.4
+
+      Order the ship to invade the given portspace with the given soldiers.
+
+      Only allowed for warships.
+
+      :arg field: The field to invade. Must be a portspace.
+      :type field: :class:`~wl.map.Field`
+      :arg soldiers: The invasion soldiers. At least one soldier must be provided,
+         and all soldiers must currently be on this ship.
+      :type soldiers: :class:`array` of :class:`~wl.map.Soldier`
+
+      :returns: :const:`nil`
+*/
+int LuaShip::invade(lua_State* L) {
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments to Ship.invade!");
+	}
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship = get(L, game);
+	const Widelands::Coords coords = (*get_user_class<LuaField>(L, 2))->coords();
+
+	if (!game.map().is_port_space(coords)) {
+		report_error(L, "Ship.invade: Not a portspace");
+	}
+	if (ship->get_ship_type() != Widelands::ShipType::kWarship) {
+		report_error(L, "Ship.invade: Self is not a warship");
+	}
+
+	std::vector<uint32_t> parameters;
+	parameters.push_back(coords.x);
+	parameters.push_back(coords.y);
+
+	luaL_checktype(L, 3, LUA_TTABLE);
+	lua_pushnil(L);
+	while (lua_next(L, 3) != 0) {
+		Widelands::Soldier* soldier = (*get_user_class<LuaSoldier>(L, -1))->get(L, game);
+		parameters.push_back(soldier->serial());
+		lua_pop(L, 1);
+	}
+	if (parameters.size() <= 2) {
+		report_error(L, "Ship.invade: No soldiers selected");
+	}
+
+	ship->warship_command(game, Widelands::WarshipCommand::kAttack, parameters);
+
 	return 0;
 }
 
