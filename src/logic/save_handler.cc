@@ -31,8 +31,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
+#include "ui/wui/interactive_base.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_base.h"
 
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
 	int32_t rolls = 0;

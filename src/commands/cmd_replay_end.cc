@@ -19,8 +19,8 @@
 #include "commands/cmd_replay_end.h"
 
 #include "logic/game_controller.h"
-#include "ui_basic/messagebox.h"
-#include "wui/interactive_base.h"
+#include "ui/basic/messagebox.h"
+#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 

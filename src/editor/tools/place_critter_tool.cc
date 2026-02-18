@@ -18,13 +18,13 @@
 
 #include "editor/tools/place_critter_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Choses an object to place randomly from all enabled

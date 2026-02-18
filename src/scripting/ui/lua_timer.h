@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_TIMER_H
 
 #include "scripting/lua_ui.h"
-#include "wui/plugins.h"
+#include "ui/shared/plugins.h"
 
 namespace LuaUi {
 
