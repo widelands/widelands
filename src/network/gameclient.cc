@@ -808,7 +808,11 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	std::vector<AddOns::AddOnState> new_g_addons;
 	std::map<std::string, std::shared_ptr<AddOns::AddOnInfo>> disabled_installed_addons;
 	for (const auto& pair : AddOns::g_addons) {
-		disabled_installed_addons[pair.first->internal_name] = pair.first;
+		if (pair.second && !AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+			new_g_addons.emplace_back(pair);  // Always keep network-irrelevant add-ons active
+		} else {
+			disabled_installed_addons[pair.first->internal_name] = pair.first;
+		}
 	}
 	std::set<std::string> missing_addons;
 	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>>
