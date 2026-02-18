@@ -72,6 +72,7 @@ init = {
          amazons_dressmaker = 1,
          amazons_tapir = 5,
          amazons_woodcutter_master = 3,
+         amazons_charcoal_master = 1,
       },
       soldiers = {
          [{0,0,0,0}] = 45,

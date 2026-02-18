@@ -14,6 +14,9 @@ wl.Descriptions():new_worker_type {
       firestones = 1,
    },
 
+   experience = 15,
+   becomes = "amazons_charcoal_master",
+
    animation_directory = dirname,
    ware_hotspot = {0, 29},
    spritesheets = {
