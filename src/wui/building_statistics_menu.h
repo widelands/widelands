@@ -33,7 +33,7 @@
 /// This window shows statistics for all the buildings that the player owns.
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
-	static constexpr int kNoOfBuildingTabs = 5;
+	static constexpr int kNoOfBuildingTabs = 6;
 
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	~BuildingStatisticsMenu() override;
@@ -51,14 +51,17 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 
 private:
 	/// Array indices for the tabs
-	enum BuildingTab { Small, Medium, Big, Mines, Ports };
+	enum BuildingTab { Traffic, Small, Medium, Big, Mines, Ports };
 
 	/// Which building state to jump through
 	enum class JumpTarget { kOwned, kConstruction, kUnproductive };
 
+	/// Traffic tab items, used for indexing and iteration
+	enum TrafficStat : uint8_t { kFlag, kRoadNormal, kRoadBusy, kWaterway, kLast };
+
 	/// Initialize the buttons
 	void reset();
-	void init(int last_selected_tab = 0);
+	void init(int last_selected_tab = 1);
 
 	/// Whether a building that is used by the player's tribe should be added
 	bool own_tribe_building_is_valid(const Widelands::Player& player,
@@ -78,14 +81,27 @@ private:
 	void
 	add_button(Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, UI::Box* row);
 
+	/// Adds button, traffic tab version
+	void add_button(TrafficStat ts, UI::Box* row);
+
+	/// Jumps to the next / previous building / traffic stat
+	void jump(JumpTarget target, bool reverse);
+
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
+
+	/// Jumps to the next / previous traffic stat
+	void jump_traffic(JumpTarget target, bool reverse);
 
 	/// Sets the label for the given textarea to text in the chosen color
 	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
+	/// Reset visual state of all building buttons
+	void reset_button_states();
+
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(Widelands::DescriptionIndex id);
+	void set_current_traffic_type(BuildingStatisticsMenu::TrafficStat ts);
 
 	/// Change the percentage where buildings are deemed unproductive
 	void low_production_changed();
@@ -118,6 +134,20 @@ private:
 	/// Labels with buildings' productivity
 	std::vector<UI::Textarea*> productivity_labels_;
 
+	/// Traffic tab content
+	struct TrafficStatData {
+		TrafficStatData(const std::string& n, const Image* i) : name(n), image(i) {
+		}
+
+		std::string name;
+		const Image* image;
+		UI::Button* button{nullptr};
+		UI::Textarea* owned_label{nullptr};
+		UI::Textarea* productivity_label{nullptr};
+		std::set<Widelands::Coords> jump_targets{};
+	};
+	std::vector<TrafficStatData> traffic_stats_;
+
 	/// At which percent to deem buildings as unproductive
 	int low_production_{33};
 
@@ -130,6 +160,7 @@ private:
 
 	/// The building type we are currently navigating
 	Widelands::DescriptionIndex current_building_type_{Widelands::INVALID_INDEX};
+	TrafficStat current_traffic_type_{TrafficStat::kLast};
 	/// The last building that was jumped to
 	int32_t last_building_index_{0};
 	/// The type of last building that was jumped to
@@ -144,6 +175,8 @@ private:
 
 	/// The total number of building types available for all the tribes
 	const Widelands::DescriptionIndex nr_building_types_;
+
+	const TrafficStat last_traffic_type_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H

@@ -18,13 +18,23 @@
 
 #include "wui/building_statistics_menu.h"
 
+#include <algorithm>
+
 #include "base/i18n.h"
+#include "economy/flag.h"
+#include "economy/road.h"
+#include "economy/waterway.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/style_manager.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/walkingdir.h"
 #include "logic/player.h"
+#include "wui/mapviewpixelfunctions.h"
 
 constexpr int kBuildGridCellHeight = 50;
 constexpr int kBuildGridCellWidth = 55;
@@ -194,7 +204,25 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              "",
                              UI::SpinBox::Units::kPercent,
                              UI::SpinBox::Type::kBig),
-     nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
+     nr_building_types_(parent.egbase().descriptions().nr_buildings()),
+     last_traffic_type_((iplayer().game().map().get_waterway_max_length() >= 2) ?
+                           TrafficStat::kLast :
+                           TrafficStat::kWaterway) {
+	const Widelands::Player& player = iplayer().player();
+	const Widelands::TribeDescr& tribe = player.tribe();
+	const Widelands::Descriptions& descriptions = iplayer().egbase().descriptions();
+	traffic_stats_ = {
+	   TrafficStatData(_("Flag"), g_animation_manager->get_representative_image(
+	                                 tribe.flag_animation(), &player.get_playercolor())),
+	   TrafficStatData(_("Road"), descriptions.get_worker_descr(tribe.carriers()[0])
+	                                 ->representative_image(&player.get_playercolor())),
+	   TrafficStatData(_("Busy Road"), descriptions.get_worker_descr(tribe.carriers()[1])
+	                                      ->representative_image(&player.get_playercolor()))};
+	if (last_traffic_type_ == TrafficStat::kLast) {
+		traffic_stats_.emplace_back(
+		   _("Waterway"), descriptions.get_worker_descr(tribe.ferry())
+		                     ->representative_image(&player.get_playercolor()));
+	}
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
@@ -232,16 +260,12 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their "
 	                                      "productivity falls below this percentage"));
 
-	b_prev_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, true); });
-	b_next_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, false); });
-	b_prev_construction_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kConstruction, true); });
-	b_next_construction_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kConstruction, false); });
-	b_prev_unproductive_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kUnproductive, true); });
-	b_next_unproductive_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kUnproductive, false); });
+	b_prev_owned_.sigclicked.connect([this]() { jump(JumpTarget::kOwned, true); });
+	b_next_owned_.sigclicked.connect([this]() { jump(JumpTarget::kOwned, false); });
+	b_prev_construction_.sigclicked.connect([this]() { jump(JumpTarget::kConstruction, true); });
+	b_next_construction_.sigclicked.connect([this]() { jump(JumpTarget::kConstruction, false); });
+	b_prev_unproductive_.sigclicked.connect([this]() { jump(JumpTarget::kUnproductive, true); });
+	b_next_unproductive_.sigclicked.connect([this]() { jump(JumpTarget::kUnproductive, false); });
 
 	unproductive_threshold_.changed.connect([this]() { low_production_changed(); });
 
@@ -254,6 +278,8 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	building_buttons_.clear();
 	owned_labels_.clear();
 	productivity_labels_.clear();
+
+	traffic_stats_.clear();
 }
 
 void BuildingStatisticsMenu::reset() {
@@ -266,6 +292,7 @@ void BuildingStatisticsMenu::reset() {
 	tab_panel_.remove_last_tab("building_stats_big");
 	tab_panel_.remove_last_tab("building_stats_medium");
 	tab_panel_.remove_last_tab("building_stats_small");
+	tab_panel_.remove_last_tab("building_stats_traffic");
 
 	// Clean state if buildings disappear from list
 	building_buttons_.clear();
@@ -289,6 +316,8 @@ void BuildingStatisticsMenu::reset() {
 	if (has_selection_) {
 		if (building_buttons_[current_building_type_] != nullptr) {
 			set_current_building_type(current_building_type_);
+		} else if (current_traffic_type_ != TrafficStat::kLast) {
+			set_current_traffic_type(current_traffic_type_);
 		} else {
 			has_selection_ = false;
 		}
@@ -318,7 +347,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 
 	// Now create the tab contents and add the building buttons
 	int row_counters[kNoOfBuildingTabs];
-	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
+	for (int tab_index = 1; tab_index < kNoOfBuildingTabs; ++tab_index) {
 		int current_column = 0;
 		tabs_[tab_index] = new UI::Box(&tab_panel_, UI::PanelStyle::kWui,
 		                               format("tab_box_%d", tab_index), 0, 0, UI::Box::Vertical);
@@ -347,6 +376,17 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 		}
 	}
 
+	// Add traffic (technically not buildings)
+	tabs_[0] = new UI::Box(
+	   &tab_panel_, UI::PanelStyle::kWui, format("tab_box_%d", 0), 0, 0, UI::Box::Vertical);
+	UI::Box* traffic_row = new UI::Box(
+	   tabs_[0], UI::PanelStyle::kWui, format("row_box_%d", 0), 0, 0, UI::Box::Horizontal);
+	for (uint8_t tt = TrafficStat::kFlag; tt < last_traffic_type_; ++tt) {
+		add_button(static_cast<TrafficStat>(tt), traffic_row);
+	}
+	tabs_[0]->add(traffic_row, UI::Box::Resizing::kFullSize);
+	row_counters[0] = 1;
+
 	// Show the tabs that have buttons on them
 	int tab_counter = 0;
 	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](
@@ -362,6 +402,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 			++tab_counter;
 		}
 	};
+	add_tab(BuildingTab::Traffic, "building_stats_traffic",
+	        "images/wui/fieldaction/menu_tab_buildroad.png", _("Traffic"));
 	add_tab(BuildingTab::Small, "building_stats_small",
 	        "images/wui/fieldaction/menu_tab_buildsmall.png", _("Small buildings"));
 	add_tab(BuildingTab::Medium, "building_stats_medium",
@@ -490,6 +532,47 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	building_buttons_[id]->sigclicked.connect([this, id]() { set_current_building_type(id); });
 }
 
+void BuildingStatisticsMenu::add_button(BuildingStatisticsMenu::TrafficStat ts, UI::Box* row) {
+	const std::string& name = traffic_stats_[ts].name;
+	UI::Box* button_box = new UI::Box(
+	   row, UI::PanelStyle::kWui, format("buttons_box_%s", name), 0, 0, UI::Box::Vertical);
+
+	traffic_stats_[ts].button =
+	   new UI::Button(button_box, format("building_button_%s", name), 0, 0, kBuildGridCellWidth,
+	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
+	                  traffic_stats_[ts].image, name, UI::Button::VisualState::kFlat);
+	traffic_stats_[ts].button->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
+	                                             UI::ButtonDisableStyle::kFlat);
+	button_box->add(traffic_stats_[ts].button);
+
+	traffic_stats_[ts].owned_label = new UI::Textarea(
+	   button_box, UI::PanelStyle::kWui, format("label_%s", name), UI::FontStyle::kWuiLabel, 0, 0,
+	   kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	traffic_stats_[ts].owned_label->set_style_override(style_.building_statistics_button_font());
+	traffic_stats_[ts].owned_label->set_fixed_width(kBuildGridCellWidth);
+	button_box->add(traffic_stats_[ts].owned_label);
+
+	traffic_stats_[ts].productivity_label = new UI::Textarea(
+	   button_box, UI::PanelStyle::kWui, format("productivity_%s", name), UI::FontStyle::kWuiLabel,
+	   0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	traffic_stats_[ts].productivity_label->set_style_override(
+	   style_.building_statistics_button_font());
+	traffic_stats_[ts].productivity_label->set_fixed_width(kBuildGridCellWidth);
+	button_box->add(traffic_stats_[ts].productivity_label);
+
+	row->add(button_box);
+
+	traffic_stats_[ts].button->sigclicked.connect([this, ts]() { set_current_traffic_type(ts); });
+}
+
+void BuildingStatisticsMenu::jump(JumpTarget target, bool reverse) {
+	if (current_building_type_ != Widelands::INVALID_INDEX) {
+		jump_building(target, reverse);
+	} else if (current_traffic_type_ != TrafficStat::kLast) {
+		jump_traffic(target, reverse);
+	}
+}
+
 void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 	bool found = true;
 	if (last_building_type_ != current_building_type_) {
@@ -614,6 +697,29 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		   stats_vector[last_building_index_].pos, MapView::Transition::Smooth);
 	}
 	update();
+}
+
+void BuildingStatisticsMenu::jump_traffic(JumpTarget target, bool reverse) {
+	assert(target == JumpTarget::kUnproductive);
+	assert(current_traffic_type_ != TrafficStat::kLast);
+	assert(!traffic_stats_[current_traffic_type_].jump_targets.empty());
+	Vector2f cv = iplayer().map_view()->get_centered_view().viewpoint;
+	Widelands::Coords cur =
+	   MapviewPixelFunctions::calc_node_and_triangle(iplayer().game().map(), cv.x, cv.y).node;
+	if (reverse) {
+		auto it = traffic_stats_[current_traffic_type_].jump_targets.lower_bound(cur);
+		if (it == traffic_stats_[current_traffic_type_].jump_targets.begin()) {
+			it = traffic_stats_[current_traffic_type_].jump_targets.end();
+		}
+		--it;
+		iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
+	} else {
+		auto it = traffic_stats_[current_traffic_type_].jump_targets.upper_bound(cur);
+		if (it == traffic_stats_[current_traffic_type_].jump_targets.end()) {
+			it = traffic_stats_[current_traffic_type_].jump_targets.begin();
+		}
+		iplayer().map_view()->scroll_to_field(*it, MapView::Transition::Smooth);
+	}
 }
 
 /*
@@ -783,6 +889,112 @@ void BuildingStatisticsMenu::update() {
 		}
 		building_buttons_[id]->set_tooltip(building.descname());
 	}
+
+	// only do traffic computations if tab is active, or one of the items is selected
+	if (tab_assignments_[tab_panel_.active()] == BuildingTab::Traffic ||
+	    (current_traffic_type_ != TrafficStat::kLast)) {
+
+		for (uint8_t tt = TrafficStat::kFlag; tt < last_traffic_type_; ++tt) {
+			traffic_stats_[tt].jump_targets.clear();
+		}
+
+		const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
+		auto traffic_stat_counts = std::vector<std::pair<uint32_t, uint32_t>>(last_traffic_type_);
+		std::fill(traffic_stat_counts.begin(), traffic_stat_counts.end(), std::make_pair(0u, 0u));
+
+		for (const auto& eco : player.economies()) {
+			if (eco.second->type() == Widelands::wwWARE) {
+				for (Widelands::Flag* flag : eco.second->flags()) {
+					++traffic_stat_counts[TrafficStat::kFlag].first;
+					if (flag->is_congested()) {
+						++traffic_stat_counts[TrafficStat::kFlag].second;
+						if (current_traffic_type_ == TrafficStat::kFlag) {
+							traffic_stats_[TrafficStat::kFlag].jump_targets.insert(flag->get_position());
+						}
+					}
+					for (uint8_t road_id = Widelands::WalkingDir::LAST_DIRECTION;
+					     road_id >= Widelands::WalkingDir::FIRST_DIRECTION; --road_id) {
+						if (Widelands::Road* const road = flag->get_road(road_id); road != nullptr) {
+							if (&road->base_flag() == flag) {
+								++traffic_stat_counts[TrafficStat::kRoadNormal].first;
+								if (road->get_carrier(0).get(iplayer().game()) == nullptr) {
+									++traffic_stat_counts[TrafficStat::kRoadNormal].second;
+									if (current_traffic_type_ == TrafficStat::kRoadNormal) {
+										traffic_stats_[TrafficStat::kRoadNormal].jump_targets.insert(
+										   road->get_positions(iplayer().game())[road->get_idle_index() - 1]);
+									}
+								}
+								if (road->is_busy()) {
+									++traffic_stat_counts[TrafficStat::kRoadBusy].first;
+									if (road->get_carrier(1).get(iplayer().game()) == nullptr) {
+										++traffic_stat_counts[TrafficStat::kRoadBusy].second;
+										if (current_traffic_type_ == TrafficStat::kRoadBusy) {
+											traffic_stats_[TrafficStat::kRoadBusy].jump_targets.insert(
+											   road->get_positions(
+											      iplayer().game())[road->get_idle_index() - 1]);
+										}
+									}
+								}
+							}
+						}
+						if (Widelands::Waterway* const wway = flag->get_waterway(road_id);
+						    wway != nullptr) {
+							assert(map_allows_waterways);
+							if (&wway->base_flag() == flag) {  // avoid double counting
+								++traffic_stat_counts[TrafficStat::kWaterway].first;
+								if (wway->get_ferry().get(iplayer().game()) == nullptr) {
+									++traffic_stat_counts[TrafficStat::kWaterway].second;
+									if (current_traffic_type_ == TrafficStat::kWaterway) {
+										traffic_stats_[TrafficStat::kWaterway].jump_targets.insert(
+										   wway->get_positions(iplayer().game())[wway->get_idle_index() - 1]);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (uint8_t tt = TrafficStat::kFlag; tt < last_traffic_type_; ++tt) {
+			traffic_stats_[tt].owned_label->set_visible(false);
+			traffic_stats_[tt].productivity_label->set_visible(false);
+			if (traffic_stat_counts[tt].first != 0u) {
+				traffic_stats_[tt].button->set_enabled(true);
+				set_labeltext(traffic_stats_[tt].owned_label,
+				              std::to_string(traffic_stat_counts[tt].first),
+				              style_.building_statistics_details_font().color());
+			} else {
+				traffic_stats_[tt].button->set_enabled(false);
+			}
+			if (traffic_stat_counts[tt].second != 0u) {
+				set_labeltext(traffic_stats_[tt].productivity_label,
+				              std::to_string(traffic_stat_counts[tt].second), style_.low_color());
+			}
+		}
+		if ((current_traffic_type_ != TrafficStat::kLast)) {
+			hbox_unproductive_.set_visible(true);
+			bool enabled = traffic_stat_counts[current_traffic_type_].second > 0;
+			label_nr_unproductive_.set_text(
+			   enabled ? std::to_string(traffic_stat_counts[current_traffic_type_].second) : "");
+			b_next_unproductive_.set_enabled(enabled);
+			b_prev_unproductive_.set_enabled(enabled);
+			switch (current_traffic_type_) {
+			case TrafficStat::kFlag:
+				label_unproductive_.set_text(_("Congested:"));
+				break;
+			case TrafficStat::kRoadNormal:
+			case TrafficStat::kRoadBusy:
+				label_unproductive_.set_text(_("Lacking carrier:"));
+				break;
+			case TrafficStat::kWaterway:
+				label_unproductive_.set_text(_("Lacking ferry:"));
+				break;
+			case TrafficStat::kLast:
+			default:
+				NEVER_HERE();
+			}
+		}
+	}
 }
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
@@ -795,16 +1007,22 @@ void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
 	textarea->set_visible(true);
 }
 
-void BuildingStatisticsMenu::set_current_building_type(Widelands::DescriptionIndex id) {
-	assert(building_buttons_[id] != nullptr);
-
-	// Reset button states
+void BuildingStatisticsMenu::reset_button_states() {
+	for (TrafficStatData& tsd : traffic_stats_) {
+		tsd.button->set_visual_state(UI::Button::VisualState::kFlat);
+	}
 	for (UI::Button* building_button : building_buttons_) {
 		if (building_button == nullptr) {
 			continue;
 		}
 		building_button->set_visual_state(UI::Button::VisualState::kFlat);
 	}
+}
+
+void BuildingStatisticsMenu::set_current_building_type(Widelands::DescriptionIndex id) {
+	assert(building_buttons_[id] != nullptr);
+
+	reset_button_states();
 
 	// Update for current button
 	current_building_type_ = id;
@@ -814,16 +1032,30 @@ void BuildingStatisticsMenu::set_current_building_type(Widelands::DescriptionInd
 	update();
 }
 
+void BuildingStatisticsMenu::set_current_traffic_type(TrafficStat ts) {
+	reset_button_states();
+	current_building_type_ = Widelands::INVALID_INDEX;
+	current_traffic_type_ = ts;
+	traffic_stats_[current_traffic_type_].button->set_perm_pressed(true);
+	label_name_.set_text(traffic_stats_[ts].name);
+	has_selection_ = true;
+	update();
+}
+
 void BuildingStatisticsMenu::low_production_changed() {
 	low_production_ = unproductive_threshold_.get_value();
 	update();
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+/* Changelog:
+ * Version 1 → 2 (v1.3): Added traffic stats
+ */
+constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// Savegame compatibility for v1.2
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			UI::UniqueWindow::Registry& r =
 			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_buildings;
 			r.create();
@@ -844,6 +1076,13 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 				}
 			}
 			m.last_building_index_ = fr.signed_32();
+			// Savegame compatibility for v1.2
+			if (packet_version >= 2) {
+				TrafficStat ts = static_cast<TrafficStat>(fr.unsigned_8());
+				if (ts < m.last_traffic_type_) {
+					m.current_traffic_type_ = ts;
+				}
+			}
 			return m;
 		}
 		throw Widelands::UnhandledVersionError(
@@ -862,4 +1101,5 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* m
 	      "" :
 	      iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
+	fw.unsigned_8(static_cast<uint8_t>(current_traffic_type_));
 }

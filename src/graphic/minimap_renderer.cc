@@ -134,9 +134,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
 				upcast(Widelands::Flag, flag, f.field->get_immovable());
 				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
-				if (flag->current_wares() > 5 &&
-				    (player == nullptr ||
-				     flag->get_owner()->player_number() == player->player_number())) {
+				if (flag->is_congested() && (player == nullptr || flag->get_owner()->player_number() ==
+				                                                     player->player_number())) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Building) != 0 &&
