@@ -197,7 +197,8 @@ void CmdDiplomacy::execute(Game& game) {
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
 
 		// Clean up no-op requests and invites
-		for (auto it = game.pending_diplomacy_actions().begin(); it != game.pending_diplomacy_actions().end();) {
+		for (auto it = game.pending_diplomacy_actions().begin();
+		     it != game.pending_diplomacy_actions().end();) {
 			if (it->action == DiplomacyAction::kJoin || it->action == DiplomacyAction::kInvite) {
 				const TeamNumber t1 = game.player(it->sender).team_number();
 				const TeamNumber t2 = game.player(it->other).team_number();
