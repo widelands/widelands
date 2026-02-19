@@ -142,7 +142,12 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 			for (const std::string& tribe : g_fs->list_directory(dirname)) {
 				const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
 				if (g_fs->file_exists(script_path)) {
-					tribeinfos.emplace_back(lua.run_script(script_path));
+					try {
+						tribeinfos.emplace_back(lua.run_script(script_path));
+					} catch (const std::exception& e) {
+						log_warn("Failed to load add-on tribe '%s': %s\n",
+						         script_path.c_str(), e.what());
+					}
 				}
 			}
 		}
