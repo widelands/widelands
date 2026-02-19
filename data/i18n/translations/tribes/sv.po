@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-02-09 04:27+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1249,25 +1249,25 @@ msgstr "Kassavaplantage"
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:51
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:88
 #: ../../../../data/tribes/buildings/productionsites/frisians/well/init.lua:49
 msgid "working"
 msgstr "arbeta"
@@ -1324,7 +1324,7 @@ msgstr "Kassavarotkock"
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
 msgstr "baka bröd"
@@ -1465,7 +1465,7 @@ msgstr "Smältugn"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:113
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:119
 msgid "smelting gold"
 msgstr "smälta guld"
 
@@ -1728,7 +1728,7 @@ msgstr "Skeppsvarv"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:86
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:81
 msgid "constructing a ship"
 msgstr "bygga en båt"
 
@@ -1743,7 +1743,7 @@ msgstr "Stenverkstad"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:226
 msgid "making a shovel"
 msgstr "göra en skyffel"
 
@@ -1773,7 +1773,7 @@ msgstr "göra en machete"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:178
 msgid "making kitchen tools"
 msgstr "göra köksredskap"
 
@@ -1782,7 +1782,7 @@ msgstr "göra köksredskap"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:154
 msgid "making a hammer"
 msgstr "göra en hammare"
 
@@ -1793,7 +1793,7 @@ msgstr "göra en mejsel"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making needles"
 msgstr "tillverka nålar"
 
@@ -2076,7 +2076,7 @@ msgstr "Kolmila"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:69
 msgid "producing coal"
 msgstr "producera kol"
 
@@ -2454,8 +2454,8 @@ msgstr "Smältverk"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:75
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:89
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:105
 msgid "smelting iron"
 msgstr "smälta järn"
 
@@ -2467,14 +2467,14 @@ msgstr "Rökeri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:94
 msgid "smoking meat"
 msgstr "röka kött"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:95
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:82
 msgid "smoking fish"
 msgstr "röka fisk"
 
@@ -2495,7 +2495,7 @@ msgstr "Verktygssmedja"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:106
 msgid "making a bread paddle"
 msgstr "göra en brödspade"
 
@@ -2509,14 +2509,14 @@ msgstr "göra ett par hinkar"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:130
 msgid "making fire tongs"
 msgstr "göra en smidestång"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:142
 msgid "making a fishing net"
 msgstr "göra ett fisknät"
 
@@ -2547,7 +2547,7 @@ msgstr "göra en såg"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:214
 msgid "making a scythe"
 msgstr "göra en lie"
 
@@ -2884,7 +2884,7 @@ msgstr "Hjälmsmedja"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:83
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:120
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:126
 msgid "forging a helmet"
 msgstr "smida en hjälm"
 
@@ -2995,7 +2995,7 @@ msgstr "göra ett fiskespö"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:166
 msgid "making a hunting spear"
 msgstr "göra ett jaktspjut"
 
@@ -3008,7 +3008,7 @@ msgstr "Bryggstuga"
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/brewery/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
 msgid "brewing beer"
 msgstr "brygga öl"
@@ -3508,7 +3508,7 @@ msgstr "Verktygssmedja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:94
 msgid "making a basket"
 msgstr "göra en korg"
 
@@ -3656,13 +3656,13 @@ msgstr "Liten vapensmedja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:96
 msgid "forging a short sword"
 msgstr "smider ett kort svärd"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:105
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:111
 msgid "forging a long sword"
 msgstr "smider ett långt svärd"
 
@@ -3679,7 +3679,7 @@ msgid "Barracks"
 msgstr "Logement"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:73
 msgctxt "frisians_building"
 msgid "recruiting soldier"
 msgstr "rekryterar soldat"
@@ -3725,12 +3725,12 @@ msgstr "Smedja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:118
 msgid "forging a felling ax"
 msgstr "smider en avverkningsyxa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:202
 msgid "forging a pick"
 msgstr "smider en hacka"
 
@@ -3747,7 +3747,7 @@ msgid "Brick Kiln"
 msgstr "Tegelbruk"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:72
 msgid "burning bricks"
 msgstr "bränner tegelstenar"
 
@@ -4054,20 +4054,20 @@ msgid "Recycling Center"
 msgstr "Återvinningsstation"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:94
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "återvinner skinn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:106
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "återvinner järn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:118
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "återvinner järn och guld"
@@ -4144,7 +4144,7 @@ msgid "Sewing Room"
 msgstr "Syateljé"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:81
 msgid "sewing fur garment"
 msgstr "syr skinnkläder"
 
@@ -4186,12 +4186,12 @@ msgstr "Värdshus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:97
 msgid "preparing only one ration"
 msgstr "tillagar bara en matbit"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:105
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:111
 msgid "preparing rations"
 msgstr "tillagar matbitar"
 
@@ -4202,7 +4202,7 @@ msgid "Weaving Mill"
 msgstr "Väveri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:71
 msgid "weaving cloth"
 msgstr "väver tyg"
 

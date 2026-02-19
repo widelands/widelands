@@ -72,18 +72,45 @@ void CmdDiplomacy::execute(Game& game) {
 		break;
 
 	case DiplomacyAction::kJoin:
-	case DiplomacyAction::kInvite:
-		broadcast_message(
-		   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
-		                                       _("Team Joining Invitation"),
-		   format(action_ == DiplomacyAction::kJoin ?
-		             _("%1$s has requested to join the team of %2$s.") :
-		             _("%1$s has invited %2$s to join their team."),
-		          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
-		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
-		// If other_player_ is the interactive player, the IBase
-		// will open a confirmation window on next think()
-		break;
+	case DiplomacyAction::kInvite: {
+		bool fall_through_to_acceptance = false;
+		for (auto it = game.pending_diplomacy_actions().begin();
+		     it != game.pending_diplomacy_actions().end();) {
+			if (it->other == sender() && it->sender == other_player_) {
+				if (action_ == DiplomacyAction::kJoin && it->action == DiplomacyAction::kInvite) {
+					fall_through_to_acceptance = true;
+					action_ = DiplomacyAction::kAcceptInvite;
+					break;
+				}
+				if (action_ == DiplomacyAction::kInvite && it->action == DiplomacyAction::kJoin) {
+					fall_through_to_acceptance = true;
+					action_ = DiplomacyAction::kAcceptJoin;
+					break;
+				}
+			}
+
+			if (it->sender == sender() && it->other == other_player_ && it->action == action_) {
+				it = game.pending_diplomacy_actions().erase(it);
+			} else {
+				++it;
+			}
+		}
+
+		if (!fall_through_to_acceptance) {
+			broadcast_message(
+			   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
+			                                       _("Team Joining Invitation"),
+			   format(action_ == DiplomacyAction::kJoin ?
+			             _("%1$s has requested to join the team of %2$s.") :
+			             _("%1$s has invited %2$s to join their team."),
+			          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
+			game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
+
+			break;
+		}
+
+		FALLS_THROUGH;
+	}
 
 	case DiplomacyAction::kAcceptJoin:
 	case DiplomacyAction::kRefuseJoin:
@@ -168,6 +195,21 @@ void CmdDiplomacy::execute(Game& game) {
 			}
 		}
 		// If we found nothing, perhaps the command had been sent twice. Ignore.
+
+		// Clean up no-op requests and invites
+		for (auto it = game.pending_diplomacy_actions().begin();
+		     it != game.pending_diplomacy_actions().end();) {
+			if (it->action == DiplomacyAction::kJoin || it->action == DiplomacyAction::kInvite) {
+				const TeamNumber t1 = game.player(it->sender).team_number();
+				const TeamNumber t2 = game.player(it->other).team_number();
+				if (t1 == t2 && t1 != 0) {
+					it = game.pending_diplomacy_actions().erase(it);
+					continue;
+				}
+			}
+			++it;
+		}
+
 		break;
 	}
 
