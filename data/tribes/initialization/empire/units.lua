@@ -22,7 +22,9 @@ wl.Descriptions():new_tribe {
       bridge_normal_se = { hotspot = {8, 8} },
       bridge_busy_se = { hotspot = {8, 8} },
       bridge_normal_sw = { hotspot = {40, 8} },
-      bridge_busy_sw = { hotspot = {40, 8} }
+      bridge_busy_sw = { hotspot = {40, 8} },
+      bridge_pillar_normal = { hotspot = {14, 9} },
+      bridge_pillar_busy = { hotspot = {14, 9} },
    },
    spritesheets = {
       frontier = {

@@ -28,6 +28,14 @@
 
 namespace Widelands {
 
+inline bool connected_by_bridge(const FCoords& start, const FCoords& end, const int32_t dir) {
+	const WalkingDir wd = static_cast<WalkingDir>(dir);
+	if (wd == WalkingDir::WALK_E || wd == WalkingDir::WALK_SE || wd == WalkingDir::WALK_SW) {
+		return is_bridge_segment(start.field->get_road(wd));
+	}
+	return is_bridge_segment(end.field->get_road(get_backward_dir(wd)));
+}
+
 /**
  * The default constructor creates a functor that always returns \c false
  * on all checks.
@@ -79,15 +87,32 @@ bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
 CheckStepDefault
 ===============
 */
-bool CheckStepDefault::allowed(const Map& /* map */,
+bool CheckStepDefault::allowed(const Map& map,
                                const FCoords& start,
                                const FCoords& end,
-                               int32_t /* dir */,
+                               int32_t dir,
                                CheckStep::StepId id) const {
 	NodeCaps const endcaps = end.field->nodecaps();
+	NodeCaps const startcaps = start.field->nodecaps();
 
 	if ((endcaps & movecaps_) != 0) {
 		return true;
+	}
+
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		// Maybe there's a bridge
+		if ((endcaps & BUILDCAPS_BRIDGE) == 0) {
+			return false;
+		}
+		if (connected_by_bridge(start, end, dir)) {
+			return true;
+		}
+
+		// Let carriers escape dismantled bridges if there's no other way
+		if ((startcaps & BUILDCAPS_BRIDGE) == 0) {
+			return false;
+		}
+		return !map.has_bridge(start);
 	}
 
 	// Swimming bobs are allowed to move from a water field to a shore field as the last step.
@@ -95,23 +120,32 @@ bool CheckStepDefault::allowed(const Map& /* map */,
 		return false;
 	}
 
-	NodeCaps const startcaps = start.field->nodecaps();
 	return (startcaps & movecaps_ & MOVECAPS_SWIM) != 0;
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if ((caps & movecaps_) == 0) {
-		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
-			return false;
-		}
-		if (!map.can_reach_by_water(dest)) {
-			return false;
-		}
+	if ((caps & movecaps_) != 0) {
+		return true;
 	}
 
-	return true;
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		// Maybe there's a bridge
+		if ((caps & BUILDCAPS_BRIDGE) == 0) {
+			return false;
+		}
+
+		// Only bridge segments should be possible here...
+		return map.has_bridge(dest);
+	}
+
+	assert((movecaps_ & MOVECAPS_SWIM) != 0);
+	if ((caps & MOVECAPS_WALK) == 0) {
+		// Impassable terrain
+		return false;
+	}
+	return map.can_reach_by_water(dest);
 }
 
 /*
@@ -191,13 +225,19 @@ CheckStepWalkOn
 bool CheckStepWalkOn::allowed(const Map& /* map */,
                               const FCoords& start,
                               const FCoords& end,
-                              int32_t /* dir */,
+                              int32_t dir,
                               CheckStep::StepId const id) const {
 	NodeCaps const startcaps = start.field->nodecaps();
 	NodeCaps const endcaps = end.field->nodecaps();
 
+	if ((movecaps_ & MOVECAPS_WALK) != 0 &&
+	    ((startcaps & BUILDCAPS_BRIDGE) != 0 || (endcaps & BUILDCAPS_BRIDGE) != 0)) {
+		// Bridgeable nodes must be accessed on bridges
+		return connected_by_bridge(start, end, dir);
+	}
+
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
-	//  then back onto a walkable node.
+	//  back onto a walkable node.
 	if (!onlyend_ && id != CheckStep::stepFirst && ((startcaps & movecaps_) == 0)) {
 		return false;
 	}
@@ -231,11 +271,20 @@ bool CheckStepRoad::allowed(const Map& map,
                             CheckStep::StepId const id) const {
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
-	// Calculate cost and passability
-	if (((endcaps & movecaps_) == 0) &&
-	    (((endcaps & MOVECAPS_WALK) == 0) ||
-	     ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) == 0))) {
-		return false;
+	// Check passability
+	if ((endcaps & movecaps_) == 0) {
+		// Check exceptions
+		if ((movecaps_ & MOVECAPS_WALK) != 0) {
+			if ((endcaps & BUILDCAPS_BRIDGE) == 0) {
+				return false;
+			}
+		} else {
+			assert((movecaps_ & MOVECAPS_SWIM) != 0);
+			if (((endcaps & MOVECAPS_WALK) == 0) ||
+			    ((player_.get_buildcaps(start) & MOVECAPS_SWIM) == 0)) {
+				return false;
+			}
+		}
 	}
 
 	// Check for blocking immovables
@@ -255,16 +304,17 @@ bool CheckStepRoad::allowed(const Map& map,
 bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if ((caps & movecaps_) == 0) {
-		if (((movecaps_ & MOVECAPS_SWIM) == 0) || ((caps & MOVECAPS_WALK) == 0)) {
-			return false;
-		}
-		if (!map.can_reach_by_water(dest)) {
-			return false;
-		}
+	if ((caps & movecaps_) != 0) {
+		// We got what we look for
+		return true;
 	}
 
-	return true;
+	if ((movecaps_ & MOVECAPS_WALK) != 0) {
+		return (caps & BUILDCAPS_BRIDGE) != 0;
+	}
+
+	assert((movecaps_ & MOVECAPS_SWIM) != 0);
+	return map.can_reach_by_water(dest);
 }
 
 bool CheckStepLimited::allowed(const Map& /* map */,

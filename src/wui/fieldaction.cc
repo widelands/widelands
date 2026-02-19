@@ -442,10 +442,15 @@ void FieldActionWindow::add_buttons_auto() {
 			if (can_act) {
 				add_button(buildbox, "build_road", kImgButtonBuildRoad,
 				           &FieldActionWindow::act_buildroad, _("Build road"));
-				if (map_.get_waterway_max_length() >= 2 &&
-				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
-					add_button(buildbox, "build_waterway", kImgButtonBuildWaterway,
-					           &FieldActionWindow::act_buildwaterway, _("Build waterway"));
+				if (map_.get_waterway_max_length() >= 2) {
+					Widelands::CheckStepAnd cs = Widelands::CheckStepAnd();
+					cs.add(Widelands::CheckStepRoad(ipl->player(), Widelands::MOVECAPS_SWIM));
+					cs.add(Widelands::CheckStepFerry(igbase->egbase()));
+
+					if (Widelands::CheckStep(cs).reachable_dest(map_, node_)) {
+						add_button(buildbox, "build_waterway", kImgButtonBuildWaterway,
+						           &FieldActionWindow::act_buildwaterway, _("Build waterway"));
+					}
 				}
 
 				Building* const building = flag->get_building();
@@ -1211,9 +1216,11 @@ void show_field_action(InteractiveBase* const ibase,
 				w.add_buttons_road(target != ibase->get_build_road_start() &&
 				                   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			} else {
-				w.add_buttons_waterway(
-				   target != ibase->get_build_road_start() &&
-				   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
+				const Widelands::NodeCaps caps = player->get_buildcaps(target);
+				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
+				                       ((caps & Widelands::BUILDCAPS_FLAG) != 0) &&
+				                       // Don't allow joining waterways to bridges or other waterways
+				                       ((caps & Widelands::MOVECAPS_SWIM) == 0));
 			}
 			w.init();
 			return;

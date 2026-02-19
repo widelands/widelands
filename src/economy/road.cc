@@ -384,8 +384,8 @@ bool Road::notify_ware(Game& game, FlagId const flagid) {
 	return false;
 }
 
-// This returns true if and only if this is road covers the specified edge and
-// both triangles adjacent to that edge are unwalkable
+// This returns true if and only if this road covers the specified edge and
+// both triangles adjacent to that edge are water or unwalkable
 bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t dir) const {
 	const Map& map = egbase.map();
 
@@ -439,9 +439,9 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 		NEVER_HERE();
 	}
 	return ((egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
-	         TerrainDescription::Is::kUnwalkable) != 0) &&
+	         (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable)) != 0) &&
 	       ((egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
-	         TerrainDescription::Is::kUnwalkable) != 0);
+	         (TerrainDescription::Is::kWater | TerrainDescription::Is::kUnwalkable)) != 0);
 }
 
 /**
