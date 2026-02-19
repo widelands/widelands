@@ -77,13 +77,10 @@ print_help () {
     echo "                      unless overridden locally."
     echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
-    if which g++ >/dev/null; then # gcc specific
-    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
-    echo "                      even if available."
+    echo "-c or --no-cross-opt  Do not use link-time optimization, even if available."
     echo "+c or --with-cross-opt"
-    echo "                      Use cross compile unit optimization if available."
+    echo "                      Use link-time optimization."
     echo " "
-    fi
     echo "--gcc                 Try to build with GCC rather than the system default."
     echo "                      If you built with Clang before, you will have to clean"
     echo "                      your build directory before switching compilers."
@@ -121,7 +118,6 @@ print_help () {
 BUILD_WEBSITE="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
-USE_FLTO="yes"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
@@ -239,11 +235,11 @@ do
     shift
     ;;
     -c|--no-cross-opt)
-      USE_FLTO="no"
+      USE_FLTO="OFF"
     shift
     ;;
     +c|--with-cross-opt)
-      USE_FLTO="yes"
+      USE_FLTO="ON"
     shift
     ;;
     -s|--skip-tests)
@@ -391,12 +387,16 @@ else
 fi
 echo " "
 
-if [ $USE_FLTO = "yes" ]; then
-  echo "Using cross compile unit optimization if available."
+if [ "x$USE_FLTO" = "xON" ]; then
+  echo "Using link-time optimization."
   CMD_ADD "--with-cross-opt"
-else
-  echo "Not using cross compile unit optimization."
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=ON"
+elif [ "x$USE_FLTO" = "xOFF" ]; then
+  echo "Not using link-time optimization."
   CMD_ADD "--no-cross-opt"
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=OFF"
+else
+  echo "Autodetect link-time optimization availability."
 fi
 echo " "
 
@@ -534,7 +534,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
                -DUSE_XDG=$USE_XDG                              \
-               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+               $FLTO_STRING
 
     $RUN $buildtool -j $CORES
 
