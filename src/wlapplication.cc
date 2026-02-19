@@ -401,10 +401,31 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #endif
 
 	// Start the SDL core
+#ifdef __linux__
+#if SDL_VERSION_ATLEAST(2, 0, 22)
+	// TODO(tothxa): Looks like SDL only tries the X11 video driver on its own?
+	//               But other programs can detect even KMSDRM without user action.
+	//               How do they do it?
+	// Try the reasonable drivers, but allow setting offscreen too using the environment
+	// variable.
+	// The environment variable works with older SDL versions too, but it only became a
+	// hint in 2.0.22.
+	if (SDL_GetHint(SDL_HINT_VIDEODRIVER) == nullptr) {
+		// If somebody uses Wayland, we can presume they prefer it, but SDL doesn't...
+		SDL_SetHint(SDL_HINT_VIDEODRIVER, "wayland,x11,KMSDRM");
+	}
+#endif
+#endif
 	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
-		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
-		// too frequent failures
+		// We sometimes run into a missing video driver in our CI environment, so we use exit code 2
+		// to let it know and so prevent too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		log_info(
+		   "You may try to use another driver by setting the SDL_VIDEODRIVER environment variable.");
+		log_info("Video drivers supported by your SDL version:");
+		for (int i = 0; i < SDL_GetNumVideoDrivers(); ++i) {
+			log_info("   %s", SDL_GetVideoDriver(i));
+		}
 		exit(2);
 	}
 
