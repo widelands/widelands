@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-02-09 04:27+0000\n"
+"POT-Creation-Date: 2026-02-19 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: CansecoGPC, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -3096,217 +3096,217 @@ msgid "Your ship has arrived at its destination."
 msgstr "Tu barco ha llegado a su destino."
 
 #. * TRANSLATORS: Ship fleets had to be split
-#: ../../../../src/logic/map_objects/tribes/ship.cc:600
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+#: ../../../../src/logic/map_objects/tribes/ship.cc:595
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2238
 msgctxt "ship"
 msgid "Fleet split"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:600
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2235
+#: ../../../../src/logic/map_objects/tribes/ship.cc:595
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2238
 msgid "Ship Fleet split"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:601
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2236
+#: ../../../../src/logic/map_objects/tribes/ship.cc:596
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2239
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:661
+#: ../../../../src/logic/map_objects/tribes/ship.cc:656
 msgid "A warship arrived at a known port build space."
 msgstr "Un barco de guerra ha llegado a un espacio de construcción de un puerto conocido."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:662
+#: ../../../../src/logic/map_objects/tribes/ship.cc:657
 msgid "An expedition ship arrived at a known port build space."
 msgstr "Un barco de exploración ha llegado a un espacio de construcción de un puerto conocido."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:663
-#: ../../../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../../../src/logic/map_objects/tribes/ship.cc:658
+#: ../../../../src/logic/map_objects/tribes/ship.cc:666
 msgid "Port Space"
 msgstr "Espacio para Puerto"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:663
+#: ../../../../src/logic/map_objects/tribes/ship.cc:658
 msgid "Port Space Spotted"
 msgstr "Espacio de Puerto Avistado"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:669
+#: ../../../../src/logic/map_objects/tribes/ship.cc:664
 msgid "A warship found a new port build space."
 msgstr "Un barco de guerra ha encontrado un nuevo espacio de construcción en el puerto."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:670
+#: ../../../../src/logic/map_objects/tribes/ship.cc:665
 msgid "An expedition ship found a new port build space."
 msgstr "Un barco de expedición ha encontrado un espacio de construcción para un puerto."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:671
+#: ../../../../src/logic/map_objects/tribes/ship.cc:666
 msgid "Port Space Found"
 msgstr "Se ha encontrado Espacio para un Puerto"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:771
+#: ../../../../src/logic/map_objects/tribes/ship.cc:766
 msgid "Enemy Ship"
 msgstr "Barco Enemigo"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:771
+#: ../../../../src/logic/map_objects/tribes/ship.cc:766
 msgid "Enemy Ship Spotted"
 msgstr "Barco Enemigo Avistado"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:772
+#: ../../../../src/logic/map_objects/tribes/ship.cc:767
 msgid "A warship spotted an enemy ship."
 msgstr "Un barco de guerra avisto un barco enemigo."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:802
-#: ../../../../src/logic/map_objects/tribes/ship.cc:821
+#: ../../../../src/logic/map_objects/tribes/ship.cc:797
+#: ../../../../src/logic/map_objects/tribes/ship.cc:816
 msgid "Destination Unreachable"
 msgstr "Destino Inalcanzable"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:802
-#: ../../../../src/logic/map_objects/tribes/ship.cc:821
+#: ../../../../src/logic/map_objects/tribes/ship.cc:797
+#: ../../../../src/logic/map_objects/tribes/ship.cc:816
 msgid "Ship Destination Unreachable"
 msgstr "Destino del Barco Inalcanzable"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:803
+#: ../../../../src/logic/map_objects/tribes/ship.cc:798
 msgid "Your ship could not find a path to its destination."
 msgstr "Tu barco no pudo encontrar un camino hacia su destino."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:822
+#: ../../../../src/logic/map_objects/tribes/ship.cc:817
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
 msgstr "Tu barco no pudo encontrar un camino hacia su puerto destino ‘%s’."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1619
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1335
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1618
 msgid "Enemy Ship Attacking"
 msgstr "Barco Enemigo Atacando"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1618
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1335
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1617
 msgid "Naval Attack"
 msgstr "Ataque Naval"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1337
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr "Tu barco ‘%s’ esta siendo atacado por un barco de guerra."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1455
 msgid "Ship Destroyed"
 msgstr "Barco Destruido"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1455
 msgid "Ship Sunk"
 msgstr "Barco Hundido"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1457
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
 msgid "An enemy ship has destroyed your warship."
 msgstr "Un barco enemigo ha destruido tu barco de guerra."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1620
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1619
 msgid "Your coast is under attack from an enemy warship."
 msgstr "Tu costa esta bajo el asedio de un barco de guerra enemigo."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1855
 msgid "Island Circumnavigated"
 msgstr "Isla Circunnavegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1852
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1855
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Esperando"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1853
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1856
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Un barco de expedición ha navegado alrededor de su isla sin eventos."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
 msgid "Coast Reached"
 msgstr "Costa Alcanzada"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1918
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1921
 msgid "Land Ahoy!"
 msgstr "¡Tierra Adelante!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1919
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1922
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un barco de expedición ha llegado a la costa y espera órdenes."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1975
 msgid "New port construction site is gone"
 msgstr "El sitio de construcción del nuevo puerto ya no existe"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1972
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1975
 msgid "Port Lost!"
 msgstr "¡Puerto Perdido!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1973
+#: ../../../../src/logic/map_objects/tribes/ship.cc:1976
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Descarga de productos fallida, la expedición es cancelada."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2033
 msgid "No Port Can Be Built"
 msgstr "No se Puede Construir Puertos"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2030
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2033
 msgid "Port Space Lost!"
 msgstr "¡Espacio para Puerto Perdido!"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2031
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2034
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Un espacio de construcción de puerto descubierto ya no está disponible para construir un puerto."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2287
 msgctxt "ship"
 msgid "Warship"
 msgstr "Barco de Guerra"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2287
 msgid "Warship Ready"
 msgstr "Barco de Guerra Listo"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2285
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2288
 msgid "A warship is waiting for your commands."
 msgstr "Un barco de guerra espera tus ordenes."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2293
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedición"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2290
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2293
 msgid "Expedition Ready"
 msgstr "Expedición Lista"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2291
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2294
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un barco de expedición espera tus órdenes."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2468
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2471
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Hundiendose"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2470
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2473
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Luchando"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2474
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Reconvertir a Barco de Transporte"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2477
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2480
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Reconvertir a Barco de Guerra"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2485
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2488
 #: ../../../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -3318,10 +3318,10 @@ msgstr "Barco de Guerra"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2491
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2501
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2507
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2521
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2494
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2504
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2510
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2524
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -3329,7 +3329,7 @@ msgstr "Navegando hacia %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2496
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2499
 #: ../../../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -3337,7 +3337,7 @@ msgstr "Vacío"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2516
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2519
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -3345,7 +3345,7 @@ msgstr "Partiendo de %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2528
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2531
 #: ../../../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -3353,14 +3353,14 @@ msgstr "Esperando"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2532
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2535
 #: ../../../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Explorando"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2536
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2539
 #: ../../../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -3369,7 +3369,7 @@ msgstr "Se ha encontrado Espacio para un Puerto"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2541
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2544
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundando una Colonia"
