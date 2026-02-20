@@ -38,6 +38,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "base/backtrace_provider.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -255,8 +256,6 @@ private:
 
 }  // namespace
 
-std::string WLApplication::segfault_backtrace_dir;
-
 // Set up the homedir. Exit 1 if the homedir is illegal or the logger couldn't be initialized for
 // Windows.
 // Also sets the config directory. This defaults to $XDG_CONFIG_HOME/widelands/config on Unix.
@@ -315,9 +314,7 @@ void WLApplication::setup_homedir() {
 		g_fs->ensure_directory_exists(kDownloadedMapsDirFull);
 
 		g_fs->ensure_directory_exists(kCrashDir);
-		segfault_backtrace_dir = homedir_;
-		segfault_backtrace_dir += "/";
-		segfault_backtrace_dir += kCrashDir;
+		BacktraceProvider::set_crash_dir(homedir_);
 	}
 
 #ifdef USE_XDG
@@ -1959,6 +1956,9 @@ void WLApplication::handle_commandline_parameters() {
 			}
 		}
 	}
+
+	// Handling of this flag is done earlier in main()
+	check_commandline_flag("no-error-handling");
 
 	// If it hasn't been handled yet it's probably an attempt to
 	// override a conffile setting

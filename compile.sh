@@ -61,6 +61,12 @@ print_help () {
     echo "                      Can only be used with --no-asan, because AddressSanitizer"
     echo "                      cannot be enabled at the same time."
     echo " "
+    echo "-i or --no-min-dbg    Standard size of debugging info (default)."
+    echo "+i or --with-min-dbg  Minimal size of debugging info."
+    echo " "
+    echo "-p or --no-cpptrace   Switch off crash handling by cpptrace (default)."
+    echo "+p or --with-cpptrace Switch on crash handling by cpptrace."
+    echo " "
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
@@ -125,6 +131,8 @@ USE_FLTO="yes"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
+MIN_DEBUG="OFF"
+USE_CPPTRACE="OFF"
 COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
@@ -190,6 +198,22 @@ do
     ;;
     +m|--with-tsan)
       USE_TSAN="ON"
+    shift
+    ;;
+    -i|--no-min-dbg)
+      MIN_DEBUG="OFF"
+    shift
+    ;;
+    +i|--with-min-dbg)
+      MIN_DEBUG="ON"
+    shift
+    ;;
+    -p|--no-cpptrace)
+      USE_CPPTRACE="OFF"
+    shift
+    ;;
+    +p|--with-cpptrace)
+      USE_CPPTRACE="ON"
     shift
     ;;
     -h|--help)
@@ -457,6 +481,24 @@ else
   echo "You can use +m or --with-tsan to switch it on."
   CMD_ADD "--no-tsan"
 fi
+if [ $MIN_DEBUG = "ON" ]; then
+  if [ $BUILD_TYPE != "Release" ]; then
+    echo "Will build with minimal debugging info."
+  fi
+  CMD_ADD "--with-min-dbg"
+else
+  if [ $BUILD_TYPE != "Release" ]; then
+    echo "Will build with standard debugging info."
+  fi
+  CMD_ADD "--no-min-dbg"
+fi
+if [ $USE_CPPTRACE = "ON" ]; then
+  echo "Will build with cpptrace library."
+  CMD_ADD "--with-cpptrace"
+else
+  echo "Will build without cpptrace library."
+  CMD_ADD "--no-cpptrace"
+fi
 if [ $USE_XDG = "ON" ]; then
   echo " "
   echo "Basic XDG Base Directory Specification will be used on Linux"
@@ -533,6 +575,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
+               -DOPTION_MINIMAL_DEBUG_INFO=$MIN_DEBUG          \
+               -DOPTION_CPPTRACE=$USE_CPPTRACE                 \
                -DUSE_XDG=$USE_XDG                              \
                -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
@@ -658,6 +702,10 @@ if [ $BUILD_TESTS = "ON" ]; then
   echo "# - Tests                                                 #"
 else
   echo "# - No tests                                              #"
+fi
+
+if [ $USE_CPPTRACE = "ON" ]; then
+  echo "# - Crash handling by cpptrace                            #"
 fi
 
 if [ $USE_XDG = "ON" ]; then
