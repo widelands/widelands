@@ -160,7 +160,7 @@ if(OPTION_CPPTRACE)
     FetchContent_Declare(
       cpptrace
       GIT_REPOSITORY https://github.com/gpalino/cpptrace.git
-      GIT_TAG        644544b567ba379c83bf180e8b20cb3d2f8030fd
+      GIT_TAG        cf82c4750e58ea1ea943d1593c54bb1119ad281d
     )
     FetchContent_MakeAvailable(cpptrace)
     message(STATUS "Adding crash self-diagnosis handler using downloaded cpptrace.")
