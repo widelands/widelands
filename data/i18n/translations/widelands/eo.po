@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-02-19 04:22+0000\n"
+"POT-Creation-Date: 2026-02-21 04:10+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -306,61 +306,61 @@ msgstr "Ludanto forlasas la teamon"
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr "%1$s forlasis teamon %2$u kaj nun estas senteama."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:77
+#: ../../../../src/commands/cmd_diplomacy.cc:101
 msgid "Team Joining Request"
 msgstr "Teama aliĝo-peto"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:78
+#: ../../../../src/commands/cmd_diplomacy.cc:102
 msgid "Team Joining Invitation"
 msgstr "Teama aliĝo-invito"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:80
+#: ../../../../src/commands/cmd_diplomacy.cc:104
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr "%1$s petis aliĝi al la teamo de %2$s."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:81
+#: ../../../../src/commands/cmd_diplomacy.cc:105
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr "%1$s invitis %2$s aliĝi al sia teamo."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:120
+#: ../../../../src/commands/cmd_diplomacy.cc:147
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr "%1$s akceptis %2$s en sian teamon."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:122
+#: ../../../../src/commands/cmd_diplomacy.cc:149
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr "%1$s akceptis la inviton por aliĝi al la teamo de %2$s."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:127
+#: ../../../../src/commands/cmd_diplomacy.cc:154
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
 msgstr "%1$s reprenis la peton por aliĝi al la teamo de %2$s."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:129
+#: ../../../../src/commands/cmd_diplomacy.cc:156
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr "%1$s rifuzis la membrecon de %2$s en sia teamo."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:132
+#: ../../../../src/commands/cmd_diplomacy.cc:159
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
 msgstr "%1$s reprenis la inviton al %2$s por aliĝi al sia teamo."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:134
+#: ../../../../src/commands/cmd_diplomacy.cc:161
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr "%1$s rifuzis la inviton por aliĝi al la teamo de %2$s."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:138
+#: ../../../../src/commands/cmd_diplomacy.cc:165
 msgid "Team Change Accepted"
 msgstr "Teama ŝanĝo akceptita"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:138
+#: ../../../../src/commands/cmd_diplomacy.cc:165
 msgid "Team Change Rejected"
 msgstr "Teama ŝanĝo rifuzita"
 
