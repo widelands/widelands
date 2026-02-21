@@ -22,13 +22,21 @@ wl.Descriptions():new_productionsite_type {
 
    animation_directory = dirname,
    animations = { unoccupied = {hotspot = {92, 73}}},
-   spritesheets = { idle = {
-      hotspot = {92, 112},
-      fps = 8,
-      frames = 4,
-      columns = 2,
-      rows = 2
-   }},
+   spritesheets = {
+      build = {
+         hotspot = {92, 73},
+         frames = 3,
+         columns = 3,
+         rows = 1
+      },
+      idle = {
+         hotspot = {92, 112},
+         fps = 8,
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
+   },
 
    aihints = {
       space_consumer = true,
