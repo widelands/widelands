@@ -23,6 +23,7 @@
 #include "scripting/lua_root_notifications.h"
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_flag.h"
+#include "scripting/ui/lua_timer.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -56,6 +57,8 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, set_keyboard_shortcut),
    METHOD(LuaMapView, set_keyboard_shortcut_release),
    METHOD(LuaMapView, add_plugin_timer),
+   METHOD(LuaMapView, get_plugin_timer),
+   METHOD(LuaMapView, remove_plugin_timer),
    METHOD(LuaMapView, subscribe_to_jump),
    METHOD(LuaMapView, subscribe_to_changeview),
    METHOD(LuaMapView, subscribe_to_track_selection),
@@ -72,6 +75,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
    PROP_RO(LuaMapView, toolbar),
+   PROP_RO(LuaMapView, plugin_timers),
    {nullptr, nullptr, nullptr},
 };
 
@@ -201,6 +205,28 @@ int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
 */
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, static_cast<int>(get()->map_view()->is_animating()));
+	return 1;
+}
+
+/* RST
+   .. attribute:: plugin_timers
+
+      .. versionadded:: 1.4
+
+      (RO) An :class:`array` of all registered :class:`~wl.ui.Timer` instances.
+
+      :see also: :meth:`add_plugin_timer`
+      :see also: :meth:`get_plugin_timer`
+      :see also: :meth:`remove_plugin_timer`
+*/
+int LuaMapView::get_plugin_timers(lua_State* L) {
+	lua_newtable(L);
+	int i = 1;
+	for (auto& timer : get_egbase(L).get_ibase()->get_plugin_actions().all_timers()) {
+		lua_pushint32(L, i++);
+		to_lua<LuaTimer>(L, new LuaTimer(timer.get()));
+		lua_rawset(L, -3);
+	}
 	return 1;
 }
 
@@ -483,9 +509,12 @@ int LuaMapView::set_keyboard_shortcut_release(lua_State* L) {
 }
 
 /* RST
-   .. method:: add_plugin_timer(action, interval[, failsafe=true])
+   .. method:: add_plugin_timer(action, interval[, name=""[, count=0]][, failsafe=true])
 
       .. versionadded:: 1.2
+
+      .. versionchanged:: 1.4
+         Added ``name`` and ``count`` parameters and added return type.
 
       Register a piece of code that will be run periodically as long as the game/editor is running.
 
@@ -493,21 +522,118 @@ int LuaMapView::set_keyboard_shortcut_release(lua_State* L) {
       :type action: :class:`string`
       :arg interval: The interval in milliseconds realtime in which the code will be invoked.
       :type interval: :class:`int`
+      :arg name: The internal name of the timer. Names do not have to be unique.
+      :type name: :class:`string`
+      :arg count: The number of runs after which the timer will be deactivated.
+         Use ``0`` for an endless timer.
+      :type count: :class:`int`
       :arg failsafe: In event of an error, an error message is shown and the timer is removed.
          If this is set to :const:`false`, the game will be aborted with no error handling instead.
       :type failsafe: :class:`boolean`
+      :returns: :class:`wl.ui.Timer`
+
+      :see also: :attr:`plugin_timers`
+      :see also: :meth:`get_plugin_timer`
+      :see also: :meth:`remove_plugin_timer`
 */
 int LuaMapView::add_plugin_timer(lua_State* L) {
 	std::string action = luaL_checkstring(L, 2);
 	uint32_t interval = luaL_checkuint32(L, 3);
-	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
+
+	std::string name;
+	int count = 0;
+	bool failsafe = true;
+
+	if (const int top = lua_gettop(L); top >= 4) {
+		if (lua_isboolean(L, 4)) {
+			failsafe = luaL_checkboolean(L, 4);
+		} else {
+			name = luaL_checkstring(L, 4);
+		}
+		if (top >= 5) {
+			count = luaL_checkuint32(L, 5);
+			if (top >= 6) {
+				failsafe = luaL_checkboolean(L, 6);
+			}
+		}
+	}
 
 	if (interval == 0) {
 		report_error(L, "Timer interval must be non-zero");
 	}
 
-	get_egbase(L).get_ibase()->add_plugin_timer(action, interval, failsafe);
-	return 0;
+	PluginActions::Timer& timer =
+	   get_egbase(L).get_ibase()->add_plugin_timer(name, action, interval, count, true, failsafe);
+	to_lua<LuaTimer>(L, new LuaTimer(&timer));
+	return 1;
+}
+
+/* RST
+   .. method:: get_plugin_timer(name)
+
+      .. versionadded:: 1.4
+
+      Find a timer by its internal name.
+      If multiple timers with the name exist, the first one is returned.
+      If no timer with the name exists, :const:`nil` is returned.
+
+      :arg name: The internal name of the timer to find.
+      :type name: :class:`string`
+      :returns: :class:`wl.ui.Timer`
+
+      :see also: :attr:`plugin_timers`
+      :see also: :meth:`add_plugin_timer`
+      :see also: :meth:`remove_plugin_timer`
+*/
+int LuaMapView::get_plugin_timer(lua_State* L) {
+	PluginActions::Timer* timer =
+	   get_egbase(L).get_ibase()->get_plugin_actions().get_timer(luaL_checkstring(L, 2));
+	if (timer != nullptr) {
+		to_lua<LuaTimer>(L, new LuaTimer(timer));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: remove_plugin_timer([name = nil[, only_first = false]])
+
+      .. versionadded:: 1.4
+
+      Remove one or several plugin timers.
+
+      If the parameter ``only_first`` is set to :const:`true`,
+      only the first timer matching the name (if any) will be removed;
+      otherwise, all matching timers are removed.
+      ``only_first`` may only be used if a ``name`` is provided.
+
+      If ``name`` is not :const:`nil`, this method looks for a timer with the given internal name;
+      otherwise all timers are matched.
+
+      The method returns the total number of timers removed.
+
+      :arg name: The internal name of the timer to remove, or :const:`nil` for any.
+      :type name: :class:`string`
+      :arg only_first: Whether to remove at most one timer.
+      :type only_first: :class:`boolean`
+      :returns: :class:`int`
+
+      :see also: :attr:`plugin_timers`
+      :see also: :meth:`add_plugin_timer`
+      :see also: :meth:`get_plugin_timer`
+*/
+int LuaMapView::remove_plugin_timer(lua_State* L) {
+	const bool only_first = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
+	std::optional<std::string> name;
+	if (lua_gettop(L) >= 2 && !lua_isnil(L, 2)) {
+		name = luaL_checkstring(L, 2);
+	} else if (only_first) {
+		report_error(L, "Cannot remove first plugin timer if no name is given");
+	}
+	lua_pushuint32(
+	   L, get_egbase(L).get_ibase()->get_plugin_actions().remove_timer(name, only_first));
+	return 1;
 }
 
 /* RST

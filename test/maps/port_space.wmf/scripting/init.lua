@@ -38,7 +38,7 @@ function wait_for_message(title)
    sleep(5000)
 end
 
-function create_infrastructure(tower_x, tower_y)
+function create_infrastructure(tower_x, tower_y, no_expedition)
    p1:allow_workers("all")
    p1.see_all = true
 
@@ -76,6 +76,9 @@ function create_infrastructure(tower_x, tower_y)
          workers = {
             barbarians_builder = 1,
          },
+         soldiers = {
+            [{3,5,0,2}] = 100,
+         },
       }
    )
    local ship = p1:place_ship(map:get_field(9, 13))
@@ -83,9 +86,11 @@ function create_infrastructure(tower_x, tower_y)
    local port = map:get_field(13, 14).immovable
 
    game.desired_speed = 100 * 1000
-   port:start_expedition()
-   wait_for_message("Expedition")
-   ship.scouting_direction = "nw"
+   if not no_expedition then
+      port:start_expedition()
+      wait_for_message("Expedition")
+      ship.scouting_direction = "nw"
+   end
 
    return ship
 end

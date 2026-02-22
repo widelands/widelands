@@ -352,10 +352,26 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-12-21" version="1.4~git">
+    <release date="2026-02-22" version="1.4~git">
       <description><ul>
       </ul></description>
       <url type="details">https://codeberg.org/wl/widelands/milestone/6040?type=all&amp;amp;state=closed&amp;amp;sort=recentupdate</url>
+    </release>
+    <release date="2026-02-22" version="1.3.1">
+      <description><ul>
+        <li>Bugfix release</li>
+        <li xml:lang="cs">Výpis chyb skriptu</li>
+        <li xml:lang="de">Fehlerbehebung</li>
+        <li xml:lang="fr">Version de correction de bugs</li>
+        <li xml:lang="hu">Hibajavító kiadás</li>
+        <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
+        <li xml:lang="nl">Bugfix-bericht</li>
+        <li xml:lang="nn">Feilrettingsutgåve</li>
+        <li xml:lang="pl">Wydanie poprawkowe</li>
+        <li xml:lang="pt_BR">Lançamento de correção de bugs</li>
+        <li xml:lang="sk">Vydanie opravy chýb</li>
+      </ul></description>
+      <url type="details">https://www.widelands.org/news/2026/Feb/22/widelands-1-3-1-released/</url>
     </release>
     <release date="2025-12-21" version="1.3">
       <description><ul>
