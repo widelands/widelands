@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Vydanie opravy chýb"
+		],
 		"1.3": [
 			"Obchodovanie v tržnici",
 			"Pridaných 6 nových máp a 3 staré odstránené",
