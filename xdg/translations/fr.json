@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Version de correction de bugs"
+		],
 		"1.3": [
 			"Négociation sur le marché",
 			"Six nouvelles cartes ont été ajoutées et trois anciennes cartes ont été retirées",

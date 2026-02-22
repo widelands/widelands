@@ -5,6 +5,13 @@
 [More info](https://codeberg.org/wl/widelands/milestone/6040?type=all&amp;state=closed&amp;sort=recentupdate)
 
 
+## Widelands 1.3.1
+
+ - Bugfix release
+
+[More info](https://www.widelands.org/news/2026/Feb/22/widelands-1-3-1-released/)
+
+
 ## Widelands 1.3
 
  - Market trading
