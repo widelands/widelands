@@ -229,6 +229,8 @@ wl_library(scripting_logic
     ui/lua_textarea.h
     ui/lua_text_input_panel.cc
     ui/lua_text_input_panel.h
+    ui/lua_timer.cc
+    ui/lua_timer.h
     ui/lua_ui_helper_functions.cc
     ui/lua_ui_helper_functions.h
     ui/lua_window.cc
@@ -265,5 +267,6 @@ wl_library(scripting_logic
     ui_fsmenu
     widelands_options
     wui
+    wui_common_plugins
     wui_mapview_pixelfunctions
 )

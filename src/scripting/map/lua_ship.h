@@ -42,8 +42,10 @@ public:
 	int get_debug_worker_economy(lua_State* L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
+	int set_destination(lua_State* L);
 	int get_state(lua_State* L);
 	int get_type(lua_State* L);
+	int set_type(lua_State* L);
 	int get_scouting_direction(lua_State* L);
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
@@ -52,6 +54,12 @@ public:
 	int set_shipname(lua_State* L);
 	int get_capacity(lua_State* L);
 	int set_capacity(lua_State* L);
+	int get_min_warship_soldier_capacity(lua_State* L);
+	int get_warship_soldier_capacity(lua_State* L);
+	int set_warship_soldier_capacity(lua_State* L);
+	int get_hitpoints(lua_State* L);
+	int set_hitpoints(lua_State* L);
+
 	/*
 	 * Lua methods
 	 */
@@ -60,6 +68,8 @@ public:
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
 	int refit(lua_State* L);
+	int attack(lua_State* L);
+	int invade(lua_State* L);
 
 	/*
 	 * C methods
