@@ -357,13 +357,11 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 	//       which would then also work with errno instead of GetLastError(),
 	//       but I am not sure if this is available (and works properly)
 	//       on all windows platforms or only with Visual Studio.
-	CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	if (!CreateDirectory(fspath.c_str(), NULL)) {
+	if (!CreateDirectory(fspath.c_str(), nullptr)) {
 		throw FileError(
 		   "RealFSImpl::make_directory", fspath,
 		   std::string("file error (Windows error code ") + std::to_string(GetLastError()) + ")");
 	}
-	CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 // TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
@@ -567,13 +565,11 @@ unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
 
-	CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
+	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, nullptr, nullptr) ?
 	          // If more than 2G free space report that much
 	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
 	                                   freeavailable.LowPart :
 	          0;
-	CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 #else
 	struct statvfs svfs;
 	if (statvfs(root_.c_str(), &svfs) != -1) {

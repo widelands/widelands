@@ -192,7 +192,8 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorToolHistory,
 	kEditorUndo,
 	kEditorRedo,
-	kEditorTools_End = kEditorRedo,
+	kEditorPicker,
+	kEditorTools_End = kEditorPicker,
 
 	// These will be grouped to one line in the in-editor help
 	kEditorToolsize1,

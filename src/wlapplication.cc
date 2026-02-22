@@ -827,6 +827,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 		return;
 	}
 
+	const uint32_t random_seed = section.get_natural("random_seed", RNG::static_rand());
+
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
@@ -907,6 +909,7 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	}
 
 	Widelands::Game game;
+	game.logic_rand_seed(random_seed);
 	std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 	if (settings->has_players_tribe()) {
 		tipstexts.push_back(settings->get_players_tribe());

@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Výpis chyb skriptu"
+		],
 		"1.3": [
 			"Obchodování",
 			"Přidáno šest nových map a tři odebrány",
