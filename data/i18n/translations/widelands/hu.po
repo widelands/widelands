@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-02-19 04:22+0000\n"
+"POT-Creation-Date: 2026-02-21 04:10+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>, 2025-2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -314,61 +314,61 @@ msgstr "Egy játékos kilépett a csapatból"
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr "%1$s kilépett a %2$u. csapatból, és egyedül folytatja."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:77
+#: ../../../../src/commands/cmd_diplomacy.cc:101
 msgid "Team Joining Request"
 msgstr "Csatlakozási kérelem egy csapathoz"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:78
+#: ../../../../src/commands/cmd_diplomacy.cc:102
 msgid "Team Joining Invitation"
 msgstr "Meghívás a csapatba"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:80
+#: ../../../../src/commands/cmd_diplomacy.cc:104
 #: ../../../../src/wui/game_diplomacy_menu.cc:320
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr "%1$s szeretne csatlakozni %2$s csapatához."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:81
+#: ../../../../src/commands/cmd_diplomacy.cc:105
 #: ../../../../src/wui/game_diplomacy_menu.cc:327
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr "%1$s meghívta %2$s-t, hogy csatlakozzon a csapatához."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:120
+#: ../../../../src/commands/cmd_diplomacy.cc:147
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr "%1$s befogadta %2$s-t a csapatába."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:122
+#: ../../../../src/commands/cmd_diplomacy.cc:149
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr "%1$s elfogadta a meghívást %2$s csapatába."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:127
+#: ../../../../src/commands/cmd_diplomacy.cc:154
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
 msgstr "%1$s visszavonta a csatlakozási kérelmét %2$s csapatához."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:129
+#: ../../../../src/commands/cmd_diplomacy.cc:156
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr "%1$s elutasította %2$s csatlakozását a csapatához."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:132
+#: ../../../../src/commands/cmd_diplomacy.cc:159
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
 msgstr "%1$s visszavonta %2$s meghívását a csapatába."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:134
+#: ../../../../src/commands/cmd_diplomacy.cc:161
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr "%1$s elutasította a meghívást %2$s csapatába."
 
-#: ../../../../src/commands/cmd_diplomacy.cc:138
+#: ../../../../src/commands/cmd_diplomacy.cc:165
 msgid "Team Change Accepted"
 msgstr "Csapatváltás elfogadva"
 
-#: ../../../../src/commands/cmd_diplomacy.cc:138
+#: ../../../../src/commands/cmd_diplomacy.cc:165
 msgid "Team Change Rejected"
 msgstr "Csapatváltás elutasítva"
 
