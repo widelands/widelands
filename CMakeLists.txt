@@ -159,8 +159,9 @@ if(OPTION_CPPTRACE)
     set(CPPTRACE_ENABLE_LIBDWARF_COMPRESSION_SUPPORT OFF)
     FetchContent_Declare(
       cpptrace
-      GIT_REPOSITORY https://github.com/gpalino/cpptrace.git
-      GIT_TAG        cf82c4750e58ea1ea943d1593c54bb1119ad281d
+      GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+      # git hash of dev branch after merge of PR 289, TODO (palino) update to 1.0.5 release tag when ready
+      GIT_TAG        4d5f3e2f57c9b35c357d3a21f25c037e58c264cc
     )
     FetchContent_MakeAvailable(cpptrace)
     message(STATUS "Adding crash self-diagnosis handler using downloaded cpptrace.")
