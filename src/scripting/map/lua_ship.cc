@@ -45,6 +45,8 @@ const char LuaShip::className[] = "Ship";
 const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_wares),
    METHOD(LuaShip, get_workers),
+   METHOD(LuaShip, get_soldiers),
+   METHOD(LuaShip, set_soldiers),
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
    METHOD(LuaShip, refit),
@@ -545,6 +547,128 @@ int LuaShip::get_workers(lua_State* L) {
 	}
 	lua_pushint32(L, nworkers);
 	return 1;
+}
+
+/* RST
+   .. method:: get_soldiers(descr)
+
+      .. versionadded:: 1.4
+
+      Gets information about the soldiers on this ship.
+
+      See: :ref:`has_soldiers`
+*/
+int LuaShip::get_soldiers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Invalid arguments!");
+	}
+
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+	const std::vector<Widelands::Soldier*> soldiers = ship->onboard_soldiers();
+	const Widelands::TribeDescr& tribe = ship->owner().tribe();
+
+	if (lua_isstring(L, -1) != 0) {
+		if (std::string(luaL_checkstring(L, -1)) == "stationed") {
+			if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+				lua_pushuint32(L, soldiers.size());
+				return 1;
+			} else {
+				lua_pushuint32(L, 0);
+				return 1;
+			}
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "present") {
+			lua_pushuint32(L, soldiers.size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "associated") {
+			lua_pushuint32(L, ship->associated_soldiers().size());
+			return 1;
+		}
+	}
+
+	return do_get_soldiers_inner(L, soldiers, tribe);
+}
+
+/* RST
+   .. method:: set_soldiers(which[, amount])
+
+      .. versionadded:: 1.4
+
+      Sets the number of soldiers of the given level(s) on this ship.
+
+      See: :ref:`has_soldiers`
+*/
+int LuaShip::set_soldiers(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship = get(L, game);
+	Widelands::Player* owner = ship->get_owner();
+	const Widelands::TribeDescr& tribe = owner->tribe();
+	const Widelands::SoldierDescr& soldier_descr =
+	   dynamic_cast<const Widelands::SoldierDescr&>(*tribe.get_worker_descr(tribe.soldier()));
+
+	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr);
+
+	// Get information about current soldiers
+	std::vector<Widelands::Soldier*> onboard_soldiers = ship->onboard_soldiers();
+	SoldiersMap hist;
+	for (const Widelands::Soldier* s : onboard_soldiers) {
+		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
+		                   s->get_evade_level());
+
+		SoldiersMap::iterator i = hist.find(sd);
+		if (i == hist.end()) {
+			hist[sd] = 1;
+		} else {
+			++i->second;
+		}
+		if (setpoints.count(sd) == 0u) {
+			setpoints[sd] = 0;
+		}
+	}
+
+	// Now adjust them
+	for (const SoldiersMap::value_type& sp : setpoints) {
+		Widelands::Quantity cur = 0;
+		SoldiersMap::iterator i = hist.find(sp.first);
+		if (i != hist.end()) {
+			cur = i->second;
+		}
+
+		int d = sp.second - cur;
+		if (d < 0) {
+			while (d < 0) {
+				for (auto s_it = onboard_soldiers.begin(); s_it != onboard_soldiers.end(); ++s_it) {
+					Widelands::Soldier* s = *s_it;
+					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
+					                   s->get_defense_level(), s->get_evade_level());
+
+					if (is == sp.first) {
+						ship->remove_item_by_serial(game, s->serial());
+						onboard_soldiers.erase(s_it);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for (; d > 0; --d) {
+				if (ship->get_nritems() < ship->get_warship_soldier_capacity()) {
+					Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
+					   soldier_descr.create(game, owner, nullptr, ship->get_position()));
+					soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
+					soldier.set_location(nullptr);
+					soldier.start_task_shipping(game, nullptr);
+					ship->add_item(game, Widelands::ShippingItem(soldier));
+				} else {
+					report_error(L, "No space left for soldier!");
+				}
+			}
+		}
+	}
+	ship->update_warship_soldier_request(false);
+	return 0;
 }
 
 /* RST

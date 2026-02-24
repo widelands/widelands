@@ -2178,6 +2178,20 @@ bool Ship::withdraw_item(Game& game, PortDock& pd) {
 }
 
 /**
+ * Remove the given shipping item from the game.
+ */
+void Ship::remove_item_by_serial(Game& game, const Serial serial) {
+	for (auto it = items_.begin(); it != items_.end(); ++it) {
+		if (serial == it->get_object_serial()) {
+			it->remove(game);
+			it = items_.erase(it);
+			return;
+		}
+	}
+	log_warn_time(game.get_gametime(), "Item %u is not on %s, cannot remove.", serial, shipname_.c_str());
+}
+
+/**
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
 uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* finalpath) const {

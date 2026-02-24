@@ -551,6 +551,12 @@ int do_get_soldiers(lua_State* L,
 	}
 
 	const SoldiersList soldiers = sc.stationed_soldiers();
+	return do_get_soldiers_inner(L, soldiers, tribe);
+}
+
+int do_get_soldiers_inner(lua_State* L,
+                          const SoldiersList& soldiers,
+                          const Widelands::TribeDescr& tribe) {
 	if (lua_isstring(L, -1) != 0) {
 		if (std::string(luaL_checkstring(L, -1)) != "all") {
 			report_error(L, "Invalid arguments!");
@@ -1364,8 +1370,8 @@ Common properties for objects garrisoning soldiers
 --------------------------------------------------
 
 Supported at the time of this writing by
-:class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite` and
-:class:`~wl.map.TrainingSite`.
+:class:`~wl.map.Warehouse`, :class:`~wl.map.MilitarySite`, :class:`~wl.map.TrainingSite`,
+and :class:`~wl.map.Ship`.
 */
 
 /* RST
@@ -1444,10 +1450,14 @@ Supported at the time of this writing by
    - military site
    - training site
    - warehouse
+   - ship .. versionadded:: 1.4
 
    :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
       description. In that case amount has to be specified as well.
    :type which: :class:`table` or :class:`array`.
+
+   Be careful if you are changing the soldiers. The removals may not happen before
+   the additions, so the capacity may be exceeded, resulting in an error.
 
    Usage example:
 

@@ -146,6 +146,10 @@ SoldiersMap parse_set_soldiers_arguments(lua_State* L,
 int do_get_soldiers(lua_State* L,
                     const Widelands::SoldierControl& sc,
                     const Widelands::TribeDescr& tribe);
+// Common part of get_soldiers for buildings and ships.
+int do_get_soldiers_inner(lua_State* L,
+                          const SoldiersList& soldiers,
+                          const Widelands::TribeDescr& tribe);
 // Does most of the work of set_soldiers for buildings.
 int do_set_soldiers(lua_State* L,
                     const Widelands::Coords& building_position,
