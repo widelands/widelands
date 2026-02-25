@@ -40,12 +40,34 @@ run(function()
    assert_equal(20, ship:get_workers("barbarians_soldier"))
    assert_equal(4, enemy_port:get_workers("barbarians_soldier"))
 
-   -- Fight!
+   -- some function call tests
    ship.destination = nil
    local soldiers = ship:get_workers("")
    assert_equal(20, #soldiers)
+   assert_equal(20, ship:get_soldiers("present"))
+   assert_equal(20, ship:get_soldiers({3,5,0,2}))
+   assert_error(
+      "Soldier capacity should be full.",
+      function()
+         ship:set_soldiers({[{0,0,0,0}] = 22})
+      end
+   )
+   saved_soldiers = ship:get_soldiers("all")
+   -- first we must make room, it doesn't work in a single call
+   ship:set_soldiers({3,5,0,2}, 1)
+   ship:set_soldiers({
+      [{0,0,0,0}] = 8,
+      [{3,5,0,2}] = 10
+   })
+   assert_equal(18, ship:get_soldiers("associated"))
+   assert_equal(10, ship:get_soldiers({3,5,0,2}))
+   ship:set_soldiers(saved_soldiers)
+   assert_equal(20, ship:get_soldiers("stationed"))
+   assert_equal(20, ship:get_soldiers({3,5,0,2}))
+
+   -- Fight!
+   local soldiers = ship:get_workers("")
    for i = 7, 20 do soldiers[i] = nil end
-   assert_equal(6, #soldiers)
    ship:invade(portspace, soldiers)
 
    stable_save(game, "naval_invasion", 100 * 1000)
