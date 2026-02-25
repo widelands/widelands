@@ -2188,7 +2188,8 @@ void Ship::remove_item_by_serial(Game& game, const Serial serial) {
 			return;
 		}
 	}
-	log_warn_time(game.get_gametime(), "Item %u is not on %s, cannot remove.", serial, shipname_.c_str());
+	log_warn_time(
+	   game.get_gametime(), "Item %u is not on %s, cannot remove.", serial, shipname_.c_str());
 }
 
 /**

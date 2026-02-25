@@ -657,7 +657,8 @@ int LuaShip::set_soldiers(lua_State* L) {
 				if (ship->get_nritems() < ship->get_warship_soldier_capacity()) {
 					Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
 					   soldier_descr.create(game, owner, nullptr, ship->get_position()));
-					soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
+					soldier.set_level(
+					   sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
 					soldier.set_location(nullptr);
 					soldier.start_task_shipping(game, nullptr);
 					ship->add_item(game, Widelands::ShippingItem(soldier));
