@@ -30,7 +30,7 @@
 
 namespace LuaMaps {
 class LuaShip;
-}
+}  // namespace LuaMaps
 
 namespace Widelands {
 
@@ -192,7 +192,7 @@ struct Ship : Bob {
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
-	void remove_item_by_serial(Game& game, const Serial serial);
+	void remove_item_by_serial(Game& game, Serial serial);
 
 	/// \returns the current state the ship is in
 	[[nodiscard]] ShipStates get_ship_state() const {

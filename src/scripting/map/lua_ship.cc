@@ -572,11 +572,10 @@ int LuaShip::get_soldiers(lua_State* L) {
 		if (std::string(luaL_checkstring(L, -1)) == "stationed") {
 			if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
 				lua_pushuint32(L, soldiers.size());
-				return 1;
 			} else {
 				lua_pushuint32(L, 0);
-				return 1;
 			}
+			return 1;
 		}
 		if (std::string(luaL_checkstring(L, -1)) == "present") {
 			lua_pushuint32(L, soldiers.size());
