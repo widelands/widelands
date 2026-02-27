@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Lançamento de correção de bugs"
+		],
 		"1.3": [
 			"Trocas comerciais",
 			"Seis novos mapas foram adicionados e três mapas antigos removidos",
@@ -17,9 +20,6 @@
 			"Baixe mapas do site como add-ons",
 			"Novos modos de visualização no editor",
 			"Muitas novas funcionalidades para desenvolvedores de add-ons"
-		],
-		"1.2.1": [
-			"Lançamento de correção de bugs"
 		]
 	}
 }
