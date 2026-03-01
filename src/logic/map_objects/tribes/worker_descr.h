@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,6 +85,7 @@ public:
 	void set_default_target_quantity(int quantity);
 
 	/// This is an AI hint
+	[[nodiscard]] int preciousness(const std::string& tribename) const;
 	void set_preciousness(const std::string& tribename, int preciousness);
 
 	[[nodiscard]] bool has_demand_check() const {

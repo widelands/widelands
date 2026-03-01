@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,6 +72,7 @@ public:
 	int remove(lua_State* L);
 	int destroy(lua_State* L);
 	int has_attribute(lua_State* L);
+	int subscribe_to_removed(lua_State* L);
 
 	/*
 	 * C Methods

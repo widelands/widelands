@@ -44,6 +44,10 @@ function warehouse_tests:test_set_get_wares_string_arg()
    self.w:set_wares("log", 190)
    assert_equal(190, self.w:get_wares("log"))
    assert_equal(0, self.w:get_wares("granite"))
+   -- check call with two arguments keeps other wares
+   self.w:set_wares("granite", 8)
+   assert_equal(190, self.w:get_wares("log"))
+   assert_equal(8, self.w:get_wares("granite"))
 end
 function warehouse_tests:test_set_get_wares_all()
    self.w:set_wares{log=190, granite=170}
@@ -78,6 +82,13 @@ function warehouse_tests:test_set_get_wares_set_is_not_increase()
    k = self.w:get_wares{"log", "granite"}
    assert_equal(10, k.log)
    assert_equal(20, k.granite)
+
+   -- check call with table keeps other wares
+   self.w:set_wares{coal=1}
+   k = self.w:get_wares{"log", "granite", "coal"}
+   assert_equal(10, k.log)
+   assert_equal(20, k.granite)
+   assert_equal(1, k.coal)
 end
 function warehouse_tests:test_get_wares_non_existant_name()
    assert_error("non existent ware", function()
@@ -98,6 +109,11 @@ function warehouse_tests:test_set_get_workers_string_arg()
    assert_equal(0, self.w:get_workers("barbarians_builder"))
    self.w:set_workers("barbarians_builder", 190)
    assert_equal(190, self.w:get_workers("barbarians_builder"))
+
+   -- check call with two arguments keeps other workers
+   self.w:set_workers("barbarians_hunter", 2)
+   assert_equal(190, self.w:get_workers("barbarians_builder"))
+   assert_equal(2, self.w:get_workers("barbarians_hunter"))
    self.w:set_workers("barbarians_builder", 0) -- too many to keep
 end
 function warehouse_tests:test_set_get_workers_table_arg()
@@ -125,6 +141,12 @@ function warehouse_tests:test_set_get_workers_set_is_not_increase()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(10, k.barbarians_builder)
    assert_equal(20, k.barbarians_lumberjack)
+
+   -- check call with table keeps other workers
+   self.w:set_workers({barbarians_lumberjack = 2})
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
+   assert_equal(10, k.barbarians_builder)
+   assert_equal(2, k.barbarians_lumberjack)
 end
 
 -- ========
@@ -291,7 +313,9 @@ end
 function warehouse_tests:test_set_soldiers()
    self.w:set_soldiers({0,0,0,0}, 100)
    assert_equal(100, _cnt(self.w:get_soldiers("all")))
-   self.w:set_soldiers({0,0,0,0}, 0) -- too many to keep
+   -- check call with two arguments: replaces other soldiers
+   self.w:set_soldiers({0,0,0,1}, 1)
+   assert_equal(1, _cnt(self.w:get_soldiers("all")))
 end
 function warehouse_tests:test_reduce_soldiers_number()
    self.w:set_soldiers{
@@ -318,6 +342,11 @@ function warehouse_tests:test_set_soldiers_by_list()
    assert_equal(1, self.w:get_soldiers({0,0,0,0}))
    assert_equal(2, self.w:get_soldiers({1,1,0,1}))
    assert_equal(0, self.w:get_soldiers({2,1,0,1}))
+   -- check call with table: replaces other soldiers
+   self.w:set_soldiers{
+      [{1,1,0,1}] = 1,
+   }
+   assert_equal(1, _cnt(self.w:get_soldiers("all")))
 end
 function warehouse_tests:test_set_soldiers_health_too_high()
    assert_error("health too high", function()

@@ -98,6 +98,8 @@ wl_library(scripting_logic
     lua_map.h
     lua_root.cc
     lua_root.h
+    lua_root_notifications.cc
+    lua_root_notifications.h
     lua_ui.cc
     lua_ui.h
     map/lua_base_immovable.cc
@@ -204,6 +206,8 @@ wl_library(scripting_logic
     ui/lua_map_view.h
     ui/lua_multiline_textarea.cc
     ui/lua_multiline_textarea.h
+    ui/lua_pagination.cc
+    ui/lua_pagination.h
     ui/lua_panel.cc
     ui/lua_panel.h
     ui/lua_panel_create_child.cc
@@ -225,6 +229,8 @@ wl_library(scripting_logic
     ui/lua_textarea.h
     ui/lua_text_input_panel.cc
     ui/lua_text_input_panel.h
+    ui/lua_timer.cc
+    ui/lua_timer.h
     ui/lua_ui_helper_functions.cc
     ui/lua_ui_helper_functions.h
     ui/lua_window.cc
@@ -233,6 +239,7 @@ wl_library(scripting_logic
   DEPENDS
     base
     base_macros
+    chat
     economy
     graphic
     graphic_fonthandler
@@ -260,5 +267,6 @@ wl_library(scripting_logic
     ui_fsmenu
     widelands_options
     wui
+    wui_common_plugins
     wui_mapview_pixelfunctions
 )

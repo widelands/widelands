@@ -4,12 +4,22 @@ local saved_version = get_build_id()
 
 -- Save the game so that reloading does not skip
 function stable_save(game, savename, desired_speed)
-   local mapview = wl.ui.MapView()
    local last_save_time = game.last_save_time
    print("###### stable_save: last save time " .. last_save_time)
 
    game.desired_speed = 1000
+   if lunit and lunit.stats and lunit.stats.run and
+         lunit.stats.run + lunit.stats.notrun < lunit.stats.tests then
+      -- lunit is currently running (it is loaded and started running and did not not finish)
+      print("WARNING: a testcase is probably running while saving. This might fail!")
+   end
+
    sleep(1000)
+
+   if not game.allow_saving then
+     error("stable_save() would hang if saving is not allowed")
+   end
+
    game:save(savename)
    game.desired_speed = 1000
 
@@ -20,6 +30,7 @@ function stable_save(game, savename, desired_speed)
    print("###### stable_save: new save time " .. game.last_save_time)
 
    -- Give the loaded game a chance to catch up
+   local mapview = wl.ui.MapView()
    local counter = 0
    while mapview.average_fps < 20 and counter < 100 do
       sleep(200)

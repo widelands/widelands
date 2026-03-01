@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/info_tool.h"
 #include "editor/tools/noise_height_tool.h"
+#include "editor/tools/picker_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/resize_tool.h"
@@ -74,6 +75,7 @@ public:
 		     set_port_space(parent, unset_port_space),
 		     set_origin(parent),
 		     resize(parent, map.get_width(), map.get_height()),
+		     picker(parent),
 		     tool_history(parent) {
 		}
 		[[nodiscard]] EditorTool& current() const {
@@ -100,6 +102,7 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
+		EditorPickerTool picker;
 		EditorHistoryTool tool_history;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);

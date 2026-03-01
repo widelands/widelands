@@ -9,24 +9,52 @@ on:
     - cron: '0 2 * * 5'
 
 jobs:
+  check-repo-setup:
+    # Don't waste cycles in forks that don't use it.
+    # Initialise the VCPKG_REF variable manually in your fork to enable caching,
+    # and set up the WIDELANDS_FORMAT_TOKEN secret to have permission to change
+    # repo variables.
+
+    # Unfortunately github doesn't allow testing the secret here.
+    if: ${{ vars.VCPKG_REF != '' }}
+    runs-on: windows-2022
+    env:
+      GH_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
+    steps:
+    - name: Checkout
+      # We need a repo for setting the variable
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Check setup
+      id: check_setup
+      shell: bash
+      run: |
+        if [ -z "$GH_TOKEN" ]; then
+          exit 1
+        fi
+        # test variables permission of GH_TOKEN
+        gh variable set VCPKG_REF -b "${{ vars.VCPKG_REF }}"
+        echo "repo_ok=true" >>"$GITHUB_OUTPUT"
+    outputs:
+      repo_ok: ${{ steps.check_setup.outputs.repo_ok }}
+
   vcpkg-packages:
-    # Checks for new vcpkg version and tries to build the update package versions
-    # On success it updates the vcpkg_ref file so the main builds use the cache
-    # with the latest version.
+    # Checks for new vcpkg version and tries to build the updated package versions
+    # On success the next job updates the VCPKG_REF variable so the main builds use
+    # the cache with the latest version.
+    needs: check-repo-setup
     strategy:
       matrix:
         arch: [x64, x86]
     name: Build vcpkg packages for ${{ matrix.arch }}
     runs-on: windows-2022
-    # Don't waste cycles in forks that don't use it.
-    # Initialise the variable manually in your fork to enable caching.
-    if: ${{ vars.VCPKG_REF != '' }}
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
     outputs:
-      result-x64: ${{ steps.build.outputs.result-x64 }}
-      result-x86: ${{ steps.build.outputs.result-x86 }}
+      result-x64: ${{ steps.signal.outputs.result-x64 }}
+      result-x86: ${{ steps.signal.outputs.result-x86 }}
       vcpkg_ref: ${{ steps.prepare.outputs.vcpkg_ref }}
     steps:
     - name: Checkout
@@ -71,10 +99,17 @@ jobs:
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
         nmake
+    - name: Signal success
+      id: signal
+      # We need this on cache hit too
+      run: |
         echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
+
   update:
+    # Sets the VCPKG_REF variable on success.
+    # Do it on cache hit too for extra safety.
     needs: vcpkg-packages
-    if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
+    if: ${{ needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Update vcpkg_ref
     runs-on: windows-2022
     env:
@@ -89,20 +124,34 @@ jobs:
       shell: bash
       run: |
         gh variable set VCPKG_REF -b "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+
   refresh_ref_cache:
-    needs: update
-    # We want to keep the vcpkg_ref cache updated so that it doesn't get dropped
-    # even if the main cache is up to date or if the build failed.
-    if: ${{ vars.VCPKG_REF != '' && always() }}
+    needs: [ check-repo-setup, vcpkg-packages ]
+    # We store the vcpkg ref in a cache too, because workflow runs for PRs from forks
+    # cannot access the repo variable.
+    # We want to keep the vcpkg_ref cache updated on every run, so that it doesn't get
+    # dropped even if the main cache is up to date or if the build failed.
+    if: ${{ needs.check-repo-setup.outputs.repo_ok && always() }}
     name: Store ref in cache
     runs-on: windows-2022
     steps:
     - name: Create ref file
+      id: create
       shell: bash
       run: |
-        echo "${{ vars.VCPKG_REF }}" > vcpkg_ref
+        # It looks like github still passes the old value of the repo var if it is
+        # updated during the workflow run, so we have to do it differently when we
+        # change it and when we just refresh the cache with the old ref after a build
+        # failure.
+        if [ "${{ needs.vcpkg-packages.outputs.result-x64 }}" = true -a "${{ needs.vcpkg-packages.outputs.result-x86 }}" = true ]; then
+          VCPKG_REF="${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+        else
+          VCPKG_REF="${{ vars.VCPKG_REF }}"
+        fi
+        echo "$VCPKG_REF" >vcpkg_ref
+        echo "vcpkg_ref=$VCPKG_REF" >>"$GITHUB_OUTPUT"
     - name: Store in cache
       uses: actions/cache/save@v4
       with:
         path: vcpkg_ref
-        key: vcpkg_ref-${{ github.run_id }}-${{ vars.VCPKG_REF }}
+        key: vcpkg_ref-${{ github.run_id }}-${{ steps.create.outputs.vcpkg_ref }}

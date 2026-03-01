@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
 "Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>, 2020\n"
 "Language-Team: Slovenian (http://app.transifex.com/widelands/widelands/language/sl/)\n"
@@ -748,7 +748,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakti"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -802,7 +802,7 @@ msgstr "Poletje"
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:515
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustinja"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../../../data/world/init.lua:543

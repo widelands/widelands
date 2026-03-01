@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -679,7 +679,9 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 		}
 	}
 
-	tool_settings_changed_ = false;
+	if (&tools_->current() == &current_tool) {
+		tool_settings_changed_ = false;
+	}
 }
 
 void EditorInteractive::update_tool_history_window() {

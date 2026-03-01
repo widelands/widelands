@@ -7,15 +7,19 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SOURCE_DIR=$DIR/../../
 
+# Minimum macOS version to support (deployment target)
+# Modern Xcode can build for older deployment targets even with a newer SDK
+OSX_MIN_VERSION="11.0"
+
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
-OSX_MIN_VERSION="12.3"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
 
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
 
 if [ ! -d "$SDK_DIRECTORY" ]; then
-   OSX_MIN_VERSION=$OSX_VERSION
+   # SDK for minimum version not found, use current OS SDK
+   # Note: We keep OSX_MIN_VERSION unchanged - deployment target is independent of SDK version
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk

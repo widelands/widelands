@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,34 +25,32 @@
 // system, this is easier to guarantee when they are all listed in
 // one place.
 enum class NoteId : uint32_t {
-	ChatMessage,
-	Immovable,
-	ConstructionsiteEnhanced,
-	FieldPossession,
-	FieldTerrainChanged,
-	ProductionSiteOutOfResources,
-	TrainingSiteSoldierTrained,
-	Ship,
 	Building,
+	ChatMessage,
+	Dropdown,
 	Economy,
 	EconomyProfile,
-	GraphicResolutionChanged,
-	NoteExpeditionCanceled,
-	Sound,
-	Dropdown,
+	ExpeditionCanceled,
+	FieldPossession,
+	FieldTerrainChanged,
 	GameSettings,
-	MapOptions,
+	GraphicResolutionChanged,
+	Hyperlink,
+	Immovable,
+	LoadingMessage,
 	MapObjectDescription,
 	MapObjectDescriptionTypeCheck,
-	LoadingMessage,
+	MapOptions,
+	PinnedNoteMoved,
+	PlayerDetailsEvent,
+	ProductionSiteOutOfResources,
+	QuicknavChangedEvent,
+	Ship,
+	Sound,
 	ThreadSafeFunction,
 	ThreadSafeFunctionHandled,
-	Panel,
-	PinnedNoteMoved,
-	QuicknavChangedEvent,
-	Hyperlink,
-	PlayerDetailsEvent,
-	TradeChanged
+	TradeChanged,
+	TrainingSiteSoldierTrained,
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H
