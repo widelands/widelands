@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Anthony Guéchoum <a.guechoum@proton.me>, 2025\n"
 "Language-Team: Breton (https://app.transifex.com/widelands/teams/35159/br/)\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:71
 msgid "Introduction"
-msgstr ""
+msgstr "Digoradur"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:72
 msgid "Welcome back!"
@@ -222,7 +222,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:131
 msgid "Diking"
-msgstr ""
+msgstr "Ar chaoseriañ"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:132
 msgid "Gaining Land"

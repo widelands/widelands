@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -238,14 +238,23 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 
 std::string as_tooltip_text_with_hotkey(const std::string& text,
                                         const std::string& hotkey,
-                                        const UI::PanelStyle style) {
-	return format("<rt><p>%s %s</p></rt>",
-	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
-	                                                          UI::FontStyle::kFsTooltip,
-	                          text),
-	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
-	                                                          UI::FontStyle::kFsTooltipHotkey,
-	                          "(" + hotkey + ")"));
+                                        const UI::PanelStyle style,
+                                        const bool add_rt_tag) {
+	std::string result;
+	if (add_rt_tag) {
+		result = "<rt>";
+	}
+	result += format("<p>%s %s</p>",
+	                 as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+	                                                             UI::FontStyle::kFsTooltip,
+	                             text),
+	                 as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
+	                                                             UI::FontStyle::kFsTooltipHotkey,
+	                             "(" + hotkey + ")"));
+	if (add_rt_tag) {
+		result += "</rt>";
+	}
+	return result;
 }
 
 std::string as_vspace(const int gap) {

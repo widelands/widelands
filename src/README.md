@@ -17,10 +17,9 @@ Here's a brief overview of what each directory contains:
 | map_io | Map saveloading |
 | network | Networking backend for multiplayer games |
 | notifications | Notification system for decoupling code (Observer pattern) |
-| random | Random number generator |
 | scripting | Lua scripting interface |
 | sound | Sound & music backend |
-| third_party | Third-party sources (eris, gettext, minizip) |
+| third_party | Third-party sources (eris, gettext, libmd, minizip) |
 | ui_basic | UI Widgets |
 | ui_fsmenu | Main ("Full Screen") menus |
 | website | Utilities used by https://github.com/widelands/widelands-website |

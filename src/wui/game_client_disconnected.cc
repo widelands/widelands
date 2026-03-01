@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,7 +129,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 		                   false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
-		                   format(_("Replace player with %s"), impl->descname));
+		                   format(_("Replace player with %s"), _(impl->descname)));
 	}
 
 	// Set default mode to normal AI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025 by the Widelands Development Team
+ * Copyright (C) 2023-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include "economy/ferry_fleet.h"
 #include "economy/ship_fleet.h"
+#include "economy/waterway.h"
 #include "graphic/font_handler.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -34,28 +35,49 @@ constexpr int kPadding = 4;
 constexpr const char kIconEndInfinity[] = "images/wui/menus/end_infinity.png";
 constexpr const char kIconInfinity[] = "images/wui/menus/infinity.png";
 
-FleetOptionsWindow&
-FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface) {
+static Widelands::ShipFleet* get_ship_fleet(Widelands::MapObject& mo) {
+	if (mo.descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE) {
+		return dynamic_cast<Widelands::ShipFleetYardInterface&>(mo).get_fleet();
+	}
+	if (mo.descr().type() == Widelands::MapObjectType::PORTDOCK) {
+		return dynamic_cast<Widelands::PortDock&>(mo).get_fleet();
+	}
+	NEVER_HERE();
+}
+static Widelands::OPtr<Widelands::FerryFleet> get_ferry_fleet(Widelands::MapObject& mo) {
+	if (mo.descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE) {
+		return dynamic_cast<Widelands::FerryFleetYardInterface&>(mo).get_fleet();
+	}
+	if (mo.descr().type() == Widelands::MapObjectType::WATERWAY) {
+		return dynamic_cast<Widelands::Waterway&>(mo).get_fleet();
+	}
+	NEVER_HERE();
+}
+
+FleetOptionsWindow& FleetOptionsWindow::create(UI::Panel* parent,
+                                               InteractiveBase& ibase,
+                                               Widelands::MapObject* interface) {
 	MutexLock m(MutexLock::ID::kObjects);
+
+	const Type type =
+	   (interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ||
+	    interface->descr().type() == Widelands::MapObjectType::PORTDOCK) ?
+	      Type::kShip :
+	      Type::kFerry;
 
 	// Check for an existing window pointing to the same fleet.
 	// We can't cache the fleet serial or pointer, they can change around a lot.
 	for (FleetOptionsWindow* window : living_fleet_option_windows) {
-		Widelands::Bob* window_interface = window->interface_.get(ibase.egbase());
-		if (window_interface == nullptr ||
-		    window_interface->descr().type() != interface->descr().type()) {
+		Widelands::MapObject* window_interface = window->interface_.get(ibase.egbase());
+		if (window_interface == nullptr || window->type_ != type) {
 			continue;  // Different type of window
 		}
-		if (interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE) {
-			if (dynamic_cast<const Widelands::ShipFleetYardInterface*>(interface)->get_fleet() !=
-			    dynamic_cast<const Widelands::ShipFleetYardInterface*>(window_interface)
-			       ->get_fleet()) {
+		if (type == Type::kShip) {
+			if (get_ship_fleet(*interface) != get_ship_fleet(*window_interface)) {
 				continue;  // Different fleets
 			}
 		} else {
-			if (dynamic_cast<const Widelands::FerryFleetYardInterface*>(interface)->get_fleet() !=
-			    dynamic_cast<const Widelands::FerryFleetYardInterface*>(window_interface)
-			       ->get_fleet()) {
+			if (get_ferry_fleet(*interface) != get_ferry_fleet(*window_interface)) {
 				continue;  // Different fleets
 			}
 		}
@@ -68,12 +90,7 @@ FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands:
 		return *window;
 	}
 
-	return *new FleetOptionsWindow(
-	   parent, ibase,
-	   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
-	      Type::kShip :
-	      Type::kFerry,
-	   interface);
+	return *new FleetOptionsWindow(parent, ibase, type, interface);
 }
 
 FleetOptionsWindow::~FleetOptionsWindow() {
@@ -83,7 +100,7 @@ FleetOptionsWindow::~FleetOptionsWindow() {
 FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
                                        InteractiveBase& ibase,
                                        Type t,
-                                       Widelands::Bob* interface)
+                                       Widelands::MapObject* interface)
    : UI::Window(parent,
                 UI::WindowStyle::kWui,
                 format("fleet_options_%u", interface->serial()),
@@ -208,8 +225,8 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 	}
 
 	MutexLock m(MutexLock::ID::kObjects);
-	const Widelands::Bob* bob = interface_.get(ibase_.egbase());
-	if (bob == nullptr) {
+	Widelands::MapObject* object = interface_.get(ibase_.egbase());
+	if (object == nullptr) {
 		return;
 	}
 
@@ -219,14 +236,13 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 
 	if (ibase_.egbase().is_game()) {
 		ibase_.game().send_player_fleet_targets(
-		   bob->owner().player_number(), interface_.serial(), target);
+		   object->owner().player_number(), interface_.serial(), target);
 	} else {
 		if (type_ == Type::kShip) {
-			dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet()->set_ships_target(
-			   ibase_.egbase(), target);
+			get_ship_fleet(*object)->set_ships_target(ibase_.egbase(), target);
 		} else {
-			dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
-			   ->get_fleet()
+			get_ferry_fleet(*object)
+			   .get(ibase_.egbase())
 			   ->set_idle_ferries_target(ibase_.egbase(), target);
 		}
 	}
@@ -234,27 +250,23 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 
 Widelands::Quantity FleetOptionsWindow::get_current_target() const {
 	MutexLock m(MutexLock::ID::kObjects);
-	Widelands::Bob* bob = interface_.get(ibase_.egbase());
-	if (bob == nullptr) {
+	Widelands::MapObject* object = interface_.get(ibase_.egbase());
+	if (object == nullptr) {
 		return 0;
 	}
 
 	if (type_ == Type::kShip) {
-		return dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)
-		   ->get_fleet()
-		   ->get_ships_target();
+		return get_ship_fleet(*object)->get_ships_target();
 	}
-	return dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
-	   ->get_fleet()
-	   ->get_idle_ferries_target();
+	return get_ferry_fleet(*object).get(ibase_.egbase())->get_idle_ferries_target();
 }
 
 void FleetOptionsWindow::think() {
 	UI::Window::think();
 
 	MutexLock m(MutexLock::ID::kObjects);
-	Widelands::Bob* bob = interface_.get(ibase_.egbase());
-	if (bob == nullptr) {
+	Widelands::MapObject* object = interface_.get(ibase_.egbase());
+	if (object == nullptr) {
 		return die();
 	}
 
@@ -264,15 +276,13 @@ void FleetOptionsWindow::think() {
 	const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
 
 	if (type_ == Type::kShip) {
-		const Widelands::ShipFleet* fleet =
-		   dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet();
+		const Widelands::ShipFleet* fleet = get_ship_fleet(*object);
 
 		txt_ships_->set_text(as_string(fleet->count_ships()));
 		txt_ports_->set_text(as_string(fleet->count_ports()));
 
 	} else {
-		const Widelands::FerryFleet* fleet =
-		   dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)->get_fleet();
+		const Widelands::FerryFleet* fleet = get_ferry_fleet(*object).get(ibase_.egbase());
 
 		txt_ferries_total_->set_text(as_string(fleet->count_ferries()));
 		txt_ferries_unemployed_->set_text(as_string(fleet->count_unemployed_ferries()));
@@ -305,7 +315,7 @@ FleetOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObject
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			return create(&ib, ib, &mol.get<Widelands::Bob>(fr.unsigned_32()));
+			return create(&ib, ib, &mol.get<Widelands::MapObject>(fr.unsigned_32()));
 		}
 		throw Widelands::UnhandledVersionError(
 		   "Fleet Options Window", packet_version, kCurrentPacketVersion);

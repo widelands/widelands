@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,8 +119,10 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 /// Paragraph in menu info texts
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
-std::string
-as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
+std::string as_tooltip_text_with_hotkey(const std::string& text,
+                                        const std::string& hotkey,
+                                        UI::PanelStyle style,
+                                        bool add_rt_tag = true);
 
 /// Insert vertical space. Returns an empty string if gap is zero or negative.
 [[nodiscard]] std::string as_vspace(int gap);

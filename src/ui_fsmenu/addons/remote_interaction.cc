@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 by the Widelands Development Team
+ * Copyright (C) 2021-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -318,8 +318,8 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 		}
 	});
 
-	reset_text();
 	set_center_panel(&main_box_);
+	reset_text();
 	center_to_parent();
 	text_->focus();
 

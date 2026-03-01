@@ -1,7 +1,0 @@
-macro(_include_directories_internal TARGET DIR SYSTEM)
-  if ("${SYSTEM}" STREQUAL "TRUE")
-    include_directories(SYSTEM "${DIR}")
-  else ()
-    include_directories("${DIR}")
-  endif ()
-endmacro(_include_directories_internal TARGET DIR SYSTEM)

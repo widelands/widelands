@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2019
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -293,10 +293,10 @@ msgstr[3] "%1% uair"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% mhionaid"
+msgstr[1] "%1% mhionaid"
+msgstr[2] "%1% mionaidean"
+msgstr[3] "%1% mionaid"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
@@ -308,7 +308,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s ’s %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394

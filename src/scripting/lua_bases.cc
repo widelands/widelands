@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -906,7 +906,7 @@ int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
       :returns: The object of the building created.
 */
 int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made const
-	const std::string& name = luaL_checkstring(L, 2);
+	const std::string name = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	bool constructionsite = false;
 	bool force = false;
@@ -980,13 +980,17 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 }
 
 /* RST
-   .. method:: place_ship(field)
+   .. method:: place_ship(field[, type = "transport"])
+
+      .. versionchanged:: 1.4  Added parameter ``type``
 
       Places a ship for the player's tribe, which will be
       owned by the player.
 
       :arg field: The field where the ship should be placed.
       :type field: :class:`~wl.map.Field`
+      :arg transport: The type of ship; can be ``"transport"`` or ``"warship"``.
+      :type transport: :class:`string`
 
       :returns: The new :class:`~wl.map.Ship` that was created.
 */
@@ -994,11 +998,20 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
+	const std::string ship_type = lua_gettop(L) < 3 ? "transport" : luaL_checkstring(L, 3);
+
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& player = get(L, egbase);
 
 	const Widelands::ShipDescr* descr = egbase.descriptions().get_ship_descr(player.tribe().ship());
-	Widelands::Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
+	Widelands::Ship& ship =
+	   dynamic_cast<Widelands::Ship&>(egbase.create_ship(c->coords(), descr->name(), &player));
+
+	if (ship_type == "warship") {
+		ship.set_ship_type(egbase, Widelands::ShipType::kWarship);
+	} else if (ship_type != "transport") {
+		report_error(L, "Invalid ship type %s", ship_type.c_str());
+	}
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);
 

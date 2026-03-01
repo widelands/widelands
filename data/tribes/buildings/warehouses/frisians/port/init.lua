@@ -35,11 +35,12 @@ wl.Descriptions():new_warehouse_type {
          columns = 5,
          rows = 2,
          fps = 10
-      }
-   },
-   animations = {
+      },
       build = {
-         hotspot = {64, 117}
+         hotspot = {64, 117},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    },
 

@@ -8,12 +8,12 @@ foreach (icon_size ${icon_sizes})
   #install(FILES ${CMAKE_SOURCE_DIR}/data/images/logos/wl-ico-${icon_size}.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${icon_size}x${icon_size}/apps RENAME ${XDG_APPLICATION_ID}.png)
   install(FILES ${CMAKE_SOURCE_DIR}/data/images/logos/wl-ico-${icon_size}.png DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/${icon_size}x${icon_size}/apps RENAME ${XDG_APPLICATION_ID}.png)
 endforeach (icon_size ${icon_sizes})
-#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.6           DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.6           DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man6)
-#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.desktop     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.desktop     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
-#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.appdata.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.appdata.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/metainfo)
+#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.6            DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.6            DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man6)
+#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.desktop      DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.desktop      DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.metainfo.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/metainfo)
 
 # TODO: check for privileges
 # If 'make install' was run without superuser privileges, the user will get a "permission denied" error

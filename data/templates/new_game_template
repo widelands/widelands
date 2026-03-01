@@ -29,6 +29,11 @@ peaceful="false"
 fogless="false"
 custom_starting_positions="false"
 
+# The seed value for the random number generator.
+# Set this to a fixed number to create a reproducible sequence of pseudo-random numbers.
+# Leave empty to seed with a truly random value.
+random_seed=12345
+
 # Comma-separated, ordered list of the internal names of the add-ons to enable. Default: All disabled.
 # Example: addons="foreign_planet.wad,more-fish-and-water.wad,frisians-economy-ultra.wad"
 # For more information regarding the ordering, see https://www.widelands.org/documentation/add-ons/#restrictions
