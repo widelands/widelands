@@ -87,7 +87,7 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader() = default;
 
-		void load(FileRead& fr);
+		void load(FileRead& fr, uint8_t packet_version);
 		void load_pointers() override;
 
 	private:

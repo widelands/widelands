@@ -188,10 +188,25 @@ void NavalInvasionBase::check_enemies(Game& game) {
 	last_update_ = game.get_gametime();
 }
 
-constexpr uint8_t kCurrentPacketVersionInvasion = 1;
+/* Changelog:
+   1 - v1.3
+   2 - v1.4: added did_conquer_
+ */
+constexpr uint8_t kCurrentPacketVersionInvasion = 2;
 
-void NavalInvasionBase::Loader::load(FileRead& fr) {
+void NavalInvasionBase::Loader::load(FileRead& fr, const uint8_t packet_version) {
 	Bob::Loader::load(fr);
+
+	NavalInvasionBase& invasion = get<NavalInvasionBase>();
+
+	// TODO: saveloading compatibility with v1.3
+	if (packet_version > 1) {
+		invasion.did_conquer_ = (fr.unsigned_8() != 0);
+	} else {
+		// Previously the invasion base was only created when the area got conquered
+		invasion.did_conquer_ = true;
+	}
+
 	for (size_t i = fr.unsigned_32(); i > 0; --i) {
 		soldiers_.insert(fr.unsigned_32());
 	}
@@ -206,18 +221,15 @@ void NavalInvasionBase::Loader::load_pointers() {
 	}
 }
 
-// TODO(tothxa): Save and load did_conquer_ to avoid double conquering.
-//               but compatibility with v1.3 will be messy...
-
 Bob::Loader* NavalInvasionBase::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionInvasion) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionInvasion) {
 			loader->init(egbase, mol, *new NavalInvasionBase);
-			loader->load(fr);
+			loader->load(fr, packet_version);
 		} else {
 			throw UnhandledVersionError(
 			   "NavalInvasionBase", packet_version, kCurrentPacketVersionInvasion);
@@ -234,6 +246,8 @@ void NavalInvasionBase::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWr
 	fw.unsigned_8(kCurrentPacketVersionInvasion);
 
 	Bob::save(egbase, mos, fw);
+
+	fw.unsigned_8(static_cast<uint8_t>(did_conquer_));
 
 	fw.unsigned_32(soldiers_.size());
 	for (const auto& soldier : soldiers_) {

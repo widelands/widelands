@@ -76,10 +76,15 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 			}
 		}
 	}
-
 	if (camp == nullptr) {
+		// Previously the invasion base was only created when there were no enemies left.
+		// Since v1.4 it is created when the invasion starts.
+		camp = NavalInvasionBase::create(game, get_owner(), state.coords);
+
+		/* TODO(tothxa): Change it to error in v1.5
 		throw wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
 		                 state.coords.y);
+		*/
 	}
 	assert(camp->get_owner() == get_owner());
 
