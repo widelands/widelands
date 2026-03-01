@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -47,7 +47,7 @@ msgstr "A Widelandsban a gazdaságod felépítése és olajozott működésének
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr "Ezt fogom neked bemutatni ebben az oktatójátékban: Milyen lehetőségeid vannak ezeknek az általános feltételeknek a beállítására?"
+msgstr "Ebben az oktatójátékban azt fogom neked bemutatni, hogy milyen lehetőségeid vannak ezeknek az általános feltételeknek a beállítására."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
@@ -257,7 +257,7 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Ezután válaszd a „Készletek” pontot!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:695
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:708
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
 msgstr "Ennek az ablaknak az eléréséhez az „%s” gyorsbillentyűt is használhatod."
@@ -982,7 +982,7 @@ msgstr "Minden raktárnak négy gombja van az áruk tárolásának beállítás�
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:623
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:631
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:722
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
 msgstr "Kereskedés"
 
@@ -1107,109 +1107,131 @@ msgstr "Végül pedig állítsd be, hogy hány szállítmányt szeretnél a beá
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
+"A batch will be delivered in one transport, each ware needing a donkey."
+msgstr "Egy-egy szállítmány mindig egyszerre indul el, amikor minden áru összegyűlt, és egy üzlethez egyszerre mindig csak egy szállítmány lehet úton. Az első szállítmány elindításához szükség van egy-egy szamárra minden egyes elszállítandó áruhoz. Ugyanezek a szamarak fogják az üzlethez tartozó további szállítmányokat is szállítani."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
 msgstr "Miután mindent beállítottál, kattints az „Ajánlat elküldése” gombra, hogy a másik játékos megkapja az ajánlatodat! Ezután ő dönti el, hogy elfogadja vagy elutasítja az ajánlatodat."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
 msgstr "Próbáld ki!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:652
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:654
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
 msgstr "Tegyél egy üzleti ajánlatot!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
 msgstr "Ajánlj egy üzletet a frízeknek!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
 msgstr "A frízek csak olyan ajánlatot fogadnak el, ami számukra is kedvező. Nem fognak több vagy értékesebb árut adni, mint amit ők kapnak."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:662
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
 msgstr "Üzleti ajánlat elutasítva"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:664
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
 msgstr "A frízek elutasították a kereskedelmi ajánlatodat. Nem fognak olyan cserét elfogadni, ami kedvezőtlen számukra. Próbálkozz egy új ajánlattal!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:671
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Accepted"
 msgstr "Üzleti ajánlat elfogadva"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:673
-msgid ""
-"Well done! The Frisians have accepted your trade offer. Did you notice that "
-"the market window now has a new tab? It has one such tab for every active "
-"trade at this market. The tab shows more details about the running trade, "
-"and also allows you to cancel it at any time."
-msgstr "Nagyszerű! A frízek elfogadták az üzleti ajánlatodat. Észrevetted, hogy a piactér ablakában új lap jelent meg? Minden, ezen a piactéren folyamatban lévő üzletnek van egy saját lapja, ahol minden lényeges információt megtalálsz az adott üzletről, és ahol meghosszabbíthatod, felfüggesztheted vagy felbonthatod azt."
-
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
-"Soon you will see a caravan of your donkeys leaving the market to bring "
-"wares to the Frisians, and a caravan of their reindeer bringing you wares in"
-" exchange."
-msgstr "Hamarosan egy szamárkaravánt láthatsz majd elindulni a piactérről, hogy elvigyék az áruidat a frízeknek. Ezzel egy időben egy rénszarvaskaraván fog tőlük is elindulni, ami a csereárukat hozza el neked."
+"Well done! The Frisians have accepted your trade offer. Soon you will see a "
+"caravan of your donkeys leaving the market to bring wares to the Frisians, "
+"and a caravan of their reindeer bringing you wares in exchange."
+msgstr "Nagyszerű! A frízek elfogadták a kereskedelmi ajánlatodat. Hamarosan egy szamárkaravánt láthatsz majd elindulni a piactérről, hogy elvigyék az áruidat a frízeknek. Ezzel egy időben egy rénszarvaskaraván fog tőlük is elindulni, ami a csereárukat hozza el neked."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
+msgid ""
+"As you can see, the market window now has a new tab. It has one such tab for"
+" every active trade at this market. The tab shows more details about the "
+"running trade and the wares waiting to be traded, and also allows you to "
+"manage it:"
+msgstr "Ahogy látod, a piactér ablakában egy új lap jelent meg. Minden, ezen a piactéren folyamatban lévő üzletnek van egy saját lapja, ahol minden lényeges információt megtalálsz az adott üzletről és az elcserélendő árukról, és ahol kezelheted azt:"
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
+msgid "You can pause the trade for a while and resume it when you wish."
+msgstr "Fel tudod függeszteni az üzlet teljesítését egy időre, majd újra tudod indítani, tetszés szerint."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
+msgid "You can move the trade to another of your markets."
+msgstr "Át tudod helyezni az üzlet teljesítését egy másik piacteredre."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
+msgid "You can propose to extend the trade with more batches."
+msgstr "Kérheted az üzlet meghosszabbítását további szállítmányokkal."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
+msgid "And you can cancel the trade at any time."
+msgstr "De akár fel is tudod bontani az üzleti megállapodást."
+
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
 msgstr "Beérkező ajánlat"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
 msgstr "Most a frízek is ajánlottak neked egy üzletet. Az összes bejövő és kimenő üzleti ajánlatot, és az össze futó üzletet megtalálod a diplomácia ablakban is. Nyisd meg ezt is az eszközsoron található gombjával!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:690
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:692
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
 msgstr "A diplomácia ablak megnyitása"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:693
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
 msgstr "A diplomácia ablak áttekintést ad a téged érintő összes bejövő és kimenő üzleti ajánlatról és futó üzletről."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
 msgstr "Ezzel a gombbal nyithatod meg a képernyő alján található eszközsorról."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:701
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
 msgstr "A diplomácia ablak"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
 msgstr "A diplomácia ablak felső részén a játékosokat és a csapatokat látod. Itt meghívhatsz játékosokat a csapatodba, vagy kérheted a felvételedet egy másik csapatba. De a kereskedelemhez nem szükséges egy csapatban lennetek."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:704
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
 msgstr "Most az ablak alsó része érdekel minket. Itt láthatod a bejövő és kimenő üzleti ajánlatokat és a futó üzleteket."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
 msgstr "Jelenleg egy bejövő üzleti ajánlatod van: amit most küldtek a frízek. Nézd át, és használd a hozzá tartozó gombokat, hogy elfogadd, vagy elutasítsd!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
 "If you wish to accept a trade, you need to select from the dropdown which "
 "market you want to use for this trade, as you can have multiple markets. You"
@@ -1217,39 +1239,39 @@ msgid ""
 "want to accept the trade."
 msgstr "Ha el szeretnél fogadni egy ajánlatot, akkor ki kell választanod a legördülő listából, hogy melyik piacteredet szeretnéd használni ehhez az üzlethez, ha több piactered is van. Az ajánlatot tudod kezelni a használni kívánt piactér ablakából is."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:713
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:715
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
 msgstr "Dönts az üzleti ajánlatról!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
 msgstr "Fogadd el, vagy utasítsd vissza a frízek üzleti ajánlatát!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
 msgstr "Ezt megteheted a diplomácia ablakból vagy a piactér ablakából is."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:724
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
 msgstr "Nagyszerű! Igazából ennyi az egész. Most már tudod, hogyan küldj és kezelj üzleti ajánlatokat."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:725
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
 msgstr "Akárhány üzleted lehet, akárhány játékossal; egy piactéren, vagy sokfelé: ahogy neked tetszik."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
 msgstr "A kereskedés művészetének elsajátításához csak ezt tarts észben: Bármely áru értéke mindig a pillanatnyi körülményektől függ, beleértve azt is, hogy melyik törzsről van szó."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:727
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
 "For example, Frisian miners will happily accept any meal, regardless of "
 "whether it was produced cheaply by an Imperial Inn or at a much higher cost "
@@ -1258,18 +1280,18 @@ msgid ""
 "against Frisian coal is a trade from which both parties can benefit greatly."
 msgstr "Például a fríz bányászok boldogan elfogadják az ebédet akkor is, ha az egy birodalmi fogadóban készült olcsón, nem pedig egy fríz ivóban sokkal drágábban. A másik oldalról viszont a frízek sokkal hatékonyabban tudnak faszenet égetni, mint a Birodalom. Ezért birodalmi ebédet adni fríz szénért általában olyan üzlet, amivel mindkét fél jól jár."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
 msgstr "Ahogy jobban megismered majd a Widelands különböző törzseit, jobban át fogod látni az egyes áruk relatív költségét és értékét a különböző törzsek számára. Ez a tudás elengedhetetlen ahhoz, hogy megfelelő döntéseket tudj hozni az üzleti ajánlatokról."
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:734
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
 msgstr "Gratulálunk!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:736
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:749
 msgid ""
 "This concludes our tutorial! I hope I could teach you how you can control "
 "the economy in Widelands. There are many options and they can be confusing "
@@ -1278,7 +1300,7 @@ msgid ""
 " possibilities. Then, return to this tutorial and learn the rest!"
 msgstr "Ezzel véget ért az oktatójáték. Remélem meg tudtam tanítani, hogy hogyan irányíthatod a gazdaságot a Widelandsben. Sok a lehetőség, és elsőre nehéz lehet eligazodni. Ha most még csak néhány témát értettél is meg belőle, akkor se add fel! Próbáld ki ezeket néhány játékban, így megszokhatod őket és kitapasztalhatod a lehetőségeket. Ezután térj vissza ehhez az oktatójátékhoz, és tanuld meg a többit is!"
 
-#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
+#: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:751
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

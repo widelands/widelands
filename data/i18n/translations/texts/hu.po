@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -10,14 +10,14 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2025
+# Tóth András <txa-dev@posteo.hu>, 2021-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-21 03:18+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +104,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "További információkért és segítségért keress minket a %1% (honlap, wiki, fórum a kérdéseknek illetve általános segítséghez), a %2% (hibakövető), vagy a %3% (fordítások) címen."
+msgstr "További információkért és segítségért keress minket az alábbi helyeken: %1% (honlap, wiki, fórum a kérdéseknek illetve általános segítséghez), %2% (hibakövető), vagy %3% (fordítások)"
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -214,13 +214,13 @@ msgid "Elders"
 msgstr "Vének"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:421
+#: ../../../../data/txts/developers.lua:423
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:365
-#: ../../../../data/txts/developers.lua:428
+#: ../../../../data/txts/developers.lua:367
+#: ../../../../data/txts/developers.lua:430
 msgid "Homepage"
 msgstr "Honlap"
 
@@ -229,7 +229,7 @@ msgid "Scripting"
 msgstr "Parancsfájlok"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:436
+#: ../../../../data/txts/developers.lua:438
 msgid "Sound"
 msgstr "Hang"
 
@@ -245,103 +245,103 @@ msgstr "Nyelvek"
 msgid "Coders"
 msgstr "Programozók"
 
-#: ../../../../data/txts/developers.lua:151
+#: ../../../../data/txts/developers.lua:152
 msgid "Graphicians"
 msgstr "Grafikusok"
 
-#: ../../../../data/txts/developers.lua:189
+#: ../../../../data/txts/developers.lua:191
 msgid "Musicians"
 msgstr "Zenészek"
 
-#: ../../../../data/txts/developers.lua:208
+#: ../../../../data/txts/developers.lua:210
 msgid "Sound Effects"
 msgstr "Hanghatások"
 
-#: ../../../../data/txts/developers.lua:224
+#: ../../../../data/txts/developers.lua:226
 msgid "Maps and Missions"
 msgstr "Térképek és hadjáratok"
 
-#: ../../../../data/txts/developers.lua:262
+#: ../../../../data/txts/developers.lua:264
 msgid "Campaign Story"
 msgstr "A hadjárat története"
 
-#: ../../../../data/txts/developers.lua:266
+#: ../../../../data/txts/developers.lua:268
 msgid "Barbarians"
 msgstr "Barbárok"
 
-#: ../../../../data/txts/developers.lua:274
+#: ../../../../data/txts/developers.lua:276
 msgid "Empire"
 msgstr "Birodalom"
 
-#: ../../../../data/txts/developers.lua:281
+#: ../../../../data/txts/developers.lua:283
 msgid "Atlanteans"
 msgstr "Atlantisziak"
 
-#: ../../../../data/txts/developers.lua:289
+#: ../../../../data/txts/developers.lua:291
 msgid "Frisians"
 msgstr "Frízek"
 
-#: ../../../../data/txts/developers.lua:297
+#: ../../../../data/txts/developers.lua:299
 msgid "Packagers"
 msgstr "Csomagkészítők"
 
-#: ../../../../data/txts/developers.lua:301
+#: ../../../../data/txts/developers.lua:303
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:307
+#: ../../../../data/txts/developers.lua:309
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:315
+#: ../../../../data/txts/developers.lua:317
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:321
+#: ../../../../data/txts/developers.lua:323
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:327
+#: ../../../../data/txts/developers.lua:329
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:334
+#: ../../../../data/txts/developers.lua:336
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:346
+#: ../../../../data/txts/developers.lua:348
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:357
+#: ../../../../data/txts/developers.lua:359
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../../../data/txts/developers.lua:369
+#: ../../../../data/txts/developers.lua:371
 msgid "Homepage Coders"
 msgstr "Honlap fejlesztői és karbantartói"
 
-#: ../../../../data/txts/developers.lua:380
+#: ../../../../data/txts/developers.lua:382
 msgid "Documentation, Help and Wiki"
 msgstr "Fejlesztői, felhasználói kézikönyv és Wiki"
 
-#: ../../../../data/txts/developers.lua:398
+#: ../../../../data/txts/developers.lua:400
 msgid "Add-Ons"
 msgstr "Bővítmények"
 
-#: ../../../../data/txts/developers.lua:417
+#: ../../../../data/txts/developers.lua:419
 msgid "Former Elders"
 msgstr "Korábbi vének"
 
-#: ../../../../data/txts/developers.lua:443
+#: ../../../../data/txts/developers.lua:445
 msgid "Translation"
 msgstr "Fordítás"
 
-#: ../../../../data/txts/developers.lua:452
+#: ../../../../data/txts/developers.lua:454
 msgid "Other"
 msgstr "Mások"
 
-#: ../../../../data/txts/developers.lua:460
+#: ../../../../data/txts/developers.lua:462
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
@@ -355,7 +355,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr "Ha dokumentációra vagy segítségre lenne szükséged a Widelandshez játékhoz vagy a térképszerkesztőhöz, bátran keresd fel honlapunkat itt: %s. Ott online segítséget találhatsz a Wikinkben."
+msgstr "Ha dokumentációra vagy segítségre lenne szükséged a Widelandshez vagy a térképszerkesztőhöz, bátran keresd fel honlapunkat, ahol online segítséget találhatsz a Wikinkben: %s"
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
@@ -511,7 +511,7 @@ msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről tal�
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr "Az amazonok szeretik a fákat. Építs elég dzsungel fenntartó kunyhót, hogy legyen sok nekik."
+msgstr "Az amazonok szeretik a fákat. Építs elég dzsungelfenntartó kunyhót, hogy legyen sok nekik."
 
 #: ../../../../data/txts/tips/amazons.lua:8
 msgid ""
@@ -807,46 +807,47 @@ msgstr "Több gazdaságod is lehet egyszerre, ha ezeket nem köti össze semmily
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Néhány épületnek, mint a földbirtoknak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
+msgstr "Néhány épületnek, mint például a földbirtoknak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
-"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr "Az egér görgőjével vagy a %1%/%2% billentyűkkel tudod a képet nagyítani/kicsinyíteni. Nyomd meg a %3% billentyűt a nagyítás alaphelyzetbe állításához."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
+"maximum/minimum zoom level. Press %5% to reset the zoom."
+msgstr "Az egér görgőjével vagy a %1%/%2% billentyűkkel tudod a képet nagyítani/kicsinyíteni, a %3%/%4% billentyűkkel tudsz a legnagyobb/legkisebb méretre váltani, a %5% billentyűvel pedig visszaállíthatod alaphelyzetbe a nagyítást."
 
-#: ../../../../data/txts/tips/general_game.lua:84
+#: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "A %1$s és a %2$s billentyűkkel vissza, illetve előre léphetsz a világ nemrégiben meglátogatott helyei között."
 
-#: ../../../../data/txts/tips/general_game.lua:88
+#: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "A %1%/%2%billentyűkkel gyorsíthatod/lassíthatod az idő múlását. A %3%/%4% billentyűkkel gyorsan, a %5%/%6% billentyűkkel finoman változtathatod a sebességet."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "kurzor"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + kurzor"
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "A %1% billentyűkkel tudod a térkép látható területét mozgatni. A %2% gyorsabban, a %3% lassabban mozgatja a térképet."
 
-#: ../../../../data/txts/tips/general_game.lua:98
+#: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + kurzor"
 
-#: ../../../../data/txts/tips/general_game.lua:102
+#: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
 "If you play on a laptop with a touchpad, you can assign functionality to "
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
@@ -854,13 +855,19 @@ msgid ""
 "scrolling instead of dragging with the right mouse button."
 msgstr "Ha érintőpárnás laptopon játszol, az érintőpárnás görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpárnán mint a jobb gombos mozgatással."
 
-#: ../../../../data/txts/tips/general_game.lua:106
+#: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
 msgstr "Amikor egy épület megsemmisül, a benne lévő munkások keresnek egy közeli zászlót, ahonnan út vezet egy raktárba. Ha nincs a közelben ilyen zászló, akkor egy ideig vándorolnak, majd idővel elpusztulnak."
+
+#: ../../../../data/txts/tips/general_game.lua:112
+msgid ""
+"Trading can help your economy and strengthen relationships between players. "
+"Learn the basics in the tutorial ‘Economy and Trading’."
+msgstr "A kereskedés kisegítheti a gazdaságodat a nehézségek idején, és megerősíti a kapcsolatot a játékosok között. A használatának az alapjait a „Gazdaság és kereskedelem” oktatójátékban tanulhatod meg."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""

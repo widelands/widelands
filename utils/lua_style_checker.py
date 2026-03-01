@@ -7,18 +7,21 @@
 import os
 import re
 import sys
-from file_utils import read_text_file, find_files
+from file_utils import find_files
 
 
 def check_line(filename, lidx, line, print_error=True):
     e = 0
-    for method in ['(^|[^A-Za-z0-9_])_', 'gettext']:
-        for stringtype in ['"', '\[=*\[']:
+    # check if i18n functions have parentheses
+    check_i18n = '_' in line or 'gettext' in line  # s1 in s2 is much faster than re.search()
+    for method in ['(^|[^A-Za-z0-9_])_', 'gettext'] if check_i18n else []:
+        for stringtype in ['"',  r'\[=*\[']:
             if re.compile(method + ' *' + stringtype).search(line):
                 e = e + 1
                 if print_error:
                     print('Optional parentheses missing at {}:{}: {}'.format(
-                        filename, lidx, line))
+                        filename, lidx, line), end='')
+    # possibly more checks
     return e
 
 
@@ -58,10 +61,19 @@ if errors > 0:
     sys.exit(1)
 
 # Actual check
-for filename in find_files(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
-    for lidx, line in enumerate(read_text_file(filename).strip().split('\n')):
-        errors += check_line(re.compile(r""".*widelands.(.*)""")
-                             .search(filename).group(1), lidx, line)
+for filename in find_files(os.path.relpath(os.path.join(os.path.dirname(__file__), '..')), ['.lua', '.rst', '.rst.org']):
+    if filename.endswith('.lua'):
+        for lidx, line in enumerate(open(filename, 'r')):
+            errors += check_line(filename, lidx, line)
+    else:  # rst file
+        checking = True
+        for lidx, line in enumerate(open(filename, 'r')):
+            if checking:
+                checking = line != '.. code-block:: ini\n'  # disable checking in an ini block
+            else:
+                checking = line[:1] not in (' ', '\n')  # enable checking at end of block
+            if checking:
+                errors += check_line(filename, lidx, line)
 
 if errors > 0:
     print('\nThere were {} error(s), please fix!'.format(errors))

@@ -11,7 +11,7 @@ local r = {
    rt(
       pagetitle(_("Licensing information for Widelands")) ..
       -- TRANSLATORS: Placeholder is copyright end year
-      subtitle(_("Copyright 2002 - %1% by the Widelands Development Team.")):bformat(2025) ..
+      subtitle(_("Copyright 2002 - %1% by the Widelands Development Team.")):bformat(2026) ..
 
       h2(_("This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0 (or, at your option, any later version).")) ..
 

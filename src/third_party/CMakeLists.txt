@@ -67,8 +67,6 @@ wl_library(third_party_eris
     eris/ltm.h
     eris/lua.h
     eris/lua.hpp
-    eris/lua.c
-    eris/luac.c
     eris/luaconf.h
     eris/lualib.h
     eris/lundump.c

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -540,6 +540,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
+	// Mark playlist config values as used to prevent errors with the options system
+	// for these auto-generated config keys
+	Section* sec = get_config_section_ptr("songs");
+	if (sec != nullptr) {
+		sec->mark_values();
+	}
+
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 
@@ -820,6 +827,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 		return;
 	}
 
+	const uint32_t random_seed = section.get_natural("random_seed", RNG::static_rand());
+
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
@@ -900,6 +909,7 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	}
 
 	Widelands::Game game;
+	game.logic_rand_seed(random_seed);
 	std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 	if (settings->has_players_tribe()) {
 		tipstexts.push_back(settings->get_players_tribe());
