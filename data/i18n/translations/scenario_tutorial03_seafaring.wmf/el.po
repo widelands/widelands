@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # erimitis, 2018
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -211,11 +211,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Πλοία"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Φτιάξτε δύο πλοία"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
@@ -258,7 +258,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
-msgstr ""
+msgstr "Καθόλου Σίδηρος"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
@@ -358,11 +358,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Αποστολή"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Έναρξη αποστολής"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -670,7 +670,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "Συμπέρασμα"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"

@@ -14,8 +14,8 @@ wl.Descriptions():new_militarysite_type {
    spritesheets = {
       idle = {
          hotspot = {22, 72},
-         frames = 4,
-         columns = 2,
+         frames = 10,
+         columns = 5,
          rows = 2,
          fps = 10
       }

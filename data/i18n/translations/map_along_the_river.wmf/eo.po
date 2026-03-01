@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ximena Delgado, 2022
+# 849a7dcbc7a1ab760f05f479eb1c8198_963006c, 2022
 # Raúl Contreras, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Raúl Contreras, 2024\n"
 "Language-Team: Esperanto (https://app.transifex.com/widelands/teams/35159/eo/)\n"

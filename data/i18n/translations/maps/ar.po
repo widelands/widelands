@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-12 03:24+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -85,7 +85,7 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "الإمبراطورية الثانية"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
@@ -113,7 +113,7 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "أشهر المنفى"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
@@ -138,7 +138,7 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "جري النار"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
@@ -342,14 +342,15 @@ msgid ""
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
-msgid "Economy"
-msgstr "الإقتصاد"
+msgid "Economy and Trading"
+msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "في هذا الدرس التعليمي، سوف تتعلم الخيارات التي توفرها لك \"الأرض الواسعة\" لكي تُعدل إقتصادك. يُنصح به للاعبين الذين لديهم بعض الخبرة."
+"In this tutorial, you will learn what options Widelands offers to adjust "
+"your economy, and how to trade with other players. Recommended for players "
+"with some experience."
+msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
@@ -777,7 +778,7 @@ msgstr "منافسه خاصة في الثقافة الاطلنطية مُسما�
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "المُهَرِبون"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""

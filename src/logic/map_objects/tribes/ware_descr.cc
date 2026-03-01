@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,10 @@ void WareDescr::set_default_target_quantity(const std::string& tribename, int qu
 		                    quantity, tribename.c_str(), name().c_str());
 	}
 	default_target_quantities_[tribename] = quantity;
+}
+
+int WareDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
 }
 
 void WareDescr::set_preciousness(const std::string& tribename, int preciousness) {

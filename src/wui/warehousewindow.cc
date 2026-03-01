@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "logic/player.h"
 #include "wui/buildingwindow.h"
 #include "wui/economy_options_window.h"
+#include "wui/fleet_options_window.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/soldier_statistics_menu.h"
 #include "wui/soldierlist.h"
@@ -191,6 +192,16 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	}
 
 	buttons->add_inf_space();
+
+	if (wh.get_portdock() != nullptr) {
+		b = new UI::Button(buttons, "configure_ship_fleet", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+		                   g_image_cache->get("images/wui/fieldaction/menu_tab_ship_targets.png"),
+		                   _("Configure this ocean’s ship fleet"));
+		buttons->add(b);
+
+		b->sigclicked.connect(
+		   [&ib, &wh]() { FleetOptionsWindow::create(&ib, ib, wh.get_portdock()); });
+	}
 
 	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 	                   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),

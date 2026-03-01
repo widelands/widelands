@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
 "Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "إبنى مصنع الصهر"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
@@ -916,7 +916,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr ""
+msgstr "المهمة إكتملت"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
@@ -947,13 +947,13 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "النصر"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "لقد أكملت المهمة. أنت ربما تُكمل اللعب إذا أردت، غير ذلك تحرك إلي المهمة التالية."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"

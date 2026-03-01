@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2025 by the Widelands Development Team
+ * Copyright (C) 2007-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -170,7 +170,7 @@ private:
 	enum class Override : uint8_t { kNoOverride = 0, kHidden = 1, kRevealed = 2 };
 	uint16_t value_ : 14;
 	// Not using the Override type for the variable because it causes a warning in GCC<8.4
-	uint8_t override_ : 2;
+	uint16_t override_ : 2;
 };
 
 }  // namespace Widelands

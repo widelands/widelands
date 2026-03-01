@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -341,14 +341,24 @@ void InteractiveBase::rebuild_mapview_menu() {
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
-	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset, false));
-
-	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut, false));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Maximum Zoom"), MapviewMenuEntry::kZoomMax,
+	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomMax, false));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Minimum Zoom"), MapviewMenuEntry::kZoomMin,
+	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomMin, false));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
+	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset, false));
 
 	mapviewmenu_.select(last_selection);
 }
@@ -369,6 +379,24 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	} break;
 	case MapviewMenuEntry::kIncreaseZoom: {
 		map_view()->increase_zoom();
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kZoomMax: {
+		if (map_view()->zoom_at_max()) {
+			map_view()->zoom_to_saved();
+		} else {
+			map_view()->zoom_save();
+			map_view()->zoom_to_max();
+		}
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kZoomMin: {
+		if (map_view()->zoom_at_min()) {
+			map_view()->zoom_to_saved();
+		} else {
+			map_view()->zoom_save();
+			map_view()->zoom_to_min();
+		}
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kResetZoom: {

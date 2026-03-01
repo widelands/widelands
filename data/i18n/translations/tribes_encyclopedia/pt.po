@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2019\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -17116,17 +17116,17 @@ msgstr ""
 #. TRANSLATORS: Size of a map immovablee
 #: ../../../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Médios"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -17193,7 +17193,7 @@ msgstr ""
 #. productionsite
 #: ../../../../data/tribes/scripting/help/format_help.lua:285
 msgid "Wares consumed:"
-msgstr ""
+msgstr "Mercadorias consumidas"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:35
 #: ../../../../data/tribes/scripting/help/ware_help.lua:30
@@ -17212,7 +17212,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
@@ -17232,7 +17232,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Enciclopédia da tribo"
 
 #: ../../../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
@@ -17245,7 +17245,7 @@ msgstr "Dicas"
 
 #: ../../../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
-msgstr ""
+msgstr "Mercadorias"
 
 #: ../../../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # erimitis, 2018
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
 "Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -82,7 +82,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Εφοδιάστε τους μεταλλωρύχους σας με φαγητό"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
@@ -457,7 +457,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "Νίκη"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264
@@ -511,4 +511,4 @@ msgstr ""
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ολοκληρώσατε αυτήν την αποστολή. Εάν το επιθυμείτε, μπορείτε να συνεχίσετε να παίζετε, αλλιώς συνεχίστε με την επόμενη αποστολή."

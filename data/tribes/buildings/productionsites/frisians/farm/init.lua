@@ -40,9 +40,9 @@ wl.Descriptions():new_productionsite_type {
       },
       build = {
          hotspot = {91, 90},
-         frames = 2,
+         frames = 4,
          columns = 2,
-         rows = 1
+         rows = 2
       }
    },
    animations = {

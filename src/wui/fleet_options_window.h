@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2025 by the Widelands Development Team
+ * Copyright (C) 2023-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ public:
 	enum class Type { kShip, kFerry };
 
 	static FleetOptionsWindow&
-	create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface);
+	create(UI::Panel* parent, InteractiveBase& ibase, Widelands::MapObject* interface);
 	~FleetOptionsWindow() override;
 
 	UI::Panel::SaveType save_type() const override {
@@ -46,7 +46,10 @@ protected:
 	void think() override;
 
 private:
-	FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::Bob* interface);
+	FleetOptionsWindow(UI::Panel* parent,
+	                   InteractiveBase& ibase,
+	                   Type t,
+	                   Widelands::MapObject* interface);
 
 	void set_target(Widelands::Quantity target);
 	Widelands::Quantity get_current_target() const;
@@ -55,7 +58,7 @@ private:
 	InteractiveBase& ibase_;
 	bool can_act_;
 	Type type_;
-	Widelands::OPtr<Widelands::Bob> interface_;
+	Widelands::OPtr<Widelands::MapObject> interface_;
 	bool is_updating_{false};
 
 	UI::Box main_box_;
