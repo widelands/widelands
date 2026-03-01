@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1941,8 +1941,9 @@ std::multimap<uint32_t, const Market*> Player::get_markets(Coords closest_to) co
 			for (const BuildingStats& bs : get_building_statistics(di)) {
 				if (!bs.is_constructionsite) {
 					Path unused;
-					int32_t distance = map.findpath(closest_to, map.br_n(bs.pos), 0, unused,
-					                                CheckStepDefault(MOVECAPS_WALK), 0, 0, wwWORKER);
+					int32_t distance =
+					   map.findpath(closest_to, map.br_n(bs.pos), 0, unused,
+					                CheckStepDefault(MOVECAPS_WALK), Map::fpBidiCost, 0, wwWORKER);
 					if (distance >= 0) {
 						result.emplace(
 						   distance, dynamic_cast<const Market*>(map[bs.pos].get_immovable()));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,6 +147,10 @@ void WorkerDescr::set_default_target_quantity(int quantity) {
 		   "default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
 	}
 	default_target_quantity_ = quantity;
+}
+
+int WorkerDescr::preciousness(const std::string& tribename) const {
+	return ai_hints_->preciousness(tribename);
 }
 
 void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {

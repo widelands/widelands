@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025 by the Widelands Development Team
+ * Copyright (C) 2024-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -687,7 +687,7 @@ private:
 	void rebuild_extensions() {
 		extensions_box_.delete_all_children();
 		extensions_box_.set_desired_size(0, 0);
-		set_desired_size(0, 0);
+		set_size(0, 0);
 
 		MutexLock m(MutexLock::ID::kObjects);
 		if (const Widelands::Market* market = market_.get(ibase_.egbase()); market != nullptr) {

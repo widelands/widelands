@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2025 by the Widelands Development Team
+ * Copyright (C) 2010-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -471,17 +471,12 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 					wh->incorporate_worker(game, worker);
 				}
 			}
-			items_.clear();
 
-			ship_type_ = pending_refit_;
-			erase_warship_soldier_request_manager();
-
+			set_ship_type(game, pending_refit_);
 			if (ship_type_ == ShipType::kWarship) {
-				start_task_expedition(game);
 				set_destination(game, dest);
-			} else {
-				exp_cancel(game);
 			}
+
 		} else {
 			// Destination vanished, try to find a new one
 			molog(game.get_gametime(), "Refit failed, retry\n");
@@ -582,9 +577,28 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 					      cur.x, cur.y, idx);
 
 					Path subpath(cur);
+
 					while (idx < path.get_nsteps()) {
 						subpath.append(map, path[idx]);
+						map.get_neighbour(cur, path[idx], &cur);
 						idx++;
+						if ((map[cur].nodecaps() & MOVECAPS_SWIM) == 0) {
+							molog(game.get_gametime(),
+							      "Non swimmable terrain at (%i,%i) recalculate path to port %u\n", cur.x,
+							      cur.y, destination->serial());
+							fleet_->remove_port(game, destination);
+							fleet_->add_port(game, destination);
+							if (!fleet_->get_path(*lastdock, *destination, path)) {
+								fleet_->split(game);
+								send_message(game,
+								             /** TRANSLATORS: Ship fleets had to be split */
+								             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+								             _("A ship fleet had to be split, because a terrain change "
+								               "blocked a passage."),
+								             descr().icon_filename());
+							}
+							return true;
+						}
 					}
 
 					start_task_movepath(game, subpath, descr().get_sail_anims());
@@ -1066,18 +1080,22 @@ bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
 
-#ifndef NDEBUG
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
-	assert(!egbase.is_game());
+	items_.clear();
+
 	ship_type_ = t;
 	pending_refit_ = ship_type_;
+
+	erase_warship_soldier_request_manager();
+
+	if (upcast(Game, game, &egbase)) {
+		if (ship_type_ == ShipType::kWarship) {
+			start_task_expedition(*game);
+		} else {
+			exp_cancel(*game);
+		}
+	}
 }
-#else
-void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
-	ship_type_ = t;
-	pending_refit_ = ship_type_;
-}
-#endif
 
 void Ship::refit(Game& game, const ShipType type) {
 	if (!can_refit(type)) {
@@ -1119,12 +1137,13 @@ PortDock* Ship::find_nearest_port(Game& game) {
 	for (PortDock* pd : fleet_->get_ports()) {
 		Path path;
 		int32_t d = -1;
-		calculate_sea_route(game, *pd, &path);
-		game.map().calc_cost(path, &d, nullptr);
-		assert(d >= 0);
-		if (nearest == nullptr || d < dist) {
-			dist = d;
-			nearest = pd;
+		if (calculate_sea_route(game, *pd, &path) != std::numeric_limits<uint32_t>::max()) {
+			game.map().calc_cost(path, &d, nullptr);
+			assert(d >= 0);
+			if (nearest == nullptr || d < dist) {
+				dist = d;
+				nearest = pd;
+			}
 		}
 	}
 
@@ -1627,12 +1646,14 @@ void Ship::battle_update(Game& game) {
 					return si.get_object_serial() == serial;
 				});
 				if (it == items_.end()) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not on ship", serial);
 					continue;
 				}
 
 				Worker* worker;
 				it->get(game, nullptr, &worker);
 				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not a soldier", serial);
 					continue;
 				}
 
@@ -1650,6 +1671,8 @@ void Ship::battle_update(Game& game) {
 					    map.findpath(
 					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
+						molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial,
+						      coords.x, coords.y);
 						break;
 					}
 				}
@@ -2207,8 +2230,14 @@ bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	   game.get_gametime(),
 	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
-	if (get_fleet() != nullptr) {
-		get_fleet()->update(game);
+	ShipFleet* fleet = fleet_ != nullptr ? fleet_ : pd.get_fleet();
+	if (fleet != nullptr) {
+		fleet->split(game);
+		send_message(game,
+		             /** TRANSLATORS: Ship fleets had to be split */
+		             pgettext("ship", "Fleet split"), _("Ship Fleet split"),
+		             _("A ship fleet had to be split, because a terrain change blocked a passage."),
+		             descr().icon_filename());
 	}
 	return false;
 }
@@ -2866,6 +2895,14 @@ void Ship::Loader::load_pointers() {
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
 			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
+		}
+	}
+
+	for (Battle& battle : battles_) {
+		for (uint32_t& serial : battle.attack_soldier_serials) {
+			// Convert file indices to actual serials
+			Soldier& soldier = mol().get<Soldier>(serial);
+			serial = soldier.serial();
 		}
 	}
 

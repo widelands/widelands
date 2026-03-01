@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,50 @@ EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
 	clicked.connect([this] { select_correct_tool(); });
 }
 
+EditorToolOptionsMenu::~EditorToolOptionsMenu() {
+	if (picker_is_active()) {
+		deactivate_picker();
+	}
+	assert(!picker_is_active());
+}
+
+/**
+ * Handle message menu hotkeys.
+ */
+bool EditorToolOptionsMenu::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		if (uses_picker() && matches_shortcut(KeyboardShortcut::kEditorPicker, code)) {
+			toggle_picker();
+			return true;
+		}
+	}
+	return UI::UniqueWindow::handle_key(down, code);
+}
+
 void EditorToolOptionsMenu::select_correct_tool() {
 	parent_.select_tool(current_tool_, EditorTool::First);
+}
+
+bool EditorToolOptionsMenu::picker_is_active() const {
+	return parent_.tools() != nullptr && &parent_.tools()->current() == &parent_.tools()->picker &&
+	       parent_.tools()->picker.get_linked_tool() == this;
+}
+
+void EditorToolOptionsMenu::activate_picker() {
+	parent_.tools()->picker.set_linked_tool(this);
+	parent_.select_tool(parent_.tools()->picker, EditorTool::First);
+}
+
+void EditorToolOptionsMenu::deactivate_picker() {
+	assert(picker_is_active());
+	parent_.tools()->picker.set_linked_tool(nullptr);
+	select_correct_tool();
+}
+
+void EditorToolOptionsMenu::toggle_picker() {
+	if (picker_is_active()) {
+		deactivate_picker();
+	} else {
+		activate_picker();
+	}
 }

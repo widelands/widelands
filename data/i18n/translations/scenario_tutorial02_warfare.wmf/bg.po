@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Любомир Василев, 2016-2017\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -159,7 +159,7 @@ msgstr "Докато чакаме бойната арена, може да за�
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Бойна арена"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
@@ -241,7 +241,7 @@ msgstr "Постройте тренировъчен лагер."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Тренировъчен лагер"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
@@ -286,7 +286,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Разузнаваческа колиба"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
@@ -355,7 +355,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Разузнавач"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"

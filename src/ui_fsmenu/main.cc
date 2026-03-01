@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1080,7 +1080,9 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 
-		internet_login(false);
+		if (!internet_login(false)) {
+			break;
+		}
 
 		get_config_string("nickname", nickname_);
 		// Only change the password if we use a registered account
@@ -1088,6 +1090,7 @@ void MainMenu::action(const MenuTarget t) {
 			get_config_string("password_sha1", password_);
 		}
 
+		assert(!nickname_.empty());
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
 	} break;
 
@@ -1153,8 +1156,10 @@ void MainMenu::internet_login_callback() {
  * IF at least a name is set, all data is read from the config file
  *
  * This fullscreen menu ends it's modality.
+ *
+ * The return value indicates whether the caller should proceed with launching the lobby.
  */
-void MainMenu::internet_login(const bool launch_metaserver) {
+bool MainMenu::internet_login(const bool launch_metaserver) {
 	nickname_ = get_config_string("nickname", "");
 	password_ = get_config_string("password_sha1", "no_password_set");
 	register_ = get_config_bool("registered", false);
@@ -1164,7 +1169,7 @@ void MainMenu::internet_login(const bool launch_metaserver) {
 	if (!InternetGaming::ref().valid_username(nickname_)) {
 		auto_log_ = true;
 		show_internet_login(true);
-		return;
+		return false;
 	}
 
 	// Try to connect to the metaserver
@@ -1189,7 +1194,10 @@ void MainMenu::internet_login(const bool launch_metaserver) {
 		set_config_string("password_sha1", "no_password_set");
 		auto_log_ = true;
 		show_internet_login(true);
+		return false;
 	}
+
+	return true;
 }
 
 }  //  namespace FsMenu

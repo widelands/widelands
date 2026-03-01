@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 by the Widelands Development Team
+ * Copyright (C) 2021-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,10 @@ public:
 			parent_.unsubscribe(this);
 		}
 
+		[[nodiscard]] const Signal& get_parent() const {
+			return parent_;
+		}
+
 	private:
 		const Signal& parent_;
 		DISALLOW_COPY_AND_ASSIGN(SignalSubscriber);
@@ -85,9 +89,12 @@ public:
 	}
 
 	/** Create a subscriber with the same lifetime as the signal. */
-	inline void connect(std::function<void(Args...)> callback,
-	                    SubscriberPosition pos = SubscriberPosition::kBack) const {
-		owned_subscribers_.insert(subscribe(callback, pos));
+	inline std::weak_ptr<SignalSubscriber>
+	connect(std::function<void(Args...)> callback,
+	        SubscriberPosition pos = SubscriberPosition::kBack) const {
+		std::shared_ptr<SignalSubscriber> sub = subscribe(callback, pos);
+		owned_subscribers_.insert(sub);
+		return sub;
 	}
 
 	/**
@@ -103,8 +110,18 @@ public:
 	subscribe(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
 		return subscribe([&s](Args... args) { s(args...); }, pos);
 	}
-	inline void connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
-		connect([&s](Args... args) { s(args...); }, pos);
+	inline std::weak_ptr<SignalSubscriber>
+	connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
+		return connect([&s](Args... args) { s(args...); }, pos);
+	}
+
+	/** Prematurely end the lifetime of a subscriber created via connect(). */
+	void unsubscribe_owned(std::shared_ptr<SignalSubscriber> sub) const {
+		auto it = owned_subscribers_.find(sub);
+		if (it == owned_subscribers_.end()) {
+			throw wexception("Signal::unsubscribe_owned: not found");
+		}
+		owned_subscribers_.erase(it);
 	}
 
 	Signal() = default;
@@ -133,7 +150,7 @@ private:
 	 * to be const-qualified while still being able to add/remove subscribers to/from
 	 * these lists. So these two member variables need to be declared mutable.
 	 */
-	mutable std::set<std::unique_ptr<SignalSubscriber>> owned_subscribers_;
+	mutable std::set<std::shared_ptr<SignalSubscriber>> owned_subscribers_;
 	mutable std::list<std::pair<SignalSubscriber*, std::function<void(Args...)>>> all_subscribers_;
 
 	DISALLOW_COPY_AND_ASSIGN(Signal);

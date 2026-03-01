@@ -36,8 +36,8 @@ wl.Descriptions():new_market_type {
       },
       build = {
          hotspot = {90, 95},
-         frames = 3,
-         columns = 3,
+         frames = 5,
+         columns = 5,
          rows = 1
       }
    },
