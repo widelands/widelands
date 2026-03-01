@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2025 by the Widelands Development Team
+ * Copyright (C) 2020-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,9 +101,9 @@ create_sort_functor(const AddOnSortingCriteria sort_by) {
 			return a->download_count > b->download_count;
 
 		case AddOnSortingCriteria::kOldest:
-			return a->upload_timestamp < b->upload_timestamp;
+			return a->edit_timestamp < b->edit_timestamp;
 		case AddOnSortingCriteria::kNewest:
-			return a->upload_timestamp > b->upload_timestamp;
+			return a->edit_timestamp > b->edit_timestamp;
 
 		case AddOnSortingCriteria::kLowestRating:
 			if (a->number_of_votes() == 0) {
@@ -1461,6 +1461,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		i->author = [bug]() { return bug; };
 		i->upload_username = bug;
 		i->upload_timestamp = std::time(nullptr);
+		i->edit_timestamp = std::time(nullptr);
 		i->icon = g_image_cache->get(AddOns::kAddOnCategories.at(AddOns::AddOnCategory::kNone).icon);
 		i->sync_safe = true;  // suppress useless warning
 		remotes_ = {i};

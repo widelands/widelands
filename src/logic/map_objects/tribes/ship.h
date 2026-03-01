@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2025 by the Widelands Development Team
+ * Copyright (C) 2010-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -303,6 +303,9 @@ struct Ship : Bob {
 	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;
+	}
+	void set_hitpoints(uint32_t hp) {
+		hitpoints_ = hp;
 	}
 	[[nodiscard]] uint32_t get_warship_soldier_capacity() const {
 		return warship_soldier_capacity_;

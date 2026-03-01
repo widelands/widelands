@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Alex Rijckaert, 2023,2025
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-12-22 03:36+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Alex Rijckaert, 2023,2025\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -813,7 +813,7 @@ msgstr "Sommige gebouwen, zoals de boerderij, hebben een heel klein werkgebied. 
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Zoom in/uit met het muiswiel of %1%/%2%. Druk op %3%/%4% voor het maximale/minimale zoomniveau. Druk op %5% om het zoomniveau te resetten."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""

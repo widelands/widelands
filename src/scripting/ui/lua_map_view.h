@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@ public:
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
 	int get_toolbar(lua_State* L);
+	int get_plugin_timers(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -73,6 +74,8 @@ public:
 	int set_keyboard_shortcut(lua_State* L);
 	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
+	int get_plugin_timer(lua_State* L);
+	int remove_plugin_timer(lua_State* L);
 	int subscribe_to_jump(lua_State* L);
 	int subscribe_to_changeview(lua_State* L);
 	int subscribe_to_track_selection(lua_State* L);

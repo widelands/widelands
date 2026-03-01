@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,7 @@
 #include "scripting/ui/lua_table.h"
 #include "scripting/ui/lua_text_input_panel.h"
 #include "scripting/ui/lua_textarea.h"
+#include "scripting/ui/lua_timer.h"
 #include "scripting/ui/lua_window.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
@@ -472,6 +473,9 @@ void luaopen_wlui(lua_State* L, const bool game_or_editor) {
 
 	register_class<LuaWindow>(L, "ui", true);
 	add_parent<LuaWindow, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaTimer>(L, "ui", true);
 	lua_pop(L, 1);  // Pop the meta table
 
 	if (game_or_editor) {
