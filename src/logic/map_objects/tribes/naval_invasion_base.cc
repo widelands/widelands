@@ -177,6 +177,8 @@ void NavalInvasionBase::check_enemies(Game& game) {
 		for (const OPtr<Soldier>& soldier : soldiers_) {
 			if (map.calc_distance(soldier.get(game)->get_position(), get_position()) <=
 			    kPortSpaceGeneralAreaRadius) {
+				molog(egbase.get_gametime(), "conquering area at %dx%d", serial(),
+				      get_position().x, get_position().y);
 				game.conquer_area(PlayerArea<Area<FCoords>>(
 				   owner().player_number(), Area<FCoords>(get_position(), Soldier::kPortSpaceRadius)));
 				did_conquer_ = true;
@@ -188,47 +190,10 @@ void NavalInvasionBase::check_enemies(Game& game) {
 	last_update_ = game.get_gametime();
 }
 
-/* Changelog:
-   1 - v1.3
-   2 - v1.4: added did_conquer_
- */
-constexpr uint8_t kCurrentPacketVersionInvasion = 2;
+constexpr uint8_t kCurrentPacketVersionInvasion = 1;
 
-void NavalInvasionBase::Loader::load(FileRead& fr, const uint8_t packet_version) {
+void NavalInvasionBase::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
-
-	NavalInvasionBase& invasion = get<NavalInvasionBase>();
-
-	// TODO(tothxa): saveloading compatibility with v1.3
-	if (packet_version > 1) {
-		invasion.did_conquer_ = (fr.unsigned_8() != 0);
-	} else {
-		// Previously the invasion base was only created when the area got conquered
-		invasion.did_conquer_ = true;
-
-		// But when two players fight for a port space, there is a short time while two bases exist
-		// when the first one is defeated. Unfortunately we can't tell which is which here, because
-		// map objects are loaded very early... So this has to be extremely ugly...
-		const FCoords& pos = invasion.get_position();
-		const ObjectManager& om = egbase().objects();
-		for (const Serial other_serial : om.all_object_serials_ordered()) {
-			if (other_serial == invasion.serial()) {
-				continue;
-			}
-			MapObject* other = om.get_object(other_serial);
-			if (other != nullptr && other->descr().type() == MapObjectType::NAVAL_INVASION_BASE) {
-				upcast(NavalInvasionBase, other_base, other);
-				if (other_base != nullptr && other_base->get_position() == pos) {
-					other_base->did_conquer_ = false;
-					invasion.did_conquer_ = false;
-					log_warn("Multiple invasion bases at %dx%d loaded from old version.", pos.x, pos.y);
-					log_warn("Invasion base %u state set to did not conquer.", other_serial);
-					log_warn("Invasion base %u state set to did not conquer.", invasion.serial());
-				}
-			}
-		}
-	}
-
 	for (size_t i = fr.unsigned_32(); i > 0; --i) {
 		soldiers_.insert(fr.unsigned_32());
 	}
@@ -249,9 +214,9 @@ Bob::Loader* NavalInvasionBase::load(EditorGameBase& egbase, MapObjectLoader& mo
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionInvasion) {
+		if (packet_version == kCurrentPacketVersionInvasion) {
 			loader->init(egbase, mol, *new NavalInvasionBase);
-			loader->load(fr, packet_version);
+			loader->load(fr);
 		} else {
 			throw UnhandledVersionError(
 			   "NavalInvasionBase", packet_version, kCurrentPacketVersionInvasion);
@@ -268,8 +233,6 @@ void NavalInvasionBase::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWr
 	fw.unsigned_8(kCurrentPacketVersionInvasion);
 
 	Bob::save(egbase, mos, fw);
-
-	fw.unsigned_8(static_cast<uint8_t>(did_conquer_));
 
 	fw.unsigned_32(soldiers_.size());
 	for (const auto& soldier : soldiers_) {
