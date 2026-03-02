@@ -177,8 +177,8 @@ void NavalInvasionBase::check_enemies(Game& game) {
 		for (const OPtr<Soldier>& soldier : soldiers_) {
 			if (map.calc_distance(soldier.get(game)->get_position(), get_position()) <=
 			    kPortSpaceGeneralAreaRadius) {
-				molog(egbase.get_gametime(), "conquering area at %dx%d", serial(),
-				      get_position().x, get_position().y);
+				molog(egbase.get_gametime(), "conquering area at %dx%d", serial(), get_position().x,
+				      get_position().y);
 				game.conquer_area(PlayerArea<Area<FCoords>>(
 				   owner().player_number(), Area<FCoords>(get_position(), Soldier::kPortSpaceRadius)));
 				did_conquer_ = true;
