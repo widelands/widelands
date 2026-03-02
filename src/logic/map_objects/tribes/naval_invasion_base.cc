@@ -199,12 +199,34 @@ void NavalInvasionBase::Loader::load(FileRead& fr, const uint8_t packet_version)
 
 	NavalInvasionBase& invasion = get<NavalInvasionBase>();
 
-	// TODO: saveloading compatibility with v1.3
+	// TODO(tothxa): saveloading compatibility with v1.3
 	if (packet_version > 1) {
 		invasion.did_conquer_ = (fr.unsigned_8() != 0);
 	} else {
 		// Previously the invasion base was only created when the area got conquered
 		invasion.did_conquer_ = true;
+
+		// But when two players fight for a port space, there is a short time while two bases exist
+		// when the first one is defeated. Unfortunately we can't tell which is which here, because
+		// map objects are loaded very early... So this has to be extremely ugly...
+		const FCoords& pos = invasion.get_position();
+		const ObjectManager& om = egbase().objects();
+		for (const Serial other_serial : om.all_object_serials_ordered()) {
+			if (other_serial == invasion.serial()) {
+				continue;
+			}
+			MapObject* other = om.get_object(other_serial);
+			if (other != nullptr && other->descr().type() == MapObjectType::NAVAL_INVASION_BASE) {
+				upcast(NavalInvasionBase, other_base, other);
+				if (other_base != nullptr && other_base->get_position() == pos) {
+					other_base->did_conquer_ = false;
+					invasion.did_conquer_ = false;
+					log_warn("Multiple invasion bases at %dx%d loaded from old version.", pos.x, pos.y);
+					log_warn("Invasion base %u state set to did not conquer.", other_serial);
+					log_warn("Invasion base %u state set to did not conquer.", invasion.serial());
+				}
+			}
+		}
 	}
 
 	for (size_t i = fr.unsigned_32(); i > 0; --i) {

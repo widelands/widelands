@@ -72,6 +72,10 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 			    bob->get_owner() == get_owner()) {
 				camp = dynamic_cast<NavalInvasionBase*>(bob);
 				assert(camp != nullptr);
+				camp->add_soldier(this);
+				state.objvar1 = camp;
+				log_warn_time(game.get_gametime(), "Soldier %u added to invasion base %u at %dx%d",
+				              serial(), camp->serial(), state.coords.x, state.coords.y);
 				break;
 			}
 		}
@@ -80,9 +84,14 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		// Previously the invasion base was only created when there were no enemies left.
 		// Since v1.4 it is created when the invasion starts.
 		camp = NavalInvasionBase::create(game, get_owner(), state.coords);
+		camp->add_soldier(this);
+		state.objvar1 = camp;
+		log_warn_time(game.get_gametime(), "Invasion base %u created for soldier %u at %dx%d",
+		              camp->serial(), serial(), state.coords.x, state.coords.y);
 
-		/* TODO(tothxa): Change it to error in v1.5
-		throw wexception("No naval invasion base for soldier %u at %3dx%3d", serial(), state.coords.x,
+		// TODO(tothxa): Change it to error in v1.5
+		/*
+		throw wexception("No naval invasion base for soldier %u at %dx%d", serial(), state.coords.x,
 		                 state.coords.y);
 		*/
 	}
