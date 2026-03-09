@@ -1636,14 +1636,17 @@ void Ship::battle_update(Game& game) {
 					// start new circle
 					nextdir = WALK_W;
 					step = 0;
-				} else if (++step >= radius) {
-					step = 0;
-					nextdir = get_cw_neighbour(nextdir);
-					if (nextdir == WALK_W) {
-						// finished the circle, we need a bigger one
-						nextdir = WALK_SE;
-						++radius;
-						step = -1;
+				} else {
+					++step;
+					if (step >= radius) {
+						step = 0;
+						nextdir = get_cw_neighbour(nextdir);
+						if (nextdir == WALK_W) {
+							// finished the circle, we need a bigger one
+							nextdir = WALK_SE;
+							++radius;
+							step = -1;
+						}
 					}
 				}
 			}

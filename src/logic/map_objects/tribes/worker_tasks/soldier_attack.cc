@@ -288,7 +288,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			   game.get_gametime(), "Naval invasion soldier failed to find path to target building.");
 			upcast(NavalInvasionBase, camp, invasion_state->objvar1.get(game));
 			if (camp != nullptr) {
-				camp->needs_update();
+				camp->mark_needs_update();
 			}
 		}
 

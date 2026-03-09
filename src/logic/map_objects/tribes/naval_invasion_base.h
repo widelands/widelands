@@ -62,7 +62,7 @@ public:
 		return soldiers_;
 	}
 
-	void needs_update() {
+	void mark_needs_update() {
 		last_update_ = Time(0);
 	}
 
