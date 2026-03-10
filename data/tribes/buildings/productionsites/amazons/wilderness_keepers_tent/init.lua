@@ -18,13 +18,21 @@ wl.Descriptions():new_productionsite_type {
    },
 
    animation_directory = dirname,
-   spritesheets = { idle = {
-      hotspot = {34, 38},
-      fps = 5,
-      frames = 10,
-      columns = 5,
-      rows = 2
-   }},
+   spritesheets = {
+      idle = {
+         hotspot = {34, 38},
+         fps = 5,
+         frames = 10,
+         columns = 5,
+         rows = 2
+      },
+      build = {
+         hotspot = {34, 38},
+         frames = 2,
+         columns = 2,
+         rows = 1
+      }
+   },
 
    aihints = {},
 
