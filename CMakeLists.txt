@@ -381,32 +381,60 @@ if(NOT MSVC)
   wl_add_flag(WL_GENERIC_C_LIBRARY_FLAGS "-std=c11")
 endif()
 
-# Cross-compile-unit optimization slows linking significantly.
+# Link-time optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
-if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
-# Cross-compile-unit optimization not supported by gcc with debug on!
-# Therefore, this may only be done with Release builds.
-if((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-  # Only tested on Linux. Might work also on other platforms.
-  # If tested and found good, remove this check
-  if (CMAKE_SYSTEM MATCHES "Linux")
-    # Usage of -flto tested only with gcc 8.3 and 9.3 (2020-04); when in doubt, leaving it out..
-    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 8.0))
-      #
-      # The execution jumps between compile units rather often. -flot allows optimization across
-      # comple units. Binary size reduced by >15% on tested environments. This does not directly
-      # translate to execution speed, but might still be noticeable.
-      #
-      # This is not related to -O2 or -O3 discussion, and not enable by either.
-      #
-      # If using lto, it needs to happen both during compile and link, else no benefits.
-      wl_add_flag(WL_GENERIC_CXX_FLAGS "-flto")
-      SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -flto")
-      message(STATUS "Enabling link-time optimizations")
-    endif()
-  endif(CMAKE_SYSTEM MATCHES "Linux")
-endif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"))
-endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
+
+if(NOT (
+        # after successful tests add here other platforms from https://cmake.org/cmake/help/latest/variable/CMAKE_SYSTEM_NAME.html
+        CMAKE_SYSTEM_NAME STREQUAL "Linux" OR
+        WIN32
+       ))
+  if(USE_FLTO_IF_AVAILABLE)
+    message(WARNING "Link-time optimization is experimental on this platform.")
+  endif()
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  # Example of problem on MSYS2+MINGW64, gcc 15.2.0, Debug build:
+  # lto1.exe: error: two or more sections for .gnu.lto__ZNSt11_Deque_baseISt10unique_ptrIN8AddOnsUI20AddOnSortingCriteriaESt14default_deleteIS2_EESaIS5_EE17_M_deallocate_mapEPPS5_y.167901
+  if(USE_FLTO_IF_AVAILABLE)
+    message(WARNING "Debug build with link-time optimization is not recommended.")
+  endif()
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND OPTION_ASAN)
+  # Example of problem on Ubuntu 24.04, clang 18.1.3, linker GNU ld 2.42, using AddressSanitizer:
+  # /usr/bin/ld: error: Failed to link module libwidelands_ball_of_mud.a.llvm.54194.wlapplication.cc: Expected at most one ThinLTO module per bitcode file
+  if(USE_FLTO_IF_AVAILABLE)
+    message(WARNING " Link-time optimization may fail if you use AddressSanitizer together with Clang compiler and GNU ld linker."
+                    " In case your build fails, you can try installing another linker (e.g. lld, mold or gold).\n"
+                    " Hint: to specify non-default linker (in this example lld), extend CMAKE_EXE_LINKER_FLAGS with -fuse-ld=lld"
+                    " (for cmake 3.29+ set CMAKE_LINKER_TYPE to LLD).")
+  endif()
+elseif(MSVC)
+  # Tested with Visual Studio 2022 and 2026, both Release and RelWithDebInfo build types
+  if(USE_FLTO_IF_AVAILABLE)
+    message(WARNING " Release and RelWithDebInfo builds with link-time optimization may produce invalid binary, see bug"
+                    " https://codeberg.org/wl/widelands/issues/5283")
+  endif()
+else()
+  if(NOT DEFINED USE_FLTO_IF_AVAILABLE)
+    # In case user doesn't specify USE_FLTO_IF_AVAILABLE, it is safe to turn it on
+    set(USE_FLTO_IF_AVAILABLE ON)
+  endif()
+endif()
+
+if(USE_FLTO_IF_AVAILABLE)
+  include(CheckIPOSupported)
+  check_ipo_supported(RESULT result OUTPUT output LANGUAGES C CXX)
+  if(result)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+    message(STATUS "Enabling link-time optimization")
+  else()
+    message(WARNING "Link-time optimization is not supported: ${output}")
+  endif()
+endif()
+
+# if you want to force cmake to use specific linker (e.g. for Clang+lld combination, if lld is not the default linker):
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
+# for cmake 3.29+
+#set(CMAKE_LINKER_TYPE "LLD")
 
 IF (WIN32)
   add_definitions(-D_WIN32_WINNT=0x0601)
