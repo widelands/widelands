@@ -504,7 +504,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	return soldier_descr;
 }
 
-// Parser the arguments of set_soldiers() into a setpoint. See the
+// Parses the arguments of set_soldiers() into a setpoint. See the
 // documentation in has_soldiers to understand the valid arguments.
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::SoldierDescr& soldier_descr) {
@@ -1450,7 +1450,8 @@ and :class:`~wl.map.Ship`.
    - military site
    - training site
    - warehouse
-   - ship .. versionadded:: 1.4
+   - ship
+      .. versionadded:: 1.4
 
    :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
       description. In that case amount has to be specified as well.
