@@ -300,4 +300,19 @@ bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) 
 	// We iterated over all reachanble fields or we found sufficient number of swimmable nodes
 	return accepted_nodes.size() >= min_fields;
 }
+
+// Drop points for invasion soldiers must be:
+// 1. Walkable
+// 2. Not have a flag as that would interfere with battle code
+bool FindNodeInvasion::accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
+	if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
+		return false;
+	}
+	BaseImmovable* const imm = coords.field->get_immovable();
+	if (imm == nullptr) {
+		return true;
+	}
+	return imm->descr().type() != MapObjectType::FLAG;
+}
+
 }  // namespace Widelands
