@@ -626,7 +626,6 @@ int LuaShip::set_soldiers(lua_State* L) {
 	}
 
 	for (Widelands::Soldier* s : soldiers_to_add) {
-		// s->set_location(nullptr);
 		s->start_task_shipping(game, nullptr);
 		ship->add_item(game, Widelands::ShippingItem(*s));
 	}

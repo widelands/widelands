@@ -52,6 +52,15 @@ run(function()
          ship:set_soldiers({[{0,0,0,0}] = 22})
       end
    )
+   assert_error(
+      "Multiple identical soldier descriptions give undefined result.",
+      function()
+         ship:set_soldiers({
+            [{0,0,0,0}] = 2,
+            [{0,0,0,0}] = 5,
+         })
+      end
+   )
    saved_soldiers = ship:get_soldiers("all")
    ship:set_soldiers({
       [{0,0,0,0}] = 8,

@@ -596,25 +596,46 @@ SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::Quantity soldier_capacity) {
 	SoldiersMap rv;
 	Widelands::Quantity total_count = 0;
+
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
 		const Widelands::Quantity count = luaL_checkuint32(L, 3);
 		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
 		rv.insert(SoldierAmount(d, count));
 		total_count = count;
+
 	} else {
+		// We got a table
 		lua_pushnil(L);
+		assert(soldier_capacity < std::numeric_limits<Widelands::Quantity>::max() / 2 - 1);
+
 		while (lua_next(L, 2) != 0) {
 			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
+			if (rv.find(d) != rv.end()) {
+				report_error(L, "Multiple identical soldier descriptions in set_soldiers()!");
+			}
+
 			const Widelands::Quantity count = luaL_checkuint32(L, -1);
-			rv.insert(SoldierAmount(d, count));
-			total_count += count;
+			if (count > soldier_capacity) {
+				total_count = count;
+				break;
+			}
+			if (count > 0) {
+				total_count += count;
+				if (total_count > soldier_capacity) {
+					break;
+				}
+
+				rv.insert(SoldierAmount(d, count));
+			}
 			lua_pop(L, 1);
 		}
 	}
+
 	if (total_count > soldier_capacity) {
 		report_error(L, "Too many soldiers specified for set_soldiers()!");
 	}
+
 	return rv;
 }
 

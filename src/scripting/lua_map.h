@@ -146,7 +146,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 // documentation in has_soldiers to understand the valid arguments.
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::SoldierDescr& soldier_descr,
-                                         const Widelands::Quantity soldier_capacity);
+                                         Widelands::Quantity soldier_capacity);
 
 // Does most of the work of get_soldiers for buildings.
 int do_get_soldiers(lua_State* L,
