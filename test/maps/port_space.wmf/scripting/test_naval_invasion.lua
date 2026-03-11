@@ -53,8 +53,6 @@ run(function()
       end
    )
    saved_soldiers = ship:get_soldiers("all")
-   -- first we must make room, it doesn't work in a single call
-   ship:set_soldiers({3,5,0,2}, 1)
    ship:set_soldiers({
       [{0,0,0,0}] = 8,
       [{3,5,0,2}] = 10

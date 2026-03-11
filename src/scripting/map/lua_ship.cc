@@ -606,70 +606,31 @@ int LuaShip::set_soldiers(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	Widelands::Ship* ship = get(L, game);
 	Widelands::Player* owner = ship->get_owner();
-	const Widelands::TribeDescr& tribe = owner->tribe();
-	const Widelands::SoldierDescr& soldier_descr =
-	   dynamic_cast<const Widelands::SoldierDescr&>(*tribe.get_worker_descr(tribe.soldier()));
 
-	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr);
+	const SoldiersList onboard_soldiers = ship->onboard_soldiers();
+	SoldiersList soldiers_to_delete;
+	SoldiersList soldiers_to_add;
 
-	// Get information about current soldiers
-	std::vector<Widelands::Soldier*> onboard_soldiers = ship->onboard_soldiers();
-	SoldiersMap hist;
-	for (const Widelands::Soldier* s : onboard_soldiers) {
-		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
-		                   s->get_evade_level());
-
-		SoldiersMap::iterator i = hist.find(sd);
-		if (i == hist.end()) {
-			hist[sd] = 1;
-		} else {
-			++i->second;
-		}
-		if (setpoints.count(sd) == 0u) {
-			setpoints[sd] = 0;
-		}
+	Widelands::Quantity capacity;
+	if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+		capacity = ship->get_warship_soldier_capacity();
+	} else {
+		capacity = ship->get_capacity() - ship->get_nritems() + onboard_soldiers.size();
 	}
 
-	// Now adjust them
-	for (const SoldiersMap::value_type& sp : setpoints) {
-		Widelands::Quantity cur = 0;
-		SoldiersMap::iterator i = hist.find(sp.first);
-		if (i != hist.end()) {
-			cur = i->second;
-		}
+	do_set_soldiers_inner(L, owner, ship->get_position(), capacity, onboard_soldiers,
+	                      soldiers_to_delete, soldiers_to_add);
 
-		int d = sp.second - cur;
-		if (d < 0) {
-			while (d < 0) {
-				for (auto s_it = onboard_soldiers.begin(); s_it != onboard_soldiers.end(); ++s_it) {
-					Widelands::Soldier* s = *s_it;
-					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
-					                   s->get_defense_level(), s->get_evade_level());
-
-					if (is == sp.first) {
-						ship->remove_item_by_serial(game, s->serial());
-						onboard_soldiers.erase(s_it);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			for (; d > 0; --d) {
-				if (ship->get_nritems() < ship->get_warship_soldier_capacity()) {
-					Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
-					   soldier_descr.create(game, owner, nullptr, ship->get_position()));
-					soldier.set_level(
-					   sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
-					soldier.set_location(nullptr);
-					soldier.start_task_shipping(game, nullptr);
-					ship->add_item(game, Widelands::ShippingItem(soldier));
-				} else {
-					report_error(L, "No space left for soldier!");
-				}
-			}
-		}
+	for (Widelands::Soldier* s : soldiers_to_delete) {
+		ship->remove_item_by_serial(game, s->serial());
 	}
+
+	for (Widelands::Soldier* s : soldiers_to_add) {
+		// s->set_location(nullptr);
+		s->start_task_shipping(game, nullptr);
+		ship->add_item(game, Widelands::ShippingItem(*s));
+	}
+
 	ship->update_warship_soldier_request(false);
 	return 0;
 }

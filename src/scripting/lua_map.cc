@@ -158,7 +158,6 @@ bool SoldierMapDescr::operator==(const SoldierMapDescr& ot) const {
 	        evade == ot.evade);
 }
 
-using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
 using WaresWorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
@@ -504,29 +503,6 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 	return soldier_descr;
 }
 
-// Parses the arguments of set_soldiers() into a setpoint. See the
-// documentation in has_soldiers to understand the valid arguments.
-SoldiersMap parse_set_soldiers_arguments(lua_State* L,
-                                         const Widelands::SoldierDescr& soldier_descr) {
-	SoldiersMap rv;
-	constexpr Widelands::Quantity max_count = 10000;
-	if (lua_gettop(L) > 2) {
-		// STACK: cls, descr, count
-		const Widelands::Quantity count = std::min(luaL_checkuint32(L, 3), max_count);
-		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
-		rv.insert(SoldierAmount(d, count));
-	} else {
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
-			const Widelands::Quantity count = std::min(luaL_checkuint32(L, -1), max_count);
-			rv.insert(SoldierAmount(d, count));
-			lua_pop(L, 1);
-		}
-	}
-	return rv;
-}
-
 // Does most of the work of get_soldiers for buildings.
 int do_get_soldiers(lua_State* L,
                     const Widelands::SoldierControl& sc,
@@ -554,6 +530,7 @@ int do_get_soldiers(lua_State* L,
 	return do_get_soldiers_inner(L, soldiers, tribe);
 }
 
+// Common part of get_soldiers
 int do_get_soldiers_inner(lua_State* L,
                           const SoldiersList& soldiers,
                           const Widelands::TribeDescr& tribe) {
@@ -612,73 +589,115 @@ int do_get_soldiers_inner(lua_State* L,
 	return 1;
 }
 
+// Parses the arguments of set_soldiers() into a setpoint. See the
+// documentation in has_soldiers to understand the valid arguments.
+SoldiersMap parse_set_soldiers_arguments(lua_State* L,
+                                         const Widelands::SoldierDescr& soldier_descr,
+                                         const Widelands::Quantity soldier_capacity) {
+	SoldiersMap rv;
+	Widelands::Quantity total_count = 0;
+	if (lua_gettop(L) > 2) {
+		// STACK: cls, descr, count
+		const Widelands::Quantity count = luaL_checkuint32(L, 3);
+		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
+		rv.insert(SoldierAmount(d, count));
+		total_count = count;
+	} else {
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
+			const Widelands::Quantity count = luaL_checkuint32(L, -1);
+			rv.insert(SoldierAmount(d, count));
+			total_count += count;
+			lua_pop(L, 1);
+		}
+	}
+	if (total_count > soldier_capacity) {
+		report_error(L, "Too many soldiers specified for set_soldiers()!");
+	}
+	return rv;
+}
+
+// Common part of set_soldiers
+// soldiers_to_delete and soldiers_to_add are the outputs
+void do_set_soldiers_inner(lua_State* L,
+                           Widelands::Player* owner,
+                           const Widelands::Coords& position,
+                           const Widelands::Quantity soldier_capacity,
+                           const SoldiersList& current_soldiers,
+                           SoldiersList& soldiers_to_delete,
+                           SoldiersList& soldiers_to_add) {
+	assert(soldiers_to_delete.empty());
+	assert(soldiers_to_add.empty());
+
+	const Widelands::TribeDescr& tribe = owner->tribe();
+	const Widelands::SoldierDescr& soldier_descr =
+	   dynamic_cast<const Widelands::SoldierDescr&>(*tribe.get_worker_descr(tribe.soldier()));
+	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr, soldier_capacity);
+
+	// Check existing soldiers: who is to be deleted, who can stay?
+	for (Widelands::Soldier* s : current_soldiers) {
+		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
+		                   s->get_evade_level());
+		SoldiersMap::iterator i = setpoints.find(sd);
+		if (i == setpoints.end()) {
+			// Soldier is not needed
+			soldiers_to_delete.emplace_back(s);
+		} else {
+			// Soldier can stay, one less to add
+			if (i->second > 1) {
+				--(i->second);
+			} else {
+				assert(i->second == 1);  // not 0
+				setpoints.erase(i);
+			}
+		}
+	}
+
+	// Now create the missing soldiers
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	for (auto sp : setpoints) {
+		assert(sp.second > 0);
+		for (Widelands::Quantity d = sp.second; d > 0; --d) {
+			Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
+			   soldier_descr.create(egbase, owner, nullptr, position));
+			soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
+			soldiers_to_add.emplace_back(&soldier);
+		}
+	}
+}
+
 // Does most of the work of set_soldiers for buildings.
 int do_set_soldiers(lua_State* L,
                     const Widelands::Coords& building_position,
                     Widelands::SoldierControl* sc,
-                    Widelands::Player* owner) {
+                    Widelands::Player* owner,
+                    const bool is_warehouse) {
 	assert(sc != nullptr);
 	assert(owner != nullptr);
 
-	const Widelands::TribeDescr& tribe = owner->tribe();
-	const Widelands::SoldierDescr& soldier_descr =  //  soldiers
-	   dynamic_cast<const Widelands::SoldierDescr&>(*tribe.get_worker_descr(tribe.soldier()));
-	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr);
+	SoldiersList soldiers_to_delete;
+	SoldiersList soldiers_to_add;
 
-	// Get information about current soldiers
-	const std::vector<Widelands::Soldier*> curs = sc->stationed_soldiers();
-	SoldiersMap hist;
-	for (const Widelands::Soldier* s : curs) {
-		SoldierMapDescr sd(s->get_health_level(), s->get_attack_level(), s->get_defense_level(),
-		                   s->get_evade_level());
+	Widelands::Quantity soldier_capacity =
+	   is_warehouse ? std::numeric_limits<int16_t>::max() : sc->soldier_capacity();
 
-		SoldiersMap::iterator i = hist.find(sd);
-		if (i == hist.end()) {
-			hist[sd] = 1;
-		} else {
-			++i->second;
-		}
-		if (setpoints.count(sd) == 0u) {
-			setpoints[sd] = 0;
-		}
-	}
+	do_set_soldiers_inner(L, owner, building_position, soldier_capacity, sc->stationed_soldiers(),
+	                      soldiers_to_delete, soldiers_to_add);
 
-	// Now adjust them
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const SoldiersMap::value_type& sp : setpoints) {
-		Widelands::Quantity cur = 0;
-		SoldiersMap::iterator i = hist.find(sp.first);
-		if (i != hist.end()) {
-			cur = i->second;
-		}
 
-		int d = sp.second - cur;
-		if (d < 0) {
-			while (d < 0) {
-				for (Widelands::Soldier* s : sc->stationed_soldiers()) {
-					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
-					                   s->get_defense_level(), s->get_evade_level());
+	for (Widelands::Soldier* s : soldiers_to_delete) {
+		sc->outcorporate_soldier(*s);
+		s->remove(egbase);
+	}
 
-					if (is == sp.first) {
-						sc->outcorporate_soldier(*s);
-						s->remove(egbase);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			for (; d > 0; --d) {
-				Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
-				   soldier_descr.create(egbase, owner, nullptr, building_position));
-				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
-				if (sc->incorporate_soldier(egbase, soldier) != 0) {
-					soldier.remove(egbase);
-					report_error(L, "No space left for soldier!");
-				}
-			}
+	for (Widelands::Soldier* s : soldiers_to_add) {
+		if (sc->incorporate_soldier(egbase, *s) != 0) {
+			NEVER_HERE();
 		}
 	}
+
 	return 0;
 }
 
@@ -1456,9 +1475,6 @@ and :class:`~wl.map.Ship`.
    :arg which: Either a :class:`table` of ``{description=count}`` pairs or one
       description. In that case amount has to be specified as well.
    :type which: :class:`table` or :class:`array`.
-
-   Be careful if you are changing the soldiers. The removals may not happen before
-   the additions, so the capacity may be exceeded, resulting in an error.
 
    Usage example:
 
