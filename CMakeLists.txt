@@ -171,6 +171,10 @@ if(OPTION_CPPTRACE)
   if(OPTION_ASAN AND NOT WIN32)
     message(WARNING "Both AddressSanitizer and cpptrace are handling crashes, consider turning off one of them.")
   endif()
+  if(OPTION_TSAN)
+    message(WARNING " Both ThreadSanitizer and cpptrace are handling crashes, consider turning off one of them."
+                    " ThreadSanitizer may produce too many error messages inside the crash handler.")
+  endif()
   if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
     # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
     # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
@@ -498,7 +502,7 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
-if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN)
+if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN AND NOT OPTION_TSAN)
   # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
