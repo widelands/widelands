@@ -83,6 +83,8 @@ end
 -- RST
 -- .. function:: create_warships(player, soldiers)
 --
+--    .. versionadded:: 1.4
+--
 --    Creates some warships in random places with the given soldiers on them.
 --    If called for the interactive player, centers the view on an arbitrary of these ships.
 --
