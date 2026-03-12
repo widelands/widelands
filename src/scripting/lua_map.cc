@@ -1515,6 +1515,19 @@ and :class:`~wl.map.Ship`.
    would set 10 level 0 soldier and 5 soldiers with hit point level 1,
    attack level 2, defense level 3 and evade level 4 (as long as this is
    legal for the players tribe).
+
+   Changed behavior in v1.4:
+
+     .. versionchanged:: 1.4
+
+   - It is possible to change soldiers in any combinations. In earlier versions deletions and
+     additions were processed in increasing order of levels, so it was not possible in a single
+     call to remove higher level soldiers to make room for additional lower level ones.
+   - Soldiers are not changed if the total number of soldiers in :class:`table` ``which`` is more
+     than the site's current soldier capacity. In earlier versions soldiers were changed one by one,
+     up to the point where the first soldier above capacity would have been added.
+   - Multiple identical descriptions are not allowed. In earlier versions this was allowed, but
+     the result was not deterministic.
 */
 
 /* RST

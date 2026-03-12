@@ -38,7 +38,8 @@ Ship
    This represents a ship in game.
 
    See also: :ref:`has_soldiers`
-   .. versionadded:: 1.4
+
+     .. versionadded:: 1.4
 
    More properties are available through this object's
    :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
