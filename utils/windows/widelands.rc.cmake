@@ -27,8 +27,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils
 // For development versions the last number is 99, e.g. between 1.2 and 1.3 we have "1.2.0.99".
 // https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
 1 VERSIONINFO
-FILEVERSION 1,3,0,99
-PRODUCTVERSION 1,3,0,99
+FILEVERSION 1,3,1,99
+PRODUCTVERSION 1,3,1,99
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
