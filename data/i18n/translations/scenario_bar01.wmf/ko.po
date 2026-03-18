@@ -3,7 +3,7 @@
 # 
 # Translators:
 # ks k, 2018,2020
-# ks k, 2018,2020
+# ks k, 2018,2020,2026
 # TaeMin An, 2019
 # TaeMin An, 2019
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: TaeMin An, 2019\n"
+"Last-Translator: ks k, 2018,2020,2026\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -402,7 +402,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "그들이 우리 친척들의 행동에 대해 이야기하는 것은 듣기 슬픈 일이다. 나는 잠에서 깨어 있고, 불안하며, 제가 생각했던 것보다 더 피곤한 채 밤을 보냈다. 하지만 나는 눈을 감을 때마다 아버지께서 건설하신 성이 화염에 휩싸인것을 본다. 우리의 동족 간의 화합과 평화의 상징인 나무들 사이의 왕좌는 우리를 갈라놓는 쐐기가 되었다."
+msgstr "우리 동족들의 업적에 대해 사람들이 하는 이야기들은 듣기에 참으로 슬프다. 나는 잠들지 못한 채 뒤척이며 밤을 지새웠고, 사람이 이토록 피곤해질 수 있다는 사실이 믿기지 않을 정도로 지쳤다. 하지만 눈을 감을 때마다, 아버지가 세우신 요새들이 불길에 휩싸이는 모습이 보인다. 우리 동족들 사이의 결속과 평화의 상징이었던 '나무들 사이의 왕좌'는, 이제 우리를 갈라놓는 쐐기가 되어버렸다."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:202
