@@ -28,6 +28,10 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/shipstates.h"
 
+namespace LuaMaps {
+class LuaShip;
+}  // namespace LuaMaps
+
 namespace Widelands {
 
 class PinnedNote;
@@ -188,6 +192,7 @@ struct Ship : Bob {
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
+	void remove_item_by_serial(Game& game, Serial serial);
 
 	/// \returns the current state the ship is in
 	[[nodiscard]] ShipStates get_ship_state() const {
@@ -362,10 +367,12 @@ protected:
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
+	void update_warship_soldier_request(bool create);
 
 private:
 	friend struct ShipFleet;
 	friend struct ShippingSchedule;
+	friend class LuaMaps::LuaShip;
 
 	void recalc_expedition_swimmable(const EditorGameBase& egbase);
 	void wakeup_neighbours(Game&);
@@ -379,7 +386,6 @@ private:
 	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
-	void update_warship_soldier_request(bool create);
 	void erase_warship_soldier_request_manager();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
