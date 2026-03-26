@@ -11,6 +11,14 @@ wl.Descriptions():new_militarysite_type {
    vision_range = 19,
 
    animation_directory = dirname,
+   spritesheets = {
+      build = {
+         hotspot = {50, 94},
+         frames = 2,
+         columns = 2,
+         rows = 1
+      },
+   },
    animations = {
       idle = {hotspot = {50, 94}},
       unoccupied = {hotspot = {50, 94}},
