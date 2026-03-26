@@ -211,21 +211,6 @@ void LaunchMPG::clicked_select_savegame() {
 			settings_.set_map(mapname, filename, s.get_string("theme", ""),
 			                  s.get_string("background", ""), nr_players, true);
 			map_changed();
-
-			// Check for sendability
-			if (g_fs->is_directory(filename)) {
-				// Send a warning
-				UI::WLMessageBox warning(
-				   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
-				   _("WARNING:\n"
-				     "The saved game you selected is a directory."
-				     " This happens if you set the option ‘nozip’ to "
-				     "true or manually unzipped the saved game.\n"
-				     "Widelands is not able to transfer directory structures to the clients,"
-				     " please select another saved game or zip the directories’ content."),
-				   UI::WLMessageBox::MBoxType::kOk);
-				warning.run<UI::Panel::Returncodes>();
-			}
 		}
 		update_tags_and_win_conditions();
 	});
