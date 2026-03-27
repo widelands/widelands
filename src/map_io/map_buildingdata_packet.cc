@@ -70,7 +70,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 3;
 constexpr uint16_t kCurrentPacketVersionMarket = 1;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 8;
 
 /* Packet versions changelog:
  * Overall: v1.1 = 9
@@ -86,6 +86,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
  * - 9 -> 10: Added infinite production
  * - 10 -> 11: Added ship/ferry fleet/yard interfaces
  * Trainingsite: v1.1 = 7
+ * - 7 -> 8 (v1.4): Complete redesign
  */
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -1101,78 +1102,59 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			}
 
 			trainingsite.capacity_ = fr.unsigned_8();
-			trainingsite.build_heroes_ = (fr.unsigned_8() != 0u);
-
-			uint8_t const nr_upgrades = fr.unsigned_8();
-			for (uint8_t i = 0; i < nr_upgrades; ++i) {
-				TrainingAttribute attribute = static_cast<TrainingAttribute>(fr.unsigned_8());
-				if (TrainingSite::Upgrade* const upgrade = trainingsite.get_upgrade(attribute)) {
-					upgrade->prio = fr.unsigned_8();
-					upgrade->credit = fr.unsigned_8();
-					upgrade->lastattempt = fr.signed_32();
-					upgrade->lastsuccess = (fr.unsigned_8() != 0u);
-				} else {
-					fr.unsigned_8();
-					fr.unsigned_8();
-					fr.signed_32();
-					fr.signed_32();
-				}
-			}
-
-			uint16_t mapsize = fr.unsigned_16();  // map of training levels (not _the_ map)
-			while (mapsize != 0u) {
-				// Get the training attribute and check if it is a valid enum member
-				// We use a temp value, because the static_cast to the enum might be undefined.
-				uint8_t temp_traintype = fr.unsigned_8();
-				switch (temp_traintype) {
-				case static_cast<uint8_t>(TrainingAttribute::kHealth):
-				case static_cast<uint8_t>(TrainingAttribute::kAttack):
-				case static_cast<uint8_t>(TrainingAttribute::kDefense):
-				case static_cast<uint8_t>(TrainingAttribute::kEvade):
-				case static_cast<uint8_t>(TrainingAttribute::kTotal):
-					break;
-				default:
-					throw GameDataError("expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
-					                    "(%u) or kTotal (%u) but found unknown attribute value (%u)",
-					                    static_cast<unsigned int>(TrainingAttribute::kHealth),
-					                    static_cast<unsigned int>(TrainingAttribute::kAttack),
-					                    static_cast<unsigned int>(TrainingAttribute::kDefense),
-					                    static_cast<unsigned int>(TrainingAttribute::kEvade),
-					                    static_cast<unsigned int>(TrainingAttribute::kTotal),
-					                    temp_traintype);
-				}
-				TrainingAttribute traintype = static_cast<TrainingAttribute>(temp_traintype);
-				uint16_t trainlevel = fr.unsigned_16();
-				uint16_t trainstall = fr.unsigned_16();
-				uint16_t spresence = fr.unsigned_8();
-				mapsize--;
-				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
-				   std::make_pair(trainstall, spresence);
-			}
-
-			trainingsite.highest_trainee_level_seen_ = fr.unsigned_8();
-			trainingsite.latest_trainee_kickout_level_ = fr.unsigned_8();
-			trainingsite.trainee_general_lower_bound_ = fr.unsigned_8();
-			uint8_t somebits = fr.unsigned_8();
-			trainingsite.latest_trainee_was_kickout_ = 0 < (somebits & 1);
-			trainingsite.requesting_weak_trainees_ = 0 < (somebits & 2);
-
-			// TODO(tothxa): update if preference is changed to manual
+			trainingsite.build_heroes_ = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			if (trainingsite.soldier_request_ != nullptr) {
-				trainingsite.soldier_request_->set_preference(trainingsite.requesting_weak_trainees_ ?
-				                                                 SoldierPreference::kRookies :
-				                                                 SoldierPreference::kHeroes);
+				trainingsite.soldier_request_->set_preference(trainingsite.build_heroes_);
 			}
 
-			trainingsite.repeated_layoff_inc_ = 0 < (somebits & 4);
-			trainingsite.recent_capacity_increase_ = 0 < (somebits & 8);
-			assert(16 > somebits);
-			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
-			trainingsite.request_open_since_ = Time(fr);
+			if (packet_version > 7) {
+				uint32_t soldier_serial = fr.unsigned_32();
+				if (soldier_serial != 0) {
+					Soldier& soldier = mol.get<Soldier>(soldier_serial);
+					trainingsite.selected_soldier_ = &soldier;
+				} else {
+					trainingsite.selected_soldier_ = nullptr;
+				}
 
-			trainingsite.checked_soldier_training_.attribute =
-			   static_cast<TrainingAttribute>(fr.unsigned_8());
-			trainingsite.checked_soldier_training_.level = fr.unsigned_8();
+				uint8_t attr = fr.unsigned_8();
+				uint16_t level = fr.unsigned_16();
+				trainingsite.set_current_training_step(attr, level);
+
+				trainingsite.failures_count_ = fr.unsigned_32();
+
+			} else {
+				// TODO(tothxa): saveloading compatibility with v1.3
+				uint8_t const nr_upgrades = fr.unsigned_8();
+				for (uint8_t i = 0; i < nr_upgrades; ++i) {
+					fr.unsigned_8();  // training attribute
+					fr.unsigned_8();  // priority
+					fr.unsigned_8();  // credit
+					fr.signed_32();   // lastattempt
+					fr.unsigned_8();  // lastsuccess
+				}
+
+				uint16_t mapsize = fr.unsigned_16();  // map of training levels
+				while (mapsize != 0u) {
+					fr.unsigned_8();   // training attribute
+					fr.unsigned_16();  // trainlevel
+					fr.unsigned_16();  // trainstall
+					fr.unsigned_8();   // spresence
+					mapsize--;
+				}
+
+				fr.unsigned_8();  // highest_trainee_level_seen_
+				fr.unsigned_8();  // latest_trainee_kickout_level_
+				fr.unsigned_8();  // trainee_general_lower_bound_
+				fr.unsigned_8();  // bitfield of latest_trainee_was_kickout_, requesting_weak_trainees_,
+				                  // repeated_layoff_inc_ and recent_capacity_increase_
+				fr.unsigned_8();  // repeated_layoff_ctr_
+
+				fr.unsigned_32();  // request_open_since_
+
+				uint8_t attr = fr.unsigned_8();
+				uint8_t level = fr.unsigned_8();
+				trainingsite.set_current_training_step(attr, level);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);
@@ -1707,49 +1689,18 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(trainingsite.capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(trainingsite.build_heroes_));
 
-	// upgrades
-	fw.unsigned_8(trainingsite.upgrades_.size());
-	for (const TrainingSite::Upgrade& upgrade : trainingsite.upgrades_) {
-		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
-		fw.unsigned_8(upgrade.prio);
-		fw.unsigned_8(upgrade.credit);
-		fw.signed_32(upgrade.lastattempt);
-		fw.signed_8(static_cast<int8_t>(upgrade.lastsuccess));
+	const Soldier* soldier = trainingsite.selected_soldier_.get(game);
+	if (soldier != nullptr) {
+		assert(mos.is_object_known(*soldier));
+		fw.unsigned_32(mos.get_object_file_index(*soldier));
+	} else {
+		fw.unsigned_32(0);
 	}
-	if (255 < trainingsite.training_failure_count_.size()) {
-		log_warn_time(game.get_gametime(),
-		              "Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
-		              static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
-	}
-	fw.unsigned_16(static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
-	for (const auto& fail_and_presence : trainingsite.training_failure_count_) {
-		fw.unsigned_8(static_cast<uint8_t>(fail_and_presence.first.first));
-		fw.unsigned_16(fail_and_presence.first.second);
-		fw.unsigned_16(fail_and_presence.second.first);
-		fw.unsigned_8(fail_and_presence.second.second);
-	}
-	fw.unsigned_8(trainingsite.highest_trainee_level_seen_);
-	fw.unsigned_8(trainingsite.latest_trainee_kickout_level_);
-	fw.unsigned_8(trainingsite.trainee_general_lower_bound_);
-	uint8_t somebits = 0;
-	if (trainingsite.latest_trainee_was_kickout_) {
-		somebits++;
-	}
-	if (trainingsite.requesting_weak_trainees_) {
-		somebits += 2;
-	}
-	if (trainingsite.repeated_layoff_inc_) {
-		somebits += 4;
-	}
-	if (trainingsite.recent_capacity_increase_) {
-		somebits += 8;
-	}
-	fw.unsigned_8(somebits);
-	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
-	trainingsite.request_open_since_.save(fw);
 
-	fw.unsigned_8(static_cast<uint8_t>(trainingsite.checked_soldier_training_.attribute));
-	fw.unsigned_8(trainingsite.checked_soldier_training_.level);
+	fw.unsigned_8(static_cast<uint8_t>(trainingsite.current_training_attribute()));
+	fw.unsigned_16(trainingsite.current_training_level());
+
+	fw.unsigned_32(trainingsite.failures_count_);
 
 	// DONE
 }

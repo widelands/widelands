@@ -41,6 +41,8 @@ public:
 	int get_max_soldiers(lua_State*);
 	int get_capacity(lua_State*);
 	int set_capacity(lua_State*);
+	int get_build_heroes(lua_State*);
+	int set_build_heroes(lua_State*);
 
 	/*
 	 * Lua Methods

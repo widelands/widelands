@@ -45,6 +45,8 @@ public:
 	int set_setting_soldier_capacity(lua_State*);
 	int get_setting_soldier_preference(lua_State*);
 	int set_setting_soldier_preference(lua_State*);
+	int get_setting_build_heroes(lua_State*);
+	int set_setting_build_heroes(lua_State*);
 	int get_setting_launch_expedition(lua_State*);
 	int set_setting_launch_expedition(lua_State*);
 	int get_setting_stopped(lua_State*);
