@@ -1,7 +1,5 @@
 wl_library(editor
   SRCS
-    editorinteractive.cc
-    editorinteractive.h
     editor_category.cc
     editor_category.h
     map_generator.cc
@@ -54,88 +52,24 @@ wl_library(editor
     tools/tool_conf.h
     tools/toolhistory_tool.cc
     tools/toolhistory_tool.h
-    ui_menus/categorized_item_selection_menu.h
-    ui_menus/field_info_window.h
-    ui_menus/field_info_window.cc
-    ui_menus/help.cc
-    ui_menus/help.h
-    ui_menus/main_menu_load_map.cc
-    ui_menus/main_menu_load_map.h
-    ui_menus/main_menu_load_or_save_map.cc
-    ui_menus/main_menu_load_or_save_map.h
-    ui_menus/main_menu_map_options.cc
-    ui_menus/main_menu_map_options.h
-    ui_menus/main_menu_new_map.cc
-    ui_menus/main_menu_new_map.h
-    ui_menus/main_menu_random_map.cc
-    ui_menus/main_menu_random_map.h
-    ui_menus/main_menu_save_map.cc
-    ui_menus/main_menu_save_map.h
-    ui_menus/main_menu_save_map_make_directory.cc
-    ui_menus/main_menu_save_map_make_directory.h
-    ui_menus/map_size_box.cc
-    ui_menus/map_size_box.h
-    ui_menus/player_menu.cc
-    ui_menus/player_menu.h
-    ui_menus/tool_change_height_options_menu.cc
-    ui_menus/tool_change_height_options_menu.h
-    ui_menus/tool_change_resources_options_menu.cc
-    ui_menus/tool_change_resources_options_menu.h
-    ui_menus/tool_noise_height_options_menu.cc
-    ui_menus/tool_noise_height_options_menu.h
-    ui_menus/tool_options_menu.cc
-    ui_menus/tool_options_menu.h
-    ui_menus/tool_place_critter_options_menu.cc
-    ui_menus/tool_place_critter_options_menu.h
-    ui_menus/tool_place_immovable_options_menu.cc
-    ui_menus/tool_place_immovable_options_menu.h
-    ui_menus/tool_resize_options_menu.cc
-    ui_menus/tool_resize_options_menu.h
-    ui_menus/tool_set_terrain_options_menu.cc
-    ui_menus/tool_set_terrain_options_menu.h
-    ui_menus/tool_toolhistory_options_menu.cc
-    ui_menus/tool_toolhistory_options_menu.h
-    ui_menus/toolsize_menu.cc
-    ui_menus/toolsize_menu.h
-  USES_SDL2
   DEPENDS
     base
     base_exceptions
     base_macros
     base_random
-    base_scoped_timer
-    build_info
-    graphic
-    graphic_color_palette
-    graphic_fonthandler
-    graphic_mouse_cursor
-    graphic_playercolor
-    graphic_surface
-    graphic_text_layout
-    io_filesystem
-    io_filesystem_illegal_filename_check
     logic
-    logic_addons
     logic_constants
     logic_exceptions
-    logic_filesystem_constants
-    logic_generic_save_handler
     logic_map
     logic_map_object_type
     logic_map_objects
-    logic_map_objects_description_maintainer
-    logic_single_player_game_settings
-    logic_tribe_basic_info
     logic_widelands_geometry
-    map_io
-    map_io_map_loader
-    network
     scripting_lua_interface
     scripting_lua_table
-    sound
-    ui_addons
+    ui_editor
+    ui_shared_unique_windows
     ui_basic
-    widelands_options
-    wui
-    wui_common_mapdetails
+    graphic
+    graphic_surface
+    io_filesystem
 )
