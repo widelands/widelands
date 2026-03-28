@@ -69,7 +69,8 @@ public:
 		Buildhelp_Big = 3,
 		Buildhelp_Mine = 4,
 		Buildhelp_Port = 5,
-		Buildhelp_None = 6
+		Buildhelp_Bridge = 6,
+		Buildhelp_None = 7
 	};
 
 	using Height = uint8_t;
