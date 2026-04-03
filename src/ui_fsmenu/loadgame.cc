@@ -37,6 +37,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
                    GameSettingsProvider& gsp,
                    bool take_ownership_of_game_and_settings,
                    bool is_replay,
+                   const std::function<void()>& on_delete_clicked,
                    const std::function<void(const std::string&)>& callback)
    : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
      game_(g),
@@ -67,6 +68,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(load_or_save_.delete_button(), UI::Box::Resizing::kFullSize);
+	load_or_save_.delete_button()->sigclicked.connect(on_delete_clicked);
 
 	layout();
 

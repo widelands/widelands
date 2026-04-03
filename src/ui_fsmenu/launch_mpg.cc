@@ -194,7 +194,7 @@ void LaunchMPG::clicked_select_savegame() {
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	new LoadGame(capsule_, game, settings_, false, false, [this](std::string filename) {
+	new LoadGame(capsule_, game, settings_, false, false, [] {}, [this](std::string filename) {
 		// Saved game was selected - therefore not a scenario
 		settings_.set_scenario(false);
 
