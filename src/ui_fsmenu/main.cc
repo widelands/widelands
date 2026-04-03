@@ -1016,7 +1016,7 @@ void MainMenu::action(const MenuTarget t) {
 	case MenuTarget::kLoadGame:
 		if (Widelands::Game* g = create_safe_game()) {
 			menu_capsule_.clear_content();
-			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, false);
+			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, false, [this] { set_labels(); });
 		}
 		break;
 
