@@ -41,15 +41,16 @@ public:
 	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
 	/// A table of savegame/replay files and a game details panel.
-	LoadOrSaveGame(UI::Panel* parent,
-	               Widelands::Game& g,
-	               FileType filetype,
-	               UI::PanelStyle,
-	               UI::WindowStyle,
-	               bool localize_autosave,
-	               UI::Panel* table_parent = nullptr,
-	               UI::Panel* delete_button_parent = nullptr,
-	               const std::function<void()>& = [] {});
+	LoadOrSaveGame(
+	   UI::Panel* parent,
+	   Widelands::Game& g,
+	   FileType filetype,
+	   UI::PanelStyle,
+	   UI::WindowStyle,
+	   bool localize_autosave,
+	   UI::Panel* table_parent = nullptr,
+	   UI::Panel* delete_button_parent = nullptr,
+	   const std::function<void()>& = [] {});
 
 	/// Make cppcheck happy
 	DISALLOW_COPY_AND_ASSIGN(LoadOrSaveGame);
