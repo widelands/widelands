@@ -32,7 +32,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                UI::WindowStyle ws,
                                bool localize_autosave,
                                UI::Panel* table_parent,
-                               UI::Panel* delete_button_parent)
+                               UI::Panel* delete_button_parent,
+                               const std::function<void()>& on_delete_clicked)
    : window_style_(ws),
      table_box_(new UI::Box(table_parent != nullptr ? table_parent : parent,
                             style,
@@ -59,7 +60,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
         _("Delete"))),
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
-     game_(g) {
+     game_(g),
+     on_delete_clicked_(on_delete_clicked) {
 
 	g_mouse_cursor->change_wait(true);
 
@@ -245,6 +247,7 @@ void LoadOrSaveGame::clicked_delete() {
 	if (savegame_deleter_->delete_savegames(selected)) {
 		fill_table();
 		select_item_and_scroll_to_it(selections);
+		on_delete_clicked_();
 		// Make sure that the game details are updated
 		entry_selected();
 	}
