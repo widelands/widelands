@@ -42,7 +42,7 @@ jobs:
         if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         cmake.exe --build .
         if ("${{ matrix.config }}" -Match "Release") {
-          strip -sv ./src/widelands.exe
+          strip -s ./src/widelands.exe
         }
         cd src
         C:\"Program Files"\7-Zip\7z.exe a -tzip ..\..\$env:ARTIFACT_NAME.zip widelands.exe
