@@ -29,7 +29,7 @@ function help_replays()
       h2(_([[Replays]])) ..
       p(_([[Widelands records every game you play in a replay file with .wry extension. This file contains an initial savegame and all commands that were issued by all players, such as building a road or attacking an enemy. The filename will tell you the time you started the game.]])) ..
       p(_([[Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to ‘go out of sync’. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game.]])) ..
-      p((_([[Replays are a very useful tool to find bugs in the game logic, so they can be useful as attachments to bug reports. The replay files are saved in the %s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ subdirectory of your Widelands installation.]])):bformat(i("~/.widelands/replays"))
+      p((_([[Replays are a very useful tool to find bugs in the game logic, so they can be useful as attachments to bug reports. To find the directory where those replays are stored, along save games and maps, look at our wiki at %s.]])):bformat(a("Where are my Maps and Save games stored", "url", "https://www.widelands.org/wiki/Technical%20Faq/#where-are-my-maps-and-savegames-stored"))
       )
    pop_textdomain()
    return r
