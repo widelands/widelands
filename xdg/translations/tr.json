@@ -2,24 +2,24 @@
 	"name": "Widelands",
 	"category": "Strateji Oyunu",
 	"tagline": "Gerçek zamanlı inşa strateji oyunu",
-	"developer": "The Widelands Development Team",
+	"developer": "The Widelands Geliştirici Ekibi",
 	"description": [
 		"Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. ",
-		"Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.\nWidelands ayrıca size yapay zeka ile meydan okur."
+		"Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Ancak asıl eğlence arkadaşlarınla Internet üzerinden  ya da LAN ile bir araya gelerek onlarla birlikte yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.\nWidelands size yapay zeka ile size meydan okuma tercihini de sunar."
 	],
 	"release_notes": {
 		"1.4": [],
 		"1.3.1": [
-			"Bugfix release"
+			"Hata düzeltme güncellemesi"
 		],
 		"1.3": [
-			"Market trading",
-			"Six new maps added and three old maps removed",
-			"Economy districts",
-			"Many improvements to the in-game Encyclopedia",
-			"Download website maps as add-ons",
-			"New visualisation modes in the editor",
-			"Many new capabilities for add-on developers"
+			"Alışveriş - ticaret",
+			"6 yeni harita eklendi, 3 eski harita kaldırıldı",
+			"Ekonomi bölgeleri",
+			"Oyun içi ansiklopediye birtakım iyileştirmeler",
+			"Site haritalarını eklentiler olarak indir",
+			"Editörde yeni görüntüleme modları",
+			"Eklenti geliştiricileri için çokça yeni imkan"
 		]
 	}
 }

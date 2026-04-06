@@ -44,7 +44,7 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       build = {
-         hotspot = {50, 60},
+         hotspot = {50, 61},
          frames = 3,
          columns = 3,
          rows = 1,
@@ -59,7 +59,7 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         hotspot = {50, 60}
+         hotspot = {50, 61}
       }
    },
 
