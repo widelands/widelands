@@ -37,7 +37,7 @@ msgstr "Naklet"
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
-"Bataklıkları ortadan kaldırmada kullanılacak dört kürek ambarda toplandı."
+"Bataklıkları ortadan kaldırmada kullanılacak dört kürek depoda toplandı."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -49,7 +49,7 @@ msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr ""
-"Bataklıkları ortadan kaldırmada kullanılacak dört kürek daha ambarda "
+"Bataklıkları ortadan kaldırmada kullanılacak dört kürek daha depoda "
 "toplandı."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
@@ -63,7 +63,7 @@ msgstr "Törver'in Ordularını Mağlup Et"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
-msgstr "Kuzey'in düşmanıdır, kırmızı sancak altında savaşan Törver."
+msgstr "Törver, kırmızı sancak altında savaşan kuzeydeki düşmandır."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -83,11 +83,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
-msgstr "Korsan üssünü ele geçir"
+msgstr "Korsan gözcülüğü ele geçir"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr "Korsan üssünü ele geçir"
+msgstr "Korsan gözcülüğünü ele geçir"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
@@ -99,11 +99,11 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr "Ambar inşa et"
+msgstr "Depo inşa et"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Korsan üssüne yakın bir ambar inşa et"
+msgstr "Korsan gözcülüğüne yakınlarında bir depo inşa et"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -111,6 +111,10 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
+"Nehir kıyısı yakınlarındaki ele geçirilmiş korsan gözcülüğü civarında bir "
+"depo inşa et. Gelecek keşifler için temelimiz olarak ihtiyacımız olacak. "
+"Dahası bu depoda, çevredeki madenlerden kazdığımız altınları saklayabiliriz."
+" "
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
@@ -120,7 +124,7 @@ msgstr "Kürekleri getir"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Yeni ambara dört kürek getir"
+msgstr "Yeni depoya dört kürek getir"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -129,7 +133,7 @@ msgstr "Bataklıkları kurutmak için gönüllülere verilecekler."
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
-msgstr "Bataklıkları kurutmak için fazladan olan gönüllülere verilecekler."
+msgstr "Bataklıkları kurutmak için yeni gönüllülere verilecekler."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
@@ -145,18 +149,19 @@ msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
+"Komşumuzu korsan tehdidinden kurtar. Korsanlar gri sancak altında savaşıyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr "Öncü birliğimizi korsanlardan kurtar"
+msgstr "Gözcümüzü korsanlardan kurtar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr ""
+msgstr "Adadaki kaleyi fethet."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr "Burası öncü birliğin hapsedildiği yer."
+msgstr "İşte burası gözcünün hapsedildiği yer."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
@@ -219,7 +224,7 @@ msgstr "Nehir Boyunca"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
 msgstr ""
-"Sizi etrafımızdaki kabileler hakkında bilgilendirmeme izin verin efendim."
+"Efendim, sizi etrafımızdaki kabileler hakkında bilgilendirmeme izin verin."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -227,6 +232,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Kuzeyden ordularını hızla büyüten savaş lordu Törver'in liderliğindeki bir "
+"savaşçı kabilenin tehdidi altındayız. Yakında yenilemeyecek kadar "
+"güçlenebilirler."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -234,6 +242,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"Kuzey doğuya doğru geniş bölge vahşi ve başıboş korsan kalabalığı çılgın "
+"lider Arvid tarafından kontrol altında tutuluyor. Varlıkları öteki "
+"kabilelere yolumuzu engelliyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -241,6 +252,9 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Nehrin ötesinde gizemli kral Runar'ın zengin toprakları yer alıyor. Onunla, "
+"korsanlar doğu bölgesini ele geçirmeden önce savaştaydık. Gücü büyük çaplı "
+"endüstrisine ve geniş ordularına dayanıyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
@@ -248,12 +262,16 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Korsanlardan ötedeki bölge kuvvetli reis Hjalmar'ın gelişmiş kabilesine "
+"aittir. Caydırıcı ordularını büyütmek için çokça zamana sahiplerdi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"Durum iç açıcı gözükmüyor, tavsiyem tüm çabalarımızı güçlü bir ordu kurmak "
+"üzerine yönlendirmek olur."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -265,12 +283,17 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Efendim, askerlerimiz düşmanla korkusuzca karşılaşabilse de kuzeydeki "
+"rakibimiz tüm ordu kuvvetimizden halen daha güçlüdür. Herhangi bir savaş "
+"çabasına girmeden onları yenmek için yeterli güce ulaşmalıyız."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Sabırlı ol, anla ki güçlü bir ordu bu durumda vazgeçilmezdir. Törver'in kötü"
+" bir şöhreti var."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
@@ -325,6 +348,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Efendim, Törver'in toprağını ele geçirdiğimize göre bitişiğindeki büyük göle"
+" erişim sağlayıp istediğimiz gibi kullanabiliriz. Kuzeyde bir liman, öteki "
+"kabilelerle olan temasımızda daha iyi fırsatlar sağlayacaktır."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -332,6 +358,9 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Törver'in ana karargahında gemi yapımıyla ilgili birtakım kağıtlar bulduk. "
+"Ne yazık ki kağıttaki yazılar bize anlaşılmaz geliyor. Bilginlerimiz bu "
+"yazıları çözebilir."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
@@ -342,6 +371,8 @@ msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Efendim, adamlarımız yalnız gözüken düşman bir korsan gözcülüğü buldu. Terk "
+"edilmiş barakalar etrafta altın olduğuna işaret ediyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -350,10 +381,14 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Gözcülüğü ele geçirmek istiyorsak yine de dikkatli olmalıyız. Görüşümüzün "
+"dışında daha fazla düşman yerleşimi olabilir, korsanlar da oldukça iyi "
+"savaşçılar olarak bilinirler. En iyisi güçlü bir askeri varlık kurulmalı ve "
+"ondan sonra adım atmalıyız."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr ""
+msgstr "Hazine bulundu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -361,6 +396,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Efendim, 25 birim altın cevherini korsan gözcülüğü içinde bulduk. Civardaki "
+"altın madencilerinin barakalarından ele geçirmiş olabilirler. Bulduğumuz "
+"altın ana karargahımıza taşınacak."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -369,11 +407,14 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Araziye başarılı genişlememizle birlikte doğrudan gözcülüğün güney batısında"
+" araziyi keşif için bir depo inşa etmeliyiz. Gözcülükten yalnızca üç adım "
+"uzakta uygun bir inşa bölgesi var."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Bataklıklar kaldırılıyor"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -382,6 +423,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Efendim, yağmur mevsimi doğudaki dere boyunca bataklık oluşmasına sebep oldu"
+" ve bundan dolayı geçiş sağlayamıyoruz. Bataklığın kaldırılması gerekiyor. "
+"Eğer yeni depoya yeterince kürek getirirsen gönüllüler bataklığı "
+"kaldıracaktır."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -389,6 +434,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Efendim, tüm kürekler dağıtıldı, ancak bu hızda devam edersek sonraki yağmur"
+" sezonuna kadar bataklığı kaldırmış olamayız. Eğer yeni depoya daha fazla "
+"kürek getirirsen o zaman daha çok gönüllü bataklık temizleme işine "
+"katılabilir."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -396,6 +445,9 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Efendim, korsanların gizli sığınağına erişimimiz olduğuna göre, ele "
+"geçirmeli ve onları hemen bitirmeliyiz. Belki bölgelerinde saklanmış "
+"hazineler bile olabilir."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
@@ -406,6 +458,8 @@ msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Efendim, korsanları yendik. Son sığınaklarına altın saklamışlar, şimdi ise "
+"bizim ana karargahımıza taşınıyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
@@ -418,10 +472,14 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Efendim, korsanlara olan saldırılarımız sonucunda öteki kabilelerden "
+"korsanlarla birleşmeye başladılar. Kaybetmiş oldukları güçten daha fazlasını"
+" geri kazanabilirler. Azalan kaynaklarımız önümüze gelecek böylesi güçlü bir"
+" düşman karşısında problem olabilir."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Kaçak korsanlar"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -429,10 +487,12 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Efendim, başarıya ulaşan çabalarımız sayesinde korsanları sürdük, çoğu kaçtı"
+" ve küçük botlarla uzaklaştı. Hangi yönde kaçtıkları bilinmiyor."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Liman inşa etme yetkinliği"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -440,6 +500,9 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Efendim, uzun süren çalışma ve araştırma icra eden bilginlerimiz sonunda "
+"Törver'in ana karargahında bulduğumuz ve kendisine ait olan tasvirlerdeki "
+"karmaşık dili çözmeyi başardı."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
@@ -451,6 +514,9 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Efendim, gözcülerimizden biri korsanlar tarafından ele geçirildi ve onların "
+"adasına götürüldü. Hjalmar'a doğru bataklıklı yol hakkında bilgi sahibi olan"
+" tek kişi o."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -458,6 +524,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Balıkçılarımıza göre o, adadaki bir kalede hapsedilmiş. Törver'den aldığımız"
+" gemi inşa etme detaylarını kullanıp, gemiler inşa edip mevkilerine "
+"saldırmalıyız."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -469,6 +538,9 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Efendim, askerlerimiz adayı ele geçirdi ve gözcüyü kurtardı. Anlaşılıyor ki "
+"korsanlar geride büyük miktarda altını, birayı ve silahları burada "
+"bırakmışlar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
@@ -479,16 +551,20 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Efendim, gözcümüz bölgemize geri döndü ve bize Hjalmar'a doğru bataklıkların"
+" arasından geçilen yolu gösterdi."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Dağın öteki tarafında da hareket edebileceğimizi fark etti olur da başarısız"
+" olursak ki bu zor bir ihtimal."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "Son hudut"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -496,11 +572,14 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Efendim, neredeyse tüm orduları yendik ve son düşmanımıza doğru "
+"yaklaşıyoruz. Bizi uzun bir süredir bekliyorlar, hayatlarında yaşanacak en "
+"ağır savaş için hazırlanmış olduklarına şüphe yok."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
-msgstr ""
+msgstr "Ordularımızın tam kuvvetinde olduğundan emin ol ve kararını ver."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
@@ -508,7 +587,7 @@ msgstr "Zafer!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Efendim, tebrik ederim!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -516,6 +595,8 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Tüm hedefleri tamamladın ve tüm düşmanlarımızı yendin. Yalnızca rakip "
+"kabileleri değil, üstüne üstlük sevgideğer halkının kalbini de fethettin."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
