@@ -36,6 +36,7 @@ public:
 	   GameSettingsProvider& gsp,
 	   bool take_ownership_of_game_and_settings,
 	   bool is_replay,
+	   const std::function<void()>& = [] {},
 	   const std::function<void(const std::string&)>& = [](const std::string&) {});
 	~LoadGame() override;
 
