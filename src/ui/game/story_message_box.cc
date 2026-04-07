@@ -28,10 +28,6 @@
 #include "ui/basic/multilinetextarea.h"
 #include "ui/wui/interactive_player.h"
 
-namespace {
-constexpr int kPadding = 4;
-}  // namespace
-
 StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  const Widelands::Coords coords,
                                  const std::string& title,
@@ -46,21 +42,21 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
      main_box_(this,
                UI::PanelStyle::kWui,
                "main_box",
-               kPadding,
-               kPadding,
+               default_padding(),
+               default_padding(),
                UI::Box::Vertical,
                0,
                0,
-               kPadding),
+               default_padding()),
      button_box_(&main_box_,
                  UI::PanelStyle::kWui,
                  "buttons_box",
-                 kPadding,
-                 kPadding,
+                 default_padding(),
+                 default_padding(),
                  UI::Box::Horizontal,
                  0,
                  0,
-                 kPadding),
+                 default_padding()),
      textarea_(&main_box_, "text", 0, 0, 100, 50, UI::PanelStyle::kWui, body),
      ok_(&button_box_,
          "ok",
@@ -105,7 +101,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	}
 
 	// Add and configure the panels
-	main_box_.set_size(get_inner_w() - 3 * kPadding, get_inner_h() - 2 * kPadding);
+	main_box_.set_size(get_inner_w() - 3 * default_padding(), get_inner_h() - 2 * default_padding());
 
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);

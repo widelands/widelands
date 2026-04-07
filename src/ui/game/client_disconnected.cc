@@ -27,10 +27,7 @@
 
 namespace {
 
-constexpr int32_t width = 256;
-constexpr int32_t margin = 10;
-constexpr int32_t vspacing = 5;
-constexpr uint32_t vgap = 3;
+constexpr int32_t kWidth = 256;
 
 }  // end anonymous namespace
 
@@ -41,7 +38,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                       UI::WindowStyle::kWui,
                       "client_disconnected",
                       &registry,
-                      2 * margin + width,
+                      4 * default_padding() + kWidth,
                       0,
                       /** TRANSLATORS: Window label */
                       _("Client got disconnected")),
@@ -50,26 +47,26 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
      box_(this,
           UI::PanelStyle::kWui,
           "main_box",
-          margin,
-          margin,
+          2 * default_padding(),
+          2 * default_padding(),
           UI::Box::Vertical,
-          width,
-          get_h() - 2 * margin,
-          vspacing),
+          kWidth,
+          get_h() - 4 * default_padding(),
+          default_spacing()),
      box_h_(&box_,
             UI::PanelStyle::kWui,
             "hbox",
-            margin,
-            margin,
+            2 * default_padding(),
+            2 * default_padding(),
             UI::Box::Horizontal,
-            width,
-            35,
-            vspacing),
+            kWidth,
+            default_button_size(),
+            default_spacing()),
      text_(&box_,
            "message",
            0,
            0,
-           width,
+           kWidth,
            10,  // automatic height
            UI::PanelStyle::kWui,
            _("A player disconnected from the game. An automatic save game has been created. "
@@ -80,8 +77,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                "continue_game",
                0,
                0,
-               width - 35 - vspacing,
-               35,
+               kWidth - default_button_size() - default_spacing(),
+               default_button_size(),
                UI::ButtonStyle::kWuiMenu,
                /** TRANSLATORS: Button text */
                _("Continue game"),
@@ -89,11 +86,11 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                _("Replace the disconnected player with the selected AI and continue playing")),
      type_dropdown_(&box_h_,
                     "dropdown_ai",
-                    width - 50,  // x
+                    kWidth - 50,  // x
                     0,           // y
                     60,          // width of selection box
                     16,  // maximum number of items in the selection box, shrinks automatically
-                    35,  // width/height of button
+                    default_button_size(),  // width/height of button
                     /** TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player has
                        disconnected from a game */
                     _("AI for the disconnected player"),
@@ -104,21 +101,21 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                 "exit_game",
                 0,
                 0,
-                width,
-                35,
+                kWidth,
+                default_button_size(),
                 UI::ButtonStyle::kWuiMenu,
                 g_image_cache->get("images/wui/menus/exit.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
 
 	box_.add(&text_);
-	box_.add_space(vgap);
+	box_.add_space(default_spacing());
 	box_h_.add(&continue_);
 	box_h_.add(&type_dropdown_);
 	box_.add(&box_h_);
 	box_.add(&exit_game_);
-	box_.set_size(width, text_.get_h() + vgap + box_h_.get_h() + exit_game_.get_h() + 3 * vspacing);
-	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
+	box_.set_size(kWidth, text_.get_h() + default_spacing() + box_h_.get_h() + exit_game_.get_h() + 3 * default_spacing());
+	set_inner_size(get_inner_w(), box_.get_h() + 4 * default_padding());
 
 	continue_.sigclicked.connect([this]() { clicked_continue(); });
 	exit_game_.sigclicked.connect([this]() { clicked_exit_game(); });

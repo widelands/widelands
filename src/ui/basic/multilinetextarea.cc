@@ -50,7 +50,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
      align_(align),
      scrollbar_(
-        this, "scrollbar", get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
+        this, "scrollbar", get_w() - default_button_size_small(), 0, default_button_size_small(), h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
@@ -154,8 +154,8 @@ void MultilineTextarea::layout() {
 	recompute();
 
 	// Take care of the scrollbar
-	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-	scrollbar_.set_size(Scrollbar::kSize, get_h());
+	scrollbar_.set_pos(Vector2i(get_w() - default_button_size_small(), 0));
+	scrollbar_.set_size(default_button_size_small(), get_h());
 	scrollbar_.set_pagesize(get_h() - 2 * font_style().size() * font_scale_);
 }
 

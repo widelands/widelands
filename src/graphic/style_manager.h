@@ -106,7 +106,10 @@ enum class StyledSize {
 	kCampaignMessageBoxMaxW,
 	kCampaignFri02PoemIndent,
 	kSPScenarioPlateauMessageBoxPosY,
+	kUIDefaultButtonSize,
+	kUIDefaultButtonSizeSmall,
 	kUIDefaultPadding,
+	kUIDefaultSpacing,
 	kUIDefaultIndent,
 	kToolbarButtonSize
 };

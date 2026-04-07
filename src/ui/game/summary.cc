@@ -33,8 +33,6 @@
 #include "ui/wui/interactive_gamebase.h"
 #include "ui/wui/interactive_player.h"
 
-constexpr uint8_t kPadding = 4;
-
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
    : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "game_summary", r, 0, 0, _("Game over")),
      game_(parent->game()),
@@ -42,12 +40,12 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox =
-	   new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	   new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 	title_area_ = new UI::Textarea(vbox, UI::PanelStyle::kWui, "title",
 	                               UI::FontStyle::kGameSummaryTitle, "", UI::Align::kCenter);
 
 	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	vbox->add_space(kPadding);
+	vbox->add_space(default_padding());
 
 	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, "hbox1", 0, 0, UI::Box::Horizontal);
 	players_table_ = new UI::Table<const Widelands::PlayerEndStatus&>(
@@ -59,7 +57,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	                                    UI::FontStyle::kWuiLabel, _("Player Info:"));
 	info_area_ = new UI::MultilineTextarea(
 	   info_box_, "info_area", 0, 0, 130,
-	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - kPadding),
+	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - default_padding()),
 	   UI::PanelStyle::kWui, "");
 
 	widelands_icon_ =
@@ -69,7 +67,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	info_box_->add(info_area_label_);
 	info_box_->add(info_area_, UI::Box::Resizing::kFullSize);
 
-	hbox1->add_space(kPadding);
+	hbox1->add_space(default_padding());
 
 	// At all times, only one of those is visible
 	info_box_->set_visible(false);
@@ -77,21 +75,21 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	hbox1->add(info_box_);
 	hbox1->add(widelands_icon_);
 
-	hbox1->add_space(3 * kPadding);
+	hbox1->add_space(3 * default_padding());
 	hbox1->add(players_table_);
-	hbox1->add_space(kPadding);
+	hbox1->add_space(default_padding());
 
 	vbox->add(hbox1);
 
 	UI::Box* bottom_box =
 	   new UI::Box(vbox, UI::PanelStyle::kWui, "bottom_box", 0, 0, UI::Box::Horizontal);
 
-	bottom_box->add_space(kPadding);
+	bottom_box->add_space(default_padding());
 
 	gametime_label_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, "label_elapsed",
 	                                   UI::FontStyle::kWuiLabel, _("Elapsed time:"));
 	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	bottom_box->add_space(kPadding);
+	bottom_box->add_space(default_padding());
 	gametime_value_ =
 	   new UI::Textarea(bottom_box, UI::PanelStyle::kWui, "elapsed", UI::FontStyle::kWuiLabel,
 	                    gametimestring(game_.get_gametime().get()));
@@ -100,17 +98,17 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	bottom_box->add_inf_space();
 
 	continue_button_ =
-	   new UI::Button(bottom_box, "continue_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	   new UI::Button(bottom_box, "continue_button", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                  g_image_cache->get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
-	bottom_box->add_space(kPadding);
-	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	bottom_box->add_space(default_padding());
+	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                              g_image_cache->get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
-	bottom_box->add_space(kPadding);
+	bottom_box->add_space(default_padding());
 
 	vbox->add(bottom_box, UI::Box::Resizing::kFullSize);
-	vbox->add_space(kPadding);
+	vbox->add_space(default_padding());
 	set_center_panel(vbox);
 
 	// Prepare table

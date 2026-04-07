@@ -57,7 +57,7 @@ void FileViewPanel::add_tab(const std::string& title, const std::string& lua_scr
 	   this, panel_style_, format("box_%" PRIuS, index), 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
-	   boxes_.at(index).get(), "text_pane", 0, 0, Scrollbar::kSize, 0, panel_style_);
+	   boxes_.at(index).get(), "text_pane", 0, 0, default_button_size_small(), 0, panel_style_);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add(format("about_%" PRIuS, index), title, boxes_.at(index).get(), "");
@@ -99,8 +99,8 @@ void FileViewPanel::layout() {
 	contents_width_ = std::max(0, get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
-	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
+	                                  get_inner_h() - 2 * padding_ - default_button_size() :
+	                                  get_inner_h() - 3 * padding_ - default_button_size());
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);

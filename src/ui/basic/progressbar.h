@@ -31,15 +31,19 @@ namespace UI {
  * The actual state of progress
  */
 struct ProgressBar : public Panel {
+public:
 	enum {
 		Horizontal = 0,  ///< from left to right
 		Vertical = 1,    ///< from bottom to top
-
-		DefaultWidth = 100,
-		DefaultHeight = 24,
 	};
 
-public:
+	static inline int DefaultWidth() {
+		return 100;
+	}
+	static inline int DefaultHeight() {
+		return default_button_size_small();
+	}
+
 	ProgressBar(Panel* parent,
 	            PanelStyle,
 	            const std::string& name,

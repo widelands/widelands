@@ -804,6 +804,20 @@ void Panel::template_directory_changed() {
 	}
 }
 
+// static
+int Panel::default_button_size() {
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSize);
+}
+int Panel::default_button_size_small() {
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall);
+}
+int Panel::default_padding() {
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultPadding);
+}
+int Panel::default_spacing() {
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultSpacing);
+}
+
 /**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
@@ -1799,10 +1813,9 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 		rendered_text = g_fh->render(text_to_render, rendered_text->width());
 	}
 
-	constexpr int kPadding = 4;
 	constexpr int kCursorHeight = 32;
-	const uint16_t tip_width = rendered_text->width() + kPadding;
-	const uint16_t tip_height = rendered_text->height() + kPadding;
+	const uint16_t tip_width = rendered_text->width() + default_padding();
+	const uint16_t tip_height = rendered_text->height() + default_padding();
 
 	if (pos == Vector2i::invalid()) {
 		pos = WLApplication::get().get_mouse_position();
@@ -1811,13 +1824,13 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	const Vector2i tooltip_bottom_right = tooltip_fixed_rect_.opposite_of_origin();
 	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x) {
-		tooltip_fixed_rect_.x -= kPadding + tooltip_fixed_rect_.w;
+		tooltip_fixed_rect_.x -= default_padding() + tooltip_fixed_rect_.w;
 	}
 	if (screen_bottom_right.y < tooltip_bottom_right.y) {
-		tooltip_fixed_rect_.y -= kCursorHeight + kPadding + tooltip_fixed_rect_.h;
+		tooltip_fixed_rect_.y -= kCursorHeight + default_padding() + tooltip_fixed_rect_.h;
 	}
-	tooltip_fixed_rect_.x = std::max(kPadding, tooltip_fixed_rect_.x);
-	tooltip_fixed_rect_.y = std::max(kPadding, tooltip_fixed_rect_.y);
+	tooltip_fixed_rect_.x = std::max(default_padding(), tooltip_fixed_rect_.x);
+	tooltip_fixed_rect_.y = std::max(default_padding(), tooltip_fixed_rect_.y);
 
 	dst.fill_rect(tooltip_fixed_rect_, RGBColor(63, 52, 34));
 	dst.draw_rect(tooltip_fixed_rect_, RGBColor(0, 0, 0));

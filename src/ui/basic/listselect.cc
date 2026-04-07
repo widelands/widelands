@@ -89,7 +89,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const ListselectLayout selection_mode)
    : Panel(parent, style, name, x, y, w, h),
 
-     scrollbar_(this, "scrollbar", get_w() - Scrollbar::kSize, 0, 0, h, style),
+     scrollbar_(this, "scrollbar", get_w() - default_button_size_small(), 0, 0, h, style),
 
      selection_(no_selection_index()),
 
@@ -382,8 +382,8 @@ void BaseListselect::layout() {
 	const int steps = entry_records_.size() * get_lineheight() - get_h();
 	scrollbar_.set_steps(steps);
 	if (scrollbar_.is_enabled()) {
-		scrollbar_.set_size(Scrollbar::kSize, get_h());
-		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+		scrollbar_.set_size(default_button_size_small(), get_h());
+		scrollbar_.set_pos(Vector2i(get_w() - default_button_size_small(), 0));
 		scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 		scrollbar_.set_singlestepsize(get_lineheight());
 		if (selection_mode_ == ListselectLayout::kDropdown) {

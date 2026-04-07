@@ -35,9 +35,6 @@
 
 namespace AddOnsUI {
 
-constexpr int16_t kButtonSize = 32;
-constexpr int16_t kSpacing = 4;
-
 AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
    : UI::Window(&parent,
                 UI::WindowStyle::kFsMenu,
@@ -94,8 +91,8 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
                 "addon_new",
                 0,
                 0,
-                kButtonSize,
-                kButtonSize,
+                default_button_size(),
+                default_button_size(),
                 UI::ButtonStyle::kFsMenuSecondary,
                 _("+"),
                 _("New add-on")),
@@ -103,8 +100,8 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
                    "addon_delete",
                    0,
                    0,
-                   kButtonSize,
-                   kButtonSize,
+                   default_button_size(),
+                   default_button_size(),
                    UI::ButtonStyle::kFsMenuSecondary,
                    _("–"),
                    _("Delete this add-on")),
@@ -112,24 +109,24 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
                       "discard_changes",
                       0,
                       0,
-                      kButtonSize,
-                      kButtonSize,
+                      default_button_size(),
+                      default_button_size(),
                       UI::ButtonStyle::kFsMenuSecondary,
                       _("Discard changes")),
      write_changes_(&box_right_bottombox_,
                     "write_changes",
                     0,
                     0,
-                    kButtonSize,
-                    kButtonSize,
+                    default_button_size(),
+                    default_button_size(),
                     UI::ButtonStyle::kFsMenuSecondary,
                     _("Save changes")),
      ok_(&box_right_bottombox_,
          "ok",
          0,
          0,
-         kButtonSize,
-         kButtonSize,
+         default_button_size(),
+         default_button_size(),
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      addons_(&box_left_, "addons", 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
@@ -144,45 +141,45 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	box_left_buttons_.add_inf_space();
 
 	box_right_subbox_header_box_right_.add(&name_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add_space(default_spacing());
 	box_right_subbox_header_box_right_.add(&author_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add_space(default_spacing());
 	box_right_subbox_header_box_right_.add(&version_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add_space(default_spacing());
 	box_right_subbox_header_box_right_.add(&min_wl_version_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add_space(default_spacing());
 	box_right_subbox_header_box_right_.add(&max_wl_version_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add_space(default_spacing());
 	box_right_subbox_header_box_right_.add(&descr_, UI::Box::Resizing::kFullSize);
 
-	box_right_subbox_header_box_left_.add_space(kSpacing);
+	box_right_subbox_header_box_left_.add_space(default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_name",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Name:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add_space(3 * default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_author",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Author:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add_space(3 * default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_version",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add_space(3 * default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    "label_min_wl_version", UI::FontStyle::kFsMenuInfoPanelHeading,
 	                    _("Minimum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add_space(3 * default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    "label_max_wl_version", UI::FontStyle::kFsMenuInfoPanelHeading,
 	                    _("Maximum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add_space(3 * default_spacing());
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    "label_description", UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -191,28 +188,28 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 
 	box_right_subbox_header_hbox_.add(
 	   &box_right_subbox_header_box_left_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_hbox_.add_space(kSpacing);
+	box_right_subbox_header_hbox_.add_space(default_spacing());
 	box_right_subbox_header_hbox_.add(
 	   &box_right_subbox_header_box_right_, UI::Box::Resizing::kExpandBoth);
 
 	box_right_bottombox_.add(&discard_changes_, UI::Box::Resizing::kExpandBoth);
-	box_right_bottombox_.add_space(kSpacing);
+	box_right_bottombox_.add_space(default_spacing());
 	box_right_bottombox_.add(&write_changes_, UI::Box::Resizing::kExpandBoth);
-	box_right_bottombox_.add_space(kSpacing);
+	box_right_bottombox_.add_space(default_spacing());
 	box_right_bottombox_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_right_.add(&box_right_subbox_header_hbox_, UI::Box::Resizing::kFullSize);
-	box_right_.add_space(kButtonSize);
+	box_right_.add_space(default_button_size());
 	box_right_.add(&box_right_addon_specific_, UI::Box::Resizing::kExpandBoth);
-	box_right_.add_space(kSpacing);
+	box_right_.add_space(default_spacing());
 	box_right_.add(&box_right_bottombox_, UI::Box::Resizing::kFullSize);
 
 	box_left_.add(&addons_, UI::Box::Resizing::kExpandBoth);
-	box_left_.add_space(kSpacing);
+	box_left_.add_space(default_spacing());
 	box_left_.add(&box_left_buttons_, UI::Box::Resizing::kFullSize);
 
 	main_box_.add(&box_left_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&box_right_, UI::Box::Resizing::kExpandBoth);
 
 	addon_boxes_[AddOns::AddOnCategory::kMaps] =
@@ -356,7 +353,7 @@ void AddOnsPackager::clicked_new_addon() {
 	UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Add-On"),
 	                 _("Enter the name for the new add-on."));
 	UI::Dropdown<AddOns::AddOnCategory> category(
-	   &n.content_box(), "category", 0, 0, 50, 12, kButtonSize, _("Category"),
+	   &n.content_box(), "category", 0, 0, 50, 12, default_button_size(), _("Category"),
 	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);
 	for (const auto& pair : AddOns::kAddOnCategories) {
 		if (pair.first != AddOns::AddOnCategory::kNone) {

@@ -30,8 +30,6 @@ static std::set<FleetOptionsWindow*> living_fleet_option_windows;
 
 constexpr Widelands::Quantity kMaxTarget = 1000 * 1000;  // Arbitrary limit
 
-constexpr int kPadding = 4;
-
 constexpr const char kIconEndInfinity[] = "images/wui/menus/end_infinity.png";
 constexpr const char kIconInfinity[] = "images/wui/menus/infinity.png";
 
@@ -159,8 +157,8 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	   new UI::Box(columns_box, UI::PanelStyle::kWui, "column_box_2", 0, 0, UI::Box::Vertical);
 
 	auto create_textarea = [column1, column2, rtl](UI::Textarea** txt, std::string label) {
-		column1->add_space(kPadding);
-		column2->add_space(kPadding);
+		column1->add_space(default_padding());
+		column2->add_space(default_padding());
 
 		column1->add(new UI::Textarea(column1, UI::PanelStyle::kWui, "label",
 		                              UI::FontStyle::kWuiInfoPanelHeading, label,
@@ -185,7 +183,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	columns_box->add(column2, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(columns_box, UI::Box::Resizing::kFullSize);
 
-	main_box_.add_space(kPadding * 2);
+	main_box_.add_space(default_padding() * 2);
 
 	main_box_.add(
 	   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_target", UI::FontStyle::kWuiLabel,
@@ -194,7 +192,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	                    UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 
-	main_box_.add_space(kPadding);
+	main_box_.add_space(default_padding());
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	if (can_act_) {

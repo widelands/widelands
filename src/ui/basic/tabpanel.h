@@ -27,9 +27,6 @@
 
 namespace UI {
 
-// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
-constexpr int kTabPanelButtonHeight = 34;
-
 /**
  * This represents a Tab of the TabPanel. Note that this does no work
  * of drawing itself or handling anything really, it is only here to

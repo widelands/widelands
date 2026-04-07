@@ -62,21 +62,21 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
      recipient_dropdown_(&hbox_,
                          "chat_recipient_dropdown",
                          0,
-                         h - 25,
-                         25,
+                         h - default_button_size_small(),
+                         default_button_size_small(),
                          16,
-                         25,
+                         default_button_size_small(),
                          _("Recipient"),
                          UI::DropdownType::kPictorial,
                          style,
                          style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                             UI::ButtonStyle::kWuiSecondary),
-     editbox(&hbox_, "input", 28, 0, w - 28, style),
+     editbox(&hbox_, "input", default_button_size(), 0, w - default_button_size(), style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	vbox_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
-	vbox_.add_space(4);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&hbox_, UI::Box::Resizing::kFullSize);
 
 	editbox.ok.connect([this]() { key_enter(); });
@@ -91,8 +91,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 		// No access to participant list. Hide the dropdown
 		recipient_dropdown_.set_visible(false);
 		// Increase the size of the edit box to fill the empty space
-		editbox.set_pos(Vector2i(editbox.get_x() - 28, editbox.get_y()));
-		editbox.set_size(editbox.get_w() + 28, editbox.get_h());
+		editbox.set_pos(Vector2i(editbox.get_x() - default_button_size(), editbox.get_y()));
+		editbox.set_size(editbox.get_w() + default_button_size(), editbox.get_h());
 		editbox.set_text(chat_.last_recipient_);
 	} else {
 		// When an entry has been selected, update the "@playername " in the edit field
@@ -116,7 +116,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 			select_recipient();
 		});
 		hbox_.add(&recipient_dropdown_, UI::Box::Resizing::kAlign);
-		hbox_.add_space(4);
+		hbox_.add_space(default_spacing());
 	}
 
 	hbox_.add(&editbox, UI::Box::Resizing::kFillSpace);

@@ -283,7 +283,7 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      Widelands::Player* const plr,
                                      UI::UniqueWindow::Registry* const registry)
-   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 68, 34, _("Action")),
+   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 2 * default_button_size(), default_button_size(), _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
@@ -343,7 +343,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(17 + 34 * best_tab_, fastclick_ ? 56 : 17));
+	set_mouse_pos(Vector2i(default_button_size() / 2 + default_button_size() * best_tab_, fastclick_ ? default_button_size() * 3 / 2 : default_button_size() / 2));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -770,7 +770,7 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const std::string& tooltip_text,
                                           bool repeating,
                                           bool enabled) {
-	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
+	UI::Button& button = *new UI::Button(box, name, 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
 	                                     g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
 	button.set_enabled(enabled);
@@ -1271,7 +1271,6 @@ void show_field_action(InteractiveBase* const ibase,
 // Ship selection window implementation
 
 class ShipSelectionWindow : public UI::UniqueWindow {
-	static constexpr int kPadding = 4;
 	static constexpr int kListHeight = 200;
 
 	static inline std::string ship_description(const Widelands::Ship* ship, bool hostile) {
@@ -1325,7 +1324,7 @@ public:
 			                    UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
 			                    UI::Align::kCenter),
 			   UI::Box::Resizing::kFullSize);
-			box_manageable_.add_space(kPadding);
+			box_manageable_.add_space(default_padding());
 		}
 #ifndef NDEBUG
 		else {
@@ -1338,7 +1337,7 @@ public:
 		                                     "label_attackable", UI::FontStyle::kWuiInfoPanelHeading,
 		                                     _("Attackable Ships"), UI::Align::kCenter),
 		                    UI::Box::Resizing::kFullSize);
-		box_attackable_.add_space(kPadding);
+		box_attackable_.add_space(default_padding());
 		box_attackable_.add(&list_attackable_, UI::Box::Resizing::kExpandBoth);
 
 		hbox_.add(&box_manageable_, UI::Box::Resizing::kFullSize);
@@ -1347,7 +1346,7 @@ public:
 		} else if (attackable.empty()) {
 			box_attackable_.set_visible(false);
 		} else {
-			hbox_.add_space(kPadding);
+			hbox_.add_space(default_padding());
 		}
 		hbox_.add(&box_attackable_, UI::Box::Resizing::kFullSize);
 

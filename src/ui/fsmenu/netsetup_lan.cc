@@ -100,16 +100,16 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
                _("Host a new game")) {
 
 	left_column_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
-	left_column_box_.add_space(kPadding);
+	left_column_box_.add_space(default_padding());
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_content_box_.set_inner_spacing(kPadding);
+	right_column_content_box_.set_inner_spacing(default_padding());
 	right_column_content_box_.add(&label_playername_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&playername_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&host_box_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(kPadding);
+	right_column_content_box_.add_space(default_padding());
 	right_column_content_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();
@@ -126,7 +126,7 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add_inf_space();
 
 	host_box_.add(&hostname_, UI::Box::Resizing::kExpandBoth);
-	host_box_.add_space(kPadding);
+	host_box_.add_space(default_padding());
 	host_box_.add(&loadlasthost_);
 
 	joingame_.sigclicked.connect([this]() { clicked_joingame(); });

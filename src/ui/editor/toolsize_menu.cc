@@ -26,7 +26,6 @@ inline EditorInteractive& EditorToolsizeMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-constexpr int kMargin = 5;
 constexpr int kSpinboxWidth = 300;
 constexpr int kSpinboxUnitW = 180;
 
@@ -37,7 +36,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
-     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      spinbox_radius_(&box_,
                      "toolsize",
                      0,

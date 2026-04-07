@@ -35,8 +35,6 @@
 #include "ui/game/waresdisplay.h"
 #include "ui/wui/interactive_player.h"
 
-constexpr int kButtonSize = 34;
-constexpr int kSpacing = 8;
 constexpr int kMinBoxWidth = 250;
 
 constexpr const char* kIconTabTradeNew = "images/wui/buildings/menu_tab_trade.png";
@@ -47,7 +45,7 @@ constexpr const char* kIconMoveTrade = "images/wui/buildings/menu_tab_trade_offe
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 
 static inline int32_t calc_max_box_height() {
-	return g_gr->get_yres() - 7 * kButtonSize;
+	return g_gr->get_yres() - 7 * UI::Panel::default_button_size();
 }
 
 class NewTradeProposalBox : public UI::Box {
@@ -64,7 +62,7 @@ public:
 	             0,
 	             200,
 	             8,
-	             kButtonSize,
+	             default_button_size(),
 	             _("Player"),
 	             UI::DropdownType::kTextual,
 	             UI::PanelStyle::kWui,
@@ -93,27 +91,27 @@ public:
 		ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 		hbox_.add(&TradeProposalWaresDisplay::create(
-		             &hbox_, iplayer.player().tribe(), _("You offer:"), kSpacing, &offer_),
+		             &hbox_, iplayer.player().tribe(), _("You offer:"), default_spacing(), &offer_),
 		          UI::Box::Resizing::kExpandBoth);
-		hbox_.add_space(kSpacing);
+		hbox_.add_space(default_spacing());
 		hbox_.add(&TradeProposalWaresDisplay::create(
-		             &hbox_, iplayer.player().tribe(), _("You demand:"), kSpacing, &demand_),
+		             &hbox_, iplayer.player().tribe(), _("You demand:"), default_spacing(), &demand_),
 		          UI::Box::Resizing::kExpandBoth);
 
-		buttons_box_.add_space(kSpacing);
+		buttons_box_.add_space(default_spacing());
 		UI::Button* b = new UI::Button(
 		   &buttons_box_, "decrease_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease amount by 10"));
 		b->sigclicked.connect([this] { change(-10); });
 		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
-		buttons_box_.add_space(kSpacing);
+		buttons_box_.add_space(default_spacing());
 		b->set_repeating(true);
 		b = new UI::Button(&buttons_box_, "decrease", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 		                   _("Decrease amount"));
 		b->sigclicked.connect([this] { change(-1); });
 		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
-		buttons_box_.add_space(kSpacing);
+		buttons_box_.add_space(default_spacing());
 
 		b->set_repeating(true);
 		b = new UI::Button(&buttons_box_, "increase", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
@@ -121,26 +119,26 @@ public:
 		                   _("Increase amount"));
 		b->sigclicked.connect([this] { change(1); });
 		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
-		buttons_box_.add_space(kSpacing);
+		buttons_box_.add_space(default_spacing());
 		b->set_repeating(true);
 		b = new UI::Button(
 		   &buttons_box_, "increase_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Increase amount by 10"));
 		b->sigclicked.connect([this] { change(10); });
 		buttons_box_.add(b, UI::Box::Resizing::kExpandBoth);
-		buttons_box_.add_space(kSpacing);
+		buttons_box_.add_space(default_spacing());
 		b->set_repeating(true);
 
 		add(&player_, UI::Box::Resizing::kFullSize);
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(&hbox_, UI::Box::Resizing::kExpandBoth);
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(&batches_, UI::Box::Resizing::kFullSize);
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(&ok_, UI::Box::Resizing::kFullSize);
-		add_space(kSpacing);
+		add_space(default_spacing());
 
 		rebuild();
 	}
@@ -316,7 +314,7 @@ private:
 				txt->set_text(_("There are no pending trade proposals at the moment."));
 			}
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * default_button_size_small());
 
 		} else {
 			const bool can_act = iplayer_ != nullptr && iplayer_->can_act(player_number_);
@@ -335,7 +333,7 @@ private:
 
 				if (can_act) {
 					UI::Button* cancel = new UI::Button(
-					   box, "cancel", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+					   box, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 					   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
 
 					cancel->sigclicked.connect([this, trade_id]() {
@@ -344,10 +342,10 @@ private:
 					});
 
 					UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
-					   box, "move", 0, 0, 100, 8, kButtonSize, _("Move this trade proposal…"),
+					   box, "move", 0, 0, 100, 8, default_button_size(), _("Move this trade proposal…"),
 					   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui,
 					   UI::ButtonStyle::kWuiSecondary);
-					move->set_min_lineheight(kButtonSize);
+					move->set_min_lineheight(default_button_size());
 					move->set_image(g_image_cache->get(kIconMoveTrade));
 
 					std::vector<const Widelands::Market*> markets = iplayer_->player().get_markets();
@@ -370,9 +368,9 @@ private:
 						});
 					}
 
-					box->add_space(kSpacing);
+					box->add_space(default_spacing());
 					box->add(move, UI::Box::Resizing::kAlign, UI::Align::kTop);
-					box->add_space(kSpacing);
+					box->add_space(default_spacing());
 					box->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kTop);
 				}
 
@@ -448,7 +446,7 @@ private:
 			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 			txt->set_text(_("Nobody has offered you any trades at the moment."));
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * default_button_size_small());
 
 		} else {
 			for (Widelands::TradeID trade_id : trades) {
@@ -464,10 +462,10 @@ private:
 				         UI::Box::Resizing::kExpandBoth);
 
 				UI::Button* yes = new UI::Button(
-				   box, "yes", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				   box, "yes", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 				   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
 				UI::Button* no = new UI::Button(
-				   box, "no", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				   box, "no", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 				   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
 
 				yes->sigclicked.connect([this, trade_id]() {
@@ -480,9 +478,9 @@ private:
 					   iplayer_.player_number(), trade_id, Widelands::TradeAction::kReject, 0, 0);
 				});
 
-				box->add_space(kSpacing);
+				box->add_space(default_spacing());
 				box->add(no, UI::Box::Resizing::kAlign, UI::Align::kTop);
-				box->add_space(kSpacing);
+				box->add_space(default_spacing());
 				box->add(yes, UI::Box::Resizing::kAlign, UI::Align::kTop);
 
 				add(box, UI::Box::Resizing::kExpandBoth);
@@ -548,7 +546,7 @@ public:
 			iqd = new InputQueueDisplay(
 			   this, ibase, market, *pair.second, false, true, collapsed, trade_id_);
 			input_queues_.push_back(iqd);
-			add_space(kSpacing);
+			add_space(default_spacing());
 			add(iqd, UI::Box::Resizing::kFullSize);
 		}
 
@@ -556,13 +554,13 @@ public:
 			action_box_ =
 			   new UI::Box(this, UI::PanelStyle::kWui, "actions", 0, 0, UI::Box::Horizontal);
 
-			button_pause_ = new UI::Button(action_box_, "toggle_pause", 0, 0, kButtonSize, kButtonSize,
+			button_pause_ = new UI::Button(action_box_, "toggle_pause", 0, 0, default_button_size(), default_button_size(),
 			                               UI::ButtonStyle::kWuiSecondary, std::string());
 			button_pause_->sigclicked.connect([this]() { toggle_pause_action(); });
 
 			const bool can_extend = trade_instance.num_batches != Widelands::kInfiniteTrade;
 			button_extend_ = new UI::Button(
-			   action_box_, "extend", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			   action_box_, "extend", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			   g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
 			   can_extend ?
 			      format("<p>%s%s%s</p>",
@@ -583,7 +581,7 @@ public:
 			}
 
 			UI::Button* cancel = new UI::Button(
-			   action_box_, "cancel", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			   action_box_, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade"));
 			cancel->sigclicked.connect([this]() {
 				upcast(InteractivePlayer, ipl, &ibase_);
@@ -598,10 +596,10 @@ public:
 			});
 
 			dropdown_move_ = new UI::Dropdown<Widelands::Serial>(
-			   action_box_, "move", 0, 0, 100, 8, kButtonSize, _("Move this trade…"),
+			   action_box_, "move", 0, 0, 100, 8, default_button_size(), _("Move this trade…"),
 			   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-			dropdown_move_->set_desired_size(kButtonSize, kButtonSize);
-			dropdown_move_->set_min_lineheight(kButtonSize);
+			dropdown_move_->set_desired_size(default_button_size(), default_button_size());
+			dropdown_move_->set_min_lineheight(default_button_size());
 			dropdown_move_->set_image(
 			   g_image_cache->get("images/wui/buildings/menu_tab_trade_offers.png"));
 
@@ -642,11 +640,11 @@ public:
 			action_box_->add(cancel, UI::Box::Resizing::kFullSize);
 			action_box_->add_inf_space();
 
-			add_space(kSpacing);
+			add_space(default_spacing());
 			add(action_box_, UI::Box::Resizing::kFullSize);
 		}
 
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(&extensions_box_, UI::Box::Resizing::kFullSize);
 
 		rebuild_extensions();
@@ -710,11 +708,11 @@ private:
 				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
-					UI::Button* reject = new UI::Button(box, "reject", 0, 0, kButtonSize, kButtonSize,
+					UI::Button* reject = new UI::Button(box, "reject", 0, 0, default_button_size(), default_button_size(),
 					                                    UI::ButtonStyle::kWuiSecondary,
 					                                    g_image_cache->get("images/wui/menu_abort.png"),
 					                                    _("Reject this trade extension proposal"));
-					UI::Button* accept = new UI::Button(box, "accept", 0, 0, kButtonSize, kButtonSize,
+					UI::Button* accept = new UI::Button(box, "accept", 0, 0, default_button_size(), default_button_size(),
 					                                    UI::ButtonStyle::kWuiSecondary,
 					                                    g_image_cache->get("images/wui/menu_okay.png"),
 					                                    _("Accept this trade extension proposal"));
@@ -732,14 +730,14 @@ private:
 						   ipl->player_number(), trade_id_, Widelands::TradeAction::kAccept, te.batches);
 					});
 
-					box->add_space(kSpacing);
+					box->add_space(default_spacing());
 					box->add(reject);
-					box->add_space(kSpacing);
+					box->add_space(default_spacing());
 					box->add(accept);
 				}
 
 				extensions_box_.add(box, UI::Box::Resizing::kFullSize);
-				extensions_box_.add_space(kSpacing);
+				extensions_box_.add_space(default_spacing());
 			}
 
 			for (const Widelands::TradeExtension& te : ibase_.game().find_trade_extensions(
@@ -763,7 +761,7 @@ private:
 						description->set_text(_("You proposed to extend this trade indefinitely."));
 					}
 
-					UI::Button* retract = new UI::Button(box, "retract", 0, 0, kButtonSize, kButtonSize,
+					UI::Button* retract = new UI::Button(box, "retract", 0, 0, default_button_size(), default_button_size(),
 					                                     UI::ButtonStyle::kWuiSecondary,
 					                                     g_image_cache->get("images/wui/menu_abort.png"),
 					                                     _("Retract this trade extension proposal"));
@@ -775,7 +773,7 @@ private:
 						   ipl->player_number(), trade_id_, Widelands::TradeAction::kRetract, te.batches);
 					});
 
-					box->add_space(kSpacing);
+					box->add_space(default_spacing());
 					box->add(retract);
 
 				} else {
@@ -792,7 +790,7 @@ private:
 				}
 
 				extensions_box_.add(box, UI::Box::Resizing::kFullSize);
-				extensions_box_.add_space(kSpacing);
+				extensions_box_.add_space(default_spacing());
 			}
 		}
 

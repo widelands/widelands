@@ -28,8 +28,6 @@
 
 namespace FsMenu {
 
-constexpr int kPadding = 4;
-
 TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
    : UI::Window(parent,
                 UI::WindowStyle::kFsMenu,
@@ -47,13 +45,13 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	UI::PanelStyle panel_style = UI::PanelStyle::kFsMenu;
 
 	// Some horizontal padding
-	UI::Box* wrapper_box = new UI::Box(this, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	UI::Box* wrapper_box = new UI::Box(this, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 	set_center_panel(wrapper_box);
 
 	wrapper_box->add_space(0);
 
 	UI::Box* main_box =
-	   new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	   new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 	wrapper_box->add(main_box, UI::Box::Resizing::kExpandBoth);
 
 	main_box->add_space(0);
@@ -68,10 +66,10 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Add a checkbox for each training wheel.
 	// Box should scroll if there are many.
-	main_box->add_space(kPadding);
+	main_box->add_space(default_padding());
 
 	UI::Box* list_box = new UI::Box(
-	   main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
+	   main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, default_padding());
 	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
@@ -93,11 +91,11 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	mark_unmark_state_ = !has_solved;
 
-	main_box->add_space(kPadding);
+	main_box->add_space(default_padding());
 
 	// Bottom button row with actions
 	UI::Box* horizontal_box =
-	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 	main_box->add(horizontal_box, UI::Box::Resizing::kFullSize);
 
 	horizontal_box->add_space(0);

@@ -57,8 +57,6 @@ constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_tra
 constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
 
-constexpr int kPadding = 5;
-constexpr int kButtonSize = 34;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
@@ -76,7 +74,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
      warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)),
      warship_health_(
         &vbox_, UI::PanelStyle::kWui, "health", UI::FontStyle::kWuiLabel, "", UI::Align::kCenter) {
-	vbox_.set_inner_spacing(kPadding);
+	vbox_.set_inner_spacing(default_padding());
 	assert(ship->get_owner());
 
 	if (ibase_.can_act(ship->owner().player_number())) {
@@ -111,7 +109,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	UI::Box* exp_bot =
 	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, "exp_box_3", 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	navigation_box_.add_space(kPadding);
+	navigation_box_.add_space(default_padding());
 
 	btn_scout_[Widelands::WALK_NW - 1] =
 	   make_button(exp_top, "scnw", _("Scout towards the north west"), kImgScoutNW, true,
@@ -165,7 +163,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	set_destination_ = new UI::Dropdown<DestinationWrapper>(
-	   &vbox_, "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
+	   &vbox_, "set_destination", 0, 0, 200, 8, default_button_size(), _("Destination"),
 	   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 	set_destination_->selected.connect([this]() { act_set_destination(); });
 	vbox_.add(set_destination_, UI::Box::Resizing::kFullSize);
@@ -182,7 +180,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	btn_refit_ =
 	   make_button(buttons, "refit", "", kImgRefitTransport, false, [this]() { act_refit(); });
 	buttons->add(btn_refit_);
-	buttons->add_space(kPadding);
+	buttons->add_space(default_padding());
 
 	btn_cancel_expedition_ =
 	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), kImgCancelExpedition,
@@ -536,7 +534,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& picname,
                                     bool flat_when_disabled,
                                     const std::function<void()>& callback) {
-	UI::Button* btn = new UI::Button(parent, name, 0, 0, kButtonSize, kButtonSize,
+	UI::Button* btn = new UI::Button(parent, name, 0, 0, default_button_size(), default_button_size(),
 	                                 UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	if (flat_when_disabled) {
 		btn->set_disable_style(UI::ButtonDisableStyle::kMonochrome | UI::ButtonDisableStyle::kFlat);

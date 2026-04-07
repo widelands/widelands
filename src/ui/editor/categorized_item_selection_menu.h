@@ -124,8 +124,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	for (const auto& category : categories) {
 		UI::Box* vertical = new UI::Box(&tab_panel_, UI::PanelStyle::kWui,
 		                                format("vbox_%s", category->name()), 0, 0, UI::Box::Vertical);
-		const int kSpacing = 5;
-		vertical->add_space(kSpacing);
+		vertical->add_space(default_spacing());
 
 		int nitems_handled = 0;
 		UI::Box* horizontal = nullptr;
@@ -134,10 +133,10 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 				horizontal =
 				   new UI::Box(vertical, UI::PanelStyle::kWui,
 				               format("hbox_%s_%d", category->name(), i), 0, 0, UI::Box::Horizontal);
-				horizontal->add_space(kSpacing);
+				horizontal->add_space(default_spacing());
 
 				vertical->add(horizontal);
-				vertical->add_space(kSpacing);
+				vertical->add_space(default_spacing());
 			}
 			assert(horizontal != nullptr);
 
@@ -147,7 +146,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			checkboxes_[i] = cb;
 			tab_indices_[i] = category_index;
 			horizontal->add(cb, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-			horizontal->add_space(kSpacing);
+			horizontal->add_space(default_spacing());
 			++nitems_handled;
 		}
 		tab_panel_.add(category->name(), category->picture(), vertical, category->descname());

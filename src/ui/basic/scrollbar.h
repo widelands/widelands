@@ -29,10 +29,6 @@ namespace UI {
 struct Scrollbar : public Panel {
 	enum class Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
 
-	/// default width for vertical scrollbars,
-	/// or height for horizontal scrollbars
-	static constexpr int kSize = 24;
-
 public:
 	Scrollbar(Panel* parent,
 	          const std::string& name,

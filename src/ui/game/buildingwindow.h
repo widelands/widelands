@@ -37,9 +37,6 @@
 struct BuildingWindow : public UI::UniqueWindow {
 	friend struct TrainingSiteWindow;
 	friend struct MilitarySiteWindow;
-	enum {
-		Width = 4 * 34  //  4 normally sized buttons
-	};
 
 	enum class CollapsedState : uint8_t { kExpanded, kCollapsed };
 
@@ -67,6 +64,10 @@ protected:
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
 	               bool avoid_fastclick);
+
+	inline int default_width() const {
+		return 4 * default_button_size();
+	}
 
 public:
 	BuildingWindow(InteractiveBase& parent,

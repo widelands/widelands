@@ -33,8 +33,6 @@
 #include "ui/basic/window.h"
 #include "ui/wui/interactive_player.h"
 
-constexpr int kPadding = 8;
-
 struct ActionConfirm : public UI::Window {
 	ActionConfirm(InteractivePlayer& parent,
 	              const std::string& windowtitle,
@@ -232,24 +230,24 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	                  g_image_cache->get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect([this]() { die(); });
 
-	button_box->add_space(kPadding);
+	button_box->add_space(default_padding());
 	button_box->add(UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kAlign,
 	                UI::Align::kCenter);
-	button_box->add_space(2 * kPadding);
+	button_box->add_space(2 * default_padding());
 	button_box->add(UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kAlign,
 	                UI::Align::kCenter);
-	button_box->add_space(kPadding);
+	button_box->add_space(default_padding());
 
 	main_box->add(textarea, UI::Box::Resizing::kExpandBoth);
-	main_box->add_space(kPadding);
+	main_box->add_space(default_padding());
 	main_box->add(custom_content_box_, UI::Box::Resizing::kExpandBoth);
-	main_box->add_space(kPadding);
+	main_box->add_space(default_padding());
 	main_box->add(button_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	main_box->add_space(kPadding);
+	main_box->add_space(default_padding());
 
-	wrapper_box->add_space(kPadding);
+	wrapper_box->add_space(default_padding());
 	wrapper_box->add(main_box, UI::Box::Resizing::kExpandBoth);
-	wrapper_box->add_space(kPadding);
+	wrapper_box->add_space(default_padding());
 
 	set_center_panel(wrapper_box);
 	set_z(UI::Panel::ZOrder::kConfirmation);

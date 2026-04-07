@@ -54,7 +54,7 @@ MapSelect::MapSelect(MenuCapsule& m,
                  UI::Box::Vertical,
                  0,
                  0,
-                 2 * kPadding),
+                 2 * default_padding()),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(
         &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
@@ -100,7 +100,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	                   UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   hbox, "dropdown_official_tags", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->set_tooltip(_("Filter by official status"));
@@ -114,7 +114,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	hbox->add_space(checkbox_space_);
 
 	team_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   hbox, "dropdown_team_tags", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
 	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
@@ -133,7 +133,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	hbox->add_space(checkbox_space_);
 
 	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_balancing", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   hbox, "dropdown_balancing", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
 	balancing_tags_dropdown_->set_tooltip(_("Filter by balancing status"));
@@ -173,7 +173,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
 	header_box_.add(&checkboxes_, UI::Box::Resizing::kExpandBoth);
-	header_box_.add_space(2 * kPadding);
+	header_box_.add_space(2 * default_padding());
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 

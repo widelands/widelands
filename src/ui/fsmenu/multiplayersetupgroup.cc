@@ -35,8 +35,6 @@
 #include "ui/basic/messagebox.h"
 #include "ui/basic/mouse_constants.h"
 
-constexpr int kPadding = 4;
-
 /// Holds the info and dropdown menu for a connected client
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const grand_parent,
@@ -53,7 +51,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	             UI::Box::Horizontal,
 	             0,
 	             0,
-	             kPadding),
+	             default_padding()),
 	     slot_dropdown_(this,
 	                    format("dropdown_slot%d", static_cast<unsigned int>(id)),
 	                    0,
@@ -692,7 +690,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
      scrollable_clientbox_(
         &clientbox_, UI::PanelStyle::kFsMenu, "scrollable_clientbox", 0, 0, UI::Box::Vertical),
      playerbox_(
-        this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      scrollable_playerbox_(
         &playerbox_, UI::PanelStyle::kFsMenu, "scrollable_playerbox", 0, 0, UI::Box::Vertical),
      clients_(&clientbox_,
@@ -718,16 +716,16 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
      buth_(buth) {
 	scrollable_clientbox_.set_scrolling(true);
 	clientbox_.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
-	clientbox_.add_space(3 * kPadding);
+	clientbox_.add_space(3 * default_padding());
 	clientbox_.add(&scrollable_clientbox_, Resizing::kExpandBoth);
 
 	scrollable_playerbox_.set_scrolling(true);
 	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
-	playerbox_.add_space(kPadding);
+	playerbox_.add_space(default_padding());
 	playerbox_.add(&scrollable_playerbox_, Resizing::kExpandBoth);
 
 	add(&clientbox_, Resizing::kFullSize);
-	add_space(8 * kPadding);
+	add_space(8 * default_padding());
 	add(&playerbox_, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
@@ -806,7 +804,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
                                                  uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	uint32_t scroll_height = max_height - players_.get_h() - 4 * kPadding;
+	uint32_t scroll_height = max_height - players_.get_h() - 4 * default_padding();
 	scrollable_playerbox_.set_max_size(0, scroll_height);
 	// Reset desired size to properly fit into scroll box
 	scrollable_playerbox_.set_desired_size(0, 0);

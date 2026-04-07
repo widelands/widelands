@@ -38,7 +38,6 @@
 namespace {
 // The map generator can't find starting positions for too many players
 constexpr uint8_t kMaxMapgenPlayers = 8;
-constexpr uint8_t kMargin = 4;
 }  // namespace
 
 MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
@@ -48,7 +47,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                                      const uint32_t h,
                                                      UI::Button& ok_button,
                                                      UI::Button& cancel_button)
-   : UI::Box(&parent, s, "random_map_panel", kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
+   : UI::Box(&parent, s, "random_map_panel", default_padding(), default_padding(), UI::Box::Vertical, 0, 0, default_padding()),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
      // UI elements
@@ -172,7 +171,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                 UI::SpinBox::Units::kPercent,
                 UI::SpinBox::Type::kSmall,
                 5),
-     mountains_box_(this, panel_style_, "mountains_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     mountains_box_(this, panel_style_, "mountains_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding()),
      mountains_label_(&mountains_box_,
                       panel_style_,
                       "mountains_label",
@@ -195,11 +194,11 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
      island_mode_(this, panel_style_, "island_mode", Vector2i::zero(), _("Island mode")),
      // Geeky stuff
      map_number_and_id_hbox_(
-        this, panel_style_, "id_hbox", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+        this, panel_style_, "id_hbox", 0, 0, UI::Box::Horizontal, 0, 0, default_padding()),
      map_number_and_id_vbox_1_(
-        &map_number_and_id_hbox_, panel_style_, "id_vbox1", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox1", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      map_number_and_id_vbox_2_(
-        &map_number_and_id_hbox_, panel_style_, "id_vbox2", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox2", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      random_number_hbox_(&map_number_and_id_vbox_2_,
                          panel_style_,
                          "seed_hbox",
@@ -208,7 +207,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                          UI::Box::Horizontal,
                          0,
                          0,
-                         kMargin),
+                         default_padding()),
      map_number_label_(&map_number_and_id_vbox_1_,
                        panel_style_,
                        "seed_label",
@@ -222,7 +221,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                       "seed_editbox",
                       0,
                       0,
-                      inner_w - 2 * kMargin - map_number_label_.get_w(),
+                      inner_w - 2 * default_padding() - map_number_label_.get_w(),
                       panel_style_),
      map_number_randomize_(&random_number_hbox_,
                            "new_random_number",
@@ -246,7 +245,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                   "id_editbox",
                   0,
                   0,
-                  inner_w - 2 * kMargin - map_id_label_.get_w(),
+                  inner_w - 2 * default_padding() - map_id_label_.get_w(),
                   panel_style_),
      ok_button_(ok_button),
      cancel_button_(cancel_button) {
@@ -263,19 +262,19 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 		}
 	}
 	add(&generator_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Width + Height ----------
 
 	map_size_box_.set_selection_function([this] { button_clicked(ButtonId::kMapSize); });
 	add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Players -----------
 
 	add(&players_, UI::Box::Resizing::kExpandBoth);
 
-	add_space(kMargin);
+	add_space(default_padding());
 
 	players_.changed.connect([this]() { button_clicked(ButtonId::kPlayers); });
 
@@ -295,7 +294,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 		nr_edit_box_changed();
 	});
 	add(&world_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Amount of Resources (Low/Medium/High) ----------
 
@@ -308,7 +307,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 		nr_edit_box_changed();
 	});
 	add(&resources_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// Terrains Distribution
 
@@ -324,7 +323,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
 	add(&terrains_distribution_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Water -----------
 	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
@@ -358,13 +357,13 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	mountains_box_.add(&mountains_);
 
 	add(&mountains_box_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Island mode ----------
 
 	island_mode_.set_state(true);
 	add(&island_mode_, UI::Box::Resizing::kExpandBoth);
-	add_space(kMargin);
+	add_space(default_padding());
 
 	island_mode_.changed.connect([this]() { button_clicked(ButtonId::kIslandMode); });
 
@@ -385,7 +384,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	});
 	random_number_hbox_.add(&map_number_randomize_);
 
-	add_space(kMargin);
+	add_space(default_padding());
 
 	// ---------- Map ID String edit ----------
 
@@ -852,12 +851,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
      box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
-     button_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     button_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding()),
      ok_button_(&button_box_,
                 "generate_map",
                 0,
                 0,
-                get_inner_w() / 2 - kMargin,
+                get_inner_w() / 2 - default_padding(),
                 0,
                 UI::ButtonStyle::kWuiPrimary,
                 _("Generate Map")),
@@ -865,7 +864,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                     "generate_map",
                     0,
                     0,
-                    get_inner_w() / 2 - kMargin,
+                    get_inner_w() / 2 - default_padding(),
                     0,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")),

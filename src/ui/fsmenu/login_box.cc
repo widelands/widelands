@@ -30,8 +30,6 @@
 
 namespace FsMenu {
 
-constexpr int8_t kMargin = 6;
-
 LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kFsMenu, "login_box", &r, 500, 290, _("Online Game Settings")),
@@ -41,9 +39,9 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
      vbox1_(&hbox_, UI::PanelStyle::kFsMenu, "vbox_1", 0, 0, UI::Box::Vertical),
      vbox2_(&hbox_, UI::PanelStyle::kFsMenu, "vbox_2", 0, 0, UI::Box::Vertical),
-     b_login_(&buttons_box_, "login", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuPrimary, _("Save")),
+     b_login_(&buttons_box_, "login", 0, 0, 200, default_button_size(), UI::ButtonStyle::kFsMenuPrimary, _("Save")),
      b_cancel_(
-        &buttons_box_, "cancel", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+        &buttons_box_, "cancel", 0, 0, 200, default_button_size(), UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
      eb_nickname_(&vbox2_, "nickname", 0, 0, 330, UI::PanelStyle::kFsMenu),
      eb_password_(&vbox2_, "password", 0, 0, 330, UI::PanelStyle::kFsMenu),
      cb_register_(&main_box_,
@@ -62,7 +60,7 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
                   UI::FontStyle::kFsMenuLabel,
                   _("Password:")),
      register_account_(&main_box_,
-                       "labeö_registered",
+                       "label_registered",
                        0,
                        0,
                        0,
@@ -73,40 +71,40 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
                                 "Please log in at %s and set an online "
                                 "gaming password on your profile page."),
                               "\n\nhttps://widelands.org/accounts/register/\n\n")) {
-	vbox1_.add_space(kMargin);
+	vbox1_.add_space(default_padding());
 	vbox1_.add(&ta_nickname_, UI::Box::Resizing::kExpandBoth);
-	vbox1_.add_space(kMargin);
+	vbox1_.add_space(default_padding());
 	vbox1_.add(&ta_password_, UI::Box::Resizing::kExpandBoth);
-	vbox1_.add_space(kMargin);
+	vbox1_.add_space(default_padding());
 
-	vbox2_.add_space(kMargin);
+	vbox2_.add_space(default_padding());
 	vbox2_.add(&eb_nickname_, UI::Box::Resizing::kExpandBoth);
-	vbox2_.add_space(kMargin);
+	vbox2_.add_space(default_padding());
 	vbox2_.add(&eb_password_, UI::Box::Resizing::kExpandBoth);
-	vbox2_.add_space(kMargin);
+	vbox2_.add_space(default_padding());
 
-	hbox_.add_space(kMargin);
+	hbox_.add_space(default_padding());
 	hbox_.add(&vbox1_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kMargin);
+	hbox_.add_space(default_padding());
 	hbox_.add(&vbox2_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kMargin);
+	hbox_.add_space(default_padding());
 
-	buttons_box_.add_space(kMargin);
+	buttons_box_.add_space(default_padding());
 	buttons_box_.add(
 	   UI::g_fh->fontset()->is_rtl() ? &b_login_ : &b_cancel_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kMargin);
+	buttons_box_.add_space(default_padding());
 	buttons_box_.add(
 	   UI::g_fh->fontset()->is_rtl() ? &b_cancel_ : &b_login_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kMargin);
+	buttons_box_.add_space(default_padding());
 
-	main_box_.add_space(kMargin);
+	main_box_.add_space(default_padding());
 	main_box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kMargin);
+	main_box_.add_space(default_padding());
 	main_box_.add(&cb_register_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kMargin);
+	main_box_.add_space(default_padding());
 	main_box_.add(&register_account_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(kMargin);
+	main_box_.add_space(default_padding());
 
 	set_center_panel(&main_box_);
 	center_to_parent();

@@ -37,7 +37,6 @@ constexpr uint32_t kMinutes = 60 * 1000;
 constexpr uint32_t kHours = 60 * 60 * 1000;
 constexpr uint32_t kDays = 24 * 60 * 60 * 1000;
 
-constexpr int32_t kSpacing = 5;
 constexpr int32_t kSpaceBottom = 20;
 constexpr int32_t kSpaceRight = 10;
 constexpr int32_t kSpaceLeftOfLabel = 15;
@@ -195,6 +194,7 @@ void draw_diagram(uint32_t time_ms,
                   const float xline_length,
                   RenderTarget& dst) {
 	const RGBColor& axis_line_color = g_style_manager->statistics_plot_style().axis_line_color();
+	const int spacing = UI::Panel::default_spacing();
 
 	uint32_t how_many_ticks;
 	uint32_t max_x;
@@ -234,20 +234,20 @@ void draw_diagram(uint32_t time_ms,
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
+	dst.draw_line_strip({Vector2f(spacing, inner_h - kSpaceBottom),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
 	                    axis_line_color, kAxisLinesWidth);
 	// Arrow
 	dst.draw_line_strip(
 	   {
-	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom - 3),
-	      Vector2f(kSpacing, inner_h - kSpaceBottom),
-	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
+	      Vector2f(spacing + 5, inner_h - kSpaceBottom - 3),
+	      Vector2f(spacing, inner_h - kSpaceBottom),
+	      Vector2f(spacing + 5, inner_h - kSpaceBottom + 3),
 	   },
 	   axis_line_color, kAxisLinesWidth);
 
 	//  Y Axis
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing * 3),
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, spacing * 3),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
 	                    axis_line_color, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
@@ -274,33 +274,33 @@ void draw_diagram(uint32_t time_ms,
 	}
 
 	//  draw yticks, one at full, one at three-quarter, one at half, one at quarter & 0
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, kSpacing * 3),
-	                     Vector2f(inner_w - kSpaceRight - 3, kSpacing * 3)},
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, spacing * 3),
+	                     Vector2f(inner_w - kSpaceRight - 3, spacing * 3)},
 	                    axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
 	   {Vector2f(
 	       inner_w - kSpaceRight + 2,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f),
+	       spacing * 3 + ((((inner_h - kSpaceBottom) + spacing * 3) / 2.f) - spacing * 3) / 2.f),
 	    Vector2f(
 	       inner_w - kSpaceRight,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f)},
+	       spacing * 3 + ((((inner_h - kSpaceBottom) + spacing * 3) / 2.f) - spacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f),
-	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f)},
+	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + spacing * 3) / 2.f),
+	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + spacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
 	   {Vector2f(
 	       inner_w - kSpaceRight + 2,
 	       inner_h - kSpaceBottom -
-	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f),
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + spacing * 3) / 2.f) / 2.f),
 	    Vector2f(
 	       inner_w - kSpaceRight,
 	       inner_h - kSpaceBottom -
-	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f)},
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + spacing * 3) / 2.f) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, inner_h - kSpaceBottom),
@@ -310,7 +310,7 @@ void draw_diagram(uint32_t time_ms,
 	//  print the used unit
 	std::shared_ptr<const UI::RenderedText> xtick =
 	   UI::g_fh->render(xtick_text_style(get_generic_unit_name(unit)));
-	Vector2i pos(2, kSpacing + 2);
+	Vector2i pos(2, spacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
 	xtick->draw(dst, pos);
 }
@@ -329,8 +329,8 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      plotmode_(plotmode),
      sample_rate_(sample_rate),
 
-     xline_length_(get_inner_w() - kSpaceRight - kSpacing),
-     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3) {
+     xline_length_(get_inner_w() - kSpaceRight - default_spacing()),
+     yline_length_(get_inner_h() - kSpaceBottom - default_spacing() * 3) {
 	update();
 }
 
@@ -518,7 +518,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 
 	//  print the maximal value into the top right corner
 	draw_value(yscale_label, g_style_manager->statistics_plot_style().y_max_value_font(),
-	           Vector2i(get_inner_w() - kSpaceRight + 3, kSpacing + 2), dst);
+	           Vector2i(get_inner_w() - kSpaceRight + 3, default_spacing() + 2), dst);
 }
 
 /**
@@ -546,7 +546,7 @@ void WuiPlotArea::draw_plot_line(RenderTarget& dst,
 		std::vector<Vector2f> points;
 		points.emplace_back(lx, ly);
 
-		for (int32_t i = dataset->size() - 1; i > 0 && posx > kSpacing; --i) {
+		for (int32_t i = dataset->size() - 1; i > 0 && posx > default_spacing(); --i) {
 			int32_t const curx = static_cast<int32_t>(posx);
 			int32_t cury = yoffset;
 
@@ -718,7 +718,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	         Vector2i::zero());
 
 	// yoffset of the zero line
-	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2.f;
+	float const yoffset = ((get_inner_h() - kSpaceBottom) + default_spacing() * 3) / 2.f;
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),

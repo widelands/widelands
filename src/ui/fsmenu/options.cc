@@ -98,7 +98,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
 
      box_interface_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_interface", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &tabs_, UI::PanelStyle::kFsMenu, "box_interface", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      box_interface_hbox_(&box_interface_,
                          UI::PanelStyle::kFsMenu,
                          "hbox_interface",
@@ -107,7 +107,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          UI::Box::Horizontal,
                          0,
                          0,
-                         kPadding),
+                         default_padding()),
      box_interface_vbox_(&box_interface_hbox_,
                          UI::PanelStyle::kFsMenu,
                          "vbox_interface",
@@ -116,15 +116,15 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          UI::Box::Vertical,
                          0,
                          0,
-                         kPadding),
+                         default_padding()),
      box_sound_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_sound", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &tabs_, UI::PanelStyle::kFsMenu, "box_sound", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      box_saving_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_saving", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &tabs_, UI::PanelStyle::kFsMenu, "box_saving", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      box_newgame_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_newgame", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &tabs_, UI::PanelStyle::kFsMenu, "box_newgame", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
      box_ingame_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_ingame", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &tabs_, UI::PanelStyle::kFsMenu, "box_ingame", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
 
      // Interface options
      language_dropdown_(&box_interface_vbox_,
@@ -133,7 +133,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
                         50,
-                        24,
+                        default_button_size_small(),
                         _("Language"),
                         UI::DropdownType::kTextual,
                         UI::PanelStyle::kFsMenu,
@@ -144,7 +144,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           50,
-                          24,
+                          default_button_size_small(),
                           _("Window Size"),
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
@@ -155,7 +155,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                        0,
                        100,  // 100 is arbitrary, will be resized in layout().
                        50,
-                       24,
+                       default_button_size_small(),
                        pgettext("multiscreen", "Display"),
                        UI::DropdownType::kTextual,
                        UI::PanelStyle::kFsMenu,
@@ -443,7 +443,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
 
-	box_interface_.add_space(kPadding);
+	box_interface_.add_space(default_padding());
 	box_interface_.add(&configure_keyboard_);
 
 	// Sound
@@ -476,12 +476,12 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-	box_ingame_.add_space(kPadding);
+	box_ingame_.add_space(default_padding());
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
 	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
-	training_wheels_box_.add_space(kPadding);
+	training_wheels_box_.add_space(default_padding());
 #endif
 
 	// Bind actions
@@ -643,21 +643,21 @@ void Options::layout() {
 		apply_.set_desired_size(butw, buth);
 		ok_.set_desired_size(butw, buth);
 		button_box_.set_size(get_inner_w(), buth);
-		button_box_.set_pos(Vector2i(0, get_inner_h() - kPadding - button_box_.get_h()));
+		button_box_.set_pos(Vector2i(0, get_inner_h() - default_padding() - button_box_.get_h()));
 
 		// Tabs
-		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
+		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * default_padding());
 
-		const int tab_panel_width = get_inner_w() - 3 * kPadding;
+		const int tab_panel_width = get_inner_w() - 3 * default_padding();
 		const int unit_w = tab_panel_width / 3;
 
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
-		                              3 * kPadding);
+		                              3 * default_padding());
 
 		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() +
-		                  display_dropdown_.get_h() + 3 * kPadding;
-		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
+		                  display_dropdown_.get_h() + 3 * default_padding();
+		const int half_w = (tab_panel_width - 3 * default_padding()) / 2;
 
 		// Make initial value big enough to avoid needing a scrollbar
 		int translation_h = 3 * min_h;

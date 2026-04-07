@@ -31,9 +31,6 @@
 
 namespace FsMenu {
 
-constexpr int16_t kPadding = 4;
-constexpr int16_t kButtonHeight = 28;
-
 struct ShortcutChooser : public UI::Window {
 	ShortcutChooser(KeyboardOptions& parent,
 	                const KeyboardShortcut c,
@@ -48,7 +45,7 @@ struct ShortcutChooser : public UI::Window {
 	                to_string(c)),
 	     code_(c),
 	     key(get_shortcut(code_)),
-	     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
+	     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding()) {
 		UI::Button* const reset = new UI::Button(
 		   &box_, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
 		reset->sigclicked.connect([this, &parent]() {
@@ -124,7 +121,7 @@ protected:
 		icon->set_handle_mouse(true);
 		icon->set_tooltip(tribe == nullptr ? tribename : tribe->descname());
 		hbox->add(icon, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		hbox->add_space(kPadding);
+		hbox->add_space(default_padding());
 
 		UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(
 		   hbox, "choose_fastplace", 0, 0, 400, 8, height, "", UI::DropdownType::kTextual,
@@ -210,7 +207,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
                 0,
                 _("Edit Keyboard And Mouse Actions")),
      buttons_box_(
-        this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+        this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding()),
      tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
      mousewheel_options_(&tabs_),
      reset_(&buttons_box_,
@@ -246,7 +243,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		                               UI::ButtonStyle::kFsMenuMenu, generate_title(key));
 		all_keyboard_buttons.emplace(key, b);
 		box.add(b, UI::Box::Resizing::kFullSize);
-		box.add_space(kPadding);
+		box.add_space(default_padding());
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			const bool fastplace = is_fastplace(key);
 			WLApplication& app = WLApplication::get();
@@ -281,7 +278,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                                  const KeyboardShortcut shortcut_end) {
 		assert(shortcut_start <= shortcut_end);
 		UI::Box* b = new UI::Box(
-		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
 			if (is_real(k)) {
@@ -396,14 +393,14 @@ bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
 
 void KeyboardOptions::layout() {
 	if (!is_minimal()) {
-		reset_.set_desired_size(get_w() / 3, kButtonHeight);
+		reset_.set_desired_size(get_w() / 3, default_button_size());
 		ok_.set_desired_size(reset_.get_w(), reset_.get_h());
 		int w;
 		int h;
 		buttons_box_.get_desired_size(&w, &h);
 		buttons_box_.set_size(get_inner_w(), h);
-		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h - kPadding));
-		tabs_.set_size(get_inner_w(), get_inner_h() - h - 2 * kPadding);
+		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h - default_padding()));
+		tabs_.set_size(get_inner_w(), get_inner_h() - h - 2 * default_padding());
 		for (UI::Box* b : boxes_) {
 			b->set_max_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 		}

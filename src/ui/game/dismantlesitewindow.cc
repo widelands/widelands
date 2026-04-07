@@ -21,7 +21,6 @@
 #include "ui/game/inputqueuedisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
-constexpr int8_t kButtonSize = 34;
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
                                          BuildingWindow::Registry& reg,
@@ -43,12 +42,12 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	// Add the progress bar
 	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
-	                                UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+	                                UI::ProgressBar::DefaultWidth(), UI::ProgressBar::DefaultHeight(),
 	                                UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	box.add_space(8);
+	box.add_space(default_spacing());
 
 	// Add the wares queue
 	dropout_queues_.reserve(dismantle_site->nr_dropout_waresqueues());
@@ -74,7 +73,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 		   *new UI::Box(&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
 		builder_caps.add_inf_space();
 		UI::Button& evict_button = *new UI::Button(
-		   &builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+		   &builder_caps, "evict", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 		   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 		   _("Send the builder away"));
 		evict_button.sigclicked.connect([this]() { evict_builder(); });

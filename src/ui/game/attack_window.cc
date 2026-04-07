@@ -34,11 +34,6 @@
 #include "ui/game/debug_ui.h"
 
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
-constexpr int kSpacing = 8;
-
-constexpr int kSoldierIconWidth = 32;
-constexpr int kSoldierIconHeight = 30;
-constexpr int kShipIconHeight = 34;
 
 static unsigned next_serial_(0);
 static std::map<unsigned, AttackWindow*> living_attack_windows_;
@@ -136,9 +131,9 @@ AttackPanel::AttackPanel(
      get_max_attackers_(get_max_attackers),
      attack_type_(attack_type),
      icon_w_(attack_type_ == AttackPanel::AttackType::kShip ?
-                (2 * Widelands::Ship::kShipHalfHealthBarWidth + kSpacing) :
-                kSoldierIconWidth),
-     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? kShipIconHeight : kSoldierIconHeight),
+                (2 * Widelands::Ship::kShipHalfHealthBarWidth + default_spacing()) :
+                default_button_size()),
+     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? default_button_size() : default_button_size()),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
@@ -254,7 +249,7 @@ UI::Button* add_button(ParentWidget* widget,
                        UI::ButtonStyle style,
                        const std::string& tooltip_text) {
 	UI::Button* button =
-	   new UI::Button(&parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
+	   new UI::Button(&parent, name, UI::Panel::default_padding(), UI::Panel::default_padding(), UI::Panel::default_button_size(), UI::Panel::default_button_size(), style, text_or_image, tooltip_text);
 	button->sigclicked.connect([widget, functor]() { (widget->*functor)(); });
 	parent.add(button);
 	return button;
@@ -389,7 +384,7 @@ void AttackPanel::init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>
 	              attack_type_ == AttackType::kShip ?
 	                 _("Send more ships. Hold down Ctrl to send as many ships as possible") :
 	                 _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
-	linebox_.add_space(kSpacing);
+	linebox_.add_space(default_spacing());
 	if (can_attack) {
 		attack_button_.reset(add_button(
 		   this, linebox_, "attack", g_image_cache->get("images/wui/buildings/menu_attack.png"),
@@ -481,7 +476,7 @@ void AttackWindow::init_bottombox() {
 		add_button(this, bottombox_, "debug",
 		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"),
 		           &AttackWindow::act_debug, UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
-		bottombox_.add_space(kSpacing);
+		bottombox_.add_space(default_spacing());
 	}
 	add_button(this, bottombox_, "goto", g_image_cache->get("images/wui/menus/goto.png"),
 	           &AttackWindow::act_goto, UI::ButtonStyle::kWuiMenu, _("Center view on this"));

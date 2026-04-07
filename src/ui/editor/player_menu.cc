@@ -33,7 +33,6 @@
 #include "wlapplication_options.h"
 
 namespace {
-constexpr int kMargin = 4;
 // Make room for 8 players
 // If this ever gets changed, don't forget to change the strings in the warning box as well.
 constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
@@ -52,7 +51,7 @@ public:
 	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
 	               recommended number of players */
 	            _("Too Many Players")),
-	     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
+	     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 2 * default_padding()),
 	     warning_label_(
 	        &box_,
 	        "label_warning",
@@ -78,12 +77,12 @@ public:
 	     button_box_(&box_,
 	                 UI::PanelStyle::kWui,
 	                 "buttons_box",
-	                 kMargin,
-	                 kMargin,
+	                 default_padding(),
+	                 default_padding(),
 	                 UI::Box::Horizontal,
 	                 0,
 	                 0,
-	                 2 * kMargin),
+	                 2 * default_padding()),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
 
@@ -97,9 +96,9 @@ public:
 		button_box_.add_inf_space();
 		button_box_.add(&ok_);
 		button_box_.add_inf_space();
-		box_.add_space(kMargin);
+		box_.add_space(default_padding());
 		box_.add(&button_box_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kMargin);
+		box_.add_space(default_padding());
 
 		ok_.sigclicked.connect([this]() { ok(); });
 		cancel_.sigclicked.connect([this]() { cancel(); });
@@ -140,21 +139,21 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
                                    EditorSetStartingPosTool& tool,
                                    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
-     box_(this, UI::PanelStyle::kWui, "main_box", kMargin, kMargin, UI::Box::Vertical),
+     box_(this, UI::PanelStyle::kWui, "main_box", default_padding(), default_padding(), UI::Box::Vertical),
      no_of_players_(&box_,
                     "dropdown_map_players",
                     0,
                     0,
                     50,
                     kMaxRecommendedPlayers,
-                    24,
+                    default_button_size_small(),
                     _("Number of players"),
                     UI::DropdownType::kTextual,
                     UI::PanelStyle::kWui,
                     UI::ButtonStyle::kWuiSecondary) {
 	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
-	box_.add_space(2 * kMargin);
+	box_.add_space(2 * default_padding());
 
 	const Widelands::Map& map = eia().egbase().map();
 
@@ -225,16 +224,16 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		// Add the elements to the row
 		row->add(plr_name, UI::Box::Resizing::kFillSpace);
-		row->add_space(kMargin);
+		row->add_space(default_padding());
 
 		row->add(plr_tribe);
-		row->add_space(kMargin);
+		row->add_space(default_padding());
 
 		row->add(plr_position);
 
 		// Add the row itself
 		box_.add(row, UI::Box::Resizing::kFullSize);
-		box_.add_space(kMargin);
+		box_.add_space(default_padding());
 		row->set_visible(map_has_player);
 
 		rows_.push_back(
@@ -257,9 +256,9 @@ void EditorPlayerMenu::layout() {
 	EditorToolOptionsMenu::layout();
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
-	box_.set_size(310, no_of_players_.get_h() + kMargin +
-	                      nr_players * (rows_.front()->name->get_h() + kMargin));
-	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
+	box_.set_size(310, no_of_players_.get_h() + default_padding() +
+	                      nr_players * (rows_.front()->name->get_h() + default_padding()));
+	set_inner_size(box_.get_w() + 2 * default_padding(), box_.get_h() + 2 * default_padding());
 }
 
 void EditorPlayerMenu::no_of_players_clicked() {

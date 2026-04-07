@@ -45,7 +45,6 @@ static const char pic_stock_policy_button_remove[] =
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
 constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
-constexpr int8_t kButtonSize = 34;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
@@ -159,7 +158,7 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 		   *new UI::Box(&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
 		builder_caps.add_inf_space();
 		UI::Button& evict_button = *new UI::Button(
-		   &builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+		   &builder_caps, "evict", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 		   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 		   _("Send the builder away"));
 		evict_button.sigclicked.connect([this]() { evict_builder(); });
@@ -172,7 +171,7 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 void ConstructionSiteWindow::add_progress_bar(UI::Box& box) {
 	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
-	                                UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+	                                UI::ProgressBar::DefaultWidth(), UI::ProgressBar::DefaultHeight(),
 	                                UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -361,21 +360,21 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		// TODO(Nordfriese): Use box layout
 		Panel& soldier_preference_panel =
 		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0,
-		              kButtonSize * 3, kButtonSize);
+		              default_button_size() * 3, default_button_size());
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 		// Make sure the creation order is consistent with enum SoldierPreference!
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies",
-		   Vector2i(kButtonSize * 2, 0),
+		   Vector2i(default_button_size() * 2, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes",
-		   Vector2i(kButtonSize * 1, 0), g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
+		   Vector2i(default_button_size() * 1, 0), g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		   _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_any",
-		   Vector2i(kButtonSize * 0, 0), g_image_cache->get("images/wui/buildings/prefer_any.png"),
+		   Vector2i(default_button_size() * 0, 0), g_image_cache->get("images/wui/buildings/prefer_any.png"),
 		   _("No preference"));
 		cs_prefer_heroes_rookies_->set_state(
 		   static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference),

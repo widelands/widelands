@@ -52,7 +52,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                "subtitle",
                0,
                0,
-               UI::Scrollbar::kSize,
+               default_button_size_small(),
                0,
                UI::PanelStyle::kFsMenu,
                "",
@@ -93,7 +93,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 	}
 
 	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
-	header_box_.add_space(10 * kPadding);
+	header_box_.add_space(10 * default_padding());
 
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 

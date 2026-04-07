@@ -21,9 +21,6 @@
 #include "ui/basic/color_chooser.h"
 #include "ui/wui/interactive_player.h"
 
-constexpr int16_t kButtonSize = 32;
-constexpr int16_t kSpacing = 4;
-
 PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent,
                                    UI::UniqueWindow::Registry& r,
                                    Widelands::FCoords pos,
@@ -48,43 +45,43 @@ PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent,
      box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
      buttons_box_(&box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
      ok_(
-        &buttons_box_, "ok", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary, _("OK")),
+        &buttons_box_, "ok", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary, _("OK")),
      delete_(&buttons_box_,
              "delete",
              0,
              0,
-             kButtonSize,
-             kButtonSize,
+             default_button_size(),
+             default_button_size(),
              UI::ButtonStyle::kWuiSecondary,
              _("Delete")),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             kButtonSize,
-             kButtonSize,
+             default_button_size(),
+             default_button_size(),
              UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      color_(&buttons_box_,
             "color",
             0,
             0,
-            kButtonSize,
-            kButtonSize,
+            default_button_size(),
+            default_button_size(),
             UI::ButtonStyle::kWuiSecondary,
             "",
             _("Change color…")),
      text_(new UI::EditBox(&box_, "text", 0, 0, 400, UI::PanelStyle::kWui)) {
 	buttons_box_.add(&delete_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&color_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(text_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	cancel_.sigclicked.connect([this]() { die(); });

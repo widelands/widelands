@@ -40,7 +40,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                        const bool preconfigured,
                        const bool mpg)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
-     map_details_(&right_column_content_box_, kPadding),
+     map_details_(&right_column_content_box_, default_padding()),
 
      configure_game_(&right_column_content_box_,
                      UI::PanelStyle::kFsMenu,
@@ -219,32 +219,32 @@ LaunchGame::~LaunchGame() {
 
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
-	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add_space(1 * default_padding());
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add_space(1 * default_padding());
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add_space(1 * default_padding());
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add_space(1 * default_padding());
 	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add_space(3 * default_padding());
 	right_column_content_box_.add(&toggle_advanced_options_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add_space(1 * default_padding());
 	right_column_content_box_.add(&advanced_options_box_, UI::Box::Resizing::kExpandBoth);
 
 	for (auto& pair : game_flag_checkboxes_) {
 		advanced_options_box_.add(pair.second.first, UI::Box::Resizing::kFullSize);
-		advanced_options_box_.add_space(1 * kPadding);
+		advanced_options_box_.add_space(1 * default_padding());
 	}
 	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 	advanced_options_box_.set_scrolling(true);
 
 	if (choose_map_ != nullptr) {
-		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add_space(3 * default_padding());
 		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
 	}
 	if (choose_savegame_ != nullptr) {
-		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add_space(3 * default_padding());
 		right_column_content_box_.add(choose_savegame_, UI::Box::Resizing::kFullSize);
 	}
 }
@@ -254,7 +254,7 @@ void LaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
-	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
+	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + default_padding());
 
 	int w;
 	int h;
@@ -262,7 +262,7 @@ void LaunchGame::layout() {
 	// hide it, if it does not fit
 	warn_desyncing_addon_.set_visible(has_desyncing_addon_);
 	right_column_content_box_.get_desired_size(&w, &h);
-	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5 * kPadding);
+	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5 * default_padding());
 	if (h > h_max) {
 		warn_desyncing_addon_.set_visible(false);
 	}

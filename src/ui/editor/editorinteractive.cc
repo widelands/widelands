@@ -174,7 +174,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	add_toolbar_button(
-	   "ui/basic/menu_help", "help",
+	   "ui_basic/menu_help", "help",
 	   as_tooltip_text_with_hotkey(_("Help"),
 	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
 	                               UI::PanelStyle::kWui),

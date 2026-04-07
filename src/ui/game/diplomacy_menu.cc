@@ -31,8 +31,6 @@
 #include "ui/game/actionconfirm.h"
 #include "ui/wui/interactive_player.h"
 
-constexpr int16_t kSpacing = 4;
-constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
 constexpr int16_t kMinBoxWidth = 250;
 
@@ -78,13 +76,13 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 		}
 
 		UI::Icon* icon_flag = new UI::Icon(
-		   &vbox_flag_, UI::PanelStyle::kWui, format("flag_icon_%u", p), 0, 0, kRowSize, kRowSize,
+		   &vbox_flag_, UI::PanelStyle::kWui, format("flag_icon_%u", p), 0, 0, default_button_size(), default_button_size(),
 		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
 		                playercolor_image, player->get_playercolor(),
 		                "images/players/genstats_player.png"));
 		UI::Icon* icon_team =
-		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, format("team_icon_%u", p), 0, 0, kRowSize,
-		                kRowSize, nullptr);
+		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, format("team_icon_%u", p), 0, 0, default_button_size(),
+		                default_button_size(), nullptr);
 		UI::Textarea* txt_name = new UI::Textarea(
 		   &vbox_name_, UI::PanelStyle::kWui, format("name_%u", p), UI::FontStyle::kWuiLabel,
 		   player->get_name(), UI::mirror_alignment(UI::Align::kLeft, rtl));
@@ -103,10 +101,10 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 			UI::Box* buttonsbox = new UI::Box(&vbox_action_, UI::PanelStyle::kWui,
 			                                  format("buttons_box_%u", p), 0, 0, UI::Box::Horizontal);
 			if (p == iplayer_->player_number()) {
-				b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize,
+				b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, default_button_size(),
 				                    UI::ButtonStyle::kWuiSecondary, _("Leave"),
 				                    _("Leave your current team and become teamless"));
-				b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, kRowSize,
+				b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, default_button_size(),
 				                    UI::ButtonStyle::kWuiSecondary, _("Resign"),
 				                    _("Give up and become a spectator"));
 				b1->sigclicked.connect([this]() {
@@ -124,10 +122,10 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 					}
 				});
 			} else {
-				b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize,
+				b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, default_button_size(),
 				                    UI::ButtonStyle::kWuiSecondary, _("Join"),
 				                    _("Request to join this player’s team"));
-				b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, kRowSize,
+				b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, default_button_size(),
 				                    UI::ButtonStyle::kWuiSecondary, _("Invite"),
 				                    _("Invite this player to join your team"));
 				b1->sigclicked.connect([this, p]() {
@@ -141,15 +139,15 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 			}
 
 			buttonsbox->add(b1, UI::Box::Resizing::kExpandBoth);
-			buttonsbox->add_space(kSpacing);
+			buttonsbox->add_space(default_spacing());
 			buttonsbox->add(b2, UI::Box::Resizing::kExpandBoth);
 
 			vbox_action_.add(buttonsbox, UI::Box::Resizing::kExpandBoth);
 			diplomacy_buttons_[p] = {b1, b2};
 		}
 
-		vbox_name_.add_space(kSpacing);
-		vbox_status_.add_space(kSpacing);
+		vbox_name_.add_space(default_spacing());
+		vbox_status_.add_space(default_spacing());
 		vbox_name_.add(
 		   txt_name, UI::Box::Resizing::kFillSpace, UI::mirror_alignment(UI::Align::kLeft, rtl));
 		vbox_status_.add(
@@ -161,28 +159,28 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 		diplomacy_status_[p] = txt_status;
 
 		for (UI::Box* b : {&vbox_flag_, &vbox_name_, &vbox_team_, &vbox_status_, &vbox_action_}) {
-			b->add_space(kSpacing);
+			b->add_space(default_spacing());
 			b->add_inf_space();
 		}
 	}
 
 	hbox_.add(rtl ? &vbox_action_ : &vbox_flag_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(rtl ? &vbox_team_ : &vbox_name_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(&vbox_status_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(rtl ? &vbox_name_ : &vbox_team_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(rtl ? &vbox_flag_ : &vbox_action_, UI::Box::Resizing::kExpandBoth);
 
 	actions_hbox_.add(&actions_vbox_descr_, UI::Box::Resizing::kExpandBoth);
-	actions_hbox_.add_space(kSpacing);
+	actions_hbox_.add_space(default_spacing());
 	actions_hbox_.add(&actions_vbox_yes_, UI::Box::Resizing::kFullSize);
-	actions_hbox_.add_space(kSpacing);
+	actions_hbox_.add_space(default_spacing());
 	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
 
-	const int maxh = g_gr->get_yres() - hbox_.get_h() - hbox_.get_h() - 7 * kRowSize;
+	const int maxh = g_gr->get_yres() - hbox_.get_h() - hbox_.get_h() - 7 * default_button_size();
 	for (UI::Box* box : {&trades_box_offers_, &trades_box_proposed_, &trades_box_active_}) {
 		box->set_min_desired_breadth(kMinBoxWidth);
 		box->set_force_scrolling(true);
@@ -196,14 +194,14 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	trades_tabs_.add("active", "", &trades_box_active_, _("Your active trade agreements"));
 
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
-	diplomacy_box_.add_space(kSpacing);
+	diplomacy_box_.add_space(default_spacing());
 	diplomacy_box_.add(&actions_hbox_, UI::Box::Resizing::kExpandBoth);
 
 	trade_changed_subscriber_ = Notifications::subscribe<Widelands::NoteTradeChanged>(
 	   [this](const Widelands::NoteTradeChanged& /*note*/) { needs_update_ = true; });
 
 	if (iplayer_ != nullptr) {
-		diplomacy_box_.add_space(kSpacing);
+		diplomacy_box_.add_space(default_spacing());
 		diplomacy_box_.add(&trades_tabs_, UI::Box::Resizing::kExpandBoth);
 	} else {
 		trades_tabs_.set_visible(false);
@@ -307,9 +305,9 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 	unsigned index = 0;
 	for (const Widelands::Game::PendingDiplomacyAction& pda : cached_diplomacy_actions_) {
 		if (index > 0) {
-			actions_vbox_descr_.add_space(kSpacing);
-			actions_vbox_no_.add_space(kSpacing);
-			actions_vbox_yes_.add_space(kSpacing);
+			actions_vbox_descr_.add_space(default_spacing());
+			actions_vbox_no_.add_space(default_spacing());
+			actions_vbox_yes_.add_space(default_spacing());
 		}
 
 		std::string descr;
@@ -342,7 +340,7 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 		actions_vbox_descr_.add_inf_space();
 		if (iplayer_ != nullptr && iplayer_->player_number() == pda.sender) {
 			UI::Button* b =
-			   new UI::Button(&actions_vbox_no_, format("retract_%u", index), 0, 0, kRowSize, kRowSize,
+			   new UI::Button(&actions_vbox_no_, format("retract_%u", index), 0, 0, default_button_size(), default_button_size(),
 			                  UI::ButtonStyle::kWuiSecondary,
 			                  g_image_cache->get("images/wui/menu_abort.png"), _("Retract"));
 			b->sigclicked.connect([this, pda]() {
@@ -354,15 +352,15 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 				   pda.other);
 			});
 			actions_vbox_no_.add(b);
-			actions_vbox_yes_.add_space(kRowSize);
+			actions_vbox_yes_.add_space(default_button_size());
 		} else if (iplayer_ != nullptr &&
 		           iplayer_->player().may_approve_request(pda.action, pda.sender, pda.other)) {
 			UI::Button* b1 =
-			   new UI::Button(&actions_vbox_yes_, format("approve_%u", index), 0, 0, kRowSize,
-			                  kRowSize, UI::ButtonStyle::kWuiSecondary,
+			   new UI::Button(&actions_vbox_yes_, format("approve_%u", index), 0, 0, default_button_size(),
+			                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			                  g_image_cache->get("images/wui/menu_okay.png"), approve_string);
 			UI::Button* b2 =
-			   new UI::Button(&actions_vbox_no_, format("reject_%u", index), 0, 0, kRowSize, kRowSize,
+			   new UI::Button(&actions_vbox_no_, format("reject_%u", index), 0, 0, default_button_size(), default_button_size(),
 			                  UI::ButtonStyle::kWuiSecondary,
 			                  g_image_cache->get("images/wui/menu_abort.png"), deny_string);
 			b1->sigclicked.connect([this, pda]() {
@@ -384,8 +382,8 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 			actions_vbox_yes_.add(b1);
 			actions_vbox_no_.add(b2);
 		} else {
-			actions_vbox_yes_.add_space(kRowSize);
-			actions_vbox_no_.add_space(kRowSize);
+			actions_vbox_yes_.add_space(default_button_size());
+			actions_vbox_no_.add_space(default_button_size());
 		}
 
 		++index;
@@ -413,7 +411,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("Nobody has offered you any trades at the moment."));
 		trades_box_offers_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_offers_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_offers_.add_space(3 * default_button_size_small());
 		return;
 	}
 
@@ -431,7 +429,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Dropdown<Widelands::Serial>* select_market = new UI::Dropdown<Widelands::Serial>(
-		   buttons, "select", 0, 0, 2 * kButtonWidth + kSpacing, 8, kRowSize, std::string(),
+		   buttons, "select", 0, 0, 2 * kButtonWidth + default_spacing(), 8, default_button_size(), std::string(),
 		   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		select_market->set_tooltip(_("Market to accept the trade at"));
 
@@ -448,10 +446,10 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		}
 
 		UI::Button* yes = new UI::Button(
-		   buttons, "yes", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "yes", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
 		UI::Button* no = new UI::Button(
-		   buttons, "no", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "no", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
 
 		if (select_market->empty()) {
@@ -470,9 +468,9 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		});
 
 		buttons->add(select_market, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(no, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(yes, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		box->add(
@@ -482,7 +480,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		      UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		   UI::Box::Resizing::kExpandBoth);
-		box->add_space(kSpacing);
+		box->add_space(default_spacing());
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_offers_.add(box, UI::Box::Resizing::kExpandBoth);
 	}
@@ -509,7 +507,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		txt->set_text(_("There are no pending trade proposals at the moment. You can propose a new "
 		                "trade from a market."));
 		trades_box_proposed_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_proposed_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_proposed_.add_space(3 * default_button_size_small());
 		return;
 	}
 
@@ -529,10 +527,10 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
-		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "go_to", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
 		UI::Button* cancel = new UI::Button(
-		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
 
 		go_to->sigclicked.connect([this, own_market]() {
@@ -545,9 +543,9 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		});
 
 		UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
-		   buttons, "move", 0, 0, 100, 8, kRowSize, _("Move this trade proposal…"),
+		   buttons, "move", 0, 0, 100, 8, default_button_size(), _("Move this trade proposal…"),
 		   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-		move->set_min_lineheight(kRowSize);
+		move->set_min_lineheight(default_button_size());
 		move->set_image(g_image_cache->get(kIconMoveTrade));
 
 		std::vector<const Widelands::Market*> markets = iplayer_->player().get_markets();
@@ -570,9 +568,9 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		}
 
 		buttons->add(move, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		box->add(
@@ -582,7 +580,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl()),
 		      UI::MultilineTextarea::ScrollMode::kNoScrolling),
 		   UI::Box::Resizing::kExpandBoth);
-		box->add_space(kSpacing);
+		box->add_space(default_spacing());
 		box->add(buttons, UI::Box::Resizing::kAlign, UI::Align::kTop);
 		trades_box_proposed_.add(box, UI::Box::Resizing::kExpandBoth);
 	}
@@ -608,7 +606,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("There are no active trade agreements at the moment."));
 		trades_box_active_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_active_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_active_.add_space(3 * default_button_size_small());
 		return;
 	}
 
@@ -638,10 +636,10 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		   new UI::Box(inner_box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Button* go_to = new UI::Button(
-		   buttons, "go_to", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "go_to", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
 		UI::Button* extend = new UI::Button(
-		   buttons, "extend", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "extend", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
 		   can_extend ?
 		      format("<p>%s%s%s</p>",
@@ -656,13 +654,13 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		                         UI::FontStyle::kWuiTooltip)) :
 		      _("Propose extending this trade"));
 		UI::Button* cancel = new UI::Button(
-		   buttons, "cancel", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+		   buttons, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade agreement"));
 
 		UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
-		   buttons, "move", 0, 0, 100, 8, kRowSize, _("Move this trade…"),
+		   buttons, "move", 0, 0, 100, 8, default_button_size(), _("Move this trade…"),
 		   UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-		move->set_min_lineheight(kRowSize);
+		move->set_min_lineheight(default_button_size());
 		move->set_image(g_image_cache->get(kIconMoveTrade));
 
 		std::multimap<uint32_t, const Widelands::Market*> markets =
@@ -705,11 +703,11 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		});
 
 		buttons->add(move, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(extend, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(cancel, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		buttons->add_space(kSpacing);
+		buttons->add_space(default_spacing());
 		buttons->add(go_to, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 		inner_box->add(
@@ -744,11 +742,11 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 			UI::Button* reject =
-			   new UI::Button(hbox, "reject", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+			   new UI::Button(hbox, "reject", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			                  g_image_cache->get("images/wui/menu_abort.png"),
 			                  _("Reject this trade extension proposal"));
 			UI::Button* accept =
-			   new UI::Button(hbox, "accept", 0, 0, kRowSize, kRowSize, UI::ButtonStyle::kWuiSecondary,
+			   new UI::Button(hbox, "accept", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			                  g_image_cache->get("images/wui/menu_okay.png"),
 			                  _("Accept this trade extension proposal"));
 
@@ -761,12 +759,12 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 				   iplayer_->player_number(), trade_id, Widelands::TradeAction::kAccept, te.batches);
 			});
 
-			hbox->add_space(kSpacing);
+			hbox->add_space(default_spacing());
 			hbox->add(reject);
-			hbox->add_space(kSpacing);
+			hbox->add_space(default_spacing());
 			hbox->add(accept);
 
-			trade_box->add_space(kSpacing);
+			trade_box->add_space(default_spacing());
 			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
@@ -787,7 +785,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
 			   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-			UI::Button* retract = new UI::Button(hbox, "retract", 0, 0, kRowSize, kRowSize,
+			UI::Button* retract = new UI::Button(hbox, "retract", 0, 0, default_button_size(), default_button_size(),
 			                                     UI::ButtonStyle::kWuiSecondary,
 			                                     g_image_cache->get("images/wui/menu_abort.png"),
 			                                     _("Retract this trade extension proposal"));
@@ -797,14 +795,14 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 				   iplayer_->player_number(), trade_id, Widelands::TradeAction::kRetract, te.batches);
 			});
 
-			hbox->add_space(kSpacing);
+			hbox->add_space(default_spacing());
 			hbox->add(retract);
 
-			trade_box->add_space(kSpacing);
+			trade_box->add_space(default_spacing());
 			trade_box->add(hbox, UI::Box::Resizing::kFullSize);
 		}
 
-		trade_box->add_space(kRowSize);
+		trade_box->add_space(default_button_size());
 		trades_box_active_.add(trade_box, UI::Box::Resizing::kExpandBoth);
 	}
 }
@@ -846,7 +844,7 @@ void GameDiplomacyMenu::draw(RenderTarget& rt) {
 		for (; panel != this; panel = panel->get_parent()) {
 			y += panel->get_y();
 		}
-		rt.brighten_rect(Recti(0, y - kSpacing / 2, get_inner_w(), h + kSpacing), 32);
+		rt.brighten_rect(Recti(0, y - default_spacing() / 2, get_inner_w(), h + default_spacing()), 32);
 	}
 }
 

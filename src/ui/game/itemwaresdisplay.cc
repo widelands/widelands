@@ -24,7 +24,6 @@
 #include "logic/player.h"
 #include "ui/basic/mouse_constants.h"
 
-constexpr int kMargin = 4;
 constexpr int kHBorder = 8;
 constexpr int kVBorder = 8;
 constexpr int kItemWidth = 22;
@@ -62,8 +61,8 @@ void ItemWaresDisplay::recalc_desired_size() {
 	uint32_t nrrows = (capacity_ + items_per_row_ - 1) / items_per_row_;
 	uint32_t rowitems = capacity_ >= items_per_row_ ? items_per_row_ : capacity_;
 
-	set_desired_size(2 * (kHBorder + kMargin) + rowitems * kItemWidth,
-	                 2 * (kVBorder + kMargin) + nrrows * kItemHeight);
+	set_desired_size(2 * (kHBorder + default_padding()) + rowitems * kItemWidth,
+	                 2 * (kVBorder + default_padding()) + nrrows * kItemHeight);
 }
 
 /**
@@ -85,8 +84,8 @@ bool ItemWaresDisplay::handle_mousemove(
 }
 
 const ItemWaresDisplay::Item* ItemWaresDisplay::at(int32_t x, int32_t y) const {
-	x -= (kHBorder + kMargin);
-	y -= (kVBorder + kMargin);
+	x -= (kHBorder + default_padding());
+	y -= (kVBorder + default_padding());
 	x /= kItemWidth;
 	y /= kItemHeight;
 	int32_t index = y * items_per_row_ + x;
@@ -97,30 +96,30 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 	const Widelands::TribeDescr& tribe(player().tribe());
 
 	// Snazzy background
-	const int width = get_w() - 2 * kMargin;
-	const int height = get_h() - 2 * kMargin;
+	const int width = get_w() - 2 * default_padding();
+	const int height = get_h() - 2 * default_padding();
 	RGBAColor black(0, 0, 0, 255);
 	dst.brighten_rect(
-	   Recti(kMargin, kMargin, width - 1, height - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
+	   Recti(default_padding(), default_padding(), width - 1, height - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
 	//  bottom edge
-	dst.brighten_rect(Recti(kMargin, height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	dst.brighten_rect(Recti(default_padding(), height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  right edge
 	dst.brighten_rect(
-	   Recti(kMargin + width - 2, kMargin, 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	   Recti(default_padding() + width - 2, default_padding(), 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  top edge
-	dst.fill_rect(Recti(kMargin, kMargin, width - 1, 1), black);
-	dst.fill_rect(Recti(kMargin, kMargin + 1, width - 2, 1), black);
+	dst.fill_rect(Recti(default_padding(), default_padding(), width - 1, 1), black);
+	dst.fill_rect(Recti(default_padding(), default_padding() + 1, width - 2, 1), black);
 	//  left edge
-	dst.fill_rect(Recti(kMargin, kMargin, 1, height - 1), black);
-	dst.fill_rect(Recti(kMargin + 1, kMargin, 1, height - 2), black);
+	dst.fill_rect(Recti(default_padding(), default_padding(), 1, height - 1), black);
+	dst.fill_rect(Recti(default_padding() + 1, default_padding(), 1, height - 2), black);
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		const Item& it = items_[idx];
 		uint32_t row = idx / items_per_row_;
 		uint32_t col = idx % items_per_row_;
 
-		uint32_t x = kHBorder + col * kItemWidth + kMargin;
-		uint32_t y = kVBorder + row * kItemHeight + kMargin;
+		uint32_t x = kHBorder + col * kItemWidth + default_padding();
+		uint32_t y = kVBorder + row * kItemHeight + default_padding();
 
 		if (it.type == Widelands::wwWORKER) {
 			constexpr float kZoom = 1.f;

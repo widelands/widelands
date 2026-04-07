@@ -28,7 +28,6 @@ namespace FsMenu {
 class MainMenu;
 class MenuCapsule;
 
-constexpr int kPadding = 4;
 constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
 
 /**

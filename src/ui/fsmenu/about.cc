@@ -61,9 +61,9 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 	close_.sigclicked.connect([this]() { die(); });
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kPadding);
+	box_.add_space(default_padding());
 	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	box_.add_space(kPadding);
+	box_.add_space(default_padding());
 
 	do_not_layout_on_resolution_change();
 

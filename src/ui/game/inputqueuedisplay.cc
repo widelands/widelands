@@ -26,8 +26,6 @@
 #include "ui/wui/interactive_player.h"
 #include "wlapplication_mousewheel_options.h"
 
-constexpr int8_t kButtonSize = 25;
-
 // The slider indexes the available priorities as 0..4, so here are some conversion functions
 static size_t priority_to_index(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryLow) {
@@ -192,8 +190,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                               "decrease_desired",
                               0,
                               0,
-                              kButtonSize,
-                              kButtonSize,
+                              default_button_size_small(),
+                              default_button_size_small(),
                               UI::ButtonStyle::kWuiMenu,
                               g_image_cache->get("images/ui_basic/scrollbar_left.png"),
                               create_tooltip(false)),
@@ -201,8 +199,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                               "increase_desired",
                               0,
                               0,
-                              kButtonSize,
-                              kButtonSize,
+                              default_button_size_small(),
+                              default_button_size_small(),
                               UI::ButtonStyle::kWuiMenu,
                               g_image_cache->get("images/ui_basic/scrollbar_right.png"),
                               create_tooltip(true)),
@@ -210,8 +208,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                            "decrease_real",
                            0,
                            0,
-                           kButtonSize,
-                           kButtonSize,
+                           default_button_size_small(),
+                           default_button_size_small(),
                            UI::ButtonStyle::kWuiMenu,
                            g_image_cache->get("images/ui_basic/scrollbar_down.png"),
                            _("Remove ware")),
@@ -219,8 +217,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                            "increase_real",
                            0,
                            0,
-                           kButtonSize,
-                           kButtonSize,
+                           default_button_size_small(),
+                           default_button_size_small(),
                            UI::ButtonStyle::kWuiMenu,
                            g_image_cache->get("images/ui_basic/scrollbar_up.png"),
                            _("Add ware")),
@@ -228,8 +226,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                "collapse",
                0,
                0,
-               kButtonSize,
-               kButtonSize * 3 / 2,
+               default_button_size_small(),
+               default_button_size_small() * 3 / 2,
                UI::ButtonStyle::kWuiMenu,
                "",
                "",
@@ -237,8 +235,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      priority_(&hbox_,
                0,
                0,
-               5 * kButtonSize,
-               kButtonSize,
+               5 * default_button_size_small(),
+               default_button_size_small(),
                0,
                4,
                has_priority_ ?
@@ -248,11 +246,11 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                   2,
                UI::SliderStyle::kWuiLight,
                "",
-               kButtonSize,
+               default_button_size_small(),
                can_act_ && has_priority_),
      spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
      priority_indicator_(
-        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, kButtonSize / 5, kButtonSize),
+        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, default_button_size_small() / 5, default_button_size_small()),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
@@ -283,14 +281,14 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	b_decrease_desired_fill_.set_repeating(true);
 	b_decrease_real_fill_.set_repeating(true);
 
-	vbox_.add_space(kButtonSize / 4);
+	vbox_.add_space(default_button_size_small() / 4);
 
 	hbox_.add(&b_decrease_real_fill_);
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(
-		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
+		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, default_button_size_small(), default_button_size_small(),
 		   type_ == Widelands::wwWARE ? building.owner().tribe().get_ware_descr(index_)->icon() :
 		                                building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
@@ -300,7 +298,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_increase_real_fill_);
 	hbox_.add(&total_fill_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
+	priority_.set_cursor_fixed_height(default_button_size_small() * 2 / 3);
 
 	// To make sure the fill buttons are aligned even when some queues
 	// have priority buttons and some don't (e.g. in barracks)
@@ -311,10 +309,10 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&spacer_);
 
 	vbox_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	vbox_.add_space(kButtonSize / 4);
+	vbox_.add_space(default_button_size_small() / 4);
 	add(&vbox_, UI::Box::Resizing::kExpandBoth);
 
-	add_space(kButtonSize / 4);
+	add_space(default_button_size_small() / 4);
 	add(&collapse_);
 
 	if (can_act_) {
@@ -413,13 +411,13 @@ void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& f
 
 int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const {
 	assert(nr_icons_ > 0);
-	if (y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
+	if (y < hbox_.get_y() || y > hbox_.get_y() + default_button_size_small() ||
 	    x < hbox_.get_x() + icons_[0]->get_x() ||
-	    x > hbox_.get_x() + icons_.back()->get_x() + kButtonSize) {
+	    x > hbox_.get_x() + icons_.back()->get_x() + default_button_size_small()) {
 		return -1;
 	}
 
-	const uint32_t fill = (x + kButtonSize / 2 - hbox_.get_x() - icons_[0]->get_x()) / kButtonSize;
+	const uint32_t fill = (x + default_button_size_small() / 2 - hbox_.get_x() - icons_[0]->get_x()) / default_button_size_small();
 	assert(fill <= nr_icons_);
 	return fill;
 }
@@ -794,8 +792,8 @@ void InputQueueDisplay::draw(RenderTarget& r) {
 	if (has_priority_ && !is_collapsed()) {
 		const int x = hbox_.get_x() + priority_.get_x();
 		for (size_t i = 0; i < 5; ++i) {
-			r.fill_rect(Recti(x + i * kButtonSize, hbox_.get_y() + kButtonSize * 2 / 5, kButtonSize,
-			                  kButtonSize / 5),
+			r.fill_rect(Recti(x + i * default_button_size_small(), hbox_.get_y() + default_button_size_small() * 2 / 5, default_button_size_small(),
+			                  default_button_size_small() / 5),
 			            kPriorityColors[i], BlendMode::Default);
 		}
 	}
@@ -846,9 +844,9 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		   priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_, disambiguator_id_) :
 		                                         get_setting()->priority);
 		const int w = priority_indicator_.get_w();
-		// Add kButtonSize / 4 to the position to align it against the collapse button
-		const int x = hbox_.get_x() + priority_indicator_.get_x() + kButtonSize / 4;
-		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
+		// Add default_button_size_small() / 4 to the position to align it against the collapse button
+		const int x = hbox_.get_x() + priority_indicator_.get_x() + default_button_size_small() / 4;
+		r.brighten_rect(Recti(x, hbox_.get_y(), w, default_button_size_small()), -32);
 		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * w, w, w), kPriorityColors[p], BlendMode::Copy);
 	}
 

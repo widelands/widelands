@@ -26,8 +26,6 @@
 #include "ui/basic/multilinetextarea.h"
 #include "ui/basic/slider.h"
 
-constexpr int kSpacing = 4;
-
 /**
  * UI elements to set sound properties for 1 type of sounds.
  */
@@ -48,7 +46,7 @@ public:
 	             (song.title.empty() ? song.filename : song.title)),
 	     filename_(song.filename) {
 
-		set_inner_spacing(kSpacing);
+		set_inner_spacing(default_spacing());
 		add(&enable_, UI::Box::Resizing::kFullSize, UI::Align::kRight);
 		if (SoundHandler::is_backend_disabled()) {
 			enable_.set_enabled(false);
@@ -86,7 +84,7 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
                   0,
                   0,
                   80,
-                  34,
+                  default_button_size(),
                   UI::ButtonStyle::kWuiSecondary,
                   _("Next")),
      checkbox_shuffle_(&hbox_playback_control_,
@@ -104,13 +102,13 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
                           UI::Align::kLeft) {
 
 	// layout ui
-	set_inner_spacing(kSpacing);
+	set_inner_spacing(default_spacing());
 	set_desired_size(370, 150);
 	vbox_track_playlist_.set_max_size(370, 100);
 	vbox_track_playlist_.set_min_desired_breadth(370);
-	vbox_track_playlist_.set_inner_spacing(2);
+	vbox_track_playlist_.set_inner_spacing(default_spacing());
 	vbox_track_playlist_.set_force_scrolling(true);
-	hbox_current_track_.set_inner_spacing(kSpacing);
+	hbox_current_track_.set_inner_spacing(default_spacing());
 
 	if (g_sh->is_backend_disabled()) {
 		return;  // prevent crash if game is started with --nosound parameter
@@ -118,9 +116,9 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 
 	rebuild_music_track_controls();
 
-	hbox_playback_control_.add_space(kSpacing);
+	hbox_playback_control_.add_space(default_spacing());
 	hbox_playback_control_.add(&button_next_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	hbox_playback_control_.add_space(kSpacing);
+	hbox_playback_control_.add_space(default_spacing());
 	hbox_playback_control_.add(&checkbox_shuffle_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	hbox_current_track_.add(&label_current_track_);
@@ -156,7 +154,7 @@ void MusicPlayer::rebuild_music_track_controls() {
 		music_track_controls_.emplace_back(new MusicTrackControl(&vbox_track_playlist_, song));
 	}
 
-	vbox_track_playlist_.add_space(2);
+	vbox_track_playlist_.add_space(default_spacing());
 	for (MusicTrackControl* control : music_track_controls_) {
 		vbox_track_playlist_.add(control);
 	}

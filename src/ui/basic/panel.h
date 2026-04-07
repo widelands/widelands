@@ -478,6 +478,11 @@ public:
 		return false;
 	}
 
+	static int default_button_size();
+	static int default_button_size_small();
+	static int default_padding();
+	static int default_spacing();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).

@@ -34,7 +34,6 @@ namespace FsMenu {
 
 static constexpr int kReportWindowWidth = 650;
 static constexpr int kReportWindowHeight = 500;
-constexpr int16_t kSpacing = 8;
 
 constexpr const char* const kReportURL = "https://github.com/widelands/widelands/discussions/5367";
 
@@ -75,13 +74,13 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
 
 	close_.sigclicked.connect([this]() { die(); });
 
-	content_.add_space(kSpacing);
+	content_.add_space(default_spacing());
 	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_.add_space(3 * kSpacing);
+	content_.add_space(3 * default_spacing());
 	content_.add(&infobox_, UI::Box::Resizing::kExpandBoth);
-	content_.add_space(3 * kSpacing);
+	content_.add_space(3 * default_spacing());
 	content_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	content_.add_space(kSpacing);
+	content_.add_space(default_spacing());
 
 	content_.set_size(get_inner_w(), get_inner_h());
 	layout();

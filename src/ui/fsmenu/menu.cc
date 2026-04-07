@@ -51,12 +51,12 @@ BaseMenu::BaseMenu(MenuCapsule& window, const std::string& title)
      header_box_(&main_box_, UI::PanelStyle::kFsMenu, "header_box", 0, 0, UI::Box::Vertical),
      standard_height_(get_h() * 9 / 200),
      capsule_(window) {
-	horizontal_padding_box_.add_space(10 * kPadding);
+	horizontal_padding_box_.add_space(10 * default_padding());
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
-	horizontal_padding_box_.add_space(10 * kPadding);
-	vertical_padding_box_.add_space(10 * kPadding);
+	horizontal_padding_box_.add_space(10 * default_padding());
+	vertical_padding_box_.add_space(10 * default_padding());
 	vertical_padding_box_.add(&main_box_, UI::Box::Resizing::kExpandBoth);
-	vertical_padding_box_.add_space(10 * kPadding);
+	vertical_padding_box_.add_space(10 * default_padding());
 
 	main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
 
@@ -72,7 +72,7 @@ void BaseMenu::layout() {
 	UI::Panel::layout();
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
 	vertical_padding_box_.set_max_size(
-	   horizontal_padding_box_.get_w() - 2 * 10 * kPadding, horizontal_padding_box_.get_h());
+	   horizontal_padding_box_.get_w() - 2 * 10 * default_padding(), horizontal_padding_box_.get_h());
 	standard_height_ = get_inner_h() * 9 / 200;
 }
 
@@ -90,7 +90,7 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&left_column_box_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(5 * kPadding);
+	content_box_.add_space(5 * default_padding());
 	content_box_.add(&right_column_box_, UI::Box::Resizing::kFullSize);
 	// let the parent box do the layout
 	content_box_.set_desired_size(0, 0);
@@ -116,7 +116,7 @@ TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
                                UI::Box::Vertical,
                                0,
                                0,
-                               1 * kPadding),
+                               1 * default_padding()),
      button_box_(&right_column_box_,
                  UI::PanelStyle::kFsMenu,
                  "buttons_box",
@@ -125,11 +125,11 @@ TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
                  UI::Box::Horizontal,
                  0,
                  0,
-                 1 * kPadding),
+                 1 * default_padding()),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
 
 	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add_space(5 * kPadding);
+	right_column_box_.add_space(5 * default_padding());
 	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
 
@@ -173,8 +173,8 @@ TwoColumnsFullNavigationMenu::~TwoColumnsFullNavigationMenu() = default;
 
 void TwoColumnsFullNavigationMenu::layout() {
 	TwoColumnsBasicNavigationMenu::layout();
-	back_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
-	ok_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
+	back_.set_desired_size((right_column_width_ / 2) - (default_padding() / 2), standard_height_);
+	ok_.set_desired_size((right_column_width_ / 2) - (default_padding() / 2), standard_height_);
 }
 
 bool TwoColumnsFullNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -236,8 +236,8 @@ void MenuCapsule::layout() {
 		box_.set_size(dw, dh);
 
 		for (Entry& e : visible_menus_) {
-			e.panel->set_pos(Vector2i(0, dh + kPadding));
-			e.panel->set_size(get_inner_w(), get_inner_h() - dh - kPadding);
+			e.panel->set_pos(Vector2i(0, dh + default_padding()));
+			e.panel->set_size(get_inner_w(), get_inner_h() - dh - default_padding());
 		}
 	}
 }
@@ -291,9 +291,9 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
 	                                    title, format(_("Back to ‘%s’"), title));
 	UI::Panel* spacer1 = new UI::Panel(
-	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0, kPadding, kPadding);
+	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0, default_padding(), default_padding());
 	UI::Panel* spacer2 = new UI::Panel(
-	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0, kPadding, kPadding);
+	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0, default_padding(), default_padding());
 	UI::Panel* icon;
 	if (visible_menus_.empty()) {
 		UI::Button* b = new UI::Button(&box_, title, 0, 0, 30, 30, UI::ButtonStyle::kFsMenuMenu,

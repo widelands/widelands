@@ -27,7 +27,6 @@
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
 #include "ui/fsmenu/addons/remote_interaction.h"
-#include "ui/shared/addons_constants.h"
 #include "wlapplication_options.h"
 
 namespace AddOnsUI {
@@ -156,7 +155,7 @@ std::string assemble_map_description_text(const std::string& descr,
 
 	if (!descr.empty()) {
 		result += format(
-		   "<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		   "<vspace gap=%d><p>%s<br>%s</p>", UI::Panel::default_spacing(),
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(_("Description:")),
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(descr));
@@ -164,14 +163,14 @@ std::string assemble_map_description_text(const std::string& descr,
 
 	if (!hint.empty()) {
 		result += format(
-		   "<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		   "<vspace gap=%d><p>%s<br>%s</p>", UI::Panel::default_spacing(),
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(_("Hint:")),
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(hint));
 	}
 
 	if (!comment.empty()) {
-		result += format("<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		result += format("<vspace gap=%d><p>%s<br>%s</p>", UI::Panel::default_spacing(),
 		                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		                    .as_font_tag(_("Comment by uploader:")),
 		                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -192,8 +191,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                format("installed_addon_row_%s", info->internal_name),
                0,
                0,
-               3 * kRowButtonSize,
-               2 * kRowButtonSize + 3 * kRowButtonSpacing),
+               3 * default_button_size(),
+               2 * default_button_size() + 3 * default_spacing()),
      info_(info),
      enabled_(enabled),
      uninstall_(this,
@@ -298,26 +297,26 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 
 void InstalledAddOnRow::layout() {
 	UI::Panel::layout();
-	if (get_w() <= 3 * kRowButtonSize) {
+	if (get_w() <= 3 * default_button_size()) {
 		// size not yet set
 		return;
 	}
-	set_desired_size(get_w(), 2 * kRowButtonSize + 3 * kRowButtonSpacing);
+	set_desired_size(get_w(), 2 * default_button_size() + 3 * default_spacing());
 
-	const int icon_size = 2 * kRowButtonSize + kRowButtonSpacing;
+	const int icon_size = 2 * default_button_size() + default_spacing();
 	icon_.set_size(icon_size, icon_size);
-	icon_.set_pos(Vector2i(0, kRowButtonSpacing));
-	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
-	category_.set_size(kRowButtonSize, kRowButtonSize);
-	version_.set_size(3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize);
-	toggle_enabled_.set_size(kRowButtonSize, kRowButtonSize);
-	toggle_enabled_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
-	category_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
-	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	version_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing,
-	                          kRowButtonSize + 3 * kRowButtonSpacing));
-	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing) - icon_size,
-	              2 * kRowButtonSize + 3 * kRowButtonSpacing);
+	icon_.set_pos(Vector2i(0, default_spacing()));
+	uninstall_.set_size(default_button_size(), default_button_size());
+	category_.set_size(default_button_size(), default_button_size());
+	version_.set_size(3 * default_button_size() + 2 * default_spacing(), default_button_size());
+	toggle_enabled_.set_size(default_button_size(), default_button_size());
+	toggle_enabled_.set_pos(Vector2i(get_w() - 2 * default_button_size() - default_spacing(), 0));
+	category_.set_pos(Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(), 0));
+	uninstall_.set_pos(Vector2i(get_w() - default_button_size(), 0));
+	version_.set_pos(Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(),
+	                          default_button_size() + 3 * default_spacing()));
+	txt_.set_size(get_w() - 3 * (default_button_size() + default_spacing()) - icon_size,
+	              2 * default_button_size() + 3 * default_spacing());
 	txt_.set_pos(Vector2i(icon_size, 0));
 }
 
@@ -348,8 +347,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                format("remote_addon_row_%s", info->internal_name),
                0,
                0,
-               3 * kRowButtonSize,
-               4 * kRowButtonSize),
+               3 * default_button_size(),
+               4 * default_button_size()),
      info_(info),
      install_(this,
               "install",
@@ -605,42 +604,42 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 
 void RemoteAddOnRow::layout() {
 	UI::Panel::layout();
-	if (get_w() <= 3 * kRowButtonSize) {
+	if (get_w() <= 3 * default_button_size()) {
 		// size not yet set
 		return;
 	}
-	set_desired_size(get_w(), 4 * kRowButtonSize);
+	set_desired_size(get_w(), 4 * default_button_size());
 	for (UI::Panel* p : std::vector<UI::Panel*>{
 	        &install_, &uninstall_, &upgrade_, &category_, &version_, &verified_, &quality_}) {
-		p->set_size(kRowButtonSize, kRowButtonSize);
+		p->set_size(default_button_size(), default_button_size());
 	}
-	const int icon_size = 2 * kRowButtonSize;
+	const int icon_size = 2 * default_button_size();
 	icon_.set_size(icon_size, icon_size);
 	icon_.set_pos(Vector2i(0, 0));
 	version_.set_size(
-	   3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize - kRowButtonSpacing);
+	   3 * default_button_size() + 2 * default_spacing(), default_button_size() - default_spacing());
 	version_.set_pos(Vector2i(
-	   get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, kRowButtonSize + kRowButtonSpacing));
-	uninstall_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
-	upgrade_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
-	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	interact_.set_size(2 * kRowButtonSize + kRowButtonSpacing, kRowButtonSize);
+	   get_w() - 3 * default_button_size() - 2 * default_spacing(), default_button_size() + default_spacing()));
+	uninstall_.set_pos(Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(), 0));
+	upgrade_.set_pos(Vector2i(get_w() - 2 * default_button_size() - default_spacing(), 0));
+	install_.set_pos(Vector2i(get_w() - default_button_size(), 0));
+	interact_.set_size(2 * default_button_size() + default_spacing(), default_button_size());
 	interact_.set_pos(
-	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
+	   Vector2i(get_w() - 2 * default_button_size() - default_spacing(), 2 * default_button_size()));
 	category_.set_pos(
-	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
-	verified_.set_pos(Vector2i(0, 2 * kRowButtonSize));
-	quality_.set_pos(Vector2i(kRowButtonSize, 2 * kRowButtonSize));
+	   Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(), 2 * default_button_size()));
+	verified_.set_pos(Vector2i(0, 2 * default_button_size()));
+	quality_.set_pos(Vector2i(default_button_size(), 2 * default_button_size()));
 	txt_.set_size(
-	   get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
+	   get_w() - icon_size - 3 * (default_button_size() + default_spacing()), 3 * default_button_size());
 	txt_.set_pos(Vector2i(icon_size, 0));
 	bottom_row_left_.set_size(
-	   get_w() / 2 - kRowButtonSpacing, kRowButtonSize - 2 * kRowButtonSpacing);
-	bottom_row_right_.set_size(get_w() / 2 - kRowButtonSpacing, bottom_row_left_.get_h());
+	   get_w() / 2 - default_spacing(), default_button_size() - 2 * default_spacing());
+	bottom_row_right_.set_size(get_w() / 2 - default_spacing(), bottom_row_left_.get_h());
 	bottom_row_left_.set_pos(
-	   Vector2i(kRowButtonSpacing, 4 * kRowButtonSize - bottom_row_left_.get_h()));
+	   Vector2i(default_spacing(), 4 * default_button_size() - bottom_row_left_.get_h()));
 	bottom_row_right_.set_pos(Vector2i(bottom_row_left_.get_x() + bottom_row_left_.get_w(),
-	                                   4 * kRowButtonSize - bottom_row_right_.get_h()));
+	                                   4 * default_button_size() - bottom_row_right_.get_h()));
 }
 
 MapRow::MapRow(Panel* parent,
@@ -652,8 +651,8 @@ MapRow::MapRow(Panel* parent,
                format("map_row_%s", info->internal_name),
                0,
                0,
-               kRowButtonSize,
-               7 * kRowButtonSize + kRowButtonSpacing),
+               default_button_size(),
+               7 * default_button_size() + default_spacing()),
      info_(info),
      minimap_(this, UI::PanelStyle::kFsMenu, "minimap", info_->icon),
      install_(this,
@@ -774,27 +773,27 @@ MapRow::MapRow(Panel* parent,
 
 void MapRow::layout() {
 	UI::Panel::layout();
-	if (get_w() <= 6 * kRowButtonSize) {
+	if (get_w() <= 6 * default_button_size()) {
 		// size not yet set
 		return;
 	}
 
-	set_desired_size(get_w(), 7 * kRowButtonSize + kRowButtonSpacing);
+	set_desired_size(get_w(), 7 * default_button_size() + default_spacing());
 
-	minimap_.set_size(6 * kRowButtonSize, 6 * kRowButtonSize);
-	install_.set_size(kRowButtonSize, kRowButtonSize);
-	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
-	interact_.set_size(kRowButtonSize, kRowButtonSize);
-	bottom_row_.set_size(get_w() - 3 * kRowButtonSize - 3 * kRowButtonSpacing, bottom_row_.get_h());
-	txt_.set_size(get_w() - 6 * kRowButtonSize - kRowButtonSpacing, 6 * kRowButtonSize);
+	minimap_.set_size(6 * default_button_size(), 6 * default_button_size());
+	install_.set_size(default_button_size(), default_button_size());
+	uninstall_.set_size(default_button_size(), default_button_size());
+	interact_.set_size(default_button_size(), default_button_size());
+	bottom_row_.set_size(get_w() - 3 * default_button_size() - 3 * default_spacing(), bottom_row_.get_h());
+	txt_.set_size(get_w() - 6 * default_button_size() - default_spacing(), 6 * default_button_size());
 
-	bottom_row_.set_pos(Vector2i(0, 7 * kRowButtonSize - bottom_row_.get_h()));
-	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 6 * kRowButtonSize + kRowButtonSpacing));
+	bottom_row_.set_pos(Vector2i(0, 7 * default_button_size() - bottom_row_.get_h()));
+	interact_.set_pos(Vector2i(get_w() - default_button_size(), 6 * default_button_size() + default_spacing()));
 	uninstall_.set_pos(
-	   Vector2i(interact_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
+	   Vector2i(interact_.get_x() - default_button_size() - default_spacing(), interact_.get_y()));
 	install_.set_pos(
-	   Vector2i(uninstall_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
-	txt_.set_pos(Vector2i(6 * kRowButtonSize + kRowButtonSpacing, 0));
+	   Vector2i(uninstall_.get_x() - default_button_size() - default_spacing(), interact_.get_y()));
+	txt_.set_pos(Vector2i(6 * default_button_size() + default_spacing(), 0));
 }
 
 }  // namespace AddOnsUI

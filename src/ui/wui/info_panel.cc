@@ -31,8 +31,6 @@
 #include "ui/wui/toolbar.h"
 #include "wlapplication_options.h"
 
-constexpr int8_t kSpacing = 4;
-
 constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 15 seconds
 
 MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
@@ -103,7 +101,7 @@ void MessagePreview::draw(RenderTarget& r) {
 	{  // lifetime indicator
 		const float w = get_w();
 		const float fraction = w * (SDL_GetTicks() - creation_time_) / kMessagePreviewMaxLifetime;
-		r.brighten_rect(Recti((w - fraction) / 2, get_h() - kSpacing, fraction, kSpacing), -64);
+		r.brighten_rect(Recti((w - fraction) / 2, get_h() - default_spacing(), fraction, default_spacing()), -64);
 	}
 }
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
@@ -279,7 +277,7 @@ inline bool InfoPanel::is_mouse_over_panel(int32_t x, int32_t y) const {
 	case UI::ToolbarDisplayMode::kMinimized:
 		return false;
 	case UI::ToolbarDisplayMode::kOnMouse_Hidden:
-		h = kSpacing;
+		h = default_spacing();
 		break;
 	default:
 		h = UI::main_toolbar_button_size();
@@ -548,17 +546,17 @@ void InfoPanel::layout() {
 	                               on_top_ ? 0 : toolbar_->get_h() - toolbar_->box.get_h()));
 
 	const int16_t offset_y = (UI::main_toolbar_button_size() - 20 /* font size estimate */) / 4 +
-	                         kSpacing + (on_top_ ? 0 : get_h() - UI::main_toolbar_button_size());
+	                         default_spacing() + (on_top_ ? 0 : get_h() - UI::main_toolbar_button_size());
 
 	text_coords_.set_size(w / 3, UI::main_toolbar_button_size());
-	text_coords_.set_pos(Vector2i(w - text_coords_.get_w() - kSpacing, offset_y));
+	text_coords_.set_pos(Vector2i(w - text_coords_.get_w() - default_spacing(), offset_y));
 
 	text_time_speed_.set_size(w / 3, UI::main_toolbar_button_size());
 	text_time_speed_.set_pos(
-	   Vector2i(toggle_mode_.get_x() + toggle_mode_.get_w() + kSpacing, offset_y));
+	   Vector2i(toggle_mode_.get_x() + toggle_mode_.get_w() + default_spacing(), offset_y));
 
 	text_fps_.set_size(w / 3, UI::main_toolbar_button_size());
-	text_fps_.set_pos(Vector2i(toolbar_->get_x() + toolbar_->get_w() + kSpacing, offset_y));
+	text_fps_.set_pos(Vector2i(toolbar_->get_x() + toolbar_->get_w() + default_spacing(), offset_y));
 
 	toolbar_->move_to_top();
 
@@ -594,7 +592,7 @@ void InfoPanel::draw(RenderTarget& r) {
 	}
 
 	const int h = display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden ?
-	                 kSpacing :
+	                 default_spacing() :
 	                 UI::main_toolbar_button_size();
 	r.brighten_rect(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), -100);
 

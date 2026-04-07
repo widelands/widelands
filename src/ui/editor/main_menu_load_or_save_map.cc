@@ -87,7 +87,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                    0,
                    100,
                    4,
-                   24,
+                   default_button_size_small(),
                    /** TRANSLATORS: "Display: Original/Localized map/file names" */
                    _("Display"),
                    UI::DropdownType::kTextual,

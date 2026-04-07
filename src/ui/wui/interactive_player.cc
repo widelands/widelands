@@ -212,7 +212,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	add_statistics_menu();
 
 	toggle_objective_menu_ = add_toolbar_button(
-	   "ui/game/menus/objectives", "objectives",
+	   "wui/menus/objectives", "objectives",
 	   as_tooltip_text_with_hotkey(_("Objectives"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
 	                               UI::PanelStyle::kWui),
@@ -223,7 +223,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	add_diplomacy_menu();
 
 	toggle_message_menu_ = add_toolbar_button(
-	   "ui/game/menus/message_old", "messages",
+	   "wui/menus/message_old", "messages",
 	   as_tooltip_text_with_hotkey(_("Messages"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
 	                               UI::PanelStyle::kWui),
@@ -233,7 +233,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toolbar()->add_space(15);
 
 	add_toolbar_button(
-	   "ui/basic/menu_help", "help",
+	   "ui_basic/menu_help", "help",
 	   as_tooltip_text_with_hotkey(_("Help"),
 	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
 	                               UI::PanelStyle::kWui),

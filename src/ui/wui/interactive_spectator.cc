@@ -40,11 +40,10 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            bool const multiplayer,
                                            ChatProvider* chat_provider)
    : InteractiveGameBase(g, global_s, multiplayer, chat_provider) {
-	constexpr int kSpacing = 15;
 	add_main_menu();
 
 	add_toolbar_button(
-	   "ui/game/menus/statistics_general", "general_stats",
+	   "wui/menus/statistics_general", "general_stats",
 	   as_tooltip_text_with_hotkey(_("Statistics"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
 	                               UI::PanelStyle::kWui),
@@ -53,17 +52,17 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
-	toolbar()->add_space(kSpacing);
+	toolbar()->add_space(default_spacing());
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
 	add_showhide_menu();
 	add_gamespeed_menu();
 
-	toolbar()->add_space(kSpacing);
+	toolbar()->add_space(default_spacing());
 
 	if (is_multiplayer()) {
 		add_chat_ui();
-		toolbar()->add_space(kSpacing);
+		toolbar()->add_space(default_spacing());
 	}
 
 	add_diplomacy_menu();

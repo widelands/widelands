@@ -29,9 +29,6 @@
 
 namespace UI {
 
-constexpr int kPadding = 5;
-constexpr int kButtonSize = 25;
-
 BuildingHelpWindow::BuildingHelpWindow(InteractiveBase* const parent,
                                        UI::UniqueWindow::Registry& reg,
                                        const Widelands::BuildingDescr& building_description,
@@ -57,13 +54,13 @@ BuildingHelpWindow::BuildingHelpWindow(InteractiveBase* const parent,
                              0,
                              0,
                              width,
-                             kButtonSize)),
+                             default_button_size_small())),
      b_back_(new Button(&hbox_,
                         "history_back",
                         0,
                         0,
-                        kButtonSize,
-                        kButtonSize,
+                        default_button_size_small(),
+                        default_button_size_small(),
                         UI::ButtonStyle::kWuiMenu,
                         g_image_cache->get("images/ui_basic/scrollbar_left.png"),
                         _("Back"))),
@@ -74,7 +71,7 @@ BuildingHelpWindow::BuildingHelpWindow(InteractiveBase* const parent,
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
 
 	hbox_.add(b_back_);
-	hbox_.add_space(kPadding);
+	hbox_.add_space(default_padding());
 	hbox_.add(titlearea_, UI::Box::Resizing::kFillSpace);
 
 	vbox_.set_size(width, height);
@@ -115,7 +112,7 @@ bool BuildingHelpWindow::load_help(const std::string& type, const std::string& i
 		}
 		hbox_.set_visible(history_.size() > 1);
 		textarea_->set_size(
-		   textarea_->get_w(), hbox_.is_visible() ? (height_ - kButtonSize) : height_);
+		   textarea_->get_w(), hbox_.is_visible() ? (height_ - default_button_size_small()) : height_);
 		return true;
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());

@@ -127,12 +127,12 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 
 	back_.set_title(_("Leave Lobby"));
 
-	left_column_box_.set_inner_spacing(kPadding);
+	left_column_box_.set_inner_spacing(default_padding());
 	left_column_box_.add(&label_clients_online_, UI::Box::Resizing::kFullSize);
 	left_column_box_.add(&clientsonline_table_, UI::Box::Resizing::kExpandBoth);
 	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_content_box_.set_inner_spacing(kPadding);
+	right_column_content_box_.set_inner_spacing(default_padding());
 	right_column_content_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&opengames_list_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(0);

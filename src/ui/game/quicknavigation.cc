@@ -153,9 +153,6 @@ void QuickNavigation::goto_next() {
 
 /* GUI window. */
 
-constexpr int kButtonSize = 34;
-constexpr int kSpacing = 4;
-
 QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueWindow::Registry& r)
    : UI::UniqueWindow(
         &ibase, UI::WindowStyle::kWui, "quicknav", &r, 100, 100, _("Quick Navigation")),
@@ -166,8 +163,8 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
            "prev",
            0,
            0,
-           kButtonSize,
-           kButtonSize,
+           default_button_size(),
+           default_button_size(),
            UI::ButtonStyle::kWuiSecondary,
            g_image_cache->get("images/ui_basic/scrollbar_left.png"),
            as_tooltip_text_with_hotkey(
@@ -178,8 +175,8 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
            "next",
            0,
            0,
-           kButtonSize,
-           kButtonSize,
+           default_button_size(),
+           default_button_size(),
            UI::ButtonStyle::kWuiSecondary,
            g_image_cache->get("images/ui_basic/scrollbar_right.png"),
            as_tooltip_text_with_hotkey(
@@ -190,8 +187,8 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
           "new",
           0,
           0,
-          kButtonSize,
-          kButtonSize,
+          default_button_size(),
+          default_button_size(),
           UI::ButtonStyle::kWuiSecondary,
           _("+"),
           _("Add a new landmark")) {
@@ -210,7 +207,7 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
 	buttons_box_.add_inf_space();
 
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kSpacing);
+	main_box_.add_space(default_spacing());
 
 	set_center_panel(&main_box_);
 	if (get_usedefaultpos()) {
@@ -224,16 +221,16 @@ void QuickNavigationWindow::rebuild() {
 		content_box_.release()->do_delete();
 	}
 	content_box_.reset(new UI::Box(
-	   &main_box_, UI::PanelStyle::kWui, "content_box", 0, 0, UI::Box::Vertical, 0, 0, kSpacing));
+	   &main_box_, UI::PanelStyle::kWui, "content_box", 0, 0, UI::Box::Vertical, 0, 0, default_spacing()));
 
 	QuickNavigation& q = ibase_.quick_navigation();
 	for (unsigned i = 0; i < q.landmarks().size(); ++i) {
 		UI::Box& box =
 		   *new UI::Box(content_box_.get(), UI::PanelStyle::kWui, format("landmark_box_%u", i), 0, 0,
-		                UI::Box::Horizontal, 0, 0, kSpacing);
+		                UI::Box::Horizontal, 0, 0, default_spacing());
 
 		UI::Button* b = new UI::Button(
-		   &box, format("goto_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		   &box, format("goto_%u", i), 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/goto.png"),
 		   i < kQuicknavSlots ?
 		      as_tooltip_text_with_hotkey(
@@ -245,7 +242,7 @@ void QuickNavigationWindow::rebuild() {
 		b->sigclicked.connect([&q, i]() { q.goto_landmark(i); });
 		box.add(b);
 
-		b = new UI::Button(&box, format("watch_%u", i), 0, 0, kButtonSize, kButtonSize,
+		b = new UI::Button(&box, format("watch_%u", i), 0, 0, default_button_size(), default_button_size(),
 		                   UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/wui/fieldaction/menu_watch_field.png"),
 		                   _("View this landmark in a watch window"));
@@ -260,7 +257,7 @@ void QuickNavigationWindow::rebuild() {
 		});
 		box.add(b);
 
-		b = new UI::Button(&box, format("clear_%u", i), 0, 0, kButtonSize, kButtonSize,
+		b = new UI::Button(&box, format("clear_%u", i), 0, 0, default_button_size(), default_button_size(),
 		                   UI::ButtonStyle::kWuiSecondary,
 		                   g_image_cache->get("images/wui/menu_abort.png"), _("Unset this landmark"));
 		b->set_enabled(q.landmarks()[i].set);
@@ -268,7 +265,7 @@ void QuickNavigationWindow::rebuild() {
 		box.add(b);
 
 		b = new UI::Button(
-		   &box, format("set_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		   &box, format("set_%u", i), 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/menus/quicknav_set.png"),
 		   i < kQuicknavSlots ?
 		      as_tooltip_text_with_hotkey(
@@ -280,9 +277,9 @@ void QuickNavigationWindow::rebuild() {
 		box.add(b);
 
 		if (i < kQuicknavSlots) {
-			box.add_space(kButtonSize);
+			box.add_space(default_button_size());
 		} else {
-			b = new UI::Button(&box, format("remove_%u", i), 0, 0, kButtonSize, kButtonSize,
+			b = new UI::Button(&box, format("remove_%u", i), 0, 0, default_button_size(), default_button_size(),
 			                   UI::ButtonStyle::kWuiSecondary, _("–"), _("Remove this landmark"));
 			b->sigclicked.connect([&q, i]() { q.remove_landmark(i); });
 			box.add(b);

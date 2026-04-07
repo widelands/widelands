@@ -175,7 +175,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
                       "description",
                       0,
                       0,
-                      UI::Scrollbar::kSize,  // min width must be set to avoid assertion failure...
+                      default_button_size_small(),  // min width must be set to avoid assertion failure...
                       0,
                       UI::PanelStyle::kFsMenu,
                       "",

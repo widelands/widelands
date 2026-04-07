@@ -35,9 +35,8 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
 	UI::Checkbox* cb =
 	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", critter_descr.name()),
 	                    Vector2i::zero(), pic, critter_descr.descname());
-	const int kMinClickableArea = 24;
-	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
-	                     std::max<int>(pic->height(), kMinClickableArea));
+	cb->set_desired_size(std::max<int>(pic->width(), cb->default_button_size_small()),
+	                     std::max<int>(pic->height(), cb->default_button_size_small()));
 	return cb;
 }
 

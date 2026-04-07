@@ -67,8 +67,6 @@ std::string merge_list(const std::vector<std::string>& list,
 
 namespace FsMenu {
 
-constexpr int16_t kSpacing = 8;
-
 // Smallest allowed width of the about window (see ui_fsmenu/main.cc) minus borders, etc.
 constexpr int kMinWidth = 520;
 
@@ -193,7 +191,7 @@ std::string TechInfo::get_richtext() const {
 
 		// The content is a plain paragraph that can flow around the label.
 		report +=
-		   format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values), kSpacing);
+		   format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values), UI::Panel::default_spacing());
 
 		// End the <div> of the entry
 		report += "</div>\n";
@@ -243,9 +241,9 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfo::Type t)
 	buttonbox->add(copy, UI::Box::Resizing::kExpandBoth);
 	buttonbox->add_inf_space();
 
-	add_space(3 * kSpacing);
+	add_space(3 * default_spacing());
 	add(buttonbox, UI::Box::Resizing::kFullSize);
-	add_space(kSpacing);
+	add_space(default_spacing());
 }
 
 }  // namespace FsMenu

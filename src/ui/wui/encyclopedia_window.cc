@@ -31,15 +31,8 @@
 #include "ui/basic/messagebox.h"
 #include "ui/wui/interactive_player.h"
 
-namespace {
-
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-
-constexpr int kPadding = 5;
-constexpr int kTabHeight = 35;
-
-}  // namespace
 
 namespace UI {
 
@@ -57,8 +50,8 @@ static const std::string kTabNamePrefix = "tab_encyclopedia_";
 
 void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
-	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
-	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * kPadding;
+	const int contents_height = WINDOW_HEIGHT - default_button_size() - 2 * default_padding();
+	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * default_padding();
 
 	try {
 		set_title(table->get_string("title"));
@@ -95,10 +88,10 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 			                contents_width, contents_height, UI::PanelStyle::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
-			boxes_.at(tab_name)->add_space(kPadding);
+			boxes_.at(tab_name)->add_space(default_padding());
 			boxes_.at(tab_name)->add(contents_.at(tab_name).get());
 
-			wrapper_boxes_.at(tab_name)->add_space(kPadding);
+			wrapper_boxes_.at(tab_name)->add_space(default_padding());
 			wrapper_boxes_.at(tab_name)->add(boxes_.at(tab_name).get());
 
 			if (tab_icon.empty()) {

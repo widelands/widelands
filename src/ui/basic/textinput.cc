@@ -125,9 +125,9 @@ AbstractTextInputPanel::~AbstractTextInputPanel() {  // NOLINT
 AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
    : scrollbar(&init_owner,
                "scrollbar",
-               init_owner.get_w() - Scrollbar::kSize,
+               init_owner.get_w() - default_button_size_small(),
                0,
-               Scrollbar::kSize,
+               default_button_size_small(),
                init_owner.get_h(),
                init_owner.panel_style_),
      style(init_owner.panel_style_),
@@ -210,8 +210,8 @@ void AbstractTextInputPanel::layout() {
 	// Offset snaps the text panel to the start of input. Saved text always displays from beginning
 	d_->scrolloffset = get_h() == 0 ? 0 : get_text().length() / get_h();
 	Panel::layout();
-	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-	d_->scrollbar.set_size(Scrollbar::kSize, get_inner_h());
+	d_->scrollbar.set_pos(Vector2i(get_w() - default_button_size_small(), 0));
+	d_->scrollbar.set_size(default_button_size_small(), get_inner_h());
 }
 
 /**
@@ -1137,7 +1137,7 @@ void EditBox::escape_illegal_characters() const {
 }
 
 uint32_t AbstractTextInputPanel::max_text_width_for_wrap() const {
-	return get_w() > Scrollbar::kSize ? get_w() - Scrollbar::kSize : 0U;
+	return get_w() > default_button_size_small() ? get_w() - default_button_size_small() : 0U;
 }
 uint32_t EditBox::max_text_width_for_wrap() const {
 	return std::numeric_limits<uint32_t>::max();

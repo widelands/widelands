@@ -43,7 +43,7 @@ public:
 	                0,
 	                _("Crash Report Details")) {
 		UI::Box* box = new UI::Box(
-		   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 
 		std::string detailed_text_rt = richtext_escape(report);
 		newlines_to_richtext(detailed_text_rt);
@@ -54,7 +54,7 @@ public:
 		   box, "details", 0, 0, 700, 400, UI::PanelStyle::kFsMenu, detailed_text_rt);
 
 		UI::Box* buttons_box = new UI::Box(
-		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 
 		UI::Button* b_open_link = new UI::Button(
 		   buttons_box, "open_link", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
@@ -99,7 +99,7 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
      clear_on_close_(crash_files) {
 
 	UI::Box* box = new UI::Box(
-	   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 
 	// not localized
 	std::string detailed_text =
@@ -142,7 +142,7 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	                  _("Show details…"), _("View the detailed crash report"));
 
 	UI::Box* buttons_box = new UI::Box(
-	   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 	UI::Button* b_open_link = new UI::Button(
 	   buttons_box, "open_link", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
 #if CAN_OPEN_HYPERLINK
@@ -188,9 +188,9 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	});
 
 	box->add(header, UI::Box::Resizing::kFullSize);
-	box->add_space(kPadding);
+	box->add_space(default_padding());
 	box->add(b_details, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	box->add_space(kPadding);
+	box->add_space(default_padding());
 	box->add(buttons_box, UI::Box::Resizing::kFullSize);
 
 	set_center_panel(box);

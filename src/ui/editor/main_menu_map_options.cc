@@ -34,8 +34,6 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-constexpr unsigned kSuggestedTeamsUnitSize = 24;
-
 SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          UI::Panel* parent,
                                          const Widelands::Map& map,
@@ -47,7 +45,7 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                0,
                0,
                w,
-               kSuggestedTeamsUnitSize,
+               default_button_size_small(),
                _("Click player to remove")),
      map_(map),
      team_(std::move(t)),
@@ -55,8 +53,8 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
              "delete",
              0,
              0,
-             kSuggestedTeamsUnitSize,
-             kSuggestedTeamsUnitSize,
+             default_button_size_small(),
+             default_button_size_small(),
              UI::ButtonStyle::kWuiSecondary,
              _("Delete"),
              _("Delete this suggested team lineup")) {
@@ -78,8 +76,8 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
 
 UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	UI::Button* b =
-	   new UI::Button(this, std::to_string(static_cast<unsigned>(p)), 0, 0, kSuggestedTeamsUnitSize,
-	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
+	   new UI::Button(this, std::to_string(static_cast<unsigned>(p)), 0, 0, default_button_size_small(),
+	                  default_button_size_small(), UI::ButtonStyle::kWuiSecondary,
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
 	b->sigclicked.connect([this, b]() {
@@ -104,7 +102,7 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 
 UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size_t index) {
 	UI::Dropdown<Widelands::PlayerNumber>* dd = new UI::Dropdown<Widelands::PlayerNumber>(
-	   this, std::to_string(index), 0, index * kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize, 8,
+	   this, std::to_string(index), 0, index * default_button_size_small(), default_button_size_small(), 8,
 	   0, _("+"), UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui,
 	   UI::ButtonStyle::kWuiSecondary);
 	for (size_t i = 0; i < map_.get_nrplayers(); ++i) {
@@ -151,22 +149,22 @@ UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size
 }
 
 void SuggestedTeamsEntry::layout() {
-	const uint16_t h = kSuggestedTeamsUnitSize * (team_.size() + 1);
+	const uint16_t h = default_button_size_small() * (team_.size() + 1);
 	set_desired_size(get_w(), h);
-	delete_.set_pos(Vector2i(get_w() / 2, h - kSuggestedTeamsUnitSize));
-	delete_.set_size(get_w() / 2, kSuggestedTeamsUnitSize);
+	delete_.set_pos(Vector2i(get_w() / 2, h - default_button_size_small()));
+	delete_.set_size(get_w() / 2, default_button_size_small());
 
 	size_t index = 0;
 	for (auto& dd : dropdowns_) {
-		dd->set_size(kSuggestedTeamsUnitSize, kSuggestedTeamsUnitSize);
-		dd->set_pos(Vector2i(0, kSuggestedTeamsUnitSize * (index++)));
+		dd->set_size(default_button_size_small(), default_button_size_small());
+		dd->set_pos(Vector2i(0, default_button_size_small() * (index++)));
 	}
 	index = 0;
 	for (auto& bb : buttons_) {
 		size_t index2 = 0;
 		for (auto& b : bb) {
 			b->set_pos(
-			   Vector2i(kSuggestedTeamsUnitSize * (++index2), kSuggestedTeamsUnitSize * index));
+			   Vector2i(default_button_size_small() * (++index2), default_button_size_small() * index));
 		}
 		++index;
 	}
@@ -293,7 +291,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                       UI::Box::Vertical,
                       max_w_,
                       get_inner_h() / 2,
-                      kSuggestedTeamsUnitSize),
+                      default_button_size_small()),
 
      name_(&main_box_, "name_editbox", 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, "author_editbox", 0, 0, max_w_, UI::PanelStyle::kWui),
@@ -312,7 +310,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          0,
                          200,
                          50,
-                         24,
+                         default_button_size_small(),
                          "",
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
@@ -323,7 +321,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                      0,
                      200,
                      50,
-                     24,
+                     default_button_size_small(),
                      _("Theme"),
                      UI::DropdownType::kTextual,
                      UI::PanelStyle::kWui,
@@ -333,7 +331,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          0,
                          0,
                          max_w_,
-                         kSuggestedTeamsUnitSize,
+                         default_button_size_small(),
                          UI::ButtonStyle::kWuiSecondary,
                          _("Add lineup"),
                          _("Add another suggested team lineup")) {
@@ -461,9 +459,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	inner_teams_box_.set_force_scrolling(true);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
 		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
-		   this, &inner_teams_box_, parent.egbase().map(), max_w_ - UI::Scrollbar::kSize, team);
+		   this, &inner_teams_box_, parent.egbase().map(), max_w_ - default_button_size_small(), team);
 		inner_teams_box_.add(ste);
-		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
+		inner_teams_box_.add_space(default_button_size_small());
 		suggested_teams_entries_.push_back(ste);
 	}
 
@@ -482,7 +480,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	new_suggested_team_.sigclicked.connect([this]() {
 		SuggestedTeamsEntry* ste =
 		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
-		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
+		                           max_w_ - default_button_size_small(), Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
 		suggested_teams_entries_.push_back(ste);
 	});

@@ -30,11 +30,9 @@
 
 namespace {
 
-constexpr int kPadding = 4;
 constexpr int kSliderWidth = 200;
 constexpr int kSliderHeight = 16;
 constexpr int kCursorWidth = 28;
-constexpr int kSpacing = 4;
 
 UI::PanelStyle slider_to_panel_style(UI::SliderStyle style) {
 	return style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
@@ -75,7 +73,7 @@ public:
 	     enable_(this, panel_style_, "enable", Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
-		set_inner_spacing(kPadding);
+		set_inner_spacing(default_padding());
 		if (UI::g_fh->fontset()->is_rtl()) {
 			add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 			add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kRight);
@@ -165,7 +163,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              "a mouse click.")),
         0) {
 
-	set_inner_spacing(kSpacing);
+	set_inner_spacing(default_spacing());
 
 	std::vector<SoundControl*> controls;
 	controls.emplace_back(new SoundControl(

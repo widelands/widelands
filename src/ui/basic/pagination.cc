@@ -22,9 +22,6 @@
 
 namespace UI {
 
-constexpr int kButtonSize = 32;
-constexpr int kSpacing = 4;
-
 constexpr int32_t kShowAll = std::numeric_limits<int32_t>::max();
 
 Pagination::Pagination(Panel* parent,
@@ -34,15 +31,15 @@ Pagination::Pagination(Panel* parent,
                        const int32_t nr_adjacent_buttons_per_side)
    : Box(parent, style, name, 0, 0, Box::Horizontal),
      button_style_(style == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu),
-     button_cur_(this, "current", 0, 0, kButtonSize, kButtonSize, button_style_, std::string()),
+     button_cur_(this, "current", 0, 0, default_button_size(), default_button_size(), button_style_, std::string()),
      button_first_(
-        this, "first", 0, 0, kButtonSize, kButtonSize, button_style_, "1", _("Go to first page")),
+        this, "first", 0, 0, default_button_size(), default_button_size(), button_style_, "1", _("Go to first page")),
      button_last_(this,
                   "last",
                   0,
                   0,
-                  kButtonSize,
-                  kButtonSize,
+                  default_button_size(),
+                  default_button_size(),
                   button_style_,
                   std::string(),
                   _("Go to last page")),
@@ -52,7 +49,7 @@ Pagination::Pagination(Panel* parent,
                   0,
                   250,
                   4,
-                  kButtonSize,
+                  default_button_size(),
                   _("Items per page"),
                   DropdownType::kTextual,
                   style,
@@ -65,10 +62,10 @@ Pagination::Pagination(Panel* parent,
 	button_cur_.set_enabled(false);
 
 	for (int i = 0; i < nr_adjacent_buttons_per_side; ++i) {
-		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0, kButtonSize,
-		                                   kButtonSize, button_style_, std::string()));
-		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0, kButtonSize,
-		                                    kButtonSize, button_style_, std::string()));
+		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0, default_button_size(),
+		                                   default_button_size(), button_style_, std::string()));
+		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0, default_button_size(),
+		                                    default_button_size(), button_style_, std::string()));
 		buttons_left_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |
 		                                       ButtonDisableStyle::kMonochrome);
 		buttons_right_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |
@@ -88,19 +85,19 @@ Pagination::Pagination(Panel* parent,
 	}
 
 	add(&button_first_, Box::Resizing::kAlign, UI::Align::kCenter);
-	add_space(kButtonSize);
+	add_space(default_button_size());
 	for (auto it = buttons_left_.rbegin(); it != buttons_left_.rend(); ++it) {
 		add(*it, Box::Resizing::kAlign, UI::Align::kCenter);
-		add_space(kSpacing);
+		add_space(default_spacing());
 	}
 	add(&button_cur_, Box::Resizing::kAlign, UI::Align::kCenter);
 	for (Button* b : buttons_right_) {
-		add_space(kSpacing);
+		add_space(default_spacing());
 		add(b, Box::Resizing::kAlign, UI::Align::kCenter);
 	}
-	add_space(kButtonSize);
+	add_space(default_button_size());
 	add(&button_last_, Box::Resizing::kAlign, UI::Align::kCenter);
-	add_space(kButtonSize);
+	add_space(default_button_size());
 	add(&dd_pagesize_, Box::Resizing::kAlign, UI::Align::kCenter);
 
 	update_pagesizes();

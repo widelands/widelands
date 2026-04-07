@@ -63,7 +63,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		show_filenames_ = new UI::Checkbox(&header_box_, UI::PanelStyle::kFsMenu, "show_filenames",
 		                                   Vector2i::zero(), _("Show Filenames"));
 		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
-		header_box_.add_space(5 * kPadding);
+		header_box_.add_space(5 * default_padding());
 	}
 
 	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);

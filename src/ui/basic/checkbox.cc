@@ -26,11 +26,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
-constexpr int kPadding = 4;
-
 namespace {
 int text_width(int available_width, int pic_width) {
-	return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
+	return available_width > (pic_width + UI::Panel::default_padding()) ? available_width - pic_width - UI::Panel::default_padding() : 0;
 }
 }  // namespace
 
@@ -99,7 +97,7 @@ void Statebox::layout() {
 		                                                        UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
-			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
+			w = std::max(rendered_text_->width() + default_padding() + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
 		set_desired_size(w, h);
@@ -175,12 +173,12 @@ void Statebox::draw(RenderTarget& dst) {
 	} else {
 		static_assert(0 <= kStateboxSize, "assert(0 <= kStateboxSize) failed.");
 		Vector2i image_anchor = Vector2i::zero();
-		Vector2i text_anchor(kStateboxSize + kPadding, 0);
+		Vector2i text_anchor(kStateboxSize + default_padding(), 0);
 
 		if (rendered_text_) {
 			if (UI::g_fh->fontset()->is_rtl()) {
 				text_anchor.x = 0;
-				image_anchor.x = rendered_text_->width() + kPadding;
+				image_anchor.x = rendered_text_->width() + default_padding();
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
 			rendered_text_->draw(dst, text_anchor);

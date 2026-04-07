@@ -37,8 +37,6 @@
 
 namespace FsMenu {
 
-constexpr int kButtonSize = 24;
-constexpr int kDividerSpace = 8;
 constexpr int kModDirDropdownMaxWidth = 200;
 constexpr int kMousewheelBoxMaxWidth = 700;
 
@@ -137,7 +135,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
                             0,
                             kModDirDropdownMaxWidth,
                             20,
-                            kButtonSize,
+                            default_button_size_small(),
                             std::string(),
                             UI::DropdownType::kTextual,
                             UI::PanelStyle::kFsMenu,
@@ -174,7 +172,7 @@ DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
                            0,
                            kModDirDropdownMaxWidth,
                            4,
-                           kButtonSize,
+                           default_button_size_small(),
                            std::string(),
                            UI::DropdownType::kTextual,
                            UI::PanelStyle::kFsMenu,
@@ -196,7 +194,7 @@ InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
                            0,
                            kModDirDropdownMaxWidth,
                            4,
-                           kButtonSize,
+                           default_button_size_small(),
                            std::string(),
                            UI::DropdownType::kTextual,
                            UI::PanelStyle::kFsMenu,
@@ -226,8 +224,8 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
              0,
              UI::Box::Horizontal,
              0,
-             kButtonSize,
-             kPadding),
+             default_button_size_small(),
+             default_padding()),
      title_area_(this,
                  UI::PanelStyle::kFsMenu,
                  "title",
@@ -307,12 +305,12 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 	return true;
 }
 void KeymodAndDirBox::set_width(int w) {
-	if (w > 3 * kPadding) {
-		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - kPadding);
-		keymod_dropdown_.set_desired_size(butt_w, kButtonSize);
-		dir_dropdown_.set_desired_size(butt_w, kButtonSize);
+	if (w > 3 * default_padding()) {
+		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - default_padding());
+		keymod_dropdown_.set_desired_size(butt_w, default_button_size_small());
+		dir_dropdown_.set_desired_size(butt_w, default_button_size_small());
 	}
-	set_desired_size(w, kButtonSize);
+	set_desired_size(w, default_button_size_small());
 }
 /***** End of KeymodAndDirBox members *****/
 
@@ -324,8 +322,8 @@ InvertDirBox::InvertDirBox(UI::Panel* parent, const std::string& title, uint8_t*
              0,
              UI::Box::Horizontal,
              0,
-             kButtonSize,
-             kPadding),
+             default_button_size_small(),
+             default_padding()),
      title_area_(this, UI::PanelStyle::kFsMenu, "title", UI::FontStyle::kFsMenuLabel, title),
      dir_dropdown_(this),
      dir_(dir) {
@@ -344,11 +342,11 @@ void InvertDirBox::update_sel() {
 	dir_dropdown_.select(*dir_);
 }
 void InvertDirBox::set_width(int w) {
-	if (w > 3 * kPadding) {
-		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - kPadding);
-		dir_dropdown_.set_desired_size(butt_w, kButtonSize);
+	if (w > 3 * default_padding()) {
+		const int butt_w = std::min(kModDirDropdownMaxWidth, w / 3 - default_padding());
+		dir_dropdown_.set_desired_size(butt_w, default_button_size_small());
 	}
-	set_desired_size(w, kButtonSize);
+	set_desired_size(w, default_button_size_small());
 }
 
 ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
@@ -359,8 +357,8 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
              0,
              UI::Box::Horizontal,
              0,
-             kButtonSize,
-             kPadding),
+             default_button_size_small(),
+             default_padding()),
      reset_button_(this,
                    "reset",
                    0,
@@ -416,7 +414,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
              UI::Box::Vertical,
              0,
              0,
-             kPadding),
+             default_padding()),
      zoom_box_(this,
                /** TRANSLATORS: Name of a function for the scroll wheel.
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -480,8 +478,8 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                          0,
                          UI::Box::Horizontal,
                          0,
-                         kButtonSize,
-                         kPadding),
+                         default_button_size_small(),
+                         default_padding()),
      inverted_x_checkbox_(
         &horiz_override_box_,
         UI::PanelStyle::kFsMenu,
@@ -521,13 +519,13 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&speed_box_);
 	add(&toolsize_box_);
 	add(&toolgap_box_);
-	add_space(kDividerSpace);
+	add_space(default_spacing());
 	add(&zoom_invert_box_);
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
-	add_space(kDividerSpace);
+	add_space(default_spacing());
 	add(&horiz_override_box_);
-	add_space(kDividerSpace);
+	add_space(default_spacing());
 	add(&button_box_);
 }
 
@@ -610,7 +608,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 	set_pos(Vector2i((w - w_real) / 2, get_y()));
 	if (w_real != get_w()) {
 		UI::Panel::set_size(w_real, h);
-		const int w_hbox = w_real - 3 * kPadding;
+		const int w_hbox = w_real - 3 * default_padding();
 		zoom_box_.set_width(w_hbox);
 		mapscroll_box_.set_width(w_hbox);
 		speed_box_.set_width(w_hbox);
@@ -619,8 +617,8 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
-		horiz_override_box_.set_desired_size(w_hbox, kButtonSize);
-		button_box_.set_size(w_hbox, kButtonSize);
+		horiz_override_box_.set_desired_size(w_hbox, default_button_size_small());
+		button_box_.set_size(w_hbox, default_button_size_small());
 	}
 }
 

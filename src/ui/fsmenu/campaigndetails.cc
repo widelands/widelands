@@ -28,17 +28,16 @@ CampaignDetails::CampaignDetails(Panel* parent)
                  "label_name",
                  0,
                  0,
-                 UI::Scrollbar::kSize,
+                 default_button_size_small(),
                  0,
                  UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, "description", 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
+     descr_(this, "description", 0, 0, default_button_size_small(), 0, UI::PanelStyle::kFsMenu) {
 
-	constexpr int kPadding = 4;
 	add(&name_label_, UI::Box::Resizing::kFullSize);
-	add_space(kPadding);
+	add_space(default_padding());
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 }
 

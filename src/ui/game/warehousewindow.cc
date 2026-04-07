@@ -146,11 +146,11 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	UI::Button* b;
 
 	if (can_act_) {
-		add_space(15);
+		add_space(4 * default_padding());
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
-	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
+	   buttons, #policy, 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,                                   \
 	   g_image_cache->get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
 	b->sigclicked.connect([this]() { set_policy(Widelands::StockPolicy::k##policyname); }),         \
 	buttons->add(b);
@@ -161,14 +161,14 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 
 		if (interactive_base_.omnipotent()) {
-			b = new UI::Button(buttons, "cheat_decrease_10", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			b = new UI::Button(buttons, "cheat_decrease_10", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
 			                   _("Remove 10 wares"));
 			b->set_repeating(true);
 			b->sigclicked.connect([this]() { change_real_fill(-10); });
 			buttons->add(b);
 
-			b = new UI::Button(buttons, "cheat_decrease_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			b = new UI::Button(buttons, "cheat_decrease_1", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 			                   _("Remove a ware"));
 			b->set_repeating(true);
@@ -176,13 +176,13 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 			buttons->add(b);
 
 			b =
-			   new UI::Button(buttons, "cheat_increase_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   new UI::Button(buttons, "cheat_increase_1", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add a ware"));
 			b->set_repeating(true);
 			b->sigclicked.connect([this]() { change_real_fill(1); });
 			buttons->add(b);
 
-			b = new UI::Button(buttons, "cheat_increase_10", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			b = new UI::Button(buttons, "cheat_increase_10", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
 			                   _("Add 10 wares"));
 			b->set_repeating(true);
@@ -194,7 +194,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	buttons->add_inf_space();
 
 	if (wh.get_portdock() != nullptr) {
-		b = new UI::Button(buttons, "configure_ship_fleet", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+		b = new UI::Button(buttons, "configure_ship_fleet", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 		                   g_image_cache->get("images/wui/fieldaction/menu_tab_ship_targets.png"),
 		                   _("Configure this ocean’s ship fleet"));
 		buttons->add(b);
@@ -203,7 +203,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		   [&ib, &wh]() { FleetOptionsWindow::create(&ib, ib, wh.get_portdock()); });
 	}
 
-	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+	b = new UI::Button(buttons, "configure_economy", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
 	                   _("Configure this building’s economy"));
 	buttons->add(b);
@@ -302,11 +302,11 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 
 	get_tabs()->add(
 	   "wares", g_image_cache->get(pic_tab_wares),
-	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWARE),
+	   new WarehouseWaresPanel(get_tabs(), default_width(), *ibase(), *warehouse, Widelands::wwWARE),
 	   _("Wares"));
 	get_tabs()->add(
 	   "workers", g_image_cache->get(pic_tab_workers),
-	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
+	   new WarehouseWaresPanel(get_tabs(), default_width(), *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
 	UI::Box* soldiers_box =
@@ -338,10 +338,10 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_image_cache->get(pic_tab_dock_wares),
-		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
+		                create_portdock_wares_display(get_tabs(), default_width(), *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));
 		get_tabs()->add("dock_workers", g_image_cache->get(pic_tab_dock_workers),
-		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
+		                create_portdock_wares_display(get_tabs(), default_width(), *pd, Widelands::wwWORKER),
 		                _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			if (upcast(InteractiveGameBase, igb, ibase())) {

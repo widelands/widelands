@@ -30,11 +30,8 @@
 
 namespace UI {
 
-constexpr int16_t kSpacing = 4;
 constexpr int16_t kMainDimension = 256;
 constexpr int16_t kSidebarWidth = 16;
-constexpr int16_t kButtonSize = 30;
-constexpr int16_t kSmallButtonSize = 15;
 
 Section* ColorChooser::favorites_section(nullptr);
 std::optional<RGBColor> ColorChooser::favorite_colors[ColorChooser::kNFavorites];
@@ -47,7 +44,7 @@ struct ColorChooserImpl : public Panel {
 	           "color_chooser_pane",
 	           0,
 	           0,
-	           kMainDimension + kSpacing + kSidebarWidth,
+	           kMainDimension + default_spacing() + kSidebarWidth,
 	           kMainDimension),
 	     chooser_(c) {
 	}
@@ -80,7 +77,7 @@ struct ColorChooserImpl : public Panel {
 			if (x >= 0 && x < kMainDimension) {
 				return left_color_at(x, y);
 			}
-			if (x >= kMainDimension + kSpacing && x < kMainDimension + kSpacing + kSidebarWidth) {
+			if (x >= kMainDimension + default_spacing() && x < kMainDimension + default_spacing() + kSidebarWidth) {
 				return right_color_at(y);
 			}
 		}
@@ -224,7 +221,7 @@ private:
 			NEVER_HERE();
 		}
 		do_draw_cursor(dst, x - selector_.width() / 2, y - selector_.height() / 2);
-		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+		do_draw_cursor(dst, kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
 		               a - selector_.height() / 2);
 	}
 	void draw_mouse_cursors(RenderTarget& dst) {
@@ -233,9 +230,9 @@ private:
 			if (mousepos.x < kMainDimension) {
 				do_draw_cursor(
 				   dst, mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2);
-			} else if (mousepos.x >= kMainDimension + kSpacing &&
-			           mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
-				do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+			} else if (mousepos.x >= kMainDimension + default_spacing() &&
+			           mousepos.x < kMainDimension + default_spacing() + kSidebarWidth) {
+				do_draw_cursor(dst, kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
 				               mousepos.y - selector_.height() / 2);
 			}
 		}
@@ -243,7 +240,7 @@ private:
 	void draw_textures(RenderTarget& dst) {
 		dst.blit(Vector2i(0, 0), &texture_left_);
 		for (uint8_t i = 0; i < kSidebarWidth; ++i) {
-			dst.blit(Vector2i(kMainDimension + kSpacing + i, 0), &texture_right_);
+			dst.blit(Vector2i(kMainDimension + default_spacing() + i, 0), &texture_right_);
 		}
 	}
 };
@@ -272,7 +269,7 @@ ColorChooser::ColorChooser(Panel* parent,
                 "ok",
                 0,
                 0,
-                kButtonSize,
+                default_button_size(),
                 0,
                 s == WindowStyle::kWui ? ButtonStyle::kWuiPrimary : ButtonStyle::kFsMenuPrimary,
                 _("OK")),
@@ -281,7 +278,7 @@ ColorChooser::ColorChooser(Panel* parent,
         "cancel",
         0,
         0,
-        kButtonSize,
+        default_button_size(),
         0,
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         _("Cancel")),
@@ -290,7 +287,7 @@ ColorChooser::ColorChooser(Panel* parent,
         "initial_color",
         0,
         0,
-        kButtonSize,
+        default_button_size(),
         0,
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         _("Initial Color")),
@@ -298,8 +295,8 @@ ColorChooser::ColorChooser(Panel* parent,
                "button_r",
                0,
                0,
-               kButtonSize,
-               kButtonSize,
+               default_button_size(),
+               default_button_size(),
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Red" */
                pgettext("color", "R")),
@@ -307,8 +304,8 @@ ColorChooser::ColorChooser(Panel* parent,
                "button_g",
                0,
                0,
-               kButtonSize,
-               kButtonSize,
+               default_button_size(),
+               default_button_size(),
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Green" */
                pgettext("color", "G")),
@@ -316,8 +313,8 @@ ColorChooser::ColorChooser(Panel* parent,
                "button_b",
                0,
                0,
-               kButtonSize,
-               kButtonSize,
+               default_button_size(),
+               default_button_size(),
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Blue" */
                pgettext("color", "B")),
@@ -326,7 +323,7 @@ ColorChooser::ColorChooser(Panel* parent,
                                    "default_color",
                                    0,
                                    0,
-                                   kButtonSize,
+                                   default_button_size(),
                                    0,
                                    s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary :
                                                             ButtonStyle::kFsMenuSecondary,
@@ -373,18 +370,18 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Type::kBig),
      interactive_pane_(*new ColorChooserImpl(hbox_, panel_style_, *this)),
      icon_(&vbox_, panel_style_, "preview", preview(init_color)) {
-	buttonsbox_.add_space(kSpacing);
+	buttonsbox_.add_space(default_spacing());
 	buttonsbox_.add(&button_cancel_, UI::Box::Resizing::kExpandBoth);
-	buttonsbox_.add_space(kSpacing);
+	buttonsbox_.add_space(default_spacing());
 	buttonsbox_.add(&button_init_, UI::Box::Resizing::kExpandBoth);
-	buttonsbox_.add_space(kSpacing);
+	buttonsbox_.add_space(default_spacing());
 	if (button_default_ != nullptr) {
 		buttonsbox_.add(button_default_, UI::Box::Resizing::kExpandBoth);
-		buttonsbox_.add_space(kSpacing);
+		buttonsbox_.add_space(default_spacing());
 		button_default_->sigclicked.connect([this, default_color]() { set_color(*default_color); });
 	}
 	buttonsbox_.add(&button_ok_, UI::Box::Resizing::kExpandBoth);
-	buttonsbox_.add_space(kSpacing);
+	buttonsbox_.add_space(default_spacing());
 
 	button_ok_.sigclicked.connect(
 	   [this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kOk); });
@@ -408,42 +405,42 @@ ColorChooser::ColorChooser(Panel* parent,
 	update_favorites();
 
 	box_r_.add(&button_r_);
-	box_r_.add_space(kSpacing);
+	box_r_.add_space(default_spacing());
 	box_r_.add(&spin_r_, UI::Box::Resizing::kAlign, Align::kCenter);
 
 	box_g_.add(&button_g_);
-	box_g_.add_space(kSpacing);
+	box_g_.add_space(default_spacing());
 	box_g_.add(&spin_g_, UI::Box::Resizing::kAlign, Align::kCenter);
 
 	box_b_.add(&button_b_);
-	box_b_.add_space(kSpacing);
+	box_b_.add_space(default_spacing());
 	box_b_.add(&spin_b_, UI::Box::Resizing::kAlign, Align::kCenter);
 
 	vbox_.add(&box_r_);
-	vbox_.add_space(kSpacing);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&box_g_);
-	vbox_.add_space(kSpacing);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&box_b_);
 	vbox_.add_inf_space();
 	vbox_.add(&icon_, UI::Box::Resizing::kAlign, Align::kCenter);
 	vbox_.add_inf_space();
 	vbox_.add(&palette_box_1_, UI::Box::Resizing::kAlign, Align::kCenter);
-	vbox_.add_space(kSpacing);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&palette_box_2_, UI::Box::Resizing::kAlign, Align::kCenter);
-	vbox_.add_space(kSpacing);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&favorites_box_, UI::Box::Resizing::kAlign, Align::kCenter);
 
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(&interactive_pane_);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(&vbox_, UI::Box::Resizing::kFullSize);
-	hbox_.add_space(kSpacing);
+	hbox_.add_space(default_spacing());
 
-	main_box_.add_space(kSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&buttonsbox_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kSpacing);
+	main_box_.add_space(default_spacing());
 
 	set_color(current_);
 	set_sidebar_attribute(ColorAttribute::kRed);
@@ -457,13 +454,13 @@ void ColorChooser::create_palette_button(const unsigned index) {
 	UI::Box* box = index < kMaxPlayers / 2 ? &palette_box_1_ : &palette_box_2_;
 
 	Button* button = new Button(
-	   box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
+	   box, "palette_" + std::to_string(index), 0, 0, default_button_size(), default_button_size(),
 	   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 	   playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
 	button->sigclicked.connect([this, index]() { set_color(kPlayerColors[index]); });
 
 	if (index != 0 && index != kMaxPlayers / 2) {
-		box->add_space(kSpacing);
+		box->add_space(default_spacing());
 	}
 	box->add(button);
 }
@@ -477,29 +474,29 @@ void ColorChooser::update_favorites() {
 		Button* button;
 		if (favorite_colors[index].has_value()) {
 			button = new Button(
-			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, kButtonSize,
-			   kButtonSize,
+			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, default_button_size(),
+			   default_button_size(),
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 			   playercolor_image(*favorite_colors[index], "images/ui_basic/square.png"));
 			button->sigclicked.connect([this, index]() { set_color(*favorite_colors[index]); });
 
 			Button* del = new Button(
-			   button, "delete_favorite_" + std::to_string(index), kButtonSize - kSmallButtonSize, 0,
-			   kSmallButtonSize, kSmallButtonSize,
+			   button, "delete_favorite_" + std::to_string(index), default_button_size() - default_button_size_small(), 0,
+			   default_button_size_small(), default_button_size_small(),
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 			   _("–"), _("Remove from favorites"));
 			del->sigclicked.connect([this, index]() { set_favorite(index, true); });
 		} else {
 			button = new Button(
-			   &favorites_box_, "add_favorite_" + std::to_string(index), 0, 0, kButtonSize,
-			   kButtonSize,
+			   &favorites_box_, "add_favorite_" + std::to_string(index), 0, 0, default_button_size(),
+			   default_button_size(),
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 			   _("+"), _("Add current color to favorites"));
 			button->sigclicked.connect([this, index]() { set_favorite(index, false); });
 		}
 
 		if (index != 0) {
-			favorites_box_.add_space(kSpacing);
+			favorites_box_.add_space(default_spacing());
 		}
 		favorites_box_.add(button);
 	}

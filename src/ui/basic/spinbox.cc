@@ -97,8 +97,8 @@ SpinBox::SpinBox(Panel* const parent,
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
-     button_size_(20),
-     big_step_button_width_(32),
+     button_size_(default_button_size_small()),
+     big_step_button_width_(default_button_size()),
      buttons_width_(0),
      padding_(2) {
 	if (type_ == SpinBox::Type::kValueList) {

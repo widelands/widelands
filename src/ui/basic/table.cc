@@ -57,7 +57,7 @@ BaseTable::Table(Panel* const parent,
                                                       UI::ButtonStyle::kWuiSecondary),
 
      scrollbar_filler_button_(new Button(
-        this, "scrollbar_filler", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
+        this, "scrollbar_filler", 0, 0, default_button_size_small(), headerheight_, button_style_, "")),
 
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -71,8 +71,8 @@ BaseTable::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ = new Scrollbar(this, "scrollbar", get_w() - Scrollbar::kSize, headerheight_,
-	                           Scrollbar::kSize, get_h() - headerheight_, style);
+	scrollbar_ = new Scrollbar(this, "scrollbar", get_w() - default_button_size_small(), headerheight_,
+	                           default_button_size_small(), get_h() - headerheight_, style);
 	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -757,7 +757,7 @@ void BaseTable::layout() {
 }
 
 void BaseTable::reposition_scrollbar() {
-	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
+	scrollbar_->set_pos(Vector2i(get_w() - default_button_size_small(), headerheight_));
 	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
 	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
