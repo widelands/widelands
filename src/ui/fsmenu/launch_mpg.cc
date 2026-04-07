@@ -210,12 +210,12 @@ void LaunchMPG::clicked_select_savegame() {
 			   std::string mapname = s.get_safe_string("name");
 			   const int nr_players = s.get_safe_int("nr_players");
 
-			settings_.set_map(mapname, filename, s.get_string("theme", ""),
-			                  s.get_string("background", ""), nr_players, true);
-			map_changed();
-		}
-		update_tags_and_win_conditions();
-	});
+			   settings_.set_map(mapname, filename, s.get_string("theme", ""),
+			                     s.get_string("background", ""), nr_players, true);
+			   map_changed();
+		   }
+		   update_tags_and_win_conditions();
+	   });
 }
 
 /**
