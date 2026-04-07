@@ -56,13 +56,13 @@
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
 #include "network/participantlist.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launch_mpg.h"
-#include "ui_fsmenu/main.h"
+#include "ui/basic/progresswindow.h"
+#include "ui/fsmenu/launch_mpg.h"
+#include "ui/fsmenu/main.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_spectator.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 
 struct HostChatProvider : public ChatProvider {
 	explicit HostChatProvider(GameHost* const init_host) : h(init_host) {
