@@ -133,8 +133,7 @@ AttackPanel::AttackPanel(
      icon_w_(attack_type_ == AttackPanel::AttackType::kShip ?
                 (2 * Widelands::Ship::kShipHalfHealthBarWidth + default_spacing()) :
                 default_button_size()),
-     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? default_button_size() :
-                                                              default_button_size()),
+     icon_h_(default_button_size()),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
