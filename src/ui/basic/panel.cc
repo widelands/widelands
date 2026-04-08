@@ -45,6 +45,7 @@ Panel* Panel::mousein_ = nullptr;
 Panel* Panel::tooltip_panel_ = nullptr;
 Vector2i Panel::tooltip_fixed_pos_ = Vector2i::invalid();
 Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
+int Panel::scale_factor_quarters_ = 4;
 
 // The following variable can be set to false. If so, all mouse and keyboard
 // events are ignored and not passed on to any widget. This is only useful
@@ -806,16 +807,16 @@ void Panel::template_directory_changed() {
 
 // static
 int Panel::default_button_size() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSize);
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSize) * scale_factor_quarters_ / 4;
 }
 int Panel::default_button_size_small() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall);
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall) * scale_factor_quarters_ / 4;
 }
 int Panel::default_padding() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultPadding);
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultPadding) * scale_factor_quarters_ / 4;
 }
 int Panel::default_spacing() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultSpacing);
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultSpacing) * scale_factor_quarters_ / 4;
 }
 
 /**

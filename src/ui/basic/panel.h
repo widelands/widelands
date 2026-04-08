@@ -478,6 +478,14 @@ public:
 		return false;
 	}
 
+	static int get_scale_factor_quarters() {
+		return scale_factor_quarters_;
+	}
+	static void set_scale_factor_quarters(int sq) {
+		scale_factor_quarters_ = sq;
+	}
+
+	/** Functions to query styled sized under the current theme and UI scaling settings. */
 	static int default_button_size();
 	static int default_button_size_small();
 	static int default_padding();
@@ -659,6 +667,7 @@ private:
 	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
 	static bool allow_fastclick_;
+	static int scale_factor_quarters_;
 
 	static FxId click_fx_;
 

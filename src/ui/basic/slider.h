@@ -234,7 +234,7 @@ struct DiscreteSlider : public Panel {
 	               uint32_t init_value,
 	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
-	               uint32_t cursor_size = 20,
+	               uint32_t cursor_size = default_button_size_small(),
 	               bool enabled = true);
 
 	void set_labels(const std::vector<std::string>&);

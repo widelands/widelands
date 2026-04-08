@@ -74,6 +74,27 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 	}
 }
 
+std::vector<std::string> generate_ui_scaling_slider_labels() {
+	std::vector<std::string> labels;
+	for (int i = 1; i <= 12; ++i) {
+		switch (i % 4) {
+		case 0:
+			/** TRANSLATORS: This is a UI scaling integer value of the form "2×" */
+			labels.emplace_back(format_l(pgettext("ui_scaling_factor", "%d×"), i / 4));
+			break;
+		case 2:
+			/** TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or "1,5×" */
+			labels.emplace_back(format_l(pgettext("ui_scaling_factor", "%.1f×"), i / 4.0));
+			break;
+		default:
+			/** TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or "1,75×" */
+			labels.emplace_back(format_l(pgettext("ui_scaling_factor", "%.2f×"), i / 4.0));
+			break;
+		}
+	}
+	return labels;
+}
+
 }  // namespace
 
 namespace FsMenu {
@@ -214,6 +235,20 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
+
+	ui_scaling_slider_(
+		&box_interface_,
+		"ui_scaling_slider",
+		0,
+		0,
+		default_button_size(),
+		default_button_size(),
+		generate_ui_scaling_slider_labels(),
+		opt.ui_scaling_factor_quarters - 1,
+		UI::SliderStyle::kFsMenu,
+		_("User interface scaling factor"),
+		default_button_size_small()
+	),
 
      configure_keyboard_(&box_interface_,
                          "configure_keyboard",
@@ -407,13 +442,15 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	do_not_layout_on_resolution_change();
 
+	const bool rtl = UI::g_fh->fontset()->is_rtl();
+
 	// Buttons
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
+	button_box_.add(rtl ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
 	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_);
+	button_box_.add(rtl ? &cancel_ : &ok_);
 	button_box_.add_inf_space();
 
 	// Tabs
@@ -442,6 +479,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
+	box_interface_.add_space(default_padding());
+
+	box_interface_.add(new UI::Textarea(&box_interface_, UI::PanelStyle::kFsMenu, "label_ui_scaling",
+	                              UI::FontStyle::kFsMenuLabel,
+	                              _("User interface scaling factor:"), UI::mirror_alignment(UI::Align::kLeft, rtl)),
+	             UI::Box::Resizing::kFullSize);
+	box_interface_.add(&ui_scaling_slider_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add_space(default_padding());
 	box_interface_.add(&configure_keyboard_);
@@ -887,6 +931,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
+	os_.ui_scaling_factor_quarters = ui_scaling_slider_.get_slider().get_value() + 1;
 
 	// Saving options
 	os_.autosave = sb_autosave_.get_value();
@@ -970,6 +1015,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
+	opt.ui_scaling_factor_quarters = opt_section_.get_int("ui_scaling_factor_quarters", 4);
 
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
@@ -1020,6 +1066,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
+	opt_section_.set_int("ui_scaling_factor_quarters", opt.ui_scaling_factor_quarters);
 
 	// Saving options
 	opt_section_.set_int("autosave", opt.autosave * 60);
@@ -1050,6 +1097,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_string("language", opt.language);
 
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
+	UI::Panel::set_scale_factor_quarters(opt.ui_scaling_factor_quarters);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 	WLApplication::get().init_plugin_shortcuts();  // To update the descnames
