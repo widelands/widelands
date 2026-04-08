@@ -221,12 +221,12 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   main_box, "message", 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                                   g_image_cache->get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect([this]() { ok(); });
 
 	UI::Button* cancelbtn =
-	   new UI::Button(button_box, "abort", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	   new UI::Button(button_box, "abort", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                  g_image_cache->get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect([this]() { die(); });
 

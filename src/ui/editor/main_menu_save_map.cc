@@ -83,7 +83,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
 	table_footer_box_.add(&editbox_label_);
 	table_footer_box_.add(&editbox_, UI::Box::Resizing::kExpandBoth);
-	table_footer_box_.add_space(0);
+	table_footer_box_.add_space(default_spacing());
 	table_footer_box_.add(&make_directory_);
 
 	navigate_directory(curdir_, kMapsDir);

@@ -148,7 +148,7 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 	add_progress_bar(box);
 
-	box.add_space(8);
+	box.add_space(default_spacing());
 
 	ensure_box_can_hold_input_queues(box);
 	add_wares_queues(construction_site, box);
@@ -231,7 +231,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
 			   settings_box.get(), ts->desired_capacity, 0, ts->max_capacity, can_act);
 			settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			settings_box->add_space(8);
+			settings_box->add_space(default_spacing());
 			cs_soldier_capacity_->changed.connect([this]() {
 				if (game_ != nullptr) {
 					game_->send_player_change_soldier_capacity(
@@ -254,7 +254,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			}
 		});
 		settings_box->add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		settings_box->add_space(6);
+		settings_box->add_space(default_spacing());
 		cs_stopped_->set_enabled(can_act);
 	} break;
 	case Widelands::MapObjectType::WAREHOUSE: {
@@ -269,19 +269,19 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			   *new UI::Box(&mainbox, UI::PanelStyle::kWui, "warehouse_settings_buttons_box", 0, 0,
 			                UI::Box::Horizontal);
 			mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			mainbox.add_space(15);
+			mainbox.add_space(4 * default_spacing());
 			UI::Button& sp_normal = *new UI::Button(
-			   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   &buttonsbox, "stock_policy_normal", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get(pic_stock_policy_button_normal), _("Normal policy"));
-			UI::Button& sp_prefer = *new UI::Button(&buttonsbox, "stock_policy_prefer", 0, 0, 34, 34,
+			UI::Button& sp_prefer = *new UI::Button(&buttonsbox, "stock_policy_prefer", 0, 0, default_button_size(), default_button_size(),
 			                                        UI::ButtonStyle::kWuiMenu,
 			                                        g_image_cache->get(pic_stock_policy_button_prefer),
 			                                        _("Preferably store selected wares here"));
 			UI::Button& sp_dont = *new UI::Button(
-			   &buttonsbox, "stock_policy_dontstock", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   &buttonsbox, "stock_policy_dontstock", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get(pic_stock_policy_button_dontstock),
 			   _("Do not store selected wares here"));
-			UI::Button& sp_remove = *new UI::Button(&buttonsbox, "stock_policy_remove", 0, 0, 34, 34,
+			UI::Button& sp_remove = *new UI::Button(&buttonsbox, "stock_policy_remove", 0, 0, default_button_size(), default_button_size(),
 			                                        UI::ButtonStyle::kWuiMenu,
 			                                        g_image_cache->get(pic_stock_policy_button_remove),
 			                                        _("Remove selected wares from here"));
@@ -326,7 +326,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			});
 			settings_box->add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
-			settings_box->add_space(6);
+			settings_box->add_space(default_spacing());
 			cs_launch_expedition_->set_enabled(can_act);
 		}
 	}
@@ -343,7 +343,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
 		   ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : wh->max_garrison, can_act);
 		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		settings_box->add_space(8);
+		settings_box->add_space(default_spacing());
 		cs_soldier_capacity_->changed.connect([this]() {
 			if (game_ != nullptr) {
 				game_->send_player_change_soldier_capacity(
@@ -398,7 +398,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			});
 		}
-		settings_box->add_space(8);
+		settings_box->add_space(default_spacing());
 	} break;
 	case Widelands::MapObjectType::MARKET: {
 		// Nothing to do currently.

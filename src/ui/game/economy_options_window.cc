@@ -86,7 +86,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(6);
+	buttons->add_space(default_spacing());
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 	                   _("Decrease target"));
@@ -94,7 +94,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(6);
+	buttons->add_space(default_spacing());
 
 	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_image_cache->get("images/wui/menus/infinity.png"),
@@ -103,7 +103,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	buttons->add(b);
 	b->set_repeating(false);
 	b->set_enabled(can_act);
-	buttons->add_space(6);
+	buttons->add_space(default_spacing());
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
@@ -111,7 +111,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(6);
+	buttons->add_space(default_spacing());
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
 	                   _("Increase target by 10"));
@@ -129,17 +129,17 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 		dropdown_.set_enabled(false);
 	}
 
-	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                   g_image_cache->get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
-	dropdown_box_.add_space(8);
+	dropdown_box_.add_space(default_spacing());
 	dropdown_box_.add(b);
 
 	main_box_.add(&tabpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	main_box_.add_space(8);
+	main_box_.add_space(default_spacing());
 	main_box_.add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	main_box_.add_space(8);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&dropdown_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	ware_economy->set_options_window(static_cast<void*>(this));
@@ -679,9 +679,9 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
      table_(&table_box_, "table", 0, 0, 460, 120, UI::PanelStyle::kWui),
      buttons_box_(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
      profile_name_(&main_box_, "profile_name", 0, 0, 240, UI::PanelStyle::kWui),
-     save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
-     cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
-     delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
+     save_(&buttons_box_, "save", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiPrimary, _("Save")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     delete_(&buttons_box_, "delete", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiSecondary, _("Delete")) {
 	table_.add_column(200, _("Existing Profiles"));
 	update_table();
 

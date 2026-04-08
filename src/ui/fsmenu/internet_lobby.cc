@@ -135,14 +135,14 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	right_column_content_box_.set_inner_spacing(default_padding());
 	right_column_content_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&opengames_list_, UI::Box::Resizing::kExpandBoth);
-	right_column_content_box_.add_space(0);
+	right_column_content_box_.add_space(default_spacing());
 	right_column_content_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(&servername_label_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&servername_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(0);
+	right_column_content_box_.add_space(default_spacing());
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(0);
+	right_column_content_box_.add_space(default_spacing());
 	right_column_content_box_.add(
 	   new UI::MultilineTextarea(&right_column_content_box_, "label_addons", 0, 0, 0, 0,
 	                             UI::PanelStyle::kFsMenu, AddOns::list_game_relevant_addons(),

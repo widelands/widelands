@@ -152,7 +152,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 
 		worker_box->add(worker_table_, UI::Box::Resizing::kFullSize);
-		worker_box->add_space(4);
+		worker_box->add_space(default_spacing());
 		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
 		get_tabs()->add("workers", g_image_cache->get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);

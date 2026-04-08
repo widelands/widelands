@@ -197,16 +197,16 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 {
 	add_main_menu();
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(4 * default_spacing());
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
 	add_showhide_menu();
 	add_gamespeed_menu();
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(4 * default_spacing());
 	if (multiplayer) {
 		add_chat_ui();
-		toolbar()->add_space(15);
+		toolbar()->add_space(4 * default_spacing());
 	}
 
 	add_statistics_menu();
@@ -230,7 +230,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(4 * default_spacing());
 
 	add_toolbar_button(
 	   "ui_basic/menu_help", "help",

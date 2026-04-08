@@ -129,7 +129,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_box_.add(&display_mode_, UI::Box::Resizing::kFullSize);
 	table_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add(&table_box_, UI::Box::Resizing::kExpandBoth);
-	table_and_details_box_.add_space(0);
+	table_and_details_box_.add_space(default_spacing());
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 

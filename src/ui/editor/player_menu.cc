@@ -146,7 +146,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
                     0,
                     50,
                     kMaxRecommendedPlayers,
-                    default_button_size_small(),
+                    default_button_size(),
                     _("Number of players"),
                     UI::DropdownType::kTextual,
                     UI::PanelStyle::kWui,
@@ -191,7 +191,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
 		   row, format("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50, 16,
-		   plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+		   default_button_size(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
 		for (const Widelands::TribeBasicInfo& tribeinfo : parent.egbase().all_tribes()) {
@@ -216,14 +216,14 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		assert(player_image);
 
 		UI::Button* plr_position = new UI::Button(
-		   row, "tribe", 0, 0, plr_tribe->get_h(), plr_tribe->get_h(), UI::ButtonStyle::kWuiSecondary,
+		   row, "tribe", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 		   /** TRANSLATORS: Button tooltip in the editor for using a player's starting position tool
 		    */
 		   player_image, _("Set this player’s starting position"));
 		plr_position->sigclicked.connect([this, p]() { set_starting_pos_clicked(p); });
 
 		// Add the elements to the row
-		row->add(plr_name, UI::Box::Resizing::kFillSpace);
+		row->add(plr_name, UI::Box::Resizing::kExpandBoth);
 		row->add_space(default_padding());
 
 		row->add(plr_tribe);

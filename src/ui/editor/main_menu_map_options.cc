@@ -488,11 +488,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	// ### End of tab content definitions ###
 
 	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add_space(4);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kFullSize);
 
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
-	tab_box_.add_space(4);
+	tab_box_.add_space(default_spacing());
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	tabs_.add("main_map_options", g_image_cache->get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));

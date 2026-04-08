@@ -335,7 +335,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 				++row_counters[tab_index];
 			} else if (current_column == kColumns) {
 				tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
-				tabs_[tab_index]->add_space(6);
+				tabs_[tab_index]->add_space(default_spacing());
 				row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui,
 				                  format("row_box_%d_%u", tab_index, id), 0, 0, UI::Box::Horizontal);
 				current_column = 0;

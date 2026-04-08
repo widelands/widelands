@@ -50,9 +50,9 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 			for (unsigned attack = 0; attack <= max_attack_; ++attack) {
 				for (unsigned evade = 0; evade <= max_evade_; ++evade) {
 					if ((attack != 0u) || (evade != 0u)) {
-						hbox1->add_space(8);
-						hbox2->add_space(8);
-						hbox3->add_space(8);
+						hbox1->add_space(default_spacing());
+						hbox2->add_space(default_spacing());
+						hbox3->add_space(default_spacing());
 					}
 					UI::Icon* icon1 =
 					   new UI::Icon(hbox1, UI::PanelStyle::kWui,
@@ -102,7 +102,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 				}
 			}
 			if ((health != 0u) || (defense != 0u)) {
-				add_space(8);
+				add_space(default_spacing());
 			}
 			add(hbox1, UI::Box::Resizing::kFullSize);
 			add(hbox2, UI::Box::Resizing::kFullSize);

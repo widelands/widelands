@@ -48,13 +48,13 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	UI::Box* wrapper_box = new UI::Box(this, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 	set_center_panel(wrapper_box);
 
-	wrapper_box->add_space(0);
+	wrapper_box->add_space(default_spacing());
 
 	UI::Box* main_box =
 	   new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 	wrapper_box->add(main_box, UI::Box::Resizing::kExpandBoth);
 
-	main_box->add_space(0);
+	main_box->add_space(default_spacing());
 
 	const auto& objectives = training_wheels_->all_objectives();
 	UI::Textarea* title_label =
@@ -62,7 +62,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	                    /** TRANSLATORS: Title above a list */
 	                    pgettext("teaching_progress", "Teaching objectives"));
 	main_box->add(title_label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	main_box->add_space(0);
+	main_box->add_space(default_spacing());
 
 	// Add a checkbox for each training wheel.
 	// Box should scroll if there are many.
@@ -86,7 +86,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		list_box->add(checkbox, UI::Box::Resizing::kFullSize);
 		checkboxes_.insert(
 		   std::make_pair(objective.first, TrainingWheelOptions::Entry(objective.second, checkbox)));
-		list_box->add_space(0);
+		list_box->add_space(default_spacing());
 	}
 
 	mark_unmark_state_ = !has_solved;
@@ -98,7 +98,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
 	main_box->add(horizontal_box, UI::Box::Resizing::kFullSize);
 
-	horizontal_box->add_space(0);
+	horizontal_box->add_space(default_spacing());
 	horizontal_box->add_inf_space();
 
 	// Close without any action
@@ -107,7 +107,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	horizontal_box->add(cancel_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	// Ensure some space between the buttons
-	horizontal_box->add_space(0);
+	horizontal_box->add_space(default_spacing());
 
 	cancel_button->sigclicked.connect(
 	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
@@ -117,7 +117,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	   horizontal_box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset"));
 	horizontal_box->add(reset_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
-	horizontal_box->add_space(0);
+	horizontal_box->add_space(default_spacing());
 
 	reset_button->sigclicked.connect([this]() {
 		for (const auto& checkboxinfo : checkboxes_) {
@@ -130,7 +130,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	   horizontal_box, "mark_unmark", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "");
 	horizontal_box->add(mark_unmark_button_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
-	horizontal_box->add_space(0);
+	horizontal_box->add_space(default_spacing());
 
 	// Toggle twice to make it expand to both labels
 	int desired_width = mark_unmark_button_->get_w();
@@ -152,13 +152,13 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 	horizontal_box->add(ok_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
-	horizontal_box->add_space(0);
+	horizontal_box->add_space(default_spacing());
 
 	ok_button->sigclicked.connect([this]() { clicked_ok(); });
 
-	main_box->add_space(0);
+	main_box->add_space(default_spacing());
 
-	wrapper_box->add_space(0);
+	wrapper_box->add_space(default_spacing());
 
 	// Make all buttons the same width
 	desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
