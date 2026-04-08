@@ -439,6 +439,9 @@ The ``styled_sizes`` table contains integer values to be used for paddings and U
 * **campaign_message_box_w_max**: The maximum width of campaign message boxes that the helper function can set
 * **campaign_fri02_poem_indent**: The indentation of the poem in the second scenario in the Frisian campaign
 * **map_plateau_message_pos_y**: The y position of the message boxes in the SP scenario The Green Plateau
-* **ui_default_padding**: default size for padding between UI elements
+* **ui_default_padding**: default size for padding around UI elements
 * **ui_default_indent** (*since version 1.3*): default horizontal gap for indenting UI elements
+* **ui_default_spacing** (*since version 1.4*): default size for spacing between UI elements
+* **ui_default_button_size** (*since version 1.4*): default size for normal-sized UI elements such as buttons
+* **ui_default_button_size_small** (*since version 1.4*): default size for smaller-sized UI elements
 
