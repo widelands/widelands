@@ -190,8 +190,8 @@ std::string TechInfo::get_richtext() const {
 		values += merge_list(entry.values, "<br>\n", entry.localize_values);
 
 		// The content is a plain paragraph that can flow around the label.
-		report +=
-		   format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values), UI::Panel::default_spacing());
+		report += format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values),
+		                 UI::Panel::default_spacing());
 
 		// End the <div> of the entry
 		report += "</div>\n";

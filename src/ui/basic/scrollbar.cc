@@ -511,7 +511,8 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 }
 
 void Scrollbar::layout() {
-	if ((2 * default_button_size_small() + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
+	if ((2 * default_button_size_small() + get_knob_size()) >
+	    static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
 		buttonsize_ = default_button_size_small() / 2;
 	} else {
 		buttonsize_ = default_button_size_small();

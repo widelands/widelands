@@ -129,7 +129,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 		dropdown_.set_enabled(false);
 	}
 
-	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, default_button_size(),
+	                   default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                   g_image_cache->get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
@@ -679,9 +680,30 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
      table_(&table_box_, "table", 0, 0, 460, 120, UI::PanelStyle::kWui),
      buttons_box_(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
      profile_name_(&main_box_, "profile_name", 0, 0, 240, UI::PanelStyle::kWui),
-     save_(&buttons_box_, "save", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiPrimary, _("Save")),
-     cancel_(&buttons_box_, "cancel", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiSecondary, _("Cancel")),
-     delete_(&buttons_box_, "delete", 0, 0, 80, default_button_size(), UI::ButtonStyle::kWuiSecondary, _("Delete")) {
+     save_(&buttons_box_,
+           "save",
+           0,
+           0,
+           80,
+           default_button_size(),
+           UI::ButtonStyle::kWuiPrimary,
+           _("Save")),
+     cancel_(&buttons_box_,
+             "cancel",
+             0,
+             0,
+             80,
+             default_button_size(),
+             UI::ButtonStyle::kWuiSecondary,
+             _("Cancel")),
+     delete_(&buttons_box_,
+             "delete",
+             0,
+             0,
+             80,
+             default_button_size(),
+             UI::ButtonStyle::kWuiSecondary,
+             _("Delete")) {
 	table_.add_column(200, _("Existing Profiles"));
 	update_table();
 

@@ -133,7 +133,8 @@ AttackPanel::AttackPanel(
      icon_w_(attack_type_ == AttackPanel::AttackType::kShip ?
                 (2 * Widelands::Ship::kShipHalfHealthBarWidth + default_spacing()) :
                 default_button_size()),
-     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? default_button_size() : default_button_size()),
+     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? default_button_size() :
+                                                              default_button_size()),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
@@ -249,7 +250,9 @@ UI::Button* add_button(ParentWidget* widget,
                        UI::ButtonStyle style,
                        const std::string& tooltip_text) {
 	UI::Button* button =
-	   new UI::Button(&parent, name, UI::Panel::default_padding(), UI::Panel::default_padding(), UI::Panel::default_button_size(), UI::Panel::default_button_size(), style, text_or_image, tooltip_text);
+	   new UI::Button(&parent, name, UI::Panel::default_padding(), UI::Panel::default_padding(),
+	                  UI::Panel::default_button_size(), UI::Panel::default_button_size(), style,
+	                  text_or_image, tooltip_text);
 	button->sigclicked.connect([widget, functor]() { (widget->*functor)(); });
 	parent.add(button);
 	return button;

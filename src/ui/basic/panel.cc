@@ -807,16 +807,20 @@ void Panel::template_directory_changed() {
 
 // static
 int Panel::default_button_size() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSize) * scale_factor_quarters_ / 4;
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSize) *
+	       scale_factor_quarters_ / 4;
 }
 int Panel::default_button_size_small() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall) * scale_factor_quarters_ / 4;
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall) *
+	       scale_factor_quarters_ / 4;
 }
 int Panel::default_padding() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultPadding) * scale_factor_quarters_ / 4;
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultPadding) * scale_factor_quarters_ /
+	       4;
 }
 int Panel::default_spacing() {
-	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultSpacing) * scale_factor_quarters_ / 4;
+	return g_style_manager->styled_size(UI::StyledSize::kUIDefaultSpacing) * scale_factor_quarters_ /
+	       4;
 }
 
 /**

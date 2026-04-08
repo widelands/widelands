@@ -51,7 +51,15 @@ public:
 	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
 	               recommended number of players */
 	            _("Too Many Players")),
-	     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 2 * default_padding()),
+	     box_(this,
+	          UI::PanelStyle::kWui,
+	          "main_box",
+	          0,
+	          0,
+	          UI::Box::Vertical,
+	          0,
+	          0,
+	          2 * default_padding()),
 	     warning_label_(
 	        &box_,
 	        "label_warning",
@@ -139,7 +147,12 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
                                    EditorSetStartingPosTool& tool,
                                    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
-     box_(this, UI::PanelStyle::kWui, "main_box", default_padding(), default_padding(), UI::Box::Vertical),
+     box_(this,
+          UI::PanelStyle::kWui,
+          "main_box",
+          default_padding(),
+          default_padding(),
+          UI::Box::Vertical),
      no_of_players_(&box_,
                     "dropdown_map_players",
                     0,
@@ -216,7 +229,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		assert(player_image);
 
 		UI::Button* plr_position = new UI::Button(
-		   row, "tribe", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		   row, "tribe", 0, 0, default_button_size(), default_button_size(),
+		   UI::ButtonStyle::kWuiSecondary,
 		   /** TRANSLATORS: Button tooltip in the editor for using a player's starting position tool
 		    */
 		   player_image, _("Set this player’s starting position"));

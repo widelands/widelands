@@ -283,7 +283,13 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      Widelands::Player* const plr,
                                      UI::UniqueWindow::Registry* const registry)
-   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 2 * default_button_size(), default_button_size(), _("Action")),
+   : UI::UniqueWindow(ib,
+                      UI::WindowStyle::kWui,
+                      "field_action",
+                      registry,
+                      2 * default_button_size(),
+                      default_button_size(),
+                      _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
@@ -343,7 +349,8 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(default_button_size() / 2 + default_button_size() * best_tab_, fastclick_ ? default_button_size() * 3 / 2 : default_button_size() / 2));
+	set_mouse_pos(Vector2i(default_button_size() / 2 + default_button_size() * best_tab_,
+	                       fastclick_ ? default_button_size() * 3 / 2 : default_button_size() / 2));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -770,8 +777,9 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const std::string& tooltip_text,
                                           bool repeating,
                                           bool enabled) {
-	UI::Button& button = *new UI::Button(box, name, 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
-	                                     g_image_cache->get(picname), tooltip_text);
+	UI::Button& button =
+	   *new UI::Button(box, name, 0, 0, default_button_size(), default_button_size(),
+	                   UI::ButtonStyle::kWuiPrimary, g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
 	button.set_enabled(enabled);
 	button.set_repeating(repeating);

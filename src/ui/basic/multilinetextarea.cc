@@ -49,8 +49,14 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
 
      align_(align),
-     scrollbar_(
-        this, "scrollbar", get_w() - default_button_size_small(), 0, default_button_size_small(), h, style, false) {
+     scrollbar_(this,
+                "scrollbar",
+                get_w() - default_button_size_small(),
+                0,
+                default_button_size_small(),
+                h,
+                style,
+                false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });

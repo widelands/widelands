@@ -224,8 +224,9 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 	auto markup_button = [this](const std::string& name, const std::string& open,
 	                            const std::string& close, const std::string& title,
 	                            const std::string& tt) {
-		UI::Button* b = new UI::Button(&markup_box_, name, 0, 0, default_button_size(), default_button_size(),
-		                               UI::ButtonStyle::kFsMenuMenu, title, tt);
+		UI::Button* b =
+		   new UI::Button(&markup_box_, name, 0, 0, default_button_size(), default_button_size(),
+		                  UI::ButtonStyle::kFsMenuMenu, title, tt);
 		b->sigclicked.connect([this, open, close]() { apply_format(open, close); });
 		return b;
 	};
@@ -484,7 +485,14 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
      action_(a),
      main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
-     ok_(&buttons_box_, "ok", 0, 0, default_button_size(), 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     ok_(&buttons_box_,
+         "ok",
+         0,
+         0,
+         default_button_size(),
+         0,
+         UI::ButtonStyle::kFsMenuPrimary,
+         _("OK")),
      cancel_(&buttons_box_,
              "cancel",
              0,
@@ -860,8 +868,10 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 void RemoteInteractionWindow::on_resolution_changed_note(const GraphicResolutionChanged& note) {
 	UI::Window::on_resolution_changed_note(note);
 
-	set_size(parent_.get_inner_w() - 2 * default_button_size(), parent_.get_inner_h() - 2 * default_button_size());
-	set_pos(Vector2i(parent_.get_x() + default_button_size(), parent_.get_y() + default_button_size()));
+	set_size(parent_.get_inner_w() - 2 * default_button_size(),
+	         parent_.get_inner_h() - 2 * default_button_size());
+	set_pos(
+	   Vector2i(parent_.get_x() + default_button_size(), parent_.get_y() + default_button_size()));
 	main_box_.set_size(get_inner_w(), get_inner_h());
 }
 

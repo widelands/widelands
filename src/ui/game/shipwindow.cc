@@ -534,8 +534,9 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     const std::string& picname,
                                     bool flat_when_disabled,
                                     const std::function<void()>& callback) {
-	UI::Button* btn = new UI::Button(parent, name, 0, 0, default_button_size(), default_button_size(),
-	                                 UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
+	UI::Button* btn =
+	   new UI::Button(parent, name, 0, 0, default_button_size(), default_button_size(),
+	                  UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	if (flat_when_disabled) {
 		btn->set_disable_style(UI::ButtonDisableStyle::kMonochrome | UI::ButtonDisableStyle::kFlat);
 	}

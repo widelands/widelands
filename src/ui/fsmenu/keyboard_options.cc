@@ -45,7 +45,15 @@ struct ShortcutChooser : public UI::Window {
 	                to_string(c)),
 	     code_(c),
 	     key(get_shortcut(code_)),
-	     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding()) {
+	     box_(this,
+	          UI::PanelStyle::kFsMenu,
+	          "main_box",
+	          0,
+	          0,
+	          UI::Box::Vertical,
+	          0,
+	          0,
+	          default_padding()) {
 		UI::Button* const reset = new UI::Button(
 		   &box_, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
 		reset->sigclicked.connect([this, &parent]() {
@@ -206,8 +214,15 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
                 0,
                 0,
                 _("Edit Keyboard And Mouse Actions")),
-     buttons_box_(
-        this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding()),
+     buttons_box_(this,
+                  UI::PanelStyle::kFsMenu,
+                  "buttons_box",
+                  0,
+                  0,
+                  UI::Box::Horizontal,
+                  0,
+                  0,
+                  default_padding()),
      tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
      mousewheel_options_(&tabs_),
      reset_(&buttons_box_,
@@ -277,8 +292,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
 		assert(shortcut_start <= shortcut_end);
-		UI::Box* b = new UI::Box(
-		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
+		UI::Box* b = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0,
+		                         UI::Box::Vertical, 0, 0, default_padding());
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
 			if (is_real(k)) {

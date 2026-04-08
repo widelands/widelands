@@ -42,8 +42,8 @@ public:
 	                0,
 	                0,
 	                _("Crash Report Details")) {
-		UI::Box* box = new UI::Box(
-		   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
+		UI::Box* box = new UI::Box(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical,
+		                           0, 0, default_padding());
 
 		std::string detailed_text_rt = richtext_escape(report);
 		newlines_to_richtext(detailed_text_rt);
@@ -53,8 +53,8 @@ public:
 		UI::MultilineTextarea* details = new UI::MultilineTextarea(
 		   box, "details", 0, 0, 700, 400, UI::PanelStyle::kFsMenu, detailed_text_rt);
 
-		UI::Box* buttons_box = new UI::Box(
-		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
+		UI::Box* buttons_box = new UI::Box(box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0,
+		                                   UI::Box::Horizontal, 0, 0, default_padding());
 
 		UI::Button* b_open_link = new UI::Button(
 		   buttons_box, "open_link", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
@@ -141,8 +141,8 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	   new UI::Button(box, "details", 0, 0, 2 * kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
 	                  _("Show details…"), _("View the detailed crash report"));
 
-	UI::Box* buttons_box = new UI::Box(
-	   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, default_padding());
+	UI::Box* buttons_box = new UI::Box(box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0,
+	                                   UI::Box::Horizontal, 0, 0, default_padding());
 	UI::Button* b_open_link = new UI::Button(
 	   buttons_box, "open_link", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
 #if CAN_OPEN_HYPERLINK

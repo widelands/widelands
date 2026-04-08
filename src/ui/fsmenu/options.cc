@@ -118,8 +118,15 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // Tabs
      tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
 
-     box_interface_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_interface", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
+     box_interface_(&tabs_,
+                    UI::PanelStyle::kFsMenu,
+                    "box_interface",
+                    0,
+                    0,
+                    UI::Box::Vertical,
+                    0,
+                    0,
+                    default_padding()),
      box_interface_hbox_(&box_interface_,
                          UI::PanelStyle::kFsMenu,
                          "hbox_interface",
@@ -138,14 +145,42 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          0,
                          0,
                          default_padding()),
-     box_sound_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_sound", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
-     box_saving_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_saving", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
-     box_newgame_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_newgame", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
-     box_ingame_(
-        &tabs_, UI::PanelStyle::kFsMenu, "box_ingame", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
+     box_sound_(&tabs_,
+                UI::PanelStyle::kFsMenu,
+                "box_sound",
+                0,
+                0,
+                UI::Box::Vertical,
+                0,
+                0,
+                default_padding()),
+     box_saving_(&tabs_,
+                 UI::PanelStyle::kFsMenu,
+                 "box_saving",
+                 0,
+                 0,
+                 UI::Box::Vertical,
+                 0,
+                 0,
+                 default_padding()),
+     box_newgame_(&tabs_,
+                  UI::PanelStyle::kFsMenu,
+                  "box_newgame",
+                  0,
+                  0,
+                  UI::Box::Vertical,
+                  0,
+                  0,
+                  default_padding()),
+     box_ingame_(&tabs_,
+                 UI::PanelStyle::kFsMenu,
+                 "box_ingame",
+                 0,
+                 0,
+                 UI::Box::Vertical,
+                 0,
+                 0,
+                 default_padding()),
 
      // Interface options
      language_dropdown_(&box_interface_vbox_,
@@ -236,19 +271,17 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
-	ui_scaling_slider_(
-		&box_interface_,
-		"ui_scaling_slider",
-		0,
-		0,
-		default_button_size(),
-		default_button_size(),
-		generate_ui_scaling_slider_labels(),
-		opt.ui_scaling_factor_quarters - 1,
-		UI::SliderStyle::kFsMenu,
-		_("User interface scaling factor"),
-		default_button_size_small()
-	),
+     ui_scaling_slider_(&box_interface_,
+                        "ui_scaling_slider",
+                        0,
+                        0,
+                        default_button_size(),
+                        default_button_size(),
+                        generate_ui_scaling_slider_labels(),
+                        opt.ui_scaling_factor_quarters - 1,
+                        UI::SliderStyle::kFsMenu,
+                        _("User interface scaling factor"),
+                        default_button_size_small()),
 
      configure_keyboard_(&box_interface_,
                          "configure_keyboard",
@@ -481,10 +514,11 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&sb_dis_border_);
 	box_interface_.add_space(default_padding());
 
-	box_interface_.add(new UI::Textarea(&box_interface_, UI::PanelStyle::kFsMenu, "label_ui_scaling",
-	                              UI::FontStyle::kFsMenuLabel,
-	                              _("User interface scaling factor:"), UI::mirror_alignment(UI::Align::kLeft, rtl)),
-	             UI::Box::Resizing::kFullSize);
+	box_interface_.add(
+	   new UI::Textarea(&box_interface_, UI::PanelStyle::kFsMenu, "label_ui_scaling",
+	                    UI::FontStyle::kFsMenuLabel, _("User interface scaling factor:"),
+	                    UI::mirror_alignment(UI::Align::kLeft, rtl)),
+	   UI::Box::Resizing::kFullSize);
 	box_interface_.add(&ui_scaling_slider_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add_space(default_padding());

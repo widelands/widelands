@@ -618,20 +618,20 @@ void RemoteAddOnRow::layout() {
 	icon_.set_pos(Vector2i(0, 0));
 	version_.set_size(
 	   3 * default_button_size() + 2 * default_spacing(), default_button_size() - default_spacing());
-	version_.set_pos(Vector2i(
-	   get_w() - 3 * default_button_size() - 2 * default_spacing(), default_button_size() + default_spacing()));
+	version_.set_pos(Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(),
+	                          default_button_size() + default_spacing()));
 	uninstall_.set_pos(Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(), 0));
 	upgrade_.set_pos(Vector2i(get_w() - 2 * default_button_size() - default_spacing(), 0));
 	install_.set_pos(Vector2i(get_w() - default_button_size(), 0));
 	interact_.set_size(2 * default_button_size() + default_spacing(), default_button_size());
 	interact_.set_pos(
 	   Vector2i(get_w() - 2 * default_button_size() - default_spacing(), 2 * default_button_size()));
-	category_.set_pos(
-	   Vector2i(get_w() - 3 * default_button_size() - 2 * default_spacing(), 2 * default_button_size()));
+	category_.set_pos(Vector2i(
+	   get_w() - 3 * default_button_size() - 2 * default_spacing(), 2 * default_button_size()));
 	verified_.set_pos(Vector2i(0, 2 * default_button_size()));
 	quality_.set_pos(Vector2i(default_button_size(), 2 * default_button_size()));
-	txt_.set_size(
-	   get_w() - icon_size - 3 * (default_button_size() + default_spacing()), 3 * default_button_size());
+	txt_.set_size(get_w() - icon_size - 3 * (default_button_size() + default_spacing()),
+	              3 * default_button_size());
 	txt_.set_pos(Vector2i(icon_size, 0));
 	bottom_row_left_.set_size(
 	   get_w() / 2 - default_spacing(), default_button_size() - 2 * default_spacing());
@@ -784,11 +784,14 @@ void MapRow::layout() {
 	install_.set_size(default_button_size(), default_button_size());
 	uninstall_.set_size(default_button_size(), default_button_size());
 	interact_.set_size(default_button_size(), default_button_size());
-	bottom_row_.set_size(get_w() - 3 * default_button_size() - 3 * default_spacing(), bottom_row_.get_h());
-	txt_.set_size(get_w() - 6 * default_button_size() - default_spacing(), 6 * default_button_size());
+	bottom_row_.set_size(
+	   get_w() - 3 * default_button_size() - 3 * default_spacing(), bottom_row_.get_h());
+	txt_.set_size(
+	   get_w() - 6 * default_button_size() - default_spacing(), 6 * default_button_size());
 
 	bottom_row_.set_pos(Vector2i(0, 7 * default_button_size() - bottom_row_.get_h()));
-	interact_.set_pos(Vector2i(get_w() - default_button_size(), 6 * default_button_size() + default_spacing()));
+	interact_.set_pos(
+	   Vector2i(get_w() - default_button_size(), 6 * default_button_size() + default_spacing()));
 	uninstall_.set_pos(
 	   Vector2i(interact_.get_x() - default_button_size() - default_spacing(), interact_.get_y()));
 	install_.set_pos(

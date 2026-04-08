@@ -31,9 +31,23 @@ Pagination::Pagination(Panel* parent,
                        const int32_t nr_adjacent_buttons_per_side)
    : Box(parent, style, name, 0, 0, Box::Horizontal),
      button_style_(style == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu),
-     button_cur_(this, "current", 0, 0, default_button_size(), default_button_size(), button_style_, std::string()),
-     button_first_(
-        this, "first", 0, 0, default_button_size(), default_button_size(), button_style_, "1", _("Go to first page")),
+     button_cur_(this,
+                 "current",
+                 0,
+                 0,
+                 default_button_size(),
+                 default_button_size(),
+                 button_style_,
+                 std::string()),
+     button_first_(this,
+                   "first",
+                   0,
+                   0,
+                   default_button_size(),
+                   default_button_size(),
+                   button_style_,
+                   "1",
+                   _("Go to first page")),
      button_last_(this,
                   "last",
                   0,
@@ -62,10 +76,12 @@ Pagination::Pagination(Panel* parent,
 	button_cur_.set_enabled(false);
 
 	for (int i = 0; i < nr_adjacent_buttons_per_side; ++i) {
-		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0, default_button_size(),
-		                                   default_button_size(), button_style_, std::string()));
-		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0, default_button_size(),
-		                                    default_button_size(), button_style_, std::string()));
+		buttons_left_.push_back(new Button(this, format("prev_%d", i + 1), 0, 0,
+		                                   default_button_size(), default_button_size(),
+		                                   button_style_, std::string()));
+		buttons_right_.push_back(new Button(this, format("next_%d", i + 1), 0, 0,
+		                                    default_button_size(), default_button_size(),
+		                                    button_style_, std::string()));
 		buttons_left_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |
 		                                       ButtonDisableStyle::kMonochrome);
 		buttons_right_.at(i)->set_disable_style(ButtonDisableStyle::kFlat |

@@ -157,10 +157,11 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 		UI::Box& builder_caps =
 		   *new UI::Box(&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
 		builder_caps.add_inf_space();
-		UI::Button& evict_button = *new UI::Button(
-		   &builder_caps, "evict", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-		   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
-		   _("Send the builder away"));
+		UI::Button& evict_button =
+		   *new UI::Button(&builder_caps, "evict", 0, 0, default_button_size(), default_button_size(),
+		                   UI::ButtonStyle::kWuiMenu,
+		                   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+		                   _("Send the builder away"));
 		evict_button.sigclicked.connect([this]() { evict_builder(); });
 		builder_caps.add(&evict_button);
 		box.add(&builder_caps, UI::Box::Resizing::kFullSize);
@@ -171,8 +172,8 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 void ConstructionSiteWindow::add_progress_bar(UI::Box& box) {
 	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
-	                                UI::ProgressBar::DefaultWidth(), UI::ProgressBar::DefaultHeight(),
-	                                UI::ProgressBar::Horizontal);
+	                                UI::ProgressBar::DefaultWidth(),
+	                                UI::ProgressBar::DefaultHeight(), UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 }
@@ -270,21 +271,23 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			                UI::Box::Horizontal);
 			mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			mainbox.add_space(4 * default_spacing());
-			UI::Button& sp_normal = *new UI::Button(
-			   &buttonsbox, "stock_policy_normal", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get(pic_stock_policy_button_normal), _("Normal policy"));
-			UI::Button& sp_prefer = *new UI::Button(&buttonsbox, "stock_policy_prefer", 0, 0, default_button_size(), default_button_size(),
-			                                        UI::ButtonStyle::kWuiMenu,
-			                                        g_image_cache->get(pic_stock_policy_button_prefer),
-			                                        _("Preferably store selected wares here"));
-			UI::Button& sp_dont = *new UI::Button(
-			   &buttonsbox, "stock_policy_dontstock", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get(pic_stock_policy_button_dontstock),
-			   _("Do not store selected wares here"));
-			UI::Button& sp_remove = *new UI::Button(&buttonsbox, "stock_policy_remove", 0, 0, default_button_size(), default_button_size(),
-			                                        UI::ButtonStyle::kWuiMenu,
-			                                        g_image_cache->get(pic_stock_policy_button_remove),
-			                                        _("Remove selected wares from here"));
+			UI::Button& sp_normal =
+			   *new UI::Button(&buttonsbox, "stock_policy_normal", 0, 0, default_button_size(),
+			                   default_button_size(), UI::ButtonStyle::kWuiMenu,
+			                   g_image_cache->get(pic_stock_policy_button_normal), _("Normal policy"));
+			UI::Button& sp_prefer = *new UI::Button(
+			   &buttonsbox, "stock_policy_prefer", 0, 0, default_button_size(), default_button_size(),
+			   UI::ButtonStyle::kWuiMenu, g_image_cache->get(pic_stock_policy_button_prefer),
+			   _("Preferably store selected wares here"));
+			UI::Button& sp_dont =
+			   *new UI::Button(&buttonsbox, "stock_policy_dontstock", 0, 0, default_button_size(),
+			                   default_button_size(), UI::ButtonStyle::kWuiMenu,
+			                   g_image_cache->get(pic_stock_policy_button_dontstock),
+			                   _("Do not store selected wares here"));
+			UI::Button& sp_remove = *new UI::Button(
+			   &buttonsbox, "stock_policy_remove", 0, 0, default_button_size(), default_button_size(),
+			   UI::ButtonStyle::kWuiMenu, g_image_cache->get(pic_stock_policy_button_remove),
+			   _("Remove selected wares from here"));
 			sp_remove.sigclicked.connect(
 			   [this, ww]() { change_policy(ww, Widelands::StockPolicy::kRemove); });
 			sp_dont.sigclicked.connect(
@@ -370,12 +373,12 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes",
-		   Vector2i(default_button_size() * 1, 0), g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
-		   _("Prefer heroes"));
+		   Vector2i(default_button_size() * 1, 0),
+		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_any",
-		   Vector2i(default_button_size() * 0, 0), g_image_cache->get("images/wui/buildings/prefer_any.png"),
-		   _("No preference"));
+		   Vector2i(default_button_size() * 0, 0),
+		   g_image_cache->get("images/wui/buildings/prefer_any.png"), _("No preference"));
 		cs_prefer_heroes_rookies_->set_state(
 		   static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference),
 		   false);

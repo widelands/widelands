@@ -171,16 +171,17 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
                0,
                _("No map selected"),
                UI::Align::kLeft),
-     map_description_(&content_box_,
-                      "description",
-                      0,
-                      0,
-                      default_button_size_small(),  // min width must be set to avoid assertion failure...
-                      0,
-                      UI::PanelStyle::kFsMenu,
-                      "",
-                      UI::Align::kLeft,
-                      UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     map_description_(
+        &content_box_,
+        "description",
+        0,
+        0,
+        default_button_size_small(),  // min width must be set to avoid assertion failure...
+        0,
+        UI::PanelStyle::kFsMenu,
+        "",
+        UI::Align::kLeft,
+        UI::MultilineTextarea::ScrollMode::kNoScrolling),
      suggested_teams_box_(
         &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, padding, 0, 0, 0) {
 	content_box_.set_scrolling(true);

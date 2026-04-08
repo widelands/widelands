@@ -333,8 +333,9 @@ private:
 
 				if (can_act) {
 					UI::Button* cancel = new UI::Button(
-					   box, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-					   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
+					   box, "cancel", 0, 0, default_button_size(), default_button_size(),
+					   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menu_abort.png"),
+					   _("Retract this trade offer"));
 
 					cancel->sigclicked.connect([this, trade_id]() {
 						iplayer_->game().send_player_trade_action(
@@ -461,12 +462,14 @@ private:
 				            UI::MultilineTextarea::ScrollMode::kNoScrolling),
 				         UI::Box::Resizing::kExpandBoth);
 
-				UI::Button* yes = new UI::Button(
-				   box, "yes", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-				   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
-				UI::Button* no = new UI::Button(
-				   box, "no", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-				   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
+				UI::Button* yes = new UI::Button(box, "yes", 0, 0, default_button_size(),
+				                                 default_button_size(), UI::ButtonStyle::kWuiSecondary,
+				                                 g_image_cache->get("images/wui/menu_okay.png"),
+				                                 _("Accept this trade offer"));
+				UI::Button* no = new UI::Button(box, "no", 0, 0, default_button_size(),
+				                                default_button_size(), UI::ButtonStyle::kWuiSecondary,
+				                                g_image_cache->get("images/wui/menu_abort.png"),
+				                                _("Reject this trade offer"));
 
 				yes->sigclicked.connect([this, trade_id]() {
 					iplayer_.game().send_player_trade_action(iplayer_.player_number(), trade_id,
@@ -554,13 +557,15 @@ public:
 			action_box_ =
 			   new UI::Box(this, UI::PanelStyle::kWui, "actions", 0, 0, UI::Box::Horizontal);
 
-			button_pause_ = new UI::Button(action_box_, "toggle_pause", 0, 0, default_button_size(), default_button_size(),
-			                               UI::ButtonStyle::kWuiSecondary, std::string());
+			button_pause_ =
+			   new UI::Button(action_box_, "toggle_pause", 0, 0, default_button_size(),
+			                  default_button_size(), UI::ButtonStyle::kWuiSecondary, std::string());
 			button_pause_->sigclicked.connect([this]() { toggle_pause_action(); });
 
 			const bool can_extend = trade_instance.num_batches != Widelands::kInfiniteTrade;
 			button_extend_ = new UI::Button(
-			   action_box_, "extend", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			   action_box_, "extend", 0, 0, default_button_size(), default_button_size(),
+			   UI::ButtonStyle::kWuiSecondary,
 			   g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
 			   can_extend ?
 			      format("<p>%s%s%s</p>",
@@ -580,9 +585,10 @@ public:
 				button_extend_->set_enabled(false);
 			}
 
-			UI::Button* cancel = new UI::Button(
-			   action_box_, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-			   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade"));
+			UI::Button* cancel =
+			   new UI::Button(action_box_, "cancel", 0, 0, default_button_size(),
+			                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			                  g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade"));
 			cancel->sigclicked.connect([this]() {
 				upcast(InteractivePlayer, ipl, &ibase_);
 				assert(ipl != nullptr);
@@ -708,14 +714,14 @@ private:
 				   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 				if (can_act_) {
-					UI::Button* reject = new UI::Button(box, "reject", 0, 0, default_button_size(), default_button_size(),
-					                                    UI::ButtonStyle::kWuiSecondary,
-					                                    g_image_cache->get("images/wui/menu_abort.png"),
-					                                    _("Reject this trade extension proposal"));
-					UI::Button* accept = new UI::Button(box, "accept", 0, 0, default_button_size(), default_button_size(),
-					                                    UI::ButtonStyle::kWuiSecondary,
-					                                    g_image_cache->get("images/wui/menu_okay.png"),
-					                                    _("Accept this trade extension proposal"));
+					UI::Button* reject = new UI::Button(
+					   box, "reject", 0, 0, default_button_size(), default_button_size(),
+					   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menu_abort.png"),
+					   _("Reject this trade extension proposal"));
+					UI::Button* accept = new UI::Button(
+					   box, "accept", 0, 0, default_button_size(), default_button_size(),
+					   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menu_okay.png"),
+					   _("Accept this trade extension proposal"));
 
 					reject->sigclicked.connect([this, te]() {
 						upcast(InteractivePlayer, ipl, &ibase_);
@@ -761,10 +767,10 @@ private:
 						description->set_text(_("You proposed to extend this trade indefinitely."));
 					}
 
-					UI::Button* retract = new UI::Button(box, "retract", 0, 0, default_button_size(), default_button_size(),
-					                                     UI::ButtonStyle::kWuiSecondary,
-					                                     g_image_cache->get("images/wui/menu_abort.png"),
-					                                     _("Retract this trade extension proposal"));
+					UI::Button* retract = new UI::Button(
+					   box, "retract", 0, 0, default_button_size(), default_button_size(),
+					   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menu_abort.png"),
+					   _("Retract this trade extension proposal"));
 
 					retract->sigclicked.connect([this, te]() {
 						upcast(InteractivePlayer, ipl, &ibase_);

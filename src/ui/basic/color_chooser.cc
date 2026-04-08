@@ -77,7 +77,8 @@ struct ColorChooserImpl : public Panel {
 			if (x >= 0 && x < kMainDimension) {
 				return left_color_at(x, y);
 			}
-			if (x >= kMainDimension + default_spacing() && x < kMainDimension + default_spacing() + kSidebarWidth) {
+			if (x >= kMainDimension + default_spacing() &&
+			    x < kMainDimension + default_spacing() + kSidebarWidth) {
 				return right_color_at(y);
 			}
 		}
@@ -221,7 +222,8 @@ private:
 			NEVER_HERE();
 		}
 		do_draw_cursor(dst, x - selector_.width() / 2, y - selector_.height() / 2);
-		do_draw_cursor(dst, kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
+		do_draw_cursor(dst,
+		               kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
 		               a - selector_.height() / 2);
 	}
 	void draw_mouse_cursors(RenderTarget& dst) {
@@ -232,8 +234,9 @@ private:
 				   dst, mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2);
 			} else if (mousepos.x >= kMainDimension + default_spacing() &&
 			           mousepos.x < kMainDimension + default_spacing() + kSidebarWidth) {
-				do_draw_cursor(dst, kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
-				               mousepos.y - selector_.height() / 2);
+				do_draw_cursor(
+				   dst, kMainDimension + default_spacing() + (kSidebarWidth - selector_.width()) / 2,
+				   mousepos.y - selector_.height() / 2);
 			}
 		}
 	}
@@ -474,15 +477,16 @@ void ColorChooser::update_favorites() {
 		Button* button;
 		if (favorite_colors[index].has_value()) {
 			button = new Button(
-			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, default_button_size(),
-			   default_button_size(),
+			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0,
+			   default_button_size(), default_button_size(),
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 			   playercolor_image(*favorite_colors[index], "images/ui_basic/square.png"));
 			button->sigclicked.connect([this, index]() { set_color(*favorite_colors[index]); });
 
 			Button* del = new Button(
-			   button, "delete_favorite_" + std::to_string(index), default_button_size() - default_button_size_small(), 0,
-			   default_button_size_small(), default_button_size_small(),
+			   button, "delete_favorite_" + std::to_string(index),
+			   default_button_size() - default_button_size_small(), 0, default_button_size_small(),
+			   default_button_size_small(),
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 			   _("–"), _("Remove from favorites"));
 			del->sigclicked.connect([this, index]() { set_favorite(index, true); });

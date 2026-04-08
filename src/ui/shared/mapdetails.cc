@@ -107,8 +107,9 @@ void MapDetails::layout() {
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
 		// Fit minimap to width
-		const int width = std::min<int>(main_box_.get_w() - default_button_size_small() - 2 * padding_,
-		                                minimap_cache_.at(last_map_)->width());
+		const int width =
+		   std::min<int>(main_box_.get_w() - default_button_size_small() - 2 * padding_,
+		                 minimap_cache_.at(last_map_)->width());
 		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
 		const int height = scale * minimap_cache_.at(last_map_)->height();
 

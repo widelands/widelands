@@ -99,13 +99,14 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 	const int width = get_w() - 2 * default_padding();
 	const int height = get_h() - 2 * default_padding();
 	RGBAColor black(0, 0, 0, 255);
-	dst.brighten_rect(
-	   Recti(default_padding(), default_padding(), width - 1, height - 1), -BUTTON_EDGE_BRIGHT_FACTOR / 2);
+	dst.brighten_rect(Recti(default_padding(), default_padding(), width - 1, height - 1),
+	                  -BUTTON_EDGE_BRIGHT_FACTOR / 2);
 	//  bottom edge
-	dst.brighten_rect(Recti(default_padding(), height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
-	//  right edge
 	dst.brighten_rect(
-	   Recti(default_padding() + width - 2, default_padding(), 2, height - 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	   Recti(default_padding(), height + 2, width, 2), 1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
+	//  right edge
+	dst.brighten_rect(Recti(default_padding() + width - 2, default_padding(), 2, height - 2),
+	                  1.5 * BUTTON_EDGE_BRIGHT_FACTOR);
 	//  top edge
 	dst.fill_rect(Recti(default_padding(), default_padding(), width - 1, 1), black);
 	dst.fill_rect(Recti(default_padding(), default_padding() + 1, width - 2, 1), black);

@@ -552,7 +552,8 @@ StyleManager::StyleManager() {
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	                "map_plateau_message_pos_y");
 	add_styled_size(UI::StyledSize::kUIDefaultButtonSize, *element_table, "ui_default_button_size");
-	add_styled_size(UI::StyledSize::kUIDefaultButtonSizeSmall, *element_table, "ui_default_button_size_small");
+	add_styled_size(
+	   UI::StyledSize::kUIDefaultButtonSizeSmall, *element_table, "ui_default_button_size_small");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
 	add_styled_size(UI::StyledSize::kUIDefaultSpacing, *element_table, "ui_default_spacing");
 	add_styled_size(UI::StyledSize::kUIDefaultIndent, *element_table, "ui_default_indent");

@@ -101,7 +101,8 @@ void MessagePreview::draw(RenderTarget& r) {
 	{  // lifetime indicator
 		const float w = get_w();
 		const float fraction = w * (SDL_GetTicks() - creation_time_) / kMessagePreviewMaxLifetime;
-		r.brighten_rect(Recti((w - fraction) / 2, get_h() - default_spacing(), fraction, default_spacing()), -64);
+		r.brighten_rect(
+		   Recti((w - fraction) / 2, get_h() - default_spacing(), fraction, default_spacing()), -64);
 	}
 }
 bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
@@ -546,7 +547,8 @@ void InfoPanel::layout() {
 	                               on_top_ ? 0 : toolbar_->get_h() - toolbar_->box.get_h()));
 
 	const int16_t offset_y = (UI::main_toolbar_button_size() - 20 /* font size estimate */) / 4 +
-	                         default_spacing() + (on_top_ ? 0 : get_h() - UI::main_toolbar_button_size());
+	                         default_spacing() +
+	                         (on_top_ ? 0 : get_h() - UI::main_toolbar_button_size());
 
 	text_coords_.set_size(w / 3, UI::main_toolbar_button_size());
 	text_coords_.set_pos(Vector2i(w - text_coords_.get_w() - default_spacing(), offset_y));

@@ -689,8 +689,15 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
      clientbox_(this, UI::PanelStyle::kFsMenu, "client_box", 0, 0, UI::Box::Vertical),
      scrollable_clientbox_(
         &clientbox_, UI::PanelStyle::kFsMenu, "scrollable_clientbox", 0, 0, UI::Box::Vertical),
-     playerbox_(
-        this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, default_padding()),
+     playerbox_(this,
+                UI::PanelStyle::kFsMenu,
+                "player_box",
+                0,
+                0,
+                UI::Box::Vertical,
+                0,
+                0,
+                default_padding()),
      scrollable_playerbox_(
         &playerbox_, UI::PanelStyle::kFsMenu, "scrollable_playerbox", 0, 0, UI::Box::Vertical),
      clients_(&clientbox_,

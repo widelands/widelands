@@ -71,8 +71,8 @@ void BaseMenu::return_to_main_menu() {
 void BaseMenu::layout() {
 	UI::Panel::layout();
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
-	vertical_padding_box_.set_max_size(
-	   horizontal_padding_box_.get_w() - 2 * 10 * default_padding(), horizontal_padding_box_.get_h());
+	vertical_padding_box_.set_max_size(horizontal_padding_box_.get_w() - 2 * 10 * default_padding(),
+	                                   horizontal_padding_box_.get_h());
 	standard_height_ = get_inner_h() * 9 / 200;
 }
 
@@ -290,10 +290,10 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 
 	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
 	                                    title, format(_("Back to ‘%s’"), title));
-	UI::Panel* spacer1 = new UI::Panel(
-	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0, default_padding(), default_padding());
-	UI::Panel* spacer2 = new UI::Panel(
-	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0, default_padding(), default_padding());
+	UI::Panel* spacer1 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0,
+	                                   default_padding(), default_padding());
+	UI::Panel* spacer2 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0,
+	                                   default_padding(), default_padding());
 	UI::Panel* icon;
 	if (visible_menus_.empty()) {
 		UI::Button* b = new UI::Button(&box_, title, 0, 0, 30, 30, UI::ButtonStyle::kFsMenuMenu,

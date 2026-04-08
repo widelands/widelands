@@ -100,8 +100,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	                   UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_official_tags", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   hbox, "dropdown_official_tags", 0, 0, 200, 50, default_button_size_small(), "",
+	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->set_tooltip(_("Filter by official status"));
 	official_tags_dropdown_->add(
@@ -114,8 +114,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	hbox->add_space(checkbox_space_);
 
 	team_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_team_tags", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   hbox, "dropdown_team_tags", 0, 0, 200, 50, default_button_size_small(), "",
+	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
 	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
 	team_tags_dropdown_->add(
@@ -133,8 +133,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	hbox->add_space(checkbox_space_);
 
 	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(
-	   hbox, "dropdown_balancing", 0, 0, 200, 50, default_button_size_small(), "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   hbox, "dropdown_balancing", 0, 0, 200, 50, default_button_size_small(), "",
+	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
 	balancing_tags_dropdown_->set_tooltip(_("Filter by balancing status"));
 	rebuild_balancing_dropdown();

@@ -75,11 +75,11 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
 }
 
 UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
-	UI::Button* b =
-	   new UI::Button(this, std::to_string(static_cast<unsigned>(p)), 0, 0, default_button_size_small(),
-	                  default_button_size_small(), UI::ButtonStyle::kWuiSecondary,
-	                  playercolor_image(p, "images/players/player_position_menu.png"),
-	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
+	UI::Button* b = new UI::Button(
+	   this, std::to_string(static_cast<unsigned>(p)), 0, 0, default_button_size_small(),
+	   default_button_size_small(), UI::ButtonStyle::kWuiSecondary,
+	   playercolor_image(p, "images/players/player_position_menu.png"),
+	   map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
 	b->sigclicked.connect([this, b]() {
 		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
@@ -102,9 +102,9 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 
 UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size_t index) {
 	UI::Dropdown<Widelands::PlayerNumber>* dd = new UI::Dropdown<Widelands::PlayerNumber>(
-	   this, std::to_string(index), 0, index * default_button_size_small(), default_button_size_small(), 8,
-	   0, _("+"), UI::DropdownType::kPictorialMenu, UI::PanelStyle::kWui,
-	   UI::ButtonStyle::kWuiSecondary);
+	   this, std::to_string(index), 0, index * default_button_size_small(),
+	   default_button_size_small(), 8, 0, _("+"), UI::DropdownType::kPictorialMenu,
+	   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 	for (size_t i = 0; i < map_.get_nrplayers(); ++i) {
 		dd->add(map_.get_scenario_player_name(i + 1), i,
 		        playercolor_image(i, "images/players/player_position_menu.png"));
@@ -163,8 +163,8 @@ void SuggestedTeamsEntry::layout() {
 	for (auto& bb : buttons_) {
 		size_t index2 = 0;
 		for (auto& b : bb) {
-			b->set_pos(
-			   Vector2i(default_button_size_small() * (++index2), default_button_size_small() * index));
+			b->set_pos(Vector2i(
+			   default_button_size_small() * (++index2), default_button_size_small() * index));
 		}
 		++index;
 	}
@@ -458,8 +458,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	inner_teams_box_.set_force_scrolling(true);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
-		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
-		   this, &inner_teams_box_, parent.egbase().map(), max_w_ - default_button_size_small(), team);
+		SuggestedTeamsEntry* ste =
+		   new SuggestedTeamsEntry(this, &inner_teams_box_, parent.egbase().map(),
+		                           max_w_ - default_button_size_small(), team);
 		inner_teams_box_.add(ste);
 		inner_teams_box_.add_space(default_button_size_small());
 		suggested_teams_entries_.push_back(ste);
@@ -478,9 +479,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	teams_box_.add_space(padding_);
 	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	new_suggested_team_.sigclicked.connect([this]() {
-		SuggestedTeamsEntry* ste =
-		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
-		                           max_w_ - default_button_size_small(), Widelands::SuggestedTeamLineup());
+		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
+		   this, &inner_teams_box_, eia().egbase().map(), max_w_ - default_button_size_small(),
+		   Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
 		suggested_teams_entries_.push_back(ste);
 	});

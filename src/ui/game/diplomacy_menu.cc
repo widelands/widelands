@@ -76,13 +76,14 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 		}
 
 		UI::Icon* icon_flag = new UI::Icon(
-		   &vbox_flag_, UI::PanelStyle::kWui, format("flag_icon_%u", p), 0, 0, default_button_size(), default_button_size(),
+		   &vbox_flag_, UI::PanelStyle::kWui, format("flag_icon_%u", p), 0, 0, default_button_size(),
+		   default_button_size(),
 		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
 		                playercolor_image, player->get_playercolor(),
 		                "images/players/genstats_player.png"));
 		UI::Icon* icon_team =
-		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, format("team_icon_%u", p), 0, 0, default_button_size(),
-		                default_button_size(), nullptr);
+		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, format("team_icon_%u", p), 0, 0,
+		                default_button_size(), default_button_size(), nullptr);
 		UI::Textarea* txt_name = new UI::Textarea(
 		   &vbox_name_, UI::PanelStyle::kWui, format("name_%u", p), UI::FontStyle::kWuiLabel,
 		   player->get_name(), UI::mirror_alignment(UI::Align::kLeft, rtl));
@@ -339,10 +340,10 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 		                        UI::Box::Resizing::kFullSize);
 		actions_vbox_descr_.add_inf_space();
 		if (iplayer_ != nullptr && iplayer_->player_number() == pda.sender) {
-			UI::Button* b =
-			   new UI::Button(&actions_vbox_no_, format("retract_%u", index), 0, 0, default_button_size(), default_button_size(),
-			                  UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_abort.png"), _("Retract"));
+			UI::Button* b = new UI::Button(
+			   &actions_vbox_no_, format("retract_%u", index), 0, 0, default_button_size(),
+			   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			   g_image_cache->get("images/wui/menu_abort.png"), _("Retract"));
 			b->sigclicked.connect([this, pda]() {
 				iplayer_->game().send_player_diplomacy(
 				   pda.sender,
@@ -355,14 +356,14 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 			actions_vbox_yes_.add_space(default_button_size());
 		} else if (iplayer_ != nullptr &&
 		           iplayer_->player().may_approve_request(pda.action, pda.sender, pda.other)) {
-			UI::Button* b1 =
-			   new UI::Button(&actions_vbox_yes_, format("approve_%u", index), 0, 0, default_button_size(),
-			                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_okay.png"), approve_string);
-			UI::Button* b2 =
-			   new UI::Button(&actions_vbox_no_, format("reject_%u", index), 0, 0, default_button_size(), default_button_size(),
-			                  UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_abort.png"), deny_string);
+			UI::Button* b1 = new UI::Button(
+			   &actions_vbox_yes_, format("approve_%u", index), 0, 0, default_button_size(),
+			   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			   g_image_cache->get("images/wui/menu_okay.png"), approve_string);
+			UI::Button* b2 = new UI::Button(
+			   &actions_vbox_no_, format("reject_%u", index), 0, 0, default_button_size(),
+			   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			   g_image_cache->get("images/wui/menu_abort.png"), deny_string);
 			b1->sigclicked.connect([this, pda]() {
 				iplayer_->game().send_player_diplomacy(
 				   pda.other,
@@ -429,8 +430,9 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
 		UI::Dropdown<Widelands::Serial>* select_market = new UI::Dropdown<Widelands::Serial>(
-		   buttons, "select", 0, 0, 2 * kButtonWidth + default_spacing(), 8, default_button_size(), std::string(),
-		   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+		   buttons, "select", 0, 0, 2 * kButtonWidth + default_spacing(), 8, default_button_size(),
+		   std::string(), UI::DropdownType::kTextual, UI::PanelStyle::kWui,
+		   UI::ButtonStyle::kWuiSecondary);
 		select_market->set_tooltip(_("Market to accept the trade at"));
 
 		std::multimap<uint32_t, const Widelands::Market*> markets =
@@ -445,12 +447,14 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 			                            it->second->get_market_name(), it->first / 1800));
 		}
 
-		UI::Button* yes = new UI::Button(
-		   buttons, "yes", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menu_okay.png"), _("Accept this trade offer"));
-		UI::Button* no = new UI::Button(
-		   buttons, "no", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menu_abort.png"), _("Reject this trade offer"));
+		UI::Button* yes = new UI::Button(buttons, "yes", 0, 0, default_button_size(),
+		                                 default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                 g_image_cache->get("images/wui/menu_okay.png"),
+		                                 _("Accept this trade offer"));
+		UI::Button* no = new UI::Button(buttons, "no", 0, 0, default_button_size(),
+		                                default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                g_image_cache->get("images/wui/menu_abort.png"),
+		                                _("Reject this trade offer"));
 
 		if (select_market->empty()) {
 			yes->set_enabled(false);
@@ -526,12 +530,14 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		UI::Box* buttons =
 		   new UI::Box(box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
-		UI::Button* go_to = new UI::Button(
-		   buttons, "go_to", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
-		UI::Button* cancel = new UI::Button(
-		   buttons, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menu_abort.png"), _("Retract this trade offer"));
+		UI::Button* go_to = new UI::Button(buttons, "go_to", 0, 0, default_button_size(),
+		                                   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                   g_image_cache->get("images/wui/menus/goto.png"),
+		                                   _("Center view on this market"));
+		UI::Button* cancel = new UI::Button(buttons, "cancel", 0, 0, default_button_size(),
+		                                    default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                    g_image_cache->get("images/wui/menu_abort.png"),
+		                                    _("Retract this trade offer"));
 
 		go_to->sigclicked.connect([this, own_market]() {
 			iplayer_->map_view()->scroll_to_field(
@@ -635,11 +641,13 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		UI::Box* buttons =
 		   new UI::Box(inner_box, UI::PanelStyle::kWui, "buttons", 0, 0, UI::Box::Horizontal);
 
-		UI::Button* go_to = new UI::Button(
-		   buttons, "go_to", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this market"));
+		UI::Button* go_to = new UI::Button(buttons, "go_to", 0, 0, default_button_size(),
+		                                   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                   g_image_cache->get("images/wui/menus/goto.png"),
+		                                   _("Center view on this market"));
 		UI::Button* extend = new UI::Button(
-		   buttons, "extend", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		   buttons, "extend", 0, 0, default_button_size(), default_button_size(),
+		   UI::ButtonStyle::kWuiSecondary,
 		   g_image_cache->get("images/wui/buildings/menu_tab_trade.png"),
 		   can_extend ?
 		      format("<p>%s%s%s</p>",
@@ -653,9 +661,10 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		             as_listitem(_("Hold down Shift to extend the trade indefinitely"),
 		                         UI::FontStyle::kWuiTooltip)) :
 		      _("Propose extending this trade"));
-		UI::Button* cancel = new UI::Button(
-		   buttons, "cancel", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menu_abort.png"), _("Cancel this trade agreement"));
+		UI::Button* cancel = new UI::Button(buttons, "cancel", 0, 0, default_button_size(),
+		                                    default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		                                    g_image_cache->get("images/wui/menu_abort.png"),
+		                                    _("Cancel this trade agreement"));
 
 		UI::Dropdown<Widelands::Serial>* move = new UI::Dropdown<Widelands::Serial>(
 		   buttons, "move", 0, 0, 100, 8, default_button_size(), _("Move this trade…"),
@@ -741,14 +750,14 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
 			   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-			UI::Button* reject =
-			   new UI::Button(hbox, "reject", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_abort.png"),
-			                  _("Reject this trade extension proposal"));
-			UI::Button* accept =
-			   new UI::Button(hbox, "accept", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-			                  g_image_cache->get("images/wui/menu_okay.png"),
-			                  _("Accept this trade extension proposal"));
+			UI::Button* reject = new UI::Button(hbox, "reject", 0, 0, default_button_size(),
+			                                    default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			                                    g_image_cache->get("images/wui/menu_abort.png"),
+			                                    _("Reject this trade extension proposal"));
+			UI::Button* accept = new UI::Button(hbox, "accept", 0, 0, default_button_size(),
+			                                    default_button_size(), UI::ButtonStyle::kWuiSecondary,
+			                                    g_image_cache->get("images/wui/menu_okay.png"),
+			                                    _("Accept this trade extension proposal"));
 
 			reject->sigclicked.connect([this, te, trade_id]() {
 				iplayer_->game().send_player_extend_trade(
@@ -785,8 +794,8 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 			      UI::mirror_alignment(UI::Align::kLeft, UI::g_fh->fontset()->is_rtl())),
 			   UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-			UI::Button* retract = new UI::Button(hbox, "retract", 0, 0, default_button_size(), default_button_size(),
-			                                     UI::ButtonStyle::kWuiSecondary,
+			UI::Button* retract = new UI::Button(hbox, "retract", 0, 0, default_button_size(),
+			                                     default_button_size(), UI::ButtonStyle::kWuiSecondary,
 			                                     g_image_cache->get("images/wui/menu_abort.png"),
 			                                     _("Retract this trade extension proposal"));
 
@@ -844,7 +853,8 @@ void GameDiplomacyMenu::draw(RenderTarget& rt) {
 		for (; panel != this; panel = panel->get_parent()) {
 			y += panel->get_y();
 		}
-		rt.brighten_rect(Recti(0, y - default_spacing() / 2, get_inner_w(), h + default_spacing()), 32);
+		rt.brighten_rect(
+		   Recti(0, y - default_spacing() / 2, get_inner_w(), h + default_spacing()), 32);
 	}
 }
 

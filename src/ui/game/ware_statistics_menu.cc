@@ -116,23 +116,24 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	//  First, we must decide about the size.
 	main_box_ =
 	   new UI::Box(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 5);
-	main_box_->set_border(default_spacing(), default_spacing(), default_spacing(), default_spacing());
+	main_box_->set_border(
+	   default_spacing(), default_spacing(), default_spacing(), default_spacing());
 	set_center_panel(main_box_);
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
 	tab_panel_ = new UI::TabPanel(main_box_, UI::TabPanelStyle::kWuiDark, "tabs");
 
-	plot_production_ =
-	   new WuiPlotArea(tab_panel_, "plot_production", 0, 0, kPlotWidth, kPlotHeight + default_spacing(),
-	                   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
+	plot_production_ = new WuiPlotArea(
+	   tab_panel_, "plot_production", 0, 0, kPlotWidth, kPlotHeight + default_spacing(),
+	   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "production", g_image_cache->get(pic_tab_production), plot_production_, _("Production"));
 
-	plot_consumption_ =
-	   new WuiPlotArea(tab_panel_, "plot_consumption", 0, 0, kPlotWidth, kPlotHeight + default_spacing(),
-	                   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
+	plot_consumption_ = new WuiPlotArea(
+	   tab_panel_, "plot_consumption", 0, 0, kPlotWidth, kPlotHeight + default_spacing(),
+	   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));

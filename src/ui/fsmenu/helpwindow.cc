@@ -44,8 +44,13 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
                 width,
                 height,
                 format(_("Help: %s"), caption)),
-     textarea_(new UI::MultilineTextarea(
-        this, "text", default_padding(), default_padding(), width - 2 * default_padding(), height - 6 * default_padding(), UI::PanelStyle::kFsMenu)) {
+     textarea_(new UI::MultilineTextarea(this,
+                                         "text",
+                                         default_padding(),
+                                         default_padding(),
+                                         width - 2 * default_padding(),
+                                         height - 6 * default_padding(),
+                                         UI::PanelStyle::kFsMenu)) {
 
 	// Calculate sizes
 	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
@@ -67,7 +72,8 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
 		helptext = err.what();
 	}
 
-	textarea_->set_size(width - 2 * default_padding(), height - btn->get_h() - 3 * default_padding());
+	textarea_->set_size(
+	   width - 2 * default_padding(), height - btn->get_h() - 3 * default_padding());
 	textarea_->set_text(helptext);
 
 	set_inner_size(width, height);

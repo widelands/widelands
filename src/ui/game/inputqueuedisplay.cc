@@ -249,8 +249,13 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                default_button_size_small(),
                can_act_ && has_priority_),
      spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
-     priority_indicator_(
-        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, default_button_size_small() / 5, default_button_size_small()),
+     priority_indicator_(&hbox_,
+                         UI::PanelStyle::kWui,
+                         "priority_indicator",
+                         0,
+                         0,
+                         default_button_size_small() / 5,
+                         default_button_size_small()),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
@@ -287,10 +292,11 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(
-		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, default_button_size_small(), default_button_size_small(),
-		   type_ == Widelands::wwWARE ? building.owner().tribe().get_ware_descr(index_)->icon() :
-		                                building.owner().tribe().get_worker_descr(index_)->icon());
+		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0,
+		                         default_button_size_small(), default_button_size_small(),
+		                         type_ == Widelands::wwWARE ?
+		                            building.owner().tribe().get_ware_descr(index_)->icon() :
+		                            building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 	hbox_.add_inf_space();
@@ -417,7 +423,9 @@ int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const
 		return -1;
 	}
 
-	const uint32_t fill = (x + default_button_size_small() / 2 - hbox_.get_x() - icons_[0]->get_x()) / default_button_size_small();
+	const uint32_t fill =
+	   (x + default_button_size_small() / 2 - hbox_.get_x() - icons_[0]->get_x()) /
+	   default_button_size_small();
 	assert(fill <= nr_icons_);
 	return fill;
 }
@@ -792,8 +800,9 @@ void InputQueueDisplay::draw(RenderTarget& r) {
 	if (has_priority_ && !is_collapsed()) {
 		const int x = hbox_.get_x() + priority_.get_x();
 		for (size_t i = 0; i < 5; ++i) {
-			r.fill_rect(Recti(x + i * default_button_size_small(), hbox_.get_y() + default_button_size_small() * 2 / 5, default_button_size_small(),
-			                  default_button_size_small() / 5),
+			r.fill_rect(Recti(x + i * default_button_size_small(),
+			                  hbox_.get_y() + default_button_size_small() * 2 / 5,
+			                  default_button_size_small(), default_button_size_small() / 5),
 			            kPriorityColors[i], BlendMode::Default);
 		}
 	}

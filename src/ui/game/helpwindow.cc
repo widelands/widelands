@@ -111,8 +111,8 @@ bool BuildingHelpWindow::load_help(const std::string& type, const std::string& i
 			history_.emplace_back(type, item);
 		}
 		hbox_.set_visible(history_.size() > 1);
-		textarea_->set_size(
-		   textarea_->get_w(), hbox_.is_visible() ? (height_ - default_button_size_small()) : height_);
+		textarea_->set_size(textarea_->get_w(),
+		                    hbox_.is_visible() ? (height_ - default_button_size_small()) : height_);
 		return true;
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());

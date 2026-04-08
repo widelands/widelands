@@ -28,7 +28,9 @@
 
 namespace {
 int text_width(int available_width, int pic_width) {
-	return available_width > (pic_width + UI::Panel::default_padding()) ? available_width - pic_width - UI::Panel::default_padding() : 0;
+	return available_width > (pic_width + UI::Panel::default_padding()) ?
+	          available_width - pic_width - UI::Panel::default_padding() :
+	          0;
 }
 }  // namespace
 

@@ -293,10 +293,9 @@ void draw_diagram(uint32_t time_ms,
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(
-	       inner_w - kSpaceRight + 2,
-	       inner_h - kSpaceBottom -
-	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + spacing * 3) / 2.f) / 2.f),
+	   {Vector2f(inner_w - kSpaceRight + 2,
+	             inner_h - kSpaceBottom -
+	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + spacing * 3) / 2.f) / 2.f),
 	    Vector2f(
 	       inner_w - kSpaceRight,
 	       inner_h - kSpaceBottom -

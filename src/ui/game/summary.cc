@@ -39,8 +39,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
      desired_speed_(game_.game_controller()->desired_speed()) {
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
-	UI::Box* vbox =
-	   new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
+	UI::Box* vbox = new UI::Box(
+	   this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical, 0, 0, default_padding());
 	title_area_ = new UI::Textarea(vbox, UI::PanelStyle::kWui, "title",
 	                               UI::FontStyle::kGameSummaryTitle, "", UI::Align::kCenter);
 
@@ -98,11 +98,13 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	bottom_box->add_inf_space();
 
 	continue_button_ =
-	   new UI::Button(bottom_box, "continue_button", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+	   new UI::Button(bottom_box, "continue_button", 0, 0, default_button_size(),
+	                  default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                  g_image_cache->get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
 	bottom_box->add_space(default_padding());
-	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, default_button_size(),
+	                              default_button_size(), UI::ButtonStyle::kWuiMenu,
 	                              g_image_cache->get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(default_padding());

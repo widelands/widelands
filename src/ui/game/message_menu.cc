@@ -54,15 +54,17 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   default_padding(),
                   default_button_size() + 3 * default_padding() + kTableHeight,
                   kWindowWidth - 2 * default_padding(),
-                  get_inner_h() - (default_button_size() + 3 * default_padding() + kTableHeight) - 2 * default_padding() - default_button_size(),
+                  get_inner_h() - (default_button_size() + 3 * default_padding() + kTableHeight) -
+                     2 * default_padding() - default_button_size(),
                   UI::PanelStyle::kWui,
                   "",
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 
-	list = new UI::Table<uintptr_t>(this, "list", default_padding(), default_button_size() + 2 * default_padding(),
-	                                kWindowWidth - 2 * default_padding(), kTableHeight, UI::PanelStyle::kWui,
-	                                UI::TableRows::kMulti);
+	list = new UI::Table<uintptr_t>(this, "list", default_padding(),
+	                                default_button_size() + 2 * default_padding(),
+	                                kWindowWidth - 2 * default_padding(), kTableHeight,
+	                                UI::PanelStyle::kWui, UI::TableRows::kMulti);
 	list->add_column(kWindowWidth - 2 * default_padding() - 60 - 60 - 75, _("Title"));
 	list->add_column(60, pgettext("message", "Type"), "", UI::Align::kCenter);
 	list->add_column(60, _("Status"), "", UI::Align::kCenter);
@@ -74,32 +76,34 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->focus();
 
 	// Buttons for message types
-	filter_box_ = new UI::Box(this, UI::PanelStyle::kWui, "filter_box", default_padding(), default_padding(),
-	                          UI::Box::Horizontal, 0, 0, default_padding());
+	filter_box_ = new UI::Box(this, UI::PanelStyle::kWui, "filter_box", default_padding(),
+	                          default_padding(), UI::Box::Horizontal, 0, 0, default_padding());
 
-	geologistsbtn_ = new UI::Button(filter_box_, "filter_geologists_messages", 0, 0, default_button_size(),
-	                                default_button_size(), UI::ButtonStyle::kWuiSecondary,
-	                                g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
+	geologistsbtn_ =
+	   new UI::Button(filter_box_, "filter_geologists_messages", 0, 0, default_button_size(),
+	                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
+	                  g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
 
 	economybtn_ = new UI::Button(filter_box_, "filter_economy_messages", 0, 0, default_button_size(),
 	                             default_button_size(), UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/stats/genstats_nrwares.png"));
 
-	seafaringbtn_ = new UI::Button(filter_box_, "filter_seafaring_messages", 0, 0, default_button_size(),
-	                               default_button_size(), UI::ButtonStyle::kWuiSecondary,
-	                               g_image_cache->get("images/wui/buildings/start_expedition.png"));
+	seafaringbtn_ =
+	   new UI::Button(filter_box_, "filter_seafaring_messages", 0, 0, default_button_size(),
+	                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
+	                  g_image_cache->get("images/wui/buildings/start_expedition.png"));
 
 	warfarebtn_ = new UI::Button(filter_box_, "filter_warfare_messages", 0, 0, default_button_size(),
 	                             default_button_size(), UI::ButtonStyle::kWuiSecondary,
 	                             g_image_cache->get("images/wui/messages/messages_warfare.png"));
 
-	scenariobtn_ = new UI::Button(filter_box_, "filter_scenario_messages", 0, 0, default_button_size(),
-	                              default_button_size(), UI::ButtonStyle::kWuiSecondary,
-	                              g_image_cache->get("images/wui/menus/objectives.png"));
+	scenariobtn_ = new UI::Button(
+	   filter_box_, "filter_scenario_messages", 0, 0, default_button_size(), default_button_size(),
+	   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menus/objectives.png"));
 
-	diplomacybtn_ = new UI::Button(filter_box_, "filter_diplomacy_messages", 0, 0, default_button_size(),
-	                               default_button_size(), UI::ButtonStyle::kWuiSecondary,
-	                               g_image_cache->get("images/wui/menus/diplomacy.png"));
+	diplomacybtn_ = new UI::Button(
+	   filter_box_, "filter_diplomacy_messages", 0, 0, default_button_size(), default_button_size(),
+	   UI::ButtonStyle::kWuiSecondary, g_image_cache->get("images/wui/menus/diplomacy.png"));
 
 	filter_box_->add(geologistsbtn_);
 	filter_box_->add(economybtn_);
@@ -119,21 +123,23 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
 
-	archivebtn_ = new UI::Button(this, "archive_or_restore_selected_messages", default_padding(),
-	                             kWindowHeight - default_padding() - default_button_size(), default_button_size(), default_button_size(),
-	                             UI::ButtonStyle::kWuiPrimary,
-	                             g_image_cache->get("images/wui/messages/message_archive.png"));
+	archivebtn_ =
+	   new UI::Button(this, "archive_or_restore_selected_messages", default_padding(),
+	                  kWindowHeight - default_padding() - default_button_size(),
+	                  default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
+	                  g_image_cache->get("images/wui/messages/message_archive.png"));
 	update_archive_button_tooltip();
 
 	togglemodebtn_ = new UI::Button(
 	   this, "toggle_between_inbox_or_archive",
-	   archivebtn_->get_x() + archivebtn_->get_w() + default_padding(), archivebtn_->get_y(), default_button_size(),
-	   default_button_size(), UI::ButtonStyle::kWuiPrimary,
+	   archivebtn_->get_x() + archivebtn_->get_w() + default_padding(), archivebtn_->get_y(),
+	   default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
 	   g_image_cache->get("images/wui/messages/message_archived.png"), _("Show Archive"));
 
 	centerviewbtn_ = new UI::Button(
-	   this, "center_main_mapview_on_location", kWindowWidth - default_padding() - default_button_size(),
-	   archivebtn_->get_y(), default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
+	   this, "center_main_mapview_on_location",
+	   kWindowWidth - default_padding() - default_button_size(), archivebtn_->get_y(),
+	   default_button_size(), default_button_size(), UI::ButtonStyle::kWuiPrimary,
 	   g_image_cache->get("images/wui/menus/goto.png"),
 	   as_tooltip_text_with_hotkey(
 	      /** TRANSLATORS: Tooltip in the messages window */

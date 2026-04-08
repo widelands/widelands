@@ -87,8 +87,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
      type_dropdown_(&box_h_,
                     "dropdown_ai",
                     kWidth - 50,  // x
-                    0,           // y
-                    60,          // width of selection box
+                    0,            // y
+                    60,           // width of selection box
                     16,  // maximum number of items in the selection box, shrinks automatically
                     default_button_size(),  // width/height of button
                     /** TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player has
@@ -114,7 +114,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	box_h_.add(&type_dropdown_);
 	box_.add(&box_h_);
 	box_.add(&exit_game_);
-	box_.set_size(kWidth, text_.get_h() + default_spacing() + box_h_.get_h() + exit_game_.get_h() + 3 * default_spacing());
+	box_.set_size(kWidth, text_.get_h() + default_spacing() + box_h_.get_h() + exit_game_.get_h() +
+	                         3 * default_spacing());
 	set_inner_size(get_inner_w(), box_.get_h() + 4 * default_padding());
 
 	continue_.sigclicked.connect([this]() { clicked_continue(); });

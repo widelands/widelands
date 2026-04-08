@@ -56,8 +56,14 @@ BaseTable::Table(Panel* const parent,
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
 
-     scrollbar_filler_button_(new Button(
-        this, "scrollbar_filler", 0, 0, default_button_size_small(), headerheight_, button_style_, "")),
+     scrollbar_filler_button_(new Button(this,
+                                         "scrollbar_filler",
+                                         0,
+                                         0,
+                                         default_button_size_small(),
+                                         headerheight_,
+                                         button_style_,
+                                         "")),
 
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -71,8 +77,9 @@ BaseTable::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ = new Scrollbar(this, "scrollbar", get_w() - default_button_size_small(), headerheight_,
-	                           default_button_size_small(), get_h() - headerheight_, style);
+	scrollbar_ =
+	   new Scrollbar(this, "scrollbar", get_w() - default_button_size_small(), headerheight_,
+	                 default_button_size_small(), get_h() - headerheight_, style);
 	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);

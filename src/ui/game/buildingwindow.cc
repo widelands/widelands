@@ -266,7 +266,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (upcast(Widelands::Warehouse const, warehouse, building)) {
 			if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 				expeditionbtn_ = new UI::Button(
-				   capsbuttons, "start_or_cancel_expedition", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+				   capsbuttons, "start_or_cancel_expedition", 0, 0, default_button_size(),
+				   default_button_size(), UI::ButtonStyle::kWuiMenu,
 				   g_image_cache->get("images/wui/buildings/start_expedition.png"));
 				update_expedition_button(!pd->expedition_started());
 				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition(); });
@@ -283,15 +284,16 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			const bool is_stopped = productionsite->is_stopped();
-			UI::Button* stopbtn = new UI::Button(
-			   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get(
-			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
-			   is_stopped ?
-			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-			      _("Continue") :
-			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-			      _("Stop"));
+			UI::Button* stopbtn =
+			   new UI::Button(capsbuttons, is_stopped ? "continue" : "stop", 0, 0,
+			                  default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+			                  g_image_cache->get((is_stopped ? "images/ui_basic/continue.png" :
+			                                                   "images/ui_basic/stop.png")),
+			                  is_stopped ?
+			                     /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			                     _("Continue") :
+			                     /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			                     _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
@@ -316,8 +318,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer =
-			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0, default_button_size() / 2, default_button_size());
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0,
+			                                  default_button_size() / 2, default_button_size());
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -337,9 +339,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				      .as_font_tag(_("Construction costs:")) +
 				   "<br>" + waremap_to_richtext(tribe, building_descr.enhancement_cost());
 
-				UI::Button* enhancebtn =
-				   new UI::Button(capsbuttons, "enhance", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-				                  building_descr.icon(), enhance_tooltip);
+				UI::Button* enhancebtn = new UI::Button(
+				   capsbuttons, "enhance", 0, 0, default_button_size(), default_button_size(),
+				   UI::ButtonStyle::kWuiMenu, building_descr.icon(), enhance_tooltip);
 
 				//  button id = building id
 				enhancebtn->sigclicked.connect(
@@ -350,9 +352,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}
 
 		if ((capscache_ & Widelands::Building::PCap_Bulldoze) != 0u) {
-			UI::Button* destroybtn =
-			   new UI::Button(capsbuttons, "destroy", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(kImgBulldoze), _("Destroy"));
+			UI::Button* destroybtn = new UI::Button(
+			   capsbuttons, "destroy", 0, 0, default_button_size(), default_button_size(),
+			   UI::ButtonStyle::kWuiMenu, g_image_cache->get(kImgBulldoze), _("Destroy"));
 			destroybtn->sigclicked.connect([this]() { act_bulldoze(); });
 			capsbuttons->add(destroybtn);
 
@@ -364,14 +366,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
 				if (!wares.empty()) {
-					UI::Button* dismantlebtn =
-					   new UI::Button(capsbuttons, "dismantle", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-					                  g_image_cache->get(kImgDismantle),
-					                  std::string(_("Dismantle")) + "<br>" +
-					                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
-					                        .header_font()
-					                        .as_font_tag(_("Returns:")) +
-					                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
+					UI::Button* dismantlebtn = new UI::Button(
+					   capsbuttons, "dismantle", 0, 0, default_button_size(), default_button_size(),
+					   UI::ButtonStyle::kWuiMenu, g_image_cache->get(kImgDismantle),
+					   std::string(_("Dismantle")) + "<br>" +
+					      g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+					         .header_font()
+					         .as_font_tag(_("Returns:")) +
+					      "<br>" + waremap_to_richtext(owner.tribe(), wares));
 					dismantlebtn->sigclicked.connect([this]() { act_dismantle(); });
 					capsbuttons->add(dismantlebtn);
 					requires_destruction_separator = true;
@@ -382,19 +384,20 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer =
-			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0, default_button_size() / 2, default_button_size());
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0,
+			                                  default_button_size() / 2, default_button_size());
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}
 
 		if (allow_muting(building->descr())) {
 			mute_this_ =
-			   new UI::Button(capsbuttons, "mute_this", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+			   new UI::Button(capsbuttons, "mute_this", 0, 0, default_button_size(),
+			                  default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get(kImgMuteThis), "" /* set by next think() */);
-			mute_all_ =
-			   new UI::Button(capsbuttons, "mute_all", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(kImgMuteAll), "" /* set by next think() */);
+			mute_all_ = new UI::Button(capsbuttons, "mute_all", 0, 0, default_button_size(),
+			                           default_button_size(), UI::ButtonStyle::kWuiMenu,
+			                           g_image_cache->get(kImgMuteAll), "" /* set by next think() */);
 			mute_all_->sigclicked.connect([this]() { act_mute(true); });
 			mute_this_->sigclicked.connect([this]() { act_mute(false); });
 			capsbuttons->add(mute_this_);
@@ -411,7 +414,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}
 		if (!wa_info->empty()) {
 			toggle_workarea_ =
-			   new UI::Button(capsbuttons, "workarea", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
+			   new UI::Button(capsbuttons, "workarea", 0, 0, default_button_size(),
+			                  default_button_size(), UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get("images/wui/buildings/toggle_workarea.png"));
 			toggle_workarea_->sigclicked.connect([this]() { toggle_workarea(); });
 
@@ -421,25 +425,27 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}
 
 		if (ibase()->get_display_flag(InteractiveBase::dfDebug)) {
-			UI::Button* debugbtn =
-			   new UI::Button(capsbuttons, "debug", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(kImgDebug), _("Show Debug Window"));
+			UI::Button* debugbtn = new UI::Button(
+			   capsbuttons, "debug", 0, 0, default_button_size(), default_button_size(),
+			   UI::ButtonStyle::kWuiMenu, g_image_cache->get(kImgDebug), _("Show Debug Window"));
 			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
 		}
 
 		if (building->owner().tribe().safe_building_index(building->descr().name()) ==
 		    building->owner().tribe().scouts_house()) {
-			watch_button_ = new UI::Button(
-			   capsbuttons, "watchscout", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
+			watch_button_ = new UI::Button(capsbuttons, "watchscout", 0, 0, default_button_size(),
+			                               default_button_size(), UI::ButtonStyle::kWuiMenu,
+			                               g_image_cache->get("images/wui/menus/watch_follow.png"),
+			                               _("Watch the scout"));
 			watch_button_->sigclicked.connect([this]() { clicked_watch(); });
 			capsbuttons->add(watch_button_);
 		}
 
 		UI::Button* gotobtn =
-		   new UI::Button(capsbuttons, "goto", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-		                  g_image_cache->get("images/wui/menus/goto.png"), _("Center view on this"));
+		   new UI::Button(capsbuttons, "goto", 0, 0, default_button_size(), default_button_size(),
+		                  UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/menus/goto.png"),
+		                  _("Center view on this"));
 		gotobtn->sigclicked.connect([this]() { clicked_goto(); });
 		capsbuttons->add(gotobtn);
 
@@ -449,9 +455,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			capsbuttons->add_inf_space();
 		}
 
-		UI::Button* helpbtn =
-		   new UI::Button(capsbuttons, "help", 0, 0, default_button_size(), default_button_size(), UI::ButtonStyle::kWuiMenu,
-		                  g_image_cache->get("images/ui_basic/menu_help.png"), _("Help"));
+		UI::Button* helpbtn = new UI::Button(
+		   capsbuttons, "help", 0, 0, default_button_size(), default_button_size(),
+		   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/menu_help.png"), _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
 		   ibase()->unique_windows().get_registry(building_descr_for_help_->name() + "_help");

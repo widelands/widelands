@@ -89,25 +89,29 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      single_window_(init_single_window),
      id_(id) {
 	UI::Button* followbtn =
-	   new UI::Button(this, "follow", 0, h - default_button_size(), default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
+	   new UI::Button(this, "follow", 0, h - default_button_size(), default_button_size(),
+	                  default_button_size(), UI::ButtonStyle::kWuiSecondary,
 	                  g_image_cache->get("images/wui/menus/watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect([this]() { do_follow(); });
 
 	UI::Button* gotobtn = new UI::Button(
-	   this, "center_mainview_here", default_button_size(), h - default_button_size(), default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
+	   this, "center_mainview_here", default_button_size(), h - default_button_size(),
+	   default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
 	   g_image_cache->get("images/wui/menus/goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect([this]() { do_goto(); });
 
 	if (init_single_window) {
 		for (uint8_t i = 0; i < kViews; ++i) {
-			view_btns_[i] = new UI::Button(
-			   this, "view", 74 + (default_button_size() / 2 * i), 200 - default_button_size(), default_button_size() / 2, default_button_size(), UI::ButtonStyle::kWuiSecondary, "-");
+			view_btns_[i] = new UI::Button(this, "view", 74 + (default_button_size() / 2 * i),
+			                               200 - default_button_size(), default_button_size() / 2,
+			                               default_button_size(), UI::ButtonStyle::kWuiSecondary, "-");
 			view_btns_[i]->sigclicked.connect([this, i]() { view_button_clicked(i); });
 		}
 
-		UI::Button* closebtn =
-		   new UI::Button(this, "close", w - default_button_size(), h - default_button_size(), default_button_size(), default_button_size(), UI::ButtonStyle::kWuiSecondary,
-		                  g_image_cache->get("images/wui/menu_abort.png"), _("Close"));
+		UI::Button* closebtn = new UI::Button(
+		   this, "close", w - default_button_size(), h - default_button_size(), default_button_size(),
+		   default_button_size(), UI::ButtonStyle::kWuiSecondary,
+		   g_image_cache->get("images/wui/menu_abort.png"), _("Close"));
 		closebtn->sigclicked.connect([this]() { close_cur_view(); });
 	}
 
