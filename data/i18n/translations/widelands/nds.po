@@ -1355,7 +1355,7 @@ msgstr "Fähren-Reckwiede:"
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr "Verlööv Fähren, Prileen un Fährenwarften up deeser Kaart, indeem du eene hoogste Längde för Fährenprielen sett"
+msgstr "Verlööv Fähren, Prielen un Fährenwarften up deeser Kaart, indeem du eene hoogste Längde för Fährenprielen sett"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
