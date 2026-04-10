@@ -42,6 +42,7 @@
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/naval_invasion_base.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -334,7 +335,6 @@ bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
 		return false;
 	}
 
-	constexpr int kPortSpaceGeneralAreaRadius = 5;
 	MapRegion<Area<Coords>> mr(map, Area<Coords>(coords, kPortSpaceGeneralAreaRadius));
 	do {
 		const Field& field = map[mr.location()];
@@ -471,17 +471,12 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 					wh->incorporate_worker(game, worker);
 				}
 			}
-			items_.clear();
 
-			ship_type_ = pending_refit_;
-			erase_warship_soldier_request_manager();
-
+			set_ship_type(game, pending_refit_);
 			if (ship_type_ == ShipType::kWarship) {
-				start_task_expedition(game);
 				set_destination(game, dest);
-			} else {
-				exp_cancel(game);
 			}
+
 		} else {
 			// Destination vanished, try to find a new one
 			molog(game.get_gametime(), "Refit failed, retry\n");
@@ -1085,18 +1080,22 @@ bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
 
-#ifndef NDEBUG
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
-	assert(!egbase.is_game());
+	items_.clear();
+
 	ship_type_ = t;
 	pending_refit_ = ship_type_;
+
+	erase_warship_soldier_request_manager();
+
+	if (upcast(Game, game, &egbase)) {
+		if (ship_type_ == ShipType::kWarship) {
+			start_task_expedition(*game);
+		} else {
+			exp_cancel(*game);
+		}
+	}
 }
-#else
-void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
-	ship_type_ = t;
-	pending_refit_ = ship_type_;
-}
-#endif
 
 void Ship::refit(Game& game, const ShipType type) {
 	if (!can_refit(type)) {
@@ -1621,61 +1620,110 @@ void Ship::battle_update(Game& game) {
 				   Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
 			}
 
-			// If the portspace is blocked, find a walkable node as closely nearby as possible.
-			Coords representative_location;
-			if ((portspace_field.nodecaps() & MOVECAPS_WALK) != 0) {
-				representative_location = portspace;
-			} else if (Coords brn = map.br_n(portspace); (map[brn].nodecaps() & MOVECAPS_WALK) != 0) {
-				representative_location = brn;
-			} else {
-				for (;;) {
-					Coords coords = game.random_location(portspace, 2);
-					const Field& field = map[coords];
-					if ((field.nodecaps() & MOVECAPS_WALK) != 0) {
-						representative_location = coords;
+			// We will scatter the soldiers on walkable fields around the portspace.
+			// If that's blocked, we try to find a walkable node as closely nearby as possible.
+
+			Coords representative_location = portspace;
+
+			WalkingDir nextdir = WALK_SE;
+			int radius = 1;
+			int step = -1;
+			constexpr uint16_t kTooFar = 3;
+			while (radius < kTooFar &&
+			       (map[representative_location].nodecaps() & MOVECAPS_WALK) == 0) {
+				representative_location = map.get_neighbour(representative_location, nextdir);
+				if (step < 0) {
+					// start new circle
+					nextdir = WALK_W;
+					step = 0;
+				} else {
+					++step;
+					if (step >= radius) {
+						step = 0;
+						nextdir = get_cw_neighbour(nextdir);
+						if (nextdir == WALK_W) {
+							// finished the circle, we need a bigger one
+							nextdir = WALK_SE;
+							++radius;
+							step = -1;
+						}
+					}
+				}
+			}
+			if (radius >= kTooFar) {
+				// no suitable location found
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending
+				// message
+				NEVER_HERE();
+			}
+
+			std::vector<Coords> drop_locations;
+			const FindNodeInvasion findnode;
+			CheckStepDefault checkstep(MOVECAPS_WALK);
+			uint32_t nr_fields = map.find_reachable_fields(
+			   game, Area<FCoords>(map.get_fcoords(representative_location), 4), &drop_locations,
+			   checkstep, findnode);
+
+			if (nr_fields == 0) {
+				// no suitable drop locations found
+				// TODO(tothxa): is this possible? if so, implement cancelling attack and sending
+				// message
+				NEVER_HERE();
+			}
+			assert(nr_fields == drop_locations.size());
+
+			assert(!battles_.back().attack_soldier_serials.empty());
+
+			NavalInvasionBase* camp = nullptr;
+
+			// Let's see whether this is a reinforcement
+			{
+				std::vector<Bob*> camps;
+				// I don't think it's possible to have 2 portspaces within 5 steps that can not be
+				// reached from each other by walking, unless blocked by buildings.
+				map.find_bobs(game,
+				              Area<FCoords>(map.get_fcoords(portspace), kPortSpaceGeneralAreaRadius),
+				              &camps, FindBobByType(MapObjectType::NAVAL_INVASION_BASE));
+				for (Bob* bob : camps) {
+					if (bob->get_owner() == get_owner()) {
+						camp = dynamic_cast<NavalInvasionBase*>(bob);
+						assert(camp != nullptr);
 						break;
 					}
 				}
 			}
 
-			CheckStepDefault worker_checkstep(MOVECAPS_WALK);
-			Path unused_path;
+			if (camp == nullptr) {
+				camp = NavalInvasionBase::create(game, get_owner(), portspace);
+			}
 
-			assert(!battles_.back().attack_soldier_serials.empty());
 			for (Serial serial : battles_.back().attack_soldier_serials) {
 				auto it = std::find_if(items_.begin(), items_.end(), [serial](const ShippingItem& si) {
 					return si.get_object_serial() == serial;
 				});
 				if (it == items_.end()) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not on ship", serial);
 					continue;
 				}
 
 				Worker* worker;
 				it->get(game, nullptr, &worker);
 				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					molog(game.get_gametime(), "[battle] Attack soldier %u not a soldier", serial);
 					continue;
 				}
 
 				it->set_location(game, nullptr);
 				it->end_shipping(game);
 
-				// Distribute the soldiers on walkable fields around the point of invasion.
-				// Do not drop them off directly on a flag as that would interfere with battle code.
-				for (;;) {
-					Coords coords = game.random_location(current_battle.attack_coords, 4);
-					const Field& field = map[coords];
-					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
-					    (field.get_immovable() == nullptr ||
-					     field.get_immovable()->descr().type() != MapObjectType::FLAG) &&
-					    map.findpath(
-					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
-						worker->set_position(game, coords);
-						break;
-					}
-				}
-
+				worker->set_position(game, drop_locations.at(game.logic_rand() % nr_fields));
+				molog(game.get_gametime(), "[battle] Attack soldier %u landed at %dx%d", serial,
+				      worker->get_position().x, worker->get_position().y);
 				worker->reset_tasks(game);
-				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, portspace);
+
+				Soldier* soldier = dynamic_cast<Soldier*>(worker);
+				camp->add_soldier(soldier);
+				soldier->start_task_naval_invasion(game, camp);
 
 				items_.erase(it);
 			}
@@ -2892,6 +2940,14 @@ void Ship::Loader::load_pointers() {
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
 			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
+		}
+	}
+
+	for (Battle& battle : battles_) {
+		for (uint32_t& serial : battle.attack_soldier_serials) {
+			// Convert file indices to actual serials
+			Soldier& soldier = mol().get<Soldier>(serial);
+			serial = soldier.serial();
 		}
 	}
 

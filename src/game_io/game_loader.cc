@@ -36,7 +36,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
 
 namespace Widelands {
 

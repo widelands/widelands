@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_CHECKBOX_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/checkbox.h"
+#include "ui/basic/checkbox.h"
 
 namespace LuaUi {
 

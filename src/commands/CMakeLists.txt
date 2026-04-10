@@ -140,5 +140,5 @@ wl_library(commands
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
     ui_basic
-    wui
+    wui_interactive
 )

@@ -23,7 +23,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace Widelands {
 

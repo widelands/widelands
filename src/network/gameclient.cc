@@ -48,13 +48,13 @@
 #include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launch_mpg.h"
-#include "ui_fsmenu/main.h"
+#include "ui/basic/progresswindow.h"
+#include "ui/fsmenu/launch_mpg.h"
+#include "ui/fsmenu/main.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_spectator.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 
 struct AddOnsMismatchException : WLWarning {
 	explicit AddOnsMismatchException(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {

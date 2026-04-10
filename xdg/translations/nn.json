@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Feilrettingsutgåve"
+		],
 		"1.3": [
 			"Marknadshandel",
 			"Seks nye kart er lagde til og tre gamle kart er fjerna",
@@ -17,9 +20,6 @@
 			"Last ned kart frå nettsida som tillegg",
 			"Nye visningsmodusar i editoren",
 			"Mange nye moglegheiter for tilleggsutviklarar"
-		],
-		"1.2.1": [
-			"Feilrettingsutgåve"
 		]
 	}
 }

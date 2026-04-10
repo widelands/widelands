@@ -49,8 +49,6 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
-#include "editor/editorinteractive.h"
-#include "editor/ui_menus/main_menu_random_map.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -76,23 +74,25 @@
 #include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/color_chooser.h"
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/about.h"
-#include "ui_fsmenu/crash_report.h"
-#include "ui_fsmenu/launch_spg.h"
-#include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/main.h"
-#include "ui_fsmenu/mapselect.h"
-#include "ui_fsmenu/options.h"
+#include "ui/basic/color_chooser.h"
+#include "ui/basic/messagebox.h"
+#include "ui/basic/progresswindow.h"
+#include "ui/editor/editorinteractive.h"
+#include "ui/editor/main_menu_random_map.h"
+#include "ui/fsmenu/about.h"
+#include "ui/fsmenu/crash_report.h"
+#include "ui/fsmenu/launch_spg.h"
+#include "ui/fsmenu/loadgame.h"
+#include "ui/fsmenu/main.h"
+#include "ui/fsmenu/mapselect.h"
+#include "ui/fsmenu/options.h"
+#include "ui/shared/chat_panel.h"
+#include "ui/shared/maptable.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_spectator.h"
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
-#include "wui/game_chat_panel.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
-#include "wui/maptable.h"
 
 std::string get_executable_directory(const bool logdir) {
 	std::string executabledir;
@@ -827,6 +827,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 		return;
 	}
 
+	const uint32_t random_seed = section.get_natural("random_seed", RNG::static_rand());
+
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
@@ -907,6 +909,7 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	}
 
 	Widelands::Game game;
+	game.logic_rand_seed(random_seed);
 	std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 	if (settings->has_players_tribe()) {
 		tipstexts.push_back(settings->get_players_tribe());

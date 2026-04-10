@@ -49,7 +49,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/mapviewpixelconstants.h"
+#include "ui/wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 

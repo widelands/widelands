@@ -304,6 +304,9 @@ struct Ship : Bob {
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;
 	}
+	void set_hitpoints(uint32_t hp) {
+		hitpoints_ = hp;
+	}
 	[[nodiscard]] uint32_t get_warship_soldier_capacity() const {
 		return warship_soldier_capacity_;
 	}

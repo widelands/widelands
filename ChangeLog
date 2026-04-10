@@ -1,5 +1,11 @@
 [TOC]
 
+## Release 1.3.1
+
+- Fix desync around unsafe use of `std::sort` in `Warehouse::launch_soldier` (CB #5314 / GH #6954)
+- Don't join lobby after cancelling metaserver login dialog (CB #5327 / GH #6967)
+
+
 ## Release 1.3
 
 ### Animations, Icons and Overlays

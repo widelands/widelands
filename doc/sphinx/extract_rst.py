@@ -164,6 +164,7 @@ _concat_files('doc/sphinx/source/autogen_temp_lua_map.cc', (
 ))
 _concat_files('doc/sphinx/source/autogen_temp_lua_ui.cc', (
 	'src/scripting/lua_ui.cc',
+	'src/scripting/ui/lua_timer.cc',
 	'src/scripting/ui/lua_panel.cc',
 	'src/scripting/ui/lua_window.cc',
 	'src/scripting/ui/lua_map_view.cc',

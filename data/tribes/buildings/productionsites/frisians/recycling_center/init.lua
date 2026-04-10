@@ -31,6 +31,12 @@ wl.Descriptions():new_productionsite_type {
          rows = 2,
          fps = 10
       },
+      build = {
+         hotspot = {50, 58},
+         frames = 3,
+         columns = 3,
+         rows = 1,
+      },
       working_metal = {
          hotspot = {50, 71}, -- the whole animation is one pixel lower
          frames = 10,

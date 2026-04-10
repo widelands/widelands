@@ -18,7 +18,7 @@
 
 #include "editor/tools/tool_conf.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 
 ToolConf::ToolConf() : interval(0, 0) {
 }

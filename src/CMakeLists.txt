@@ -96,12 +96,10 @@ add_subdirectory(network)
 add_subdirectory(notifications)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-add_subdirectory(ui_basic)
-add_subdirectory(ui_fsmenu)
+add_subdirectory(ui)
 if (OPTION_BUILD_WEBSITE_TOOLS)
   add_subdirectory(website)
 endif (OPTION_BUILD_WEBSITE_TOOLS)
-add_subdirectory(wui)
 
 # TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
 # library.
@@ -122,7 +120,6 @@ wl_library(widelands_ball_of_mud
     base_random
     base_time_string
     build_info
-    editor
     graphic
     graphic_fonthandler
     graphic_functions
@@ -141,11 +138,12 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
+    ui_editor
     ui_fsmenu
+    ui_shared_chat
+    ui_shared_maps_ui
     widelands_options
-    wui
-    wui_chat_ui
-    wui_common_mapdetails
+    wui_interactive
 )
 
 wl_library(widelands_options
