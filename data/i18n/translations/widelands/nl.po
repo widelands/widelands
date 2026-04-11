@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-09 04:36+0000\n"
+"POT-Creation-Date: 2026-04-11 04:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -6454,7 +6454,7 @@ msgid "Choose Campaign"
 msgstr "Kies een Veldtocht"
 
 #: ../../../../src/ui/fsmenu/campaign_select.cc:38
-#: ../../../../src/ui/fsmenu/loadgame.cc:79
+#: ../../../../src/ui/fsmenu/loadgame.cc:78
 #: ../../../../src/ui/fsmenu/scenario_select.cc:105
 #: ../../../../src/ui/game/story_message_box.cc:92
 msgid "Return to the main menu"
@@ -6936,21 +6936,21 @@ msgstr "Kies Herhaling"
 msgid "Show Filenames"
 msgstr "Toon Bestandsnamen"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:80
+#: ../../../../src/ui/fsmenu/loadgame.cc:79
 msgid "Load this replay"
 msgstr "Laad deze herhaling"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:82
+#: ../../../../src/ui/fsmenu/loadgame.cc:81
 #: ../../../../src/ui/fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Keer terug naar de instellingen van het multiplayer spel"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:83
+#: ../../../../src/ui/fsmenu/loadgame.cc:82
 #: ../../../../src/ui/fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Keer terug naar het menu alleen spelen"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:84
+#: ../../../../src/ui/fsmenu/loadgame.cc:83
 msgid "Load this game"
 msgstr "Laad dit spel"
 

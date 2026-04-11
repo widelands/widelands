@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-09 04:36+0000\n"
+"POT-Creation-Date: 2026-04-11 04:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2021,2026\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
@@ -6449,7 +6449,7 @@ msgid "Choose Campaign"
 msgstr "Vælg kampagne"
 
 #: ../../../../src/ui/fsmenu/campaign_select.cc:38
-#: ../../../../src/ui/fsmenu/loadgame.cc:79
+#: ../../../../src/ui/fsmenu/loadgame.cc:78
 #: ../../../../src/ui/fsmenu/scenario_select.cc:105
 #: ../../../../src/ui/game/story_message_box.cc:92
 msgid "Return to the main menu"
@@ -6931,21 +6931,21 @@ msgstr "Vælg genafspilning"
 msgid "Show Filenames"
 msgstr "Vis filnavne"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:80
+#: ../../../../src/ui/fsmenu/loadgame.cc:79
 msgid "Load this replay"
 msgstr "Indlæs denne genafspilning"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:82
+#: ../../../../src/ui/fsmenu/loadgame.cc:81
 #: ../../../../src/ui/fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Tilbage til spilopsætningen for flere spillere"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:83
+#: ../../../../src/ui/fsmenu/loadgame.cc:82
 #: ../../../../src/ui/fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Returner til menuen for en spiller"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:84
+#: ../../../../src/ui/fsmenu/loadgame.cc:83
 msgid "Load this game"
 msgstr "Indlæs dette spil"
 
