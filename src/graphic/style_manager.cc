@@ -194,13 +194,13 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
                                              const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
-	                                  get_string_with_default(*style_table, "align", ""),
-	                                  get_string_with_default(*style_table, "valign", ""),
-	                                  style_table->get_int_with_default("indent", 0) * scale_factor_quarters / 4,
-	                                  style_table->get_int_with_default("spacing", 0) * scale_factor_quarters / 4,
-	                                  style_table->get_int_with_default("space_before", 0) * scale_factor_quarters / 4,
-	                                  style_table->get_int_with_default("space_after", 0) * scale_factor_quarters / 4);
+	return new UI::ParagraphStyleInfo(
+	   read_font_style(*style_table, "font"), get_string_with_default(*style_table, "align", ""),
+	   get_string_with_default(*style_table, "valign", ""),
+	   style_table->get_int_with_default("indent", 0) * scale_factor_quarters / 4,
+	   style_table->get_int_with_default("spacing", 0) * scale_factor_quarters / 4,
+	   style_table->get_int_with_default("space_before", 0) * scale_factor_quarters / 4,
+	   style_table->get_int_with_default("space_after", 0) * scale_factor_quarters / 4);
 }
 
 // Read image filename and RGBA color from LuaTable
@@ -210,9 +210,10 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_image_cache->get(image),
-	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
-	                              table.get_int_with_default("margin", 0) * scale_factor_quarters / 4);
+	return new UI::PanelStyleInfo(
+	   image.empty() ? nullptr : g_image_cache->get(image),
+	   RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
+	   table.get_int_with_default("margin", 0) * scale_factor_quarters / 4);
 }
 
 // Read text panel style from LuaTable
