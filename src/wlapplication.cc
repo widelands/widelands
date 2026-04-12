@@ -1346,6 +1346,7 @@ bool WLApplication::init_settings() {
 	// Then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
+	set_scale_factor_quarters(get_config_int("ui_scaling_factor_quarters", 4), false);
 	set_mouse_swap(get_config_bool("swapmouse", false));
 
 	// Without this the config options get dropped by check_used().

@@ -30,18 +30,36 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
+using StyleCacheKey = std::pair<std::string /*template_dir*/, int /*scale_quarters*/>;
 const std::string kDefaultTemplate("templates/default/");
 static std::string g_template_dir;
-static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
+static int scale_factor_quarters(4);
+static std::map<StyleCacheKey, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);       // points to an entry in `g_style_managers`
 static StyleManager* default_style(nullptr);  // points to the default style in `g_style_managers`
 
 const std::string kSplashImage("loadscreens/splash.jpg");
 const std::string kFallbackImage("images/novalue.png");
 
+static void do_update_g_style_manager() {
+	const StyleCacheKey cache_key(g_template_dir, scale_factor_quarters);
+	auto it = g_style_managers.find(cache_key);
+	if (it != g_style_managers.end()) {
+		g_style_manager = it->second.get();
+	} else {
+		g_style_manager = new StyleManager();
+		g_style_managers[cache_key] = std::unique_ptr<StyleManager>(g_style_manager);
+		if (default_style == nullptr) {
+			assert(g_template_dir == kDefaultTemplate);
+			default_style = g_style_manager;
+		}
+	}
+}
+
 const std::string& template_dir() {
 	return g_template_dir;
 }
+
 void set_template_dir(std::string dir) {
 	if (dir.empty()) {
 		// Empty string means "use default"
@@ -71,19 +89,16 @@ void set_template_dir(std::string dir) {
 
 	g_template_dir = dir;
 
-	auto it = g_style_managers.find(g_template_dir);
-	if (it != g_style_managers.end()) {
-		g_style_manager = it->second.get();
-	} else {
-		g_style_manager = new StyleManager();
-		g_style_managers[g_template_dir] = std::unique_ptr<StyleManager>(g_style_manager);
-		if (default_style == nullptr) {
-			assert(g_template_dir == kDefaultTemplate);
-			default_style = g_style_manager;
-		}
-	}
+	do_update_g_style_manager();
 
 	RenderQueue::instance().set_dither_mask(resolve_template_image_filename("world/pics/edge.png"));
+}
+
+void set_scale_factor_quarters(int quarters, bool update_style) {
+	scale_factor_quarters = quarters;
+	if (update_style) {
+		do_update_g_style_manager();
+	}
 }
 
 std::string resolve_template_image_filename(const std::string& path) {
@@ -161,11 +176,12 @@ RGBAColor read_rgba_color(const LuaTable& table) {
 // Read font style from LuaTable
 UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	const int size = style_table->get_int("size");
+	int size = style_table->get_int("size");
 	if (size < 1) {
 		throw wexception(
 		   "Font size %d too small for %s, must be at least 1!", size, table_key.c_str());
 	}
+	size = std::max(1, size * scale_factor_quarters / 4);
 	return new UI::FontStyleInfo(style_table->get_string("face"),
 	                             read_rgb_color(*style_table->get_table("color")), size,
 	                             style_table->get_bool_with_default("bold", false),
@@ -181,10 +197,10 @@ UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
 	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
 	                                  get_string_with_default(*style_table, "align", ""),
 	                                  get_string_with_default(*style_table, "valign", ""),
-	                                  style_table->get_int_with_default("indent", 0),
-	                                  style_table->get_int_with_default("spacing", 0),
-	                                  style_table->get_int_with_default("space_before", 0),
-	                                  style_table->get_int_with_default("space_after", 0));
+	                                  style_table->get_int_with_default("indent", 0) * scale_factor_quarters / 4,
+	                                  style_table->get_int_with_default("spacing", 0) * scale_factor_quarters / 4,
+	                                  style_table->get_int_with_default("space_before", 0) * scale_factor_quarters / 4,
+	                                  style_table->get_int_with_default("space_after", 0) * scale_factor_quarters / 4);
 }
 
 // Read image filename and RGBA color from LuaTable
@@ -196,7 +212,7 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	}
 	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_image_cache->get(image),
 	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
-	                              table.get_int_with_default("margin", 0));
+	                              table.get_int_with_default("margin", 0) * scale_factor_quarters / 4);
 }
 
 // Read text panel style from LuaTable
@@ -369,6 +385,7 @@ StyleManager::StyleManager() {
 		fail_if_doing_default_style("entry", key);
 		minimum_font_size_ = default_style->minimum_font_size();
 	}
+	minimum_font_size_ = std::max(1, minimum_font_size_ * scale_factor_quarters / 4);
 
 	key = "minimap_icon_frame";
 	if (table->has_key(key)) {
@@ -404,6 +421,7 @@ StyleManager::StyleManager() {
 		fail_if_doing_default_style("entry", key);
 		focus_border_thickness_ = default_style->focus_border_thickness();
 	}
+	focus_border_thickness_ = std::max(1, focus_border_thickness_ * scale_factor_quarters / 4);
 
 	// Fonts
 	section = "fonts";
@@ -836,6 +854,7 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 		details_font = new UI::FontStyleInfo(fallback.building_statistics_details_font());
 		editbox_margin = fallback.editbox_margin();
 	}
+	editbox_margin = std::max(1, editbox_margin * scale_factor_quarters / 4);
 
 	if (table.has_key("colors")) {
 		std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
@@ -915,7 +934,7 @@ void StyleManager::add_window_style(UI::WindowStyle style,
 		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
 		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
 		   style_table->get_string("button_close"),
-		   style_table->get_int_with_default("button_spacing", 1));
+		   style_table->get_int_with_default("button_spacing", 1) * scale_factor_quarters / 4);
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));
@@ -1004,7 +1023,7 @@ void StyleManager::add_styled_size(UI::StyledSize id,
                                    const LuaTable& table,
                                    const std::string& key) {
 	if (table.has_key(key)) {
-		styled_sizes_.emplace(id, table.get_int(key));
+		styled_sizes_.emplace(id, table.get_int(key) * scale_factor_quarters / 4);
 	} else {
 		fail_if_doing_default_style("styled size", key);
 		styled_sizes_.emplace(id, default_style->styled_size(id));

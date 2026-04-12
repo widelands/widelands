@@ -267,6 +267,10 @@ void fill_parameter_vector() {
 	    _("Move a window to the edge of the panel when the edge of the window comes within "
 	      "a distance of `n` from the edge of the panel."),
 	    true},
+	   {"", "ui_scaling_factor_quarters", _("n"),
+	    /** TRANSLATORS: `n` references a numerical placeholder */
+	    _("The factor by which to fractionally scale the Widelands user interface, in quarters."),
+	    false},
 	   /// Others
 	   {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	   {"", "verbose-i18n", "",
