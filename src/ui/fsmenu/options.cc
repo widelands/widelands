@@ -459,6 +459,10 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
 	tabs_.add("options_ingame", _("In-Game"), &box_ingame_, "");
 
+	for (UI::Box* box : {&box_interface_, &box_sound_, &box_saving_, &box_newgame_, &box_ingame_}) {
+		box->set_scrolling(true);
+	}
+
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
