@@ -240,24 +240,9 @@ void WareStatisticsMenu::layout() {
 		return;
 	}
 	layouting = true;
-
-	display_->set_hgap(3, false);
-	int w1;
-	int h1;
-	int w2;
-	int h2;
-	int w3;
-	int h3;
-	tab_panel_->get_desired_size(&w1, &h1);
-	display_->get_desired_size(&w2, &h2);
-	slider_->get_desired_size(&w3, &h3);
-
 	display_->set_hgap(
 	   std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
-	display_->get_desired_size(&w2, &h2);
 
-	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing,
-	                            h1 + h2 + h3 + text_height(UI::FontStyle::kWuiLabel));
 	UI::UniqueWindow::layout();
 	layouting = false;
 }
