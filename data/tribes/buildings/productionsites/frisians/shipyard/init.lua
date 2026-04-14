@@ -26,7 +26,7 @@ wl.Descriptions():new_productionsite_type {
 
    spritesheets = {
       idle = {
-         hotspot = {50, 78},
+         hotspot = {50, 76},
          frames = 10,
          columns = 5,
          rows = 2,
