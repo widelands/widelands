@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_MULTILINE_TEXTAREA_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/multilinetextarea.h"
+#include "ui/basic/multilinetextarea.h"
 
 namespace LuaUi {
 

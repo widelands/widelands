@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Emil Stoyanov <emil.stynv@gmail.com>, 2022
+# Enes Efe Ü., 2026
 # Erdoğan Şahin, 2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Yigit Kutay Keten, 2025
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Yigit Kutay Keten, 2025\n"
+"Last-Translator: Enes Efe Ü., 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +91,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Öteki iki önemli gıdalar tütsülenmiş balık ve tütsülenmiş ettir. Çiğ et bir avcı aracılığıyla ulaştırılıyor. Bir balıkçı balığı denizden getiriyorken balık üreticisi de kendi yetiştirdiği balığın fazla üreyip soyunun sona ermemesini denetliyor. Tütsüleme de bir tütsüleme adresinde oluyor, en az iki taneye ihtiyacın var onlardan."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -870,7 +871,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Satul seni ısıtıversin Jundlina. Benim adım Ostur ve ben gemi yapıyorum. Yeni bir tür küçük gemi icat ettim. Alıştıklarımızdan daha küçükler ama daha dayanıklılar. Eğer onları doğru inşa edersek, buna eminim ki daha uzun mesafeler yelken alırız ve belki de Lutas ile muhatap olmak zorunda kalmayız."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
@@ -945,8 +946,8 @@ msgstr "You have completed this mission. You may continue playing if you wish, o
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr "Building lost!"
+msgstr "Bina kaybedildi!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"
-msgstr "We lost a building to the ocean!"
+msgstr "Bir binayı okyanusa kaybettik!"
