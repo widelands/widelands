@@ -28,10 +28,6 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/shipstates.h"
 
-namespace LuaMaps {
-class LuaShip;
-}  // namespace LuaMaps
-
 namespace Widelands {
 
 class PinnedNote;
@@ -320,6 +316,9 @@ struct Ship : Bob {
 	[[nodiscard]] std::vector<Soldier*> onboard_soldiers() const;
 	[[nodiscard]] std::vector<Soldier*> associated_soldiers() const;
 
+	// Must be called after changing the onboard soldiers directly.
+	void update_warship_soldier_request(bool create);
+
 	/**
 	 * Execute a warship command.
 	 * For a kAttack against a port, `parameters` contains first the port coordinates x,y and then
@@ -367,12 +366,10 @@ protected:
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
-	void update_warship_soldier_request(bool create);
 
 private:
 	friend struct ShipFleet;
 	friend struct ShippingSchedule;
-	friend class LuaMaps::LuaShip;
 
 	void recalc_expedition_swimmable(const EditorGameBase& egbase);
 	void wakeup_neighbours(Game&);
