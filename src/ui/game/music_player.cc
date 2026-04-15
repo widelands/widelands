@@ -96,6 +96,12 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
                        _("Shuffle")),
      hbox_current_track_(
         this, UI::PanelStyle::kWui, "hbox_current_track", 0, 0, UI::Box::Horizontal),
+     label_current_track_label_(&hbox_current_track_,
+							UI::PanelStyle::kWui,
+							"label_current_track_label",
+							UI::FontStyle::kWuiLabel,
+							_("Current Song:"),
+							UI::Align::kLeft),
      label_current_track_(&hbox_current_track_,
                           UI::PanelStyle::kWui,
                           "label_current_track",
@@ -123,17 +129,12 @@ MusicPlayer::MusicPlayer(UI::Panel& parent)
 	hbox_playback_control_.add_space(kSpacing);
 	hbox_playback_control_.add(&checkbox_shuffle_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
+	hbox_current_track_.add(&label_current_track_label_);
 	hbox_current_track_.add(&label_current_track_);
 
 	add(&vbox_track_playlist_);
 	add(&hbox_playback_control_);
 	add(&hbox_current_track_);
-
-	// due to a layout bug, adding an empty label at the bottom to prevent clipping the label for
-	// current track title.
-	UI::Textarea* label_spacer = new UI::Textarea(
-	   this, UI::PanelStyle::kWui, "spacer", UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
-	add(label_spacer);
 
 	// setup event handlers
 	button_next_.sigclicked.connect([]() { g_sh->change_music(); });
@@ -160,7 +161,6 @@ void MusicPlayer::rebuild_music_track_controls() {
 	for (MusicTrackControl* control : music_track_controls_) {
 		vbox_track_playlist_.add(control);
 	}
-	vbox_track_playlist_.add_inf_space();  // aligns scrollbar to the right
 
 	initialization_complete();
 }
