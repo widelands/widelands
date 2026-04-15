@@ -3,8 +3,9 @@ include "scripting/coroutine.lua"
 local saved_version = get_build_id()
 
 -- Save the game so that reloading does not skip
-function stable_save(game, savename, desired_speed)
+function stable_save(game, savename, desired_speed, desired_wait_time)
    local last_save_time = game.last_save_time
+   local initial_gametime = game.time
    print("###### stable_save: last save time " .. last_save_time)
 
    game.desired_speed = 1000
@@ -23,23 +24,17 @@ function stable_save(game, savename, desired_speed)
    game:save(savename)
    game.desired_speed = 1000
 
-   -- Wait until save was finished
-   repeat
-      sleep(200)
-   until game.last_save_time ~= last_save_time
+   -- Wait until save was finished and give the game some time to catch up
+   wake_me(initial_gametime + (desired_wait_time or 10000))
+   while game.last_save_time == last_save_time do
+      print("WARNING: Game save was delayed! Adding extra sleep time")
+      sleep(1000)
+   end
    print("###### stable_save: new save time " .. game.last_save_time)
 
-   -- Give the loaded game a chance to catch up
-   local mapview = wl.ui.MapView()
-   local counter = 0
-   while mapview.average_fps < 20 and counter < 100 do
-      sleep(200)
-      counter = counter + 1
-   end
-
-   sleep(1000)
    game.desired_speed = desired_speed
    sleep(100)
+   print("stable_save: save took " .. (game.time - initial_gametime) .. " ms gametime, FPS is now " .. wl.ui.MapView().average_fps)
 end
 
 function same_version()
