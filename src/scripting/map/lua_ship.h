@@ -65,6 +65,8 @@ public:
 	 */
 	int get_wares(lua_State* L);
 	int get_workers(lua_State* L);
+	int get_soldiers(lua_State* L);
+	int set_soldiers(lua_State* L);
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
 	int refit(lua_State* L);
