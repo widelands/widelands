@@ -29,6 +29,7 @@
 #include "graphic/render_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
+#include "wlapplication_options.h"
 
 using StyleCacheKey = std::pair<std::string /*template_dir*/, int /*scale_quarters*/>;
 const std::string kDefaultTemplate("templates/default/");
@@ -58,6 +59,10 @@ static void do_update_g_style_manager() {
 
 const std::string& template_dir() {
 	return g_template_dir;
+}
+
+int get_scale_factor_quarters() {
+	return scale_factor_quarters;
 }
 
 void set_template_dir(std::string dir) {
@@ -98,6 +103,7 @@ void set_scale_factor_quarters(int quarters, bool update_style) {
 	scale_factor_quarters = quarters;
 	if (update_style) {
 		do_update_g_style_manager();
+		update_intro_style_config();
 	}
 }
 
@@ -129,6 +135,14 @@ std::string resolve_template_image_filename(const std::string& path) {
 	/* If all else fails (e.g. a missing template sprite): Default image. */
 	log_warn("Template image '%s' not found, using fallback image", path.c_str());
 	return kFallbackImage;
+}
+
+void update_intro_style_config() {
+	// Save splash image realpath and intro font to the config, because start up needs it before
+	// addon themes are initialized
+	set_config_string("splash_image", resolve_template_image_filename(kSplashImage));
+	set_config_string(
+	   "intro_font", g_style_manager->font_style(UI::FontStyle::kFsMenuIntro).as_font_open());
 }
 
 namespace {

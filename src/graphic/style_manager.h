@@ -45,6 +45,8 @@ inline bool is_using_default_theme() {
 int get_scale_factor_quarters();
 void set_scale_factor_quarters(int quarters, bool update_style = true);
 
+void update_intro_style_config();
+
 extern const std::string kSplashImage;
 extern const std::string kFallbackImage;
 
