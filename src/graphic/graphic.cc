@@ -171,6 +171,7 @@ Graphic::~Graphic() {
 		SDL_GL_DeleteContext(gl_context_);
 		gl_context_ = nullptr;
 	}
+	SDL_GL_UnloadLibrary();
 }
 
 int Graphic::get_display_at(int x, int y) const {
