@@ -111,8 +111,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
-	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,
-	// probably coming from the gaphics drivers
 	gl_context_ = Gl::initialize(
 	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_, &max);
 
