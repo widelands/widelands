@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-11 04:23+0000\n"
+"POT-Creation-Date: 2026-04-16 04:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
@@ -1641,18 +1641,18 @@ msgstr ""
 
 #. * TRANSLATORS: Ship fleets had to be split
 #: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2283
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
 msgctxt "ship"
 msgid "Fleet split"
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2283
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
 msgid "Ship Fleet split"
 msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:596
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2299
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
 msgstr ""
@@ -1803,54 +1803,54 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2332
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
 msgctxt "ship"
 msgid "Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2332
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
 msgid "Warship Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2333
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2348
 msgid "A warship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2338
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2338
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2339
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2354
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2516
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2531
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2518
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2533
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2522
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2537
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2525
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2540
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2533
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2548
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -1862,10 +1862,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2539
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2549
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2555
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2569
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2554
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2564
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2570
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2584
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -1873,7 +1873,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2544
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2559
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -1881,7 +1881,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2564
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2579
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -1889,7 +1889,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2576
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2591
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1897,14 +1897,14 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2580
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2595
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2584
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2599
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1913,7 +1913,7 @@ msgstr ""
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2589
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2604
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
