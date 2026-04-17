@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
