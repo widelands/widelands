@@ -51,14 +51,14 @@ void CmdSetSoldierPreference::execute(Game& game) {
 		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
 			ms->soldier_preference = preference;
 		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
-			ts->build_heroes = preference;
+			ts->soldier_preference = preference;
 		} else if (upcast(WarehouseSettings, wh, cs->get_settings())) {
 			wh->soldier_preference = preference;
 		}
 	} else if (upcast(MilitarySite, ms, mo)) {
 		ms->set_soldier_preference(preference);
 	} else if (upcast(TrainingSite, ts, mo)) {
-		ts->set_build_heroes(preference);
+		ts->set_soldier_preference(preference);
 	} else if (upcast(Warehouse, wh, mo)) {
 		wh->set_soldier_preference(preference);
 	} else if (upcast(Ship, ship, mo)) {

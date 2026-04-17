@@ -94,9 +94,6 @@ static GameLogicCommand& do_create_correct_queue_command(QueueCommandTypes const
 		return *new CmdEnhanceBuilding(args...);
 	case QueueCommandTypes::kBulldoze:
 		return *new CmdBulldoze(args...);
-	// TODO(tothxa): remove after v1.5
-	case QueueCommandTypes::kChangeTrainingOptions:
-		throw wexception("kChangeTrainingOptions command type was removed");
 	case QueueCommandTypes::kDropSoldier:
 		return *new CmdDropSoldier(args...);
 	case QueueCommandTypes::kChangeSoldierCapacity:

@@ -44,7 +44,7 @@ const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
    PROP_RO(LuaTrainingSite, max_soldiers),
-   PROP_RW(LuaTrainingSite, build_heroes),
+   PROP_RW(LuaTrainingSite, soldier_preference),
    PROP_RW(LuaTrainingSite, capacity),
    {nullptr, nullptr, nullptr},
 };
@@ -76,7 +76,7 @@ int LuaTrainingSite::get_capacity(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: build_heroes
+   .. attribute:: soldier_preference
 
       .. versionadded:: 1.4
 
@@ -86,18 +86,18 @@ int LuaTrainingSite::get_capacity(lua_State* L) {
       In other words, ``"heroes"`` brings a single soldier up to the highest possible level before
       training the next one, while ``"rookies"`` trains all present soldiers in parallel.
 */
-int LuaTrainingSite::set_build_heroes(lua_State* L) {
+int LuaTrainingSite::set_soldier_preference(lua_State* L) {
 	try {
 		get(L, get_egbase(L))
-		   ->set_build_heroes(string_to_soldier_preference(luaL_checkstring(L, -1)));
+		   ->set_soldier_preference(string_to_soldier_preference(luaL_checkstring(L, -1)));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
 }
-int LuaTrainingSite::get_build_heroes(lua_State* L) {
+int LuaTrainingSite::get_soldier_preference(lua_State* L) {
 	lua_pushstring(
-	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_build_heroes()).c_str());
+	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_soldier_preference()).c_str());
 	return 1;
 }
 

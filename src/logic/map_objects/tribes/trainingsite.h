@@ -179,11 +179,11 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
-	SoldierPreference get_build_heroes() const {
-		return build_heroes_;
+	SoldierPreference get_soldier_preference() const {
+		return soldier_preference_;
 	}
-	void set_build_heroes(SoldierPreference b_heroes) {
-		build_heroes_ = b_heroes;
+	void set_soldier_preference(SoldierPreference preference) {
+		soldier_preference_ = preference;
 		update_soldier_request(true);
 	}
 
@@ -272,7 +272,7 @@ private:
 	/** kHeroes, \b request and upgrade already experienced soldiers first, when possible
 	 *  kRookies, \b request and upgrade inexperienced soldiers first, when possible
 	 *  kAny, \b request and upgrade first found suitable soldier */
-	SoldierPreference build_heroes_{SoldierPreference::kHeroes};
+	SoldierPreference soldier_preference_{SoldierPreference::kHeroes};
 
 	std::map<TypeAndLevel, Upgrade> upgrades_;
 	std::map<TypeAndLevel, Upgrade>::iterator current_upgrade_;

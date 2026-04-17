@@ -67,7 +67,7 @@ inline uint16_t level_from_key(const Widelands::TypeAndLevel key) {
 
 namespace Widelands {
 
-const uint32_t TrainingSite::training_state_multiplier_ = 12;
+const uint32_t TrainingSite::training_state_multiplier_ = 1;
 
 /**
  * The contents of 'table' are documented in
@@ -450,7 +450,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 	}
 
 	Soldier* best_soldier = nullptr;
-	unsigned best_level = (build_heroes_ == SoldierPreference::kRookies) ?
+	unsigned best_level = (soldier_preference_ == SoldierPreference::kRookies) ?
 	                         soldiers_.front()->descr().get_max_total_level() :
 	                         0;
 	unsigned current_level;
@@ -459,7 +459,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 		if (soldier->get_level(attr) != level) {
 			continue;
 		}
-		if (build_heroes_ == SoldierPreference::kAny) {
+		if (soldier_preference_ == SoldierPreference::kAny) {
 			return soldier;
 		}
 		current_level = soldier->get_total_level();
@@ -473,7 +473,7 @@ Soldier* TrainingSite::pick_another_soldier(const TrainingAttribute attr, const 
 }
 
 inline bool TrainingSite::compare_levels(const unsigned first, const unsigned second) const {
-	switch (build_heroes_) {
+	switch (soldier_preference_) {
 	case SoldierPreference::kAny:
 		return false;
 	case SoldierPreference::kHeroes:
@@ -536,7 +536,7 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 
 		soldier_request_ =
 		   new SoldierRequest(*this, owner().tribe().soldier(),
-		                      TrainingSite::request_soldier_callback, wwWORKER, build_heroes_);
+		                      TrainingSite::request_soldier_callback, wwWORKER, soldier_preference_);
 
 		RequireOr r;
 
@@ -565,7 +565,7 @@ void TrainingSite::update_soldier_request(const bool needs_update_statuses) {
 		force_rebuild_soldier_requests_ = false;
 
 	} else {
-		soldier_request_->set_preference(build_heroes_);
+		soldier_request_->set_preference(soldier_preference_);
 	}
 
 	soldier_request_->set_count(capacity_ - soldiers_.size());
@@ -606,13 +606,9 @@ inline void TrainingSite::drop_all_soldiers_from_vector(std::vector<Soldier*>& v
 
 // soldiers_ itself must not be passed directly, pass a copy of it if needed
 void TrainingSite::drop_soldiers_from_vector(std::vector<Soldier*>& v, unsigned number_to_drop) {
-	if (number_to_drop >= v.size()) {
-		log_warn("TrainingSite::drop_soldiers_from_vector(): Use drop_all_soldiers_from_vector()");
-		drop_all_soldiers_from_vector(v);
-		return;
-	}
+	assert(number_to_drop < v.size());  // Use drop_all_soldiers_from_vector(v) instead
 
-	if (build_heroes_ != SoldierPreference::kAny) {
+	if (soldier_preference_ != SoldierPreference::kAny) {
 		std::sort(v.begin(), v.end(), [this](Soldier* a, Soldier* b) {
 			const unsigned level_a = a->get_total_level();
 			const unsigned level_b = b->get_total_level();
@@ -683,7 +679,7 @@ std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings()
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
-	settings->build_heroes = build_heroes_;
+	settings->soldier_preference = soldier_preference_;
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
@@ -742,7 +738,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		return;
 	}
 
-	if (build_heroes_ != SoldierPreference::kAny) {
+	if (soldier_preference_ != SoldierPreference::kAny) {
 		// update_upgrade_statuses() picked the soldier and the training step for us,
 		// unless there are no soldiers for the possible training steps
 		if (selected_soldier_.get(game) == nullptr) {
@@ -822,7 +818,7 @@ TrainingSite::Upgrade::Upgrade(const TrainingAttribute attr, const uint16_t leve
 unsigned TrainingSite::current_training_level() const {
 	if (current_upgrade_ == upgrades_.end()) {
 		// This should only be possible when saving the game
-		constexpr unsigned kRandomInvalidLevel = 99;
+		constexpr unsigned kRandomInvalidLevel = 0xff;
 		return kRandomInvalidLevel;
 	}
 	return level_from_key(current_upgrade_->first);
@@ -898,7 +894,7 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 	if (select_next_step) {
 		selected_soldier_ = nullptr;
 	}
-	unsigned best_total_level = (build_heroes_ == SoldierPreference::kRookies) ?
+	unsigned best_total_level = (soldier_preference_ == SoldierPreference::kRookies) ?
 	                               soldiers_.front()->descr().get_max_total_level() :
 	                               0;
 
@@ -924,7 +920,7 @@ void TrainingSite::update_upgrade_statuses(const bool select_next_step) {
 
 		switch (best_status) {
 		case Upgrade::Status::kCanStart:
-			if (select_next_step && build_heroes_ != SoldierPreference::kAny) {
+			if (select_next_step && soldier_preference_ != SoldierPreference::kAny) {
 				const unsigned this_total_level = soldier->get_total_level();
 				if (compare_levels(best_total_level, this_total_level) ||
 				    selected_soldier_ == nullptr) {

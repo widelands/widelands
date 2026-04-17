@@ -114,7 +114,7 @@ void TrainingsiteSettings::apply(const BuildingSettings& bs) {
 	if (upcast(const TrainingsiteSettings, s, &bs)) {
 		desired_capacity =
 		   new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
-		build_heroes = s->build_heroes;
+		soldier_preference = s->soldier_preference;
 	}
 }
 
@@ -323,8 +323,9 @@ void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version <= kCurrentPacketVersionTrainingsite) {
 			desired_capacity = fr.unsigned_32();
+			// TODO(tothxa): Savegame compatibility with v1.3
 			if (packet_version >= 2) {
-				build_heroes = static_cast<SoldierPreference>(fr.unsigned_8());
+				soldier_preference = static_cast<SoldierPreference>(fr.unsigned_8());
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -339,7 +340,7 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	ProductionsiteSettings::save(game, fw);
 	fw.unsigned_8(kCurrentPacketVersionTrainingsite);
 	fw.unsigned_32(desired_capacity);
-	fw.unsigned_8(static_cast<uint8_t>(build_heroes));
+	fw.unsigned_8(static_cast<uint8_t>(soldier_preference));
 }
 
 void WarehouseSettings::read(const Game& game, FileRead& fr) {

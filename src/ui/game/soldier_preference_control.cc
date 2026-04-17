@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 by the Widelands Development Team
+ * Copyright (C) 2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -110,7 +110,7 @@ void SoldierPreferenceControl::think() {
 	}
 	case Widelands::MapObjectType::TRAININGSITE: {
 		upcast(const Widelands::TrainingSite, ts, object);
-		current_pref = ts->get_build_heroes();
+		current_pref = ts->get_soldier_preference();
 		break;
 	}
 	case Widelands::MapObjectType::CONSTRUCTIONSITE: {
@@ -118,7 +118,7 @@ void SoldierPreferenceControl::think() {
 		if (upcast(const Widelands::MilitarysiteSettings, ms, cs->get_settings())) {
 			current_pref = ms->soldier_preference;
 		} else if (upcast(const Widelands::TrainingsiteSettings, ts, cs->get_settings())) {
-			current_pref = ts->build_heroes;
+			current_pref = ts->soldier_preference;
 		} else if (upcast(const Widelands::WarehouseSettings, wh, cs->get_settings())) {
 			current_pref = wh->soldier_preference;
 		}

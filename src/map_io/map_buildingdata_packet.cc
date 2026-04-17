@@ -1102,9 +1102,9 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			}
 
 			trainingsite.capacity_ = fr.unsigned_8();
-			trainingsite.build_heroes_ = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
+			trainingsite.soldier_preference_ = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			if (trainingsite.soldier_request_ != nullptr) {
-				trainingsite.soldier_request_->set_preference(trainingsite.build_heroes_);
+				trainingsite.soldier_request_->set_preference(trainingsite.soldier_preference_);
 			}
 
 			if (packet_version > 7) {
@@ -1687,7 +1687,7 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 
 	fw.unsigned_8(trainingsite.capacity_);
-	fw.unsigned_8(static_cast<uint8_t>(trainingsite.build_heroes_));
+	fw.unsigned_8(static_cast<uint8_t>(trainingsite.soldier_preference_));
 
 	const Soldier* soldier = trainingsite.selected_soldier_.get(game);
 	if (soldier != nullptr) {
