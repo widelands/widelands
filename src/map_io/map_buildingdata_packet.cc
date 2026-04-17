@@ -1102,7 +1102,8 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			}
 
 			trainingsite.capacity_ = fr.unsigned_8();
-			trainingsite.soldier_preference_ = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
+			trainingsite.soldier_preference_ =
+			   static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			if (trainingsite.soldier_request_ != nullptr) {
 				trainingsite.soldier_request_->set_preference(trainingsite.soldier_preference_);
 			}
