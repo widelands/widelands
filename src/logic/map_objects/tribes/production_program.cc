@@ -1771,7 +1771,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	         static_cast<unsigned int>(training_.attribute), training_.level);
 
 	if (ts->get_selected_soldier(game, training_.attribute, training_.level) == nullptr) {
-		ps.set_production_result(ts->descr().no_soldier_to_train_message());
+		ps.set_production_result(ts->descr().no_soldier_for_training_level_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 
@@ -1841,7 +1841,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 
 	Soldier* soldier = ts.get_selected_soldier(game, training_.attribute, current_level);
 	if (soldier == nullptr) {
-		ps.set_production_result(_("No soldier found for this training level!"));
+		ps.set_production_result(ts.descr().no_soldier_for_training_level_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 

@@ -725,6 +725,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		    soldier_request_->get_num_transfers() == 0) {
 			++failures_count_;
 		}
+		set_production_result(descr().no_soldier_to_train_message());
 		program_start(game, "sleep");
 		return;
 	}
@@ -733,6 +734,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 
 	if (max_possible_status_ < Upgrade::Status::kCanStart) {
 		++failures_count_;
+		set_production_result(_("All training levels are missing some wares, no training is possible!"));
 		program_start(game, "sleep");
 		return;
 	}
@@ -742,6 +744,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 		// unless there are no soldiers for the possible training steps
 		if (selected_soldier_.get(game) == nullptr) {
 			++failures_count_;
+			set_production_result(descr().no_soldier_for_training_level_message());
 			program_start(game, "sleep");
 			return;
 		}
@@ -768,6 +771,7 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 
 	if (!current_upgrade_->second.has_wares_and_candidate()) {
 		++failures_count_;
+		set_production_result(descr().no_soldier_for_training_level_message());
 		program_start(game, "sleep");
 		return;
 	}
