@@ -734,7 +734,8 @@ void TrainingSite::find_and_start_next_program(Game& game) {
 
 	if (max_possible_status_ < Upgrade::Status::kCanStart) {
 		++failures_count_;
-		set_production_result(_("All training levels are missing some wares, no training is possible!"));
+		set_production_result(
+		   _("All training levels are missing some wares, no training is possible!"));
 		program_start(game, "sleep");
 		return;
 	}
