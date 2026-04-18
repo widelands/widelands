@@ -21,8 +21,6 @@
 #include <functional>
 
 #include "base/i18n.h"
-#include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
