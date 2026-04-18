@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-16 04:56+0000\n"
+"POT-Creation-Date: 2026-04-18 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alexandros “Icydemon” Koutroulis, 2024\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -500,7 +500,7 @@ msgstr "Διαδραστικός παίκτης"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:179
+#: ../../../../src/graphic/gl/initialize.cc:177
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -509,8 +509,8 @@ msgstr "Το Widelands δεν θα λειτουργήσει καθώς δεν κ
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:183
-#: ../../../../src/graphic/gl/initialize.cc:196
+#: ../../../../src/graphic/gl/initialize.cc:181
+#: ../../../../src/graphic/gl/initialize.cc:194
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -519,7 +519,7 @@ msgstr "Υπάρχει κάποιο άγνωστο σφάλμα κατά την 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:193
+#: ../../../../src/graphic/gl/initialize.cc:191
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "Το Widelands δεν θα λειτουργήσει καθώς δεν καταφέραμε να εντοπίσουμε την έκδοση OpenGL."
@@ -527,15 +527,15 @@ msgstr "Το Widelands δεν θα λειτουργήσει καθώς δεν κ
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:224
-#: ../../../../src/graphic/gl/initialize.cc:244
+#: ../../../../src/graphic/gl/initialize.cc:222
+#: ../../../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "Το Widelands δεν θα λειτουργήσει καθώς ο οδηγός γραφικών είναι πολύ παλιός."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:227
+#: ../../../../src/graphic/gl/initialize.cc:225
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
 msgstr "Η έκδοση του  %1$s χρειάζεται να είναι %2$u.%3$u ή νεότερη."
@@ -543,16 +543,16 @@ msgstr "Η έκδοση του  %1$s χρειάζεται να είναι %2$u.%
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:247
+#: ../../../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "Το %1$s χρειάζεται να είναι στην έκδοση %2$u.%3$u ή νεότερη."
 
-#: ../../../../src/graphic/gl/initialize.cc:263
+#: ../../../../src/graphic/gl/initialize.cc:261
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../../../src/graphic/gl/initialize.cc:310
+#: ../../../../src/graphic/gl/initialize.cc:308
 msgid "Shading Language"
 msgstr "Γλώσσα Shading"
 
