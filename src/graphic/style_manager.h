@@ -42,6 +42,7 @@ inline bool is_using_default_theme() {
 	return template_dir() == kDefaultTemplate;
 }
 
+constexpr int kMaxScaleFactorQuarters = 12;
 int get_scale_factor_quarters();
 void set_scale_factor_quarters(int quarters, bool update_style = true);
 

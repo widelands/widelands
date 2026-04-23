@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
@@ -77,7 +78,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 std::vector<std::string> generate_ui_scaling_slider_labels() {
 	std::vector<std::string> labels;
-	for (int i = 1; i <= 12; ++i) {
+	for (int i = 1; i <= kMaxScaleFactorQuarters; ++i) {
 		switch (i % 4) {
 		case 0:
 			/** TRANSLATORS: This is a UI scaling integer value of the form "2×" */
@@ -1019,7 +1020,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
-	opt.ui_scaling_factor_quarters = opt_section_.get_int("ui_scaling_factor_quarters", 4);
+	opt.ui_scaling_factor_quarters = math::clamp(opt_section_.get_int("ui_scaling_factor_quarters", 4), 1, kMaxScaleFactorQuarters);
 
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
