@@ -1020,7 +1020,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
-	opt.ui_scaling_factor_quarters = math::clamp(opt_section_.get_int("ui_scaling_factor_quarters", 4), 1, kMaxScaleFactorQuarters);
+	opt.ui_scaling_factor_quarters = math::clamp(
+	   opt_section_.get_int("ui_scaling_factor_quarters", 4), 1, kMaxScaleFactorQuarters);
 
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
