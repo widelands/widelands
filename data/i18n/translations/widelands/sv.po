@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-11 04:23+0000\n"
+"POT-Creation-Date: 2026-04-18 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025-2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -505,7 +505,7 @@ msgstr "Interaktiv spelare"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:179
+#: ../../../../src/graphic/gl/initialize.cc:177
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -514,8 +514,8 @@ msgstr "Widelands fungerar inte eftersom vi inte kunde hitta versionen av OpenGL
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:183
-#: ../../../../src/graphic/gl/initialize.cc:196
+#: ../../../../src/graphic/gl/initialize.cc:181
+#: ../../../../src/graphic/gl/initialize.cc:194
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -524,7 +524,7 @@ msgstr "Det har uppstått ett okänt problem med att läsa information från gra
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:193
+#: ../../../../src/graphic/gl/initialize.cc:191
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "Widelands fungerar inte eftersom vi inte kunde hitta versionen av OpenGL."
@@ -532,15 +532,15 @@ msgstr "Widelands fungerar inte eftersom vi inte kunde hitta versionen av OpenGL
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:224
-#: ../../../../src/graphic/gl/initialize.cc:244
+#: ../../../../src/graphic/gl/initialize.cc:222
+#: ../../../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "Widelands fungerar inte eftersom din grafikdrivrutin är för gammal."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:227
+#: ../../../../src/graphic/gl/initialize.cc:225
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
 msgstr "%1$s-versionen måste vara version %2$u.%3$u eller nyare."
@@ -548,16 +548,16 @@ msgstr "%1$s-versionen måste vara version %2$u.%3$u eller nyare."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:247
+#: ../../../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "%1$s måste vara version %2$u.%3$u eller nyare."
 
-#: ../../../../src/graphic/gl/initialize.cc:263
+#: ../../../../src/graphic/gl/initialize.cc:261
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../../../src/graphic/gl/initialize.cc:310
+#: ../../../../src/graphic/gl/initialize.cc:308
 msgid "Shading Language"
 msgstr "OpenGL Shading Language"
 
@@ -1637,18 +1637,18 @@ msgstr "Ditt skepp har nått sin destination."
 
 #. * TRANSLATORS: Ship fleets had to be split
 #: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2283
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
 msgctxt "ship"
 msgid "Fleet split"
 msgstr "Flottan uppdelad"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2283
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
 msgid "Ship Fleet split"
 msgstr "Skeppsflottan uppdelad"
 
 #: ../../../../src/logic/map_objects/tribes/ship.cc:596
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2284
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2299
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
 msgstr "En skeppsflotta måste delas upp eftersom en terrängförändring blockerade en passage."
@@ -1799,54 +1799,54 @@ msgid ""
 msgstr "En upptäckt hamnplats är inte längre tillgänglig för byggnation av en hamn."
 
 #. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2332
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
 msgctxt "ship"
 msgid "Warship"
 msgstr "Krigsskepp"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2332
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
 msgid "Warship Ready"
 msgstr "Krigsskepp redo"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2333
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2348
 msgid "A warship is waiting for your commands."
 msgstr "Ett krigsskepp väntar på dina order."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2338
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedition"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2338
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
 msgid "Expedition Ready"
 msgstr "Expedition klar"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2339
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2354
 msgid "An expedition ship is waiting for your commands."
 msgstr "Ett expeditionsskepp väntar på dina order."
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2516
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2531
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr "Sjunker"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2518
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2533
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr "Strid"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2522
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2537
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr "Byggs om till transportskepp"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2525
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2540
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr "Byggs om till krigsskepp"
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2533
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2548
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -1858,10 +1858,10 @@ msgstr "Krigsskepp"
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2539
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2549
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2555
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2569
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2554
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2564
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2570
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2584
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -1869,7 +1869,7 @@ msgstr "Seglar mot %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2544
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2559
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -1877,7 +1877,7 @@ msgstr "Tomt"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2564
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2579
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -1885,7 +1885,7 @@ msgstr "Skeppar till %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2576
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2591
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1893,14 +1893,14 @@ msgstr "Väntar"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2580
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2595
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Rekognocerar"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2584
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2599
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1909,7 +1909,7 @@ msgstr "Hamnplats hittad"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2589
+#: ../../../../src/logic/map_objects/tribes/ship.cc:2604
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Grundar koloni"
