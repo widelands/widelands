@@ -24,12 +24,12 @@ jobs:
       appimage: ${{ steps.changed_files.outputs.appimage }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
     - name: Check for changed files
-      uses: dorny/paths-filter@v3
+      uses: dorny/paths-filter@v4
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
@@ -149,12 +149,12 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 15
           token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
