@@ -35,7 +35,7 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/hyperlink.h"
-#include "graphic/styles/panel_styles.h"
+#include "graphic/style_manager.h"
 #include "notifications/signal.h"
 #include "sound/constants.h"
 
@@ -424,6 +424,16 @@ public:
 
 	// Call this on the topmost panel after you changed the template directory
 	void template_directory_changed();
+
+	/**
+	 * Convenience function to query the preferred UI widget dimensions
+	 * under the current theme and scaling factor.
+	 */
+	[[nodiscard]] static inline int default_spacing() { return g_style_manager->styled_size(StyledSize::kUIDefaultSpacing); }
+	[[nodiscard]] static inline int default_padding() { return g_style_manager->styled_size(StyledSize::kUIDefaultPadding); }
+	[[nodiscard]] static inline int default_indent() { return g_style_manager->styled_size(StyledSize::kUIDefaultIndent); }
+	[[nodiscard]] static inline int default_button_size() { return g_style_manager->styled_size(StyledSize::kUIDefaultButtonSize); }
+	[[nodiscard]] static inline int default_button_size_small() { return g_style_manager->styled_size(StyledSize::kUIDefaultButtonSizeSmall); }
 
 	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
 		kNone = 0,          ///< This panel is not saveable.
