@@ -10,7 +10,7 @@
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025
+# Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025-2026
 # ilmaren, 2021
 # Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-16 04:56+0000\n"
+"POT-Creation-Date: 2026-04-18 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025-2026\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -510,7 +510,7 @@ msgstr "Giocatore interattivo"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:179
+#: ../../../../src/graphic/gl/initialize.cc:177
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -519,8 +519,8 @@ msgstr "Widelands non funziona: impossibile rilevare versione dello shader"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:183
-#: ../../../../src/graphic/gl/initialize.cc:196
+#: ../../../../src/graphic/gl/initialize.cc:181
+#: ../../../../src/graphic/gl/initialize.cc:194
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -529,7 +529,7 @@ msgstr "Problema sconosciuto durante la lettura delle informazioni dal driver gr
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:193
+#: ../../../../src/graphic/gl/initialize.cc:191
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "Widelands non riesce a rilevare la versione di OpenGL"
@@ -537,15 +537,15 @@ msgstr "Widelands non riesce a rilevare la versione di OpenGL"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:224
-#: ../../../../src/graphic/gl/initialize.cc:244
+#: ../../../../src/graphic/gl/initialize.cc:222
+#: ../../../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "Widelands non può funzionare perché la versione dei driver grafici è troppo vecchia."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:227
+#: ../../../../src/graphic/gl/initialize.cc:225
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
 msgstr "Aggiornare la versione %1$s a %2$u,%3$u o successiva."
@@ -553,16 +553,16 @@ msgstr "Aggiornare la versione %1$s a %2$u,%3$u o successiva."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:247
+#: ../../../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "%1$s deve essere aggiornato alla versione %2$u.%3$u o successiva."
 
-#: ../../../../src/graphic/gl/initialize.cc:263
+#: ../../../../src/graphic/gl/initialize.cc:261
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../../../src/graphic/gl/initialize.cc:310
+#: ../../../../src/graphic/gl/initialize.cc:308
 msgid "Shading Language"
 msgstr "Linguaggio dello shader"
 
@@ -786,7 +786,7 @@ msgstr "Nessuno"
 #: ../../../../src/logic/addons.cc:284
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (versione %3$s)"
 
 #: ../../../../src/logic/addons.cc:314
 msgid "No game-relevant add-ons in use."
@@ -3476,11 +3476,11 @@ msgstr "Sblocca"
 
 #: ../../../../src/ui/basic/window.cc:847
 msgid "Minimize the window"
-msgstr ""
+msgstr "Riduci a icona la finestra"
 
 #: ../../../../src/ui/basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Riporta la finestra alle dimensioni normali"
 
 #: ../../../../src/ui/basic/window.cc:857
 msgid "Pin the window"
@@ -4692,7 +4692,7 @@ msgstr "Altezza fissa"
 
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Raccogli ..."
 
 #: ../../../../src/ui/editor/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
@@ -5339,7 +5339,7 @@ msgstr "Installato (%u)"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1661
 msgid "Translations for website maps"
-msgstr ""
+msgstr "Traduzioni per le mappe del sito web"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1664
 #, c-format

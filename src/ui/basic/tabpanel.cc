@@ -473,9 +473,10 @@ void TabPanel::draw(RenderTarget& dst) {
 	}
 
 	// draw the remaining separator
-	assert(x <= get_w());
-	dst.brighten_rect(Recti(x + tab_width, kTabPanelButtonHeight - 2, get_w() - x, 2),
-	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
+	if (get_w() > x) {
+		dst.brighten_rect(Recti(x + tab_width, kTabPanelButtonHeight - 2, get_w() - x, 2),
+		                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
+	}
 
 	// Draw border around the main panel
 	if (tab_style_ == UI::TabPanelStyle::kFsMenu) {

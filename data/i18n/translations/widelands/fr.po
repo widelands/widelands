@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-04-16 04:56+0000\n"
+"POT-Creation-Date: 2026-04-18 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -519,7 +519,7 @@ msgstr "Joueur Interactif"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:179
+#: ../../../../src/graphic/gl/initialize.cc:177
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -528,8 +528,8 @@ msgstr "Widelands ne fonctionnera pas car nous n'avons pas été capable de dét
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:183
-#: ../../../../src/graphic/gl/initialize.cc:196
+#: ../../../../src/graphic/gl/initialize.cc:181
+#: ../../../../src/graphic/gl/initialize.cc:194
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -538,7 +538,7 @@ msgstr "Il y a un problème inconnu en lisant les informations du pilote graphiq
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:193
+#: ../../../../src/graphic/gl/initialize.cc:191
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "Widelands ne fonctionnera pas car nous n'avons pas été capable de détecter la version d'OpenGL."
@@ -546,15 +546,15 @@ msgstr "Widelands ne fonctionnera pas car nous n'avons pas été capable de dét
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:224
-#: ../../../../src/graphic/gl/initialize.cc:244
+#: ../../../../src/graphic/gl/initialize.cc:222
+#: ../../../../src/graphic/gl/initialize.cc:242
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "Widelands ne fonctionnera pas car votre pilote graphique est trop vieux."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:227
+#: ../../../../src/graphic/gl/initialize.cc:225
 #, c-format
 msgid "The %1$s version needs to be version %2$u.%3$u or newer."
 msgstr "La version %1$s a besoin d'être en version %2$u.%3$u ou plus récente."
@@ -562,16 +562,16 @@ msgstr "La version %1$s a besoin d'être en version %2$u.%3$u ou plus récente."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../../../src/graphic/gl/initialize.cc:247
+#: ../../../../src/graphic/gl/initialize.cc:245
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "Le %1$s nécessite d'être en version %2$u.%3$u ou plus récente."
 
-#: ../../../../src/graphic/gl/initialize.cc:263
+#: ../../../../src/graphic/gl/initialize.cc:261
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../../../src/graphic/gl/initialize.cc:310
+#: ../../../../src/graphic/gl/initialize.cc:308
 msgid "Shading Language"
 msgstr "Langage de shading"
 
