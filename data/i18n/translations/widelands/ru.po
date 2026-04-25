@@ -12,7 +12,7 @@
 # GunChleoc, 2016,2018
 # aa26bd9ab58eaf66f2dd8a133c45eb7b_740a4a0 <e0546a0601f08ad77df0edd7ee27c670_658246>, 2017
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
-# Viktor Skachkov <awsswa59@gmail.com>, 2023
+# Viktor Skachkov <awsswa59@gmail.com>, 2023,2026
 # Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2025
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
@@ -27,7 +27,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-04-18 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2025\n"
+"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023,2026\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -470,7 +470,7 @@ msgstr "Экономика"
 #: ../../../../src/game_io/game_loader.cc:143
 #: ../../../../src/game_io/game_saver.cc:90
 msgid "Trades"
-msgstr ""
+msgstr "Торговля"
 
 #: ../../../../src/game_io/game_loader.cc:150
 #: ../../../../src/game_io/game_saver.cc:97
@@ -1025,33 +1025,33 @@ msgstr "Предложение обмена"
 
 #: ../../../../src/logic/game.cc:1337
 msgid "New trade offer received"
-msgstr ""
+msgstr "Новое торговое предложение получено"
 
 #: ../../../../src/logic/game.cc:1338
 #, c-format
 msgid "You have received a new trade offer from %s."
-msgstr ""
+msgstr "Вы получили новое торговое предложение от %s."
 
 #: ../../../../src/logic/game.cc:1368
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Торговля одобрена"
 
 #: ../../../../src/logic/game.cc:1369
 msgid "Trade offer accepted"
-msgstr ""
+msgstr "Торговое предложение принято"
 
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$s принял ваше торговое предложение в%2$s."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Торговля отклонена"
 
 #: ../../../../src/logic/game.cc:1389
 msgid "Trade offer rejected"
-msgstr ""
+msgstr "Торговое предложение отклонено"
 
 #: ../../../../src/logic/game.cc:1390
 #, c-format
@@ -1060,7 +1060,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
-msgstr ""
+msgstr "Сделка отозвана"
 
 #: ../../../../src/logic/game.cc:1414
 msgid "Trade offer retracted"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Продление торговли отозвано"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
@@ -1245,22 +1245,22 @@ msgstr ""
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u торговля"
+msgstr[1] "%u торгует"
+msgstr[2] "%u торговли"
+msgstr[3] "%u торгует"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
-msgstr ""
+msgstr "Торговля отменена"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Complete"
-msgstr ""
+msgstr "Торговля завершена"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement cancelled"
-msgstr ""
+msgstr "Торговое соглашение отменено"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:277
 msgid "Trade agreement complete"
@@ -1291,7 +1291,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Торговля возобновлена"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
@@ -1312,7 +1312,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Торговое предложение от %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
@@ -1325,10 +1325,10 @@ msgstr ""
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d партия"
+msgstr[1] "%d партии"
+msgstr[2] "%d партий"
+msgstr[3] "%d партий"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
@@ -1354,29 +1354,29 @@ msgstr[3] ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
-msgstr ""
+msgstr "Приостановлена обоими игроками"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:819
 msgid "Paused by you"
-msgstr ""
+msgstr "Приостановлена тобой"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:820
 #: ../../../../src/logic/map_objects/tribes/market.cc:824
 #, c-format
 msgid "Paused by %s"
-msgstr ""
+msgstr "Приостановлена %s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:826
 msgid "Active"
-msgstr ""
+msgstr "Активна"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "Player sends:"
-msgstr ""
+msgstr "Игрок отправляет:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:838
 msgid "You send:"
-msgstr ""
+msgstr "Вы отправляете:"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
 #. * TRANSLATORS:    %1$i = "2"
@@ -1386,15 +1386,15 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/production_program.cc:1407
 #, c-format
 msgid "%1$i× %2$s"
-msgstr ""
+msgstr "%1$i× %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "Player receives:"
-msgstr ""
+msgstr "Игрок получает:"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:850
 msgid "You receive:"
-msgstr ""
+msgstr "Вы получаете:"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../../../src/logic/map_objects/tribes/militarysite.cc:254
@@ -2147,7 +2147,7 @@ msgstr "Порт %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Рынок %d"
 
 #: ../../../../src/logic/player.cc:2098
 #, c-format
@@ -3167,11 +3167,11 @@ msgstr "Совпадений нет"
 
 #: ../../../../src/ui/basic/pagination.cc:39
 msgid "Go to first page"
-msgstr ""
+msgstr "Перейти на первую страницу"
 
 #: ../../../../src/ui/basic/pagination.cc:48
 msgid "Go to last page"
-msgstr ""
+msgstr "Перейти на последнюю страницу"
 
 #: ../../../../src/ui/basic/pagination.cc:56
 msgid "Items per page"
