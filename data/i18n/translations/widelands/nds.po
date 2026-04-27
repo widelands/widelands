@@ -7698,7 +7698,7 @@ msgstr "De angeven Weerts-Naam of Adress is ungültig, daar kann man nich mit ve
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7706,7 +7706,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7714,7 +7714,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7765,7 +7765,7 @@ msgstr "Ofstand dat Fensters an de Rand binnen:"
 
 #: ../../../../src/ui/fsmenu/options.cc:250
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Skaleer-Faktor för de Bruker-Schnittstee"
 
 #: ../../../../src/ui/fsmenu/options.cc:260
 msgid "Edit keyboard and mouse actions…"
@@ -7894,7 +7894,7 @@ msgstr "Im Speel"
 
 #: ../../../../src/ui/fsmenu/options.cc:490
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Skaleer-Faktor för de Bruker-Schnittstee:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:574
