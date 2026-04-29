@@ -135,7 +135,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 			picker_target_ = spinbox;
 		});
 	}
-
+	noise_tool_.set_tool().interval_changed.connect(
+			[this](const Widelands::HeightInterval interval) {set_to_.set_value(interval.min, false);});
 	set_center_panel(&box_);
 	initialization_complete();
 }
