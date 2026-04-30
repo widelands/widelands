@@ -549,6 +549,8 @@ void MainMenu::set_labels() {
 	   format(_("(C) %1%-%2% by the Widelands Development Team • Licensed under "
 	            "the GNU General Public License V2.0"),
 	          kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
+	version_.set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+	copyright_.set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 }
 
 void MainMenu::set_button_visibility(const bool v) {
