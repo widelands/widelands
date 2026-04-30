@@ -7702,7 +7702,7 @@ msgstr "De hostnaam of het adres dat je ingaf is ongeldig, er kan geen verbindin
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7710,7 +7710,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7718,7 +7718,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7769,7 +7769,7 @@ msgstr "Afstand voor vensters om aan kaders aan te haken:"
 
 #: ../../../../src/ui/fsmenu/options.cc:250
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Schaalfactor voor de gebruikersinterface"
 
 #: ../../../../src/ui/fsmenu/options.cc:260
 msgid "Edit keyboard and mouse actions…"
@@ -7898,7 +7898,7 @@ msgstr "Tijdens Spelen"
 
 #: ../../../../src/ui/fsmenu/options.cc:490
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Schaalfactor voor de gebruikersinterface:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:574
