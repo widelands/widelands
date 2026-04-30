@@ -78,8 +78,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	table_.double_clicked.connect([this](uint32_t /* value */) { clicked_ok(); });
 	table_.cancel.connect([this]() { clicked_back(); });
 
-	UI::Box* hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "hbox", 0, 0,
-	                            UI::Box::Horizontal);
+	UI::Box* hbox =
+	   new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "hbox", 0, 0, UI::Box::Horizontal);
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
@@ -96,8 +96,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	// Row with dropdowns
 
-	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_1", 0, 0,
-	                   UI::Box::Horizontal);
+	hbox =
+	   new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_1", 0, 0, UI::Box::Horizontal);
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
@@ -145,8 +145,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	// Row with checkboxes
 
-	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_2", 0, 0,
-	                   UI::Box::Horizontal);
+	hbox =
+	   new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_2", 0, 0, UI::Box::Horizontal);
 	add_tag_checkbox(hbox, "seafaring");
 	add_tag_checkbox(hbox, "ferries");
 	add_tag_checkbox(hbox, "artifacts");
