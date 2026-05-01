@@ -4,9 +4,9 @@ local saved_version = get_build_id()
 
 -- Save the game so that reloading does not skip
 function stable_save(game, savename, desired_speed, desired_wait_time)
-   local last_save_time = game.last_save_time
+   local last_save_gametime = game.last_save_gametime
    local initial_gametime = game.time
-   print("###### stable_save: last save time " .. last_save_time)
+   print("###### stable_save: last save gametime " .. last_save_gametime .. ", realtime " .. game.last_save_time)
 
    game.desired_speed = 1000
    if lunit and lunit.stats and lunit.stats.run and
@@ -26,11 +26,11 @@ function stable_save(game, savename, desired_speed, desired_wait_time)
 
    -- Wait until save was finished and give the game some time to catch up
    wake_me(initial_gametime + (desired_wait_time or 10000))
-   while game.last_save_time == last_save_time do
+   while game.last_save_gametime == last_save_gametime do
       print("WARNING: Game save was delayed! Adding extra sleep time")
       sleep(1000)
    end
-   print("###### stable_save: new save time " .. game.last_save_time)
+   print("###### stable_save: new save gametime " .. game.last_save_gametime .. ", realtime " .. game.last_save_time)
 
    game.desired_speed = desired_speed
    sleep(100)
