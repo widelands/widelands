@@ -151,7 +151,7 @@ public:
 	}
 
 private:
-	bool scrolling_{false};
+	bool scrolling_{true};
 	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;
 	uint32_t orientation_;
