@@ -29,6 +29,8 @@ struct EditorSetHeightTool : public EditorTool {
 	   : EditorTool(parent, *this, *this), interval_(10, 10) {
 	}
 
+	Notifications::Signal<Widelands::HeightInterval> interval_changed;
+
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
@@ -48,6 +50,7 @@ struct EditorSetHeightTool : public EditorTool {
 	}
 	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
+		interval_changed(interval_);
 	}
 
 	WindowID get_window_id() override {
@@ -60,6 +63,7 @@ struct EditorSetHeightTool : public EditorTool {
 	}
 	void load_configuration(const ToolConf& conf) override {
 		interval_ = conf.interval;
+		interval_changed(interval_);
 	}
 
 private:

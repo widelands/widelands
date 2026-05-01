@@ -97,6 +97,9 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	set_center_panel(&box_);
 
+	increase_tool_.set_tool().interval_changed.connect(
+	   [this](const Widelands::HeightInterval interval) { set_to_.set_value(interval.min, false); });
+
 	initialization_complete();
 }
 
