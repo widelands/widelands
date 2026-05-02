@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1356,9 +1356,9 @@ msgstr "Hyödyntää ympäröivän alueen harvinaisia puita. Toimittaa sitten ke
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
@@ -14179,8 +14179,9 @@ msgstr "Hiiltä louhitaan hiilikaivoksilla tai sitä tuottaa tukeista hiilenpolt
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "Tiiliuunien tuleen ja haarniskapajoihin syötetään hiiltä."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

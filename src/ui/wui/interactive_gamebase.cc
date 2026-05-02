@@ -246,7 +246,7 @@ void InteractiveGameBase::handle_restart(const bool force) {
 
 void InteractiveGameBase::add_diplomacy_menu() {
 	add_toolbar_button(
-	   "ui/game/menus/diplomacy", "diplomacy",
+	   "wui/menus/diplomacy", "diplomacy",
 	   as_tooltip_text_with_hotkey(_("Diplomacy"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
 	                               UI::PanelStyle::kWui),
@@ -411,7 +411,7 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 
 void InteractiveGameBase::add_chat_ui() {
 	add_toolbar_button(
-	   "ui/game/menus/chat", "chat",
+	   "wui/menus/chat", "chat",
 	   as_tooltip_text_with_hotkey(
 	      _("Chat"), shortcut_string_for(KeyboardShortcut::kInGameChat, true), UI::PanelStyle::kWui),
 	   &chat_, true);
