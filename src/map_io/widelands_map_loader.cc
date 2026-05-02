@@ -55,7 +55,7 @@
 #include "map_io/map_waterway_packet.h"
 #include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
 
 namespace Widelands {
 

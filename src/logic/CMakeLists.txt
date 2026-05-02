@@ -71,7 +71,7 @@ wl_library(logic_game_controller
     commands
     logic_game_settings
     widelands_options
-    wui
+    wui_interactive
 )
 
 wl_library(logic_constants
@@ -184,7 +184,7 @@ wl_library(logic_map
     logic_widelands_geometry_io
     map_io_map_loader
     notifications
-    wui_mapview_pixelconstants
+    wui_mapviewpixelfunctions
 )
 
 wl_library(logic_training_wheels
@@ -270,7 +270,7 @@ wl_library(logic
     ui_basic
     ui_basic_loading_message
     widelands_options
-    wui # TODO(GunChleoc): Circular dependency
+    wui_interactive # TODO(GunChleoc): Circular dependency
     wui_game_tips
 )
 

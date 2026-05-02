@@ -20,10 +20,10 @@
 #define WL_SCRIPTING_UI_LUA_UI_HELPER_FUNCTIONS_H
 
 #include "scripting/lua.h"
-#include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
-#include "ui_basic/listselect.h"
+#include "ui/basic/box.h"
+#include "ui/basic/button.h"
+#include "ui/basic/dropdown.h"
+#include "ui/basic/listselect.h"
 
 namespace LuaUi {
 

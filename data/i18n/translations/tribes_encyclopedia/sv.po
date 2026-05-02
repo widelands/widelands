@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2017,2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1350,10 +1350,10 @@ msgstr "Skördar sällsynta träd i omgivningen. Levererar järnträ, balsaträ 
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
-msgstr "Denna byggnad kan producera mellan %1$s och %2$s sällsynta träslag, beroende på hur långt skogshuggaren måste gå. Om alla sällsynta träslag finns tillgängliga inom hennes arbetsområde produceras ett av varje sort mellan %3$s och %4$s."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14173,8 +14173,9 @@ msgstr "Kol bryts i kolgruvor eller framställs av stockar av en kolbrännare i 
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "Eldarna i tegelugnarna, smältugnarna och vapensmedjorna eldas med kol."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

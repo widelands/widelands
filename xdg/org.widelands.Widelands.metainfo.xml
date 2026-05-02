@@ -366,6 +366,7 @@ Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
+        <li xml:lang="it">Versione di correzione di bug</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
         <li xml:lang="nl">Bugfix-bericht</li>
         <li xml:lang="nn">Feilrettingsutgåve</li>
@@ -423,7 +424,7 @@ Version de correction de bugs</li>
         <li xml:lang="hu">Sok új lehetőség a bővítményfejlesztők számára</li>
         <li xml:lang="it">Market trading</li>
         <li xml:lang="it">Six new maps added and three old maps removed</li>
-        <li xml:lang="it">Economy districts</li>
+        <li xml:lang="it">Distretti economici</li>
         <li xml:lang="it">Molti miglioramenti all'Enciclopedia dentro alla partita</li>
         <li xml:lang="it">Download website maps as add-ons</li>
         <li xml:lang="it">New visualisation modes in the editor</li>
@@ -622,6 +623,7 @@ Version de correction de bugs</li>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
+    <name xml:lang="it">Il team di sviluppo di Widelands</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
     <name xml:lang="nn">Widelands utviklarlag</name>

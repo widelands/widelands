@@ -1,0 +1,90 @@
+/*
+ * Copyright (C) 2002-2026 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+#ifndef WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
+#define WL_UI_EDITOR_TOOL_OPTIONS_MENU_H
+
+#include "editor/tools/tool.h"
+#include "ui/basic/unique_window.h"
+#include "ui/editor/editorinteractive.h"
+
+struct EditorToolOptionsMenu : public UI::UniqueWindow {
+	EditorToolOptionsMenu(EditorInteractive& parent,
+	                      UI::UniqueWindow::Registry&,
+	                      uint32_t width,
+	                      uint32_t height,
+	                      const std::string& title,
+	                      EditorTool& tool);
+	~EditorToolOptionsMenu() override;
+
+	/**
+	 * Selects the correct tool from the parent.
+	 * This is needed when a selection was made in the options menus.
+	 */
+	void select_correct_tool();
+
+	[[nodiscard]] uint32_t spacing() const {
+		return 5;
+	}
+	[[nodiscard]] uint32_t hspacing() const {
+		return spacing();
+	}
+	[[nodiscard]] uint32_t vspacing() const {
+		return spacing();
+	}
+	[[nodiscard]] uint32_t hmargin() const {
+		return spacing();
+	}
+	[[nodiscard]] uint32_t vmargin() const {
+		return spacing();
+	}
+
+	[[nodiscard]] const EditorTool& current_tool() const {
+		return current_tool_;
+	}
+	[[nodiscard]] EditorTool& current_tool() {
+		return current_tool_;
+	}
+
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+	virtual bool pick_from_field(const Widelands::Map& /*map*/,
+	                             const Widelands::NodeAndTriangle<>& /*center*/,
+	                             bool /*multiselect*/) {
+		NEVER_HERE();
+	}
+	[[nodiscard]] virtual bool uses_picker() const {
+		return false;
+	}
+	void activate_picker();
+	void deactivate_picker();
+	virtual void toggle_picker();
+	[[nodiscard]] bool picker_is_active() const;
+
+	/**
+	 * Update window options to match tool settings
+	 */
+	virtual void update_window() {
+	}
+
+protected:
+	EditorInteractive& parent_;
+	EditorTool& current_tool_;
+};
+
+#endif  // end of include guard: WL_UI_EDITOR_TOOL_OPTIONS_MENU_H

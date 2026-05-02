@@ -41,7 +41,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/note_loading_message.h"
+#include "ui/basic/note_loading_message.h"
 
 namespace {
 

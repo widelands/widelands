@@ -38,7 +38,7 @@
 #include "scripting/ui/lua_textarea.h"
 #include "scripting/ui/lua_ui_helper_functions.h"
 #include "scripting/ui/lua_window.h"
-#include "ui_basic/messagebox.h"
+#include "ui/basic/messagebox.h"
 
 namespace LuaUi {
 
