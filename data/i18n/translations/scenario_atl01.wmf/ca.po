@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Juanjo, 2015-2020,2022-2023,2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -77,11 +77,11 @@ msgstr "Producció d’aliments"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "El menjar és molt important per les mines i edificis d’entrenament militar. Establiu un bon entorn de treball per produir aliments construint almenys una masoveria de panís, una de negrarrel i un molí. Els dos tipus de farina juntament amb l’aigua d’un pou són els ingredients del pa. Així que també cal que feu una fleca i un pou."
+msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

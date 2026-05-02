@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -87,11 +87,11 @@ msgstr "Nahrungsproduktion"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Nahrung ist für Minen und Ausbildungsstätten sehr wichtig. Errichte eine gut funktionierende Nahrungsproduktion, indem du mindestens einen Bauernhof, einen Dunkelrübenhof und eine Mühle baust. Die beiden Mehlsorten werden zusammen mit Wasser aus einem Brunnen in der Bäckerei zu Brot gebacken, also baue auch eine Bäckerei und einen Brunnen."
+msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -171,8 +171,8 @@ msgstr "Vad du förväntade dig skulle hända när du gjorde det du gjorde och v
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "Vilken version av Widelands du kör (d.v.s. antingen vilken revision eller vilket bygge du använder, beroende på om du kör en stabil version eller en utvecklingsversion av spelet.)"
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -570,10 +570,9 @@ msgstr "Djungelmästare lär sig sina färdigheter genom att arbeta som djungelb
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "Håll ett öga på dina fiskare och bygg en fiskodling. När fisken har tagit slut i vattnet kan inte fiskodlaren återställa fisktillgången."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

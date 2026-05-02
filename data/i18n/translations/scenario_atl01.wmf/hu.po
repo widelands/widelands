@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023,2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -83,11 +83,11 @@ msgstr "Élelemtermelés"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Az étel nagyon fontos a bányáknak és a katonai kiképzőhelyeknek. Létesíts egy jól működő élelmiszertermelő gazdaságot legalább egy földbirtok, egy feketegyökér ültetvény és egy malom építésével! A kétféle lisztből, illetve a kútból szerzett vízből a pékségben sütnek kenyeret, ezért építs egy pékséget és egy kutat is!"
+msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

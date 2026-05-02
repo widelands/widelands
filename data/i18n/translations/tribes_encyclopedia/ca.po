@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2025\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1347,10 +1347,10 @@ msgstr "Tala arbres rars de l’àrea del voltant. Aconsegueix fusta dura, fusta
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
-msgstr "Aquest edifici pot produir un tros de fusta d'arbre rar aproximadament cada %1$s i %2$s, en funció de la distància que hagi de caminar el llenyataire. Si hi ha disponibles diferents tipus d'arbres rars a la seva àrea de treball, se'n produeix un de cada tipus aproximadament entre %3$s i %4$s."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14170,8 +14170,9 @@ msgstr "El carbó s’extrau de les mines de carbó o s’obté a partir de tron
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "El foc de les bòbiles, les fargues i dels tallers d’armadures s’alimenten de carbó."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

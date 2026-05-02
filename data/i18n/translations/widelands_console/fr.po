@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-04-25 04:41+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2022,2024-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -160,6 +160,7 @@ msgstr "Lance le Script Lua indiqué après initiallisation. Ne fonctionne qu'av
 #: ../../../../src/wlapplication_messages.cc:221
 #: ../../../../src/wlapplication_messages.cc:255
 #: ../../../../src/wlapplication_messages.cc:265
+#: ../../../../src/wlapplication_messages.cc:270
 msgid "n"
 msgstr "n"
 
@@ -494,37 +495,44 @@ msgid ""
 "within a distance of `n` from the edge of the panel."
 msgstr "Déplace une fenêtre vers le bord du panneau lorsque le bord de la fenêtre se trouve à une distance de `n` du bord du panneau."
 
-#: ../../../../src/wlapplication_messages.cc:271
+#. * TRANSLATORS: `n` references a numerical placeholder
+#: ../../../../src/wlapplication_messages.cc:272
+msgid ""
+"The factor by which to fractionally scale the Widelands user interface, in "
+"quarters."
+msgstr ""
+
+#: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"
 msgstr "Activer les messages de débogage détaillés"
 
-#: ../../../../src/wlapplication_messages.cc:271
+#: ../../../../src/wlapplication_messages.cc:275
 msgid "Others:"
 msgstr "Autres :"
 
-#: ../../../../src/wlapplication_messages.cc:273
+#: ../../../../src/wlapplication_messages.cc:277
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "écrire toutes les chaines de caractères quand elles sont traduites. Ceci aide à identifier les problèmes avec l'internationalisation."
 
-#: ../../../../src/wlapplication_messages.cc:276
+#: ../../../../src/wlapplication_messages.cc:280
 msgid "Only print version and exit."
 msgstr "Juste indiquer la version et quitter."
 
-#: ../../../../src/wlapplication_messages.cc:277
+#: ../../../../src/wlapplication_messages.cc:281
 msgid "Show this help."
 msgstr "Afficher cette aide."
 
-#: ../../../../src/wlapplication_messages.cc:278
+#: ../../../../src/wlapplication_messages.cc:282
 msgid "Show this help with all available config options."
 msgstr "Afficher cette aide avec toutes les options de configurations disponibles."
 
-#: ../../../../src/wlapplication_messages.cc:279
+#: ../../../../src/wlapplication_messages.cc:283
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<save.wgf>/<replay.wry>"
 
-#: ../../../../src/wlapplication_messages.cc:280
+#: ../../../../src/wlapplication_messages.cc:284
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -532,12 +540,12 @@ msgid ""
 msgstr "Charge la sauvegarde indiquée ou la rejoue directement. Utile pour l'association d'extension de fichiers .wgf/.wry. Ne fonctionne pas avec d'autres options. Voir aussi --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../../../src/wlapplication_messages.cc:315
+#: ../../../../src/wlapplication_messages.cc:319
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Ceci est la version%sde Widelands"
 
-#: ../../../../src/wlapplication_messages.cc:373
+#: ../../../../src/wlapplication_messages.cc:377
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

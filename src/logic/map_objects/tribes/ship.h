@@ -188,6 +188,7 @@ struct Ship : Bob {
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
+	void remove_item_by_serial(Game& game, Serial serial);
 
 	/// \returns the current state the ship is in
 	[[nodiscard]] ShipStates get_ship_state() const {
@@ -315,6 +316,9 @@ struct Ship : Bob {
 	[[nodiscard]] std::vector<Soldier*> onboard_soldiers() const;
 	[[nodiscard]] std::vector<Soldier*> associated_soldiers() const;
 
+	// Must be called after changing the onboard soldiers directly.
+	void update_warship_soldier_request(bool create);
+
 	/**
 	 * Execute a warship command.
 	 * For a kAttack against a port, `parameters` contains first the port coordinates x,y and then
@@ -379,7 +383,6 @@ private:
 	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
-	void update_warship_soldier_request(bool create);
 	void erase_warship_soldier_request_manager();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.

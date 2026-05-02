@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_DROPDOWN_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/dropdown.h"
+#include "ui/basic/dropdown.h"
 
 namespace LuaUi {
 
