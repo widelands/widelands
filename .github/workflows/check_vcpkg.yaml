@@ -23,7 +23,7 @@ jobs:
     steps:
     - name: Checkout
       # We need a repo for setting the variable
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 1
     - name: Check setup
@@ -58,7 +58,7 @@ jobs:
       vcpkg_ref: ${{ steps.prepare.outputs.vcpkg_ref }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 1
     - name: Get vcpkg version
@@ -73,7 +73,7 @@ jobs:
       shell: bash
     - name: Check whether cache exists
       id: lookup
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         # Explicit path here because env is overridden by msvc-dev-cmd
         path: C:\vcpkg\installed
@@ -117,7 +117,7 @@ jobs:
     steps:
     - name: Checkout
       # We need a repo for setting the variable
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 1
     - name: Set variable
@@ -151,7 +151,7 @@ jobs:
         echo "$VCPKG_REF" >vcpkg_ref
         echo "vcpkg_ref=$VCPKG_REF" >>"$GITHUB_OUTPUT"
     - name: Store in cache
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         path: vcpkg_ref
         key: vcpkg_ref-${{ github.run_id }}-${{ steps.create.outputs.vcpkg_ref }}

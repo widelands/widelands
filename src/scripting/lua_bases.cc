@@ -42,7 +42,7 @@
 #include "scripting/map/lua_road.h"
 #include "scripting/map/lua_terrain_description.h"
 #include "scripting/map/lua_tribe_description.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
 
 namespace LuaBases {
 

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1347,10 +1347,10 @@ msgstr "Arnt Edelholten in de Naberskupp un maakt daarut Iesenholt, Balsa un Gum
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um een Edelholt to produzeren, je nadeem, wo wied de Boomslagerske lopen mutt. Wenn ’t all Aarden vun Edelholten in hör Arbeidsgewest gifft, word eens vun elkeen Aard in %3$s bit %4$s produzeert."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14170,8 +14170,9 @@ msgstr "Köhle word in Köhle-Bargwarken ofboot of vun eenem Holtköhlbranner in
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "Dat Füür in Backsteen-Brannereen, Smeltereen un Wapensmeden bruukt Köhl."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
