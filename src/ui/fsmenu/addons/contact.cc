@@ -21,7 +21,6 @@
 #include "base/log.h"
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
-#include "ui/shared/addons_constants.h"
 
 namespace AddOnsUI {
 
@@ -42,24 +41,24 @@ ContactForm::ContactForm(AddOnsCtrl& ctrl)
          "ok",
          0,
          0,
-         kRowButtonSize,
-         kRowButtonSize,
+         default_button_size(),
+         default_button_size(),
          UI::ButtonStyle::kFsMenuPrimary,
          _("Send message")),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             kRowButtonSize,
-             kRowButtonSize,
+             default_button_size(),
+             default_button_size(),
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")) {
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(message_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	check_ok_button_enabled();
