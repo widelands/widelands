@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2018,2020\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -170,8 +170,8 @@ msgstr "O que esperavas que acontecesse ao executar os passos e o que realmente 
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "Que versão de Widelands está a usar (i.e. ou o número de build ou o número da revisão se é uma versão de desenvolvimento ou um build diário.)"
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -569,10 +569,9 @@ msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "Presta bem atenção aos pescadores. Assim que os recursos piscícolas se esgotarem nessa área de trabalho, eles não vão poder pescar mais."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
