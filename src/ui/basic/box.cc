@@ -51,25 +51,8 @@ Box::Box(Panel* const parent,
 }
 
 /**
- * Enable or disable the creation of a scrollbar if the maximum
- * depth is exceeded.
- *
- * Scrollbars are only created for the direction in which boxes
- * are added, e.g. if the box has a \ref Vertical orientation,
- * only a vertical scrollbar may be added.
- */
-void Box::set_scrolling(bool scroll) {
-	if (scroll == scrolling_) {
-		return;
-	}
-
-	scrolling_ = scroll;
-	update_desired_size();
-}
-
-/**
  * If set to `true`, a scrollbar will always be used regardless of
- * whether `scrolling_` is true and whether a scrollbar is needed.
+ * whether a scrollbar is needed.
  */
 void Box::set_force_scrolling(bool f) {
 	if (force_scrolling_ == f) {
@@ -137,13 +120,13 @@ void Box::update_desired_size() {
 	}
 
 	if (orientation_ == Horizontal) {
-		if ((totaldepth > max_x_ && scrolling_) || force_scrolling_) {
+		if ((totaldepth > max_x_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(totaldepth, max_x_),   // + get_lborder() + get_rborder(),
 		                 std::min(maxbreadth, max_y_));  // + get_tborder() + get_bborder());
 	} else {
-		if ((totaldepth > max_y_ && scrolling_) || force_scrolling_) {
+		if ((totaldepth > max_y_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
@@ -158,7 +141,6 @@ void Box::update_desired_size() {
 
 bool Box::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (scrollbar_) {
-		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_mousewheel(x, y, modstate);
 	}
 	return Panel::handle_mousewheel(x, y, modstate);
@@ -166,7 +148,6 @@ bool Box::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 
 bool Box::handle_key(bool down, SDL_Keysym code) {
 	if (scrollbar_) {
-		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_key(down, code);
 	}
 	return Panel::handle_key(down, code);
@@ -200,12 +181,8 @@ void Box::layout() {
 
 	// Second pass: Adjust whether we have a scrollbar
 	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
-	bool needscrollbar = force_scrolling_;
-	if (!force_scrolling_ && scrolling_) {
-		needscrollbar = totaldepth > max_depths;
-	}
 
-	if (needscrollbar) {
+	if (force_scrolling_ || totaldepth > max_depths) {
 		int32_t sb_x;
 		int32_t sb_y;
 		int32_t sb_w;
@@ -293,13 +270,6 @@ void Box::update_positions() {
 #ifndef NDEBUG
 	// Subtract last spacing + some leeway from infspace calculation
 	totaldepth = totaldepth - items_.size() - inner_spacing_;
-	int max_depths = orientation_ == Horizontal ? get_w() : get_h();
-	if (!force_scrolling_ && !scrolling_ && max_depths > 0 && totaldepth > max_depths) {
-		// TODO(matthiakl): one day this should be an error
-		verb_log_dbg("Overflowing %s box %s: %d > %d ",
-		             orientation_ == Horizontal ? "horizontal" : "vertical  ", get_name().c_str(),
-		             totaldepth, max_depths);
-	}
 #endif
 }
 
