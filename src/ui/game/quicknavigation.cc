@@ -297,7 +297,6 @@ void QuickNavigationWindow::rebuild() {
 		content_box_->add(&box, UI::Box::Resizing::kFullSize);
 	}
 
-	content_box_->set_scrolling(true);
 	main_box_.add(content_box_.get(), UI::Box::Resizing::kExpandBoth);
 	initialization_complete();
 }

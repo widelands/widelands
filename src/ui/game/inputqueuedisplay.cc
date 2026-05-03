@@ -87,7 +87,6 @@ void ensure_box_can_hold_input_queues(UI::Box& b) {
 		p = p->get_parent();
 	}
 	b.set_max_size(p->get_w() - 200, p->get_h() - 200);
-	b.set_scrolling(true);
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
