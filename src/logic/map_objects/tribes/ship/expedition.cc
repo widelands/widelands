@@ -30,7 +30,8 @@ const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_s
 
 /// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
-bool can_support_port(const Widelands::FCoords& coords, Widelands::BaseImmovable::Size max_immo_size) {
+bool can_support_port(const Widelands::FCoords& coords,
+                      Widelands::BaseImmovable::Size max_immo_size) {
 	Widelands::BaseImmovable* baim = coords.field->get_immovable();
 	Widelands::Immovable* imo = dynamic_cast<Widelands::Immovable*>(baim);
 	// we have a player immovable
