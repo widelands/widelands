@@ -7704,7 +7704,7 @@ msgstr "Det angivna värdnamnet eller adressen är ogiltigt och kan inte ansluta
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7712,7 +7712,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7720,7 +7720,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -9688,7 +9688,7 @@ msgstr "Blanda"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Aktuell låt:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11713,7 +11713,7 @@ msgstr "Välj från karta"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Visa verktygsmenyn"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"
