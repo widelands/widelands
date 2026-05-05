@@ -9038,7 +9038,7 @@ msgstr "De normaalen Vörinstellens könen nich lösket worden"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Utköört Vörinstellen lösken"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9682,7 +9682,7 @@ msgstr "Misken"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Upstünds Lied:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11707,7 +11707,7 @@ msgstr "Vun Kaart utkören"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Warktüügmenü wiesen"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"
