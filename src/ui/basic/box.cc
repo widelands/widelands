@@ -18,7 +18,6 @@
 
 #include "ui/basic/box.h"
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "ui/basic/scrollbar.h"
 
@@ -266,11 +265,6 @@ void Box::update_positions() {
 
 		totaldepth += depth + inner_spacing_;
 	}
-
-#ifndef NDEBUG
-	// Subtract last spacing + some leeway from infspace calculation
-	totaldepth = totaldepth - items_.size() - inner_spacing_;
-#endif
 }
 
 /**
