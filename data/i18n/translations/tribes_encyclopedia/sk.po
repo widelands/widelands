@@ -1352,7 +1352,7 @@ msgid ""
 "how far the master woodcutter has to walk. If all kinds of rare tree are "
 "available within her work area, then one of each kind is produced between "
 "%3$s and %4$s."
-msgstr ""
+msgstr "Táto budova dokáže vyrobiť jedno vzácne drevo za %1$s až %2$s, podľa toho, ako ďaleko musí majsterka drevorubačka prejsť. Ak sú dostupné všetky druhy vzácnych driev, každé z jedného druhu je vyrobené za %3$s až %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14208,7 +14208,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces, armor smithies and recycling centers"
 " are fed with coal."
-msgstr ""
+msgstr "Do ohňov v tehliarskych peciach, peciach, vyhniach na zbroje a recyklačných centrách sa prikladá uhlie."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

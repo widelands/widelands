@@ -2,10 +2,10 @@
 	"name": "Widelands",
 	"category": "Strateginis žaidimas",
 	"tagline": "Realaus laiko strateginis žaidimas",
-	"developer": "The Widelands Development Team",
+	"developer": "The Videlands kūrėjų komanda",
 	"description": [
 		"Jūs esate mažo klano valdovas. Jūsų užduotis yra statyti nuolat besiplečiančią gyvenvietę. Tuo tarpu, kiekvienas klano narys darys viską, kas jos ar jo galioje, kad  pagamintų kuo daugiau resursų ir pagreitintų jos augimą.",
-		"Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you."
+		"„Widelands“ siūlo vieno žaidėjo režimą su kampanijomis, kurios pasakoja istorijas apie gentis ir jų kovą „Widelands“ visatoje. Tačiau tikrasis įsikūrimas prasideda, kai susivienijate su draugais internetu arba vietiniame tinkle, tam, kad kartu kurtumėte naujas imperijas – arba sutriuškintumėte vienas kitą karo dulkėse. „Widelands“ taip pat gali pasiūlyti dirbtinio intelekto mestą iššūkį."
 	],
 	"release_notes": {
 		"1.4": [],
@@ -14,9 +14,9 @@
 		],
 		"1.3": [
 			"Market trading",
-			"Six new maps added and three old maps removed",
-			"Economy districts",
-			"Many improvements to the in-game Encyclopedia",
+			"Pridėti šeši nauji žemėlapiai ir pašalinti trys seni",
+			"Ekonominiai rajonai",
+			"Daugelis patabulinimų žaidimo Enciklopedijoje",
 			"Download website maps as add-ons",
 			"New visualisation modes in the editor",
 			"Many new capabilities for add-on developers"
