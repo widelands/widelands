@@ -72,6 +72,7 @@ int LuaBox::get_no_of_items(lua_State* L) {
 
 /* RST
    .. attribute:: scrolling
+
       .. versionremoved:: 1.4
          boxes always scroll
 
