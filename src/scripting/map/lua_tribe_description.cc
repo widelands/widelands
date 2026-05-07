@@ -20,7 +20,7 @@
 
 #include <cstring>
 
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "scripting/globals.h"
 #include "scripting/map/lua_immovable_description.h"
 #include "scripting/map/lua_ware_description.h"
