@@ -20,7 +20,7 @@
 #define WL_COMMANDS_CMD_SHIP_EXPLORE_ISLAND_H
 
 #include "commands/command.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 
 namespace Widelands {
 

@@ -18,7 +18,7 @@
 
 #include "ui/game/soldiercapacitycontrol.h"
 
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
 #include "ui/basic/button.h"

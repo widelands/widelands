@@ -27,7 +27,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
