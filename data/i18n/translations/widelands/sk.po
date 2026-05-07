@@ -7825,7 +7825,7 @@ msgstr "Monitor"
 #. * TRANSLATORS: short description for the sdl_cursor option
 #: ../../../../src/ui/fsmenu/options.cc:191
 msgid "Let the system draw the mouse cursor"
-msgstr ""
+msgstr "Nechať systém kresliť kurzor myši"
 
 #. * TRANSLATORS: tooltip text for the sdl_cursor option
 #: ../../../../src/ui/fsmenu/options.cc:193
@@ -7834,7 +7834,7 @@ msgid ""
 "and the cursor appears frozen during long operations. Disable it only if the"
 " cursor doesn’t appear right, or if you want it to be visible in screenshots"
 " or screencasts."
-msgstr ""
+msgstr "V prípade pochybností nechajte túto možnosť zapnutú. Ak je vypnutá, aktualizácie kurzora môžu byť pomalé a kurzor sa počas dlhých operácií javí ako zamrznutý. Vypnite ju iba v prípade, že sa kurzor nezobrazuje správne alebo ak chcete, aby bol viditeľný na snímkach obrazovky alebo screencastoch."
 
 #: ../../../../src/ui/fsmenu/options.cc:202
 msgid "Accessibility mode for tooltips"
@@ -9139,7 +9139,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Odstrániť vybraný profil"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9789,7 +9789,7 @@ msgstr "V náhodnom poradí"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Aktuálna sklatba:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11838,7 +11838,7 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Zobrazenie ponuky nástrojov"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"
