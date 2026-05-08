@@ -183,7 +183,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
                       UI::MultilineTextarea::ScrollMode::kNoScrolling),
      suggested_teams_box_(
         &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, padding, 0, 0, 0) {
-	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
 	add(&map_name_, UI::Box::Resizing::kFullSize);
