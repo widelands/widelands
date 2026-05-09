@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-05-02 05:04+0000\n"
+"POT-Creation-Date: 2026-05-09 05:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017\n"
 "Language-Team: Western Frisian (http://app.transifex.com/widelands/widelands/language/fy/)\n"
@@ -1600,242 +1600,58 @@ msgid ""
 "able to build ferries."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:402
-msgid "Destination Gone"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:402
-msgid "Ship Destination Vanished"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:403
-msgid "Your ship’s destination has disappeared."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:430
-msgid "Ship Arrived"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:430
-msgid "Ship Reached Destination"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:431
-msgid "Your ship has arrived at its destination."
-msgstr ""
-
-#. * TRANSLATORS: Ship fleets had to be split
-#: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
-msgctxt "ship"
-msgid "Fleet split"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:595
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2298
-msgid "Ship Fleet split"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:596
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2299
-msgid ""
-"A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:656
-msgid "A warship arrived at a known port build space."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:657
-msgid "An expedition ship arrived at a known port build space."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:658
-#: ../../../../src/logic/map_objects/tribes/ship.cc:666
-msgid "Port Space"
-msgstr "Havenplak"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:658
-msgid "Port Space Spotted"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:664
-msgid "A warship found a new port build space."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:665
-msgid "An expedition ship found a new port build space."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:666
-msgid "Port Space Found"
-msgstr "Havenplak fûn"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:766
-msgid "Enemy Ship"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:766
-msgid "Enemy Ship Spotted"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:767
-msgid "A warship spotted an enemy ship."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:797
-#: ../../../../src/logic/map_objects/tribes/ship.cc:816
-msgid "Destination Unreachable"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:797
-#: ../../../../src/logic/map_objects/tribes/ship.cc:816
-msgid "Ship Destination Unreachable"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:798
-msgid "Your ship could not find a path to its destination."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:817
-#, c-format
-msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1335
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1618
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:364
 msgid "Enemy Ship Attacking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1335
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1617
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:363
 msgid "Naval Attack"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1336
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:98
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1455
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:201
 msgid "Ship Destroyed"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1455
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:201
 msgid "Ship Sunk"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1456
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:202
 msgid "An enemy ship has destroyed your warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1619
+#: ../../../../src/logic/map_objects/tribes/ship/battle.cc:365
 msgid "Your coast is under attack from an enemy warship."
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1900
-msgid "Island Circumnavigated"
-msgstr "Eilân rûnsyld"
-
-#. * TRANSLATORS: A ship has circumnavigated an island and is waiting
-#. for orders
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1900
-msgctxt "ship"
-msgid "Waiting"
-msgstr "Oan it wachtsjen"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1901
-msgid "An expedition ship sailed around its island without any events."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1966
-msgid "Coast Reached"
-msgstr ""
-
-#. * TRANSLATORS: A ship has discovered land
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1966
-msgid "Land Ahoy!"
-msgstr "Lân yn sicht!"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:1967
-msgid ""
-"An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2020
-msgid "New port construction site is gone"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2020
-msgid "Port Lost!"
-msgstr "Haven ferlern!"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2021
-msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2078
-msgid "No Port Can Be Built"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2078
-msgid "Port Space Lost!"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2079
-msgid ""
-"A discovered port build space is not available for building a port anymore."
-msgstr ""
-
-#. * TRANSLATORS: Warship ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
-msgctxt "ship"
-msgid "Warship"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2347
-msgid "Warship Ready"
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2348
-msgid "A warship is waiting for your commands."
-msgstr ""
-
-#. * TRANSLATORS: Ship expedition ready
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
-msgctxt "ship"
-msgid "Expedition"
-msgstr "Untdekkingsreis"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2353
-msgid "Expedition Ready"
-msgstr "Klear foar ûntdekkingsreis"
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2354
-msgid "An expedition ship is waiting for your commands."
-msgstr ""
-
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2531
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:42
 msgctxt "ship_state"
 msgid "Sinking"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2533
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:44
 msgctxt "ship_state"
 msgid "Fighting"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2537
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:48
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2540
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:51
 msgctxt "ship_state"
 msgid "Refitting to Warship"
 msgstr ""
 
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2548
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:59
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
@@ -1847,10 +1663,10 @@ msgstr ""
 #. * currently sailing to a specific destination note.
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2554
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2564
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2570
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2584
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:65
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:75
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:81
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:95
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -1858,7 +1674,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2559
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:70
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
@@ -1866,7 +1682,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2579
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:90
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -1874,7 +1690,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2591
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:102
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1882,14 +1698,14 @@ msgstr "Oan it wachtsjen"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2595
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:106
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Oan it ferkennen"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2599
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:110
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1898,10 +1714,194 @@ msgstr "Havenplak fûn"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to
 #. * build a port.
-#: ../../../../src/logic/map_objects/tribes/ship.cc:2604
+#: ../../../../src/logic/map_objects/tribes/ship/draw.cc:115
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Koloanje oan it oprjochtsjen"
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:169
+msgid "A warship arrived at a known port build space."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:170
+msgid "An expedition ship arrived at a known port build space."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:171
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:179
+msgid "Port Space"
+msgstr "Havenplak"
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:171
+msgid "Port Space Spotted"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:177
+msgid "A warship found a new port build space."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:178
+msgid "An expedition ship found a new port build space."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:179
+msgid "Port Space Found"
+msgstr "Havenplak fûn"
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:304
+msgid "No Port Can Be Built"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:304
+msgid "Port Space Lost!"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:305
+msgid ""
+"A discovered port build space is not available for building a port anymore."
+msgstr ""
+
+#. * TRANSLATORS: Warship ready
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
+msgctxt "ship"
+msgid "Warship"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
+msgid "Warship Ready"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:81
+msgid "A warship is waiting for your commands."
+msgstr ""
+
+#. * TRANSLATORS: Ship expedition ready
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:86
+msgctxt "ship"
+msgid "Expedition"
+msgstr "Untdekkingsreis"
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:86
+msgid "Expedition Ready"
+msgstr "Klear foar ûntdekkingsreis"
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:87
+msgid "An expedition ship is waiting for your commands."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:127
+msgid "Enemy Ship"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:127
+msgid "Enemy Ship Spotted"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:128
+msgid "A warship spotted an enemy ship."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:158
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:177
+msgid "Destination Unreachable"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:158
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:177
+msgid "Ship Destination Unreachable"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:159
+msgid "Your ship could not find a path to its destination."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:178
+#, c-format
+msgid "Your ship could not find a path to its destination port ‘%s’."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:144
+msgid "Island Circumnavigated"
+msgstr "Eilân rûnsyld"
+
+#. * TRANSLATORS: A ship has circumnavigated an island and is waiting
+#. for orders
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:144
+msgctxt "ship"
+msgid "Waiting"
+msgstr "Oan it wachtsjen"
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:145
+msgid "An expedition ship sailed around its island without any events."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:210
+msgid "Coast Reached"
+msgstr ""
+
+#. * TRANSLATORS: A ship has discovered land
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:210
+msgid "Land Ahoy!"
+msgstr "Lân yn sicht!"
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:211
+msgid ""
+"An expedition ship reached a coast and is waiting for further commands."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:264
+msgid "New port construction site is gone"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:264
+msgid "Port Lost!"
+msgstr "Haven ferlern!"
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_idle.cc:265
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr ""
+
+#. * TRANSLATORS: Ship fleets had to be split
+#: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:86
+#: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:96
+msgctxt "ship"
+msgid "Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:86
+#: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:96
+msgid "Ship Fleet split"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:87
+#: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:97
+msgid ""
+"A ship fleet had to be split, because a terrain change blocked a passage."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:81
+msgid "Destination Gone"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:81
+msgid "Ship Destination Vanished"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:82
+msgid "Your ship’s destination has disappeared."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:109
+msgid "Ship Arrived"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:109
+msgid "Ship Reached Destination"
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:110
+msgid "Your ship has arrived at its destination."
+msgstr ""
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../../../src/logic/map_objects/tribes/tribe_descr.cc:160
@@ -2990,7 +2990,7 @@ msgstr ""
 #: ../../../../src/ui/fsmenu/keyboard_options.cc:232
 #: ../../../../src/ui/fsmenu/menu.cc:166
 #: ../../../../src/ui/fsmenu/options.cc:118
-#: ../../../../src/ui/fsmenu/training_wheel_options.cc:154
+#: ../../../../src/ui/fsmenu/training_wheel_options.cc:153
 #: ../../../../src/ui/game/main_menu_save_game.cc:100
 #: ../../../../src/ui/game/pinned_note.cc:51
 #: ../../../../src/ui/game/story_message_box.cc:72
@@ -3013,7 +3013,7 @@ msgstr "OK"
 #: ../../../../src/ui/fsmenu/keyboard_options.cc:63
 #: ../../../../src/ui/fsmenu/login_box.cc:46
 #: ../../../../src/ui/fsmenu/options.cc:116
-#: ../../../../src/ui/fsmenu/training_wheel_options.cc:108
+#: ../../../../src/ui/fsmenu/training_wheel_options.cc:107
 #: ../../../../src/ui/game/economy_options_window.cc:683
 #: ../../../../src/ui/game/main_menu_save_game.cc:99
 #: ../../../../src/ui/game/pinned_note.cc:67
@@ -4936,7 +4936,7 @@ msgstr ""
 #: ../../../../src/ui/fsmenu/addons/manager.cc:487
 #: ../../../../src/ui/fsmenu/addons/manager.cc:496
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:205
-#: ../../../../src/ui/fsmenu/training_wheel_options.cc:119
+#: ../../../../src/ui/fsmenu/training_wheel_options.cc:118
 #: ../../../../src/ui/shared/addons_login_box.cc:72
 msgid "Reset"
 msgstr ""
@@ -6749,89 +6749,89 @@ msgstr ""
 msgid "Start game"
 msgstr "Start spultsje"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:289
+#: ../../../../src/ui/fsmenu/launch_game.cc:288
 msgid "Show fewer options"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:289
+#: ../../../../src/ui/fsmenu/launch_game.cc:288
 msgid "Show more options"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:305
+#: ../../../../src/ui/fsmenu/launch_game.cc:304
 msgid "The relations between players are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:307
+#: ../../../../src/ui/fsmenu/launch_game.cc:306
 msgid "The relations between players are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:309
+#: ../../../../src/ui/fsmenu/launch_game.cc:308
 msgid "The selected win condition does not allow peaceful matches"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:311
+#: ../../../../src/ui/fsmenu/launch_game.cc:310
 msgid "Forbid fighting between players"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:342
+#: ../../../../src/ui/fsmenu/launch_game.cc:341
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:348
+#: ../../../../src/ui/fsmenu/launch_game.cc:347
 msgid "The starting positions are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:350
+#: ../../../../src/ui/fsmenu/launch_game.cc:349
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:353
+#: ../../../../src/ui/fsmenu/launch_game.cc:352
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:373
+#: ../../../../src/ui/fsmenu/launch_game.cc:372
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:375
+#: ../../../../src/ui/fsmenu/launch_game.cc:374
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:377
+#: ../../../../src/ui/fsmenu/launch_game.cc:376
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:399
+#: ../../../../src/ui/fsmenu/launch_game.cc:398
 msgid "Naval warfare is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:401
+#: ../../../../src/ui/fsmenu/launch_game.cc:400
 msgid "Naval warfare is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:404
+#: ../../../../src/ui/fsmenu/launch_game.cc:403
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:425
+#: ../../../../src/ui/fsmenu/launch_game.cc:424
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:427
+#: ../../../../src/ui/fsmenu/launch_game.cc:426
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:429
+#: ../../../../src/ui/fsmenu/launch_game.cc:428
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui/fsmenu/launch_game.cc:438
+#: ../../../../src/ui/fsmenu/launch_game.cc:437
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:283
@@ -6840,21 +6840,21 @@ msgstr ""
 msgid "Scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:439
+#: ../../../../src/ui/fsmenu/launch_game.cc:438
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:445
+#: ../../../../src/ui/fsmenu/launch_game.cc:444
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Opslein potsje"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:447
+#: ../../../../src/ui/fsmenu/launch_game.cc:446
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:522
+#: ../../../../src/ui/fsmenu/launch_game.cc:521
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -7282,7 +7282,7 @@ msgstr ""
 msgid "No map selected"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:215
+#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:214
 msgid "(no map)"
 msgstr "(gjin kaart)"
 
@@ -7887,65 +7887,65 @@ msgstr ""
 msgid "In-Game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:490
+#: ../../../../src/ui/fsmenu/options.cc:486
 msgid "User interface scaling factor:"
 msgstr ""
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../../../src/ui/fsmenu/options.cc:574
-#: ../../../../src/ui/fsmenu/options.cc:575
+#: ../../../../src/ui/fsmenu/options.cc:570
+#: ../../../../src/ui/fsmenu/options.cc:571
 msgid "Off"
 msgstr "Ut"
 
 #. * TRANSLATORS: Options: Delete replays after:
-#: ../../../../src/ui/fsmenu/options.cc:577
+#: ../../../../src/ui/fsmenu/options.cc:573
 msgid "Never"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the display selection dropdown
-#: ../../../../src/ui/fsmenu/options.cc:632
+#: ../../../../src/ui/fsmenu/options.cc:628
 msgctxt "multiscreen"
 msgid "Follow mouse"
 msgstr ""
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
-#: ../../../../src/ui/fsmenu/options.cc:638
+#: ../../../../src/ui/fsmenu/options.cc:634
 msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui/fsmenu/options.cc:653
+#: ../../../../src/ui/fsmenu/options.cc:649
 msgid "Fullscreen"
 msgstr "Folslein skerm"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui/fsmenu/options.cc:656
+#: ../../../../src/ui/fsmenu/options.cc:652
 msgid "Maximized"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui/fsmenu/options.cc:672
-#: ../../../../src/ui/fsmenu/options.cc:680
+#: ../../../../src/ui/fsmenu/options.cc:668
+#: ../../../../src/ui/fsmenu/options.cc:676
 msgid "%1% × %2%"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:748
+#: ../../../../src/ui/fsmenu/options.cc:744
 msgid "Try system language"
 msgstr "Probearje de systeemtaal"
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui/fsmenu/options.cc:860
+#: ../../../../src/ui/fsmenu/options.cc:856
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "De oersetting nei it %s is foltôge."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui/fsmenu/options.cc:864
+#: ../../../../src/ui/fsmenu/options.cc:860
 msgid "The translation into %1% is %2%%% complete."
 msgstr "The oersetting nei it %1% is %2%%% foltôge."
 
-#: ../../../../src/ui/fsmenu/options.cc:876
+#: ../../../../src/ui/fsmenu/options.cc:872
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -8153,11 +8153,11 @@ msgstr ""
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
-#: ../../../../src/ui/fsmenu/training_wheel_options.cc:182
+#: ../../../../src/ui/fsmenu/training_wheel_options.cc:181
 msgid "Mark All"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/training_wheel_options.cc:182
+#: ../../../../src/ui/fsmenu/training_wheel_options.cc:181
 msgid "Unmark All"
 msgstr ""
 
@@ -9377,56 +9377,56 @@ msgid "Priority: Very High"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../../../src/ui/game/inputqueuedisplay.cc:140
+#: ../../../../src/ui/game/inputqueuedisplay.cc:139
 msgid "Increase the number of wares you want to be stored here"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../../../src/ui/game/inputqueuedisplay.cc:142
+#: ../../../../src/ui/game/inputqueuedisplay.cc:141
 msgid "Decrease the number of wares you want to be stored here"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../../../src/ui/game/inputqueuedisplay.cc:146
+#: ../../../../src/ui/game/inputqueuedisplay.cc:145
 msgid "Hold down Shift to increase all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../../../src/ui/game/inputqueuedisplay.cc:149
+#: ../../../../src/ui/game/inputqueuedisplay.cc:148
 msgid "Hold down Shift to decrease all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../../../src/ui/game/inputqueuedisplay.cc:154
+#: ../../../../src/ui/game/inputqueuedisplay.cc:153
 msgid "Hold down Ctrl to allow all of this ware"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../../../src/ui/game/inputqueuedisplay.cc:157
+#: ../../../../src/ui/game/inputqueuedisplay.cc:156
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr ""
 
-#: ../../../../src/ui/game/inputqueuedisplay.cc:217
+#: ../../../../src/ui/game/inputqueuedisplay.cc:216
 msgid "Remove ware"
 msgstr ""
 
-#: ../../../../src/ui/game/inputqueuedisplay.cc:226
+#: ../../../../src/ui/game/inputqueuedisplay.cc:225
 msgid "Add ware"
 msgstr ""
 
-#: ../../../../src/ui/game/inputqueuedisplay.cc:713
+#: ../../../../src/ui/game/inputqueuedisplay.cc:712
 msgid "Hide controls"
 msgstr ""
 
-#: ../../../../src/ui/game/inputqueuedisplay.cc:713
+#: ../../../../src/ui/game/inputqueuedisplay.cc:712
 msgid "Show controls"
 msgstr ""
 
-#: ../../../../src/ui/game/inputqueuedisplay.cc:769
+#: ../../../../src/ui/game/inputqueuedisplay.cc:768
 #, c-format
 msgid "+%u"
 msgstr ""
