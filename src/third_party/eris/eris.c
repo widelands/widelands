@@ -2082,9 +2082,9 @@ u_thread(Info *info) {                                                 /* ... */
         lua_rawgeti(info->L, -1, i + 1);                /* ... thread tbl nup */
         nup = lua_tointeger(info->L, -1);
         lua_pop(info->L, 1);                                /* ... thread tbl */
-      	/* Open the upvalue by pointing to the stack and register in GC.
-			 * Decrement the old upvalue's refcount before replacing it, to avoid
-			 * leaking the closed upvalue created by luaF_initupvals. */
+        /* Open the upvalue by pointing to the stack and register in GC.
+         * Decrement the old upvalue's refcount before replacing it, to avoid
+         * leaking the closed upvalue created by luaF_initupvals. */
       	luaC_upvdeccount(thread, cl->upvals[nup - 1]);
         cl->upvals[nup - 1] = nuv;
         cl->upvals[nup - 1]->refcount++;
