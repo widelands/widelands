@@ -64,7 +64,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr ""
+msgstr "Miškininko namas"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
-msgstr ""
+msgstr "Karjeras"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""

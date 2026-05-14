@@ -25,15 +25,15 @@ msgstr "Artefaktai"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "Ieškokite senovinių artefaktų. Kai jie visi bus rasti, komanda, kuriai priklauso dauguma jų, laimės žaidimą."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Turimi artefaktai"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
-msgstr ""
+msgstr "Jokių artefaktų"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
@@ -41,47 +41,47 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "Šiame žemėlapyje nėra artefaktų. Tai neturėtų atsitikti. Pateikite pranešimą apie riktą %s ir nurodykite Widelands versiją bei žemėlapį, kurį bandėte įkelti."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
-msgstr ""
+msgstr "Rastas artefaktas"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "Jūsų komanda rado naują artefaktą."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Radai naują artefaktą."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Artefaktas prarastas"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Vieną iš jūsų komandos artefaktų pavogė priešas."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Vieną iš jūsų artefaktų pavogė priešas."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Artefaktas užkariautas"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "Jūsų komanda pavogė artefaktą iš priešo."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Jūs pavogėte artefaktą iš priešo."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
@@ -100,24 +100,24 @@ msgstr[3] ""
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s priklauso %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "Komandai %1$i (%2$s) priklauso %3$s."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
-msgstr ""
+msgstr "Kolekcionieriai"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:20
 #, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Jūs gaunate taškų už brangius gaminius savo sandėliuose. Žaidėjas, surinkęs aukščiausią balą po %s, laimi žaidimą."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -128,21 +128,21 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "sukonfigūruotas laiko limitas"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
-msgstr ""
+msgstr "Taškai"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "Būsena %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../../../data/scripting/win_conditions/collectors.lua:84
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i p) x %3$i = %4$i p"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:88
 #, lua-format
@@ -156,7 +156,7 @@ msgstr[3] ""
 #: ../../../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "Komandos %d Statusas "
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
@@ -169,54 +169,54 @@ msgstr[3] ""
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr ""
+msgstr "Autokratas"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:17
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Gentis arba komanda, galinti nugalėti visus kitus, laimi žaidimą! Tai reiškia, kad priešininkai neturi būstinės, uostų ar sandėlių."
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
-msgstr ""
+msgstr "Begalinis žaidimas"
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Tai begalinis žaidimas be taisyklių."
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "HQ Hunter"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Gentis arba komanda, galinti rasti ir sunaikinti visas kitas būstines, laimi žaidimą! Neveikia su pradžios sąlygomis be būstinės."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "komanda %i"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s turi %2$3.0f%% žemės (%3$i iš %4$i)."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s turėjo %2$3.0f%% žemės (%3$i iš %4$i)."
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Teritorijos procentas"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "Jums priklauso daugiau nei pusė žemėlapio srities."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:236
 #, lua-format
@@ -230,7 +230,7 @@ msgstr[3] ""
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s valdo daugiau nei pusę žemėlapio srities."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:265
 #, lua-format
@@ -243,7 +243,7 @@ msgstr[3] ""
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
-msgstr ""
+msgstr "Teritorinis valdovas"
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
@@ -251,15 +251,15 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Kiekvienas žaidėjas ar komanda bando gauti daugiau nei pusę žemėlapio srities. Laimėtojas bus žaidėjas arba komanda, kuri sugebės išlaikyti tą zoną bent 20 minučių. Jei pasirenkamas taikus režimas, žaidimas baigiasi, jei vienas žaidėjas turi daugiau žemės, nei galėtų laimėti bet kuris kitas žaidėjas."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Šiuo metu nė vienai frakcijai nepriklauso daugiau nei pusė žemėlapio ploto."
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
-msgstr ""
+msgstr "Teritorinis laikas"
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:24
 #, lua-format
@@ -269,7 +269,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Kiekvienas žaidėjas ar komanda bando gauti daugiau nei pusę žemėlapio srities. Laimėtojas bus žaidėjas arba komanda, kuri sugebės išlaikyti tą zoną bent 20 minučių, arba ta, kuri turi daugiausiai teritorijų po %s, atsižvelgiant į tai, kas įvyks anksčiau. Jei pasirenkamas taikus režimas, žaidimas baigiasi, jei vienas žaidėjas turi daugiau žemės, nei galėtų laimėti bet kuris kitas žaidėjas."
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
@@ -298,7 +298,7 @@ msgstr[3] ""
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s ir %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
@@ -311,41 +311,41 @@ msgstr "%1$s ir %2$s"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394
 #, lua-format
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Žaidimas baigsis %s."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
-msgstr ""
+msgstr "Sveikiname!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:34
 msgid "You have won this game!"
-msgstr ""
+msgstr "Jūs laimėjote šį žaidimą!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
-msgstr ""
+msgstr "Tu nugalėtas!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr ""
+msgstr "Jūs praradote paskutinį sandėlį ir dėl to esate nugalėtas. Jei norite, galite tęsti kaip žiūrovas."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
-msgstr ""
+msgstr "Tu laimėjai"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"
-msgstr ""
+msgstr "Jūs esate nugalėtojas!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:69
 msgid "You lost"
-msgstr ""
+msgstr "Tu pralaimėjai"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:70
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "Jūs pralaimėjote šį žaidimą!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
@@ -354,11 +354,11 @@ msgstr "Būsena"
 #. TRANSLATORS: This is an overview for all players.
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:83
 msgid "Player overview:"
-msgstr ""
+msgstr "Žaidėjo apžvalga:"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
-msgstr ""
+msgstr "Medienos nykštukas"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:19
 #, lua-format
@@ -366,11 +366,11 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Kaip Wood Gnome jums patinka dideli miškai, todėl jūsų užduotis yra turėti daugiau medžių savo teritorijoje nei bet kurio kito žaidėjo. Žaidimas baigsis po %s. Tas, kuris tuo metu turi daugiausiai medžių, laimės žaidimą."
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
-msgstr ""
+msgstr "Medžiai priklausė"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:68
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:90
@@ -386,20 +386,20 @@ msgstr[3] ""
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:71
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s šiuo metu turi %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:92
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s turėjo %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
-msgstr ""
+msgstr "Laimėtojas yra %1$s su %2$s."
 
 #. TRANSLATORS: %s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "Nugalėtojai turėjo %s."
