@@ -20,7 +20,7 @@
 
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/player.h"
 #include "ui/basic/icon.h"
 #include "ui/game/inputqueuedisplay.h"

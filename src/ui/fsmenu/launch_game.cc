@@ -237,7 +237,6 @@ void LaunchGame::add_all_widgets() {
 		advanced_options_box_.add_space(1 * kPadding);
 	}
 	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
-	advanced_options_box_.set_scrolling(true);
 
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);

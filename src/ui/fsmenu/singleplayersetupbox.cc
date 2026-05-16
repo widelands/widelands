@@ -173,7 +173,6 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(title_.get_h());
 	add(&scrollable_playerbox_, Resizing::kExpandBoth);
-	scrollable_playerbox_.set_scrolling(true);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
 			reset();

@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
-#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
+#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H
+#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H
 
 #include <deque>
 #include <memory>
@@ -26,7 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 
 namespace Widelands {
 
@@ -91,8 +91,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
-constexpr int32_t kShipInterval = 1500;
-
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -100,6 +98,12 @@ constexpr int32_t kShipInterval = 1500;
  */
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
+
+	static constexpr int32_t kShipInterval = 1500;
+	static constexpr unsigned kSinkAnimationDuration = 3000;
+	static constexpr uint32_t kAttackAnimationDuration = 2000;
+	static constexpr unsigned kNearDestinationShipRadius = 4;
+	static constexpr unsigned kNearDestinationNoteRadius = 1;
 
 	/** Half the total width of a ship's health bar at 1× scale. */
 	static constexpr int kShipHalfHealthBarWidth = 30;
@@ -498,4 +502,4 @@ public:
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H

@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "logic/game.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/walkingdir.h"
 #include "ui/basic/button.h"
 #include "ui/basic/dropdown.h"

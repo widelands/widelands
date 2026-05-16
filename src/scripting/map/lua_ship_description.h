@@ -19,7 +19,7 @@
 #ifndef WL_SCRIPTING_MAP_LUA_SHIP_DESCRIPTION_H
 #define WL_SCRIPTING_MAP_LUA_SHIP_DESCRIPTION_H
 
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "scripting/map/lua_map_object_description.h"
 
 namespace LuaMaps {
