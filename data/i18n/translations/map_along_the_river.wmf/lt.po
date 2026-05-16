@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,72 +31,76 @@ msgstr[3] ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "Transport"
-msgstr ""
+msgstr "Transportas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
-msgstr ""
+msgstr "Sandėlyje surinkti keturi kastuvai pelkėms sausinti."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
-msgstr ""
+msgstr "Kastuvai"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
-msgstr ""
+msgstr "Sandėlyje surinkti dar keturi kastuvai pelkėms sausinti."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
-msgstr ""
+msgstr "Nugalėkite Törverį"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr ""
+msgstr "Nugalėkite Törverio armijas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
-msgstr ""
+msgstr "Törveris yra priešas Šiaurėje, kovojantis po raudona vėliava."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
-msgstr ""
+msgstr "Pastatykite uostą"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr ""
+msgstr "Pastatykite uostą Šiaurėje"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
+"Turėtume pastatyti uostą buvusioje Törverio žemėje, kad būtume pasirengę "
+"išsiųsti ekspediciją, kai tik sužinosime, kaip statyti laivus."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
-msgstr ""
+msgstr "Užimkite piratų sargybos postą"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr ""
+msgstr "Užimkite piratų sargybos postą"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
 "Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
+"Užimkite piratų sargybos postą prie upelio rytuose. Tikėkimės, "
+"išsiaiškinsime, kas nutiko auksui šiose apylinkėse."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr ""
+msgstr "Pastatyti sandėlį"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr ""
+msgstr "Pastatykite sandėlį šalia piratų sargybos posto"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -100,80 +108,90 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
+"Pastatykite sandėlį netoli užimto piratų sargybos posto prie upelio. Jo "
+"prireiks kaip bazės tolesniems tyrinėjimams. Be to, galėsime ten saugoti "
+"auksą, kurį kasime aplinkinėse kalvose."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
-msgstr ""
+msgstr "Atneškite kastuvus"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr ""
+msgstr "Pristatykite keturis kastuvus į naująjį sandėlį"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr ""
+msgstr "Jie bus išdalinti kai kuriems savanoriams, kad šie nusausintų pelkes."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
 msgstr ""
+"Jie bus išdalinti papildomiems savanoriams, kad šie nusausintų pelkes."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
 msgid "Defeat the pirates"
-msgstr ""
+msgstr "Nugalėkite piratus"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr ""
+msgstr "Nugalėkite piratus"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
+"Išlaisvinkite mūsų apylinkes nuo piratų grėsmės. Piratai kovoja po pilka "
+"vėliava."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr ""
+msgstr "Išlaisvinkite mūsų žvalgą iš piratų"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr ""
+msgstr "Užimkite tvirtovę saloje"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr ""
+msgstr "Čia žvalgas laikomas nelaisvėje."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
-msgstr ""
+msgstr "Nugalėkite Hjalmarą"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr ""
+msgstr "Nugalėkite Hjalmaro armijas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
 msgstr ""
+"Hjalmaras yra priešas į šiaurę nuo buvusių piratų, kuris kovoja po žalia "
+"vėliava."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
-msgstr ""
+msgstr "Nugalėkite Runarą"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr ""
+msgstr "Nugalėkite Runaro armijas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
 msgstr ""
+"Runaras yra priešas į pietryčius nuo buvusių piratų, kuris kovoja po geltona"
+" vėliava."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
@@ -195,15 +213,15 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr ""
+msgstr "Jūsų patarėjas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr ""
+msgstr "Palei upę"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
-msgstr ""
+msgstr "Valdove, leiskite man pranešti apie aplinkines gentis."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -211,6 +229,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Iš šiaurės mums gresia karinga gentis, vadovaujama karo vado Törverio, kuri "
+"sparčiai telkia savo kariuomenę. Greitai jie gali tapti per stiprūs, kad "
+"juos nugalėtume."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -218,6 +239,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"Didelę teritoriją į šiaurės rytus kankina laukinė nevaržomų piratų minia, "
+"kuriai vadovauja jų beprotiškas Arvidas. Jų buvimas užkerta mums kelius pas "
+"kitas gentis."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -225,6 +249,9 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Kitoje upės pusėje yra klestinti paslaptingojo karaliaus Runaro žemė. Mes su"
+" juo kariavome dar prieš piratams užimant rytinę sritį. Jo stiprybė slypi "
+"didžiulėje pramonėje ir gausioje kariuomenėje."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
@@ -232,16 +259,21 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Teritorija už piratų priklauso išsivysčiusiai genčiai, kuriai vadovauja jų "
+"galingas vadas Hjalmaras. Jie turėjo daug laiko pasiruošti ir sutelkti savo "
+"atgrasančią kariuomenę."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"Situacija atrodo gana pavojinga, todėl patariu sutelkti pastangas į stiprios"
+" kariuomenės kūrimą."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
-msgstr ""
+msgstr "Mūsų šiaurinis priešas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
@@ -249,22 +281,29 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Valdove, nors mūsų kariai be menkiausios baimės stotų į kovą su bet kokiu "
+"priešu, mūsų varžovas Šiaurėje vis dar yra stipresnis už visas mūsų pajėgas "
+"kartu sudėjus. Turėtume vengti konflikto, kol būsime pajėgūs juos nugalėti."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Būkite kantrūs ir pripažinkite, kad šioje situacijoje būtina stipri "
+"kariuomenė. Törveris turi labai prastą reputaciją."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Pavojus iš Šiaurės"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Valdove, gavome nerimą keliantį pranešimą iš vieno iš mūsų tyrinėtojų. "
+"Törveris plečia savo fronto liniją ir artėja prie mūsų teritorijos."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -272,15 +311,20 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"Negalime amžinai vengti pulti jų kariuomenės. Jei mums pavyks įveikti "
+"šiaurinį priešą, išplėsime savo teritoriją ir rasime daugiau išteklių "
+"pajėgoms stiprinti."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
+"Tuomet galėsime pasinaudoti jų priėjimu prie ežero ir ištyrinėti daugiau "
+"žemių."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr ""
+msgstr "Teisingu keliu"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
@@ -289,10 +333,13 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Valdove, mūšis su Törveriu klostosi puikiai, mes jau įveikėme stipriausią jo"
+" kariuomenės dalį. Tačiau šis priešas nebus lengvai nugalėtas. Iš nevilties "
+"Törveris pasitelkė užkietėjusių samdinių grupę."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
-msgstr ""
+msgstr "Didysis ežeras"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
@@ -300,6 +347,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Valdove, dabar, kai užkariavome Törverio žemę, galime pasinaudoti puikiu jų "
+"priėjimu prie gretimo Didžiojo ežero. Uostas Šiaurėje suteiks mums geresnes "
+"galimybes užmegzti ryšius su kitomis gentimis."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -307,16 +357,21 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Törverio būstinėje radome dokumentų, kuriuose aprašoma laivų statyba. Deja, "
+"tekstai parašyti mums nežinoma kalba. Mūsų išminčiai bandys išversti šiuos "
+"aprašymus."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr ""
+msgstr "Aukso paieškos"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Valdove, mūsų vyrai aptiko izoliuotą priešo piratų sargybos postą. Apleistos"
+" trobelės rodo, kad netoliese yra aukso."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -325,10 +380,14 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Tačiau turime būti atsargūs, jei norime užimti šį postą. Gali būti ir "
+"daugiau priešo pastatų, kurių dar nematome, o piratai garsėja kaip labai "
+"geri kovotojai. Prieš tęsiant geriausia čia sutelkti stiprias karines "
+"pajėgas."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr ""
+msgstr "Rastas lobis"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -336,6 +395,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Valdove, piratų sargybos poste radome 25 vienetus aukso rūdos. Jie galėjo "
+"būti pagrobti iš netoliese esančių aukso ieškotojų namelių. Ši aukso rūda "
+"bus gabenama į mūsų būstinę."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -344,11 +406,14 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Sėkmingai išplėtę šią sritį, turėtume apsvarstyti galimybę pastatyti sandėlį"
+" tiesiai į pietvakarius nuo sargybos posto, kad galėtume toliau tyrinėti šią"
+" sritį. Tik už trijų žingsnių nuo posto yra puiki vieta statyboms."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Pelkių sausinimas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -357,6 +422,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Valdove, per drėgnąjį sezoną palei upelį rytuose atsirado pelkių ir mes "
+"negalime per jas praeiti. Jas būtina nusausinti, kad galėtume tęsti žygį. "
+"Jei į naująjį sandėlį pristatysite pakankamai kastuvų, savanoriai nusausins "
+"pelkes."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -364,6 +433,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Valdove, visi kastuvai išdalinti, bet jei ir toliau dirbsime tokiu tempu, "
+"nespėsime nusausinti pelkių iki kito drėgnojo sezono. Jei į naująjį sandėlį "
+"pristatysite daugiau kastuvų, prisijungs daugiau savanorių."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -371,20 +443,24 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Valdove, dabar, kai galime pasiekti piratų slėptuvę, turėtume ją užimti ir "
+"su jais pribaigti. Galbūt jų teritorijoje paslėpta ir daugiau lobių."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr ""
+msgstr "Piratai buvo nugalėti."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Valdove, mes nugalėjome piratus. Savo paskutiniame bastione jie buvo paslėpę"
+" šiek tiek aukso, kuris dabar gabenamas į mūsų būstinę."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr ""
+msgstr "Piratai persigrupuoja"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -393,10 +469,13 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Valdove, po mūsų atakų piratai pradėjo vienytis su kitų genčių piratais. Jie"
+" gali atgauti didžiąją dalį prarastų jėgų. Prieš mus stovint tokiam galingam"
+" priešui, mūsų senkantys ištekliai gali tapti didele problema."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Piratai bėga"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -404,10 +483,12 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Valdove, mūsų sėkmingų pastangų išvaryti piratus dėka daugelis jų paspruko "
+"mažomis valtimis. Nežinoma, kuria kryptimi jie pabėgo."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Galimybė statyti laivų statyklas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -415,10 +496,13 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Pone, po ilgų studijų ir tyrimų mūsų išminčiai pagaliau sugebėjo iššifruoti "
+"keistą kalbą Törverio aprašymuose, kuriuos radome jo būstinėje. Nuo šiol "
+"galime statyti laivų statyklas."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr ""
+msgstr "Mūsų žvalgas buvo sučiuptas"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -426,6 +510,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Valdove, piratai sučiupo vieną iš mūsų žvalgų ir išgabeno jį į savo salą. "
+"Jis yra vienintelis žmogus, žinantis kelią per pelkes link Hjalmaro."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -433,10 +519,13 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Pasak mūsų žvejų, jis yra uždarytas salos tvirtovėje. Turėtume panaudoti "
+"žinias apie laivų statybą, kurias gavome iš Törverio, kad pastatytume laivus"
+" ir atakuotume jų pozicijas."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr ""
+msgstr "Sala užimta"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -444,26 +533,32 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Valdove, mūsų kariai užėmė salą ir sugebėjo išlaisvinti žvalgą. Pasirodo, "
+"piratai saloje paliko daug aukso, alaus ir ginklų."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr ""
+msgstr "Žvalgas grįžta"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Valdove, mūsų žvalgas grįžo į mūsų teritoriją ir parodė mums kelią per "
+"pelkes link Hjalmaro."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Jis pastebėjo, kad galime judėti ir kitoje kalno pusėje, jei čia nepavyktų, "
+"bet tai padaryti bus daug sunkiau."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "Paskutinė riba"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -471,19 +566,24 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Valdove, mes beveik nugalėjome visas kariuomenes ir dabar artėjame prie "
+"paskutiniojo priešo. Jie ilgai mūsų laukė ir bus pasiruošę sunkiausiam "
+"mūšiui savo gyvenime."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Užtikrinkite, kad mūsų pajėgos būtų visiškai pasirengusios, ir tuomet "
+"veikite ryžtingai."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
-msgstr ""
+msgstr "Pergalė!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Valdove, sveikinu!"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -491,7 +591,10 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Jūs įvykdėte visus tikslus ir nugalėjote visus mūsų priešus. Jūs ne tik "
+"užkariavote konkuruojančias gentis, bet ir pavergėte savo mylinčių žmonių "
+"širdis."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Jūsų vardas bus prisimenamas amžinai."

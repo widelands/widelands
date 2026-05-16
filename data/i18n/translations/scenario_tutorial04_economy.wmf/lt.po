@@ -18,40 +18,40 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:10
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "Jūsų ekonomika ir jos nustatymai"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:12
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomika"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:13
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr ""
+msgstr "Sveiki sugrįžę. Šioje pamokoje papasakosiu, ką galite padaryti, kad patikrintumėte, kaip gerai veikia jūsų ekonomika."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:14
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "Ekonomikos kūrimas, jos sklandaus veikimo ir augimo užtikrinimas yra pagrindinė Widelands dalis. Tačiau negalite tiesiogiai valdyti darbuotojų – jie laikysis jūsų nustatytų bendrųjų sąlygų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:15
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "Štai ką parodysiu šioje pamokoje: kokių veiksmų galite imtis, kad apibrėžtumėte tas bendrąsias sąlygas?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "Taikus kraštas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:26
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "Dabar apie žemėlapį: jūs įsikūrėte gražiame slėnyje tarp dviejų kalnų, kuriame gausu marmuro, geležies rūdos ir anglies. Visi tikėjosi taikaus gyvenimo."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:27
 msgid ""
@@ -59,86 +59,86 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "Tačiau vieną dieną rytuose aptikote dykvietę su apleistais pastatais. Iš ten sklido keista aura ir niekas nenorėjo ten kelti kojos. Tačiau siena negalėjo likti neapsaugota, todėl pastatėte tris tvirtoves."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:28
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr ""
+msgstr "Nebuvote pasiruošę karui, todėl dabar turite skubėti ir suburti kariuomenę."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid "An accident"
-msgstr ""
+msgstr "Nelaimingas atsitikimas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:37
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "Smuklė dega!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:39
 msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "O ne, pažiūrėkite: mūsų smuklė dega! Paskubomis mūsų smuklininkė netyčia numetė deglą. Jai viskas gerai, bet mes nespėjome laiku užgesinti ugnies."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
 msgid "Open the building statistics window"
-msgstr ""
+msgstr "Atidarykite pastatų statistikos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:50
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Atidarykite pastatų statistikos langą, kad matytumėte savo turimų pastatų apžvalgą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Pirmiausia ekrano apačioje turėsite atidaryti meniu „Statistika“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
-msgstr ""
+msgstr "Tada pasirinkite „Pastatai“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "You can also use the hotkey ‘%s’."
-msgstr ""
+msgstr "Taip pat galite naudoti spartųjį klavišą „%s“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
-msgstr ""
+msgstr "Pastatų statistika"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
-msgstr ""
+msgstr "Patikrinkite savo smukles"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Pirmiausia turėtume išsiaiškinti, kiek smuklių šiuo metu turime. Widelands siūlo langą, kuriame galite lengvai tai patikrinti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr ""
+msgstr "Pažiūrėkite, kiek smuklių turite"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Norime sužinoti, ar dar turime smuklių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "Pastatų statistikos lange pasirinkite skirtuką „Vidutiniai pastatai“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Pažiūrėkite, kiek turite smuklių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid ""
@@ -146,38 +146,38 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr ""
+msgstr "Po kiekvienu pastatu yra dvi eilutės. Pirmoji rodo jums priklausančių pastatų ir statomų pastatų skaičių. Antroji eilutė rodo vidutinį produktyvumą, jei tai yra gamybos ar mokymo vieta, arba dislokuotus bei pageidaujamus karius kariniuose pastatuose."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
-msgstr ""
+msgstr "Baigę uždarykite pastatų statistikos langą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
-msgstr "Statinių statistika"
+msgstr "Pastatų statistika"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr ""
+msgstr "Tai yra pastatų statistikos langas. Jame rodomi visi pastatai, kuriuos galite turėti, surūšiuoti pagal jų dydį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid "Let me now explain what all those numbers mean:"
-msgstr ""
+msgstr "Dabar leiskite paaiškinti, ką reiškia visi šie skaičiai:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "„2/1“ po karjeru: tai reiškia, kad turite du karjerus ir dar vieną, kuris yra statomas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "„0%“: tai nurodo vidutinį visų tokio tipo pastatų produktyvumą. Ką tik pradėjote šį žaidimą, todėl nė vienas jūsų pastatas dar neatliko jokių darbų, bet netrukus jie pradės dirbti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
@@ -185,164 +185,164 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "„2/4“ po jūsų sargybos postu: kariniuose pastatuose vietoj produktyvumo rodomi dislokuoti kariai. Norite, kad jūsų sargybos postuose būtų keturi kariai, bet tokio tipo pastatuose yra dislokuoti tik du kariai. Taip lieka dvi laisvos vietos – mums tikrai reikia daugiau karių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
-msgstr ""
+msgstr "Abiem atvejais spalva (žalia - geltona - raudona) parodo, koks geras yra šis rodiklis."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:89
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "Jei spustelėsite pastatą, galėsite peržiūrėti pasirinkto tipo pastatus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:90
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "Jei neturite jokio konkretaus tipo pastato, jis bus rodomas pilkas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Kol kas paaiškinimų pakaks. Dabar išbandykite patys."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
-msgstr ""
+msgstr "Jūs uždarėte pastatų statistikos langą!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr ""
+msgstr "Uždarėte pastatų statistikos langą. Nepastebėjau, kad perėjote prie vidutinių pastatų, kad pažiūrėtumėte smuklių skaičių. Ar galėtumėte būti toks malonus ir man tai parodyti?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr ""
+msgstr "Dar kartą atidarykite pastatų statistikos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr ""
+msgstr "Uždarėte pastatų statistikos langą, nors dar nepažiūrėjote smuklių skaičiaus."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr ""
+msgstr "Prašome jį atidaryti iš naujo ir pasirinkti antrąjį skirtuką (vidutiniai pastatai)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "Atidarykite savo atsargų langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "Atsargų lange pateikiama šiuo metu turimų prekių apžvalga."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "Po to pasirinkite „Akcijų“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:708
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "Taip pat galite naudoti spartųjį klavišą „%s“, kad greitai pasiektumėte šį langą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:165
 msgid "Stock"
-msgstr "Sandėlis"
+msgstr "Ištekliai"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr ""
+msgstr "Patikrinkite, ar nėra racionų"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr ""
+msgstr "Gerai. Sąraše matėte, kad nebeturite tavernų ar užeigų. Tai reiškia, kad jūs negaminate jokių davinių. Bet pažiūrėkime, ką dar turime sandėlyje."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Išnagrinėkite pirmuosius du skirtukus akcijų lange"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Pažvelkite į pirmuosius du skirtukus akcijų lange. Jie rodo visus jūsų turimus gaminius ir darbuotojus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "Kai pamatysite pakankamai, grįžkite į trečiąjį skirtuką („Prekės sandėliuose“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "Akcijų lange yra keturi skirtukai. Pirmasis parodo visus jūsų dabartinius gaminius, įskaitant esančius keliuose, vėliavose ir pastatuose, kurie laukia apdorojimo."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr ""
+msgstr "Žvelgiant į racioną, šiuo metu iš viso yra tik penki, tikriausiai pakeliui į kažkur. Penki daviniai nėra daug tokiai didelei ekonomikai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr ""
+msgstr "Antrame skirtuke rodomi visi jūsų darbuotojai, vėl tie, kurie yra keliuose ir pastatuose."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr ""
+msgstr "Trečiame skirtuke rodomi gaminiai, kurie saugomi jūsų būstinėje, sandėliuose ir uostuose. Jie niekur nereikalingi, todėl yra jūsų rezervas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
-msgstr ""
+msgstr "Ketvirtajame skirtuke parodytas tas pats darbuotojams."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:170
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr ""
+msgstr "Trečiame skirtuke nurodoma, kad jūsų būstinėje neliko davinio – tai nėra gerai!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Jūs uždarėte akcijų langą!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Jūs uždarėte akcijų langą, bet aš dar nebaigiau savo paaiškinimo. Ar galėtumėte jį atidaryti iš naujo ir pasirinkti pirmąjį skirtuką?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Dar kartą atidarykite akcijų langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -350,75 +350,75 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Jūs uždarėte atsargų langą, kol aš baigiau jums viską apie tai papasakoti. Jei jau viską žinote, nedvejodami palikite šią pamoką bet kuriuo metu."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "Kitu atveju atidarykite jį iš naujo ir peržiūrėkite visus jo skirtukus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Jūs uždarėte akcijų langą, bet aš dar nebaigiau savo paaiškinimo. Ar galėtumėte jį atidaryti iš naujo ir pasirinkti trečią skirtuką?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "Kitu atveju atidarykite jį iš naujo ir pasirinkite trečią skirtuką."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr ""
+msgstr "Pastatykite naujas smukles"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
-msgstr ""
+msgstr "Pastatykite bent dvi smukles."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "Kol negaminsime davinio, mūsų kalnakasiai nekabės rūdos. Ir be geležies negalime padirbti nė vieno vairo."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
-msgstr ""
+msgstr "Naujos tavernos"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid "We need new taverns"
-msgstr ""
+msgstr "Mums reikia naujų tavernų"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "Dabar, kai turite apžvalgą, turėtumėte veikti. Manau, kad turėtume pastatyti daugiau nei vieną smuklę – du ar trys yra geriau."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Atidarykite žaidimo pagalbos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Lange Encyclopedia yra žaidimo žinynas ir enciklopedija genties, kurią šiuo metu žaidžiate."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Atidarykite jį. Jį galite pasiekti naudodami mygtuką ekrano apačioje."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Arba galite jį pasiekti tiesiogiai naudodami „%s“ klavišą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -426,13 +426,13 @@ msgstr "Enciklopedija"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "Kaip gauti pagalbos"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Žinoma, sunku prisiminti visas mano pastabas ir patarimus. Pavyzdžiui, galite savęs paklausti: „Kam mums reikia raciono, kad gautume karius?“"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -440,12 +440,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Kai daug žaidi, visus šiuos dalykus žinosi mintinai. Tačiau iki tol arba jei nesate tikri dėl savo genties poreikių ir gebėjimų bei jos pastatų ir darbuotojų veikimo, galite tai lengvai ieškoti mūsų genties žinyne ir enciklopedijoje."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Pažiūrėkite, kokių prekių reikia norint įdarbinti karius"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -453,123 +453,123 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Kariui reikia medinės ieties ir šalmo – nuo tada galite ieškoti atgal, kad surastumėte prekes ir pastatus, kurių reikia norint aprūpinti kareivines, kuriose užverbuotas kareivis. Baigę tiesiog uždarykite enciklopedijos langą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Naudokite enciklopediją, kad sužinotumėte, kaip sukurti naujus karius."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Encyclopedia lange pasirinkite skirtuką „Wares“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Pažiūrėkite, ko reikia šalmui pagaminti ir ko reikia medinei ietims pagaminti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Jei norite, galite toliau ieškoti, ko reikia norint pagaminti prekes, kurias ką tik ieškojote."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Baigę uždarykite enciklopedijos langą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Enciklopedijos detalės"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Enciklopedijos kategorijos"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Enciklopedijoje yra penki skirtukai:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Skirtuke „Bendra“ pateikiama informacija apie visus pagrindinius Widelands sąsajos valdiklius. Be to, ten galite rasti patarimų, kurie yra svarbūs jūsų genčiai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "Skirtuke „Prekės“ rodoma informacija apie jūsų genčiai reikalingus gaminius, įskaitant trumpą pagalbos tekstą, pastatų, gaminančių kiekvieną gaminį, sąrašą, reikalingus gaminius joms gaminti ir kur suvartojama."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "Skirtuke „Darbuotojai“ pateikiama informacija apie jūsų genties darbuotojus panašiai kaip ir antrame skirtuke."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Skirtuke „Pastatai“ yra visa reikalinga informacija apie jūsų genties pastatus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Galiausiai, skirtuke „Nekilnojamasis turtas“ rodoma informacija apie konkrečius nekilnojamuosius daiktus, kuriuos jūsų genties darbuotojai gali įdėti į žemėlapį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Jūs uždarėte enciklopediją!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Jūs uždarėte enciklopedijos langą, bet nepastebėjau, kad bandėte išsiaiškinti, kokių gaminių reikia norint užverbuoti kareivį. Ar galėtumėte jį iš naujo atidaryti ir padaryti?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Dar kartą atidarykite enciklopedijos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Uždarėte enciklopedijos langą neieškodami mums reikalingos informacijos. Jei jau viską žinote, nedvejodami palikite šią pamoką bet kuriuo metu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "Kitu atveju iš naujo atidarykite enciklopedijos langą ir pasirinkite antrą skirtuką."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
-msgstr ""
+msgstr "Prioriteto nustatymai"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Send the wares where they’re needed"
-msgstr ""
+msgstr "Siųskite prekes ten, kur jų reikia"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:319
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr ""
+msgstr "Puiku. Mūsų tavernos dabar buvo pastatytos ir tiekia mums racioną."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "Šiuo metu visos kasyklos tiekiamos su racionu. Jei norite teikti pirmenybę specialiai kasyklai, tiesiog turite atidaryti jos langą. Prekių skirtuke, už kiekvienos prekės, galite pamatyti slankiklį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -577,27 +577,27 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "Kai perkeliate slankiklį į mėlyną sritį kairėje pusėje (žemas prioritetas), atitinkama gaminiai pristatoma rečiau. Raudona (dešinė pusė) reiškia, kad į šį pastatą reikia pristatyti kuo daugiau prekių, galbūt todėl, kad iš jo gaminama kažkas svarbaus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "Tikroji tiekimo būsena nurodoma įvairiomis pačių prekių piktogramų spalvomis:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Pastate laikomi gaminiai rodomi spalvotai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Trūksta prekių pilkai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Pastate dar nėra, bet ten jau vežami gaminiai rodomi tamsesniu pilku."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -605,72 +605,72 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr ""
+msgstr "Mūsų situacijoje galbūt norėsite kuo greičiau padirbėti kepyklėlėse, nes jos aprūpina mūsų smukles, kad galėtumėte joms skirti didžiausią prioritetą. Kituose pastatuose (pavyzdžiui, asilų fermoje) būtų mažiau vandens, tačiau kepykla galėtų veikti greičiau."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Atidarykite Ware Statistics langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Meniu „Statistika“ pasirinkite įrašą „Wares“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "Ware Statistics"
-msgstr "Gaminių statistika"
+msgstr "Programų statistika"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Pažiūrėkime, kaip sekasi mūsų gaminių gamybai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Ištirkite savo gaminių gamybą ir vartojimą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr ""
+msgstr "Pirmieji du skirtukai rodo bet kokios prekės gamybą ir vartojimą. Galite juos perjungti tiesiog spustelėdami."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Kai pamatysite pakankamai, pereikite prie trečiojo skirtuko („Economy Health“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "Šiame lange galite pasirinkti gaminius, kad pamatytumėte, kaip laikui bėgant pasikeitė jų gamyba ar vartojimas. Išbandykite su kai kuriais gaminiais."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Tęsiu, kai tik spustelėsite trečiąjį skirtuką („Economy Health“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Ištirkite savo ekonomikos sveikatą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr ""
+msgstr "Trečiame skirtuke parodyta prekių ekonomiškumas. Kai vertė yra teigiama, tai reiškia, kad jūsų akcijos auga."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
-msgstr ""
+msgstr "Dabar išbandykite tai. Taip pat galite palyginti jį su dviem ankstesniais skirtukais."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Kai pamatysite pakankamai, perjunkite į ketvirtą skirtuką („Akcijų“)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -678,51 +678,51 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr ""
+msgstr "Šiame skirtuke galite pamatyti skirtumą tarp gamybos ir vartojimo, vadinamo „Economy Health“. Vienu žvilgsniu galite pamatyti, kuris iš šių dviejų yra didesnis pasirinktam gaminiui, tai reiškia, ar suma didėja, ar mažėja."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Patikrinkite savo atsargas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr ""
+msgstr "Skirtukas „Stock“ rodo, kiek prekių turite. Palyginkite informaciją iš keturių skirtukų, kad suprastumėte koreliaciją."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "Baigę uždarykite langą Programų statistika."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr ""
+msgstr "Paskutiniame skirtuke taip pat galite matyti savo absoliučią atsargą. Jis padidės, kai ekonomikos sveikata bus teigiama, o kitaip sumažės. Palyginkite du grafikus!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr ""
+msgstr "Paskutiniai du skirtukai yra geri rodikliai, leidžiantys pamatyti, ar netrukus ateis trūkumas. Nepamirškite jų reguliariai tikrinti!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "Uždarėte prekių statistikos langą!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Uždarėte programinės įrangos statistikos langą, bet aš dar nebaigiau savo paaiškinimo. Ar galėtumėte jį atidaryti iš naujo ir pasirinkti trečią skirtuką?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Dar kartą atidarykite programinės įrangos statistikos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -730,33 +730,33 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Jūs uždarėte programinės įrangos statistikos langą, kol aš baigiau jums viską apie tai papasakoti. Jei jau viską žinote, nedvejodami palikite šią pamoką bet kuriuo metu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Uždarėte programinės įrangos statistikos langą, bet aš dar nebaigiau savo paaiškinimo. Ar galėtumėte jį iš naujo atidaryti ir pasirinkti ketvirtą skirtuką?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr ""
+msgstr "Kitu atveju atidarykite jį iš naujo ir pasirinkite ketvirtą skirtuką."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Atidarykite langą „Konfigūruoti ekonomiką“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "Atidarykite langą „Konfigūruoti ekonomiką“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Langą galima pasiekti spustelėjus bet kurią jums priklausančią vėliavėlę arba iš sandėlio langų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -764,28 +764,28 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
-msgstr "Ekonomikos parinktys"
+msgstr "Ekonominės galimybės"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Parodžiau jums mūsų atsargų langą, kuriame matėte, kurios prekės yra sandėliuose. Prisimeni?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Dabar aš jums pasakysiu, kaip galite nustatyti, kiek prekių norite turėti. Šiam tikslui skirtą langą galima pasiekti per bet kurią vėliavėlę ir jis vadinamas „Konfigūruoti ekonomiką“."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
-msgstr ""
+msgstr "Tai yra piktograma."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Tą patį mygtuką galima rasti ir sandėlio languose."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -794,26 +794,26 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares and workers."
-msgstr ""
+msgstr "Atminkite, kad mygtukai ne veltui vadinami „konfigūruoti šios vėliavos / pastato ekonomiką“. Ekonomika susideda iš visų pastatų ir vėliavų, sujungtų keliais, keltais ar laivais, todėl galite turėti daugiau nei vieną ekonomiką, jei jų vėliavos nėra sujungtos jokiu transportu. Tokiu atveju jūsų atskiros ekonomikos gali turėti skirtingus gaminių ir darbuotojų nustatymus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
-msgstr ""
+msgstr "Šis langas atrodo panašus į akcijų langą, tačiau jo apačioje yra papildomų mygtukų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr ""
+msgstr "Pirmiausia turite pasirinkti vieną ar daugiau prekių (taip pat galite spustelėti ir vilkti kairiuoju pelės mygtuku). Tada galite nustatyti norimą tikslinį kiekį pasirinktoms prekėms."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr ""
+msgstr "Dauguma pastatų ką nors gamins tik tada, kai atsargų lygis jūsų sandėliuose nukris žemiau tikslinio kiekio, todėl turėtumėte nurodyti rezervą, kurį norite kaupti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -821,7 +821,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr ""
+msgstr "Pavyzdys: numatytoji dalgio reikšmė yra 1. Jei statysite ūkį, vežėjas paims dalgį ir taps ūkininku. Tada dalgių neliks, bet tikslinis kiekis yra 1, todėl jūsų įrankių kalvis pradės gaminti kitą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
@@ -829,7 +829,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr ""
+msgstr "Jei statysite du ūkius, iš karto pradės dirbti tik vienas iš jų. Antrasis ūkis turės laukti savo darbuotojo, kuriam trūks dalgio. Jei anksčiau būtumėte nustatę tikslinį kiekį iki 2, būtų buvę du dalgiai ir abu ūkiai būtų galėję iš karto pradėti dirbti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
@@ -840,14 +840,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Prekių kaupimas yra dviašmenis kardas. Viena vertus, sandėlyje esantys gaminiai yra naudingi siekiant apsaugoti laikinus jūsų ekonomikos svyravimus, kurie dažniausiai pasitaiko. Kita vertus, bet kokios prekės, kurios sėdi sandėlyje, o ne perdirbamos į ką nors kitą, yra iššvaistomos. Surasti pusiausvyrą tarp švaistomų atsargų kaupimo ir gamybos tiekimo grandinėse tiesioginės gamybos laiko yra vienas iš svarbiausių iššūkių tobulinant ekonomiką. Jei abejojate, pasistenkite turėti papildomų atsargų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Norėdami palengvinti perjungimo tarp skirtingų ekonominių situacijų procesą, galite išsaugoti ir pritaikyti ekonominius profilius ekonominių opcionų lango apačioje. Ten iš anksto nustatytas atsargų kaupimo ir efektyvumo profilis."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -856,7 +856,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "Dažniausiai ekonomikos galimybės yra naudinga priemonė, užtikrinanti, kad ištekliai nebūtų švaistomi gaminiams gaminti gaminiams gaminti, kurių jūsų ekonomikai iš tikrųjų nereikia. Tačiau kartais gali būti naudinga kaupti gaminį labai dideliais kiekiais. Norėdami tai pasiekti, ekonominių opcionų langas leidžia nustatyti programinės įrangos tikslą į begalinį, kad ji visada būtų gaminama."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -865,36 +865,36 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Tą patį mygtuką galima rasti ir gamybos vietų pastato lange. Dėl to tik ši svetainė gaminama neribotą laiką, nepaisant ekonomikos sąlygų. Tai gali būti naudinga, pavyzdžiui, kad šalia sienos būtų pagaminama daugiau statybinių medžiagų, net jei jūsų tėvynėje yra daug atsargų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "pagaminti 20 marmurinių kolonų"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr ""
+msgstr "Kad būtumėte pasiruošę papildomiems įtvirtinimams, turėtumėte pagaminti 20 marmurinių kolonų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr ""
+msgstr "Jūsų akmentašys negamins marmurinių kolonų, kai jų nereikės. Turite padidinti tikslinį kiekį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "Norėdami tai padaryti, spustelėkite bet kurią vėliavėlę ir pasirinkite „Konfigūruoti ekonomiką“. Šiame lange galite nuspręsti, kiek kiekvieno tipo prekių sandėlyje norite turėti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr ""
+msgstr "Kartais daug gaminių prireiks vienu metu greitai – greičiau nei galima pagaminti. Šiuo atveju gerai turėti pakankamai atsargų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
@@ -902,71 +902,71 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr ""
+msgstr "Pakeitę tikslinį kiekį, galite nuspręsti, į kuriuos gaminius/įrankius reikia paversti jūsų ištekliais (šiuo atveju: geležimi), ar norite sutaupyti lygintuvo, ir laukti, kol sužinosite, kam jo prireiks."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr ""
+msgstr "Ši aplinka rūpi tik pastatams, kurie vartoja prekes. Pastatai, kuriuose nemokamai gaminami gaminiai (pvz., jūsų ūkiai ar šuliniai), visada veiks."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr ""
+msgstr "Dabar pabandykime: dabartinis marmurinių kolonų tikslinis kiekis yra 10. Padidinkite jį, kad būtų paruoštas, jei tektų greitai pastatyti įtvirtinimus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Į priekinę liniją atneškite 20 marmurinių kolonų"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Atneškite visas 20 marmurinių kolonų į sandėlį netoli fronto linijos."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr ""
+msgstr "Norėdami tai pasiekti, turėsite padaryti du dalykus. Pirmiausia pageidaujamame sandėlyje nustatykite pirmenybę marmurinėms kolonoms. Jei įmanoma, ten bus atvežtos visos ateityje pagamintos marmurinės kolonos."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr ""
+msgstr "Tada, norėdami perkelti marmurinius stulpelius iš savo būstinės, turėsite spustelėti ten esantį mygtuką Pašalinti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
-msgstr ""
+msgstr "Sandėlio nuostatos"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
-msgstr ""
+msgstr "Atneškite marmurines kolonas į priekinę liniją"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
-msgstr ""
+msgstr "Marmurinių kolonų gamyba dabar veikia gerai, bet būtų puiku, jei jos būtų laikomos ten, kur mums jų reikia."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr ""
+msgstr "Paprastai pagaminti gaminiai atvežami į artimiausią sandėlį, jei jų nereikia kitur. Šiuo atveju tai reiškia mūsų būstinę. Bet mes norėtume juos turėti sandėlyje prie mūsų tvirtovių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr ""
+msgstr "Kiekviename sandėlyje yra keturi mygtukai nuostatai nustatyti. Jei perkelsite pelės žymeklį ant jų, pamatysite patarimus, paaiškinančius, ką daro mygtukai."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:565
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:575
@@ -978,7 +978,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
-msgstr ""
+msgstr "Prekiavimas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -986,14 +986,14 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "Puiku. Dabar turime pakankamai marmurinių kolonų, kad agresoriaus atveju galėtume pastatyti savo įtvirtinimus. Tačiau paaiškėjo, kad šioje dykvietėje tikrai gyvena fryzų gentis, ir jie yra taikūs. Jie prašė su mumis prekiauti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Kadangi Widelands yra skirtas kurti, o ne deginti, prekyba yra daug geresnis būdas bendrauti su kitomis gentimis, nei įsiveržti į jų žemę. Taigi prekiaukime."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1001,33 +1001,33 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "Sandoriai vykdomi per rinkas. Kai turite rinką, jūs ir kitas žaidėjas derasi, kokiais gaminiais norite keistis vieni su kitais ir kiek jų. Bet aš jums papasakosiu apie procesą žingsnis po žingsnio. Pirma, jums reikia sukurti rinką."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Sukurkite rinką"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Pastatykite turgų šalia dykvietės."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Rinka yra didelis pastatas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "Jūsų teritorijoje prekes veža vežėjai. Tačiau sandoriai gali vykti dideliais atstumais, per toli, kad jūsų vežėjai galėtų vaikščioti. Taigi mes įdarbiname asilų karavaną, kad galėtume neštis savo gaminius."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "Asilai veisiami asilų fermoje. Pagal šį scenarijų jūs jau turite vieną čia."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1035,47 +1035,47 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "Asilai ne tik gabenti prekybinius gaminius, bet ir padėti judriuose keliuose: kai kelias sulaukia didelio eismo, jo vežėjas prašo asilo, kuris padėtų atlikti darbus, todėl per tą patį laiką galima gabenti dvigubai daugiau prekių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "Rinka jau baigta ir galime pradėti kurti prekybos pasiūlymą fryzams. Tai daroma iš rinkos lango. Leisk man tiesiog atidaryti jį tau."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "Kaip matote, rinkos lange yra trys skirtukai. Pirmasis skirtukas mums šiuo metu yra įdomiausias: čia galite konfigūruoti ir pasiūlyti naują prekybą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "Antrame skirtuke pateikiami sandoriai, kuriuos anksčiau siūlėte iš šios rinkos. Šiuo metu jis tuščias, nes dar nepasiūlėte jokių sandorių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
 "The third tab lists trade offers that you received from other players, and "
 "allows you to accept or reject them. This, too, is empty, since the Frisians"
 " are waiting for you to make the first move."
-msgstr ""
+msgstr "Trečiame skirtuke pateikiami prekybos pasiūlymai, kuriuos gavote iš kitų žaidėjų, ir leidžia juos priimti arba atmesti. Tai taip pat tuščia, nes fryzai laukia, kol žengsite pirmąjį žingsnį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:625
 msgid ""
 "Proposing a trade is straightforward. The first step is to select the player"
 " you want to trade with from the dropdown. In this case, there is only one "
 "other player, and he is automatically preselected for you."
-msgstr ""
+msgstr "Pasiūlyti sandorį yra paprasta. Pirmas žingsnis yra išskleidžiamajame meniu pasirinkti žaidėją, su kuriuo norite prekiauti. Šiuo atveju yra tik vienas kitas žaidėjas ir jis automatiškai iš anksto pasirenkamas jums."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:633
 msgid ""
 "Next, you select the wares you want to send and receive respectively from "
 "the large double panel in the center of the market window."
-msgstr ""
+msgstr "Tada iš didelio dvigubo skydelio, esančio rinkos lango centre, pasirenkate atitinkamai prekes, kurias norite siųsti ir gauti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:634
 msgid ""
@@ -1085,50 +1085,50 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr ""
+msgstr "Kai prekiaujate su kita gentimi, ne visi gaminiai gali būti keičiami. Kiekviena gentis turi savo ekonomiką ir naudoja skirtingus gaminius. Pavyzdžiui, fryzai negeria vyno ir negali statyti namų iš marmuro; Ir jūsų imperatoriškoji gentis negali statyti namų iš fryzų plytų ir nevalgo savo rūkytos žuvies. Skydelyje rodomos tik prekės, kuriomis galite naudotis jūs ir jūsų būsimas prekybos partneris."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "Skydelyje pasirinkite gaminius ir naudokite po juo esančius rodyklių mygtukus, kad padidintumėte arba sumažintumėte keičiamų prekių kiekį."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr ""
+msgstr "Galiausiai pasirinkite, kiek pasirinktų prekių partijų bus pakeista. Taip pat galite nustatyti, kad sandoris veiktų neribotą laiką, naudodami begalybės piktogramą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Partija bus pristatyta vienu transportu, kiekvienai gaminiui reikės asilo."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
-msgstr ""
+msgstr "Kai viską sukonfigūruosite, spustelėkite mygtuką „Pasiūlyti“, kad išsiųstumėte prekybos pasiūlymą kitam žaidėjui. Tada jis gali nuspręsti, priimti ar atmesti jūsų pasiūlymą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "Išbandykite!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "Pasiūlykite prekybą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Pasiūlykite fryzams prekybą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Fryzai priims tik jiems naudingą prekybą; Tai yra, jie neišduos daugiau prekių, nei gauna."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
@@ -1138,7 +1138,7 @@ msgstr "Prekyba atmesta"
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Fryzai atmetė jūsų prekybos pasiūlymą. Jie nepriims sandorio, kuris jiems gali būti nepalankus. Nusiųskite jiems naują prekybos pasiūlymą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
@@ -1150,7 +1150,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Gerai padaryta! Fryzai priėmė jūsų prekybos pasiūlymą. Netrukus pamatysite savo asilų karavaną, išeinantį iš turgaus, kad atvežtų fryzų gaminių, o jų elnių karavanas mainais atneš jums prekių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1158,72 +1158,72 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Kaip matote, rinkos lange dabar yra naujas skirtukas. Jame yra vienas toks skirtukas kiekvienai aktyviai prekybai šioje rinkoje. Skirtuke rodoma daugiau informacijos apie vykdomą prekybą ir prekes, kurios laukia, kol bus prekiaujama, taip pat leidžia ją valdyti:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Galite trumpam pristabdyti prekybą ir, kai norite, tęsti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Galite perkelti prekybą į kitą savo rinką."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Galite pasiūlyti pratęsti prekybą daugiau partijų."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "Ir jūs galite bet kada atšaukti prekybą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "Siūloma prekyba"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "Dabar fryzai taip pat pasiūlė jums prekybą. Diplomatijos lange galite rasti visų prekybos pasiūlymų ir pasiūlymų sąrašą, taip pat vykdyti sandorius. Atidarykite jį naudodami mygtuką iš pagrindinės įrankių juostos."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Atidarykite diplomatijos langą"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "Diplomatijos lange pateikiama visų jūsų sandorių, prekybos pasiūlymų ir prekybos pasiūlymų apžvalga."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Jį galite atidaryti naudodami šį mygtuką pagrindinėje įrankių juostoje."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "Diplomatijos langas"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "Viršutinėje diplomatijos lango pusėje galite pamatyti visus žaidėjus ir jų komandas. Čia galite pakviesti kitus žaidėjus prisijungti prie jūsų komandos arba prašyti prisijungti prie jų. Tačiau prekiauti nebūtina būti komandoje."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "Mus labiau domina apatinė lango pusė. Čia galite pamatyti savo siūlomus, siūlomus ir aktyvius sandorius."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "Šiuo metu turite vieną prekybos pasiūlymą – tą, kurį ką tik jums atsiuntė fryzai. Peržiūrėkite jį, tada naudokite šalia esančius mygtukus, kad jį priimtumėte arba atmestumėte."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1231,39 +1231,39 @@ msgid ""
 "market you want to use for this trade, as you can have multiple markets. You"
 " can also manage the offer directly from the window of the market where you "
 "want to accept the trade."
-msgstr ""
+msgstr "Jei norite priimti prekybą, iš išskleidžiamojo meniu turite pasirinkti, kurią rinką norite naudoti šiai prekybai, nes galite turėti kelias rinkas. Taip pat galite valdyti pasiūlymą tiesiai iš rinkos lango, kuriame norite priimti prekybą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "Nuspręskite dėl prekybos pasiūlymo"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "priimti arba atmesti fryzų prekybos pasiūlymą."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "Tai galite padaryti pro diplomatijos langą arba iš turgaus lango."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "Gerai padaryta! Tai iš tikrųjų viskas; Dabar žinote, kaip siųsti ir valdyti prekybos pasiūlymus ir pasiūlymus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr ""
+msgstr "Galite turėti bet kokį aktyvių sandorių skaičių ir su bet kokiu žaidėjų skaičiumi; toje pačioje rinkoje arba daugelyje, kaip norite."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "Norėdami iš tikrųjų įvaldyti prekybos meną, tiesiog atsiminkite tai: bet kokių gaminių vertė labai priklauso nuo aplinkybių, taip pat nuo genties."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1272,18 +1272,18 @@ msgid ""
 "in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal "
 "much more efficiently than the Empire. Therefore, trading Imperial meals "
 "against Frisian coal is a trade from which both parties can benefit greatly."
-msgstr ""
+msgstr "Pavyzdžiui, fryzų kalnakasiai mielai priims bet kokį patiekalą, nepaisant to, ar jį pigiai pagamino „Imperial Inn“, ar už daug didesnę kainą fryzų girdykloje. Kita vertus, fryzai gali deginti anglį daug efektyviau nei imperija. Todėl prekyba imperijos patiekalais prieš fryzietišką anglį yra prekyba, iš kurios abi šalys gali gauti daug naudos."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
-msgstr ""
+msgstr "Įgydami daugiau patirties su skirtingomis Widelands gentimis, įgysite išsamų supratimą apie kiekvienos genties kiekvienos prekės santykinę kainą ir vertę. Šios žinios yra neįkainojamos sprendžiant dėl sandorių."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:749
 msgid ""
@@ -1292,7 +1292,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "Tai užbaigia mūsų pamoką! Tikiuosi, kad galėčiau jus išmokyti, kaip galite kontroliuoti ekonomiką Widelands. Yra daug variantų ir iš pradžių jie gali būti painūs. Net jei supratote tik keletą sąvokų, neturite pasiduoti. Išbandykite juos kai kuriuose žaidimuose, susipažinkite su jais ir patirkite galimybes. Tada grįžkite prie šios pamokos ir sužinokite visa kita!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:751
 msgid ""
@@ -1301,4 +1301,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "Tai buvo paskutinė pamoka, kurią jums paruošiau. Dabar išmokau tave visko, ką žinau. Šiame pasaulyje vis dar yra paslėptų paslapčių, apie kurias net aš nežinau. Dabar ieškosiu ramios vietos praleisti saulėlydžio metus. Jei vis dar turite klausimų, Widelands bendruomenė jums tikrai padės. Jį galite rasti adresu:"

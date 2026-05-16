@@ -18,48 +18,48 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
-msgstr "Jūrininkystės"
+msgstr "Jūrininkystė"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Jūrininkystės pamoka"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Sveiki sugrįžę. Šioje pamokoje sužinosite svarbiausius dalykus apie jūrininkystę: laivus, uostus ir ekspedicijas."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "Tačiau pirmiausia leiskite apžvelgti jūsų teritoriją: čia, pietuose, turite veikiančią ekonomiką su beveik viskuo, ko jums reikia."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr ""
+msgstr "Šiaurinė dalis"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Čia, šiaurinėje dalyje, turite tik aukso kasyklą ir sandėlį. Nors kasyklos darbininkai yra gerai aprūpinti maistu, nėra galimybės gabenti aukso rūdos į mūsų lydyklą pietinėje dalyje."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Bandėme nutiesti kelią, tačiau kalnas yra per platus ir per status. Todėl turime tik vieną išeitį: privalome nutiesti jūrų kelią tarp šių dviejų dalių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Bet aš nenoriu tavęs skubinti: tu ką tik čia atvykai ir tikriausiai norėtum atidžiau pažvelgti į savo stovyklą. Taip pat trumpai pailsėsiu ir greitai grįšiu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -71,7 +71,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
+msgstr "Viskam, ką darote atviroje jūroje, jums reikia uosto pakrantėje. Uostai yra tarsi būstinės: juose galima laikyti prekes, darbuotojus ir karius. Viduje esantys kariai automatiškai išeis gintis, jei priešas užpuls uostą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
 msgid ""
@@ -80,132 +80,132 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "Be to, uostai suteikia galimybę gabenti prekes laivais. Spustelėję jau turimą prievadą pastebėsite du papildomus skirtukus: „Galios laukia, kol bus išsiųstos“ ir „Darbininkai laukia įlaipinimo“. Jie laukia, kol laivas nugabens juos į kitą uostą. Šiuo metu jų nėra, nes dar nepastatėme antrojo uosto. Taigi pakeiskime tai!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
-msgstr ""
+msgstr "Uostų statyba"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
-msgstr ""
+msgstr "Kaip pastatyti uostą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
+msgstr "Uostai yra dideli pastatai, tačiau juos galima statyti tik specialiose vietose, kurios pažymėtos"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
-msgstr ""
+msgstr "mėlyna uosto vietos piktograma."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "Uostų vietas nustato žemėlapio kūrėjas, todėl jos žemėlapyje arba bus, arba ne. Tačiau jos gali būti paslėptos po medžiais arba užstatytos aplinkiniais pastatais."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "Tikriausiai jau pastebėjote, kad tokia piktograma yra šalia jūsų pilies."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
-msgstr ""
+msgstr "Pastatykite uostą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "Pastatykite uostą šiaurinėje savo stovyklos dalyje"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Jums visada prireiks uosto, jei norėsite gabenti prekes laivu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Pastatykite uostą šalia savo pilies, ant mėlynos uosto vietos piktogramos."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "Uostai statomi kaip įprasti pastatai, tačiau jie galimi tik mėlynose uosto vietose. Tiesiog spustelėkite lauką su piktograma ir statybų meniu automatiškai pasiūlys pastatyti uostą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "Nors uostai veikia kaip sandėliai, neturėtumėte jų statyti daugiau nei reikia: jie kainuoja kvarcą, deimantus ir auksą, todėl yra gana brangūs."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Constructing ships"
-msgstr ""
+msgstr "Laivų statyba"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Statykime laivus"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "Puiku. Kol jūsų uostas statomas, pastatykime keletą laivų."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "Laivus pakrantėje, netoli laivų statyklos, stato laivų statytojas. Turime ją pastatyti kur nors netoli kranto."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Pastatykite laivų statyklą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Pastatykite laivų statyklą netoli kranto"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "Laivus gamina laivų statykla. Tai vidutinio dydžio pastatas."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Pastatykite laivų statyklą netoli pietinės savo teritorijos dalies kranto."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
+msgstr "Laivų statykla yra vidutinis pastatas. Nors žemėlapyje jį galima statyti visur, laivų meistras veikia tik tada, kai yra arti vandens, o pakrantėje nėra medžių ar kelių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "Laukiame laivų"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
+msgstr "Labai gerai. Jūsų laivų statykla baigta ir statytojas iškart pradėjo darbą. Laivų statybai jam reikia rąstų, lentų ir voratinklių audinio, kurie bus gabenami į laivų statyklą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr ""
+msgstr "Laivų statytojas nusineš reikiamas medžiagas į laisvą vietą pakrantėje ir ten statys laivą. Kai pirmasis laivas bus baigtas, jis bus nuleistas į jūrą, o statytojas pradės kitą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "Turėtume palaukti, kol turėsime du laivus. Kol kas to turėtų pakakti."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
@@ -213,88 +213,88 @@ msgstr "Laivai"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Pastatykite du laivus"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
+msgstr "Laivai statomi automatiškai, kai laivų statykla baigta ir pristatytos reikiamos medžiagos."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr ""
+msgstr "Palaukite, kol laivų statytojas pastatys du laivus."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "Nepamirškite sustabdyti laivų statyklos, kai turėsite pakankamai laivų."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "Shipyard production"
-msgstr ""
+msgstr "Laivų statyklos gamyba"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "We have enough ships"
-msgstr ""
+msgstr "Turime pakankamai laivų"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "Jūsų antrasis laivas \"%1%\" jau paruoštas."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
+msgstr "Turite sustabdyti savo laivų statyklą, kai turite pakankamai laivų. Priešingu atveju jūsų laivų meistras sunaudos visus jūsų rąstus ir voratinklį, pagamindamas dešimtis laivų."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
+msgstr "Tai yra gamybos sustabdymo piktograma. Ją rasite pastato lange."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
-msgstr ""
+msgstr "Nėra geležies"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
-msgstr ""
+msgstr "Mums trūksta geležies"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "Antrasis laivas dar gali būti nebaigtas, tačiau turime skubią problemą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
+msgstr "Kaip tikriausiai pastebėjote, vakariniame kalne nėra geležies. Turime daug anglies ir aukso rūdos, tačiau be geležies rūdos negalime pagaminti jokių įrankių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
+msgstr "Nors tai gali užtrukti, brangiai kainuoti ir būti pavojinga – kas žino, kokios pabaisos gyvena jūrose? – nematyti kitos išeities: teks leistis į ekspediciją po nežinomus vandenis."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "Kelionė jūra, kaip tai gali būti smagu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Expeditions"
-msgstr ""
+msgstr "Ekspedicijos"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
+msgstr "Ekspedicijos metu išsiunčiate laivą atrasti naujų salų ir galbūt ten įkurti koloniją."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -303,56 +303,56 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
+msgstr "Ekspedicijas galima pradėti bet kuriame uoste. Tada visos reikiamos prekės gabenamos į tą uostą. Šios prekės yra būtent tos, kurių jūsų genčiai reikia naujam uostui pastatyti (jūsų tikslas – įkurti uostą toli nuo namų, tad tai nenuostabu), ir, žinoma, jums prireiks statytojo. Kai viskas bus paruošta, atplauks laivas ir jas paims."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Reikiamas prekes galite peržiūrėti uosto skirtuke „Ekspedicija“ (jis atsiras paskutinėje vietoje, kai pradėsite ekspediciją)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
-msgstr ""
+msgstr "Išbandykite tai. Vėliau papasakosiu, kokie bus tolesni žingsniai."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "Pradėkite ekspediciją bet kuriame savo uoste."
 
 #. TRANSLATORS: This refers to a memory game
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "Susikroviau krepšį ir į jį įsidėjau..."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr ""
+msgstr "Papildomi daiktai"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Gali būti naudinga su savimi pasiimti daugiau gaminių nei tik tuos, kurie sukurti naują uostą. Taip galėsime pradėti statyti naujus pastatus, kai tik bus pastatytas uostas."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Į ekspediciją galite pasiimti su savimi papildomų gaminių, kareivių ar darbuotojų. Galite juos apibrėžti užpildydami tuščias lizdus po pirminėmis programomis, kad galėtumėte sukurti prievadą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "Tiesiog spustelėkite tuščias vietas ir slinkite per sąrašą, kad pasirinktumėte papildomą elementą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Dabar išbandykite tai. Mažas žalias, geltonos arba raudonos spalvos taškas nurodo, ar prekė atkeliavo, yra pakeliui, ar nėra."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
@@ -364,21 +364,21 @@ msgstr "Pradėkite ekspediciją"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
-msgstr ""
+msgstr "Pradėkite ekspediciją."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
+msgstr "Norėdami tai padaryti, spustelėkite mygtuką „Pradėti ekspediciją“ bet kuriame prievade. Atsiras naujas skirtukas, kuriame galite pamatyti reikiamus gaminius."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
-msgstr ""
+msgstr "Į žalesnes ganyklas"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr ""
+msgstr "Pradėkite savo ekspediciją"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -387,64 +387,64 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Jūsų ekspedicijos laivas paruoštas. Jis laukia jūsų užsakymų priešais jūsų uostą. Tai nebeveža prekių. Naudokite jo mygtukus, kad išsiųstumėte savo laivą bet kuria iš šešių pagrindinių Widelands žemėlapio krypčių. Pasiekus pakrantę, galite priversti ją keliauti po pakrantę, kur ieškos tinkamų vietų nusileidimui."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "Suradę prievado erdvę, galite sukurti naują prievadą su mygtuku laivo valdymo lango centre."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
+msgstr "Tada gaminiai bus iškrauti, o laivas vėl imsis prekių gabenimo. Statytojas pradės savo darbus ir statys uostą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "Ieškokite salos su kalnu ir ten ieškokite uosto erdvės. Kolonizuoti salą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
-msgstr ""
+msgstr "Ištirti"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid "Found a settlement"
-msgstr ""
+msgstr "rado gyvenvietę"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr ""
+msgstr "Nuplaukite savo laivu į salą, kurioje gali būti geležies rūdos."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
+msgstr "Spustelėjus ekspedicijos laivą, atsidaro langas, kuriame galite valdyti savo laivą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "Radę tinkamą uosto erdvę, pastatykite ten uostą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
-msgstr ""
+msgstr "Nauja kolonija"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "Jūsų kolonija buvo įkurta"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
+msgstr "Jūs vadovavote ekspedicijai iki sėkmingos pabaigos ir įkūrėte naują koloniją. Išsiunčiau keletą geologų – jie jau praneša, kad rado geležies rūdos."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:213
 msgid ""
@@ -452,7 +452,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Iki šiol jūs išmokote viską apie jūreivystę: kaip statyti uostus ir laivus ir kaip išsiųsti ekspediciją. Atminkite, kad ekspedicijos kartais yra greičiausias būdas pasiekti esminius išteklius, o kartais ir vienintelius."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -460,7 +460,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
+msgstr "Bet aš noriu pasakyti perspėjimą. Uostai yra kaip būstinė: juos gali užpulti netoliese esantis priešas. Nors jūsų būstinėje yra karių, kurie jį gina, jūsų naujai pastatytas uostas nebus. Todėl turėtumėte vengti įsikurti šalia priešo."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
@@ -470,33 +470,33 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Norėdami įsitikinti, kad jie yra tinkamai apginti, galite nustatyti norimą ginančių karių skaičių abiem kareivių skirtuke, panašų į karinius pastatus. Tačiau jie taip pat yra sandėliai tuo pačiu metu, todėl gali laikyti bet kokį karių skaičių. Norimas skaičius užtikrina, kad gynėjų paprašytų uostas ar būstinė, o kai jie ten yra įkalinti, jie nebus išsiunčiami aptarnauti kitus poreikius."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Šiame žemėlapyje nėra priešo, kurio bijoti. Kituose žaidimuose turėtumėte nustatyti kai kuriuos gynėjus savo uostams ir teikti pirmenybę vieno ar dviejų karinių įtvirtinimų aplink savo naujas kolonijas prioritetu."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
-msgstr ""
+msgstr "Mūsų misija"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:225
 msgid "Start mining"
-msgstr ""
+msgstr "Pradėkite kasybą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "Tai buvo ilgas ir brangus darbas čia patekti. Sala neturi daug ką pasiūlyti, tačiau jos kalno viduje yra šiek tiek geležies rūdos. Mūsų ekonomikai reikia geležies rūdos, todėl turime statyti geležies kasyklą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "Pradėkite kasti geležies rūdą kalne."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
@@ -504,15 +504,15 @@ msgstr "Geležies kasykla"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "Saloje pastatykite geležies kasyklą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "Mūsų ekonomikai trūksta išteklių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "Pradėkite kasti geležies rūdą kalnuose saloje."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
@@ -520,25 +520,25 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid "There is more to it…"
-msgstr ""
+msgstr "Yra daugiau čia…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid "Another gold mountain"
-msgstr ""
+msgstr "Kitas Auksinis kalnas"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "Prireiks šiek tiek laiko, kol jūsų laivų statykla pastatys kai kuriuos laivus. Kol mes jų laukiame, yra dar vienas vandens transporto būdas, kurį norėčiau jus išmokyti."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Laivai turi pranašumą, nes vienu metu gali gabenti didelius prekių ir darbuotojų kiekius, bet, deja, jų kelionės tikslai apsiriboja keletu uostui tinkamų erdvių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
 msgid ""
@@ -547,53 +547,53 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "Pažvelkite į šį slėnį čia, tolimuose pietuose. Čia radome kalną su auksu ir taip pat norėtume iš jo išgauti rūdas. bet upeliai, skiriantys jį nuo mūsų pagrindinės kolonijos, yra per platūs, kad būtų galima statyti tiltus, ir per siauri, kad laivai galėtų juos praplaukti. Mūsų keliai turėtų važiuoti ilgais posūkiais, o tai labai lėtina dirbinių transportavimą."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "Irklinės valtys ir keltų aikštelės"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "Čia atplaukia keltai. Keltai yra mažos irklinės valtys, kuriomis vienu metu gali gabenti tik vienas gaminys, ir nėra darbuotojų (išskyrus tą, kuris jį irkluoja ir kuris niekada nepalieka savo valties)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Keltai statomi keltų aikštelėse, viena irklinė valtis kainuoja du rąstus ir vieną audinio gabalą ir greitai sukonstruota. Keltų kiemas – vidutinio dydžio pastatas, kurį reikia statyti arti kranto."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "Pastatykime kelto kiemą netoli kranto, kol tęsime."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "Pastatykite keltų statyklą"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "Pastatykite keltų statyklą netoli kranto"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Keltus stato keltų aikštelė."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "Keltų kiemą reikia statyti netoli kranto, kitaip ten keltų statyti nepavyks."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr ""
+msgstr "Vandens keliai"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -601,7 +601,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "Skirtingai nuo laivų, kurie plaukia į bet kurį uostą, kur jų reikia, keltai turi fiksuotus transporto maršrutus, vadinamus vandens keliais. Vandens kelias nutiestas kaip kelias: spustelite vėliavą prie kranto, pasirenkate „statykite vandens kelią“ ir pasirenkate vandens kelio kelią, kaip ir keliui."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -609,76 +609,76 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "Vandens kelius galima nutiesti atviroje jūroje, taip pat arti kranto, kur vanduo per seklus dideliems laivams. Vienintelė taisyklė yra ta, kad du trikampiai, esantys tiesiai prie kiekvieno vandens kelio atkarpos, turi būti vanduo, o visas kelias turi būti jūsų teritorijoje."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "Taip pat atkreipkite dėmesį, kad vandens keliai, skirtingai nei keliai, gali būti tiesiami ne taip ilgai, kaip norite. Kiekvienas žemėlapis turi vandens kelių ilgio apribojimą. Šiame žemėlapyje tai yra 5 plytelės."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "Visada atminkite, kad keltai darbuotojų neveža. Galite juos naudoti norėdami pagreitinti gaminių transportavimą, tačiau jie niekada negali visiškai pakeisti kelių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "Leiskite man parodyti, kaip nutiesti vandens kelią…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
-msgstr ""
+msgstr "Auksinės bangos"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "Kaip matote, tai nėra taip sunku. Kai statysite vandens kelią, jam priskirs artimiausias „Idle Ferry“."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Dabar jūsų eilė: pastatykite aukso kasyklą ant kalno pietuose ir sujunkite ją su pagrindine žeme, tiesdami vandens kelius virš upelių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Pastatykite aukso kasyklą ir vandens kelius"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Pastatykite aukso kasyklą ant kalno pietuose ir sujunkite ją su žemynu, tiesdami vandens kelius virš upelių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Vandens kelias nutiestas kaip kelias: spustelite vėliavą prie kranto, pasirenkate „statykite vandens kelią“ ir pasirenkate vandens kelio kelią, kaip ir keliui."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "Tačiau kiekvienam vandens kelio segmentui šalia jo reikia dviejų vandens trikampių."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "Išvada"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "Apie keltus"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Dabar yra tik keletas dalykų, kuriuos norėčiau turėti omenyje, kai naudojate keltus."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
@@ -687,7 +687,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Niekada nepamirškite, kad šios irklinės valtys yra per mažos, kad būtų galima vežti darbuotojus. Galite naudoti juos kaip gaminių transportavimo sparčiuosius klavišus tam tikrose teritorijos dalyse, bet nereikalauti regionų, kurių nepasieksite nei keliu, nei laivu. Niekada nenupjaukite visų kelių tarp dviejų vandens kelių sujungtų vietų, nebent esate tikri, kad jokiam darbuotojui niekada nereikės ten vaikščioti."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -699,47 +699,47 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Ir jei jūsų vandens keliai yra reikšminga nuoroda tarp jūsų kelių tinklų, jūsų ekonomika linkusi siųsti daug prekių per vandens kelią. Kadangi vandens kelyje gali tilpti tik vienas keltas – skirtingai nei keliuose, kurie, jei jie yra labai judrūs, gauna antrą vežėją – ir kadangi jie dažnai būna ilgesni nei rekomenduojami du ar trys keliai laukai, visada yra rizika, kad vandens keliai taps didelėmis jūsų ekonomikos kliūtimis. Pabandykite sukurti keletą iš jų lygiagrečiai, kad paskirstytumėte įtampą. Jei tai neįmanoma, kai kuriais atvejais dar efektyviau nesinaudoti vandens keliais."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid "Ferry yard production"
-msgstr ""
+msgstr "Keltų statyklos gamyba"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
 msgid "More ferries needed?"
-msgstr ""
+msgstr "Reikia daugiau keltų?"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Kaip matote, keltus galima išgabenti gana greitai, tačiau nereikia jaudintis dėl iššvaistytų medžiagų, nes keltų aikštelės paprastai jas gamina tik pagal poreikį, kai yra neprižiūrimi vandens keliai."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Kol keltas aptarnauja vandens kelią, jo eksploatavimo laikas yra neribotas, tačiau bedarbiai keltai supūs ir galiausiai nuskęs."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Sužinojote viską, ką reikia žinoti apie laivus ir keltus!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "Taip pat yra dar viena sala, kurioje galite pastatyti uostą, jei norite pabandyti pradėti kitą ekspediciją."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Kaip visada, galite toliau žaisti ir praktikuotis šiame žemėlapyje, jei norite, arba paruošti kapitono licenciją ir išbandyti savo naujus įgūdžius tikrame žaidime..."

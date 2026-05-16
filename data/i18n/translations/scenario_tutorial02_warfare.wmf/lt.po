@@ -22,7 +22,7 @@ msgstr "Įvadas"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Kariai, mokymas ir karyba"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
@@ -31,18 +31,18 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "Šiame scenarijuje aš jums papasakosiu apie karius, jų mokymą ir profesiją: karybą. Nors „Widelands“ tikslas yra statyti, o ne griauti, kartais atsiranda priešų, kuriuos privalote nugalėti. Tačiau karyba čia daugiausia remiasi ekonomika, o ne karinėmis strategijomis, todėl jos mechaniką verta paaiškinti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "Įkūriau nedidelį kaimelį, kuriame yra patys svarbiausi pastatai. Jūs taip pat turite pakankamai prekių, todėl nereikia rūpintis ginklų gamyba. Tikrame žaidime tokios prabangos neturėsite."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Karių gebėjimai"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid ""
@@ -50,7 +50,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Nauji kariai kuriami kitaip nei įprasti darbuotojai: naujokai eis iš sandėlio (ar jūsų būstinės) į kareivines, kur gaus pagrindinį mokymą ir taps kariais. Pagrindiniai barbarų kariai nenaudoja šarvų, jiems reikia tik kirvio."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -59,7 +59,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "Pažvelkite į karius, kurie keliauja į mūsų karinius pastatus. Jie atrodo kitaip nei įprasti darbuotojai: virš galvos yra sveikatos juosta, rodanti likusią sveikatą, ir turi keturis simbolius, kurie simbolizuoja dabartinį atskiro kario lygį keturiose skirtingose kategorijose: sveikata, puolimas, gynyba ir vengimas."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
@@ -67,22 +67,22 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Jei barbaro kareivis yra visiškai apmokytas, jis turi %1% sveikatos, %2% atakos lygio, %3% lygio gynybos ir lygio %4% vengimo. Tai vienas baisus karys! Individualūs gebėjimai turi tokią reikšmę:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid "Health:"
-msgstr ""
+msgstr "Sveikata:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "Visas kario gyvenimas. Barbarų kareivis pradeda nuo %1% sveikatos ir įgaus %2% sveikatos su kiekvienu sveikatos lygiu."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Attack:"
-msgstr ""
+msgstr "puolimas:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
@@ -91,11 +91,11 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "Žala, kurią kareivis padarys priešui, kai puolimas bus sėkmingas. Barbarų kareivis, turintis 0 puolimo lygį, padaro ~%1% taškų žalą sveikatai, kai jam pavyksta pataikyti į priešą. Už kiekvieną atakos lygį jis gauna %2% žalos taškų."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Defense:"
-msgstr ""
+msgstr "Gynyba:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -106,11 +106,11 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Gynyba yra procentas, kuris atimamas iš atakos vertės. Barbarai negali treniruotis šio įgūdžio, todėl visada turi 0 gynybos lygį, o tai reiškia, kad žala visada sumažinama %1%%%. Jei užpuolikas, kurio atakos vertė yra 3500 taškų, pataikys į barbarų kareivį, barbaras praras 3500 ×%2%%% = %3% sveikatos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
-msgstr ""
+msgstr "Išvengti:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -119,22 +119,22 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "Išsisukinėjimas yra tikimybė, kad karys sugebės išvengti atakos. 0 lygio barbaras turi %1%%% tikimybę išvengti atakos, ir tai padidėja po %2%%% kiekviename lygyje."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Mūšio arena"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "Dabar, kai papasakojau apie mokymus ir lygius, leiskite tai paaiškinti plačiau."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "Naujai sukurtas karys neturi patirties ir nelabai moka kovoti. Kad jis taptų stipresnis, galite statyti mokymo vietas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
@@ -142,135 +142,135 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "Viena iš šių treniruočių vietų yra mūšio arena. Tai didelis ir brangus pastatas, kuriame kariai mokomi išsisukinėti. Kadangi treniruotės metu kariai labai išalksta, šiam pastatui reikia daug maisto ir stipraus alaus. Tikrame žaidime prieš jį statant turėtumėte turėti gerą infrastruktūrą."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "Norėdami pamatyti, kaip veikia išsisukinėjimo mokymai, pastatykite mūšio areną."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr ""
+msgstr "Kol laukiame mūšio arenos, tikriausiai pastebėsite aplink vaikštančius karius. Retkarčiais jie automatiškai pakeičiami kitais. Apie tai papasakosiu vėliau."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Mūšio arena"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Pastatykite mūšio areną"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Pastatykite mūšio areną. Tai didelis pastatas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Kadangi statybos užtruks šiek tiek laiko, galite pakeisti žaidimo greitį naudodami %1$s ir %2$s."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "Mūšio arena pastatyta"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:82
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr ""
+msgstr "Labai gerai. Mūsų mūšio arena baigta, o kariai jau eina link jos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "Ten taip pat pristatomos reikalingos prekės. Norint sėkmingai treniruotis, jums reikia Pitta duonos ir stipraus alaus, taip pat žuvies ar mėsos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr ""
+msgstr "Daugiau informacijos galite rasti pastato pagalbos lange, kurį pasieksite paspaudę klaustuką kiekvieno pastato lange."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "Norėdami sužinoti, kiek pažengė jūsų kariai, galite pažvelgti į jų piktogramas. Jie modifikuojami raudonais taškais:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "Jokių raudonų taškų reiškia, kad karys nėra apmokytas, todėl jo lygis yra 0. Tai turi visi jūsų naujokai."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "Su kiekvienu sėkmingu treniruočių žingsniu jūsų karys tampa stipresnis. Tai rodo raudonas taškas. Šis karys yra pasiekęs 1-ąjį išsisukinėjimo mokymų lygį."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Kai jūsų karys pasiekia aukščiausią įmanomą lygį (šiuo atveju 2-ąjį), tai žymima balta fono spalva."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:115
 msgid "The Training Camp"
-msgstr ""
+msgstr "Treniruočių stovykla"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:98
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "Yra ir antroji treniruočių vieta: treniruočių stovykla. Tai taip pat didelis pastatas, kuris papildo mūšio areną ir treniruoja ataką bei sveikatą (atminkite, kad barbarų karių negalima apmokyti gynybos)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp."
-msgstr ""
+msgstr "Pastatykite treniruočių stovyklą."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Treniruočių stovykla"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
-msgstr ""
+msgstr "Pastatykite treniruočių stovyklą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "Mūšio arenoje kariai mokomi tik išsisukinėti. Norėdami gauti kuo stipresnį karį, taip pat turite pastatyti treniruočių stovyklą, kuri mokytų juos atakos ir sveikatos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr ""
+msgstr "Puiku, mūsų treniruočių stovykla taip pat baigta. Dabar niekas netrukdys mums gauti stipriausių karių, kokius pasaulis kada nors yra matęs."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "Norint treniruotis treniruočių stovykloje, mūsų kariams reikia maisto, kaip ir mūšio arenoje, bet ne stipraus alaus. Vietoj to jiems reikia skirtingų kirvių atakos mokymams ir šalmų sveikatos mokymams."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr ""
+msgstr "Ši įranga gaminama kalvėse iš anglies, geležies ir kartais aukso. Daugiau apie tai sužinosite antrajame Barbarų kampanijos scenarijuje."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
@@ -279,127 +279,127 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Taip pat turėtumėte atsiminti, kad kiekviena Widelands gentis turi savo mokymo būdą, todėl pastatai ir prekės skiriasi. Be to, gebėjimų lygių negalima lyginti: imperijos kario bazinė ataka yra %1% 0 lygyje, o barbarų karys tame pačiame lygyje turi tik %2% bazinės atakos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Žvalgo trobelė"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Tyrinėkite savo aplinką"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Didelė žemėlapio dalis dar neištirta. Galbūt būtų naudinga žinoti, kuri kryptis yra geriausia mūsų imperijai plėsti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Galite bandyti laimę ir plėstis aklai, bet tai rizikinga. Saugesnis būdas – naudoti žvalgą nepažįstamoms žemėlapio dalims ištirti. O kas, jei jis ras kalnus, pilnus aukso?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Mums reikės žvalgo trobelės, kad galėtume pradėti tyrinėti. Tai mažas pastatas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Pastatykite žvalgo trobelę."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Pastatykite žvalgo trobelę"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Visada naudinga pažinti savo aplinką. Žvalgas už jus ištirs dar nematytas žemėlapio vietas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Pastatykite žvalgo trobelę."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
-msgstr ""
+msgstr "Žvalgas pasiruošęs"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
-msgstr ""
+msgstr "Pasiruošę keliauti!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Puikiai padirbėta! Jūsų žvalgo trobelė pastatyta. Kol mūsų žvalgas įsikuria, sužinokime apie jį šiek tiek daugiau."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Visų pirma, į žvalgybos keliones jam reikės pasiimti maisto. Laimei, mūsų sandėlyje yra keletas maisto davinių."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Aprūpintas maistu, jis atsitiktinai vaikščios po apylinkes. Turėtumėte sekti jo judėjimą, kol karo rūkas vėl nepaslėpė to, ką jis matė."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Žvalgas"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
-msgstr ""
+msgstr "Tyrinėkite žemėlapį"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Palaukite, kol žvalgas ištirs dar nematytas vietoves."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 msgid "Observe your scout."
-msgstr ""
+msgstr "Stebėkite savo žvalgą."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"
-msgstr ""
+msgstr "Žvalgas padarė pažangą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid "New horizons?"
-msgstr ""
+msgstr "Nauji horizontai?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Kaip matote, žvalgai gali nueiti gana toli. Gera žinia ta, kad aplinkui nėra priešų."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Galite naudoti mini žemėlapį tyrinėjimo eigai stebėti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Nepamirškite, kad žvalgyba yra sunkus darbas ir jo negalima atlikti be maisto atsargų."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Herojai ir naujokai"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "Kol mūsų kariai treniruojasi, leiskite man papasakoti, ką galime su jais daryti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
@@ -407,29 +407,29 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr ""
+msgstr "Kiekviename kariniame pastate galite nustatyti pirmenybę herojams (apmokytiems kariams) arba naujokams. Retkarčiais karys išeis iš pastato ir jį automatiškai pakeis stipresnis arba silpnesnis karys – būtent tai ir matėte anksčiau."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "Pradinis nustatymas priklauso nuo pastato tipo. Barbarams sargybos postas yra vienintelis pastatas, kuris pagal nutylėjimą teikia pirmenybę naujokams. Turėtumėte pakeisti šį nustatymą pagal savo dabartinius poreikius."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr ""
+msgstr "Kai plečiatės į niekieno žemę, galite priversti savo pastatus teikti pirmenybę naujokams. Kai planuojate pulti, siųskite herojus į tą regioną. Užkariauti pastatai visada teikia pirmenybę herojams."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:192
 msgid "Soldier capacity"
-msgstr ""
+msgstr "Karių talpa"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "Karių skaičiaus koregavimas"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
 msgid ""
@@ -438,51 +438,51 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr ""
+msgstr "Yra ir dar vienas būdas kontroliuoti karinio pastato stiprumą: pagal ten dislokuotų karių skaičių. Tiesiog spustelėkite rodyklių mygtukus, kad sumažintumėte arba padidintumėte norimą karių skaičių. Kiekvienas pastatas turi maksimalią talpą. Pavyzdžiui, užkardos atveju tai yra penki."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:196
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "Jei norite išsiųsti tam tikrą karį, galite tiesiog jį spustelėti. Tada jį pakeis kitas karys."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Taip pat leiskite man apibūdinti, ką reiškia skaičiai būsenos eilutėje. Šioje eilutėje gali būti rodyklė ir iki trijų skaičių, pvz. „↑ 1 (+5) kareivis (+2)“."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The arrow shows whether the building is set to prefer heroes (upwards arrow)"
 " or rookies (downwards arrow)."
-msgstr ""
+msgstr "Rodyklė rodo, ar pastatas nustatytas į pirmenybę didvyriams (rodyklė aukštyn), ar naujokai (rodyklė žemyn)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "Pirmasis skaičius nurodo, kiek karių šiuo metu yra šiame pastate. Šiame pavyzdyje viduje liko tik vienas karys (kiekvieną karinį pastatą visada saugo bent vienas karys)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "Antrasis skaičius nurodo, kiek papildomų karių priklauso šiam pastatui, bet šiuo metu yra lauke. Tie penki kariai galbūt dabar puola priešą. Jie grįš, kai misija bus sėkminga."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
+msgstr "Trečiasis skaičius rodo trūkstamus karius. Iš aštuonių karių (1 + 5 + 2), kuriuos čia norite turėti, du galėjo žūti. Juos, jei įmanoma, pakeis nauji kariai iš jūsų sandėlio."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Kariai būstinėje"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -490,7 +490,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Jūsų būstinė turi tam tikrų karinių pastatų savybių: ji užkariauja dalį žemės, priešas gali ją tiesiogiai pulti, o joje esantys kariai užpuolimo atveju gina ją ir jos aplinką. Tačiau yra ir skirtumas: negalite pradėti atakos naudodami karius, esančius jūsų būstinėje."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -498,12 +498,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Būstinės kariniai pajėgumai yra didžiulis skirtumas nuo paprastų sandėlių, kurie neužkariauja žemės ir kurių gynybai reikia netoliese esančių karinių pastatų. Paprastuose sandėliuose esantys kariai nedalyvauja jokiose kovose, be to, paprasti sandėliai negali būti tiesiogiai puolami."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Būstinės karių nustatymai"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -514,7 +514,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Nors visi kariai, esantys jūsų būstinėje, padeda ją ginti, jie nėra nuolat jai priskirti, todėl juos galima bet kada išsiųsti, jei kariniam pastatui prireikia kario. Laimei, dalį karių taip pat galite priskirti būstinės gynybai tuo pačiu būdu, kaip nustatote karių talpą ir pirmenybę kariniams pastatams. Jei tai padarysite, būstinė leis siųsti tik perteklinius karius į kitus pastatus, bet ne karius iš priskirto garnizono."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -525,15 +525,15 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Jei pažvelgsite į būsenos eilutes, pamatysite, kad jūsų sandėlyje nieko nėra, o jūsų būstinėje iš pradžių rodomas „—“ ženklas. Tai reiškia, kad nėra nustatyto garnizono būstinei apsaugoti, nors ten vis dar gali būti saugomi keli kariai. Jei padidinsite pageidaujamą karių skaičių iki daugiau nei nulio, būstinėje bus rodoma ta pati karių informacija kaip ir karinių pastatų statuse. Pertekliniai kariai statuse niekada nerodomi."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
-msgstr ""
+msgstr "Išmontuokite sargybos postą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "Karinių pastatų išmontavimas"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid ""
@@ -541,7 +541,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr ""
+msgstr "Karių skaičių galite sumažinti tik iki vieno. Paskutinis pastato karys niekada neišeis (nebent šis pastatas būtų užpultas). Jei norite tą karį perkelti kitur, pastatą teks išmontuoti arba sudeginti."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
 msgid ""
@@ -552,32 +552,32 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "Tačiau karinio pastato sunaikinimas visada susijęs su rizika: žemė vis dar jūsų, tačiau ji nebesaugoma. Bet koks priešas, pastatęs savo karinius pastatus, gali užimti tą žemę be kovos, dėl ko jūsų pastatai gali sudegti. Be to, dalis žemės dabar vėl gali pasislėpti po karo rūku. Dėl to karinius pastatus išmontuoti reikėtų tik giliai savo teritorijoje, kur esate saugūs nuo priešų."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:232
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Ar matėte savo sargybos postą? Kadangi jis negali sutalpinti daug karių ir yra šalia stipresnės užkardos, jis yra gana nenaudingas."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
 msgid "Dismantle it."
-msgstr ""
+msgstr "Išmontuokite jį."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
+msgstr "Taip pat galite pasinaudoti šia proga ir susipažinti su kitomis galimybėmis: herojų ir naujokų pirmenybe bei karių talpa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Kariai, laisvi!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
 msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Išmontuokite savo šiaurės vakarų sargybos postą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:244
 msgid ""
@@ -585,59 +585,59 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "Karių vietoje dislokuotų karių skaičių galite valdyti rodyklių mygtukais. Jei norite ištraukti net savo paskutinį karį, turėsite jį sunaikinti. Tačiau tai nebeapsaugos jūsų teritorijos, todėl ji bus pažeidžiama priešiškų išpuolių."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:245
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "Išmontuokite savo sargybos postą šiaurės vakaruose, šalia užkardos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Patobulinkite savo tvirtovę"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "Pastatų tobulinimas"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:254
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "Gerai padaryta. Dabar jūs žinote, kaip atitraukti savo karius iš tų vietų, kur jums jų nereikia. Atėjo laikas pasakyti, kaip sustiprinti savo priekinę liniją."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:255
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "Jūsų tvirtovė jau dabar yra gana stipri ir užima daug teritorijos. Tačiau yra dar didesnis pastatas: citadelė."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:256
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "Citadelių negalima statyti tiesiogiai. Vietoje to pirmiausia turėsite pastatyti tvirtovę, o tada ją patobulinti į citadelę. Norėdami tai padaryti, spustelėkite tvirtovę, tada pasirinkite mygtuką „Patobulinti į citadelę“."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "Kol vyks statybos, jūsų kariai paliks tvirtovę. Tai reiškia, kad jūsų tvirtovė praras savo karinę įtaką, kaip aprašiau anksčiau."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "Dabar patobulinkite savo tvirtovę į citadelę."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Patobulinkite savo tvirtovę į citadelę"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:267
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "Patobulinkite savo tvirtovę į galingą citadelę."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
 msgid ""
@@ -645,15 +645,15 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
+msgstr "Citadelėje gali tilpti 12 karių, ir tai yra didžiausias karinis pastatas, kurį gali pastatyti barbarai. Be to, jam reikia daug išteklių ir jį pastatyti užtrunka ilgai. Jis labiausiai tinka saugoti strategiškai svarbius taškus, pavyzdžiui, siaurus praėjimus ar kalnus."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Nugalėkite savo priešą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:277
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Nugalėkite priešą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:278
 msgid ""
@@ -662,44 +662,44 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "Puikus darbas, citadelė baigta. Bet kas ten? Kol buvo statoma citadelė, šalia mūsų įsikūrė priešiška gentis! Ar matote, kaip jie atėmė dalį mūsų žemės? O mūsų medkirtys dabar prarado savo darbo vietą. Būtent apie tai aš ir kalbėjau. Atgaukime savo žemę ir nugalėkime priešą!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:290
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "Norėdami pulti pastatą, spustelėkite jo duris, pasirinkite karių, kuriuos norite siųsti, skaičių ir spustelėkite mygtuką „Pulti“."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Jūsų kariai atvyks iš visų netoliese esančių karinių pastatų. Lygiai taip pat ir gynėjai išeis iš visų netoliese esančių priešo karinių pastatų, kad perimtų jūsų pajėgas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "Užpulkite ir užkariaukite visus priešo karinius pastatus bei sunaikinkite jų būstinę."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:286
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Nugalėkite savo priešą"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:288
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Nugalėkite priešų gentį"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:289
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "Nugalėkite netoliese esantį priešą."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:297
 msgid "Conclusion"
-msgstr ""
+msgstr "Išvada"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:298
 msgid ""
@@ -707,18 +707,18 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "Dėkojame, kad sužaidėte šią pamoką. Tikiuosi, kad jums patiko ir išmokote, kaip kurti bei apmokyti karius, kontroliuoti, kur jie eina, ir kaip nugalėti priešą. Ar matėte, kaip lengvai galite įveikti savo priešą? Apmokyti kariai suteikia didžiulį pranašumą."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:299
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "Tačiau karas yra brangus ir ne visada geriausias kelias tikslui pasiekti. Kuriant naują žaidimą, taip pat galite pasirinkti taikias laimėjimo sąlygas. Būtinai jas išbandykite – jos to vertos."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:300
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "Dabar esate pasiruošę žaisti kampanijas. Jie išmokys jus apie skirtingas genčių ekonomiką. Taip pat galite žaisti likusias pamokas, tačiau jos nėra labai svarbios norint sėkmingai vykdyti kampanijas."
