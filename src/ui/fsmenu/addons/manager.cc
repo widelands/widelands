@@ -2073,7 +2073,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (remote != nullptr) {
 			*remote = net().fetch_one_remote(remote->internal_name);
 		}
-		clear_cache_for_browse(remote->internal_name);
+		clear_cache_for_browse(addon->internal_name);
 		rebuild_browse();
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());

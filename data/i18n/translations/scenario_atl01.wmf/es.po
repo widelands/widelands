@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -85,11 +85,11 @@ msgstr "Producción de comida"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "La comida es muy importante para minas y zonas de entrenamiento militar. Establece un buen ambiente de producción de comida construyendo al menos una granja, una granja de raíz negra y un molino. Los dos tipos de harina junto con agua de un pozo serán horneados en pan en una panadería, así que construye una panadería y un pozo también."
+msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

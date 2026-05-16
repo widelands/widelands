@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022,2025\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1367,10 +1367,10 @@ msgstr "Récolte des arbres rares dans les environs. Fournit du bois de fer, du 
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
-msgstr "Ce bâtiment peut produire un bois rare entre %1$set%2$s, en fonction de la distance que le bûcheron doit parcourir. Si toutes sortes d'arbres rares sont disponibles dans sa zone de travail, alors un de chaque espèce est produit entre %3$set%4$s."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14207,8 +14207,9 @@ msgstr "Le charbon est extrait dans des mines de charbon ou produit à partir de
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "Les fourneaux des fours à briques, des forges et des armuriers sont nourris avec du charbon."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

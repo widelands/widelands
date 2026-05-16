@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,37 +21,39 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:31
 msgid "Get to the North"
-msgstr ""
+msgstr "Keliaukite į šiaurę"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr ""
+msgstr "Eik į šiaurę"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
-msgstr ""
+msgstr "Plaukkite į šiaurę kiek įmanoma greičiau, kuo greičiau."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr ""
+msgstr "Sunaikink Angadthuro rūmus"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr ""
+msgstr "sunaikinti Atlanto būstinę ir pastatyti uostą"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
+"Pastatykite uostą šiaurinėje salos pakrantėje. Uosto erdvė yra po Angadthur "
+"būstine."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:51
 msgid "Pay or Fight"
-msgstr ""
+msgstr "Susimokėti arba kovoti"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "sumokėti imperijai arba sunaikinti jų uostą"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:54
 #, lua-format
@@ -66,25 +72,25 @@ msgstr[3] ""
 msgid ""
 "Alternatively, you can destroy his port to build one of your own in it’s "
 "place."
-msgstr ""
+msgstr "Arba galite sunaikinti jo uostą ir pastatyti vieną iš savo vietoje."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
-msgstr ""
+msgstr "Jus lydės visi kariai, kurie yra šiaurinėje saloje, kai įlipsite."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:59
 msgid "You have two hours to accomplish this objective."
-msgstr ""
+msgstr "Turite dvi valandas šiam tikslui pasiekti."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:71
 msgid "Introduction"
-msgstr ""
+msgstr "Įvadas"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:72
 msgid "Welcome back!"
-msgstr ""
+msgstr "Sveiki sugrįžę!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:74
@@ -92,6 +98,8 @@ msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
 msgstr ""
+"Į šiaurę plaukėme kelias savaites, kol pasiekėme šį krantą. Nė vienas iš "
+"daugybės mano siužetų nesuteikia man informacijos, kas yra už šio taško."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -99,6 +107,9 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"Tik vienas dalykas yra tikras: šiaurinėje šios žemės juostos pakrantėje "
+"turime rasti uosto erdvę, kad galėtume pradėti ekspediciją ir toliau plaukti"
+" į šiaurę."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:80
@@ -107,18 +118,21 @@ msgid ""
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
+"Noriu kuo greičiau susirasti savo seną draugą Reebaud. Kiekviena dykinėjimo "
+"minutė mane skaudina, kai įsivaizduoju, kaip atterdagas linksmai trypia "
+"žalias mano föhr pelkes po jo niekšiška koja... Paskubėkime."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:85
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "Prieš aštuonias savaites"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:86
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:95
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:104
 msgid "An unfair fight"
-msgstr ""
+msgstr "Nesąžininga kova"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:88
@@ -127,6 +141,8 @@ msgid ""
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
 msgstr ""
+"Bet atleisk man. Dar net neprisistačiau. Aš esu Clausas Lembeckas, riteris, "
+"valdantis Föhr salą... arba aš tai dariau tol, kol mane privertė užkariauti."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:91
@@ -134,6 +150,8 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
+"Mano valdžioje sala klestėjo, o mano pavaldiniai mane mylėjo ir gerbė. Jie "
+"netgi pastatė man naują pilį kaip dovaną. Ir tada atėjo Atterdagas."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -144,6 +162,11 @@ msgid ""
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
 msgstr ""
+"Atterdag! Danijos imperijos karalius ir mano prisiekęs priešas. Daug kartų "
+"padėjau žemyno kunigaikščiams, kai jie gynėsi nuo jo karo ir užkariavimo "
+"troškulio, ir dažniausiai mes su juo kovojome. Tačiau prieš aštuonias "
+"savaites jis išsilaipino su kai kuriais savo sąjungininkais ir didele bei "
+"gerai apmokyta armija mano saloje Föhr ir siekė ją užgrobti."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:100
@@ -155,21 +178,27 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
+"Ir turiu pasakyti karčiai prisipažinti – jam pavyko. Mūšiai truko penkias ir"
+" trisdešimt dienų, o kiekvieną rytą ir vakarą iš Danijos atplaukdavo dar "
+"vienas laivas, atgabenęs dar vieną karių būrį. Kaip galėčiau tikėtis "
+"varžytis su tokiais šansais? Galų gale man neliko nieko kito, kaip tik "
+"pabėgti su savo sūnumi Henneke ir keliais artimiausiais pasekėjais, o "
+"Atterdagas dabar Föhrą vadina dar viena jo augančios imperijos dalimi."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 msgid "But I will not accept defeat!"
-msgstr ""
+msgstr "Bet aš nepriimsiu pralaimėjimo!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:118
 msgid "Dark Future"
-msgstr ""
+msgstr "Tamsi ateitis"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:110
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:119
 msgid "Reconquest"
-msgstr ""
+msgstr "Atkariauti"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:112
@@ -181,6 +210,12 @@ msgid ""
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
 msgstr ""
+"Akivaizdu, kad vien aš negaliu tikėtis nugalėti šio pagrindinio priešo. Taip"
+" pat tie, su kuriais daug kartų kovojau, negalėtų man padėti, matydami, kad "
+"mums visada sunku atremti atterdagą; Ir šis paskutinis jo puolimas įrodė, "
+"kad iki šiol jis niekada net nebandė laimėti. Jis tik žaidė su mumis. Ne, "
+"jei noriu laimėti prieš jį, turiu rasti didesnę jėgą, kuri padėtų mano "
+"reikalui."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:115
@@ -190,6 +225,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"Ir tokios jėgos aš dabar ieškau. Reebaud, mažos, bet stiprios fryzų "
+"bendruomenės, su kuria kažkada draugavau, vadas; Jo išdidus pasididžiavimas "
+"ir didžiuliai įgūdžiai mūšyje yra neprilygstami visose žinomo pasaulio "
+"dalyse. Jei kas nors gali atsispirti Atterdagui, tai turi būti jis."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -200,6 +239,10 @@ msgid ""
 "settle before. The bravery for so bold an undertaking is also something I "
 "would expect from nobody but him."
 msgstr ""
+"Kai nuėjau prašyti jo pagalbos, mane sutiko skaudus nusivylimas. Jis ir jo "
+"vyrai nebegyvena šiaurinėje Fryzijoje, bet nusprendė įkurti naują gyvenvietę"
+" tolimojoje šiaurėje, kur jokie vyrai anksčiau nedrįso apsigyventi. Drąsos "
+"dėl tokio drąsaus įsipareigojimo taip pat tikiuosi iš jo kito, išskyrus jo."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:124
@@ -209,19 +252,23 @@ msgid ""
 "Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
 " the evil Dane."
 msgstr ""
+"Tai drąsa, kurią turime pabandyti kopijuoti, nes galime imtis tik vieno "
+"veiksmo. Turime plaukti į šiaurę ir surasti mano seną draugą Reebaud ir "
+"įtikinti jį siųsti karius su manimi, kad išvaduotų mano brangųjį Föhrą nuo "
+"piktojo dano."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:127
 msgid "We must not fail. The future of my people depends on me."
-msgstr ""
+msgstr "Mes neturime žlugti. Mano žmonių ateitis priklauso nuo manęs."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:131
 msgid "Diking"
-msgstr ""
+msgstr "Dikingas"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:132
 msgid "Gaining Land"
-msgstr ""
+msgstr "Žemės įgijimas"
 
 #. TRANSLATORS: Claus Lembeck – Diker
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:134
@@ -232,14 +279,19 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
+"Ši sala yra šiek tiek per maža ir ankšta, kad man patiktų. Tarp mano žmonių "
+"yra patyręs pylimas, ir jis pasiūlė panaudoti kai kuriuos rąstus "
+"bangolaužiams statyti, o tai leis mums paimti iš jūros papildomos žemės. Tai"
+" bus lėtas ir brangus verslas, ir tikiuosi, kad šioje saloje nepasiliksime "
+"daug, bet bent jau turėtume tai apsvarstyti."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid "Port Space Found"
-msgstr ""
+msgstr "Rasta uosto erdvė"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:139
 msgid "One step closer to the North"
-msgstr ""
+msgstr "vienu žingsniu arčiau šiaurės"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:141
@@ -250,14 +302,18 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"Mano kariai praneša, kad rado uosto erdvę! Dabar turime pastatyti uostą ir "
+"pradėti ekspediciją. Žinoma, pirmiausia turėsime sukurti visą jūrų ekonomiką"
+" su laivų statykla ir audimo malūnu. Tačiau negaiškite per daug laiko "
+"tobulindami mūsų ekonomiką – svarbu tik tai, kad greitai pateksime į šiaurę."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
 msgid "A Strange Island"
-msgstr ""
+msgstr "Keista sala"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:145
 msgid "An apprehension"
-msgstr ""
+msgstr "sulaikymas"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:147
@@ -270,6 +326,13 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
+"Mes nusileidome keistoje saloje. Žemė kieta, juoda ir kieta, o oras kvepia "
+"apdegusiu. Paplūdimys yra pelenų spalvos, o pats smėlis jaučiasi "
+"piktybiškai, tarsi po juo glaudėtųsi Lindworm, laukdamas, kol užpuls bet "
+"kokį gyvą padarą, kad galėtų čia ateiti. Vargu ar galiu žodžiais apsakyti "
+"savo baimės jausmą. Nežinau, ko reikia bijoti, bet bet kuriuo atveju turime "
+"būti labai atsargūs, kai jį kertame. Tikimės, kad greitai pasieksime "
+"priešingą salos pusę."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:151
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -285,12 +348,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:264
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:283
 msgid "Strangers"
-msgstr ""
+msgstr "Svetimšaliai"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:233
 msgid "Who are they?"
-msgstr ""
+msgstr "Kas jie tokie?"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -298,10 +361,12 @@ msgid ""
 "Our soldiers have sighted strangers. Their buildings do not look like any I "
 "have seen before. I wonder who they are."
 msgstr ""
+"Mūsų kariai matė nepažįstamus žmones. Jų pastatai neatrodo kaip anksčiau "
+"mačiau. Įdomu, kas jie tokie."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:158
 msgid "Who are you?"
-msgstr ""
+msgstr "Kas tu esi?"
 
 #. TRANSLATORS: Angadthur – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:160
@@ -310,11 +375,14 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
+"Pasisveikinkite, užsieniečiai! Aš esu Angadthuras, šios stebuklingos salos "
+"karalius, legendinio karaliaus Ajantalo palikuonis, pirmasis iš paties "
+"Atlantidos. Būkite laukiami pas mane, jei būsite mūsų draugai!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:176
 msgid "Greetings to the King!"
-msgstr ""
+msgstr "Linkėjimai karaliui!"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:166
@@ -324,13 +392,17 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
+"Ramybė, karaliau Angadthur! Aš esu Clausas Lembeckas, o tai mano sūnus "
+"Henneke. Ieškome mano seno draugo Reebaud, kuris prieš keletą metų išvyko iš"
+" mūsų šalies ieškoti naujų namų tolimojoje šiaurėje. Jei galiu paklausti, ar"
+" girdėjote apie jį anksčiau ir ar galite pasakyti, kur jį rasti?"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:170
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:251
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:265
 msgid "Greetings"
-msgstr ""
+msgstr "Sveikinimai"
 
 #. TRANSLATORS: Angadthur – Strangers 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:172
@@ -338,6 +410,8 @@ msgid ""
 "Of course you may ask. Ask whatever you like. Why do you ask whether you may"
 " ask?"
 msgstr ""
+"Žinoma, galite paklausti. Klauskite ko tik norite. Kodėl klausiate, ar "
+"galite paklausti?"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:178
@@ -346,6 +420,8 @@ msgid ""
 "all. Very well, I’ll ask properly: Do you know where we can find my friend "
 "Reebaud?"
 msgstr ""
+"Tai kalbos figūra, kuri tarp mūsų žmonių laikoma mandagia, tai viskas. Labai"
+" gerai, paklausiu tinkamai: ar žinote, kur galime rasti mano draugą Reebaud?"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -356,6 +432,11 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
+"Apgailestauju, kad jus nuviliu, sere Lembeckai, bet aš niekada anksčiau "
+"negirdėjau šio vardo, todėl negaliu jums apie jį pranešti. Kalbant apie jūsų"
+" ketinimą keliauti į šiaurę – bijau, kad šioje saloje yra tik viena tinkama "
+"vieta uostui, išskyrus tą, kur nusileidote, ir ji yra tiesiai po mano "
+"rūmais."
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:187
@@ -366,16 +447,20 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Taip atsitinka, mano kariams nuobodu niekada neturėti ką veikti. Surengkime "
+"ginklų konkursą, ar ne? Galite siųsti savo karius bandyti sunaikinti mano "
+"rūmus. Esu tikras, kad jūs neturėsite šansų, todėl pažadu, kad melsiuosi "
+"dievams, kad palaimintų jūsų kelionę, jei jums pasiseks."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:192
 msgid "May Satul bless you"
-msgstr ""
+msgstr "Tegul Sadulas jus palaimina"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:194
@@ -385,17 +470,21 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"Tu aplenkei mano geriausius sargybinius ir sudegei mano rūmus, o tai, mano "
+"manymu, neįmanoma. Turite būti labai galingas ir pamėgtas dievų. Jūs tikrai "
+"nusipelnėte savo pergalės. Sveikinu jus ir linkiu sėkmės jūsų kelionei. "
+"Tegul Satulas saugo jus!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:198
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:204
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:211
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "Ledo dykumoje"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:199
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:205
 msgid "The next island"
-msgstr ""
+msgstr "Kita sala"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:201
@@ -404,6 +493,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"Atrodo, kad artėjame prie šiaurės. Ledo dykuma! Aš net nežinojau, kad toks "
+"dalykas egzistuoja. Bet abejoju, ar kas nors galėtų čia gyventi; Bijau, kad "
+"šioje saloje nieko naudingo nerasime."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:207
@@ -411,10 +503,11 @@ msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
 msgstr ""
+"Nesvarbu. Greitai suraskime kitą uosto erdvę, kad galėtume tęsti kelionę."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
-msgstr ""
+msgstr "Rasta uosto erdvė"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:214
@@ -422,16 +515,18 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
+"Saloje radome uosto erdvę. Dabar galime palikti šią šaltą ir niūrią ledo "
+"dykumą ir toliau plaukti."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:218
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:224
 msgid "The North"
-msgstr ""
+msgstr "Šiaurė"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:219
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:225
 msgid "In the North"
-msgstr ""
+msgstr "šiaurėje"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:221
@@ -440,6 +535,9 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
+"Taip, tai labiau atrodo taip, kaip aš įsivaizduoju, kaip turėtų atrodyti "
+"šiaurė. Pievos čia vis dar žalios, bet sniego lopai vis didėja ir didėja, "
+"kuo toliau į šiaurę."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:227
@@ -447,6 +545,8 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
+"Tai atrodo gerai, bet tai gali būti tik dar viena sala. Greitai keliaukime "
+"toliau."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:235
@@ -454,10 +554,12 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"Mūsų kariai vėl pamatė nepažįstamus žmones. Įdomu, ar jie panašūs į keistą "
+"karalių, kuris pasveikino mus sugriovus jo rūmus."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:239
 msgid "No troubles, please"
-msgstr ""
+msgstr "Jokių rūpesčių, prašau"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:241
@@ -466,11 +568,14 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"Linkėjimai, nepažįstami žmonės! Aš esu Marcusas Caius Iniucundus, imperijos "
+"legatas. Ar tai tavo sala? Mes tik einame pro šalį, tikiuosi, jūs "
+"neprieštaraujate. Mes nenorime jokių rūpesčių."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:257
 msgid "Travellers"
-msgstr ""
+msgstr "Keliautojai"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:247
@@ -480,6 +585,10 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"Ramybė, pone Iniucundus! Aš esu Clausas Lembeckas, o tai mano sūnus Henneke."
+" Mes taip pat tik pravažiuojame. Sakai, tu esi legatas? Turbūt daug "
+"važinėjate. Ar girdėjote naujienas apie mano seną draugą Reebaud? Žinau tik "
+"tiek, kad jis gyvena šiaurėje, ar galite pasakyti, kur jį rasti?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:253
@@ -490,6 +599,11 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Džiaugiuosi girdėdamas, kad norite ramybės. Atsiprašau, bet Reebaud vardo "
+"dar negirdėjau. Tačiau jei norite vykti į šiaurę, mes turime tą patį tikslą,"
+" nes būtent ten aš keliauju oficialiu reikalu iš sostinės. Šiuo metu "
+"ruošiame laivą išplaukti. Jei norite, galime jus pasiimti su savimi, jei "
+"galite sumokėti už ištrauką."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:259
@@ -497,6 +611,8 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Dėkojame už jūsų pasiūlymą! Kokios kainos reikalaujate? Ir jei "
+"neprieštaraujate, kad klausiu, ar galiu žinoti, kokiame versle dirbate?"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:266
 #, lua-format
@@ -513,6 +629,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Žinau, kad tai atrodo daug, bet Senatas šiai ekspedicijai man nepaskyrė daug"
+" pinigų, todėl turiu pripažinti, kad man jų reikia."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:271
@@ -525,6 +643,12 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"Mano kelionės tikslas – ieškoti provincijos šiaurinių žemių prokonsulo, "
+"kuris keletą metų iš eilės nemokėjo mokesčių. Mano užduotis yra gerai "
+"pasakyti šiam Muriliui, ir jei sužinosiu, kad jam nepavyko sumokėti iš "
+"godumo, o ne iš būtinybės, aš turiu sugrąžinti jį į sostinę grandinėmis. "
+"Turiu pasakyti, kad esu laimingas, kad man buvo pavesta ši užduotis, nes "
+"turiu gerą galimybę būti paskirtas prokonsule vietoj jo, jei man pavyks."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:274
@@ -537,10 +661,16 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"Bet grįžkime prie jūsų ištraukos temos. Šios salos šiaurinėje pakrantėje yra"
+" tik viena vieta, kur galima pastatyti uostą. Taigi jūs tikrai neturite "
+"alternatyvos įsigyti ištrauką mano virtuvėje. Tačiau mano astrologai "
+"praneša, kad telkiasi siaubinga audra, dėl kurios ilgą laiką keliauti jūra "
+"bus neįmanoma. Turime išplaukti per dvi valandas, o kas po to laiko vis dar "
+"bus saloje, greitai jos nepaliks."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 msgid "Decide"
-msgstr ""
+msgstr "Nuspręsti"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:286
@@ -549,16 +679,19 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Atrodo, kad jis pakankamai laimingas, kad pasiūlė mums ištrauką, bet kaina "
+"yra nepaprastai didelė. Taip pat galime sunaikinti jo uostą ir pastatyti "
+"vieną iš savo. Įdomu, kas būtų geriau…"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "Victory!"
-msgstr ""
+msgstr "Pergalė!"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:297
@@ -568,6 +701,10 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Mes užkariavome uostą! Mes jau statome laivą, o tada pagaliau keliausime į "
+"tikrąją tolimą šiaurę. Nors vis dar negirdėjome jokių naujienų apie Reebaud,"
+" esu įsitikinęs, kad greitai jį surasime. Tada jis suteiks mums pagalbą, o "
+"aš atkovosiu Föhr iš uzurpatoriaus atterdago!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:308
@@ -575,6 +712,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite toliau žaisti, kitaip pereikite "
+"prie kitos misijos."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:306
@@ -582,6 +721,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Jūs sumokėjote už praėjimą grynu auksu. Dabar teisinga, kad tai gauni. Mūsų "
+"laivas yra paruoštas, galite įlipti!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:312
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:316
@@ -590,11 +731,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:328
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:335
 msgid "You Have Lost"
-msgstr ""
+msgstr "tu praradai"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:313
 msgid "Goodbye!"
-msgstr ""
+msgstr "Sudie!"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:315
@@ -603,6 +744,8 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Jūs užtrukote per ilgai. Dabar turime išplaukti, o tada audra neleis jums "
+"palikti šios salos. Atsiprašau tavęs, bet oras nelaukia. Atsisveikink."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:317
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:325
@@ -611,11 +754,14 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Jūs praradote ir galite toliau žaisti. Tegul jums pasiseks dar kartą, kai "
+"bandysite šį scenarijų. Spustelėkite Gerai, kad grįžtumėte į pagrindinį "
+"meniu."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "įstrigo"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -626,6 +772,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Dabar pažiūrėkite, kur mus nuvedė jūsų kvailystė. Audra praūžė ir mes visi "
+"čia įstrigome nuo tada, kai sudeginote mūsų uostą. Dievai yra teisingi – "
+"nors atrodo, kad esate galingesnis kovoje nei mes, jie verčia jus likti "
+"šioje saloje taip ilgai, kad niekada nepasieksite savo bergždžios kelionės "
+"tikslo. Neviltis dėl savo triumfo!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -633,6 +784,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"Tai nelaimė! Pasiekėme kitą krantą, bet ten jau apsigyveno kita gentis. Jie "
+"neleis mums nusileisti jų pakrantėje."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:334
@@ -640,12 +793,14 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Buvome per lėti. Mes šėlome ir blaškėmės, ir tai yra rezultatas. Nėra kelio "
+"į priekį. Nė vienas iš mūsų daugiau niekada nepamatys savo namų!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Uostas"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
@@ -654,3 +809,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Tarnauja kaip užjūrio kolonizacijos ir prekybos bazė. Taip pat saugo jūsų "
+"karius, gaminius ir įrankius."

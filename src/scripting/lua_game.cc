@@ -24,7 +24,7 @@
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"

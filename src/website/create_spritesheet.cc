@@ -32,7 +32,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/building.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/map_objects/world/critter.h"

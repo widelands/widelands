@@ -46,7 +46,7 @@ msgstr "Būsena"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
-msgstr ""
+msgstr "Kontrabandininkai"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
