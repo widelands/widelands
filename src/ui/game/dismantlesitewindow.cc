@@ -43,8 +43,8 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	// Add the progress bar
 	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
-	                                UI::ProgressBar::default_width(), UI::ProgressBar::default_height(),
-	                                UI::ProgressBar::Horizontal);
+	                                UI::ProgressBar::default_width(),
+	                                UI::ProgressBar::default_height(), UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 

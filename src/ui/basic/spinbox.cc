@@ -304,7 +304,8 @@ void SpinBox::layout() {
 	}
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
-	if (!sbi_->label->get_text().empty() && (get_w() + default_spacing() + 40) <= static_cast<int>(unit_width_)) {
+	if (!sbi_->label->get_text().empty() &&
+	    (get_w() + default_spacing() + 40) <= static_cast<int>(unit_width_)) {
 		throw wexception("SpinBox: Overall width %d must be bigger than %u (unit width) "
 		                 "+ %d (spacing) + 40 (label text)",
 		                 get_w(), unit_width_, default_spacing());

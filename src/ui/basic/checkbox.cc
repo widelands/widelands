@@ -28,7 +28,9 @@
 
 namespace {
 inline int text_width(int available_width, int pic_width) {
-	return available_width > (pic_width + UI::Panel::default_spacing()) ? available_width - pic_width - UI::Panel::default_spacing() : 0;
+	return available_width > (pic_width + UI::Panel::default_spacing()) ?
+	          available_width - pic_width - UI::Panel::default_spacing() :
+	          0;
 }
 }  // namespace
 
@@ -44,7 +46,8 @@ Statebox::Statebox(Panel* const parent,
                    Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
-   : Panel(parent, s, name, p.x, p.y, default_statebox_size(), default_statebox_size(), tooltip_text),
+   : Panel(
+        parent, s, name, p.x, p.y, default_statebox_size(), default_statebox_size(), tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
      rendered_text_(nullptr) {
@@ -68,7 +71,14 @@ Statebox::Statebox(Panel* const parent,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    int width)
-   : Panel(parent, s, name, p.x, p.y, std::max(width, default_statebox_size()), default_statebox_size(), tooltip_text),
+   : Panel(parent,
+           s,
+           name,
+           p.x,
+           p.y,
+           std::max(width, default_statebox_size()),
+           default_statebox_size(),
+           tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_image_cache->get(get_checkbox_graphics(panel_style_))),
      rendered_text_(nullptr),
@@ -185,15 +195,16 @@ void Statebox::draw(RenderTarget& dst) {
 		}
 
 		// TODO(Nordfriese): Use mipmaps for checkbox graphics
-		dst.blitrect_scale(Rectf(image_anchor, default_statebox_size(), default_statebox_size()),
-	                    pic_graphics_,
-	                    Recti(Vector2i((flags_ & Is_Checked) != 0 ? pic_graphics_->width() / 2 : 0, 0), pic_graphics_->width() / 2, pic_graphics_->height()),
-	                    1.0f,
-	                    BlendMode::UseAlpha);
+		dst.blitrect_scale(
+		   Rectf(image_anchor, default_statebox_size(), default_statebox_size()), pic_graphics_,
+		   Recti(Vector2i((flags_ & Is_Checked) != 0 ? pic_graphics_->width() / 2 : 0, 0),
+		         pic_graphics_->width() / 2, pic_graphics_->height()),
+		   1.0f, BlendMode::UseAlpha);
 
 		if ((flags_ & Is_Highlighted) != 0) {
 			dst.draw_rect(
-			   Recti(image_anchor, default_statebox_size() + 1, default_statebox_size() + 1), RGBColor(100, 100, 80));
+			   Recti(image_anchor, default_statebox_size() + 1, default_statebox_size() + 1),
+			   RGBColor(100, 100, 80));
 		}
 	}
 }

@@ -56,8 +56,14 @@ BaseTable::Table(Panel* const parent,
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
 
-     scrollbar_filler_button_(new Button(
-        this, "scrollbar_filler", 0, 0, Scrollbar::default_size(), headerheight_, button_style_, "")),
+     scrollbar_filler_button_(new Button(this,
+                                         "scrollbar_filler",
+                                         0,
+                                         0,
+                                         Scrollbar::default_size(),
+                                         headerheight_,
+                                         button_style_,
+                                         "")),
 
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),

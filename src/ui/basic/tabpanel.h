@@ -102,7 +102,8 @@ struct TabPanel : public Panel {
 		return default_button_size();
 	}
 
-	// Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
+	// Margin around image. The image will be scaled down to fit into this rectangle with preserving
+	// size.
 	[[nodiscard]] static inline int default_tab_panel_image_margin() {
 		return default_spacing();
 	}

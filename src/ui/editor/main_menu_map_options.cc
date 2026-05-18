@@ -460,8 +460,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	inner_teams_box_.set_force_scrolling(true);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
-		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
-		   this, &inner_teams_box_, parent.egbase().map(), max_w_ - UI::Scrollbar::default_size(), team);
+		SuggestedTeamsEntry* ste =
+		   new SuggestedTeamsEntry(this, &inner_teams_box_, parent.egbase().map(),
+		                           max_w_ - UI::Scrollbar::default_size(), team);
 		inner_teams_box_.add(ste);
 		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
@@ -480,9 +481,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	teams_box_.add_space(padding_);
 	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	new_suggested_team_.sigclicked.connect([this]() {
-		SuggestedTeamsEntry* ste =
-		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
-		                           max_w_ - UI::Scrollbar::default_size(), Widelands::SuggestedTeamLineup());
+		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
+		   this, &inner_teams_box_, eia().egbase().map(), max_w_ - UI::Scrollbar::default_size(),
+		   Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
 		suggested_teams_entries_.push_back(ste);
 	});
