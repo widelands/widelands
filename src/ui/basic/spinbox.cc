@@ -97,10 +97,9 @@ SpinBox::SpinBox(Panel* const parent,
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
-     button_size_(20),
-     big_step_button_width_(32),
-     buttons_width_(0),
-     padding_(2) {
+     button_size_(default_button_size_small()),
+     big_step_button_width_(default_button_size()),
+     buttons_width_(0) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -208,11 +207,11 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_plus);
 
 		box_->add(sbi_->button_ten_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add_space(padding_);
+		box_->add_space(default_spacing());
 		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 		box_->add(sbi_->text, Box::Resizing::kFillSpace, UI::Align::kBottom);
 		box_->add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add_space(padding_);
+		box_->add_space(default_spacing());
 		box_->add(sbi_->button_ten_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	} else {
 		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
@@ -305,10 +304,10 @@ void SpinBox::layout() {
 	}
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
-	if (!sbi_->label->get_text().empty() && (get_w() + padding_ + 40) <= unit_width_) {
+	if (!sbi_->label->get_text().empty() && (get_w() + default_spacing() + 40) <= static_cast<int>(unit_width_)) {
 		throw wexception("SpinBox: Overall width %d must be bigger than %u (unit width) "
-		                 "+ %u (padding) + 40 (label text)",
-		                 get_w(), unit_width_, padding_);
+		                 "+ %d (spacing) + 40 (label text)",
+		                 get_w(), unit_width_, default_spacing());
 	}
 
 	const uint32_t unit_text_min_width = button_size_;
