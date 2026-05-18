@@ -30,9 +30,6 @@
 
 namespace UI {
 
-// int instead of uint because of overflow situations
-static constexpr int32_t kRichtextMargin = 2;
-
 MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const std::string& name,
                                      const int32_t x,
@@ -106,7 +103,7 @@ void MultilineTextarea::recompute() {
 		int height = 0;
 		if (!text_.empty()) {
 			// Ensure we have a text width. Simply overflow if there is no width available.
-			const int txt_width = std::max(kRichtextMargin, get_eff_w() - 2 * kRichtextMargin);
+			const int txt_width = std::max(default_padding(), get_eff_w() - 2 * default_padding());
 			assert(txt_width > 0);
 
 			if (!is_richtext(text_)) {
@@ -181,10 +178,10 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		anchor = std::max(0, (get_eff_w() - rendered_text_->width()) / 2);
 		break;
 	case UI::Align::kRight:
-		anchor = std::max(0, get_eff_w() - rendered_text_->width() - kRichtextMargin);
+		anchor = std::max(0, get_eff_w() - rendered_text_->width() - default_padding());
 		break;
 	case UI::Align::kLeft:
-		anchor = kRichtextMargin;
+		anchor = default_padding();
 		break;
 	default:
 		NEVER_HERE();
