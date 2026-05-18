@@ -33,10 +33,6 @@
 
 namespace UI {
 
-// Margin around image. The image will be scaled down to fit into this rectangle with preserving
-// size.
-constexpr int kButtonImageMargin = 2;
-
 Button::Button  //  Common constructor
    (Panel* const parent,
     const std::string& name,
@@ -130,12 +126,12 @@ void Button::expand() {
 		int new_width = get_w();
 		const int new_height = std::max(text_height(button_style().enabled().font()),
 		                                text_height(button_style().disabled().font())) +
-		                       4 * kButtonImageMargin;
+		                       4 * default_button_image_margin();
 		if (expand_w_) {
 			// Automatically resize for text width too.
 			new_width = std::max(text_width(title_, button_style().enabled().font()),
 			                     text_width(title_, button_style().disabled().font())) +
-			            8 * kButtonImageMargin;
+			            8 * default_button_image_margin();
 		}
 		set_desired_size(new_width, new_height);
 		set_size(new_width, new_height);
@@ -220,8 +216,8 @@ void Button::draw(RenderTarget& dst) {
 				   title_image_, RGBAColor(255, 255, 255, 127));
 			}
 		} else {
-			const int max_image_w = get_w() - 2 * kButtonImageMargin;
-			const int max_image_h = get_h() - 2 * kButtonImageMargin;
+			const int max_image_w = get_w() - 2 * default_button_image_margin();
+			const int max_image_h = get_h() - 2 * default_button_image_margin();
 			const float image_scale =
 			   std::min({1.f, static_cast<float>(max_image_w) / title_image_->width(),
 			             static_cast<float>(max_image_h) / title_image_->height()});
@@ -243,7 +239,7 @@ void Button::draw(RenderTarget& dst) {
 	} else if (!title_.empty()) {
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text = autofit_text(
-		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
+		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * default_button_image_margin());
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
