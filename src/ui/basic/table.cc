@@ -52,7 +52,7 @@ BaseTable::Table(Panel* const parent,
    : Panel(parent, style, name, x, y, w, h),
 
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
-     headerheight_(lineheight_ + 4),
+     headerheight_(lineheight_ + default_padding()),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
 
