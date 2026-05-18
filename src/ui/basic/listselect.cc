@@ -33,10 +33,6 @@
 #include "ui/basic/mouse_constants.h"
 #include "wlapplication_options.h"
 
-constexpr int kMargin = 2;
-constexpr int kHotkeyGap = 16;
-constexpr int kIndentStrength = 20;
-
 namespace UI {
 
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
@@ -95,7 +91,7 @@ BaseListselect::BaseListselect(Panel* const parent,
 
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     lineheight_(text_height(table_style().enabled()) + kMargin) {
+     lineheight_(text_height(table_style().enabled()) + default_padding()) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
@@ -339,7 +335,7 @@ int BaseListselect::get_lineheight_without_padding() const {
 
 int BaseListselect::get_lineheight() const {
 	return get_lineheight_without_padding() +
-	       (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
+	       default_padding() * (selection_mode_ == ListselectLayout::kDropdown ? 2 : 1);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -356,7 +352,7 @@ int BaseListselect::calculate_desired_width() {
 	widest_text_ = 0;
 	widest_hotkey_ = 0;
 	for (const EntryRecord* er : entry_records_) {
-		const int current_text_width = er->rendered_name->width() + (er->indent * kIndentStrength);
+		const int current_text_width = er->rendered_name->width() + (er->indent * default_indent());
 		if (current_text_width > widest_text_) {
 			widest_text_ = current_text_width;
 		}
@@ -369,7 +365,7 @@ int BaseListselect::calculate_desired_width() {
 	// Add up the width
 	int txt_width = widest_text_;
 	if (widest_hotkey_ > 0) {
-		txt_width += kHotkeyGap;
+		txt_width += default_button_size_small();
 		txt_width += widest_hotkey_;
 	}
 
@@ -387,7 +383,7 @@ void BaseListselect::layout() {
 		scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
 		scrollbar_.set_singlestepsize(get_lineheight());
 		if (selection_mode_ == ListselectLayout::kDropdown) {
-			scrollbar_.set_steps(steps + kMargin);
+			scrollbar_.set_steps(steps + default_padding());
 		}
 	} else {
 		// Prevent invisible child
@@ -409,7 +405,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 	// draw text lines
 	int eff_h = get_inner_h();
 	if (selection_mode_ == ListselectLayout::kDropdown) {
-		eff_h -= kMargin;
+		eff_h -= default_padding();
 	}
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
@@ -479,8 +475,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 			dst.blit(
 			   Vector2i(UI::g_fh->fontset()->is_rtl() ?
 			               get_eff_w() - er.pic->width() - (max_pic_width_ - er.pic->width()) / 2 - 1 -
-			                  kIndentStrength * er.indent :
-			               kIndentStrength * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
+			                  default_indent() * er.indent :
+			               default_indent() * er.indent + (max_pic_width_ - er.pic->width()) / 2 + 1,
 			            y + (lineheight_unpadded - er.pic->height()) / 2),
 			   er.pic);
 		}
@@ -505,13 +501,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 			if (er.name_alignment == UI::Align::kRight) {
 				text_point.x = maxw - widest_text_ - picw;
 			} else if (widest_hotkey_ > 0) {
-				text_point.x += widest_hotkey_ + kHotkeyGap;
+				text_point.x += widest_hotkey_ + default_button_size_small();
 			}
-			text_point.x -= kIndentStrength * er.indent;
+			text_point.x -= default_indent() * er.indent;
 		} else {
 			hotkey_point.x = maxw - widest_hotkey_;
 			text_point.x += picw;
-			text_point.x += kIndentStrength * er.indent;
+			text_point.x += default_indent() * er.indent;
 		}
 
 		// Position the text and hotkey according to their alignment
