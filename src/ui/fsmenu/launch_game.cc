@@ -253,7 +253,7 @@ void LaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
-	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
+	advanced_options_box_.set_max_size(0, 2 * UI::Statebox::default_statebox_size() + kPadding);
 
 	int w;
 	int h;
