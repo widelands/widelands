@@ -367,6 +367,7 @@ Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
 Version de correction de bugs</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="it">Versione di correzione di bug</li>
+        <li xml:lang="lt">Klaidų taisymo laida</li>
         <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
         <li xml:lang="nl">Bugfix-bericht</li>
         <li xml:lang="nn">Feilrettingsutgåve</li>
@@ -429,13 +430,13 @@ Version de correction de bugs</li>
         <li xml:lang="it">Download website maps as add-ons</li>
         <li xml:lang="it">New visualisation modes in the editor</li>
         <li xml:lang="it">Many new capabilities for add-on developers</li>
-        <li xml:lang="lt">Market trading</li>
+        <li xml:lang="lt">prekyba rinkoje</li>
         <li xml:lang="lt">Pridėti šeši nauji žemėlapiai ir pašalinti trys seni</li>
         <li xml:lang="lt">Ekonominiai rajonai</li>
         <li xml:lang="lt">Daugelis patabulinimų žaidimo Enciklopedijoje</li>
-        <li xml:lang="lt">Download website maps as add-ons</li>
-        <li xml:lang="lt">New visualisation modes in the editor</li>
-        <li xml:lang="lt">Many new capabilities for add-on developers</li>
+        <li xml:lang="lt">Atsisiųsti tinklalapio žemėlapius kaip priedus</li>
+        <li xml:lang="lt">Nauji atvaizdavimo režimai redagavimo programoje</li>
+        <li xml:lang="lt">Daug naujų galimybių priedų kūrėjams</li>
         <li xml:lang="nds">Hannel in Markten</li>
         <li xml:lang="nds">Sess neje Kaarten hentoföögt un dree olle Kaarten wegdaan</li>
         <li xml:lang="nds">Weertskupp-Distrikten</li>
@@ -631,7 +632,7 @@ Version de correction de bugs</li>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="it">Il team di sviluppo di Widelands</name>
-    <name xml:lang="lt">The Videlands kūrėjų komanda</name>
+    <name xml:lang="lt">The Widelands kūrėjų komanda</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
     <name xml:lang="nn">Widelands utviklarlag</name>

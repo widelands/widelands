@@ -31,7 +31,6 @@
 #include "ui/basic/color_chooser.h"
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
-#include "ui/shared/addons_constants.h"
 
 namespace AddOnsUI {
 
@@ -68,9 +67,9 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      edit_(&buttons_, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Edit…")),
      delete_(&buttons_, "delete", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Delete")) {
 	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
-	buttons_.add_space(kRowButtonSpacing);
+	buttons_.add_space(default_spacing());
 	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
-	buttons_.add_space(kRowButtonSpacing);
+	buttons_.add_space(default_spacing());
 
 	text_wrapper_.set_layout_toplevel(true);
 
@@ -191,24 +190,24 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
          "ok",
          0,
          0,
-         kRowButtonSize,
-         kRowButtonSize,
+         default_button_size(),
+         default_button_size(),
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      reset_(&buttons_box_,
             "reset",
             0,
             0,
-            kRowButtonSize,
-            kRowButtonSize,
+            default_button_size(),
+            default_button_size(),
             UI::ButtonStyle::kFsMenuSecondary,
             _("Reset")),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             kRowButtonSize,
-             kRowButtonSize,
+             default_button_size(),
+             default_button_size(),
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")) {
 	if (ctrl.username().empty()) {
@@ -217,38 +216,39 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 	}
 
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&reset_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	auto markup_button = [this](const std::string& name, const std::string& open,
 	                            const std::string& close, const std::string& title,
 	                            const std::string& tt) {
-		UI::Button* b = new UI::Button(&markup_box_, name, 0, 0, kRowButtonSize, kRowButtonSize,
-		                               UI::ButtonStyle::kFsMenuMenu, title, tt);
+		UI::Button* b =
+		   new UI::Button(&markup_box_, name, 0, 0, default_button_size(), default_button_size(),
+		                  UI::ButtonStyle::kFsMenuMenu, title, tt);
 		b->sigclicked.connect([this, open, close]() { apply_format(open, close); });
 		return b;
 	};
 	markup_box_.add(markup_button("markup_bold", "<font bold=true>", "</font>",
 	                              /** TRANSLATORS: Short for Bold text markup */
 	                              pgettext("markup", "B"), _("Bold")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_italic", "<font italic=true>", "</font>",
 	                              /** TRANSLATORS: Short for Italic text markup */
 	                              pgettext("markup", "I"), _("Italic")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_line", "<font underline=true>", "</font>",
 	                              /** TRANSLATORS: Short for Underline text markup */
 	                              pgettext("markup", "_"), _("Underline")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_shadow", "<font shadow=true>", "</font>",
 	                              /** TRANSLATORS: Short for Shadow text markup */
 	                              pgettext("markup", "S"), _("Shadow")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	{
-		UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, kRowButtonSize,
-		                               kRowButtonSize, UI::ButtonStyle::kFsMenuMenu,
+		UI::Button* b = new UI::Button(&markup_box_, "markup_color", 0, 0, default_button_size(),
+		                               default_button_size(), UI::ButtonStyle::kFsMenuMenu,
 		                               /** TRANSLATORS: Short for Color text markup */
 		                               pgettext("markup", "C"), _("Color…"));
 		b->sigclicked.connect([this]() {
@@ -263,34 +263,34 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 		});
 		markup_box_.add(b);
 	}
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_tiny", "<font size=8>", "</font>",
 	                              /** TRANSLATORS: Short for Tiny text markup */
 	                              pgettext("markup", "1"), _("Tiny")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_small", "<font size=11>", "</font>",
 	                              /** TRANSLATORS: Short for Small text markup */
 	                              pgettext("markup", "2"), _("Small")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_normal", "<font size=14>", "</font>",
 	                              /** TRANSLATORS: Short for Medium text markup */
 	                              pgettext("markup", "3"), _("Medium")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_large", "<font size=18>", "</font>",
 	                              /** TRANSLATORS: Short for Large text markup */
 	                              pgettext("markup", "4"), _("Large")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 	markup_box_.add(markup_button("markup_huge", "<font size=24>", "</font>",
 	                              /** TRANSLATORS: Short for Huge text markup */
 	                              pgettext("markup", "5"), _("Huge")));
-	markup_box_.add_space(kRowButtonSpacing);
+	markup_box_.add_space(default_spacing());
 
 	main_box_.add(&markup_box_, UI::Box::Resizing::kAlign, UI::Align::kRight);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(text_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&preview_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	cancel_.sigclicked.connect([this]() { die(); });
@@ -404,25 +404,25 @@ public:
 		                     UI::FontStyle::kFsMenuInfoPanelHeading, pgettext("tx", "Priority:"),
 		                     UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(&priority_, UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(new UI::Textarea(
 		       this, UI::PanelStyle::kFsMenu, "label_name", UI::FontStyle::kFsMenuInfoPanelHeading,
 		       /** TRANSLATORS: "Resource" here refers to the name of a translation unit */
 		       pgettext("tx", "Resource Name:"), UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(&name_, UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, "label_categories",
 		                     UI::FontStyle::kFsMenuInfoPanelHeading,
 		                     pgettext("tx", "Categories (whitespace-separated; characters only):"),
 		                     UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(&categories_, UI::Box::Resizing::kFullSize);
-		add_space(kRowButtonSpacing);
+		add_space(default_spacing());
 		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, "label_duration",
 		                     UI::FontStyle::kFsMenuInfoPanelHeading,
 		                     _("This may take several minutes. Please be patient."),
@@ -485,12 +485,19 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
      action_(a),
      main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
-     ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     ok_(&buttons_box_,
+         "ok",
+         0,
+         0,
+         default_button_size(),
+         0,
+         UI::ButtonStyle::kFsMenuPrimary,
+         _("OK")),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             kRowButtonSize,
+             default_button_size(),
              0,
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")) {
@@ -504,7 +511,7 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 		                               _("Please explain why you are deleting this add-on."),
 		                               UI::Align::kCenter),
 		              UI::Box::Resizing::kFullSize);
-		main_box_.add_space(kRowButtonSpacing);
+		main_box_.add_space(default_spacing());
 		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
 		break;
 	}
@@ -549,9 +556,9 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 	}
 
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	cancel_.sigclicked.connect([this]() { die(); });
@@ -626,10 +633,10 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
    : UI::Window(parent.get_parent(),
                 UI::WindowStyle::kFsMenu,
                 info->internal_name,
-                parent.get_x() + kRowButtonSize,
-                parent.get_y() + kRowButtonSize,
-                parent.get_inner_w() - 2 * kRowButtonSize,
-                parent.get_inner_h() - 2 * kRowButtonSize,
+                parent.get_x() + default_button_size(),
+                parent.get_y() + default_button_size(),
+                parent.get_inner_w() - 2 * default_button_size(),
+                parent.get_inner_h() - 2 * default_button_size(),
                 info->descname()),
      parent_(parent),
      info_(info),
@@ -668,7 +675,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                  0,
                  0,
                  11,
-                 kRowButtonSize - kRowButtonSpacing,
+                 default_button_size() - default_spacing(),
                  _("Your vote"),
                  UI::DropdownType::kTextual,
                  UI::PanelStyle::kFsMenu,
@@ -766,18 +773,18 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	box_screenies_buttons_.add(&screenshot_stats_, UI::Box::Resizing::kExpandBoth);
 	box_screenies_buttons_.add(&screenshot_next_, UI::Box::Resizing::kFullSize);
 
-	box_screenies_.add_space(kRowButtonSpacing);
+	box_screenies_.add_space(default_spacing());
 	box_screenies_.add(&box_screenies_buttons_, UI::Box::Resizing::kFullSize);
-	box_screenies_.add_space(kRowButtonSpacing);
+	box_screenies_.add_space(default_spacing());
 	box_screenies_.add(&screenshot_, UI::Box::Resizing::kExpandBoth);
-	box_screenies_.add_space(kRowButtonSpacing);
+	box_screenies_.add_space(default_spacing());
 	box_screenies_.add(&screenshot_descr_, UI::Box::Resizing::kFullSize);
 
 	box_comment_rows_.set_force_scrolling(true);
 	box_comments_.add(&comments_header_, UI::Box::Resizing::kFullSize);
-	box_comments_.add_space(kRowButtonSpacing);
+	box_comments_.add_space(default_spacing());
 	box_comments_.add(&box_comment_rows_, UI::Box::Resizing::kExpandBoth);
-	box_comments_.add_space(kRowButtonSpacing);
+	box_comments_.add_space(default_spacing());
 	box_comments_.add(&write_comment_, UI::Box::Resizing::kFullSize);
 
 	voting_stats_.add_inf_space();
@@ -786,24 +793,24 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 		                           format("voting_box_%u", i), 0, 0, UI::Box::Vertical);
 		voting_bars_[i] =
 		   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, format("voting_bar_%u", i), 0, 0,
-		                       kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
+		                       default_button_size() * 3 / 2, 0, UI::ProgressBar::Vertical);
 		voting_bars_[i]->set_show_percent(false);
 		voting_txt_[i] = new UI::Textarea(box, UI::PanelStyle::kFsMenu, format("voting_label_%u", i),
 		                                  UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter);
 
 		box->add(voting_bars_[i], UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
-		box->add_space(kRowButtonSpacing);
+		box->add_space(default_spacing());
 		box->add(voting_txt_[i], UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		voting_stats_.add(box, UI::Box::Resizing::kExpandBoth);
 		voting_stats_.add_inf_space();
 	}
 
 	box_votes_.add(&voting_stats_summary_, UI::Box::Resizing::kFullSize);
-	box_votes_.add_space(kRowButtonSpacing);
+	box_votes_.add_space(default_spacing());
 	box_votes_.add(&voting_stats_, UI::Box::Resizing::kExpandBoth);
-	box_votes_.add_space(kRowButtonSpacing);
+	box_votes_.add_space(default_spacing());
 	box_votes_.add(&own_voting_, UI::Box::Resizing::kFullSize);
-	box_votes_.add_space(kRowButtonSpacing);
+	box_votes_.add_space(default_spacing());
 
 	tabs_.add("comments", "", &box_comments_);
 	if (nr_screenshots_ != 0) {
@@ -821,7 +828,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	tabs_.sigclicked.connect([this]() { update_current_vote_on_demand(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 
 	screenshot_next_.set_enabled(nr_screenshots_ > 1);
@@ -861,8 +868,10 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 void RemoteInteractionWindow::on_resolution_changed_note(const GraphicResolutionChanged& note) {
 	UI::Window::on_resolution_changed_note(note);
 
-	set_size(parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
-	set_pos(Vector2i(parent_.get_x() + kRowButtonSize, parent_.get_y() + kRowButtonSize));
+	set_size(parent_.get_inner_w() - 2 * default_button_size(),
+	         parent_.get_inner_h() - 2 * default_button_size());
+	set_pos(
+	   Vector2i(parent_.get_x() + default_button_size(), parent_.get_y() + default_button_size()));
 	main_box_.set_size(get_inner_w(), get_inner_h());
 }
 
@@ -876,7 +885,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_visible(parent_.net().is_admin());
 		admin_action_.set_size(login_button_.get_h(), login_button_.get_h());
 		admin_action_.set_pos(Vector2i(
-		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
+		   login_button_.get_x() - admin_action_.get_w() - default_spacing(), login_button_.get_y()));
 
 		box_comment_rows_.set_max_size(box_comment_rows_.get_max_x(), 0);
 		box_comment_rows_.set_desired_size(0, 0);
@@ -947,7 +956,7 @@ void RemoteInteractionWindow::update_data() {
 		CommentRow* cr =
 		   new CommentRow(parent_, info_, *this, box_comment_rows_, text, comment.first);
 		comment_rows_.push_back(std::unique_ptr<CommentRow>(cr));
-		box_comment_rows_.add_space(kRowButtonSize);
+		box_comment_rows_.add_space(default_button_size());
 		box_comment_rows_.add(cr, UI::Box::Resizing::kFullSize);
 	}
 }

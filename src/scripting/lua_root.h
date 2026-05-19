@@ -66,6 +66,7 @@ public:
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
 	int get_last_save_time(lua_State* L);
+	int get_last_save_gametime(lua_State* L);
 	int get_type(lua_State*);
 	int get_scenario_difficulty(lua_State*);
 	int get_allow_diplomacy(lua_State*);
