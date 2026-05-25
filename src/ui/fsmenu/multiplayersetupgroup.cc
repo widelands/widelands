@@ -716,12 +716,10 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
               _("Players"),
               UI::Align::kCenter),
      buth_(buth) {
-	scrollable_clientbox_.set_scrolling(true);
 	clientbox_.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox_.add_space(3 * kPadding);
 	clientbox_.add(&scrollable_clientbox_, Resizing::kExpandBoth);
 
-	scrollable_playerbox_.set_scrolling(true);
 	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
 	playerbox_.add_space(kPadding);
 	playerbox_.add(&scrollable_playerbox_, Resizing::kExpandBoth);

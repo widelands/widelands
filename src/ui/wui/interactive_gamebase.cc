@@ -30,7 +30,7 @@
 #include "logic/game_controller.h"
 #include "logic/map.h"
 #include "logic/map_objects/findbob.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
 #include "ui/basic/toolbar_setup.h"

@@ -18,8 +18,8 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Dar neįgyvendinta"
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:14
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Atsiprašome, šis žemėlapis dar neįdiegtas."
