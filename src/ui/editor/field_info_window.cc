@@ -19,7 +19,7 @@
 #include "ui/editor/field_info_window.h"
 
 #include "graphic/text_layout.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
 

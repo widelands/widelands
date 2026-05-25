@@ -23,7 +23,7 @@
 #include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/market.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "ui/basic/box.h"

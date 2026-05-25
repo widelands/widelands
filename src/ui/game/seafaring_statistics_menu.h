@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
 #include "ui/basic/table.h"

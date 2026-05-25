@@ -30,7 +30,7 @@
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/production_program.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker_program.h"
@@ -99,6 +99,7 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),
    PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),
+   PROP_RO(LuaGame, last_save_gametime),
    PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player),
    PROP_RO(LuaGame, scenario_difficulty),
@@ -205,10 +206,22 @@ int LuaGame::get_interactive_player(lua_State* L) {
 /* RST
    .. attribute:: last_save_time
 
-      (RO) The gametime at which the game was last saved.
+      (RO) The realtime at which the game was last saved.
 */
 int LuaGame::get_last_save_time(lua_State* L) {
-	lua_pushuint32(L, get_game(L).save_handler().last_save_time());
+	lua_pushuint32(L, get_game(L).save_handler().last_save_realtime());
+	return 1;
+}
+
+/* RST
+   .. attribute:: last_save_gametime
+
+      .. versionadded:: 1.4
+
+      (RO) The gametime at which the game was last saved.
+*/
+int LuaGame::get_last_save_gametime(lua_State* L) {
+	lua_pushuint32(L, get_game(L).save_handler().last_save_gametime().get());
 	return 1;
 }
 

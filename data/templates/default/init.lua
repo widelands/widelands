@@ -1058,7 +1058,7 @@ return {
    styled_sizes = {
       fs_text_default_gap = fs_text_padding,
       fs_text_space_before_inline_header = 8,
-      fs_main_menu_dropdown_height = 33,
+      fs_main_menu_dropdown_height = 32,
       wui_text_default_gap = wui_text_padding,
       wui_text_space_before_inline_header = 8,
       wui_space_before_immovable_icon = 14,
@@ -1077,7 +1077,10 @@ return {
       campaign_fri02_poem_indent = 10,
       map_plateau_message_pos_y = 1,
       ui_default_padding = 4,
+      ui_default_spacing = 4,
       ui_default_indent = 8,
-      toolbar_button_size = 33,
+      ui_default_button_size = 32,
+      ui_default_button_size_small = 24,
+      toolbar_button_size = 32,
    }
 }

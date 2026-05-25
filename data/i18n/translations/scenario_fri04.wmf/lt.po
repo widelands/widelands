@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Pastaba"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -26,69 +30,74 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Atrodo, kad neatlikote ankstesnės misijos. Vis tiek galite žaisti šį "
+"scenarijų, bet būsite nepalankioje padėtyje. Rekomenduoju pirmiausia "
+"užbaigti ankstesnį scenarijų ir tada iš naujo pradėti šią misiją."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Raskite Reebaud"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
-msgstr ""
+msgstr "Išplėskite savo teritoriją, kol susitiksite su senu draugu Reebaud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Nugalėk nepažįstamus žmones"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Nugalėk nepažįstamus žmones"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Nugalėk priešišką gentį."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Nugalėk imperiją"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Nugalėk imperatoriškąjį legatą"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Nugalėk Marcusą Caius Iniucundus."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Įdarbinkite ir mokykite"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Įdarbinkite ir mokykite savo karius"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Išmokykite savo karius, kol laukiate, kol Reebaud paskelbs savo karius "
+"pasiruošusius mūšiui."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
-msgstr ""
+msgstr "Turite vieną valandą treniruoti kuo daugiau karių."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Sveiki sugrįžę!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Atvyko pagaliau"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -97,6 +106,9 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Markas Kajus Iniucundusas nemelavo apie audrą. Mes išvykome pačiu laiku; Tai"
+" mus užklupo, kai buvome jūroje, ir visi buvome tikri, kad mūsų laivas tuoj "
+"suskils ir nuskęs, ir nė vienas iš mūsų daugiau nepamatysime savo namų."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -106,6 +118,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Tačiau Dievas buvo gailestingas, ir mūsų gausios maldos paskatino jį mus "
+"pasigailėti. Turėjome nusileisti ant niūraus, negyvenamo kranto ir "
+"remontuoti laivą, kol galėjome toliau plaukti. Galiausiai atvykome į šiaurę,"
+" kiek įmanoma laivu."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -118,6 +134,12 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"Mes su legatu dabar neturime daugiau reikalų vienas su kitu. Man nepatiko jo"
+" aukštesnis požiūris kelionės metu, o ypač į tai, kaip jis elgėsi su savo "
+"virtuvės vergais. Jam neatėjo į galvą, kad jie yra tokie žmonės kaip jis ir "
+"aš; Arba, jei taip, jis elgėsi taip, lyg jie patys būtų kalti dėl savo "
+"nelaimės. Nesigailiu, kad tikriausiai daugiau jo nebematysiu. Jis įrengė "
+"savo stovyklą kiek toliau nuo manosios, kad mes vienas kitam netrukdytume."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -127,6 +149,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Bet dabar, kai taip priartėjome, esu per daug nekantrus, kad sėdėčiau be "
+"darbo ir galvočiau apie praeitį. Greičiau! Eime ir ieškokime mano draugo. "
+"Nors čia dar nemačiau žmonių gyvenimo ženklų, neabejoju, kad greitai jį "
+"surasime."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -136,12 +162,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Svetimšaliai"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Kas jie tokie?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -149,6 +175,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Mūsų kariai matė nepažįstamus žmones – pirmuosius čiabuvius šiame niūriame "
+"kaime. Galbūt jie žino, kur galima rasti Reebaud?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -157,11 +185,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Ramybė ir sveikinimai, geri žmonės! Aš esu Clausas Lembeckas, o tai mano "
+"sūnus Henneke. Ateiname ieškoti mano draugo Reebaud. Ar galiu paklausti, ar "
+"žinote, kur mes galime jį rasti?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Priešai"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -169,10 +200,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Mūsų kariai matė nepažįstamus žmones. Tai turi būti Reebaud paminėti "
+"įsibrovėliai."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Pažeidėjai"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -181,11 +214,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"Mes – amazonės. Jūs – nepažįstami žmonės. Žemė – čia – nuosavas – mes. Jūs –"
+" pažeidėjai. Tu – priešai. Mes – jūs – visi – numirsime!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Ne patys draugiškiausi žmonės…"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -200,7 +235,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "senas draugas"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -215,13 +250,15 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Pagaliau susitiko"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"Pagaliau! Šie žmonių pastatai atrodo pažįstami. Tai turi būti Reebaud "
+"gentis."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -229,6 +266,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Ar mano akys mane apgaudinėja, ar dvasia mane apgaudinėja? Tikrai negali "
+"būti mano senas draugas Klausas, kuris mane sutinka taip toli nuo namų!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -237,6 +276,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Tai jokia gudrybė ar apgaulė, tai tikrai aš, Claus Lembeck! Mano sūnus "
+"Henneke ir aš nukeliavome taip toli tavęs ieškoti. Negaliu pasakyti, kaip "
+"džiaugiuosi, kad pagaliau tave radau."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -246,6 +288,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Džiaugiuosi, kad patekote į tokią bėdą dėl susitikimo su manimi. Bet tu to "
+"nepadarei tik tam, kad vėl su manimi pasikalbėtum. Kas tave vargina? Kaip "
+"kadaise padėjai man atremti Holšteino invaziją, dabar, jei galėsiu, padėsiu "
+"savo draugui."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -256,6 +302,11 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"Tikrai atėjau prašyti jūsų pagalbos. Tikrai prisimenate danų karalių "
+"Atterdagą, kuris mums dažnai sukėlė didelių sunkumų. Jūs pats niekada su juo"
+" nekovojote, jis per daug atsargus dėl jūsų reputacijos, kad galėtų jus "
+"tiesiogiai užpulti; Bet aš padariau jį priešu, dažnai padėdamas tiems, "
+"kuriuos jis siekė užkariauti."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -267,6 +318,12 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Prieš kokius tris ar keturis mėnesius – aš praradau laiką ilgoje kelionėje –"
+" jis išlaipino savo karius mano saloje Föhr. Nepagailėsiu jums pasakojimo "
+"apie mūšį, kuris truko penkias savaites ir ne diena mažiau. Trumpa ir karti "
+"tiesa ta, kad buvau nugalėtas ir priverstas bėgti. Neturėjau vilties, kad "
+"mano draugai žemyne galėtų man padėti, nes Atterdago armijos yra "
+"neįtikėtinai daug, kad žinojau, kad jie nebūtų turėję progos."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -276,6 +333,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Tik jūs turite nuostabiausių ginklų žygdarbių reputaciją. Jūs tikriausiai "
+"esate vienintelis gyvas žmogus, galintis nugalėti piktąjį daną. Prašau jūsų "
+"ateiti su manimi į pietus ir išlaisvinti Föhrą arba bent jau atsiųsti su "
+"manimi būrį savo garsių karių."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -289,6 +350,14 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Jei atvyktumėte savaite anksčiau, būčiau iš karto sutikęs su jūsų prašymu. "
+"Tačiau dabar horizonte pasirodė vargo vieta. Aš tai turiu galvoje pažodžiui;"
+" Užsieniečiai atvyko iš toli ir siekia mus išvaryti ir užvaldyti mūsų žemes,"
+" kaip mes patys, vedami poreikio, atimti juos iš čia gyvenusių priešiškų "
+"žmonių. karingi barbarai ir imperatoriškasis scallywag, vardu Murilius, "
+"kuris kėlė pačius baisiausius reikalavimus. Mes juos visus nugalėjome ir "
+"tikėjome, kad pagaliau radome ramybę. Ir ketverius ilgus metus gyvenimas "
+"buvo tikrai ramus."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -305,6 +374,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Bet dabar, kaip sakiau, artėjant trumpam vasaros laikotarpiui, kai šiek tiek"
+" sniegas šiek tiek tirpsta ir gali keliauti į tolimas vietas, pasirodė "
+"nepažįstami žmonės ir įsitraukė į mūšį. Jie mus nustebino, gyvenimas be "
+"kovos padarė mus nerūpestingus. Daugelis gerų kareivių krito į savo ietis, "
+"įskaitant Haukę, mano geriausią draugą ir garbingiausią patarėją, ir Fietę, "
+"mano vienintelį sūnų ir įpėdinį. Jų slapti mūšio žingsniai mums buvo "
+"naujovė, nors dabar, kai žinome, su kuo susiduriame, negali būti jokių "
+"abejonių, kad galiausiai juos įveiksime. Bet bijau, kad vis tiek užtruks "
+"šiek tiek laiko, kol jie bus nugalėti ir man bus saugu keliauti su jumis į "
+"pietus. Žinoma, už šį laikotarpį gausite visą svetingumą ir mandagumą, kurį "
+"galime pasiūlyti."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -321,6 +401,17 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Bet dabar, kaip sakiau, artėjant trumpam vasaros laikotarpiui, kai šiek tiek"
+" sniegas šiek tiek tirpsta ir gali keliauti į tolimas vietas, pasirodė "
+"nepažįstami žmonės ir įsitraukė į mūšį. Jie mus nustebino, gyvenimas be "
+"kovos padarė mus nerūpestingus. Daugelis gerų kareivių krito į savo ietis, "
+"įskaitant Haukę, mano geriausią draugą ir garbingiausią patarėją, ir Fietę, "
+"mano vienintelį sūnų ir įpėdinį. Jų gudrūs mūšio žingsniai mums buvo "
+"naujovė, nors dabar, kai žinojome, su kuo susiduriame, galiausiai sugebėjome"
+" juos įveikti. Tačiau visi mūsų kariai vis dar yra skausmingi ir sužeisti "
+"nuo sunkių kovų, todėl jiems prireiks šiek tiek laiko atsigauti, kad "
+"galėtume vėl išsiųsti juos į mūšį. Žinoma, už šį laikotarpį gausite visą "
+"svetingumą ir mandagumą, kurį galime pasiūlyti."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -330,6 +421,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Manau, kad mes jau sutikome šiuos įsibrovėlius. Būtų nemalonu sėdėti ir "
+"mėgautis midaus puodeliais, kol kovojate už savo gyvybes. Savo draugystės "
+"dvasia ir gerų vyrų, kuriuos praradote, garbei, mes kartu su jumis kovosime "
+"su užpuolikais!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -339,6 +434,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Tiesą sakant, būtų netinkamiausia sėdėti ir mėgautis midaus puodeliais, kol "
+"kovojate už savo gyvybes. Savo draugystės dvasia ir gerų vyrų, kuriuos "
+"praradote, garbei, mes ieškosime tų įsibrovėlių ir kovosime su jais kartu su"
+" jumis!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -351,18 +450,24 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Esu beveik nusivylęs, kad jūsų reputacija neviršija faktų, nes kaip jūs, "
+"apibūdindami užpuolikus, nekantriai laukiau, kada galėsiu su jais kovoti "
+"kartu su jumis. Apgailestauju dėl jūsų netekčių, o ypač dėl to, kad niekada "
+"nesutiksiu žinomo Hauke, kurio vardas išliks šlovėje. Kol jūsų kariai "
+"atsigaus, aš imsiuos mūsų pačių karių mokymo sesijų organizavimas, kad jie "
+"pasimokytų iš jūsų ir taptų kuo stipresni prieš grįždami į tėvynę."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "senas priešas"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Išdavystė"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -370,6 +475,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Palaukite minutę, jūs abu. Ką tu sakei? Jūs užpuolėte ir nužudėte Murilių, "
+"imperijos prokonsulą?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -379,6 +486,10 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"Tai labiausiai nepriimtina. Aš esu Marcusas Caius Iniucundus, imperijos "
+"legatas. Pagalvoti, kad buvau išsiųstas tirti, ar Murilius nesumokėjo "
+"mokesčių dėl poreikio ar godumo, ir kad dabar sužinojau, kad jį ir visus jo "
+"vyrus nešvankiai nužudė arogantiški įsibrovėliai!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -389,6 +500,11 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Savo poelgiu jūs padovanojote sau imperijos rūstybę ir prisiekiu Jupiteriu "
+"Optimusu Maksimu, kad aš nenurimsiu, kol jūs ir jūsų negulėsite savo "
+"kraujyje. Būsiu gailestingas tik tiems, kurie per jauni, kad dalyvaučiau "
+"kovose, kuriuos išliksiu gyvas, kad pakeisčiau saujelę virtuvės vergų, kurie"
+" neišgyveno paskutinės kelionės."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -397,6 +513,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Oi, dabar aš bijau. Sakyk man, gerasis žmogau, ar kvailystė yra reikalavimas"
+" būti paskirtam imperijos atstovu? Klausai, už ką atsinešei tą apgailėtiną "
+"juokdarį?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -406,10 +525,14 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Atsiprašau. Jis pasiūlė mums praeiti savo laive, ir aš neturėjau jokio būdo "
+"žinoti ir jokios priežasties manyti, kad jis sieks kivirčo su jumis. Bet "
+"matydamas, kad tai aš atnešiau jums šią bėdą, mažiausia, ką galiu padaryti, "
+"tai prisiimti atsakomybę už tai, kad išvadu jus nuo jo."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr ""
+msgstr "Kažkas vyksta…"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -419,15 +542,19 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Šiandien netoli mūsų šiaurės vakarų sienos sutikome sužeistą kareivį. Jis "
+"kažką aiktelėjo apie tai, kad jo gentį užpuolė žiaurūs nepažįstamieji, bet "
+"jis mirė nespėjęs mums daugiau pasakyti. Jo šarvai ir ginklai atrodė "
+"stulbinamai pažįstami. Įdomu, ar Reebaud genčiai gresia pavojus?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Turime paskubėti."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Mes pavėlavom"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -436,6 +563,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Šiandien netoli mūsų šiaurės vakarų sienos sutikome sužeistą kareivį. Jis "
+"kažką aiktelėjo apie tai, kad jo gentis buvo užpulta ir nugalėta žiaurių "
+"nepažįstamų žmonių. Paskutiniu atodūsiu jis mums pasakė savo lyderio vardą: "
+"Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -444,12 +575,15 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Mes pavėlavom. Reebaud jau buvo mūsų pasiekiamoje vietoje ir buvo nugalėtas "
+"likus kelioms valandoms iki mūsų susitikimo. Šiame pasaulyje nėra vilties nė"
+" vienam iš mūsų."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr ""
+msgstr "Jūs pralaimėjote"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -458,16 +592,18 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Jūs pralaimėjote ir negalite tęsti žaidimo. Tikimės, kad kitą kartą jums "
+"pasiseks geriau. Spustelėkite GERAI, kad grįžtumėte į pagrindinį meniu."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Nugalėti"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Mes pralaimėjome"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -478,6 +614,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"Priešai sunaikino mūsų paskutinį sandėlį. Jokia gentis negalėtų išgyventi "
+"pagal šiuos šansus, ir viskas, ką dabar galime padaryti, tai susidurti su "
+"tam tikru likimu aukštai iškėlusias galvas. Apgailestauju tik tai, kad "
+"negalėsiu padėti savo senam draugui Klausui jo keblioje padėtyje. Tegul "
+"dievai jo gailisi, bet bijau, kad visa viltis prarasta."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -488,14 +629,19 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Buvome taip arti, bet dabar priešai sunaikino mūsų paskutinį sandėlį. Galbūt"
+" man buvo kvaila manyti, kad galėčiau nugalėti Atterdagą, jei net "
+"neprilygsiu šiems nereikšmingiems užsieniečiams. Dievas tam nepritaria mano "
+"pasipūtimui, ir jis, o ne koks nors atsitiktinis nepažįstamų žmonių "
+"gaudymas, užbaigė mūsų liūdną likimą."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Išplėtimas"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Mus nutraukia"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -504,6 +650,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Iniucundus greitai plečia savo teritoriją. Nors jis visiškai "
+"turi savo teises tai daryti, aš nerimauju, kad galime būti atskirti nuo "
+"Reebaud žemės, jei nebūsime atsargūs."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -512,6 +661,9 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Turėtume padidinti savo plėtros tempą. Nežinodamas, kuria kryptimi mums "
+"reikia eiti, patarčiau kol kas sutelkti dėmesį į plitimą į vakarus, kol "
+"Marcusas Caiusas Iniucundus užblokuos mus šioje sienoje."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -519,11 +671,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:304
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Įsibrovėliai nugalėjo"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -531,10 +683,12 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Šie įsibrovėliai nebuvo tokie stiprūs, kaip jie manė. Jie daugiau tavęs "
+"nevargins."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Nepažįstami žmonės nugalėjo"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -542,21 +696,25 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Šie nepažįstamieji nebuvo tokie stiprūs, kaip jie manė. Kad ir kas jie būtų,"
+" jie mums daugiau netrukdys."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legatas nugalėjo"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Bandymas mane priimti yra paskutinė klaida, kurią kada nors padarėte, "
+"kvailas legate."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Mes laimėjome"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -565,11 +723,14 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Priešai nugalėti. Dabar aš ateisiu į pietus kartu su jumis kartu su visais "
+"savo kariais, išskyrus nedidelį garnizoną, kad apsaugočiau mano žemes, ir "
+"mes vėl užkariausime jūsų salą!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -577,6 +738,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite tęsti žaidimą, kitu atveju "
+"pereikite prie kitos misijos."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -586,12 +749,16 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Mūsų kariai atsigavo, o jūs gerai praleidote laiką, padidindami savo "
+"kariuomenės jėgą. Dabar aš ateisiu į pietus kartu su jumis kartu su visais "
+"savo kariais, išskyrus nedidelį garnizoną, kad apsaugočiau mano žemes, ir "
+"mes vėl užkariausime jūsų salą!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Uostas"
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
@@ -600,3 +767,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Tarnauja kaip užjūrio kolonizacijos ir prekybos bazė. Taip pat saugo jūsų "
+"karius, gaminius ir įrankius."

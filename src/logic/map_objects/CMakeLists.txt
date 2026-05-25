@@ -102,9 +102,21 @@ wl_library(logic_map_objects
     tribes/requirements.h
     tribes/road_textures.cc
     tribes/road_textures.h
-    tribes/ship.cc
-    tribes/ship.h
-    tribes/shipstates.h
+    tribes/ship/battle.cc
+    tribes/ship/destination.cc
+    tribes/ship/draw.cc
+    tribes/ship/expedition.cc
+    tribes/ship/onboard_soldiers.cc
+    tribes/ship/saveload.cc
+    tribes/ship/ship.cc
+    tribes/ship/ship.h
+    tribes/ship/shipstates.h
+    tribes/ship/task_expedition.cc
+    tribes/ship/task_idle.cc
+    tribes/ship/task_movement.cc
+    tribes/ship/task_ship.cc
+    tribes/ship/task_transport.cc
+    tribes/ship/warship.cc
     tribes/soldier.cc
     tribes/soldier.h
     tribes/soldiercontrol.cc
