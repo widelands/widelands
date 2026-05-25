@@ -514,8 +514,6 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"max_x"``: **Optional**. The maximum horizontal size. Default: unlimited.
            * ``"max_y"``: **Optional**. The maximum vertical size. Default: unlimited.
            * ``"spacing"``: **Optional**. The inner spacing between items. Default: 0.
-           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content
-             is too large. Default: false.
 
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
             Takes no properties.

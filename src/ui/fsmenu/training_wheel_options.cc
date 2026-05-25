@@ -72,7 +72,6 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	UI::Box* list_box = new UI::Box(
 	   main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
-	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
 	// If some but not all wheels are solved, the Mark/Unmark button should be labelled "Unmark All"

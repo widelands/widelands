@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIPSTATES_H
-#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIPSTATES_H
+#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIPSTATES_H
+#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIPSTATES_H
 
 namespace Widelands {
 
@@ -64,4 +64,4 @@ enum class WarshipCommand : uint8_t {
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIPSTATES_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIPSTATES_H

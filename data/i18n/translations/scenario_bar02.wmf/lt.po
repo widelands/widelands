@@ -20,140 +20,140 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Ondun"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "Sukurkite bazinę ekonomiką"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Pradėkite rinkti pagrindines statybines medžiagas ir įtvirtinkite stovyklą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Pastatykite medkirčio trobelę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Pastatykite girininko trobelę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "Pastatykite akmens skaldyklą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Pastatykite medienos kietinimo dirbtuvę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Pastatykite sargybinio postą rytiniame pasienyje"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Galiausiai turėtumėte pastatyti nendryną ir kalkių degyklą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Sukurkite nedidelę maisto ekonomiką"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Sukurkite bazinę maisto ekonomiką, kad aprūpintumėte savo žmones maistu."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Pastatykite žvejo trobelę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Pastatykite medžiotojo trobelę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
-msgstr ""
+msgstr "Pastatykite šulinį"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr ""
+msgstr "Pastatykite ūkį"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
-msgstr ""
+msgstr "Pastatykite kepyklą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Pastatykite galvijų ūkį"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Nepamirškite pastatyti galvijų ūkio"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Keliams ilgėjant, o ekonomikai augant, turėtumėte išnaudoti savo jaučius, kad šie padėtų greičiau transportuoti prekes."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr ""
+msgstr "Pastatykite bokštą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Pastatykite bokštą šiaurės rytiniame savo teritorijos pasienyje, kad padidintumėte matomumo lauką ir apsaugotumėte savo žmones nuo netikėtų priešų atakų."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "Tyrinėkite toliau"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Pastatykite daugiau karinių pastatų, kad išžvalgytumėte vietovę aplink štabą ir užtikrintumėte savo žmonių saugumą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Sukurkite kasybos infrastruktūrą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Išplėskite savo teritoriją iki kalnų, siųskite geologus ieškoti rūdos bei anglių ir sukurkite kasybos ekonomiką su kasyklomis, smuklėmis, lydyklomis bei metalo dirbtuvėmis."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Pastatykite tvirtovę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Pastatykite tvirtovę į rytus nuo kalnų."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Sukurkite treniruočių infrastruktūrą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Pastatykite kareivines, kad apmokytumėte keletą paprastų karių."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Pastatykite mūšio areną ir treniruočių stovyklą į vakarus nuo kalnų."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:122
@@ -163,23 +163,23 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Patobulinkite savo metalo dirbtuves iki kirvių dirbtuvių, kad galėtumėte gaminti ginklus, ir pastatykite antrą metalo dirbtuvę įrankių gamybai užtikrinti. Kai kalvis pasieks kitą lygį (kalvystės meistro), galėsite patobulinti kirvių dirbtuves iki karo malūno, kuriame bus gaminami papildomi ginklai."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Pastatykite šalmų kalvę į vakarus nuo kalnų, kad aprūpintumėte savo karius geresniais šarvais."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Pastatykite sandėlį"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Pastatykite sandėlį į vakarus nuo kalnų."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
@@ -187,18 +187,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Sandėliai yra panašūs į jūsų štabą, tačiau jų negina kariai. Plečiantis teritorijai ir ilgėjant keliams iki štabo, dažnai verta pastatyti papildomą sandėlį."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 msgid "Build training sites"
-msgstr ""
+msgstr "Pastatykite treniruočių vietas"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Pastatykite kareivines, mūšio areną ir treniruočių stovyklą į vakarus nuo kalnų."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
@@ -206,30 +206,30 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Kareivinėse ruošiami paprasti kariai, o treniruočių vietos, tokios kaip treniruočių stovykla ar mūšio arena, naudojamos tobulinti įvairias karių savybes. Šios savybės yra gyvybiškai svarbios kovose: kuo geresnis karys, tuo didesnė tikimybė laimėti mūšį."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Savybės yra: sveikata, puolimas, gynyba ir išvengimas."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr ""
+msgstr "Sukurkite ginklų gamybą"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Pastatykite šalmų kalvę"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Sunaikinkite Kalitato armiją"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Sunaikinkite Kalitato armiją ir išplėskite savo teritoriją į rytus."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
@@ -237,27 +237,27 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Norėdami pulti priešą, turite paspausti ant priešininko karinio pastato durų. Atsivėrusiame meniu galėsite pasirinkti puolimui siunčiamų karių skaičių. Pasirinkę skaičių, paspauskite ant kryželio („Pradėti puolimą“)."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Karinis puolimas prieš Al'thunraną"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "Sunaikinkite visas abiejų Throno brolių pajėgas, kad išlaisvintumėte sosto ratą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
-msgstr ""
+msgstr "Netoli namų"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thronas atrodo susirūpinęs..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:158
@@ -265,20 +265,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "Pastarosiomis dienomis priartėjome prie sostinės. Žygiuojant prie mūsų prisidėjo daugybė žmonių, sudėjusių į mane visas savo viltis. Tačiau bijau, kad nesame pakankamai stiprūs stoti į kovą prieš mano brolius."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "Kol kas ilsimės prie Senojo miško ribų ir ruošiamės ateinančioms dienoms."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Dar viena šalta diena"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -289,15 +289,15 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "Patrulio atnešta žinia nieko gero nežada. Mūsų šnipai praneša, kad karingosios gentys vis dar įnirtingai kaunasi, tačiau kai kurie vyresni kariai ir genčių vadai, regis, pavargo nuo šio beprasmiško karo. Kalitatas, Kuno sūnus, yra pirmasis karo vadas, palikęs Al'thunraną, taip palikdamas savo pusę silpną ir pažeidžiamą. Mano žvalgai praneša, kad jis įsitvirtino žemumose aplink sostinę, užimdamas išorinius įtvirtinimų žiedus."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
-msgstr ""
+msgstr "Abejonės"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldretas purto galvą..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:178
@@ -308,12 +308,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "Thronas nori tikėti, kad Kalitatas pavargo kovoti ir prisijungs prie mūsų, kai žygiuosime įvesti tvarkos Al'thunrane. Tačiau aš tuo abejoju. Kalitatas yra vieno galingiausių mūsų kariuomenės generolų sūnus, o jo šeimai niekada nebuvo prie širdies mintis lenktis prieš Chat'Karuth vėliavą. Kodėl jis turėtų žygiuoti kartu su Chat'Karuth sūnumi, kad susigrąžintų savo paveldą ir sostą?"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid "The Story Continues"
-msgstr ""
+msgstr "Istorija tęsiasi"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:232
@@ -321,7 +321,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:267
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldretas sako:"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:186
@@ -329,11 +329,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Tačiau Thronas nenori klausytis mano abejonių. Jis siekia išplėsti mūsų įtvirtinimus iki pat Kalitato teritorijos ribų ir susijungti su savo pajėgomis. Privalau akylai stebėti viską, kas čia vyksta."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Thronas kalba užtikrintai."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:194
@@ -344,7 +344,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "Mano pajėgų pasienio linija išsiplėtė iki miškų krašto. Mums yra ilga ir šalta žiema ir tiek daug mylių už nugaros. Įtvirtinimas, kurį pastatėme aplink Onduną, garantuos mums greitą vyrų ir prekių tiekimą, o kai Al'Thuranas bus mano rankose, abu miestus sujungs gera ir ginama infrastruktūra. Vis dėlto tikiuosi, kad nevaikščiosiu vienas šioje misijoje, tikiuosi, kad Kuno sūnus Kalitatas seks mano kvietimą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -354,7 +354,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
-msgstr ""
+msgstr "Thron sako:"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:202
@@ -365,15 +365,15 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Išsiunčiau vyrus susitikti su Kalitatu jo tvirtovėje. Jis užtvėrė buvusį pagrindinį įėjimą į sostinę ir bando įrengti apgulties žiedą aplink Al'Thuraną. Jis neleis niekam įeiti ar išeiti iš miesto, kol žiedas nepažeistas. Iki šiol jis neatsakė į jokias mano žinutes. Tačiau laikas, kurį praleidžiu laukdamas, nepraras. Toliau mokysiu savo karius ir ruošiuosi mūšiui."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Jūsų ištikimas bendražygis"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldrethas šaukia!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:209
@@ -382,11 +382,11 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "niekšas! Tik vienas mūsų pasienio patrulio vyras grįžo gyvas. Jis nešė žinią iš Kalitato, sakydamas, kad už kiekvieną mūsų kariuomenės judesį nubaus savo krauju! Negalime susitaikyti su tokiu elgesiu. Nuo šiol tarp Kalitato ir mūsų vyksta karas!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Renegato įtvirtinimas"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:220
@@ -396,7 +396,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "Išdavikas paliko savo armijas mirti ten, kur jos gulėjo, kai pamatė, kad nesulaikys mano pajėgų. Kalitatas dingo karo sumaištyje, bet dabar man tai nerūpi. Ar jis pabėgs ir bus visiems laikams pamirštas kaip genties vadas, kuris nenusilenks prieš medinį sostą, kurį dabar reikia paimti."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:223
@@ -406,7 +406,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "Be to, jo skrydis mums atnešė didelę naudą: visus metus Kalitatas buvo taip užsiėmęs kovomis, kad jam net nerūpėjo laikyti pakankamai maisto visiems savo vyrams. Dabar, kai jis pabėgo, dėl jų alkio kai kurie jo jaunesni pasekėjai pasitraukė. Ši grupė turi tvirtą įtvirtinimą pagrindiniame ringe."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -415,11 +415,11 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "Tačiau yra ir daugiau naujienų: mano skautai pranešė, kad dvi siautėjančios mano brolių gentys yra chaose ir vos nepastebėjo naujo pavojaus, kuris netrukus juos ištiks. Tačiau jiems nerūpėtų, jei pastebėtų, manau, apakinti pykčio ir neapykantos, aš tikiu, kad juose nėra jokios prasmės."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Žiema į priekį"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -429,15 +429,15 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Šįryt Throno protas man buvo sutrikęs. Vakar vėlai vakare jis grįžo iš patrulio ir atsisėdo prie medžio, stebėdamas stovyklą. Ginčų ir ginčų skaičius nuolat auga, o žiema mus tvirtai laiko. Turėtume dėti maistą į saugyklą, kad išgyventume ilgą, šaltą žiemą!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "Patarėjas"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Khantrukh linkteli."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:242
@@ -447,22 +447,22 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth teisus! Neturime pakankamai maisto, kad išgyventume ilgą, šaltą žiemą. Turėtume pradėti statyti šulinį, žvejo ir medžiotojų trobelę. O jei rasime pakankamai vietos, taip pat turėtume pastatyti ūkį ir kepyklą! Atrodo, kad vienas iš mūsų ūkininkų yra labai protingas – jis jau gavo keletą derlių, kad galėtų auginti šioje šaltoje dirvoje."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Maisto ekonomika baigta"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "Khantrukh ką tik man pranešė, kad mūsų pagrindinė maisto ekonomika buvo sėkmingai sukurta. Galiausiai nė vienam iš mūsų nebereikia bijoti bado."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
-msgstr ""
+msgstr "takeliai"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:260
@@ -471,11 +471,11 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thronas man pasakė, kad jis aptiko pėdsakus sniege į šiaurės rytus nuo mūsų gyvenvietės. Jis nurodė mums pastatyti bokštą, turėti didesnį regėjimo diapazoną aplink mūsų salę, kad apsaugotume žmones nuo staigių išpuolių."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
-msgstr ""
+msgstr "Tolesnis tyrinėjimas"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:269
@@ -487,7 +487,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Ką tik baigtas pirmasis užsakytas įtvirtinimų sostas. Šiuo metu jis siekia suteikti pasitikėjimo ir tikėjimo tiems, kurie gyvena mūsų naujos buveinės, kurią pavadinome „Ondun“, sienose, o tai reiškia „tie, kurie laukia“ senąja kalba. Bet Thronas dar nepatenkintas – ir aš visiškai suprantu jo baimes: miškai gilūs, o siena iki Al’Tunran yra arti. Esu tikras, kad ten yra tūkstantis didesnių pavojų nei nežinomi takeliai."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -496,11 +496,11 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Kad nepastebėtume daugiau teritorijos aplink mūsų salę, turėtume tyrinėti toliau ir sukurti daugiau sargybinių bei skautų, kurie stebėtų sieną ir stebėtų siautėjančius karus prie mūsų slenksčio. Tada būsime pasiruošę, kai bėdos sieks užkariauti mūsų miškus."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
-msgstr ""
+msgstr "Rasti kalnai"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:281
@@ -510,11 +510,11 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Ką tik kalbėjausi su mūsų patrulio vadovu. Jis man pasakė, kad jie rado keletą kalnų į šiaurės rytus ir rytus nuo mūsų teritorijos. Jei pasiseks, tai atvers naują galimybę perginkluoti mūsų vyrus, nes, kiek pamenu, daugumoje kalnų į vakarus nuo Al'Tunran yra anglis ir metalinės rūdos."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Kasybos ekonomika baigta"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:290
@@ -522,11 +522,11 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "Ką tik buvau informuotas, kad mūsų kasybos ekonomika pradėjo savo darbą. Ši žinia man sukėlė šypseną – net jei sunkiausia dalis vis dar laukia, kol bus padaryta, dabar, kai mūsų kalviai duos viską, ką gali, kad dar labiau palengvintų mūsų gyvenimą."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Reikalinga tvirtovė"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:298
@@ -537,11 +537,11 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth ir aš ką tik apžiūrėjome vietovę aplink tris kalnus. Atrodo, kad viena iš pagrindinių tos srities strateginių problemų yra ta, kad yra dvi didesnės perėjos – viena į šiaurę ir kitą į pietus nuo centrinio kalno. Tas ištraukas gana sunku suvaldyti, todėl man atrodo, kad turime tik vieną galimybę apsaugoti kalnus nuo priešo rankų: turime pastatyti tvirtovę į rytus nuo kalnų!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Tvirtovė baigta"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:307
@@ -550,11 +550,11 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Pagaliau! Tvirtovė ką tik baigta, todėl įėjimas į mūsų gyvenvietę kol kas turėtų būti saugus. Ateityje galėtume pagalvoti apie dar keletą įtvirtinimų, pavyzdžiui, užtvarų ir bokštų, statybų prie perėjos, bet kol kas galime giliai įkvėpti."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Patobulinta ekonomika ir mokymas"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:315
@@ -562,7 +562,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Atrodo, kad mūsų kasybos ekonomika veikia gerai, tai jau gera žinia! Šiaip ar taip, mūsų salėje vis dar laukia daug vyrų ir moterų, kad gautų užduotį, todėl jie gali padėti mūsų kariams pasiruošti artėjančiam karui."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -574,7 +574,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Mūsų geologai rado daug daugiau geležies rūdos, anglies ir net aukso telkinių. Turėtume patobulinti savo dabartines kasyklas, kai tik mūsų kalnakasiai bus labiau patyrę. Turėtume pastatyti dar keletą kasyklų, didesnę maisto infrastruktūrą, kad visada aprūpintume savo vyrus pakankamai maisto ir tolesnę perdirbimo ekonomiką. Bet tai dar ne viskas – dauguma mūsų karių yra gana jauni ir neturi nei gero ginklo, nei gerai apmokyti. Turėtume sukurti mokymo vietas, kad paruoštume jas būsimoms užduotims."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:328
@@ -583,7 +583,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Mano broliai ir jų kariai mirė ir paliko ugnį bei sunaikinimą. Nė viename iš visų griuvėsių neradau jokio įprasto liaudies vyro ar moters, todėl galiu tikėtis, kad jie pabėgo iš šio žiauraus mūšio lauko ir pradėjo geresnį gyvenimą kažkur kitur."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -594,21 +594,21 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Iš to grožio, kurį prisimenu, nieko neliko, senojoje sostinėje liko tik griuvėsiai. Man liūdna, bet ir palengvėjimas. Niekada nesitikėjau, kad vėl pamatysiu senąjį Al'Thurano grožį – tik prieš kelis mėnesius susimąsčiau, ar kada nors vėl galėsiu ten pastatyti kojas. Dabar senamiestis grįžo į mano rankas, ir aš nedvejodamas jį atstatysiu iš visų jėgų, kurias turi mano žmonės. Nekantrauju vėl pamatyti jį senu grožiu."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Įvykdėte paskutinę barbarų mokymo kampanijos misiją. Jei norite, galite tęsti žaidimą, kitu atveju pereikite prie kitos kampanijos."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
-msgstr ""
+msgstr "Karinis puolimas"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:341
@@ -616,7 +616,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Tebūnie taip, generolai ruošiasi organizuoti mano kariuomenę, o pats Boldrethas vadovaus pirmajam smūgiui. Aš važiuosiu šalia jo, kad išlaisvinčiau Al'Thuraną nuo šio karo ir grąžinsiu taiką mūsų sostinei."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:344
@@ -625,20 +625,20 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Kai rytoj ryte virš medžių pakils jauna saulė, aš įsakysiu puolimą. Sutemus švęsiu savo pergalę medinėse karo vado salėse ir paaukosiu naujagimį ėriuką savo Tėvo garbei, kurio akys šiandien nukreiptos į mane."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
-msgstr ""
+msgstr "Tebūnie!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Greitesnis transportas"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukhas sako:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:355
@@ -646,4 +646,4 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Virše, atsiminkite vargšus vežėjus: mūsų keliai vis ilgėja ir ilgėja, o našta ant jų pečių niekada netampa lengvesnė. Turėtume veisti daugiau jaučių, kad jų darbas būtų lengvesnis, o transportavimas būtų efektyvesnis."

@@ -584,7 +584,11 @@ StyleManager::StyleManager() {
 	   UI::StyledSize::kCampaignFri02PoemIndent, *element_table, "campaign_fri02_poem_indent");
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	                "map_plateau_message_pos_y");
+	add_styled_size(UI::StyledSize::kUIDefaultButtonSize, *element_table, "ui_default_button_size");
+	add_styled_size(
+	   UI::StyledSize::kUIDefaultButtonSizeSmall, *element_table, "ui_default_button_size_small");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
+	add_styled_size(UI::StyledSize::kUIDefaultSpacing, *element_table, "ui_default_spacing");
 	add_styled_size(UI::StyledSize::kUIDefaultIndent, *element_table, "ui_default_indent");
 	add_styled_size(UI::StyledSize::kToolbarButtonSize, *element_table, "toolbar_button_size");
 	check_completeness("styled_sizes", styled_sizes_.size(),

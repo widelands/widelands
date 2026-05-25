@@ -213,8 +213,6 @@ UI::Box* LuaPanel::do_create_child_box(lua_State* L, UI::Panel* parent) {
 	UI::Box* box =
 	   new UI::Box(parent, panel_style(L), name, x, y, orientation, max_x, max_y, spacing);
 
-	box->set_scrolling(get_table_boolean(L, "scrolling", false));
-
 	return box;
 }
 
