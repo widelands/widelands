@@ -28,9 +28,6 @@
 
 namespace AddOnsUI {
 
-constexpr int16_t kRowButtonSize = 32;
-constexpr int16_t kRowButtonSpacing = 4;
-
 constexpr const char* const kRegisterURL = "https://widelands.org/accounts/register/";
 
 AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
@@ -47,8 +44,8 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
          "ok",
          0,
          0,
-         kRowButtonSize,
-         kRowButtonSize,
+         default_button_size(),
+         default_button_size(),
          style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary :
                                              UI::ButtonStyle::kWuiPrimary,
          _("OK")),
@@ -56,8 +53,8 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
              "cancel",
              0,
              0,
-             kRowButtonSize,
-             kRowButtonSize,
+             default_button_size(),
+             default_button_size(),
              style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                  UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
@@ -65,8 +62,8 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
             "reset",
             0,
             0,
-            kRowButtonSize,
-            kRowButtonSize,
+            default_button_size(),
+            default_button_size(),
             style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                 UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
@@ -102,23 +99,23 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 	left_box_.add_inf_space();
 
 	right_box_.add(&username_, UI::Box::Resizing::kExpandBoth);
-	right_box_.add_space(kRowButtonSpacing);
+	right_box_.add_space(default_spacing());
 	right_box_.add(&password_, UI::Box::Resizing::kExpandBoth);
 
 	hbox_.add(&left_box_, UI::Box::Resizing::kFullSize);
-	hbox_.add_space(kRowButtonSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(&right_box_, UI::Box::Resizing::kExpandBoth);
 
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&reset_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	box_.add(m, UI::Box::Resizing::kFullSize);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	ok_.sigclicked.connect([this]() { ok(); });
