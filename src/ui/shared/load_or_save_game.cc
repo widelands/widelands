@@ -192,7 +192,13 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 		                              selected multiple files */
 		                           _("Delete these games"));
 	} else {
-		delete_->set_tooltip("");
+		delete_->set_tooltip(filetype_ == FileType::kReplay ?
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("No replay selected") :
+		                           /** TRANSLATORS: Tooltip for the delete button. The user has
+		                              selected multiple files */
+		                           _("No game selected"));
 	}
 }
 
