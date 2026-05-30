@@ -76,11 +76,9 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
-		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
 		                                               _("Return to the single player menu"));
-		ok_.set_tooltip(_("Load this game"));
 	}
 
 	load_or_save_.table().selected.connect([this](unsigned /* value */) { entry_selected(); });
@@ -94,6 +92,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 	fill_table();
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
+	} else {
+		entry_selected();
 	}
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
@@ -183,8 +183,16 @@ void LoadGame::entry_selected() {
 	if (load_or_save_.has_selection()) {
 		// Update during think() instead of every keypress
 		update_game_details_ = true;
+
+		/** TRANSLATORS: Tooltip for OK button. The user has a file to select */
+		ok_.set_tooltip(is_replay_ ? _("Load this replay") : _("Load this game"));
 	} else {
 		load_or_save_.delete_button()->set_enabled(false);
+		load_or_save_.entry_selected();
+		
+		ok_.set_enabled(false);
+		/** TRANSLATORS: Tooltip for OK button. The user has no files to select */
+		ok_.set_tooltip(is_replay_ ? _("No replay selected") : _("No game selected"));
 	}
 }
 

@@ -171,7 +171,6 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		result.reset(new SavegameData(savegames[0]));
 	} else {
 		delete_->set_enabled(false);
-		delete_->set_tooltip("");
 	}
 	return result;
 }
@@ -194,10 +193,10 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 	} else {
 		delete_->set_tooltip(filetype_ == FileType::kReplay ?
 		                        /** TRANSLATORS: Tooltip for the delete button. The user has
-		                           selected multiple files */
+		                           no files to select */
 		                        _("No replay selected") :
 		                           /** TRANSLATORS: Tooltip for the delete button. The user has
-		                              selected multiple files */
+		                              no files to select */
 		                           _("No game selected"));
 	}
 }
