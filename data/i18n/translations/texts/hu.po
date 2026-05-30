@@ -176,7 +176,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "A Widelands melyik verziója fut (tehát vagy az építési szám vagy a revízószám ha a fejlesztői verziót vagy napi építést használod)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -576,7 +576,7 @@ msgstr "A dzsungelmesterek dzsungelfenntartóként dolgozva szerzik meg a megfel
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Tartsd szemmel a halászaidat, és építs haltenyésztőházat melléjük, hogy ne fogyjon ki a munkaterületük a halból."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

@@ -9042,7 +9042,7 @@ msgstr "De vooraf bepaalde profielen kunnen niet worden gewist"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Verwijder het geselecteerde profiel"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9686,7 +9686,7 @@ msgstr "Shuffle"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Huidig Lied:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11711,7 +11711,7 @@ msgstr "Kies op de Kaart"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Menu Tools Weergeven"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"

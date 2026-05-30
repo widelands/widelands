@@ -14,7 +14,7 @@
 # litoll <litoll@freemail.hu>, 2020
 # litoll <litoll@freemail.hu>, 2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2025
+# Tóth András <txa-dev@posteo.hu>, 2021-2026
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-18 06:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>, 2025-2026\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4582,12 +4582,12 @@ msgstr "Magasság megadása:"
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:78
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Magasság választása a térképről …"
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:79
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:115
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Magasság átvétele a térképen kiválasztott mezőtől"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:84
@@ -4612,11 +4612,11 @@ msgstr "Mennyiség megadása:"
 
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:98
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Erőforrás választása a térképről …"
 
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:99
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Az erőforrás típusának és mennyiségének átvétele a térképen kiválasztott mezőtől"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:105
@@ -4658,17 +4658,17 @@ msgstr "Állandó magasság"
 
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:123
 msgid "Pick …"
-msgstr ""
+msgstr "Választás a térképről …"
 
 #: ../../../../src/ui/editor/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Állat választása a térképről …"
 
 #: ../../../../src/ui/editor/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Állat fajtájának átvétele a térképen kiválasztott mezőtől. A Ctrl nyomvatartásával többet is kiválaszthatsz."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -4703,13 +4703,13 @@ msgstr "%1$s (nagy épülethelyet igényel)"
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Tereptárgy választása a térképről …"
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Tereptárgy fajtájának átvétele a térképen kiválasztott mezőtől. A Ctrl nyomvatartásával többet is kiválaszthatsz."
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -4734,13 +4734,13 @@ msgstr "Válaszd ki a térkép új méretét, és kattints a térképen a felosz
 
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Terep választása a térképről …"
 
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Terep fajtájának átvétele a térképen kiválasztott mezőtől. A Ctrl nyomvatartásával többet is kiválaszthatsz."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/ui/editor/tool_toolhistory_options_menu.cc:121
@@ -6333,7 +6333,7 @@ msgstr "Megjegyzések és szavazatok"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:426
 #, c-format
 msgid "%1$s   ✎ %2$s"
-msgstr ""
+msgstr "%1$s   ✎ %2$s"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
@@ -7707,7 +7707,7 @@ msgstr "A megadott gépnév vagy cím érvénytelen, és nem lehet hozzá kapcso
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7715,7 +7715,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7723,7 +7723,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7774,7 +7774,7 @@ msgstr "Ablak szélhez illesztése, ha ennél közelebb kerül hozzá:"
 
 #: ../../../../src/ui/fsmenu/options.cc:250
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Felhasználói felület átméretezése"
 
 #: ../../../../src/ui/fsmenu/options.cc:260
 msgid "Edit keyboard and mouse actions…"
@@ -7903,7 +7903,7 @@ msgstr "Játék alatt"
 
 #: ../../../../src/ui/fsmenu/options.cc:486
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Felhasználói felület mérete:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:570
@@ -9047,7 +9047,7 @@ msgstr "Ez a célbeállítás nem törölhető"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "A kiválasztott célbeállítás törlése"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9691,7 +9691,7 @@ msgstr "Keverve"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Jelenlegi zene:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11712,11 +11712,11 @@ msgstr "Térkép megosztása"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Választás a térképről"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Eszközök menü megjelenítése"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"
