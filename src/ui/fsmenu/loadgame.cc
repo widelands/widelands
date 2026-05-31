@@ -115,12 +115,10 @@ void LoadGame::layout() {
 void LoadGame::think() {
 	TwoColumnsFullNavigationMenu::think();
 
-	// ok_.set_enabled(load_or_save_.has_selection() && !load_or_save_.game_details()->has_conflicts());
 	if (update_game_details_) {
 		// Call performance heavy draw_minimap function only during think
 		update_game_details_ = false;
 		load_or_save_.entry_selected();
-		// ok_.set_enabled(!load_or_save_.game_details()->has_conflicts());
 	}
 }
 
