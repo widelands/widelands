@@ -181,7 +181,7 @@ void GameMainMenuSaveGame::layout() {
 }
 
 void GameMainMenuSaveGame::entry_selected() {
-	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
+	ok_.set_enabled((type_ == Type::kSave && FileSystemHelper::is_legal_filename(filename_editbox_.get_text())) || load_or_save_.table().selections().size() == 1);
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();

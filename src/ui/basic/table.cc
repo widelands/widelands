@@ -233,7 +233,6 @@ void BaseTable::clear_selections() {
 	multiselect_.clear();
 	selection_ = no_selection_index();
 	last_selection_ = no_selection_index();
-	log_dbg("table was cleared");
 	selected(no_selection_index());
 }
 
