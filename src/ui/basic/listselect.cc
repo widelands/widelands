@@ -365,7 +365,7 @@ int BaseListselect::calculate_desired_width() {
 	// Add up the width
 	int txt_width = widest_text_;
 	if (widest_hotkey_ > 0) {
-		txt_width += default_button_size_small();
+		txt_width += default_hotkey_gap();
 		txt_width += widest_hotkey_;
 	}
 
@@ -501,7 +501,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 			if (er.name_alignment == UI::Align::kRight) {
 				text_point.x = maxw - widest_text_ - picw;
 			} else if (widest_hotkey_ > 0) {
-				text_point.x += widest_hotkey_ + default_button_size_small();
+				text_point.x += widest_hotkey_ + default_hotkey_gap();
 			}
 			text_point.x -= default_indent() * er.indent;
 		} else {
