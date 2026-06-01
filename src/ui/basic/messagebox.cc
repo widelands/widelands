@@ -40,13 +40,17 @@ WLMessageBox::WLMessageBox(Panel* const parent,
                            std::string text,
                            const MBoxType type,
                            Align align)
-   : Window(parent, s, "message_box", 0, 0, 20, 20, caption), type_(type) {
+   : Window(parent, s, "message_box", 0, 0, default_button_size(), default_button_size(), caption),
+     type_(type) {
 	// Calculate textarea dimensions depending on text size
 	const int outerwidth = parent != nullptr ? parent->get_inner_w() : g_gr->get_xres();
 	const int outerheight = parent != nullptr ? parent->get_inner_h() : g_gr->get_yres();
 
-	const int button_w = 120;
+	const int button_w = default_button_size_large();
 	const int minwidth = 3.5 * button_w;
+
+	// TODO(Nordfriese / UI Scaling): Make these arbitrary constraints
+	// more responsive to scaling factor and screen size
 
 	// Ample space for the buttons, but not hugely wide
 	const int maxwidth = std::min(600, std::max(outerwidth * 2 / 3, minwidth));
