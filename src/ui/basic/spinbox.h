@@ -42,14 +42,18 @@ public:
 
 	enum class Units { kNone, kPixels, kMinutes, kWeeks, kPercent, kFields };
 
+	[[nodiscard]] static inline int default_unit_width_narrow() {
+		return default_button_size_small() * 3;
+	}
+	[[nodiscard]] static inline int default_unit_width_wide() {
+		return default_button_size_small() * 6;
+	}
+
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values
 	 */
 	SpinBox(Panel*,
 	        const std::string& name,
-	        int32_t x,
-	        int32_t y,
-	        uint32_t w,
 	        uint32_t unit_w,
 	        int32_t startval,
 	        int32_t minval,

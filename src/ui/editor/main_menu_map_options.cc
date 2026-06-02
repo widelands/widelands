@@ -442,9 +442,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   new UI::Icon(ww_box, UI::PanelStyle::kWui, "long_waterway_warning_icon",
 	                g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
-	uint32_t ww_spinbox_w = max_w_ - waterway_length_warning_->get_w();
 	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, "waterway_length", 0, 0, ww_spinbox_w, ww_spinbox_w - padding_, 1, 1,
+	   new UI::SpinBox(ww_box, "waterway_length", UI::SpinBox::default_unit_width_wide(), 1, 1,
 	                   50, UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields,
 	                   UI::SpinBox::Type::kBig, 1, 5);
 	/** TRANSLATORS: Map Options: Waterways are disabled */

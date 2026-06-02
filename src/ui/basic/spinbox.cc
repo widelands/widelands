@@ -24,7 +24,6 @@
 #include <SDL_keyboard.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
@@ -73,16 +72,11 @@ struct SpinBoxImpl {
  * SpinBox constructor:
  *
  * initializes a new spinbox with either two (big = false) or four (big = true)
- * buttons. w must be >= the space taken up by the buttons, else the spinbox would become useless
- * and so
- * throws an exception.
+ * buttons.
  * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox(Panel* const parent,
                  const std::string& name,
-                 const int32_t x,
-                 const int32_t y,
-                 const uint32_t w,
                  const uint32_t unit_w,
                  int32_t const startval,
                  int32_t const minval,
@@ -99,12 +93,6 @@ SpinBox::SpinBox(Panel* const parent,
      button_size_(default_button_size_small()),
      big_step_button_width_(default_button_size()),
      buttons_width_(0) {
-
-	// NOCOM get rid
-	(void)x;
-	(void)y;
-	(void)w;
-
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;

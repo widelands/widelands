@@ -335,10 +335,7 @@ ColorChooser::ColorChooser(Panel* parent,
                         nullptr),
      spin_r_(&box_r_,
              "spinner_r",
-             0,
-             0,
-             300,
-             200,
+             UI::SpinBox::default_unit_width_narrow(),
              init_color.r,
              0,
              255,
@@ -348,10 +345,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Type::kBig),
      spin_g_(&box_g_,
              "spinner_g",
-             0,
-             0,
-             300,
-             200,
+             UI::SpinBox::default_unit_width_narrow(),
              init_color.g,
              0,
              255,
@@ -361,10 +355,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Type::kBig),
      spin_b_(&box_b_,
              "spinner_b",
-             0,
-             0,
-             300,
-             200,
+             UI::SpinBox::default_unit_width_narrow(),
              init_color.b,
              0,
              255,
@@ -410,21 +401,21 @@ ColorChooser::ColorChooser(Panel* parent,
 
 	box_r_.add(&button_r_);
 	box_r_.add_space(default_spacing());
-	box_r_.add(&spin_r_, UI::Box::Resizing::kAlign, Align::kCenter);
+	box_r_.add(&spin_r_, UI::Box::Resizing::kFillSpace, Align::kCenter);
 
 	box_g_.add(&button_g_);
 	box_g_.add_space(default_spacing());
-	box_g_.add(&spin_g_, UI::Box::Resizing::kAlign, Align::kCenter);
+	box_g_.add(&spin_g_, UI::Box::Resizing::kFillSpace, Align::kCenter);
 
 	box_b_.add(&button_b_);
 	box_b_.add_space(default_spacing());
-	box_b_.add(&spin_b_, UI::Box::Resizing::kAlign, Align::kCenter);
+	box_b_.add(&spin_b_, UI::Box::Resizing::kFillSpace, Align::kCenter);
 
-	vbox_.add(&box_r_);
+	vbox_.add(&box_r_, UI::Box::Resizing::kFullSize);
 	vbox_.add_space(default_spacing());
-	vbox_.add(&box_g_);
+	vbox_.add(&box_g_, UI::Box::Resizing::kFullSize);
 	vbox_.add_space(default_spacing());
-	vbox_.add(&box_b_);
+	vbox_.add(&box_b_, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&icon_, UI::Box::Resizing::kAlign, Align::kCenter);
 	vbox_.add_inf_space();
