@@ -53,14 +53,14 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
  * Initializes config from a list of music files, enabled by default
  * \param files filenames that will be added
  */
-void Songset::init_songs(const std::vector<std::string> &files) {
+void Songset::init_songs(const std::vector<std::string>& files) {
 	for (const std::string& filename : files) {
 		set_config_bool("songs", filename, true);
 	}
 }
 
 /// Loads song data from config into memory
-void Songset::load_songs(const std::vector<std::string> &files) {
+void Songset::load_songs(const std::vector<std::string>& files) {
 	std::string path_basename = "music";
 	path_basename += FileSystem::file_separator() + name_;
 	try {
