@@ -32,7 +32,7 @@ struct SpinBoxImpl;
 /// label_text is a text that precedes the actual spinbox.
 /// The current implementation does not allow minval or maxval to be near the numeric limits of
 /// int32_t.
-class SpinBox : public Panel {
+class SpinBox : public Box {
 public:
 	enum class Type {
 		kSmall,     // Displays buttons for small steps
@@ -85,7 +85,6 @@ public:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 private:
-	void layout() override;
 	void update();
 	void change_value(int32_t);
 	// Format value or change step with unit.
@@ -96,11 +95,9 @@ private:
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;
-	uint32_t unit_width_;
 	uint32_t button_size_;
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
-	uint32_t min_height_ = 0;
 };
 }  // namespace UI
 

@@ -477,8 +477,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&sb_dis_panel_);
-	box_interface_.add(&sb_dis_border_);
+	box_interface_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
 	box_interface_.add_space(kPadding);
 
 	box_interface_.add(
