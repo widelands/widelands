@@ -31,15 +31,17 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
 
 	name_ = basename;
 
-	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, name_, "mp3");
-	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, name_, "ogg");
+	std::vector<std::string> all_songs;
+	for (const char* suffix : {"mp3", "ogg"}) {
+		std::vector<std::string> files = g_fs->get_sequential_files(dir, name_, suffix);
+		all_songs.insert(all_songs.end(), files.begin(), files.end());
+	}
 
-	load_songs();
+	load_songs(all_songs);
 
 	if (songs_.empty()) {
-		init_songs(mp3_files);
-		init_songs(ogg_files);
-		load_songs();
+		init_songs(all_songs);
+		load_songs(all_songs);
 	}
 
 	// initialize "neg" index to ensure 1st sequential playback starts at 0
@@ -51,25 +53,24 @@ Songset::Songset(const std::string& dir, const std::string& basename) {
  * Initializes config from a list of music files, enabled by default
  * \param files filenames that will be added
  */
-void Songset::init_songs(std::vector<std::string> files) {
+void Songset::init_songs(const std::vector<std::string> &files) {
 	for (const std::string& filename : files) {
 		set_config_bool("songs", filename, true);
 	}
 }
 
 /// Loads song data from config into memory
-void Songset::load_songs() {
+void Songset::load_songs(const std::vector<std::string> &files) {
 	std::string path_basename = "music";
 	path_basename += FileSystem::file_separator() + name_;
 	try {
 		Section& sec = get_config_section("songs");
-		std::vector<Section::Value> values = sec.get_values();
-		for (Section::Value& val : values) {
-			const std::string& filename = val.get_name();
+		for (const std::string& filename : files) {
 			if (filename.rfind(path_basename, 0) != 0) {
+				log_warn("Not loading invalid song file %s", filename.c_str());
 				continue;
 			}
-			bool enabled = val.get_bool();
+			const bool enabled = sec.get_bool(filename.c_str(), true);
 			Song song = Song(filename);
 			song.enabled = enabled;
 			song.filename = filename;
@@ -82,6 +83,7 @@ void Songset::load_songs() {
 			song.title = title;
 			songs_.emplace(filename, song);
 		}
+
 	} catch (WException&) {
 		log_warn("Failed to load song data from config");
 	}
