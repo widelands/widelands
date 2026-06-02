@@ -91,8 +91,7 @@ SpinBox::SpinBox(Panel* const parent,
      type_(type),
      sbi_(new SpinBoxImpl),
      button_size_(default_button_size_small()),
-     big_step_button_width_(default_button_size()),
-     buttons_width_(0) {
+     big_step_button_width_(default_button_size()) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -228,8 +227,6 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
-
-	buttons_width_ = 2 * button_size_ + (is_big ? 2 * big_step_button_width_ : 0);
 
 	set_can_focus(true);
 	layout();

@@ -100,7 +100,6 @@ private:
 	std::vector<UI::Button*> buttons_;
 	uint32_t button_size_;
 	uint32_t big_step_button_width_;
-	uint32_t buttons_width_;
 };
 }  // namespace UI
 
