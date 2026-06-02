@@ -98,7 +98,6 @@ private:
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
-	UI::Box* box_;
 	uint32_t button_size_;
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;

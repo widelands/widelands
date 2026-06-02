@@ -268,7 +268,7 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			NEVER_HERE();
 		}
 	}
-	return Panel::handle_key(down, code);
+	return Box::handle_key(down, code);
 }
 
 bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
@@ -320,8 +320,8 @@ void SpinBox::update() {
 /**
  * Display width for the spinbox unit
  */
-void SpinBox::set_unit_width(uint32_t unit_w) {
-	sbi_->text->set_size(unit_w, button_size_);
+void SpinBox::set_unit_width(uint32_t width) {
+	sbi_->text->set_size(width, button_size_);
 }
 
 /**
