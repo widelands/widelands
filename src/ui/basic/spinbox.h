@@ -100,7 +100,6 @@ private:
 	uint32_t button_size_;
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
-	uint32_t padding_;
 	uint32_t min_height_ = 0;
 };
 }  // namespace UI
