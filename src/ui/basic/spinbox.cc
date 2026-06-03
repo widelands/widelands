@@ -39,7 +39,7 @@ namespace UI {
 static inline UI::ButtonStyle get_button_style_for_value(const UI::PanelStyle style) {
 	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
 	                                      UI::ButtonStyle::kWuiSecondary;
-};
+}
 
 // static
 int SpinBox::default_unit_width_fit_text(const UI::PanelStyle style, const std::string& text) {
