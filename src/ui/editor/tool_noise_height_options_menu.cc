@@ -86,8 +86,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_random", UI::FontStyle::kWuiLabel, 0, 0,
 	                    0, 0, _("Random height"), UI::Align::kCenter);
 	box_.add(label, UI::Box::Resizing::kFullSize);
-	upper_box_.add(&upper_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	lower_box_.add(&lower_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	upper_box_.add(&upper_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+	lower_box_.add(&lower_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 	box_.add(&upper_box_, UI::Box::Resizing::kFullSize);
 	box_.add_space(vspacing());
 	box_.add(&lower_box_, UI::Box::Resizing::kFullSize);
@@ -96,12 +96,17 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_fixed", UI::FontStyle::kWuiLabel, 0,
 	                         0, 0, 0, _("Fixed height"), UI::Align::kCenter);
 	box_.add(label, UI::Box::Resizing::kFullSize);
-	set_to_box_.add(&set_to_);
+	set_to_box_.add(&set_to_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 	box_.add(&set_to_box_, UI::Box::Resizing::kFullSize);
 
-	for (UI::Box* box : {&upper_box_, &lower_box_, &set_to_box_}) {
-		UI::SpinBox* spinbox = dynamic_cast<UI::SpinBox*>(box->get_first_child());
-		assert(spinbox != nullptr);
+	using BoxSpinboxPair = std::pair<UI::Box*, UI::SpinBox*>;
+	for (BoxSpinboxPair pair : {
+		BoxSpinboxPair(&upper_box_, &upper_),
+		BoxSpinboxPair(&lower_box_, &lower_),
+		BoxSpinboxPair(&set_to_box_, &set_to_),
+	}) {
+		UI::Box* box = pair.first;
+		UI::SpinBox* spinbox = pair.second;
 
 		std::string tooltip = _("Select the height of a field by clicking on it on the map");
 		if (box == &set_to_box_) {
