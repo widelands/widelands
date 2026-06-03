@@ -101,10 +101,10 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 
 	using BoxSpinboxPair = std::pair<UI::Box*, UI::SpinBox*>;
 	for (BoxSpinboxPair pair : {
-		BoxSpinboxPair(&upper_box_, &upper_),
-		BoxSpinboxPair(&lower_box_, &lower_),
-		BoxSpinboxPair(&set_to_box_, &set_to_),
-	}) {
+	        BoxSpinboxPair(&upper_box_, &upper_),
+	        BoxSpinboxPair(&lower_box_, &lower_),
+	        BoxSpinboxPair(&set_to_box_, &set_to_),
+	     }) {
 		UI::Box* box = pair.first;
 		UI::SpinBox* spinbox = pair.second;
 

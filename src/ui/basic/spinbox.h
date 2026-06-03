@@ -44,7 +44,8 @@ public:
 
 	[[nodiscard]] static int default_unit_width_narrow(UI::PanelStyle style);
 	[[nodiscard]] static int default_unit_width_wide(UI::PanelStyle style);
-	[[nodiscard]] static int default_unit_width_fit_text(UI::PanelStyle style, const std::string& text);
+	[[nodiscard]] static int default_unit_width_fit_text(UI::PanelStyle style,
+	                                                     const std::string& text);
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values

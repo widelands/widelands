@@ -37,12 +37,16 @@
 namespace UI {
 
 static inline UI::ButtonStyle get_button_style_for_value(const UI::PanelStyle style) {
-	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+	                                      UI::ButtonStyle::kWuiSecondary;
 };
 
 // static
 int SpinBox::default_unit_width_fit_text(const UI::PanelStyle style, const std::string& text) {
-	return text_width(text, g_style_manager->button_style(get_button_style_for_value(style)).disabled().font()) + 2 * default_padding();
+	return text_width(
+	          text,
+	          g_style_manager->button_style(get_button_style_for_value(style)).disabled().font()) +
+	       2 * default_padding();
 }
 int SpinBox::default_unit_width_narrow(const UI::PanelStyle style) {
 	return default_unit_width_fit_text(style, "100%");
@@ -122,15 +126,17 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
-	sbi_->label =
-		new UI::MultilineTextarea(this, "label", 0, 0,
-			text_width(
-				label_text, g_style_manager->font_style(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel)
-			) + 2 * default_padding(), 0,
-			style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	sbi_->label = new UI::MultilineTextarea(
+	   this, "label", 0, 0,
+	   text_width(label_text, g_style_manager->font_style(style == UI::PanelStyle::kFsMenu ?
+	                                                         FontStyle::kFsMenuLabel :
+	                                                         FontStyle::kWuiLabel)) +
+	      2 * default_padding(),
+	   0, style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 
-	sbi_->text = new UI::Button(this, "value", 0, 0, unit_w, button_size_, get_button_style_for_value(style), "");
+	sbi_->text = new UI::Button(
+	   this, "value", 0, 0, unit_w, button_size_, get_button_style_for_value(style), "");
 	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
