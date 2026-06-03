@@ -123,8 +123,11 @@ SpinBox::SpinBox(Panel* const parent,
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
 	sbi_->label =
-	   new UI::MultilineTextarea(this, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		new UI::MultilineTextarea(this, "label", 0, 0,
+			text_width(
+				label_text, g_style_manager->font_style(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel)
+			) + 2 * default_padding(), 0,
+			style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 
 	sbi_->text = new UI::Button(this, "value", 0, 0, unit_w, button_size_, get_button_style_for_value(style), "");
