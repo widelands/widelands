@@ -27,6 +27,7 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "ui/basic/button.h"
 #include "ui/basic/multilinetextarea.h"
 #include "ui/basic/textarea.h"
@@ -34,6 +35,21 @@
 #include "wlapplication_options.h"
 
 namespace UI {
+
+static inline UI::ButtonStyle get_button_style_for_value(const UI::PanelStyle style) {
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
+};
+
+// static
+int SpinBox::default_unit_width_fit_text(const UI::PanelStyle style, const std::string& text) {
+	return text_width(text, g_style_manager->button_style(get_button_style_for_value(style)).disabled().font()) + 2 * default_padding();
+}
+int SpinBox::default_unit_width_narrow(const UI::PanelStyle style) {
+	return default_unit_width_fit_text(style, "100%");
+}
+int SpinBox::default_unit_width_wide(const UI::PanelStyle style) {
+	return default_unit_width_fit_text(style, std::string(12, 'H'));
+}
 
 struct SpinBoxImpl {
 	/// Value held by the spinbox
@@ -111,10 +127,7 @@ SpinBox::SpinBox(Panel* const parent,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 
-	sbi_->text = new UI::Button(this, "value", 0, 0, unit_w, button_size_,
-	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-	                                                           UI::ButtonStyle::kWuiSecondary,
-	                            "");
+	sbi_->text = new UI::Button(this, "value", 0, 0, unit_w, button_size_, get_button_style_for_value(style), "");
 	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);

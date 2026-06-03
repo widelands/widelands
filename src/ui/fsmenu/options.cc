@@ -214,7 +214,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             0),
      sb_dis_panel_(&box_interface_,
                    "panel_snap_distance",
-                   UI::SpinBox::default_unit_width_wide(),
+                   UI::SpinBox::default_unit_width_wide(panel_style_),
                    opt.panel_snap_distance,
                    0,
                    99,
@@ -224,7 +224,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_dis_border_(&box_interface_,
                     "border_snap_distance",
-                    UI::SpinBox::default_unit_width_wide(),
+                    UI::SpinBox::default_unit_width_wide(panel_style_),
                     opt.border_snap_distance,
                     0,
                     99,
@@ -259,7 +259,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // Saving options
      sb_autosave_(&box_saving_,
                   "autosave_interval",
-                  UI::SpinBox::default_unit_width_wide(),
+                  UI::SpinBox::default_unit_width_wide(panel_style_),
                   opt.autosave / 60,
                   0,
                   100,
@@ -270,7 +270,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_rolling_autosave_(&box_saving_,
                           "rolling_autosave",
-                          UI::SpinBox::default_unit_width_wide(),
+                          UI::SpinBox::default_unit_width_wide(panel_style_),
                           opt.rolling_autosave,
                           1,
                           20,
@@ -283,7 +283,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_replay_lifetime_(&box_saving_,
                          "replay_lifetime",
-                         UI::SpinBox::default_unit_width_wide(),
+                         UI::SpinBox::default_unit_width_wide(panel_style_),
                          opt.replay_lifetime,
                          0,
                          52,
@@ -343,7 +343,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // In-Game options
      sb_pause_game_on_inactivity_(&box_ingame_,
                                   "pause_game_on_inactivity",
-                                  UI::SpinBox::default_unit_width_wide(),
+                                  UI::SpinBox::default_unit_width_wide(panel_style_),
                                   opt.pause_game_on_inactivity,
                                   0,
                                   120,

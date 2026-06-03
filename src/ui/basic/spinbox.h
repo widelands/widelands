@@ -42,12 +42,9 @@ public:
 
 	enum class Units { kNone, kPixels, kMinutes, kWeeks, kPercent, kFields };
 
-	[[nodiscard]] static inline int default_unit_width_narrow() {
-		return default_button_size_small() * 3;
-	}
-	[[nodiscard]] static inline int default_unit_width_wide() {
-		return default_button_size_small() * 6;
-	}
+	[[nodiscard]] static int default_unit_width_narrow(UI::PanelStyle style);
+	[[nodiscard]] static int default_unit_width_wide(UI::PanelStyle style);
+	[[nodiscard]] static int default_unit_width_fit_text(UI::PanelStyle style, const std::string& text);
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values

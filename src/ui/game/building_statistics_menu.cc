@@ -182,7 +182,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
      unproductive_threshold_(&main_box_,
                              "unproductive_threshold",
-                             UI::SpinBox::default_unit_width_narrow(),
+                             UI::SpinBox::default_unit_width_narrow(panel_style_),
                              low_production_,
                              0,
                              100,
