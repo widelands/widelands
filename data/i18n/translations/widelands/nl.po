@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-05-18 06:15+0000\n"
+"POT-Creation-Date: 2026-06-04 06:41+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -628,8 +628,8 @@ msgstr "nee"
 msgid "off"
 msgstr "af"
 
-#: ../../../../src/logic/addons.cc:48 ../../../../src/ui/basic/dropdown.cc:360
-#: ../../../../src/ui/basic/dropdown.cc:362
+#: ../../../../src/logic/addons.cc:48 ../../../../src/ui/basic/dropdown.cc:361
+#: ../../../../src/ui/basic/dropdown.cc:363
 #: ../../../../src/ui/editor/editorinteractive.cc:1279
 #: ../../../../src/ui/fsmenu/addons/contact.cc:81
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2021
@@ -668,7 +668,7 @@ msgstr "Script"
 #: ../../../../src/ui/editor/field_info_window.cc:229
 #: ../../../../src/ui/fsmenu/mapdetailsbox.cc:161
 #: ../../../../src/ui/fsmenu/netsetup_lan.cc:143
-#: ../../../../src/ui/shared/mapdetails.cc:135
+#: ../../../../src/ui/shared/mapdetails.cc:136
 #: ../../../../src/ui/wui/minimap.cc:142
 msgid "Map"
 msgstr "Kaart"
@@ -2978,13 +2978,13 @@ msgid ""
 "%s"
 msgstr "Fout bij het uitvoeren van plugin:\n%s"
 
-#: ../../../../src/ui/basic/color_chooser.cc:259
+#: ../../../../src/ui/basic/color_chooser.cc:260
 msgid "Choose Color…"
 msgstr "Kies Kleur..."
 
-#: ../../../../src/ui/basic/color_chooser.cc:278
-#: ../../../../src/ui/basic/messagebox.cc:111
-#: ../../../../src/ui/basic/text_prompt.cc:46
+#: ../../../../src/ui/basic/color_chooser.cc:279
+#: ../../../../src/ui/basic/messagebox.cc:115
+#: ../../../../src/ui/basic/text_prompt.cc:43
 #: ../../../../src/ui/editor/main_menu_load_or_save_map.cc:112
 #: ../../../../src/ui/editor/main_menu_map_options.cc:250
 #: ../../../../src/ui/editor/main_menu_save_map_make_directory.cc:62
@@ -3007,9 +3007,9 @@ msgstr "Kies Kleur..."
 msgid "OK"
 msgstr "OK"
 
-#: ../../../../src/ui/basic/color_chooser.cc:287
-#: ../../../../src/ui/basic/messagebox.cc:120
-#: ../../../../src/ui/basic/text_prompt.cc:55
+#: ../../../../src/ui/basic/color_chooser.cc:288
+#: ../../../../src/ui/basic/messagebox.cc:124
+#: ../../../../src/ui/basic/text_prompt.cc:52
 #: ../../../../src/ui/editor/main_menu_load_or_save_map.cc:113
 #: ../../../../src/ui/editor/main_menu_map_options.cc:258
 #: ../../../../src/ui/editor/main_menu_new_map.cc:70
@@ -3030,56 +3030,56 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../../../../src/ui/basic/color_chooser.cc:296
+#: ../../../../src/ui/basic/color_chooser.cc:297
 msgid "Initial Color"
 msgstr "Begin Kleur"
 
 #. * TRANSLATORS: First letter of the word "Red"
-#: ../../../../src/ui/basic/color_chooser.cc:305
+#: ../../../../src/ui/basic/color_chooser.cc:306
 msgctxt "color"
 msgid "R"
 msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
-#: ../../../../src/ui/basic/color_chooser.cc:314
+#: ../../../../src/ui/basic/color_chooser.cc:315
 msgctxt "color"
 msgid "G"
 msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
-#: ../../../../src/ui/basic/color_chooser.cc:323
+#: ../../../../src/ui/basic/color_chooser.cc:324
 msgctxt "color"
 msgid "B"
 msgstr "B"
 
-#: ../../../../src/ui/basic/color_chooser.cc:333
+#: ../../../../src/ui/basic/color_chooser.cc:334
 msgid "Default Color"
 msgstr "Standaard Kleur"
 
-#: ../../../../src/ui/basic/color_chooser.cc:345
+#: ../../../../src/ui/basic/color_chooser.cc:346
 msgid "Red"
 msgstr "Rood"
 
-#: ../../../../src/ui/basic/color_chooser.cc:358
+#: ../../../../src/ui/basic/color_chooser.cc:359
 msgid "Green"
 msgstr "Groen"
 
-#: ../../../../src/ui/basic/color_chooser.cc:371
+#: ../../../../src/ui/basic/color_chooser.cc:372
 msgid "Blue"
 msgstr "Blauw"
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:492
 msgid "Remove from favorites"
 msgstr "Verwijderen uit favorieten"
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:492
 #: ../../../../src/ui/fsmenu/addons/packager.cc:106
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:168
 #: ../../../../src/ui/game/quicknavigation.cc:286
 msgid "–"
 msgstr "–"
 
-#: ../../../../src/ui/basic/color_chooser.cc:497
+#: ../../../../src/ui/basic/color_chooser.cc:499
 #: ../../../../src/ui/editor/main_menu_map_options.cc:108
 #: ../../../../src/ui/fsmenu/addons/packager.cc:97
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:150
@@ -3087,21 +3087,21 @@ msgstr "–"
 msgid "+"
 msgstr "+"
 
-#: ../../../../src/ui/basic/color_chooser.cc:497
+#: ../../../../src/ui/basic/color_chooser.cc:499
 msgid "Add current color to favorites"
 msgstr "Huidige kleur toevoegen aan favorieten"
 
-#: ../../../../src/ui/basic/dropdown.cc:113
+#: ../../../../src/ui/basic/dropdown.cc:114
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Kies Item"
 
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
-#: ../../../../src/ui/basic/dropdown.cc:308
-#: ../../../../src/ui/basic/dropdown.cc:360
-#: ../../../../src/ui/basic/dropdown.cc:431
-#: ../../../../src/ui/basic/dropdown.cc:439
+#: ../../../../src/ui/basic/dropdown.cc:309
+#: ../../../../src/ui/basic/dropdown.cc:361
+#: ../../../../src/ui/basic/dropdown.cc:432
+#: ../../../../src/ui/basic/dropdown.cc:440
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:76
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:370
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:197
@@ -3109,7 +3109,7 @@ msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../../../src/ui/basic/dropdown.cc:424
+#: ../../../../src/ui/basic/dropdown.cc:425
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Niet Gekozen"
@@ -3118,25 +3118,25 @@ msgstr "Niet Gekozen"
 msgid "No matches"
 msgstr "Geen overeenkomsten"
 
-#: ../../../../src/ui/basic/pagination.cc:39
+#: ../../../../src/ui/basic/pagination.cc:50
 msgid "Go to first page"
 msgstr "Ga naar de eerste pagina"
 
-#: ../../../../src/ui/basic/pagination.cc:48
+#: ../../../../src/ui/basic/pagination.cc:59
 msgid "Go to last page"
 msgstr "Ga naar de laatste pagina"
 
-#: ../../../../src/ui/basic/pagination.cc:56
+#: ../../../../src/ui/basic/pagination.cc:67
 msgid "Items per page"
 msgstr "Items per pagina"
 
-#: ../../../../src/ui/basic/pagination.cc:195
+#: ../../../../src/ui/basic/pagination.cc:208
 msgctxt "all_items"
 msgid "All"
 msgstr "Alle"
 
-#: ../../../../src/ui/basic/pagination.cc:219
-#: ../../../../src/ui/basic/pagination.cc:228
+#: ../../../../src/ui/basic/pagination.cc:232
+#: ../../../../src/ui/basic/pagination.cc:241
 #, c-format
 msgid "Go to page %d"
 msgstr "Ga naar pagina %d"
@@ -3149,33 +3149,33 @@ msgstr "Even geduld a.u.b .."
 msgid "Game ending – please wait…"
 msgstr "Het spel stopt – even geduld aub..."
 
-#: ../../../../src/ui/basic/progresswindow.cc:83
+#: ../../../../src/ui/basic/progresswindow.cc:80
 #: ../../../../src/wlapplication.cc:490
 msgid "Loading…"
 msgstr "Laden…"
 
-#: ../../../../src/ui/basic/spinbox.cc:151
+#: ../../../../src/ui/basic/spinbox.cc:150
 msgid "Decrease the value"
 msgstr "Verlaag de waarde"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:155
-#: ../../../../src/ui/basic/spinbox.cc:183
+#: ../../../../src/ui/basic/spinbox.cc:154
+#: ../../../../src/ui/basic/spinbox.cc:182
 #, c-format
 msgid "Decrease the value by %s"
 msgstr "Verlaag de waarde met %s"
 
-#: ../../../../src/ui/basic/spinbox.cc:164
+#: ../../../../src/ui/basic/spinbox.cc:163
 msgid "Increase the value"
 msgstr "Verhoog de waarde"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:168
-#: ../../../../src/ui/basic/spinbox.cc:187
+#: ../../../../src/ui/basic/spinbox.cc:167
+#: ../../../../src/ui/basic/spinbox.cc:186
 #, c-format
 msgid "Increase the value by %s"
 msgstr "Verhoog de waarde met %s"
@@ -3340,18 +3340,18 @@ msgctxt "spinbox_change"
 msgid "%d"
 msgstr "%d"
 
-#: ../../../../src/ui/basic/table.cc:157
+#: ../../../../src/ui/basic/table.cc:163
 msgid "Click to reverse sorting"
 msgstr "Klik om omgekeerd te sorteren"
 
-#: ../../../../src/ui/basic/table.cc:157
+#: ../../../../src/ui/basic/table.cc:163
 msgid "Click to sort by this column"
 msgstr "Klik om op deze kolom te sorteren"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
 #. "Click to sort ..." or "Click to reverse..."
-#: ../../../../src/ui/basic/table.cc:163
+#: ../../../../src/ui/basic/table.cc:169
 #, c-format
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
@@ -4237,36 +4237,36 @@ msgstr "Schakel veerboten, waterwegen en veerbootemplacementen in op deze kaart 
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:473
+#: ../../../../src/ui/editor/main_menu_map_options.cc:474
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u Speler"
 msgstr[1] "%u Spelers"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:477
+#: ../../../../src/ui/editor/main_menu_map_options.cc:478
 msgid "Suggested Teams:"
 msgstr "Teamsuggestie:"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:500
+#: ../../../../src/ui/editor/main_menu_map_options.cc:501
 msgid "Main Options"
 msgstr "Hoofdopties"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:502
-#: ../../../../src/ui/shared/mapdetails.cc:176
+#: ../../../../src/ui/editor/main_menu_map_options.cc:503
+#: ../../../../src/ui/shared/mapdetails.cc:177
 msgid "Tags"
 msgstr "Labels"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:504
+#: ../../../../src/ui/editor/main_menu_map_options.cc:505
 msgid "Teams"
 msgstr "Teams"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:538
+#: ../../../../src/ui/editor/main_menu_map_options.cc:539
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr "Het wordt afgeraden om waterwegen toe te staan langer dan %u"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:554
+#: ../../../../src/ui/editor/main_menu_map_options.cc:555
 msgid "Size: %1% x %2%"
 msgstr "Grootte: %1% x %2%"
 
@@ -5531,8 +5531,8 @@ msgid "Version:"
 msgstr "Versie:"
 
 #: ../../../../src/ui/fsmenu/addons/packager.cc:174
-#: ../../../../src/ui/shared/mapdetails.cc:198
-#: ../../../../src/ui/shared/mapdetails.cc:203
+#: ../../../../src/ui/shared/mapdetails.cc:199
+#: ../../../../src/ui/shared/mapdetails.cc:204
 msgid "Minimum Widelands Version:"
 msgstr "Minimale Widelands-versie:"
 
@@ -6433,7 +6433,7 @@ msgstr "Zend Schermafbeelding voor '%s'"
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:95
 #: ../../../../src/ui/fsmenu/campaigndetails.cc:67
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:64
-#: ../../../../src/ui/shared/mapdetails.cc:209
+#: ../../../../src/ui/shared/mapdetails.cc:210
 #: ../../../../src/ui/shared/savegametable.cc:148
 #: ../../../../src/ui/shared/savegametable.cc:200
 #: ../../../../src/ui/shared/savegametable.cc:259
@@ -6845,7 +6845,7 @@ msgstr "Verbied spelers om van bondgenoot te veranderen tijdens het spel"
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:283
 #: ../../../../src/ui/shared/map_tags.cc:66
-#: ../../../../src/ui/shared/mapdetails.cc:135
+#: ../../../../src/ui/shared/mapdetails.cc:136
 msgid "Scenario"
 msgstr "Scenario"
 
@@ -7291,7 +7291,7 @@ msgstr "Hint: %s"
 msgid "No map selected"
 msgstr "geen kaart geselecteerd"
 
-#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:214
+#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:215
 msgid "(no map)"
 msgstr "(geen kaart)"
 
@@ -8040,7 +8040,7 @@ msgstr "Oefencampagne"
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:55
-#: ../../../../src/ui/shared/mapdetails.cc:161
+#: ../../../../src/ui/shared/mapdetails.cc:162
 msgid "Author"
 msgstr "Auteur"
 
@@ -8051,7 +8051,7 @@ msgstr "Auteur"
 #. need plural
 #. forms here, please let us know.
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:58
-#: ../../../../src/ui/shared/mapdetails.cc:164
+#: ../../../../src/ui/shared/mapdetails.cc:165
 msgid "Authors"
 msgstr "Auteurs"
 
@@ -10366,7 +10366,7 @@ msgid "Win Condition:"
 msgstr "Winconditie:"
 
 #: ../../../../src/ui/shared/gamedetails.cc:184
-#: ../../../../src/ui/shared/mapdetails.cc:182
+#: ../../../../src/ui/shared/mapdetails.cc:183
 msgid "Add-Ons:"
 msgstr "Uitbreidingen:"
 
@@ -10554,7 +10554,7 @@ msgstr "bovenliggende map"
 msgid "empty"
 msgstr "leeg"
 
-#: ../../../../src/ui/shared/mapdetails.cc:128
+#: ../../../../src/ui/shared/mapdetails.cc:129
 msgid "Directory"
 msgstr "Map"
 
@@ -10562,7 +10562,7 @@ msgstr "Map"
 #. being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../../../src/ui/shared/mapdetails.cc:145
+#: ../../../../src/ui/shared/mapdetails.cc:146
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Originele naam van deze kaart: %s"
@@ -10571,17 +10571,17 @@ msgstr "Originele naam van deze kaart: %s"
 #. displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../../../src/ui/shared/mapdetails.cc:151
+#: ../../../../src/ui/shared/mapdetails.cc:152
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Naam van deze kaart in jouw taal: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../../../src/ui/shared/mapdetails.cc:214
+#: ../../../../src/ui/shared/mapdetails.cc:215
 msgid "Hint"
 msgstr "Hint"
 
-#: ../../../../src/ui/shared/mapdetails.cc:240
+#: ../../../../src/ui/shared/mapdetails.cc:241
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
