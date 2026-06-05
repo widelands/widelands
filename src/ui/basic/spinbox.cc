@@ -36,16 +36,11 @@
 
 namespace UI {
 
-static inline UI::ButtonStyle get_button_style_for_value(const UI::PanelStyle style) {
-	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-	                                      UI::ButtonStyle::kWuiSecondary;
-}
-
 // static
 int SpinBox::default_unit_width_fit_text(const UI::PanelStyle style, const std::string& text) {
 	return text_width(
 	          text,
-	          g_style_manager->button_style(get_button_style_for_value(style)).disabled().font()) +
+	          g_style_manager->button_style(to_button_style_secondary(style)).disabled().font()) +
 	       2 * default_padding();
 }
 int SpinBox::default_unit_width_narrow(const UI::PanelStyle style) {
@@ -136,7 +131,7 @@ SpinBox::SpinBox(Panel* const parent,
 	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 
 	sbi_->text = new UI::Button(
-	   this, "value", 0, 0, unit_w, button_size_, get_button_style_for_value(style), "");
+	   this, "value", 0, 0, unit_w, button_size_, to_button_style_secondary(style), "");
 	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
@@ -219,11 +214,9 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_plus);
 
 		add(sbi_->button_ten_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		add_space(default_spacing());
 		add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 		add(sbi_->text, Box::Resizing::kAlign, UI::Align::kBottom);
 		add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		add_space(default_spacing());
 		add(sbi_->button_ten_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	} else {
 		add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);

@@ -19,6 +19,7 @@
 #include "graphic/styles/button_style.h"
 
 namespace UI {
+
 PanelStyle to_panel_style(const ButtonStyle s) {
 	switch (s) {
 	case ButtonStyle::kFsMenuMenu:
@@ -29,4 +30,20 @@ PanelStyle to_panel_style(const ButtonStyle s) {
 		return PanelStyle::kWui;
 	}
 }
+
+ButtonStyle to_button_style_primary(const PanelStyle style) {
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary :
+	                                      UI::ButtonStyle::kWuiPrimary;
+}
+
+ButtonStyle to_button_style_secondary(const PanelStyle style) {
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+	                                      UI::ButtonStyle::kWuiSecondary;
+}
+
+ButtonStyle to_button_style_menu(const PanelStyle style) {
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+	                                      UI::ButtonStyle::kWuiMenu;
+}
+
 }  // namespace UI
