@@ -42,8 +42,7 @@ ButtonStyle to_button_style_secondary(const PanelStyle style) {
 }
 
 ButtonStyle to_button_style_menu(const PanelStyle style) {
-	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
-	                                      UI::ButtonStyle::kWuiMenu;
+	return style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiMenu;
 }
 
 }  // namespace UI
