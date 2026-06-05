@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-05-18 06:15+0000\n"
+"POT-Creation-Date: 2026-06-04 06:41+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2026\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -629,8 +629,8 @@ msgstr "ne"
 msgid "off"
 msgstr "ne"
 
-#: ../../../../src/logic/addons.cc:48 ../../../../src/ui/basic/dropdown.cc:360
-#: ../../../../src/ui/basic/dropdown.cc:362
+#: ../../../../src/logic/addons.cc:48 ../../../../src/ui/basic/dropdown.cc:361
+#: ../../../../src/ui/basic/dropdown.cc:363
 #: ../../../../src/ui/editor/editorinteractive.cc:1279
 #: ../../../../src/ui/fsmenu/addons/contact.cc:81
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2021
@@ -669,7 +669,7 @@ msgstr "Skript"
 #: ../../../../src/ui/editor/field_info_window.cc:229
 #: ../../../../src/ui/fsmenu/mapdetailsbox.cc:161
 #: ../../../../src/ui/fsmenu/netsetup_lan.cc:143
-#: ../../../../src/ui/shared/mapdetails.cc:135
+#: ../../../../src/ui/shared/mapdetails.cc:136
 #: ../../../../src/ui/wui/minimap.cc:142
 msgid "Map"
 msgstr "Mapa"
@@ -3017,13 +3017,13 @@ msgid ""
 "%s"
 msgstr "Chyba v zásuvném modulu:\n%s"
 
-#: ../../../../src/ui/basic/color_chooser.cc:259
+#: ../../../../src/ui/basic/color_chooser.cc:260
 msgid "Choose Color…"
 msgstr "Výběr barvy…"
 
-#: ../../../../src/ui/basic/color_chooser.cc:278
-#: ../../../../src/ui/basic/messagebox.cc:111
-#: ../../../../src/ui/basic/text_prompt.cc:46
+#: ../../../../src/ui/basic/color_chooser.cc:279
+#: ../../../../src/ui/basic/messagebox.cc:115
+#: ../../../../src/ui/basic/text_prompt.cc:43
 #: ../../../../src/ui/editor/main_menu_load_or_save_map.cc:112
 #: ../../../../src/ui/editor/main_menu_map_options.cc:250
 #: ../../../../src/ui/editor/main_menu_save_map_make_directory.cc:62
@@ -3046,9 +3046,9 @@ msgstr "Výběr barvy…"
 msgid "OK"
 msgstr "OK"
 
-#: ../../../../src/ui/basic/color_chooser.cc:287
-#: ../../../../src/ui/basic/messagebox.cc:120
-#: ../../../../src/ui/basic/text_prompt.cc:55
+#: ../../../../src/ui/basic/color_chooser.cc:288
+#: ../../../../src/ui/basic/messagebox.cc:124
+#: ../../../../src/ui/basic/text_prompt.cc:52
 #: ../../../../src/ui/editor/main_menu_load_or_save_map.cc:113
 #: ../../../../src/ui/editor/main_menu_map_options.cc:258
 #: ../../../../src/ui/editor/main_menu_new_map.cc:70
@@ -3069,56 +3069,56 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../../../../src/ui/basic/color_chooser.cc:296
+#: ../../../../src/ui/basic/color_chooser.cc:297
 msgid "Initial Color"
 msgstr "Výchozí barva"
 
 #. * TRANSLATORS: First letter of the word "Red"
-#: ../../../../src/ui/basic/color_chooser.cc:305
+#: ../../../../src/ui/basic/color_chooser.cc:306
 msgctxt "color"
 msgid "R"
 msgstr "Č"
 
 #. * TRANSLATORS: First letter of the word "Green"
-#: ../../../../src/ui/basic/color_chooser.cc:314
+#: ../../../../src/ui/basic/color_chooser.cc:315
 msgctxt "color"
 msgid "G"
 msgstr "Z"
 
 #. * TRANSLATORS: First letter of the word "Blue"
-#: ../../../../src/ui/basic/color_chooser.cc:323
+#: ../../../../src/ui/basic/color_chooser.cc:324
 msgctxt "color"
 msgid "B"
 msgstr "M"
 
-#: ../../../../src/ui/basic/color_chooser.cc:333
+#: ../../../../src/ui/basic/color_chooser.cc:334
 msgid "Default Color"
 msgstr "Výchozí barva"
 
-#: ../../../../src/ui/basic/color_chooser.cc:345
+#: ../../../../src/ui/basic/color_chooser.cc:346
 msgid "Red"
 msgstr "Červená"
 
-#: ../../../../src/ui/basic/color_chooser.cc:358
+#: ../../../../src/ui/basic/color_chooser.cc:359
 msgid "Green"
 msgstr "Zelená"
 
-#: ../../../../src/ui/basic/color_chooser.cc:371
+#: ../../../../src/ui/basic/color_chooser.cc:372
 msgid "Blue"
 msgstr "Modrá"
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:492
 msgid "Remove from favorites"
 msgstr "Odstranit z oblíbených"
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:492
 #: ../../../../src/ui/fsmenu/addons/packager.cc:106
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:168
 #: ../../../../src/ui/game/quicknavigation.cc:286
 msgid "–"
 msgstr "–"
 
-#: ../../../../src/ui/basic/color_chooser.cc:497
+#: ../../../../src/ui/basic/color_chooser.cc:499
 #: ../../../../src/ui/editor/main_menu_map_options.cc:108
 #: ../../../../src/ui/fsmenu/addons/packager.cc:97
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:150
@@ -3126,21 +3126,21 @@ msgstr "–"
 msgid "+"
 msgstr "+"
 
-#: ../../../../src/ui/basic/color_chooser.cc:497
+#: ../../../../src/ui/basic/color_chooser.cc:499
 msgid "Add current color to favorites"
 msgstr "Přidat aktuální barvu mezi oblíbené"
 
-#: ../../../../src/ui/basic/dropdown.cc:113
+#: ../../../../src/ui/basic/dropdown.cc:114
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Vybrat položku"
 
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
-#: ../../../../src/ui/basic/dropdown.cc:308
-#: ../../../../src/ui/basic/dropdown.cc:360
-#: ../../../../src/ui/basic/dropdown.cc:431
-#: ../../../../src/ui/basic/dropdown.cc:439
+#: ../../../../src/ui/basic/dropdown.cc:309
+#: ../../../../src/ui/basic/dropdown.cc:361
+#: ../../../../src/ui/basic/dropdown.cc:432
+#: ../../../../src/ui/basic/dropdown.cc:440
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:76
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:370
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:197
@@ -3148,7 +3148,7 @@ msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../../../src/ui/basic/dropdown.cc:424
+#: ../../../../src/ui/basic/dropdown.cc:425
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
@@ -3157,25 +3157,25 @@ msgstr "Nevybráno"
 msgid "No matches"
 msgstr "Žádná shoda"
 
-#: ../../../../src/ui/basic/pagination.cc:39
+#: ../../../../src/ui/basic/pagination.cc:50
 msgid "Go to first page"
 msgstr "Přejít na první stránku"
 
-#: ../../../../src/ui/basic/pagination.cc:48
+#: ../../../../src/ui/basic/pagination.cc:59
 msgid "Go to last page"
 msgstr "Přejít na poslední stránku"
 
-#: ../../../../src/ui/basic/pagination.cc:56
+#: ../../../../src/ui/basic/pagination.cc:67
 msgid "Items per page"
 msgstr "Položek na stránku"
 
-#: ../../../../src/ui/basic/pagination.cc:195
+#: ../../../../src/ui/basic/pagination.cc:208
 msgctxt "all_items"
 msgid "All"
 msgstr "Vše"
 
-#: ../../../../src/ui/basic/pagination.cc:219
-#: ../../../../src/ui/basic/pagination.cc:228
+#: ../../../../src/ui/basic/pagination.cc:232
+#: ../../../../src/ui/basic/pagination.cc:241
 #, c-format
 msgid "Go to page %d"
 msgstr "Přejít na stránku %d"
@@ -3188,33 +3188,33 @@ msgstr "Prosím o strpení..."
 msgid "Game ending – please wait…"
 msgstr "Hra se ukončuje – prosím o strpení..."
 
-#: ../../../../src/ui/basic/progresswindow.cc:83
+#: ../../../../src/ui/basic/progresswindow.cc:80
 #: ../../../../src/wlapplication.cc:490
 msgid "Loading…"
 msgstr "Nahrávání…"
 
-#: ../../../../src/ui/basic/spinbox.cc:151
+#: ../../../../src/ui/basic/spinbox.cc:150
 msgid "Decrease the value"
 msgstr "Snížit hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:155
-#: ../../../../src/ui/basic/spinbox.cc:183
+#: ../../../../src/ui/basic/spinbox.cc:154
+#: ../../../../src/ui/basic/spinbox.cc:182
 #, c-format
 msgid "Decrease the value by %s"
 msgstr "Snížit hodnotu o %s"
 
-#: ../../../../src/ui/basic/spinbox.cc:164
+#: ../../../../src/ui/basic/spinbox.cc:163
 msgid "Increase the value"
 msgstr "Zvýšit hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:168
-#: ../../../../src/ui/basic/spinbox.cc:187
+#: ../../../../src/ui/basic/spinbox.cc:167
+#: ../../../../src/ui/basic/spinbox.cc:186
 #, c-format
 msgid "Increase the value by %s"
 msgstr "Zvýšit hodnotu o %s"
@@ -3403,18 +3403,18 @@ msgctxt "spinbox_change"
 msgid "%d"
 msgstr "%d"
 
-#: ../../../../src/ui/basic/table.cc:157
+#: ../../../../src/ui/basic/table.cc:163
 msgid "Click to reverse sorting"
 msgstr "Kliknutím řadit opačně"
 
-#: ../../../../src/ui/basic/table.cc:157
+#: ../../../../src/ui/basic/table.cc:163
 msgid "Click to sort by this column"
 msgstr "Kliknutím seřadit sloupec"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
 #. "Click to sort ..." or "Click to reverse..."
-#: ../../../../src/ui/basic/table.cc:163
+#: ../../../../src/ui/basic/table.cc:169
 #, c-format
 msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
@@ -4300,7 +4300,7 @@ msgstr "Nastavením maximální délky vodní cesty aktivuj přívozy, vodní ce
 msgid "Disabled"
 msgstr "Neaktivní"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:473
+#: ../../../../src/ui/editor/main_menu_map_options.cc:474
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -4309,29 +4309,29 @@ msgstr[1] "%u hráči"
 msgstr[2] "%u hráčů"
 msgstr[3] "%u hráčů"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:477
+#: ../../../../src/ui/editor/main_menu_map_options.cc:478
 msgid "Suggested Teams:"
 msgstr "Doporučené týmy:"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:500
+#: ../../../../src/ui/editor/main_menu_map_options.cc:501
 msgid "Main Options"
 msgstr "Hlavní nastavení"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:502
-#: ../../../../src/ui/shared/mapdetails.cc:176
+#: ../../../../src/ui/editor/main_menu_map_options.cc:503
+#: ../../../../src/ui/shared/mapdetails.cc:177
 msgid "Tags"
 msgstr "Charakter"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:504
+#: ../../../../src/ui/editor/main_menu_map_options.cc:505
 msgid "Teams"
 msgstr "Týmy"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:538
+#: ../../../../src/ui/editor/main_menu_map_options.cc:539
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr "Nedoporučuje se nastavit limit délky vodní cesty na hodnotu větší než %u"
 
-#: ../../../../src/ui/editor/main_menu_map_options.cc:554
+#: ../../../../src/ui/editor/main_menu_map_options.cc:555
 msgid "Size: %1% x %2%"
 msgstr "Velikost: %1% x %2%"
 
@@ -5602,8 +5602,8 @@ msgid "Version:"
 msgstr "Verze:"
 
 #: ../../../../src/ui/fsmenu/addons/packager.cc:174
-#: ../../../../src/ui/shared/mapdetails.cc:198
-#: ../../../../src/ui/shared/mapdetails.cc:203
+#: ../../../../src/ui/shared/mapdetails.cc:199
+#: ../../../../src/ui/shared/mapdetails.cc:204
 msgid "Minimum Widelands Version:"
 msgstr "Minimální verze Widelands:"
 
@@ -6522,7 +6522,7 @@ msgstr "Nahrát snímek obrazovky pro '%s'"
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:95
 #: ../../../../src/ui/fsmenu/campaigndetails.cc:67
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:64
-#: ../../../../src/ui/shared/mapdetails.cc:209
+#: ../../../../src/ui/shared/mapdetails.cc:210
 #: ../../../../src/ui/shared/savegametable.cc:148
 #: ../../../../src/ui/shared/savegametable.cc:200
 #: ../../../../src/ui/shared/savegametable.cc:259
@@ -6934,7 +6934,7 @@ msgstr "Znemožnit změny spojenectví v průběhu hry"
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:283
 #: ../../../../src/ui/shared/map_tags.cc:66
-#: ../../../../src/ui/shared/mapdetails.cc:135
+#: ../../../../src/ui/shared/mapdetails.cc:136
 msgid "Scenario"
 msgstr "Scénář"
 
@@ -7380,7 +7380,7 @@ msgstr "Doplňující informace: %s"
 msgid "No map selected"
 msgstr "Nevybrána žádná mapa"
 
-#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:214
+#: ../../../../src/ui/fsmenu/mapdetailsbox.cc:215
 msgid "(no map)"
 msgstr "(žádná mapa)"
 
@@ -8129,7 +8129,7 @@ msgstr "Tutoriál"
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:55
-#: ../../../../src/ui/shared/mapdetails.cc:161
+#: ../../../../src/ui/shared/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
@@ -8140,7 +8140,7 @@ msgstr "Autor"
 #. need plural
 #. forms here, please let us know.
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:58
-#: ../../../../src/ui/shared/mapdetails.cc:164
+#: ../../../../src/ui/shared/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autoři"
 
@@ -10481,7 +10481,7 @@ msgid "Win Condition:"
 msgstr "Výherní podmínka:"
 
 #: ../../../../src/ui/shared/gamedetails.cc:184
-#: ../../../../src/ui/shared/mapdetails.cc:182
+#: ../../../../src/ui/shared/mapdetails.cc:183
 msgid "Add-Ons:"
 msgstr "Rozšíření:"
 
@@ -10669,7 +10669,7 @@ msgstr "nadřazený adresář"
 msgid "empty"
 msgstr "prázdné"
 
-#: ../../../../src/ui/shared/mapdetails.cc:128
+#: ../../../../src/ui/shared/mapdetails.cc:129
 msgid "Directory"
 msgstr "Adresář"
 
@@ -10677,7 +10677,7 @@ msgstr "Adresář"
 #. being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../../../src/ui/shared/mapdetails.cc:145
+#: ../../../../src/ui/shared/mapdetails.cc:146
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Původní název mapy: %s"
@@ -10686,17 +10686,17 @@ msgstr "Původní název mapy: %s"
 #. displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../../../src/ui/shared/mapdetails.cc:151
+#: ../../../../src/ui/shared/mapdetails.cc:152
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Název mapy v tvém jazyce: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../../../src/ui/shared/mapdetails.cc:214
+#: ../../../../src/ui/shared/mapdetails.cc:215
 msgid "Hint"
 msgstr "Další poznámky"
 
-#: ../../../../src/ui/shared/mapdetails.cc:240
+#: ../../../../src/ui/shared/mapdetails.cc:241
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
