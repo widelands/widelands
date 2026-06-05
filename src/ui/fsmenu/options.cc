@@ -214,10 +214,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             0),
      sb_dis_panel_(&box_interface_,
                    "panel_snap_distance",
-                   0,
-                   0,
-                   0,
-                   0,
+                   UI::SpinBox::default_unit_width_wide(panel_style_),
                    opt.panel_snap_distance,
                    0,
                    99,
@@ -227,10 +224,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_dis_border_(&box_interface_,
                     "border_snap_distance",
-                    0,
-                    0,
-                    0,
-                    0,
+                    UI::SpinBox::default_unit_width_wide(panel_style_),
                     opt.border_snap_distance,
                     0,
                     99,
@@ -265,10 +259,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // Saving options
      sb_autosave_(&box_saving_,
                   "autosave_interval",
-                  0,
-                  0,
-                  0,
-                  0,
+                  UI::SpinBox::default_unit_width_wide(panel_style_),
                   opt.autosave / 60,
                   0,
                   100,
@@ -279,10 +270,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_rolling_autosave_(&box_saving_,
                           "rolling_autosave",
-                          0,
-                          0,
-                          0,
-                          0,
+                          UI::SpinBox::default_unit_width_wide(panel_style_),
                           opt.rolling_autosave,
                           1,
                           20,
@@ -295,10 +283,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      sb_replay_lifetime_(&box_saving_,
                          "replay_lifetime",
-                         0,
-                         0,
-                         0,
-                         0,
+                         UI::SpinBox::default_unit_width_wide(panel_style_),
                          opt.replay_lifetime,
                          0,
                          52,
@@ -358,10 +343,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // In-Game options
      sb_pause_game_on_inactivity_(&box_ingame_,
                                   "pause_game_on_inactivity",
-                                  0,
-                                  0,
-                                  0,
-                                  0,
+                                  UI::SpinBox::default_unit_width_wide(panel_style_),
                                   opt.pause_game_on_inactivity,
                                   0,
                                   120,
@@ -477,8 +459,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&sb_dis_panel_);
-	box_interface_.add(&sb_dis_border_);
+	box_interface_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
 	box_interface_.add_space(kPadding);
 
 	box_interface_.add(
@@ -681,7 +663,6 @@ void Options::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
 		const int16_t buth = get_inner_h() / 16;
-		constexpr int16_t kSpinboxW = 250;
 
 		// Buttons
 		cancel_.set_desired_size(butw, buth);
@@ -694,7 +675,6 @@ void Options::layout() {
 		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
 
 		const int tab_panel_width = get_inner_w() - 3 * kPadding;
-		const int unit_w = tab_panel_width / 3;
 
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
@@ -721,19 +701,6 @@ void Options::layout() {
 		const int translation_pad_h = translation_h - min_h;
 		translation_padding_.set_desired_size(half_w, translation_pad_h);
 		translation_padding_.set_size(half_w, translation_pad_h);
-
-		// Interface tab spinboxes
-		for (UI::SpinBox* sb : {&sb_dis_panel_, &sb_dis_border_}) {
-			sb->set_unit_width(unit_w);
-			sb->set_desired_size(tab_panel_width, sb->get_h());
-		}
-
-		// Saving options
-		for (UI::SpinBox* sb : {&sb_autosave_, &sb_rolling_autosave_, &sb_replay_lifetime_,
-		                        &sb_pause_game_on_inactivity_}) {
-			sb->set_unit_width(kSpinboxW);
-			sb->set_desired_size(tab_panel_width, sb->get_h());
-		}
 	}
 	UI::Window::layout();
 }
