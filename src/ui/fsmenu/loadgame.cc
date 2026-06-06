@@ -189,7 +189,7 @@ void LoadGame::entry_selected() {
 	} else {
 		load_or_save_.delete_button()->set_enabled(false);
 		load_or_save_.entry_selected();
-		
+
 		ok_.set_enabled(false);
 		/** TRANSLATORS: Tooltip for OK button. The user has no files to select */
 		ok_.set_tooltip(is_replay_ ? _("No replay selected") : _("No game selected"));
