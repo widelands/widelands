@@ -24,10 +24,10 @@
 #include <SDL_keyboard.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "ui/basic/button.h"
 #include "ui/basic/multilinetextarea.h"
 #include "ui/basic/textarea.h"
@@ -35,6 +35,20 @@
 #include "wlapplication_options.h"
 
 namespace UI {
+
+// static
+int SpinBox::default_unit_width_fit_text(const UI::PanelStyle style, const std::string& text) {
+	return text_width(
+	          text,
+	          g_style_manager->button_style(to_button_style_secondary(style)).disabled().font()) +
+	       2 * default_padding();
+}
+int SpinBox::default_unit_width_narrow(const UI::PanelStyle style) {
+	return default_unit_width_fit_text(style, "100%");
+}
+int SpinBox::default_unit_width_wide(const UI::PanelStyle style) {
+	return default_unit_width_fit_text(style, std::string(12, 'H'));
+}
 
 struct SpinBoxImpl {
 	/// Value held by the spinbox
@@ -73,16 +87,11 @@ struct SpinBoxImpl {
  * SpinBox constructor:
  *
  * initializes a new spinbox with either two (big = false) or four (big = true)
- * buttons. w must be >= the space taken up by the buttons, else the spinbox would become useless
- * and so
- * throws an exception.
+ * buttons.
  * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox(Panel* const parent,
                  const std::string& name,
-                 const int32_t x,
-                 const int32_t y,
-                 const uint32_t w,
                  const uint32_t unit_w,
                  int32_t const startval,
                  int32_t const minval,
@@ -93,13 +102,11 @@ SpinBox::SpinBox(Panel* const parent,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
-   : Panel(parent, style, name, x, y, std::max(w, unit_w), 0),
+   : Box(parent, style, name, 0, 0, UI::Box::Horizontal),
      type_(type),
      sbi_(new SpinBoxImpl),
-     unit_width_(unit_w),
      button_size_(default_button_size_small()),
-     big_step_button_width_(default_button_size()),
-     buttons_width_(0) {
+     big_step_button_width_(default_button_size()) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -114,17 +121,17 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
-	box_ = new UI::Box(this, style, "spinner_buttons_box", 0, 0, UI::Box::Horizontal);
+	sbi_->label = new UI::MultilineTextarea(
+	   this, "label", 0, 0,
+	   text_width(label_text, g_style_manager->font_style(style == UI::PanelStyle::kFsMenu ?
+	                                                         FontStyle::kFsMenuLabel :
+	                                                         FontStyle::kWuiLabel)) +
+	      2 * default_padding(),
+	   0, style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 
-	sbi_->label =
-	   new UI::MultilineTextarea(box_, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	box_->add(sbi_->label, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-
-	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_size_,
-	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-	                                                           UI::ButtonStyle::kWuiSecondary,
-	                            "");
+	sbi_->text = new UI::Button(
+	   this, "value", 0, 0, unit_w, button_size_, to_button_style_secondary(style), "");
 	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
@@ -154,7 +161,7 @@ SpinBox::SpinBox(Panel* const parent,
 		button_tooltip = format(_("Decrease the value by %s"), unit_text(sbi_->step_size, true));
 	}
 	sbi_->button_minus =
-	   new Button(box_, "-", 0, 0, button_size_, button_size_, sbi_->button_style,
+	   new Button(this, "-", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
 	                                          "images/ui_basic/scrollbar_down.png"),
 	              button_tooltip);
@@ -167,7 +174,7 @@ SpinBox::SpinBox(Panel* const parent,
 		button_tooltip = format(_("Increase the value by %s"), unit_text(sbi_->step_size, true));
 	}
 	sbi_->button_plus =
-	   new Button(box_, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
+	   new Button(this, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
 	                                          "images/ui_basic/scrollbar_up.png"),
 	              button_tooltip);
@@ -177,11 +184,11 @@ SpinBox::SpinBox(Panel* const parent,
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-		   new Button(box_, "--", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
+		   new Button(this, "--", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
 		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size, true)));
 		sbi_->button_ten_plus =
-		   new Button(box_, "++", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
+		   new Button(this, "++", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
 		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size, true)));
 		sbi_->button_ten_minus->set_can_focus(false);
@@ -206,17 +213,15 @@ SpinBox::SpinBox(Panel* const parent,
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		box_->add(sbi_->button_ten_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add_space(default_spacing());
-		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add(sbi_->text, Box::Resizing::kFillSpace, UI::Align::kBottom);
-		box_->add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add_space(default_spacing());
-		box_->add(sbi_->button_ten_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_ten_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->text, Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_ten_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	} else {
-		box_->add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
-		box_->add(sbi_->text, Box::Resizing::kFillSpace, UI::Align::kBottom);
-		box_->add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_minus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->text, Box::Resizing::kAlign, UI::Align::kBottom);
+		add(sbi_->button_plus, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	}
 
 	sbi_->button_plus->sigclicked.connect([this]() {
@@ -237,10 +242,6 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
-
-	buttons_width_ = 2 * button_size_ + (is_big ? 2 * big_step_button_width_ : 0);
-
-	sbi_->text->set_desired_size(0, button_size_);
 
 	set_can_focus(true);
 	layout();
@@ -279,7 +280,7 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 			NEVER_HERE();
 		}
 	}
-	return Panel::handle_key(down, code);
+	return Box::handle_key(down, code);
 }
 
 bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
@@ -297,52 +298,8 @@ bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return false;
 }
 
-void SpinBox::layout() {
-	// Do not layout if the size hasn't been set yet.
-	if (get_w() == 0 && get_h() == 0) {
-		return;
-	}
-
-	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
-	if (!sbi_->label->get_text().empty() &&
-	    (get_w() + default_spacing() + 40) <= static_cast<int>(unit_width_)) {
-		throw wexception("SpinBox: Overall width %d must be bigger than %u (unit width) "
-		                 "+ %d (spacing) + 40 (label text)",
-		                 get_w(), unit_width_, default_spacing());
-	}
-
-	const uint32_t unit_text_min_width = button_size_;
-	if (unit_width_ < unit_text_min_width + buttons_width_) {
-		log_warn("Not enough space to draw spinbox \"%s\".\n"
-		         "Width %u is smaller than required width %u."
-		         "Please report as a bug.\n",
-		         sbi_->label->get_text().c_str(), unit_width_, unit_text_min_width + buttons_width_);
-	}
-
-	int w;
-	int padding;
-	uint32_t box_height;
-	sbi_->label->get_text_size(&w, &padding);
-	padding = get_w() - static_cast<int32_t>(unit_width_);
-	if (padding > w) {
-		sbi_->label->set_visible(true);
-		sbi_->label->set_desired_size(padding, 0);
-		box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_size_));
-	} else {
-		// There is no space for the label
-		sbi_->label->set_visible(false);
-		box_height = static_cast<int32_t>(button_size_);
-	}
-	box_height = std::max(box_height, min_height_);
-
-	box_->set_size(get_w(), box_height);
-	set_desired_size(get_w(), box_height);
-	set_size(get_w(), box_height);
-}
-
 void SpinBox::set_min_height(uint32_t height) {
-	min_height_ = height;
-	layout();
+	set_min_desired_breadth(height);
 }
 
 /**
@@ -374,10 +331,9 @@ void SpinBox::update() {
 
 /**
  * Display width for the spinbox unit
- * \note This does not relayout the spinbox.
  */
 void SpinBox::set_unit_width(uint32_t width) {
-	unit_width_ = width;
+	sbi_->text->set_size(width, button_size_);
 }
 
 /**
