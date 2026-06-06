@@ -1901,6 +1901,9 @@ void AddOnsCtrl::layout() {
 
 		installed_addons_outer_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * default_button_size());
+		installed_addons_inner_wrapper_.set_max_size(
+		   tabs_placeholder_.get_w() - UI::Scrollbar::default_size() - default_spacing() - default_button_size(),
+		   tabs_placeholder_.get_h() - 2 * default_button_size());
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * default_button_size() -
 		                                 browse_addons_buttons_box_.get_h() -
