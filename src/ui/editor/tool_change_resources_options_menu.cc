@@ -57,7 +57,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 1,
                 kMaxValue,
                 UI::PanelStyle::kWui,
-                _("Increase/Decrease amount by:"),
+                _("Increase/Decrease amount by:"), false,
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
@@ -67,7 +67,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              0,
              kMaxValue,
              UI::PanelStyle::kWui,
-             _("Set amount to:"),
+             _("Set amount to:"), false,
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      resources_box_(

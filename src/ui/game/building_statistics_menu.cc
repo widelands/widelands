@@ -188,6 +188,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              100,
                              UI::PanelStyle::kWui,
                              "",
+                             false,
                              UI::SpinBox::Units::kPercent,
                              UI::SpinBox::Type::kBig),
      nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
