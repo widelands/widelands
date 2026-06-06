@@ -121,15 +121,16 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
-	const FontStyle font_style = style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel;
+	const FontStyle font_style =
+	   style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel;
 	if (allow_multiline_label) {
 		sbi_->label = new UI::MultilineTextarea(
 		   this, "label", 0, 0,
-		   text_width(label_text, g_style_manager->font_style(font_style)) +
-			  2 * default_padding(),
-		   0, style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		   text_width(label_text, g_style_manager->font_style(font_style)) + 2 * default_padding(), 0,
+		   style, label_text, UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	} else {
-		sbi_->label = new UI::Textarea(this, style, "label", font_style, label_text, UI::Align::kLeft);
+		sbi_->label =
+		   new UI::Textarea(this, style, "label", font_style, label_text, UI::Align::kLeft);
 	}
 	add(sbi_->label, UI::Box::Resizing::kFillSpace, UI::Align::kBottom);
 

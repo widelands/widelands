@@ -721,8 +721,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	}
 
 	UI::SpinBox* spinbox =
-	   new UI::SpinBox(parent, name, unit_w, val, val_min, val_max, panel_style(L), label, allow_multiline_label, units,
-	                   sb_type, step_size_small, step_size_big);
+	   new UI::SpinBox(parent, name, unit_w, val, val_min, val_max, panel_style(L), label,
+	                   allow_multiline_label, units, sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);
