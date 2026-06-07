@@ -599,7 +599,7 @@ void EconomyOptionsWindow::SaveProfileWindow::table_selection_changed() {
 		delete_.set_tooltip(_("The predefined profiles cannot be deleted"));
 		delete_.set_enabled(false);
 	} else {
-		delete_.set_tooltip(_("Delete the selected profiles"));
+		delete_.set_tooltip(_("Delete the selected profile"));
 		delete_.set_enabled(true);
 	}
 	profile_name_.set_text(sel);

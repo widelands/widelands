@@ -52,7 +52,7 @@ obj_make_food_infrastructure = {
    title = _("Establish a solid food production"),
    number = 10,
    body = objective_text(_("Food Production"),
-      p(_([[Food is very important for mines and military training areas. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]])) ..
+      p(_([[Food is very important for mines and military training sites. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]])) ..
       p(_([[The other two important food wares are smoked fish and smoked meat. Raw meat is delivered from a hunter. A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct by breeding more. The smoking happens in a smokery, you will need at least two of those.]])) ..
       li(_([[Build a farm and a blackroot farm]])) ..
       li(_([[Build a mill to make cornmeal and blackroot flour]])) ..

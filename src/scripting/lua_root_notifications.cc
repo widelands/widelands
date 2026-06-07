@@ -25,7 +25,7 @@
 #include "economy/expedition_bootstrap.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "logic/map_objects/pinned_note.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "scripting/globals.h"
 #include "ui/game/economy_options_window.h"

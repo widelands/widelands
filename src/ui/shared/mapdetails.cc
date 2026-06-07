@@ -50,7 +50,7 @@ MapDetails::MapDetails(Panel* parent,
                  "label_name",
                  0,
                  0,
-                 UI::Scrollbar::kSize,
+                 UI::Scrollbar::default_size(),
                  0,
                  style,
                  "",
@@ -60,7 +60,7 @@ MapDetails::MapDetails(Panel* parent,
             "description",
             0,
             0,
-            UI::Scrollbar::kSize,
+            UI::Scrollbar::default_size(),
             0,
             style,
             "",
@@ -107,17 +107,15 @@ void MapDetails::layout() {
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
 		// Fit minimap to width
-		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_,
-		                                minimap_cache_.at(last_map_)->width());
+		const int width =
+		   std::min<int>(main_box_.get_w() - UI::Scrollbar::default_size() - 2 * padding_,
+		                 minimap_cache_.at(last_map_)->width());
 		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
 		const int height = scale * minimap_cache_.at(last_map_)->height();
 
 		minimap_icon_.set_desired_size(width, height);
 	}
 
-	const int full_height = descr_.get_h() + minimap_icon_.get_h();
-	const int descr_height = main_box_.get_h() - name_label_.get_h() - padding_;
-	descr_box_.set_force_scrolling(full_height > descr_height);
 	descr_box_.set_desired_size(0, 0);
 }
 

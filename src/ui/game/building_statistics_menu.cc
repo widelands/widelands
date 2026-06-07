@@ -32,7 +32,6 @@ constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kLabelHeight = 18;
-constexpr int kSpinboxWidth = 4 * kBuildGridCellWidth;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
 constexpr Duration kUpdateTimeInGametimeMs(1000);  //  1 second, gametime
@@ -183,10 +182,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 
      unproductive_threshold_(&main_box_,
                              "unproductive_threshold",
-                             0,
-                             0,
-                             kSpinboxWidth,
-                             kSpinboxWidth,
+                             UI::SpinBox::default_unit_width_narrow(panel_style_),
                              low_production_,
                              0,
                              100,

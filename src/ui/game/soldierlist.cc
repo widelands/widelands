@@ -28,7 +28,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"

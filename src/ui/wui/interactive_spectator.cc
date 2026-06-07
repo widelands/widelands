@@ -44,7 +44,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	add_main_menu();
 
 	add_toolbar_button(
-	   "ui/game/menus/statistics_general", "general_stats",
+	   "wui/menus/statistics_general", "general_stats",
 	   as_tooltip_text_with_hotkey(_("Statistics"),
 	                               shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
 	                               UI::PanelStyle::kWui),

@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2022,2024-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -184,8 +184,8 @@ msgstr "Ce que vous attendiez lorsque vous réalisiez l'opération et ce qui est
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "La version de Widelands que vous exécutez (c-à-d soit le numéro de compilation ou le numéro de révision si vous exécutez une version de développement ou une compilation quotidienne)."
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -583,10 +583,9 @@ msgstr "Les maîtres de la jungle apprennent leurs compétences en travaillant c
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "Gardez un œil sur vos pêcheurs et construisez une maison de pisciculteur. Une fois les ressources épuisées dans la zone de travail, les poissons ne pourront plus se régénérer."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

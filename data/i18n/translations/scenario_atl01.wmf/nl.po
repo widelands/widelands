@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
-# Alex Rijckaert, 2023,2025
+# Alex Rijckaert, 2023,2025-2026
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Foppe Benedictus <foppe.benedictus@gmail.com>, 2020
 # GunChleoc, 2014
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Alex Rijckaert, 2023,2025\n"
+"Last-Translator: Alex Rijckaert, 2023,2025-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,11 +80,11 @@ msgstr "Productie van voedsel"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Voedsel is erg belangrijk voor mijnen en militaire trainingsplaatsen. Zet een goed werkende voedselomgeving op door in iedere geval een boerderij, een helmkruidkwekerij en een molen te bouwen. De beide soorten meel samen met water kunnen tot brood gebakken worden, dus bouw ook een bakkerij en een waterput."
+msgstr "Voedsel is van groot belang voor mijnen en militaire oefenterreinen. Zorg voor een goed functionerende voedselvoorziening door ten minste één boerderij, één zwartewortelboerderij en een molen te bouwen. De twee soorten meel worden samen met water uit een put in een bakkerij tot brood gebakken, dus bouw ook een bakkerij en een put."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

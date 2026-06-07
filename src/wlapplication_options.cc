@@ -478,7 +478,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_t),
                          "editor_tools",
-                         gettext_noop("Toggle Tools Menu"))},
+                         gettext_noop("Show Tools Menu"))},
    {KeyboardShortcut::kEditorChangeHeight,
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_h, KMOD_SHIFT),

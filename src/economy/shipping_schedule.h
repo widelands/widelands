@@ -24,7 +24,7 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 
 class FileRead;
 class FileWrite;

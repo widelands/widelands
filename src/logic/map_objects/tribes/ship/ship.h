@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
-#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
+#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H
+#define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H
 
 #include <deque>
 #include <memory>
@@ -26,7 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 
 namespace Widelands {
 
@@ -91,8 +91,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
-constexpr int32_t kShipInterval = 1500;
-
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -100,6 +98,12 @@ constexpr int32_t kShipInterval = 1500;
  */
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
+
+	static constexpr int32_t kShipInterval = 1500;
+	static constexpr unsigned kSinkAnimationDuration = 3000;
+	static constexpr uint32_t kAttackAnimationDuration = 2000;
+	static constexpr unsigned kNearDestinationShipRadius = 4;
+	static constexpr unsigned kNearDestinationNoteRadius = 1;
 
 	/** Half the total width of a ship's health bar at 1× scale. */
 	static constexpr int kShipHalfHealthBarWidth = 30;
@@ -188,6 +192,7 @@ struct Ship : Bob {
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
+	void remove_item_by_serial(Game& game, Serial serial);
 
 	/// \returns the current state the ship is in
 	[[nodiscard]] ShipStates get_ship_state() const {
@@ -315,6 +320,9 @@ struct Ship : Bob {
 	[[nodiscard]] std::vector<Soldier*> onboard_soldiers() const;
 	[[nodiscard]] std::vector<Soldier*> associated_soldiers() const;
 
+	// Must be called after changing the onboard soldiers directly.
+	void update_warship_soldier_request(bool create);
+
 	/**
 	 * Execute a warship command.
 	 * For a kAttack against a port, `parameters` contains first the port coordinates x,y and then
@@ -379,7 +387,6 @@ private:
 	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
-	void update_warship_soldier_request(bool create);
 	void erase_warship_soldier_request_manager();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
@@ -495,4 +502,4 @@ public:
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_SHIP_H

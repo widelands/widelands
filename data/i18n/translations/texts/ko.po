@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -174,8 +174,8 @@ msgstr "단계를 수행 할 때 예상했던 것과 실제로 일어난 일."
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "실행중인 와이드랜드 버전 (예를들면, 개발 버전 또는 일일 구축버전을 실행중인 경우 구축 번호 또는 수정 번호)"
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -573,10 +573,9 @@ msgstr "정글 달인들은 정원 가꾸기 가게나 희귀한 나무 농장�
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "낚시꾼들을 잘 감시하고 어장 집을 지으십시오. 물고기 자원은 일터에서 고갈되면 다시 살릴 수 없습니다."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

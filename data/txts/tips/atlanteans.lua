@@ -1,7 +1,7 @@
 push_textdomain("texts")
 tips = {
    {
-      text = _("Keep an eye on your fishers and build a fish breeder’s house. After fish resources are exhausted in their work area, the fish supply cannot be regenerated."),
+      text = _("Keep an eye on your fishers and build a fish breeder’s house to regenerate fish resources."),
       seconds = 4
    },
    {

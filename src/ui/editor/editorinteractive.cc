@@ -143,7 +143,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	add_tool_menu();
 
 	add_toolbar_button(
-	   "ui/game/editor/menus/toolsize", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
+	   "wui/editor/menus/toolsize", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
 	menu_windows_.toolsize.open_window = [this] {
 		new EditorToolsizeMenu(*this, menu_windows_.toolsize);
 	};
@@ -156,12 +156,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	undo_ =
-	   add_toolbar_button("ui/game/editor/menus/undo", "undo",
+	   add_toolbar_button("wui/editor/menus/undo", "undo",
 	                      as_tooltip_text_with_hotkey(
 	                         _("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo, true),
 	                         UI::PanelStyle::kWui));
 	redo_ =
-	   add_toolbar_button("ui/game/editor/menus/redo", "redo",
+	   add_toolbar_button("wui/editor/menus/redo", "redo",
 	                      as_tooltip_text_with_hotkey(
 	                         _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo, true),
 	                         UI::PanelStyle::kWui));
@@ -174,7 +174,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	add_toolbar_button(
-	   "ui/basic/menu_help", "help",
+	   "ui_basic/menu_help", "help",
 	   as_tooltip_text_with_hotkey(_("Help"),
 	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
 	                               UI::PanelStyle::kWui),

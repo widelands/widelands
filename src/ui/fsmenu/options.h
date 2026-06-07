@@ -26,6 +26,7 @@
 #include "ui/basic/checkbox.h"
 #include "ui/basic/dropdown.h"
 #include "ui/basic/multilinetextarea.h"
+#include "ui/basic/slider.h"
 #include "ui/basic/spinbox.h"
 #include "ui/basic/tabpanel.h"
 #include "ui/basic/textarea.h"
@@ -56,6 +57,7 @@ public:
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
+		int32_t ui_scaling_factor_quarters;
 
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
@@ -168,6 +170,7 @@ private:
 	UI::Checkbox dock_windows_to_edges_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
+	UI::DiscreteSlider ui_scaling_slider_;
 
 	UI::Button configure_keyboard_;
 

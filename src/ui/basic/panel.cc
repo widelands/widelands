@@ -632,10 +632,14 @@ void Panel::set_inner_size(int const nw, int const nh) {
  * and position of the inner area will change.
  */
 void Panel::set_border(int l, int r, int t, int b) {
+	if (lborder_ == l && rborder_ == r && tborder_ == t && bborder_ == b) {
+		return;
+	}
 	lborder_ = l;
 	rborder_ = r;
 	tborder_ = t;
 	bborder_ = b;
+	update_desired_size();
 }
 
 int Panel::get_inner_w() const {

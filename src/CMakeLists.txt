@@ -117,6 +117,7 @@ wl_library(widelands_ball_of_mud
     base_exceptions
     base_geometry
     base_macros
+    base_math
     base_random
     base_time_string
     build_info

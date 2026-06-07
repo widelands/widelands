@@ -44,7 +44,6 @@
 #include "ui/fsmenu/addons/packager.h"
 #include "ui/fsmenu/addons/rows_ui.h"
 #include "ui/fsmenu/addons/screenshot_upload.h"
-#include "ui/shared/addons_constants.h"
 #include "ui/shared/addons_login_box.h"
 #include "ui/shared/addons_progress.h"
 #include "wlapplication.h"
@@ -346,10 +345,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                             UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_players_(&filter_maps_rvbox_min_,
                               "filter_maps_min_players",
-                              0,
-                              0,
-                              0,
-                              150,
+                              UI::SpinBox::default_unit_width_narrow(panel_style_),
                               0,
                               0,
                               kMaxPlayers,
@@ -359,10 +355,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                               UI::SpinBox::Type::kSmall),
      filter_maps_min_w_(&filter_maps_rvbox_min_,
                         "filter_maps_min_w",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
@@ -372,10 +365,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::SpinBox::Type::kValueList),
      filter_maps_min_h_(&filter_maps_rvbox_min_,
                         "filter_maps_min_h",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
@@ -385,10 +375,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::SpinBox::Type::kValueList),
      filter_maps_min_size_(&filter_maps_rvbox_min_,
                            "filter_maps_min_size",
-                           0,
-                           0,
-                           0,
-                           150,
+                           UI::SpinBox::default_unit_width_narrow(panel_style_),
                            0,
                            0,
                            0,
@@ -398,10 +385,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                            UI::SpinBox::Type::kValueList),
      filter_maps_max_players_(&filter_maps_rvbox_max_,
                               "filter_maps_max_players",
-                              0,
-                              0,
-                              0,
-                              150,
+                              UI::SpinBox::default_unit_width_narrow(panel_style_),
                               kMaxPlayers + 1,
                               0,
                               kMaxPlayers + 1,
@@ -411,10 +395,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                               UI::SpinBox::Type::kSmall),
      filter_maps_max_w_(&filter_maps_rvbox_max_,
                         "filter_maps_max_w",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
@@ -424,10 +405,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::SpinBox::Type::kValueList),
      filter_maps_max_h_(&filter_maps_rvbox_max_,
                         "filter_maps_max_h",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
@@ -437,10 +415,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::SpinBox::Type::kValueList),
      filter_maps_max_size_(&filter_maps_rvbox_max_,
                            "filter_maps_max_size",
-                           0,
-                           0,
-                           0,
-                           150,
+                           UI::SpinBox::default_unit_width_narrow(panel_style_),
                            0,
                            0,
                            0,
@@ -454,7 +429,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                    0,
                    get_inner_w() / 2,
                    8,
-                   kRowButtonSize,
+                   default_button_size(),
                    _("Choose add-on to upload…"),
                    UI::DropdownType::kTextualMenu,
                    UI::PanelStyle::kFsMenu,
@@ -465,7 +440,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         0,
                         get_inner_w() / 2,
                         8,
-                        kRowButtonSize,
+                        default_button_size(),
                         _("Upload a screenshot…"),
                         UI::DropdownType::kTextualMenu,
                         UI::PanelStyle::kFsMenu,
@@ -499,16 +474,16 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   "upgrade_all",
                   0,
                   0,
-                  kRowButtonSize,
-                  kRowButtonSize,
+                  default_button_size(),
+                  default_button_size(),
                   UI::ButtonStyle::kFsMenuSecondary,
                   ""),
      refresh_(&buttons_box_,
               "refresh",
               0,
               0,
-              kRowButtonSize,
-              kRowButtonSize,
+              default_button_size(),
+              default_button_size(),
               UI::ButtonStyle::kFsMenuSecondary,
               _("Refresh"),
               _("Refresh the list of add-ons available from the server")),
@@ -516,8 +491,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
          "ok",
          0,
          0,
-         kRowButtonSize,
-         kRowButtonSize,
+         default_button_size(),
+         default_button_size(),
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
@@ -525,8 +500,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                            "autofix",
                            0,
                            0,
-                           kRowButtonSize,
-                           kRowButtonSize,
+                           default_button_size(),
+                           default_button_size(),
                            UI::ButtonStyle::kFsMenuSecondary,
                            _("Fix dependencies…"),
                            _("Try to automatically fix the dependency errors")),
@@ -535,8 +510,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                "move_top",
                0,
                0,
-               kRowButtonSize,
-               kRowButtonSize,
+               default_button_size(),
+               default_button_size(),
                UI::ButtonStyle::kFsMenuSecondary,
                g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
                _("Move selected add-on to top")),
@@ -544,8 +519,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               "move_up",
               0,
               0,
-              kRowButtonSize,
-              kRowButtonSize,
+              default_button_size(),
+              default_button_size(),
               UI::ButtonStyle::kFsMenuSecondary,
               g_image_cache->get("images/ui_basic/scrollbar_up.png"),
               _("Move selected add-on one step up")),
@@ -553,8 +528,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                 "move_down",
                 0,
                 0,
-                kRowButtonSize,
-                kRowButtonSize,
+                default_button_size(),
+                default_button_size(),
                 UI::ButtonStyle::kFsMenuSecondary,
                 g_image_cache->get("images/ui_basic/scrollbar_down.png"),
                 _("Move selected add-on one step down")),
@@ -562,8 +537,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   "move_bottom",
                   0,
                   0,
-                  kRowButtonSize,
-                  kRowButtonSize,
+                  default_button_size(),
+                  default_button_size(),
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
                   _("Move selected add-on to bottom")),
@@ -614,7 +589,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                              UI::FontStyle::kFsMenuInfoPanelHeading,
 	                              _("Tools for Add-Ons Developers"), UI::Align::kCenter),
 	             UI::Box::Resizing::kFullSize);
-	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add_space(default_button_size());
 	{
 		UI::MultilineTextarea* m = new UI::MultilineTextarea(
 		   &dev_box_, "message_development", 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
@@ -626,10 +601,10 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		              "without having to write a single line of code."));
 		dev_box_.add(m, UI::Box::Resizing::kFullSize);
 	}
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 	dev_box_.add(&launch_packager_);
 
-	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add_space(default_button_size());
 	dev_box_.add(new UI::MultilineTextarea(
 	                &dev_box_, "message_links", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	                format("<rt><p>%1$s</p></rt>",
@@ -641,9 +616,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                                .as_font_tag(as_url_hyperlink(kDocumentationURL))))),
 	                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	             UI::Box::Resizing::kFullSize);
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 
-	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add_space(default_button_size());
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, "message_detailed_info", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
@@ -679,11 +654,11 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 	dev_box_.add(&upload_addon_accept_);
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 	dev_box_.add(&upload_addon_);
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 	dev_box_.add(&upload_screenshot_);
 
 	upload_addon_accept_.changed.connect([this]() { update_login_button(nullptr); });
@@ -695,7 +670,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		s.run<UI::Panel::Returncodes>();
 	});
 
-	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add_space(default_button_size());
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, "message_contact_public", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
@@ -710,9 +685,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                             .as_font_tag(as_url_hyperlink(kForumURL))))),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 
-	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add_space(default_button_size());
 	dev_box_.add(
 	   new UI::MultilineTextarea(
 	      &dev_box_, "message_contact_private", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
@@ -732,33 +707,33 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		ContactForm c(*this);
 		c.run<UI::Panel::Returncodes>();
 	});
-	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add_space(default_spacing());
 	dev_box_.add(&contact_);
 
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
+	installed_addons_buttons_box_.add_space(default_spacing());
 	installed_addons_buttons_box_.add(&move_up_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	installed_addons_buttons_box_.add_space(kRowButtonSize + 2 * kRowButtonSpacing);
+	installed_addons_buttons_box_.add_space(default_button_size() + 2 * default_spacing());
 	installed_addons_buttons_box_.add(&move_down_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
+	installed_addons_buttons_box_.add_space(default_spacing());
 	installed_addons_buttons_box_.add(&move_bottom_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_outer_wrapper_.add(
 	   &installed_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
-	installed_addons_outer_wrapper_.add_space(kRowButtonSpacing);
+	installed_addons_outer_wrapper_.add_space(default_spacing());
 	installed_addons_outer_wrapper_.add(
 	   &installed_addons_buttons_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	browse_addons_outer_wrapper_.add(&browse_addons_buttons_box_, UI::Box::Resizing::kFullSize);
-	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	browse_addons_outer_wrapper_.add_space(2 * default_spacing());
 	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
-	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	browse_addons_outer_wrapper_.add_space(2 * default_spacing());
 	browse_addons_outer_wrapper_.add(
 	   &browse_pagination_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	maps_outer_wrapper_.add(&maps_buttons_box_, UI::Box::Resizing::kFullSize);
-	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	maps_outer_wrapper_.add_space(2 * default_spacing());
 	maps_outer_wrapper_.add(&maps_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
-	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	maps_outer_wrapper_.add_space(2 * default_spacing());
 	maps_outer_wrapper_.add(&maps_pagination_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
@@ -815,9 +790,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			filter_browse_category_[pair.first] = c;
 			c->set_state(true);
 			c->changed.connect([this, &pair]() { category_filter_browse_changed(pair.first); });
-			c->set_desired_size(kRowButtonSize, kRowButtonSize);
+			c->set_desired_size(default_button_size(), default_button_size());
 			if (index > 0) {
-				browse_addons_buttons_box_category_box_.add_space(kRowButtonSpacing);
+				browse_addons_buttons_box_category_box_.add_space(default_spacing());
 			}
 			browse_addons_buttons_box_category_box_.add(
 			   c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -839,9 +814,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			filter_maps_world_[world.old_name] = c;
 			c->set_state(true);
 			c->changed.connect([this, world]() { world_filter_maps_changed(world.old_name); });
-			c->set_desired_size(kRowButtonSize, kRowButtonSize);
+			c->set_desired_size(default_button_size(), default_button_size());
 			if (index > 0) {
-				filter_maps_lhbox_.add_space(kRowButtonSpacing);
+				filter_maps_lhbox_.add_space(default_spacing());
 			}
 			filter_maps_lhbox_.add(c, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			++index;
@@ -855,9 +830,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	browse_addons_buttons_box_rvbox_.add(
 	   &browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_rvbox_.add_space(default_spacing());
 	browse_addons_buttons_box_rvbox_.add(&filter_browse_name_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_rvbox_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_rvbox_.add_space(default_spacing());
 	browse_addons_buttons_box_rvbox_.add(&sort_order_browse_, UI::Box::Resizing::kFullSize);
 
 	browse_addons_buttons_box_lvbox_.add(
@@ -866,41 +841,41 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	browse_addons_buttons_box_lvbox_.add(&filter_browse_reset_, UI::Box::Resizing::kFullSize);
 
 	browse_addons_buttons_box_.add(&browse_addons_buttons_box_lvbox_, UI::Box::Resizing::kFullSize);
-	browse_addons_buttons_box_.add_space(kRowButtonSpacing);
+	browse_addons_buttons_box_.add_space(default_spacing());
 	browse_addons_buttons_box_.add(
 	   &browse_addons_buttons_box_rvbox_, UI::Box::Resizing::kExpandBoth);
 
 	filter_maps_lvbox_.add(&sort_order_maps_, UI::Box::Resizing::kFullSize);
-	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add_space(default_spacing());
 	filter_maps_lvbox_.add(&filter_maps_lhbox_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add_space(default_spacing());
 	filter_maps_lvbox_.add(&filter_maps_name_, UI::Box::Resizing::kFullSize);
-	filter_maps_lvbox_.add_space(kRowButtonSpacing);
+	filter_maps_lvbox_.add_space(default_spacing());
 	filter_maps_lvbox_.add(&filter_maps_reset_, UI::Box::Resizing::kFullSize);
 
 	// Spinboxes and their width requirements...
 	filter_maps_rvbox_min_.set_size(300, 100);
 	filter_maps_rvbox_max_.set_size(300, 100);
 	filter_maps_rvbox_min_.add(&filter_maps_min_players_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add_space(default_spacing());
 	filter_maps_rvbox_min_.add(&filter_maps_min_w_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add_space(default_spacing());
 	filter_maps_rvbox_min_.add(&filter_maps_min_h_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_min_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_min_.add_space(default_spacing());
 	filter_maps_rvbox_min_.add(&filter_maps_min_size_, UI::Box::Resizing::kFullSize);
 
 	filter_maps_rvbox_max_.add(&filter_maps_max_players_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add_space(default_spacing());
 	filter_maps_rvbox_max_.add(&filter_maps_max_w_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add_space(default_spacing());
 	filter_maps_rvbox_max_.add(&filter_maps_max_h_, UI::Box::Resizing::kFullSize);
-	filter_maps_rvbox_max_.add_space(kRowButtonSpacing);
+	filter_maps_rvbox_max_.add_space(default_spacing());
 	filter_maps_rvbox_max_.add(&filter_maps_max_size_, UI::Box::Resizing::kFullSize);
 
 	maps_buttons_box_.add(&filter_maps_lvbox_, UI::Box::Resizing::kExpandBoth);
-	maps_buttons_box_.add_space(kRowButtonSpacing);
+	maps_buttons_box_.add_space(default_spacing());
 	maps_buttons_box_.add(&filter_maps_rvbox_min_, UI::Box::Resizing::kFullSize);
-	maps_buttons_box_.add_space(kRowButtonSpacing);
+	maps_buttons_box_.add_space(default_spacing());
 	maps_buttons_box_.add(&filter_maps_rvbox_max_, UI::Box::Resizing::kFullSize);
 
 	std::vector<int32_t> field_sizes_max;
@@ -1170,24 +1145,24 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		update_dependency_errors();
 	});
 
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&upgrade_all_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 	buttons_box_.add(&refresh_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 #if 0  // TODO(Nordfriese): Disabled autofix_dependencies for v1.0
 	buttons_box_.add(&autofix_dependencies_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 #endif
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
-	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add_space(default_spacing());
 
 	main_box_.add(&tabs_placeholder_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&warn_requirements_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add_space(default_spacing());
 
 	// prevent assert failures
 	installed_addons_box_.set_size(100, 100);
@@ -1587,7 +1562,7 @@ void AddOnsCtrl::rebuild_installed() {
 	size_t index = 0;
 	for (const auto& pair : AddOns::g_addons) {
 		if (index > 0) {
-			installed_addons_box_.add_space(kRowButtonSize);
+			installed_addons_box_.add_space(default_button_size());
 		}
 		++index;
 
@@ -1700,7 +1675,7 @@ void AddOnsCtrl::browse_pagination_changed(const bool changed_size) {
 
 	for (size_t index = first; index < last; ++index) {
 		if (index != first) {
-			browse_addons_box_.add_space(kRowButtonSize);
+			browse_addons_box_.add_space(default_button_size());
 		}
 		std::shared_ptr<AddOns::AddOnInfo> remote_info = remotes_to_show_.at(index);
 
@@ -1765,7 +1740,7 @@ void AddOnsCtrl::maps_pagination_changed(const bool changed_size) {
 
 	for (size_t index = first; index < last; ++index) {
 		if (index != first) {
-			maps_box_.add_space(kRowButtonSize);
+			maps_box_.add_space(default_button_size());
 		}
 		std::shared_ptr<AddOns::AddOnInfo> map_info = maps_to_show_.at(index);
 
@@ -1936,13 +1911,13 @@ void AddOnsCtrl::layout() {
 		tabs_.set_size(tabs_placeholder_.get_w(), tabs_placeholder_.get_h());
 
 		installed_addons_outer_wrapper_.set_max_size(
-		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * kRowButtonSize);
+		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * default_button_size());
 		browse_addons_inner_wrapper_.set_max_size(
-		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * kRowButtonSize -
+		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * default_button_size() -
 		                                 browse_addons_buttons_box_.get_h() -
 		                                 browse_pagination_.get_h());
 		maps_inner_wrapper_.set_max_size(
-		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * kRowButtonSize -
+		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * default_button_size() -
 		                                 maps_buttons_box_.get_h() - maps_pagination_.get_h());
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
@@ -1950,7 +1925,7 @@ void AddOnsCtrl::layout() {
 		int w;
 		int h;
 		server_name_.get_desired_size(&w, &h);
-		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
+		server_name_.set_pos(Vector2i(login_button_.get_x() - w - default_spacing(),
 		                              login_button_.get_y() + (login_button_.get_h() - h) / 2));
 	}
 
@@ -2074,7 +2049,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		if (remote != nullptr) {
 			*remote = net().fetch_one_remote(remote->internal_name);
 		}
-		clear_cache_for_browse(remote->internal_name);
+		clear_cache_for_browse(addon->internal_name);
 		rebuild_browse();
 	} catch (const OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
@@ -2095,7 +2070,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		         format(_("The add-on ‘%s’ may not be uploaded to the server because the following "
 		                  "filenames contained in the add-on are not allowed:"),
 		                addon->internal_name),
-		         kRowButtonSize, message, kRowButtonSize,
+		         default_button_size(), message, default_button_size(),
 		         _("Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and simple "
 		           "punctuation "
 		           "(period, hyphen, and underscore; not multiple periods). Other characters such as "

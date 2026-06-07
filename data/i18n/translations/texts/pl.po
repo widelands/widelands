@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Marcin S <dzidek1003@o2.pl>, 2025\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -177,8 +177,8 @@ msgstr "Co miało się stać podczas wykonywania kroków i co się właściwie s
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "Z której wersji Widelands korzystasz (tj. numer builda lub rewizji jeśli\nkorzystasz z wersji deweloperskiej lub dziennego builda.)"
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -576,10 +576,9 @@ msgstr "Mistrzowie dżungli uczą się swoich umiejętności, pracując jako obr
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "Miej oko na swoich rybaków i nie zapomnij wybudować chaty hodowcy ryb. Jeśli przełowią swój obszar pracy aż do wyginięcia ryb, nigdy już nie będzie można ich przywrócić."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
