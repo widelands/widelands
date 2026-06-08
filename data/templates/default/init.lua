@@ -1081,6 +1081,8 @@ return {
       ui_default_indent = 8,
       ui_default_button_size = 32,
       ui_default_button_size_small = 24,
+      ui_default_button_size_large = 120,
       toolbar_button_size = 32,
+      ui_default_progress_bar_width = 100,
    }
 }
