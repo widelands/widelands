@@ -658,6 +658,9 @@ int LuaPanel::get_child(lua_State* L) {
 
            This widget can not have a custom tooltip.
 
+           .. versionchanged:: 1.4
+              This widget does not use the sizing and positioning properties.
+
          * ``"slider"``: A button that can be slid along a line to change a value. Properties:
 
            * ``"orientation"``: **Mandatory**. The slider's direction:
