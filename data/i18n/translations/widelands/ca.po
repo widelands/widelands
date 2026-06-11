@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Juanjo, 2015-2025
 # Juanjo, 2015
+# Júlia Rosell Saldaña, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-06 05:58+0000\n"
+"POT-Creation-Date: 2026-06-08 06:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Juanjo, 2015-2025\n"
+"Last-Translator: Júlia Rosell Saldaña, 2026\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1014,7 +1015,7 @@ msgstr "Oferta d'acord comercial acceptada"
 #: ../../../../src/logic/game.cc:1370
 #, c-format
 msgid "%1$s has accepted your trade offer at %2$s."
-msgstr ""
+msgstr "%1$sha acceptat la teva oferta de compravenda a %2$s ."
 
 #: ../../../../src/logic/game.cc:1388
 msgid "Trade Rejected"
@@ -1027,7 +1028,7 @@ msgstr "Oferta d'acord comercial rebutjada"
 #: ../../../../src/logic/game.cc:1390
 #, c-format
 msgid "%1$s has rejected your trade offer at %2$s."
-msgstr ""
+msgstr "%1$sha rebutjat la teva oferta de compravenda a %2$s."
 
 #: ../../../../src/logic/game.cc:1412
 msgid "Trade Retracted"
@@ -1040,7 +1041,7 @@ msgstr "S'ha retirat l'oferta d'acord comercial"
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "L'oferta comercial de %sha estat retirada."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
@@ -1053,7 +1054,7 @@ msgstr "Nova proposta d'allargament d'acord comercial rebuda"
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%sha proposat d'estendre un acord comercial."
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
@@ -1066,7 +1067,7 @@ msgstr "S'ha retirat la proposta d'allargament d'acord comercial"
 #: ../../../../src/logic/game.cc:1560
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "La proposta de %sd'estendre un acord comercial ha estat retirada."
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
@@ -1079,7 +1080,7 @@ msgstr "La proposta d'allargament d'acord comercial s'ha rebutjat"
 #: ../../../../src/logic/game.cc:1602
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%sha rebutjat la teva proposta d'estendre un acord comercial."
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
@@ -1092,7 +1093,7 @@ msgstr "La proposta d'allargament de l'acord comercial s'ha acceptat"
 #: ../../../../src/logic/game.cc:1657
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%sha acceptat la teva proposta d'estendre un acord comercial."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -1210,7 +1211,7 @@ msgstr "%u%% desmantellat"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:71
 msgid "A new market was added to your economy."
-msgstr ""
+msgstr "Un nou mercat ha estat afegit a la teva economia."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:153
 #, c-format
@@ -1238,12 +1239,12 @@ msgstr "Acord comercial completat"
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "El teu acord comercial a %sha estat completat."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "El teu acord comercial a %sha estat cancelat."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
@@ -1269,33 +1270,33 @@ msgstr "S'ha reprès l'acord comercial"
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$sha reactivat l'acord comercial amb tu a%2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Acord comercial a %1$samb%2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Oferta comercial de %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Ofertes comercials de %1$sa%2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%dlot"
+msgstr[1] "%dlots"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
@@ -1305,15 +1306,15 @@ msgstr "L'acord es mantindrà indefinidament"
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%dlot entregat"
+msgstr[1] "%dlots entregats"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%dlot restant"
+msgstr[1] "%dlots restants"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
@@ -1869,18 +1870,18 @@ msgstr "La descàrrega de béns ha fallat. L’expedició s’ha cancel·lat."
 #: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:96
 msgctxt "ship"
 msgid "Fleet split"
-msgstr ""
+msgstr "Divisió de flota"
 
 #: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:86
 #: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:96
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Divisió de flota de vaixells"
 
 #: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:87
 #: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:97
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Una flota de vaixells va haver de ser dividida, perquè un canvi de terreny va bloquejar un pas."
 
 #: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:81
 msgid "Destination Gone"
@@ -2104,7 +2105,7 @@ msgstr "Port %d"
 #, c-format
 msgctxt "market"
 msgid "Market %d"
-msgstr ""
+msgstr "Mercat %d"
 
 #: ../../../../src/logic/player.cc:2098
 #, c-format
@@ -3863,7 +3864,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Estàs segur que vols publicar aquest mapa online?\n\nNom: %1$s\nNom intern: %2$s\nAutor: %3$s\nDescripció: %4$s\nConsell: %5$s\n\n"
 
 #: ../../../../src/ui/editor/editorinteractive.cc:1582
 msgid "Publish Map"
@@ -3876,7 +3877,7 @@ msgid ""
 "General Public License (GPL) version 2 or any later version (the same "
 "license under which Widelands itself is distributed). For more information, "
 "see %s."
-msgstr ""
+msgstr "En carregar-lo, accepteu publicar el mapa segons els termes de la Llicència Pública General GNU (GPL) versió 2 o qualsevol versió posterior (la mateixa llicència sota la qual es distribueix Widelands). Per a més informació, consulteu %s."
 
 #: ../../../../src/ui/editor/editorinteractive.cc:1608
 msgid "Login Error"
@@ -4571,12 +4572,12 @@ msgstr "Estableix l’alçada a:"
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:72
 msgid "Pick height from map …"
-msgstr ""
+msgstr "Agafa l'alçada del mapa..."
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:73
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:111
 msgid "Select the height of a field by clicking on it on the map"
-msgstr ""
+msgstr "Selecciona l'alçada d'un camp fent-hi clic al mapa"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:78
@@ -4601,11 +4602,11 @@ msgstr "Estableix la quantitat a:"
 
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:92
 msgid "Pick resource from map …"
-msgstr ""
+msgstr "Agafa un recurs del mapa..."
 
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:93
 msgid "Select a resource type by clicking on it on the map"
-msgstr ""
+msgstr "Selecciona un tipus de recurs fent-hi clic al mapa"
 
 #. * TRANSLATORS: Editor change rseources access keys. *
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:99
@@ -4647,17 +4648,17 @@ msgstr "Alçada fixada"
 
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:119
 msgid "Pick …"
-msgstr ""
+msgstr "Agafa..."
 
 #: ../../../../src/ui/editor/tool_place_critter_options_menu.cc:58
 msgid "Pick animal from map …"
-msgstr ""
+msgstr "Agafa un animal del mapa..."
 
 #: ../../../../src/ui/editor/tool_place_critter_options_menu.cc:59
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr ""
+msgstr "Selecciona un animal fent-hi clic al mapa. Mantingues premuda la tecla Ctrl per seleccionar diversos animals."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -4692,13 +4693,13 @@ msgstr "%1$s (necessita un lloc de construcció gran)"
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Agafa un immoble del mapa..."
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:92
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Selecciona un tipus d'immoble fent-hi clic al mapa. Mantingues premuda la tecla Ctrl per seleccionar diversos immobles."
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -4723,13 +4724,13 @@ msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo
 
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:103
 msgid "Pick terrain from map …"
-msgstr ""
+msgstr "Agafa un terreny del mapa..."
 
 #: ../../../../src/ui/editor/tool_set_terrain_options_menu.cc:104
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Selecciona un tipus de terreny fent-hi clic al mapa. Mantingues premuda la tecla Ctrl per seleccionar diversos terrenys."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/ui/editor/tool_toolhistory_options_menu.cc:121
@@ -5020,7 +5021,7 @@ msgid ""
 " (the same license under which Widelands itself is distributed). For more "
 "information on the GPL, please refer to ‘About Widelands’ → ‘License’ in the"
 " main menu or see %s."
-msgstr ""
+msgstr "Aquí podeu carregar els vostres complements al servidor per posar-los a disposició d'altres jugadors. En carregar-los, accepteu publicar la vostra creació sota els termes de la Llicència Pública General de GNU (GPL) versió 2 o qualsevol versió posterior (la mateixa llicència sota la qual es distribueix Widelands). Per obtenir més informació sobre la GPL, consulteu \"Quant a Widelands\" → \"Llicència\" al menú principal o vegeu %s."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:638
 msgid ""
@@ -6322,7 +6323,7 @@ msgstr "Comentaris i vots"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:426
 #, c-format
 msgid "%1$s   ✎ %2$s"
-msgstr ""
+msgstr "%1$s ✎ %2$s"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
@@ -6930,23 +6931,39 @@ msgstr "Escull una repetició"
 msgid "Show Filenames"
 msgstr "Mostra els noms dels fitxers"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:79
-msgid "Load this replay"
-msgstr "Carrega aquesta repetició"
-
-#: ../../../../src/ui/fsmenu/loadgame.cc:81
+#: ../../../../src/ui/fsmenu/loadgame.cc:80
 #: ../../../../src/ui/fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Torna a la configuració de partida multijugador"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:82
+#: ../../../../src/ui/fsmenu/loadgame.cc:81
 #: ../../../../src/ui/fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Torna al menú d’un jugador"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:83
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
 msgid "Load this game"
 msgstr "Carrega aquesta partida"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has a file to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
+msgid "Load this replay"
+msgstr "Carrega aquesta repetició"
+
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:200
+msgid "No game selected"
+msgstr "No s'ha seleccionat cap joc"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has no files to select
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:197
+msgid "No replay selected"
+msgstr "No s'ha seleccionat cap repetició"
 
 #: ../../../../src/ui/fsmenu/login_box.cc:37
 #: ../../../../src/ui/fsmenu/main.cc:431
@@ -7696,7 +7713,7 @@ msgstr "El nom de l’amfitrió o l’adreça no és vàlid i no us hi podeu con
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%dx"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7704,7 +7721,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1fx"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7712,7 +7729,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2fx"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7763,7 +7780,7 @@ msgstr "Distància de les finestres per adherir-se a les vores:"
 
 #: ../../../../src/ui/fsmenu/options.cc:244
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Factor d'escalat de la interfície d'usuari"
 
 #: ../../../../src/ui/fsmenu/options.cc:254
 msgid "Edit keyboard and mouse actions…"
@@ -7892,7 +7909,7 @@ msgstr "Durant les partides"
 
 #: ../../../../src/ui/fsmenu/options.cc:468
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Factor d'escalat de la interfície d'usuari:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:552
@@ -8244,36 +8261,36 @@ msgstr "Voleu cancel·lar-ho?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr ""
+msgstr "De veritat vols cancel·lar aquest acord comercial?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Estendre acord comercial"
 
 #: ../../../../src/ui/game/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Selecciona per quants lots vols estendre aquest acord comecial:"
 
 #: ../../../../src/ui/game/actionconfirm.cc:603
 #: ../../../../src/ui/game/marketwindow.cc:75
 msgid "Toggle indefinite trade"
-msgstr ""
+msgstr "Activar acord comercial indefinit"
 
 #: ../../../../src/ui/game/actionconfirm.cc:604
 #: ../../../../src/ui/game/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Lots:"
 
 #: ../../../../src/ui/game/actionconfirm.cc:639
 msgid "Unpause?"
-msgstr ""
+msgstr "Despausar?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:640
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
 "Doing so will reset all queues to their maximum capacity."
-msgstr ""
+msgstr "De veritat vols despausar aquest acord comercial?\n\nFer-ho reiniciarà totes les cues a la seva màxima capacitat."
 
 #: ../../../../src/ui/game/attack_window.cc:79
 msgid "Attack"
@@ -8750,15 +8767,15 @@ msgstr "Inviteu aquest jugador a unir-se al vostre equip."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Acords comercials que has rebut d'altres jugadors"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Acords comercials que has proposat a altres jugadors"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Els teus acords comercials actius"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:246
 msgid "No team"
@@ -8813,136 +8830,136 @@ msgstr "Ofertes d'acords comercials (%u)"
 #: ../../../../src/ui/game/diplomacy_menu.cc:414
 #: ../../../../src/ui/game/marketwindow.cc:449
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Ningú t'ha ofert cap acord comercial de moment."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
-msgstr ""
+msgstr "Mercat en el qual acceptar acord comercial a"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:442
 #: ../../../../src/ui/game/diplomacy_menu.cc:673
 #: ../../../../src/ui/game/marketwindow.cc:614
 #, c-format
 msgid "%s (closest)"
-msgstr ""
+msgstr "%s(més proper)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:445
 #, c-format
 msgid "%1$s (distance: %2$u field)"
 msgid_plural "%1$s (distance: %2$u fields)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " %1$s(distància: %2$ucamp)"
+msgstr[1] "%1$s (distància: %2$ucamps) "
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:452
 #: ../../../../src/ui/game/marketwindow.cc:468
 msgid "Accept this trade offer"
-msgstr ""
+msgstr "Acceptar aquesta oferta comercial."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:455
 #: ../../../../src/ui/game/marketwindow.cc:471
 msgid "Reject this trade offer"
-msgstr ""
+msgstr "Rebutjar aquesta oferta comercial."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:459
 msgid "Build a market to accept trade offers."
-msgstr ""
+msgstr "Construeix un mercat per acceptar acords comercials."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:498
 #: ../../../../src/ui/game/marketwindow.cc:930
 #, c-format
 msgid "Proposed Trades (%u)"
-msgstr ""
+msgstr "Acords comercials proposats (%u)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:509
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from a market."
-msgstr ""
+msgstr "No hi ha acords comercials pendents en aquest moment. Pots proposar-ne de nous des del mercat."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:533
 #: ../../../../src/ui/game/diplomacy_menu.cc:642
 msgid "Center view on this market"
-msgstr ""
+msgstr "Centrar vista en aquest mercat"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:536
 #: ../../../../src/ui/game/marketwindow.cc:339
 msgid "Retract this trade offer"
-msgstr ""
+msgstr "Retirar aquest acord comercial"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:548
 #: ../../../../src/ui/game/marketwindow.cc:347
 msgid "Move this trade proposal…"
-msgstr ""
+msgstr "Moure aquest acord comercial..."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:558
 #: ../../../../src/ui/game/marketwindow.cc:358
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Moure aquest acord comercial a %s"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:563
 #: ../../../../src/ui/game/diplomacy_menu.cc:683
 #: ../../../../src/ui/game/marketwindow.cc:364
 #: ../../../../src/ui/game/marketwindow.cc:624
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "No disposes de mercats als quals poder moure aquest acord comercial."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:598
 #, c-format
 msgid "Active Trades (%u)"
-msgstr ""
+msgstr "Acord comercials actius (%u)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "No hi ha acords comercials en aquest moment."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:649
 #: ../../../../src/ui/game/diplomacy_menu.cc:657
 #: ../../../../src/ui/game/marketwindow.cc:570
 #: ../../../../src/ui/game/marketwindow.cc:578
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Proposar estendre aquest interncanvi"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:650
 #: ../../../../src/ui/game/marketwindow.cc:571
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Mantén premut Ctrl per a estendre per %dlot"
+msgstr[1] "Mantén premut Ctrl per a estendre per %dlots"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:655
 #: ../../../../src/ui/game/marketwindow.cc:576
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Mantén premut Shift per a estendre aquest intercanvi indefinidament"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Cancel·la aquest acord"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:663
 #: ../../../../src/ui/game/marketwindow.cc:601
 msgid "Move this trade…"
-msgstr ""
+msgstr "Mou aquest intercanvi..."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:676
 #: ../../../../src/ui/game/marketwindow.cc:617
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Mou aquest intercanvi a %s (la més propera)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:677
 #: ../../../../src/ui/game/marketwindow.cc:618
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Mou aquest intercanvi a %s"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:737
 #: ../../../../src/ui/game/marketwindow.cc:703
 #: ../../../../src/ui/game/marketwindow.cc:789
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "%1$s ha proposat ampliar aquest intercanvi indefinidament."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:740
 #: ../../../../src/ui/game/marketwindow.cc:706
@@ -8950,8 +8967,8 @@ msgstr ""
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s ha proposat ampliar aquest intercanvi en %2$dlot."
+msgstr[1] "%1$s ha proposat ampliar aquest intercanvi en %2$dlots."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:749
 #: ../../../../src/ui/game/marketwindow.cc:716
@@ -8966,15 +8983,15 @@ msgstr "Accepta aquesta proposta d'extensió d'acord comercial"
 #: ../../../../src/ui/game/diplomacy_menu.cc:783
 #: ../../../../src/ui/game/marketwindow.cc:763
 msgid "You proposed to extend this trade indefinitely."
-msgstr ""
+msgstr "Has proposat ampliar aquest intercanvi indefinidament."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:784
 #: ../../../../src/ui/game/marketwindow.cc:759
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vau proposar ampliar aquest intercanvi per %d lots."
+msgstr[1] "Has proposat ampliar aquest intercanvi en %d lots."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:793
 #: ../../../../src/ui/game/marketwindow.cc:769
@@ -9036,7 +9053,7 @@ msgstr "Els perfils predefinits no es poden esborrar."
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Esborrar el perfil seleccionat."
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9461,53 +9478,53 @@ msgstr "El que demaneu:"
 
 #: ../../../../src/ui/game/marketwindow.cc:106
 msgid "Decrease amount by 10"
-msgstr ""
+msgstr "Reduir quantitat en 10"
 
 #: ../../../../src/ui/game/marketwindow.cc:113
 msgid "Decrease amount"
-msgstr ""
+msgstr "Redueix la quantitat"
 
 #: ../../../../src/ui/game/marketwindow.cc:121
 msgid "Increase amount"
-msgstr ""
+msgstr "Augmenta la quantitat"
 
 #: ../../../../src/ui/game/marketwindow.cc:128
 msgid "Increase amount by 10"
-msgstr ""
+msgstr "Augmenta la quantitat en 10"
 
 #: ../../../../src/ui/game/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Si us plau, seleccioneu el jugador amb qui voleu intercanviar."
 
 #: ../../../../src/ui/game/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Si us plau, seleccioneu els articles que voleu enviar i rebre."
 
 #: ../../../../src/ui/game/marketwindow.cc:230
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No es permet intercanviar més de %dd'articles per lot."
+msgstr[1] "No es permet intercanviar més %dde mercaderies per lot."
 
 #: ../../../../src/ui/game/marketwindow.cc:239
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "No podeu enviar i rebre el mateix tipus de bé comercial(%s)."
 
 #: ../../../../src/ui/game/marketwindow.cc:245
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Proposa l'intercanvi configurat al jugador seleccionat"
 
 #: ../../../../src/ui/game/marketwindow.cc:313
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
-msgstr ""
+msgstr "No hi ha propostes de transacció pendents en aquest moment. Podeu proposar una nova transacció des de la primera pestanya."
 
 #: ../../../../src/ui/game/marketwindow.cc:316
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Actualment no hi ha cap proposta comercial pendent."
 
 #: ../../../../src/ui/game/marketwindow.cc:587
 msgid "Cancel this trade"
@@ -9517,41 +9534,41 @@ msgstr "Cancel·la aquest acord comercial"
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Reprèn aquesta operació en pausa. Això requereix que totes les cues estiguin a la seva capacitat màxima."
 
 #: ../../../../src/ui/game/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Pausar aquest comerç"
 
 #: ../../../../src/ui/game/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Cal que posis en pausa l'intercanvi abans de poder canviar la capacitat de la cua."
 
 #: ../../../../src/ui/game/marketwindow.cc:825
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Pausar comerç?"
 
 #: ../../../../src/ui/game/marketwindow.cc:826
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
-msgstr ""
+msgstr "Canviar la capacitat de les cues d'entrada farà que l'intercanvi es posi en pausa. Voleu pausar l'intercanvi ara?"
 
 #: ../../../../src/ui/game/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Proposar comerç"
 
 #: ../../../../src/ui/game/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Propostes de comerç"
 
 #: ../../../../src/ui/game/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Ofertes de comerç"
 
 #: ../../../../src/ui/game/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Comerç actiu"
 
 #: ../../../../src/ui/game/message_menu.cc:54
 #: ../../../../src/ui/game/message_menu.cc:654
@@ -9672,15 +9689,15 @@ msgstr "Soldats"
 
 #: ../../../../src/ui/game/music_player.cc:91
 msgid "Next"
-msgstr ""
+msgstr "Següent"
 
 #: ../../../../src/ui/game/music_player.cc:96
 msgid "Shuffle"
-msgstr ""
+msgstr "Mesclar "
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Cançó actual:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -10382,24 +10399,24 @@ msgid ""
 msgstr "La repetició es va crear amb una versió diferent del Widelands. Potser és compatible, però probablement es dessincronitzi o potser no es pugui carregar.\n\nSi us plau, no envieu informes d’error que passin mentre mireu la repetició.\n\nVoleu carregar la repetició igualment?"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:183
+#: ../../../../src/ui/shared/load_or_save_game.cc:182
 msgid "Delete this replay"
 msgstr "Esborra aquesta repetició"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:185
+#: ../../../../src/ui/shared/load_or_save_game.cc:184
 msgid "Delete this game"
 msgstr "Esborra aquesta partida"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:190
+#: ../../../../src/ui/shared/load_or_save_game.cc:189
 msgid "Delete these replays"
 msgstr "Esborra aquestes repeticions"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:193
+#: ../../../../src/ui/shared/load_or_save_game.cc:192
 msgid "Delete these games"
 msgstr "Esborra aquestes partides"
 
@@ -11010,13 +11027,13 @@ msgstr "Allunya la vista"
 #: ../../../../src/ui/wui/interactive_base.cc:349
 #: ../../../../src/wlapplication_options.cc:426
 msgid "Maximum Zoom"
-msgstr ""
+msgstr "Zoom màxim"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/ui/wui/interactive_base.cc:354
 #: ../../../../src/wlapplication_options.cc:431
 msgid "Minimum Zoom"
-msgstr ""
+msgstr "Zoom mínim"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../../../src/ui/wui/interactive_base.cc:359
@@ -11381,7 +11398,7 @@ msgstr "Ho sentim, però el Widelands no ha pogut crear una desada d’emergènc
 
 #: ../../../../src/wlapplication_options.cc:182
 msgid "Market"
-msgstr ""
+msgstr "Mercat"
 
 #: ../../../../src/wlapplication_options.cc:183
 msgid "Warehouse"
@@ -11701,11 +11718,11 @@ msgstr "Publica el mapa en línia"
 
 #: ../../../../src/wlapplication_options.cc:476
 msgid "Pick From Map"
-msgstr ""
+msgstr "Tria del mapa"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Mostra el menú d'eines"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"
