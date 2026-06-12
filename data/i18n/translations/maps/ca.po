@@ -6,13 +6,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015-2018,2020-2023
 # Juanjo, 2015
+# Júlia Rosell Saldaña, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Juanjo, 2015-2018,2020-2023\n"
+"Last-Translator: Júlia Rosell Saldaña, 2026\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,18 +342,18 @@ msgstr "En aquest tutorial, aprendreu a navegar i gestionar vaixells i ports. Ta
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Economia i Comerç"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "En aquest tutorial, aprendràs quines opcions ofereix Widelands per ajustar la teva economia i com intercanviar diners amb altres jugadors. Recomanat per a jugadors amb una mica d'experiència."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Europa precisa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -364,22 +365,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Avís: Aquest mapa es proporciona com a vista prèvia experimental. Tot i que és millor en molts aspectes que l'Europa 1.2 que substitueix, probablement encara té errors. A més, és un mapa molt gran amb més posicions de jugador de les que es recomanen generalment, per la qual cosa té uns requisits de maquinari elevats. — Un mapa per jugar a imperis històrics. – Aquest mapa d'Europa pretén ser el més precís possible a Widelands. – FÀCIL: Imperi Otomà, Suècia, Imperi Rus, Cartago – MIG: Imperi Francès, Imperi Britànic, Espanya, Imperi Alemany, Imperi Romà – DIFÍCIL: Egipte, Polònia, Grècia"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "Els rius amples són navegables per crear una \"xarxa comercial\". Tots els jugadors tenen els seus propis reptes, però estan relativament equilibrats per ser jugables: – Imperi Britànic: crear colònies sostenibles – Imperi Rus: Distàncies molt grans..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Ameba"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Ets una ameba, expandeix-te i conquereix totes les altres amebes..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -387,7 +388,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Tingueu en compte que esteu envoltats d'enemics. Desactiveu la diplomàcia per a un joc més fàcil i activeu-la per a un joc més desafiant. A més, podeu definir la dificultat jugant contra diferents equips d'IA. Tot i que alguns jugadors tenen més espai al principi, el mapa està ben equilibrat."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -525,7 +526,7 @@ msgstr "Les muntanyes tenen molt terreny pla. Desgraciadament, gran part és ver
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Mandala egipci v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -533,7 +534,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Amb prou feines van tenir temps de preparar-se quan van embarcar cap a aquesta illa. Segons els vostres exploradors, però, les coses no aniran tan fàcilment com us van dir abans. Heu d'esperar una oposició ferotge. Amplieu la vostra base i sigueu els primers a arribar a l'anell de poder."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -594,13 +595,13 @@ msgstr "És una prova dels déus o un pla malvat d’algú altre que la vostra t
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Forest Valley v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Una vall fluvial envoltada de muntanyes amb molts recursos excepte el carbó. Molt espai pla per construir."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -921,7 +922,7 @@ msgstr "Es diu que els vells monjos de guerra, que vivien en l’encara més ant
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Guerra Negra de Tasmània"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -934,7 +935,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Benvingut, intrús! Ets com un conqueridor europeu de principis del segle XIX quan es van establir a la terra de Van Diemen, més tard coneguda com a Tasmània. Entre 1828 i 1832 hi va haver una guerra anomenada la Guerra Negra en què l'Imperi Britànic va eradicar gairebé tota la població aborigen de la terra de Van Diemen. – El mapa simula un Imperi Britànic dispers però sense cap avantatge; en realitat, ofereix alguns grans desavantatges i probablement et costarà conquerir Tasmània. Durant la històrica Guerra Negra, la proporció entre europeus i aborígens era d'un contra deu, però aquesta vegada estan armats fins a les dents per a una revenja."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -947,7 +948,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "Aquest mapa està pensat per ser jugat per un sol jugador des de la ubicació inicial del jugador blau com a Imperi. Trieu bàrbars i amazones com a tribus rivals. Si voleu un repte, poseu-los tots al mateix bàndol i desactiveu la Diplomàcia. O podeu jugar amb tots els jugadors contra tots els altres, amb una condició de victòria de Temps Territorial. Aquest mapa no és adequat per a partides curtes i una partida probablement durarà més de deu hores. La IA té una gran capacitat en aquest mapa. És probable que un dels jugadors de l'ordinador també comenci a navegar i a competir pels millors ports de la costa de Tasmània, així que esteu avisats!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -984,7 +985,7 @@ msgstr "Diuen que les terres impenetrables del nord són temudes pels més valen
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Les Illes de les Vuit Tribus"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -992,7 +993,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Aquest mapa està dissenyat per a una partida llarga! Vuit tribus, tres illes i molts recursos. La colonització i els ferris us poden donar un gran avantatge, però això no és necessari per derrotar altres jugadors. Si voleu endarrerir els combats, podeu desactivar els quatre últims jugadors."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

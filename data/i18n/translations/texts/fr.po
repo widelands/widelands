@@ -185,7 +185,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "Quelle version de Widelands vous utilisez (c'est-à-dire le numéro de build ou le numéro de révision si vous utilisez une version de développement ou une version quotidienne)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -585,7 +585,7 @@ msgstr "Les maîtres de la jungle apprennent leurs compétences en travaillant c
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Surveillez vos pêcheurs et construisez une pisciculture pour régénérer les ressources en poisson."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
