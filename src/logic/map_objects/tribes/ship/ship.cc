@@ -86,9 +86,9 @@ bool Ship::init(EditorGameBase& egbase) {
 	shipname_ = get_owner()->pick_shipname();
 	molog(egbase.get_gametime(), "New ship: %s\n", shipname_.c_str());
 	Notifications::publish(NoteShip(this, NoteShip::Action::kGained));
-	if (upcast(Game, game, &egbase);  game != nullptr) {
-		send_message(*game, _("New Ship"), _("New Ship"),
-							_("A new ship has been built."), descr().icon_filename());
+	if (upcast(Game, game, &egbase); game != nullptr) {
+		send_message(*game, _("New Ship"), _("New Ship"), _("A new ship has been built."),
+		             descr().icon_filename());
 	}
 	return true;
 }
