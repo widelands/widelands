@@ -107,7 +107,16 @@ UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
 			assert(r.window);
 			GameObjectivesMenu& m = dynamic_cast<GameObjectivesMenu&>(*r.window);
 			m.think();  // Fills the list
-			m.objective_list_.select(fr.unsigned_32());
+
+			const uint32_t sel_index = fr.unsigned_32();
+			uint32_t const list_size = m.objective_list_.size();
+			if (sel_index < list_size || sel_index == m.objective_list_.no_selection_index()) {
+				m.objective_list_.select(sel_index);
+			} else {
+				log_warn("Objectives Menu: loaded selection of item %u out of %u, ignoring", sel_index, list_size);
+				m.objective_list_.select(m.objective_list_.no_selection_index());
+			}
+
 			return m;
 		}
 		throw Widelands::UnhandledVersionError(
