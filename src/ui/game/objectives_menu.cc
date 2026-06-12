@@ -113,7 +113,8 @@ UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
 			if (sel_index < list_size || sel_index == m.objective_list_.no_selection_index()) {
 				m.objective_list_.select(sel_index);
 			} else {
-				log_warn("Objectives Menu: loaded selection of item %u out of %u, ignoring", sel_index, list_size);
+				log_warn("Objectives Menu: loaded selection of item %u out of %u, ignoring", sel_index,
+				         list_size);
 				m.objective_list_.select(m.objective_list_.no_selection_index());
 			}
 
