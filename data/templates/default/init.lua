@@ -1084,5 +1084,8 @@ return {
       ui_default_button_size_large = 120,
       toolbar_button_size = 32,
       ui_default_progress_bar_width = 100,
+      ui_default_panel_dimension_narrow = 100,
+      ui_default_panel_dimension_medium = 200,
+      ui_default_panel_dimension_large = 400,
    }
 }

@@ -591,6 +591,9 @@ StyleManager::StyleManager() {
 	   UI::StyledSize::kUIDefaultButtonSizeLarge, *element_table, "ui_default_button_size_large");
 	add_styled_size(
 	   UI::StyledSize::kUIDefaultProgressBarWidth, *element_table, "ui_default_progress_bar_width");
+	add_styled_size(UI::StyledSize::kUIDefaultPanelDimensionNarrow, *element_table, "ui_default_panel_dimension_narrow");
+	add_styled_size(UI::StyledSize::kUIDefaultPanelDimensionMedium, *element_table, "ui_default_panel_dimension_medium");
+	add_styled_size(UI::StyledSize::kUIDefaultPanelDimensionLarge, *element_table, "ui_default_panel_dimension_large");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
 	add_styled_size(UI::StyledSize::kUIDefaultSpacing, *element_table, "ui_default_spacing");
 	add_styled_size(UI::StyledSize::kUIDefaultIndent, *element_table, "ui_default_indent");
