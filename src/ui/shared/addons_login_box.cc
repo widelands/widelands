@@ -31,7 +31,14 @@ namespace AddOnsUI {
 constexpr const char* const kRegisterURL = "https://widelands.org/accounts/register/";
 
 AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
-   : UI::Window(&parent, style, "login", 0, 0, default_panel_dimension_narrow(), default_panel_dimension_narrow(), _("Login")),
+   : UI::Window(&parent,
+                style,
+                "login",
+                0,
+                0,
+                default_panel_dimension_narrow(),
+                default_panel_dimension_narrow(),
+                _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
      box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
      hbox_(&box_, panel_style_, "hbox", 0, 0, UI::Box::Horizontal),
@@ -67,9 +74,9 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
             style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                 UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
-	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, "message", 0, 0, default_panel_dimension_narrow(), default_panel_dimension_narrow(), panel_style_, "",
-	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	UI::MultilineTextarea* m = new UI::MultilineTextarea(
+	   &box_, "message", 0, 0, default_panel_dimension_narrow(), default_panel_dimension_narrow(),
+	   panel_style_, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_text(as_richtext(
 	   g_style_manager
 	      ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :

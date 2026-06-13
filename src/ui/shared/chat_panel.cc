@@ -71,7 +71,12 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          style,
                          style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                             UI::ButtonStyle::kWuiSecondary),
-     editbox(&hbox_, "input", default_button_size_small() + default_spacing(), 0, w - default_button_size_small() - default_spacing(), style),
+     editbox(&hbox_,
+             "input",
+             default_button_size_small() + default_spacing(),
+             0,
+             w - default_button_size_small() - default_spacing(),
+             style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
@@ -91,8 +96,10 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 		// No access to participant list. Hide the dropdown
 		recipient_dropdown_.set_visible(false);
 		// Increase the size of the edit box to fill the empty space
-		editbox.set_pos(Vector2i(editbox.get_x() - default_button_size_small() - default_spacing(), editbox.get_y()));
-		editbox.set_size(editbox.get_w() + default_button_size_small() + default_spacing(), editbox.get_h());
+		editbox.set_pos(Vector2i(
+		   editbox.get_x() - default_button_size_small() - default_spacing(), editbox.get_y()));
+		editbox.set_size(
+		   editbox.get_w() + default_button_size_small() + default_spacing(), editbox.get_h());
 		editbox.set_text(chat_.last_recipient_);
 	} else {
 		// When an entry has been selected, update the "@playername " in the edit field

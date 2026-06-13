@@ -31,10 +31,12 @@ MapTable::MapTable(
    : UI::Table<uintptr_t>(parent, "maps_table", x, y, w, h, style) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	add_column(default_panel_dimension_narrow() / 2, _("Pl."), _("Number of players"), UI::Align::kCenter);
+	add_column(
+	   default_panel_dimension_narrow() / 2, _("Pl."), _("Number of players"), UI::Align::kCenter);
 	add_column(0, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft,
 	           UI::TableColumnType::kFlexible);
-	add_column(default_panel_dimension_narrow(), _("Size"), _("The size of the map (Width x Height)"));
+	add_column(
+	   default_panel_dimension_narrow(), _("Size"), _("The size of the map (Width x Height)"));
 
 	set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
 	set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });

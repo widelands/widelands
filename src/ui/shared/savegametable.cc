@@ -151,7 +151,8 @@ SavegameTableSinglePlayer::SavegameTableSinglePlayer(UI::Panel* parent,
 }
 
 void SavegameTableSinglePlayer::add_columns() {
-	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
+	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"),
+	           UI::Align::kLeft);
 	add_column(0, _("Description"),
 	           _("The filename that the game was saved under followed by the map’s name, "
 	             "or the map’s name followed by the last objective achieved."),
@@ -179,7 +180,8 @@ SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
 }
 
 void SavegameTableReplay::add_columns() {
-	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
+	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"),
+	           UI::Align::kLeft);
 	std::string game_mode_tooltip =
 	   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	       load. */
@@ -242,7 +244,8 @@ SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
 }
 
 void SavegameTableMultiplayer::add_columns() {
-	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
+	add_column(default_column_width_date(), _("Save Date"), _("The date this game was saved"),
+	           UI::Align::kLeft);
 	std::string game_mode_tooltip =
 	   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	       load. */

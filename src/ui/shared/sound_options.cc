@@ -204,9 +204,9 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if
 	// the MultilineTextarea is not added to the Box. So, we create and add it even if its text is
 	// empty.
-	UI::MultilineTextarea* sound_warning =
-	   new UI::MultilineTextarea(this, "warning", 0, 0, default_panel_dimension_narrow(), 0, slider_to_panel_style(style), "",
-	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
+	   this, "warning", 0, 0, default_panel_dimension_narrow(), 0, slider_to_panel_style(style), "",
+	   UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 
 	if (SoundHandler::is_backend_disabled()) {
