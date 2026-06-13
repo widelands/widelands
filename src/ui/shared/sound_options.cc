@@ -30,12 +30,6 @@
 
 namespace {
 
-constexpr int kPadding = 4;
-constexpr int kSliderWidth = 200;
-constexpr int kSliderHeight = 16;
-constexpr int kCursorWidth = 28;
-constexpr int kSpacing = 4;
-
 UI::PanelStyle slider_to_panel_style(UI::SliderStyle style) {
 	return style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui;
 }
@@ -63,19 +57,19 @@ public:
 	             "volume",
 	             0,
 	             0,
-	             kSliderWidth,
-	             kSliderHeight,
+	             default_panel_dimension_medium(),
+	             default_button_size() / 2,
 	             0,
 	             g_sh->get_max_volume(),
 	             g_sh->get_volume(type),
 	             style,
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
-	             kCursorWidth),
+	             default_button_size_small()),
 	     enable_(this, panel_style_, "enable", Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
-		set_inner_spacing(kPadding);
+		set_inner_spacing(default_spacing());
 		if (UI::g_fh->fontset()->is_rtl()) {
 			add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 			add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kRight);
@@ -165,7 +159,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              "a mouse click.")),
         0) {
 
-	set_inner_spacing(kSpacing);
+	set_inner_spacing(default_spacing());
 
 	std::vector<SoundControl*> controls;
 	controls.emplace_back(new SoundControl(
@@ -211,7 +205,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	// the MultilineTextarea is not added to the Box. So, we create and add it even if its text is
 	// empty.
 	UI::MultilineTextarea* sound_warning =
-	   new UI::MultilineTextarea(this, "warning", 0, 0, 100, 0, slider_to_panel_style(style), "",
+	   new UI::MultilineTextarea(this, "warning", 0, 0, default_panel_dimension_narrow(), 0, slider_to_panel_style(style), "",
 	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 
