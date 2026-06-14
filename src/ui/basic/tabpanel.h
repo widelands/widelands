@@ -27,9 +27,6 @@
 
 namespace UI {
 
-// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
-constexpr int kTabPanelButtonHeight = 34;
-
 /**
  * This represents a Tab of the TabPanel. Note that this does no work
  * of drawing itself or handling anything really, it is only here to
@@ -99,6 +96,27 @@ private:
 struct TabPanel : public Panel {
 
 	friend struct Tab;
+
+	// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
+	[[nodiscard]] static inline int default_tab_panel_button_height() {
+		return default_button_size();
+	}
+
+	// Margin around image. The image will be scaled down to fit into this rectangle with preserving
+	// size.
+	[[nodiscard]] static inline int default_tab_panel_image_margin() {
+		return default_spacing();
+	}
+
+	// Left and right margin around text.
+	[[nodiscard]] static inline int default_tab_panel_text_margin() {
+		return default_spacing();
+	}
+
+	//  height of the bar separating buttons and tab contents
+	[[nodiscard]] static inline int default_tab_panel_separator_height() {
+		return default_padding();
+	}
 
 	TabPanel(Panel* parent, UI::TabPanelStyle style, const std::string& name);
 
