@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-06 05:58+0000\n"
+"POT-Creation-Date: 2026-06-13 06:19+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1799,6 +1799,14 @@ msgstr "Perte d'espace pour un port !"
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Un espace de construction de port découvert n’est plus disponible pour construire un port."
+
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "A new ship has been built."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "New Ship"
+msgstr ""
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
@@ -6996,23 +7004,39 @@ msgstr "Choisir le  replay"
 msgid "Show Filenames"
 msgstr "Afficher les noms des fichiers"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:79
-msgid "Load this replay"
-msgstr "Charger ce replay"
-
-#: ../../../../src/ui/fsmenu/loadgame.cc:81
+#: ../../../../src/ui/fsmenu/loadgame.cc:80
 #: ../../../../src/ui/fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Retour au menu de paramétrage de jeu multijoueurs"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:82
+#: ../../../../src/ui/fsmenu/loadgame.cc:81
 #: ../../../../src/ui/fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Retour au menu de jeu solo"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:83
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
 msgid "Load this game"
 msgstr "Charger cette partie"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has a file to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
+msgid "Load this replay"
+msgstr "Charger ce replay"
+
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:200
+msgid "No game selected"
+msgstr "Pas de jeu sélectionné"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has no files to select
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:197
+msgid "No replay selected"
+msgstr "Pas de replay sélectionné"
 
 #: ../../../../src/ui/fsmenu/login_box.cc:37
 #: ../../../../src/ui/fsmenu/main.cc:431
@@ -7762,7 +7786,7 @@ msgstr "Le nom de l'hôte ou l'adresse est invalide et ne peut être joint."
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7770,7 +7794,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7778,7 +7802,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7829,7 +7853,7 @@ msgstr "Distance pour que la fenêtre se colle aux bords :"
 
 #: ../../../../src/ui/fsmenu/options.cc:244
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Facteur de mise à l'échelle de l'interface utilisateur"
 
 #: ../../../../src/ui/fsmenu/options.cc:254
 msgid "Edit keyboard and mouse actions…"
@@ -7958,7 +7982,7 @@ msgstr "En jeu"
 
 #: ../../../../src/ui/fsmenu/options.cc:468
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Facteur de mise à l'échelle de l'interface utilisateur :"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:552
@@ -9108,7 +9132,7 @@ msgstr "Le profil prédéfini ne peut être supprimé"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Supprimer le profil sélectionné"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9755,7 +9779,7 @@ msgstr "Mélanger"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Chanson actuelle :"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -10461,24 +10485,24 @@ msgid ""
 msgstr "Ce replay a été créé avec une version différente de Widelands. Il peut être compatible, mais pourra être désynchronisé ou même refusera de se charger.\n\nS'il vous plait n'envoyez pas de rapport de bug pouvant survenir pendant le visionnage de ce replay.\n\nVoulez vous néanmoins charger ce replay ?  "
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:183
+#: ../../../../src/ui/shared/load_or_save_game.cc:182
 msgid "Delete this replay"
 msgstr "Effacer ce replay"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:185
+#: ../../../../src/ui/shared/load_or_save_game.cc:184
 msgid "Delete this game"
 msgstr "Effacer ce jeu"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:190
+#: ../../../../src/ui/shared/load_or_save_game.cc:189
 msgid "Delete these replays"
 msgstr "Supprimer ces replays"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:193
+#: ../../../../src/ui/shared/load_or_save_game.cc:192
 msgid "Delete these games"
 msgstr "Supprimer ces parties"
 
@@ -11792,7 +11816,7 @@ msgstr "Prendre depuis la carte"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Montrer le menu des outils"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"

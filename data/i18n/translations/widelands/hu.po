@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-06 05:58+0000\n"
+"POT-Creation-Date: 2026-06-13 06:19+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1774,6 +1774,14 @@ msgstr "A kikötőhely megszűnt!"
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr "Egy korábban felfedezett kikötő építési hely többé már nem szabad."
+
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "A new ship has been built."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "New Ship"
+msgstr ""
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
@@ -6941,23 +6949,39 @@ msgstr "Válassz egy visszajátszást"
 msgid "Show Filenames"
 msgstr "Fájlnevek megjelenítése"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:79
-msgid "Load this replay"
-msgstr "A kiválasztott visszajátszás betöltése"
-
-#: ../../../../src/ui/fsmenu/loadgame.cc:81
+#: ../../../../src/ui/fsmenu/loadgame.cc:80
 #: ../../../../src/ui/fsmenu/mapselect.cc:72
 msgid "Return to the multiplayer game setup"
 msgstr "Visszatérés a többjátékos játék beállításaiba"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:82
+#: ../../../../src/ui/fsmenu/loadgame.cc:81
 #: ../../../../src/ui/fsmenu/mapselect.cc:74
 msgid "Return to the single player menu"
 msgstr "Visszatérés az egyjátékos-menübe"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:83
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
 msgid "Load this game"
 msgstr "A kiválasztott játék betöltése"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has a file to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:188
+msgid "Load this replay"
+msgstr "A kiválasztott visszajátszás betöltése"
+
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:200
+msgid "No game selected"
+msgstr "Nincs elmentett játék kiválasztva"
+
+#. * TRANSLATORS: Tooltip for OK button. The user has no files to select
+#. * TRANSLATORS: Tooltip for the delete button. The user has
+#. no files to select
+#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/shared/load_or_save_game.cc:197
+msgid "No replay selected"
+msgstr "Nincs visszajátszás kiválasztva"
 
 #: ../../../../src/ui/fsmenu/login_box.cc:37
 #: ../../../../src/ui/fsmenu/main.cc:431
@@ -10393,24 +10417,24 @@ msgid ""
 msgstr "Ez a visszajátszás más Widelands verzióval készült. Elképzelhető, hogy használható, de valószínűbb, hogy kiesik a szinkronból, vagy, hogy be sem lehet tölteni.\n\nKérjük ne jelents semmilyen hibát, amit a megtekintése közben tapasztalsz!\n\nEnnek ellenére is be szeretnéd tölteni a visszajátszást?"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:183
+#: ../../../../src/ui/shared/load_or_save_game.cc:182
 msgid "Delete this replay"
 msgstr "A kiválasztott visszajátszás törlése"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../../../src/ui/shared/load_or_save_game.cc:185
+#: ../../../../src/ui/shared/load_or_save_game.cc:184
 msgid "Delete this game"
 msgstr "A kiválasztott játék törlése"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:190
+#: ../../../../src/ui/shared/load_or_save_game.cc:189
 msgid "Delete these replays"
 msgstr "Ezen visszajátszások törlése"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
-#: ../../../../src/ui/shared/load_or_save_game.cc:193
+#: ../../../../src/ui/shared/load_or_save_game.cc:192
 msgid "Delete these games"
 msgstr "Ezen játékok törlése"
 
