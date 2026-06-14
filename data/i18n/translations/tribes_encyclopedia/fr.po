@@ -22,7 +22,7 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Paulo Paulo <paulletilly@gmail.com>, 2021
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2016-2022,2024-2025
+# Renaud Bouchard, 2016-2022,2024-2026
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022,2025
 # syl_, 2017
 # Tubuntu, 2015
@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022,2025\n"
+"Last-Translator: Renaud Bouchard, 2016-2022,2024-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgctxt "ware"
 msgid ""
 "Logs are an important basic building material. They are produced by felling "
 "trees."
-msgstr "Les troncs sont un important matériau de construction de base. Il sont produits en abattant des arbres."
+msgstr "Les troncs sont un important matériau de construction de base. Ils sont produits en abattant des arbres."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Log, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:90
@@ -63,7 +63,7 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr "Les bûcheronnes Amazones abattent les arbres et les sylvicultrices en replantent. Les Troncs résultantes sont utilisées par la tailleuse de pierre. Le four à charbon a également besoin de troncs pour produire du charbon de bois."
+msgstr "Les bûcheronnes Amazones abattent les arbres et les sylvicultrices en replantent. Les troncs résultants sont utilisés par la tailleuse de pierre. Le four à charbon a également besoin de troncs pour produire du charbon de bois."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
@@ -1370,7 +1370,7 @@ msgid ""
 "how far the master woodcutter has to walk. If all kinds of rare tree are "
 "available within her work area, then one of each kind is produced between "
 "%3$s and %4$s."
-msgstr ""
+msgstr "Ce bâtiment peut produire un bois rare entre %1$set%2$s, en fonction de la distance que le maître bûcheron doit parcourir. Si toutes sortes d'arbres rares sont disponibles dans sa zone de travail, alors un de chaque espèce est produit entre %3$set%4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent

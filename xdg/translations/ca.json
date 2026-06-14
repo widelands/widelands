@@ -10,16 +10,16 @@
 	"release_notes": {
 		"1.4": [],
 		"1.3.1": [
-			"Bugfix release"
+			"Publicació de correcció d'errors"
 		],
 		"1.3": [
-			"Market trading",
-			"Six new maps added and three old maps removed",
-			"Economy districts",
-			"Many improvements to the in-game Encyclopedia",
-			"Download website maps as add-ons",
-			"New visualisation modes in the editor",
-			"Many new capabilities for add-on developers"
+			"Negociació de mercat",
+			"Sis mapes nous afegits i tres mapes antics eliminats",
+			"Districtes econòmics",
+			"Moltes millores a l'Enciclopèdia del joc",
+			"Baixeu mapes de llocs web com a complements",
+			"Nous modes de visualització a l'editor",
+			"Moltes noves capacitats per a desenvolupadors de complements"
 		]
 	}
 }
