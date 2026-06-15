@@ -1768,11 +1768,11 @@ msgstr "Bi een funnen Rüümte för Muden kann nu keene Muu mehr baut worden."
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "A new ship has been built."
-msgstr ""
+msgstr "Een nejes Schipp is baut worden."
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "New Ship"
-msgstr ""
+msgstr "Nejes Schipp"
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
