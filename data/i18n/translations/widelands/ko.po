@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-08 06:40+0000\n"
+"POT-Creation-Date: 2026-06-15 07:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1754,6 +1754,14 @@ msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "A new ship has been built."
+msgstr ""
+
+#: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
+msgid "New Ship"
+msgstr ""
+
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
 msgctxt "ship"
@@ -2111,12 +2119,12 @@ msgid "Saving skipped"
 msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:171
-#: ../../../../src/ui/game/main_menu_save_game.cc:377
+#: ../../../../src/ui/game/main_menu_save_game.cc:379
 msgid "Saving failed!"
 msgstr "저장 실패!"
 
 #: ../../../../src/logic/save_handler.cc:187
-#: ../../../../src/ui/game/main_menu_save_game.cc:360
+#: ../../../../src/ui/game/main_menu_save_game.cc:362
 msgid "Game saved"
 msgstr "게임 저장됨"
 
@@ -4433,7 +4441,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "‘%s’ 디렉토리를 만드는 중 오류가 발생했습니다."
 
 #: ../../../../src/ui/editor/main_menu_save_map.cc:312
-#: ../../../../src/ui/game/main_menu_save_game.cc:325
+#: ../../../../src/ui/game/main_menu_save_game.cc:327
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "파일 이름 ‘%s’ 가 이미 있습니다. 덮어쓰겠습니까?"
@@ -6900,18 +6908,18 @@ msgstr "함꼐 놀기 놀이 설정으로 복귀"
 msgid "Return to the single player menu"
 msgstr "단일 선수 차림표로 돌아감"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this game"
 msgstr "해당 놀이를 불러오기"
 
 #. * TRANSLATORS: Tooltip for OK button. The user has a file to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this replay"
 msgstr "해당 리플레이 불러오기"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:200
 msgid "No game selected"
 msgstr ""
@@ -6919,7 +6927,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for OK button. The user has no files to select
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:197
 msgid "No replay selected"
 msgstr ""
@@ -9412,8 +9420,8 @@ msgstr ""
 msgid "Save Game"
 msgstr "게임 저장"
 
-#: ../../../../src/ui/game/main_menu_save_game.cc:327
-#: ../../../../src/ui/game/main_menu_save_game.cc:367
+#: ../../../../src/ui/game/main_menu_save_game.cc:329
+#: ../../../../src/ui/game/main_menu_save_game.cc:369
 msgid "Error Saving Game!"
 msgstr "놀이를 저장하다 오류 발생!"
 
