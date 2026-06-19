@@ -39,9 +39,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "wlapplication.h"
 
-constexpr int16_t kProgressStatusRectPadding = 2;
-constexpr int16_t kProgressStatusBorderX = 2;
-constexpr int16_t kProgressStatusBorderY = 2;
 constexpr int16_t kProgressStatusPositionY = 90; /* in percents, from top */
 
 namespace UI {
@@ -113,14 +110,14 @@ void ProgressWindow::draw(RenderTarget& rt) {
 
 	label_rectangle_.x = get_w() / 6;
 	label_rectangle_.w = get_w() * 2 / 3;
-	label_rectangle_.y = label_center_.y - h / 2 - kProgressStatusRectPadding;
-	label_rectangle_.h = h + 2 * kProgressStatusRectPadding;
+	label_rectangle_.y = label_center_.y - h / 2 - default_padding();
+	label_rectangle_.h = h + 2 * default_padding();
 
 	Recti border_rect = label_rectangle_;
-	border_rect.x -= kProgressStatusBorderX;
-	border_rect.y -= kProgressStatusBorderY;
-	border_rect.w += 2 * kProgressStatusBorderX;
-	border_rect.h += 2 * kProgressStatusBorderY;
+	border_rect.x -= default_padding();
+	border_rect.y -= default_padding();
+	border_rect.w += 2 * default_padding();
+	border_rect.h += 2 * default_padding();
 
 	rt.draw_rect(border_rect, progress_style().font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse

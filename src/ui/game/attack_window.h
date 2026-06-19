@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
 #include "ui/basic/box.h"

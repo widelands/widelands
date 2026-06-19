@@ -130,7 +130,6 @@ wl_library(ui_shared_chat
 
 wl_library(ui_shared_addons
   SRCS
-    addons_constants.h
     addons_login_box.cc
     addons_login_box.h
     addons_progress.cc

@@ -50,7 +50,6 @@ struct Box : public Panel {
 	    int32_t max_y = 0,
 	    uint32_t inner_spacing = 0);
 
-	void set_scrolling(bool scroll);
 	void set_force_scrolling(bool);
 
 	[[nodiscard]] int32_t get_nritems() const {
@@ -69,9 +68,6 @@ struct Box : public Panel {
 
 	[[nodiscard]] uint32_t get_orientation() const {
 		return orientation_;
-	}
-	[[nodiscard]] bool is_scrolling() const {
-		return scrolling_;
 	}
 	[[nodiscard]] bool is_force_scrolling() const {
 		return force_scrolling_;
@@ -151,7 +147,6 @@ public:
 	}
 
 private:
-	bool scrolling_{true};
 	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;
 	uint32_t orientation_;

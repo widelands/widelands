@@ -79,10 +79,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              UI::ButtonStyle::kFsMenuMenu),
      win_condition_duration_(&right_column_content_box_,
                              "win_condition_duration",
-                             0,
-                             0,
-                             0,
-                             240,
+                             UI::SpinBox::default_unit_width_wide(panel_style_),
                              Widelands::kDefaultWinConditionDuration,
                              15,        // 15 minutes minimum gametime
                              512 * 60,  // 512 hours maximum gametime (arbitrary limit)
@@ -237,7 +234,6 @@ void LaunchGame::add_all_widgets() {
 		advanced_options_box_.add_space(1 * kPadding);
 	}
 	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
-	advanced_options_box_.set_scrolling(true);
 
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
@@ -254,7 +250,7 @@ void LaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
-	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
+	advanced_options_box_.set_max_size(0, 2 * UI::Statebox::default_statebox_size() + kPadding);
 
 	int w;
 	int h;

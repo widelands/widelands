@@ -24,8 +24,6 @@
 #include "graphic/text/rendered_text.h"
 #include "ui/basic/panel.h"
 
-constexpr int kStateboxSize = 20;
-
 namespace UI {
 
 /**
@@ -33,6 +31,10 @@ namespace UI {
  * Serves as base for Checkbox and Radiobutton.
  */
 struct Statebox : public Panel {
+
+	[[nodiscard]] static inline int default_statebox_size() {
+		return default_button_size_small();
+	}
 
 	/**
 	 * Pictorial Statebox

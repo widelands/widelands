@@ -20,7 +20,7 @@
 #define WL_COMMANDS_CMD_SHIP_REFIT_H
 
 #include "commands/command.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 
 namespace Widelands {
 

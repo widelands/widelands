@@ -52,7 +52,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                "subtitle",
                0,
                0,
-               UI::Scrollbar::kSize,
+               UI::Scrollbar::default_size(),
                0,
                UI::PanelStyle::kFsMenu,
                "",

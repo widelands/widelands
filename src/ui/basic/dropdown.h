@@ -252,7 +252,7 @@ private:
 	int list_offset_x_{0};
 	int list_offset_y_{0};
 	const int base_height_;
-	const int mouse_tolerance_{50};  // Allow mouse outside the panel a bit before autocollapse
+	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button* push_button_;  // Only used in textual dropdowns
 	UI::Button display_button_;

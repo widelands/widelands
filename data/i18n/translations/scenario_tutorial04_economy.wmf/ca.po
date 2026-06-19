@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # Juanjo, 2015-2022,2024-2025
+# Júlia Rosell Saldaña, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Juanjo, 2015-2022,2024-2025\n"
+"Last-Translator: Júlia Rosell Saldaña, 2026\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -796,7 +797,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares and workers."
-msgstr ""
+msgstr "Tingueu en compte que els botons s'anomenen \"Configura l'economia d'aquesta bandera/edifici\" per una raó. Una economia consisteix en tots els edificis i banderes connectats per carreteres, ferris o vaixells, de manera que podeu tenir més d'una economia si les seves banderes no estan connectades per cap mitjà de transport. En aquest cas, les vostres economies separades poden tenir configuracions diferents per a mercaderies i treballadors."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
@@ -980,7 +981,7 @@ msgstr "Cada magatzem té quatre botons per establir-ne la preferència. Si move
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
-msgstr ""
+msgstr "Comerç"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -988,14 +989,14 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "Genial. Ara tenim prou columnes de marbre perquè, en cas d'un agressor, puguem construir les nostres fortificacions. Tanmateix, resulta que hi ha una tribu de frisons que viu en aquest erm, i són pacífics. Han demanat comerciar amb nosaltres."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Com que a Widelands es tracta de construir en lloc d'incendiar-les, el comerç és una manera molt millor d'interactuar amb altres tribus que envair les seves terres. Així que, comerciem."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1003,33 +1004,33 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "Els intercanvis es duen a terme a través de mercats. Un cop teniu un mercat, vosaltres i l'altre jugador negocieu sobre quines mercaderies voleu intercanviar entre vosaltres i quantes en voleu. Però us guiaré pel procés pas a pas. Primer, heu de construir un mercat."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Construir un mercat"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Construeix un mercat a prop de l'erm."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "El mercat és un edifici gran."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "Dins del vostre territori, les mercaderies les transporten els transportistes. Però els intercanvis comercials poden tenir lloc a llargues distàncies, massa lluny perquè els vostres transportistes puguin caminar. Per això, contractem una caravana de rucs per transportar les nostres mercaderies."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "Els rucs es crien en una granja de rucs. En aquest escenari, ja en tens un."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1037,47 +1038,47 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "A més de transportar mercaderies, els rucs també s'utilitzen per ajudar en carreteres transitades: quan una carretera rep molt de trànsit, el seu transportista demana un ruc per ajudar amb la feina, de manera que es poden transportar el doble de mercaderies en el mateix temps."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "El mercat ja està complet i podem començar a crear una proposta comercial per als frisons. Això es fa des de la finestra del mercat. Deixa'm obrir-la per a tu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "Com podeu veure, la finestra del mercat conté tres pestanyes. La primera pestanya és la que més ens interessa ara mateix: aquí podeu configurar i proposar una nova operació."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "La segona pestanya enumera les operacions que heu proposat anteriorment des d'aquest mercat. Actualment està buida, ja que encara no heu proposat cap operació."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
 "The third tab lists trade offers that you received from other players, and "
 "allows you to accept or reject them. This, too, is empty, since the Frisians"
 " are waiting for you to make the first move."
-msgstr ""
+msgstr "La tercera pestanya enumera les ofertes de comerç que has rebut d'altres jugadors i et permet acceptar-les o rebutjar-les. Aquesta també està buida, ja que els frisons esperen que facis el primer moviment."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:625
 msgid ""
 "Proposing a trade is straightforward. The first step is to select the player"
 " you want to trade with from the dropdown. In this case, there is only one "
 "other player, and he is automatically preselected for you."
-msgstr ""
+msgstr "Proposar un intercanvi és senzill. El primer pas és seleccionar el jugador amb qui vols intercanviar del menú desplegable. En aquest cas, només hi ha un altre jugador i aquest està preseleccionat automàticament per a tu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:633
 msgid ""
 "Next, you select the wares you want to send and receive respectively from "
 "the large double panel in the center of the market window."
-msgstr ""
+msgstr "A continuació, seleccioneu les mercaderies que voleu enviar i rebre respectivament des del gran panell doble que hi ha al centre de la finestra del mercat."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:634
 msgid ""
@@ -1087,50 +1088,50 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr ""
+msgstr "Quan comercies amb una altra tribu, no totes les mercaderies es poden intercanviar. Cada tribu té la seva pròpia economia i utilitzen mercaderies diferents. Per exemple, els frisons no beuen vi i no poden construir cases de marbre; i la teva tribu imperial no pot construir cases de maó frisó i no menja el seu peix fumat. El panell només mostra mercaderies que tu i el teu possible soci comercial podeu utilitzar tots dos."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "Seleccioneu les mercaderies al panell i utilitzeu els botons de fletxa que hi ha a sota per augmentar o disminuir la quantitat de mercaderies que voleu intercanviar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr ""
+msgstr "Finalment, seleccioneu quants lots de les mercaderies seleccionades s'intercanviaran. També podeu configurar l'intercanvi perquè s'executi indefinidament mitjançant la icona Infinit."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Un lot es lliurarà en un sol transport, i cada mercaderia necessitarà un ruc."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
-msgstr ""
+msgstr "Quan ho hagis configurat tot, fes clic al botó «Proposa» per enviar l'oferta d'intercanvi a l'altre jugador. Aleshores, ell podrà decidir si accepta o rebutja la teva proposta."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "Prova-ho!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "Proposa un intercanvi"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Ofereix un intercanvi als frisons."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Els frisons només acceptaran un comerç que sigui avantatjós per a ells; és a dir, no regalaran més mercaderies de les que reben."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
@@ -1140,7 +1141,7 @@ msgstr "Acord comercial rebutjat"
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Els frisons han rebutjat la teva oferta d'intercanvi. No acceptaran un intercanvi que pugui ser perjudicial per a ells. Envia'ls una nova proposta d'intercanvi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
@@ -1152,7 +1153,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Ben fet! Els frisons han acceptat la teva oferta comercial. Aviat veuràs una caravana dels teus rucs sortint del mercat per portar mercaderies als frisons, i una caravana dels seus rens que et portaran mercaderies a canvi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1160,72 +1161,72 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Com podeu veure, la finestra del mercat ara té una nova pestanya. Té una pestanya d'aquest tipus per a cada operació activa en aquest mercat. La pestanya mostra més detalls sobre l'operació en curs i les mercaderies que esperen ser negociades, i també us permet gestionar-la:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Podeu pausar l'operació durant un temps i reprendre-la quan vulgueu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Podeu traslladar l'operació a un altre dels vostres mercats."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Podeu proposar ampliar l'intercanvi amb més lots."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "I podeu cancel·lar l'intercanvi en qualsevol moment."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "S'ofereix un intercanvi"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "Ara els frisons també us han ofert un intercanvi. Podeu trobar una llista de totes les ofertes i propostes d'intercanvi, així com els intercanvis en curs, a la finestra Diplomàcia. Obriu-la mitjançant el botó de la barra d'eines principal."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Obre la finestra de la diplomàcia"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "La finestra de diplomàcia us ofereix una visió general de tots els vostres intercanvis, ofertes comercials i propostes comercials."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Podeu obrir-lo mitjançant aquest botó de la barra d'eines principal."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "La finestra de la diplomàcia"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "A la meitat superior de la finestra de diplomàcia, podeu veure tots els jugadors i els seus equips. Aquí podeu convidar altres jugadors a unir-se al vostre equip o sol·licitar unir-se al seu. Però no és necessari formar part d'un equip per intercanviar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "Ens interessa més la meitat inferior de la finestra. Aquí podeu veure les vostres operacions ofertes, proposades i actives."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "Ara mateix, tens una oferta de canvi: la que t'acaben d'enviar els frisons. Revisa-la i, a continuació, utilitza els botons que hi ha al costat per acceptar-la o rebutjar-la."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1233,39 +1234,39 @@ msgid ""
 "market you want to use for this trade, as you can have multiple markets. You"
 " can also manage the offer directly from the window of the market where you "
 "want to accept the trade."
-msgstr ""
+msgstr "Si voleu acceptar una operació, heu de seleccionar del menú desplegable quin mercat voleu utilitzar per a aquesta operació, ja que podeu tenir diversos mercats. També podeu gestionar l'oferta directament des de la finestra del mercat on voleu acceptar l'operació."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "Decidir sobre l'oferta comercial"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "Acceptar o rebutjar l'oferta comercial dels frisons."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "Pots fer-ho des de la finestra de Diplomàcia o des de la finestra del mercat."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "Ben fet! Això és tot; ara ja saps com enviar i gestionar propostes i ofertes comercials."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr ""
+msgstr "Pots tenir qualsevol nombre d'operacions actives i amb qualsevol nombre de jugadors; al mateix mercat o en molts, com prefereixis."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "Per dominar realment l'art del comerç, només cal recordar això: el valor de qualsevol mercaderia depèn en gran mesura de les circumstàncies i també de la tribu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1274,14 +1275,14 @@ msgid ""
 "in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal "
 "much more efficiently than the Empire. Therefore, trading Imperial meals "
 "against Frisian coal is a trade from which both parties can benefit greatly."
-msgstr ""
+msgstr "Per exemple, els miners frisons acceptaran amb molt de gust qualsevol àpat, independentment de si s'ha produït a baix preu en una posada imperial o a un cost molt més elevat a la Sala de Begudes Frisona. D'altra banda, els frisons poden cremar carbó vegetal de manera molt més eficient que l'Imperi. Per tant, intercanviar àpats imperials per carbó frisó és un intercanvi del qual ambdues parts es poden beneficiar enormement."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
-msgstr ""
+msgstr "A mesura que guanyeu més experiència amb les diferents tribus de Widelands, obtindreu una comprensió completa del cost i el valor relatius de cada mercaderia per a cada tribu. Aquest coneixement és inestimable a l'hora de decidir sobre intercanvis."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
