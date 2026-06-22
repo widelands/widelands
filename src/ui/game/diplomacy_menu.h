@@ -29,6 +29,7 @@
 #include "ui/basic/unique_window.h"
 
 class InteractiveBase;
+class InteractiveGameBase;
 
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class GameDiplomacyMenu : public UI::UniqueWindow {

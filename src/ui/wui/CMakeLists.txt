@@ -18,6 +18,8 @@ wl_library(wui_interactive
     interactive_gamebase.h
     interactive_player.cc
     interactive_player.h
+    interactive_provider.cc
+    interactive_provider.h
     interactive_spectator.cc
     interactive_spectator.h
   USES_SDL2

@@ -59,6 +59,7 @@ wl_library(logic_single_player_game_settings
 wl_library(logic_game_controller
   SRCS
     game_controller.h
+    game_interface_provider.h
     replay_game_controller.h
     replay_game_controller.cc
     single_player_game_controller.h
@@ -67,11 +68,12 @@ wl_library(logic_game_controller
   DEPENDS
     ai
     base_times
-    logic
     commands
+    logic
+    logic_constants
     logic_game_settings
+    logic_widelands_geometry
     widelands_options
-    wui_interactive
 )
 
 wl_library(logic_constants
@@ -270,7 +272,6 @@ wl_library(logic
     ui_basic
     ui_basic_loading_message
     widelands_options
-    wui_interactive # TODO(GunChleoc): Circular dependency
     wui_game_tips
 )
 

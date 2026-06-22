@@ -282,6 +282,14 @@ InteractiveBase::~InteractiveBase() {
 	RenderQueue::instance().clear();  // Cleanup spurious drawing commands
 }
 
+void InteractiveBase::load_plugins() {
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+			egbase().lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name + FileSystem::file_separator() + "init.lua");
+		}
+	}
+}
+
 UI::Box* InteractiveBase::toolbar() {
 	return &toolbar_.box;
 }
@@ -803,6 +811,19 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
  * Default implementation does nothing.
  */
 void InteractiveBase::postload() {
+}
+
+void InteractiveBase::notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) {
+	if (player == player_number()) {
+		// Scroll map to starting position for new games.
+		// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+		// InteractiveGameBase::start() for multiplayer.
+		map_view()->scroll_to_field(coords, MapView::Transition::Jump);
+	}
+}
+
+void InteractiveBase::main_loop() {
+	run<UI::Panel::Returncodes>();
 }
 
 void InteractiveBase::draw_road_building(RenderTarget* dst,

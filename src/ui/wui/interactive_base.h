@@ -67,7 +67,7 @@ enum class RoadBuildingType { kRoad, kWaterway };
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
  */
-class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
+class InteractiveBase : public UI::Panel, public IGameInterface, public DebugConsole::Handler {
 public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
@@ -125,7 +125,7 @@ public:
 	double average_fps() const;
 	uint64_t average_real_gamespeed() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
-	virtual void postload();
+	void postload() override;
 
 	void load_windows(FileRead&, Widelands::MapObjectLoader&);
 	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
@@ -189,7 +189,9 @@ public:
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
 
-	virtual void cleanup_for_load();
+	void cleanup_for_load() override;
+	void rebuild_main_menu() override {
+	}
 
 	/**
 	 * Log a message to be displayed on screen
@@ -226,7 +228,10 @@ public:
 		return &map_view_;
 	}
 
-	void info_panel_fast_forward_message_queue();
+	void main_loop() override;
+
+	void info_panel_fast_forward_message_queue() override;
+	void notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) override;
 
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
@@ -253,6 +258,8 @@ public:
 	bool extended_tooltip_accessibility_mode() const override {
 		return true;
 	}
+
+	void load_plugins() override;
 
 	void add_toolbar_plugin(const std::string& action,
 	                        const std::string& icon,

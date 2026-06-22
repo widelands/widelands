@@ -60,7 +60,6 @@
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
-#include "ui/wui/interactive_player.h"
 
 namespace {
 

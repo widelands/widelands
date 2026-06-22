@@ -60,6 +60,7 @@
 #include "ui/fsmenu/launch_mpg.h"
 #include "ui/fsmenu/main.h"
 #include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_provider.h"
 #include "ui/wui/interactive_spectator.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -561,6 +562,7 @@ void GameHost::run_callback() {
 
 	broadcast(packet);
 
+	game_->set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
 	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
