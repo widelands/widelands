@@ -1,5 +1,5 @@
 # TODO(GunChleoc): This unit testing project is currently unmaintained
-# Reactivate in parent directory once work resumes on this
+# ... except of tests for memleak
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/paths.h)
 
@@ -28,4 +28,13 @@ wl_library(graphic_text_test_render
     graphic
     graphic_text
     io_filesystem
+)
+
+wl_test(test_graphic_text
+  SRCS
+    text_test_main.cc
+    test_rt_parse_memleak.cc
+  DEPENDS
+    base_test
+    graphic_text
 )
