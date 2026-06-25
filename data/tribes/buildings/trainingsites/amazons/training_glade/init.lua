@@ -33,13 +33,21 @@ wl.Descriptions():new_trainingsite_type {
       idle = {hotspot = {92, 92}},
       unoccupied = {hotspot = {92, 92}}
    },
-   spritesheets = { working = {
-      hotspot = {92, 92},
-      fps = 15,
-      frames = 30,
-      columns = 6,
-      rows = 5
-   }},
+   spritesheets = {
+      build = {
+         hotspot = {92, 92},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      },
+      working = {
+         hotspot = {92, 92},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
+      }
+   },
 
    aihints = {
       trainingsites_max_percent = 75,
