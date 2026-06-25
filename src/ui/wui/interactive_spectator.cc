@@ -108,7 +108,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			continue;
 		}
 
-		draw_bridges(dst, &field, gametime, scale);
+		draw_bridges(dst, fields_to_draw, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		{
