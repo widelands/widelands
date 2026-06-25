@@ -71,10 +71,10 @@ def colorize_log(text):
 
 def github_asan_line(text):
     "annotates asan summary on GitHub"
-    # GitHub only supports 10 error and 10 warning annotations per step. This might be too few.
+    # GitHub only lists 10 error and 10 warning annotations per step. This might be too few.
     # Therefore only annotate the summary line of ASan.
     if 'SUMMARY' in text:
-        return '::warning title=ASan error::' + text
+        return '::warning::' + text
     return text
 
 
@@ -378,12 +378,15 @@ class WidelandsTestCase():
     def print_report(self):
         print(f'{colorize(self.result, self.get_result_color())}: {self.test_script}\n')
         print(self.report_header)
+        lsan_report = False
         for stdout_fn in self.outputs:
             title = os.path.basename(getattr(stdout_fn, 'file_path', 'output'))\
                 .replace('_00', '').replace('.txt', '')
             print(group_start, colorize(f'{title}:', info_color))
             print(stdout_fn)
             print(group_end, end='')
+            lsan_report = lsan_report or title.startswith('lsan.')
+        return lsan_report
 
 
 # For parallel execution of tests
@@ -614,17 +617,21 @@ def main():
 
     nr_errors = 0
     results = dict()
+    lsan_report = False
     for test_case in test_cases:
         # Skipped test cases are logged, but don't count as failure
         if test_case.report_header != None:
             print(separator)
-            test_case.print_report()
+            lsan_report = test_case.print_report() or lsan_report
             if test_case.result in results.keys():
                 results[test_case.result].append(test_case.test_script)
             else:
                 results[test_case.result] = [ test_case.test_script ]
         if not test_case.success:
             nr_errors += 1
+    if lsan_report and os.getenv('GITHUB_OUTPUT'):
+        with open(os.getenv('GITHUB_OUTPUT'), 'a') as gh_out:
+            gh_out.write('ASAN_FAILURE=true\n')
 
     print(separator)
 
