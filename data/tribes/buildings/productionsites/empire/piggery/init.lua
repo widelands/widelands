@@ -12,7 +12,7 @@ wl.Descriptions():new_productionsite_type {
    buildcost = {
       log = 2,
       granite = 2,
-      marble_column = 2
+      marble = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -56,13 +56,13 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
          descname = _("raising pigs"),
          actions = {
-            -- time total: 10.4 + 20 + 3.6 = 34 sec
+            -- time: 14.8 + 30 + 2 * 3.6 = 52 sec
             "return=skipped unless economy needs meat",
             "consume=water wheat",
-            "sleep=duration:10s400ms",
+            "sleep=duration:14s800ms",
             "playsound=sound/farm/farm_animal priority:40% allow_multiple",
-            "animate=working duration:20s",
-            "produce=meat"
+            "animate=working duration:30s",
+            "produce=meat:2"
          }
       },
    },
