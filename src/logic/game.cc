@@ -667,8 +667,11 @@ bool Game::run(StartGameType const start_game_type,
 					                  "Editor to fix this problem."),
 					                static_cast<unsigned int>(p));
 				}
-				get_game_interface()->notify_player_starting_pos(p, map().get_starting_pos(p));
 			}
+		}
+
+		iterate_players_existing_novar(p, nr_players, *this) {
+			get_game_interface()->notify_player_starting_pos(p, map().get_starting_pos(p));
 		}
 
 		// Prepare the map, set default textures
