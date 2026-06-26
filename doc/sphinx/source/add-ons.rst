@@ -55,6 +55,7 @@ Categories
 - `starting_condition`_
 - `ui_plugin`_
 - `theme`_
+- `combo`_
 
 
 tribes
@@ -143,12 +144,22 @@ The add-on needs to contain one or more scripts called ``<tribename>.lua`` which
 
 ui_plugin
 ~~~~~~~~~
+.. versionadded:: 1.2
+
 A plugin for the graphical user interface. The add-on needs to contain a script called ``init.lua`` which will be run once upon creating the interactive game base or the editor. The script can then modify the user interface using the :doc:`UI scripting API <autogen_wl_ui>`.
 
 
 theme
 ~~~~~
 A UI theme. See :doc:`themes` for details.
+
+
+combo
+~~~~~
+.. versionadded:: 1.4
+
+A combo add-on combines multiple different kinds of add-ons into one. The add-on directory contains one subdirectory for each category of add-on that it provides, which must be named like the provided category (e.g. ``addons/example.wad/tribes/`` and ``addons/example.wad/starting_condition/``).
+
 
 Keyboard Shortcuts
 ------------------

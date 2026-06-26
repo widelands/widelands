@@ -245,7 +245,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
 	generator_.add(pgettext("map_generator", "Default"), nullptr,
 	               g_image_cache->get("images/logos/wl-ico-64.png"), true);
 	for (const auto& addon : AddOns::g_addons) {
-		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
+		if (addon.second && addon.first->acts_as(AddOns::AddOnCategory::kMapGenerator)) {
 			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
 			generator_.set_enabled(true);
 		}
@@ -665,9 +665,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			lua.interpret_string(format("kIslandMode = %b", map_info.islandMode));
 			lua.interpret_string(format("kRandomNumber = %d", map_info.mapNumber));
 			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.get_text()));
-			lua.run_script(kAddOnDir + FileSystem::file_separator() +
-			               generator_.get_selected()->internal_name + FileSystem::file_separator() +
-			               "init.lua");
+			lua.run_script(generator_.get_selected()->basedir_for(AddOns::AddOnCategory::kMapGenerator) + "init.lua");
 			result = true;
 		} catch (const std::exception& e) {
 			log_err("Map generation Lua error: %s", e.what());

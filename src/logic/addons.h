@@ -23,19 +23,22 @@
 #include <functional>
 #include <map>
 #include <memory>
+#include <optional>
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "base/i18n.h"
-#include "logic/filesystem_constants.h"
 
+class FileSystem;
 class Image;
 
 namespace AddOns {
 
 enum class AddOnCategory {
 	kNone,
+	kCombo,
 	kWorld,
 	kTribes,
 	kScript,
@@ -56,11 +59,14 @@ enum class AddOnCategory {
 // that this does not matter performance-wise.
 
 struct AddOnCategoryInfo {
+	using Flag = uint8_t;
+	static constexpr Flag kHide = 1;
+	static constexpr Flag kNetworkRelevant = 2;
+
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
-	bool network_relevant;
-	bool hide;
+	Flag flags;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -96,6 +102,11 @@ struct AddOnInfo {
 	 * correctly when saving an add-on in the packager.
 	 */
 
+private:
+	AddOnCategory category_ = AddOnCategory::kNone;
+	std::set<AddOnCategory> combo_categories_;
+
+public:
 	std::string internal_name;  // "cool_feature.wad"
 
 	std::string unlocalized_descname;
@@ -108,7 +119,6 @@ struct AddOnInfo {
 	AddOnVersion version;       ///< Add-on version (e.g. 1.2.3)
 	uint32_t i18n_version = 0;  ///< (see doc/sphinx/source/add-ons.rst)
 
-	AddOnCategory category = AddOnCategory::kNone;
 	const Image* icon = nullptr;  ///< A little icon to display in the add-ons manager.
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
@@ -152,16 +162,27 @@ struct AddOnInfo {
 	[[nodiscard]] uint32_t number_of_votes() const;
 	[[nodiscard]] double average_rating() const;
 	[[nodiscard]] bool requires_texture_atlas_rebuild() const;
+
+	[[nodiscard]] AddOnCategory get_category() const {
+		return category_;
+	}
+	void set_category(AddOnCategory c) {
+		category_ = c;
+	}
+	void init_combo_categories(FileSystem& fs);
+
+	[[nodiscard]] bool acts_as(AddOnCategory) const;
+	[[nodiscard]] bool has_category_flag(AddOnCategoryInfo::Flag flag) const;
+	[[nodiscard]] std::string basedir_for(AddOnCategory) const;
+
+	using CategoryFunctor = bool(*)(AddOnCategory, AddOnCategory);
+	static bool category_functor_any(CategoryFunctor, const AddOnInfo& base, const AddOnInfo& dependency);
 };
 
 using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;
 
-inline static std::string theme_addon_template_dir(const std::string& name) {
-	std::string s = kAddOnDir;
-	s += '/';
-	s += name;
-	s += '/';
-	return s;
+inline static std::string theme_addon_template_dir(const AddOnInfo& addon) {
+	return addon.basedir_for(AddOnCategory::kTheme);
 }
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
@@ -171,6 +192,7 @@ const AddOnInfo* find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
+std::optional<AddOnCategory> try_get_category(const std::string&);
 AddOnCategory get_category(const std::string&);
 
 // Creates a string informing about missing or wrong-version add-ons

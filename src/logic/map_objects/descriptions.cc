@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions_compatibility_table.h"
 #include "logic/map_objects/immovable.h"
@@ -78,26 +77,32 @@ Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
 
 	assert(lua_);
 	for (const auto& info : addons) {
-		if (info->category == AddOns::AddOnCategory::kWorld ||
-		    info->category == AddOns::AddOnCategory::kTribes) {
-			const std::string script(kAddOnDir + FileSystem::file_separator() + info->internal_name +
-			                         FileSystem::file_separator() + "preload.lua");
+		if (info->acts_as(AddOns::AddOnCategory::kWorld)) {
+			const std::string script(info->basedir_for(AddOns::AddOnCategory::kWorld) + "preload.lua");
 			if (g_fs->file_exists(script)) {
-				log_info("Running preload script for add-on %s", info->internal_name.c_str());
+				log_info("Running world preload script for add-on %s", info->internal_name.c_str());
+				lua_->run_script(script);
+			}
+		}
+		if (info->acts_as(AddOns::AddOnCategory::kTribes)) {
+			const std::string script(info->basedir_for(AddOns::AddOnCategory::kTribes) + "preload.lua");
+			if (g_fs->file_exists(script)) {
+				log_info("Running tribes preload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);
 			}
 		}
 	}
 
 	for (const auto& info : addons) {
-		if (info->category == AddOns::AddOnCategory::kWorld) {
+		if (info->acts_as(AddOns::AddOnCategory::kWorld)) {
 			description_manager_->register_directory(
-			   kAddOnDir + FileSystem::file_separator() + info->internal_name, g_fs,
+			   info->basedir_for(AddOns::AddOnCategory::kWorld), g_fs,
 			   DescriptionManager::RegistryCallerInfo(
 			      DescriptionManager::RegistryCallerType::kWorldAddon, info->internal_name));
-		} else if (info->category == AddOns::AddOnCategory::kTribes) {
+		}
+		if (info->acts_as(AddOns::AddOnCategory::kTribes)) {
 			description_manager_->register_directory(
-			   kAddOnDir + FileSystem::file_separator() + info->internal_name, g_fs,
+			   info->basedir_for(AddOns::AddOnCategory::kTribes), g_fs,
 			   DescriptionManager::RegistryCallerInfo(
 			      DescriptionManager::RegistryCallerType::kTribeAddon, info->internal_name));
 		}

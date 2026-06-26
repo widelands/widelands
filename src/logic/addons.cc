@@ -32,6 +32,7 @@
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
+#include "logic/filesystem_constants.h"
 #include "wlapplication_options.h"
 
 namespace AddOns {
@@ -45,36 +46,38 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false, true}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", AddOnCategoryInfo::kHide}},
+   {AddOnCategory::kCombo,
+    AddOnCategoryInfo{"combo", []() { return _("Combo"); }, "images/wui/stats/menu_tab_workers_warehouse.png", AddOnCategoryInfo::kHide}},
    {AddOnCategory::kTribes,
     AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png", true, false}},
+                      "images/wui/stats/menu_tab_wares_warehouse.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kWorld,
     AddOnCategoryInfo{"world", []() { return _("World"); },
-                      "images/wui/menus/toggle_immovables.png", true, false}},
+                      "images/wui/menus/toggle_immovables.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png", true, false}},
+                                              "images/logos/WL-Editor-32.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kSingleMap,
     AddOnCategoryInfo{
-       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", true, true}},
+       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", AddOnCategoryInfo::kNetworkRelevant | AddOnCategoryInfo::kHide}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", true, false}},
+                                            "images/wui/menus/toggle_minimap.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kMapGenerator,
     AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
-                      "images/wui/editor/menus/new_random_map.png", false, false}},
+                      "images/wui/editor/menus/new_random_map.png", 0}},
    {AddOnCategory::kCampaign,
     AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                      "images/wui/messages/messages_warfare.png", false, false}},
+                      "images/wui/messages/messages_warfare.png", 0}},
    {AddOnCategory::kWinCondition,
     AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
-                      "images/wui/menus/objectives.png", true, false}},
+                      "images/wui/menus/objectives.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true, false}},
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", false, false}},
+                                             "images/wui/menus/main_menu.png", 0}},
    {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
-                                                "images/plugin.png", false, false}}};
+                                                "images/plugin.png", 0}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -158,6 +161,38 @@ AddOnVersion string_to_version(std::string input) {
 	throw wexception("Malformed version string: '%s'", input.c_str());
 }
 
+bool AddOnInfo::acts_as(const AddOnCategory c) const {
+	return category_ == c || combo_categories_.count(c) != 0;
+}
+
+bool AddOnInfo::has_category_flag(const AddOnCategoryInfo::Flag flag) const {
+	if ((kAddOnCategories.at(category_).flags & flag) != 0) {
+		return true;
+	}
+	for (AddOnCategory c : combo_categories_) {
+		if ((kAddOnCategories.at(c).flags & flag) != 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+std::string AddOnInfo::basedir_for(const AddOnCategory c) const {
+	std::string path = kAddOnDir;
+	path += FileSystem::file_separator();
+	path += internal_name;
+	path += FileSystem::file_separator();
+
+	if (category_ != c) {
+		assert(category_ == AddOnCategory::kCombo);
+		assert(combo_categories_.count(c) == 1);
+		path += kAddOnCategories.at(c).internal_name;
+		path += FileSystem::file_separator();
+	}
+
+	return path;
+}
+
 bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare) {
 	const size_t s_a = base.size();
 	const size_t s_b = compare.size();
@@ -191,6 +226,22 @@ bool require_enabled(AddOnCategory base, AddOnCategory dependency) {
 	default:
 		return true;
 	}
+}
+
+// static
+bool AddOnInfo::category_functor_any(CategoryFunctor fn, const AddOnInfo& base, const AddOnInfo& dependency) {
+	std::set<AddOnCategory> all_base(base.combo_categories_);
+	std::set<AddOnCategory> all_dep(dependency.combo_categories_);
+	all_base.insert(base.get_category());
+	all_dep.insert(dependency.get_category());
+	for (AddOnCategory a1 : all_base) {
+		for (AddOnCategory a2 : all_dep) {
+			if (fn(a1, a2)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 static AddOnConflict check_requirements_conflicts(const AddOnRequirements& required_addons) {
@@ -304,7 +355,7 @@ unsigned count_all_dependencies(const std::string& info,
 std::string list_game_relevant_addons() {
 	std::vector<std::string> addons;
 	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+		if (pair.second && pair.first->has_category_flag(AddOnCategoryInfo::kNetworkRelevant)) {
 			addons.push_back(pair.first->descname());
 		}
 	}
@@ -325,11 +376,18 @@ std::string list_game_relevant_addons() {
 	return as_richtext(addons_text);
 }
 
-AddOnCategory get_category(const std::string& name) {
+std::optional<AddOnCategory> try_get_category(const std::string& name) {
 	for (const auto& pair : kAddOnCategories) {
 		if (pair.second.internal_name == name) {
 			return pair.first;
 		}
+	}
+	return std::nullopt;
+}
+
+AddOnCategory get_category(const std::string& name) {
+	if (std::optional<AddOnCategory> result = try_get_category(name); result.has_value()) {
+		return *result;
 	}
 	throw wexception("Invalid add-on category '%s'", name.c_str());
 }
@@ -363,28 +421,29 @@ static bool contains_png(const std::string& dir) {
 // Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road
 // textures.
 bool AddOnInfo::requires_texture_atlas_rebuild() const {
-	std::string dir_to_check = kAddOnDir;
-	dir_to_check += FileSystem::file_separator();
-	dir_to_check += internal_name;
-	switch (category) {
-	case AddOnCategory::kTribes: {
+	if (acts_as(AddOnCategory::kWorld)) {
+		if (contains_png(basedir_for(AddOnCategory::kWorld))) {
+			return true;
+		}
+	}
+
+	if (acts_as(AddOnCategory::kTribes)) {
 		// We do not support replacing road or flag images of existing tribes,
 		// so we only need to check in case there's a new tribe.
-		return g_fs->is_directory(dir_to_check + FileSystem::file_separator() + "tribes") &&
-		       contains_png(dir_to_check);
+		const std::string dir = basedir_for(AddOnCategory::kTribes);
+		if (g_fs->is_directory(dir + "tribes") && contains_png(dir)) {
+			return true;
+		}
 	}
-	case AddOnCategory::kWorld:
-		return contains_png(dir_to_check);
-	default:
-		return false;
-	}
+
+	return false;
 }
 
 inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	AddOnState* previously_enabled = nullptr;
 	std::list<AddOnState*> installed;
 	for (AddOnState& s : g_addons) {
-		if (s.first->category == AddOnCategory::kTheme) {
+		if (s.first->acts_as(AddOnCategory::kTheme)) {
 			if (s.second) {
 				previously_enabled = &s;
 			}
@@ -398,7 +457,7 @@ inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) 
 		for (AddOnState* s : installed) {
 			if (s->first->internal_name == arg) {
 				s->second = true;
-				set_template_dir(theme_addon_template_dir(arg));
+				set_template_dir(theme_addon_template_dir(*s->first));
 				set_config_string("theme", arg);
 				return;
 			}
@@ -414,7 +473,7 @@ inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) 
 		for (AddOnState* s : installed) {
 			if (s->first->internal_name == arg) {
 				s->second = true;
-				set_template_dir(theme_addon_template_dir(arg));
+				set_template_dir(theme_addon_template_dir(*s->first));
 				return;
 			}
 		}
@@ -428,7 +487,7 @@ inline void do_update_ui_theme(const UpdateThemeAction action, std::string arg) 
 		}
 		previously_enabled->second = true;
 		set_config_string("theme", previously_enabled->first->internal_name);
-		set_template_dir(theme_addon_template_dir(previously_enabled->first->internal_name));
+		set_template_dir(theme_addon_template_dir(*previously_enabled->first));
 		return;
 
 	default:
@@ -480,6 +539,23 @@ bool matches_widelands_version(const std::string& min_wl_version,
 	return true;
 }
 
+void AddOnInfo::init_combo_categories(FileSystem& fs) {
+	combo_categories_.clear();
+
+	if (category_ != AddOnCategory::kCombo) {
+		return;
+	}
+
+	for (const std::string& path : fs.list_directory("")) {
+		if (std::optional<AddOnCategory> result = try_get_category(path); result.has_value() && (kAddOnCategories.at(*result).flags & AddOnCategoryInfo::kHide) == 0) {
+			combo_categories_.insert(*result);
+		}
+	}
+	if (combo_categories_.empty()) {
+		throw wexception("preload_addon (%s): combo add-on without contents", internal_name.c_str());
+	}
+}
+
 std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
 	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
@@ -498,7 +574,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->unlocalized_author = s.get_safe_untranslated_string("author");
 	i->version = string_to_version(s.get_safe_string("version"));
 	i->i18n_version = i18n_section != nullptr ? i18n_section->get_natural(name.c_str(), 0) : 0;
-	i->category = get_category(s.get_safe_string("category"));
+	i->set_category(get_category(s.get_safe_string("category")));
 	i->sync_safe = s.get_bool("sync_safe", false);
 	i->min_wl_version = s.get_string("min_wl_version", "");
 	i->max_wl_version = s.get_string("max_wl_version", "");
@@ -517,9 +593,9 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
 	                                kAddOnDir + FileSystem::file_separator() + name +
 	                                   FileSystem::file_separator() + kAddOnIconFile :
-	                                kAddOnCategories.at(i->category).icon);
+	                                kAddOnCategories.at(i->get_category()).icon);
 
-	if (i->category == AddOnCategory::kNone) {
+	if (i->get_category() == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
 	}
 	if (i->version.empty()) {
@@ -529,6 +605,8 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		throw wexception(
 		   "preload_addon (%s): incompatible with this Widelands version", name.c_str());
 	}
+
+	i->init_combo_categories(*fs);
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
 		const size_t commapos = req.find(',');

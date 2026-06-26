@@ -25,7 +25,6 @@
 #include "graphic/color.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
-#include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"
@@ -135,10 +134,8 @@ struct GameSettings {
 			}
 		}
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first->category == AddOns::AddOnCategory::kWinCondition && pair.second) {
-				const std::string filename = kAddOnDir + LayeredFileSystem::file_separator() +
-				                             pair.first->internal_name +
-				                             LayeredFileSystem::file_separator() + "init.lua";
+			if (pair.first->acts_as(AddOns::AddOnCategory::kWinCondition) && pair.second) {
+				const std::string filename = pair.first->basedir_for(AddOns::AddOnCategory::kWinCondition) + "init.lua";
 				if (g_fs->file_exists(filename)) {
 					win_condition_scripts.push_back(filename);
 				} else {

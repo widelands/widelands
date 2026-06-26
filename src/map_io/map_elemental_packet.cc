@@ -176,7 +176,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	std::string addons;
 	for (const auto& addon : egbase.enabled_addons()) {
-		if (addon->category == AddOns::AddOnCategory::kWorld) {
+		if (addon->acts_as(AddOns::AddOnCategory::kWorld)) {
 			if (!addons.empty()) {
 				addons += ',';
 			}

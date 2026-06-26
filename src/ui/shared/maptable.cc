@@ -141,9 +141,8 @@ void MapTable::fill(const std::vector<std::string>& directories,
 		// but only in the load screen, not in the save screen!
 		if (include_addon_maps) {
 			for (const auto& addon : AddOns::g_addons) {
-				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
-					for (const std::string& mapname : g_fs->list_directory(
-					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
+				if (addon.second && addon.first->acts_as(AddOns::AddOnCategory::kMaps)) {
+					for (const std::string& mapname : g_fs->list_directory(addon.first->basedir_for(AddOns::AddOnCategory::kMaps))) {
 						files.insert(mapname);
 					}
 				}

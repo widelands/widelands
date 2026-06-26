@@ -50,10 +50,8 @@ Campaigns::Campaigns() {
 	LuaInterface lua;
 	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
 	for (const auto& pair : AddOns::g_addons) {
-		if (pair.first->category == AddOns::AddOnCategory::kCampaign && pair.second) {
-			campaign_config_scripts.push_back(kAddOnDir + FileSystem::file_separator() +
-			                                  pair.first->internal_name +
-			                                  FileSystem::file_separator() + "campaigns.lua");
+		if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kCampaign)) {
+			campaign_config_scripts.push_back(pair.first->basedir_for(AddOns::AddOnCategory::kCampaign) + "campaigns.lua");
 		}
 	}
 	for (const std::string& script : campaign_config_scripts) {

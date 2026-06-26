@@ -200,14 +200,22 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (directory == kDownloadedMapsDirFull) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
+
 	} else if (starts_with(directory, kAddOnDir)) {
-		std::string addon = directory.substr(kAddOnDir.size() + 1);
-		addon = addon.substr(0, addon.find('/'));
+		std::vector<std::string> result;
+		split(result, directory, {'/'});
+		assert(result.size() >= 2);
+
+		std::string& addon = result.at(1);
 		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
-		std::string profilepath = kAddOnDir;
-		profilepath += FileSystem::file_separator();
-		profilepath += addon;
-		profilepath += FileSystem::file_separator();
+
+		const AddOns::AddOnInfo* addon_info = AddOns::find_addon(addon);
+		if (addon_info == nullptr) {
+			throw wexception("Could not find add-on %s (needed for mapdatadir %s)", addon.c_str(), directory.c_str());
+		}
+		const std::string addon_basedir = addon_info->basedir_for(AddOns::AddOnCategory::kMaps);
+
+		std::string profilepath = addon_basedir;
 		profilepath += "dirnames";
 		Profile p(profilepath.c_str());
 		if (Section* s = p.get_section("global")) {

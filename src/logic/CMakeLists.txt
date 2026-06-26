@@ -35,7 +35,6 @@ wl_library(logic_game_settings
     logic_addons
     logic_constants
     logic_exceptions
-    logic_filesystem_constants
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
