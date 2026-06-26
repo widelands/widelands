@@ -127,8 +127,8 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 	void postload() override;
 
-	void load_windows(FileRead&, Widelands::MapObjectLoader&);
-	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
+	void load_windows(FileRead&, Widelands::MapObjectLoader&) override;
+	void save_windows(FileWrite&, Widelands::MapObjectSaver&) override;
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
@@ -256,6 +256,15 @@ public:
 	bool extended_tooltip_accessibility_mode() const override {
 		return true;
 	}
+
+	void notify_game_ended() override {
+	}
+
+	void notify_message(Widelands::PlayerNumber, Widelands::MessageId, const Widelands::Message&, bool) override {}
+	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {}
+	std::unique_ptr<Texture> draw_minimap_for_savegame() override;
+	void gather_saveloading_information(SaveloadingInformation& data) override;
+	void restore_from_saveloading_information(SaveloadingInformation& data) override;
 
 	void load_plugins() override;
 

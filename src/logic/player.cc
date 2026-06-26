@@ -39,6 +39,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -451,11 +452,7 @@ void Player::update_team_players() {
 }
 
 void Player::show_watch_window(Game& game, Bob& b) {
-	if (InteractivePlayer* const iplayer = game.get_ipl()) {
-		if (&iplayer->player() == this) {
-			iplayer->show_watch_window(b);
-		}
-	}
+	game.get_game_interface()->request_watch_window(player_number(), b);
 }
 
 /*
@@ -496,14 +493,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	}
 
 	// Sound & popup
-	if (InteractivePlayer* const iplayer = game.get_ipl()) {
-		if (&iplayer->player() == this) {
-			play_message_sound(message);
-			if (popup) {
-				iplayer->popup_message(id, *message);
-			}
-		}
-	}
+	game.get_game_interface()->notify_message(player_number(), id, *message, popup);
 
 	return id;
 }

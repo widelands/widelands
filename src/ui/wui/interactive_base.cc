@@ -829,6 +829,46 @@ void InteractiveBase::end_main_loop() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
+std::unique_ptr<Texture> InteractiveBase::draw_minimap_for_savegame() {
+	return draw_minimap(game(), nullptr, Rectf(), MiniMapType::kStaticMap, kSavegameMinimapLayers);
+}
+
+void InteractiveBase::gather_saveloading_information(SaveloadingInformation& data) {
+	data.mapview_center = map_view()->view_area().rect().center();
+	data.display_flags = get_display_flags();
+
+	const auto& landmarks = quick_navigation().landmarks();
+	data.landmarks.resize(landmarks.size());
+	for (size_t i = 0; i < landmarks.size(); ++i) {
+		data.landmarks.at(i).set = landmarks.at(i).set;
+		data.landmarks.at(i).view_x = landmarks.at(i).view.viewpoint.x;
+		data.landmarks.at(i).view_y = landmarks.at(i).view.viewpoint.y;
+		data.landmarks.at(i).zoom = landmarks.at(i).view.zoom;
+		data.landmarks.at(i).name = landmarks.at(i).name;
+	}
+}
+
+void InteractiveBase::restore_from_saveloading_information(SaveloadingInformation& data) {
+	map_view()->scroll_to_map_pixel(data.mapview_center, MapView::Transition::Jump);
+
+	if (g_allow_script_console) {
+		data.display_flags |= InteractiveBase::dfDebug;
+	} else {
+		data.display_flags &= ~InteractiveBase::dfDebug;
+	}
+	set_display_flags(data.display_flags);
+
+	quick_navigation().landmarks().resize(data.landmarks.size());
+	for (size_t i = 0; i < data.landmarks.size(); ++i) {
+		const auto& lm = data.landmarks.at(i);
+		if (lm.set) {
+			MapView::View view = {Vector2f(lm.view_x, lm.view_y), lm.zoom};
+			quick_navigation().set_landmark(i, view);
+		}
+		quick_navigation().landmarks()[i].name = lm.name;
+	}
+}
+
 void InteractiveBase::draw_road_building(RenderTarget* dst,
                                          FieldsToDraw::Field& field,
                                          const Time& gametime,

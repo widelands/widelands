@@ -108,6 +108,8 @@ public:
 		get_messages()->set_message_status(id, status);
 	}
 
+	void play_message_sound(const Message* message) const;
+
 	// Open a watch window following the given bob, provided that this is the interactive player.
 	void show_watch_window(Game&, Bob&);
 
@@ -649,7 +651,6 @@ private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message* message) const;
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
 	/// Called when a node becomes seen, stops being seen or has changed. Discovers the node and

@@ -67,6 +67,7 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_geometry
     base_times
     commands
     logic

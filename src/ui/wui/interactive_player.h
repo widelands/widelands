@@ -93,6 +93,12 @@ public:
 	    including a header. */
 	std::string get_fastplace_help() const;
 
+	void notify_message(Widelands::PlayerNumber pn, Widelands::MessageId id, const Widelands::Message& message, bool popup) override;
+	void request_watch_window(Widelands::PlayerNumber pn, Widelands::Bob& bob) override;
+	std::unique_ptr<Texture> draw_minimap_for_savegame() override;
+	void gather_saveloading_information(SaveloadingInformation& data) override;
+	void restore_from_saveloading_information(SaveloadingInformation& data) override;
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
 	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.

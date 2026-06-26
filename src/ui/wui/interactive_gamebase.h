@@ -65,6 +65,7 @@ public:
 	void postload() override;
 	void start() override;
 	void rebuild_main_menu() override;
+	void notify_game_ended() override;
 
 protected:
 	// For referencing the items in showhidemenu_
