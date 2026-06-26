@@ -98,7 +98,7 @@ public:
 	                    const Widelands::Message& message,
 	                    bool popup) override;
 	void request_watch_window(Widelands::PlayerNumber pn, Widelands::Bob& bob) override;
-	std::unique_ptr<Texture> draw_minimap_for_savegame() override;
+	[[nodiscard]] std::unique_ptr<Texture> draw_minimap_for_savegame() override;
 	void gather_saveloading_information(SaveloadingInformation& data) override;
 	void restore_from_saveloading_information(SaveloadingInformation& data) override;
 

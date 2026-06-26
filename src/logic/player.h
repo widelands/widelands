@@ -111,7 +111,7 @@ public:
 	void play_message_sound(const Message* message) const;
 
 	// Open a watch window following the given bob, provided that this is the interactive player.
-	void show_watch_window(Game&, Bob&);
+	void show_watch_window(Game&, Bob&) const;
 
 	const std::set<Serial>& ships() const;
 	void add_ship(Serial ship);

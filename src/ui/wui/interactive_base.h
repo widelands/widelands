@@ -271,7 +271,7 @@ public:
 	}
 	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {
 	}
-	std::unique_ptr<Texture> draw_minimap_for_savegame() override;
+	[[nodiscard]] std::unique_ptr<Texture> draw_minimap_for_savegame() override;
 	void gather_saveloading_information(SaveloadingInformation& data) override;
 	void restore_from_saveloading_information(SaveloadingInformation& data) override;
 

@@ -451,7 +451,7 @@ void Player::update_team_players() {
 	update_team_vision_whole_map();
 }
 
-void Player::show_watch_window(Game& game, Bob& b) {
+void Player::show_watch_window(Game& game, Bob& b) const {
 	game.get_game_interface()->request_watch_window(player_number(), b);
 }
 

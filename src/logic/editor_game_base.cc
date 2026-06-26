@@ -201,8 +201,8 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 	return descriptions_.get();
 }
 
-void EditorGameBase::set_game_interface(std::unique_ptr<IGameInterface> ig) {
-	game_interface_ = std::move(ig);
+void EditorGameBase::set_game_interface(std::unique_ptr<IGameInterface> gi) {
+	game_interface_ = std::move(gi);
 
 	// Now that the IBase and the EGBase are linked into each other, load the UI plugins.
 	if (game_interface_ != nullptr) {

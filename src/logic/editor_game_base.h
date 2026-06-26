@@ -172,10 +172,10 @@ public:
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
-	const Time& get_gametime() const {
+	[[nodiscard]] const Time& get_gametime() const {
 		return gametime_;
 	}
-	IGameInterface* get_game_interface() const {
+	[[nodiscard]] IGameInterface* get_game_interface() const {
 		return game_interface_.get();
 	}
 

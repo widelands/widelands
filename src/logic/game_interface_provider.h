@@ -65,8 +65,8 @@ public:
 		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
 	}
 
-	virtual Widelands::PlayerNumber player_number() const = 0;
-	virtual std::unique_ptr<Texture> draw_minimap_for_savegame() = 0;
+	[[nodiscard]] virtual Widelands::PlayerNumber player_number() const = 0;
+	[[nodiscard]] virtual std::unique_ptr<Texture> draw_minimap_for_savegame() = 0;
 
 	struct SaveloadingInformation {
 		struct LandmarkInfo {
