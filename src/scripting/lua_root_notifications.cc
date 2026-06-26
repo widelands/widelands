@@ -128,8 +128,7 @@ Wrapper* create(const std::string& type) {
 }
 
 Wrapper* create_mapview_jump(lua_State* L) {
-	return new SignalImpl(
-	   PersistenceInfo::kMapViewJump, 0, get_safe_ibase(L).map_view()->jump);
+	return new SignalImpl(PersistenceInfo::kMapViewJump, 0, get_safe_ibase(L).map_view()->jump);
 }
 
 Wrapper* create_mapview_changeview(lua_State* L) {
@@ -138,13 +137,13 @@ Wrapper* create_mapview_changeview(lua_State* L) {
 }
 
 Wrapper* create_mapview_field_clicked(lua_State* L) {
-	return new SignalImpl(PersistenceInfo::kMapViewFieldClicked, 0,
-	                      get_safe_ibase(L).map_view()->field_clicked);
+	return new SignalImpl(
+	   PersistenceInfo::kMapViewFieldClicked, 0, get_safe_ibase(L).map_view()->field_clicked);
 }
 
 Wrapper* create_mapview_track_selection(lua_State* L) {
-	return new SignalImpl(PersistenceInfo::kMapViewTrackSelection, 0,
-	                      get_safe_ibase(L).map_view()->track_selection);
+	return new SignalImpl(
+	   PersistenceInfo::kMapViewTrackSelection, 0, get_safe_ibase(L).map_view()->track_selection);
 }
 
 Wrapper* create_map_object_removed(const Widelands::MapObject& obj) {

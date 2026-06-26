@@ -618,13 +618,13 @@ int LuaPlayer::message_box(lua_State* L) {
 	}
 
 	if (is_modal) {
-		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2),
-		                                                        luaL_checkstring(L, 3), posx, posy, w,
-		                                                        h, is_modal, allow_next_scenario));
+		std::unique_ptr<StoryMessageBox> mb(
+		   new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3),
+		                       posx, posy, w, h, is_modal, allow_next_scenario));
 		NoteThreadSafeFunction::instantiate([&mb]() { mb->run<UI::Panel::Returncodes>(); }, true);
 	} else {
-		new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
-		                    w, h, is_modal, allow_next_scenario);
+		new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3),
+		                    posx, posy, w, h, is_modal, allow_next_scenario);
 	}
 
 	return 1;

@@ -1038,7 +1038,10 @@ void InteractivePlayer::edit_pinned_note(const Widelands::FCoords& c) {
 	}
 }
 
-void InteractivePlayer::notify_message(const Widelands::PlayerNumber pn, const Widelands::MessageId id, const Widelands::Message& message, const bool popup) {
+void InteractivePlayer::notify_message(const Widelands::PlayerNumber pn,
+                                       const Widelands::MessageId id,
+                                       const Widelands::Message& message,
+                                       const bool popup) {
 	if (player_number() == pn) {
 		player().play_message_sound(&message);
 		if (popup) {
@@ -1054,7 +1057,8 @@ void InteractivePlayer::request_watch_window(Widelands::PlayerNumber pn, Widelan
 }
 
 std::unique_ptr<Texture> InteractivePlayer::draw_minimap_for_savegame() {
-	return draw_minimap(game(), &player(), map_view()->view_area().rect(), MiniMapType::kStaticViewWindow, kSavegameMinimapLayers);
+	return draw_minimap(game(), &player(), map_view()->view_area().rect(),
+	                    MiniMapType::kStaticViewWindow, kSavegameMinimapLayers);
 }
 
 void InteractivePlayer::gather_saveloading_information(SaveloadingInformation& data) {

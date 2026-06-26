@@ -398,7 +398,9 @@ public:
 	void set_game_interface_provider(std::unique_ptr<IGameInterfaceProvider> gip) {
 		game_interface_provider_ = std::move(gip);
 	}
-	void create_game_interface(PlayerNumber player_number, bool multiplayer = false, ChatProvider* chat_provider = nullptr);
+	void create_game_interface(PlayerNumber player_number,
+	                           bool multiplayer = false,
+	                           ChatProvider* chat_provider = nullptr);
 
 	TradeID propose_trade(TradeInstance trade);
 	void accept_trade(TradeID trade_id, Market& receiver);

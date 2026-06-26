@@ -196,7 +196,8 @@ public:
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message, const std::string& tooltip = std::string()) const override;
+	void log_message(const std::string& message,
+	                 const std::string& tooltip = std::string()) const override;
 
 	void toggle_minimap();
 	void toggle_quicknav();
@@ -229,7 +230,8 @@ public:
 	void end_main_loop() override;
 
 	void info_panel_fast_forward_message_queue() override;
-	void notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) override;
+	void notify_player_starting_pos(Widelands::PlayerNumber player,
+	                                Widelands::Coords coords) override;
 
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
@@ -262,8 +264,13 @@ public:
 	void notify_replay_ended() override;
 	void notify_desync() override;
 
-	void notify_message(Widelands::PlayerNumber, Widelands::MessageId, const Widelands::Message&, bool) override {}
-	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {}
+	void notify_message(Widelands::PlayerNumber,
+	                    Widelands::MessageId,
+	                    const Widelands::Message&,
+	                    bool) override {
+	}
+	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {
+	}
 	std::unique_ptr<Texture> draw_minimap_for_savegame() override;
 	void gather_saveloading_information(SaveloadingInformation& data) override;
 	void restore_from_saveloading_information(SaveloadingInformation& data) override;

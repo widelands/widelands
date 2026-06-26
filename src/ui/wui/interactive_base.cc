@@ -286,7 +286,9 @@ InteractiveBase::~InteractiveBase() {
 void InteractiveBase::load_plugins() {
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
-			egbase().lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name + FileSystem::file_separator() + "init.lua");
+			egbase().lua().run_script(kAddOnDir + FileSystem::file_separator() +
+			                          pair.first->internal_name + FileSystem::file_separator() +
+			                          "init.lua");
 		}
 	}
 }
@@ -814,7 +816,8 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 void InteractiveBase::postload() {
 }
 
-void InteractiveBase::notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) {
+void InteractiveBase::notify_player_starting_pos(Widelands::PlayerNumber player,
+                                                 Widelands::Coords coords) {
 	if (player == player_number()) {
 		// Scroll map to starting position for new games.
 		// Loaded games are handled in GameInteractivePlayerPacket for single player, and in

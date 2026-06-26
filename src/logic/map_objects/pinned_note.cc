@@ -95,7 +95,8 @@ void PinnedNote::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	if (const PlayerNumber interactive_player = egbase.get_game_interface()->player_number(); interactive_player != neutral()) {
+	if (const PlayerNumber interactive_player = egbase.get_game_interface()->player_number();
+	    interactive_player != neutral()) {
 		const Player& p = egbase.player(interactive_player);
 		if (&p != &owner() &&
 		    (owner().team_number() == 0 || owner().team_number() != p.team_number())) {

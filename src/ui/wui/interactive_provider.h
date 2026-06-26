@@ -25,7 +25,10 @@
 
 class UserInterfaceProvider : public IGameInterfaceProvider {
 public:
-	std::unique_ptr<IGameInterface> create(Widelands::Game& game, Widelands::PlayerNumber player_number, bool multiplayer, ChatProvider* chat_provider) override;
+	std::unique_ptr<IGameInterface> create(Widelands::Game& game,
+	                                       Widelands::PlayerNumber player_number,
+	                                       bool multiplayer,
+	                                       ChatProvider* chat_provider) override;
 };
 
 #endif  // end of include guard: WL_UI_WUI_INTERACTIVE_PROVIDER_H

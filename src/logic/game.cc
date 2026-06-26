@@ -251,11 +251,15 @@ void Game::postload_addons_before_loading() {
 	postload_addons();
 }
 
-void Game::create_game_interface(PlayerNumber player_number, bool multiplayer, ChatProvider* chat_provider) {
+void Game::create_game_interface(PlayerNumber player_number,
+                                 bool multiplayer,
+                                 ChatProvider* chat_provider) {
 	if (game_interface_provider_ == nullptr) {
-		throw wexception("Game::create_game_interface(%d, %s): no game interface provider provided!", static_cast<int>(player_number), multiplayer ? "MP" : "SP");
+		throw wexception("Game::create_game_interface(%d, %s): no game interface provider provided!",
+		                 static_cast<int>(player_number), multiplayer ? "MP" : "SP");
 	}
-	set_game_interface(game_interface_provider_->create(*this, player_number, multiplayer, chat_provider));
+	set_game_interface(
+	   game_interface_provider_->create(*this, player_number, multiplayer, chat_provider));
 }
 
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,

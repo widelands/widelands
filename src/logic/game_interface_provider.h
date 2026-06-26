@@ -48,14 +48,19 @@ public:
 
 	virtual void load_plugins() = 0;
 	virtual void rebuild_main_menu() = 0;
-	virtual void notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) = 0;
+	virtual void notify_player_starting_pos(Widelands::PlayerNumber player,
+	                                        Widelands::Coords coords) = 0;
 	virtual void notify_game_ended() = 0;
 	virtual void notify_replay_ended() = 0;
 	virtual void notify_desync() = 0;
-	virtual void notify_message(Widelands::PlayerNumber pn, Widelands::MessageId id, const Widelands::Message& message, bool popup) = 0;
+	virtual void notify_message(Widelands::PlayerNumber pn,
+	                            Widelands::MessageId id,
+	                            const Widelands::Message& message,
+	                            bool popup) = 0;
 	virtual void request_watch_window(Widelands::PlayerNumber pn, Widelands::Bob& bob) = 0;
 
-	virtual void log_message(const std::string& message, const std::string& tooltip = std::string()) const = 0;
+	virtual void log_message(const std::string& message,
+	                         const std::string& tooltip = std::string()) const = 0;
 	inline void log_message(const char* message, const char* tt = nullptr) const {
 		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
 	}
@@ -65,16 +70,16 @@ public:
 
 	struct SaveloadingInformation {
 		struct LandmarkInfo {
-			bool set {false};
+			bool set{false};
 			float view_x, view_y, zoom;
 			std::string name;
 		};
 
-		Widelands::PlayerNumber player_number {1};
-		Vector2f mapview_center {Vector2f::zero()};
-		uint32_t display_flags {0U};
+		Widelands::PlayerNumber player_number{1};
+		Vector2f mapview_center{Vector2f::zero()};
+		uint32_t display_flags{0U};
 		std::vector<LandmarkInfo> landmarks;
-		bool should_saveload_windows {false};
+		bool should_saveload_windows{false};
 	};
 
 	virtual void gather_saveloading_information(SaveloadingInformation& data) = 0;
@@ -89,7 +94,10 @@ public:
 class IGameInterfaceProvider {
 public:
 	virtual ~IGameInterfaceProvider() = default;
-	virtual std::unique_ptr<IGameInterface> create(Widelands::Game& game, Widelands::PlayerNumber player_number, bool multiplayer, ChatProvider* chat_provider) = 0;
+	virtual std::unique_ptr<IGameInterface> create(Widelands::Game& game,
+	                                               Widelands::PlayerNumber player_number,
+	                                               bool multiplayer,
+	                                               ChatProvider* chat_provider) = 0;
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_INTERFACE_PROVIDER_H

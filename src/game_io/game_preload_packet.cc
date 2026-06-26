@@ -122,7 +122,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	const Map& map = game.map();
 	s.set_string("mapname", map.get_name());  // Name of map
 
-	if (Widelands::PlayerNumber pn = game.get_game_interface()->player_number(); pn != Widelands::neutral()) {
+	if (Widelands::PlayerNumber pn = game.get_game_interface()->player_number();
+	    pn != Widelands::neutral()) {
 		// player that saved the game.
 		s.set_int("player_nr", pn);
 	} else {
@@ -172,7 +173,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	   [&game, &fs]() {
 		   std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 		   if (sw != nullptr) {
-			   std::unique_ptr<Texture> texture = game.get_game_interface()->draw_minimap_for_savegame();
+			   std::unique_ptr<Texture> texture =
+			      game.get_game_interface()->draw_minimap_for_savegame();
 			   assert(texture != nullptr);
 			   save_to_png(texture.get(), sw.get(), ColorType::RGBA);
 			   sw->flush();

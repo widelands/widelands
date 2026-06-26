@@ -56,7 +56,7 @@ constexpr inline MiniMapLayer operator^(MiniMapLayer left, MiniMapLayer right) {
 }
 
 constexpr MiniMapLayer kSavegameMinimapLayers =
-  MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 
 enum class MiniMapType {
 	// Keep the view window always in the center of the minimap and pan the underlying map.

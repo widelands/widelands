@@ -23,9 +23,15 @@
 #include "ui/wui/interactive_player.h"
 #include "ui/wui/interactive_spectator.h"
 
-std::unique_ptr<IGameInterface> UserInterfaceProvider::create(Widelands::Game& game, const Widelands::PlayerNumber player_number, const bool multiplayer, ChatProvider* chat_provider) {
+std::unique_ptr<IGameInterface>
+UserInterfaceProvider::create(Widelands::Game& game,
+                              const Widelands::PlayerNumber player_number,
+                              const bool multiplayer,
+                              ChatProvider* chat_provider) {
 	if (player_number != 0) {
-		return std::make_unique<InteractivePlayer>(game, get_config_section(), player_number, multiplayer, chat_provider);
+		return std::make_unique<InteractivePlayer>(
+		   game, get_config_section(), player_number, multiplayer, chat_provider);
 	}
-	return std::make_unique<InteractiveSpectator>(game, get_config_section(), multiplayer, chat_provider);
+	return std::make_unique<InteractiveSpectator>(
+	   game, get_config_section(), multiplayer, chat_provider);
 }

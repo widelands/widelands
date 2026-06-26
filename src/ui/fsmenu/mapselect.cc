@@ -237,8 +237,9 @@ void MapSelect::clicked_ok() {
 		   get_map(), table_.get_selected_data().maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, std::shared_ptr<Widelands::Game>(get_capsule().menu().create_safe_game()), get_map(),
-		              table_.get_selected_data().maptype == MapData::MapType::kScenario);
+		new LaunchSPG(get_capsule(), *settings_,
+		              std::shared_ptr<Widelands::Game>(get_capsule().menu().create_safe_game()),
+		              get_map(), table_.get_selected_data().maptype == MapData::MapType::kScenario);
 	}
 }
 

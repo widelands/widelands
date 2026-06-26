@@ -36,7 +36,7 @@ class InteractiveBase;
  */
 struct StoryMessageBox : public UI::Window {
 	StoryMessageBox(InteractiveBase* ibase,
-	Widelands::Game* game,
+	                Widelands::Game* game,
 	                Widelands::Coords coords,
 	                const std::string& title,
 	                const std::string& body,

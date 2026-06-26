@@ -594,7 +594,8 @@ void GameHost::run_callback() {
 			set_win_condition_script(gpdp.get_win_condition());
 		}
 
-		const bool is_player = (player_number > 0) && (player_number <= UserSettings::highest_playernum());
+		const bool is_player =
+		   (player_number > 0) && (player_number <= UserSettings::highest_playernum());
 		if (!is_player) {
 			player_number = 1;  // for the emergency save later
 		}

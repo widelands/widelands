@@ -661,8 +661,7 @@ int LuaMapView::remove_plugin_timer(lua_State* L) {
 		} else if (only_first) {
 			report_error(L, "Cannot remove first plugin timer if no name is given");
 		}
-		lua_pushuint32(
-		   L, ibase->get_plugin_actions().remove_timer(name, only_first));
+		lua_pushuint32(L, ibase->get_plugin_actions().remove_timer(name, only_first));
 	} else {
 		lua_pushuint32(L, 0);
 	}

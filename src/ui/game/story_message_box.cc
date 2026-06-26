@@ -33,7 +33,7 @@ constexpr int kPadding = 4;
 }  // namespace
 
 StoryMessageBox::StoryMessageBox(InteractiveBase* ibase,
-Widelands::Game* game,
+                                 Widelands::Game* game,
                                  const Widelands::Coords coords,
                                  const std::string& title,
                                  const std::string& body,
