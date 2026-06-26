@@ -33,6 +33,7 @@
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"
 
+struct ChatProvider;
 struct GameSettings;
 class GameController;
 
@@ -45,7 +46,6 @@ constexpr int16_t kInvalidForesterEntry = -1;
 
 constexpr uint32_t kScenarioDifficultyNotSet = 0;
 
-struct ChatProvider;
 struct Flag;
 struct Path;
 struct PlayerImmovable;

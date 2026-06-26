@@ -25,6 +25,8 @@
 #include "ui/basic/multilinetextarea.h"
 #include "ui/basic/window.h"
 
+class InteractiveBase;
+
 /**
  * A message box window with an OK button for use in scenarios.
  * Closing this window per right-click is blocked.
@@ -33,7 +35,8 @@
  * If 'x' == 'y' == -1, the message box will be centered on screen.
  */
 struct StoryMessageBox : public UI::Window {
-	StoryMessageBox(Widelands::Game* game,
+	StoryMessageBox(InteractiveBase* ibase,
+	Widelands::Game* game,
 	                Widelands::Coords coords,
 	                const std::string& title,
 	                const std::string& body,

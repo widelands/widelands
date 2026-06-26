@@ -95,15 +95,12 @@ void PinnedNote::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	if (egbase.is_game()) {
-		const InteractivePlayer* ipl = dynamic_cast<const Game&>(egbase).get_ipl();
-		if (ipl != nullptr) {
-			const Player& p = ipl->player();
-			if (&p != &owner() &&
-			    (owner().team_number() == 0 || owner().team_number() != p.team_number())) {
-				/* Notes are invisible to enemy players. */
-				return;
-			}
+	if (const PlayerNumber interactive_player = egbase.get_game_interface()->player_number(); interactive_player != neutral()) {
+		const Player& p = egbase.player(interactive_player);
+		if (&p != &owner() &&
+		    (owner().team_number() == 0 || owner().team_number() != p.team_number())) {
+			/* Notes are invisible to enemy players. */
+			return;
 		}
 	}
 

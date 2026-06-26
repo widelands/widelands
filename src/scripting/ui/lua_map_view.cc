@@ -40,6 +40,10 @@ MapView
    This class may only be accessed in a game or the editor.
    You can construct as many instances of it as you like,
    and they will all refer to the same map view.
+
+   .. versionchanged: 1.4
+      Games can be headless, in which case many properties and methods
+      of this class may not be accessed.
 */
 const char LuaMapView::className[] = "MapView";
 const MethodType<LuaMapView> LuaMapView::Methods[] = {
@@ -79,11 +83,11 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    {nullptr, nullptr, nullptr},
 };
 
-LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
+LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_ibase_if_exists(L)) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	panel_ = get_egbase(L).get_ibase();
+	panel_ = get_ibase_if_exists(L);
 }
 
 /*
@@ -189,7 +193,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
       (RO) Is the player using automatic road building mode?
 */
 int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
-	InteractivePlayer* ipl = get_game(L).get_ipl();
+	upcast(InteractivePlayer, ipl, get_ibase_if_exists(L));
 	if (ipl == nullptr) {
 		lua_pushboolean(L, 0);
 	} else {
@@ -215,14 +219,22 @@ int LuaMapView::get_is_animating(lua_State* L) {
 
       (RO) An :class:`array` of all registered :class:`~wl.ui.Timer` instances.
 
+      .. versionchanged: 1.4
+         This is :const:`nil` for headless games.
+
       :see also: :meth:`add_plugin_timer`
       :see also: :meth:`get_plugin_timer`
       :see also: :meth:`remove_plugin_timer`
 */
 int LuaMapView::get_plugin_timers(lua_State* L) {
+	InteractiveBase* ibase = get_ibase_if_exists(L);
+	if (ibase == nullptr) {
+		return 0;
+	}
+
 	lua_newtable(L);
 	int i = 1;
-	for (auto& timer : get_egbase(L).get_ibase()->get_plugin_actions().all_timers()) {
+	for (auto& timer : ibase->get_plugin_actions().all_timers()) {
 		lua_pushint32(L, i++);
 		to_lua<LuaTimer>(L, new LuaTimer(timer.get()));
 		lua_rawset(L, -3);
@@ -409,9 +421,14 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 
       Recompute the size and position of the toolbar.
       Call this after you have modified the toolbar in any way.
+
+      .. versionchanged: 1.4
+         Does nothing in headless games.
 */
 int LuaMapView::update_toolbar(lua_State* L) {
-	get_egbase(L).get_ibase()->finalize_toolbar();
+	if (InteractiveBase* ibase = get_ibase_if_exists(L); ibase != nullptr) {
+		ibase->finalize_toolbar();
+	}
 	return 0;
 }
 
@@ -422,6 +439,9 @@ int LuaMapView::update_toolbar(lua_State* L) {
 
       .. versionchanged:: 1.3
          Added ``hotkey`` parameter.
+
+      .. versionchanged: 1.4
+         Not permitted in headless games.
 
       Add an entry to the main toolbar's Plugin dropdown.
       This makes the plugin dropdown visible if it was hidden.
@@ -438,7 +458,7 @@ int LuaMapView::update_toolbar(lua_State* L) {
       :type hotkey: :class:`string`
 */
 int LuaMapView::add_toolbar_plugin(lua_State* L) {
-	get_egbase(L).get_ibase()->add_toolbar_plugin(
+	get_safe_ibase(L).add_toolbar_plugin(
 	   luaL_checkstring(L, 2), luaL_checkstring(L, 3), luaL_checkstring(L, 4),
 	   lua_gettop(L) >= 5 ? luaL_checkstring(L, 5) : "",
 	   lua_gettop(L) >= 6 ? shortcut_string_if_set(luaL_checkstring(L, 6), false) : "");
@@ -516,6 +536,9 @@ int LuaMapView::set_keyboard_shortcut_release(lua_State* L) {
       .. versionchanged:: 1.4
          Added ``name`` and ``count`` parameters and added return type.
 
+      .. versionchanged: 1.4
+         Not permitted in headless games.
+
       Register a piece of code that will be run periodically as long as the game/editor is running.
 
       :arg action: The Lua code to run.
@@ -563,7 +586,7 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
 	}
 
 	PluginActions::Timer& timer =
-	   get_egbase(L).get_ibase()->add_plugin_timer(name, action, interval, count, true, failsafe);
+	   get_safe_ibase(L).add_plugin_timer(name, action, interval, count, true, failsafe);
 	to_lua<LuaTimer>(L, new LuaTimer(&timer));
 	return 1;
 }
@@ -577,6 +600,9 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
       If multiple timers with the name exist, the first one is returned.
       If no timer with the name exists, :const:`nil` is returned.
 
+      .. versionchanged: 1.4
+         Always returns :const:`nil` in headless games.
+
       :arg name: The internal name of the timer to find.
       :type name: :class:`string`
       :returns: :class:`wl.ui.Timer`
@@ -586,14 +612,14 @@ int LuaMapView::add_plugin_timer(lua_State* L) {
       :see also: :meth:`remove_plugin_timer`
 */
 int LuaMapView::get_plugin_timer(lua_State* L) {
-	PluginActions::Timer* timer =
-	   get_egbase(L).get_ibase()->get_plugin_actions().get_timer(luaL_checkstring(L, 2));
-	if (timer != nullptr) {
-		to_lua<LuaTimer>(L, new LuaTimer(timer));
-	} else {
-		lua_pushnil(L);
+	if (InteractiveBase* ibase = get_ibase_if_exists(L); ibase != nullptr) {
+		PluginActions::Timer* timer = ibase->get_plugin_actions().get_timer(luaL_checkstring(L, 2));
+		if (timer != nullptr) {
+			to_lua<LuaTimer>(L, new LuaTimer(timer));
+			return 1;
+		}
 	}
-	return 1;
+	return 0;
 }
 
 /* RST
@@ -613,6 +639,9 @@ int LuaMapView::get_plugin_timer(lua_State* L) {
 
       The method returns the total number of timers removed.
 
+      .. versionchanged: 1.4
+         Does nothing in headless games.
+
       :arg name: The internal name of the timer to remove, or :const:`nil` for any.
       :type name: :class:`string`
       :arg only_first: Whether to remove at most one timer.
@@ -624,15 +653,19 @@ int LuaMapView::get_plugin_timer(lua_State* L) {
       :see also: :meth:`get_plugin_timer`
 */
 int LuaMapView::remove_plugin_timer(lua_State* L) {
-	const bool only_first = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
-	std::optional<std::string> name;
-	if (lua_gettop(L) >= 2 && !lua_isnil(L, 2)) {
-		name = luaL_checkstring(L, 2);
-	} else if (only_first) {
-		report_error(L, "Cannot remove first plugin timer if no name is given");
+	if (InteractiveBase* ibase = get_ibase_if_exists(L); ibase != nullptr) {
+		const bool only_first = lua_gettop(L) >= 3 && luaL_checkboolean(L, 3);
+		std::optional<std::string> name;
+		if (lua_gettop(L) >= 2 && !lua_isnil(L, 2)) {
+			name = luaL_checkstring(L, 2);
+		} else if (only_first) {
+			report_error(L, "Cannot remove first plugin timer if no name is given");
+		}
+		lua_pushuint32(
+		   L, ibase->get_plugin_actions().remove_timer(name, only_first));
+	} else {
+		lua_pushuint32(L, 0);
 	}
-	lua_pushuint32(
-	   L, get_egbase(L).get_ibase()->get_plugin_actions().remove_timer(name, only_first));
 	return 1;
 }
 
@@ -640,6 +673,9 @@ int LuaMapView::remove_plugin_timer(lua_State* L) {
    .. method:: subscribe_to_jump()
 
       .. versionadded:: 1.3
+
+      .. versionchanged: 1.4
+         Not permitted in headless games.
 
       Subscribe to the "jump" signal, which is triggered when
       the viewport jumps immediately to a different position.
@@ -662,6 +698,9 @@ int LuaMapView::subscribe_to_jump(lua_State* L) {
 
       .. versionadded:: 1.3
 
+      .. versionchanged: 1.4
+         Not permitted in headless games.
+
       Subscribe to the "changeview" signal, which is triggered when the viewport moves.
 
       This signal is triggered repeatedly by animated map transitions.
@@ -681,6 +720,9 @@ int LuaMapView::subscribe_to_changeview(lua_State* L) {
    .. method:: subscribe_to_field_clicked()
 
       .. versionadded:: 1.3
+
+      .. versionchanged: 1.4
+         Not permitted in headless games.
 
       Subscribe to the "field_clicked" signal, which is triggered when the user clicks on a field.
 
@@ -710,6 +752,9 @@ int LuaMapView::subscribe_to_field_clicked(lua_State* L) {
    .. method:: subscribe_to_track_selection()
 
       .. versionadded:: 1.3
+
+      .. versionchanged: 1.4
+         Not permitted in headless games.
 
       Subscribe to the "track_selection" signal, which is triggered when
       the field under the mouse cursor changes.

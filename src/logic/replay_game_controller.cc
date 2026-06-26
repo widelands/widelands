@@ -24,6 +24,7 @@
 
 #include "commands/cmd_replay_end.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/replay.h"
 

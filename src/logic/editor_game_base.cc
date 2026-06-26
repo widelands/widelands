@@ -30,6 +30,7 @@
 #include "economy/waterway.h"
 #include "graphic/color.h"
 #include "graphic/road_segments.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

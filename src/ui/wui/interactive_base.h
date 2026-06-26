@@ -196,10 +196,7 @@ public:
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message, const std::string& tooltip = std::string()) const;
-	void log_message(const char* message, const char* tt = nullptr) const {
-		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
-	}
+	void log_message(const std::string& message, const std::string& tooltip = std::string()) const override;
 
 	void toggle_minimap();
 	void toggle_quicknav();
@@ -229,6 +226,7 @@ public:
 	}
 
 	void main_loop() override;
+	void end_main_loop() override;
 
 	void info_panel_fast_forward_message_queue() override;
 	void notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) override;
@@ -251,7 +249,7 @@ public:
 	virtual bool can_act(Widelands::PlayerNumber) const {
 		return omnipotent();
 	}
-	virtual Widelands::PlayerNumber player_number() const {
+	Widelands::PlayerNumber player_number() const override {
 		return 0;
 	}
 

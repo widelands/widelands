@@ -611,18 +611,19 @@ int LuaPlayer::message_box(lua_State* L) {
 	}
 #undef CHECK_UINT
 
-	InteractivePlayer* ipl = game.get_ipl();
+	InteractiveBase& ibase = get_safe_ibase(L);
+	upcast(InteractivePlayer, ipl, &ibase);
 	if (ipl != nullptr) {
 		ipl->map_view()->stop_dragging();
 	}
 
 	if (is_modal) {
-		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
+		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2),
 		                                                        luaL_checkstring(L, 3), posx, posy, w,
 		                                                        h, is_modal, allow_next_scenario));
 		NoteThreadSafeFunction::instantiate([&mb]() { mb->run<UI::Panel::Returncodes>(); }, true);
 	} else {
-		new StoryMessageBox(&game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
+		new StoryMessageBox(&ibase, &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
 		                    w, h, is_modal, allow_next_scenario);
 	}
 
@@ -836,7 +837,8 @@ int LuaPlayer::hide_fields(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
-	if (get_game(L).get_ipl()->player_number() != player_number()) {
+	upcast(InteractivePlayer, ipl, get_ibase_if_exists(L));
+	if (ipl == nullptr || ipl->player_number() != player_number()) {
 		report_error(L, "Can only be called for interactive player!");
 	}
 
@@ -1095,12 +1097,10 @@ int LuaPlayer::allow_workers(lua_State* L) {
       :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-
 	uint8_t newplayer = luaL_checkinteger(L, -1);
-	InteractivePlayer* ipl = game.get_ipl();
+	upcast(InteractivePlayer, ipl, get_ibase_if_exists(L));
 	// only switch, if this is our player!
-	if (ipl->player_number() == player_number()) {
+	if (ipl != nullptr && ipl->player_number() == player_number()) {
 		ipl->set_player_number(newplayer);
 	}
 	return 0;

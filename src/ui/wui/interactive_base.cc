@@ -825,6 +825,9 @@ void InteractiveBase::notify_player_starting_pos(Widelands::PlayerNumber player,
 void InteractiveBase::main_loop() {
 	run<UI::Panel::Returncodes>();
 }
+void InteractiveBase::end_main_loop() {
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
 
 void InteractiveBase::draw_road_building(RenderTarget* dst,
                                          FieldsToDraw::Field& field,

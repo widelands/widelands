@@ -667,7 +667,7 @@ bool Game::run(StartGameType const start_game_type,
 					                  "Editor to fix this problem."),
 					                static_cast<unsigned int>(p));
 				}
-				get_game_interface()->notify_player_starting_pos(p, map().get_starting_pos(p);
+				get_game_interface()->notify_player_starting_pos(p, map().get_starting_pos(p));
 			}
 		}
 
@@ -783,13 +783,13 @@ bool Game::run(StartGameType const start_game_type,
 	}
 #endif
 
-	get_game_interface->main_loop();
+	get_game_interface()->main_loop();
 
 	state_ = gs_ending;
 
 	cleanup_objects();
 	delete_pending_player_commands();
-	set_ibase(nullptr);
+	set_game_interface(nullptr);
 
 	state_ = gs_notrunning;
 

@@ -27,6 +27,7 @@
 namespace Widelands {
 class Game;
 }  // namespace Widelands
+struct ChatProvider;
 
 class IGameInterface {
 public:
@@ -40,13 +41,21 @@ public:
 	virtual void load_plugins() = 0;
 	virtual void rebuild_main_menu() = 0;
 
+	virtual void log_message(const std::string& message, const std::string& tooltip = std::string()) const = 0;
+	inline void log_message(const char* message, const char* tt = nullptr) const {
+		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
+	}
+
+	virtual Widelands::PlayerNumber player_number() const = 0;
+
 	virtual void main_loop() = 0;
+	virtual void end_main_loop() = 0;
 };
 
 class IGameInterfaceProvider {
 public:
 	virtual ~IGameInterfaceProvider() = default;
-	virtual std::unique_ptr<IGameInterface> create(Widelands::Game& game, Widelands::PlayerNumber player_number) = 0;
+	virtual std::unique_ptr<IGameInterface> create(Widelands::Game& game, Widelands::PlayerNumber player_number, bool multiplayer, ChatProvider* chat_provider) = 0;
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_INTERFACE_PROVIDER_H

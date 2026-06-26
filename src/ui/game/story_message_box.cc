@@ -32,7 +32,8 @@ namespace {
 constexpr int kPadding = 4;
 }  // namespace
 
-StoryMessageBox::StoryMessageBox(Widelands::Game* game,
+StoryMessageBox::StoryMessageBox(InteractiveBase* ibase,
+Widelands::Game* game,
                                  const Widelands::Coords coords,
                                  const std::string& title,
                                  const std::string& body,
@@ -42,7 +43,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  uint32_t const h,
                                  bool modal,
                                  bool allow_next_scenario)
-   : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
+   : UI::Window(ibase, UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
      main_box_(this,
                UI::PanelStyle::kWui,
                "main_box",
@@ -101,7 +102,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 
 	// Adjust map view
 	if (coords != Widelands::Coords::null()) {
-		game_->get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
+		ibase->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
 	}
 
 	// Add and configure the panels

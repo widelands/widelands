@@ -176,8 +176,8 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	game->save_handler().set_autosave_filename(
 	   format("%s_netclient%u", kAutosavePrefix, static_cast<unsigned int>(pn)));
 
-	game.set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
-	game.create_game_interface(playernumber, true, parent);
+	game->set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
+	game->create_game_interface(pn, true, parent);
 
 	if (settings.savegame) {  // savegame
 		game->init_savegame(settings);
@@ -185,7 +185,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 		game->init_newgame(settings);
 	}
 
-	upcast(InteractiveGameBase, igb, game.get_game_interface());
+	upcast(InteractiveGameBase, igb, game->get_game_interface());
 	assert(igb != nullptr);
 	return igb;
 }

@@ -30,6 +30,7 @@
 
 class InteractiveBase;
 class InteractiveGameBase;
+class InteractivePlayer;
 
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class GameDiplomacyMenu : public UI::UniqueWindow {
