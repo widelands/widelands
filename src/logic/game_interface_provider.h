@@ -50,6 +50,8 @@ public:
 	virtual void rebuild_main_menu() = 0;
 	virtual void notify_player_starting_pos(Widelands::PlayerNumber player, Widelands::Coords coords) = 0;
 	virtual void notify_game_ended() = 0;
+	virtual void notify_replay_ended() = 0;
+	virtual void notify_desync() = 0;
 	virtual void notify_message(Widelands::PlayerNumber pn, Widelands::MessageId id, const Widelands::Message& message, bool popup) = 0;
 	virtual void request_watch_window(Widelands::PlayerNumber pn, Widelands::Bob& bob) = 0;
 

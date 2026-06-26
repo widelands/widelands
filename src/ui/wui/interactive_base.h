@@ -259,6 +259,8 @@ public:
 
 	void notify_game_ended() override {
 	}
+	void notify_replay_ended() override;
+	void notify_desync() override;
 
 	void notify_message(Widelands::PlayerNumber, Widelands::MessageId, const Widelands::Message&, bool) override {}
 	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {}

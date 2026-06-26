@@ -29,6 +29,7 @@
 #include "base/multithreading.h"
 #include "base/string.h"
 #include "base/time_string.h"
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -827,6 +828,30 @@ void InteractiveBase::main_loop() {
 }
 void InteractiveBase::end_main_loop() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
+
+void InteractiveBase::notify_replay_ended() {
+	UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("End of Replay"),
+	                     _("The end of the replay has been reached and the game has "
+	                       "been paused. You may unpause the game and continue watching "
+	                       "if you want to."),
+	                     UI::WLMessageBox::MBoxType::kOk);
+	mmb.run<UI::Panel::Returncodes>();
+}
+
+void InteractiveBase::notify_desync() {
+	UI::WLMessageBox m(
+	   this, UI::WindowStyle::kWui, _("Desync"),
+	   format(_("The replay has desynced and the game was paused.\n"
+	            "You are probably watching a replay created with another version of "
+	            "Widelands, which is not supported.\n\n"
+	            "If you are certain that the replay was created with the same version "
+	            "of Widelands, %1$s, please report this problem as a bug.\n"
+	            "You will find related messages in the standard output (stdout.txt on "
+	            "Windows). Please add this information to your report."),
+	          build_ver_details()),
+	   UI::WLMessageBox::MBoxType::kOk);
+	m.run<UI::Panel::Returncodes>();
 }
 
 std::unique_ptr<Texture> InteractiveBase::draw_minimap_for_savegame() {

@@ -24,6 +24,7 @@ wl_library(wui_interactive
     interactive_spectator.h
   USES_SDL2
   DEPENDS
+    build_info
     ui_basic
     logic_map_objects
     graphic_fonthandler
