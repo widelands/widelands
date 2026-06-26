@@ -114,32 +114,33 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 			// Now fill the lists
 			std::unique_ptr<LuaTable> entries_table = tab_table->get_table("entries");
 			for (const auto& entry_table : entries_table->array_entries<std::unique_ptr<LuaTable>>()) {
-				const std::string entry_name = entry_table->get_string("name");
-				const std::string entry_title = entry_table->get_string("title");
-				const std::string entry_icon =
-				   entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
-				const std::string entry_script = entry_table->get_string("script");
+				do_add_entry(entry_table.get(), tab_name);
+			}
+		}
 
-				// Make sure that all paths exist
-				if (!g_fs->file_exists(entry_script)) {
-					throw wexception("Script path %s for entry %s does not exist!", entry_script.c_str(),
-					                 entry_name.c_str());
-				}
-
-				EncyclopediaEntry entry(
-				   entry_name, entry_script,
-				   entry_table->get_table("script_parameters")->array_entries<std::string>());
-
-				if (entry_icon.empty()) {
-					lists_.at(tab_name)->add(entry_title, entry);
-				} else if (g_fs->file_exists(entry_icon)) {
-					lists_.at(tab_name)->add(entry_title, entry, g_image_cache->get(entry_icon));
-				} else {
-					throw wexception("Icon path '%s' for tab entry '%s' does not exist!",
-					                 entry_icon.c_str(), entry_name.c_str());
+		// Lastly, add-on help
+		for (const AddOns::AddOnState& state : AddOns::g_addons) {
+			if (state.second) {
+				std::string path = kAddOnDir;
+				path += FileSystem::file_separator();
+				path += state.first->internal_name;
+				path += FileSystem::file_separator();
+				path += kAddOnEncyclopediaFile;
+				if (g_fs->file_exists(path)) {
+					std::unique_ptr<LuaTable> entries_table(lua_->run_script(path));
+					for (const auto& entry_table : entries_table->array_entries<std::unique_ptr<LuaTable>>()) {
+						const std::string tab_name = entry_table->has_key("tab_name") ? entry_table->get_string("tab_name") : "addons";
+						do_add_entry(entry_table.get(), tab_name);
+					}
 				}
 			}
 		}
+
+		auto addon_list = lists_.find("addons");
+		if (addon_list != lists_.end() && addon_list->second->empty()) {
+			tabs_.remove_last_tab(kTabNamePrefix + "addons");
+		}
+
 	} catch (WException& err) {
 		log_err_time(parent_.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
@@ -159,6 +160,33 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
+}
+
+void EncyclopediaWindow::do_add_entry(LuaTable* entry_table, const std::string& tab_name) {
+	const std::string entry_name = entry_table->get_string("name");
+	const std::string entry_title = entry_table->get_string("title");
+	const std::string entry_icon =
+	   entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
+	const std::string entry_script = entry_table->get_string("script");
+
+	// Make sure that all paths exist
+	if (!g_fs->file_exists(entry_script)) {
+		throw wexception("Script path %s for entry %s does not exist!", entry_script.c_str(),
+		                 entry_name.c_str());
+	}
+
+	EncyclopediaEntry entry(
+	   entry_name, entry_script,
+	   entry_table->get_table("script_parameters")->array_entries<std::string>());
+
+	if (entry_icon.empty()) {
+		lists_.at(tab_name)->add(entry_title, entry);
+	} else if (g_fs->file_exists(entry_icon)) {
+		lists_.at(tab_name)->add(entry_title, entry, g_image_cache->get(entry_icon));
+	} else {
+		throw wexception("Icon path '%s' for tab entry '%s' does not exist!",
+		                 entry_icon.c_str(), entry_name.c_str());
 	}
 }
 

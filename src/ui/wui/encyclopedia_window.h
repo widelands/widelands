@@ -63,6 +63,8 @@ private:
 		const std::vector<std::string> script_parameters;
 	};
 
+	void do_add_entry(LuaTable* entry_table, const std::string& tab_name);
+
 	// Update contents when an entry is selected
 	void entry_selected(const std::string& tab_name);
 

@@ -175,6 +175,16 @@ Each shortcut definition :class:`table` contains the following keys:
 * ``mods`` *Optional*: An :class:`array` of the modifiers keys in the default keyboard shortcut. Valid modifiers are ``"control"`` (also known as ``"ctrl"``), ``"shift"``, ``"alt"``, and ``"gui"`` (also known as ``"super"``, ``"meta"``, ``"cmd"``, ``"command"``, or ``"windows"``).
 
 
+Encyclopedia Integration
+------------------------
+
+Since Widelands version 1.4, add-ons can add custom entries to the in-game/in-editor encyclopedia. To do so, the add-on must create a script called ``encyclopedia.lua`` in the add-on directory, which returns an :class:`array` of entry definition tables.
+
+Each entry definition :class:`table` contains all the keys of a regular encyclopedia Entry table and optionally the key:
+
+* ``tab_name`` *(optional)*: The name of the encyclopedia tab in which this entry appears (default ``"addons"``).
+
+
 Restrictions
 ------------
 
