@@ -1413,7 +1413,8 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	for (const auto& info : egbase.enabled_addons()) {
 		if (info->acts_as(AddOns::AddOnCategory::kWorld)) {
 			verb_log_info("┃    Add-On ‘%s’", info->internal_name.c_str());
-			table = egbase.lua().run_script(info->basedir_for(AddOns::AddOnCategory::kWorld) + "editor.lua");
+			table = egbase.lua().run_script(info->basedir_for(AddOns::AddOnCategory::kWorld) +
+			                                "editor.lua");
 			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
 			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
 			load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);

@@ -175,8 +175,9 @@ public:
 	[[nodiscard]] bool has_category_flag(AddOnCategoryInfo::Flag flag) const;
 	[[nodiscard]] std::string basedir_for(AddOnCategory) const;
 
-	using CategoryFunctor = bool(*)(AddOnCategory, AddOnCategory);
-	static bool category_functor_any(CategoryFunctor, const AddOnInfo& base, const AddOnInfo& dependency);
+	using CategoryFunctor = bool (*)(AddOnCategory, AddOnCategory);
+	static bool
+	category_functor_any(CategoryFunctor, const AddOnInfo& base, const AddOnInfo& dependency);
 };
 
 using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;

@@ -211,7 +211,8 @@ void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	if (b != nullptr) {
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kUIPlugin)) {
-				lua().run_script(pair.first->basedir_for(AddOns::AddOnCategory::kUIPlugin) + "init.lua");
+				lua().run_script(pair.first->basedir_for(AddOns::AddOnCategory::kUIPlugin) +
+				                 "init.lua");
 			}
 		}
 	}
@@ -320,16 +321,20 @@ void EditorGameBase::postload_addons() {
 
 	for (const auto& info : enabled_addons_) {
 		if (info->acts_as(AddOns::AddOnCategory::kWorld)) {
-			const std::string script(info->basedir_for(AddOns::AddOnCategory::kWorld) + "postload.lua");
+			const std::string script(info->basedir_for(AddOns::AddOnCategory::kWorld) +
+			                         "postload.lua");
 			if (g_fs->file_exists(script)) {
-				verb_log_info("Running world postload script for add-on %s", info->internal_name.c_str());
+				verb_log_info(
+				   "Running world postload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);
 			}
 		}
 		if (info->acts_as(AddOns::AddOnCategory::kTribes)) {
-			const std::string script(info->basedir_for(AddOns::AddOnCategory::kTribes) + "postload.lua");
+			const std::string script(info->basedir_for(AddOns::AddOnCategory::kTribes) +
+			                         "postload.lua");
 			if (g_fs->file_exists(script)) {
-				verb_log_info("Running tribe postload script for add-on %s", info->internal_name.c_str());
+				verb_log_info(
+				   "Running tribe postload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);
 			}
 		}

@@ -45,39 +45,42 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
    {"Easy.", "images/ui_fsmenu/easy.png"}};
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
-   {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", AddOnCategoryInfo::kHide}},
+   {AddOnCategory::kNone, AddOnCategoryInfo{"", []() { return _("Error"); },
+                                            "images/ui_basic/stop.png", AddOnCategoryInfo::kHide}},
    {AddOnCategory::kCombo,
-    AddOnCategoryInfo{"combo", []() { return _("Combo"); }, "images/wui/stats/menu_tab_workers_warehouse.png", AddOnCategoryInfo::kHide}},
-   {AddOnCategory::kTribes,
-    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png", AddOnCategoryInfo::kNetworkRelevant}},
-   {AddOnCategory::kWorld,
-    AddOnCategoryInfo{"world", []() { return _("World"); },
-                      "images/wui/menus/toggle_immovables.png", AddOnCategoryInfo::kNetworkRelevant}},
-   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png", AddOnCategoryInfo::kNetworkRelevant}},
+    AddOnCategoryInfo{"combo", []() { return _("Combo"); },
+                      "images/wui/stats/menu_tab_workers_warehouse.png", AddOnCategoryInfo::kHide}},
+   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                                              "images/wui/stats/menu_tab_wares_warehouse.png",
+                                              AddOnCategoryInfo::kNetworkRelevant}},
+   {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
+                                             "images/wui/menus/toggle_immovables.png",
+                                             AddOnCategoryInfo::kNetworkRelevant}},
+   {AddOnCategory::kScript,
+    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png",
+                      AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kSingleMap,
-    AddOnCategoryInfo{
-       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", AddOnCategoryInfo::kNetworkRelevant | AddOnCategoryInfo::kHide}},
-   {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", AddOnCategoryInfo::kNetworkRelevant}},
+    AddOnCategoryInfo{"map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png",
+                      AddOnCategoryInfo::kNetworkRelevant | AddOnCategoryInfo::kHide}},
+   {AddOnCategory::kMaps,
+    AddOnCategoryInfo{"maps", []() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png",
+                      AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kMapGenerator,
     AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
                       "images/wui/editor/menus/new_random_map.png", 0}},
-   {AddOnCategory::kCampaign,
-    AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                      "images/wui/messages/messages_warfare.png", 0}},
+   {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
+                                                "images/wui/messages/messages_warfare.png", 0}},
    {AddOnCategory::kWinCondition,
     AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
                       "images/wui/menus/objectives.png", AddOnCategoryInfo::kNetworkRelevant}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", AddOnCategoryInfo::kNetworkRelevant}},
-   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", 0}},
-   {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
-                                                "images/plugin.png", 0}}};
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png",
+                      AddOnCategoryInfo::kNetworkRelevant}},
+   {AddOnCategory::kTheme,
+    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png", 0}},
+   {AddOnCategory::kUIPlugin,
+    AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", 0}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -229,7 +232,9 @@ bool require_enabled(AddOnCategory base, AddOnCategory dependency) {
 }
 
 // static
-bool AddOnInfo::category_functor_any(CategoryFunctor fn, const AddOnInfo& base, const AddOnInfo& dependency) {
+bool AddOnInfo::category_functor_any(CategoryFunctor fn,
+                                     const AddOnInfo& base,
+                                     const AddOnInfo& dependency) {
 	std::set<AddOnCategory> all_base(base.combo_categories_);
 	std::set<AddOnCategory> all_dep(dependency.combo_categories_);
 	all_base.insert(base.get_category());
@@ -547,7 +552,9 @@ void AddOnInfo::init_combo_categories(FileSystem& fs) {
 	}
 
 	for (const std::string& path : fs.list_directory("")) {
-		if (std::optional<AddOnCategory> result = try_get_category(path); result.has_value() && (kAddOnCategories.at(*result).flags & AddOnCategoryInfo::kHide) == 0) {
+		if (std::optional<AddOnCategory> result = try_get_category(path);
+		    result.has_value() &&
+		    (kAddOnCategories.at(*result).flags & AddOnCategoryInfo::kHide) == 0) {
 			combo_categories_.insert(*result);
 		}
 	}

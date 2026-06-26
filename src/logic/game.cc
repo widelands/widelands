@@ -708,7 +708,8 @@ bool Game::run(StartGameType const start_game_type,
 			for (const auto& addon : enabled_addons()) {
 				if (addon->acts_as(AddOns::AddOnCategory::kScript)) {
 					enqueue_command(new CmdLuaScript(
-					   get_gametime() + Duration(1), addon->basedir_for(AddOns::AddOnCategory::kScript) + "init.lua"));
+					   get_gametime() + Duration(1),
+					   addon->basedir_for(AddOns::AddOnCategory::kScript) + "init.lua"));
 				}
 			}
 		}

@@ -142,7 +142,8 @@ void MapTable::fill(const std::vector<std::string>& directories,
 		if (include_addon_maps) {
 			for (const auto& addon : AddOns::g_addons) {
 				if (addon.second && addon.first->acts_as(AddOns::AddOnCategory::kMaps)) {
-					for (const std::string& mapname : g_fs->list_directory(addon.first->basedir_for(AddOns::AddOnCategory::kMaps))) {
+					for (const std::string& mapname :
+					     g_fs->list_directory(addon.first->basedir_for(AddOns::AddOnCategory::kMaps))) {
 						files.insert(mapname);
 					}
 				}

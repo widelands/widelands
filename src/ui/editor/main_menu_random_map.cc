@@ -665,7 +665,9 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			lua.interpret_string(format("kIslandMode = %b", map_info.islandMode));
 			lua.interpret_string(format("kRandomNumber = %d", map_info.mapNumber));
 			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.get_text()));
-			lua.run_script(generator_.get_selected()->basedir_for(AddOns::AddOnCategory::kMapGenerator) + "init.lua");
+			lua.run_script(
+			   generator_.get_selected()->basedir_for(AddOns::AddOnCategory::kMapGenerator) +
+			   "init.lua");
 			result = true;
 		} catch (const std::exception& e) {
 			log_err("Map generation Lua error: %s", e.what());

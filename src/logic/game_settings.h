@@ -135,7 +135,8 @@ struct GameSettings {
 		}
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first->acts_as(AddOns::AddOnCategory::kWinCondition) && pair.second) {
-				const std::string filename = pair.first->basedir_for(AddOns::AddOnCategory::kWinCondition) + "init.lua";
+				const std::string filename =
+				   pair.first->basedir_for(AddOns::AddOnCategory::kWinCondition) + "init.lua";
 				if (g_fs->file_exists(filename)) {
 					win_condition_scripts.push_back(filename);
 				} else {

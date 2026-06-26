@@ -51,7 +51,8 @@ Campaigns::Campaigns() {
 	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kCampaign)) {
-			campaign_config_scripts.push_back(pair.first->basedir_for(AddOns::AddOnCategory::kCampaign) + "campaigns.lua");
+			campaign_config_scripts.push_back(
+			   pair.first->basedir_for(AddOns::AddOnCategory::kCampaign) + "campaigns.lua");
 		}
 	}
 	for (const std::string& script : campaign_config_scripts) {

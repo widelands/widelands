@@ -1802,13 +1802,14 @@ void AddOnsCtrl::update_dependency_errors() {
 				          addon->first->descname(), requirement));
 			} else {
 				if (!search_result->second &&
-				    AddOns::AddOnInfo::category_functor_any(AddOns::require_enabled, *addon->first, *search_result->first)) {
+				    AddOns::AddOnInfo::category_functor_any(
+				       AddOns::require_enabled, *addon->first, *search_result->first)) {
 					warn_requirements.push_back(format(_("• ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
 				}
-				if (too_late &&
-				    AddOns::AddOnInfo::category_functor_any(AddOns::order_matters, *addon->first, *search_result->first)) {
+				if (too_late && AddOns::AddOnInfo::category_functor_any(
+				                   AddOns::order_matters, *addon->first, *search_result->first)) {
 					warn_requirements.push_back(
 					   format(_("• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
 					          addon->first->descname(), search_result->first->descname()));
@@ -1836,7 +1837,8 @@ void AddOnsCtrl::update_dependency_errors() {
 				}
 				if (prev != nullptr) {
 					assert(!too_late || next != nullptr);
-					if (too_late && AddOns::AddOnInfo::category_functor_any(AddOns::order_matters, *prev, *next)) {
+					if (too_late &&
+					    AddOns::AddOnInfo::category_functor_any(AddOns::order_matters, *prev, *next)) {
 						warn_requirements.push_back(format(
 						   _("• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						     "listed in the wrong order"),
@@ -2015,7 +2017,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   format(_("The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 			            "match the category of the version present on the server (%3$s)."),
-			          addon->internal_name, AddOns::kAddOnCategories.at(addon->get_category()).descname(),
+			          addon->internal_name,
+			          AddOns::kAddOnCategories.at(addon->get_category()).descname(),
 			          AddOns::kAddOnCategories.at(remote->get_category()).descname()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
@@ -2211,9 +2214,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first = AddOns::preload_addon(remote->internal_name);
-				enable_theme =
-				   (remote->acts_as(AddOns::AddOnCategory::kTheme) &&
-				    template_dir() == AddOns::theme_addon_template_dir(*remote));
+				enable_theme = (remote->acts_as(AddOns::AddOnCategory::kTheme) &&
+				                template_dir() == AddOns::theme_addon_template_dir(*remote));
 				found = true;
 				break;
 			}

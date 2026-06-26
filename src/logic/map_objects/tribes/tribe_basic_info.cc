@@ -67,7 +67,8 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 		}
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kStartingCondition)) {
-				const std::string script_path = pair.first->basedir_for(AddOns::AddOnCategory::kStartingCondition) + name + ".lua";
+				const std::string script_path =
+				   pair.first->basedir_for(AddOns::AddOnCategory::kStartingCondition) + name + ".lua";
 				if (!g_fs->file_exists(script_path)) {
 					continue;
 				}

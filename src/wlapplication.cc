@@ -767,7 +767,8 @@ static void init_one_player_from_template(unsigned p,
 	if (FileSystem::filename_ext(init_script_name) == kAddOnExtension) {
 		const AddOns::AddOnInfo* addon_info = AddOns::find_addon(init_script_name);
 		if (addon_info == nullptr) {
-			throw wexception("Could not find add-on '%s' for player %u's starting condition", init_script_name.c_str(), p);
+			throw wexception("Could not find add-on '%s' for player %u's starting condition",
+			                 init_script_name.c_str(), p);
 		}
 		addon = addon_info->basedir_for(AddOns::AddOnCategory::kStartingCondition);
 		addon += tribe;

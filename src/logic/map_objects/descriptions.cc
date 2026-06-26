@@ -85,7 +85,8 @@ Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
 			}
 		}
 		if (info->acts_as(AddOns::AddOnCategory::kTribes)) {
-			const std::string script(info->basedir_for(AddOns::AddOnCategory::kTribes) + "preload.lua");
+			const std::string script(info->basedir_for(AddOns::AddOnCategory::kTribes) +
+			                         "preload.lua");
 			if (g_fs->file_exists(script)) {
 				log_info("Running tribes preload script for add-on %s", info->internal_name.c_str());
 				lua_->run_script(script);

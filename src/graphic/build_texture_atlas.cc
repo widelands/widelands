@@ -159,7 +159,6 @@ build_texture_atlas(const int max_size,
 				}
 			}
 
-
 		} catch (const std::exception& e) {
 			log_warn("Ignoring unreadable add-ons profile %s: %s", file.c_str(), e.what());
 		}

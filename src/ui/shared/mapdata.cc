@@ -211,7 +211,8 @@ MapData MapData::create_directory(const std::string& directory) {
 
 		const AddOns::AddOnInfo* addon_info = AddOns::find_addon(addon);
 		if (addon_info == nullptr) {
-			throw wexception("Could not find add-on %s (needed for mapdatadir %s)", addon.c_str(), directory.c_str());
+			throw wexception("Could not find add-on %s (needed for mapdatadir %s)", addon.c_str(),
+			                 directory.c_str());
 		}
 		const std::string addon_basedir = addon_info->basedir_for(AddOns::AddOnCategory::kMaps);
 
