@@ -169,15 +169,10 @@ bool AddOnInfo::acts_as(const AddOnCategory c) const {
 }
 
 bool AddOnInfo::has_category_flag(const AddOnCategoryInfo::Flag flag) const {
-	if ((kAddOnCategories.at(category_).flags & flag) != 0) {
-		return true;
-	}
-	for (AddOnCategory c : combo_categories_) {
-		if ((kAddOnCategories.at(c).flags & flag) != 0) {
-			return true;
-		}
-	}
-	return false;
+	return ((kAddOnCategories.at(category_).flags & flag) != 0) ||
+		std::any_of(combo_categories_.begin(), combo_categories_.end(), [flag](AddOnCategory c) {
+			return (kAddOnCategories.at(c).flags & flag) != 0;
+		});
 }
 
 std::string AddOnInfo::basedir_for(const AddOnCategory c) const {
