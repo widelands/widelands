@@ -23,9 +23,6 @@
 
 namespace UI {
 
-constexpr int16_t kButtonSize = 32;
-constexpr int16_t kSpacing = 4;
-
 TextPrompt::TextPrompt(UI::Panel& parent,
                        const UI::WindowStyle s,
                        const std::string& title,
@@ -39,8 +36,8 @@ TextPrompt::TextPrompt(UI::Panel& parent,
          "ok",
          0,
          0,
-         kButtonSize,
-         kButtonSize,
+         default_button_size(),
+         default_button_size(),
          s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary :
                                          UI::ButtonStyle::kWuiPrimary,
          _("OK")),
@@ -48,13 +45,13 @@ TextPrompt::TextPrompt(UI::Panel& parent,
              "cancel",
              0,
              0,
-             kButtonSize,
-             kButtonSize,
+             default_button_size(),
+             default_button_size(),
              s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                              UI::ButtonStyle::kWuiSecondary,
              _("Cancel")) {
 	buttonsbox_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
-	buttonsbox_.add_space(kSpacing);
+	buttonsbox_.add_space(default_spacing());
 	buttonsbox_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(
@@ -63,11 +60,11 @@ TextPrompt::TextPrompt(UI::Panel& parent,
 	                                                    UI::FontStyle::kWuiInfoPanelHeading,
 	                    text),
 	   UI::Box::Resizing::kFullSize);
-	box_.add_space(kSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&editbox_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&content_box_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&buttonsbox_, UI::Box::Resizing::kFullSize);
 
 	ok_.sigclicked.connect(

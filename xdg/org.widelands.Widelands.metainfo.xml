@@ -360,6 +360,7 @@ Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
     <release date="2026-02-22" version="1.3.1">
       <description><ul>
         <li>Bugfix release</li>
+        <li xml:lang="ca">Publicació de correcció d'errors</li>
         <li xml:lang="cs">Výpis chyb skriptu</li>
         <li xml:lang="da">Udgivelse med fejlrettelser</li>
         <li xml:lang="de">Fehlerbehebung</li>
@@ -388,6 +389,13 @@ Version de correction de bugs</li>
         <li>Download website maps as add-ons</li>
         <li>New visualisation modes in the editor</li>
         <li>Many new capabilities for add-on developers</li>
+        <li xml:lang="ca">Negociació de mercat</li>
+        <li xml:lang="ca">Sis mapes nous afegits i tres mapes antics eliminats</li>
+        <li xml:lang="ca">Districtes econòmics</li>
+        <li xml:lang="ca">Moltes millores a l'Enciclopèdia del joc</li>
+        <li xml:lang="ca">Baixeu mapes de llocs web com a complements</li>
+        <li xml:lang="ca">Nous modes de visualització a l'editor</li>
+        <li xml:lang="ca">Moltes noves capacitats per a desenvolupadors de complements</li>
         <li xml:lang="cs">Obchodování</li>
         <li xml:lang="cs">Přidáno šest nových map a tři odebrány</li>
         <li xml:lang="cs">Hospodářské oblasti</li>
@@ -423,7 +431,7 @@ Version de correction de bugs</li>
         <li xml:lang="hu">Térképek letöltése a honlapról a bővítményekhez hasonlóan</li>
         <li xml:lang="hu">Új megjelenítési módok a térképszerkesztőben</li>
         <li xml:lang="hu">Sok új lehetőség a bővítményfejlesztők számára</li>
-        <li xml:lang="it">Market trading</li>
+        <li xml:lang="it">Commercio di mercato</li>
         <li xml:lang="it">Six new maps added and three old maps removed</li>
         <li xml:lang="it">Distretti economici</li>
         <li xml:lang="it">Molti miglioramenti all'Enciclopedia dentro alla partita</li>

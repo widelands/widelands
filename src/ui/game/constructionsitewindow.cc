@@ -172,8 +172,8 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 void ConstructionSiteWindow::add_progress_bar(UI::Box& box) {
 	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
-	                                UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
-	                                UI::ProgressBar::Horizontal);
+	                                UI::ProgressBar::default_width(),
+	                                UI::ProgressBar::default_height(), UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 }
