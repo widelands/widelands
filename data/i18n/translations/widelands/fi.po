@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-13 06:19+0000\n"
+"POT-Creation-Date: 2026-06-15 07:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ilmo Nurminen <ilmo.nurminen@gmail.com>, 2025\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -2138,12 +2138,12 @@ msgid "Saving skipped"
 msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:171
-#: ../../../../src/ui/game/main_menu_save_game.cc:377
+#: ../../../../src/ui/game/main_menu_save_game.cc:379
 msgid "Saving failed!"
 msgstr "Tallentaminen epäonnistui!"
 
 #: ../../../../src/logic/save_handler.cc:187
-#: ../../../../src/ui/game/main_menu_save_game.cc:360
+#: ../../../../src/ui/game/main_menu_save_game.cc:362
 msgid "Game saved"
 msgstr "Peli tallennettu"
 
@@ -4478,7 +4478,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Virhe luotaessa hakemistoa ‘%s’."
 
 #: ../../../../src/ui/editor/main_menu_save_map.cc:312
-#: ../../../../src/ui/game/main_menu_save_game.cc:325
+#: ../../../../src/ui/game/main_menu_save_game.cc:327
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tiedosto '%s' on jo olemassa. Ylikirjoitanko?"
@@ -6957,18 +6957,18 @@ msgstr "Palaa moninpelin peliasetuksiin"
 msgid "Return to the single player menu"
 msgstr "Palaa yksinpelivalikkoon"
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this game"
 msgstr "Lataa tämä peli"
 
 #. * TRANSLATORS: Tooltip for OK button. The user has a file to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this replay"
 msgstr "Lataa pelin toisto"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:200
 msgid "No game selected"
 msgstr ""
@@ -6976,7 +6976,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for OK button. The user has no files to select
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:197
 msgid "No replay selected"
 msgstr ""
@@ -9475,8 +9475,8 @@ msgstr ""
 msgid "Save Game"
 msgstr "Tallenna peli"
 
-#: ../../../../src/ui/game/main_menu_save_game.cc:327
-#: ../../../../src/ui/game/main_menu_save_game.cc:367
+#: ../../../../src/ui/game/main_menu_save_game.cc:329
+#: ../../../../src/ui/game/main_menu_save_game.cc:369
 msgid "Error Saving Game!"
 msgstr "Virhe Tallennettaessa Peliä!"
 
