@@ -56,9 +56,9 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
                                               "images/logos/WL-Editor-32.png", true, false}},
    {AddOnCategory::kSingleMap,
     AddOnCategoryInfo{
-       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", true, true}},
+       "map", []() { return _("Map"); }, "images/wui/menus/toggle_minimap.png", false, true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png", true, false}},
+                                            "images/wui/menus/toggle_minimap.png", false, false}},
    {AddOnCategory::kMapGenerator,
     AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
                       "images/wui/editor/menus/new_random_map.png", false, false}},

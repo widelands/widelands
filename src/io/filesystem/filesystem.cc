@@ -408,6 +408,37 @@ std::vector<std::string> FileSystem::get_sequential_files(const std::string& dir
 	return result;
 }
 
+void FileSystem::recursive_copy(FileSystem& dest_fs,
+                                const std::string& src_path,
+                                const std::string& dest_path) {
+	std::string dest_filename;
+	if (!dest_path.empty()) {
+		dest_filename = dest_path;
+		dest_filename += file_separator();
+	}
+	dest_filename += fs_filename(src_path.c_str());
+
+	if (is_directory(src_path)) {
+		dest_fs.ensure_directory_exists(dest_filename);
+
+		for (const std::string& src_child : list_directory(src_path)) {
+			recursive_copy(dest_fs, src_child, dest_filename);
+		}
+
+	} else {
+		verb_log_dbg("Copying /%s to /%s", src_path.c_str(), dest_filename.c_str());
+		size_t length(0);
+		void* data = load(src_path, length);
+
+		if (data == nullptr) {
+			throw wexception("Filesystem: Could not open file for copy: %s", src_path.c_str());
+		}
+
+		dest_fs.write(dest_filename, data, length);
+		free(data);
+	}
+}
+
 /**
  * Split a string into components separated by a certain character.
  *
