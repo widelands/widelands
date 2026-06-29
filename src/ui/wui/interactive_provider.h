@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2026 by the Widelands Development Team
+ * Copyright (C) 2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,16 +16,19 @@
  *
  */
 
-#include "commands/cmd_replay_end.h"
+#ifndef WL_UI_WUI_INTERACTIVE_PROVIDER_H
+#define WL_UI_WUI_INTERACTIVE_PROVIDER_H
 
-#include "logic/game.h"
-#include "logic/game_controller.h"
+#include <memory>
 
-namespace Widelands {
+#include "logic/game_interface_provider.h"
 
-void CmdReplayEnd::execute(Widelands::Game& game) {
-	game.game_controller()->set_desired_speed(0);
-	game.get_game_interface()->notify_replay_ended();
-}
+class UserInterfaceProvider : public IGameInterfaceProvider {
+public:
+	std::unique_ptr<IGameInterface> create(Widelands::Game& game,
+	                                       Widelands::PlayerNumber player_number,
+	                                       bool multiplayer,
+	                                       ChatProvider* chat_provider) override;
+};
 
-}  // namespace Widelands
+#endif  // end of include guard: WL_UI_WUI_INTERACTIVE_PROVIDER_H

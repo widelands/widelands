@@ -31,7 +31,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
-#include "ui/wui/interactive_base.h"
 #include "wlapplication_options.h"
 
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
@@ -111,7 +110,7 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) cons
 	   game.get_gametime(), "Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
 	   autosave_interval_in_ms_, gametimestring(game.get_gametime().get(), true).c_str());
 
-	game.get_ibase()->log_message(_("Saving game…"));
+	game.get_game_interface()->log_message(_("Saving game…"));
 
 	return true;
 }
@@ -150,7 +149,7 @@ void SaveHandler::think(Widelands::Game& game) {
 				last_save_realtime_ = realtime;
 				last_save_gametime_ = game.get_gametime();
 				force_skip = true;
-				game.get_ibase()->log_message(_("Saving skipped"));
+				game.get_game_interface()->log_message(_("Saving skipped"));
 			} else {
 				save_success = roll_save_files(filename, &error);
 				if (save_success) {
@@ -168,7 +167,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		}
 		if (!save_success) {
 			log_err_time(game.get_gametime(), "Autosave: ERROR! - %s\n", error.c_str());
-			game.get_ibase()->log_message(_("Saving failed!"));
+			game.get_game_interface()->log_message(_("Saving failed!"));
 
 			// Wait 30 seconds until next save try
 			next_save_realtime_ = SDL_GetTicks() + 30000;
@@ -184,7 +183,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		if (!force_skip) {
 			verb_log_info_time(
 			   game.get_gametime(), "Autosave: save took %u ms\n", SDL_GetTicks() - realtime);
-			game.get_ibase()->log_message(_("Game saved"));
+			game.get_game_interface()->log_message(_("Game saved"));
 		}
 	} else {
 		saving_next_tick_ = check_next_tick(game, realtime);

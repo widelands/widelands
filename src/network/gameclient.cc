@@ -52,6 +52,7 @@
 #include "ui/fsmenu/launch_mpg.h"
 #include "ui/fsmenu/main.h"
 #include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_provider.h"
 #include "ui/wui/interactive_spectator.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -174,19 +175,18 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   format("%s_netclient%u", kAutosavePrefix, static_cast<unsigned int>(pn)));
-	InteractiveGameBase* igb;
-	if (pn > 0) {
-		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
-	} else {
-		igb = new InteractiveSpectator(*game, get_config_section(), true, parent);
-	}
 
-	game->set_ibase(igb);
+	game->set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
+	game->create_game_interface(pn, true, parent);
+
 	if (settings.savegame) {  // savegame
 		game->init_savegame(settings);
 	} else {  //  new map
 		game->init_newgame(settings);
 	}
+
+	upcast(InteractiveGameBase, igb, game->get_game_interface());
+	assert(igb != nullptr);
 	return igb;
 }
 

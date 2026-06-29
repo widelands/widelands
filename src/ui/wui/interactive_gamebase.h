@@ -64,7 +64,8 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
-	void rebuild_main_menu();
+	void rebuild_main_menu() override;
+	void notify_game_ended() override;
 
 protected:
 	// For referencing the items in showhidemenu_

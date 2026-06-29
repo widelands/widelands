@@ -60,6 +60,7 @@
 #include "ui/fsmenu/launch_mpg.h"
 #include "ui/fsmenu/main.h"
 #include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_provider.h"
 #include "ui/wui/interactive_spectator.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -581,7 +582,6 @@ void GameHost::run_callback() {
 
 		d->game = game_.get();
 		game_->set_game_controller(pointer_);
-		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
 		game_->save_handler().set_autosave_filename(format("%s_nethost", kAutosavePrefix));
 
@@ -594,13 +594,13 @@ void GameHost::run_callback() {
 			set_win_condition_script(gpdp.get_win_condition());
 		}
 
-		if ((player_number > 0) && (player_number <= UserSettings::highest_playernum())) {
-			igb = new InteractivePlayer(*game_, get_config_section(), player_number, true, &d->chat);
-		} else {
-			igb = new InteractiveSpectator(*game_, get_config_section(), true, &d->chat);
+		const bool is_player =
+		   (player_number > 0) && (player_number <= UserSettings::highest_playernum());
+		if (!is_player) {
 			player_number = 1;  // for the emergency save later
 		}
-		game_->set_ibase(igb);
+		game_->set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
+		game_->create_game_interface(is_player ? player_number : 0, true, &d->chat);
 
 		if (!d->settings.savegame) {  // new game
 			game_->init_newgame(d->settings);
@@ -2591,7 +2591,8 @@ void GameHost::disconnect_client(uint32_t const client_number,
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
 			// If not shown yet, show a window and ask the host player what to do
 			// with the tribe of the leaving client
-			if (d->game->get_igbase()->show_game_client_disconnected()) {
+			upcast(InteractiveGameBase, igbase, d->game->get_game_interface());
+			if (igbase != nullptr && igbase->show_game_client_disconnected()) {
 				// Window has just been opened, pause game and create a save game
 				if (!forced_pause()) {
 					force_pause();

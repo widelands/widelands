@@ -48,6 +48,7 @@ private:
 	std::string parse_player_info(const std::string& info);
 	bool compare_status(uint32_t, uint32_t) const;
 
+	InteractiveGameBase* igbase_;
 	Widelands::Game& game_;
 	uint32_t desired_speed_;
 	UI::Box* info_box_;

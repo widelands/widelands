@@ -767,6 +767,10 @@ bool InteractiveGameBase::try_show_ship_windows() {
 	return true;
 }
 
+void InteractiveGameBase::notify_game_ended() {
+	show_game_summary();
+}
+
 void InteractiveGameBase::show_game_summary() {
 	NoteThreadSafeFunction::instantiate(
 	   [this]() {
