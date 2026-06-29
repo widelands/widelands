@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-06-13 06:19+0000\n"
+"POT-Creation-Date: 2026-06-15 07:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Enes Efe Ü., 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/widelands/widelands/language/tr/)\n"
@@ -2132,12 +2132,12 @@ msgid "Saving skipped"
 msgstr ""
 
 #: ../../../../src/logic/save_handler.cc:171
-#: ../../../../src/ui/game/main_menu_save_game.cc:377
+#: ../../../../src/ui/game/main_menu_save_game.cc:379
 msgid "Saving failed!"
 msgstr "Kaydetme başarısız!"
 
 #: ../../../../src/logic/save_handler.cc:187
-#: ../../../../src/ui/game/main_menu_save_game.cc:360
+#: ../../../../src/ui/game/main_menu_save_game.cc:362
 msgid "Game saved"
 msgstr "Oyun kaydedildi"
 
@@ -4472,7 +4472,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr ""
 
 #: ../../../../src/ui/editor/main_menu_save_map.cc:312
-#: ../../../../src/ui/game/main_menu_save_game.cc:325
+#: ../../../../src/ui/game/main_menu_save_game.cc:327
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "'%s' isminde bir dosya mevcut. Üzerine yazılsın mı?"
@@ -6951,18 +6951,18 @@ msgstr ""
 msgid "Return to the single player menu"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this game"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for OK button. The user has a file to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:188
+#: ../../../../src/ui/fsmenu/loadgame.cc:187
 msgid "Load this replay"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:200
 msgid "No game selected"
 msgstr ""
@@ -6970,7 +6970,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for OK button. The user has no files to select
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. no files to select
-#: ../../../../src/ui/fsmenu/loadgame.cc:195
+#: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:197
 msgid "No replay selected"
 msgstr ""
@@ -9469,8 +9469,8 @@ msgstr ""
 msgid "Save Game"
 msgstr ""
 
-#: ../../../../src/ui/game/main_menu_save_game.cc:327
-#: ../../../../src/ui/game/main_menu_save_game.cc:367
+#: ../../../../src/ui/game/main_menu_save_game.cc:329
+#: ../../../../src/ui/game/main_menu_save_game.cc:369
 msgid "Error Saving Game!"
 msgstr ""
 
