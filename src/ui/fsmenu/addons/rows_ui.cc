@@ -71,7 +71,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		                   "Category: %4$s\n"
 		                   "%5$s"),
 		         info->descname(), info->author(), AddOns::version_to_string(info->version),
-		         AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
+		         AddOns::kAddOnCategories.at(info->get_category()).descname(), info->description())),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -100,13 +100,13 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 	for (auto it = AddOns::g_addons.begin(); it != AddOns::g_addons.end(); ++it) {
 		if (it->first->internal_name == info->internal_name) {
 			AddOns::g_addons.erase(it);
-			if (info->category == AddOns::AddOnCategory::kTheme &&
-			    template_dir() == AddOns::theme_addon_template_dir(info->internal_name)) {
+			if (info->acts_as(AddOns::AddOnCategory::kTheme) &&
+			    template_dir() == AddOns::theme_addon_template_dir(*info)) {
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
 
-			if (info->category == AddOns::AddOnCategory::kUIPlugin) {
+			if (info->acts_as(AddOns::AddOnCategory::kUIPlugin)) {
 				ctrl->fsmm().reinit_plugins();
 			}
 
@@ -219,7 +219,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
      category_(this,
                UI::PanelStyle::kFsMenu,
                "category",
-               g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
+               g_image_cache->get(AddOns::kAddOnCategories.at(info->get_category()).icon)),
      version_(this,
               UI::PanelStyle::kFsMenu,
               "version",
@@ -266,12 +266,14 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 
-				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
+				if (pair.first->acts_as(AddOns::AddOnCategory::kTheme)) {
 					AddOns::update_ui_theme(pair.second ? AddOns::UpdateThemeAction::kEnableArgument :
 					                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
-				} else if (pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+				}
+
+				if (pair.first->acts_as(AddOns::AddOnCategory::kUIPlugin)) {
 					ctrl->fsmm().reinit_plugins();
 				}
 
@@ -286,7 +288,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	toggle_enabled_.set_enabled(info->matches_widelands_version());
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
-	   format(_("Category: %s"), AddOns::kAddOnCategories.at(info->category).descname()));
+	   format(_("Category: %s"), AddOns::kAddOnCategories.at(info->get_category()).descname()));
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(format(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
@@ -390,7 +392,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
      category_(this,
                UI::PanelStyle::kFsMenu,
                "category",
-               g_image_cache->get(AddOns::kAddOnCategories.at(info->category).icon)),
+               g_image_cache->get(AddOns::kAddOnCategories.at(info->get_category()).icon)),
      verified_(this,
                UI::PanelStyle::kFsMenu,
                "verified",
@@ -483,21 +485,21 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	install_.sigclicked.connect([ctrl, this]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info_->verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
-			UI::WLMessageBox w(
-			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
-			   safe_richtext_message(format(
-			      _("Are you certain that you want to install this add-on?\n\n"
-			        "%1$s\n"
-			        "by %2$s\n"
-			        "%3$s\n"
-			        "Version %4$s\n"
-			        "Category: %5$s\n"
-			        "%6$s\n"),
-			      info_->descname(), info_->author(),
-			      (info_->verified ? _("Verified") : _("NOT VERIFIED")),
-			      AddOns::version_to_string(info_->version),
-			      AddOns::kAddOnCategories.at(info_->category).descname(), info_->description())),
-			   UI::WLMessageBox::MBoxType::kOkCancel);
+			UI::WLMessageBox w(&ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
+			                   safe_richtext_message(
+			                      format(_("Are you certain that you want to install this add-on?\n\n"
+			                               "%1$s\n"
+			                               "by %2$s\n"
+			                               "%3$s\n"
+			                               "Version %4$s\n"
+			                               "Category: %5$s\n"
+			                               "%6$s\n"),
+			                             info_->descname(), info_->author(),
+			                             (info_->verified ? _("Verified") : _("NOT VERIFIED")),
+			                             AddOns::version_to_string(info_->version),
+			                             AddOns::kAddOnCategories.at(info_->get_category()).descname(),
+			                             info_->description())),
+			                   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
@@ -518,20 +520,20 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		if (!info->verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
-			   safe_richtext_message(
-			      format(_("Are you certain that you want to upgrade this add-on?\n\n"
-			               "%1$s\n"
-			               "by %2$s\n"
-			               "%3$s\n"
-			               "Installed version: %4$s\n"
-			               "Available version: %5$s\n"
-			               "Category: %6$s\n"
-			               "%7$s"),
-			             info->descname(), info->author(),
-			             (info->verified ? _("Verified") : _("NOT VERIFIED")),
-			             AddOns::version_to_string(installed_version),
-			             AddOns::version_to_string(info->version),
-			             AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
+			   safe_richtext_message(format(
+			      _("Are you certain that you want to upgrade this add-on?\n\n"
+			        "%1$s\n"
+			        "by %2$s\n"
+			        "%3$s\n"
+			        "Installed version: %4$s\n"
+			        "Available version: %5$s\n"
+			        "Category: %6$s\n"
+			        "%7$s"),
+			      info->descname(), info->author(),
+			      (info->verified ? _("Verified") : _("NOT VERIFIED")),
+			      AddOns::version_to_string(installed_version),
+			      AddOns::version_to_string(info->version),
+			      AddOns::kAddOnCategories.at(info->get_category()).descname(), info->description())),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -566,7 +568,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		p->set_handle_mouse(true);
 	}
 	category_.set_tooltip(
-	   format(_("Category: %s"), AddOns::kAddOnCategories.at(info->category).descname()));
+	   format(_("Category: %s"), AddOns::kAddOnCategories.at(info->get_category()).descname()));
 	version_.set_tooltip(format(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
 	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));

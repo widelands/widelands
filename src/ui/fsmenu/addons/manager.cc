@@ -779,7 +779,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	{
 		uint8_t index = 0;
 		for (const auto& pair : AddOns::kAddOnCategories) {
-			if (pair.second.hide) {
+			if ((pair.second.flags & AddOns::AddOnCategoryInfo::kHide) != 0) {
 				continue;
 			}
 			UI::Checkbox* c =
@@ -1464,11 +1464,18 @@ bool AddOnsCtrl::matches_filter_browse(std::shared_ptr<AddOns::AddOnInfo> info) 
 		return true;
 	}
 
-	if (AddOns::kAddOnCategories.at(info->category).hide) {
+	if (info->has_category_flag(AddOns::AddOnCategoryInfo::kHide)) {
 		return false;  // Hidden in the main view
 	}
 
-	if (!filter_browse_category_.at(info->category)->get_state()) {
+	bool matches_any_category = false;
+	for (const auto& pair : filter_browse_category_) {
+		if (pair.second->get_state() && info->acts_as(pair.first)) {
+			matches_any_category = true;
+			break;
+		}
+	}
+	if (!matches_any_category) {
 		// wrong category
 		return false;
 	}
@@ -1490,12 +1497,12 @@ bool AddOnsCtrl::matches_filter_browse(std::shared_ptr<AddOns::AddOnInfo> info) 
 	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
 	              info->description()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
-		return text.find(filter_browse_name_.get_text()) != std::string::npos;
+		return contains(text, filter_browse_name_.get_text(), false);
 	});
 }
 
 bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
-	if (info->category != AddOns::AddOnCategory::kSingleMap) {
+	if (!info->acts_as(AddOns::AddOnCategory::kSingleMap)) {
 		return false;
 	}
 
@@ -1795,13 +1802,14 @@ void AddOnsCtrl::update_dependency_errors() {
 				          addon->first->descname(), requirement));
 			} else {
 				if (!search_result->second &&
-				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
+				    AddOns::AddOnInfo::category_functor_any(
+				       AddOns::require_enabled, *addon->first, *search_result->first)) {
 					warn_requirements.push_back(format(_("• ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
 				}
-				if (too_late &&
-				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
+				if (too_late && AddOns::AddOnInfo::category_functor_any(
+				                   AddOns::order_matters, *addon->first, *search_result->first)) {
 					warn_requirements.push_back(
 					   format(_("• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
 					          addon->first->descname(), search_result->first->descname()));
@@ -1829,7 +1837,8 @@ void AddOnsCtrl::update_dependency_errors() {
 				}
 				if (prev != nullptr) {
 					assert(!too_late || next != nullptr);
-					if (too_late && AddOns::order_matters(prev->category, next->category)) {
+					if (too_late &&
+					    AddOns::AddOnInfo::category_functor_any(AddOns::order_matters, *prev, *next)) {
 						warn_requirements.push_back(format(
 						   _("• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						     "listed in the wrong order"),
@@ -2003,13 +2012,14 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 			w.run<UI::Panel::Returncodes>();
 			return;
 		}
-		if (remote->category != addon->category) {
+		if (remote->get_category() != addon->get_category()) {
 			UI::WLMessageBox w(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   format(_("The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 			            "match the category of the version present on the server (%3$s)."),
-			          addon->internal_name, AddOns::kAddOnCategories.at(addon->category).descname(),
-			          AddOns::kAddOnCategories.at(remote->category).descname()),
+			          addon->internal_name,
+			          AddOns::kAddOnCategories.at(addon->get_category()).descname(),
+			          AddOns::kAddOnCategories.at(remote->get_category()).descname()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
@@ -2204,15 +2214,14 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == remote->internal_name) {
 				pair.first = AddOns::preload_addon(remote->internal_name);
-				enable_theme =
-				   (remote->category == AddOns::AddOnCategory::kTheme &&
-				    template_dir() == AddOns::theme_addon_template_dir(remote->internal_name));
+				enable_theme = (remote->acts_as(AddOns::AddOnCategory::kTheme) &&
+				                template_dir() == AddOns::theme_addon_template_dir(*remote));
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			enable_theme = (remote->category == AddOns::AddOnCategory::kTheme);
+			enable_theme = (remote->acts_as(AddOns::AddOnCategory::kTheme));
 			AddOns::g_addons.emplace_back(AddOns::preload_addon(remote->internal_name), true);
 		}
 	}
@@ -2227,7 +2236,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
-	if (remote->category == AddOns::AddOnCategory::kUIPlugin) {
+	if (remote->acts_as(AddOns::AddOnCategory::kUIPlugin)) {
 		fsmm_.reinit_plugins();
 	}
 

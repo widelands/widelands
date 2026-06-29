@@ -112,6 +112,11 @@ protected:
 	ProgressFunction callback_init_, callback_progress_;
 };
 
+class ComboAddon : public MutableAddOn {
+public:
+	using MutableAddOn::MutableAddOn;
+};
+
 class WorldAddon : public MutableAddOn {
 public:
 	using MutableAddOn::MutableAddOn;

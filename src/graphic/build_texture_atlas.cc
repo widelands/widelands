@@ -131,8 +131,10 @@ build_texture_atlas(const int max_size,
 			Profile profile(file.c_str());
 			const std::string category =
 			   profile.get_safe_section("global").get_safe_string("category");
+
 			if (category == "world") {
 				find_images(dir, &all_images, &first_atlas_images);
+
 			} else if (category == "tribes") {
 				std::string tribes_dir = dir;
 				tribes_dir += FileSystem::file_separator();
@@ -140,7 +142,23 @@ build_texture_atlas(const int max_size,
 				if (g_fs->is_directory(tribes_dir)) {
 					find_images(tribes_dir, &all_images, &first_atlas_images);
 				}
+
+			} else if (category == "combo") {
+				std::string world_dir = dir;
+				world_dir += FileSystem::file_separator();
+				world_dir += "world";
+				find_images(world_dir, &all_images, &first_atlas_images);
+
+				std::string tribes_dir = dir;
+				tribes_dir += FileSystem::file_separator();
+				tribes_dir += "tribes";
+				tribes_dir += FileSystem::file_separator();
+				tribes_dir += "tribes";
+				if (g_fs->is_directory(tribes_dir)) {
+					find_images(tribes_dir, &all_images, &first_atlas_images);
+				}
 			}
+
 		} catch (const std::exception& e) {
 			log_warn("Ignoring unreadable add-ons profile %s: %s", file.c_str(), e.what());
 		}

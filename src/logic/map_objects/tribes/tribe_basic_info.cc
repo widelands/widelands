@@ -23,7 +23,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 
@@ -67,10 +66,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			                                script_table->get_bool("uses_map_starting_position"));
 		}
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first->category == AddOns::AddOnCategory::kStartingCondition && pair.second) {
-				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
-				                                pair.first->internal_name +
-				                                FileSystem::file_separator() + name + ".lua";
+			if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kStartingCondition)) {
+				const std::string script_path =
+				   pair.first->basedir_for(AddOns::AddOnCategory::kStartingCondition) + name + ".lua";
 				if (!g_fs->file_exists(script_path)) {
 					continue;
 				}
@@ -128,7 +126,7 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 		addons = addons_to_consider;
 	} else {
 		for (auto& pair : AddOns::g_addons) {
-			if (pair.first->category == AddOns::AddOnCategory::kTribes && pair.second) {
+			if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kTribes)) {
 				enabled_tribe_addons.push_back(pair.first);
 			}
 		}
@@ -136,13 +134,14 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 	}
 
 	for (const auto& a : *addons) {
-		const std::string dirname = kAddOnDir + FileSystem::file_separator() + a->internal_name +
-		                            FileSystem::file_separator() + "tribes";
-		if (g_fs->is_directory(dirname)) {
-			for (const std::string& tribe : g_fs->list_directory(dirname)) {
-				const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
-				if (g_fs->file_exists(script_path)) {
-					tribeinfos.emplace_back(lua.run_script(script_path));
+		if (a->acts_as(AddOns::AddOnCategory::kTribes)) {
+			const std::string dirname = a->basedir_for(AddOns::AddOnCategory::kTribes) + "tribes";
+			if (g_fs->is_directory(dirname)) {
+				for (const std::string& tribe : g_fs->list_directory(dirname)) {
+					const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
+					if (g_fs->file_exists(script_path)) {
+						tribeinfos.emplace_back(lua.run_script(script_path));
+					}
 				}
 			}
 		}

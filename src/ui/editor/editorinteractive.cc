@@ -1299,7 +1299,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 
 	// We need to disable non-world add-ons in the editor
 	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-		if ((*it)->category != AddOns::AddOnCategory::kWorld) {
+		if (!(*it)->acts_as(AddOns::AddOnCategory::kWorld)) {
 			it = egbase.enabled_addons().erase(it);
 		} else {
 			++it;
@@ -1411,9 +1411,10 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	load_resources(*table);
 
 	for (const auto& info : egbase.enabled_addons()) {
-		if (info->category == AddOns::AddOnCategory::kWorld) {
+		if (info->acts_as(AddOns::AddOnCategory::kWorld)) {
 			verb_log_info("┃    Add-On ‘%s’", info->internal_name.c_str());
-			table = egbase.lua().run_script(kAddOnDir + '/' + info->internal_name + "/editor.lua");
+			table = egbase.lua().run_script(info->basedir_for(AddOns::AddOnCategory::kWorld) +
+			                                "editor.lua");
 			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
 			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
 			load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
@@ -1668,7 +1669,7 @@ void EditorInteractive::publish_map() {
 	info.unlocalized_description = egbase().map().get_description();
 	info.unlocalized_author = egbase().map().get_author();
 	info.version = version;
-	info.category = AddOns::AddOnCategory::kMaps;
+	info.set_category(AddOns::AddOnCategory::kMaps);
 	info.min_wl_version = egbase().map().version().minimum_required_widelands_version;
 
 	AddOns::NetAddons::CallbackFn fnn = [this](const std::string& /* f */, int64_t /* l */) {
