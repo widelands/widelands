@@ -63,13 +63,13 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
      button_box_(new UI::Box(&main_box_, style, "buttons_box", 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
-	descr_box_.add_space(padding_);
+	descr_box_.add_space(default_spacing());
 	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(padding_);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(padding_);
+	main_box_.add_space(default_spacing());
 	main_box_.add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
@@ -252,7 +252,7 @@ void GameDetails::layout() {
 	} else {
 		// Fit minimap to width
 		const int width =
-		   std::min<int>(main_box_.get_w() - UI::Scrollbar::default_size() - 2 * padding_,
+		   std::min<int>(main_box_.get_w() - UI::Scrollbar::default_size() - 2 * default_spacing(),
 		                 minimap_cache_.at(last_game_)->width());
 		const float scale = static_cast<float>(width) / minimap_cache_.at(last_game_)->width();
 		const int height = scale * minimap_cache_.at(last_game_)->height();
@@ -262,7 +262,7 @@ void GameDetails::layout() {
 
 	const int full_height = descr_.get_h() + minimap_icon_.get_h();
 	const int descr_height =
-	   main_box_.get_h() - name_label_.get_h() - button_box_->get_h() - 2 * padding_;
+	   main_box_.get_h() - name_label_.get_h() - button_box_->get_h() - 2 * default_spacing();
 	descr_box_.set_force_scrolling(full_height > descr_height);
 	descr_box_.set_size(main_box_.get_w(), descr_height);
 }
