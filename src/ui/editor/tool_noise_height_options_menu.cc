@@ -44,6 +44,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
             _("Minimum height:"),
+            false,
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
      upper_(&upper_box_,
@@ -54,6 +55,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
             _("Maximum height:"),
+            false,
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
      set_to_(&set_to_box_,
@@ -64,6 +66,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,
              _("Set height to:"),
+             false,
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall) {
 	box_.set_size(330, 50);

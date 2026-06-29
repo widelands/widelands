@@ -220,6 +220,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                    99,
                    UI::PanelStyle::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
+                   true,
                    UI::SpinBox::Units::kPixels),
 
      sb_dis_border_(&box_interface_,
@@ -230,6 +231,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     99,
                     UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
+                    true,
                     UI::SpinBox::Units::kPixels),
 
      ui_scaling_slider_(&box_interface_,
@@ -265,6 +267,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                   100,
                   UI::PanelStyle::kFsMenu,
                   _("Save game automatically every:"),
+                  true,
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
 
@@ -276,6 +279,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           20,
                           UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
+                          true,
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig,
                           1,
@@ -289,6 +293,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          52,
                          UI::PanelStyle::kFsMenu,
                          _("Delete replays after:"),
+                         true,
                          UI::SpinBox::Units::kWeeks,
                          UI::SpinBox::Type::kBig,
                          1,
@@ -349,6 +354,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                                   120,
                                   UI::PanelStyle::kFsMenu,
                                   _("Pause game when inactive for:"),
+                                  true,
                                   UI::SpinBox::Units::kMinutes,
                                   UI::SpinBox::Type::kBig,
                                   1,
