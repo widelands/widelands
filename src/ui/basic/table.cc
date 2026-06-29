@@ -239,6 +239,7 @@ void BaseTable::clear_selections() {
 	multiselect_.clear();
 	selection_ = no_selection_index();
 	last_selection_ = no_selection_index();
+	selected(no_selection_index());
 }
 
 uint32_t BaseTable::get_eff_w() const {
