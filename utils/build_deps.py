@@ -72,6 +72,7 @@ def extract_includes(srcdir, source):
 
 
 __USES_INCLUDES = dict()
+__USES_INCLUDES['USES_CPPTRACE'] = r'<cpptrace\/cpptrace\.hpp>'
 __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_TINYGETTEXT'] = r'"third_party\/tinygettext\/include\/tinygettext\/tinygettext\.hpp"'
