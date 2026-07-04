@@ -43,6 +43,7 @@
 #include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/math.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -114,15 +115,16 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 // empty components, absolute paths and parent-directory references, and thus
 // prevents writing outside the destination directory via path traversal.
 [[nodiscard]] inline bool relative_path_valid(const std::string& path) {
-	if (path.empty()) {
+	// split() stops scanning at an embedded NUL byte, which would leave the
+	// remainder of the string unvalidated, so reject such paths explicitly.
+	if (path.empty() || path.find('\0') != std::string::npos) {
 		return false;
 	}
-	for (size_t start = 0, end = 0; end <= path.size(); ++end) {
-		if (end == path.size() || path[end] == '/' || path[end] == '\\') {
-			if (!name_valid(path.substr(start, end - start))) {
-				return false;
-			}
-			start = end + 1;
+	std::vector<std::string> components;
+	split(components, path, {'/', '\\'});
+	for (const std::string& component : components) {
+		if (!name_valid(component)) {
+			return false;
 		}
 	}
 	return true;
