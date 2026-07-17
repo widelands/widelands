@@ -1772,11 +1772,11 @@ msgstr "Een ontdekte bouwruimte voor een haven is niet meer beschikbaar om een h
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "A new ship has been built."
-msgstr ""
+msgstr "Er is een nieuw schip gebouwd."
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "New Ship"
-msgstr ""
+msgstr "Nieuw Schip"
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80

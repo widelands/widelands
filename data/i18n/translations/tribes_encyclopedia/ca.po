@@ -5,7 +5,7 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2025
+# Juanjo, 2015-2026
 # Júlia Rosell Saldaña, 2026
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Júlia Rosell Saldaña, 2026\n"
+"Last-Translator: Juanjo, 2015-2026\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -281,7 +281,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr "Els grans de cacau es recullen dels arbres de cacau pel cultivador de cacau. S’usen per produir xocolata."
+msgstr "Els grans de cacau els recullen dels arbres de cacau les cultivadores de cacau. S’usen per produir xocolata."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Bread
 #: ../../../../data/tribes/initialization/amazons/units.lua:215
@@ -1111,7 +1111,7 @@ msgstr "Els ports poden ser atacats i destruïts pels enemics, com també passa 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
 msgctxt "amazons_building"
 msgid "A market enables trading with other tribes."
-msgstr "Un mercat permet el comerç amb altres tribus."
+msgstr "Els mercats permeten el comerç amb altres tribus."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
@@ -1299,7 +1299,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr "Aquest edifici pot produir una liana entre%1$s i%2$s , depenent de la distància que hagi de caminar la talladora de lianes."
+msgstr "Aquest edifici pot produir una liana entre %1$s i %2$s, depenent de la distància que hagi de caminar la talladora de lianes."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1351,7 +1351,7 @@ msgid ""
 "how far the master woodcutter has to walk. If all kinds of rare tree are "
 "available within her work area, then one of each kind is produced between "
 "%3$s and %4$s."
-msgstr "Aquest edifici pot produir una fusta rara entre %1$si %2$s, depenent de la distància que hagi de caminar el mestre llenyataire. Si hi ha tot tipus d'arbres rars disponibles dins de la seva àrea de treball, aleshores es produeix un de cada tipus entre %3$si %4$s."
+msgstr "Aquest edifici pot produir una fusta d'arbre exòtic entre %1$s i %2$s, depenent de la distància que hagi de caminar el mestre llenyataire. Si hi ha tot tipus d'arbres exòtics disponibles dins de la seva àrea de treball, aleshores es produeix un de cada tipus entre %3$s i %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1376,7 +1376,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper can breed one fish and release one animal between %1$s"
 " and %2$s, depending on how far she has to walk."
-msgstr "La persona que guarda la natura pot criar un peix i alliberar un animal entre %1$si %2$s, depenent de la distància que hagi de caminar."
+msgstr "La cuidadora de la jungla pot criar un peix i alliberar un animal entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1429
 msgctxt "amazons_building"
@@ -1428,7 +1428,7 @@ msgstr "Fabrica cordes amb lianes."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr "La cabina de teixidor de cordes necessita %sde mitjana per produir una corda."
+msgstr "La caseta del teixidor de cordes necessita %s de mitjana per a produir una corda."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1641,7 +1641,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr "La mestre de la selva pot realitzar una terraformació entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "La mestra de la jungla pot realitzar una terraformació entre%1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -1686,7 +1686,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava farmer sows and harvests one bundle of cassava between %1$s and "
 "%2$s, depending on how far she has to walk."
-msgstr "La pagesa de iuca sembra i cull un manat de iuca entre %1$s i %2$s , depenent de la distància que hagi de caminar."
+msgstr "La cultivadora de mandioca sembra i cull un manat de mandioca entre %1$s i %2$s , depenent de la distància que hagi de caminar."
 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1589
 #: ../../../../data/tribes/initialization/amazons/units.lua:1604
@@ -1701,8 +1701,8 @@ msgstr "La pagesa de iuca sembra i cull un manat de iuca entre %1$s i %2$s , dep
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] "%dcamp de cultiu"
-msgstr[1] "%dcamps de cultiu"
+msgstr[0] "%d camp de cultiu"
+msgstr[1] "%d camps de cultiu"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1712,7 +1712,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs at least %s to work at full productivity most "
 "of the time."
-msgstr "La plantació de iuca necessita com a mínim%sper treballar a plena productivitat la major part del temps."
+msgstr "La plantació de mandioca necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1597
@@ -1733,7 +1733,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer sows and harvests one basket of cocoa beans between %1$s "
 "and %2$s, depending on how far she has to walk."
-msgstr "La productora de cacau sembra i cull una cistella de grans de cacau entre%1$s i%2$s , depenent de la distància que hagi de caminar."
+msgstr "La cultivadora de cacau sembra i cull una cistella de grans de cacau entre%1$s i%2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 2; %s is replaced by 'N growing fields'
@@ -1743,7 +1743,7 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr "La granja de cacau necessita com a mínim%sper treballar a plena productivitat la major part del temps."
+msgstr "La plantació de cacau necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1614
@@ -1831,7 +1831,7 @@ msgid ""
 "soldier to the first level in evade or health, or both defense levels in "
 "%1$s on average. The rest of evade and health levels are trained in %2$s "
 "each."
-msgstr "Si totes les mercaderies necessàries es lliuren a temps, una clariana d'entrenament pot entrenar un soldat fins al primer nivell en evassió o salut, o ambdós nivells de defensa en %1$sde mitjana. La resta de nivells d'evassió i salut s'entrenen en %2$scadascun."
+msgstr "Si tots els béns necessaris es lliuren a temps, un clar d'entrenament pot entrenar un soldat fins al primer nivell en evasió o salut, o ambdós nivells de defensa en %1$s de mitjana. La resta de nivells d'evasió i salut s'entrenen en %2$s cadascun."
 
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Treetop Sentry
@@ -3591,7 +3591,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Les pinces de munyir les utilitza el criador d’aranyes per munyir-les. Les produeix el fabricant d’eines."
+msgstr "Les pinces de munyir les utilitza el criador d’aranyes per a munyir-les. Les produeix el fabricant d’eines."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:726
@@ -4238,7 +4238,7 @@ msgstr "L’Ostur, el dissenyador de la nova classe de naus d’expedició, dura
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1475
 msgctxt "atlanteans_building"
 msgid "A market enables trading with other tribes."
-msgstr "Un mercat permet el comerç amb altres tribus."
+msgstr "Els mercats permeten el comerç amb altres tribus."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1484
@@ -4496,7 +4496,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr "El criador de peixos pot criar un peix entre %1$si%2$s , depenent de la distància que hagi de caminar."
+msgstr "El criador de peixos pot criar un peix entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4623,7 +4623,7 @@ msgstr "Pintada en una filadora d’or sense subministrament"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The gold spinning mill needs %s on average to produce one gold thread."
-msgstr "La filatura d'or necessita %s de mitjana per produir un fil d'or."
+msgstr "La filadora d'or necessita %s de mitjana per a produir un fil d'or."
 
 #. TRANSLATORS: Special helptext for an Atlantean production site: Scout's
 #. House without road connection
@@ -5095,7 +5095,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The farmer sows and harvests one sheaf of corn between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El pagès sembra i cull una garba de blat de moro entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "L'agricultor sembra i cull una garba de panís entre%1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -5104,7 +5104,7 @@ msgstr "El pagès sembra i cull una garba de blat de moro entre%1$s i %2$s, depe
 msgctxt "atlanteans_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr "La granja necessita com a mínim %s per treballar a plena productivitat la major part del temps."
+msgstr "La masoveria necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot
 #. Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
@@ -5135,7 +5135,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr "El pagès d'arrel negra sembra i cull un manat d'arrel negra entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "El cultivador de negrarrel sembra i cull un manat de negrarrel entre%1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5145,7 +5145,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr "La granja d'arrel negra necessita com a mínim %s per treballar a plena productivitat la major part del temps."
+msgstr "La masoveria de negrarrel necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1865
@@ -5169,7 +5169,7 @@ msgstr "No, les aranyes no s’alimenten amb panís. El panís és per a les lla
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1871
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing her farm"
-msgstr "Una criadora d'aranyes mostrant la seva granja"
+msgstr "Un criador d'aranyes mostra la seva granja"
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Spider
 #. Farm
@@ -5177,7 +5177,7 @@ msgstr "Una criadora d'aranyes mostrant la seva granja"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The spider farm needs %s on average to produce one spider silk."
-msgstr "La granja d'aranyes necessita %sde mitjana per produir una seda d'aranya."
+msgstr "La granja d'aranyes necessita %s de mitjana per a produir una seda d'aranya."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving
 #. Mill
@@ -6909,7 +6909,7 @@ msgstr "Els ports poden ser atacats i destruïts pels enemics, com també passa 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1132
 msgctxt "barbarians_building"
 msgid "A market enables trading with other tribes."
-msgstr "Un mercat permet el comerç amb altres tribus."
+msgstr "Els mercats permeten el comerç amb altres tribus."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Quarry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1141
@@ -7139,7 +7139,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gamekeeper can release one animal between %1$s and %2$s, depending on "
 "how far he has to walk."
-msgstr "El guarda de caça pot alliberar un animal entre%1$s i%2$s , depenent de quant hagi de caminar."
+msgstr "El guarda de peces de caça pot alliberar un animal entre %1$s i%2$s, depenent de quant hagi de caminar."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Well
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1258
@@ -7271,7 +7271,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El jardiner sembra i cull una garba de canya entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "El jardiner sembra i cull una garba de juncs entre%1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Reed
 #. Yard, part 2; %s is replaced by 'N growing fields'
@@ -7281,7 +7281,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr "El canyar necessita com a mínim %sper treballar a plena productivitat la major part del temps."
+msgstr "El camp de juncs necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1328
@@ -7769,7 +7769,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El pagès sembra i cull una garba de blat entre %1$si %2$s, depenent de la distància que hagi de caminar."
+msgstr "L'agricultor sembra i cull una garba de blat entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -7778,7 +7778,7 @@ msgstr "El pagès sembra i cull una garba de blat entre %1$si %2$s, depenent de 
 msgctxt "barbarians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr "La granja necessita com a mínim %sper  treballar a plena productivitat la major part del temps."
+msgstr "La masoveria necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Helm Smithy
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1557
@@ -11158,7 +11158,7 @@ msgstr "Els bons contractes fan bons amics."
 #: ../../../../data/tribes/initialization/empire/units.lua:1244
 msgctxt "empire_building"
 msgid "A market enables trading with other tribes."
-msgstr "Un mercat permet el comerç amb altres tribus."
+msgstr "Els mercats permeten el comerç amb altres tribus."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11520,7 +11520,7 @@ msgstr "Talla magnífiques columnes de marbre a partir de peces de marbre en bru
 msgctxt "empire_building"
 msgid ""
 "The stonemason’s house needs %s on average to produce one marble column."
-msgstr "La casa del picapedrer necessita %s de mitjana per produir una columna de marbre."
+msgstr "El taller de la pedra necessita %s de mitjana per a produir una columna de marbre."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11680,7 +11680,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer sows and harvests one basket of grapes between %1$s and "
 "%2$s, depending on how far he has to walk."
-msgstr "El pagès sembra i cull una cistella de raïm entre %1$s i %2$s , depenent de la distància que hagi de caminar."
+msgstr "El vinyater sembra i cull una cistella de raïm entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Vineyard,
 #. part 2; %s is replaced by 'N growing fields'
@@ -11690,7 +11690,7 @@ msgctxt "empire_building"
 msgid ""
 "The vineyard needs at least %s to work at full productivity most of the "
 "time."
-msgstr "La vinya necessita com a mínim %s per treballar a plena productivitat la major part del temps."
+msgstr "La vinya necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11731,7 +11731,7 @@ msgstr "Produeix vi."
 #, lua-format
 msgctxt "empire_building"
 msgid "The winery needs %s on average to produce one wine."
-msgstr "El celler necessita %sde mitjana per produir un vi."
+msgstr "El celler necessita %sde mitjana per a produir un vi."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12053,7 +12053,7 @@ msgctxt "empire_building"
 msgid ""
 "The farmer sows and harvests one sheaf of wheat between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El pagès sembra i cull una garba de blat entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "L'agricultor sembra i cull una garba de blat entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -12062,7 +12062,7 @@ msgstr "El pagès sembra i cull una garba de blat entre%1$s i %2$s, depenent de 
 msgctxt "empire_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr "La granja necessita com a mínim %sper treballar a plena productivitat la major part del temps."
+msgstr "La masoveria necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12123,7 +12123,7 @@ msgstr "Cuida ovelles per obtenir-ne llana."
 #, lua-format
 msgctxt "empire_building"
 msgid "The sheep farm needs %s on average to produce one wool."
-msgstr "Una granja d'ovelles necessita %sde mitjana per produïr una llana."
+msgstr "Una granja d'ovelles necessita %s de mitjana per produir una llana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12494,7 +12494,7 @@ msgctxt "empire_building"
 msgid ""
 "If all needed wares are delivered in time, an arena can train one soldier to"
 " the first level in evade in %s on average."
-msgstr "Si totes les mercaderies necessàries es lliuren a temps, una arena pot entrenar un soldat fins al primer nivell en evadir %sde mitjana."
+msgstr "Si totes les mercaderies necessàries es lliuren a temps, una palestra pot entrenar un soldat fins al primer nivell en evadir %s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14173,7 +14173,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces, armor smithies and recycling centers"
 " are fed with coal."
-msgstr "Els focs dels forns de maons, forns de forn, ferreries d'armadures i centres de reciclatge s'alimenten amb carbó."
+msgstr "Els focs de les bòbiles, fargues, tallers d'armadures i centres de reciclatge s'alimenten amb carbó."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
@@ -14791,7 +14791,7 @@ msgstr "Un comerciant explicant la seva diplomàcia"
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
 msgctxt "frisians_building"
 msgid "A market enables trading with other tribes."
-msgstr "Un mercat permet el comerç amb altres tribus."
+msgstr "Els mercats permeten el comerç amb altres tribus."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../../../data/tribes/initialization/frisians/units.lua:1567
@@ -15040,7 +15040,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer sows and harvests one sheaf of reed between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El conreador de canyes sembra i cull una gamba de canyes entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "El cultivador de juncs sembra i cull una garba de juncs entre%1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reed Farm,
 #. part 2; %s is replaced by 'N growing fields'
@@ -15050,7 +15050,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr "La granja de canyissars necessita com a mínim %sper treballar a plena productivitat la major part del temps."
+msgstr "La masoveria de juncs necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../../../data/tribes/initialization/frisians/units.lua:1683
@@ -15183,7 +15183,7 @@ msgctxt "frisians_building"
 msgid ""
 "The berry farmer plants one bush between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr "El cultivador de baies planta un arbust entre%1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "El cultivador de baies planta un arbust entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fruit Collector's
 #. House
@@ -15259,7 +15259,7 @@ msgctxt "frisians_building"
 msgid ""
 "The beekeeper collects one honey between %1$s and %2$s, depending on how far"
 " he has to walk."
-msgstr "L'apicultor recull una mel entre %1$s i %2$s , depenent de la distància que hagi de caminar."
+msgstr "L'apicultor recull una mel entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Aqua Farm
 #: ../../../../data/tribes/initialization/frisians/units.lua:1793
@@ -15344,7 +15344,7 @@ msgstr "Cou maons usant granit i argila, usant carbó com a combustible. Els mao
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce one brick."
-msgstr "El forn de maons necessita %s de mitjana produir un maó."
+msgstr "La bòbila necessita %s de mitjana per a produir un maó."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../../../data/tribes/initialization/frisians/units.lua:1845
@@ -15899,7 +15899,7 @@ msgctxt "frisians_building"
 msgid ""
 "The farmer sows and harvests one sheaf of barley between %1$s and %2$s, "
 "depending on how far he has to walk."
-msgstr "El pagès sembra i cull una garba d'ordi entre %1$si %2$s, depenent de la distància que hagi de caminar."
+msgstr "L'agricultor sembra i cull una garba d'ordi entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Farm, part
 #. 2; %s is replaced by 'N growing fields'
@@ -15908,7 +15908,7 @@ msgstr "El pagès sembra i cull una garba d'ordi entre %1$si %2$s, depenent de l
 msgctxt "frisians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr "La granja necessita com a mínim %s per treballar a plena productivitat la major part del temps."
+msgstr "La masoveria necessita com a mínim %s per a treballar a plena productivitat la major part del temps."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
@@ -15933,7 +15933,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr "Si aquest edifici està completament subministrat, el dicador pot realitzar una terraformació entre %1$s i %2$s, depenent de la distància que hagi de caminar."
+msgstr "Si a aquest edifici està ben subministrat, el constructor de dics pot realitzar una terraformació entre %1$s i %2$s, depenent de la distància que hagi de caminar."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
