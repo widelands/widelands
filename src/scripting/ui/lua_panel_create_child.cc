@@ -213,8 +213,6 @@ UI::Box* LuaPanel::do_create_child_box(lua_State* L, UI::Panel* parent) {
 	UI::Box* box =
 	   new UI::Box(parent, panel_style(L), name, x, y, orientation, max_x, max_y, spacing);
 
-	box->set_scrolling(get_table_boolean(L, "scrolling", false));
-
 	return box;
 }
 
@@ -644,10 +642,6 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	int32_t val = get_table_int(L, "value", true);
 	std::string label = get_table_string(L, "label", false);
 
-	int32_t x = get_table_int(L, "x", false);
-	int32_t y = get_table_int(L, "y", false);
-	int32_t w = get_table_int(L, "w", false);
-
 	UI::SpinBox::Units units;
 
 	std::string units_str = get_table_string(L, "units", false);
@@ -726,8 +720,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	}
 
 	UI::SpinBox* spinbox =
-	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, panel_style(L), label,
-	                   units, sb_type, step_size_small, step_size_big);
+	   new UI::SpinBox(parent, name, unit_w, val, val_min, val_max, panel_style(L), label, units,
+	                   sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);

@@ -7,14 +7,14 @@
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
-# Pavol Gono, 2024-2025
+# Pavol Gono, 2024-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Pavol Gono, 2024-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1070,7 +1070,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1041
 #: ../../../../data/tribes/initialization/frisians/units.lua:1378
 msgid "A ship is being constructed at this site."
-msgstr ""
+msgstr "Na tomto mieste sa stavia loď."
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Headquarters
 #: ../../../../data/tribes/initialization/amazons/units.lua:1264
@@ -1349,9 +1349,9 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
 msgstr "Táto budova dokáže vyrobiť jedno vzácne drevo za %1$s až %2$s, podľa toho, ako ďaleko musí majsterka drevorubačka prejsť. Ak sú dostupné všetky druhy vzácnych driev, každé z jedného druhu je vyrobené za %3$s až %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
@@ -4162,7 +4162,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1515
 msgid ""
 "This tree is only planted by the Amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Tento strom sadí iba kmeň Amazoniek, ale dá sa ťažiť na kmene."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1432
@@ -14206,8 +14206,9 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr "Do ohňov v tehliarskych peciach, peciach, vyhniach na zbroje a recyklačných centrách sa prikladá uhlie."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
@@ -17232,7 +17233,7 @@ msgstr ""
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
-msgstr ""
+msgstr "Požiadavky"
 
 #: ../../../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"

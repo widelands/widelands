@@ -25,7 +25,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "ui/basic/messagebox.h"
 #include "ui/fsmenu/addons/manager.h"
-#include "ui/shared/addons_constants.h"
 
 namespace AddOnsUI {
 
@@ -49,16 +48,16 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
          "ok",
          0,
          0,
-         7 * kRowButtonSize,
-         kRowButtonSize,
+         7 * default_button_size(),
+         default_button_size(),
          UI::ButtonStyle::kFsMenuPrimary,
          _("Upload")),
      cancel_(&buttons_box_,
              "cancel",
              0,
              0,
-             7 * kRowButtonSize,
-             kRowButtonSize,
+             7 * default_button_size(),
+             default_button_size(),
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")),
      images_(&hbox_, "images", 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
@@ -78,19 +77,19 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
 	                               UI::Align::kRight),
 	              UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	descrbox_.add_space(kRowButtonSpacing);
+	descrbox_.add_space(default_spacing());
 	descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
 
 	vbox_.add(&icon_, UI::Box::Resizing::kExpandBoth);
-	vbox_.add_space(kRowButtonSpacing);
+	vbox_.add_space(default_spacing());
 	vbox_.add(&descrbox_, UI::Box::Resizing::kExpandBoth);
 
 	hbox_.add(&images_, UI::Box::Resizing::kExpandBoth);
-	hbox_.add_space(kRowButtonSpacing);
+	hbox_.add_space(default_spacing());
 	hbox_.add(&vbox_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	description_.set_tooltip(_("Description"));

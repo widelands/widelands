@@ -65,6 +65,7 @@ wl_library(ui_fsmenu
     base
     base_crypto
     base_exceptions
+    base_math
     base_random
     base_time_string
     build_info

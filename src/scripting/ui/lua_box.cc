@@ -73,14 +73,16 @@ int LuaBox::get_no_of_items(lua_State* L) {
 /* RST
    .. attribute:: scrolling
 
+      .. versionremoved:: 1.4
+         boxes always scroll
+
       (RW) Whether the box may scroll when its content is larger than the box.
 */
 int LuaBox::get_scrolling(lua_State* L) {
-	lua_pushboolean(L, static_cast<int>(get()->is_scrolling()));
+	lua_pushboolean(L, static_cast<int>(true));
 	return 1;
 }
-int LuaBox::set_scrolling(lua_State* L) {
-	get()->set_scrolling(luaL_checkboolean(L, -1));
+int LuaBox::set_scrolling(lua_State* /*L*/) {
 	return 0;
 }
 

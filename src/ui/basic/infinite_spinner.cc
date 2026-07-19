@@ -34,10 +34,7 @@ InfiniteSpinner::InfiniteSpinner(Panel* parent,
    : Box(parent, style, name, 0, 0, Box::Horizontal),
      spinner_(this,
               "spinner",
-              0,
-              0,
-              400,
-              250,
+              UI::SpinBox::default_unit_width_wide(panel_style_),
               spinner_val,
               spinner_min,
               spinner_max,
@@ -49,8 +46,8 @@ InfiniteSpinner::InfiniteSpinner(Panel* parent,
              "infinity_button",
              0,
              0,
-             34,
-             34,
+             default_button_size(),
+             default_button_size(),
              style == PanelStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
              g_image_cache->get(kIconInfinity),
              button_tooltip) {
@@ -70,7 +67,7 @@ InfiniteSpinner::InfiniteSpinner(Panel* parent,
 	spinner_.changed.connect(changed);
 
 	add(&button_, Box::Resizing::kAlign, Align::kCenter);
-	add_space(4);
+	add_space(default_spacing());
 	add(&spinner_, Box::Resizing::kFillSpace, Align::kCenter);
 }
 

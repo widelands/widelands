@@ -316,7 +316,7 @@ private:
 				txt->set_text(_("There are no pending trade proposals at the moment."));
 			}
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * UI::Scrollbar::default_size());
 
 		} else {
 			const bool can_act = iplayer_ != nullptr && iplayer_->can_act(player_number_);
@@ -448,7 +448,7 @@ private:
 			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 			txt->set_text(_("Nobody has offered you any trades at the moment."));
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * UI::Scrollbar::default_size());
 
 		} else {
 			for (Widelands::TradeID trade_id : trades) {

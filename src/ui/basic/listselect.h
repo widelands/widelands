@@ -173,6 +173,10 @@ struct BaseListselect : public Panel {
 private:
 	static const int32_t ms_darken_value = -20;
 
+	[[nodiscard]] static inline int default_hotkey_gap() {
+		return 4 * default_spacing();
+	}
+
 	void set_scrollpos(int32_t);
 	Recti get_highlight_rect(const std::string& text, int x, int y);
 

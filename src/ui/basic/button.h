@@ -66,6 +66,12 @@ private:
 	    UI::Button::VisualState state,
 	    UI::Button::ImageMode mode);
 
+	// Margin around image. The image will be scaled down to fit into this rectangle with preserving
+	// size.
+	[[nodiscard]] static inline int default_button_image_margin() {
+		return default_spacing();
+	}
+
 public:
 	/**
 	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'

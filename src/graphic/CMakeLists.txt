@@ -379,5 +379,6 @@ wl_library(graphic
     notifications
     scripting_lua_interface
     scripting_lua_table
+    widelands_options
 )
 

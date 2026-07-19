@@ -130,27 +130,50 @@ int do_set_workers_for_productionsite(lua_State* L,
 
 // Return the valid workers for a Road.
 WaresWorkersMap get_valid_workers_for(const Widelands::RoadBase& r);
+
 // Returns the valid workers allowed in 'pi'.
 WaresWorkersMap get_valid_workers_for(const Widelands::ProductionSite& ps);
+
 // Translate the given Workers map into a (string, count) Lua table.
 int workers_map_to_lua(lua_State* L, const WaresWorkersMap& valid_workers);
+
 // Unpacks the Lua table of the form {health, attack, defense, evade} at the stack index
 // 'table_index' into a SoldierMapDescr struct.
 SoldierMapDescr
 unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::SoldierDescr& sd);
-// Parser the arguments of set_soldiers() into a setpoint. See the
+
+// Parses the arguments of set_soldiers() into a setpoint. See the
 // documentation in has_soldiers to understand the valid arguments.
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
-                                         const Widelands::SoldierDescr& soldier_descr);
+                                         const Widelands::SoldierDescr& soldier_descr,
+                                         Widelands::Quantity soldier_capacity);
+
 // Does most of the work of get_soldiers for buildings.
 int do_get_soldiers(lua_State* L,
                     const Widelands::SoldierControl& sc,
                     const Widelands::TribeDescr& tribe);
+
+// Common part of get_soldiers for buildings and ships.
+int do_get_soldiers_inner(lua_State* L,
+                          const SoldiersList& soldiers,
+                          const Widelands::TribeDescr& tribe);
+
 // Does most of the work of set_soldiers for buildings.
 int do_set_soldiers(lua_State* L,
                     const Widelands::Coords& building_position,
                     Widelands::SoldierControl* sc,
-                    Widelands::Player* owner);
+                    Widelands::Player* owner,
+                    bool is_warehouse = false);
+
+// Common part of set_soldiers for buildings and ships.
+// soldiers_to_delete and soldiers_to_add are outputs.
+void do_set_soldiers_inner(lua_State* L,
+                           Widelands::Player* owner,
+                           const Widelands::Coords& position,
+                           Widelands::Quantity soldier_capacity,
+                           const SoldiersList& current_soldiers,
+                           SoldiersList& soldiers_to_delete,
+                           SoldiersList& soldiers_to_add);
 
 // Parses a table of name/count pairs as given from Lua.
 void parse_wares_workers(lua_State* L,
@@ -168,6 +191,7 @@ Widelands::SoldierPreference string_to_soldier_preference(const std::string& p);
 
 // Transforms the given warehouse policy to a string which is used by the lua code
 void wh_policy_to_string(lua_State* L, Widelands::StockPolicy p);
+
 // Transforms the given string from the lua code to a warehouse policy
 Widelands::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index);
 

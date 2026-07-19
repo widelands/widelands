@@ -150,7 +150,7 @@ struct HorizontalSlider : public Slider {
 	                 const int32_t value,
 	                 UI::SliderStyle style,
 	                 const std::string& tooltip_text = std::string(),
-	                 const uint32_t cursor_size = 20,
+	                 const uint32_t cursor_size = default_button_size_small(),
 	                 const bool enabled = true)
 	   : Slider(parent,
 	            name,
@@ -191,7 +191,7 @@ struct VerticalSlider : public Slider {
 	               const int32_t max_value,
 	               const int32_t value,
 	               UI::SliderStyle style,
-	               const uint32_t cursor_size = 20,
+	               const uint32_t cursor_size = default_button_size_small(),
 	               const std::string& tooltip_text = std::string(),
 	               const bool enabled = true)
 	   : Slider(parent,
@@ -234,7 +234,7 @@ struct DiscreteSlider : public Panel {
 	               uint32_t init_value,
 	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
-	               uint32_t cursor_size = 20,
+	               uint32_t cursor_size = default_button_size_small(),
 	               bool enabled = true);
 
 	void set_labels(const std::vector<std::string>&);

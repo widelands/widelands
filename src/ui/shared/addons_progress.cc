@@ -18,8 +18,6 @@
 
 #include "ui/shared/addons_progress.h"
 
-#include "ui/shared/addons_constants.h"
-
 namespace AddOnsUI {
 
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent,
@@ -30,8 +28,8 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent,
                 "progress",
                 0,
                 0,
-                parent->get_inner_w() - 2 * kRowButtonSize,
-                2 * kRowButtonSize,
+                parent->get_inner_w() - 2 * default_button_size(),
+                2 * default_button_size(),
                 title),
      modal_(*this),
      box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical, get_inner_w()),
@@ -63,15 +61,15 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent,
                0,
                0,
                get_w(),
-               kRowButtonSize,
+               default_button_size(),
                UI::ProgressBar::Horizontal) {
 
 	hbox_.add(&txt2_, UI::Box::Resizing::kExpandBoth);
 	hbox_.add(&txt3_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&txt1_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kRowButtonSpacing);
+	box_.add_space(default_spacing());
 	box_.add(&hbox_, UI::Box::Resizing::kFullSize);
-	box_.add_space(2 * kRowButtonSpacing);
+	box_.add_space(2 * default_spacing());
 	box_.add(&progress_, UI::Box::Resizing::kFullSize);
 
 	set_center_panel(&box_);

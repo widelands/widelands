@@ -32,9 +32,6 @@
 
 namespace AddOnsUI {
 
-constexpr int16_t kButtonSize = 32;
-constexpr int16_t kSpacing = 4;
-
 /* All restrictions on add-on filenames are imposed by the server. */
 static const std::string kValidAddOnFilenameChars = "abcdefghijklmnopqrstuvwxyz"
                                                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -147,8 +144,8 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
               "map_add",
               0,
               0,
-              kButtonSize,
-              kButtonSize,
+              default_button_size(),
+              default_button_size(),
               UI::ButtonStyle::kFsMenuSecondary,
               _("+"),
               _("Add selected map")),
@@ -156,8 +153,8 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                   "map_add_dir",
                   0,
                   0,
-                  kButtonSize,
-                  kButtonSize,
+                  default_button_size(),
+                  default_button_size(),
                   UI::ButtonStyle::kFsMenuSecondary,
                   _("*"),
                   _("Create subdirectory")),
@@ -165,8 +162,8 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                  "map_delete",
                  0,
                  0,
-                 kButtonSize,
-                 kButtonSize,
+                 default_button_size(),
+                 default_button_size(),
                  UI::ButtonStyle::kFsMenuSecondary,
                  _("–"),
                  _("Remove selected map or directory")),
@@ -183,7 +180,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                             UI::PanelStyle::kFsMenu) {
 	box_buttonsbox_.add_inf_space();
 	box_buttonsbox_.add(&map_add_);
-	box_buttonsbox_.add_space(kSpacing);
+	box_buttonsbox_.add_space(default_spacing());
 	box_buttonsbox_.add(&map_delete_);
 	box_buttonsbox_.add_inf_space();
 	box_buttonsbox_.add(&map_add_dir_);
@@ -199,30 +196,30 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	                    "label_dirstruct_displayname", UI::FontStyle::kFsGameSetupHeadings,
 	                    _("Directory Display Name"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
-	box_dirstruct_displayname_.add_space(kSpacing);
+	box_dirstruct_displayname_.add_space(default_spacing());
 	box_dirstruct_displayname_.add(&dirstruct_displayname_, UI::Box::Resizing::kFullSize);
-	box_dirstruct_displayname_.add_space(kSpacing);
+	box_dirstruct_displayname_.add_space(default_spacing());
 	box_dirstruct_displayname_.add(&displayname_duplicate_, UI::Box::Resizing::kFullSize);
 
 	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu, "label_dirstruct",
 	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
 	                                    UI::Align::kCenter),
 	                   UI::Box::Resizing::kFullSize);
-	box_dirstruct_.add_space(kSpacing);
+	box_dirstruct_.add_space(default_spacing());
 	box_dirstruct_.add(&dirstruct_, UI::Box::Resizing::kExpandBoth);
-	box_dirstruct_.add_space(kSpacing);
+	box_dirstruct_.add_space(default_spacing());
 	box_dirstruct_.add(&box_dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_maps_list_.add(
 	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu, "label_my_maps",
 	                    UI::FontStyle::kFsGameSetupHeadings, _("My Maps"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
-	box_maps_list_.add_space(kSpacing);
+	box_maps_list_.add_space(default_spacing());
 	box_maps_list_.add(&my_maps_, UI::Box::Resizing::kExpandBoth);
 
 	add(&box_dirstruct_, UI::Box::Resizing::kExpandBoth);
-	add_space(kSpacing);
+	add_space(default_spacing());
 	add(&box_buttonsbox_, UI::Box::Resizing::kFullSize);
-	add_space(kSpacing);
+	add_space(default_spacing());
 	add(&box_maps_list_, UI::Box::Resizing::kExpandBoth);
 
 	find_maps(kMyMapsDirFull, maps_list_);
@@ -478,7 +475,7 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                    0,
                    50,
                    8,
-                   kButtonSize,
+                   default_button_size(),
                    _("Tribe"),
                    UI::DropdownType::kTextual,
                    UI::PanelStyle::kFsMenu,
@@ -489,7 +486,7 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                       0,
                       50,
                       8,
-                      kButtonSize,
+                      default_button_size(),
                       _("Difficulty"),
                       UI::DropdownType::kPictorial,
                       UI::PanelStyle::kFsMenu,
@@ -529,17 +526,17 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
 	short_desc_.set_tooltip(_("Short description, which will be appended to the difficulty."));
 
 	difficulty_hbox_.add(&difficulty_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add_space(default_spacing());
 	difficulty_hbox_.add(&icon_difficulty_);
-	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add_space(default_spacing());
 	difficulty_hbox_.add(&difficulty_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add_space(default_spacing());
 	difficulty_hbox_.add(&short_desc_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
 	add(&difficulty_hbox_, UI::Box::Resizing::kFullSize);
-	add_space(kSpacing);
+	add_space(default_spacing());
 	add(&tribe_select_, UI::Box::Resizing::kFullSize);
-	add_space(kSpacing);
+	add_space(default_spacing());
 	add(&maps_box_, UI::Box::Resizing::kExpandBoth);
 }
 

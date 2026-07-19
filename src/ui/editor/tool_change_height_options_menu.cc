@@ -43,10 +43,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
           vspacing()),
      change_by_(&box_,
                 "change_by",
-                0,
-                0,
-                80,
-                80,
+                UI::SpinBox::default_unit_width_narrow(panel_style_),
                 increase_tool_.get_change_by(),
                 1,
                 eia_.egbase().map().max_field_height_diff(),
@@ -56,10 +53,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              "set_to",
-             0,
-             0,
-             80,
-             80,
+             UI::SpinBox::default_unit_width_narrow(panel_style_),
              increase_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
@@ -96,6 +90,9 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
 	box_.add(&set_to_, UI::Box::Resizing::kFullSize);
 	box_.add(&picker_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	set_center_panel(&box_);
+
+	increase_tool_.set_tool().interval_changed.connect(
+	   [this](const Widelands::HeightInterval interval) { set_to_.set_value(interval.min, false); });
 
 	initialization_complete();
 }
