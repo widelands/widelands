@@ -7,7 +7,7 @@ wl.Descriptions():new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Vineyard"),
    icon = dirname .. "menu.png",
-   size = "mine",
+   size = "medium",
 
    buildcost = {
       planks = 2,

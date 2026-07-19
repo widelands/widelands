@@ -822,9 +822,8 @@ void DefaultAI::late_initialization() {
 				}
 				const auto& first_resource_it = collected_resources.begin();
 				if (first_resource_it == collected_resources.end()) {
-					verb_log_dbg_time(gametime,
-					                  "AI %u: The mine '%s' does not mine any resources.",
-					                  static_cast<unsigned>(player_number()), bo.name);
+					log_warn("AI %u: The mine '%s' does not mine any resources!",
+					         static_cast<unsigned>(player_number()), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
@@ -3195,7 +3194,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					int32_t prio = 0;
 					if (bo.mines != Widelands::INVALID_INDEX) {
-						// Actual mine: priority based on nearby resource amount
 						Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 						   map, Widelands::Area<Widelands::FCoords>(mf->coords, 2));
 						do {
@@ -3210,6 +3208,19 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						if (prio < 1) {
 							continue;
 						}
+
+						// applying nearnest penalty
+						prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
+
+						// applying max needed
+						prio += bo.primary_priority;
+
+						// prefer mines in the middle of mine fields of the
+						// same type, so we add a small bonus here
+						// depending on count of same mines nearby,
+						// though this does not reflects how many resources
+						// are (left) in nearby mines
+						prio += mf->same_mine_fields_nearby;
 					} else {
 						// Mine-sized building without mining - just needs any mine spot
 						prio = 1;
@@ -3218,13 +3229,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						    mines_per_type.count(mf->coords.field->get_resources()) > 0) {
 							prio -= 10;
 						}
-					}
-
-					if (bo.mines != Widelands::INVALID_INDEX) {
-						// applying nearness penalty
-						prio -= mf->mines_nearby * std::abs(management_data.get_military_number_at(126));
-						// prefer mines in the middle of mine fields of the same type
-						prio += mf->same_mine_fields_nearby;
 					}
 
 					if (bo.type == BuildingObserver::Type::kMilitarysite) {
