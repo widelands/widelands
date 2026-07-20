@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_MAIN_MENU_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_fsmenu/main.h"
+#include "ui/fsmenu/main.h"
 
 namespace LuaUi {
 
@@ -43,6 +43,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_plugin_timers(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -50,6 +51,8 @@ public:
 	int set_keyboard_shortcut(lua_State* L);
 	int set_keyboard_shortcut_release(lua_State* L);
 	int add_plugin_timer(lua_State* L);
+	int get_plugin_timer(lua_State* L);
+	int remove_plugin_timer(lua_State* L);
 
 	/*
 	 * C Methods

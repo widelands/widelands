@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_TABLE_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/table.h"
+#include "ui/basic/table.h"
 
 namespace LuaUi {
 

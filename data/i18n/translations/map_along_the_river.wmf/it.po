@@ -6,6 +6,7 @@
 # Davide Nicolini <davide97@gmail.com>, 2023
 # Guybrush88 <erpizzo@alice.it>, 2025
 # Daniel Savoia, 2026
+# giorgio ghidini, 2026
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Daniel Savoia, 2026\n"
+"Last-Translator: giorgio ghidini, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -352,6 +353,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Sire, ora che abbiamo conquistato la terra dei Törver, possiamo sfruttare il"
+" loro eccellente accesso al lago adiacente. Un porto a nord ci darebbe "
+"migliori opportunità di avere contatti con altre tribù."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -359,6 +363,10 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Nel quartier generale dei Törver abbiamo trovato un progetto che descrive "
+"come costruire le navi. Sfortunatamente, il testo è scritto in una lingua  "
+"anoi sconosciuta. I nostri uomini saggi proveranno a tradurre queste "
+"descrizioni."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
@@ -388,6 +396,10 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Sire, abbiamo trovato 25 unità di Minerale aurifero nella Guardiola dei "
+"pirati. Forse l'hanno estratta dalle capanne dei cercatori d'oro nelle "
+"vicinanze. Questo Minerale aurifero verrà trasportato al nostro Quartier "
+"generale."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""

@@ -18,86 +18,86 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Pastatykite blokinį namą"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
-msgstr ""
+msgstr "Blockhouse"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Pastatykite blokinį namą prie Raudonojo namo simbolio rytinėje miškų pusėje, laikinosios būstinės dešinėje."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Pastatykite medkirčio namą"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Lumberjacko namas"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "Pastatykite medkirčio namą prie Raudonojo namo simbolio, į pietus nuo savo laikinosios būstinės."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Pastatykite 2 medkirčių namus ir lentpjūvę"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Du medkirčių namai ir lentpjūvė"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr ""
+msgstr "Pastatykite dar du medkirčių namus ir lentpjūvę, kai tik jiems užteks vietos."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Pastatykite miškininko namą"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr ""
+msgstr "Miškininko namas"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "Pastatykite miškininko namą, kad išsaugotumėte šios salos medienos išteklius."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr ""
+msgstr "Pastatykite karjerą"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
-msgstr ""
+msgstr "Karjeras"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "Pietuose pastatykite karjerą, kad iš uolų išpjautumėte šiek tiek granito ir marmuro."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Jie gali būti naudojami būsimiems pastatams."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "tamsi naktis"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Liucijaus dienoraštis"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -105,7 +105,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Kas nutiko mūsų imperijai? Tikrai užduodu šį klausimą – kodėl mano karalius uždraudė man kovoti su ta siaubinga barbarų gentimi, kuri iš pradžių veikė kaip taikus draugas, o paskui užpuolė mano armiją tamsiausią naktį?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -115,7 +115,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Su 150 vyrų armija man buvo pavesta patruliuoti mūsų šiaurinėje sienoje, kuri yra netoli Galdino kalnų dideliame, gražiame ir senoviniame miške. Netrukus sutikome barbarų gentį, kuri iš pradžių buvo draugiška. Keletas mano vyrų net prekiavo su jais, o jų vaikai atėjo pas mus pasigrožėti mūsų švariomis ir tvarkingomis uniformomis bei ginklais."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -126,7 +126,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Tačiau per mūsų penktąją naktį tame regione jie mus užpuolė be jokios priežasties. Aš praradau dešimtis gerų vyrų, buvau įkalintas ir atvestas pas jų vadą. Jis spjaudė į mane, tyčiojosi iš manęs ir liepė visam laikui palikti šią žemę. Jis nenorėjo naujos žemės ir nenorėjo mūsų žemės, bet man pasakė, kad šis miškas yra jų žemė – ir ji liks jų, kol dvasios paims paskutinį jo žmonių žmogų!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -135,7 +135,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "Po trijų savaičių grįžau į Fremilį pasikalbėti su mūsų karaliumi. Jis buvo įsiutę ant barbarų, tačiau uždraudė bet kokį puolimą prieš šias gentis. Jis tikėjo, kad mūsų kariuomenė per silpna, kad išgyventų kare prieš barbarus."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -144,11 +144,11 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "Vis dėlto nemačiau, kad galėčiau ištrinti savo gėdą, nekovodamas su šiais barbarais. Taigi, aš išvykau iš Fremilio laivu, kad surasčiau sau naują pasaulį ir naują gyvenimą kažkur pietuose. Dabar aš plaukiu Perlo įlankoje su savo šeima, kai kuriais savo draugais ir keliais geriausiais mano kariais."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
-msgstr ""
+msgstr "Nelygi jūra"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:99
@@ -157,23 +157,23 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "Atrodo, kad plaukimas Perlo įlanka buvo viena didžiausių mūsų klaidų. Gamta buvo prieš mus ir įvarė mus į tamsią, laukinę audrą. Tikrai nežinau, kiek valandų praėjo nuo to laiko, kai bangos pakilo aukščiau nei mūsų valtis, bet vis tiek būtų savižudybė išeiti į lauką."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr ""
+msgstr "Mūsų laivas smarkiai apgadintas ir sugeria vis daugiau vandens. Galime padėkoti dievams, jei išgyvensime šią juodą naktį savo gyvenimu."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:108
 msgid "Survivors"
-msgstr ""
+msgstr "Išgyvenusieji"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Pagaliau dievai buvo su mumis!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -181,7 +181,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "Nusileidome į nežinomą pakrantę ir radome ramų poilsį po krante augančiomis palmėmis. Bet tai yra taip gerai, kaip yra. Tiesa tokia: kai šįryt pabudau, aplink mus nemačiau nieko, išskyrus smėlį."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -189,15 +189,15 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "Tikrai atrodo, kad nusileidome po vienintele palme, egzistuojančia šioje tolimoje smėlio dykumoje. Bijau, kad nerasime pagalbos, kurios mums reikia norint laiku suremontuoti laivą."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
-msgstr ""
+msgstr "Nujautimas"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus nervingai apsidairo..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:126
@@ -205,7 +205,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "Pone, bijau, kad nesame saugūs šioje svetimoje žemėje. Kas žino, kokie baisūs padarai gyvena už šio miško, toje galingoje dykumoje? Ką daryti, jei šios būtybės įžengs į mišką ir lauks laiko, kada mus užpuls?"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -213,7 +213,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "Na, galbūt mano baimė yra klaidinga, bet negali būti neteisinga stebėti miškuose – kad galėtume būti tikri, kad pamatysime bet kokius potencialius priešus, kol jie mus pamatys."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -221,51 +221,51 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Rytinėje miško dalyje tikrai turėtumėte pastatyti blokinį namą. Tada vienas iš mano vyrų gali budėti tamsoje ir apsaugoti mus nuo šių būtybių."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
-msgstr ""
+msgstr "Kol kas saugu"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus kalba su palengvėjimu..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "Pone, pamačiau, kad blokinio namo statyba baigta, todėl paskyriau vieną geriausių savo karių, kurie budėtų dykumoje."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr ""
+msgstr "Tai geras žingsnis į priekį. Dabar galime jaustis šiek tiek saugesni ir nekantriai laukiame savo laivo remonto."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Young Amalea"
-msgstr ""
+msgstr "Jaunoji Amale"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea šypsosi…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Linkėjimai, Lucijus! Ką tik sutikau Saledusą lauke."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Jis man papasakojo apie blokinį namą. Na, nemanau, kad mums reikia daugiau blokinių namų – vietoj to dabar galime susikoncentruoti į kitus dalykus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -273,11 +273,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "Visiškai aišku, kad mūsų laivui remontuoti reikia medienos. Taigi, vakar ėjau per mišką ieškoti gražios vietos medkirčio namui ir radau vieną į pietus nuo mūsų laikinosios būstinės."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea rekomenduoja…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -286,7 +286,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "Gavau žinią, kad mūsų pirmasis medkirtys šiandien pradėjo savo darbą. Galbūt būtų gera mintis palaukti, kol jis atlaisvins pakankamai vietos dar dviem medkirčių namams pastatyti, kad galėtume greičiau nuimti rąstus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -295,30 +295,30 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Bet, deja, rąstai nenaudingi mūsų laivo remontui – juos reikia paversti lentomis, kurių reikia ir kiekvienam laivui bei kiekvienam didesniam pastatui. Taigi turėtume pastatyti lentpjūvę – kai tik tam užteks vietos."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea ateina…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Turiu pakalbėti apie du svarbius dalykus... Pirmiausia geros naujienos:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "Pastebėjau, kad lentpjūvės statyba baigta, todėl galime pradėti tobulinti rąstus, kuriuos medkirčiai nuima į lentas."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Tačiau blogos naujienos yra tai, kad mūsų medkirčiai derlius nuima neįtikėtinu greičiu. Šioje saloje medžių beveik neliko."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -326,42 +326,42 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Šie medžiai suteikia prieglobstį nuo smėlio audrų, kurios šluoja iš dykumos, o karštomis dienomis pavėsyje, ir jie yra daugelio švelnių gyvūnų namai. Neturėtume palikti šios salos visiška dykuma."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "Lutiaus, prašau susirasti žmogų, kuris pasirūpins naujų medžių sodinimu."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "Galvoju apie ateitį"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr ""
+msgstr "Saledus užrašai…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "Pone, aš ką tik pagalvojau apie uolas, stovinčias pietinėje šios žemės pakrantėje. Galbūt galėtume iškirpti naudingą granitą ir gražų marmurą."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "Bet kokiu atveju mūsų laivo remontas užtruks kelias savaites, o ištekliai, kuriuos dabar nuimame, gali būti tvirtų ir didelių pastatų pagrindas kitoje žemėje."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
-msgstr ""
+msgstr "Žingsnis į priekį"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus atrodo susijaudinęs…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:213
@@ -369,16 +369,16 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "Pone, šiandien mes daug arčiau savo pirmosios pilies. Karjeras į pietus pradėjo savo darbą šiandien ir netrukus suteiks mums granito ir gražaus marmuro."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:216
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "Dabar tikrai galime laukti apsigyventi kitoje saloje."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
-msgstr ""
+msgstr "Užduotis įvykdyta"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:224
@@ -386,41 +386,41 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr ""
+msgstr "Šiandien gavau pranešimą, kad mūsų laivas visiškai suremontuotas. Šiuo metu mano žmonės viską krauna į mūsų naujai suremontuotą laivą, tikėdamiesi, kad jis mums pasitarnaus geriau nei praėjusį kartą."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr ""
+msgstr "Šiąnakt bus paskutinė mūsų naktis šioje saloje. Rytoj ryte išvažiuosime, ieškodami naujos vietos savo tremčiai."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Vis dar galvoju, ar dar kada nors pamatysime Fremilą."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Jūs įvykdėte šią misiją. Jei norite, galite toliau žaisti, kitaip pereikite prie kitos misijos."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Saugus pusiasalis"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Saledus kalba:"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "Pone, jūs padarėte šį pusiasalį labai saugia vieta. Dabar laikas judėti toliau!"

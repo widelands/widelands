@@ -30,8 +30,8 @@
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
-#include "ui_basic/note_loading_message.h"
-#include "wui/game_tips.h"
+#include "ui/basic/note_loading_message.h"
+#include "ui/wui/game_tips.h"
 
 namespace UI {
 struct ProgressWindow;

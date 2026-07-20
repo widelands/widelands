@@ -20,9 +20,9 @@
 
 #include <sstream>
 
-#include "editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /// Increases the heights by a value. Changes surrounding nodes if necessary.
 int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,

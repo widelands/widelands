@@ -494,7 +494,8 @@ int LuaWarehouse::get_soldiers(lua_State* L) {
 // documented in parent class
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
-	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
+	return do_set_soldiers(
+	   L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner(), true);
 }
 
 /* RST

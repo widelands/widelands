@@ -64,6 +64,12 @@ print_help () {
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
+    echo "-o or --no-codecheck  Switch off codecheck."
+    echo "+o or --codecheck     Switch on codecheck for debug mode (default)."
+    echo " "
+    echo "-t or --no-static     Build a dynamically linked .exe on windows (default)."
+    echo "+t or --static        Build a static linked .exe on windows."
+    echo " "
     echo "Compiler options:"
     echo " "
     echo "-j <number> or --cores <number>"
@@ -77,13 +83,10 @@ print_help () {
     echo "                      unless overridden locally."
     echo "-e or --rel-with-dbg  Create a release build with debugging symbols."
     echo " "
-    if which g++ >/dev/null; then # gcc specific
-    echo "-c or --no-cross-opt  Do not use cross compile unit optimization,"
-    echo "                      even if available."
+    echo "-c or --no-cross-opt  Do not use link-time optimization, even if available."
     echo "+c or --with-cross-opt"
-    echo "                      Use cross compile unit optimization if available."
+    echo "                      Use link-time optimization."
     echo " "
-    fi
     echo "--gcc                 Try to build with GCC rather than the system default."
     echo "                      If you built with Clang before, you will have to clean"
     echo "                      your build directory before switching compilers."
@@ -121,12 +124,13 @@ print_help () {
 BUILD_WEBSITE="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
-USE_FLTO="yes"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
 COMPILER="default"
 USE_XDG="ON"
+USE_CODECHECK="ON"
+BUILD_STATIC="OFF"
 EXTRA_OPTS=""
 # Option for this script itself
 QUIET=0
@@ -222,6 +226,7 @@ do
       if [ "${USE_ASAN}" = "default" ]; then
         USE_ASAN="OFF"
       fi
+      USE_CODECHECK="OFF"
     shift
     ;;
     -d|--debug)
@@ -236,14 +241,15 @@ do
       if [ "${USE_ASAN}" = "default" ]; then
         USE_ASAN="OFF"
       fi
+      USE_CODECHECK="OFF"
     shift
     ;;
     -c|--no-cross-opt)
-      USE_FLTO="no"
+      USE_FLTO="OFF"
     shift
     ;;
     +c|--with-cross-opt)
-      USE_FLTO="yes"
+      USE_FLTO="ON"
     shift
     ;;
     -s|--skip-tests)
@@ -302,6 +308,24 @@ do
     ;;
     +x|--with-xdg)
       USE_XDG="ON"
+    shift
+    ;;
+    -o|--no-codecheck)
+      USE_CODECHECK="OFF"
+    shift
+    ;;
+    +o|--codecheck)
+      if [ "$BUILD_TYPE" = "Debug" ]; then
+        USE_CODECHECK="ON"
+      fi
+    shift
+    ;;
+    -t|--no-static)
+      BUILD_STATIC="OFF"
+    shift
+    ;;
+    +t|--static)
+      BUILD_STATIC="ON"
     shift
     ;;
     -D*)
@@ -391,12 +415,16 @@ else
 fi
 echo " "
 
-if [ $USE_FLTO = "yes" ]; then
-  echo "Using cross compile unit optimization if available."
+if [ "x$USE_FLTO" = "xON" ]; then
+  echo "Using link-time optimization."
   CMD_ADD "--with-cross-opt"
-else
-  echo "Not using cross compile unit optimization."
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=ON"
+elif [ "x$USE_FLTO" = "xOFF" ]; then
+  echo "Not using link-time optimization."
   CMD_ADD "--no-cross-opt"
+  FLTO_STRING="-DUSE_FLTO_IF_AVAILABLE=OFF"
+else
+  echo "Autodetect link-time optimization availability."
 fi
 echo " "
 
@@ -467,10 +495,23 @@ if [ $USE_XDG = "ON" ]; then
   echo "and defaults to \$HOME/.config/widelands."
   echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
   echo "for more information."
-  echo " "
   CMD_ADD "--with-xdg"
 else
   CMD_ADD "--without-xdg"
+fi
+echo " "
+if [ $USE_CODECHECK = "ON" ]; then
+  echo "Will perform codecheck."
+  CMD_ADD "--codecheck"
+else
+  echo "Codecheck is disabled."
+  CMD_ADD "--no-codecheck"
+fi
+if [ $BUILD_STATIC = "ON" ]; then
+  echo "Building a static linked .exe on windows."
+  CMD_ADD "--static"
+else
+  CMD_ADD "--no-static"
 fi
 echo " "
 echo "###########################################################"
@@ -534,7 +575,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
                -DUSE_XDG=$USE_XDG                              \
-               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+               -DOPTION_BUILD_CODECHECK=$USE_CODECHECK         \
+               -DOPTION_BUILD_WINSTATIC=$BUILD_STATIC          \
+               $FLTO_STRING
 
     $RUN $buildtool -j $CORES
 
@@ -659,12 +702,20 @@ if [ $BUILD_TESTS = "ON" ]; then
 else
   echo "# - No tests                                              #"
 fi
+if [ $USE_CODECHECK = "ON" ]; then
+  echo "# - Codecheck                                             #"
+else
+  echo "# - No codecheck                                          #"
+fi
 
 if [ $USE_XDG = "ON" ]; then
   echo "# - With support for the XDG Base Directory Specification #"
 else
   echo "# - Without support for the XDG Base Directory            #"
   echo "#   Specification                                         #"
+fi
+if [ $BUILD_STATIC = "ON" ]; then
+  echo "# - Static linking for windows .exe                       #"
 fi
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "# - Website-related executables                           #"

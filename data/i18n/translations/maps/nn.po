@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Ola Haugen Havrevoll <havrevoll@gmail.com>, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2010\n"
+"Last-Translator: Ola Haugen Havrevoll <havrevoll@gmail.com>, 2026\n"
 "Language-Team: Norwegian Nynorsk (http://app.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -361,7 +362,7 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Merk: Dette kartet er ei uferdig førehandsvising. Sjølv om det på mange måtar er betre enn Europa 1.2, som det tek over for, finst det truleg framleis feil her. Kartet er dessutan sers stort og har fleire spelarplassar enn det me vanlegvis tilrår, noko som krev mykje av maskinvara di. — Eit kart for rollespel med historiske rike. – Dette Europa-kartet skal vera så nøyaktig som råd er i Widelands. – LETT: Det osmanske riket, Sverige, Det russiske keisardømet, Kartago – MIDDELS: Det franske keisardømet, Det britiske riket, Spania, Det tyske keisardømet, Romarriket – VANSKELEG: Egypt, Polen, Hellas."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""

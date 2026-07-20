@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr ""
+msgstr "Pastaba"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -26,42 +30,48 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Atrodo, kad neatlikote ankstesnės misijos. Vis tiek galite žaisti šį "
+"scenarijų, bet būsite nepalankioje padėtyje. Rekomenduoju pirmiausia "
+"užbaigti ankstesnį scenarijų ir tada iš naujo pradėti šią misiją."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Sukurkite pagrindinę ekonomiką"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Tiekti visas pagrindines medžiagas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Pastatykite karjerą, nendrių fermą, molio duobę, šulinį, medžio anglies "
+"krosnį, plytų krosnį ir namus medžio pjaustytojui ir miškininkui."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
-msgstr ""
+msgstr "Plėsti į pietus"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Išplėskite savo teritoriją ir tyrinėkite pietus"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:36
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"Šiaurė mums atrodo nelabai naudinga, bet kas žino, ką galime rasti pietuose?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
-msgstr ""
+msgstr "Treniruokis ir perdirbk"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Perdirbkite ginklus, kad atgautumėte metalą"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -69,6 +79,9 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Kai kariai treniruojasi, jų seni ginklai išmetami. Perdirbimo centre juos "
+"galima paversti metalu. Parduotuvėje esančius ginklus mokykite karius ir "
+"perdirbkite metalo laužą."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid ""
@@ -77,14 +90,17 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
+"Kalvystė gamina tik antrąjį gamybos ciklą. Jei vienu metu tiekiamas tik "
+"vienas geležies luitas, jis gali niekada nepasiekti šio ciklo. Turite "
+"sustabdyti kalvį, kol bent dvi geležies bus saugomos jos įvesties eilėje."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Sukurkite vandens ūkį"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Sukurkite vandens ūkį, kad pradėtumėte gaminti žuvį"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -92,68 +108,74 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Sukurkite vandens ūkį žuvims gaminti. Vandens ūkiui reikia skylių, kurias "
+"paliko šalia esančios molio duobės, kad būtų galima naudoti kaip tvenkinius "
+"žuvims auginti. Iš šių tvenkinių žvejoti gali tik žvejys, dirbantis vandens "
+"ūkyje."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Nuspręskite, ar norite bendradarbiauti su imperija"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Surinkite gaminius kaip dovaną arba sunaikinkite imperijos sandėlį"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Nuspręskite, ar norite dirbti su Muriliumi prieš barbarus. Jei taip, "
+"užpildykite jo sandėlį šiais gaminiais:"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × rastai"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × granitas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × žuvis"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × alus"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × vanduo"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × racionas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × patiekalas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × anglis"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × geležies rūda"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × geležis"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × aukso rūda"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × auksas"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -164,95 +186,105 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"Priešingu atveju tiesiog sunaikinkite sandėlį ir rizikuokite, kad Murilius "
+"bus priešas. Jis uždraudė jums plėsti savo teritoriją, kol prekės nebus "
+"perduotos."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Šnipinėja Murilius"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Nusiųskite žvalgą šnipinėti imperiją"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Pastatykite skautų namą netoli sienos, kad sužinotumėte imperijos paslaptis."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Iššifruokite eilėraštį"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Supraskite eilėraštį, kurį skautas rado imperijoje"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:336
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "kiek vietų, kur apsistoja kariai,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:339
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "Kiek vietų, kuriose tu laikai siūbavimą,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:342
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "nors ir ne jų buvimo vieta"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:345
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Kas čia užsisako, tu!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Nugalėk barbarus!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Nugalėk barbarus"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Nugalėk priešišką gentį, gyvenančią į šiaurės vakarus nuo imperijos "
+"forposto!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Nugalėk Murilius!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr ""
+msgstr "Nugalėk arogantišką imperijos forpostą"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"Vienintelis būdas padaryti galą imperijos norui pavogti mūsų laisvę yra "
+"kartą ir visiems laikams sunaikinti šį forpostą. užkariauti visą jos žemę."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Užkariaukite kiekvieną lauką, kuris vis dar priklauso Muriliui."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Nugalėk Murilių ir barbarus!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Nugalėk barbarus ir imperijos koloniją"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
+"Barbarai ir imperija yra pernelyg pavojingi, kad leistų jiems gyventi šalia "
+"mūsų. Turime juos abu nugalėti."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:128
@@ -260,6 +292,8 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Pradėjau tikėti, kad kelionė niekada nesibaigs. Neįsivaizduoju, kiek laiko "
+"buvome jūroje, mėtosi pavydžių audrų... Turbūt praėjo mėnesiai."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -270,6 +304,11 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Audros tvirtai laikė laivą visos mūsų kelionės metu. Vargu ar buvo tokia "
+"diena, kai nesusimąstytume, ar tai bus paskutinė. Buvome priversti numesti "
+"tauriuosius metalus, kuriuos pasiėmėme su savimi už borto, kad sutvirtintume"
+" laivą, jausdami, lyg tai būtų niūri auka dievams, suteikianti mums vilties "
+"gyventi dar kelias valandas."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -279,6 +318,10 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Keletas įrankių, kuriuos mums pavyko išgelbėti iš langeness, nebuvo gerai "
+"susitvarkę. Kalnakasių kirtikliai pasirodė ypač pažeidžiami, ir mes turėjome"
+" juos išmesti į vandenyną, kai paaiškėjo, kad juos taip surūdijo jūros "
+"druska, kad daugiau niekada nieko negalėsime su jais išgauti."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -286,18 +329,20 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Bet mes išgyvenome. Galiausiai pasiekėme ramesnio fiordo žiotis. Išplaukėme "
+"aukštyn ir čia atvykome."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:140
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Sveiki sugrįžę!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
-msgstr ""
+msgstr "Nauji namai"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
@@ -305,6 +350,8 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Čia gyveno nedidelė grupė užsieniečių. Jie mus pasitiko mojuodami į mus savo"
+" kirviais ir šaukė nenuoseklia kalba."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -313,6 +360,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Mūsų laivas nebuvo valstybėje, kad galėtume toliau plaukti, todėl nužudėme "
+"vietinius gyventojus ir paėmėme jų žemę. Tikiuosi, kad jų nebus daugiau, kad"
+" galėtume gyventi taikiai."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:157
@@ -320,6 +370,8 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
+"Ši vieta atrodo niūri ir nevaisinga, sako mano palydovai, bet manau, kad ji "
+"atrodo... gražiai."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:160
@@ -327,6 +379,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Mano skautai nebepraneša apie gyvų būtybių požymius netoliese. Čia pradėsime"
+" statyti savo naujus namus."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -337,14 +391,19 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Turime pradėti nuo visų pagrindinių pastatų statybos. Netoliese nematau "
+"kalnų, kur galėtume išgauti anglį. Geriau pastatyti anglies krosnį, kad "
+"sudegintume rąstus į anglį. Krosnis tobuliname moliu, kad jos nesunaudotų "
+"tiek daug medienos. Mūsų kaimynai mums pavydėjo šiai protingai technikai, "
+"kurios negalėjo kopijuoti."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
-msgstr ""
+msgstr "Eik į pietus"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Plėsti ir užkariauti"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:171
@@ -352,6 +411,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Šiame nuostabiame kraštovaizdyje pasistatėme namus. Tačiau augant mūsų "
+"genčiai, mums reikia daugiau erdvės. Turėtume pradėti plėsti savo "
+"teritoriją."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:174
@@ -360,17 +422,19 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Skautai pranešė, kad šiaurėje esančios žemės yra tvirtos kalvos, gražios, "
+"bet netinka pastatams. Išsiaiškinkime, ką galime atrasti pietuose."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:188
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Metalo trūkumas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
-msgstr ""
+msgstr "Mums baigėsi metalai"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
@@ -379,6 +443,9 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"Vyriausiasis Reebaud! Turime rimtą problemą. Atradome kalną, kuriame "
+"galėtume pradėti kasti anglį ir geležį, bet neturime nei kalnakasių, nei "
+"pasirinkimų, kuriais galėtume juos aprūpinti."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:185
@@ -386,11 +453,13 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"Ir mums nebelieka geležies. Turime rasti būdą, kaip gauti metalo naujiems "
+"pasirinkimams kalti. Deja, aš neįsivaizduoju, kaip tai padaryti."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
-msgstr ""
+msgstr "Naujo metalo gavimas"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:191
@@ -398,6 +467,8 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"Tai baisi žinia! Be geležies ar priemonių gaminti, mes taip įstrigome "
+"amžiams! Turite sugalvoti sprendimą."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:194
@@ -406,10 +477,12 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Mačiau keletą pažangių ginklų mūsų sandėliuose. Galbūt būtų galima juos "
+"išlydyti atgal į metalą? Bet tai atrodo kaip brangių kardų švaistymas..."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
-msgstr ""
+msgstr "Naujas metalas"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:200
@@ -418,6 +491,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Dabar turiu idėją: kai mūsų kariai yra apmokyti, jie aprūpinti naujais "
+"kardais, o senieji ginklai išmetami. Jie netinkami naudoti mūšyje, todėl "
+"juos lydyti nebūtų veltui."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -426,6 +502,9 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Tai mes turime padaryti. Mes naudosime savo ginklus kariams mokyti, tada "
+"metalo laužą išlydysime į geležį ir auksą. Ir tada mūsų kalviai gali gaminti"
+" kirtiklius, kad aprūpintų kalnakasius. Iš karto pasirūpinsiu!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -436,14 +515,19 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Ne taip skubotai! Norėdami sukurti treniruočių stovyklą, pirmiausia mums "
+"reikės aukso, o mes jo neturime. Pirmiausia turime išardyti savo uostą, "
+"kuris suteiks mums tik tiek aukso treniruočių stovyklai. Man tai nepatinka, "
+"bet tai vienintelis būdas. Žinoma, prieš išmontuodami uostą turėsime "
+"perkelti visus savo gaminius į sandėlį."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
-msgstr ""
+msgstr "Metalo gamyba"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
-msgstr ""
+msgstr "Kasyklos veikia"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:217
@@ -451,6 +535,8 @@ msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
+"Mūsų kasyklos pradėjo veikti. Dabar mums tereikia pastatyti krosnį ir metalo"
+" gamyba vyks sklandžiai."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:220
@@ -460,15 +546,19 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Ar jau turime šiaurės elnių fermą? Jei ne, turėtume sukurti vieną dabar. "
+"Mums reikia daugiau šiaurės elnių perpildytuose keliuose ir jau galėtume "
+"pradėti siūti kailinius drabužius, kad aprūpintume naujus karius. Kas žino, "
+"ar galiausiai turėsime kovoti?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:233
 msgid "Fishing"
-msgstr ""
+msgstr "Žvejyba"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 msgid "We need fish"
-msgstr ""
+msgstr "Mums reikia žuvies"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:226
@@ -478,6 +568,11 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Viršininkas Reebaud, turiu daugiau blogų naujienų. Netoliese esančiuose "
+"vandenyse žuvų beveik nėra. Nors racioną galime paruošti naudodami tik "
+"vaisius ar duoną, kareivių mokymui reikia daug rūkytos mėsos ar žuvies. "
+"Mėsos likučiai šiaurės elnių fermoje iškrenta kaip šalutinis produktas, kai "
+"gaminant kailį neužtenka."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -487,10 +582,14 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Laimei, vienas iš mūsų žvejų sugalvojo sprendimą. Mūsų molio duobės palieka "
+"dideles skyles žemėje; Žvejas galėtų pripilti juos vandens ir auginti žuvis "
+"šiuose tvenkiniuose. Jam reikės tik daug vandens tvenkiniams ir vaisių "
+"žuvims maitinti."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
-msgstr ""
+msgstr "Vėl turime žuvies"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:236
@@ -499,6 +598,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Gerai padaryta. Mes pastatėme vandens ūkį, o mūsų kasybos ekonomika kol kas "
+"stabili. Tačiau kalnakasiai man sako, kad išteklių jau mažai, o kasyklos "
+"netrukus gali veikti visiškai tuščios."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:239
@@ -507,14 +609,17 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Tada kasyklos vis tiek galės gaminti, bet užtruks maždaug dvidešimt kartų "
+"ilgiau – dešimt kartų, jei tai gilioji kasykla – rūdos ar anglies gamyba. "
+"Tikriausiai norite pasiruošti didėjantiems laiko ir maisto poreikiams."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
-msgstr ""
+msgstr "Komplektavimas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Mūsų ekonomika baigta"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:245
@@ -522,6 +627,8 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Jūs teisus – turėtume pastatyti daugiau uogų fermų, vaisių kolekcinių namų "
+"ir tavernų, taip pat gėrimų salę, pažangias kepyklas ir alaus daryklas."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:248
@@ -531,6 +638,9 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"Tačiau jau galime pradėti sutelkti dėmesį į karių įdarbinimą ir mokymą. "
+"Dabar galime sau leisti naudoti metalą ginklams, šalmams ir drabužiams. "
+"Dabar siūlau statyti šarvus, kareivines, mokymo areną ir siuvėjų parduotuvę."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -542,7 +652,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Mes nesame vieni"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -552,7 +662,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete Peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -563,24 +673,26 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete Peregrini! Murilius proconsul terrae septentrionalis provinciae ego "
+"suma. Vos nominuoti!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
-msgstr ""
+msgstr "Svetimšaliai"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "...Ar kas nors supranta, ką jis sako?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:268
 msgid "Do they not even speak the noble language of the Empire?"
-msgstr ""
+msgstr "Ar jie net nekalba kilnia imperijos kalba?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:271
@@ -589,6 +701,9 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Nepažįstami žmonės! Aš, Murilius, Šiaurės žemių prokonsulas, imperijos "
+"provincija, reikalauju sužinoti, kas tu esi ir kokį verslą šiose žemėse "
+"turi!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. Frisian greeting, nothing more.
@@ -598,6 +713,9 @@ msgid ""
 "tribe. All we want is to settle down here, build our home and live our lives"
 " in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
+"Taika, imperijos atstove! Aš esu Reebaud, šios genties vadas. Viskas, ko mes"
+" norime, yra čia įsikurti, pasistatyti savo namus ir gyventi taikiai. Mes "
+"nesiekiame bėdų, bet ir nebijome kovoti."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -607,6 +725,8 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"Šiuo atveju, Reebaude, turiu jus informuoti apie nesvetingą, priešišką "
+"barbarų gentį, esančią netoli šio imperijos forposto."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -615,6 +735,8 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Jei siekiate čia gyventi taikiai, jūs neturite pasirinkimo, ar leisti jiems "
+"čia gyventi – jūs turite padėti imperijai juos išvaryti."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:292
@@ -624,6 +746,10 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"Be to, kaip jūsų gerų ketinimų ženklą, reikalaujame draugystės dovanos "
+"imperijai. Kaip ir turėjote pastebėti, aš jums pateikiau naują sandėlį. "
+"Užpildykite jį reikalingomis dovanomis, kad jas įteiktumėte. Leidžiu jums "
+"duoti mums šiuos gaminius:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -632,6 +758,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 rąstų, 40 granito plokščių, 30 žuvų, 30 bokalų alaus, 150 kibirų vandens,"
+" 40 davinių, 10 patiekalų, 30 gabalėlių anglies, 40 gabalėlių geležies Rūda,"
+" 20 geležies luitų, 20 gabalėlių aukso rūdos ir 10 aukso luitų."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:301
@@ -641,6 +770,10 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"Chieftain Reebaud – šios arogantiškos imperijos Proconsul reikalavimai yra "
+"tiesiog siaubingi. Jis elgiasi su mumis kaip su Jo tarnais. Ir tikrai "
+"negalime sau leisti nepagailėti tiek daug prekių, kad jam padėtų. Siūlau "
+"sugriauti tą bjaurų sandėlį ir leisti jam kovoti savo kovas."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:307
@@ -650,6 +783,10 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Jei jums nepavyks pristatyti šių gaminių, imperija elgsis su jumis kaip su "
+"priešais. Ir kad neleisčiau švaistyti savo tauriojo metalo, uždrausiu plėsti"
+" savo teritoriją nuo šios akimirkos, kol nepadovanosite mums savo dovanos. "
+"nepaklus, ir imperija elgsis su tavimi kaip su priešais."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -660,6 +797,10 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Jei ketinate gyventi rajone, turėsite kovoti su barbarais; Ar tikrai matote,"
+" kad kovoti su jais kartu su imperija yra lengviau nei vienam? Ir jūs tikrai"
+" nenorite, kad imperija būtų jūsų priešas. Nors ir barbarai, aš tikiu, kad "
+"po tam tikro svarstymo suprasite mano žodžių tiesą."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -668,6 +809,9 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Tai didžiausias pasipiktinimas iš visų. Kaip Jis drįsta mums įsakyti nustoti"
+" plėsti savo teritoriją, kai norime tik pastatyti naujus namus ir grasinti "
+"mums karu, jei atsisakysime būti Jo vergais?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:320
@@ -677,6 +821,10 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Norėčiau pasakyti, kad turėtume jį pulti dabar, bet bijau, kad dar nesame "
+"pakankamai stiprūs, kad galėtume atsilaikyti prieš jį mūšyje. Turėtume "
+"paskubinti savo kareivio mokymus, apsimesdami, kad renkame jo vadinamąją "
+"dovaną. Tai mums atpirktų šiek tiek laiko."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -684,14 +832,16 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"Kalbant apie plėtrą – įdomu, kaip griežtai jis gali mus kontroliuoti. Galbūt"
+" turėtume nusiųsti žvalgą, kad jis šnipinėtų jį..."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Skautas kažką atrado"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
-msgstr ""
+msgstr "Mūsų skautas grįžo"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:333
@@ -701,6 +851,9 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Vyriausiasis Reebaud! Mūsų skautas ką tik grįžo. Jis rado eilėraštį keista "
+"kalba, kurią kalba šis prokonsulas. Su tam tikrais sunkumais išverčiau jį į "
+"mūsų kalbą. Jei nesuklydau neteisingai, jis veikia taip:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:348
@@ -708,11 +861,13 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Nežinau, ką tai reiškia, bet esu tikras, kad tai svarbu. Galbūt galite tai "
+"suprasti."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:353
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Imperija pikta"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -720,7 +875,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:355
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid "Hostes Imperii estis!"
-msgstr ""
+msgstr "Šeimininkai imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:357
@@ -728,12 +883,14 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"Barbarai! Jūs negailestingiausiai atsisakėte mano pasiūlymo draugauti, "
+"sunaikindami gražų pastatą, kurį jums padovanojome!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:360
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "You are enemies of the Empire, and I shall treat you as such!"
-msgstr ""
+msgstr "Jūs esate imperijos priešai, ir aš elgsiuosi su jumis kaip su tokiu!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -742,14 +899,16 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbarai! Jūs negailestingiausiai atsisakėte mano pasiūlymo draugauti, nes "
+"iššvaistydami savo brangius išteklius plėtrai!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
-msgstr ""
+msgstr "Du priešai"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Nugalėk priešus!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:375
@@ -757,6 +916,8 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Murilius aiškiai pasakė, kad nepaliks mūsų ramybėje. Bijau, kad turime jį "
+"nugalėti ir sunaikinti jo koloniją, jei kada nors norime čia turėti taiką."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:378
@@ -765,17 +926,20 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
+"Jo minėta barbarų gentis taip pat kelia grėsmę. Nenoriu su niekuo dalytis "
+"šia žeme, nes dalijimasis tik veda į konfliktus ir mūšius, kaip matėme savo "
+"senuose namuose. Turime nugalėti ir barbarus."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Imperija yra dėkinga"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
@@ -783,6 +947,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Nepažįstami žmonės! Matau, kad ištesėjote savo žodį. Imperija apdovanoja "
+"savo draugus, todėl aš apdovanosiu jus imperijos draugyste!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -794,16 +960,20 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Dabar leidžiu jums padėti mums užkariauti barbarus, kurie gyvena apsaugotame"
+" slėnyje į šiaurės vakarus nuo mūsų. Aš įkraunu jus, išsiplėskite palei "
+"šiaurinį kalnų galą, gaubiantį šį forpostą; Ten rasite barbarus – pulkite "
+"juos! Mes atremsime priešo pradėtas atakas."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Atlygis už jūsų paslaugą"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
-msgstr ""
+msgstr "amici imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:397
@@ -811,6 +981,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Jūs padarėte gerai, nepažįstami žmonės! Kaip jau sakiau anksčiau, būsite "
+"apdovanoti imperijos draugyste!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:400
@@ -821,14 +993,18 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Siūlau pradėti nuo legatų siuntimo į sostinę, kad atrastumėte naujausią "
+"politinę veiklą. Ten patekę galite gauti nurodymus savo genčiai iš Senato. "
+"Be to, turėsite išsiaiškinti, kokios duoklės iš jūsų pareikalaus sostinė ir,"
+" žinoma, kas bus jūsų genties karalius."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
-msgstr ""
+msgstr "Kitas priešas"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Nugalėk imperiją!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:406
@@ -838,6 +1014,10 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"Ar teisingai jį supratau? Po visko, ką padarėme dėl jo, po to, kai tiek daug"
+" mano karių atidavė savo gyvybes dėl jo, jis nori, kad būtume šios imperijos"
+" tarnai ir atimtume mano vadovavimą? Ir ar veidmainis išdrįsta tai vadinti "
+"atlygiu?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:409
@@ -846,14 +1026,17 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Mes nubausime šį apsišaukėlį prokonsulą už jo išdavystę! Aš sudeginsiu visą "
+"jo koloniją ir nužudysiu kiekvieną žmogų jo karalystėje. Jis tikrai labai "
+"gailisi, kad taip įžeidė mūsų gentį."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
-msgstr ""
+msgstr "Pergalė!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:416
@@ -861,16 +1044,20 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Mes nugalėjome visus savo priešus! Dabar jokia kita gentis niekada nebedrįs "
+"čia apsigyventi. Esame saugūs ir pagaliau galime gyventi taikiai."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite toliau žaisti, kitaip pereikite "
+"prie kitos misijos."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
@@ -879,9 +1066,11 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
+"Jūsų darbuotojai ir kariai čia ras prieglobstį. Taip pat saugo jūsų prekes "
+"ir įrankius."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Empire Warehouse"

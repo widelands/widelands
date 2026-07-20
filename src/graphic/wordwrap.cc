@@ -25,7 +25,6 @@
 #include <cstddef>
 #include <memory>
 
-#include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
 #include "base/string.h"
@@ -35,6 +34,7 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text_layout.h"
+#include "ui/basic/mouse_constants.h"
 
 namespace {
 inline std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {

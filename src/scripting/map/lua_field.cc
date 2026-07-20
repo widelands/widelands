@@ -26,7 +26,7 @@
 #include "scripting/globals.h"
 #include "scripting/map/lua_resource_description.h"
 #include "scripting/map/lua_terrain_description.h"
-#include "wui/mapviewpixelfunctions.h"
+#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace LuaMaps {
 

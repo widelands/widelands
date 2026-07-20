@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2025-2026\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -174,8 +174,8 @@ msgstr "Co mělo být očekávanou odezvou na provedenou akci a co se ve skuteč
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "Kterou verzi Widelands používáš (tj. buď pořadové číslo aktualizace nebo ověřovací ID, pokud používáš vývojovou verzi nebo denní aktualizaci)."
+"build)."
+msgstr ""
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -573,10 +573,9 @@ msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo n
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "Dávej pozor na své rybáře a postav domek porybného. Když se v lovené oblasti zdroj ryb vyčerpá, nelze již rybí populaci obnovit."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr ""
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

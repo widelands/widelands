@@ -37,7 +37,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/save_handler.h"
-#include "wui/interactive_base.h"
+#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 

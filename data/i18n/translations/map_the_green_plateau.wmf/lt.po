@@ -20,7 +20,7 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:60
 msgid "The Forbidden Island"
-msgstr ""
+msgstr "Uždraustoji sala"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:61
@@ -31,49 +31,49 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr ""
+msgstr "Pagaliau! Ką tik žengėme pirmąjį žingsnį pergalės link! Praėjusią naktį išsilaipinome Uždraustojoje saloje ir nugalėjome kelis sargybinius, saugojusius šiaurės vakarinę salos dalį. Esu visiškai tikras, kad kol kas mūsų neaptiko nė vienas iš kitų karo vadų, todėl turėtume veikti tyliai ir plėtoti savo infrastruktūrą. Netrukus būsime pakankamai stiprūs, kad galėtume užpulti jų pozicijas."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:23
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
-msgstr ""
+msgstr "Užimti senovinę pilį"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr ""
+msgstr "Nugalėti Lanisą ir užimti senovinę pilį."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
-msgstr ""
+msgstr "Nugalėti Erviną"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:35
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
-msgstr ""
+msgstr "Nugalėti Erviną. Jis vadovauja stipriausioms priešo karinėms pajėgoms, likusioms šioje saloje."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:40
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo"
-msgstr ""
+msgstr "Nugalėti Jomo"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:43
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
-msgstr ""
+msgstr "Nugalėti Jomo. Jis rūpinasi karių maisto atsargomis."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "First Briefing"
-msgstr ""
+msgstr "Pirmasis instruktažas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Second Briefing"
-msgstr ""
+msgstr "Antrasis instruktažas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:70
 msgid "An Ancient Castle"
-msgstr ""
+msgstr "Senovinė pilis"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:71
 msgid ""
@@ -81,7 +81,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not Barbarian "
 "craft."
-msgstr ""
+msgstr "Tepadeda dievai! Vienas iš mūsų žvalgų senojo plokščiakalnio centre atrado galingą pilį. Pilis turėtų būti gana sena ir, regis, pastatyta neįprastu stiliumi. Visiškai akivaizdu, kad tai nėra barbarų darbas."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
@@ -89,17 +89,17 @@ msgid ""
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr ""
+msgstr "Tikėkimės, kad Lanisa – tą pilį valdanti karo vadė – dar nepastebėjo mūsų judėjimo. Galbūt turime progą užkariauti tą galingą tvirtovę be didesnio mūšio! Tačiau labai svarbu, kad ją užimtume. Tai bus raktas į mūsų viešpatavimą šioje saloje!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:81
 msgid "Ancient Castle Captured"
-msgstr ""
+msgstr "Senovinė pilis užimta"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:82
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr ""
+msgstr "Nuostabu! Mūsų kariai pagaliau nugalėjo Lanisą ir jos pajėgas. Senovinė pilis mūsų!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:83
 msgid ""
@@ -112,49 +112,49 @@ msgid ""
 "commands the strongest warriors. In the south, we caught sight of some food "
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can cut off our enemies’ food supply."
-msgstr ""
+msgstr "Neįtikėtina, kaip toli galima matyti iš aukščiausio pilies bokšto. Galime stebėti visą salą. Todėl dabar man įdomu, kodėl Lanisa mūsų nepastebėjo ir tam nepasiruošė. Kaip ten bebūtų, kai kurie dalykai taip ir neišvys dienos šviesos. Šiuo metu svarbiausia yra likusios priešo pajėgos. Aptikome Ervino užimtas priešo pozicijas į šiaurę ir rytus nuo pilies. Žinoma, kad jis yra galingas karo vadas ir tikrai vadovauja stipriausiems kariams. Pietuose pastebėjome maisto tiekimo infrastruktūrą, kurią saugo Jomo – jaunesnis karo vadas, todėl turėtume ja pasirūpinti, kad galėtume atkirsti priešų maisto tiekimą."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Another Briefing"
-msgstr ""
+msgstr "Kitas instruktažas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
-msgstr ""
+msgstr "Ervinas nugalėtas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
-msgstr ""
+msgstr "Puiku! Ervinas pasidavė pamatęs, kaip dega jo paskutiniai pastatai. Šioje saloje vienu stipriu karo vadu mažiau!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
-msgstr ""
+msgstr "Jomo nugalėtas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
-msgstr ""
+msgstr "Puiku! Jomo pasidavė pamatęs, kaip dega jo paskutiniai pastatai. Šioje saloje vienu karo vadu mažiau!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Last Briefing"
-msgstr ""
+msgstr "Paskutinis instruktažas"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
-msgstr ""
+msgstr "Pergalė!"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
-msgstr ""
+msgstr "Pagaliau! Sala visiškai mūsų. Dabar tereikia ją apginti geriau, nei tai darė karo vadai."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:112
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr ""
+msgstr "Sveikiname! Įveikėte šį scenarijų. Jei norite, galite žaisti toliau!"
