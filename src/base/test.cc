@@ -20,6 +20,7 @@
 
 namespace WLTestsuite {
 Testsuite& all_testsuites() {
+	setvbuf(stdout, nullptr, _IONBF, 0);
 	static Testsuite* t = new Testsuite;
 	return *t;
 }

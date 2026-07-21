@@ -526,7 +526,7 @@ if (OPTION_BUILD_TESTS)
   # not rebuild tests:
   # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
   add_custom_target(_run_all_tests ALL
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --debug --extra-verbose --repeat after-timeout:2
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --debug --verbose
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     DEPENDS wl_tests
   )
