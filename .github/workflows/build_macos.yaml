@@ -41,7 +41,6 @@ jobs:
         TYPE: ${{ matrix.config }}
         COMPILER: ${{ matrix.compiler }}
       run: |
-        sudo spctl --master-disable
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website"
