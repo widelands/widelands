@@ -201,6 +201,7 @@ elif [ "$DISTRO" = "homebrew" ]; then
    else
        brew install $@ $PKGS
    fi
+   brew install $@ cmake
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
