@@ -937,10 +937,11 @@ void RemoteInteractionWindow::update_data() {
 			                               format_datetime(comment.second.timestamp),
 			                               format_datetime(comment.second.edit_timestamp)));
 		} else {
-			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(format(
-			              _("%1$s (edited by ‘%2$s’ on %3$s)"), format_datetime(comment.second.timestamp),
-			              comment.second.editor, format_datetime(comment.second.edit_timestamp)));
+			text +=
+			   g_style_manager->font_style(UI::FontStyle::kItalic)
+			      .as_font_tag(format(_("%1$s (edited by ‘%2$s’ on %3$s)"),
+			                          format_datetime(comment.second.timestamp), comment.second.editor,
+			                          format_datetime(comment.second.edit_timestamp)));
 		}
 		text += "<br>";
 		text +=

@@ -207,16 +207,11 @@ std::string format_datetime(const std::time_t& time) {
 	struct tm* datetime = localtime(&time);
 
 	return format(
-		/** TRANSLATORS: Display date.
-		 * Placeholders are: day_of_month month day, year, hour:minute */
-		_("%1% %2% %3%, %4%, %5%:%6%"),
-		localize_day_of_month(datetime->tm_wday),
-		localize_month(datetime->tm_mon),
-		datetime->tm_mday,
-		(1900 + datetime->tm_year),
-		datetime->tm_hour,
-		format("%02u", datetime->tm_min)
-	);
+	   /** TRANSLATORS: Display date.
+	    * Placeholders are: day_of_month month day, year, hour:minute */
+	   _("%1% %2% %3%, %4%, %5%:%6%"), localize_day_of_month(datetime->tm_wday),
+	   localize_month(datetime->tm_mon), datetime->tm_mday, (1900 + datetime->tm_year),
+	   datetime->tm_hour, format("%02u", datetime->tm_min));
 }
 
 char* gamestring_with_leading_zeros(uint32_t gametime) {
@@ -258,11 +253,7 @@ std::string realtimestring() {
 	std::time_t t = std::time(nullptr);
 	std::tm* tm = std::localtime(&t);
 	return format(
-		/** TRANSLATORS: Display time.
-		 * Placeholders are: hour:minute:second */
-		_("%1%:%2%:%3%"),
-		tm->tm_hour,
-		format("%02u", tm->tm_min),
-		format("%02u", tm->tm_sec)
-	);
+	   /** TRANSLATORS: Display time.
+	    * Placeholders are: hour:minute:second */
+	   _("%1%:%2%:%3%"), tm->tm_hour, format("%02u", tm->tm_min), format("%02u", tm->tm_sec));
 }
