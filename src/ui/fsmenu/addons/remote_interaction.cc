@@ -24,6 +24,7 @@
 
 #include "base/log.h"
 #include "base/string.h"
+#include "base/time_string.h"
 #include "graphic/font_handler.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
@@ -929,17 +930,17 @@ void RemoteInteractionWindow::update_data() {
 		text = "<rt><p>";
 		if (comment.second.editor.empty()) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(time_string(comment.second.timestamp));
+			           .as_font_tag(format_datetime(comment.second.timestamp));
 		} else if (comment.second.editor == comment.second.username) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(format(_("%1$s (edited on %2$s)"),
-			                               time_string(comment.second.timestamp),
-			                               time_string(comment.second.edit_timestamp)));
+			                               format_datetime(comment.second.timestamp),
+			                               format_datetime(comment.second.edit_timestamp)));
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(format(
-			              _("%1$s (edited by ‘%2$s’ on %3$s)"), time_string(comment.second.timestamp),
-			              comment.second.editor, time_string(comment.second.edit_timestamp)));
+			              _("%1$s (edited by ‘%2$s’ on %3$s)"), format_datetime(comment.second.timestamp),
+			              comment.second.editor, format_datetime(comment.second.edit_timestamp)));
 		}
 		text += "<br>";
 		text +=
