@@ -9,15 +9,15 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        os: [14, 15, 15-intel]
+        os: [15, 26, 26-intel]
         # Check https://github.com/actions/runner-images#available-images
         include:
-          - os: 15-intel
-            osname: macOS15_x86
-          - os: 14
-            osname: macOS14_arm64
+          - os: 26-intel
+            osname: macOS26_x86
           - os: 15
             osname: macOS15_arm64
+          - os: 26
+            osname: macOS26_arm64
     name: ${{ matrix.osname}} ${{ matrix.config }} 
     # ${{ matrix.compiler }}
     runs-on: macos-${{ matrix.os }}
