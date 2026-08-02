@@ -34,6 +34,8 @@ jobs:
         ./install-dependencies.sh homebrew --formula
         # temporary fix for macos-14 arm failures
         brew install --quiet icu4c
+        brew uninstall cmake
+        brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/2b7726600b6cb2c3491bfe8fb677437c913950b3/Formula/c/cmake.rb
     - name: Building
       env:
         # Exports for build_app.sh
