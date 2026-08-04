@@ -35,7 +35,10 @@ jobs:
         # temporary fix for macos-14 arm failures
         brew install --quiet icu4c
         brew uninstall cmake
-        brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/2b7726600b6cb2c3491bfe8fb677437c913950b3/Formula/c/cmake.rb
+        brew tap-new $USER/local-cmake
+        brew tap homebrew/core --force
+        brew extract --version=4.3.3 cmake $USER/local-cmake
+        brew install $USER/local-cmake/cmake@4.3.3
     - name: Building
       env:
         # Exports for build_app.sh
