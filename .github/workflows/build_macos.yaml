@@ -34,11 +34,11 @@ jobs:
         ./install-dependencies.sh homebrew --formula
         # temporary fix for macos-14 arm failures
         brew install --quiet icu4c
-        brew uninstall cmake
-        brew tap-new $USER/local-cmake
+        brew uninstall sdl2
+        brew tap-new $USER/local-sdl2
         brew tap homebrew/core --force
-        brew extract --version=4.3.3 cmake $USER/local-cmake
-        brew install $USER/local-cmake/cmake@4.3.3
+        brew extract --version=2.32.10 sdl2 $USER/local-sdl2
+        brew install $USER/local-sdl2/sdl2@2.32.10
     - name: Building
       env:
         # Exports for build_app.sh
