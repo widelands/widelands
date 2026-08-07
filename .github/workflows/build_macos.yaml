@@ -54,6 +54,7 @@ jobs:
         brew list --versions sdl2
         brew unlink sdl2
         brew link --overwrite sdl2@2.32.10
+        ls -la "$(brew --prefix sdl2)/lib/"
     - name: Building
       env:
         # Exports for build_app.sh
