@@ -37,6 +37,9 @@ jobs:
         brew extract --version=2.8.10 sdl2_image $USER/local-sdl2
         brew extract --version=2.8.1 sdl2_mixer $USER/local-sdl2
         brew extract --version=2.22.0 sdl2_ttf $USER/local-sdl2
+        brew deps --tree $USER/local-sdl2/sdl2_image@2.8.10
+        brew deps --tree $USER/local-sdl2/sdl2_mixer@2.8.1
+        brew deps --tree $USER/local-sdl2/sdl2_ttf@2.22.0
         brew install $USER/local-sdl2/sdl2@2.32.10
         brew install $USER/local-sdl2/sdl2_image@2.8.10
         brew install $USER/local-sdl2/sdl2_mixer@2.8.1
