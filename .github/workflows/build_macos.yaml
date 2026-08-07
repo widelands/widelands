@@ -54,7 +54,14 @@ jobs:
         brew list --versions sdl2
         brew unlink sdl2
         brew link --overwrite sdl2@2.32.10
-        ln -sfn /opt/homebrew/opt/sdl2@2.32.10 /opt/homebrew/opt/sdl2
+        HOMEBREW_PREFIX="$(brew --prefix)"
+        if [[ "$(uname -m)" == "arm64" ]]; then
+            echo "Apple Silicon: $HOMEBREW_PREFIX"
+        else
+            echo "Intel: $HOMEBREW_PREFIX"
+        fi
+        ln -sfn "$HOMEBREW_PREFIX/opt/sdl2@2.32.10" \
+                "$HOMEBREW_PREFIX/opt/sdl2"
     - name: Building
       env:
         # Exports for build_app.sh
