@@ -31,34 +31,18 @@ jobs:
         export ICU_ROOT="$(brew --prefix icu4c)"
         # Suppress warnings about installing formulas instead of casks. Casks would raise another
         # warning about disabling macos gatekeeper.
-        # brew tap-new $USER/local-sdl2
-        # brew tap homebrew/core --force
-        # brew extract --version=2.32.10 sdl2 $USER/local-sdl2
-        # brew extract --version=2.8.10 sdl2_image $USER/local-sdl2
-        # brew extract --version=2.8.1 sdl2_mixer $USER/local-sdl2
-        # brew extract --version=2.22.0 sdl2_ttf $USER/local-sdl2
-        # brew deps --tree $USER/local-sdl2/sdl2_image@2.8.10
-        # brew deps --tree $USER/local-sdl2/sdl2_mixer@2.8.1
-        # brew deps --tree $USER/local-sdl2/sdl2_ttf@2.22.0
-        # brew install $USER/local-sdl2/sdl2@2.32.10
-        # brew install $USER/local-sdl2/sdl2_image@2.8.10
-        # brew install $USER/local-sdl2/sdl2_mixer@2.8.1
-        # brew install $USER/local-sdl2/sdl2_ttf@2.22.0
         ./install-dependencies.sh homebrew --formula
-        # temporary fix for macos-14 arm failures
-        # brew install --quiet icu4c
         brew tap-new $USER/local-sdl2
         brew tap homebrew/core --force
         brew extract --version=2.32.10 sdl2 $USER/local-sdl2
         brew install $USER/local-sdl2/sdl2@2.32.10
-        brew list --versions sdl2
         brew unlink sdl2
         brew link --overwrite sdl2@2.32.10
         HOMEBREW_PREFIX="$(brew --prefix)"
         if [[ "$(uname -m)" == "arm64" ]]; then
-            echo "Apple Silicon: $HOMEBREW_PREFIX"
+            # echo "Apple Silicon: $HOMEBREW_PREFIX"
         else
-            echo "Intel: $HOMEBREW_PREFIX"
+            # echo "Intel: $HOMEBREW_PREFIX"
         fi
         ln -sfn "$HOMEBREW_PREFIX/opt/sdl2@2.32.10" \
                 "$HOMEBREW_PREFIX/opt/sdl2"
