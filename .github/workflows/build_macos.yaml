@@ -46,7 +46,7 @@ jobs:
         # brew install $USER/local-sdl2/sdl2_ttf@2.22.0
         ./install-dependencies.sh homebrew --formula
         # temporary fix for macos-14 arm failures
-        brew install --quiet icu4c
+        # brew install --quiet icu4c
         brew tap-new $USER/local-sdl2
         brew tap homebrew/core --force
         brew extract --version=2.32.10 sdl2 $USER/local-sdl2
