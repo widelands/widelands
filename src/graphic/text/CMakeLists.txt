@@ -25,8 +25,8 @@ wl_library(graphic_text
     texture_cache.h
     transient_cache.h
   USES_ICU
-  USES_SDL2
-  USES_SDL2_TTF
+  USES_SDL3
+  USES_SDL3_TTF
   DEPENDS
     base
     base_exceptions

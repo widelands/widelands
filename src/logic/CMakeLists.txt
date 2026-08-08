@@ -63,7 +63,7 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     ai
     base_times
@@ -223,8 +223,8 @@ wl_library(logic
     save_handler.cc
     save_handler.h
     trade_agreement.h
-  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
-  USES_SDL2
+  # TODO(sirver): Uses SDL3 only on WIN32 for a dirty hack.
+  USES_SDL3
   USES_ATOMIC
   DEPENDS
     base

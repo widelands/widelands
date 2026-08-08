@@ -114,5 +114,5 @@ wl_library(ui_fsmenu
     wui_interactive
     widelands_ball_of_mud
     widelands_options
-  USES_SDL2
+  USES_SDL3
 )

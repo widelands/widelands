@@ -10,10 +10,10 @@ macro(_parse_common_args ARGS)
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
-    USES_SDL2
-    USES_SDL2_IMAGE
-    USES_SDL2_MIXER
-    USES_SDL2_TTF
+    USES_SDL3
+    USES_SDL3_IMAGE
+    USES_SDL3_MIXER
+    USES_SDL3_TTF
     USES_STD_FS
     USES_TINYGETTEXT
     USES_ZLIB
@@ -159,19 +159,19 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_SDL2)
-    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Main ${SDL_STATIC_LIBS})
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3::SDL3 ${SDL_STATIC_LIBS})
   endif()
 
   if(ARG_USES_SDL2_MIXER)
-    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Mixer ${SDL_MIXER_STATIC_LIBS})
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_mixer::SDL3_mixer ${SDL_MIXER_STATIC_LIBS})
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
-    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image ${SDL_IMG_STATIC_LIBS})
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_image::SDL3_image ${SDL_IMG_STATIC_LIBS})
   endif()
 
   if(ARG_USES_SDL2_TTF)
-    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF ${SDL_TTF_STATIC_LIBS})
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_ttf::SDL3_ttf ${SDL_TTF_STATIC_LIBS})
   endif()
 
   if(ARG_USES_STD_FS)
@@ -222,8 +222,8 @@ function(wl_test NAME)
 
   add_executable(${NAME} ${ARG_SRCS})
 
-  # Tests need to link with SDL2 library without main.
-  target_link_libraries(${NAME} SDL2::Core)
+  # Tests need to link with the SDL3 library without a bundled main.
+  target_link_libraries(${NAME} SDL3::SDL3)
 
   _common_compile_tasks()
 

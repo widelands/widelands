@@ -124,7 +124,7 @@ wl_library(tinygettext
     tinygettext/include/tinygettext/po_parser.hpp
     tinygettext/include/tinygettext/tinygettext.hpp
     tinygettext/include/tinygettext/unix_file_system.hpp
-  USES_SDL2
+  USES_SDL3
   USES_STD_FS
 )
 wl_include_directories(tinygettext ${CMAKE_CURRENT_SOURCE_DIR}/tinygettext/include)

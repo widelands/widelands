@@ -38,7 +38,7 @@ wl_library(network
     relay_protocol.h
     participantlist.cc
     participantlist.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     ai
     base

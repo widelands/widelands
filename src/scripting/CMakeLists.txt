@@ -61,7 +61,7 @@ wl_library(scripting_lua_interface
     lua_styles.h
     run_script.cc
     run_script.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_macros
@@ -235,7 +235,7 @@ wl_library(scripting_logic
     ui/lua_ui_helper_functions.h
     ui/lua_window.cc
     ui/lua_window.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_macros

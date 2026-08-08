@@ -32,7 +32,7 @@ wl_library(graphic_color
     color.cc
   DEPENDS
     base
-  USES_SDL2
+  USES_SDL3
 )
 
 wl_library(graphic_color_palette
@@ -80,7 +80,7 @@ wl_library(graphic_image_io
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL2_IMAGE
+  USES_SDL3_IMAGE
   DEPENDS
     base_exceptions
     graphic_surface
@@ -93,7 +93,7 @@ wl_library(graphic_sdl_utils
   SRCS
     sdl_utils.h
     sdl_utils.cc
-  USES_SDL2
+  USES_SDL3
 )
 
 wl_library(graphic_gl_utils
@@ -105,7 +105,7 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
-  USES_SDL2
+  USES_SDL3
   USES_OPENGL
   DEPENDS
     base
@@ -126,7 +126,7 @@ wl_library(graphic_surface
     surface.h
     texture.cc
     texture.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_exceptions
@@ -205,7 +205,7 @@ wl_library(graphic_minimap_renderer
   SRCS
     minimap_renderer.cc
     minimap_renderer.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base_geometry
     economy
@@ -315,7 +315,7 @@ wl_library(graphic_mouse_cursor
   SRCS
     mouse_cursor.cc
     mouse_cursor.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base_geometry
     graphic
@@ -354,7 +354,7 @@ wl_library(graphic
     rendertarget.h
     road_segments.cc
     road_segments.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_exceptions

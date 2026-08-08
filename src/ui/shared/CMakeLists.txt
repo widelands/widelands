@@ -105,7 +105,7 @@ wl_library(ui_shared_plugins
   SRCS
     plugins.cc
     plugins.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     ui_basic
@@ -116,7 +116,7 @@ wl_library(ui_shared_chat
   SRCS
     chat_panel.cc
     chat_panel.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     graphic
     ui_game_chat

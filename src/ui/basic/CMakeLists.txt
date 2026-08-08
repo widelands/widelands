@@ -65,7 +65,7 @@ wl_library(ui_basic
     unique_window.h
     window.cc
     window.h
-  USES_SDL2
+  USES_SDL3
   USES_ATOMIC
   DEPENDS
     base

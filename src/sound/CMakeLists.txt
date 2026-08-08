@@ -24,8 +24,8 @@ wl_library(sound
     songset.h
     sound_handler.cc
     sound_handler.h
-  USES_SDL2
-  USES_SDL2_MIXER
+  USES_SDL3
+  USES_SDL3_MIXER
   DEPENDS
     base
     base_macros

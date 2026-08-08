@@ -45,7 +45,7 @@ wl_library(ui_editor
     tool_toolhistory_options_menu.h
     toolsize_menu.cc
     toolsize_menu.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_exceptions

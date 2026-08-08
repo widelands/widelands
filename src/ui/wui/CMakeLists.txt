@@ -20,7 +20,7 @@ wl_library(wui_interactive
     interactive_player.h
     interactive_spectator.cc
     interactive_spectator.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     ui_basic
     logic_map_objects
@@ -81,7 +81,7 @@ wl_library(wui_main_ui
     mapview.h
     toolbar.cc
     toolbar.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     ui_basic
     wui_interactive
@@ -109,7 +109,7 @@ wl_library(wui_minimap
   SRCS
     minimap.cc
     minimap.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -125,7 +125,7 @@ wl_library(wui_game_tips
   SRCS
     game_tips.cc
     game_tips.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     io_filesystem
     ui_basic

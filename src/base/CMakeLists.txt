@@ -22,7 +22,7 @@ wl_library(base
     string.h
     string.cc
   USES_ATOMIC
-  USES_SDL2
+  USES_SDL3
   USES_TINYGETTEXT
   DEPENDS
     base_exceptions
@@ -84,7 +84,7 @@ wl_library(base_scoped_timer
   SRCS
     scoped_timer.h
     scoped_timer.cc
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     base
     base_macros

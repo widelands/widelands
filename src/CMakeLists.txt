@@ -110,8 +110,8 @@ wl_library(widelands_ball_of_mud
     wlapplication_messages.cc
     wlapplication_messages.h
   USES_ATOMIC
-  USES_SDL2
-  USES_SDL2_TTF
+  USES_SDL3
+  USES_SDL3_TTF
   DEPENDS
     base
     base_exceptions
@@ -160,7 +160,7 @@ wl_library(widelands_options
     io_filesystem
     io_profile
     logic_filesystem_constants
-  USES_SDL2
+  USES_SDL3
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR

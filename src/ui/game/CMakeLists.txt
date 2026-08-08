@@ -60,7 +60,7 @@ wl_library(ui_game_attack
   SRCS
     attack_window.cc
     attack_window.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -180,7 +180,7 @@ wl_library(ui_game_wares_displays
     portdockwaresdisplay.h
     waresdisplay.cc
     waresdisplay.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -225,7 +225,7 @@ wl_library(ui_game_soldierlist
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -243,7 +243,7 @@ wl_library(ui_game_navigation
     quicknavigation.h
     watchwindow.cc
     watchwindow.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -273,7 +273,7 @@ wl_library(ui_game_toplevel_windows
     objectives_menu.h
     story_message_box.cc
     story_message_box.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic
@@ -364,7 +364,7 @@ wl_library(ui_game_notice_boxes
     exit_confirm_box.h
     summary.cc
     summary.h
-  USES_SDL2
+  USES_SDL3
   DEPENDS
     wui_interactive
     ui_basic

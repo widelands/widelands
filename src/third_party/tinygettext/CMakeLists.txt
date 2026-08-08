@@ -43,12 +43,11 @@ option(TINYGETTEXT_WITH_SDL "Use SDL's iconv implementation with tinygettext. Id
 
 if(TINYGETTEXT_WITH_SDL)
   # If your CMake configuration is failing here, that's because
-  # the variables SDL2_LIBRARY and SDL2_INCLUDE_DIRS must be defined.
+  # the variables SDL3_LIBRARY and SDL3_INCLUDE_DIRS must be defined.
   # You can use find_package or pkgconfig before adding this submodule
   # to fix this issue.
   target_compile_definitions(tinygettext PUBLIC TINYGETTEXT_WITH_SDL)
-  target_link_libraries(tinygettext PUBLIC ${SDL2_LIBRARY})
-  target_include_directories(tinygettext PUBLIC ${SDL2_INCLUDE_DIRS})
+  target_link_libraries(tinygettext PUBLIC SDL3::SDL3)
 else()
   find_package(Iconv REQUIRED)
   target_link_libraries(tinygettext PUBLIC Iconv::Iconv)
