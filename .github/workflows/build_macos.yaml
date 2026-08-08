@@ -39,11 +39,6 @@ jobs:
         brew unlink sdl2
         brew link --overwrite sdl2@2.32.10
         HOMEBREW_PREFIX="$(brew --prefix)"
-        if [[ "$(uname -m)" == "arm64" ]]; then
-            # echo "Apple Silicon: $HOMEBREW_PREFIX"
-        else
-            # echo "Intel: $HOMEBREW_PREFIX"
-        fi
         ln -sfn "$HOMEBREW_PREFIX/opt/sdl2@2.32.10" \
                 "$HOMEBREW_PREFIX/opt/sdl2"
     - name: Building
