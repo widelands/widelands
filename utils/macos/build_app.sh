@@ -72,10 +72,10 @@ function MakeDMG {
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
       # MacOS 13 is the worst
-      if [ "${MATRIX_OS}" = 13 ]; then
-         echo "Running on MacOS 13, run hdiutil as root"
-         SUDO=sudo
-      fi
+      # if [ "${MATRIX_OS}" = 13 ]; then
+         # echo "Running on MacOS 13, run hdiutil as root"
+         # SUDO=sudo
+      # fi
    else
       HDI_MAX_TRIES=1
    fi
