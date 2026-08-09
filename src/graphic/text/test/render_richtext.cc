@@ -114,12 +114,12 @@ int main(int argc, char** argv) {
 	if (parse_arguments(argc, argv, &w, outname, inname, allowed_tags))
 		return 0;
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		std::cerr << "SDLInit did not succeed: " << SDL_GetError() << std::endl;
 		return 1;
 	}
 
-	if (TTF_Init() == -1) {
+	if (!TTF_Init()) {
 		std::cerr << "True Type library did not initialize: " << TTF_GetError() << std::endl;
 		return 1;
 	}

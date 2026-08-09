@@ -97,7 +97,7 @@ SoundHandler::SoundHandler()
 		return;
 	}
 
-	if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
+	if (!SDL_InitSubSystem(SDL_INIT_AUDIO)) {
 		initialization_error(SDL_GetError(), false);
 		return;
 	}
@@ -158,7 +158,7 @@ SoundHandler::~SoundHandler() {
 
 	Mix_HaltChannel(-1);
 
-	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
+	if (!SDL_InitSubSystem(SDL_INIT_AUDIO)) {
 		log_err("SoundHandler: Audio error %s\n", SDL_GetError());
 	}
 

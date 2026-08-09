@@ -33,7 +33,7 @@ void initialize() {
 	set_initializer_thread();
 	g_verbose = true;
 
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
 		// too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());

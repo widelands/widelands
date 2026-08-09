@@ -402,7 +402,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #endif
 
 	// Start the SDL core
-	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
 		// too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
