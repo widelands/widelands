@@ -158,19 +158,19 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} PNG::PNG)
   endif()
 
-  if(ARG_USES_SDL2)
+  if(ARG_USES_SDL3)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3::SDL3 ${SDL_STATIC_LIBS})
   endif()
 
-  if(ARG_USES_SDL2_MIXER)
+  if(ARG_USES_SDL3_MIXER)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_mixer::SDL3_mixer ${SDL_MIXER_STATIC_LIBS})
   endif()
 
-  if(ARG_USES_SDL2_IMAGE)
+  if(ARG_USES_SDL3_IMAGE)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_image::SDL3_image ${SDL_IMG_STATIC_LIBS})
   endif()
 
-  if(ARG_USES_SDL2_TTF)
+  if(ARG_USES_SDL3_TTF)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL3_ttf::SDL3_ttf ${SDL_TTF_STATIC_LIBS})
   endif()
 
