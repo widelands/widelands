@@ -39,6 +39,7 @@ jobs:
         TYPE: ${{ matrix.config }}
         COMPILER: ${{ matrix.compiler }}
       run: |
+        # Building even the debug builds without asan is a temporary workaround for https://github.com/libsdl-org/sdl2-compat/issues/610
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website" "--no-asan"
