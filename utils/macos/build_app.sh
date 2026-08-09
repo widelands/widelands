@@ -67,7 +67,6 @@ function MakeDMG {
    cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
 
    echo "Creating DMG ..."
-   SUDO=""
    if [ -n "$GITHUB_ACTION" ]; then
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
@@ -78,7 +77,7 @@ function MakeDMG {
    while true; do
       HDI_TRY=$(( ++HDI ))
       HDI_RESULT=0
-      $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+      hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
                     -srcfolder "$DESTINATION" "$DMGFILE" \
          || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then
