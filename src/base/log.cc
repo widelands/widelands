@@ -75,7 +75,7 @@ public:
 			throw wexception(
 			   "Unable to initialize stdout logging destination: %s", stdout_filename_.c_str());
 		}
-		SDL_LogSetOutputFunction(sdl_logging_func, this);
+		SDL_SetLogOutputFunction(sdl_logging_func, this);
 		std::cout << "Log output will be written to: " << stdout_filename_ << std::endl;
 
 		// Repeat version info so that we'll have it available in the log file too
