@@ -20,7 +20,7 @@
 
 #include <string>
 
-#include <SDL_events.h>
+#include <SDL3/SDL_events.h>
 
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"

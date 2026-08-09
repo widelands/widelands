@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <memory>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "economy/flag.h"
 #include "economy/road.h"

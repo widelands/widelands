@@ -18,7 +18,7 @@
 
 #include "logic/single_player_game_controller.h"
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "ai/computer_player.h"
 #include "commands/command.h"

@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-#include <SDL_mixer.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 /** A collection of several sound effects meant for the same event.
  *

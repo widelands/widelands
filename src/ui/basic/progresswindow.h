@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_events.h>
+#include <SDL3/SDL_events.h>
 
 #include "base/rect.h"
 #include "graphic/note_graphic_resolution_changed.h"

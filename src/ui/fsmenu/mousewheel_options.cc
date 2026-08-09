@@ -20,7 +20,7 @@
 
 #include <list>
 
-#include <SDL_keycode.h>
+#include <SDL3/SDL_keycode.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"

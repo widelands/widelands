@@ -19,7 +19,7 @@
 #ifndef WL_WLAPPLICATION_MOUSEWHEEL_OPTIONS_H
 #define WL_WLAPPLICATION_MOUSEWHEEL_OPTIONS_H
 
-#include <SDL_keyboard.h>
+#include <SDL3/SDL_keyboard.h>
 
 #include "base/vector.h"
 

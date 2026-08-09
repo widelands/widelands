@@ -21,7 +21,7 @@
 #include <cstddef>
 #include <memory>
 
-#include <SDL_image.h>
+#include <SDL3_image/SDL_image.h>
 #include <png.h>
 
 #include "base/wexception.h"

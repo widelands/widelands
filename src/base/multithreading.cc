@@ -24,7 +24,7 @@
 #include <memory>
 #include <set>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/log.h"
 #include "base/mutex.h"

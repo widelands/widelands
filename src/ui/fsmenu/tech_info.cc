@@ -18,8 +18,8 @@
 
 #include "ui/fsmenu/tech_info.h"
 
-#include <SDL.h>
-#include <SDL_clipboard.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_clipboard.h>
 
 #include "base/i18n.h"
 #include "build_info.h"

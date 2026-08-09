@@ -29,7 +29,7 @@
 #include <unistd.h>
 #endif
 
-#include <SDL_mutex.h>
+#include <SDL3/SDL_mutex.h>
 
 #include "base/macros.h"
 #include "base/random.h"

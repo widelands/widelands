@@ -20,7 +20,7 @@
 
 #include <memory>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/time_string.h"
 #include "commands/cmd_message_set_status_archived.h"

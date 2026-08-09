@@ -18,7 +18,7 @@
 
 #include "ui/fsmenu/mousewheel_report.h"
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "base/i18n.h"
 #include "graphic/style_manager.h"

@@ -22,8 +22,8 @@
 #include <memory>
 #include <string>
 
-#include <SDL_version.h>
-#include <SDL_video.h>
+#include <SDL3/SDL_version.h>
+#include <SDL3/SDL_video.h>
 
 #if SDL_VERSION_ATLEAST(2, 0, 5)
 #define RESIZABLE_WINDOW

@@ -20,7 +20,7 @@
 
 #include <vector>
 
-#include <SDL_mouse.h>
+#include <SDL3/SDL_mouse.h>
 
 #include "base/log.h"
 #include "base/time_string.h"

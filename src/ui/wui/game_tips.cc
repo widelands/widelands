@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <memory>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "graphic/align.h"
 #include "graphic/color.h"

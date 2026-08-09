@@ -21,7 +21,7 @@
 
 #include <cstring>
 
-#include <SDL_endian.h>
+#include <SDL3/SDL_endian.h>
 
 #include "base/macros.h"
 

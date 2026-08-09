@@ -20,8 +20,8 @@
 
 #include <memory>
 
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include <SDL3/SDL.h>
+#include <SDL3_mixer/SDL_mixer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif

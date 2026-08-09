@@ -18,7 +18,7 @@
 
 #include "website/website_common.h"
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

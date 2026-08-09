@@ -22,7 +22,7 @@
 #include <memory>
 #include <vector>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/i18n.h"
 #include "build_info.h"

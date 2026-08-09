@@ -20,7 +20,7 @@
 #include <cassert>
 #include <cstddef>
 
-#include <SDL_surface.h>
+#include <SDL3/SDL_surface.h>
 
 #include "base/macros.h"
 #include "base/multithreading.h"

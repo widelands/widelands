@@ -20,8 +20,8 @@
 
 #include <algorithm>
 
-#include <SDL_mouse.h>
-#include <SDL_timer.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_timer.h>
 
 #include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"

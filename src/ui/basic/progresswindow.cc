@@ -24,7 +24,7 @@
 #include <sys/time.h>
 #endif
 
-#include <SDL_events.h>
+#include <SDL3/SDL_events.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

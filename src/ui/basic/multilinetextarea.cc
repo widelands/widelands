@@ -18,7 +18,7 @@
 
 #include "ui/basic/multilinetextarea.h"
 
-#include <SDL_mouse.h>
+#include <SDL3/SDL_mouse.h>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"

@@ -20,8 +20,8 @@
 
 #include <functional>
 
-#include <SDL_mouse.h>
-#include <SDL_timer.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/macros.h"
 #include "graphic/font_handler.h"

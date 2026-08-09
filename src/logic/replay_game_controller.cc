@@ -20,7 +20,7 @@
 
 #include <memory>
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "commands/cmd_replay_end.h"
 #include "logic/game.h"

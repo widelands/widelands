@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <memory>
 
-#include <SDL_mouse.h>
+#include <SDL3/SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"

@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include <SDL_pixels.h>
+#include <SDL3/SDL_pixels.h>
 
 struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);

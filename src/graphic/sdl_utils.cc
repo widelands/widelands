@@ -18,7 +18,7 @@
 
 #include "graphic/sdl_utils.h"
 
-#include <SDL_surface.h>
+#include <SDL3/SDL_surface.h>
 
 SDL_Surface* empty_sdl_surface(int16_t w, int16_t h) {
 	SDL_Surface* const surface =

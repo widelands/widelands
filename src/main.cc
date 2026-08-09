@@ -22,7 +22,7 @@
 
 #ifdef _MSC_VER
 // Needed to resolve entry point
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #else
 #include <unistd.h>
 #endif

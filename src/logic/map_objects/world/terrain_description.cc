@@ -20,7 +20,7 @@
 
 #include <memory>
 
-#include <SDL_surface.h>
+#include <SDL3/SDL_surface.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

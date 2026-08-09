@@ -18,8 +18,8 @@
 
 #include "ui/game/story_message_box.h"
 
-#include <SDL_mouse.h>
-#include <SDL_timer.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3/SDL_timer.h>
 
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"

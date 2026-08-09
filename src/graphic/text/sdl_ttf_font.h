@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_ttf.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 #include "graphic/text/texture_cache.h"
 #include "graphic/texture.h"

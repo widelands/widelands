@@ -24,7 +24,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include <SDL_mixer.h>
+#include <SDL3_mixer/SDL_mixer.h>
 
 #include "io/fileread.h"
 #include "sound/song.h"

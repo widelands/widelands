@@ -21,7 +21,7 @@
 #include <csignal>
 #include <regex>
 
-#include <SDL_messagebox.h>
+#include <SDL3/SDL_messagebox.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

@@ -28,9 +28,9 @@
 #include <memory>
 #include <regex>
 
-#include <SDL.h>
-#include <SDL_mouse.h>
-#include <SDL_ttf.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_mouse.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #include <unistd.h>

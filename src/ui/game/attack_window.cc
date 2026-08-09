@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <memory>
 
-#include <SDL_mouse.h>
+#include <SDL3/SDL_mouse.h>
 
 #include "base/mutex.h"
 #include "graphic/style_manager.h"

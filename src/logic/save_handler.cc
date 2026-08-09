@@ -18,7 +18,7 @@
 
 #include "logic/save_handler.h"
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/log.h"
 #include "base/scoped_timer.h"

@@ -38,7 +38,7 @@
 #include <ws2tcpip.h>
 #endif
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 
 #include "base/crypto.h"
 #include "base/i18n.h"

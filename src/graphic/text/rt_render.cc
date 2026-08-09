@@ -22,7 +22,7 @@
 #include <memory>
 #include <queue>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "base/i18n.h"
 #include "base/log.h"

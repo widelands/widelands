@@ -19,7 +19,7 @@
 #ifndef WL_GRAPHIC_HYPERLINK_H
 #define WL_GRAPHIC_HYPERLINK_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"

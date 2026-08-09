@@ -21,7 +21,7 @@
 #include <cassert>
 #include <limits>
 
-#include <SDL_keyboard.h>
+#include <SDL3/SDL_keyboard.h>
 
 #include "base/i18n.h"
 #include "base/wexception.h"

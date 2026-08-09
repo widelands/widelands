@@ -24,8 +24,8 @@
 #include <string>
 #include <vector>
 
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 #undef main  // No, we do not want SDL_main
 
