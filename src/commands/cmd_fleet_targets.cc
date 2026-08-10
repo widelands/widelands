@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2025 by the Widelands Development Team
+ * Copyright (C) 2004-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include "economy/ferry_fleet.h"
 #include "economy/ship_fleet.h"
+#include "economy/waterway.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
@@ -39,10 +40,16 @@ void CmdFleetTargets::execute(Game& game) {
 	case MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 		dynamic_cast<ShipFleetYardInterface*>(mo)->get_fleet()->set_ships_target(game, target_);
 		return;
+	case MapObjectType::PORTDOCK:
+		dynamic_cast<PortDock*>(mo)->get_fleet()->set_ships_target(game, target_);
+		return;
 
 	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		dynamic_cast<FerryFleetYardInterface*>(mo)->get_fleet()->set_idle_ferries_target(
 		   game, target_);
+		return;
+	case MapObjectType::WATERWAY:
+		dynamic_cast<Waterway*>(mo)->get_fleet().get(game)->set_idle_ferries_target(game, target_);
 		return;
 
 	default:
@@ -69,7 +76,7 @@ void CmdFleetTargets::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionCmdFleetTargets) {
 			PlayerCommand::read(fr, egbase, mol);
-			interface_ = fr.unsigned_32();
+			interface_ = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 			target_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError(

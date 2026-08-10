@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Výpis chyb skriptu"
+		],
 		"1.3": [
 			"Obchodování",
 			"Přidáno šest nových map a tři odebrány",
@@ -17,9 +20,6 @@
 			"Mapy z internetu lze nově stahovat prostřednictvím herních rozšíření",
 			"V editoru map jsou k dispozici nová zobrazení",
 			"Řada nových funkcí pro tvorbu vlastních rozšíření"
-		],
-		"1.2.1": [
-			"Výpis chyb skriptu"
 		]
 	}
 }

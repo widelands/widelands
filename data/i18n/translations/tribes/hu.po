@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-11-27 03:16+0000\n"
+"POT-Creation-Date: 2026-02-23 04:25+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2025\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1193,19 +1193,19 @@ msgid "Cassava Plantation"
 msgstr "Manióka ültetvény"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:30
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:38
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:47
 #: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:60
-#: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:38
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:38
+#: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:46
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:214
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:53
@@ -1250,41 +1250,41 @@ msgstr "Manióka ültetvény"
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/frisians/farm/init.lua:66
-#: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:56
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:74
+#: ../../../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:51
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:53
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:82
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:88
 #: ../../../../data/tribes/buildings/productionsites/frisians/well/init.lua:49
 msgid "working"
 msgstr "A munka"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:58
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 msgid "planting cassava"
 msgstr "Manióka ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:77
 msgid "harvesting cassava"
 msgstr "Manióka betakarítása"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:81
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:89
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:97
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:84
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:88
 #: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:107
@@ -1296,8 +1296,8 @@ msgstr "Manióka betakarítása"
 msgid "No Fields"
 msgstr "Nincs mező"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:82
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:98
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:89
 #: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:108
@@ -1309,7 +1309,7 @@ msgstr "Nincs mező"
 msgid "Out of Fields"
 msgstr "A mezők kifogytak"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:83
+#: ../../../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:91
 msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
@@ -1325,7 +1325,7 @@ msgstr "Maniókafőzde"
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
 msgstr "Kenyér sütése"
@@ -1359,16 +1359,16 @@ msgid "Cocoa Farm"
 msgstr "Kakaó ültetvény"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgid "planting cocoa"
 msgstr "Kakaó ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:85
 msgid "harvesting cocoa"
 msgstr "Kakaó betakarítása"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:99
 msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
@@ -1466,7 +1466,7 @@ msgstr "Kemence"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:113
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:119
 msgid "smelting gold"
 msgstr "Arany olvasztása"
 
@@ -1490,7 +1490,7 @@ msgid "Gold Digger Dwelling"
 msgstr "Aranyásó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
+#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:73
@@ -1508,7 +1508,7 @@ msgstr "Aranyásó kunyhó"
 msgid "mining gold"
 msgstr "Arany bányászata"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:72
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
@@ -1520,7 +1520,7 @@ msgstr "Arany bányászata"
 msgid "No Gold"
 msgstr "Nincs arany"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:88
 #: ../../../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:97
@@ -1532,7 +1532,7 @@ msgstr "Nincs arany"
 msgid "Main Gold Vein Exhausted"
 msgstr "Fő arany telér kimerült"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:69
+#: ../../../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:75
 msgctxt "amazons_building"
 msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
@@ -1547,31 +1547,31 @@ msgid "Hunter-Gatherer’s Hut"
 msgstr "Vadász-gyűjtögető kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:39
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:47
 msgid "gathering"
 msgstr "Gyűjtögetés"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:58
 msgid "gathering meat"
 msgstr "Hús gyűjtése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:62
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:70
 msgid "gathering fish"
 msgstr "Hal gyűjtése"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:83
 msgid "No Game, No Fish"
 msgstr "Se vad, se hal"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:85
 msgid "Out of Game and Fish"
 msgstr "A vadak és a halak elfogytak"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:79
+#: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:87
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -1597,7 +1597,7 @@ msgid "Jungle Preserver’s Hut"
 msgstr "Dzsungelfenntartó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:48
+#: ../../../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:54
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
@@ -1612,13 +1612,13 @@ msgid "Liana Cutter’s Hut"
 msgstr "Liánvágó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:47
 msgid "cutting lianas"
 msgstr "Lián vágása"
 
 #. TRANSLATORS: Short for "No Tree to Cut Lianas" for a resource
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
-#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:60
+#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:73
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
@@ -1626,11 +1626,11 @@ msgstr "Lián vágása"
 msgid "No Trees"
 msgstr "Nincs fa"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:61
 msgid "No Tree to Cut Lianas"
 msgstr "Nincs fa lián vágásához"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:54
+#: ../../../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:62
 msgctxt "amazons_building"
 msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
@@ -1646,19 +1646,19 @@ msgstr "Ritkafa vágó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:50
 msgid "harvesting balsa"
 msgstr "Balzafa betakarítása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:54
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:62
 msgid "harvesting rubber"
 msgstr "Gumi betakarítása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:74
 msgid "harvesting ironwood"
 msgstr "Vasfa betakarítása"
 
@@ -1704,8 +1704,8 @@ msgid "Scout’s Hut"
 msgstr "Felderítő kunyhója"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
-#: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:53
+#: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:56
@@ -1729,7 +1729,7 @@ msgstr "Hajóács műhely"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:80
 #: ../../../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:86
-#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:81
 msgid "constructing a ship"
 msgstr "Hajó építése"
 
@@ -1744,7 +1744,7 @@ msgstr "Kőfaragó műhely"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:226
 msgid "making a shovel"
 msgstr "Lapát készítése"
 
@@ -1774,7 +1774,7 @@ msgstr "Macsete készítése"
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:178
 msgid "making kitchen tools"
 msgstr "Konyhai eszközök készítése"
 
@@ -1783,7 +1783,7 @@ msgstr "Konyhai eszközök készítése"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:154
 msgid "making a hammer"
 msgstr "Kalapács készítése"
 
@@ -1794,7 +1794,7 @@ msgstr "Véső készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making needles"
 msgstr "Tű készítése"
 
@@ -1834,11 +1834,11 @@ msgid "Stonecutter’s Hut"
 msgstr "Kőfejtő kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:42
 msgid "cutting granite"
 msgstr "Gránit kifejtése"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:60
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
@@ -1846,7 +1846,7 @@ msgstr "Gránit kifejtése"
 msgid "No Rocks"
 msgstr "Nincs kő"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:49
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:57
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:50
 #: ../../../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
 #: ../../../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
@@ -1854,7 +1854,7 @@ msgstr "Nincs kő"
 msgid "Out of Rocks"
 msgstr "A kő elfogyott"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:50
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:58
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1868,12 +1868,12 @@ msgid "Stone Mine"
 msgstr "Kőbánya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:57
 msgid "mining"
 msgstr "A bányászás"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:70
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:107
 #: ../../../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:61
@@ -1889,21 +1889,21 @@ msgid "mining granite"
 msgstr "Gránit bányászata"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:73
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:115
 msgid "mining quartz"
 msgstr "Kvarc bányászata"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:97
 msgid "No Stones"
 msgstr "Nincs kő"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:98
 msgid "Main Stone Vein Exhausted"
 msgstr "A fő kvarc telér kimerült"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
+#: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:100
 msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
@@ -1917,7 +1917,7 @@ msgid "Tapir Farm"
 msgstr "Tapírtelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:69
 msgctxt "amazons_building"
 msgid "breeding tapir"
 msgstr "Tapír tenyésztése"
@@ -1928,7 +1928,7 @@ msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
 msgstr "Vízgyűjtő kunyhó"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:55
+#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
 #: ../../../../data/tribes/buildings/productionsites/barbarians/well/init.lua:67
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:62
@@ -1936,7 +1936,7 @@ msgstr "Vízgyűjtő kunyhó"
 msgid "No Water"
 msgstr "Nincs víz"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:56
+#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:64
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/barbarians/well/init.lua:68
 #: ../../../../data/tribes/buildings/productionsites/empire/well/init.lua:63
@@ -1944,7 +1944,7 @@ msgstr "Nincs víz"
 msgid "Out of Water"
 msgstr "Kifogyott a víz"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
+#: ../../../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:65
 msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
@@ -1959,14 +1959,14 @@ msgstr "Vadonőrző kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:48
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:56
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:71
 msgid "breeding fish"
 msgstr "Halak tenyésztése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
+#: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:67
 msgid "releasing game"
 msgstr "Vad kitelepítése"
 
@@ -1977,7 +1977,7 @@ msgid "Woodcutter’s Hut"
 msgstr "Favágó kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
+#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:55
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
@@ -1985,7 +1985,7 @@ msgstr "Favágó kunyhó"
 msgid "felling trees"
 msgstr "Fa kivágása"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:74
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
 #: ../../../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
 #: ../../../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
@@ -1993,7 +1993,7 @@ msgstr "Fa kivágása"
 msgid "Out of Trees"
 msgstr "Kifogyott a fa"
 
-#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:75
 msgctxt "amazons_building"
 msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
@@ -2077,7 +2077,7 @@ msgstr "Faszénégető kemence"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:59
 #: ../../../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:55
-#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:63
+#: ../../../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:69
 msgid "producing coal"
 msgstr "Szén termelése"
 
@@ -2455,8 +2455,8 @@ msgstr "Kohó"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:81
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:75
 #: ../../../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:89
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
-#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:99
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:105
 msgid "smelting iron"
 msgstr "Vas olvasztása"
 
@@ -2468,14 +2468,14 @@ msgstr "Füstölő"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:94
 msgid "smoking meat"
 msgstr "Hús füstölése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:95
-#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
+#: ../../../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:82
 msgid "smoking fish"
 msgstr "Hal füstölése"
 
@@ -2496,7 +2496,7 @@ msgstr "Szerszámkovács műhely"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:106
 msgid "making a bread paddle"
 msgstr "Péklapát készítése"
 
@@ -2510,14 +2510,14 @@ msgstr "Egy pár vödör készítése"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:130
 msgid "making fire tongs"
 msgstr "Parázsfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:142
 msgid "making a fishing net"
 msgstr "Halászháló készítése"
 
@@ -2548,7 +2548,7 @@ msgstr "Fűrész készítése"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:214
 msgid "making a scythe"
 msgstr "Kasza készítése"
 
@@ -2885,7 +2885,7 @@ msgstr "Sisakkészítő műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:79
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:83
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:120
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:126
 msgid "forging a helmet"
 msgstr "Sisak kovácsolása"
 
@@ -2996,7 +2996,7 @@ msgstr "Horgászbot készítése"
 #. ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:166
 msgid "making a hunting spear"
 msgstr "Vadászlándzsa készítése"
 
@@ -3009,7 +3009,7 @@ msgstr "Kis sörfőzde"
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
 #: ../../../../data/tribes/buildings/productionsites/empire/brewery/init.lua:57
-#: ../../../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:77
+#: ../../../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:83
 #: ../../../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
 msgid "brewing beer"
 msgstr "Sör főzése"
@@ -3509,7 +3509,7 @@ msgstr "Szerszámkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:94
 msgid "making a basket"
 msgstr "Kosár fonása"
 
@@ -3657,13 +3657,13 @@ msgstr "Kis páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:90
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:96
 msgid "forging a short sword"
 msgstr "Rövid kard kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:105
+#: ../../../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:111
 msgid "forging a long sword"
 msgstr "Hosszú kard kovácsolása"
 
@@ -3680,7 +3680,7 @@ msgid "Barracks"
 msgstr "Laktanya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:67
+#: ../../../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:73
 msgctxt "frisians_building"
 msgid "recruiting soldier"
 msgstr "Katona toborzása"
@@ -3726,12 +3726,12 @@ msgstr "Kovácsműhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:118
 msgid "forging a felling ax"
 msgstr "Favágóbalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
+#: ../../../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:202
 msgid "forging a pick"
 msgstr "Csákány kovácsolása"
 
@@ -3748,7 +3748,7 @@ msgid "Brick Kiln"
 msgstr "Téglaégető"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:66
+#: ../../../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:72
 msgid "burning bricks"
 msgstr "Tégla égetése"
 
@@ -4055,20 +4055,20 @@ msgid "Recycling Center"
 msgstr "Újrahasznosító telep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:88
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:94
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "Szőrme újrahasznosítása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:106
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "Vas újrahasznosítása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:112
+#: ../../../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:118
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "Vas és arany újrahasznosítása"
@@ -4145,7 +4145,7 @@ msgid "Sewing Room"
 msgstr "Varroda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:75
+#: ../../../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:81
 msgid "sewing fur garment"
 msgstr "Kacagány varrása"
 
@@ -4187,12 +4187,12 @@ msgstr "Kocsma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:91
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:97
 msgid "preparing only one ration"
 msgstr "Csak egy harapnivaló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:105
+#: ../../../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:111
 msgid "preparing rations"
 msgstr "Harapnivaló készítése"
 
@@ -4203,7 +4203,7 @@ msgid "Weaving Mill"
 msgstr "Szövőmalom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-#: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:65
+#: ../../../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:71
 msgid "weaving cloth"
 msgstr "Ruha szövése"
 

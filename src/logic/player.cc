@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -60,7 +60,7 @@
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace {
 

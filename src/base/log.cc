@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,9 +56,7 @@ std::string get_output_directory() {
 #else
 	char path[MAX_PATH];
 #endif
-	CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	auto pathlen = GetModuleFileName(NULL, path, MAX_PATH);
-	CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
+	auto pathlen = GetModuleFileName(nullptr, path, MAX_PATH);
 	while (pathlen > 0 && path[pathlen] != '\\') {
 		--pathlen;
 	}

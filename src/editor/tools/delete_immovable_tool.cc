@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,10 @@
 #include "editor/tools/delete_immovable_tool.h"
 
 #include "base/macros.h"
-#include "editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Deletes the immovable at the given location

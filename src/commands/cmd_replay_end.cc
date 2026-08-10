@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2025 by the Widelands Development Team
+ * Copyright (C) 2004-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,8 @@
 #include "commands/cmd_replay_end.h"
 
 #include "logic/game_controller.h"
-#include "ui_basic/messagebox.h"
-#include "wui/interactive_base.h"
+#include "ui/basic/messagebox.h"
+#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 

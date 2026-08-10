@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2025 by the Widelands Development Team
+ * Copyright (C) 2004-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/market.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"

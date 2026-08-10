@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2025 by the Widelands Development Team
+ * Copyright (C) 2017-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,12 @@ void set_template_dir(std::string);
 inline bool is_using_default_theme() {
 	return template_dir() == kDefaultTemplate;
 }
+
+constexpr int kMaxScaleFactorQuarters = 12;
+int get_scale_factor_quarters();
+void set_scale_factor_quarters(int quarters, bool update_style = true);
+
+void update_intro_style_config();
 
 extern const std::string kSplashImage;
 extern const std::string kFallbackImage;
@@ -106,7 +112,12 @@ enum class StyledSize {
 	kCampaignMessageBoxMaxW,
 	kCampaignFri02PoemIndent,
 	kSPScenarioPlateauMessageBoxPosY,
+	kUIDefaultButtonSize,
+	kUIDefaultButtonSizeSmall,
+	kUIDefaultButtonSizeLarge,
+	kUIDefaultProgressBarWidth,
 	kUIDefaultPadding,
+	kUIDefaultSpacing,
 	kUIDefaultIndent,
 	kToolbarButtonSize
 };

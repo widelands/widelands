@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,9 @@
 
 #include "editor/tools/info_tool.h"
 
-#include "editor/ui_menus/field_info_window.h"
 #include "graphic/style_manager.h"
-#include "wui/unique_window_handler.h"
+#include "ui/editor/field_info_window.h"
+#include "ui/shared/unique_window_handler.h"
 
 constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.

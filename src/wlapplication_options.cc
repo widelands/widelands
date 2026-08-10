@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2025 by the Widelands Development Team
+ * Copyright (C) 2012-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -470,11 +470,15 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_y, kDefaultCtrlModifier),
                                                         "editor_redo",
                                                         gettext_noop("Redo"))},
+   {KeyboardShortcut::kEditorPicker, KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
+                                                          keysym(SDLK_k),
+                                                          "editor_picker",
+                                                          gettext_noop("Pick From Map"))},
    {KeyboardShortcut::kEditorTools,
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_t),
                          "editor_tools",
-                         gettext_noop("Toggle Tools Menu"))},
+                         gettext_noop("Show Tools Menu"))},
    {KeyboardShortcut::kEditorChangeHeight,
     KeyboardShortcutInfo({KeyboardShortcutScope::kEditor},
                          keysym(SDLK_h, KMOD_SHIFT),

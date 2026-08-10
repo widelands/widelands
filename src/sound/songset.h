@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,8 +55,8 @@ struct Songset {
 
 private:
 	Mix_Music* load_file(const std::string& filename);
-	void load_songs();
-	void init_songs(std::vector<std::string> files);
+	void load_songs(const std::vector<std::string>& files);
+	void init_songs(const std::vector<std::string>& files);
 	std::map<std::string, Song> create_playlist();
 
 	/// The name of this songset

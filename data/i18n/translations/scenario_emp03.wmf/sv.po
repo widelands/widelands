@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
@@ -528,7 +528,7 @@ msgid ""
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
 "Jag märkte att vår stenhuggare äntligen har börjat sitt arbete. Han kommer "
-"att hugga det antal marmorkolonner som vi begär i våra grundläggande "
+"att hugga det antal marmorpelare som vi begär i våra grundläggande "
 "ekonomiska inställningar."
 
 #. TRANSLATORS: Amalea
@@ -651,7 +651,7 @@ msgid ""
 msgstr ""
 "För att kunna skicka ut ett expeditionsfartyg behöver vi först ett fartyg. "
 "Tyvärr har vi bara fem balar tyg kvar, som vi behöver för att bygga hamnen "
-"och varvet."
+"och skeppsvarvet."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:369
@@ -929,8 +929,8 @@ msgid ""
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
-"Bra gjort hittills. Nu kommer vi inte att producera fler marmorkolonner än "
-"vad som behövs. Jag tror verkligen att vi kommer att behöva denna "
+"Bra gjort hittills. Nu kommer vi inte att producera fler marmorpelare än vad"
+" som behövs. Jag tror verkligen att vi kommer att behöva denna "
 "ekonomifunktion ganska ofta för att justera vår ekonomi. Kom ihåg att vår "
 "industri endast kommer att arbeta tills den angivna mängden i "
 "ekonomiinställningarna har uppnåtts."

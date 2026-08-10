@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 
 #include <sstream>
 
-#include "editor/editorinteractive.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/maptriangleregion.h"
+#include "ui/editor/editorinteractive.h"
 
 using Widelands::TCoords;
 

@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021,2023
+# D M <kamera001dm@gmail.com>, 2021,2023,2026
 # GunChleoc, 2018
 # Fredrik Pettersson <luno@iaofredde.net>, 2006
 # GunChleoc, 2014
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Nya soldater skapas på ett annat sätt än övriga arbetare. Rekryter går från ett magasin (eller ditt högkvarter) till kasernen där de får grundläggande träning och blir soldater. Nyutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
+msgstr "Nya soldater skapas på ett annat sätt än övriga arbetare. Rekryter går från en lagerbyggnad (eller ditt högkvarter) till kasernen där de får grundläggande träning och blir soldater. Nyutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Titta på soldaterna som är på väg till våra militärbyggnader. De ser annorlunda ut jämfört med vanliga arbetare: De har en hälsostapel över sitt huvud som visar deras återstående hälsa och de har fyra symboler som symboliserar den individuella soldatens nuvarande nivåer i de fyra kategorierna hälsa, attack, försvar förmågan att hoppa undan."
+msgstr "Titta på soldaterna som är på väg till våra militärbyggnader. De ser annorlunda ut jämfört med vanliga arbetare: De har en hälsostapel över sitt huvud som visar deras återstående hälsa och de har fyra symboler som symboliserar den individuella soldatens nuvarande nivåer i de fyra kategorierna hälsa, attack, försvar och förmågan att parera."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
@@ -73,7 +73,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Om en barbarsoldat är fullt tränad har han hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och nivå %4% avseende förmågan att hoppa undan. Då är han en skräckinjagande krigare! De individuella förmågorna har följande betydelse:"
+msgstr "Om en barbarsoldat är fullt tränad har han hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och nivå %4% avseende förmågan att parera. Då är han en skräckinjagande krigare! De individuella förmågorna har följande betydelse:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid "Health:"
@@ -116,7 +116,7 @@ msgstr "Försvaret är den procentandel som dras av från attackvärdet. Barbare
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
-msgstr "Hoppa undan:"
+msgstr "Parera:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -125,7 +125,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "Hoppa undan är möjligheten att soldaten lyckas vika undan från en attack. En nivå 0 barbar har en chans på %1%%% att undvika en attack och detta ökar i steg om %2%%% för varje nivå."
+msgstr "Parera är möjligheten att soldaten lyckas blockera en attack. En nivå 0 barbar har en chans på %1%%% att parera en attack och detta ökar i steg om %2%%% för varje nivå."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
@@ -148,11 +148,11 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "En av dessa träningsanläggningar är stridsarenan. Det är en stor och dyr byggnad och där tränar soldaterna på att hoppa undan. Eftersom soldater blir mycket hungriga under sin träning behöver denna byggnad mängder av mat och starköl. I ett riktigt spel ska du ha en bra infrastruktur innan du bygger en stridsarena."
+msgstr "En av dessa träningsanläggningar är stridsarenan. Det är en stor och dyr byggnad och där tränar soldaterna på att parera. Eftersom soldater blir mycket hungriga under sin träning behöver denna byggnad mängder av mat och starköl. I ett riktigt spel ska du ha en bra infrastruktur innan du bygger en stridsarena."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "To see evade training in action, build a battle arena."
-msgstr "För att se en pågående \"hoppa undan\"-träning, bygg en stridsarena."
+msgstr "För att se en pågående träning i parering, bygg en stridsarena."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
@@ -217,7 +217,7 @@ msgstr "Inga röda prickar betyder att soldaten är otränad, så han har nivå 
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "För varje lyckat träningssteg blir dina soldater starkare. Detta visas med en röd prick. Denna soldat är på nivå 1 i sin förmåga att hoppa undan från motståndarens slag."
+msgstr "För varje lyckat träningssteg blir dina soldater starkare. Detta visas med en röd prick. Denna soldat är på nivå 1 i sin förmåga att parera motståndarens slag."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
@@ -256,7 +256,7 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Stridsarenan tränar bara soldaterna i att hoppa undan. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, vilket tränar dem i attack och hälsa."
+msgstr "Stridsarenan tränar bara soldaterna i att parera. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, vilket tränar dem i attack och hälsa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
@@ -349,7 +349,7 @@ msgstr "Bra gjort! Din spejarkoja har byggts. Medan vår spanare flyttar in kan 
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några matbitar i vårt magasin."
+msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några ransoner i våt magasin."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
@@ -483,7 +483,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (1 + 5 + 2) som du vill ha här kan två ha dött. De kommer att ersättas av nya soldater från dina lager, om möjligt."
+msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (1 + 5 + 2) som du vill ha här kan två ha dött. De kommer att ersättas av nya soldater från ditt magasin, om möjligt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
@@ -504,7 +504,7 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga lagerlokaler som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i vanliga lagerlokaler deltar inte i några strider, och vanliga lagerlokaler kan inte attackeras direkt."
+msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga magasin som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i magasin deltar inte i några strider, och magasin kan inte attackeras direkt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
@@ -531,7 +531,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr "Om du tittar på statusraderna kan du se att ditt lager är tomt, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
+msgstr "Om du tittar på statusraderna kan du se att det är tomt i ditt magasin, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

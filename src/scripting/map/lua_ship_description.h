@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 #ifndef WL_SCRIPTING_MAP_LUA_SHIP_DESCRIPTION_H
 #define WL_SCRIPTING_MAP_LUA_SHIP_DESCRIPTION_H
 
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "scripting/map/lua_map_object_description.h"
 
 namespace LuaMaps {

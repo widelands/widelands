@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 by the Widelands Development Team
+ * Copyright (C) 2021-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ struct FloatNode : FormatNode {
 			}
 
 			rounded += rounding_;
-			if (rounded > kMaxInt) {
+			if (rounded > static_cast<double>(kMaxInt)) {
 				throw wexception("Floating point value too large: %f", arg_u.float_val);
 			}
 			int_part = static_cast<int64_t>(rounded);

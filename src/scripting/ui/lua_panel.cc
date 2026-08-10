@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -514,8 +514,6 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"max_x"``: **Optional**. The maximum horizontal size. Default: unlimited.
            * ``"max_y"``: **Optional**. The maximum vertical size. Default: unlimited.
            * ``"spacing"``: **Optional**. The inner spacing between items. Default: 0.
-           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content
-             is too large. Default: false.
 
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
             Takes no properties.
@@ -659,6 +657,9 @@ int LuaPanel::get_child(lua_State* L) {
              The properties for normal spinboxes above cannot be used when ``"values"`` is used.
 
            This widget can not have a custom tooltip.
+
+           .. versionchanged:: 1.4
+              This widget does not use the sizing and positioning properties.
 
          * ``"slider"``: A button that can be slid along a line to change a value. Properties:
 

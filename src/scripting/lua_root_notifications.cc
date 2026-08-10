@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 by the Widelands Development Team
+ * Copyright (C) 2025-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,12 +25,12 @@
 #include "economy/expedition_bootstrap.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "logic/map_objects/pinned_note.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "scripting/globals.h"
-#include "wui/economy_options_window.h"
-#include "wui/interactive_base.h"
-#include "wui/quicknavigation.h"
+#include "ui/game/economy_options_window.h"
+#include "ui/game/quicknavigation.h"
+#include "ui/wui/interactive_base.h"
 
 namespace LuaRoot::LuaNotifications {
 

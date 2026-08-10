@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2025 by the Widelands Development Team
+ * Copyright (C) 2010-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
-#include "wui/mapviewpixelfunctions.h"
+#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace {
 

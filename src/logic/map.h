@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,6 +113,17 @@ struct FindBobByName : public FindBob {
 private:
 	std::string name_;
 };
+
+struct FindBobByType : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindBobByType(const MapObjectType t) : type_(t) {
+	}
+	~FindBobByType() override = default;
+
+private:
+	MapObjectType type_;
+};
+
 struct FindCritter : public FindBob {
 	bool accept(Bob* b) const override;
 	~FindCritter() override = default;

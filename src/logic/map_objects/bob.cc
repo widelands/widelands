@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@
 #include "logic/map_objects/backtrace.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findbob.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/critter.h"
@@ -42,7 +42,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/mapviewpixelconstants.h"
+#include "ui/wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 

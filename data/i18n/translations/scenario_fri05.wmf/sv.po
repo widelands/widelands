@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-05-19 03:23+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
@@ -483,8 +483,9 @@ msgstr ""
 " att göra denna vidsträckta platå nästan omöjlig att erövra. Även om fienden"
 " skulle lyckas ta hela den nedre delen av ön, skulle vi kunna hålla ut där i"
 " flera år, förutsatt att vi i förväg lagrar tillräckligt med förnödenheter i"
-" magasinen på Uplands. Naturligtvis skulle vi vara avskurna från hamnarna "
-"och handelsvägarna, så vi bör försöka undvika att hamna i den situationen."
+" lagerbyggnaderna på Uplands. Naturligtvis skulle vi vara avskurna från "
+"hamnarna och handelsvägarna, så vi bör försöka undvika att hamna i den "
+"situationen."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
@@ -678,8 +679,8 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
-"Våra skogsvaktare och skogsarbetare har påbörjat sitt arbete. Det kommer att"
-" ta lite tid innan vi har en stabil tillgång på timmer, men det akuta "
+"Våra skogsvaktare och skogshuggare har påbörjat sitt arbete. Det kommer att "
+"ta lite tid innan vi har en stabil tillgång på timmer, men det akuta "
 "problemet har avvärjts."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290

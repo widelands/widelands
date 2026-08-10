@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_PANEL_H
 
 #include "scripting/lua_ui.h"
-#include "ui_basic/panel.h"
+#include "ui/basic/panel.h"
 
 namespace UI {
 struct Box;

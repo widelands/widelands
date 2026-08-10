@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2025 by the Widelands Development Team
+ * Copyright (C) 2012-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,7 +192,8 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorToolHistory,
 	kEditorUndo,
 	kEditorRedo,
-	kEditorTools_End = kEditorRedo,
+	kEditorPicker,
+	kEditorTools_End = kEditorPicker,
 
 	// These will be grouped to one line in the in-editor help
 	kEditorToolsize1,

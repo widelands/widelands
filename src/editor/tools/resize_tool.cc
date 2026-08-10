@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,8 @@
 
 #include "editor/tools/resize_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/widelands_geometry.h"
+#include "ui/editor/editorinteractive.h"
 
 int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                             EditorActionArgs* args,

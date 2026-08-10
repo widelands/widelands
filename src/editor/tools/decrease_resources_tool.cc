@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,12 +18,12 @@
 
 #include "editor/tools/decrease_resources_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Decrease the resources of the current field by the given value if
