@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include "base/time_string.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -420,12 +421,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                       0,
                       0,
                       info->upload_timestamp == info->edit_timestamp ?
-                         time_string(info->upload_timestamp) :
+                         format_datetime(info->upload_timestamp) :
                          format(
                             /** TRANSLATORS: Upload timestamp • Edit timestamp */
                             _("%1$s   ✎ %2$s"),
-                            time_string(info->upload_timestamp),
-                            time_string(info->edit_timestamp)),
+                            format_datetime(info->upload_timestamp),
+                            format_datetime(info->edit_timestamp)),
                       UI::Align::kLeft),
      bottom_row_right_(
         this,
@@ -725,7 +726,7 @@ MapRow::MapRow(Panel* parent,
            /** TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
               Number of comments */
            _("%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"),
-           time_string(info->upload_timestamp),
+           format_datetime(info->upload_timestamp),
            filesize_string(info->total_file_size),
            info->download_count,
            (info->number_of_votes() != 0u ? format_l("%.2f", info->average_rating()) : "–"),
