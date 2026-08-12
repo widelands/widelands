@@ -261,13 +261,25 @@ end
 function supply_murilius()
    local wh = p1:get_buildings("frisians_warehouse_empire")[1]
    local hq = p2:get_buildings("empire_headquarters")[1]
+   if not hq then
+      -- The red HQ was overrun by the Barbarians, try to find a warehouse
+      hq = p2:get_buildings("empire_warehouse")
+      if #hq > 0 then
+         hq = hq[math.random(#hq)]
+      else
+         -- No warehouse left either. We'll still pretend to transfer the wares though.
+         hq = nil
+      end
+   end
 
    -- transfer all wares that the Frisians and the Empire have in common
    for idx,ware in ipairs(p1.tribe.wares) do
       if p2.tribe:has_ware(ware.name) then
          local amount = wh:get_wares(ware.name)
          wh:set_wares(ware.name, 0)
-         hq:set_wares(ware.name, hq:get_wares(ware.name) + amount)
+         if hq then
+            hq:set_wares(ware.name, hq:get_wares(ware.name) + amount)
+         end
       end
    end
    campaign_message_box(supply_murilius_thanks)

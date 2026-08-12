@@ -1,17 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005,2025
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2017,2026
+# GunChleoc, 2018
 # GunChleoc, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-10-02 03:03+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2005,2025\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2017,2026\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +64,7 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "Men en dag upptäckte du en öde ödemark med övergivna byggnader i öster. En märklig aura strålade från platsen, och ingen ville sätta sin fot där. Men gränsen kunde inte lämnas oskyddad, så du byggde tre fästningar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:28
 msgid ""
@@ -88,29 +90,29 @@ msgstr "Nej, titta! Vår krog brinner! Mitt i all stress tappade krögaren, av m
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
 msgid "Open the building statistics window"
-msgstr ""
+msgstr "Öppna fönstret med byggnadsstatistik"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:50
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Öppna fönstret med byggnadsstatistik för en översikt över de byggnader du har."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Först måste du öppna menyn ”Statistik” längst ned på skärmen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
-msgstr ""
+msgstr "Välj sedan ”Byggnader”."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "You can also use the hotkey ‘%s’."
-msgstr ""
+msgstr "Du kan även använda snabbtangenten ‘%s’."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -129,15 +131,15 @@ msgstr "Först ska vi ta reda på hur många krogar vi för närvarande har. Wid
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr ""
+msgstr "Ta reda på hur många krogar du har"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Vi vill veta om vi fortfarande har krogar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "Välj fliken ”Medelstora byggnader” i fönstret med byggnadsstatistik."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
@@ -167,7 +169,7 @@ msgstr "Detta är byggnadsstatistikfönstret. Det visar dig alla byggnadstyper d
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid "Let me now explain what all those numbers mean:"
-msgstr "Låt mig nu förklara vad alla dessa siffror betyder."
+msgstr "Låt mig nu förklara vad alla dessa siffror betyder:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
@@ -210,7 +212,7 @@ msgstr "Om du inte har någon byggnad av en speciell byggnadstyp visas den nedto
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Det räcker med förklaringar för tillfället. Prova nu själv."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
@@ -226,7 +228,7 @@ msgstr "Du har stängt byggnadsstatistikfönstret. Jag såg inte när du växlad
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr ""
+msgstr "Öppna fönstret med byggnadsstatistik igen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
@@ -237,27 +239,27 @@ msgstr "Du stängde byggnadsstatistikfönstret fast att du inte har letat upp an
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr "Var vänlig och öppna det igen och välj den andra fliken (mellanstora byggnader)."
+msgstr "Öppna det igen och välj den andra fliken (mellanstora byggnader)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "Öppna ditt lagerfönster"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "Lagerfönstret ger dig en översikt över de varor du har för närvarande."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "Välj sedan ”Lager”."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:708
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "Du kan också använda snabbtangenten \"%s\" för att snabbt öppna detta fönster."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -279,26 +281,26 @@ msgstr "Ok. I listan såg du att du inte har några fler krogar eller värdshus.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "Granska de två första flikarna i lagerfönstret"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Ta en titt på de två första flikarna i lagerfönstret. De visar alla varor och arbetare du har."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "När du har sett tillräckligt, växla tillbaka till den tredje fliken (”Varor i lagerbyggnader”)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "Lagerfönstret har fyra flikar. Den första visar alla dina aktuella varor, inklusive de som finns på vägar, vid flaggor och inne i byggnader som väntar på att bearbetas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
@@ -317,7 +319,7 @@ msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "Den tredje fliken visar dig varorna som finns lagrade i ditt högkvarter, dina magasin och dina hamnar. De är inte efterfrågade någonstans och finns därför i ditt lager."
+msgstr "Den tredje fliken visar dig varorna som finns lagrade i ditt högkvarter, dina lagerbyggnader och dina hamnar. De är inte efterfrågade någonstans och finns därför i ditt lager."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
@@ -338,14 +340,14 @@ msgstr "Du stängde lagerfönstret!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "Du har stängt lagerfönstret, men jag är inte klar med min förklaring än. Kan du öppna det igen och välja den första fliken?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Öppna lagerfönstret igen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -353,30 +355,30 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Du stängde lagerfönstret innan jag hann berätta allt om det. Om du redan vet allt kan du lämna den här handledningen när du vill."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "Annars, öppna den igen och titta på alla flikar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Du har stängt lagerfönstret, men jag är inte klar med min förklaring än. Kan du öppna det igen och välja den tredje fliken?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr "Annars, var vänlig och öppna det igen och välj tredje fliken."
+msgstr "Annars, öppna det igen och välj tredje fliken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr ""
+msgstr "Bygg nya krogar"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
@@ -386,7 +388,7 @@ msgstr "Bygg minst två krogar."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "Så länge vi inte producerar ransoner kommer våra gruvarbetare inte att gräva efter malm. Och utan järn kan vi inte smida en enda hjälm."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -400,28 +402,28 @@ msgstr "Vi behöver nya krogar"
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "Nu när du har en överblick bör du agera. Jag tycker att vi ska bygga fler än en krog – två eller tre är bättre."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Öppna hjälpfönstret i spelet"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Uppslagsfönstret innehåller hjälpen i spelet och ett uppslagsverk om den stam du spelar för tillfället."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Öppna den. Du kan komma åt den via knappen längst ned på skärmen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "Alternativt kan du komma åt den direkt med tangenten ”%s”."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -429,13 +431,13 @@ msgstr "Encyklopedi"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "Hur man får hjälp"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Det är förstås svårt att komma ihåg alla mina kommentarer och råd. Du kanske till exempel undrar: ”Varför behöver vi ransoner för att få soldater?”"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -443,12 +445,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "När du har spelat mycket kommer du att kunna allt detta utan och innan. Men tills dess, eller om du är osäker på din stams behov och förmågor och hur dess byggnader och arbetare fungerar, kan du enkelt slå upp det i vår stamspecifika hjälp och uppslagsverk i spelet."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Ta reda på vilka varor som behövs för att rekrytera soldater"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -456,103 +458,103 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "En soldat behöver ett träspjut och en hjälm – därifrån kan du söka bakåt för att hitta de varor och byggnader du behöver för att förse din kasern där soldaten rekryteras. När du är klar stänger du bara uppslagsverkets fönster."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Använd uppslagsverket för att ta reda på hur man skapar nya soldater."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Välj fliken ”Varor” i uppslagsverkets fönster."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Ta reda på vad som behövs för att tillverka en hjälm och vad som behövs för att tillverka ett träspjut."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Om du vill kan du vidare undersöka vad som behövs för att tillverka de varor du just har letat upp."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Stäng uppslagsverket när du är klar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Detaljer om uppslagsverket"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Kategorier i uppslagsverket"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Uppslagsverket har fem flikar:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Fliken ”Allmänt” innehåller information om alla grundläggande gränssnittskontroller för Widelands. Dessutom hittar du tips som är relevanta för din stam där."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "Fliken ”Varor” visar information om de varor som din stam behöver, inklusive en kort hjälptext, en lista över byggnader som producerar varje vara, de varor som behövs för att producera den och var varan konsumeras."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "Fliken ”Arbetare” visar information om din stams arbetare på ett liknande sätt som varorna i den andra fliken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Fliken ”Byggnader” innehåller all nödvändig information om din stams byggnader."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Slutligen visar fliken ”Fasta föremål” information om de specifika fasta föremål som dina stamarbetare kan placera på kartan."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Du stängde uppslagsverket!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Du har stängt uppslagsverket, men jag märkte inte att du försökte ta reda på vilka varor som behövs för att rekrytera en soldat. Kan du öppna det igen och göra det?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Öppna fönstret för uppslagsverket igen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Du stängde uppslagsverket utan att söka efter den information vi behöver. Om du redan vet allt kan du lämna denna handledning när som helst."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "Annars öppnar du upp uppslagsverksfönstret igen och väljer den andra fliken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
@@ -572,7 +574,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "För närvarande försörjs alla gruvor med ransoner. Om du vill prioritera en viss gruva behöver du bara öppna dess fönster. I fliken \"Varor\" finns en draglist bakom varje vara."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -580,27 +582,27 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "När du flyttar draglisten till det blå området på vänster sida (låg prioritet) levereras motsvarande varor mindre ofta. Rött (höger sida) betyder att så många varor som möjligt ska levereras till denna byggnad, kanske för att den producerar något viktigt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "Den aktuella leveransstatusen indikeras genom olika färger på själva varuikonerna:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "Varor som lagras i byggnaden visas i fullfärg."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "Saknade varor är gråmarkerade."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "Varor som ännu inte finns i byggnaden men som redan är på väg dit visas i mörkare grått."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -613,11 +615,11 @@ msgstr "I din situation kanske du vill att bagarna ska jobba så fort som möjli
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Öppna fönstret för lagerstatistik"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Välj posten \"Varor\" i menyn \"Statistik\"."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
@@ -628,12 +630,12 @@ msgstr "Varustatistik"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "Låt oss ta en titt på hur vår varuproduktion går."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "Granska din varuproduktion och konsumtion"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
@@ -643,23 +645,23 @@ msgstr "De två första flikarna visar dig produktionen och konsumtionen av valf
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "När du har sett tillräckligt, växla till den tredje fliken (”Ekonomisk hälsa”)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "I det här fönstret kan du välja varor för att se hur deras produktion eller konsumtion har förändrats över tid. Prova med några varor."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Jag fortsätter så snart du klickar på den tredje fliken (”Ekonomisk hälsa”)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "Undersök din ekonomis hälsa"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
@@ -673,7 +675,7 @@ msgstr "Prova nu. Du kan även jämföra med de två tidigare flikarna."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "När du har sett tillräckligt, växla till den fjärde fliken (”Lager”)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -686,7 +688,7 @@ msgstr "I denna fliken kan du se skillnaden mellan produktion och konsumtion, ka
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "Granska ditt lager"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
@@ -703,7 +705,7 @@ msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr "Under den sista fliken kan du även se hela ditt lager. Det kommer att öka när den ekonomiska hälsan är positiv och annars minska. Jämför de två graferna."
+msgstr "Under den sista fliken kan du även se hela ditt lager. Det kommer att öka när den ekonomiska hälsan är positiv och annars minska. Jämför de två graferna!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
@@ -720,12 +722,12 @@ msgstr "Du stängde varustatistikfönstret!"
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Du har stängt fönstret med lagerstatistik, men jag är inte klar med min förklaring än. Kan du öppna det igen och välja den tredje fliken?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Öppna fönstret för lagerstatistik igen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -733,23 +735,23 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Du stängde fönstret med lagerstatistik innan jag hann berätta allt om det. Om du redan vet allt kan du lämna den här handledningen när du vill."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Du har stängt fönstret med lagerstatistik, men jag är inte klar med min förklaring ännu. Kan du öppna det igen och välja den fjärde fliken?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr "Annars, var vänlig och öppna det igen och välj den fjärde fliken."
+msgstr "Annars, öppna det igen och välj den fjärde fliken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Öppna fönstret \"Konfigurera ekonomi\""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
@@ -759,7 +761,7 @@ msgstr "Öppna 'Ställ in ekonomi' fönstret."
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Fönstret kan öppnas genom att klicka på valfri flagga som du äger eller från lagerbyggnadsfönstren."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -773,14 +775,14 @@ msgstr "Ekonomiinställningar"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Jag har visat dig vårt lagerfönster, där du kan se vilka varor som finns i lagerbyggnaderna. Minns du det?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "Nu ska jag berätta hur du kan bestämma hur många varor du vill ha. Fönstret för detta ändamål kan nås via valfri flagga och heter \"Konfigurera ekonomi\"."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -788,7 +790,7 @@ msgstr "Detta är ikonen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Samma knapp finns även i lagerbyggnadsfönstren."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -796,7 +798,7 @@ msgid ""
 "for a reason. An economy consists of all buildings and flags connected by "
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
-"separate economies can have different settings for wares."
+"separate economies can have different settings for wares and workers."
 msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
@@ -816,7 +818,7 @@ msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr "De flesta byggnader producerar bara någonting när lagernivån i dina lager understiger målnivån. Därför behöver du ange hur många du vill lagra i reserv."
+msgstr "De flesta byggnader producerar bara någonting när lagernivån i dina lagerbyggnader understiger målnivån. Därför behöver du ange hur många du vill lagra i reserv."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -843,14 +845,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Att lagra varor är ett tveeggat svärd. Å ena sidan är varor i lager användbara för att dämpa tillfälliga fluktuationer i ekonomin, som tenderar att uppstå hela tiden. Å andra sidan är alla varor som ligger i en lagerbyggnad istället för att bearbetas till något annat slöseri. Att hitta balansen mellan slösaktig lagring och just-in-time-produktion i dina leveranskedjor är en av de största utmaningarna när det gäller att perfekta din ekonomi. Om du är osäker, luta dig mot att ha några extra reserver."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "För att underlätta växlingen mellan olika ekonomiska situationer kan du spara och tillämpa ekonomiprofil i botten av fönstret för ekonomialternativ. En profil för lagerhållning och en för effektivitet är förinställda där."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -859,7 +861,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "Oftast är ekonomialternativen ett användbart verktyg för att säkerställa att resurser inte slösas bort på att producera varor som din ekonomi inte behöver. Ibland kan det dock vara användbart att lagra en vara i mycket stora mängder. För att uppnå detta kan du i fönstret för ekonomialternativ ställa in målet för en vara till oändligt, så att den alltid kommer att produceras."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -873,7 +875,7 @@ msgstr "Samma knapp finns också i byggfönstret för produktionsanläggningar. 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "Producera 20 marmorpelare"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
@@ -891,7 +893,7 @@ msgstr "Din stenhuggare kommer inte att tillverka marmorpelare när de inte beh�
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "För att göra detta, klicka på valfri flagga och välj \"Konfigurera ekonomi\". I detta fönster kan du bestämma hur många varor av varje typ du vill ha i lager."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
@@ -923,12 +925,12 @@ msgstr "Låt oss nu testa detta: Nuvarande målnivå för marmorpelare är 10. �
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Leverera 20 marmorpelare till frontlinjen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Leverera alla 20 marmorpelare till magasinet nära frontlinjen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
@@ -945,11 +947,11 @@ msgstr "Bär sedan ut marmorpelarna från ditt högkvarter. För att göra det m
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
-msgstr "Lagerinställningar"
+msgstr "Inställningar för lagerbyggnad"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
-msgstr "Frakta marmorpelarna till frontlinjen."
+msgstr "Frakta marmorpelarna till frontlinjen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
@@ -962,14 +964,14 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "Normalt fraktas producerade varor till det närmaste lagret, om de inte behövs på någon annan plats. I detta fall blir det högkvarteret, men vi skulle vilja ha dem i magasinet nära vår fästning."
+msgstr "Normalt fraktas producerade varor till den närmaste lagerbyggnaden, om de inte behövs på någon annan plats. I detta fall blir det högkvarteret, men vi skulle vilja ha dem i magasinet nära vår fästning."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr "Varje lagringsplats har fyra knappar för att ställa in hur vi vill att de agerar. Om du flyttar din muspekare över dem kommer du att se information om vad knapparna gör."
+msgstr "Varje lagerbyggnad har fyra knappar för att ställa in hur vi vill att de agerar. Om du flyttar din muspekare över dem kommer du att se information om vad knapparna gör."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:565
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:575
@@ -981,7 +983,7 @@ msgstr "Varje lagringsplats har fyra knappar för att ställa in hur vi vill att
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
-msgstr ""
+msgstr "Handel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -989,14 +991,14 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "Utmärkt. Vi har nu tillräckligt med marmorpelare för att kunna bygga upp våra befästningar i händelse av ett angrepp. Det visar sig dock att det faktiskt finns en stam friser som bor i denna ödemark, och de är fredliga. De har bett om att få handla med oss."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Eftersom Widelands handlar om att bygga upp snarare än att bränna ner, är handel ett mycket bättre sätt att interagera med andra stammar än att invadera deras land. Så låt oss handla."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1004,33 +1006,33 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "Handeln sker via marknader. När du har en marknad förhandlar du och den andra spelaren om vilka varor ni vill byta med varandra och hur många. Men jag ska gå igenom processen steg för steg. Först måste du bygga en marknad."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Bygg en marknad"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Bygg en marknad nära ödemarken."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Marknaden är en stor byggnad."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "Inom ditt territorium transporteras varor av transportörer. Men handel kan ske över långa avstånd, alldeles för långt för dina transportörer att gå. Därför använder vi istället en karavan med åsnor för att transportera våra varor."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "Åsnor föds upp på en åsnefarm. I det här scenariot har du redan en här."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1038,47 +1040,47 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "Förutom att transportera handelsvaror används åsnor också för att hjälpa till på trafikerade vägar: När en väg har mycket trafik begär transportören en åsna för att hjälpa till med arbetet, så att dubbelt så många varor kan transporteras på samma tid."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "Marknaden är nu klar och vi kan börja skapa ett handelsförslag för friserna. Detta görs från marknadens fönster. Låt mig öppna det åt dig."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "Som du kan se innehåller marknadsfönstret tre flikar. Den första fliken är den som är mest intressant för oss just nu: Här kan du konfigurera och föreslå en ny handel."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "Den andra fliken visar de affärer som du tidigare har föreslagit från denna marknad. Den är för närvarande tom, eftersom du ännu inte har föreslagit några affärer."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
 "The third tab lists trade offers that you received from other players, and "
 "allows you to accept or reject them. This, too, is empty, since the Frisians"
 " are waiting for you to make the first move."
-msgstr ""
+msgstr "Den tredje fliken visar handelserbjudanden som du har fått från andra spelare och låter dig acceptera eller avvisa dem. Även denna flik är tom, eftersom friserna väntar på att du ska göra det första draget."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:625
 msgid ""
 "Proposing a trade is straightforward. The first step is to select the player"
 " you want to trade with from the dropdown. In this case, there is only one "
 "other player, and he is automatically preselected for you."
-msgstr ""
+msgstr "Att föreslå en handel är enkelt. Det första steget är att välja den spelare du vill handla med från rullgardinsmenyn. I det här fallet finns det bara en annan spelare, och han är automatiskt förvald åt dig."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:633
 msgid ""
 "Next, you select the wares you want to send and receive respectively from "
 "the large double panel in the center of the market window."
-msgstr ""
+msgstr "Därefter väljer du de varor du vill skicka respektive ta emot från den stora dubbla panelen i mitten av marknadsfönstret."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:634
 msgid ""
@@ -1088,72 +1090,72 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr ""
+msgstr "När du handlar med en annan stam kan inte alla varor bytas. Varje stam har sin egen ekonomi och använder olika varor. Friserna dricker till exempel inte vin och kan inte bygga hus av marmor, och din kejserliga stam kan inte bygga hus av frisiska tegelstenar och äter inte deras rökt fisk. Panelen visar endast varor som både du och din potentiella handelspartner kan använda."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "Välj varorna i panelen och använd pilknapparna nedanför för att öka eller minska mängden varor som ska bytas."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr ""
+msgstr "Slutligen väljer du hur många sändningar av de valda varorna som ska bytas ut. Du kan också ställa in handeln så att den pågår på obestämd tid med hjälp av ikonen Oändligt."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "En sändning levereras i en transport, och varje vara kräver en åsna."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
-msgstr ""
+msgstr "När du har konfigurerat allt klickar du på knappen \"Föreslå\" för att skicka handelserbjudandet till den andra spelaren. Han kan sedan besluta om han vill acceptera eller avvisa ditt förslag."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "Prova själv!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "Föreslå en handel"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Erbjud friserna en handel."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Friserna accepterar endast handel som är fördelaktig för dem, det vill säga de ger inte bort mer varor än de får."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Handel avvisad"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Friserna har avvisat ditt handelserbjudande. De kommer inte att acceptera en handel som kan vara ofördelaktig för dem. Skicka dem ett nytt handelsförslag."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Handel accepterad"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Bra gjort! Friserna har accepterat ditt handelserbjudande. Snart kommer du att se en karavan med dina åsnor lämna marknaden för att leverera varor till friserna, och en karavan med deras renar kommer att leverera varor till dig i utbyte."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1161,72 +1163,72 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "Som du kan se har marknadsfönstret nu en ny flik. Det finns en sådan flik för varje aktiv handel på denna marknad. Fliken visar mer information om den pågående handeln och varorna som väntar på att handlas, och låter dig också hantera den:"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Du kan pausa handeln ett tag och återuppta den när du vill."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Du kan flytta handeln till en annan av dina marknader."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "Du kan föreslå att handeln förlängs med fler sändningar."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "Och du kan avbryta handeln när som helst."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "Handel erbjuden"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "Nu har friserna också erbjudit dig en handel. Du hittar en lista över alla handelserbjudanden och förslag samt pågående handel i fönstret Diplomati. Öppna det via knappen i huvudverktygsfältet."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Öppna diplomatifönstret"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "Diplomatifönstret ger dig en översikt över alla din handel, handelserbjudanden och handelsförslag."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Du kan öppna den via den här knappen i huvudverktygsfältet."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "Diplomatifönstret"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "I den övre halvan av diplomatifönstret kan du se alla spelare och deras lag. Här kan du bjuda in andra spelare att gå med i ditt lag eller be om att få gå med i deras. Men det är inte nödvändigt att vara med i ett lag för att kunna handla."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "Vi är mer intresserade av den nedre halvan av fönstret. Här kan du se dina erbjudanden, förslag och aktiv handel."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "Just nu har du ett handelserbjudande – det som friserna just skickade dig. Granska det och använd sedan knapparna bredvid för att antingen acceptera eller avvisa det."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1234,39 +1236,39 @@ msgid ""
 "market you want to use for this trade, as you can have multiple markets. You"
 " can also manage the offer directly from the window of the market where you "
 "want to accept the trade."
-msgstr ""
+msgstr "Om du vill acceptera en handel måste du välja vilken marknad du vill använda för denna handel i rullgardinsmenyn, eftersom du kan ha flera marknader. Du kan också hantera erbjudandet direkt från fönstret för den marknad där du vill acceptera handeln."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "Besluta om handelserbjudandet"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "Acceptera eller avvisa frisernas handelserbjudande."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "Du kan göra detta antingen från fönstret Diplomati eller från marknadsfönstret."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "Bra gjort! Det är egentligen allt; nu vet du hur du skickar och hanterar handelsförslag och erbjudanden."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr ""
+msgstr "Du kan ha valfritt antal aktiv handel och valfritt antal spelare, på samma marknad eller på flera marknader, precis som du vill."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "För att verkligen bemästra konsten att handla, kom bara ihåg detta: Värdet på alla varor beror i hög grad på omständigheterna och även på stammen."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1275,18 +1277,18 @@ msgid ""
 "in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal "
 "much more efficiently than the Empire. Therefore, trading Imperial meals "
 "against Frisian coal is a trade from which both parties can benefit greatly."
-msgstr ""
+msgstr "Till exempel accepterar frisiska gruvarbetare gärna vilken måltid som helst, oavsett om den har producerats billigt av ett kejserligt värdshus eller till en mycket högre kostnad i den frisiska dryckeshallen. Å andra sidan kan friserna bränna kol mycket mer effektivt än kejsardömet. Därför är handel med kejserliga måltider mot frisiskt kol en handel som båda parter kan dra stor nytta av."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
-msgstr ""
+msgstr "När du får mer erfarenhet av de olika stammarna i Widelands kommer du att få en grundlig förståelse för den relativa kostnaden och värdet för varje vara för varje stam. Denna kunskap är ovärderlig när du fattar beslut om handel."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
-msgstr "Gratulerar!"
+msgstr "Gratulerar"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:749
 msgid ""
@@ -1295,7 +1297,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "Detta avslutar vår handledning! Jag hoppas att jag har kunnat lära dig hur du kan kontrollera ekonomin i Widelands. Det finns många alternativ och de kan vara förvirrande i början. Även om du bara har förstått några få begrepp, får du inte ge upp. Prova dem i några spel, bekanta dig med dem och upplev möjligheterna. Gå sedan tillbaka till denna handledning och lär dig resten!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:751
 msgid ""

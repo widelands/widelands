@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2025 by the Widelands Development Team
+ * Copyright (C) 2012-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 #include "editor/tools/draw_tool.h"
 #include "editor/tools/tool.h"
-#include "ui_basic/button.h"
+#include "ui/basic/button.h"
 
 /**
  * The all actions done with an editor tool are saved on a stack to

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,7 +99,7 @@
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -114,10 +114,10 @@
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_spectator.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -192,8 +192,8 @@ Game::Game()
 	last_detectedportspace_serial_ = 0;
 }
 
-Game::~Game() {  // NOLINT
-	              // ReplayWriter needs this
+Game::~Game() {
+	delete_pending_player_commands();
 }
 
 void Game::sync_reset() {

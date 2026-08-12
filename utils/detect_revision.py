@@ -53,6 +53,14 @@ def detect_debian_version():
     return version
 
 
+def detect_directory_version():
+    dirname = os.path.basename(base_path)
+    result = re.fullmatch('^widelands[-_]([0-9][-+.~0-9a-zA-Z]+)$', dirname)
+    if result:
+        return result.group(1)
+    return None
+
+
 def detect_git_revision():
     try:
         stdout = _communicate_utf8(
@@ -130,7 +138,8 @@ def detect_revision():
             check_for_explicit_version,
             detect_git_revision,
             detect_bzr_revision,
-            detect_debian_version):
+            detect_debian_version,
+            detect_directory_version):
         rv = func()
         if rv:
             return rv

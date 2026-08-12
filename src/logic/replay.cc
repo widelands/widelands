@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2025 by the Widelands Development Team
+ * Copyright (C) 2007-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/save_handler.h"
-#include "wui/interactive_base.h"
+#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 

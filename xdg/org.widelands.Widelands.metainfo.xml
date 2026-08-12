@@ -33,6 +33,7 @@
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nds">Een taktisk Speel över ’t Upbauen in Echt-Tied</summary>
   <summary xml:lang="nl">Een realtime bouw strategiespel</summary>
+  <summary xml:lang="nn">Eit sanntidsbyggjestrategispel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="pt_BR">Um jogo em tempo real de estratégia e evolução</summary>
@@ -202,7 +203,7 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
       Jūs esate mažo klano valdovas. Jūsų užduotis yra statyti nuolat besiplečiančią gyvenvietę. Tuo tarpu, kiekvienas klano narys darys viską, kas jos ar jo galioje, kad  pagamintų kuo daugiau resursų ir pagreitintų jos augimą.
     </p>
     <p xml:lang="lt">
-      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+      „Widelands“ siūlo vieno žaidėjo režimą su kampanijomis, kurios pasakoja istorijas apie gentis ir jų kovą „Widelands“ visatoje. Tačiau tikrasis įsikūrimas prasideda, kai susivienijate su draugais internetu arba vietiniame tinkle, tam, kad kartu kurtumėte naujas imperijas – arba sutriuškintumėte vienas kitą karo dulkėse. „Widelands“ taip pat gali pasiūlyti dirbtinio intelekto mestą iššūkį.
     </p>
     <p xml:lang="ms">
       Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.
@@ -222,6 +223,12 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
     <p xml:lang="nl">
       Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelands universum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten. Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
     </p>
+    <p xml:lang="nn">
+      Du er regenten for ein liten klan. Oppgåva di er å byggja ein stadig veksande busetnad. Kvart medlem av klanen vil gjera sin del for å produsera fleire ressursar og fremja denne voksteren.
+    </p>
+    <p xml:lang="nn">
+      Widelands tilbyr ein einspelarmodus med kampanjar som fortel historier om stammane og striden deira i Widelands-universet. Men busetjinga byrjar for alvor når du slår deg saman med vener over internett eller lokalt nettverk for å byggja nye imperium saman – eller for å knusa kvarandre i krigens støv. Widelands byr òg på ein dataspelar som kan utfordra deg.
+    </p>
     <p xml:lang="pl">
       Stoisz na czele małego plemiona. Twoim zadaniem jest zbudować prosperującą osadę. Każdy członek plemiona pomagać ci będzie w produkcji surowców niezbędnych do tego celu.
     </p>
@@ -229,10 +236,10 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
       Widelands posiada tryb dla jednego gracza z kampaniami zawierającymi historię plemion i wyzwań, przed jakimi stają w uniwersum Widelands. Prawdziwa gra zaczyna się jednak, gdy razem z przyjaciółmi, poprzez internet lub LAN, budujecie wspólnie królestwa lub obracacie je w pył we wzajemnych wojnach. Spragnionym wyzwania Widelands oferuje także potyczki z SI.
     </p>
     <p xml:lang="pt">
-      Tu és o chefe dum pequeno clã. A tua tarefa é de construir um campo que se está sempre a desenvolver. Cada membro do clã vai fazer a sua parte para produzir o necessário para continuar o desenvolvimento.
+      Tu és o chefe de um pequeno clã. A tua tarefa é construir uma povoação em constante crescimento. Cada membro do teu clã vai fazer a sua parte para produzir mais recursos necessários para continuar o crescimento.
     </p>
     <p xml:lang="pt">
-      Widelands propõe um modo de jogo solitário com campanhas que contam as histórias das tribus e as suas interações no universo do Widelands. No entanto, a verdadeira dificuldade começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se afrontar nas poeiras da guerra. Widelands também propõe uma inteligencia artificial para o desafiar.
+      Widelands oferece um modo de jogo solitário com campanhas que contam as histórias das tribos e os seus esforços no universo de Widelands. No entanto, a verdadeira adaptação começa quando se une com amigos através da rede para construir novos impérios juntos - ou para se esmagarem mutuamente nas poeiras da guerra. Widelands também oferece uma inteligência artificial para o desafiar.
     </p>
     <p xml:lang="pt_BR">
       Você é o governante de um pequeno clã. Sua meta é construir um assentamento em constante crescimento. Cada membro do seu clã fará sua parte para produzir recursos de forma a sustentar esse crescimento.
@@ -280,8 +287,8 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
       Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. 
     </p>
     <p xml:lang="tr">
-      Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.
-Widelands ayrıca size yapay zeka ile meydan okur.
+      Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Ancak asıl eğlence arkadaşlarınla Internet üzerinden  ya da LAN ile bir araya gelerek onlarla birlikte yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.
+Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
     </p>
     <p xml:lang="uk">
       Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.
@@ -345,7 +352,35 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <color type="primary" scheme_preference="dark">#493921</color>
   </branding>
   <releases>
-    <release date="2025-08-20" version="1.3~git">
+    <release date="2026-02-22" version="1.4~git">
+      <description><ul>
+      </ul></description>
+      <url type="details">https://codeberg.org/wl/widelands/milestone/6040?type=all&amp;amp;state=closed&amp;amp;sort=recentupdate</url>
+    </release>
+    <release date="2026-02-22" version="1.3.1">
+      <description><ul>
+        <li>Bugfix release</li>
+        <li xml:lang="ca">Publicació de correcció d'errors</li>
+        <li xml:lang="cs">Výpis chyb skriptu</li>
+        <li xml:lang="da">Udgivelse med fejlrettelser</li>
+        <li xml:lang="de">Fehlerbehebung</li>
+        <li xml:lang="fr"> 
+Version de correction de bugs</li>
+        <li xml:lang="hu">Hibajavító kiadás</li>
+        <li xml:lang="it">Versione di correzione di bug</li>
+        <li xml:lang="lt">Klaidų taisymo laida</li>
+        <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
+        <li xml:lang="nl">Bugfix-bericht</li>
+        <li xml:lang="nn">Feilrettingsutgåve</li>
+        <li xml:lang="pl">Wydanie poprawkowe</li>
+        <li xml:lang="pt_BR">Lançamento de correção de bugs</li>
+        <li xml:lang="sk">Vydanie opravy chýb</li>
+        <li xml:lang="sv">Buggfixutgåva</li>
+        <li xml:lang="tr">Hata düzeltme güncellemesi</li>
+      </ul></description>
+      <url type="details">https://www.widelands.org/news/2026/Feb/22/widelands-1-3-1-released/</url>
+    </release>
+    <release date="2025-12-21" version="1.3">
       <description><ul>
         <li>Market trading</li>
         <li>Six new maps added and three old maps removed</li>
@@ -354,6 +389,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li>Download website maps as add-ons</li>
         <li>New visualisation modes in the editor</li>
         <li>Many new capabilities for add-on developers</li>
+        <li xml:lang="ca">Comerç de mercat</li>
+        <li xml:lang="ca">Sis mapes nous afegits i tres mapes antics eliminats</li>
+        <li xml:lang="ca">Districtes econòmics</li>
+        <li xml:lang="ca">Moltes millores a l'Enciclopèdia del joc</li>
+        <li xml:lang="ca">Baixeu mapes de llocs web com a complements</li>
+        <li xml:lang="ca">Nous modes de visualització a l'editor</li>
+        <li xml:lang="ca">Moltes capacitats noves per als desenvolupadors de complements</li>
         <li xml:lang="cs">Obchodování</li>
         <li xml:lang="cs">Přidáno šest nových map a tři odebrány</li>
         <li xml:lang="cs">Hospodářské oblasti</li>
@@ -361,6 +403,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="cs">Mapy z internetu lze nově stahovat prostřednictvím herních rozšíření</li>
         <li xml:lang="cs">V editoru map jsou k dispozici nová zobrazení</li>
         <li xml:lang="cs">Řada nových funkcí pro tvorbu vlastních rozšíření</li>
+        <li xml:lang="da">Markedshandel</li>
+        <li xml:lang="da">Seks nye kort tilføjet og tre gamle kort fjernet</li>
+        <li xml:lang="da">Økonomidistrikter</li>
+        <li xml:lang="da">Mange forbedringer til encyklopædien i spillet</li>
+        <li xml:lang="da">Hent kort fra internettet som en udvidelse</li>
+        <li xml:lang="da">Nye visualiseringstilstande i redigeringsprogrammet</li>
+        <li xml:lang="da">Mange nye funktioner for udviklere af udvidelser</li>
         <li xml:lang="de">Handeln mit Märkten</li>
         <li xml:lang="de">Sechs neue Karten hinzugefügt und drei alte Karten entfernt</li>
         <li xml:lang="de">Wirtschaftsbezirke</li>
@@ -382,6 +431,20 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="hu">Térképek letöltése a honlapról a bővítményekhez hasonlóan</li>
         <li xml:lang="hu">Új megjelenítési módok a térképszerkesztőben</li>
         <li xml:lang="hu">Sok új lehetőség a bővítményfejlesztők számára</li>
+        <li xml:lang="it">Commercio di mercato</li>
+        <li xml:lang="it">Six new maps added and three old maps removed</li>
+        <li xml:lang="it">Distretti economici</li>
+        <li xml:lang="it">Molti miglioramenti all'Enciclopedia dentro alla partita</li>
+        <li xml:lang="it">Download website maps as add-ons</li>
+        <li xml:lang="it">New visualisation modes in the editor</li>
+        <li xml:lang="it">Many new capabilities for add-on developers</li>
+        <li xml:lang="lt">prekyba rinkoje</li>
+        <li xml:lang="lt">Pridėti šeši nauji žemėlapiai ir pašalinti trys seni</li>
+        <li xml:lang="lt">Ekonominiai rajonai</li>
+        <li xml:lang="lt">Daugelis patabulinimų žaidimo Enciklopedijoje</li>
+        <li xml:lang="lt">Atsisiųsti tinklalapio žemėlapius kaip priedus</li>
+        <li xml:lang="lt">Nauji atvaizdavimo režimai redagavimo programoje</li>
+        <li xml:lang="lt">Daug naujų galimybių priedų kūrėjams</li>
         <li xml:lang="nds">Hannel in Markten</li>
         <li xml:lang="nds">Sess neje Kaarten hentoföögt un dree olle Kaarten wegdaan</li>
         <li xml:lang="nds">Weertskupp-Distrikten</li>
@@ -396,6 +459,13 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="nl">Download websitekaarten als add-ons</li>
         <li xml:lang="nl">Nieuwe visualisatiemodi in de editor</li>
         <li xml:lang="nl">Veel nieuwe mogelijkheden voor ontwikkelaars van add-ons</li>
+        <li xml:lang="nn">Marknadshandel</li>
+        <li xml:lang="nn">Seks nye kart er lagde til og tre gamle kart er fjerna</li>
+        <li xml:lang="nn">Økonomidistrikt</li>
+        <li xml:lang="nn">Mange forbetringar i oppslagsverket i spelet</li>
+        <li xml:lang="nn">Last ned kart frå nettsida som tillegg</li>
+        <li xml:lang="nn">Nye visningsmodusar i editoren</li>
+        <li xml:lang="nn">Mange nye moglegheiter for tilleggsutviklarar</li>
         <li xml:lang="pl">Handel na rynku</li>
         <li xml:lang="pl">Sześć nowych map dodanych i trzy stare usunięte.</li>
         <li xml:lang="pl">Dzielnica gospodarcza</li>
@@ -403,6 +473,20 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="pl">Pobierz mapy i dodatki</li>
         <li xml:lang="pl">Nowe tryby wizualizacji w edytorze</li>
         <li xml:lang="pl">Wiele nowych możliwości dla twórców dodatków</li>
+        <li xml:lang="pt">Trocas de Mercado</li>
+        <li xml:lang="pt">Seis novos mapas foram adicionados e três mapas velhos removidos</li>
+        <li xml:lang="pt">Distritos Económicos </li>
+        <li xml:lang="pt">Many improvements to the in-game Encyclopedia</li>
+        <li xml:lang="pt">Descarregar mapas do website como add-ons</li>
+        <li xml:lang="pt">Novos modos de visualização no editor</li>
+        <li xml:lang="pt">Many new capabilities for add-on developers</li>
+        <li xml:lang="pt_BR">Trocas comerciais</li>
+        <li xml:lang="pt_BR">Seis novos mapas foram adicionados e três mapas antigos removidos</li>
+        <li xml:lang="pt_BR">Distritos econômicos</li>
+        <li xml:lang="pt_BR">Muitas melhorias na enciclopédia do jogo</li>
+        <li xml:lang="pt_BR">Baixe mapas do site como add-ons</li>
+        <li xml:lang="pt_BR">Novos modos de visualização no editor</li>
+        <li xml:lang="pt_BR">Muitas novas funcionalidades para desenvolvedores de add-ons</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -410,92 +494,25 @@ Widelands ayrıca size yapay zeka ile meydan okur.
         <li xml:lang="sk">Mapy z webstránky sa dajú stiahnuť ako doplnky</li>
         <li xml:lang="sk">Nové zobrazenia v editore</li>
         <li xml:lang="sk">Veľa nových funkcií pre vývoj doplnkov</li>
+        <li xml:lang="sv">Marknadshandel</li>
+        <li xml:lang="sv">Sex nya kartor tillagda och tre gamla kartor borttagna</li>
+        <li xml:lang="sv">Ekonomidistrikt</li>
+        <li xml:lang="sv">Många förbättringar till spelets uppslagsverk</li>
+        <li xml:lang="sv">Ladda ner webbplatskartor som tillägg</li>
+        <li xml:lang="sv">Nya visuella lägen i redigeraren</li>
+        <li xml:lang="sv">Många nya förmågor för tilläggsutvecklare</li>
+        <li xml:lang="tr">Alışveriş - ticaret</li>
+        <li xml:lang="tr">6 yeni harita eklendi, 3 eski harita kaldırıldı</li>
+        <li xml:lang="tr">Ekonomi bölgeleri</li>
+        <li xml:lang="tr">Oyun içi ansiklopediye birtakım iyileştirmeler</li>
+        <li xml:lang="tr">Site haritalarını eklentiler olarak indir</li>
+        <li xml:lang="tr">Editörde yeni görüntüleme modları</li>
+        <li xml:lang="tr">Eklenti geliştiricileri için çokça yeni imkan</li>
       </ul></description>
-      <url type="details">https://codeberg.org/wl/widelands/milestone/4647?type=all&amp;state=closed&amp;sort=recentupdate</url>
+      <url type="details">https://www.widelands.org/news/2025/Dec/21/widelands-1-3-released/</url>
     </release>
-    <release date="2024-11-15" version="1.2.1">
-      <description><ul>
-        <li>Bugfix release</li>
-        <li xml:lang="cs">Výpis chyb skriptu</li>
-        <li xml:lang="de">Fehlerbehebung</li>
-        <li xml:lang="fr"> 
-Version de correction de bugs</li>
-        <li xml:lang="hu">Hibajavító kiadás</li>
-        <li xml:lang="nds">Fehler-Ofhelpens-Publizeren</li>
-        <li xml:lang="nl">Bugfix-bericht</li>
-        <li xml:lang="pl">Wydanie poprawkowe</li>
-      </ul></description>
-      <url type="details">https://www.widelands.org/news/2024/Nov/15/widelands-1-2-1-released/</url>
-    </release>
-    <release date="2024-03-30" version="1.2">
-      <description><ul>
-        <li>New Frisian scenario</li>
-        <li>Diplomacy handling by computer players</li>
-        <li>Naval Warfare (preview)</li>
-        <li>Garrisons for ports and headquarters</li>
-        <li>UI Plugins</li>
-        <li>Pinned notes</li>
-        <li>Direct map publishing</li>
-        <li>Enhanced error handling</li>
-        <li xml:lang="cs">Nová kampaň pro kmen Frísů</li>
-        <li xml:lang="cs">Hráči řízení počítačem mohou vyvíjet aktivní diplomacii</li>
-        <li xml:lang="cs">Námořní vojenství (zkušební provoz)</li>
-        <li xml:lang="cs">Vojenská posádka v přístavech a hlavní budově</li>
-        <li xml:lang="cs">Zásuvné moduly uživatelského rozhraní</li>
-        <li xml:lang="cs">K mapě připínatelné poznámky</li>
-        <li xml:lang="cs">Mapy lze publikovat přímo z editoru</li>
-        <li xml:lang="cs">Vylepšena správa chyb</li>
-        <li xml:lang="de">Neues Friesenszenario</li>
-        <li xml:lang="de">Diplomatie mit Computerspielern</li>
-        <li xml:lang="de">Seekriegsführung (Vorschau)</li>
-        <li xml:lang="de">Garnisonen in Häfen und im Hauptquartier</li>
-        <li xml:lang="de">Benutzeroberflächenerweiterungen</li>
-        <li xml:lang="de">Haftnotizen</li>
-        <li xml:lang="de">Direkte Kartenveröffentlichung</li>
-        <li xml:lang="de">Verbesserte Fehlerbehandlung</li>
-        <li xml:lang="fr">Nouveau scénario Frisien</li>
-        <li xml:lang="fr">Diplomatie gérée par les joueurs ordinateurs</li>
-        <li xml:lang="fr">Bataille navale (aperçu)</li>
-        <li xml:lang="fr">garnisons pour les ports et les quartiers-généraux.</li>
-        <li xml:lang="fr">UI Plugin</li>
-        <li xml:lang="fr">Notes épinglées</li>
-        <li xml:lang="fr">Publication de carte en direct</li>
-        <li xml:lang="fr">Gestion d'erreur améliorée</li>
-        <li xml:lang="hu">Új küldetés a fríz hadjáratban</li>
-        <li xml:lang="hu">A számítógépes játékosok is kezelik a diplomáciát</li>
-        <li xml:lang="hu">Tengeri hadviselés (előzetes)</li>
-        <li xml:lang="hu">Helyőrség a kikötőkben és a főhadiszálláson</li>
-        <li xml:lang="hu">Kezelői felület bővítmények</li>
-        <li xml:lang="hu">Térképjelölők</li>
-        <li xml:lang="hu">Térképek feltöltése a szerkesztőből</li>
-        <li xml:lang="hu">Jobb hibakezelés</li>
-        <li xml:lang="nds">Neje Fresen-Rutfödderung</li>
-        <li xml:lang="nds">Künstelk Spelers regeren Betreckens</li>
-        <li xml:lang="nds">Seekrieg (Utkiek)</li>
-        <li xml:lang="nds">Mannskuppen in Muden un Raadhusen</li>
-        <li xml:lang="nds">Schnittstee-Inschuvens</li>
-        <li xml:lang="nds">Faste Anmarkens</li>
-        <li xml:lang="nds">Kaarten stracks publizeren</li>
-        <li xml:lang="nds">Beterer Umgang mit Fehlers</li>
-        <li xml:lang="nl">Nieuw Fries scenario</li>
-        <li xml:lang="nl">Diplomatie door computerspelers</li>
-        <li xml:lang="nl">Oorlogsvoering op zee (preview)</li>
-        <li xml:lang="nl">Garnizoenen voor havens en hoofdkwartier</li>
-        <li xml:lang="nl">UI Plugins</li>
-        <li xml:lang="nl">Vastgepinde opmerkingen</li>
-        <li xml:lang="nl">Directe kaart publicatie</li>
-        <li xml:lang="nl">Verbeterde foutverwerking</li>
-        <li xml:lang="pl">Nowy scenariusz Fryzów</li>
-        <li xml:lang="pl">Obsługa dyplomacji przez graczy komputerowych</li>
-        <li xml:lang="pl">Operacje morskie</li>
-        <li xml:lang="pl">Garnizony dla portów i kwater głównych</li>
-        <li xml:lang="pl">Wtyczki UI</li>
-        <li xml:lang="pl">Przypięte notatki</li>
-        <li xml:lang="pl">Bezpośrednie publikowanie map</li>
-        <li xml:lang="pl">Ulepszona obsługa błędów</li>
-      </ul></description>
-      <url type="details">https://www.widelands.org/news/2024/Mar/30/widelands-1-2-released/</url>
-    </release>
+    <release date="2024-11-15" version="1.2.1"/>
+    <release date="2024-03-30" version="1.2"/>
     <release date="2022-10-23" version="1.1"/>
     <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="~Build 21"/>
@@ -618,13 +635,21 @@ Version de correction de bugs</li>
     <name>The Widelands Development Team</name>
     <name xml:lang="ca">L’equip de desenvolupament del Widelands</name>
     <name xml:lang="cs">Tým vývojářů Widelands</name>
+    <name xml:lang="da">Widelands' udviklingshold</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
+    <name xml:lang="it">Il team di sviluppo di Widelands</name>
+    <name xml:lang="lt">The Widelands kūrėjų komanda</name>
     <name xml:lang="nds">De Widelands Entwickeln-Klottje</name>
     <name xml:lang="nl">Het Widelands Ontwikkeling Team</name>
+    <name xml:lang="nn">Widelands utviklarlag</name>
     <name xml:lang="pl">Zespół rozwojowy Widelands</name>
+    <name xml:lang="pt">A Equipa de Desenvolvimento The Widelands</name>
+    <name xml:lang="pt_BR">Equipe de Desenvolvimento de Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
+    <name xml:lang="sv">Widelands utvecklingsteam</name>
+    <name xml:lang="tr">The Widelands Geliştirici Ekibi</name>
   </developer>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,11 +18,11 @@
 
 #include "editor/tools/decrease_height_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
 int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,

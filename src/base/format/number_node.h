@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 by the Widelands Development Team
+ * Copyright (C) 2021-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,8 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			arg = arg_u.unsigned_val;
 			break;
 		case ArgType::kFloat:
-			if (arg_u.float_val > kMaxInt || arg_u.float_val < -kMaxInt) {
+			if (arg_u.float_val > static_cast<double>(kMaxInt) ||
+			    arg_u.float_val < -static_cast<double>(kMaxInt)) {
 				throw wexception("Floating point value too large: %f", arg_u.float_val);
 			}
 			arg = arg_u.float_val;

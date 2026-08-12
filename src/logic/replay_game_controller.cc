@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2025 by the Widelands Development Team
+ * Copyright (C) 2015-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "logic/game.h"
 #include "logic/playersmanager.h"
 #include "logic/replay.h"
-#include "wui/interactive_base.h"
+#include "ui/wui/interactive_base.h"
 
 ReplayGameController::ReplayGameController(Widelands::Game& game)
    : game_(game), lastframe_(SDL_GetTicks()), time_(game_.get_gametime()) {

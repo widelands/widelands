@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2025 by the Widelands Development Team
+ * Copyright (C) 2006-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
+   METHOD(LuaEconomy, __eq),
    METHOD(LuaEconomy, target_quantity),
    METHOD(LuaEconomy, set_target_quantity),
    METHOD(LuaEconomy, needs),
@@ -61,6 +62,11 @@ void LuaEconomy::__unpersist(lua_State* L) {
 	UNPERS_UINT32("economy", economy_serial)
 	const Widelands::Player& player = get_egbase(L).player(player_number);
 	set_economy_pointer(player.get_economy(economy_serial));
+}
+
+int LuaEconomy::__eq(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>((*get_user_class<LuaEconomy>(L, -1))->get() == get()));
+	return 1;
 }
 
 /* RST

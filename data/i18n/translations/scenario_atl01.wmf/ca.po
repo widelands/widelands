@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2020,2022-2023,2025
+# Juanjo, 2015-2020,2022-2023,2025-2026
 # Juanjo, 2015
+# Júlia Rosell Saldaña, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-04-19 03:04+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Juanjo, 2015-2020,2022-2023,2025\n"
+"Last-Translator: Juanjo, 2015-2020,2022-2023,2025-2026\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,11 +78,11 @@ msgstr "Producció d’aliments"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "El menjar és molt important per les mines i edificis d’entrenament militar. Establiu un bon entorn de treball per produir aliments construint almenys una masoveria de panís, una de negrarrel i un molí. Els dos tipus de farina juntament amb l’aigua d’un pou són els ingredients del pa. Així que també cal que feu una fleca i un pou."
+msgstr "El menjar és molt important per a les mines i els llocs d'entrenament militar. Estableix una cadena de producció d'aliments que funcioni bé construint almenys una granja, una granja d'arrel negra i un molí. Els dos tipus de farina juntament amb l'aigua d'un pou es couran en una fleca per a fer-ne pa. Per això, us caldrà construir una fleca i un pou."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2025
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-01-02 02:52+0000\n"
+"POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2025\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -119,7 +119,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr "Du entscheddst, wat du baust. Vergeet nich – Köhle- un Iesen-Bargwarken bruuken Beer, Marmel- un Gold-Bargwarken bruuken Wien. Alle Bargwarken bruuken tominnsten Happen, de ut Brood OF Fleesk OF Fiss produzeert worden."
+msgstr "Du entscheddst, wat du baust. Vergeet nich – Köhle- un Iesen-Bargwarken bruken Beer, Marmel- un Gold-Bargwarken bruken Wien. Alle Bargwarken bruken tominnsten Happen, de ut Brood OF Fleesk OF Fiss produzeert worden."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
@@ -350,7 +350,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Aver för all de groten Husen bruuken wi betern Baukraam. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
+msgstr "Aver för all de groten Husen bruken wi betern Baukraam. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:204
@@ -384,7 +384,7 @@ msgstr "’t is nett un natürelk klook, Bargwarken to bauen, un ’t maakt uns�
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruuken … aver ick raad an:"
+msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruken … aver ick raad an:"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"

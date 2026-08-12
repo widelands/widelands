@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -276,6 +276,16 @@ Section::Value& Section::create_val(char const* const name, char const* const va
 Section::Value& Section::create_val_duplicate(char const* const name, char const* const value) {
 	values_.emplace_back(name, value);
 	return values_.back();
+}
+
+std::vector<Section::Value> Section::get_values() {
+	return values_;
+}
+
+void Section::mark_values() {
+	for (Section::Value& val : values_) {
+		val.mark_used();
+	}
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1114,8 +1114,14 @@ Soldier& Warehouse::launch_soldier(Game& game,
 	if (!soldiers_are_sorted_) {
 		std::sort(incorporated_soldiers_.begin(), incorporated_soldiers_.end(),
 		          [&game](OPtr<Soldier> a, OPtr<Soldier> b) {
-			          // We're sorting in decreasing order
-			          return a.get(game)->get_total_level() > b.get(game)->get_total_level();
+			          const unsigned level_a = a.get(game)->get_total_level();
+			          const unsigned level_b = b.get(game)->get_total_level();
+			          if (level_a != level_b) {
+				          // We're sorting in decreasing order
+				          return level_a > level_b;
+			          }
+			          // Always use serial as tie-breaker, so sort order remains deterministic.
+			          return a.serial() > b.serial();
 		          });
 		soldiers_are_sorted_ = true;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,13 +72,17 @@ public:
 		save_filename_ = filename;
 	}
 
-	[[nodiscard]] uint32_t last_save_time() const {
+	[[nodiscard]] uint32_t last_save_realtime() const {
 		return last_save_realtime_;
+	}
+	[[nodiscard]] Time last_save_gametime() const {
+		return last_save_gametime_;
 	}
 
 private:
 	uint32_t next_save_realtime_{0U};
 	uint32_t last_save_realtime_{0U};
+	Time last_save_gametime_{0U};
 	Time next_save_min_gametime_;
 	bool initialized_{false};
 	bool allow_saving_{true};

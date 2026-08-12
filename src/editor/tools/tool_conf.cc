@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 
 #include "editor/tools/tool_conf.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 
 ToolConf::ToolConf() : interval(0, 0) {
 }

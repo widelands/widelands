@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2025 by the Widelands Development Team
+ * Copyright (C) 2004-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #define WL_COMMANDS_CMD_SHIP_REFIT_H
 
 #include "commands/command.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 
 namespace Widelands {
 

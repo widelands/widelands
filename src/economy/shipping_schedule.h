@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2025 by the Widelands Development Team
+ * Copyright (C) 2019-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 
 class FileRead;
 class FileWrite;

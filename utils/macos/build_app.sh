@@ -7,15 +7,19 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SOURCE_DIR=$DIR/../../
 
+# Minimum macOS version to support (deployment target)
+# Modern Xcode can build for older deployment targets even with a newer SDK
+OSX_MIN_VERSION="11.0"
+
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
-OSX_MIN_VERSION="12.3"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
 
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
 
 if [ ! -d "$SDK_DIRECTORY" ]; then
-   OSX_MIN_VERSION=$OSX_VERSION
+   # SDK for minimum version not found, use current OS SDK
+   # Note: We keep OSX_MIN_VERSION unchanged - deployment target is independent of SDK version
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
@@ -63,15 +67,9 @@ function MakeDMG {
    cp "$SOURCE_DIR"/COPYING  "$DESTINATION"/COPYING.txt
 
    echo "Creating DMG ..."
-   SUDO=""
    if [ -n "$GITHUB_ACTION" ]; then
       # Sometimes we get resource busy errors in the github actions
       HDI_MAX_TRIES=3
-      # MacOS 13 is the worst
-      if [ "${MATRIX_OS}" = 13 ]; then
-         echo "Running on MacOS 13, run hdiutil as root"
-         SUDO=sudo
-      fi
    else
       HDI_MAX_TRIES=1
    fi
@@ -79,7 +77,7 @@ function MakeDMG {
    while true; do
       HDI_TRY=$(( ++HDI ))
       HDI_RESULT=0
-      $SUDO hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
+      hdiutil create -verbose -fs APFS -volname "Widelands $WLVERSION" \
                     -srcfolder "$DESTINATION" "$DMGFILE" \
          || HDI_RESULT=$?
       if [ $HDI_RESULT -eq 0 ]; then

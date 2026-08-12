@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2025 Widelands Development Team
+# Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2025
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2026
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2016
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2025-06-26 03:25+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2025\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2026\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1347,10 +1347,10 @@ msgstr "Arnt Edelholten in de Naberskupp un maakt daarut Iesenholt, Balsa un Gum
 msgctxt "amazons_building"
 msgid ""
 "This building can produce one rare wood between %1$s and %2$s, depending on "
-"how far the woodcutter has to walk. If all kinds of rare tree are available "
-"within her work area, then one of each kind is produced between %3$s and "
-"%4$s."
-msgstr "Dat Huus bruukt %1$s bit %2$s, um een Edelholt to produzeren, je nadeem, wo wied de Boomslagerske lopen mutt. Wenn ’t all Aarden vun Edelholten in hör Arbeidsgewest gifft, word eens vun elkeen Aard in %3$s bit %4$s produzeert."
+"how far the master woodcutter has to walk. If all kinds of rare tree are "
+"available within her work area, then one of each kind is produced between "
+"%3$s and %4$s."
+msgstr "Dat Huus bruukt %1$s bit %2$s, um een Edelholt to produzeren, je nadeem, wo wied de Meister-Boomslagerske lopen mutt. Wenn ’t all Aarden vun Edelholten in hör Arbeidsgewest gifft, word eens vun elkeen Aard in %3$s bit %4$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -6294,7 +6294,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Nüms kann deeses platte, leckere Pitta-Brood beter maken as de Willen Backers. ’t word na eenem gehemen Rezept ut Weit un Water maakt. Pitta-Brood word in Kneipen, Kröög un Weertshusen bruukt, um Happen, Spiesen un Mahltieden torecttomaken. ’t word ok vun Övens-Boen (Övens-Lager un Slachtenring) verbruukt."
+msgstr "Nüms kann deeses platte, leckere Pitta-Brood beter maken as de Willen Backers. ’t word na eenem gehemen Rezept ut Weit un Water maakt. Pitta-Brood word in Kneipen, Kröög un Weertshusen bruukt, um Happen, Spiesen un Mahltieden torecttomaken. ’t word ok vun Övens-Boen (Övens-Lager un Slachtenring) bruukt."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Beer
 #: ../../../../data/tribes/initialization/barbarians/units.lua:213
@@ -10452,7 +10452,7 @@ msgctxt "empire_ware"
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
 " smithy."
-msgstr "Eenige Husen bruken Stoff. ’t word ok vun de Panzersmee verbruukt."
+msgstr "Eenige Husen bruken Stoff. ’t word ok vun de Panzersmee bruukt."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fish
 #: ../../../../data/tribes/initialization/empire/units.lua:170
@@ -10502,7 +10502,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "De Rieks-Backers maken bannig leckeres Brood ut Mehl un Water. ’t word in Kneipen un Weertshusen bruukt, um Happen un Mahltieden torechttomaken. Brood word ok vun Övens-Boen (Ring, Groter Ring, Övens-Lager) verbruukt."
+msgstr "De Rieks-Backers maken bannig leckeres Brood ut Mehl un Water. ’t word in Kneipen un Weertshusen bruukt, um Happen un Mahltieden torechttomaken. Brood word ok vun Övens-Boen (Ring, Groter Ring, Övens-Lager) bruukt."
 
 #. TRANSLATORS: Helptext for an Empire ware: Beer
 #: ../../../../data/tribes/initialization/empire/units.lua:234
@@ -14170,8 +14170,9 @@ msgstr "Köhle word in Köhle-Bargwarken ofboot of vun eenem Holtköhlbranner in
 #: ../../../../data/tribes/initialization/frisians/units.lua:308
 msgctxt "frisians_ware"
 msgid ""
-"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr "Dat Füür in Backsteen-Brannereen, Smeltereen un Wapensmeden bruukt Köhl."
+"The fires of the brick kilns, furnaces, armor smithies and recycling centers"
+" are fed with coal."
+msgstr "Dat Füür in Backsteen-Brannereen, Smeltereen, Wapensmeden un Verweertereen bruukt Köhl."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
@@ -17280,13 +17281,13 @@ msgstr "Produzeert vun"
 #. consumes a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr "Verbruuker"
+msgstr "Bruuker"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../../../data/tribes/scripting/help/ware_help.lua:128
 msgid "Consumers"
-msgstr "Verbruukers"
+msgstr "Bruukers"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../../../data/tribes/scripting/help/worker_help.lua:53

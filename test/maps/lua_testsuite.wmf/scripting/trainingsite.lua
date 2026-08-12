@@ -236,10 +236,11 @@ function trainingsite_tests:test_illegal_soldier()
    end)
 end
 function trainingsite_tests:test_no_space()
+   self.camp:set_soldiers{[{0,0,0,0}] = 3}
    assert_error("no_space", function()
       self.camp:set_soldiers{[{0,0,0,0}] = 13}
-  end)
-   assert_equal(12, _cnt(self.camp:get_soldiers("all")))
+   end)
+   assert_equal(3, _cnt(self.camp:get_soldiers("all")))
 end
 function trainingsite_tests:test_foreign_trainingsite_new_tribe_fails()
    local field = map:get_field(13,13)

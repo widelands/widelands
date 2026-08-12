@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2025 by the Widelands Development Team
+ * Copyright (C) 2018-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,6 +44,9 @@ enum class ButtonStyle {
 };
 
 PanelStyle to_panel_style(ButtonStyle);
+ButtonStyle to_button_style_primary(PanelStyle);
+ButtonStyle to_button_style_secondary(PanelStyle);
+ButtonStyle to_button_style_menu(PanelStyle);
 
 struct ButtonStyleInfo {
 	ButtonStyleInfo(const UI::TextPanelStyleInfo* init_enabled,

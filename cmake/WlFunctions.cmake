@@ -1,5 +1,4 @@
 # Utilize cmake_parse_arguments standard function to parse for common arguments.
-include(CMakeParseArguments)
 macro(_parse_common_args ARGS)
   set(OPTIONS
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
@@ -133,8 +132,6 @@ macro(_common_compile_tasks)
   # And a few -D do not hurt anything.
   if(OPTION_USE_GLBINDING)
     add_definitions("-DUSE_GLBINDING")
-  elseif(${CMAKE_VERSION} VERSION_LESS 3.9.0)
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_OPENGL)
@@ -148,10 +145,8 @@ macro(_common_compile_tasks)
         target_link_libraries(${NAME} glbinding::glbinding)
       endif()
     else()
-      if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
-        wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
-        target_link_libraries(${NAME} ${GLEW_LIBRARY})
-        target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      if (OPTION_BUILD_WINSTATIC)
+        target_link_libraries(${NAME} GLEW::glew_s)
       else()
         if (OPTION_BUILD_WINSTATIC)
           target_link_libraries(${NAME} GLEW::glew_s)

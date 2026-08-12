@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2025 by the Widelands Development Team
+ * Copyright (C) 2012-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,9 +18,9 @@
 
 #include "editor/tools/history.h"
 
-#include "editor/editorinteractive.h"
 #include "editor/tools/action_args.h"
 #include "editor/tools/tool_action.h"
+#include "ui/editor/editorinteractive.h"
 
 // === EditorActionArgs === //
 

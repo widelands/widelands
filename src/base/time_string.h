@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2025 by the Widelands Development Team
+ * Copyright (C) 2008-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #define WL_BASE_TIME_STRING_H
 
 #include <cstdint>
+#include <ctime>
 #include <string>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in
@@ -30,6 +31,10 @@ char* timestring();
 /// Turn a month number into a short, localized month string,
 /// 0 = "Jan" ... 11 = "Dec"
 std::string localize_month(int8_t month);
+std::string localize_day_of_month(int8_t dom);
+
+/// Format a date and time localized with minutes precision.
+std::string format_datetime(const std::time_t& time);
 
 /// Get a string representation of the game time as hhh:mm:ss. If Time
 /// represents more than 999 hours, it wraps around. Use this in table columns

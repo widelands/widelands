@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include "io/streamwrite.h"
 #include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"

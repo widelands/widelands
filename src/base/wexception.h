@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2025 by the Widelands Development Team
+ * Copyright (C) 2002-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,11 +52,11 @@ public:
 	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	[[nodiscard]] const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept [[clang::lifetimebound]] override {
 		return what_.c_str();
 	}
 
-	[[nodiscard]] const std::string& file() const {
+	[[nodiscard]] const std::string& file() const [[clang::lifetimebound]] {
 		return file_;
 	}
 	[[nodiscard]] uint32_t line() const {

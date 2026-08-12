@@ -91,14 +91,17 @@ update_statistics() {
   fi
 }
 
-gitAddGeneratedFiles() {
+gitAddChanges() {
   # Stage changes
+  # - Translations
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
   # - Authors
   git add 'data/txts/*.lua' || true
   # - Locale data
   git add 'data/i18n/*.lua' || true
   # - MetaInfo
-  git add xdg/org.widelands.Widelands.metainfo.xml xdg/org.widelands.Widelands.desktop || true
+  git add xdg/org.widelands.Widelands.metainfo.xml xdg/org.widelands.Widelands.desktop \
+          xdg/release_urls.json || true
   # - Statistics
   git add data/i18n/translation_stats.conf || true
 }
@@ -138,11 +141,8 @@ update_metainfo
 if [ -n "$(git status -s)" ]; then
   update_statistics
 
-  # Stage translations
-  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json' \
-          'xdg/release_urls.json'
-  # and generated files
-  gitAddGeneratedFiles
+  # Stage changes
+  gitAddChanges
 
   # commit translations
   git commit -m "Fetched translations and updated data."
@@ -182,10 +182,10 @@ if [ -n "$(git status -s)" ]; then
   update_statistics
 
   # Stage changes
-  # - Translations and templates
-  git add 'data/i18n/translations/*/*.po' 'data/i18n/translations/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
-  # - generated files
-  gitAddGeneratedFiles
+  # - catalogs
+  git add 'data/i18n/translations/*/*.pot' || true
+  # - everything else
+  gitAddChanges
 
   # Commit
   git commit -m "Updated translations catalogs and statistics."

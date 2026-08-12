@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 by the Widelands Development Team
+ * Copyright (C) 2025-2026 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_PAGINATION_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/pagination.h"
+#include "ui/basic/pagination.h"
 
 namespace LuaUi {
 

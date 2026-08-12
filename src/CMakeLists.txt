@@ -32,12 +32,8 @@ add_dependencies(shaders run_build_deps)
 # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
-#include the cmake version dependend macro _include_directories
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectoriesOld.cmake)
-else (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
-endif (CMAKE_VERSION VERSION_LESS 2.8.11)
+#include macro _include_directories
+include (${CMAKE_SOURCE_DIR}/cmake/IncludeDirectories.cmake)
 
 wl_library(build_info
   SRCS
@@ -115,12 +111,10 @@ add_subdirectory(network)
 add_subdirectory(notifications)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-add_subdirectory(ui_basic)
-add_subdirectory(ui_fsmenu)
+add_subdirectory(ui)
 if (OPTION_BUILD_WEBSITE_TOOLS)
   add_subdirectory(website)
 endif (OPTION_BUILD_WEBSITE_TOOLS)
-add_subdirectory(wui)
 
 # TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
 # library.
@@ -138,10 +132,10 @@ wl_library(widelands_ball_of_mud
     base_exceptions
     base_geometry
     base_macros
+    base_math
     base_random
     base_time_string
     build_info
-    editor
     graphic
     graphic_fonthandler
     graphic_functions
@@ -160,11 +154,12 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
+    ui_editor
     ui_fsmenu
+    ui_shared_chat
+    ui_shared_maps_ui
     widelands_options
-    wui
-    wui_chat_ui
-    wui_common_mapdetails
+    wui_interactive
 )
 
 wl_library(widelands_options
