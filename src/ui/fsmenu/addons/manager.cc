@@ -20,10 +20,7 @@
 
 #include <algorithm>
 #include <cstdlib>
-#include <iomanip>
 #include <memory>
-#include <ostream>
-#include <sstream>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -71,17 +68,6 @@ std::string filesize_string(const uint32_t bytes) {
 		return format_l(_("%.2f kB"), (bytes / 1000.f));
 	}
 	return format_l(_("%u bytes"), bytes);
-}
-
-std::string time_string(const std::time_t& time) {
-	std::ostringstream oss("");
-	try {
-		oss.imbue(std::locale(i18n::get_locale()));
-	} catch (...) {
-		// silently ignore
-	}
-	oss << std::put_time(std::localtime(&time), "%c");
-	return oss.str();
 }
 
 static inline std::function<bool(const std::shared_ptr<AddOns::AddOnInfo>,
