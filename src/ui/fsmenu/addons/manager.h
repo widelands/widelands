@@ -45,7 +45,6 @@ class MapRow;
 class ProgressIndicatorWindow;
 class RemoteAddOnRow;
 
-std::string time_string(const std::time_t& time);
 std::string filesize_string(uint32_t bytes);
 std::string underline_tag(const std::string& text);
 
