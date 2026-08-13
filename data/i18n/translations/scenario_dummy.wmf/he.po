@@ -18,8 +18,8 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Not yet implemented"
-msgstr ""
+msgstr "טרם מומש"
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:14
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "מצטערים, המפה הזו טרם מומשה."
