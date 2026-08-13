@@ -20,140 +20,140 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "אונדון"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "הקם כלכלה בסיסית"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "התחל לאסוף חומרי בניין בסיסיים, ובצר את המחנה."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "בנה בקתת חוטב עצים"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "בנה עמדת קק\"ל"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr ""
+msgstr "בנה מחצבה"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "בנה מקשה עץ"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "בנה זקיף בגבול המזרחי"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "בסופו של דבר כדאי גם לבנות חצר קנים וכבשן סיד."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "הקם כלכלת מזון קטנה"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "הקם כלכלת מזון בסיסית כדי לספק מזון לאנשיך."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "בנה בקתת דייג"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "בנה בקתת צייד"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
-msgstr ""
+msgstr "בנה באר"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr ""
+msgstr "בנה חווה"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
-msgstr ""
+msgstr "בנה מאפייה"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "בנה חוות בקר"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "זכור לבנות חוות בקר"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "ככל שהדרכים שלך מתארכות והכלכלה גדלה, כדאי לך לנצל היטב את השוורים כדי לסייע בהעברת סחורות מהר יותר."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr ""
+msgstr "בנה מגדל"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "בנה מגדל בגבול הצפון-מזרחי של שטחך כדי לקבל טווח ראייה גדול יותר ולהגן על אנשיך מפני התקפות פתע של אויבים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "המשך לחקור"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "בנה מבנים צבאיים נוספים כדי לחקור את האזור סביב המפקדה ולהבטיח את ביטחון אנשיך."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "בנה תשתית כרייה"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "הרחב את שטחך אל ההרים, שלח גיאולוגים לחפש עפרות ופחם, ובנה כלכלת כרייה עם מכרות, מסבאות, בתי התכה ובית מלאכת מתכת."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "בנה מבצר"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "בנה מבצר ממזרח להרים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "בנה תשתית אימונים"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "בנה קסרקטין כדי לאמן כמה חיילים בסיסיים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "בנה זירת קרב ומחנה אימונים ממערב להרים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:122
@@ -163,23 +163,23 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "שדרג את בית מלאכת המתכת שלך לבית מלאכת גרזנים כדי לייצר נשק, ובנה בית מלאכת מתכת נוסף כדי להבטיח את ייצור הכלים. כשהנפח יגיע לרמה הבאה שלו (רב-נפחים), תוכל אפילו לשדרג את בית מלאכת הגרזנים למפעל מלחמה, שיפיק נשק נוסף."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "בנה נפחיית קסדות ממערב להרים כדי לספק לחייליך שריון טוב יותר."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "בנה מחסן"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "בנה מחסן ממערב להרים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
@@ -187,18 +187,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "מחסנים דומים למפקדה שלך, בהבדל אחד: הם אינם מוגנים בידי חיילים. לרוב כדאי לבנות מחסן כאשר שטחך גדל והדרכים אל המפקדה מתארכות והולכות."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 msgid "Build training sites"
-msgstr ""
+msgstr "בנה מתקני אימונים"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "בנה קסרקטין, זירת קרב ומחנה אימונים ממערב להרים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
@@ -206,30 +206,30 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "הקסרקטין מאמן חיילים בסיסיים, בעוד שמתקני אימונים כמו מחנה אימונים או זירת קרב משמשים לאימון חיילים בתכונותיהם השונות. תכונות אלה חשובות בקרבות, וככל שהחייל טוב יותר, כך גדל הסיכוי לנצח בקרב."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "התכונות הן: חיים, תקיפה, הגנה וחמיקה."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr ""
+msgstr "בנה ייצור נשק"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "בנה נפחיית קסדות"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "השמד את צבאו של קליטאת'"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "השמד את צבאו של קליטאת' והרחב את שטחך מזרחה."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
@@ -237,27 +237,27 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "כדי לתקוף אויב, עליך ללחוץ על דלת מבנה צבאי של היריב. יופיע תפריט שיאפשר לך לבחור את מספר החיילים שיתקפו. כשתסיים לקבוע את המספר, לחץ על הצלב ('התחל התקפה')."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "מתקפה צבאית על אל-ת'ונראן"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "השמד את כל כוחותיהם של שני אחיו של ת'רון כדי לשחרר את מעגל הכס."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
-msgstr ""
+msgstr "קרוב לבית"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "ת'רון נראה מודאג…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:158
@@ -265,20 +265,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "בימים האחרונים התקרבנו לבירתנו. אנשים רבים כבר הצטרפו אלינו בצעדה ותלו בי את תקוותם. עם זאת, אני חושש שאיננו חזקים דיים כדי לצאת לקרב נגד אחיי."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "לעת עתה, אנו נחים בגבולות היער העתיק ומתכוננים לימים הבאים."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
-msgstr ""
+msgstr "עוד יום קר"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -289,15 +289,15 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "הידיעות שהביא סיור אינן משמחות. מרגלינו מספרים לנו ששבטי המלחמה עדיין משתוללים בקרב, אך נדמה שכמה מהחיילים הוותיקים וראשי השבטים כבר עייפו ממלחמה חסרת טעם זו. קליטאת', בנו של קון, הוא ראשון מנהיגי המלחמה שעזב את אל-ת'ונראן, ובכך הותיר את צדו חלש וחשוף. לפי דיווחי הסיירים שלי, הוא דרך על האדמות הנמוכות סביב הבירה, ומאבטח את טבעות הביצור החיצוניות."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
-msgstr ""
+msgstr "ספקות"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "בולדרת' מנענע בראשו…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:178
@@ -308,12 +308,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "ת'רון מבקש להאמין שקליטאת' עייף מהלחימה ויהיה מוכן להצטרף אלינו כשנצעד להשיב את החוק והסדר על כנם באל-ת'ונראן. אבל אני לא בטוח בכך. קליטאת' הוא בנו של אחד המצביאים האדירים בכוחותינו, ומשפחתו מעולם לא ממש אהבה את הרעיון להשתחוות בפני דגלו של צ'אט-קארות'. מדוע שיצעד עם בנו של צ'אט-קארות' כדי להשיב את מורשתו ואת הכס?"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid "The Story Continues"
-msgstr ""
+msgstr "הסיפור נמשך"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:232
@@ -321,7 +321,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:267
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Boldreth says:"
-msgstr ""
+msgstr "בולדרת' אומר:"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:186
@@ -329,11 +329,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "עם זאת, ת'רון אינו מוכן להקשיב לספקותיי. הוא מבקש להרחיב את ביצורינו עד לגבולות שטחו של קליטאת' ולאחד מחדש את כוחותיו. עליי לפקוח עין על כל מה שקורה כאן."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "ת'רון מדבר בביטחון."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:194
@@ -344,7 +344,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "קו החזית של כוחותיי התרחב עד לקצה היערות. חורף ארוך וקר וכה הרבה מייל מאחורינו. הביצור שהקמנו סביב אונדון יבטיח לנו אספקה מהירה של אנשים וסחורות, וברגע שאל-ת'ונראן תהיה בידיי, שתי הערים תחוברנה בתשתית טובה וברת-הגנה. ובכל זאת, אני מקווה שלא אלך לבדי במשימה הזו, אני מקווה שקליטאת' בנו של קון ייענה לקריאתי."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -354,7 +354,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
-msgstr ""
+msgstr "ת'רון אומר:"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:202
@@ -365,15 +365,15 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "שלחתי אנשים לפגוש את קליטאת' במבצרו. הוא חסם את הכניסה הראשית לשעבר לבירה ומנסה להקים טבעת מצור סביב אל-ת'ונראן. הוא לא יניח לאיש להיכנס לעיר או לצאת ממנה כל עוד הטבעת שלמה. עד כה, הוא לא השיב לאף אחת מהודעותיי. אבל הזמן שאני מבלה בהמתנה לא יירד לטמיון. אמשיך לאמן את חיילי ולהתכונן לקרב."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "בן לווייתך הנאמן"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "בולדרת' צועק בקול!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:209
@@ -382,11 +382,11 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "הממזר ההוא! רק איש אחד מסיור הגבול שלנו חזר בחיים. הוא נשא הודעה מקליטאת', שאמרה שהוא יעניש כל תזוזה של כוחותינו בדמם שלהם! איננו יכולים לקבל התנהגות כזו. מעתה, יש מלחמה בינינו לבין קליטאת'!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "ביצור המורדים"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:220
@@ -396,7 +396,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "הבוגד נטש את צבאותיו למות היכן שנפלו, כשראה שלא יוכל לעצור את כוחותיי. קליטאת' נעלם בתוך מהומת המלחמה, אך זה כבר לא מעניין אותי. שיברח ושייזכר לעד כראש שבט שלא רצה להשתחוות בפני הכס העצי — כס שכעת שלי לקחתו."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:223
@@ -406,7 +406,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "יתרה מזאת, בריחתו הביאה לנו תועלת גדולה: כל השנה קליטאת' היה עסוק כל כך בלחימה עד שלא טרח לאגור מספיק מזון לכל אנשיו. עכשיו משברח, הרעב גרם לחלק מחסידיו הצעירים לערוק. קבוצה זו מחזיקה בביצור חזק על הטבעת הראשית."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -415,11 +415,11 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "אבל יש עוד חדשות: הסיירים שלי דיווחו ששני השבטים המשתוללים של אחיי שרויים בתוהו ובוהו, ובקושי הבחינו בסכנה החדשה העומדת להכות בהם. עם זאת, אני מניח שגם אם היו מבחינים, לא היה אכפת להם — מסונוורים מזעם ומשנאה, איני מאמין שנותר בהם עוד שמץ של שכל."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
-msgstr ""
+msgstr "חורף בפתח"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -429,15 +429,15 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "הבוקר מצאתי את ת'רון מוטרד. הוא חזר מסיורו מאוחר בלילה שעבר וישב נשען על עץ, משגיח על המחנה. מספר המריבות והסכסוכים רק גדל, והחורף אוחז בנו בחוזקה. עלינו לאגור מזון במחסנינו כדי לשרוד את החורף הארוך והקר!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "היועץ"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "חנתרוך' מהנהן."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:242
@@ -447,22 +447,22 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "בולדרת' צודק! אין לנו מספיק מזון כדי לשרוד חורף ארוך וקר. עלינו להתחיל לבנות באר, בקתת דייג ובקתת צייד. ואם נמצא מספיק מקום, כדאי גם שנבנה חווה ומאפייה! אחד מחקלאינו נראה חכם למדי — הוא כבר הצליח להצמיח כמה יבולים באדמה הקרה הזו."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "כלכלת המזון הושלמה"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "חנתרוך' זה עתה הודיע לי שכלכלת המזון הבסיסית שלנו הוקמה בהצלחה. סוף סוף, איש מאיתנו לא צריך לפחד מרעב עוד."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
-msgstr ""
+msgstr "עקבות"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:260
@@ -471,11 +471,11 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "ת'רון סיפר לי שגילה עקבות בשלג צפון-מזרחית ליישוב שלנו. הוא הורה לנו לבנות מגדל, כדי לקבל טווח ראייה גדול יותר על האזור סביב האולם שלנו ולהגן על אנשינו מפני התקפות פתע."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
-msgstr ""
+msgstr "חקירה נוספת"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:269
@@ -487,7 +487,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "הביצור הראשון שהזמין ת'רון הושלם זה עתה. כרגע הוא מבקש להביא אמון ואמונה לאלה שחיים בין חומות בית הגידול החדש שלנו, אשר קראנו לו 'אונדון', שפירושו 'אלה שממתינים' בלשון העתיקה. אבל ת'רון עדיין לא מרוצה — ואני מבין את חששותיו היטב: היערות עמוקים, והגבול אל-ת'ונראן קרוב. אני בטוח שיש שם בחוץ אלף סכנות גדולות יותר מהעקבות הבלתי-מזוהות."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -496,11 +496,11 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "כדי להשקיף על שטח נרחב יותר סביב האולם שלנו, עלינו לחקור עוד ולהציב עוד שומרים וסיירים כדי לפקח על הגבול ולעקוב אחר המלחמות המשתוללות ממש על סף דלתנו. ואז, ורק אז, נהיה מוכנים כשהצרה תבקש לכבוש את יערותינו."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
-msgstr ""
+msgstr "הרים נמצאו"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:281
@@ -510,11 +510,11 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "זה עתה דיברתי עם ראש הסיור שלנו. הוא סיפר לי שהם מצאו הרים כלשהם צפון-מזרחית ומזרחית לשטחנו. עם קצת מזל, זה עשוי לפתוח הזדמנות חדשה לחמש מחדש את אנשינו, כי ככל שאני זוכר, רוב ההרים ממערב לאל-ת'ונראן מכילים פחם וכמה עפרות מתכת."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "כלכלת הכרייה הושלמה"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:290
@@ -522,11 +522,11 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "זה עתה הודיעו לי שכלכלת הכרייה שלנו החלה לעבוד. החדשות האלה העלו חיוך על פניי — גם אם החלק הקשה ביותר עדיין מחכה לביצוע, עכשיו הנפחים שלנו ייתנו את המיטב כדי להקל עוד יותר על חיינו."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
-msgstr ""
+msgstr "נדרש מבצר"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:298
@@ -537,11 +537,11 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "בולדרת' ואני חקרנו זה עתה את האזור סביב שלושת ההרים. הבעיה האסטרטגית העיקרית של האזור הזה נראית כמו שני מעברים גדולים — אחד בצפון ואחד בדרום ההר המרכזי. קשה למדי לשלוט במעברים האלה, ולכן נדמה לי שיש לנו רק סיכוי אחד לאבטח את ההרים מידי האויב: עלינו לבנות מבצר ממזרח להרים!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
-msgstr ""
+msgstr "המבצר הושלם"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:307
@@ -550,11 +550,11 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "סוף סוף! המבצר הושלם זה עתה, כך שכניסת היישוב שלנו אמורה להיות בטוחה לעת עתה. לעתיד, אולי נשקול לבנות עוד ביצורים כמו מחסומים ומגדלים במעברים, אבל כרגע נוכל לנשום לרווחה."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "כלכלה משודרגת ואימונים"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:315
@@ -562,7 +562,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "נדמה שכלכלת הכרייה שלנו עובדת כשורה, וזה כבר חדשות טובות! בכל אופן, עדיין יש הרבה גברים ונשים ממתינים באולם שלנו למשימה, כדי שיוכלו לסייע לחיילינו להתכונן למלחמה הצפויה."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -574,7 +574,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "הגיאולוגים שלנו מצאו עוד הרבה משקעים של עפרת ברזל, פחם ואפילו זהב. עלינו לשדרג את המכרות הנוכחיים שלנו ברגע שהכורים שלנו יהיו מנוסים יותר. עלינו לבנות עוד כמה מכרות, תשתית מזון גדולה יותר כדי לספק לאנשינו תמיד מזון מספיק, וכן כלכלת עיבוד נוספת. אבל זה עדיין לא הכול — רוב חיילינו צעירים למדי, ואין להם לא נשק טוב ולא אימון ראוי. עלינו לבנות מתקני אימונים כדי להכין אותם למשימותיהם הבאות."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:328
@@ -583,7 +583,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "אחיי וחייליהם מתים, והותירו אחריהם אש והרס. בכל ההריסות לא הצלחתי למצוא ולו איש או אישה מן העם הפשוט, ולכן איני יכול אלא לקוות שברחו משדה הקרב האכזרי הזה והחלו בחיים טובים יותר במקום אחר."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -594,21 +594,21 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "לא נותר דבר מהיופי שאני זוכר, רק הריסות נותרו מהבירה הישנה. אני עצוב אך גם מוקל. מעולם לא קיוויתי לראות שוב את יופייה הישן של אל-ת'ונראן — רק לפני כמה חודשים תהיתי אם אי פעם אדרוך שם שוב. עכשיו העיר הישנה בידיי מחדש, ולא אהסס לבנות אותה מחדש בכל הכוח שיש לעמי. אינני יכול לחכות לראות אותה שוב ביופייה הישן."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
-msgstr ""
+msgstr "ניצחון"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "השלמת את המשימה האחרונה של מסע ההדרכה הברברי. אתה יכול להמשיך לשחק אם תרצה, או לעבור למערכה הבאה."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
-msgstr ""
+msgstr "מתקפה צבאית"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:341
@@ -616,7 +616,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "אם כך יהי כן, המצביאים כבר בחוץ מארגנים את כוחותיי, ובולדרת' עצמו יוביל את המכה הראשונה. אני ארכב לצידו, כדי לשחרר את אל-ת'ונראן ממלחמה זו ולהשיב את השלום לבירתנו."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:344
@@ -625,20 +625,20 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "כשהשמש הצעירה תזרח מעל העצים מחר בבוקר, אצווה על המתקפה. עם רדת החשכה, אחגוג את ניצחוני באולמות העץ של אדון המלחמה, ואקריב טלה רך יומו לכבוד אבי, שעיניו נשואות אליי היום."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
-msgstr ""
+msgstr "אם כך יהי כן!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
-msgstr ""
+msgstr "הובלה מהירה יותר"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "חנתרוך' אומר:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:355
@@ -646,4 +646,4 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "ראש השבט, זכור את הסבלים המסכנים: הדרכים שלנו הולכות ומתארכות והנטל על כתפיהם לעולם לא נעשה קל יותר. עלינו לגדל עוד שוורים כדי להקל על עבודתם ולייעל את ההובלה שלנו."
