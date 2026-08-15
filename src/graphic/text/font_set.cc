@@ -22,7 +22,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
