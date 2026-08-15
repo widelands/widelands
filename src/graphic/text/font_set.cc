@@ -186,8 +186,9 @@ FontSets::FontSets() {
 	try {  // Begin read locales table
 		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
 
-		for (const std::string& localename : all_locales->keys<std::string>()) {  // iterate over all locales
-			try {  // Begin read locale from table
+		for (const std::string& localename :
+		     all_locales->keys<std::string>()) {  // iterate over all locales
+			try {                                  // Begin read locale from table
 				std::unique_ptr<LuaTable> locale_table = all_locales->get_table(localename);
 				locale_table
 				   ->do_not_warn_about_unaccessed_keys();  // We are only reading the fontset names
