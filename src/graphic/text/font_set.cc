@@ -195,7 +195,7 @@ FontSets::FontSets() {
 		for (const std::string& filename : files) {  // Begin scan locales directory
 			char const* const path = filename.c_str();
 			if ((strcmp(FileSystem::fs_filename(path), "locales_translators.json") == 0) ||
-					g_fs->is_directory(path)) {
+			    g_fs->is_directory(path)) {
 				continue;
 			}
 
