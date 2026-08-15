@@ -124,7 +124,7 @@ function dependencies(items, text)
    local images = img(items[1].icon_name)
    for k,v in ipairs({table.unpack(items,2)}) do
       if wl.ui.is_rtl() then
-         images = img(v.icon_name)  .. img("images/richtext/arrow-left.png")  .. images 
+         images = img(v.icon_name)  .. img("images/richtext/arrow-left.png")  .. images
       else
          images = images ..  img("images/richtext/arrow-right.png") ..  img(v.icon_name)
       end
