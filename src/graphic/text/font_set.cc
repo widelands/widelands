@@ -184,7 +184,7 @@ FontSets::FontSets() {
 	   ->do_not_warn_about_unaccessed_keys();  // We are only reading partial information as needed
 
 	// Now assign a fontset to each locale
-	FilenameSet files = g_fs->list_directory("locale");
+	FilenameSet files = g_fs->list_directory("i18n/locales");
 	std::string localename;
 
 	try {  // Begin read locales table
@@ -194,8 +194,8 @@ FontSets::FontSets() {
 
 		for (const std::string& filename : files) {  // Begin scan locales directory
 			char const* const path = filename.c_str();
-			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
-			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || !g_fs->is_directory(path)) {
+			if ((strcmp(FileSystem::fs_filename(path), "locales_translators.json") == 0) ||
+					g_fs->is_directory(path)) {
 				continue;
 			}
 
