@@ -123,10 +123,19 @@ function dependencies(items, text)
    end
    local images = img(items[1].icon_name)
    for k,v in ipairs({table.unpack(items,2)}) do
-      images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
+      if wl.ui.is_rtl() then
+         images = img(v.icon_name)  .. img("images/richtext/arrow-left.png")  .. images 
+      else
+         images = images ..  img("images/richtext/arrow-right.png") ..  img(v.icon_name)
+      end
    end
-   return div("width=100%",
-              styles.as_paragraph("wui_image_line", images .. space() .. text))
+   if wl.ui.is_rtl() then
+      return div("width=100%",
+              styles.as_p_with_attr("wui_image_line", "align=left", text .. space() .. images))
+   else
+      return div("width=100%",
+              styles.as_p_with_attr("wui_image_line", "align=left", images .. space() .. text))
+   end
 end
 
 
