@@ -183,24 +183,11 @@ FontSets::FontSets() {
 	fontsets_table
 	   ->do_not_warn_about_unaccessed_keys();  // We are only reading partial information as needed
 
-	// Now assign a fontset to each locale
-	FilenameSet files = g_fs->list_directory("i18n/locales");
-	std::string localename;
-
 	try {  // Begin read locales table
 		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
-		all_locales->do_not_warn_about_unaccessed_keys();  // We are only reading partial information
-		                                                   // as needed
 
-		for (const std::string& filename : files) {  // Begin scan locales directory
-			char const* const path = filename.c_str();
-			if ((strcmp(FileSystem::fs_filename(path), "locales_translators.json") == 0) ||
-			    g_fs->is_directory(path)) {
-				continue;
-			}
-
+		for (const std::string& localename : all_locales->keys<std::string>()) {  // iterate over all locales
 			try {  // Begin read locale from table
-				localename = FileSystem::filename_without_ext(path);
 				std::unique_ptr<LuaTable> locale_table = all_locales->get_table(localename);
 				locale_table
 				   ->do_not_warn_about_unaccessed_keys();  // We are only reading the fontset names
@@ -217,7 +204,7 @@ FontSets::FontSets() {
 				log_err("Could not read locale fontset for: %s\n", localename.c_str());
 				locale_fontsets.insert(std::make_pair(localename, FontSets::Selector::kDefault));
 			}  // End read locale from table
-		}  // End scan locales directory
+		}
 	} catch (const LuaError& err) {
 		log_err("Could not read locales fontset information from file: %s\n", err.what());
 		return;  // Nothing more can be done now.
