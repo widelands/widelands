@@ -12,11 +12,19 @@ include "scripting/help.lua"
 --  =======================================================
 
 function consumed_items_line(text, images)
-   return
-      div("width=100%",
-         div("width=50%", p(vspace() .. text .. space())) ..
-         div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
-      )
+   if wl.ui.is_rtl() then
+      return
+         div("width=100%",
+            div("width=50%", styles.as_p_with_attr("wui_image_line", "align=right", images)) ..
+            div("width=*", p("align=right", vspace() .. space() .. text))
+         )
+   else
+      return
+         div("width=100%",
+            div("width=50%", p(vspace() .. text .. space())) ..
+            div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
+         )
+   end
 end
 
 -- RST
@@ -122,19 +130,18 @@ function dependencies(items, text)
       text = ""
    end
    local images = img(items[1].icon_name)
-   for k,v in ipairs({table.unpack(items,2)}) do
-      if wl.ui.is_rtl() then
+   if wl.ui.is_rtl() then
+      for k,v in ipairs({table.unpack(items,2)}) do
          images = img(v.icon_name)  .. img("images/richtext/arrow-left.png")  .. images
-      else
+      end
+      return div("width=100%",
+              styles.as_paragraph("wui_image_line", text .. space() .. images))
+   else
+      for k,v in ipairs({table.unpack(items,2)}) do
          images = images ..  img("images/richtext/arrow-right.png") ..  img(v.icon_name)
       end
-   end
-   if wl.ui.is_rtl() then
       return div("width=100%",
-              styles.as_p_with_attr("wui_image_line", "align=left", text .. space() .. images))
-   else
-      return div("width=100%",
-              styles.as_p_with_attr("wui_image_line", "align=left", images .. space() .. text))
+              styles.as_paragraph("wui_image_line", images .. space() .. text))
    end
 end
 
@@ -160,7 +167,7 @@ function help_ware_amount_line(ware_description, amount)
       temp_amount = temp_amount - imgperline
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(ware_description)))) .. result
+   result = image_line(image, temp_amount, _("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(ware_description))) .. result
    return result
 end
 
@@ -262,7 +269,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
       end
       local text = localize_list(consumed_itemnames, "or")
       if (countlist > 1) then
-         text = _("%s and"):bformat(text)
+         text = p(_("%s and"):bformat(text))
       end
       local images = ""
       local image_counter = 1
