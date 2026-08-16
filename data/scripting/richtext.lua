@@ -498,7 +498,11 @@ function li(text_or_symbol, text)
       symbol ="•"
       t = text_or_symbol
    end
-   return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
+   if wl.ui.is_rtl() then
+      return div("width=95%%", p(t .. vspace())) .. div(p(space())) .. div(p(symbol))
+   else
+      return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
+   end
 end
 
 

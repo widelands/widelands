@@ -12,11 +12,19 @@ include "scripting/help.lua"
 --  =======================================================
 
 function consumed_items_line(text, images)
-   return
-      div("width=100%",
-         div("width=50%", p(vspace() .. text .. space())) ..
-         div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
-      )
+   if wl.ui.is_rtl() then
+      return
+         div("width=100%",
+            div("width=50%", styles.as_p_with_attr("wui_image_line", "align=right", images)) ..
+            div("width=*", p("align=right", vspace() .. space() .. text))
+         )
+   else
+      return
+         div("width=100%",
+            div("width=50%", p(vspace() .. text .. space())) ..
+            div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
+         )
+   end
 end
 
 -- RST
@@ -122,11 +130,19 @@ function dependencies(items, text)
       text = ""
    end
    local images = img(items[1].icon_name)
-   for k,v in ipairs({table.unpack(items,2)}) do
-      images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
-   end
-   return div("width=100%",
+   if wl.ui.is_rtl() then
+      for k,v in ipairs({table.unpack(items,2)}) do
+         images = img(v.icon_name)  .. img("images/richtext/arrow-left.png")  .. images
+      end
+      return div("width=100%",
+              styles.as_paragraph("wui_image_line", text .. space() .. images))
+   else
+      for k,v in ipairs({table.unpack(items,2)}) do
+         images = images ..  img("images/richtext/arrow-right.png") ..  img(v.icon_name)
+      end
+      return div("width=100%",
               styles.as_paragraph("wui_image_line", images .. space() .. text))
+   end
 end
 
 
@@ -151,7 +167,7 @@ function help_ware_amount_line(ware_description, amount)
       temp_amount = temp_amount - imgperline
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(ware_description)))) .. result
+   result = image_line(image, temp_amount, _("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(ware_description))) .. result
    return result
 end
 
@@ -203,7 +219,7 @@ function help_tool_string(tribe, toolnames, no_of_workers)
    for i, toolname in ipairs(toolnames) do
       if (tribe:has_ware(toolname)) then
          local ware_description = game:get_ware_description(toolname)
-         result = result .. image_line(ware_description.icon_name, 1, p(linkify_encyclopedia_object(ware_description)))
+         result = result .. image_line(ware_description.icon_name, 1, linkify_encyclopedia_object(ware_description))
       elseif (tribe:has_worker(toolname)) then
          local worker_description = game:get_worker_description(toolname)
          result = result .. image_line(worker_description.icon_name, 1, p(linkify_encyclopedia_object(worker_description)))
@@ -253,7 +269,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
       end
       local text = localize_list(consumed_itemnames, "or")
       if (countlist > 1) then
-         text = _("%s and"):bformat(text)
+         text = p(_("%s and"):bformat(text))
       end
       local images = ""
       local image_counter = 1

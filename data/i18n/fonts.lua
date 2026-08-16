@@ -57,10 +57,10 @@ return {
 
    hebrew = {
       sans = "Culmus/TaameyFrankCLM-Medium.ttf",
-      sans_bold = "TaameyFrankCLM-Bold.ttf",
+      sans_bold = "Culmus/TaameyFrankCLM-Bold.ttf",
       sans_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
       serif = "Culmus/TaameyFrankCLM-Medium.ttf",
-      serif_bold = "TaameyFrankCLM-Bold.ttf",
+      serif_bold = "Culmus/TaameyFrankCLM-Bold.ttf",
       serif_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
       representative_character = "א",
       direction = "rtl",
