@@ -219,7 +219,7 @@ function help_tool_string(tribe, toolnames, no_of_workers)
    for i, toolname in ipairs(toolnames) do
       if (tribe:has_ware(toolname)) then
          local ware_description = game:get_ware_description(toolname)
-         result = result .. image_line(ware_description.icon_name, 1, p(linkify_encyclopedia_object(ware_description)))
+         result = result .. image_line(ware_description.icon_name, 1, linkify_encyclopedia_object(ware_description))
       elseif (tribe:has_worker(toolname)) then
          local worker_description = game:get_worker_description(toolname)
          result = result .. image_line(worker_description.icon_name, 1, p(linkify_encyclopedia_object(worker_description)))
