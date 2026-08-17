@@ -8,6 +8,7 @@ wl_library(ui_shared_savegames_data
     io_filesystem
     logic
     logic_constants
+    logic_filesystem_constants
     base_time_string
     base
     logic_game_controller

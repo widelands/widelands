@@ -145,6 +145,13 @@ return {
                icon = "images/wui/encyclopedia_world.png",
                entries = world_immovable_entries(tribename)
             },
+            {
+               name = "addons",
+               -- TRANSLATORS Tab title: add-on-specific help
+               title = _("Add-Ons"),
+               icon = "images/plugin.png",
+               entries = {}
+            },
          }
       }
       pop_textdomain()

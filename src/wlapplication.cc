@@ -765,10 +765,12 @@ static void init_one_player_from_template(unsigned p,
 	const std::string& init_script_name = player_section.get_string("init", "headquarters.lua");
 	std::string addon;
 	if (FileSystem::filename_ext(init_script_name) == kAddOnExtension) {
-		addon = kAddOnDir;
-		addon += FileSystem::file_separator();
-		addon += init_script_name;
-		addon += FileSystem::file_separator();
+		const AddOns::AddOnInfo* addon_info = AddOns::find_addon(init_script_name);
+		if (addon_info == nullptr) {
+			throw wexception("Could not find add-on '%s' for player %u's starting condition",
+			                 init_script_name.c_str(), p);
+		}
+		addon = addon_info->basedir_for(AddOns::AddOnCategory::kStartingCondition);
 		addon += tribe;
 		addon += ".lua";
 	}
@@ -857,10 +859,11 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
 		std::string script;
 		if (FileSystem::filename_ext(wc_name) == kAddOnExtension) {
-			script = kAddOnDir;
-			script += FileSystem::file_separator();
-			script += wc_name;
-			script += FileSystem::file_separator();
+			const AddOns::AddOnInfo* addon_info = AddOns::find_addon(wc_name);
+			if (addon_info == nullptr) {
+				throw wexception("Could not find add-on '%s' for win condition", wc_name.c_str());
+			}
+			script = addon_info->basedir_for(AddOns::AddOnCategory::kStartingCondition);
 			script += "init.lua";
 		} else {
 			script = "scripting/win_conditions/";

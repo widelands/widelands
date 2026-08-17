@@ -81,7 +81,9 @@ static std::string read_text_file(const std::string& filename) {
 }
 
 std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo& a) {
-	switch (a.category) {
+	switch (a.get_category()) {
+	case AddOnCategory::kCombo:
+		return std::unique_ptr<ComboAddon>(new ComboAddon(a));
 	case AddOnCategory::kWorld:
 		return std::unique_ptr<WorldAddon>(new WorldAddon(a));
 	case AddOnCategory::kTribes:
@@ -103,7 +105,7 @@ std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo
 	case AddOnCategory::kTheme:
 		return std::unique_ptr<ThemeAddon>(new ThemeAddon(a));
 	default:
-		throw wexception("Invalid category %u for addon %s", static_cast<uint32_t>(a.category),
+		throw wexception("Invalid category %u for addon %s", static_cast<uint32_t>(a.get_category()),
 		                 a.internal_name.c_str());
 	}
 }
@@ -116,7 +118,7 @@ MutableAddOn::MutableAddOn(const AddOnInfo& a)
      version_(AddOns::version_to_string(a.version, false)),
      min_wl_version_(a.min_wl_version),
      max_wl_version_(a.max_wl_version),
-     category_(a.category),
+     category_(a.get_category()),
      force_sync_safe_(false),
      directory_(kAddOnDir + FileSystem::file_separator() + internal_name_) {
 }

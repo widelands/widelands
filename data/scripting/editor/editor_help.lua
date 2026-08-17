@@ -89,6 +89,13 @@ local r = {
          title = _("Trees"),
          icon = "world/immovables/trees/alder/menu.png",
          entries = get_trees()
+      },
+      {
+         name = "addons",
+         -- TRANSLATORS Tab title: add-on-specific help
+         title = _("Add-Ons"),
+         icon = "images/plugin.png",
+         entries = {}
       }
    }
 }

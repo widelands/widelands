@@ -595,9 +595,8 @@ void MainMenu::reinit_plugins() {
 	   new PluginActions(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
 
 	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
-			lua_->run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name +
-			                 FileSystem::file_separator() + "init.lua");
+		if (pair.second && pair.first->acts_as(AddOns::AddOnCategory::kUIPlugin)) {
+			lua_->run_script(pair.first->basedir_for(AddOns::AddOnCategory::kUIPlugin) + "init.lua");
 		}
 	}
 }
