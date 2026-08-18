@@ -37,9 +37,9 @@ wl.Descriptions():new_market_type {
    spritesheets = {
       build = {
          hotspot = {92, 107},
-         frames = 3,
-         columns = 3,
-         rows = 1
+         frames = 4,
+         columns = 2,
+         rows = 2
       },
    },
 
