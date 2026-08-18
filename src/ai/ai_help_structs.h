@@ -37,6 +37,7 @@
 namespace Widelands {
 class MilitarySite;
 class ProductionSite;
+class TrainingSite;
 }  // namespace Widelands
 
 namespace AI {
