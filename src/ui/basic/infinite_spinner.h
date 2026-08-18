@@ -40,6 +40,7 @@ struct InfiniteSpinner : public Box {
 	                int32_t spinner_val,
 	                int32_t spinner_min,
 	                int32_t spinner_max,
+	                bool allow_multiline_label,
 	                SpinBox::Units spinner_units = SpinBox::Units::kNone);
 
 	Notifications::Signal<> changed;
