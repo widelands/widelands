@@ -204,8 +204,6 @@ struct WLApplication {
 	                           bool replace_ctrl = true,
 	                           bool ask_for_bug_report = true);
 
-	static std::string segfault_backtrace_dir;
-
 private:
 	WLApplication(int argc, char const* const* argv);
 
