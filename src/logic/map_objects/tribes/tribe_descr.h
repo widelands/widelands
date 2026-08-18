@@ -123,6 +123,7 @@ public:
 	[[nodiscard]] uint32_t flag_animation() const;
 	[[nodiscard]] uint32_t pinned_note_animation() const;
 	[[nodiscard]] uint32_t bridge_animation(uint8_t dir, bool busy) const;
+	[[nodiscard]] uint32_t bridge_pillar_animation(bool busy) const;
 
 	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
 	[[nodiscard]] uint32_t bridge_height() const;
@@ -246,13 +247,15 @@ private:
 	uint32_t flag_animation_id_{0U};
 	uint32_t pinned_note_animation_id_{0U};
 	struct BridgeAnimationIDs {
-		uint32_t e;
-		uint32_t se;
-		uint32_t sw;
+		uint32_t e{0U};
+		uint32_t se{0U};
+		uint32_t sw{0U};
 	};
 	BridgeAnimationIDs bridges_normal_;
 	BridgeAnimationIDs bridges_busy_;
 	uint32_t bridge_height_;
+	uint32_t bridge_pillar_normal_animation_id_{0U};
+	uint32_t bridge_pillar_busy_animation_id_{0U};
 
 	// A container of all texture images that can be used for drawing a
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.

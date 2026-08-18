@@ -62,14 +62,15 @@ public:
 		// neighbor is not contained.
 		int ln_index;
 		int rn_index;
+		int tln_index;
 		int trn_index;
 		int bln_index;
 		int brn_index;
 
 		[[nodiscard]] inline bool all_neighbors_valid() const {
 			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
-			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
-			       brn_index != kInvalidIndex;
+			       tln_index != kInvalidIndex && trn_index != kInvalidIndex &&
+			       bln_index != kInvalidIndex && brn_index != kInvalidIndex;
 		}
 	};
 
@@ -91,6 +92,14 @@ public:
 
 	// Returns a mutable field at 'index' which must be in bound.
 	inline Field* mutable_field(const int index) {
+		return &fields_[index];
+	}
+
+	// Returns the field at 'index' if it is valid, otherwise returns nullptr.
+	[[nodiscard]] inline const Field* check_field(const int index) const {
+		if (index == kInvalidIndex) {
+			return nullptr;
+		}
 		return &fields_[index];
 	}
 
