@@ -43,6 +43,7 @@
 #include "base/crypto.h"
 #include "base/i18n.h"
 #include "base/math.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
@@ -107,6 +108,26 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 	                                  "abcdefghijklmnopqrstuvwxyz"
 	                                  "0123456789._-") == std::string::npos &&
 	       filename.find("..") == std::string::npos;
+}
+
+// A relative path supplied by the server (e.g. an add-on subdirectory) is
+// accepted only if each of its components is a valid name. This also rejects
+// empty components, absolute paths and parent-directory references, and thus
+// prevents writing outside the destination directory via path traversal.
+[[nodiscard]] inline bool relative_path_valid(const std::string& path) {
+	// split() stops scanning at an embedded NUL byte, which would leave the
+	// remainder of the string unvalidated, so reject such paths explicitly.
+	if (path.empty() || path.find('\0') != std::string::npos) {
+		return false;
+	}
+	std::vector<std::string> components;
+	split(components, path, {'/', '\\'});
+	for (const std::string& component : components) {
+		if (!name_valid(component)) {
+			return false;
+		}
+	}
+	return true;
 }
 }  // namespace
 
@@ -644,12 +665,20 @@ void NetAddons::download_addon(const std::string& name,
 	std::unique_ptr<std::string[]> dirnames(new std::string[nr_dirs]);
 	for (int64_t i = 0; i < nr_dirs; ++i) {
 		dirnames[i] = read_line();
+		if (!relative_path_valid(dirnames[i])) {
+			throw_warning(format("Refusing to download add-on '%s': invalid directory name '%s'",
+			                     name.c_str(), dirnames[i].c_str()));
+		}
 		g_fs->ensure_directory_exists(save_as + FileSystem::file_separator() + dirnames[i]);
 	}
 	int64_t progress_state = 0;
 	for (int64_t i = -1 /* top-level directory is not counted */; i < nr_dirs; ++i) {
 		for (int64_t j = math::to_long(read_line()); j > 0; --j) {
 			const std::string filename = read_line();
+			if (!name_valid(filename)) {
+				throw_warning(format("Refusing to download add-on '%s': invalid file name '%s'",
+				                     name.c_str(), filename.c_str()));
+			}
 			const std::string checksum = read_line();
 			const int64_t length = math::to_long(read_line());
 			std::string relative_path;
@@ -703,6 +732,10 @@ void NetAddons::download_i18n(const std::string& name,
 	init_fn("", nr_translations);
 	for (int64_t i = 0; i < nr_translations; ++i) {
 		const std::string filename = read_line();
+		if (!name_valid(filename)) {
+			throw_warning(format("Refusing to download translations for '%s': invalid file name '%s'",
+			                     name.c_str(), filename.c_str()));
+		}
 		const std::string checksum = read_line();
 		progress(filename.substr(0, filename.find('.')), i);
 		const int64_t length = math::to_long(read_line());
@@ -988,6 +1021,9 @@ void NetAddons::upload_screenshot(const std::string& addon,
 std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
 	try {
 		check_string_validity(name);
+		if (!name_valid(screenie)) {
+			return "";
+		}
 		init();
 		CrashGuard guard(*this, false);
 
