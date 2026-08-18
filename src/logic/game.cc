@@ -115,8 +115,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui/basic/progresswindow.h"
-#include "ui/wui/interactive_player.h"
-#include "ui/wui/interactive_spectator.h"
 #include "wlapplication_options.h"
 
 namespace Widelands {
@@ -203,18 +201,6 @@ void Game::sync_reset() {
 	verb_log_info_time(get_gametime(), "[sync] Reset\n");
 }
 
-/**
- * \return a pointer to the \ref InteractivePlayer if any.
- * \note This function may return 0 (in particular, it will return 0 during
- * playback or if player is spectator)
- */
-InteractivePlayer* Game::get_ipl() {
-	return dynamic_cast<InteractivePlayer*>(get_ibase());
-}
-const InteractivePlayer* Game::get_ipl() const {
-	return dynamic_cast<const InteractivePlayer*>(get_ibase());
-}
-
 void Game::set_game_controller(std::shared_ptr<GameController> c) {
 	ctrl_ = c;
 }
@@ -265,6 +251,17 @@ void Game::postload_addons_before_loading() {
 	postload_addons();
 }
 
+void Game::create_game_interface(PlayerNumber player_number,
+                                 bool multiplayer,
+                                 ChatProvider* chat_provider) {
+	if (game_interface_provider_ == nullptr) {
+		throw wexception("Game::create_game_interface(%d, %s): no game interface provider provided!",
+		                 static_cast<int>(player_number), multiplayer ? "MP" : "SP");
+	}
+	set_game_interface(
+	   game_interface_provider_->create(*this, player_number, multiplayer, chat_provider));
+}
+
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
 	full_cleanup();
@@ -309,7 +306,10 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	}
 	win_condition_displayname_ = "Scenario";
 
-	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
+	if (game_interface_provider_ == nullptr) {
+		throw wexception("run_splayer_scenario_direct: no game interface provider provided!");
+	}
+	create_game_interface(1);
 
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
@@ -523,13 +523,16 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		}
 
 		player_nr = gpdp.get_player_nr();
-		InteractivePlayer* ipl = new InteractivePlayer(*this, get_config_section(), player_nr, false);
-		set_ibase(ipl);
+
+		if (game_interface_provider_ == nullptr) {
+			throw wexception("run_load_game: no game interface provider provided!");
+		}
+		create_game_interface(player_nr);
 
 		gl.load_game();
 		postload_addons();
 
-		ipl->info_panel_fast_forward_message_queue();
+		get_game_interface()->info_panel_fast_forward_message_queue();
 	}
 
 	// Store the filename for further saves
@@ -592,7 +595,7 @@ std::string Game::active_training_wheel() const {
  */
 void Game::postload() {
 	EditorGameBase::postload();
-	get_ibase()->postload();
+	get_game_interface()->postload();
 }
 
 /**
@@ -618,8 +621,6 @@ bool Game::run(StartGameType const start_game_type,
 	assert(has_loader_ui());
 
 	postload();
-
-	InteractivePlayer* ipl = get_ipl();
 
 	if (start_game_type != StartGameType::kSaveGame) {
 		// Check whether we need to disable replays because of add-ons.
@@ -673,12 +674,8 @@ bool Game::run(StartGameType const start_game_type,
 			}
 		}
 
-		if (ipl != nullptr) {
-			// Scroll map to starting position for new games.
-			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
-			// InteractiveGameBase::start() for multiplayer.
-			ipl->map_view()->scroll_to_field(
-			   map().get_starting_pos(ipl->player_number()), MapView::Transition::Jump);
+		iterate_players_existing_novar(p, nr_players, *this) {
+			get_game_interface()->notify_player_starting_pos(p, map().get_starting_pos(p));
 		}
 
 		// Prepare the map, set default textures
@@ -719,7 +716,7 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
-	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
+	get_game_interface()->rebuild_main_menu();
 
 	if (!script_to_run.empty()) {
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
@@ -793,13 +790,13 @@ bool Game::run(StartGameType const start_game_type,
 	}
 #endif
 
-	get_ibase()->run<UI::Panel::Returncodes>();
+	get_game_interface()->main_loop();
 
 	state_ = gs_ending;
 
 	cleanup_objects();
 	delete_pending_player_commands();
-	set_ibase(nullptr);
+	set_game_interface(nullptr);
 
 	state_ = gs_notrunning;
 
@@ -835,7 +832,11 @@ bool Game::run_replay(const std::string& filename, const std::string& script_to_
 
 	create_loader_ui(
 	   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
-	set_ibase(new InteractiveSpectator(*this, get_config_section()));
+
+	if (game_interface_provider_ == nullptr) {
+		throw wexception("run_replay: no game interface provider provided!");
+	}
+	create_game_interface(Widelands::neutral());
 
 	set_write_replay(false);
 	set_game_controller(std::make_shared<ReplayGameController>(*this));

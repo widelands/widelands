@@ -30,6 +30,7 @@ namespace Widelands {
 class Objective;
 }  // namespace Widelands
 class InteractiveBase;
+class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {

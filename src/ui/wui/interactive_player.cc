@@ -18,6 +18,8 @@
 
 #include "ui/wui/interactive_player.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/mutex.h"
@@ -1034,6 +1036,41 @@ void InteractivePlayer::edit_pinned_note(const Widelands::FCoords& c) {
 	if (!exists) {  // Already create the note if it did not exist yet.
 		game().send_player_pinned_note(player_number(), c, text, *rgb, false);
 	}
+}
+
+void InteractivePlayer::notify_message(const Widelands::PlayerNumber pn,
+                                       const Widelands::MessageId id,
+                                       const Widelands::Message& message,
+                                       const bool popup) {
+	if (player_number() == pn) {
+		player().play_message_sound(&message);
+		if (popup) {
+			popup_message(id, message);
+		}
+	}
+}
+
+void InteractivePlayer::request_watch_window(Widelands::PlayerNumber pn, Widelands::Bob& bob) {
+	if (player_number() == pn) {
+		show_watch_window(bob);
+	}
+}
+
+std::unique_ptr<Texture> InteractivePlayer::draw_minimap_for_savegame() {
+	return draw_minimap(game(), &player(), map_view()->view_area().rect(),
+	                    MiniMapType::kStaticViewWindow, kSavegameMinimapLayers);
+}
+
+void InteractivePlayer::gather_saveloading_information(SaveloadingInformation& data) {
+	InteractiveBase::gather_saveloading_information(data);
+	data.player_number = player_number();
+	data.should_saveload_windows = true;
+}
+
+void InteractivePlayer::restore_from_saveloading_information(SaveloadingInformation& data) {
+	InteractiveBase::restore_from_saveloading_information(data);
+	set_player_number(data.player_number);
+	data.should_saveload_windows = true;
 }
 
 /**

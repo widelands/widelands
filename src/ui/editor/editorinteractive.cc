@@ -1295,7 +1295,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
                                       const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
-	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+	egbase.set_game_interface(std::unique_ptr<EditorInteractive>(&eia));
 
 	// We need to disable non-world add-ons in the editor
 	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {

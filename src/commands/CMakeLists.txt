@@ -122,7 +122,6 @@ wl_library(commands
     base_exceptions
     base_macros
     base_times
-    build_info
     economy # TODO(GunChleoc): Circular dependency
     graphic_color
     graphic_text_layout
@@ -139,6 +138,4 @@ wl_library(commands
     scripting_coroutine
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
-    ui_basic
-    wui_interactive
 )

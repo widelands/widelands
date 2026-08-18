@@ -67,7 +67,7 @@ enum class RoadBuildingType { kRoad, kWaterway };
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
  */
-class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
+class InteractiveBase : public UI::Panel, public IGameInterface, public DebugConsole::Handler {
 public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
@@ -125,10 +125,10 @@ public:
 	double average_fps() const;
 	uint64_t average_real_gamespeed() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
-	virtual void postload();
+	void postload() override;
 
-	void load_windows(FileRead&, Widelands::MapObjectLoader&);
-	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
+	void load_windows(FileRead&, Widelands::MapObjectLoader&) override;
+	void save_windows(FileWrite&, Widelands::MapObjectSaver&) override;
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
@@ -189,15 +189,15 @@ public:
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
 
-	virtual void cleanup_for_load();
+	void cleanup_for_load() override;
+	void rebuild_main_menu() override {
+	}
 
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message, const std::string& tooltip = std::string()) const;
-	void log_message(const char* message, const char* tt = nullptr) const {
-		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
-	}
+	void log_message(const std::string& message,
+	                 const std::string& tooltip = std::string()) const override;
 
 	void toggle_minimap();
 	void toggle_quicknav();
@@ -226,7 +226,12 @@ public:
 		return &map_view_;
 	}
 
-	void info_panel_fast_forward_message_queue();
+	void main_loop() override;
+	void end_main_loop() override;
+
+	void info_panel_fast_forward_message_queue() override;
+	void notify_player_starting_pos(Widelands::PlayerNumber player,
+	                                Widelands::Coords coords) override;
 
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
@@ -246,13 +251,31 @@ public:
 	virtual bool can_act(Widelands::PlayerNumber) const {
 		return omnipotent();
 	}
-	virtual Widelands::PlayerNumber player_number() const {
+	Widelands::PlayerNumber player_number() const override {
 		return 0;
 	}
 
 	bool extended_tooltip_accessibility_mode() const override {
 		return true;
 	}
+
+	void notify_game_ended() override {
+	}
+	void notify_replay_ended() override;
+	void notify_desync() override;
+
+	void notify_message(Widelands::PlayerNumber,
+	                    Widelands::MessageId,
+	                    const Widelands::Message&,
+	                    bool) override {
+	}
+	void request_watch_window(Widelands::PlayerNumber, Widelands::Bob&) override {
+	}
+	[[nodiscard]] std::unique_ptr<Texture> draw_minimap_for_savegame() override;
+	void gather_saveloading_information(SaveloadingInformation& data) override;
+	void restore_from_saveloading_information(SaveloadingInformation& data) override;
+
+	void load_plugins() override;
 
 	void add_toolbar_plugin(const std::string& action,
 	                        const std::string& icon,
