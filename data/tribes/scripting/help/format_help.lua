@@ -61,7 +61,7 @@ end
 --
 function plot_size_line(size, size_only)
    local text = ""
-   local image = ""
+   local imagepath = ""
    if (size_only == true) then
       if (size == "small") then
          -- TRANSLATORS: Size of a map immovablee
@@ -82,31 +82,35 @@ function plot_size_line(size, size_only)
       if (size == "mine") then
          -- TRANSLATORS: Space on the map required for building a building there
          text = _("Mine plot")
-         image = "images/wui/overlays/mine.png"
+         imagepath = "images/wui/overlays/mine.png"
       elseif (size == "port") then
          -- TRANSLATORS: Space on the map required for building a building there
          text = _("Port plot")
-         image = "images/wui/overlays/port.png"
+         imagepath = "images/wui/overlays/port.png"
       elseif (size == "small") then
          -- TRANSLATORS: Space on the map required for building a building there
          text = _("Small plot")
-         image = "images/wui/overlays/small.png"
+         imagepath = "images/wui/overlays/small.png"
       elseif (size == "medium") then
          -- TRANSLATORS: Space on the map required for building a building there
          text = _("Medium plot")
-         image = "images/wui/overlays/medium.png"
+         imagepath = "images/wui/overlays/medium.png"
       elseif (size == "big") then
          -- TRANSLATORS: Space on the map required for building a building there
          text = _("Big plot")
-         image = "images/wui/overlays/big.png"
+         imagepath = "images/wui/overlays/big.png"
       else
          return ""
       end
    -- TRANSLATORS: Space on the map required for building a building there
-      text = p(join_sentences(
-         styles.as_font_from_p("wui_heading_3", _("Space required:")),
-         text))
-      return div("width=100%", div("float=right padding_l=" .. default_gap(), p(img(image)))) .. text
+      text = p(inline_header(_("Space required:"), text))
+      local image = img(imagepath)
+      if wl.ui.is_rtl() then
+         -- width of 90% is a bloody hack as for whatever reason this does write over the scrollbar else
+         return div("width=90%%", div("float=left padding_r=", p(image)) .. text)
+      else
+         return div("width=100%", div("float=right padding_l=" .. default_gap(), p(image)) .. text)
+      end
    end
 end
 
@@ -142,6 +146,36 @@ function dependencies(items, text)
       end
       return div("width=100%",
               styles.as_paragraph("wui_image_line", images .. space() .. text))
+   end
+end
+
+
+-- RST
+-- .. function:: dependencies_basic(images[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg images: images in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies_basic(images, text)
+   if not text then
+      text = ""
+   end
+   local imgstring = img(images[1])
+   if wl.ui.is_rtl() then
+      for k,v in ipairs({table.unpack(images,2)}) do
+         imgstring = img(v)  .. img("images/richtext/arrow-left.png")  .. imgstring
+      end
+      return div("width=100%",
+              styles.as_paragraph("wui_image_line", text .. space() .. imgstring))
+   else
+      for k,v in ipairs({table.unpack(images,2)}) do
+         imgstring = imgstring ..  img("images/richtext/arrow-right.png") ..  img(v)
+      end
+      return div("width=100%",
+              styles.as_paragraph("wui_image_line", imgstring .. space() .. text))
    end
 end
 

@@ -10,31 +10,6 @@ include "tribes/scripting/help/calculations.lua"
 -- Pass the internal tribe name and building name to the coroutine to select the
 -- building type.
 
---  =======================================================
---  ********** Helper functions for dependencies **********
---  =======================================================
-
--- RST
--- .. function:: dependencies_basic(images[, text = nil])
---
---    Creates a dependencies line of any length.
---
---    :arg images: images in the correct order from left to right as table (set in {}).
---    :arg text: comment of the image.
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_basic(images, text)
-   if not text then
-      text = ""
-   end
-
-   local imgstring = img(images[1])
-   for k,v in ipairs({table.unpack(images,2)}) do
-      imgstring = imgstring .. img("images/richtext/arrow-right.png") .. img(v)
-   end
-   return p(imgstring .. text)
-end
-
 
 -- RST
 -- .. function:: item_image(mapobject)
@@ -138,13 +113,24 @@ function dependencies_collects(tribe, building_description)
    local supported = building_description.supported_by_productionsites
    if #supported > 0 then
       local result = ""
-      for i,productionsite in ipairs(supported) do
-         local row = item_image(productionsite) .. img("images/richtext/arrow-right.png")
-         for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
-            row = row .. item_image(mapobject)
+      if wl.ui.is_rtl() then
+         for i,productionsite in ipairs(supported) do
+            local row = img("images/richtext/arrow-left.png") .. item_image(productionsite)
+            for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
+               row = item_image(mapobject) .. row
+            end
+            row = linkify_encyclopedia_object(productionsite) .. " " .. img(building_description.icon_name) .. img("images/richtext/arrow-left.png") .. row
+            result = result .. p(row)
          end
-         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. linkify_encyclopedia_object(productionsite)
-         result = result .. p(row)
+      else
+         for i,productionsite in ipairs(supported) do
+            local row = item_image(productionsite) .. img("images/richtext/arrow-right.png")
+            for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
+               row = row .. item_image(mapobject)
+            end
+            row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. linkify_encyclopedia_object(productionsite)
+            result = result .. p(row)
+         end
       end
       return result
    end
@@ -163,11 +149,17 @@ function dependencies_collects(tribe, building_description)
       table.insert(collected_items, {resource.resource, false})
       result = result .. item_image(find_resource_indicator(tribe, resource.resource))
    end
-   result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   for k,mapobject in ipairs(collected_items) do
-      if k > 1 then result = result .. " • " end
-      result = result .. (mapobject[2] and linkify_encyclopedia_object(mapobject[1]) or mapobject[1].descname)
+   if wl.ui.is_rtl() then
+      result = img(building_description.icon_name) .. img("images/richtext/arrow-left.png") .. result
+   else
+      result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
    end
+   local link_line = ""
+   for k,mapobject in ipairs(collected_items) do
+      if k > 1 then link_line = link_line .. " • " end
+      link_line = link_line .. (mapobject[2] and linkify_encyclopedia_object(mapobject[1]) or p(mapobject[1].descname))
+   end
+   result = result .. p(link_line)
    return p(result)
 end
 
@@ -185,18 +177,29 @@ function dependencies_creates(tribe, building_description)
    local supported = building_description.supported_productionsites
    if #supported > 0 then
       local result = ""
-      for i,productionsite in ipairs(supported) do
-         local row = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
-         for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
-            row = row .. item_image(mapobject)
+      if wl.ui.is_rtl() then
+         for i,productionsite in ipairs(supported) do
+            local row = img("images/richtext/arrow-left.png") .. img(building_description.icon_name)
+            for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
+               row = item_image(mapobject) .. row
+            end
+            row = linkify_encyclopedia_object(productionsite) .. " " .. item_image(productionsite) .. img("images/richtext/arrow-left.png") .. row
+            result = result .. p(row)
          end
-         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. linkify_encyclopedia_object(productionsite)
-         result = result .. p(row)
+      else
+         for i,productionsite in ipairs(supported) do
+            local row = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+            for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
+               row = row .. item_image(mapobject)
+            end
+            row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. linkify_encyclopedia_object(productionsite)
+            result = result .. p(row)
+         end
       end
       return result
    end
    -- No other productionsites supported
-   local result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png")
+   local result = ""
    local created_items = {}
    for i, bob in ipairs(building_description.created_bobs) do
       table.insert(created_items, bob)
@@ -210,10 +213,17 @@ function dependencies_creates(tribe, building_description)
       table.insert(created_items, resource)
       result = result .. item_image(find_resource_indicator(tribe, resource))
    end
-   result = result .. " " .. linkify_encyclopedia_object(created_items[1])
-   for k,mapobject in ipairs({table.unpack(created_items,2)}) do
-      result = result .. " • " .. linkify_encyclopedia_object(mapobject)
+   if wl.ui.is_rtl() then
+      result = result .. img("images/richtext/arrow-left.png") .. img(building_description.icon_name)
+   else
+      result = img(building_description.icon_name) .. img("images/richtext/arrow-right.png") .. result
    end
+   local link_line = ""
+   link_line = link_line .. linkify_encyclopedia_object(created_items[1])
+   for k,mapobject in ipairs({table.unpack(created_items,2)}) do
+      link_line = link_line .. " • " .. linkify_encyclopedia_object(mapobject)
+   end
+   result = result .. p(link_line)
    return p(result)
 end
 
@@ -351,23 +361,23 @@ function building_help_general_string(tribe, building_description)
 
    if(building_description.type_name == "productionsite") then
       if(building_description.workarea_radius and building_description.workarea_radius > 0) then
-         result = result .. inline_header(_("Work area radius:"), building_description.workarea_radius)
+         result = result .. p(inline_header(_("Work area radius:"), building_description.workarea_radius))
       end
 
    elseif(building_description.type_name == "warehouse") then
-      result = result .. inline_header(_("Healing:"),
-         ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
-      result = result .. inline_header(_("Conquer range:"), building_description.conquers)
+      result = result .. h3(_("Healing:"))
+         .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
+      result = result .. p(inline_header(_("Conquer range:"), building_description.conquers))
 
    elseif(building_description.type_name == "militarysite") then
       result = result .. h3(_("Healing:"))
          .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
-      result = result .. inline_header(_("Capacity:"), building_description.max_number_of_soldiers)
-      result = result .. inline_header(_("Conquer range:"), building_description.conquers)
-      result = result .. inline_header(_("Vision range:"), building_description.vision_range)
+      result = result .. p(inline_header(_("Capacity:"), building_description.max_number_of_soldiers))
+      result = result .. p(inline_header(_("Conquer range:"), building_description.conquers))
+      result = result .. p(inline_header(_("Vision range:"), building_description.vision_range))
 
    elseif(building_description.type_name == "trainingsite") then
-      result = result .. inline_header(_("Capacity:"), building_description.max_number_of_soldiers)
+      result = result .. p(inline_header(_("Capacity:"), building_description.max_number_of_soldiers))
    end
    return result
 end
@@ -493,8 +503,8 @@ function building_help_building_section(building_description)
    if (building_description.buildable or building_description.enhanced) then
 
       if (building_description.buildable and building_description.enhanced) then
-         result = result .. inline_header(_("Note:"),
-            _("This building can either be built directly or obtained by enhancing another building."))
+         result = result .. p(inline_header(_("Note:"),
+            _("This building can either be built directly or obtained by enhancing another building.")))
       end
 
       if (building_description.buildable) then
@@ -513,9 +523,9 @@ function building_help_building_section(building_description)
       if (building_description.enhanced) then
          former_building = building_description.enhanced_from
             if (building_description.buildable) then
-               result = result .. inline_header(_("Or enhanced from:"), linkify_encyclopedia_object(former_building))
+               result = result .. p(inline_header(_("Or enhanced from:"), linkify_encyclopedia_object(former_building)))
             else
-               result = result .. inline_header(_("Enhanced from:"), linkify_encyclopedia_object(former_building))
+               result = result .. p(inline_header(_("Enhanced from:"), linkify_encyclopedia_object(former_building)))
             end
 
          for ware, amount in pairs(building_description.enhancement_cost) do
@@ -632,7 +642,7 @@ function building_help_building_section(building_description)
 
       -- Can be enhanced to
       if (building_description.enhancement) then
-         result = result .. inline_header(_("Can be enhanced to:"), linkify_encyclopedia_object(building_description.enhancement))
+         result = result .. p(inline_header(_("Can be enhanced to:"), linkify_encyclopedia_object(building_description.enhancement)))
          for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
@@ -687,7 +697,7 @@ function building_help_crew_section(tribe, building_description)
                p(_("%s or better"):bformat(linkify_encyclopedia_object(worker_description))))
          else
             result = result .. image_line(worker_description.icon_name, 1,
-               p(linkify_encyclopedia_object(worker_description)))
+               linkify_encyclopedia_object(worker_description))
          end
       end
 
@@ -831,7 +841,7 @@ function building_help_production_section(tribe, building_description)
    if (helptexts["performance"] ~= nil) then
       performance = helptexts["performance"]
    end
-   result = result .. inline_header(_("Performance:"), performance)
+   result = result .. p(inline_header(_("Performance:"), performance))
    return result
 end
 
