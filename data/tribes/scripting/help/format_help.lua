@@ -107,7 +107,7 @@ function plot_size_line(size, size_only)
       local image = img(imagepath)
       if wl.ui.is_rtl() then
          -- width of 90% is a bloody hack as for whatever reason this does write over the scrollbar else
-         return div("width=90%%", div("float=left padding_r=", p(image)) .. text)
+         return div("width=90%", div("float=left padding_r=", p(image)) .. text)
       else
          return div("width=100%", div("float=right padding_l=" .. default_gap(), p(image)) .. text)
       end
