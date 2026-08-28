@@ -6,6 +6,7 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016,2018-2019
 # Markus <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +123,7 @@ msgstr "Kerääjät"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Saat pisteitä arvokkaista tuotteista varastoissasi. Se pelaaja, jolla on eniten tuotteita %s jälkeen, voittaa pelin."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -133,7 +134,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "määritetty aikaraja"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -271,8 +272,8 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% päivä"
+msgstr[1] "%1% päivää"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -289,7 +290,7 @@ msgstr[1] "%1% minuuttia"
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s,%2$s ja %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
@@ -357,7 +358,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Metsäläisenä pidät suurista metsistä, joten tehtävänäsi on omistaa enemmän puita alueellasi kuin kellään muulla pelaajaalla. Peli loppuu %s jälkeen. Se jolla on eniten puita sillä hetkellä, voittaa pelin."
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
@@ -391,4 +392,4 @@ msgstr "Voittaja on %1$s, meriitti %2$s."
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "Voittajalla oli %s."

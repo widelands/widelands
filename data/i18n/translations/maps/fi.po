@@ -6,6 +6,7 @@
 # Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2018,2020
 # LINUX-SAUNA, 2022
 # Oi Suomi On! <oisuomion@protonmail.com>, 2022
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: LINUX-SAUNA, 2022\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -218,7 +219,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Hävittyään tärkeän taistelun barbaareja vastaan, mikä johti keisarikunnan maiden suuren osan menettämiseen, Lutius jättää Fremilin aloittaakseen uuden elämän. Kohtalo puuttuu kuitenkin peliin, ja hänen laivansa melkein tuhoutuu kovassa myrskyssä. Vain hyvällä onnella hän onnistuu rantautumaan vaurioituneella aluksellaan ja pelastamaan oman kansansa."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -251,7 +252,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Kotiin palattuaan Lutiuksella ja hänen miehistöllään on vastassaan huonossa jamassa oleva talous, jonka pullonkaulojen selvittäminen tulee olemaan äärimmäisen tärkeää keisarikunnan loistokkuuden palauttamisessa."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -305,14 +306,14 @@ msgstr "Claus ja Henneke Lembeck ovat saavuttaneet Pohjolan nyt viimeinkin. Mutt
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Takaisinvalloitus"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Jälleen Pohjois-Friisiassa. Claus, Henneke ja Reebaud valmistautuvat taisteluun tunkeilijoita vastaan. Heidän on koottava liittolaisia ja suunniteltava strategiaa, mutta vihollinen ei ole koskaan kaukana..."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -347,18 +348,18 @@ msgstr "Tässä opetuspelissä opit merenkäynnistä, joka käsittää laivojen 
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Talous ja kaupankäynti"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "Tässä opetuspelissä opit mitä asetuksia Widelands tarjoaa talouden säätämiseksi ja miten käydä kauppaa muiden pelaajien kanssa. Näitä suositellaan hieman kokeneemmille pelaajille."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Tarkka Eurooppa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -377,15 +378,15 @@ msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "Leveät joet ovat kulkukelpoisia \"kauppaverkostona\". Kaikilla pelaajilla on omat haasteensa, mutta ne ovat varsin tasapainotettuja pelattaviksi: – Brittiläinen imperiumi: luo kestäviä siirtomaita – Venäjän imperiumi: Tosi suuria etäisyyksiä ..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Ameeba"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Olet ameeba, laajenna ja valtaa muita ameeboja..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -393,7 +394,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Tiedoksi, että viholliset saartavat sinua. Poista diplomatia käytöstä helpompaa peliä varten, ota se käyttöön haastavampaa peliä varten. Lisäksi voit määrittää vaikeusasteen pelaamalla eri tekoälyjoukkoja vastaan. Vaikka joillakin pelaajilla on enemmän tilaa alussa, kartta on hyvin tasapainotettu."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -531,7 +532,7 @@ msgstr "Vuorilla on yllin kyllin tasamaata. Valitettavasti, suurin osa siitä ku
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Egyptiläinen Mandala v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -600,13 +601,13 @@ msgstr "Liekö jumalten asettama koetus vai jonkin pahan noidan juoni, joka on h
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Metsälaakso v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "Vuorten ympäröimä jokilaakso, jossa on paljon resursseja, paitsi hiitlä. Paljon tasaista rakennustilaa."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -927,7 +928,7 @@ msgstr "Sanotaan että vanhan sodan munkit elävät tasaisilla vanhoilla soilla,
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Tasmanian musta sota"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -990,7 +991,7 @@ msgstr "Jotkut sanovat kaukaisen pohjoisen läpitunkemattomien maiden säikäytt
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Kahdeksan heimon saaret"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
