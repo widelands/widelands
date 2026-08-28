@@ -147,7 +147,7 @@ function dependencies_collects(tribe, building_description)
    end
    for i, resource in ipairs(building_description.collected_resources) do
       table.insert(collected_items, {resource.resource, false})
-      result = result .. item_image(find_resource_indicator(tribe, resource.resource))
+      result = result .. img_object(find_resource_indicator(tribe, resource.resource).name)
    end
    if wl.ui.is_rtl() then
       result = img(building_description.icon_name) .. img("images/richtext/arrow-left.png") .. result
