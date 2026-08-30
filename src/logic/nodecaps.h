@@ -57,6 +57,10 @@ enum NodeCaps {
 	/// their path. Without this clause, ports would be kind of impossible ;)
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
+
+	/// The node is currently unwalkable, but can be made walkable by building a
+	/// road through it.
+	BUILDCAPS_BRIDGE = 128,
 };
 }  // namespace Widelands
 
