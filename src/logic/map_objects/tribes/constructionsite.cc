@@ -339,6 +339,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 					if (ts->desired_capacity != b.soldier_control()->soldier_capacity()) {
 						b.mutable_soldier_control()->set_soldier_capacity(ts->desired_capacity);
 					}
+					dynamic_cast<TrainingSite&>(b).set_soldier_preference(ts->soldier_preference);
 				}
 				dynamic_cast<ProductionSite&>(b).set_stopped(ps->stopped);
 			} else if (upcast(MilitarysiteSettings, ms, settings_.get())) {
@@ -496,6 +497,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		}
 		new_settings->desired_capacity =
 		   new_desired_capacity(ts->max_capacity, ts->desired_capacity, new_settings->max_capacity);
+		new_settings->soldier_preference = ts->soldier_preference;
 	} break;
 	case Widelands::MapObjectType::PRODUCTIONSITE: {
 		upcast(const ProductionSiteDescr, pd, building_);

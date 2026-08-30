@@ -101,6 +101,7 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
+	SoldierPreference soldier_preference{SoldierPreference::kHeroes};
 };
 
 struct WarehouseSettings : public BuildingSettings {

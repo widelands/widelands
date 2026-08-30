@@ -1228,19 +1228,6 @@ bool Player::has_economy(Widelands::Serial serial) const {
 /************  Military stuff  **********/
 
 /*
-==========
-Change the training priotity values
-==========
-*/
-void Player::change_training_options(TrainingSite& trainingsite,
-                                     TrainingAttribute attr,
-                                     int32_t const val) {
-	if (trainingsite.get_owner() == this) {
-		trainingsite.set_pri(attr, trainingsite.get_pri(attr) + val);
-	}
-}
-
-/*
 ===========
 Forces the drop of given soldier at given house
 ===========
