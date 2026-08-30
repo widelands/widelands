@@ -1770,7 +1770,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+			if (pair.second &&
+			    pair.first->has_category_flag(AddOns::AddOnCategoryInfo::kNetworkRelevant)) {
 				enabled_addons.push_back(pair.first.get());
 			}
 		}

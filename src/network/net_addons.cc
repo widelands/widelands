@@ -516,7 +516,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 
 	a.version = string_to_version(read_line());
 	a.i18n_version = math::to_long(read_line());
-	a.category = get_category(read_line());
+	a.set_category(get_category(read_line()));
+	// TODO(Nordfriese): Receive list of combo-categories from the server
 
 	std::string req = read_line();
 	for (; !req.empty();) {
@@ -570,7 +571,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	const std::string icon_checksum = read_line();
 	const int64_t icon_file_size = math::to_long(read_line());
 	if (icon_file_size <= 0) {
-		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
+		a.icon = g_image_cache->get(kAddOnCategories.at(a.get_category()).icon);
 	} else {
 		g_fs->ensure_directory_exists(kTempFileDir);
 		const std::string path = kTempFileDir + FileSystem::file_separator() + timestring() +
@@ -581,7 +582,7 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		g_fs->fs_unlink(path);
 	}
 
-	if (a.category == AddOnCategory::kSingleMap) {
+	if (a.acts_as(AddOnCategory::kSingleMap)) {
 		a.map_file_name = read_line();
 
 		a.unlocalized_map_hint = read_line();
