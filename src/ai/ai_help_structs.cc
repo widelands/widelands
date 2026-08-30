@@ -340,8 +340,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
    : coords(fc), field_info_expiration(20000) {
 }
 
-EconomyObserver::EconomyObserver(Widelands::Economy& e)
-   : economy(e), fields_block_last_time(Time(0)) {
+EconomyObserver::EconomyObserver(const Widelands::Economy& e)
+   : economy_serial(e.serial()), economy_type(e.type()), fields_block_last_time(Time(0)) {
 }
 
 uint32_t BuildingObserver::total_count() const {
