@@ -80,7 +80,7 @@ msgstr "Klikkaa jotakin maatilaa"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr "Avaa Maatilan Rakennusruutu"
+msgstr "Avaa Maatilan rakennusruutu"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""

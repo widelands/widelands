@@ -855,7 +855,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Jokaisella pelaajalla on eri päämäärät laajentamisessa ja siihen pääsemiseksi on aina enemmän kuin yksi tapa. Vaikka teköäly voidaan täällä voittaa tekemättä yhtään laivaa, pelaajia neuvotaan ensisijassa tekemään satamia ja telakoita – odotukset ovat universaalisti hyödyllisiä ja ovat useimmiten nopein tie kultapinnoitteisiin."
+msgstr "Jokaisella pelaajalla on eri päämäärät laajentamisessa, ja siihen pääsemiseksi on aina enemmän kuin yksi tapa. Vaikka tekoälyn voi täällä voittaa tekemättä yhtään laivaa, pelaajia neuvotaan ensisijassa tekemään satamia ja telakoita – odotukset ovat universaalisti hyödyllisiä ja ovat useimmiten nopein tie kultavarantoihin."
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"

@@ -910,7 +910,7 @@ msgstr "itä"
 #: ../../../../src/logic/detected_port_space.cc:83
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Omistamatonta satamapaikkaa löydetty paikassa %1$s löytäjänä %2$s"
 
 #. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
@@ -920,13 +920,13 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Omistamatonta satamapaikkaa löydetty paikassa %1$s löytäjänä %2$s %3$u askel %4$s/%5$s"
+msgstr[1] "Omistamatonta satamapaikkaa löydetty paikassa %1$s löytäjänä %2$s %3$u askelia %4$s/%5$s"
 
 #: ../../../../src/logic/detected_port_space.cc:96
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Satamapaikka %1$s löydetty paikassa %2$s löytäjänä %3$s"
 
 #. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
@@ -936,8 +936,8 @@ msgstr ""
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Satamapaikka %1$s löydetty paikassa %2$s löytäjänä %3$s  %4$uaskel %5$s/%6$s"
+msgstr[1] "Satamapaikka %1$s löydetty paikassa %2$s löytäjänä  %3$s %4$u askelia %5$s/%6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../../../src/logic/detected_port_space.cc:115
@@ -992,7 +992,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Omistamaton / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -1001,7 +1001,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Omistamaton / %1$s / %2$s / %3$u %4$s %5$s "
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -1129,16 +1129,16 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
-msgstr ""
+msgstr "Vaihtolaajennusehdotus"
 
 #: ../../../../src/logic/game.cc:1528
 msgid "New trade extension proposal received"
-msgstr ""
+msgstr "Uusi vaihtolaajennusehdotus saatu"
 
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s on esittänyt kaupan jatkamista. "
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
@@ -1155,11 +1155,11 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
-msgstr ""
+msgstr "Vaihtolaajennus hylätty"
 
 #: ../../../../src/logic/game.cc:1601
 msgid "Trade extension proposal rejected"
-msgstr ""
+msgstr "Vaihtolaajennusehdotus hylätty"
 
 #: ../../../../src/logic/game.cc:1602
 #, c-format
@@ -1301,8 +1301,8 @@ msgstr "Uusi kauppapaikka on lisätty ekonomiaasi."
 #, c-format
 msgid "%u trade"
 msgid_plural "%u trades"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u kauppa"
+msgstr[1] "%u kauppaa"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:275
 msgid "Trade Cancelled"
@@ -1323,12 +1323,12 @@ msgstr "Kauppasopimus valmis"
 #: ../../../../src/logic/map_objects/tribes/market.cc:278
 #, c-format
 msgid "Your trade agreement at %s has been completed."
-msgstr ""
+msgstr "Kauppasopimuksesi paikassa %s on valmis."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:279
 #, c-format
 msgid "Your trade agreement at %s has been cancelled."
-msgstr ""
+msgstr "Kauppasopimuksesi paikassa %s on peruttu."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:547
 msgid "Trade Paused"
@@ -1341,32 +1341,32 @@ msgstr "Kauppasopimus keskeytetty"
 #: ../../../../src/logic/map_objects/tribes/market.cc:549
 #, c-format
 msgid "%1$s paused the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s keskeytti kaupan kanssasi paikassa %2$s."
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:553
 msgid "Trade Resumed"
-msgstr ""
+msgstr "Kauppa jatkettu"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:554
 msgid "Trade agreement resumed"
-msgstr ""
+msgstr "Kauppasopimusta jatkettu"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:555
 #, c-format
 msgid "%1$s resumed the trade with you at %2$s."
-msgstr ""
+msgstr "%1$s jatkoi kauppaa kanssasi paikassa %2$s."
 
 #. * TRANSLATORS: "At" is the market's name, and "with" is the receiving
 #. player's name
 #: ../../../../src/logic/map_objects/tribes/market.cc:754
 #, c-format
 msgid "Trade agreement at %1$s with %2$s"
-msgstr ""
+msgstr "Kauppasopimus paikassa %1$s %2$s mukana"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:762
 #, c-format
 msgid "Trade offer from %s"
-msgstr ""
+msgstr "Vaihtotarjous tarjoajalta %s"
 
 #. * TRANSLATORS: "From" is the market's name, and "to" is the receiving
 #. player's name
@@ -1384,7 +1384,7 @@ msgstr[1] ""
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
-msgstr ""
+msgstr "Kauppa pyörii määrittelemättömäksi ajaksi"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:795
 #, c-format
@@ -1680,13 +1680,13 @@ msgstr "Telakkasi ei ole rakennettu tarpeeksi lähelle rantaa. Se ei voi rakenta
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1286
 msgid "Ferry Yard Without Shore"
-msgstr ""
+msgstr "Lauttatelakka ilman rantaa"
 
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:1287
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr ""
+msgstr "Lauttatelakkasi ei ole rakennettu tarpeeksi lähelle rantaa. Se ei voi rakentaa lauttoja."
 
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:364
@@ -1732,12 +1732,12 @@ msgstr "Taistelee"
 #: ../../../../src/logic/map_objects/tribes/ship/draw.cc:48
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Kuljetuslaivaksi muuntaminen"
 
 #: ../../../../src/logic/map_objects/tribes/ship/draw.cc:51
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Sotalaivaksi muuntaminen"
 
 #: ../../../../src/logic/map_objects/tribes/ship/draw.cc:59
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:270
@@ -1809,11 +1809,11 @@ msgstr "Perustaa siirtokuntaa"
 
 #: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:169
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Sotalaiva saapui tunnettuun satamanrakennusalueelle."
 
 #: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:170
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Tutkimusalus saapui tunnettuun satamanrakennusalueelle."
 
 #: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:171
 #: ../../../../src/logic/map_objects/tribes/ship/expedition.cc:179
@@ -12012,7 +12012,7 @@ msgstr "Avaa laivan ikkuna"
 
 #: ../../../../src/wlapplication_options.cc:785
 msgid "Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Avaa laivan ikkuna ja mene laivalle"
 
 #: ../../../../src/wlapplication_options.cc:790
 msgid "Show All Ships"

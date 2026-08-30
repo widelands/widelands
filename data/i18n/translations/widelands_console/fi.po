@@ -474,20 +474,20 @@ msgstr "Animoidaanko automaattiset kartan liikkeet."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr "Siirrä ikkuna ruudun äärireunaan kun ikkunan reunus tulee etäisyydelle `n` ruudunreunasta. "
+msgstr "Siirrä ikkuna ruudun äärireunaan, kun ikkunan reunus tulee etäisyydelle `n` ruudunreunasta. "
 
 #: ../../../../src/wlapplication_messages.cc:261
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "Poista ikkunan raja kohti ruudun reunusta kun ikkunan reuna on ruudun reunuksen vieressä."
+msgstr "Poista ikkunan raja kohti ruudun reunusta, kun ikkunan reuna on ruudun reunuksen vieressä."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Siirrä ikkuna paneelin reunaan kun ikkunan reuna tulee etäisyyteen `n` paneelin reunasta."
+msgstr "Siirrä ikkuna paneelin reunaan, kun ikkunan reuna tulee etäisyyteen `n` paneelin reunasta."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:272
