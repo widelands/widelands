@@ -1142,7 +1142,7 @@ msgstr "%s on esittänyt kaupan jatkamista. "
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
-msgstr ""
+msgstr "Vaihtolaajennus peruttu"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
@@ -1168,16 +1168,16 @@ msgstr ""
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
-msgstr ""
+msgstr "Vaihtolaajennus hyväksytty"
 
 #: ../../../../src/logic/game.cc:1656
 msgid "Trade extension proposal accepted"
-msgstr ""
+msgstr "Vaihtolaajennusehdotus hyväksytty"
 
 #: ../../../../src/logic/game.cc:1657
 #, c-format
 msgid "%s has accepted your proposal to extend a trade."
-msgstr ""
+msgstr "%s on hyväksynyt ehdotuksesi laajentaa kauppaa."
 
 #: ../../../../src/logic/game_data_error.cc:51
 msgid ""
@@ -1696,7 +1696,7 @@ msgstr "Vihollislaiva hyökkää"
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:363
 msgid "Naval Attack"
-msgstr ""
+msgstr "Merihyökkäys"
 
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:98
 #, c-format
@@ -2239,7 +2239,7 @@ msgstr "Pelaaja %u"
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:986
 msgid "Building’s inputs changed!"
-msgstr ""
+msgstr "Rakennuksen syötteet vaihdettu!"
 
 #. * TRANSLATORS: The argument is the buiding name
 #: ../../../../src/map_io/map_buildingdata_packet.cc:997
@@ -2431,7 +2431,7 @@ msgstr "Tarkistan kartan"
 
 #: ../../../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Jälkiladataan kartan objekteja"
 
 #: ../../../../src/network/gameclient.cc:171
 #: ../../../../src/network/gamehost.cc:580
@@ -4750,7 +4750,7 @@ msgstr "Valitse eläin kartalta …"
 msgid ""
 "Select an animal type by clicking on it on the map. Hold down Ctrl to select"
 " multiple animals."
-msgstr "Valitse eläintyyppi kartalta klikkaamalla sitä kartalta. Valitse useampi eläin pitämällä Ctrl pohjassa."
+msgstr "Valitse eläintyyppi klikkaamalla sitä kartalta. Valitse useampi eläin pitämällä Ctrl pohjassa."
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
@@ -4785,7 +4785,7 @@ msgstr "%1$s (vaatii suuren rakennuspaikan)"
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:91
 msgid "Pick immovable from map …"
-msgstr ""
+msgstr "Valitse liikkumaton kartalta ..."
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:92
 msgid ""
@@ -4822,7 +4822,7 @@ msgstr "Valitse maasto kartalta ..."
 msgid ""
 "Select a terrain type by clicking on it on the map. Hold down Ctrl to select"
 " multiple terrains."
-msgstr ""
+msgstr "Valitse maastotyyppi klikkaamalla sitä kartalta. Valitse useampi maasto pitämällä Ctrl pohjassa."
 
 #. * TRANSLATORS: Help tooltip in tool history window
 #: ../../../../src/ui/editor/tool_toolhistory_options_menu.cc:121
@@ -6815,7 +6815,7 @@ msgstr "Rauhaisa pelitila"
 
 #: ../../../../src/ui/fsmenu/launch_game.cc:122
 msgid "No fog of war"
-msgstr "Ei sodan usvaa"
+msgstr "Ei sodan sumua"
 
 #: ../../../../src/ui/fsmenu/launch_game.cc:130
 msgid "Forbid diplomacy"
@@ -7325,7 +7325,7 @@ msgstr "Julkaisukoonti %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% Widelandsin kehittäjäryhmän toimesta · Luvitettu GNU-yleisluvan alaiseksi eli GNU General Public License V2.0"
 
 #: ../../../../src/ui/fsmenu/main.cc:892
 msgid "Click for the main menu"
@@ -7892,7 +7892,7 @@ msgstr "Poista uusinnat:"
 
 #: ../../../../src/ui/fsmenu/options.cc:301
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Ohita automaattiset tallennukset epäaktiivisena"
 
 #: ../../../../src/ui/fsmenu/options.cc:308
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -7900,7 +7900,7 @@ msgstr "Pakkaa Widelandsin datatiedostot (kartat, toistot, tallennukset)"
 
 #: ../../../../src/ui/fsmenu/options.cc:316
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Pidä lähetettyjen keskusteluviestien historia tiedostossa."
 
 #: ../../../../src/ui/fsmenu/options.cc:327
 #: ../../../../src/ui/wui/interactive_gamebase.cc:278
@@ -7932,7 +7932,7 @@ msgstr "Näytä työalue kartalla"
 
 #: ../../../../src/ui/fsmenu/options.cc:351
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Keskeytä peli epäaktiivisena:"
 
 #: ../../../../src/ui/fsmenu/options.cc:361
 msgid "Start building road after placing a flag"

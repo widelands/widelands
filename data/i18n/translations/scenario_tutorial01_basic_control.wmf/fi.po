@@ -207,7 +207,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Se ei toimi. Minun pitää vielä yhdistää puunhakkaajan mökki päämajaan. Rakennustyömaan alettua siirryin automaattisesti tienrakennustilaan, joten minun täytyy vain klikata päämajani edessä olevaa sinistä lippua."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
