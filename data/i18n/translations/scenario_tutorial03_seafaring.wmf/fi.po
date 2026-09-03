@@ -5,6 +5,7 @@
 # Atte Timonen, 2022
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # heidi.wenger, 2022
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2020
 # Markus <markus@hallfors.com>, 2015
 # Oi Suomi On! <oisuomion@protonmail.com>, 2023
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,7 +260,7 @@ msgstr "Sinun täytyy pysäyttää telakkasi sitten, kun sinulla on riittäväst
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr "Tämä on kuvake tuotannon pysättämiseen. Löydät sen rakennusruudusta."
+msgstr "Tämä on tuotannon pysäyttämisen kuvake. Löydät sen rakennusruudusta."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
@@ -301,7 +302,7 @@ msgstr "Tutkimusmatkat"
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr "Tutkimusmatkan aikana sinä lähetät laivan etsimään uusia saaria ja kenties löydät sieltä siirtomaan."
+msgstr "Tutkimusmatkan aikana sinä lähetät laivan etsimään uusia saaria, ja kenties löydät sieltä siirtomaan."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -310,7 +311,7 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Tutkimusmatkoja voidaan aloittaa kakista samamista. Silloin kaikki tarvittavat tuotteet toimitetaan siihen satamaan. Tuotteet ovat täsmälleen ne mitä heimosi tarvitsee rakentaakseen sataman (sinun tavoitteena on rakentaa satama kauas kotoa, mikä ei ole yllättävää) ja toki tarvitset myös rakentajan. Kun kaikki valmistelut on tehty, laiva tulee hakemaan ne."
+msgstr "Tutkimusmatkoja voidaan aloittaa kakista satamista. Silloin kaikki tarvittavat tuotteet toimitetaan siihen satamaan. Tuotteet ovat täsmälleen ne, mitä heimosi tarvitsee rakentaakseen sataman (tavoitteenasi on rakentaa satama kauas kotoa, mikä ei ole yllättävää) ja toki tarvitset myös rakentajan. Kun kaikki valmistelut on tehty, laiva tulee hakemaan ne."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
@@ -394,7 +395,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "Tutkimusmatka-aluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tuotteita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
+msgstr "Tutkimusaluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tuotteita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikon, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan rantautumispaikan."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
@@ -432,7 +433,7 @@ msgstr "Navigoi laivasi saareen, joka voisi olla rautamalmia."
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr "Kun klikkaat tutkimusmatka-alusta, avautuu ruutu, jolla voit hallita laivaasi."
+msgstr "Kun klikkaat tutkimusalusta, avautuu ruutu, jolla voit hallita laivaasi."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
@@ -459,7 +460,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr "Olet tähän mennessä oppinut kaiken merenkäynnistä: kuinka rakentaa satamia ja laivoja ja kuinka lähettää tutkimusmatkoja. Muistathan, että tutkimusmatkat ovat joskus nopein tapa saada tärkeimmät resurssit  – ja joskus se ainoa tapa."
+msgstr "Olet tähän mennessä oppinut kaiken merenkäynnistä: kuinka rakentaa satamia ja laivoja ja kuinka lähettää tutkimusmatkoja. Muistathan, että tutkimusmatkat ovat joskus nopein tapa saada tärkeimmät resurssit  – ja joskus ainoa tapa."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""

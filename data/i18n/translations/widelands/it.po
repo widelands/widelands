@@ -5,6 +5,7 @@
 # Alen Ciga, 2021
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
 # xno, 2016
+# Daniele Vintauri <duriumingabbia@gmail.com>, 2026
 # Davide Nicolini <davide97@gmail.com>, 2015
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
 # GunChleoc, 2016
@@ -25,7 +26,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-08-13 04:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025-2026\n"
+"Last-Translator: Daniele Vintauri <duriumingabbia@gmail.com>, 2026\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +74,7 @@ msgstr "Non abbastanza alberi nei paraggi"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Nelle vicinanze della tua posizione di partenza non ci sono abbastanza alberi. Pertanto, ricevi risorse extra per avviare la tua economia."
 
 #: ../../../../data/scripting/messages.lua:66
 #: ../../../../data/scripting/messages.lua:68
@@ -298,7 +299,7 @@ msgstr "Dic"
 #: ../../../../src/base/time_string.cc:170
 msgctxt "day_of_month"
 msgid "Sun"
-msgstr ""
+msgstr "Dom"
 
 #. * TRANSLATORS: Monday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -307,7 +308,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:175
 msgctxt "day_of_month"
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 #. * TRANSLATORS: Tuesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -316,7 +317,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:180
 msgctxt "day_of_month"
 msgid "Tue"
-msgstr ""
+msgstr "Mar"
 
 #. * TRANSLATORS: Wednesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -325,7 +326,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:185
 msgctxt "day_of_month"
 msgid "Wed"
-msgstr ""
+msgstr "Mer"
 
 #. * TRANSLATORS: Thursday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -334,7 +335,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:190
 msgctxt "day_of_month"
 msgid "Thu"
-msgstr ""
+msgstr "Gio"
 
 #. * TRANSLATORS: Friday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -343,7 +344,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:195
 msgctxt "day_of_month"
 msgid "Fri"
-msgstr ""
+msgstr "Ven"
 
 #. * TRANSLATORS: Saturday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -352,19 +353,19 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:200
 msgctxt "day_of_month"
 msgid "Sat"
-msgstr ""
+msgstr "Sab"
 
 #. * TRANSLATORS: Display date.
 #. * Placeholders are: day_of_month month day, year, hour:minute
 #: ../../../../src/base/time_string.cc:212
 msgid "%1% %2% %3%, %4%, %5%:%6%"
-msgstr ""
+msgstr "%1% %2% %3%, %4%, %5%:%6%"
 
 #. * TRANSLATORS: Display time.
 #. * Placeholders are: hour:minute:second
 #: ../../../../src/base/time_string.cc:258
 msgid "%1%:%2%:%3%"
-msgstr ""
+msgstr "%1%:%2%:%3%"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
 #: ../../../../src/ui/game/diplomacy_menu.cc:44
@@ -389,7 +390,7 @@ msgstr "Il giocatore lascia la squadra"
 #: ../../../../src/commands/cmd_diplomacy.cc:69
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s ha lasciato il team %2$u e ora è senza squadra."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:101
 msgid "Team Joining Request"
@@ -424,7 +425,7 @@ msgstr "%1$s ha accettato l'invito ad unirsi alla squadra di %2$s."
 #: ../../../../src/commands/cmd_diplomacy.cc:154
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha ritirato la richiesta di unirsi al team di %2$s."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:156
 #, c-format

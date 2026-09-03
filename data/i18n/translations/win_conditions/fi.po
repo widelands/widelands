@@ -267,7 +267,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Kukin pelaaja tai joukkue pyrkii hallitsemaan yli puolta kartan maapinta-alasta. Pelaaja tai joukkue, joka pitää hallussaan ainakin 20 minuutin ajan tai enintä aluetta %s jälkeen, voittaa. Jos pelataan rauhallisessa pelitilassa, peli päättyy kun jollakin pelaajalla on hallussaan enemmän maata kuin mitä kukaan muu pystyy valtaamaan."
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"

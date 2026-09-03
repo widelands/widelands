@@ -587,7 +587,7 @@ msgid ""
 "port for loading our ships and starting an expedition."
 msgstr ""
 "Herra, mietiskelin juuri kotimatkaamme. On äärimmäisen tärkeää rakentaa "
-"satama aluksiemme lastaamiseksi ja tutkimusmatkan aloittamiseksi."
+"satama laivojemme lastaamiseksi ja tutkimusmatkan aloittamiseksi."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:338
@@ -650,9 +650,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
-"Lähettääksemme tutkimusmatka-aluksen, me tarvitsemme ensin laivan. "
-"Valitettavasti meillä on jäljellä vain viisi paalia kangasta, jotka me "
-"tarvitsemme sataman ja telakan rakentamiseksi."
+"Lähettääksemme tutkimusaluksen me tarvitsemme ensin laivan. Valitettavasti "
+"meillä on jäljellä vain viisi paalia kangasta, jotka me tarvitsemme sataman "
+"ja telakan rakentamiseksi."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:369
