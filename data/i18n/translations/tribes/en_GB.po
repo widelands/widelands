@@ -92,55 +92,55 @@ msgstr "Your soldiers defeated the enemy at the fortification."
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Fortress"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:62
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Your soldiers have occupied your fortress."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:64
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Your fortress discovered an aggressor."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:66
 msgctxt "amazons_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Your fortress is under attack."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:68
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "The enemy defeated your soldiers at the fortress."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:70
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Your soldiers defeated the enemy at the fortress."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Observation Tower"
-msgstr ""
+msgstr "Observation Tower"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr ""
+msgstr "Your soldiers have occupied your observation tower."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr ""
+msgstr "Your observation tower discovered an aggressor."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34

@@ -5,6 +5,7 @@
 # Atte Timonen, 2022
 # GunChleoc, 2018
 # GunChleoc, 2014
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2018,2020
 # LINUX-SAUNA, 2022
 # Oi Suomi On! <oisuomion@protonmail.com>, 2023
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-04-25 04:41+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgstr "TIEDOSTONIMI"
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "viimeinen"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -260,7 +261,7 @@ msgstr "Älä tallenna tiedostoja binäärisinä zip-arkistoina."
 
 #: ../../../../src/wlapplication_messages.cc:165
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Tallenna tiedostoja binäärisinä zip-arkistoina."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -418,11 +419,11 @@ msgstr "Grafiikkavallinnat:"
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Käytä koko ruutua pelinäkymälle."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Aloita peli suurimmassa ikkunatilassa."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../../../src/wlapplication_messages.cc:236
@@ -449,7 +450,7 @@ msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "Annetaanko järjestelmän piirtää hiiren osoitin. Poista käytöstä vain, jos osoitin ei näy oikein, tai jos haluat sen näkyväksi kuvankaappauksissa tai ruudunkaappauksissa."
 
 #: ../../../../src/wlapplication_messages.cc:248
 msgid "Whether to use sticky tooltips."
@@ -473,20 +474,20 @@ msgstr "Animoidaanko automaattiset kartan liikkeet."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr "Siirrä ikkuna ruudun äärireunaan kun ikkunan reunus tulee etäisyydelle `n` ruudunreunasta. "
+msgstr "Siirrä ikkuna ruudun äärireunaan, kun ikkunan reunus tulee etäisyydelle `n` ruudunreunasta. "
 
 #: ../../../../src/wlapplication_messages.cc:261
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "Poista ikkunan raja kohti ruudun reunusta kun ikkunan reuna on ruudun reunuksen vieressä."
+msgstr "Poista ikkunan raja kohti ruudun reunusta, kun ikkunan reuna on ruudun reunuksen vieressä."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Siirrä ikkuna paneelin reunaan kun ikkunan reuna tulee etäisyyteen `n` paneelin reunasta."
+msgstr "Siirrä ikkuna paneelin reunaan, kun ikkunan reuna tulee etäisyyteen `n` paneelin reunasta."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:272

@@ -8,6 +8,7 @@
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2020
 # Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # Teppo Mäenpää <teppo@runbox.com>, 2020
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,20 +34,20 @@ msgstr "Eikö olekin kivaa ja helppoa?"
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "Valitan, mutta minun on revittävä tämä. Me saatamme myöhemmin tarvita tilaa tähän."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:20
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "Valitan, mutta minun on revittävä tämä taas. Me saatamme myöhemmin tarvita tilaa tähän."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:22
 msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "Jos olen sinulle liian hidas, halunnet pelata kunnon peliä ja keksiä asiat itse. Muutoin koeta kestää kanssani, en ole enää nuorin ja nopein."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Welcome to the Widelands Tutorial!"
@@ -84,11 +85,11 @@ msgstr "Voit avata ja sulkea 'Tavoitteet'-ikkunan klikkaamalla 'Tavoitteet'-pain
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr "Kuten useimmat muutkin ikkunat, voit sulkea sen myös hiiren oikealla näppäimellä."
+msgstr "Kuten monia muitakin ikkunoita, voit sulkea sen myös hiiren oikealla näppäimellä."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Voit myös pienentää ikkunoita napsauttamalla niitä hiiren keskipainikkeella."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
@@ -97,7 +98,7 @@ msgstr "Kun olet saavuttanut tavoitteen, se poistuu listasta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Nyt jatka sulkemalla 'Taivoitteet'-ikkuna."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
@@ -187,7 +188,7 @@ msgstr "Puunhakkaajan mökin rakentaminen"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr "Ensiksi, klikkaan vasemmalla painikkeella rakennuksen kuvaketta siinä kohtaa mihin haluan puunhakkaajan mökin rakentaa. Tämä avaa ikkunan jossa voin valita eri rakennusten välillä."
+msgstr "Ensiksi, klikkaan vasemmalla painikkeella rakennuksen kuvaketta siinä kohtaa, mihin haluan puunhakkaajan mökin rakentaa. Tämä avaa ikkunan, jossa voin valita eri rakennusten välillä."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:123
 msgid ""
@@ -206,7 +207,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Se ei toimi. Minun pitää vielä yhdistää puunhakkaajan mökki päämajaan. Rakennustyömaan alettua siirryin automaattisesti tienrakennustilaan, joten minun täytyy vain klikata päämajani edessä olevaa sinistä lippua."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
@@ -377,7 +378,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Liikkuminen hiiren oikealla napilla voi olla epämukavaa, jos pelaat kannettavalla kosketuslevyllä. Voit ottaa kartan liikkumisen käyttöön kosketuslevyvierityksellä Widelands-päävalikossa: valitse 'Asetukset', sitten paina 'Muokkaa näppäimistön ja hiiren toimintoja' ja valitse välilehti 'Hiiren vieritys'."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
@@ -482,7 +483,7 @@ msgstr "Kivilouhos on pieni rakennus kuten puunhakkaajan mökki. Siispä voit ra
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Paina vain mitä tahansa rakennuskuvaketta kivikkojen vieressä, valitse pieni rakennus -välilehti avautuvasta ruudusta, ja paina sitten kivilouhos-kuvaketta."
+msgstr "Paina mitä tahansa rakennuskuvaketta kivikkojen vieressä, valitse pieni rakennus -välilehti avautuvasta ruudusta, ja paina sitten kivilouhos-kuvaketta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "How to Build a Quarry"
@@ -498,7 +499,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr "Varmista että rakennuspaikkojen näyttäminen on kytketty päälle. Sitten vain klikkaat kohtaa johon haluat rakennuksen sijoittaa, valitset avautuvasta ikkunasta kivilouhoksen, ja se on siinä."
+msgstr "Varmista, että rakennuspaikkojen näyttäminen on kytketty päälle. Sitten vain klikkaat kohtaa, johon haluat rakennuksen sijoittaa, valitset avautuvasta ikkunasta kivilouhoksen, ja se on siinä."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid ""
@@ -570,7 +571,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Loistavaa! Muista, meidän on myös rakennettava tie louhokseen. Siirry tienrakennustilaan mistä tahansa lipusta klikkaamalla sitä hiiren vasemmalla painikkeella ja valitsemalla tienrakennus-kuvakkeen."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
@@ -772,7 +773,7 @@ msgstr ""
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Yleensä aloitat pelin päämajasta. Se on merkitty pienillä kruunuilla: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
@@ -795,40 +796,40 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Vaihda pikkukyläsi nimeä"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Vaihja päämajasi nimeä"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Jotta asetat päämajallesi uusi nimi, avaa sen ikkuna klikkaamalla sitä."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "Ikkunan yläosassa näkyy muokkauskenttä, jossa näkyy nimi."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Sinun pitää vain poistaa vanha nimi ja kirjoittaa uusi."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Kun olet valmis, sulje ikkuna"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Ole luova"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Suljit ikkunan vaihtamatta nimeä. Varmasti keksit jotakin. Mutta jos et halua, poista edes vanha nimi, niin näytät, että olet löytänyt muokkauskentän."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"
@@ -891,7 +892,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "Viestiruudun voi aktivoida toisella painikkeella oikealta, ikkunan alalaidassa. Painike muuttaa myös ulkonäköä kun uusia viestejä on saatavilla. Uuden viestin saapuessa kuuluu myös äänimerkki."
+msgstr "Viestiruudun voi aktivoida toisella painikkeella oikealta, ikkunan alalaidassa. Painike muuttaa myös ulkonäköä, kun uusia viestejä on saatavilla. Uuden viestin saapuessa kuuluu myös äänimerkki."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:557
 msgid ""
@@ -917,7 +918,7 @@ msgstr "Kaikki ruudut Widelandsissä (lukuunottamatta 'OK'-viestin näyttäviä 
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Ikkunoita voi myös pienentää napsauttamalla niitä hiiren keskipainikkeella."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
