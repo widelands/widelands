@@ -26,6 +26,7 @@
 #include "ui/basic/unique_window.h"
 #include "ui/wui/mapview.h"
 
+class InteractiveBase;
 class InteractiveGameBase;
 namespace Widelands {
 class Game;

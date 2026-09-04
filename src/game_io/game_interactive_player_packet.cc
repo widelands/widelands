@@ -26,9 +26,6 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "ui/wui/interactive_player.h"
-#include "ui/wui/mapview.h"
-#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace Widelands {
 
@@ -48,7 +45,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber player_number = fr.unsigned_8();
 			if (player_number < 1 || player_number > game.map().get_nrplayers()) {
 				throw GameDataError("Invalid player number: %i.", player_number);
@@ -70,72 +67,28 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				}
 			}
 
-			Vector2f center_map_pixel = Vector2f::zero();
-			center_map_pixel.x = fr.float_32();
-			center_map_pixel.y = fr.float_32();
+			IGameInterface* iginterface = game.get_game_interface();
+			IGameInterface::SaveloadingInformation info;
+			info.player_number = player_number;
 
-			uint32_t display_flags = fr.unsigned_32();
+			info.mapview_center.x = fr.float_32();
+			info.mapview_center.y = fr.float_32();
+			info.display_flags = fr.unsigned_32();
 
-			InteractivePlayer* ipl = game.get_ipl();
-			if (InteractiveBase* const ibase = game.get_ibase()) {
-				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
-			}
-			if (ipl != nullptr) {  // Not in replays
-				if (g_allow_script_console) {
-					display_flags |= InteractiveBase::dfDebug;
-				} else {
-					display_flags &= ~InteractiveBase::dfDebug;
-				}
-				ipl->set_display_flags(display_flags);
-				ipl->set_player_number(player_number);
+			info.landmarks.resize(fr.unsigned_32());
+			for (auto& lm : info.landmarks) {
+				lm.set = fr.unsigned_8() != 0;
+				lm.view_x = fr.float_32();
+				lm.view_y = fr.float_32();
+				lm.zoom = fr.float_32();
+				lm.name = fr.string();
 			}
 
-			// Map landmarks
-			// TODO(Nordfriese): Savegame compatibility v1.1
-			if (InteractiveBase* const ibase = game.get_ibase()) {
-				const size_t no_of_landmarks =
-				   (packet_version >= 7) ? fr.unsigned_32() : fr.unsigned_8();
-				auto& quicknav = ibase->quick_navigation();
-				quicknav.landmarks().resize(no_of_landmarks);
+			if (iginterface != nullptr) {
+				iginterface->restore_from_saveloading_information(info);
 
-				// TODO(tothxa): Only needed for savegame compatibility code for v1.1 below
-				const Vector2f viewpoint_offset(
-				   ibase->map_view()->get_w() / 2.f, ibase->map_view()->get_h() / 2.f);
-
-				for (size_t i = 0; i < no_of_landmarks; ++i) {
-					uint8_t set = fr.unsigned_8();
-					const float x = fr.float_32();
-					const float y = fr.float_32();
-					const float zoom = fr.float_32();
-					MapView::View view = {Vector2f(x, y), zoom};
-					// TODO(tothxa): Savegame compatibility, remove after v1.2
-					if (packet_version < 7) {
-						// Reference point was top left up to v1.1, is center starting with v1.2.
-						// The landmarks are shifted if the window size is different between saving and
-						// restoring. (same as pre v1.2 behavior)
-						view.viewpoint =
-						   MapviewPixelFunctions::panel_to_map(view.viewpoint, zoom, viewpoint_offset);
-					}
-					if (set > 0) {
-						quicknav.set_landmark(i, view);
-					}
-					if (packet_version >= 7) {
-						quicknav.landmarks()[i].name = fr.string();
-					}
-				}
-
-				// TODO(tothxa): Savegame compatibility, remove after v1.2
-				//               This used to be a cache of expedition ships' primary seen port spaces
-				if (packet_version < 8) {
-					size_t nr_port_spaces = fr.unsigned_32();
-					for (size_t i = 0; i < nr_port_spaces; ++i) {
-						/* serial */ fr.unsigned_32();
-						/* x */ fr.signed_16();
-						/* y */ fr.signed_16();
-					}
-				}
-				if (packet_version >= 6 && (fr.unsigned_8() != 0u) && (ipl != nullptr)) {
-					ibase->load_windows(fr, *mol);
+				if (fr.unsigned_8() != 0u && info.should_saveload_windows) {
+					iginterface->load_windows(fr, *mol);
 				}
 			}
 		} else {
@@ -155,40 +108,34 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	InteractiveBase* const ibase = game.get_ibase();
-	InteractivePlayer* const iplayer = game.get_ipl();
+	IGameInterface* iginterface = game.get_game_interface();
+	IGameInterface::SaveloadingInformation info;
+	if (iginterface != nullptr) {
+		iginterface->gather_saveloading_information(info);
+	}
 
 	// Player number
-	fw.unsigned_8(iplayer != nullptr ? iplayer->player_number() : 1);
+	fw.unsigned_8(info.player_number);
 
-	if (ibase != nullptr) {
-		const Vector2f center = ibase->map_view()->view_area().rect().center();
-		fw.float_32(center.x);
-		fw.float_32(center.y);
-	} else {
-		fw.float_32(0.f);
-		fw.float_32(0.f);
-	}
+	fw.float_32(info.mapview_center.x);
+	fw.float_32(info.mapview_center.y);
 
 	// Display flags
-	fw.unsigned_32(ibase != nullptr ? ibase->get_display_flags() : 0);
+	fw.unsigned_32(info.display_flags);
 
 	// Map landmarks
-	if (ibase != nullptr) {
-		const auto& landmarks = ibase->quick_navigation().landmarks();
-		fw.unsigned_32(landmarks.size());
-		for (const auto& lm : landmarks) {
-			fw.unsigned_8(lm.set ? 1 : 0);
-			fw.float_32(lm.view.viewpoint.x);
-			fw.float_32(lm.view.viewpoint.y);
-			fw.float_32(lm.view.zoom);
-			fw.string(lm.name);
-		}
+	fw.unsigned_32(info.landmarks.size());
+	for (const auto& lm : info.landmarks) {
+		fw.unsigned_8(lm.set ? 1 : 0);
+		fw.float_32(lm.view_x);
+		fw.float_32(lm.view_y);
+		fw.float_32(lm.zoom);
+		fw.string(lm.name);
 	}
 
-	if (iplayer != nullptr) {
+	if (info.should_saveload_windows) {
 		fw.unsigned_8(1);
-		iplayer->save_windows(fw, *mos);
+		iginterface->save_windows(fw, *mos);
 	} else {
 		fw.unsigned_8(0);
 	}
