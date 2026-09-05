@@ -35,7 +35,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - fix_RTL_enzyclopedia
 
 skip_tags: true
 
