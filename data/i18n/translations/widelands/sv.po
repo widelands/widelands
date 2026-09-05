@@ -293,7 +293,7 @@ msgstr "Dec"
 #: ../../../../src/base/time_string.cc:170
 msgctxt "day_of_month"
 msgid "Sun"
-msgstr ""
+msgstr "Sön"
 
 #. * TRANSLATORS: Monday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -302,7 +302,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:175
 msgctxt "day_of_month"
 msgid "Mon"
-msgstr ""
+msgstr "Mån"
 
 #. * TRANSLATORS: Tuesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -311,7 +311,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:180
 msgctxt "day_of_month"
 msgid "Tue"
-msgstr ""
+msgstr "Tis"
 
 #. * TRANSLATORS: Wednesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -320,7 +320,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:185
 msgctxt "day_of_month"
 msgid "Wed"
-msgstr ""
+msgstr "Ons"
 
 #. * TRANSLATORS: Thursday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -329,7 +329,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:190
 msgctxt "day_of_month"
 msgid "Thu"
-msgstr ""
+msgstr "Tor"
 
 #. * TRANSLATORS: Friday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -338,7 +338,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:195
 msgctxt "day_of_month"
 msgid "Fri"
-msgstr ""
+msgstr "Fre"
 
 #. * TRANSLATORS: Saturday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -347,19 +347,19 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:200
 msgctxt "day_of_month"
 msgid "Sat"
-msgstr ""
+msgstr "Lör"
 
 #. * TRANSLATORS: Display date.
 #. * Placeholders are: day_of_month month day, year, hour:minute
 #: ../../../../src/base/time_string.cc:212
 msgid "%1% %2% %3%, %4%, %5%:%6%"
-msgstr ""
+msgstr "%1% %2% %3%, %4%, %5%:%6%"
 
 #. * TRANSLATORS: Display time.
 #. * Placeholders are: hour:minute:second
 #: ../../../../src/base/time_string.cc:258
 msgid "%1%:%2%:%3%"
-msgstr ""
+msgstr "%1%:%2%:%3%"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
 #: ../../../../src/ui/game/diplomacy_menu.cc:44
@@ -1849,11 +1849,11 @@ msgstr "En upptäckt hamnplats är inte längre tillgänglig för byggnation av 
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "A new ship has been built."
-msgstr ""
+msgstr "Ett nytt skepp har byggts."
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "New Ship"
-msgstr ""
+msgstr "Nytt skepp"
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
@@ -7045,7 +7045,7 @@ msgstr "Läs in denna repris"
 #: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:200
 msgid "No game selected"
-msgstr ""
+msgstr "Inget spel valt"
 
 #. * TRANSLATORS: Tooltip for OK button. The user has no files to select
 #. * TRANSLATORS: Tooltip for the delete button. The user has
@@ -7053,7 +7053,7 @@ msgstr ""
 #: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:197
 msgid "No replay selected"
-msgstr ""
+msgstr "Ingen repris vald"
 
 #: ../../../../src/ui/fsmenu/login_box.cc:37
 #: ../../../../src/ui/fsmenu/main.cc:431
@@ -7870,7 +7870,7 @@ msgstr "Avstånd för fönster att snappa till kanter:"
 
 #: ../../../../src/ui/fsmenu/options.cc:244
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Skalningsfaktor för användargränssnitt"
 
 #: ../../../../src/ui/fsmenu/options.cc:254
 msgid "Edit keyboard and mouse actions…"
@@ -7999,7 +7999,7 @@ msgstr "I spelet"
 
 #: ../../../../src/ui/fsmenu/options.cc:468
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Skalningsfaktor för användargränssnitt:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:552
@@ -9143,7 +9143,7 @@ msgstr "Fördefinierade profiler kan inte tas bort"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Ta bort den valda profilen"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
