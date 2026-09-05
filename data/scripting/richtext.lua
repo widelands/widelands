@@ -525,8 +525,11 @@ end
 --    :returns: li("→", text)
 
 function li_arrow(text)
-   -- TODO(GunChleoc): Reverse arrow for rtl languages.
-   return li("→", text)
+   if wl.ui.is_rtl() then
+      return li("←", text)
+   else
+      return li("→", text)
+   end
 end
 
 -- RST
