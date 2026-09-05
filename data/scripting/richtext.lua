@@ -299,12 +299,21 @@ end
 --    :returns: header text followed by normal text.
 
 function inline_header(header, text)
-   return
-      div("width=100%",
-          vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
-      div("width=100%",
-          styles.as_font_from_p(_style_prefix_ .. "heading_3", header .. " ") ..
-          styles.as_font_from_p(_style_prefix_ .. "text", text))
+   if wl.ui.is_rtl() then
+      return
+         div("width=100%",
+             vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
+         div("width=100%",
+             styles.as_font_from_p(_style_prefix_ .. "text", text) ..
+             styles.as_font_from_p(_style_prefix_ .. "heading_3", " " .. header))
+   else
+      return
+         div("width=100%",
+             vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
+         div("width=100%",
+             styles.as_font_from_p(_style_prefix_ .. "heading_3", header .. " ") ..
+             styles.as_font_from_p(_style_prefix_ .. "text", text))
+   end
 end
 
 
@@ -498,7 +507,11 @@ function li(text_or_symbol, text)
       symbol ="•"
       t = text_or_symbol
    end
-   return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
+   if wl.ui.is_rtl() then
+      return div("width=95%%", p(t .. vspace())) .. div(p(space())) .. div(p(symbol))
+   else
+      return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
+   end
 end
 
 
@@ -512,8 +525,11 @@ end
 --    :returns: li("→", text)
 
 function li_arrow(text)
-   -- TODO(GunChleoc): Reverse arrow for rtl languages.
-   return li("→", text)
+   if wl.ui.is_rtl() then
+      return li("←", text)
+   else
+      return li("→", text)
+   end
 end
 
 -- RST
@@ -558,11 +574,19 @@ function li_object(name, text, playercolor)
    if (playercolor ~= nil) then
       image = img_object(name, "color=" .. playercolor)
    end
-   return
-      div("width=100%",
-         div("float=left padding_r=" .. default_gap(), p(image)) ..
-         p(text)
-      )
+   if wl.ui.is_rtl() then
+      return
+         div("width=100%",
+            div("float=right padding_l=6", p(image)) ..
+            p(text)
+         )
+   else
+      return
+         div("width=100%",
+            div("float=left padding_r=" .. default_gap(), p(image)) ..
+            p(text)
+         )
+   end
 end
 
 -- RST
