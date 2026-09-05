@@ -18,6 +18,7 @@
 
 #include "network/net_addons.h"
 
+#include <algorithm>
 #include <cassert>
 #include <csignal>
 #include <cstdlib>
@@ -122,12 +123,8 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 	}
 	std::vector<std::string> components;
 	split(components, path, {'/', '\\'});
-	for (const std::string& component : components) {
-		if (!name_valid(component)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(components.begin(), components.end(),
+	                   [](const std::string& component) { return name_valid(component); });
 }
 }  // namespace
 
