@@ -101,6 +101,8 @@ public:
 
 	void
 	recursive_copy(FileSystem& dest_fs, const std::string& src_path, const std::string& dest_path);
+	void
+	recursive_copy_all(FileSystem& dest_fs, const std::string& path = std::string());
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();

@@ -408,6 +408,12 @@ std::vector<std::string> FileSystem::get_sequential_files(const std::string& dir
 	return result;
 }
 
+void FileSystem::recursive_copy_all(FileSystem& dest_fs, const std::string& path) {
+	for (const std::string& child : list_directory(path)) {
+		recursive_copy(dest_fs, child, path);
+	}
+}
+
 void FileSystem::recursive_copy(FileSystem& dest_fs,
                                 const std::string& src_path,
                                 const std::string& dest_path) {

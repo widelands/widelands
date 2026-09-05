@@ -1051,7 +1051,7 @@ void GameHost::set_map(const std::string& mapname,
 				can_send = false;
 
 			} else {
-				g_fs->recursive_copy(*zip_fs, original_file, "");
+				map_fs->recursive_copy_all(*zip_fs);
 			}
 		}
 	}
