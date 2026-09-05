@@ -491,7 +491,7 @@ msgstr "Flytta ett fönster till kontrollpanelens kant när fönstrets kant komm
 msgid ""
 "The factor by which to fractionally scale the Widelands user interface, in "
 "quarters."
-msgstr ""
+msgstr "Faktorn som Widelands användargränssnitt ska skalas med i fjärdedelar."
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"

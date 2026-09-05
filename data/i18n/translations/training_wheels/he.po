@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# ari ploni, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: ari ploni, 2026\n"
 "Language-Team: Hebrew (https://app.transifex.com/widelands/teams/35159/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,32 +25,32 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "שטחי בנייה"
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "נרצה להציב מבנים כדי שנוכל לייצר סחורות."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "אז בואו נגלה איפה יש לנו מקום עבורם."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "לחצו על התפריט ‘הצג / הסתר’."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "בחרו ‘הצג שטחי בנייה’."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "כעת אנחנו יכולים לראות איפה ניתן להציב מבנים ודגלים."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr ""
+msgstr "לחצו ‘אישור’ כדי להמשיך."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/flags.lua:60
@@ -54,50 +58,51 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/flags.lua:83
 #: ../../../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "דגלים"
 
 #: ../../../../data/scripting/training_wheels/flags.lua:63
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
 msgstr ""
+"הסבלים שלכם יכולים להעביר את הסחורות שלכם מהר יותר אם הם חולקים את המשא."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "לחצו על סמל הדגל."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "לחצו על כפתור הדגל."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "כעת בדקו אם אתם יכולים להציב עוד דגלים על הדרכים שלכם."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr ""
+msgstr "לחצו ‘אישור’ כשסיימתם."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "ברוכים הבאים"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:147
 #: ../../../../data/scripting/training_wheels/objectives.lua:22
 #: ../../../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "יעדים"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "בולי עץ ודרכים"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "סלעים"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:115
 #: ../../../../data/scripting/training_wheels/rocks.lua:115
@@ -105,6 +110,8 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
+"לחצו על שטח בנייה קטן, בינוני או גדול, ואז בחרו את המבנה מלשונית המבנים "
+"הקטנים."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:117
 #: ../../../../data/scripting/training_wheels/rocks.lua:117
@@ -112,30 +119,34 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
+"לחצו על שטח בנייה בינוני או גדול, ואז בחרו את המבנה מלשונית המבנים "
+"הבינוניים."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:119
 #: ../../../../data/scripting/training_wheels/rocks.lua:119
 msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
-msgstr ""
+msgstr "לחצו על שטח בנייה גדול, ואז בחרו את המבנה מלשונית המבנים הגדולים."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"אם תחזיקו את המקש ‘Ctrl’ לחוץ בזמן שאתם לוחצים על הדגל השני, פעולה זו תציב "
+"עוד דגלים על הדרך שלכם אם אפשר."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:125
 #: ../../../../data/scripting/training_wheels/logs.lua:175
 msgid "Logs"
-msgstr ""
+msgstr "בולי עץ"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:128
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
-msgstr ""
+msgstr "עליכם לספק לשבט שלכם בולי עץ. נא בנו את המבנה הבא:"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:138
 #: ../../../../data/scripting/training_wheels/logs.lua:149
@@ -144,36 +155,36 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/rocks.lua:152
 #: ../../../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
-msgstr ""
+msgstr "דרכים"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:141
 #: ../../../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr ""
+msgstr "לחצו על הדגל שלפני המבנה כדי להתחיל לסלול דרך."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
-msgstr ""
+msgstr "לחצו על כפתור ‘סלול דרך’, ולאחר מכן לחצו על הדגל המסומן."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:164
 #: ../../../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "לחצו על כפתור המבנה…"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…ואז לחצו על הדגל שלפני מבנה היעד."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
-msgstr ""
+msgstr "כל הכבוד! בקרוב נתחיל לייצר בולי עץ, שאותם נצטרך לבניית מבנים נוספים."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr ""
+msgstr "פתחו את חלון היעדים"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -181,59 +192,69 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"לחצו על הכפתור שאליו מצביע החץ, או לחצו על ‘%s’ כדי לראות את יעדי המשחק "
+"הנוכחי."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "סגרו את החלון הזה"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr ""
+msgstr "סגירת החלון הזה"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"אתם יכולים לפתוח ולסגור את החלון הזה על ידי לחיצה על כפתור ‘יעדים’ בסרגל "
+"הכלים בתחתית המסך."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"כמו כל חלון אחר, אתם יכולים לסגור גם את חלון ‘יעדים’ על ידי לחיצה ימנית "
+"עליו."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
-msgstr ""
+msgstr "תוך כדי כך, בדקו את הסימונים כדי לעשות את הדרך שטוחה ככל האפשר:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "השטח כאן שטוח. הסבלים שלכם ינועו כאן במהירות רבה."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"יש מדרון קטן לטפס כדי להגיע לשדה הזה. משמעות הדבר היא שהעובדים שלכם יהיו "
+"מהירים יותר בירידה מאשר בעלייה."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"החיבור בין השדות תלול במיוחד. תוספת המהירות בכיוון אחד גדולה מאוד, וההאטה "
+"בכיוון השני משמעותית גם היא."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:128
 #: ../../../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "גרניט"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
-msgstr ""
+msgstr "עליכם לספק לשבט שלכם גרניט. נא בנו את המבנה הבא:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:155
 msgid ""
@@ -241,24 +262,28 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"לחצו על כפתור ‘סלול דרך’. לאחר מכן, לחצו על הסימונים הצבעוניים על המפה כדי "
+"לכוון את הדרך עד שתגיעו לדגל שלפני מבנה היעד."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…ואז לחצו על הסימונים הצבעוניים על המפה כדי לכוון את הדרך עד שתגיעו לדגל "
+"שלפני מבנה היעד."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
-msgstr ""
+msgstr "כל הכבוד! בקרוב נתחיל לייצר גרניט, שאותו נצטרך לבניית מבנים נוספים."
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:20
 #: ../../../../data/scripting/training_wheels/welcome.lua:24
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "ברוכים הבאים ל-Widelands!"
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "עקבו אחרי החצים כדי ללמוד איך לשחק."
