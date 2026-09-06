@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# ari ploni, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: ari ploni, 2026\n"
 "Language-Team: Hebrew (https://app.transifex.com/widelands/teams/35159/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,152 +22,157 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "השיטפון הגדול (שמירה אוטומטית - גיבוי)"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "לנגנס"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "בנה כלכלת עץ וחוות קנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "כלכלת עץ"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"בנה לפחות בית כורת עצים אחד ושני בתי יערן כדי להתחיל בייצור בולי עץ, וכן "
+"חוות קנים כדי להתחיל בגידול קנים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "התחל בייצור לבנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr ""
+msgstr "כלכלת לבנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"בנה כבשן לבנים, מכרה פחם, מכרה סלע, בור חימר ובאר כדי להתחיל בייצור לבנים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "אסוף חומרי בנייה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "אגירת חומרי בנייה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
-msgstr ""
+msgstr "אגור חומרי בנייה במפקדה שלך. אסוף לפחות:"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × בול עץ"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × גרניט"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × חימר"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × לבנה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × פחם"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × קנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
-msgstr ""
+msgstr "זכור שאתה יכול לקבוע כמויות יעד לרוב הסחורות האלה בהגדרות הכלכלה שלך."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "ייצר מזון לכורים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr ""
+msgstr "כלכלת מזון"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
-msgstr ""
+msgstr "בנה מסבאה, בית דייג, בית עישון, חוות פירות יער ובית אספן פירות."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "שדרג את כלכלת המזון שלך"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "שדרוג כלכלת המזון"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"בנה לפחות שתי חוות, בית דבוראי (ליד חוות פירות היער), מאפייה, מבשלת בירה, "
+"ומסבאה נוספת."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "בנה מכרה ברזל ותשתית כרייה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "בניית מכרות ותשתית כרייה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr ""
+msgstr "בנה מכרה ברזל, כור התכה, נפחייה ונפחיית שריון קטנה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "התחל לגייס חיילים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "גיוס חיילים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "בנה קסרקטין, חוות איילים וחדר תפירה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "גלה עוד מהאי"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "התרחבות וגילוי"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "התרחב עוד וגלה עוד מהאי."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "אמן את חייליך"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -173,7 +182,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "אימון חיילים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -182,38 +191,44 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"אמן חייל לרמה הגבוהה ביותר האפשרית. חיילים מתאמנים במחנות אימונים ובזירות "
+"אימונים. נזדקק למכרה זהב, לחנות חייט לתפירת בגדים חסונים יותר, ולנפחיית "
+"שריון גדולה לנשק וקסדות טובים יותר."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "הבס את האויב!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "הבסת האויב!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "הרוס את מפקדת שבט האויב."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "הימלט מהשיטפונות"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "בריחה מהשיטפונות"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"בנה נמל, בית אריגה ומספנה, ואז צא במשלחת כדי להימלט לפני שהשיטפון הגדול "
+"יטביע את האי."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"תוכל לבנות את הנמל בקצה המזרחי ביותר של האי, או במקום שבו עמדה מפקדת האויב."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -221,6 +236,8 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"אם לא התכוננת די טוב כדי להתגבר על האתגר הזה בזמן, תוכל לטעון מחדש את התרחיש"
+" משמירת הגיבוי שנוצרה עבורך אוטומטית זמן קצר לפני שהגעת למפקדת האויב."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -228,11 +245,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "מבוא"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "ברוכים הבאים!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -240,6 +257,7 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"ברוכים הבאים לאי היפהפה לנגנס! אני ריבאוד, ראש השבט של האי הבתולי הזה."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -250,10 +268,13 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"שבטי ואני זה עתה הגענו מהיבשת. היו קרבות עם הדנים בצפון, עם השאואנבורגים "
+"וההולשטיינים במזרח ובדרום… אז החלטתי להוביל את שבטי משם ולהתחיל חיים שקטים "
+"ושלווים באי הבלתי-נגוע הזה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "בית חדש"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -261,17 +282,19 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"זה מקום טוב כמו כל מקום אחר להתחיל לבנות בו את ביתנו החדש. קודם כול, עלינו "
+"להבטיח אספקה יציבה של חומרי בנייה בסיסיים."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
-msgstr ""
+msgstr "ביקשתי מהאוקה, אחד מיועצי, לפקח על בניית היישוב שלנו."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "המבנים הראשונים"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
@@ -279,7 +302,7 @@ msgstr ""
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
-msgstr ""
+msgstr "שלום, ראש השבט ריבאוד! אני אתחיל מיד ביישוב האי."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -288,6 +311,8 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"כמו כל הפריזים, אנחנו בונים את בתינו בעיקר מלבנים. אנחנו משפרים אותם בהוספת "
+"בולי עץ וגרניט. הגגות מכוסים כמובן בקנים. שום דבר לא טוב יותר לעצירת הגשם."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -296,6 +321,8 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"כדאי שנתחיל בטיפול בייצור העץ שלנו. נראה שהעצים לא צומחים היטב באי הזה; עדיף"
+" לבנות לפחות שני בתי יערנים ובית אחד לחוטב עצים."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -305,10 +332,13 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"בנוסף, כדאי שנבנה חוות קנים בקרוב. גם חוות קנים זקוקות לקנים כדי להיבנות, "
+"ולכן עלינו להיזהר שלא ניגמר לנו המלאי לפני שנוכל לגדל משלנו. קנים קל לגדל, "
+"כך שמגדלת הקנים לא זקוקה לעוד דבר כדי להתחיל לגדל שדות קנים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "בניית ביתנו החדש"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -319,6 +349,10 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"אספקת העץ והקנים שלנו מובטחת. עכשיו עלינו לטפל באספקת הלבנים. לבנים נשרפות "
+"בכבשן לבנים מגרניט וחימר, אז עלינו קודם לייצר אותם. ביבשת נהגנו לחצוב גרניט "
+"מסלעים, אבל אני לא רואה כאלה כאן. אולי הגבעות האלה מכילות מספיק אבן כדי "
+"לכרות מעט גרניט."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -328,6 +362,9 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"חימר קל להכין: כורה החרסית העובד בבור החימר פשוט יחפור אדמה ויערבב אותה עם "
+"מים. רק ודא שיש לו מספיק מקום לחפירה סביב בור החימר שלו. אולי כדאי לבנות כמה"
+" עמדות שמירה כדי להתרחב."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -336,6 +373,9 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"כדי לשרוף לבנים, כבשן הלבנים זקוק לאש. עלינו להשתמש בפחם כדלק. בנה מכרה פחם "
+"כדי לוודא שלא ניגמר לנו. בלי פחם אין לבנים, בלי לבנים אין מכרות, בלי מכרות "
+"אין פחם… אתה רואה את הבעיה."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -343,10 +383,11 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"כמו כן, בנה באר – אף אחד לא אוהב לשתות מי מלח, וזה גם לא טוב להכנת חימר."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "היישוב הראשון שלנו"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -355,14 +396,17 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"עשית עבודה טובה. כל ייצור חומרי הבנייה שלנו פועל עכשיו. הבה נחכה עד שנאסוף "
+"עוד קצת חומרים. נוכל להרחיב עוד את השטח שלנו, כדי לראות מה עוד ניתן למצוא "
+"באי הזה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "מחסור בקנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr ""
+msgstr "בנה חוות קנים נוספת"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -372,20 +416,25 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"שמתי לב שאנחנו סובלים ממחסור בקנים כבר זמן מה. נראה שהמבנים שלנו זקוקים "
+"לכמות לא מבוטלת מהם. כדאי שנבנה חוות קנים נוספת, או שתיים. קנים משמשים גם "
+"להכנת רשתות דיג וכלים אחרים; לכן פתרון המחסור הזה צריך להיות בעדיפות."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"עליך להקצות לחוות הקנים החדשה את העדיפות הגבוהה ביותר לקנים בחלון אתר "
+"הבנייה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "מחסור בחימר"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "בנה בור חימר נוסף"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -395,6 +444,9 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"יצרני הלבנים שלנו מתלוננים כבר זמן מה על מחסור בחימר. בלי חימר אי אפשר לייצר"
+" לבנים, כך שהמחסור הזה מאט אותנו מאוד. עדיף לבנות עוד בור חימר אחד או שניים,"
+" ובארות שיספקו להם מים."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -403,14 +455,17 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"חימר משמש גם בבניית ספינות ולשיפור כבשני פחם. אם אי פעם נצטרך לבנות ספינה, "
+"או שהמכרות לא יספקו לנו מספיק פחם, נזדקק ליותר חימר, ולכן יש לפתור את "
+"המחסור."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "מחסור בלבנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "בנה כבשן לבנים נוסף"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -421,20 +476,26 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"שמתי לב שהלבנים שלנו אוזלות. זה מאט מאוד את בניית המבנים שלנו, מכיוון שאנחנו"
+" זקוקים לכל כך הרבה לבנים. כדאי שנתחיל ממש לבנות כבשן לבנים נוסף, ולהקצות לו"
+" את העדיפות הגבוהה ביותר ללבנים בחלון אתר הבנייה כדי לפתור את המחסור בהקדם "
+"האפשרי."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"עליך להקצות לכבשן הלבנים החדש את העדיפות הגבוהה ביותר ללבנים בחלון אתר "
+"הבנייה."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "מחסנים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "בנה מחסן במזרח"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -445,14 +506,18 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"אנחנו מתרחבים יותר ויותר מזרחה, וסחורות צריכות להיות מובלות למרחקים ארוכים "
+"יותר. כדאי שנבנה מחסנים ליד הגבול המזרחי שלנו במרווחים מסוימים, ועדיף לאחסן "
+"חומרי בנייה במחסן המזרחי ביותר. המפקדה שלנו רחוקה מדי במערב מכדי להיות "
+"שימושית לאחסון סחורות לטווח ארוך."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "כורים רעבים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "הכורים מוחים…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -461,6 +526,8 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"ראש השבט ריבאוד! אני מביא חדשות רעות. הכורים עובדים כל כך קשה שאין להם זמן "
+"להכין לעצמם אוכל. הם דורשים שיסופק להם."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -470,6 +537,9 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"עלינו לבנות מסבאה להכנת מנות. כדי לקבל את המזון הגולמי, עלינו לבנות בית "
+"דייג, ומכיוון שאף אחד לא אוהב דג נא, בית עישון לעשן אותו. בנוסף, בנה חוות "
+"פירות יער שתטע שיחי פירות יער, ובית אספן פירות כדי שהשיחים ייקצרו."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -477,19 +547,21 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"כדאי שנתחיל להרחיב את שטחנו מהר יותר כדי שיהיה מספיק מקום לחוות פירות יער "
+"רבות, ולקו חוף ארוך יותר לדיג."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "שדרוג כלכלת המזון"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "האכלת החיילים"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "עבודה יפה. הכורים מרוצים וחזרו לעבוד."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -498,6 +570,8 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"אבל כשיהיה צורך לשדרג את המכרות, מנות לא ישאירו את הכורים מרוצים. עדיף לנקוט"
+" אמצעי זהירות – בנה מסבאה שנייה, ואז שקול לשדרג אחת מהן לבית מרזח."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -508,6 +582,10 @@ msgid ""
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
 msgstr ""
+"בית מרזח זקוק למזון טוב יותר. בנה מאפייה, מבשלת בירה, ושתיים או שלוש חוות "
+"כדי להתחיל לגדל שעורה. זכור ששעורה גדלה לאט מאוד; ולכן החוות הבודדות האלה לא"
+" יספיקו כשבאמת נזדקק ללחם ולבירה. עלינו להמשיך להתרחב במהירות כדי שיהיה יותר"
+" מקום לחקלאות."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -517,14 +595,17 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"יש לשדרג את המאפייה ואת מבשלת הבירה ברגע שלעובדים יהיה מספיק ניסיון. הם "
+"יוכלו אז לייצר מי דבש, ולחם ממותק בדבש. בנה בית דבוראי ליד חוות פירות היער "
+"כדי לייצר מעט דבש, שנוכל לאחסן עד שנזדקק לו."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "בניית כלכלת כרייה"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "כלכלת כרייה"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -532,6 +613,8 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"אנחנו יכולים כעת לייצר את כל סוגי המזון שהורגלנו אליהם. אני תוהה אילו אוצרות"
+" עשויות הגבעות האלה להכיל? כדאי שנברר."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -542,11 +625,15 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
+"בנה מכרה ברזל ואולי גם מכרה זהב. מכיוון שהם מייצרים רק עפרות, נזדקק לכור "
+"התכה כדי להתיך אותן. בנה גם נפחייה כדי לוודא שלא ניגמרו לנו כלים – וכן, גם "
+"נפחיית שריון קטנה. היא מייצרת גם קסדות וגם חרבות. אני מקווה שלא ניתקל כאן "
+"באויבים, אבל עדיף להיות מוכנים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "היו מוכנים"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -554,6 +641,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"המכרות שלנו פועלים היטב. אנחנו יכולים כעת לייצר את כל הכלים שאנחנו זקוקים "
+"להם, וגם קצת נשק."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -563,6 +652,9 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"נוכל להשתמש בנשק הזה כדי לצייד כמה חיילים חדשים. אני מקווה שלא נמצא כאן "
+"אויבים, אבל תמיד עדיף להיות מוכנים. חיילים חדשים מצוידים בקסרקטין בחרב קצרה "
+"ובבגד פרווה, מדי הלוחמים המכובדים."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -572,6 +664,9 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"נזדקק כמובן לקסרקטין; חוות איילים לייצור פרווה, וחדר תפירה לתפירת הפרווה "
+"לבגדים. חוות האיילים מייצרת גם קצת בשר כתוצר לוואי של הפרווה, והיא גם מאמנת "
+"איילי צפון שיעזרו לסבלים שלנו בדרכים העמוסות."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -580,6 +675,9 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"אני ממליץ לבנות את כל המבנים האלה במרחק קצר זה מזה, ולהקים שני מחסנים בקרבת "
+"מקום: אחד יש להגדיר לאחסן רק נשק, שריון, עפרות, מתכת ופחם; והשני לאחסן חומרי"
+" בנייה."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -589,20 +687,23 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"כדאי שנבנה גם מבנים קשורים נוספים בקרבת מקום, כגון כור התכה, וכמה בארות "
+"וחוות כדי לספק את חוות האיילים. תכנון כזה יהפוך את הכלכלה הצבאית שלנו ליעילה"
+" יותר, מכיוון שהוא מקצר את זמן ההמתנה לסחורות במבני העיבוד."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "חקירת האי"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "התרחבות"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "הקסרקטין שלנו החל לפעול, ואנחנו מגייסים עכשיו חיילים חדשים."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -610,6 +711,8 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"אבל אנחנו עדיין לא יכולים להיות בטוחים שאנחנו בטוחים כאן. עדיף שנתרחב עוד "
+"מזרחה כדי לגלות אם אנחנו באמת לבד כאן."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -617,23 +720,25 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"התרחבות גם תספק יותר מקום לחקלאות. נוכל להשתמש בקצת שעורה נוספת כדי לגייס "
+"עוד איילי צפון, מכיוון שהדרכים שלנו עמוסות למדי."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "אויבים!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "אויב נראה!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "שבט נוסף! על האי שלנו דווקא! מה אתם עושים כאן, פולשים?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -644,6 +749,8 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"זה האי שלי דווקא! אתה הפולש כאן! אני מתפלל לאל האחד והאמיתי היחיד שנהרוג את "
+"כולכם, ונשמותיכם תיענה בגיהינום לנצח!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -651,10 +758,12 @@ msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr ""
+"כופרים! אני מתפלל לאלים שלנו דווקא שהשבט חסר האמונה הזה יתרסק כליל! מלחמה "
+"עליהם!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "חזקים יותר בקרב"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -662,6 +771,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
+"אנחנו מגייסים חיילים בקלות למדי, אבל הם חלשים למדי. עלינו לאמן את חיילינו אם"
+" ברצוננו שינצחו את האויב."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -669,10 +780,12 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"חיילים מתאמנים בתקיפה, בריאות והגנה בסיסיות במחנה אימונים. הם יכולים ללמוד "
+"את הדקויות בזירת אימונים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "לחימה פריזית"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -681,6 +794,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"חיילים מתאמנים בשני שלבים בהגנה ובבריאות. הם מקבלים בגדי פרווה משובצים בברזל"
+" וגם בזהב כדי לרכך מכות; וקסדות המחושלות מברזל, וגם מזהב, כדי להאריך את "
+"חייהם בקרב."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -691,6 +807,10 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"הם לומדים לתקוף בשלוש חרבות שונות: החרב הארוכה, החרב הרחבה והחרב הדו-להבית. "
+"שתי האחרונות מכילות זהב, וכולן מכילות ברזל. החיילים המתקדמים מלומדים להשתמש "
+"בשתי חרבות בו-זמנית: הם שומרים על החרב הדו-להבית הראשונה שלהם, ומקבלים חרבות"
+" נוספות שונות לאחוז בידם השנייה. כך נוצרים שישה שלבי אימון תקיפה."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -699,10 +819,12 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"איננו מאמנים חיילים לחמוק מהתקפות; לוחם אמיתי יכול לחסום את מכות יריבו "
+"בתנועת חרב מיומנת במקום לקפוץ הצידה כמו פחדן."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "תכנון מרכז אימונים"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -713,6 +835,11 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"נזדקק לחנות חייט לתפירת בגדים מגוננים יותר, ולחדר תפירה נוסף כדי להמשיך "
+"לייצר בגדי פרווה רגילים. כמו כן, עליך לשדרג את נפחיית השריון הקטנה כדי לייצר"
+" נשק וקסדות טובים יותר, ולבנות אחת קטנה חדשה כדי שעדיין נקבל נשק בסיסי. "
+"אנחנו זקוקים כעת לפחות למכרה זהב אחד, מכיוון שהנשק והשריון הטובים ביותר "
+"משתמשים בזהב."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -723,6 +850,10 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"כדאי שנבנה את המבנים האלה קרוב לקסרקטין, מכיוון שכפי שכבר ציינתי קודם, יעיל "
+"הרבה יותר לרכז את כל המתקנים הצבאיים שלנו במרכז גיוס ואימון אחד, מאשר אם היו"
+" מפוזרים על פני מרחק ארוך. בנה שם מחסן שלישי שיאחסן רק את המזון הדרוש "
+"לאימונים."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -731,6 +862,8 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"כשחיילים מתאמנים להשתמש בנשק חדש, הציוד הישן שלהם מושלך. קח בחשבון שהגרוטאות"
+" חסרות התועלת יגדשו את הדרכים שלך עד שיאוחסנו במחסן כלשהו."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -738,19 +871,21 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"אני ממליץ לאמן לפחות חייל אחד לרמה הגבוהה ביותר בבריאות, הגנה ותקיפה. עד אז,"
+" האויב פשוט חזק מדי בשבילנו."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "חיילינו חזקים"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
-msgstr ""
+msgstr "סוף סוף יש לנו את חיילנו המאומן הראשון עד תום. הבה נתקוף!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "האם חיילינו חזקים דיים?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -760,10 +895,14 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"בכל הכבוד, ראש השבט, אנא אל תמהר כל כך! האויבים חזקים מאוד, ואני עדיין לא "
+"משוכנע שנוכל להביסם. הייתי מעדיף לא לשלוח חיילים לקרב שהם צפויים כנראה "
+"להפסיד בו. הייתי מעדיף לחכות עוד קצת עד שנוכל בוודאות להביס את האויב מבלי "
+"לאבד חיילים."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "חיילינו חזקים דיים"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -773,16 +912,19 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"כמובן שגם אני מעדיף לשמור על חיי חיילינו, אבל אי אפשר להציל כל חיים. חיילים "
+"מתים בקרב, כך פשוט הם פני הדברים. אתה יכול להחליט כמה זמן לחכות עד ההתקפה, "
+"אבל אל תחכה יותר מדי, אחרת האויבים ינצלו את חולשתנו."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "היזהר!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "לא חזקים דיים"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -791,6 +933,9 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
+"ראש השבט ריבאוד! הסיירים שלנו מדווחים שהאויב מתקדם במהירות. אני חושש שאיננו "
+"חזקים דיים עדיין כדי להתגונן אם הוא יתקוף ראשון. עליך לתכנן משהו כדי לעצור "
+"אותו."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -800,6 +945,9 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"הסיירים הודיעו לי שהאויב לא יכול לבנות מגדלים. נוכל לבנות מבצר, המבנה שידחוף"
+" את הגבול מזרחה ככל האפשר בבת אחת. האויב יוכל לראות אותו רק אם יבנה מבצר ממש"
+" על הגבול."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -809,23 +957,26 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"נוכל למנוע את זה, או לפחות להקשות על כך, בכך שנצווה על כמה יערנים לנטוע עצים"
+" על הגבול. האויב יצטרך לכרות רבים מהם כדי לפנות מקום, כך שאולי נהיה בטוחים "
+"עד שנפתח בקרב בזמן שנבחר בעצמנו."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "האויב הובס"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "האויב הובס!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
 msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
-msgstr ""
+msgstr "הם הובסו! אני מודה לכם, כל אלי, על שהענקתם לנו ניצחון על הכופרים!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -833,23 +984,25 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"אני מתפלל לאל שישמע את מילותיי האחרונות. אל יתנו לשד הכוזב לנצח! הענישו אותם"
+" על המעשה הנבזה הזה!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "השיטפון הגדול"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "האי מוצף!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
-msgstr ""
+msgstr "האל שלו נענה למשאלתו! האוקיינוס עולה! האי כמעט שטוח – כולנו נטבע!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -859,6 +1012,9 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"אל תתייאש, אני כן צפיתי בקצת תקווה! הקצה המזרחי ביותר של האי, וכן המקום שבו "
+"עמדה מפקדת השדים, נראים מתאימים לבניית נמל. אם נצליח לבנות ספינה, ולמלא אותה"
+" בכל מה שאנחנו צריכים כדי להקים יישוב חדש, אולי נוכל להימלט."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -869,14 +1025,17 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"נראה שהשיטפון הגדול מגיע מהמערב. אם נמהר, בדיוק נספיק! עלינו רק לבנות נמל "
+"ומספנה – אה, וגם בית אריגה כדי לארוג את הבד העמיד, העשוי מקנים ופרווה, "
+"למפרשים. אז נוכל לצאת במשלחת מהנמל. התפללו לאלים ומהרו!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "אל תשכחו את החיילים"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "חיילים לנמל!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -898,22 +1057,42 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"כמעט שכחתי בבהילות הזאת – בכל מקום שבו ננחת, נזדקק לקצת חומרי בנייה כדי "
+"להתחיל, ולחיילים כדי לאבטח ולהרחיב את המושבה החדשה שלנו. גם לאחר טעינת "
+"המשלחת, לספינה אמורה להיות מספיק מקום פנוי לכמה סחורות ועובדים. מעבר לכך, "
+"אמור להיות מקום ל%d חייל, אם אף אחד לא מתנגד להיות דחוס יחד עם כולם. הבה "
+"נשלח כמה אספקת בנייה ואת אנשינו הטובים ביותר לנמל כשהוא יושלם, כדי להתכונן "
+"להפליג כשנצא לדרך!"
 msgstr[1] ""
+"כמעט שכחתי בבהילות הזאת – בכל מקום שבו ננחת, נזדקק לקצת חומרי בנייה כדי "
+"להתחיל, ולחיילים כדי לאבטח ולהרחיב את המושבה החדשה שלנו. גם לאחר טעינת "
+"המשלחת, לספינה אמורה להיות מספיק מקום פנוי לכמה סחורות ועובדים. מעבר לכך, "
+"אמור להיות מקום ל%d חיילים, אם אף אחד לא מתנגד להיות דחוס יחד עם כולם. הבה "
+"נשלח כמה אספקת בנייה ואת אנשינו הטובים ביותר לנמל כשהוא יושלם, כדי להתכונן "
+"להפליג כשנצא לדרך!"
 msgstr[2] ""
+"כמעט שכחתי בבהילות הזאת – בכל מקום שבו ננחת, נזדקק לקצת חומרי בנייה כדי "
+"להתחיל, ולחיילים כדי לאבטח ולהרחיב את המושבה החדשה שלנו. גם לאחר טעינת "
+"המשלחת, לספינה אמורה להיות מספיק מקום פנוי לכמה סחורות ועובדים. מעבר לכך, "
+"אמור להיות מקום ל%d חיילים, אם אף אחד לא מתנגד להיות דחוס יחד עם כולם. הבה "
+"נשלח כמה אספקת בנייה ואת אנשינו הטובים ביותר לנמל כשהוא יושלם, כדי להתכונן "
+"להפליג כשנצא לדרך!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"כל הסחורות והעובדים שייטענו על המשלחת, וכן חלק מהחיילים בנמל, יועברו לתרחיש "
+"הבא."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
-msgstr ""
+msgstr "ניצחון"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "נמלטנו!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -922,10 +1101,12 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
+"האלים נענו לתפילותינו. נימלט מטביעת האי, ואני בטוח שנוכל לבנות שוב בית חדש "
+"בפינה שלווה יותר של העולם הזה!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "ברכות"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:427
@@ -933,3 +1114,5 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"השלמת את המשימה הזאת. תוכל כעת לעבור לתרחיש הבא כדי לעזור לנו לבנות בית חדש,"
+" הרחק מהישג ידו הנוקמת של האל הכוזב…"

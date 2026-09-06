@@ -18,107 +18,107 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid "Nice And Easy Does It All the Time"
-msgstr ""
+msgstr "לאט ובטוח תמיד מנצח"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "אני מצטער, אבל אני אצטרך להרוס את זה. ייתכן שנצטרך את השטח הזה בהמשך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:20
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "אני מצטער, אבל אני אצטרך להרוס את זה שוב. ייתכן שנצטרך את השטח הזה בהמשך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:22
 msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "אם אני איטי מדי בשבילך, אולי כדאי שתשחק משחק אמיתי ותגלה הכול בעצמך. אחרת, אנא התאזר בסבלנות איתי - אני כבר לא הכי צעיר והכי מהיר."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "ברוך הבא למדריך של Widelands!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "ברוך הבא ל-Widelands!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands הוא משחק אסטרטגיית בנייה איטי בקצב, שמדגיש בנייה ולא הרס."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "תודרך במהלך המדריך הזה באמצעות יעדים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "יעדים וכיצד להתמודד איתם"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "התמודדות עם חלון ‘יעדים’"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "תוכל לפתוח ולסגור את חלון ‘יעדים’ בלחיצה על כפתור ‘יעדים’ בסרגל הכלים שבתחתית המסך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "כמו רוב שאר החלונות, אפשר לסגור גם את החלון הזה בלחיצה ימנית עליו."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "אפשר גם למזער חלונות בלחיצה על כפתור העכבר האמצעי עליהם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "כשתשלים יעד, הוא ייעלם מהרשימה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "כעת סגור בבקשה את חלון ‘יעדים’ כדי להמשיך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
 msgid "Show building spaces"
-msgstr ""
+msgstr "הצג שטחי בנייה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "הפעל את ‘הצג שטחי בנייה’. יש שתי דרכים לעשות זאת:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "לחץ על %s כדי להחליף את מצבם, או בחר ‘הצג שטחי בנייה’ בתפריט ‘הצג / הסתר’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "הצג כעת את שטחי הבנייה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building Spaces"
-msgstr ""
+msgstr "שטחי בנייה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "בוא נצלול ישר לעניינים!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:83
 msgid ""
@@ -126,7 +126,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "יש חמישה שבטים שונים ב-Widelands: הברברים, האימפריה, האטלנטים, הפריזים והאמזונות. לכל השבטים יש כלכלות, חוזקות וחולשות שונות, אבל מהלך המשחק הכללי זהה לכולם. כרגע נשחק עם הברברים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:84
 msgid ""
@@ -138,29 +138,29 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "בדרך כלל תתחיל את המשחק עם מפקדה אחת. זהו המבנה הגדול עם הדגל הכחול לפניו. המפקדה מאחסנת סחורות, עובדים וחיילים. חלק מהסחורות דרושות לבניית בתים, ואחרות לייצור סחורות נוספות. מובן מאליו שהסחורות ההתחלתיות לא יחזיקו מעמד לנצח, ולכן עליך לדאוג לחדש אותן. הסחורות החשובות ביותר בתחילת המשחק הן סחורות הבנייה הבסיסיות: בולי עץ וגרניט. בוא נדאג שלא ייגמרו לנו בולי העץ. לשם כך, אנחנו זקוקים לחוטב עצים ולבקתה שבה יוכל לגור."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:85
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "עלינו למצוא מקום נאה לבקתת חוטב העצים. כדי להקל על כך, נוכל להפעיל את ‘הצג שטחי בנייה’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "אראה לך היכן נמצא התפריט והיכן להציג ולהסתיר את שטחי הבנייה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:97
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "עכשיו כשהראיתי לך היכן להציג ולהסתיר את שטחי הבנייה, הפעל אותם בבקשה כדי שנוכל להציב את המבנה הראשון שלנו."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "מקום לחוטב עצים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:111
 msgid ""
@@ -168,28 +168,28 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "הנה זה. עכשיו הרשה לי להראות לך איך בונים בקתת חוטב עצים ואיך מחברים אותה בדרך. יש מקום מצוין לחוטב עצים ממש ליד העצים האלה. אתאר את הצעדים שאני עומד לנקוט ואז אדגים אותם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "בניית חוטב העצים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:122
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "קודם כול, אני אלחץ לחיצה שמאלית על הסמל במקום שבו אני רוצה לבנות את בקתת חוטב העצים. ייפתח חלון שבו אוכל לבחור בין מבנים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:123
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "בקתת חוטב העצים היא מבנה קטן, אז אבחר בלשונית המבנים הקטנים. לאחר מכן אבחר בבקתת חוטב העצים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:130
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:141
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "בניית דרך מחברת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:133
 msgid ""
@@ -197,7 +197,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "זה עדיין לא מספיק. אני עדיין צריך לחבר את בקתת חוטב העצים למפקדה. לאחר שהזמנתי את אתר הבנייה, הועברתי אוטומטית למצב סלילת דרכים, אז כל מה שעליי לעשות הוא ללחוץ על הדגל הכחול שלפני המפקדה שלי."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
@@ -207,160 +207,160 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "זה עדיין לא מספיק. אני עדיין צריך לחבר את בקתת חוטב העצים למפקדה. השבתת את האפשרות ‘התחל לסלול דרך אחרי הצבת דגל’ (כדי לשנות זאת, בחר ‘אפשרויות’ בתפריט הראשי של Widelands). לכן נכנסתי למצב סלילת דרכים באופן ידני. אספר לך בהמשך איך לעשות זאת. כדי לסלול את הדרך, כל מה שעליי לעשות עכשיו הוא ללחוץ על הדגל הכחול שלפני המפקדה שלי."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "ממתינים שבקתת חוטב העצים תיבנה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr ""
+msgstr "עכשיו שים לב היטב בזמן שבנאי יוצא מהמפקדה ומתקדם לעבר אתר הבנייה. בנוסף, סבל יתמקם בין שני הדגלים הכחולים ויוביל סחורות מדגל אחד למשנהו."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "בנה דגל כדי לחלק את הדרך אל חוטב העצים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "בניית דגל על הדרך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:168
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
+msgstr "ככל שקטעי הדרך שלך קצרים יותר, כך הסחורות שלך יובלו מהר יותר. לכן עליך לדאוג שיהיו על הדרכים שלך כמה שיותר דגלים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
+msgstr "בנה עכשיו דגל כחול באמצע הדרך שמחברת בין המפקדה שלך לבין בקתת חוטב העצים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:170
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "כדי לבנות את הדגל, לחץ על סמל הדגל הצהוב שבין שני הדגלים הכחולים שהצבנו זה עתה, ואז לחץ על סמל בניית הדגל."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:176
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "הצבת דגל נוסף"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "נחמד לראות אותם עובדים, לא? אבל הסבל המסכן צריך לעבור דרך ארוכה מאוד. נוכל להקל עליו (וגם להיות יעילים יותר) על ידי הצבת דגל כחול נוסף על הדרך. הפעם תנסה אתה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr ""
+msgstr "רציתי ללמד אותך איך בונים דגלים חדשים, אבל נראה שכבר גילית זאת בעצמך. כל הכבוד!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr ""
+msgstr "עכשיו פיצלת את הדרך לשני חלקים, עם סבל לכל חלק. זה אומר פחות עבודה לכל סבל ויעילות גבוהה יותר בשבילנו. לכן כדאי תמיד להציב כמה שיותר דגלים על הדרכים שלך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "בוא נראה את ההתקדמות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "לחץ על אתר הבנייה כדי להעיף בו מבט."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:209
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid "The Construction Site"
-msgstr ""
+msgstr "אתר הבנייה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "אם תלחץ על אתר הבנייה, ייפתח חלון. תוכל לראות באפור את הסחורות שעדיין חסרות. כמו כן, תוכל לראות את התקדמות אתר הבנייה הזה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "הכפתור הזה מציג או מסתיר את אזור העבודה של המבנה. כשחוטב העצים יוצא מהמבנה לחפש עצים לכריתה, הוא יחפש אותם רק בתוך האזור הזה. הרשה לי להראות לך כמה מושלם המקום הזה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "סגור את חלון אתר הבנייה כשתראה מספיק."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "כל הכבוד! בוא נחכה עד שהבקתה תושלם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:236
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "אם ברצונך שהדברים יתקדמו מהר יותר, פשוט השתמש במקש %1$s במקלדת שלך כדי להגביר את מהירות המשחק. תוכל להשתמש ב-%2$s כדי להאט את המשחק שוב."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "השינוי מהיר עם %1$s/%2$s ומתון עם %3$s/%4$s."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "בקתת חוטב העצים מוכנה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr ""
+msgstr "מצוין. בקתת חוטב העצים מוכנה. חוטב עצים יעבור לגור בה עכשיו ויתחיל לכרות עצים, כך שהכנסת בולי העץ שלנו מובטחת לעת עתה. עכשיו נעבור לגרניט."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:259
 msgid "Moving the View"
-msgstr ""
+msgstr "הזזת התצוגה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:261
 msgid "Move your view"
-msgstr ""
+msgstr "הזז את התצוגה שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:262
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "הזזת התצוגה חיונית כדי לקבל תמונה מלאה של הכלכלה שלך כולה. יש שלוש דרכים להזיז את התצוגה ב-Widelands."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "הדרך הראשונה היא להשתמש במקשי החצים במקלדת שלך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr ""
+msgstr "הדרך השנייה היא הנפוצה והמהירה יותר: לחץ והחזק את כפתור העכבר הימני בכל מקום על המפה, ואז הזז את העכבר ותראה את התצוגה נגללת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr ""
+msgstr "הדרך השלישית היא להשתמש במפה הממוזערת. היא שימושית במיוחד למעבר על מרחקים גדולים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 msgid ""
@@ -368,15 +368,15 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "הזזה באמצעות כפתור העכבר הימני עלולה להיות לא נוחה אם אתה משחק במחשב נייד עם משטח מגע. תוכל להפעיל תזוזת מפה עם גלילה במשטח מגע בתפריט הראשי של Widelands: בחר ‘אפשרויות’, לחץ על ‘ערוך פעולות מקלדת ועכבר’, ובחר בלשונית ‘גלילה בעכבר’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "נמצאו כמה סלעים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:273
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "הקמת מחצבה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:275
 msgid ""
@@ -384,20 +384,20 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "אפשר לכרות גרניט במכרות גרניט, אבל הדרך הקלה יותר היא לבנות מחצבה ליד סלעים המונחים בסביבה. במקרה הזה, יש ערמת סלעים ממש ממערב (משמאל) למפקדה שלך. עכשיו אלמד אותך איך להזיז את התצוגה לשם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:283
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "למד להשתמש במפה הממוזערת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:286
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "נסה לנוע על ידי לחיצה על המפה הממוזערת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "שחק קצת עם השכבות השונות (דרכים, דגלים וכו')"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:288
 #, lua-format
@@ -405,61 +405,61 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "כשתהיה מוכן להמשיך, סגור את המפה הממוזערת על ידי בחירה ב‘הסתר מפה ממוזערת’ בתפריט ‘תצוגת המפה’, או על ידי לחיצה על ‘%s’. כמובן שגם לחיצה ימנית עובדת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid "Moving Your View"
-msgstr ""
+msgstr "הזזת התצוגה שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:309
 msgid "Using the Minimap"
-msgstr ""
+msgstr "שימוש במפה הממוזערת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "יפה מאוד. ועכשיו לגבי המפה הממוזערת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "תוכל לפתוח אותה על ידי בחירה בפריט ‘הצג מפה ממוזערת’ בתפריט ‘תצוגת המפה’ שבתחתית המסך, או פשוט באמצעות קיצור המקלדת ‘%s’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid "I will open it for you."
-msgstr ""
+msgstr "אני אפתח אותה בשבילך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr ""
+msgstr "המפה הממוזערת מציגה את כל המפה בזעיר אנפין. תוכל לקפוץ ישירות לכל שדה בלחיצה שמאלית עליו. תוכל גם להציג ולהסתיר בתוך המפה הממוזערת מבנים, דרכים, דגלים וסמלי שחקנים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:319
 msgid "Onward to the Quarry"
-msgstr ""
+msgstr "הלאה אל המחצבה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "מצוין. ועכשיו לגבי המחצבה הזאת…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "בנה מחצבה ליד הסלעים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:333
 msgid "Build a Quarry"
-msgstr ""
+msgstr "בניית מחצבה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "יש כמה סלעים ממערב למפקדה שלך. בנה מחצבה ממש לידם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:335
 #, lua-format
@@ -467,86 +467,86 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "המחצבה היא מבנה קטן כמו בקתת חוטב העצים. לכן תוכל לבנות אותה בכל שדה שמציג בית אדום, צהוב או ירוק כשסמלי שטחי הבנייה מופעלים (לחץ על ‘%s’ לשם כך)."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:336
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "פשוט לחץ על כל סמל בית ליד הסלעים, בחר בלשונית המבנים הקטנים בחלון שנפתח, ואז לחץ על סמל המחצבה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "איך בונים מחצבה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "בנה מחצבה ליד הסלעים האלה כאן. זוכר איך עשיתי זאת קודם?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:346
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "ודא שאתה מציג את שטחי הבנייה, ואז פשוט לחץ על השטח שבו אתה רוצה שהמבנה יהיה, בחר אותו מהחלון שמופיע, וכך הוא יוצב."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "אפשר לבנות ארבעה דברים על שדות ב-Widelands: דגלים, בתים קטנים, בתים בינוניים ובתים גדולים. אבל לא כל שדה יכול להכיל הכול. סמלי שטח הבנייה מקלים על הזיהוי:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:348
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "הכול ניתן לבנות על סמל הבית הירוק."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:349
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
+msgstr "הכול חוץ ממבנים גדולים ניתן לבנות על סמל הבית הצהוב."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:350
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr ""
+msgstr "סמלי מבנים אדומים יכולים להכיל רק מבנים קטנים ודגלים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "ולבסוף, סמל הדגל הצהוב מאפשר רק דגלים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:352
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr ""
+msgstr "אם תציב משהו על שדה, ייתכן שלשדות הסמוכים יהיה פחות מקום להכיל מבנים, אז בחר את השדות שלך בתבונה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:358
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "אם תחליט שאינך רוצה לסלול דרך כרגע, תוכל לבטל את סלילת הדרך על ידי לחיצה על דגל ההתחלה של הדרך ובחירה בסמל הביטול."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:390
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid "Road Building"
-msgstr ""
+msgstr "סלילת דרכים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "מצוין! מיד לאחר הצבת המבנה, הועברת למצב סלילת דרכים. הדרך החדשה תתחיל בדגל שלפני אתר הבנייה שהצבת זה עתה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "תוכל להיכנס למצב סלילת דרך עבור כל דגל על ידי לחיצה שמאלית על דגל ובחירת סמל סלילת הדרך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:368
 msgid ""
@@ -554,104 +554,104 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr ""
+msgstr "כעת, לגבי הדרך הזו. זכור: אנחנו כבר במצב סלילת דרך מכיוון שזה עתה הזמנת את המחצבה. תוכל להאריך אותה שדה אחד בכל פעם על ידי לחיצה שמאלית מספר פעמים על שדות שכנים, לשליטה מושלמת במסלול שהדרך תעבור בו, כך:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "מצוין! זכור, עלינו גם לסלול דרך אל המחצבה. כדי להיכנס למצב סלילת דרך עבור כל דגל, לחץ לחיצה שמאלית על דגל ובחר בסמל סלילת הדרך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr ""
+msgstr "כעת, לגבי הדרך הזו. אכנס למצב סלילת דרך ואז אאריך אותה שדה אחד בכל פעם על ידי לחיצה שמאלית מספר פעמים על שדות שכנים, לשליטה מושלמת במסלול שהדרך תעבור בו, כך:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:391
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr ""
+msgstr "לחלופין, תוכל ללחוץ ישירות על הדגל שבו הדרך אמורה להסתיים, כך:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "חבר את המחצבה למפקדה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid "Connect Your Construction Site"
-msgstr ""
+msgstr "חבר את אתר הבנייה שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "חבר את אתר בניית המחצבה שלך למפקדה באמצעות דרך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr ""
+msgstr "כדי לסלול דרך חדשה לגמרי, פשוט לחץ על הדגל שלפני אתר הבנייה שלך, לחץ על סמל סלילת הדרך, ואז לחץ על הדגל שלפני המפקדה שלך. המתן להשלמת בניית המחצבה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:403
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "אם תחזיק את Ctrl או Shift+Ctrl בזמן שאתה מסיים את הדרך, דגלים יוצבו אוטומטית."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr ""
+msgstr "עוד דבר אחד: סביב השדה שבו הדרך שלך תסתיים, תוכל לראות סמנים שונים. משמעותם היא כדלקמן:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "השטח כאן שטוח. הסבלים שלך יהיו מהירים מאוד על שטח כזה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr ""
+msgstr "יש שיפוע קטן לטפס עליו כדי להגיע לשדה הזה. המשמעות היא שהעובדים שלך יהיו מהירים יותר בהליכה במורד מאשר בהליכה במעלה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr ""
+msgstr "החיבור בין השדות תלול ביותר. עליית המהירות בכיוון אחד היא עצומה, בעוד ההאטה בכיוון השני משמעותית אף היא."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "זכור את השיפועים בעת סלילת דרכים ונצל אותם לטובתך. כמו כן, נסה לשמור על הדרכים קצרות ככל האפשר, וזכור תמיד להציב כמה שיותר דגלים על קטעי הדרך כדי לפזר את העומס בצורה טובה יותר."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:421
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "המחצבה אינה מחוברת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:423
 msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "העובדים שלך אינם אוהבים ללכת דרך שטח פתוח. עליך לסלול דרך מהמפקדה שלך אל אתר הבנייה, כדי שהסבלים יוכלו להוביל סחורות."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "הרסת את אתר הבנייה!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:432
 msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "נראה שהרסת אתר בנייה של מחצבה שרצינו לבנות. למרבה המזל, עדיין נותרו לנו מספיק בולי עץ הפעם, כך שתוכל פשוט לבנות אחת נוספת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
 msgid ""
@@ -659,47 +659,47 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "תוכל גם לטעון מחדש את המשחק משמירה קודמת. למרבה המזל, אלה נוצרות מדי פעם. לשם כך, יהיה עליך לחזור לתפריט הראשי ולבחור ‘שחקן יחיד’ ← ‘טעינת משחק’. ואנא היה קצת יותר זהיר בפעם הבאה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:443
 msgid "Build another quarry"
-msgstr ""
+msgstr "בנה מחצבה נוספת"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:444
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr ""
+msgstr "בנה מחצבה שנייה ליד הסלעים וחבר אותה לרשת הדרכים שלך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
 msgid ""
 "You can connect the new road to any flag of your existing road network. You "
 "can create junctions everywhere, not only in front of buildings."
-msgstr ""
+msgstr "תוכל לחבר את הדרך החדשה לכל דגל ברשת הדרכים הקיימת שלך. תוכל ליצור צמתים בכל מקום, לא רק מול מבנים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid "Build a second quarry"
-msgstr ""
+msgstr "בנה מחצבה שנייה"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "כאשר יש הרבה סלעים, כדאי לשקול בניית מחצבה נוספת. הדבר יאיץ את ייצור הגרניט."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid "Census and Status"
-msgstr ""
+msgstr "שמות ומצב"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "בזמן שאנחנו ממתינים, אראה לך במהירות תכונה שימושית נוספת. לעיתים קשה להבחין בין כל המבנים. Widelands מציעה תכונה שמציגה טקסטים מעל המבנים, הנקראת ‘שמות’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
 #, lua-format
@@ -707,16 +707,16 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "כדי להציג או להסתיר את תוויות שמות המבנים, תוכל לבחור בפריט ‘הצג שמות’ / ‘הסתר שמות’ מתפריט ‘הצג / הסתר’ בתחתית המסך, או ללחוץ על המקש ‘%s’ במקלדת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "תן לי להפעיל עבורך את הצגת השמות."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid "Show the building status"
-msgstr ""
+msgstr "הצג את מצב המבנים"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 #, lua-format
@@ -724,24 +724,24 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "כדי להציג או להסתיר את תוויות מצב המבנים, תוכל לבחור בפריט ‘הצג מצב’ מתפריט ‘הצג / הסתר’ בתחתית המסך, או ללחוץ על המקש ‘%s’ במקלדת."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "עכשיו, האם לא יהיה נחמד לבדוק את התקדמות המחצבות שלנו בלי לפתוח את החלונות שלהן?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr ""
+msgstr "בנוסף לשמות המבנים, תוכל גם להפעיל עליהם תוויות מצב. הדבר יציג מידע על הפריון של מבנים או על התקדמות אתרי בנייה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr ""
+msgstr "עכשיו אנחנו יודעים מה קורה. הבה נמתין לסיום בניית המחצבות."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
@@ -751,100 +751,100 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "אולי שמת לב שהשם המוצג מעל המפקדה שונה. הסיבה לכך היא שמדובר בסוג מבנה מיוחד הנקרא מחסן. מחסנים הם מבנים שבהם העובדים שלך יכולים לנוח עד שהם מוקצים למקום עבודה, ובהם ניתן לאחסן כל כמות של סחורות עד שהן נדרשות במקום כלשהו. כך שהם פועלים כמעין מרכז עיר, ולציון זאת, הם מקבלים שמות ייחודיים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "הכתרים הקטנים לצד השם מסמנים אותו כמפקדה שלך. ככל שתשחק ב-Widelands, תראה שלושה סוגים של מחסנים, המסומנים באייקונים קטנים:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "המפקדה שבה אתה בדרך כלל מתחיל את המשחק. היא מסומנת בכתרים קטנים: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "מחסנים רגילים שפשוט מחזיקים סחורות ועובדים כדי לשמור עליהם מפוזרים בכל שטחך. הם מסומנים בבתים קטנים: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "נמלים שבהם תשתמש לצורכי שיט. הם לא רק מאחסנים את הסחורות והעובדים שלך, אלא יכולים גם לטעון אותם על ספינותיך כדי לשלוח אותם מעבר לימים. הם מסומנים בעוגנים קטנים: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "לכולם מוקצים שמות אוטומטית, ההולמים את השבט, אך תוכל גם לשנות את שמם כרצונך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "שנה את שם הכפר הקטן שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "שנה את שם המפקדה שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "כדי לקבוע שם חדש למפקדה שלך, לחץ תחילה עליה כדי לפתוח את חלונה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "תראה תיבת עריכה בראש החלון, המציגה את השם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "כל שעליך לעשות הוא למחוק את השם הישן ולהקליד את החדש."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "כשתסיים, פשוט סגור את החלון."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "היה יצירתי"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "אני רואה שסגרת את החלון בלי לשנות את השם. אני בטוח שתוכל לחשוב על משהו. אבל אם אינך רוצה, לפחות מחק את השם הישן, בבקשה, כדי להראות לי שמצאת את תיבת העריכה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "העבר לארכיון את כל ההודעות בתיבת הדואר הנכנס שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:542
 msgid "Archive Your Inbox Messages"
-msgstr ""
+msgstr "העבר לארכיון את הודעות תיבת הדואר הנכנס שלך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:543
 msgid "Archive all your messages in your inbox now."
-msgstr ""
+msgstr "העבר לארכיון עכשיו את כל ההודעות בתיבת הדואר הנכנס שלך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:544
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "המשך ללחוץ על הכפתור ‘העבר את ההודעה שנבחרה לארכיון’ עד שכל ההודעות יועברו לארכיון והרשימה תהיה ריקה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 #, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "תוכל גם להחזיק את המקש Ctrl או Shift כדי לבחור מספר הודעות, או ללחוץ על %s כדי לבחור את כולן."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:546
 #, lua-format
@@ -852,29 +852,29 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "תוכל להחליף את מצב חלון ההודעות על ידי לחיצה על ‘%s’ או לחיצה על הכפתור השני מימין בתחתית המסך ממש. ההודעה החדשה ביותר תסומן עבורך אוטומטית."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:547
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "חלון ההודעות מרכזי לשליטה מלאה בגורל שבטך. עם זאת, במשחק אמיתי תקבל הרבה הודעות. כדי לשמור על ריכוז, כדאי לך לנסות לשמור על תיבת הדואר הנכנס ריקה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Messages"
-msgstr ""
+msgstr "הודעות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:553
 msgid "Introducing Messages"
-msgstr ""
+msgstr "היכרות עם הודעות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:555
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr ""
+msgstr "שלום, זה שוב אני! הפעם שלחתי לך הודעה. הודעות נשלחות אליך על ידי Widelands כדי ליידע אותך על אירועים חשובים: מכרות ריקים, התקפות על שבטך, מבנים צבאיים שנכבשו או אבדו, משאבים שנמצאו…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:556
 msgid ""
@@ -882,46 +882,46 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr ""
+msgstr "ניתן להחליף את מצב חלון ההודעות באמצעות הכפתור השני מימין בתחתית המסך. כפתור זה גם ישנה את מראהו בכל פעם שיש הודעות חדשות, אך יש גם צליל פעמון שמושמע בכל פעם שאתה מקבל הודעה חדשה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:557
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "יש לך כרגע שתי הודעות. זו שאתה קורא כעת, וזו שיידעה אותך שמפקדה חדשה נוספה לכלכלה שלך. הבה נלמד כיצד להעביר הודעות לארכיון:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Close the messages window"
-msgstr ""
+msgstr "סגור את חלון ההודעות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "סגור את חלון ההודעות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "ניתן לסגור את כל החלונות ב-Widelands (למעט חלונות הודעות עלילה המציגים ‘אישור’) על ידי לחיצה ימנית בתוכם. חלק מהחלונות ניתן גם להחליף באמצעות הכפתורים והתפריטים בתחתית המסך ממש."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "ניתן גם למזער את החלונות באמצעות לחיצה על גלגלת העכבר בתוכם."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
-msgstr ""
+msgstr "סגור עכשיו את חלון ההודעות על ידי לחיצה ימנית בתוכו."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Closing Windows"
-msgstr ""
+msgstr "סגירת חלונות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "מצוין. עכשיו עלינו להתמקד בדברים אחרים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
 msgid ""
@@ -929,70 +929,70 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr ""
+msgstr "כל הכבוד! הבה נראה כיצד הודעות פועלות במשחק אמיתי, נכון? לשם כך, אקח את כל הסלעים מבנאי האבן המסכנים במחצבות. אז כל אחד מהם ישלח הודעה שהוא אינו מוצא סלעים באזור העבודה שלו בפעם הבאה שינסה לעבוד."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:595
 msgid "Destroy the two quarries"
-msgstr ""
+msgstr "הרוס את שתי המחצבות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "הרוס את המחצבות"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr ""
+msgstr "מכיוון שהמחצבות שלנו חסרות תועלת כעת, תוכל להרוס אותן ולהשתמש בשטח שוב מאוחר יותר."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr ""
+msgstr "ישנן שתי דרכים שונות להרוס מבנה: שריפה ופירוק. נסה את שתיהן על המחצבות שלך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "שריפת המחצבה: זו הדרך המהירה ביותר לפנות את השטח. בעוד העובד נוטש את המבנה, הסחורות אובדות."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "פירוק המחצבה: בנאי יצעד מהמפקדה כדי לפרק את המחצבה חתיכה אחר חתיכה. כך תקבל בחזרה חלק מהמשאבים ששימשו לבנייה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "הגיעו הודעות!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:608
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "קיבלת כמה הודעות. שים לב כיצד הכפתור בתחתית המסך שינה את מראהו?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expand your territory"
-msgstr ""
+msgstr "הרחב את שטחך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:621
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "הגדל את שטחך"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:622
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "בנה מבנה צבאי על גבולך. בחר את זה שאתה הכי אוהב."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:623
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "הזקיף הוא המוצב הצבאי היחיד המתאים למגרש בנייה קטן. אם חוטב העצים שלך פינה מספיק שטח, תוכל לבנות גם מבנה צבאי גדול יותר."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:624
 msgid ""
@@ -1000,11 +1000,11 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr ""
+msgstr "זכור שמבנים גדולים (אייקון ירוק) אינם יכולים להיבנות על מגרשי בנייה קטנים (אדום) או בינוניים (צהוב), אך מבנים יכולים להיבנות על מגרש בנייה המספק יותר שטח ממה שהם זקוקים לו. תמיד כדאי לזכור זאת כשאתה מחפש מקום מתאים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:628
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "הרחבת שטחך!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:631
 msgid ""
@@ -1013,7 +1013,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr ""
+msgstr "יש עוד דבר אחד שהייתי רוצה ללמד אותך עכשיו: הרחבת שטחך. המקום שהתחלנו בו סביב המפקדה שלנו מספיק בקושי לתשתית בנייה בסיסית, ואין לנו גישה להרים, שאותם אנחנו זקוקים להם כדי לכרות מינרלים ופחם. לכן, עלינו להרחיב את שטחנו."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:632
 msgid ""
@@ -1024,62 +1024,62 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "הרחבת שטח היא פשוטה כמו בניית מבנה צבאי בקצה שטחך. לברברים יש מבחר של ארבעה מבנים צבאיים שונים: זקיפים, מחסומים, מגדלים ומבצרים. ככל שהמבנה גדול יותר, כך יקר יותר לבנות אותו, אך הוא יכבוש יותר אדמה סביבו ויותר חיילים יוכלו להיות מוצבים בו. המבנים נבדלים גם בטווח הראייה שלהם: מבנים עם מגדל רואים למרחק רב יותר מאחרים."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:633
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "ברגע שמבנה צבאי מאויש, הוא ירחיב את אדמתך. אספר לך עוד על מבנים צבאיים במדריך אחר."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:640
 msgid "Military Site Occupied"
-msgstr ""
+msgstr "המוצב הצבאי אויש"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:642
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "שטחך זה עתה גדל!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:644
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr ""
+msgstr "נהדר. אתה רואה כיצד שטחך גדל מאז שחייליך נכנסו למבנה הצבאי החדש שלך?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:655
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:657
 msgid "Conclusion"
-msgstr ""
+msgstr "סיכום"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:659
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr ""
+msgstr "בכך מסתיים המדריך הראשון. כדי ללמוד עוד על המשחק, אני מציע לשחק באחד המדריכים האחרים. כל אחד מהם עוסק בנושא שונה."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:660
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr ""
+msgstr "עם זאת, מכיוון שכעת אתה יודע כיצד לשלוט ב-Widelands, תוכל גם להתחיל משחק (או להמשיך במשחק הזה) ולגלות עוד בעצמך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:661
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "כדי לצאת מהמשחק הזה ולחזור לתפריט הראשי:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:662
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr ""
+msgstr "לחץ על הכפתור ‘תפריט ראשי’ בקצה השמאלי ביותר בתחתית המסך."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:663
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "ואז לחץ על הפריט ‘יציאה מהמשחק’."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:664
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr ""
+msgstr "תודה ששיחקת במדריך הזה. תיהנה מ-Widelands וזכור לבקר אותנו בכתובת"

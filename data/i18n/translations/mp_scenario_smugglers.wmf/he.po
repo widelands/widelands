@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "סחורות שהוברחו"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
@@ -28,14 +28,14 @@ msgstr ""
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%i נקודה"
+msgstr[1] "%i נקודות"
+msgstr[2] "%i נקודות"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
-msgstr ""
+msgstr "חוקים"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
@@ -45,14 +45,14 @@ msgstr "סטטוס"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
-msgstr ""
+msgstr "מבריחים"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:9
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "Smugglers היא מפה כיפית לארבעה שחקנים. אתם ובן-הזוג שלכם מתחילים באלכסון זה מזה על אי סימטרי-נקודתי. יש שפע של מנהרות הברחה על האי הזה, וכל אחת מהן מורכבת מקצה מקבל וקצה שולח."
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -60,7 +60,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "כדי להקים נתיב הברחה, עליכם לבנות מחסן על מקום שולח/מקבל, בעוד בן-קבוצתכם צריך לבנות אחד במקום המקביל המקבל/שולח. סחורה אחת מועברת אז כל 10 שניות."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -68,32 +68,32 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
+msgstr "עבור נתיבי הברחה קשים יותר להגנה, תקבלו 2 או 3 נקודות עבור כל סחורה שהוברחה. הקבוצה הראשונה שתאסוף %s מנצחת."
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr ""
+msgstr "מקום שולח"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
-msgstr ""
+msgstr "מקום מקבל"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "הערות"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
+msgstr "זכרו שלמפה יש סימטריה סיבובית. לדוגמה, כשתמצאו מקום בפינה השמאלית-עליונה של המפקדה שלכם, המקום המקביל יהיה בפינה הימנית-תחתונה של המפקדה של בן-קבוצתכם."
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr ""
+msgstr "תוכלו לראות בכל עת את מספר הסחורות שנסחרו בתפריט הסטטיסטיקה הכללית. בהצלחה!"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
@@ -101,7 +101,7 @@ msgstr ""
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr ""
+msgstr "נוסד נתיב הברחה חדש מ-%1$s ל-%2$s! כל סחורה שהם מבריחים שם שווה %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
@@ -109,7 +109,7 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "הקבוצה שלכם הקימה נתיב הברחה חדש. בידיכם המחסן השולח. כל סחורה שמוברחת כאן שווה %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -117,17 +117,17 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "הקבוצה שלכם הקימה נתיב הברחה חדש. בידיכם המחסן המקבל. כל סחורה שמוברחת כאן שווה %s."
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr ""
+msgstr "נתיב ההברחה בשווי %1$s מ-%2$s ל-%3$s נשבר!"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
-msgstr ""
+msgstr "המשחק נגמר!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
@@ -135,4 +135,4 @@ msgstr ""
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr ""
+msgstr "המשחק נגמר! %1$s ו-%2$s ניצחו במשחק! %3$s ו-%4$s הצליחו לאסוף רק %5$s."
