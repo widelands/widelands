@@ -19,12 +19,12 @@
 #include "editor/tools/place_immovable_tool.h"
 
 #include "base/macros.h"
-#include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/mapregion.h"
+#include "ui/editor/editorinteractive.h"
 
 /**
  * Choses an object to place randomly from all enabled

@@ -24,7 +24,7 @@
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_flag.h"
 #include "scripting/ui/lua_timer.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace LuaUi {
 

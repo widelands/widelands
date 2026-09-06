@@ -29,7 +29,7 @@
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/pinned_note.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/player.h"
@@ -42,7 +42,7 @@
 #include "scripting/map/lua_road.h"
 #include "scripting/map/lua_terrain_description.h"
 #include "scripting/map/lua_tribe_description.h"
-#include "ui_basic/progresswindow.h"
+#include "ui/basic/progresswindow.h"
 
 namespace LuaBases {
 

@@ -305,7 +305,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for a Frisian ware: Coal, part 1
                   pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal burner in a charcoal kiln or charcoal burner’s house."),
                   -- TRANSLATORS: Helptext for a Frisian ware: Coal, part 2
-                  pgettext("frisians_ware", "The fires of the brick kilns, furnaces and armor smithies are fed with coal.")
+                  pgettext("frisians_ware", "The fires of the brick kilns, furnaces, armor smithies and recycling centers are fed with coal.")
                }
             }
          },

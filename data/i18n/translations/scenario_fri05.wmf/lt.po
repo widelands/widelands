@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Pastaba"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -26,64 +30,71 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Atrodo, nebaigėte ankstesnės misijos. Vis tiek galite žaisti šį scenarijų, "
+"tačiau būsite nepalankioje padėtyje. Rekomenduoju pirma užbaigti ankstesnį "
+"scenarijų ir tik tada iš naujo pradėti šią misiją."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgolandas"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
-msgstr ""
+msgstr "Kopenhaga"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Prekyba"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Šioje saloje negalite išgauti išteklių ar kasti akmenų karjeruose. Vietoje "
+"to galite mainyti vietinę produkciją į kitas prekes."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Bus prekiaujama visomis uoste laikomomis prekėmis. Prekybos kainos nurodytos"
+" šioje lentelėje."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Nugalėkite užpuolikus"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Nugalėkite Atterdago pajėgas."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Sunaikinkite visus priešo pastatus."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Užblokuokite siaurąją vietą"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Užblokuokite siaurąją vietą."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -91,48 +102,50 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Užstatykite siaurą perėją į rytus nuo Aukštumų keliais dideliais kariniais "
+"pastatais, kad priešas neprasiveržtų, kol nesate pasiruošę puolimui."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Medienos gamyba"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Užtikrinkite medienos gamybą."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Pastatykite bent tris medkirčių namus."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Pastatykite bent keturis miškininkų namus."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "Aukštumos"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Išmintingai naudokite Aukštumas."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Perkelkite savo pramonę į Aukštumas."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Įžanga"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Sveiki sugrįžę!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -140,6 +153,8 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"Pagaliau namie! Negaliu žodžiais apsakyti džiaugsmo vėl matydamas gimtąsias "
+"žemes... ir nekantrumo esant taip arti, bet vis dar taip toli."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -152,6 +167,13 @@ msgid ""
 " will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"Šįkart jūra buvo rami ir leido greitai plaukti atgal į pietus. Abu su "
+"Henneke didžiąją kelionės dalį praleidome prie laivo laivapriekio, laukdami "
+"sugrįžimo. Rybo iš pradžių stovėjo laivagalyje ir žiūrėjo atgal taip pat, "
+"kaip mes žiūrėjome į priekį. Akivaizdu, kad jis myli savo naujus namus taip "
+"pat stipriai, kaip aš savo senuosius. Esu tikras, kad noras grįžti gyviems "
+"ir nugalėtojams įkvėps jo karius kovoti taip pat narsiai, kaip ir mano "
+"kariai stengsis atsiimti savo namus."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -160,6 +182,9 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"Nuotaika mūsų laive tapo įtempta, kai artėjome prie pažįstamų vandenų. "
+"Džiaugsmingą juoką ir sujaudintą sugrįžimo laukimą pakeitė niūrios "
+"nuotaikos, kai pradėjome ruoštis mūšiui."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -168,6 +193,8 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"Ir tada pagaliau atėjo ta diena. Pamatėme šiauriausią Zilto salos kyšulį ir "
+"žinojome, kad tos pačios dienos vakarą išsilaipinsime Fėre. Bet tada –"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -176,6 +203,9 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Padarėme vieną pačių paprasčiausių klaidų, ir visi turėtume gėdytis, kad "
+"buvome ne atsargesni už jungą. Per tuos mėnesius nuo tada, kai palikome "
+"Fėrą, visiškai pamiršome sekti kalendorių."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -186,6 +216,11 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Šiandien Vėlinės, antroji lapkričio diena, ir kiekvienas vaikas čia žino, "
+"kad joks sveiko proto kapitonas net nesvajotų iškelti burių likus savaitei "
+"iki šios dienos ar savaitę po jos. Nuo neatminamų laikų itin stiprios "
+"audros, kylančios šiuo metų laiku, pasiuntė ne vieną nerūpestingą jūreivį į "
+"vandenų kapą."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -196,6 +231,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Mus išgelbėjo tik gryna sėkmė. Laivai beveik nenukentėjo, nei vienas "
+"jūreivis nebuvo prarastas bangose. Nepatikėčiau, kad kam nors galėtų taip "
+"pasisekti, jei nebūčiau to matęs savo akimis. Mūsų neįtikėtinas "
+"išsigelbėjimas teikia man vilties – tai akivaizdus ženklas, kad mūsų "
+"pavojingą sumanymą laimina šventieji."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -207,6 +247,11 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"Audra nubloškė mūsų laivą maždaug per dvi dienas kelio nuo kurso. Laimei, aš"
+" vis dar pažįstu šiuos vandenis, tad tai tik nedidelė kliūtis. Audrai "
+"nurimus, buvome netoli Helgolando salos ir nusprendėme čia išsilaipinti. "
+"Salos gyventojai garsėja svetingumu, o proga pailsėti ir atgauti jėgas prieš"
+" mūšį bus labai vertinga. Galbūt kai kurie jų net prisijungs prie mūsų."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -215,12 +260,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Sveikinimai"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Sveiki atvykę į Helgolandą!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -231,10 +276,15 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Ramybė jums ir sveiki atvykę į Helgolandą! Jūsų garsas sklinda pirmiau jūsų,"
+" Klausai Lembekai, mylimas Fėro valdove, ir Rybo, kurį bardai vadina "
+"Drąsiuoju, Narsiuoju ir Galinguoju. Esu Okė Ketelsenas, vyresnysis "
+"Helgolando seniūnas, ir nepaisant šių sunkių laikų, man malonu ir didelė "
+"garbė priimti tokius garbingus svečius."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Svetingumas"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -246,6 +296,12 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Ramybė ir dėkoju už draugišką pasveikinimą, Oke Ketelsenai! Maloni permaina,"
+" kai nereikia kariauti su tuo, kurio saloje išsilaipinome. Tačiau jūsų "
+"pasveikinimas nuskambėjo keistai trumpai. Kadangi jūsų žodžiai tokie šilti, "
+"galiu tik daryti išvadą, kad jus ištiko kokia nors kita bėda. Jei "
+"neprieštaraujate ir mano klausimas neatrodo įžūlus, norėčiau sužinoti, ar "
+"galime kuo nors padėti."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -253,18 +309,19 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Jūs nepaprastai įžvalgus. Tikrai turime problemą, ir ją matote štai ten."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Priešai"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Danai! Negi Atterdago užkariavimų troškulys siekia taip toli?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -272,6 +329,8 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Taip. Matau, kad pažįstate šį priešą, ir man būtų įdomu išgirsti, kaip "
+"susitikote – nors įtariu, kad jiems tai nieko gero nežadėjo!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -282,6 +341,11 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Mano didžiam apgailestavimui, ši prielaida klaidinga. Trumpai tariant, "
+"Atterdagas įsiveržė į Fėrą su tokia galinga jėga, kad buvau priverstas "
+"palikti salą ir prašyti Rybo pagalbos ją atsiimant. Tiesą sakant, we "
+"plaukėme į Fėrą, kad kartą ir visiems laikams išvytume užpuolikus, kai audra"
+" mus nubloškė į Helgolandą."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -290,12 +354,14 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Tai gali būti net dangiškas įsikišimas. Mes mielai padėsime jums kovoti su "
+"šiuo priešu. Taip sakant, apšilimo mūšis – aš jau laukiu!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "Pasiruošimas karui"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -305,6 +371,9 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"Jūsų entuziazmas mane džiugina tiek pat, kiek jūsų bėda kelia užuojautą. "
+"Tačiau priešai galingesni, nei atrodo – jie atsivežė milžiniškas danų karių "
+"pajėgas, ir net jūsų narsūs vyrai nepajėgs jų visų įveikti."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -313,6 +382,9 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"Mūsų sala nepratusi prie tokio karo. Esame žvejai ir ūkininkai, neturime nei"
+" patirties, nei lėšų palaikyti užsitęsusį mūšį. Jūsų žinios šioje srityje "
+"būtų neįkainojamos."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -320,10 +392,12 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Bet pirmiausia leiskite man aprodyti mūsų mažą salą, kad susidarytumėte "
+"aiškesnį vaizdą."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomika"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -333,6 +407,10 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Kaip jūs čia išgyvenate? Šios uolos atrodo įspūdingai, bet nematau, kaip "
+"galėtumėte jas kirsti akmeninių namų statybai. Beveik nematau medžių ir "
+"jokių vietų, kur galėtumėte išgauti geležį ar kitus mineralų! Kaip jums tai "
+"pavyksta?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -345,6 +423,12 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Prekyba. Parduodame grūdus, žuvį ir kitas prekes žemynui, o iš ten perkame "
+"rūdą bei granitą. Pasiskirstykime darbus pagal tai, ką mokame geriausiai: "
+"jūs imkitės ekonomikos pertvarkymo karui ir mūsų žmonių apmokymo, o aš "
+"pasirūpinsiu reikiamu prekių importu. Tiesiog palikite prekes pardavimui "
+"uostuose, o aš pasirūpinsiu viskuo kitu. Ši lentelė rodo, kokiomis prekėmis "
+"ir kokiais kiekiais mes paprastai prekiaujame."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -353,11 +437,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "Karo planavimas"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "Išmintingai naudokite Aukštumas"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -366,6 +450,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Pirmiausia – svarbiausi dalykai. Šis miestelis turi puikią gynybinę "
+"poziciją, tačiau yra visiškai nesaugomas. Turime viską taktiškai suplanuoti,"
+" nes sutinku, kad šis mūšis nebus laimėtas greitai."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -379,10 +466,16 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"Aukštumos turi tik vieną įėjimą: šią rampą čia pat, šalia miesto centro. "
+"Visus svarbius gamybos pastatus statykime ten. Keletas tvirtovių pietiniame "
+"gale paverstų šią plynaukštę beveik neužimama. Net jei priešui pavyktų "
+"užimti visą apatinę salą, mes galime ten išsilaikyti daugybę metų, jei tik "
+"iš anksto sukauptume pakankamai atsargų Aukštumų sandėliuose. Žinoma, būtume"
+" atkirsti nuo uostų ir prekybos kelių, tad turėtume stengtis to išvengti."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "Sutvirtinkite siaurąją vietą"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -397,6 +490,14 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"Tačiau mums svarbiausias rūpestis turėtų būti apsaugoti šią perėją netoli "
+"mūsų šiauriausio uosto. Mūsų priešas turi praeiti pro šį siaurą tašką, kad "
+"mus pasiektų, bet tas pats galioja ir atvirkščiai. Jei būsime atsargūs, šiuo"
+" metu galime ilgai laikyti priešą, kol būsime pasirengę pradėti savo "
+"priešpriešinį mokestį. Tačiau perėja per siaura, kad ją būtų galima "
+"sutvirtinti taip pat lengvai, kaip ir aukštumos. Turime čia kartu pastatyti "
+"kuo daugiau tvirtovių, kad priešas neįgytų jokios žemės. Būtų neprotinga ką "
+"nors statyti į šiaurę nuo perėjos, nes tai būtų pavojingai atvira."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -407,10 +508,15 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"Priklausomai nuo to, kiek turime statybinių medžiagų, galbūt vertėtų "
+"nugriauti kai kuriuos kitus pastatus ir padaryti vietos dar didesniems "
+"įtvirtinimams. Bet kokiu atveju, visiems šios zonos pastatams – tiek "
+"kariniams, tiek kitiems – nuolat grės pavojus būti sudegintiems per danų "
+"antpuolius."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "Medienos tiekimas"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -419,6 +525,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Kaip teisingai pastebėjo Rybo, Aukštumos yra geriausia vieta naujiems "
+"pastatams. Be strateginės vertės, jos siūlo daug vietos statyboms, kurios "
+"trūksta žemutinėje salos dalyje."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -429,6 +538,11 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"Dėl to, ką kursime, aš nesutinku. Svarbi yra daugiau karinių vietų, bet dar "
+"labiau – galimybė statyti pastatus. Niekur saloje nėra medienos pjovėjų, o "
+"mes negalime pasikliauti prekyba mediena, todėl turime iš karto užtikrinti "
+"savo medienos gamybą, kol visos medienos nesunaudojo rūkyklos ir anglies "
+"degyklos!"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -439,10 +553,15 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"Žemė atrodo gana nederlinga, todėl mums reikės rezervuoti daugiau vietos "
+"miškui, nei man patogu. Atrodo, kad žemumos yra šiek tiek derlingesnės, "
+"todėl gali būti protinga čia pastatyti miškininkų ir medkirčių namus ir kai "
+"kuriuos ūkius perkelti į aukštumas. Ūkiai, nendrių ūkiai ir uogų ūkiai "
+"nepriklauso nuo derlingos žemės taip stipriai kaip medžiai."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "Ilgalaikė strategija"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -454,6 +573,12 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"Mūsų prekyba prasidėjo sėkmingai. Dabar turėsime planuoti savo įdarbinimo ir"
+" mokymo ekonomiką. Mes gaminame pagrindinę maisto ir metalo gamybą, bet "
+"atrodo, kad ji išaugo atsitiktinai ir nepakaks mūsų poreikiams patenkinti. "
+"Mums reikės daugiau ir pažangesnių vietų, kad aprūpintume pakankamai ginklų "
+"ir šarvų, taip pat maisto mūsų kariams. Nereikia nė sakyti, kad pora mokymo "
+"vietų ir kareivinės taip pat yra būtinos."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -465,10 +590,16 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"Visada turėsime atidžiai stebėti savo prekiaujamų prekių pasiūlą. Paprašysiu"
+" Ocke Ketelsen pirkti tik tas prekes, kurių iš tikrųjų reikia mūsų "
+"ekonomikai, kad neiššvaistytume jokių prekių, bet mes turėsime užtikrinti, "
+"kad galėtume tiekti pakankamai prekių. Visi šie prekybos maršrutai yra labai"
+" brangūs, todėl turėsime pažymėti didelį plotą vien tam, kad galėtume "
+"parduoti prekes."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Pylimų statymas"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -479,6 +610,10 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Vietos trūkumas Helgolande vis dar kelia nerimą. Salos užtektų paruošti "
+"nedidelį skaičių karių per protingą laiką, tačiau suburti tokią kariuomenę, "
+"kokios mums reikia, truktų amžinybę! Gali tekti rizikuoti ir pasikliauti "
+"pranašesne taktika, kad kompensuotume šį trūkumą."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -490,10 +625,16 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"Tačiau jei norite žaisti saugiai, nepamirškite, kad galime tiesiog padidinti"
+" salą. Kadangi dabar turime nuolatinį rąstų tiekimą, galime statyti pylimus "
+"ir bangolaužius, kad iš jūros įgytume daugiau vietos statybai. Kai būsime "
+"pasiruošę pulti, netgi galime tai panaudoti kaip būdą apeiti siaurą tašką "
+"rytuose arba, jei norime būti tikrai drąsūs, galėtume užtvindyti visą "
+"vakarinę salos pakrantę, kad vienu metu pultume priešą iš dviejų pusių!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Sėkmės!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -501,14 +642,16 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Mane džiugina jūsų ryžtas. Kibkime kiekvienas į savo darbus, ir te lydi mus "
+"sėkmė!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "Medienos tiekimas"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "Medienos tiekimas užtikrintas"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -517,14 +660,16 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Mūsų miškininkai ir medkirčiai pradėjo darbą. Prireiks šiek tiek laiko, kol "
+"turėsime nuolatinį rąstų tiekimą, tačiau skubiausia problema išspręsta."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "Perėja apsaugota"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "Perėja saugoma"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:293
@@ -532,14 +677,16 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
+"Mūsų kariai įtvirtino perėją. Joks priešas pro juos neprasibraus, kol nesame"
+" pasiruošę."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "Aukštumos kolonizuotos"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "Aukštumos apgyvendintos"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -548,6 +695,9 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"Aukštumos paverčiamos tikru mūsų ekonomikos centru. Turime nepamiršti visada"
+" atidžiai stebėti prekių mainus tarp žemumų ir aukštumų ir sumažinti jų iki "
+"minimumo, kad išvengtume spūsčių keliuose."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -557,12 +707,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Priešas nugalėtas"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -571,6 +721,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Jie nugalėti! Ačiū, ačiū už pagalbą. Niekada nebūtume galėję jų įveikti "
+"patys. Mūsų miestelis net nepatyrė didelės žalos – priešingai, jūs jį "
+"išplėtėte toli už buvusių ribų."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -580,6 +733,10 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"Mano žmonės ir aš niekada negalėsime grąžinti jums skolingos skolos. Kartu "
+"su jumis atsiųsiu visus karius, kuriuos išmokote, kad padėtų jums "
+"išlaisvinti savo namus. Jei dar ką nors galime padaryti už jus, dabar ar "
+"amžinai, jums tereikia paklausti ir mes būsime jūsų įsakymas."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -587,6 +744,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Labai laukiame, Ocke Ketelsen. Tačiau nesumenkinkite savo dalies šioje "
+"pergalėje, nes mes patys to negalėjome pasiekti."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -599,12 +758,19 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"Ir nuoširdžiai dėkoju už pažadą atsiųsti savo karius. Jau žinojau, kad "
+"Atterdagas yra didžiulis priešas, bet jėgos, su kuriomis dabar susidūrėme, "
+"pranoko viską, ką mačiau per visą savo gyvenimą, ir jos buvo tik avangardas!"
+" Mums reikės visų pranašumų, kuriuos galime gauti, ir net tada nesu toks "
+"tikras dėl pergalės, kaip anksčiau. Jei girdėjote apie ką nors kita, kas "
+"gali būti naudinga – bet kokius taktinius patarimus – bet kokius miestus, "
+"kurie gali prisijungti prie mūsų – pasidalykite šia informacija su mumis."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "Pažink savo priešą"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -615,6 +781,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Aš tai padarysiu mielai. Iš tiesų, pasak mano prekybos partnerių, Atterdago "
+"užkariavimo troškulys yra beribis. Įkūręs savo buvimą Föhr mieste, jis taip "
+"pat užkariavo visas kitas netoliese esančias salas. Jūsų tvirtovė Föhr "
+"visada buvo vienintelė jų gynyba, apie kurią reikia kalbėti, todėl kai tavęs"
+" išvykstate, jis lengvai užgrobė visą teritoriją."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -625,6 +796,12 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Sklinda gandai, kad gyventojai vykdo žiaurią taisyklę. Žinomas faktas, kad "
+"jie nutraukė bet kokią prekybą, o vietiniai yra priversti atiduoti pusę "
+"visko, ką gamina danams. Pusė! Jau dabar, kaip teigiama, buvo įvykdyta "
+"mirties bausmė už tai, kad buvo pasisavinta grūdų bušelis. Žmonės kenčia ir,"
+" be jokios abejonės, mielai prisijungs prie visų, kurie ateina jų "
+"išlaisvinti."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -634,6 +811,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"Yra dar vienas dalykas. Prekybos laivus, bandančius plaukti gerokai į šiaurę"
+" nuo okupuotos teritorijos, piratai įlipo ir nuskandino. Tačiau "
+"išgyvenusieji prisiekia, kad piratai iš tikrųjų buvo danų kariai ir kad jų "
+"laivai priklauso Danijos laivynui."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -644,6 +825,11 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Dabar tai daugiausia spėlionės, bet manau, kad Atterdagas gabena savo "
+"kariuomenę iš Danijos sostinės į salas, kurias užkariauja laivu. Sausumos "
+"maršrutas daug ilgesnis ir įtemptesnis, todėl nesunku suprasti, kodėl jis "
+"taip elgtųsi. Akivaizdu, kad jis bando užmaskuoti šį faktą. Kodėl jis turėtų"
+" tai daryti, nebent mano, kad ši paslaptis yra strategiškai svarbi?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -657,11 +843,18 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Nežinau, kokia didelė dalis jo karių keičiama tarp sostinės ir salų laivu, "
+"bet atrodo, kad jų skaičius yra pakankamai didelis, kad patarčiau nutraukti "
+"šį mainą. Kaip žinote, šias dvi sritis jungia tik vienas jūrų kelias ir jis "
+"veda per sąsiaurį, vadinamą Kattegatu. Šis sąsiauris yra kelių mylių pločio "
+"ir nusėtas mažytėmis salomis. Jei galite pasiekti šią vietą be jų užpulto jų"
+" laivų, galite užimti salas ir pastatyti nenugalimų tvirtovių juostą, kuri "
+"blokuoja bet kurį priešo laivą, bandantį praplaukti."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Pergalė!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:350
@@ -671,6 +864,10 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"Ir jei galėsime jį užblokuoti, jie praras savo svarbiausią prekybos kelią! "
+"Turime tai išbandyti. Iš karto plauksime į Kattegatą, kad užkariautume "
+"sąsiaurį, o tada iškelsime Föhr ir visų kitų salų žmones kartu maištaujant "
+"prieš užpuoliką!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -682,6 +879,12 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Norėčiau pateikti dar vieną prašymą. prašymas ir pasiūlymas. Mano du sūnūs "
+"Harke'as Ockesenas ir Eschelas Ockesenas mokosi kaip kariai ir vadai. Būčiau"
+" labai dėkingas, jei leistumėte jiems palydėti jus į kampaniją „Kattegat“, "
+"kad įgytumėte praktinės patirties, o vėliau grąžintumėte man. Tuo tarpu mes "
+"panaudosime jūsų sukurtą pramonę, kad apmokytume daugiau karių, kurie padės "
+"jums atlikti tolesnius veiksmus."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -690,6 +893,8 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Mums bus labai malonu juos priimti ir pažadu, kad jais gerai pasirūpinsime. "
+"Jūs tikrai mokate parinkti savo sūnums geriausius mokytojus."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -697,13 +902,17 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"Tad čia ir atsisveikiname iki kito susitikimo. Likite sveiki, ir te amžina "
+"ramybė lydi visą Helgolandą!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite tęsti žaidimą, kitu atveju "
+"pereikite prie kitos misijos."

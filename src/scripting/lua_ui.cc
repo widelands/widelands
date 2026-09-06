@@ -48,9 +48,9 @@
 #include "scripting/ui/lua_textarea.h"
 #include "scripting/ui/lua_timer.h"
 #include "scripting/ui/lua_window.h"
-#include "ui_basic/messagebox.h"
+#include "ui/basic/messagebox.h"
+#include "ui/wui/interactive_player.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
 
 namespace LuaUi {
 
@@ -91,7 +91,6 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	// clang-format off
 	TRY_TO_LUA(Window, LuaWindow)
 	else TRY_TO_LUA(Pagination, LuaPagination)
-	else TRY_TO_LUA(Box, LuaBox)
 	else TRY_TO_LUA(Button, LuaButton)
 	else TRY_TO_LUA(Checkbox, LuaCheckbox)
 	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
@@ -110,6 +109,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
 	else TRY_TO_LUA(BaseListselect, LuaListselect)
 	else TRY_TO_LUA(BaseTable, LuaTable)
+	else TRY_TO_LUA(Box, LuaBox)
 	else if (!is_main_menu(L) && panel == get_egbase(L).get_ibase()) {
 		to_lua<LuaMapView>(L, new LuaMapView(L));
 	} else if (upcast(MapView, temp_MapView, panel); temp_MapView != nullptr) {

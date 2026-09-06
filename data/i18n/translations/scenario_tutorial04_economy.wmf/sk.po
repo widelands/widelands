@@ -7,14 +7,14 @@
 # Karl Vest, 2020
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
-# Pavol Gono, 2024-2025
+# Pavol Gono, 2024-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -799,8 +799,8 @@ msgid ""
 "for a reason. An economy consists of all buildings and flags connected by "
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
-"separate economies can have different settings for wares."
-msgstr "Všimnite si, že tlačidlá sa volajú „Nastaviť ekonomiku tejto vlajky/budovy“ nie bez dôvodu. Ekonomika pozostáva zo všetkých budov a vlajok prepojených cestami, trajektmi alebo loďami, takže môžete mať viac ako jednu ekonomiku, ak ich vlajky nie sú prepojené žiadnym dopravným prostriedkom. V takom prípade môžu mať vaše oddelené ekonomiky rôzne nastavenia pre výrobky."
+"separate economies can have different settings for wares and workers."
+msgstr "Všimnite si, že tlačidlá sa volajú „Nastaviť ekonomiku tejto vlajky/budovy“ nie bez dôvodu. Ekonomika pozostáva zo všetkých budov a vlajok prepojených cestami, trajektmi alebo loďami, takže môžete mať viac ako jednu ekonomiku, ak ich vlajky nie sú prepojené žiadnym dopravným prostriedkom. V takom prípade môžu mať vaše oddelené ekonomiky rôzne nastavenia pre výrobky a pracovníkov."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

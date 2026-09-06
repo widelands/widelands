@@ -82,14 +82,10 @@ function militarysite_tests:test_set_soldiers_all_at_once()
       _cnt(self.fortress:get_soldiers("all")))
    assert_equal(self.fortress.max_soldiers,
       self.fortress:get_soldiers({0,0,0,0}))
-   -- repeated key (which is valid for table as key and might happen by accident)
-   self.fortress:set_soldiers({[{0,0,0,0}] = 1, [{0,0,0,0}] = 2, [{0,1,0,0}] = 3})
-   local found = _cnt(self.fortress:get_soldiers("all"))
-   if found == 5 then -- pass when one of the keys is used
-      assert_equal(5, found)
-   else
-      assert_equal(4, found) -- looks like only 1st key is used
-   end
+   -- repeated key is not allowed, because the order is not deterministic
+   assert_error("Repeated key is not allowed", function()
+      self.fortress:set_soldiers({[{0,0,0,0}] = 1, [{0,0,0,0}] = 2, [{0,1,0,0}] = 3})
+   end)
 end
 function militarysite_tests:test_illegal_soldier()
    assert_error("illegal level", function()
@@ -97,10 +93,11 @@ function militarysite_tests:test_illegal_soldier()
    end)
 end
 function militarysite_tests:test_no_space()
+   self.fortress:set_soldiers{[{0,0,0,0}] = 2}
    assert_error("no_space", function()
       self.fortress:set_soldiers{[{0,0,0,0}] = 9}
-  end)
-   assert_equal(8, _cnt(self.fortress:get_soldiers("all")))
+   end)
+   assert_equal(2, _cnt(self.fortress:get_soldiers("all")))
 end
 function militarysite_tests:test_foreign_militarysite_new_tribe()
    local field = map:get_field(13,13)

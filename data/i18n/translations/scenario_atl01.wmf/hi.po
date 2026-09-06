@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Habis Muhammed, 2024\n"
 "Language-Team: Hindi (http://app.transifex.com/widelands/widelands/language/hi/)\n"
@@ -75,11 +75,11 @@ msgstr "खाद्य उत्पाद"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
-"Food is very important for mines and military training areas. Establish a "
+"Food is very important for mines and military training sites. Establish a "
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "खनिज और सैन्य प्रशिक्षण के लिए भोजन बहुत महत्वपूर्ण है। एक अच्छा कार्यशील भोजन वातावरण स्थापित करने के लिए कम से कम एक खेत, एक ब्लैकरूट खेत और एक । दोनों प्रकार के आटे को कुएँ के पानी के साथ मिलाकर बेकरी में रोटी बनाई जाएगी, इसलिए आप एक बेकरी और एक कुआँ बनाइए।"
+msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""

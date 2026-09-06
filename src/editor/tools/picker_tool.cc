@@ -18,7 +18,7 @@
 
 #include "editor/tools/picker_tool.h"
 
-#include "editor/ui_menus/tool_options_menu.h"
+#include "ui/editor/tool_options_menu.h"
 
 int32_t EditorPickerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                             EditorActionArgs* /* args */,

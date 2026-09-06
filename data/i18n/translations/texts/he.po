@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
@@ -167,8 +167,8 @@ msgstr "למה ציפית שיקרה כשביצעת את השלבים ומה ב�
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
-"build.)"
-msgstr "איזו גרסה של Widelands אתה מריץ (כלומר, או את מספר הגרסה או את מספר התיקון אם אתה מריץ גרסת פיתוח או גרסת בנייה יומית)."
+"build)."
+msgstr "איזו גרסה של Widelands אתם מריצים (כלומר מספר הבנייה, או מספר הגרסה אם אתם מריצים גרסת פיתוח או בנייה יומית)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -566,10 +566,9 @@ msgstr "אמני ג'ונגל לומדים את מיומנויותיהם על י�
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
-"Keep an eye on your fishers and build a fish breeder’s house. After fish "
-"resources are exhausted in their work area, the fish supply cannot be "
-"regenerated."
-msgstr "פקח עין על הדייגים שלך ובנה בית מגדל דגים. לאחר שמשאבי הדגים באזור העבודה שלהם מתרוקנים, אספקת הדגים אינה יכולה להתחדש."
+"Keep an eye on your fishers and build a fish breeder’s house to regenerate "
+"fish resources."
+msgstr "עקבו אחרי הדייגים שלכם ובנו בית מגדל דגים כדי לחדש את משאבי הדגים."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -805,7 +804,7 @@ msgstr "לכמה מבנים, כמו החווה, יש אזור עבודה קטן 
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "התקרבו/התרחקו עם גלגלת העכבר או %1%/%2%. לחצו %3%/%4% לרמת התקריב המקסימלית/מינימלית. לחצו %5% לאיפוס התקריב."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""

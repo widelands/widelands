@@ -9,21 +9,21 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
-        os: [14, 15, 15-intel]
+        os: [15, 26, 26-intel]
         # Check https://github.com/actions/runner-images#available-images
         include:
-          - os: 15-intel
-            osname: macOS15_x86
-          - os: 14
-            osname: macOS14_arm64
+          - os: 26-intel
+            osname: macOS26_x86
           - os: 15
             osname: macOS15_arm64
+          - os: 26
+            osname: macOS26_arm64
     name: ${{ matrix.osname}} ${{ matrix.config }} 
     # ${{ matrix.compiler }}
     runs-on: macos-${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 1
     - name: Installing dependencies
@@ -32,8 +32,6 @@ jobs:
         # Suppress warnings about installing formulas instead of casks. Casks would raise another
         # warning about disabling macos gatekeeper.
         ./install-dependencies.sh homebrew --formula
-        # temporary fix for macos-14 arm failures
-        brew install --quiet icu4c
     - name: Building
       env:
         # Exports for build_app.sh
@@ -41,9 +39,10 @@ jobs:
         TYPE: ${{ matrix.config }}
         COMPILER: ${{ matrix.compiler }}
       run: |
+        # Building even the debug builds without asan is a temporary workaround for https://github.com/libsdl-org/sdl2-compat/issues/610
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website"
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}" "--no-website" "--no-asan"
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
@@ -51,7 +50,7 @@ jobs:
         mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
 
     - name: Uploading DMG
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.osname }} AppImage
         path: "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.osname }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"

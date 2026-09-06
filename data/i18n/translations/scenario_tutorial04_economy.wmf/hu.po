@@ -7,14 +7,14 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017,2025
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021,2023-2025
+# Tóth András <txa-dev@posteo.hu>, 2021,2023-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-01-01 03:54+0000\n"
+"POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2025\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -799,7 +799,7 @@ msgid ""
 "for a reason. An economy consists of all buildings and flags connected by "
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
-"separate economies can have different settings for wares."
+"separate economies can have different settings for wares and workers."
 msgstr "A gomb neve nem véletlenül „A zászlót/épületet tartalmazó gazdaság beállítása”. Egy gazdaság azon épületek és zászlók összességét jelenti, amelyeket utak, víziutak és hajók kötnek össze. Több gazdaságod is lehet egyszerre, ha ezeket nem köti össze semmilyen közlekedési útvonal. Ebben az esetben a különálló gazdaságaid beállításai különbözőek is lehetnek."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485

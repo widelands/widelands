@@ -1,5 +1,118 @@
 [TOC]
 
+## Post-1.3.1 until [git d7d7574](https://codeberg.org/wl/widelands/commit/d7d7574f504ae9327ede0b32729fca5d8b457fde)
+
+### Animations, Icons and Overlays
+
+- Build Animations for Frisian Medium Non-Enhanced Productionsites (CB #5306 / GH #6946)
+- Build Animations for Amazon Small and Big Productionsites & Mines (CB #5317 / GH #6957)
+- Pixel-correct Frisian building hotspots (CB #5348 / GH #6989)
+- Fix image icon filepath regressions (CB #5364 / GH #7005)
+
+
+### Sounds and Music
+
+- Added new song Teeming-Waltz (CB #5357 / GH #6998)
+
+
+### Tutorials and Campaigns
+
+
+
+### Scripting
+
+- Lua memory leaks: No references to temporary variables (CB #5179 / GH #6819)
+- Allow using `stable_save.lua` without lunit (CB #5299 / GH #6939)
+- Lua API for Plugin Timers (CB #5325 / GH #6965)
+- Implement `get_soldiers()` and `set_soldiers()` for LuaShip (CB #5351 / GH #6992)
+
+
+### Maps
+
+
+
+### Add-Ons
+
+- Show add-on edit timestamps in add-ons manager (CB #5316 / GH #6956)
+- Fix segfault in new add-on upload (CB #5377 / GH #7018)
+
+
+### Saveloading
+
+
+
+### AI
+
+
+
+### Gameplay
+
+- Diplomacy: Handle duplicated and mirrored actions properly (CB #5312 / GH #6952)
+- Refactor the land phase of naval invasions (CB #5303 / GH #6943)
+
+
+### User Interface
+
+- Max Zoom and Min Zoom shortcuts (CB #4661 / GH #6298)
+- Show fastplace shortcuts in fieldaction tooltip (CB #5307 / GH #6947)
+- Add fleet options button to portdock and waterway windows (CB #5324 / GH #6964)
+- Fix "Continue Playing" button in SPG (CB #5358 / GH #6999)
+- Remove redundant callback (CB #5363 / GH #7004)
+- Fix `Panel::set_border()` not triggering layout recalculation (CB #5370 / GH #7011)
+- Initial (Partial) UI Scaling Support (CB #5365 / GH #7006)
+- Make scrolling in boxes default (CB #5366 / GH #7007)
+
+
+### Internationalization
+
+- `merge_and_push_translations.sh`: Allow updating `release_urls.json` in second stage (CB #5352 / GH #6993)
+- Improvements in english texts (CB #5378 / GH #7019)
+
+
+### Help and Documentation
+
+
+
+### Editor
+
+- Editor Picker Tool (CB #5308 / GH #6948)
+- Sync "fixed height" value in "random height" and "change height" tool window (CB #5380 / GH #7021)
+
+
+### Graphics Engine
+
+- Fix graphics memory leak (CB #5371 / GH #7012)
+
+
+### Networking
+
+
+
+### Build System
+
+- Migrate Launchpad Mirror from Bazaar to Git (CB #5294 / GH #6934)
+- Update revision detection for PPA (CB #5295 / GH #6935)
+- Use asio-1.36.0 in `download_asio.sh` (GH #6921 / CB #5281)
+- `compile.sh`: clarify `-/+w` option (CB #5302 / GH #6942)
+- Set MacOS builds deployment target to 11.0 (CB #5310 / GH #6950)
+- Update and refactoring of cmake files (CB #5262 / GH #6902)
+- Fix few compiler and linker warnings (GH #6963 / CB #5323)
+- Enhance compile.sh options: disabling codecheck and enabling static linking (CB #5263 / GH #6903)
+- Enhance cross-compile-unit optimization for Linux and Windows platforms (CB #5330 / GH #6971)
+- Fix of strip arguments in MSYS2+CLANGARM64 environment (GH #6994 / CB #5353)
+- [ci] Update GitHub Actions to latest major releases (#7013)
+
+
+### Other Issues
+
+- Player commands get cleaned up at exit (CB #5232 / GH #6873)
+- Game Logic Random Seed for Templated Games (CB #5328 / GH #6968)
+- Naval Warfare Testsuite (CB #5321 / GH #6961)
+- AI Content Policy (CB #5342 / GH #6983)
+- Refactor UI Code Directory Structure (CB #5297 / GH #6937)
+
+
+
 ## Release 1.3.1
 
 - Fix desync around unsafe use of `std::sort` in `Warehouse::launch_soldier` (CB #5314 / GH #6954)

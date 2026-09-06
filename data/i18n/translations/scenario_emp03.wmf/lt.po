@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,39 +21,43 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Pastatykite savo pirmąjį avanpostą"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr ""
+msgstr "Pirmasis avanpostas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Pastatykite avanpostą prie geltono namo simbolio, esančio į rytus nuo jūsų "
+"laikinosios būstinės."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
-msgstr ""
+msgstr "Pastatykite akmens skaldyklą"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Quarry"
-msgstr ""
+msgstr "Akmens skaldykla"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Pastatykite akmens skaldyklą netoli gausių uolų, kad atlaisvintumėte sklypų "
+"statyboms ir gautumėte vertingų išteklių."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Pastatykite medkirčio trobelę, lentpjūvę ir akmentašio trobelę"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Medkirtys, lentpjūvė ir akmentašys"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -57,172 +65,192 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Pastatykite medkirčio trobelę, lentpjūvę ir akmentašio trobelę, kai tik joms"
+" atsiras pakankamai vietos. Tai užbaigs pagrindinę statybinių medžiagų "
+"tiekimo grandinę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Sumažinkite marmurinių kolonų paklausą iki 4"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Sumažinta marmurinių kolonų paklausa"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Ekonomikos nustatymuose sumažinkite marmurinių kolonų paklausą iki keturių. "
+"Tai padės pataupyti marmuro pastatams."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Atminkite, kad ekonomikos nustatymus galite pasiekti spustelėję bet kurią "
+"vėliavėlę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Raskite uosto vietą mažoje saloje"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr ""
+msgstr "Uosto vieta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Ieškokite uosto vietos, kad atgautumėte prieigą prie jūros."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Saloje pastatykite uostą ir laivų statyklą"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
-msgstr ""
+msgstr "Laivų statybos pramonė"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Pastatykite uostą, kad galėtumėte išplaukti iš šios salos."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Pastatykite laivų statyklą laivams, kuriais plauksite, gaminti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr ""
+msgstr "Užauginkite kviečių"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
-msgstr ""
+msgstr "Kviečių auginimas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Užauginkite bent 50 kviečių pėdų, kad galėtumėte pradėti vilnos gamybą."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Pagaminkite audinio mūsų pirmojo laivo statybai"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
-msgstr ""
+msgstr "Audinių gamyba"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
 "Now build a sheep farm and use all the wheat to produce at least 50 bales of"
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Dabar pastatykite avių fermą ir sunaudokite visus kviečius, kad "
+"pagamintumėte bent 50 vilnos ryšulių. Po to naudokite vilną audiniams austi,"
+" kad galėtumėte pastatyti laivą."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Pastatykite 2 uostus tolimose salose"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Pastatykite du ekspedicijų uostus"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Ištyrinėkite pietuose esančią salą. Išsiųskite ekspediciją iš mūsų uosto, "
+"kad ten pastatytų uostą. Po to pabandykite rasti kasybos išteklių."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Išsiųskite laivą į šiaurę, kad surinktų žvalgybinės informacijos apie "
+"Barbarus. Pabandykite saloje pastatyti uostą ir įkurti avanpostą."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Išgaukite aukso ekspedicijoms siųsti"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
-msgstr ""
+msgstr "Aukso gavyba"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Išlydykite bent šešis aukso luitus, kad galėtumėte kolonizuoti apylinkes."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Nugalėkite Barbarus"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Nugalėkite priešą"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Padarykite galą Barbarų egzistavimui šioje pasaulio dalyje."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Tyrinėkite toliau ir statykite uostus"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Tyrinėkite papildomas salas ir ieškokite vietų uostams"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr ""
+"Atraskite daugiau žemių savo apylinkėse ir pastatykite kuo daugiau uostų."
 
 #. TRANSLATORS: Objective header
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:157
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Atgaukite šventovę"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Raskite Šventąją šventovę"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr ""
+"Turime rasti ir apsaugoti visas šešias Neptūno šventosios šventovės dalis."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:170
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Sukurkite karių rengimo infrastruktūrą"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Karių rengimo infrastruktūra"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:173
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Pastatykite treniruočių stovyklą, keletą kareivinių ir areną ar koliziejų, "
+"kad galėtumėte ruošti savo karius."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
-msgstr ""
+msgstr "Kelionė namo"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:195
@@ -231,7 +259,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:622
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lucijaus dienoraštis"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:185
@@ -239,15 +267,17 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
+"Galiausiai vėl pasukome link Fremilo. Negalėjau sulaukti progos nuplauti šio"
+" didelio Barbarų sukelto pralaimėjimo dėmę."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:188
 msgid "But the gods themselves didn’t want us to get home so quickly!"
-msgstr ""
+msgstr "Tačiau patys dievai nenorėjo, kad taip greitai grįžtume namo!"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:194
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "Neptūno rūstybė"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:197
@@ -256,6 +286,9 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Pats Neptūnas atsigręžė prieš mus ir vėl įbloškė į tamsią, laukinę audrą. "
+"Tačiau šį kartą buvo dar blogiau nei praėjusį. Bangos dvigubai viršijo mūsų "
+"drąsaus laivo aukštį, o vėjai mus nunešė į nesaugius vandenis."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:200
@@ -264,15 +297,18 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Mūsų laivas smarkiai apgadintas. Stiebas nulūžo ir iškrito už borto, o į "
+"korpusą sunkiasi vis daugiau vandens. Būtume laimingi išgyvenę šią juodą "
+"naktį, išsaugodami bent savo gyvybes."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Vėl sudužę"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
-msgstr ""
+msgstr "Galiausiai, regis, dievų ir vandenyno rūstybė baigėsi."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:212
@@ -282,6 +318,10 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Vėlgi, įstrigome nežinomoje pakrantėje ir miegojome pavėsyje po palmėmis, "
+"kol saulė pakilo aukštai danguje. Bijau, kad kai pabudome vidurdienį, niekas"
+" tikrai nenustebo, kad pamatėme tik smėlį... nors uolų kiekis šalia mūsų "
+"stovyklos buvo stulbinantis."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -289,6 +329,7 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Tikrai atrodo, kad atsidūrėme labai mažoje saloje, kurioje mažai erdvės."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:218
@@ -296,6 +337,8 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
+"Dar blogiau tai, kad visa matoma žemė yra užblokuota uolų ir medžių. Bijau, "
+"kad nerasime išteklių, reikalingų naujam laivui pastatyti."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -303,14 +346,17 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
+"Tikrai nežinau, ar mes kada nors grįšime namo, ir kaip tai padarysime. O "
+"karas vyksta be mūsų. Tikiuosi, kad mano kovos draugai gerai gina mūsų "
+"imperiją."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
-msgstr ""
+msgstr "Jokio vaizdo"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus nervingai apsižvalgo..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -319,14 +365,17 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
+"Valdove, mes nieko nežinome apie šią salą. Ir aš manau, kad nesame saugūs. "
+"Tikriausiai būtų protinga pastatyti bokštą, kad galėtume ištyrinėti salą ir "
+"sustiprinti mūsų karines pajėgas."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "Amalea pertraukia"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:237
 msgid "Amalea raises her hand…"
-msgstr ""
+msgstr "Amalea pakelia ranką..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:239
@@ -335,15 +384,17 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
+"Kadangi nežinome, kiek išteklių galime gauti, turėtume juos naudoti labai "
+"taupiai. Net ir su kariniais pastatais turėtume elgtis labai atsargiai."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:246
 msgid "Save Resources"
-msgstr ""
+msgstr "Taupykite išteklius"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:247
 msgid "Saledus is nodding in agreement…"
-msgstr ""
+msgstr "Saledus pritariamai linkteli..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:249
@@ -352,14 +403,16 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
+"Valdove, Amalea teisi dėl išteklių. Todėl pasitaisau. Turėtume statyti tik "
+"avanpostą, nes tai pats efektyviausias karinis pastatas."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Uolos, vien tik uolos"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:258
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus prabyla su palengvėjimo atodūsiu..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:260
@@ -367,6 +420,8 @@ msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr ""
+"Valdove, mačiau, kad avanposto statybos baigtos, todėl paskyriau jame budėti"
+" kelis geriausius savo karius."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:263
@@ -376,14 +431,17 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Bet nors tai geras žingsnis į priekį, nematau daug vietos pastatams. Visa "
+"sala nusėta uolomis. Kaip galime kada nors pastatyti naują laivą ar net "
+"turėti pagrindinę infrastruktūrą, kad mūsų gyvenimas būtų patogesnis?"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "Amalėjos planas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea šypsosi…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:272
@@ -391,6 +449,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lucijau, tai gali atrodyti labai sudėtinga, bet mes galime tai padaryti. "
+"Visų pirma, norint išgyventi šioje pasaulio dalyje, mums reikia kantrybės, "
+"greičio ir plano."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:275
@@ -398,6 +459,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Manau, turėtume pabandyti atlaisvinti erdvės statyboms, skaldant visas uolas"
+" akmens skaldykloje."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:278
@@ -406,15 +469,17 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"Be to, taip gautume granito ir marmuro mūsų naujajam pasauliui sukurti. "
+"Galėsime juos panaudoti, kai tik atsiras pakankamai vietos pastatams."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Nauji Amalėjos nurodymai"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:287
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:361
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea pataria..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:289
@@ -422,6 +487,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Geros naujienos iš žmonių, Lucijau. Gavau žinią, kad mūsų pirmoji akmens "
+"skaldykla šiandien pradėjo darbą."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -429,20 +496,24 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Galbūt būtų protinga palaukti, kol ji atlaisvins šiek tiek vietos, ir tada "
+"sukurti pagrindinę statybinių medžiagų pramonę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
-msgstr ""
+msgstr "Amalėjos rekomendacijos"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:301
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:318
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea įeina..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
 msgstr ""
+"Turiu svarbių dalykų, apie kuriuos reikia kalbėti... Pirmiausia geros "
+"naujienos:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -450,6 +521,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
+"Pastebėjau, kad mūsų akmentašys pagaliau pradėjo savo darbą. Jis iškals tiek"
+" marmurinių kolonų, kiek nurodėme pagrindiniuose ekonomikos nustatymuose."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:309
@@ -459,15 +532,19 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Bet štai kas, jei visą savo marmurą išnaudosime kolonoms, galime pritrūkti. "
+"Taigi, marmurinių stulpelių nustatymus ekonominiuose nustatymuose turėtume "
+"sumažinti iki mažesnio kiekio. Manau, kad šiuo metu gali pakakti keturių "
+"stulpelių rezervo."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea atrodo laiminga"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Dabar galiu pranešti apie puikią pažangą."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -475,6 +552,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
+"Sužinojau, kad medkirčio trobelės ir lentpjūvės statybos baigtos, todėl "
+"galime pradėti kirsti rąstus ir gaminti iš jų lentas."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:326
@@ -482,14 +561,16 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
+"Tai didžiulis žingsnis į priekį statant sudėtingesnius pastatus. O kai "
+"kurias lentas galėsime panaudoti naujų laivų statybai."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
-msgstr ""
+msgstr "Mums reikia uosto"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus susimąstęs..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:335
@@ -497,6 +578,8 @@ msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr ""
+"Valdove, aš ką tik galvojau apie mūsų kelią namo. Labai svarbu pastatyti "
+"uostą laivams pakrauti ir ekspedicijoms pradėti."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:338
@@ -506,14 +589,17 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
+"Problema ta, kad uostui pastatyti reikia labai ypatingos vietos. Taigi, "
+"kurdami savo ekonomiką, mes vis tiek turėtume plėstis ir ištirti visą salą. "
+"Pabandykime rasti tokią vertingą statybvietę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Žingsnis arčiau namų"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus atrodo susijaudinęs..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:349
@@ -522,6 +608,9 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
+"Valdove, šiandien mes dar labiau priartėjome prie galimybės pagaliau grįžti "
+"namo. Mūsų kariuomenė aptiko vietą, kurioje galima statyti uostą. Turėtume "
+"kuo greičiau pradėti jį statyti."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:352
@@ -529,10 +618,12 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
+"Dabar tikrai galime pradėti planuoti laivų statybą. Todėl turėtume pastatyti"
+" ir laivų statyklą."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
-msgstr ""
+msgstr "Amalėjos išmintis"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:363
@@ -540,6 +631,8 @@ msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
 msgstr ""
+"Suprantu Saledus euforiją, bet pirmiausia turime išspręsti keletą rimtų "
+"problemų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:366
@@ -548,6 +641,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Norint išsiųsti ekspedicinį laivą, mums pirmiausia reikia paties laivo. "
+"Deja, mums liko tik penki audinio ryšuliai, kurių prireiks uostui ir laivų "
+"statyklai pastatyti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:369
@@ -556,6 +652,9 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
+"Taigi, mums reikia daugiau audinio, kad pagaliau galėtume pastatyti laivus. "
+"Tačiau saloje nėra vietos sukurti visą audinių gamybos pramonę. Todėl "
+"reikiamas prekes turime gaminti žingsnis po žingsnio."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:372
@@ -564,6 +663,9 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Pagalvokime apie tai. Audiniams austi reikia vilnos iš avių fermos. Pačiai "
+"avių fermai veikti reikia kviečių ir vandens. Taigi, suraskime erdvę "
+"dideliam pastatui ir pirmiausia pastatykime fermą."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -574,6 +676,10 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Užauginę pakankamai kviečių, galėsime išardyti fermą ir pastatyti avių fermą"
+" vilnai gaminti. Kai ji pradės veikti, galėsime rasti arba atlaisvinti "
+"vietos vidutiniam pastatui – audyklai, kurioje iš vilnos ausime audinius. "
+"Bet šiuo metu pradėkime nuo pakankamo kviečių kiekio užauginimo."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -582,23 +688,27 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Manau, kad pradžiai pakaks 50 kviečių pėdų atsargos. Kviečiams neturime "
+"numatyto tikslinio kiekio, nes ūkininkui nereikia kitų prekių jiems "
+"užauginti. Viskas, ką turime padaryti, tai stebėti, kaip auga mūsų kviečių "
+"atsargos."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Jūreivystė vėl įmanoma"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 msgid "Praise the gods. We finally have a ship industry."
-msgstr ""
+msgstr "Šlovė dievams. Mes pagaliau turime laivų pramonę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
-msgstr ""
+msgstr "Amalea didžiuojasi"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr ""
+msgstr "Amalea sveikina…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -606,6 +716,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
+"Kol kas puikiai padirbėta. Užauginome pakankamai kviečių. Dabar išardykite "
+"fermą ir pastatykite kitą pastatą gamybos grandinėje."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:401
@@ -614,6 +726,8 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
+"Nepamirškite ekonomikos nustatymuose patikrinti vilnos ir audinių tikslinio "
+"kiekio. Visus kviečius turime paversti vilna, o visą vilną – audiniu."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:404
@@ -621,15 +735,17 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
+"Galbūt būtų protinga sustabdyti laivų statyklos gamybą, kol neturėsime "
+"audinio, kad nešvaistytume rąstų ar lentų."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Turėtume ištirti salas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:459
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus džiaugiasi..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:415
@@ -637,6 +753,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
+"Dabar, kai turime visus laivui statyti reikalingus išteklius, turėtume "
+"ištirti aplinkines salas."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:418
@@ -645,11 +763,14 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
+"Pirmiausia mums reikia rasti daugiau išteklių, kad paremtume savo augančią "
+"ekonomiką. Pietuose pastebėjau salą su kalnais. Galbūt ten rasime vertingų "
+"išteklių, pavyzdžiui, geležies."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:421
 msgid "But the following objective is even more important:"
-msgstr ""
+msgstr "Tačiau kitas tikslas yra dar svarbesnis:"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:424
@@ -658,6 +779,9 @@ msgid ""
 " the north. If I’m not totally wrong, I have heard some Barbarian war drums."
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
+"Manau, kad girdėjau, kaip vėjas neša keistus, bet gerai žinomus garsus iš "
+"šiaurės. Jei visiškai neklystu, girdėjau keletą barbarų karo būgnų. Taigi, "
+"geriau turėtume eiti ir pažiūrėti, kas ten vyksta."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:427
@@ -666,14 +790,17 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
+"Bet kuriuo atveju turėtume būti atsargūs su savo uostais. Kad apgintume juos"
+" nuo galimų priešų, į kiekvieną naują uostą turėtume pasiųsti po kelis "
+"karius, kol galėsime juos apsaugoti kariniais pastatais."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Amalea pataria"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:436
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea atrodo susimąsčiusi..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:438
@@ -682,12 +809,16 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve Lutius. Kalbėdami su visais mūsų drąsiais statybininkais, jie man "
+"pasakė, kad turi panaudoti visą likusį auksą uosto statybai. Taigi, "
+"pastačius mūsų uostą, aukso nebeliks."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:441
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr ""
+"Tačiau problema ta, kad norint išsiųsti ekspediciją mums reikia aukso."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:444
@@ -696,6 +827,9 @@ msgid ""
 "have some mining resources. Perhaps we should send some geologists to "
 "explore the hidden resources."
 msgstr ""
+"Laimei, pastebėjau kalną, kuris atrodo labai daug žadantis ir jame gali būti"
+" kasybos išteklių. Galbūt turėtume pasiųsti kelis geologus, kad jie ištirtų "
+"paslėptus išteklius."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:447
@@ -704,6 +838,9 @@ msgid ""
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
 " hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
+"Primygtinai rekomenduoju sukurti aukso gavybos ir lydymo gamybos grandinę. "
+"Manau, mums reikės vynuogyno, vyninės, smuklės, žvejo ar medžiotojo trobelės"
+" bei lydyklos. Ir, žinoma, pačių kasyklų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:450
@@ -713,29 +850,35 @@ msgid ""
 "should perhaps optimize our roads to free up some building sites, or even "
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
+"Jei kyla sunkumų pastatyti visus reikiamus pastatus, turėtume prisiminti "
+"viską, ko iki šiol išmokome. Galime suskaldyti visas uolas. Galbūt turėtume "
+"optimizuoti savo kelius, kad atlaisvintume kelias statybvietes, ar net "
+"išardyti dalį karinių pastatų, kad gautume daugiau erdvės savo ekonomikai."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "We Should Conquer All the Islands"
-msgstr ""
+msgstr "Turėtume užkariauti visas salas"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:461
 msgid "Now it is time to conquer the islands."
-msgstr ""
+msgstr "Dabar atėjo laikas užkariauti salas."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:463
 msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
 msgstr ""
+"Pribaigkime Barbarus ir padovanokime gražią koloniją mūsų imperijos "
+"cezariui."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Amalėjos sėkmė"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
-msgstr ""
+msgstr "Amalea tikrai didžiuojasi pasiekimais..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:474
@@ -744,6 +887,9 @@ msgid ""
 "to send out at least three expeditions. Perhaps we might even keep some gold"
 " to make some jewelry."
 msgstr ""
+"Lucijau, ką tik išsprendėme dar vieną problemą. Mums pavyko išlydyti "
+"pakankamai aukso, kad išsiųstume mažiausiai tris ekspedicijas. Galbūt net "
+"pasiliksime šiek tiek aukso papuošalams pagaminti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:477
@@ -751,14 +897,16 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
+"Aš tik juokauju. Žinoma, turėtume nepagailėti tiek aukso, kiek galime, "
+"statydami areną ir kitus pastatus savo kariams apmokyti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea patenkinta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
-msgstr ""
+msgstr "Amalea patenkinta, kad mes susidorosime su visais iššūkiais"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:486
@@ -768,6 +916,10 @@ msgid ""
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
+"Kol kas puikiai padirbėta. Dabar negaminsime daugiau marmurinių kolonų nei "
+"reikia. Tikrai manau, kad šios ekonomikos funkcijos mums reikės gana dažnai,"
+" norint sureguliuoti savo ūkį. Atminkite, kad mūsų pramonė veiks tik tol, "
+"kol bus pasiektas ekonomikos nustatymuose nurodytas kiekis."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:489
@@ -776,14 +928,16 @@ msgid ""
 "ware and afterwards dismantle the building to gain space for another "
 "building."
 msgstr ""
+"Pavyzdžiui, gali būti protinga pagaminti tam tikrą prekių kiekį ir vėliau "
+"išardyti pastatą, kad gautumėte erdvės kitam pastatui."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea’s Reminder"
-msgstr ""
+msgstr "Amalėjos priminimas"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
-msgstr ""
+msgstr "Amalea purto galvą..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:498
@@ -792,6 +946,9 @@ msgid ""
 "security. But I think we could use the little space on this island better "
 "than by building a lot of military buildings."
 msgstr ""
+"Lucijau. Aš tikrai vertinu tai, kad tu ir Saledus taip rūpinatės mūsų "
+"saugumu. Bet manau, kad galėtume geriau išnaudoti tą mažą erdvę šioje "
+"saloje, o ne statyti daugybę karinių pastatų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:501
@@ -801,19 +958,23 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
+"Primygtinai rekomenduoju daugumą jų išardyti, kad galėtume statyti "
+"pramoninius pastatus. Nemanau, kad šioje saloje gresia didelis pavojus, bet "
+"jei norite būti atsargūs, pakrantėje galite palikti kelis sargybos bokštus "
+"ar blokhauzus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:504
 msgid "But be careful not to waste any bigger building spots."
-msgstr ""
+msgstr "Tačiau būkite atsargūs ir nešvaistykite didesnių statybų aikštelių."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid "Amalea’s Excited"
-msgstr ""
+msgstr "Amalea susijaudinusi"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
-msgstr ""
+msgstr "Amalea nekantriai laukia tyrinėjimų..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:513
@@ -821,6 +982,8 @@ msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
 msgstr ""
+"Lucijau. Iki šiol padarėme didelę pažangą. Džiaugiuosi girdėdama, kad dabar "
+"turime daug laivų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:516
@@ -828,6 +991,8 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
+"Dabar, kai mūsų laivynas vis auga, turėtume ištirti visą regioną. "
+"Pabandykime rasti daugiau žemių ir galiausiai gauti daugiau išteklių."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:519
@@ -835,15 +1000,17 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
+"Būtų ypač naudinga rasti daugiau marmuro, atviruose uolienų telkiniuose arba"
+" kalnuose, kad galėtume jį kasti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea labai patenkinta"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:528
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:537
 msgid "Amalea is clapping her hands…"
-msgstr ""
+msgstr "Amale ploja rankomis..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:530
@@ -852,10 +1019,13 @@ msgid ""
 " in the complete region. Now we can strengthen our economy and we will "
 "manage to sail home soon."
 msgstr ""
+"Lucijau. Puikiai padirbėta. Puikiai padirbėta. Atradome visas galimas uostų "
+"vietas visame regione. Dabar galime sustiprinti savo ekonomiką ir greitai "
+"galėsime išplaukti namo."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea’s Counsel"
-msgstr ""
+msgstr "Amalėjos patarimas"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:539
@@ -864,6 +1034,9 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
+"Sveikas, Lucijau. Ką tik baigėme statyti audyklą. Dabar esame labai arti to,"
+" kad vėl išplauktume į jūrą. Tačiau pagalvojau, kad būtų naudinga priminti, "
+"jog laivų statyba nėra vienintelė sritis, kuriai reikia audinių."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:541
 msgid ""
@@ -871,6 +1044,9 @@ msgid ""
 "it to build some of the training buildings for our soldiers. And most "
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
+"Mums taip pat reikia audinių šarvų gamybai mūsų šarvų kalvėje. Jo reikia "
+"norint pastatyti kai kuriuos karių rengimo pastatus. Ir svarbiausia bei "
+"neatidėliotina užduotis – jo reikia ekspedicijoms siųsti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
@@ -880,14 +1056,19 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
+"Todėl tikrai rekomenduoju reguliariai tikrinti savo audinių atsargas, kad "
+"užtikrintume, jog rezerve liks pakankamai audinio bent kelioms ekspedicijoms"
+" išsiųsti. Kadangi vienai ekspedicijai reikia trijų audinio ryšulių, manau, "
+"kad 6-9 ryšulių atsargos, leisiančios mums atlikti 2-3 ekspedicijas, būtų "
+"pakankamos."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Pergalė yra mūsų"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
-msgstr ""
+msgstr "Saledus džiaugiasi…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:552
@@ -895,18 +1076,20 @@ msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
+"Valdove, pagaliau mes nugalėjome Barbarus šiame regione. Be to, įkūrėme "
+"puikią koloniją savo imperijai."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
-msgstr ""
+msgstr "Karalius bus labai patenkintas mūsų pergale."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
-msgstr ""
+msgstr "Įtinkant Neptūnui"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
-msgstr ""
+msgstr "Saledus labai liūdnas ir sunerimęs…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:563
@@ -914,12 +1097,16 @@ msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
 msgstr ""
+"Valdove, mes darome didelę pažangą siekdami galiausiai grįžti namo. Tačiau "
+"turiu pasikalbėti apie vieną dalyką:"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:565
 msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
+"Kaip matėme per savo keliones, labai svarbu palaikyti gerą dievų, o ypač "
+"Neptūno, nuotaiką, kad apsaugotume savo kelionę."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:567
 msgid ""
@@ -927,20 +1114,25 @@ msgid ""
 "can’t worship him well. I think we should search the whole region to see if "
 "we can recover all six pieces of the shrine."
 msgstr ""
+"Deja, per didžiąją audrą praradome savo šventąją Neptūno šventovę, todėl "
+"negalime jo gerai garbinti. Manau, turėtume apieškoti visą regioną, kad "
+"pamatytume, ar galime susigrąžinti visas šešias šventovės dalis."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:569
 msgid ""
 "To ease the search, I have crafted some models of the pieces as you can see."
 " You can give them to our soldiers and sailors to look for them."
 msgstr ""
+"Kad paieška būtų lengvesnė, pagaminau šių dalių modelius, kaip matote. "
+"Galite duoti juos mūsų kariams ir jūreiviams, kad jie žinotų, ko ieškoti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid "Praise, Praise, Praise"
-msgstr ""
+msgstr "Šlovė, šlovė, šlovė"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:578
 msgid "Saledus is happily worshipping…"
-msgstr ""
+msgstr "Saledus džiaugsmingai meldžiasi..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:580
@@ -948,6 +1140,8 @@ msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
 msgstr ""
+"Valdove, mes atgavome šventąją Neptūno šventovę. Dabar galime prašyti Jo "
+"apsaugos savo kelionei."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
@@ -955,14 +1149,17 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
+"O puikus Neptūnas, saugok mūsų kelionę! O puikus Neptūnas, tegul vėjai būna "
+"draugiški mūsų kursui! O didysis Neptūnas, išgelbėk mus nuo jūros būtybių! O"
+" puikus Neptūnas,…"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Nemalonūs atradimai"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:589
 msgid "Saledus looks very worried…"
-msgstr ""
+msgstr "Saledus atrodo labai susirūpinęs..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:591
@@ -971,14 +1168,17 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
+"Pone, radome buvusios barbarų tvirtovės ir kaimo griuvėsius. Aš šiek tiek "
+"nerimauju, kad turėsime prieš juos kovoti, kol būsime pasiruošę tai "
+"padaryti."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Treniruokitės greičiau, treniruokitės sunkiau"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:598
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Saledus reikalauja disciplinos"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:600
@@ -987,20 +1187,25 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
+"Valdove, mes turime visus pastatus, skirtus mūsų kariams mokyti, tačiau "
+"turėtume dėti daugiau pastangų, kad parengtume juos iki aukščiausio lygio ir"
+" išmokytume jų dar daugiau."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr ""
+"Tam mums reikės daug maisto, daug geležies ir daug aukso. Taigi, turime "
+"susidoroti su daugybe iššūkių."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Training Infrastructure is Needed"
-msgstr ""
+msgstr "Reikalinga karių rengimo infrastruktūra"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
-msgstr ""
+msgstr "Saledus nerimauja dėl saugumo"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:611
@@ -1009,6 +1214,9 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
+"Valdove, turime apmokyti dalį savo žmonių tarnauti Jūsų didžiojoje armijoje."
+" Svarbu kuo greičiau padidinti karių skaičių. Be to, mes turėtume juos gerai"
+" išmokyti, kad pagerintume jų kovinius sugebėjimus."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:613
 msgid ""
@@ -1016,10 +1224,13 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
+"Todėl, nepaisant ribotos erdvės, privalome sukurti pilną karių rengimo "
+"infrastruktūrą. Mums reikia kareivinių, treniruočių stovyklos ir arenos arba"
+" koliziejaus."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
-msgstr ""
+msgstr "Laikas vėl grįžti namo"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:624
@@ -1028,26 +1239,31 @@ msgid ""
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
+"Taip, mano kovos draugai, mes tai padarėme! Įveikėme visus mums mestus "
+"iššūkius. Tačiau mano širdis vis dar su mūsų namais. Turime kuo greičiau "
+"išplaukti, kad padėtume apginti Imperiją nuo Barbarų genties."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:626
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite toliau žaisti, priešingu atveju "
+"pereikite prie kitos misijos."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Galiausiai atradome savo šventovės dalį. Šlovė Neptūnui!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Atradome dar vieną savo šventovės dalį. Šlovė Neptūnui!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:645
@@ -1065,7 +1281,9 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"Galiausiai atradome paskutinę savo šventovės dalį. Dabar galime ją surinkti "
+"ir garbinti savo dievą. Šlovė Neptūnui!"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
-msgstr ""
+msgstr "Rastas artefaktas"

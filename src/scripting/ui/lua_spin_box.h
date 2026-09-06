@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_SPIN_BOX_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/spinbox.h"
+#include "ui/basic/spinbox.h"
 
 namespace LuaUi {
 

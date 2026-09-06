@@ -19,25 +19,25 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_controls.lua:4
 #: ../../../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
-msgstr ""
+msgstr "Valdikliai"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "Redaktoriaus pagalba"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr ""
+msgstr "Generolas"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Įvadas"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Patarimai"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
@@ -45,27 +45,27 @@ msgstr "Reljefai"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
-msgstr ""
+msgstr "Medžiai"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Widelands redaktorius"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Šis redaktorius skirtas žaidėjams, kurie norėtų kurti savo žemėlapius, skirtus naudoti su Widelands."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Kaip matote, šis redaktorius yra sunkus darbas, o redaktorius tampa vis geresnis ir geresnis, šis tekstas taip pat taps ilgesnis ir išsamesnis."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "Wiki taip pat yra trumpa pamoka, kaip sukurti žemėlapį."
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -74,17 +74,17 @@ msgstr "Ištekliai"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Galiojantis šaltinis:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Galiojantys ištekliai:"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
-msgstr ""
+msgstr "Numatytasis:"
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
@@ -95,12 +95,12 @@ msgstr "%1% x %2%"
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Medžių augimo tikimybė"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Čia neaugs jokie medžiai."
 
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
@@ -113,4 +113,4 @@ msgstr "%2.1f%%"
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Pageidaujamos vietovės"
