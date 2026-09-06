@@ -76,7 +76,8 @@ public:
 	              _("Batches:"),
 	              1,
 	              1,
-	              Widelands::kMaxBatches),
+	              Widelands::kMaxBatches,
+	              false),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
