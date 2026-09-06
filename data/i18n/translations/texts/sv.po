@@ -172,7 +172,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "Vilken version av Widelands du kör, det vill säga antingen byggnumret eller revisionsnumret om du kör en utvecklingsversion eller en daglig version."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -572,7 +572,7 @@ msgstr "Djungelmästare lär sig sina färdigheter genom att arbeta som djungelb
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Håll ett öga på dina fiskare och bygg ett fiskodlarhus för att återskapa fiskresurser."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

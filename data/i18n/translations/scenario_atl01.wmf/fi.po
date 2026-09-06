@@ -6,6 +6,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2019
 # LINUX-SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,7 +88,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "Ruoka on hyvin tärkeää kaivoksille ja sotakoulutusalueille. Perusta hyvin toimiva ruokatalous rakentamalla ainakin yksi maatila, yksi mustajuuritila ja mylly. Kahta eri jauhoa sekoitettaessa kaivoveteen voidaan paistaa leipää leipomossa, joten rakenna myös leipomo ja kaivo."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -876,7 +877,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "Lämmittäköön Satul sinua, Jundlina. Nimeni on Ostur ja rakennan laivoja. Olen keksinyt uudenlaisen laivan: pienemmän kuin se, joita olemme käyttäneet, mutta paljon lujemman. Jos rakennamme ne oikein, voimme varmasti purjehtia paljon pidemmän markan niillä ja ehkä paeta Lutasin vaikutukselta."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454

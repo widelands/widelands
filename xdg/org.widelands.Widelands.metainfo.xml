@@ -22,6 +22,7 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel</summary>
   <summary xml:lang="fy">In strategysk bouwspultsje mei rinnende tiid</summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
+  <summary xml:lang="he">משחק אסטרטגיית בנייה בזמן אמת</summary>
   <summary xml:lang="hr">Strateška igra građenja u stvarnom vremenu</summary>
   <summary xml:lang="hu">Valós idejű építkező stratégiai játék</summary>
   <summary xml:lang="id">Sebuah permainan pembangunan strategi dalam waktu nyata</summary>
@@ -156,6 +157,12 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
     </p>
     <p xml:lang="gd">
       Bheir Widelands modh aon-chluicheadair chut le iomairtean a dh’innseas sgeulachdan nan treubhan agus an còmhstri aca air saoghal Widelands. Co-dhiù, cha tòisich an tuineachadh ann an dà-rìribh ach nuair a bhios tu ’s do charaidean cruinn còmhla air an eadar-lìn no air lìonra ionadail gus impireachdan ùra a thogail còmhla – no gus càch a chèile a cheannsachadh air a’ bhlàr. Tha inntinn fhuadain aig Widelands cuideachd a bheir dùbhlan dhut.
+    </p>
+    <p xml:lang="he">
+      אתם השליטים של שבט קטן. משימתכם היא לבנות התיישבות שהולכת וגדלה. כל בן שבט יעשה את חלקו כדי לייצר עוד משאבים ולקדם את הצמיחה הזו.
+    </p>
+    <p xml:lang="he">
+      Widelands מציע מצב יחיד-שחקן עם קמפיינים שמספרים את סיפורי השבטים ומאבקם ביקום Widelands. אולם ההתיישבות באמת מתחילה כשמתאחדים עם חברים באינטרנט או ברשת מקומית כדי לבנות יחד אימפריות חדשות – או לרסק זה את זה באבק המלחמה. Widelands מציע גם בינה מלאכותית שתאתגר אתכם.
     </p>
     <p xml:lang="hr">
       Postali ste poglavica malenog plemena. Vaš zadatak je da sagradite naselje koje stalno raste i širi se. Svaki član vašeg plemena će učiniti svoj dio kako bi proizveo više resursa za daljnji rast.
@@ -366,6 +373,7 @@ Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
         <li xml:lang="de">Fehlerbehebung</li>
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
+        <li xml:lang="he">גרסת תיקון באגים</li>
         <li xml:lang="hu">Hibajavító kiadás</li>
         <li xml:lang="it">Versione di correzione di bug</li>
         <li xml:lang="lt">Klaidų taisymo laida</li>
@@ -424,6 +432,13 @@ Version de correction de bugs</li>
         <li xml:lang="fr">Téléchargement de cartes et modules du site web...</li>
         <li xml:lang="fr">Nouveaux modes de visualisation dans l'éditeur</li>
         <li xml:lang="fr">De nouvelles possibilités pour les développeurs de modules</li>
+        <li xml:lang="he">מסחר בשווקים</li>
+        <li xml:lang="he">נוספו שש מפות חדשות והוסרו שלוש מפות ישנות</li>
+        <li xml:lang="he">מחוזות כלכליים</li>
+        <li xml:lang="he">שיפורים רבים באנציקלופדיה שבתוך המשחק</li>
+        <li xml:lang="he">הורדת מפות מאתר הבית כתוספים</li>
+        <li xml:lang="he">מצבי תצוגה חדשים בעורך</li>
+        <li xml:lang="he">יכולות חדשות רבות למפתחי תוספים</li>
         <li xml:lang="hu">Kereskedés</li>
         <li xml:lang="hu">A játék hat új térképpel bővült, és három régi térkép el lett távolítva</li>
         <li xml:lang="hu">Raktár körzetek</li>
@@ -432,12 +447,12 @@ Version de correction de bugs</li>
         <li xml:lang="hu">Új megjelenítési módok a térképszerkesztőben</li>
         <li xml:lang="hu">Sok új lehetőség a bővítményfejlesztők számára</li>
         <li xml:lang="it">Commercio di mercato</li>
-        <li xml:lang="it">Six new maps added and three old maps removed</li>
+        <li xml:lang="it">Sono state aggiunte sei nuove mappe e ne sono state rimosse tre mappe vecchie.</li>
         <li xml:lang="it">Distretti economici</li>
         <li xml:lang="it">Molti miglioramenti all'Enciclopedia dentro alla partita</li>
         <li xml:lang="it">Download website maps as add-ons</li>
-        <li xml:lang="it">New visualisation modes in the editor</li>
-        <li xml:lang="it">Many new capabilities for add-on developers</li>
+        <li xml:lang="it">Nuove modalità di visualizzazione nell'editor</li>
+        <li xml:lang="it">Molte nuove funzionalità per gli sviluppatori di componenti aggiuntivi</li>
         <li xml:lang="lt">prekyba rinkoje</li>
         <li xml:lang="lt">Pridėti šeši nauji žemėlapiai ir pašalinti trys seni</li>
         <li xml:lang="lt">Ekonominiai rajonai</li>
@@ -638,6 +653,7 @@ Version de correction de bugs</li>
     <name xml:lang="da">Widelands' udviklingshold</name>
     <name xml:lang="de">Das Widelands-Entwicklungsteam</name>
     <name xml:lang="fr">L'équipe de développement de Widelands</name>
+    <name xml:lang="he">צוות הפיתוח של Widelands</name>
     <name xml:lang="hu">A Widelands fejlesztőcsapat</name>
     <name xml:lang="it">Il team di sviluppo di Widelands</name>
     <name xml:lang="lt">The Widelands kūrėjų komanda</name>
