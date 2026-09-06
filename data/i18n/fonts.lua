@@ -56,12 +56,12 @@ return {
    },
 
    hebrew = {
-      sans = "Culmus/TaameyFrankCLM-Medium.ttf",
-      sans_bold = "TaameyFrankCLM-Bold.ttf",
-      sans_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
-      serif = "Culmus/TaameyFrankCLM-Medium.ttf",
-      serif_bold = "TaameyFrankCLM-Bold.ttf",
-      serif_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
+      sans = "Culmus/FrankRuehlCLM-Medium.otf",
+      sans_bold = "Culmus/FrankRuehlCLM-Bold.otf",
+      sans_italic = "Culmus/FrankRuehlCLM-MediumOblique.otf",
+      serif = "Culmus/FrankRuehlCLM-Medium.otf",
+      serif_bold = "Culmus/FrankRuehlCLM-Bold.otf",
+      serif_italic = "Culmus/FrankRuehlCLM-MediumOblique.otf",
       representative_character = "א",
       direction = "rtl",
       size_offset = 4
