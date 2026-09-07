@@ -28,6 +28,7 @@ namespace LuaGlobals {
 
 void luaopen_globals(lua_State*);
 
+void clear_textdomain_stack(const lua_State*);
 void read_textdomain_stack(FileRead&, const lua_State*);
 void write_textdomain_stack(FileWrite&, const lua_State*);
 

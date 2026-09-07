@@ -87,6 +87,7 @@ LuaInterface::LuaInterface(const bool is_main_menu) {
 }
 
 LuaInterface::~LuaInterface() {
+	LuaGlobals::clear_textdomain_stack(lua_state_);
 	lua_close(lua_state_);
 }
 

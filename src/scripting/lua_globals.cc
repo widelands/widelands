@@ -215,6 +215,10 @@ static const TextdomainInfo* current_textdomain(const lua_State* L) {
 	return it == textdomains.end() || it->second.empty() ? nullptr : &it->second.back();
 }
 
+void clear_textdomain_stack(const lua_State* L) {
+	textdomains.erase(L);
+}
+
 constexpr uint16_t kCurrentPacketVersion = 1;
 void read_textdomain_stack(FileRead& fr, const lua_State* L) {
 	{
