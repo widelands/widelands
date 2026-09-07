@@ -148,8 +148,7 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 						LuaInterface addon_lua;
 						tribeinfos.emplace_back(addon_lua.run_script(script_path));
 					} catch (const std::exception& e) {
-						log_warn("Failed to load add-on tribe '%s': %s\n",
-						         script_path.c_str(), e.what());
+						log_warn("Failed to load add-on tribe '%s': %s\n", script_path.c_str(), e.what());
 					}
 				}
 			}
