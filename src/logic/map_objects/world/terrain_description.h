@@ -44,6 +44,7 @@ public:
 		kUnreachable = 4,
 		kMineable = 8,
 		kUnwalkable = 16,
+		kBridgeable = 32,
 	};
 
 	struct Type {

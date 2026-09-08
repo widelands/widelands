@@ -507,6 +507,7 @@ local result = {
             "summer_snow",
             "lava",
             "summer_water",
+            "summer_bridgeable_water",
          }
       },
       {
