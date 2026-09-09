@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-08-13 04:11+0000\n"
+"POT-Creation-Date: 2026-09-07 07:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -90,7 +90,7 @@ msgstr "Uudet Tavoitteet"
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../../../data/scripting/richtext.lua:675
+#: ../../../../data/scripting/richtext.lua:699
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -98,7 +98,7 @@ msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:703
+#: ../../../../data/scripting/richtext.lua:727
 #: ../../../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
@@ -106,7 +106,7 @@ msgstr "%1$s ja %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:705
+#: ../../../../data/scripting/richtext.lua:729
 #: ../../../../src/base/i18n.cc:339
 #, c-format
 msgid "%1$s or %2$s"
@@ -116,8 +116,8 @@ msgstr "%1$s tai %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:707
-#: ../../../../data/scripting/richtext.lua:712
+#: ../../../../data/scripting/richtext.lua:731
+#: ../../../../data/scripting/richtext.lua:736
 #: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
 #: ../../../../src/logic/addons.cc:245
 #, c-format
@@ -127,7 +127,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
-#: ../../../../data/scripting/richtext.lua:709
+#: ../../../../data/scripting/richtext.lua:733
 #: ../../../../src/base/i18n.cc:347 ../../../../src/ui/basic/spinbox.cc:499
 #, c-format
 msgid "%1$s and %2$s"
@@ -726,7 +726,7 @@ msgstr "pois"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:576
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:582
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:125
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:330
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:315
 #: ../../../../src/ui/fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2037
 msgid "Error"
 msgstr "Virhe"
@@ -1125,7 +1125,7 @@ msgstr "Kauppatarjous peruttu"
 #: ../../../../src/logic/game.cc:1415
 #, c-format
 msgid "The trade offer by %s has been retracted."
-msgstr ""
+msgstr "Vaihtotarjous peruttiin tarjoajalta %s."
 
 #: ../../../../src/logic/game.cc:1526
 msgid "Trade Extension Proposal"
@@ -1146,12 +1146,12 @@ msgstr "Vaihtolaajennus peruttu"
 
 #: ../../../../src/logic/game.cc:1559
 msgid "Trade extension proposal retracted"
-msgstr ""
+msgstr "Vaihtolaajennusehdotus peruttu"
 
 #: ../../../../src/logic/game.cc:1560
 #, c-format
 msgid "The proposal by %s to extend a trade has been retracted."
-msgstr ""
+msgstr "Kaupan jatkaminen ehdottajalta %s peruttu."
 
 #: ../../../../src/logic/game.cc:1598
 msgid "Trade Extension Rejected"
@@ -1164,7 +1164,7 @@ msgstr "Vaihtolaajennusehdotus hylätty"
 #: ../../../../src/logic/game.cc:1602
 #, c-format
 msgid "%s has rejected your proposal to extend a trade."
-msgstr ""
+msgstr "%s on hylännyt ehdotuksesi jatkaa kauppaa."
 
 #: ../../../../src/logic/game.cc:1653
 msgid "Trade Extension Accepted"
@@ -1967,13 +1967,13 @@ msgstr "Laivasto jaettu"
 #: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:86
 #: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:96
 msgid "Ship Fleet split"
-msgstr ""
+msgstr "Laivaston jakaminen"
 
 #: ../../../../src/logic/map_objects/tribes/ship/task_movement.cc:87
 #: ../../../../src/logic/map_objects/tribes/ship/task_transport.cc:97
 msgid ""
 "A ship fleet had to be split, because a terrain change blocked a passage."
-msgstr ""
+msgstr "Laivasto oli jaettava, koska maastonmuutokset estivät kulun."
 
 #: ../../../../src/logic/map_objects/tribes/ship/task_ship.cc:81
 msgid "Destination Gone"
@@ -2245,7 +2245,7 @@ msgstr "Rakennuksen syötteet vaihdettu!"
 #: ../../../../src/map_io/map_buildingdata_packet.cc:997
 #, c-format
 msgid "%s: the building’s inputs have changed."
-msgstr ""
+msgstr "%s: rakennuksen syötteet vaihdettu."
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:1000
 msgid "The following wares have been deleted:"
@@ -2610,13 +2610,13 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands ei voinut käynnistää palvelinta.\nMahdollisesti jollakin toisella prosessilla on palvelin käynnissä meidän portissa."
 
-#: ../../../../src/network/gamehost.cc:1681
+#: ../../../../src/network/gamehost.cc:1702
 #: ../../../../src/ui/editor/main_menu_random_map.cc:735
 #, c-format
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../../../src/network/gamehost.cc:1940
+#: ../../../../src/network/gamehost.cc:1961
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2843,12 +2843,12 @@ msgid ""
 "request in time."
 msgstr "Yhteytesi meta-pelipalvelimeen katkaistiin, koska et vastannut PING-pyyntöön ajoissa."
 
-#: ../../../../src/network/net_addons.cc:896
+#: ../../../../src/network/net_addons.cc:926
 #, c-format
 msgid "Sending metadata for %s"
-msgstr ""
+msgstr "Lähetetään metadataa: %s"
 
-#: ../../../../src/network/net_addons.cc:938
+#: ../../../../src/network/net_addons.cc:968
 #, c-format
 msgid "Uploading %s"
 msgstr "Ladataan %s"
@@ -3956,7 +3956,7 @@ msgid ""
 "Description: %4$s\n"
 "Hint: %5$s\n"
 "\n"
-msgstr ""
+msgstr "Haluatko varmasti julkaista tämän kartan verkkoon?\n\nNimi: %1$s\nSisäinen nimi: %2$s\nTekijä: %3$s\nKuvaus: %4$s\nVihje: %5$s\n"
 
 #: ../../../../src/ui/editor/editorinteractive.cc:1582
 msgid "Publish Map"
@@ -5420,12 +5420,12 @@ msgstr "Selaa (%u)"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1705
 msgid "Website Maps"
-msgstr ""
+msgstr "Verkkosivuston kartat"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1706
 #, c-format
 msgid "Website Maps (%u)"
-msgstr ""
+msgstr "Verkkosivuston kartat (%u)"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1780
 #, c-format
@@ -5541,7 +5541,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voitu ladata palvelimelta.\n\nVirheviesti:\n%2$s"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2134
 #, c-format
@@ -5572,7 +5572,7 @@ msgstr ""
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2304
 msgid "Downloading website maps translations…"
-msgstr ""
+msgstr "Ladataan verkkosivuston karttojen käännöksiä..."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2360
 #, c-format
@@ -6294,7 +6294,7 @@ msgid ""
 "%1$s\n"
 "by %2$s\n"
 "%3$s"
-msgstr ""
+msgstr "Haluatko varmasti poistaa tämän kartan asennuksen?\n\n%1$s\ntekijä %2$s\n%3$s"
 
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:61
 #, c-format
@@ -6912,7 +6912,7 @@ msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Ota käyttöön rannikkohyökkäykset ja laivataistelut. Tämä ominaisuus on kokeellinen ja se saattaa käydä läpi merkittäviä muutoksia Widelandsin tulevissa versioissa."
 
 #: ../../../../src/ui/fsmenu/launch_game.cc:421
 msgid "Player relations are set by the scenario"
@@ -6969,23 +6969,12 @@ msgstr "Valitse kartta tai tallennettu peli."
 msgid "The host has not yet selected a map or saved game."
 msgstr "Isäntä ei ole vielä valinnut karttaa tai pelitallennetta."
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:221
-msgid "Saved Game is Directory"
-msgstr "Tallennettu Peli on Kansio"
-
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:222
-msgid ""
-"WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr "VAROITUS:\nValitsemasi pelitallenne on hakemisto. Tämä tapahtuu, jos asetat asetuksen \"nozip\" päälle tai purat pelitallenteen käsin hakemistoksi. Widelands ei kykene siirtämään hakemistorakenteita muille pelaajille. Ole hyvä ja valitse toinen pelitallenne tai pakkaa hakemistorakenne zip-tiedostoksi."
-
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:241
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:226
 #: ../../../../src/ui/fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Tiedostoa ei löytynyt"
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:242
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:227
 #: ../../../../src/ui/fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
@@ -6994,19 +6983,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands yritti käynnistää pelin käyttäen tiedostoa, joka ei löydy annetusta polusta.\nTiedosto oli: %s\nJos tämä tapahtuu verkkopelissä, isäntä saattaa olla valinnut tiedoston, jota et omista. Normaalisti sellainen tiedosto pitäisi lähettää isännältä sinulle, mutta ehkäpä siirto ei ollut vielä valmistunut!?!"
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:283
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:268
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Valittua tiedostoa ei löydy. Jollei se siirry automaattisesti sinulle, kerro hostaajalle ongelmasta."
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:332
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:317
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Ei pystytty lataamaan voittoehtojen skriptitiedostoa ‘%s’."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:459
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:444
 msgid "Multiplayer Game Setup"
 msgstr "Moninpeli asetukset"
 
@@ -7594,7 +7583,7 @@ msgstr "Vaihda editorin työkalukokoa"
 #. The ':' will be added by another format string.
 #: ../../../../src/ui/fsmenu/mousewheel_options.cc:457
 msgid "Change Editor Tool Gap"
-msgstr ""
+msgstr "Vaihda editorin työkalujen väliä"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
@@ -8357,11 +8346,11 @@ msgstr "Haluatko todella peruuttaa tämän kauppasopimuksen?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:596
 msgid "Extend Trade"
-msgstr ""
+msgstr "Jatka kauppaa"
 
 #: ../../../../src/ui/game/actionconfirm.cc:597
 msgid "Select by how many batches you want to extend this trade:"
-msgstr ""
+msgstr "Valitse, kuinka monella erällä haluat jatkaa tätä kauppaa:"
 
 #: ../../../../src/ui/game/actionconfirm.cc:603
 #: ../../../../src/ui/game/marketwindow.cc:75
@@ -8371,7 +8360,7 @@ msgstr ""
 #: ../../../../src/ui/game/actionconfirm.cc:604
 #: ../../../../src/ui/game/marketwindow.cc:76
 msgid "Batches:"
-msgstr ""
+msgstr "Erää:"
 
 #: ../../../../src/ui/game/actionconfirm.cc:639
 msgid "Unpause?"
@@ -8863,11 +8852,11 @@ msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
-msgstr ""
+msgstr "Muille pelaajille esittämiäsi kauppoja"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:196
 msgid "Your active trade agreements"
-msgstr ""
+msgstr "Aktiiviset kauppasopimuksesi"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:246
 msgid "No team"
@@ -8922,7 +8911,7 @@ msgstr "Vaihtotarjouksia (%u)"
 #: ../../../../src/ui/game/diplomacy_menu.cc:414
 #: ../../../../src/ui/game/marketwindow.cc:449
 msgid "Nobody has offered you any trades at the moment."
-msgstr ""
+msgstr "Kukaan ei ole tarjonnut yhtään kauppaa tällä hetkellä."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:436
 msgid "Market to accept the trade at"
@@ -8987,14 +8976,14 @@ msgstr "Siirrä tämä kauppaehdotus..."
 #: ../../../../src/ui/game/marketwindow.cc:358
 #, c-format
 msgid "Move this trade proposal to %s"
-msgstr ""
+msgstr "Siirrä tämä kauppaehdotus paikkaan %s"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:563
 #: ../../../../src/ui/game/diplomacy_menu.cc:683
 #: ../../../../src/ui/game/marketwindow.cc:364
 #: ../../../../src/ui/game/marketwindow.cc:624
 msgid "You have no markets you could move this trade to."
-msgstr ""
+msgstr "Sinulla ei ole kauppapaikkaa, jonne siirtää tätä kauppa."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:598
 #, c-format
@@ -9003,22 +8992,22 @@ msgstr "Aktiivisia kauppoja (%u)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:609
 msgid "There are no active trade agreements at the moment."
-msgstr ""
+msgstr "Ei ole aktiivisia kauppasopimuksia tällä hetkellä."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:649
 #: ../../../../src/ui/game/diplomacy_menu.cc:657
 #: ../../../../src/ui/game/marketwindow.cc:570
 #: ../../../../src/ui/game/marketwindow.cc:578
 msgid "Propose extending this trade"
-msgstr ""
+msgstr "Ehdosta tämän kaupan jatkamista"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:650
 #: ../../../../src/ui/game/marketwindow.cc:571
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Jatka sitä %d erällä pitämällä Ctrl pohjassa"
+msgstr[1] "Jatka sitä %d erällä pitämällä Ctrl pohjassa"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:655
 #: ../../../../src/ui/game/marketwindow.cc:576
@@ -9027,24 +9016,24 @@ msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr ""
+msgstr "Peru tämä kauppasopimus"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:663
 #: ../../../../src/ui/game/marketwindow.cc:601
 msgid "Move this trade…"
-msgstr ""
+msgstr "Siirrä tämä kauppa..."
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:676
 #: ../../../../src/ui/game/marketwindow.cc:617
 #, c-format
 msgid "Move this trade to %s (closest)"
-msgstr ""
+msgstr "Siirrä tämä kauppaehdotus paikkaan %s (lähin)"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:677
 #: ../../../../src/ui/game/marketwindow.cc:618
 #, c-format
 msgid "Move this trade to %s"
-msgstr ""
+msgstr "Siirrä tämä kauppa paikkaan %s"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:737
 #: ../../../../src/ui/game/marketwindow.cc:703
@@ -9065,12 +9054,12 @@ msgstr[1] ""
 #: ../../../../src/ui/game/diplomacy_menu.cc:749
 #: ../../../../src/ui/game/marketwindow.cc:716
 msgid "Reject this trade extension proposal"
-msgstr ""
+msgstr "Hylkää tämän kaupan jatkamisehdotus"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:753
 #: ../../../../src/ui/game/marketwindow.cc:720
 msgid "Accept this trade extension proposal"
-msgstr ""
+msgstr "Hyväksy tämän kaupan jatkamisehdotus"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:783
 #: ../../../../src/ui/game/marketwindow.cc:763
@@ -9088,7 +9077,7 @@ msgstr[1] ""
 #: ../../../../src/ui/game/diplomacy_menu.cc:793
 #: ../../../../src/ui/game/marketwindow.cc:769
 msgid "Retract this trade extension proposal"
-msgstr ""
+msgstr "Peru tämän kaupan jatkamisehdotus"
 
 #: ../../../../src/ui/game/economy_options_window.cc:51
 msgid "Economy options"
@@ -9254,7 +9243,7 @@ msgstr "Unohda lauttareitti"
 #: ../../../../src/ui/game/fieldaction.cc:550
 #: ../../../../src/ui/game/warehousewindow.cc:199
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Määritä tämä valtamerilaivasto"
 
 #: ../../../../src/ui/game/fieldaction.cc:555
 msgid "Configure this ocean’s ferry fleet"
@@ -9375,7 +9364,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/fleet_options_window.cc:148
 msgid "Fleet Statistics"
-msgstr ""
+msgstr "Laivaston tilastot"
 
 #: ../../../../src/ui/game/fleet_options_window.cc:172
 msgid "Ports:"
@@ -9616,7 +9605,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/marketwindow.cc:316
 msgid "There are no pending trade proposals at the moment."
-msgstr ""
+msgstr "Ei ole odottavia kauppaehdotuksia tällä hetkellä."
 
 #: ../../../../src/ui/game/marketwindow.cc:587
 msgid "Cancel this trade"
@@ -9630,7 +9619,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/marketwindow.cc:813
 msgid "Pause this trade"
-msgstr ""
+msgstr "Keskeytä tämä kauppa"
 
 #: ../../../../src/ui/game/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
@@ -9638,7 +9627,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/marketwindow.cc:825
 msgid "Pause Trade?"
-msgstr ""
+msgstr "Keskeytä kauppa?"
 
 #: ../../../../src/ui/game/marketwindow.cc:826
 msgid ""
@@ -9648,19 +9637,19 @@ msgstr ""
 
 #: ../../../../src/ui/game/marketwindow.cc:977
 msgid "Propose Trade"
-msgstr ""
+msgstr "Ehdota kauppaa"
 
 #: ../../../../src/ui/game/marketwindow.cc:982
 msgid "Proposed Trades"
-msgstr ""
+msgstr "Ehdotetut kaupat"
 
 #: ../../../../src/ui/game/marketwindow.cc:988
 msgid "Trade Offers"
-msgstr ""
+msgstr "Vaihtotarjoukset"
 
 #: ../../../../src/ui/game/marketwindow.cc:999
 msgid "Active Trade"
-msgstr ""
+msgstr "Aktiiviset kaupat"
 
 #: ../../../../src/ui/game/message_menu.cc:54
 #: ../../../../src/ui/game/message_menu.cc:654
@@ -9948,8 +9937,8 @@ msgstr ""
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Merenkulun tilastot (%u laiva)"
+msgstr[1] "Merenkulun tilastot (%u laivaa)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:577
@@ -9989,7 +9978,7 @@ msgstr "Näytä sotalaivat"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:617
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Näytä kunnostettavia laivoja"
 
 #: ../../../../src/ui/game/shipwindow.cc:92
 #, c-format
@@ -10086,11 +10075,11 @@ msgstr "Mene kohteeseen"
 
 #: ../../../../src/ui/game/shipwindow.cc:476
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Kunnosta kuljetusalukseksi"
 
 #: ../../../../src/ui/game/shipwindow.cc:477
 msgid "Refit to warship"
-msgstr ""
+msgstr "Kunnosta sotalaivaksi"
 
 #: ../../../../src/ui/game/shipwindow.cc:499
 #, c-format
@@ -11382,7 +11371,7 @@ msgstr "Ei viimeisintä muokattua karttaa"
 
 #: ../../../../src/wlapplication.cc:1005
 msgid "No last saved replay."
-msgstr ""
+msgstr "Ei viimeksi tallennettua toistoa."
 
 #: ../../../../src/wlapplication.cc:1007
 msgid "No last saved game."
@@ -11774,7 +11763,7 @@ msgstr "Avaa vianetsintäkonsoli (kehittäjän työkalu)"
 
 #: ../../../../src/wlapplication_options.cc:396
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Kytke huijaustila päälle/pois (kehittäjätyökalu)"
 
 #: ../../../../src/wlapplication_options.cc:406
 msgid "Load"
@@ -11870,7 +11859,7 @@ msgstr "Kytke ruudukko"
 
 #: ../../../../src/wlapplication_options.cc:544
 msgid "Toggle Oceans"
-msgstr ""
+msgstr "Kytke valtameret"
 
 #: ../../../../src/wlapplication_options.cc:549
 msgid "Toggle Immovables"
@@ -11896,7 +11885,7 @@ msgstr "Aseta työkalun kooksi %d"
 #: ../../../../src/wlapplication_options.cc:590
 #, c-format
 msgid "Set Tool Gap to %d%%"
-msgstr ""
+msgstr "Aseta työkaluväliksi %d%%"
 
 #: ../../../../src/wlapplication_options.cc:613
 msgid "Restart Scenario or Replay"
@@ -12132,7 +12121,7 @@ msgstr "Vaihda työkalun kokoa"
 
 #: ../../../../src/wlapplication_options.cc:1062
 msgid "Change tool gap"
-msgstr ""
+msgstr "Vaihda työkalun väliä"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../../../src/wlapplication_options.cc:1067
@@ -12244,7 +12233,7 @@ msgstr "Valikko"
 #: ../../../../src/wlapplication_options.cc:1435
 msgctxt "hotkey"
 msgid "Application"
-msgstr ""
+msgstr "Sovellus"
 
 #: ../../../../src/wlapplication_options.cc:1437
 msgctxt "hotkey"

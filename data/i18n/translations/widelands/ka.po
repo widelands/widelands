@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-08-13 04:11+0000\n"
+"POT-Creation-Date: 2026-09-07 07:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2014\n"
 "Language-Team: Georgian (http://app.transifex.com/widelands/widelands/language/ka/)\n"
@@ -77,7 +77,7 @@ msgstr ""
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../../../data/scripting/richtext.lua:675
+#: ../../../../data/scripting/richtext.lua:699
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -85,7 +85,7 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:703
+#: ../../../../data/scripting/richtext.lua:727
 #: ../../../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
@@ -93,7 +93,7 @@ msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:705
+#: ../../../../data/scripting/richtext.lua:729
 #: ../../../../src/base/i18n.cc:339
 #, c-format
 msgid "%1$s or %2$s"
@@ -103,8 +103,8 @@ msgstr ""
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../../../data/scripting/richtext.lua:707
-#: ../../../../data/scripting/richtext.lua:712
+#: ../../../../data/scripting/richtext.lua:731
+#: ../../../../data/scripting/richtext.lua:736
 #: ../../../../src/base/i18n.cc:343 ../../../../src/base/i18n.cc:352
 #: ../../../../src/logic/addons.cc:245
 #, c-format
@@ -114,7 +114,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
-#: ../../../../data/scripting/richtext.lua:709
+#: ../../../../data/scripting/richtext.lua:733
 #: ../../../../src/base/i18n.cc:347 ../../../../src/ui/basic/spinbox.cc:499
 #, c-format
 msgid "%1$s and %2$s"
@@ -713,7 +713,7 @@ msgstr ""
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:576
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:582
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:125
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:330
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:315
 #: ../../../../src/ui/fsmenu/main.cc:305 ../../../../src/wlapplication.cc:2037
 msgid "Error"
 msgstr ""
@@ -2597,13 +2597,13 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../../../src/network/gamehost.cc:1681
+#: ../../../../src/network/gamehost.cc:1702
 #: ../../../../src/ui/editor/main_menu_random_map.cc:735
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../../../src/network/gamehost.cc:1940
+#: ../../../../src/network/gamehost.cc:1961
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2830,12 +2830,12 @@ msgid ""
 "request in time."
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:896
+#: ../../../../src/network/net_addons.cc:926
 #, c-format
 msgid "Sending metadata for %s"
 msgstr ""
 
-#: ../../../../src/network/net_addons.cc:938
+#: ../../../../src/network/net_addons.cc:968
 #, c-format
 msgid "Uploading %s"
 msgstr ""
@@ -6956,23 +6956,12 @@ msgstr ""
 msgid "The host has not yet selected a map or saved game."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:221
-msgid "Saved Game is Directory"
-msgstr ""
-
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:222
-msgid ""
-"WARNING:\n"
-"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
-"Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
-msgstr ""
-
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:241
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:226
 #: ../../../../src/ui/fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:242
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:227
 #: ../../../../src/ui/fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
@@ -6981,19 +6970,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:283
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:268
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:332
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:317
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr ""
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../../../src/ui/fsmenu/launch_mpg.cc:459
+#: ../../../../src/ui/fsmenu/launch_mpg.cc:444
 msgid "Multiplayer Game Setup"
 msgstr ""
 
