@@ -205,7 +205,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:114
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Amatsonit käyttävät kvartsia teräviin työkaluihin ja aseisiin."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:116
@@ -520,7 +520,7 @@ msgstr "Tämä keihäs on Amatsoni-armeijajärjestelmässä perusase. Kivenveist
 #: ../../../../data/tribes/initialization/amazons/units.lua:435
 msgctxt "amazons_ware"
 msgid "It is used by the Amazon hunter-gatherers as well."
-msgstr ""
+msgstr "Sitä käyttävät amatsonien metsästäjä-keräilijät niin ikään."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Stone Tipped Spear
 #: ../../../../data/tribes/initialization/amazons/units.lua:449
@@ -1047,7 +1047,7 @@ msgstr "Graniitti on perus rakennusaines ja sitä voidaan kaivaa ylös kivilouho
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:1222
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Tällä on vain vähän kvartsia."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1065,7 +1065,7 @@ msgstr "Täällä on runsaasti kultaa."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:1244
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Täällä on runsasti kvartsia."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1120,7 +1120,7 @@ msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
 msgctxt "amazons_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Kauppapaikka mahdollistaa kaupankäynnin muiden heimojen kanssa."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
@@ -1185,7 +1185,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:1761
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Jos reitillä on rinteitä tai esteitä, aikaa lisätään."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1256,7 +1256,7 @@ msgstr "Metsästäjä-keräilijän maja tarvitsee metsästettäviä eläimiä ta
 #: ../../../../data/tribes/initialization/amazons/units.lua:1350
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät kalastamisen."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut, part 1
@@ -1331,7 +1331,7 @@ msgstr "Vedenkerääjän majan työalueella tarvitaan vapaita vedenlähteitä. T
 #: ../../../../data/tribes/initialization/amazons/units.lua:1388
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät veden ottamisen."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Water
 #. Gatherer's Hut, part 1
@@ -1710,8 +1710,8 @@ msgstr ""
 #, lua-format
 msgid "%d growing field"
 msgid_plural "%d growing fields"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d viljelty pelto"
+msgstr[1] "%d viljeltävää peltoa"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cassava
 #. Plantation, part 2; %s is replaced by 'N growing fields'
@@ -1733,7 +1733,7 @@ msgstr "Jalostaa kaakaota jota tarvitaan suklaajuomien valmistamiseen."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1599
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
-msgstr ""
+msgstr "Suklaa on elintärkeää amatsonisotilaiden koulutuksessa."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Cocoa
 #. Farm, part 1
@@ -1752,13 +1752,13 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Kookostila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1614
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Kaivaa graniittia ja kvartsia maasta vuoristoisessa maastossa."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../../../data/tribes/initialization/amazons/units.lua:1616
@@ -1783,7 +1783,7 @@ msgstr "Huuhtoo kultahippusia maaperästä vuoristoisella alueella."
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "Jos toimitus on vakaa, tämä kaivos tuottaa kultapölyä keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
@@ -1821,7 +1821,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Yhen sotilaan koko koulutus kestää %s keskimäärin."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
 #: ../../../../data/tribes/initialization/amazons/units.lua:1649
@@ -1898,7 +1898,7 @@ msgstr "Rakentaa lauttoja."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1734
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Tarvitsee lähellä olevaa vettä. Olethan tietoinen, että lautat kuljettavat vain tarvikkeita, eivät työläisiä."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1929,7 +1929,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2300
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät pääsyn veden luo."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Ferry
 #. Yard, part 1
@@ -1962,7 +1962,7 @@ msgstr "Rakentaa laivoja, joita käytetään merentakaisten alueiden asuttamisee
 #: ../../../../data/tribes/initialization/frisians/units.lua:2298
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Tarvitsee lähellä olevaa avovettä."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Shipyard,
 #. part 1
@@ -1971,7 +1971,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden laivan välillä %1$s ja %2$s riippuen, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -3249,7 +3249,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../../../data/tribes/initialization/amazons/units.lua:2143
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "Asiantaitaja puuttuu"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -3257,7 +3257,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/amazons/units.lua:2145
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "Asiantaitajia puuttuvat"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -4160,7 +4160,7 @@ msgstr "Täältä löytyy runsaasti arvokiviä."
 #: ../../../../data/tribes/initialization/frisians/units.lua:1515
 msgid ""
 "This tree is only planted by the Amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Tätä puuta istuttaa ainoastaan amatsoniheimo, mutta voidaan kaataa tukeiksi."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1432
@@ -4247,7 +4247,7 @@ msgstr "Ostur, uuden tutkimusmatkaluokan aluksen suunnittelija, uuden sataman av
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1475
 msgctxt "atlanteans_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Kauppapaikka mahdollistaa kaupankäynnin muiden heimojen kanssa."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1484
@@ -4313,7 +4313,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2137
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Jos reitillä on mäkiä tai esteitä, aikaa lisätään."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4465,7 +4465,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden kalan välillä %1$s ja %2$s riippuen siitä, miten paljon kalastajan täytyy kävellä."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4586,7 +4586,7 @@ msgstr "Vedenkerääjä mutisee itsekseen."
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Kantaja tarvitsee %s yhtä täyttä vesiämpäriä kohden."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 2
@@ -4594,7 +4594,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Jos vesivaranto on ehtynyt, kantaja tarvitsee keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4718,7 +4718,7 @@ msgstr "Askadus, pystysuuntaisen tuulimyllyn keksijä."
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The sawmill needs %s on average to produce one plank."
-msgstr ""
+msgstr "Saha tarvitsee keskimäärin %s tuottaakseen yhden lankun."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1686
@@ -5046,7 +5046,7 @@ msgstr "Värväysjuliste"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasarmi tarvitsee keskimäärin %s sotilaan värväämiseen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1817
@@ -5077,7 +5077,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a horse"
 " in %s on average."
-msgstr ""
+msgstr "Jos kaikki tarvittavat tuotteet toimitetaan ajallaan, tämä rakennus tuottaa hevosen keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1830
@@ -5307,7 +5307,7 @@ msgstr "Kaivostyöläisten killan laulu"
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, tämä kaivos tuottaa hiiltä keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5339,7 +5339,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, tämä kaivos tuottaa rautamalmia keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5385,7 +5385,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, tämä kaivos tuottaa kultamalmia keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -5435,7 +5435,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Yhen sotilaan koko koulutus kestää %s keskimäärin."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth,
 #. part 1
@@ -5639,7 +5639,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden lautan välillä %1$s ja %2$s riippuen, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
@@ -5677,7 +5677,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden laivan välillä %1$s ja %2$s riippuen, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2169

@@ -1379,8 +1379,8 @@ msgstr ""
 #, c-format
 msgid "%d batch"
 msgid_plural "%d batches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d erä"
+msgstr[1] "%d erää"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:784
 msgid "Trade runs indefinitely"
@@ -1390,15 +1390,15 @@ msgstr "Kauppa pyörii määrittelemättömäksi ajaksi"
 #, c-format
 msgid "%d batch delivered"
 msgid_plural "%d batches delivered"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d erä toimitettu"
+msgstr[1] "%d erää toimitettu"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:803
 #, c-format
 msgid "%d batch remaining"
 msgid_plural "%d batches remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d erä jäljellä"
+msgstr[1] "%d erää jäljellä"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:817
 msgid "Paused by both players"
@@ -3943,7 +3943,7 @@ msgstr "Ladataan maailmaa..."
 #: ../../../../src/ui/editor/editorinteractive.cc:1548
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Työkalujen välit: %u%%"
 
 #: ../../../../src/ui/editor/editorinteractive.cc:1571
 #, c-format
@@ -4791,7 +4791,7 @@ msgstr "Valitse liikkumaton kartalta ..."
 msgid ""
 "Select an immovable type by clicking on it on the map. Hold down Ctrl to "
 "select multiple immovables."
-msgstr ""
+msgstr "Valitse liikkumaton-tyyppi klikkaamalla sitä kartalta. Valitse useampi pitämällä Ctrl pohjassa."
 
 #: ../../../../src/ui/editor/tool_place_immovable_options_menu.cc:116
 msgid "Automatically place the trees which grow best on the terrain"
@@ -5244,7 +5244,7 @@ msgstr "Yksi maailma"
 #: ../../../../src/ui/fsmenu/addons/manager.cc:799
 #, c-format
 msgid "Toggle world ‘%s’"
-msgstr ""
+msgstr "Kytke maailma '%s' päälle/pois"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:897
 msgctxt "nr_players"
@@ -6284,7 +6284,7 @@ msgid ""
 "%3$s\n"
 "\n"
 "Note that this map can not be downloaded again from the server."
-msgstr ""
+msgstr "Haluatko varmasti poistaa tämän kartan asennuksen?\n\n%1$s\ntekijältä %2$s\n %3$s\n\nHuomaa, että tätä karttaa ei voida ladata uudelleen palvelimelta."
 
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:55
 #, c-format
@@ -8790,7 +8790,7 @@ msgstr "Suosi ammattisotilaita"
 #: ../../../../src/ui/game/constructionsitewindow.cc:379
 #: ../../../../src/ui/game/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Ei preferenssiä"
 
 #: ../../../../src/ui/game/constructionsitewindow.cc:414
 msgid "Settings to apply after construction"
@@ -8848,7 +8848,7 @@ msgstr "Kutsu tämä pelaaja liittymään joukkueeseesi"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:193
 msgid "Trade offers you have received from other players"
-msgstr ""
+msgstr "Muilta pelaajilta saatua vaihtotarjouksia"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:195
 msgid "Trades you have proposed to other players"
@@ -9247,7 +9247,7 @@ msgstr "Määritä tämä valtamerilaivasto"
 
 #: ../../../../src/ui/game/fieldaction.cc:555
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Määritä tämä valtamerilaivasto"
 
 #: ../../../../src/ui/game/fieldaction.cc:562
 msgid "Watch field in a separate window"
@@ -9360,7 +9360,7 @@ msgstr "Laivaston asetukset"
 
 #: ../../../../src/ui/game/fleet_options_window.cc:138
 msgid "Toggle infinite production"
-msgstr ""
+msgstr "Kytke ääretön tuotanto päälle/pois"
 
 #: ../../../../src/ui/game/fleet_options_window.cc:148
 msgid "Fleet Statistics"
@@ -9615,7 +9615,7 @@ msgstr "Peru tämä kauppa"
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
-msgstr ""
+msgstr "Jatka tätä keskeytettyä kauppaa. Tämä vaatii kaikilta jonoilta maksimikapasiteettia."
 
 #: ../../../../src/ui/game/marketwindow.cc:813
 msgid "Pause this trade"
@@ -9623,7 +9623,7 @@ msgstr "Keskeytä tämä kauppa"
 
 #: ../../../../src/ui/game/marketwindow.cc:824
 msgid "You need to pause the trade before you can change the queue capacity."
-msgstr ""
+msgstr "Sinun on keskeytettävä kauppa ennen kuin voit vaihtaa jonon kapasiteettia."
 
 #: ../../../../src/ui/game/marketwindow.cc:825
 msgid "Pause Trade?"
@@ -11965,15 +11965,15 @@ msgstr "Näytä kaikki viestit"
 
 #: ../../../../src/wlapplication_options.cc:740
 msgid "Show Geologists’ Messages Only"
-msgstr ""
+msgstr "Näytä vain geologien viestit"
 
 #: ../../../../src/wlapplication_options.cc:745
 msgid "Show Economy Messages Only"
-msgstr ""
+msgstr "Näytä vain talouden viestit"
 
 #: ../../../../src/wlapplication_options.cc:750
 msgid "Show Seafaring Messages Only"
-msgstr ""
+msgstr "Näytä vain merenkulut viestit"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Show Military Messages Only"
@@ -11981,11 +11981,11 @@ msgstr ""
 
 #: ../../../../src/wlapplication_options.cc:760
 msgid "Show Scenario Messages Only"
-msgstr ""
+msgstr "Näytä vain skenaarion viestit"
 
 #: ../../../../src/wlapplication_options.cc:765
 msgid "Show Diplomacy Messages Only"
-msgstr ""
+msgstr "Näytä vain diplomatian viestit"
 
 #: ../../../../src/wlapplication_options.cc:770
 msgid "Go to Ship"
