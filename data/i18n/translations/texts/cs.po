@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-10 07:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2025-2026\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -400,24 +400,24 @@ msgid ""
 msgstr "Použitím volby \"Sledovat záznam\" v hlavní nabídce máš možnost sledovat přesný záznam odehrané hry. Ber ale na vědomí, že i nepatrná změna v datových souborech nebo v přehrávači Widelands může učinit záznam nekompatibilní a způsobit desynchronizaci. Tento problém se týká i her, kdy jeden hráč používá jinou verzi hry než hráči ostatní."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
-#, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
 "be useful as attachments to bug reports. The replay files are saved in the "
-"%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
-"subdirectory of your Widelands installation."
-msgstr "Záznamy jsou velmi dobrým nástrojem pro odhalování chyb v herním mechanismu a lze je proto používat jako přílohy při hlášení chyb. Soubory záznamů jsou v Linuxu a Max OS X ukládány do adresáře %s. V systému Windows jsou uloženy v adresáři \"replays\", což je jedna z podsložek tvojí Widelands instalace."
+"‘replays’ subdirectory of the Widelands home directory. You may look in the "
+"last tab \"Technical Information\" of this window to see where this "
+"directory is located on your computer."
+msgstr ""
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../../../data/txts/help/common_helptexts.lua:41
+#: ../../../../data/txts/help/common_helptexts.lua:40
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#: ../../../../data/txts/help/common_helptexts.lua:48
-#: ../../../../data/txts/help/common_helptexts.lua:57
-#: ../../../../data/txts/help/common_helptexts.lua:67
+#: ../../../../data/txts/help/common_helptexts.lua:47
+#: ../../../../data/txts/help/common_helptexts.lua:56
+#: ../../../../data/txts/help/common_helptexts.lua:66
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
