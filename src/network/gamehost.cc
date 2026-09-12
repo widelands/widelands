@@ -1805,9 +1805,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 					}
 					enabled_non_network_relevant_addons += pair.first->internal_name;
 					enabled_non_network_relevant_addons += " ";
-					enabled_non_network_relevant_addons += AddOns::version_to_string(pair.first->version, false);
+					enabled_non_network_relevant_addons +=
+					   AddOns::version_to_string(pair.first->version, false);
 					enabled_non_network_relevant_addons += " (";
-					enabled_non_network_relevant_addons += AddOns::kAddOnCategories.at(pair.first->category).internal_name;
+					enabled_non_network_relevant_addons +=
+					   AddOns::kAddOnCategories.at(pair.first->category).internal_name;
 					enabled_non_network_relevant_addons += ")";
 				}
 			}
@@ -1894,7 +1896,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 
 	if (!enabled_non_network_relevant_addons.empty()) {
-		send_system_message_code("EXTRA_ADDONS", d->localplayername, enabled_non_network_relevant_addons);
+		send_system_message_code(
+		   "EXTRA_ADDONS", d->localplayername, enabled_non_network_relevant_addons);
 	}
 	if (g_allow_script_console) {
 		// TODO(tothxa): The host could warn only the new client, but other clients can only

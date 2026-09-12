@@ -1187,9 +1187,11 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 				}
 				enabled_non_network_relevant_addons += pair.first->internal_name;
 				enabled_non_network_relevant_addons += " ";
-				enabled_non_network_relevant_addons += AddOns::version_to_string(pair.first->version, false);
+				enabled_non_network_relevant_addons +=
+				   AddOns::version_to_string(pair.first->version, false);
 				enabled_non_network_relevant_addons += " (";
-				enabled_non_network_relevant_addons += AddOns::kAddOnCategories.at(pair.first->category).internal_name;
+				enabled_non_network_relevant_addons +=
+				   AddOns::kAddOnCategories.at(pair.first->category).internal_name;
 				enabled_non_network_relevant_addons += ")";
 			}
 		}
@@ -1199,7 +1201,8 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 
 		if (g_allow_script_console) {
 			// Warn others
-			// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
+			// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise
+			// send
 			//               it to the new user only, but
 			//                 1. We can only send commands to the host
 			//                 2. System messages are assembled and translated on each client, so
