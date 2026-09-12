@@ -21,6 +21,7 @@
 #include <memory>
 
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "ui/wui/interactive_player.h"
@@ -110,7 +111,11 @@ void PinnedNote::draw(const EditorGameBase& egbase,
 
 	dst->blit_animation(field_on_dst, coords, scale, owner().tribe().pinned_note_animation(),
 	                    egbase.get_gametime(), &rgb_);
-	do_draw_info(info_to_draw, text_, std::string(), field_on_dst, scale, dst);
+	// The note text is free-form player input and is rendered as richtext below,
+	// so any characters that richtext treats specially (e.g. '<') must be escaped
+	// first. Without this, a note containing such a character throws an uncaught
+	// richtext parse error and crashes the game.
+	do_draw_info(info_to_draw, richtext_escape(text_), std::string(), field_on_dst, scale, dst);
 }
 
 constexpr uint8_t kCurrentPacketVersion = 1;

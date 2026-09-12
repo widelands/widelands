@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2016,2018
 # heidi.wenger, 2022
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2020
 # Markus <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-05-02 05:04+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: heidi.wenger, 2022\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,7 +127,7 @@ msgstr "Tarkista krouvisi"
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr "Ensiksi meidän täytyy tarkistaa kuinka monta krouvia meillä on. Widelamds tarjoaa sitä varten ruudun, josta voit tarkistaa sen helposti."
+msgstr "Ensiksi meidän täytyy tarkistaa, kuinka monta krouvia meillä on. Widelamds tarjoaa sitä varten ruudun, josta voit tarkistaa sen helposti."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
@@ -216,25 +217,25 @@ msgstr "Tässä olikin kaikki neuvot tältä erää. Nyt voit kokeilla itse."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
-msgstr "Voit sulkea rakennustilastot ruudun!"
+msgstr "Voit sulkea rakennustilastot-ruudun!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr "Olet sulkenut rakennustilastot ruudun. En huomannut, että vaihdoit keskikokoiset rakennukset välilehteen katsoaksesi krouvien määrän. Olisitko kiltti ja näyttäisit sen minulle?"
+msgstr "Olet sulkenut rakennustilastot-ruudun. En huomannut, että vaihdoit keskikokoiset rakennukset välilehteen katsoaksesi krouvien määrän. Olisitko kiltti ja näyttäisit sen minulle?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr "Avaa rakennustilastot ruutu uudelleen"
+msgstr "Avaa rakennustilastot-ruutu uudelleen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr "Suljit rakennustilasto ruudun, vaikka et ole vielä katsonut krouviesi määrää."
+msgstr "Suljit rakennustilasto-ruudun, vaikka et ole vielä katsonut krouviesi määrää."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
@@ -249,7 +250,7 @@ msgstr "Avaa sinun varastoruutu"
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr "Varastoikkuna antaa sinulla yleisnäkymän tuotteisiin, jotka sinulla on tällä hetkellä."
+msgstr "Varastoikkuna antaa sinulla yleisnäkymän tuotteisiin, joita sinulla on tällä hetkellä."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
@@ -334,20 +335,20 @@ msgstr "Kolmas välilehti kertoo sinulle, ettei ruoka-annoksia ole jäljellä p�
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
 msgid "You closed the stock window!"
-msgstr "Suljit varastoruudun!"
+msgstr "Suljit varastoikkunan!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr "Olet sulkenut varastoikkuna, mutta en ole päässyt vielä selitykseni loppuun. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä ensimmäisen välilehden?"
+msgstr "Olet sulkenut varastoikkuna, mutta en ole päässyt vielä lopettanut selitystäni. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit sieltä ensimmäisen välilehden?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr "Avaa varastoruutu uudelleen"
+msgstr "Avaa varastoikkuna uudelleen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -355,7 +356,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr "Suljit varastoikkunan ennen kuin ehdin kertoa sinulle siitä kaikki asiat. Jos jo tiedät kaiken, voit halutessasi poistua tästä opetuspelistä."
+msgstr "Suljit varastoikkunan ennen kuin ehdin kertoa sinulle siitä kaikki asiat. Mikäli jo tiedät kaiken, voit halutessasi poistua tästä opetuspelistä."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
@@ -366,7 +367,7 @@ msgstr "Muussa tapauksessa, avaa se uudelleen ja katso kaikkia sen välilehtiä.
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr "Olet sulkenut varastoikkuna, mutta en ole päässyt vielä selitykseni loppuun. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä kolmannen välilehden?"
+msgstr "Olet sulkenut varastoikkunan, mutta en ole päässyt vielä lopettanut selitystäni. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit sieltä kolmannen välilehden?"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -458,7 +459,7 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr "Sotilas tarvitsee puukeihään ja kypärän – tästä eteen päin, joten voit etsiä jälkikäteen tuotteita ja rakennuksia, joita tarvitset kasarmille, jolle sotilas on palkattu. Kun olet valmis, voit sulkea opasruudun."
+msgstr "Sotilas tarvitsee puukeihään ja kypärän – tästä lähtien voit etsiä jälkikäteen tuotteita ja rakennuksia, joita tarvitset kasarmille, jolle sotilas on palkattu. Kun olet valmis, voit sulkea opasruudun."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
@@ -466,7 +467,7 @@ msgstr "Käytä opasta siihen, että opit kuinka uusia sotilaita luodaan."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr "Valitse ‘Tuotteet’ välilehti opasruudusta."
+msgstr "Valitse ‘Tuotteet’-välilehti opasruudusta."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -549,7 +550,7 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr "Suljit opasruudun ilman, että etsit sitä tietoa mitä tarvitsemme. Jos tiedät jo kaiken, voit poistua tästä tutoriaalista milloin tahansa."
+msgstr "Suljit opasruudun ilman, että etsit sitä tarvitsemaamme tietoa. Jos tiedät jo kaiken, voit poistua tästä tutoriaalista milloin tahansa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
@@ -574,7 +575,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr "Tällä hetkellä, kaikki kaivokset saavat avuja säännöstellysti. Mikäli haluat ensisijaistaa erityisen tärkeän kaivoksen, avaa yksinkertaisesti vain sen ikkuna. Tarvikevälilehdessä, jokaisen tarvikkeen takana, näet liukurin. "
+msgstr "Tällä hetkellä kaikki kaivokset saavat avuja säännöstellysti. Mikäli haluat ensisijaistaa erityisen tärkeän kaivoksen, avaa vain sen ikkuna. Tarvikkeet-välilehdessä, jokaisen tarvikkeen takana, näet liukurin."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -615,7 +616,7 @@ msgstr "Meidän tapauksessa, ehkä haluat leipomoissa työskenneltävän niin no
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr "Avaa tuotetilastot ruutu"
+msgstr "Avaa tuotetilastot-ruutu"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
@@ -651,7 +652,7 @@ msgstr "Kun olet nähnyt riittävästi, vaihda kolmanteen välilheteen (‘Talou
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr "Tässä ruudussa, voit valita tuotteita nähdäksesi kuinka niiden tuotanto tai kulutus on edistynyt ajan kuluessa. Kokeile sitä joillakin tuotteilla."
+msgstr "Tässä ruudussa voit valita tuotteita nähdäksesi, kuinka niiden tuotanto tai kulutus on edistynyt ajan kuluessa. Kokeile sitä joillakin tuotteilla."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
@@ -698,7 +699,7 @@ msgstr "Varasto välilehti näyttää sinulle kuinka monta tuotetta sinulla on. 
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr "Kun olet valmis, sulje tuotetilastot ruutu."
+msgstr "Kun olet valmis, sulje tuotetilastot-ruutu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
@@ -716,18 +717,18 @@ msgstr "Kaksi viimeistä välilehteä ovat hyviä indikaattoreita näyttämään
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr "Suljit tuotetilastot ruudun!"
+msgstr "Suljit tuotetilastot-ruudun!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr "Olet sulkenut tuotetilastot ruudun, mutta en ole päässyt vielä selitykseni loppuun. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä kolmannen välilehden?"
+msgstr "Olet sulkenut tuotetilastot-ruudun, mutta en ole vielä lopettanut selitystäni. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä kolmannen välilehden?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr "Avaa tuotetilastot ruutu uudelleen"
+msgstr "Avaa tuotetilastot-ruutu uudelleen"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -735,13 +736,13 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr "Suljit tuotetilasto ruudun ennen kuin ehdin kertoa sinulle siitä kaikki asiat. Jos jo tiedät kaiken, voit halutessasi poistua tästä opetuspelistä."
+msgstr "Suljit tuotetilasto-ruudun ennen kuin ehdin kertoa sinulle siitä kaikki asiat. Jos jo tiedät kaiken, voit halutessasi poistua tästä opetuspelistä."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr "Olet sulkenut tuotetilastot ruudun, mutta en ole päässyt vielä selitykseni loppuun. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä neljännen välilehden?"
+msgstr "Olet sulkenut tuotetilastot-ruudun, mutta en ole vielä lopettanut selitystäni. Olisitko kiltti ja avaisit sen uudelleen ja valitsisit siitä neljännen välilehden?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
@@ -751,17 +752,17 @@ msgstr "Muussa tapauksessa, avaa se uudelleen ja valitse neljäs välilehti."
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr "Avaa ‘Muuta talouden asetuksia’ ruutu"
+msgstr "Avaa ‘Muuta talouden asetuksia’ -ruutu"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
-msgstr "Avaa ‘Muuta talouden asetuksia’ ruutu."
+msgstr "Avaa ‘Muuta talouden asetuksia’ -ruutu."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "Ruutuun voi mennä klikkaamalla mitä tahansa omaa lippua tai varaston ruutuja."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -775,14 +776,14 @@ msgstr "Talousvalinnat"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr "Olen näyttänyt sinulle varasto ruudun, josta voit nähdä, mitä tuotteita on varastoissa. Muistatko?"
+msgstr "Olen näyttänyt sinulle varastoruudun, josta voit nähdä, mitä tuotteita on varastoissa. Muistatko?"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr "Nyt kerron sinulle kuinka voit määritellä kuinka monta tavaraa haluat sinulla olevan. Sitä varten ruutuun voi päästä minkä tahansa lipun kautta ja sitä kutsutaan nimellä ‘Muuta talouden asetuksia’."
+msgstr "Nyt kerron sinulle, kuinka määritellä, montako tavaraa haluat sinulla olevan. Sitä varten ruutuun voi päästä minkä tahansa lipun kautta ja se on nimellään ‘Muuta talouden asetuksia’."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
@@ -790,7 +791,7 @@ msgstr "Tämä on sen kuvake."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "Sama painike on käytettävissä myös varastoruudussa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -893,7 +894,7 @@ msgstr "Kivenhakkaajasi ei tuota marmoripylväitä, jos niille ei ole tarvetta. 
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr "Tehdäksesi niin, klikkaa mitä tahansa lippua ja valitse ‘Muuta talouden asetuksia’. Tässä ruudussa voit valita kuinka monta kunkin tyyppistä tuotetta toivot sinulla olevan varastossa."
+msgstr "Tehdäksesi niin klikkaa mitä tahansa lippua ja valitse ‘Muuta talouden asetuksia’. Tässä ruudussa voit valita, kuinka monta kunkin tyyppistä tuotetta toivot sinulla olevan varastossa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
@@ -983,7 +984,7 @@ msgstr "Jokaisessa varastossa on neljä painiketta suosimisen asettamiseen. Jos 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
-msgstr ""
+msgstr "Kaupankäynti"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -998,7 +999,7 @@ msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "Koska Widelandsissa on kyse rakentamisesta eikä niiden polttamisesta, kaupanteko on parempi tapa vaikuttaa muihin heimoihin kuin vallata heidän maansa. Tehdään siis kaupat."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1011,15 +1012,15 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "Rakenna kauppapaikka"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "Rakenna kauppapaikka lähelle joutomaata."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "Kauppapaikka on iso rakennus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
@@ -1032,7 +1033,7 @@ msgstr ""
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "Aaseja jalostetaan aasitilassa. Tässä skenaariossa sinulla on jo tässä yksi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1047,20 +1048,20 @@ msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "Kauppapaikka on nyt valmis, ja me voimme alkaa tehdä kauppoja friiseille. Se tehdään kauppapaikan ruudussa. Anna kun avaan sen sinulle."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "Kuten näkyy, kaupparuudussa on kolme välilehteä. Ensimmäinen välilehti on meille mielenkiintoisin juuri nyt. Siinä voit määrittää ja ehdottaa uutta kauppaa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "Toinen välilehti listaa kauppoja, joita olet aiemmin esittänyt tässä kauppapaikassa. Se on tyhjä tällä hetkellä, koska et ole vielä esittänyt yhtään kauppaa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
@@ -1096,7 +1097,7 @@ msgstr ""
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "Valitse tuotteet paneelissa, ja lisää tai vähennä tuotteiden määrää alla olevilla nuolipainikkeilla tehdäksesi vaihtokaupat."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
@@ -1118,7 +1119,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "Kokeile!"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
@@ -1127,7 +1128,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "Tarjoa friiseille kaupantekoa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
@@ -1137,7 +1138,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "Kaupat hylätty"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
@@ -1148,7 +1149,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Accepted"
-msgstr ""
+msgstr "Kaupat hyväksytty"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
@@ -1167,11 +1168,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "Voit keskeyttää kaupat hetkeksi ja jatkaa sitä halutessasi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "Voit siirtää kauppaa toiseen kauppapaikkaasi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
@@ -1179,11 +1180,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "Ja voit myös perua kaupat koska tahansa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "Vaihtotarjous"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
@@ -1195,40 +1196,40 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "Avaa Diplomatia-ikkuna"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "Diplomatia-ikkuna antaa sinulle yleisnäkymän kaikkiin kauppoihisi, vaihtotarjouksiisi sekä kauppaesityksiisi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "Voit avata sen tästä painikkeesta päätyökalupalkissa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "Diplomatia-ikkuna"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "Diplomatia-ikkunan yläpuoliskolla näet kaikki pelaajat ja heidän joukkueensa. Tässä voit kutsua muita pelaajia liittymään joukkueeseesi tai kysyä liittymään heihin. Joukkueessa olemista ei vaadita kaupantekoon."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "Meitä kiinnostaa enemmän ruudun alapuolisko. Siinä näet tarjotut, ehdotetut ja aktiiviset kaupantekosi."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "Sinulla on juuri nyt yksi vaihtotarjous – friisien sinulle lähettämä. Arvioi se, sitten joko hyväksy tai hylkää se viereisillä painikkeilla."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1241,22 +1242,22 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "Päätä vaihtotarjouksesta"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "Hyväksy tai hylkää friisien vaihtotarjous"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "Voit tehdä niin joko Diplomatia-ikkunassa tai kauppapaikan ruudusta. "
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "Hyvin tehty! Siinä olivatkin kaikki. Nyt tiedät, miten lähettää ja hallinnoida vaihtoehdotuksia ja -tarjouksia."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
@@ -1268,7 +1269,7 @@ msgstr ""
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "Todellakin hallitset kaupankäynnin taidon. Muistahan, että tuotteen arvo riippuu suuresti olosuhteista sekä myös heimosta."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1288,7 +1289,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
-msgstr ""
+msgstr "Onneksi olkoon"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:749
 msgid ""
