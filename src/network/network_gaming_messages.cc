@@ -78,6 +78,7 @@ static const std::map<std::string, std::string> ngmessages = {
    {"CHEAT", gettext_noop("Client %s is cheating!")},
    /** TRANSLATORS: %1 and %2 are user and player names */
    {"SWITCHED_PLAYER", gettext_noop("Cheating: Client %1$s now controls %2$s")},
+   {"EXTRA_ADDONS", gettext_noop("Client %1$s has enabled the following additional add-on(s): %2$s")},
    /** TRANSLATORS: %1 and %2 are user and player names */
    {"CHEAT_OTHER", gettext_noop("Client %1$s is cheating, acting as %2$s!")}};
 

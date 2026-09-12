@@ -1784,6 +1784,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	verb_log_info("[Host]: Client %u: welcome to usernum %u", number, client.usernum);
 
+	std::string enabled_non_network_relevant_addons;
+
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_HELLO);
 	packet.unsigned_8(NETWORK_PROTOCOL_VERSION);
@@ -1791,8 +1793,23 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
-				enabled_addons.push_back(pair.first.get());
+			if (pair.second) {
+				if (AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+					enabled_addons.push_back(pair.first.get());
+				} else {
+					// Unlocalized list
+					// TODO(Nordfriese): If we make this its own NETCMD code,
+					// we could have each recipient build a localised string
+					if (!enabled_non_network_relevant_addons.empty()) {
+						enabled_non_network_relevant_addons += ", ";
+					}
+					enabled_non_network_relevant_addons += pair.first->internal_name;
+					enabled_non_network_relevant_addons += " ";
+					enabled_non_network_relevant_addons += AddOns::version_to_string(pair.first->version, false);
+					enabled_non_network_relevant_addons += " (";
+					enabled_non_network_relevant_addons += AddOns::kAddOnCategories.at(pair.first->category).internal_name;
+					enabled_non_network_relevant_addons += ")";
+				}
 			}
 		}
 		packet.unsigned_32(enabled_addons.size());
@@ -1876,6 +1893,9 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 
+	if (!enabled_non_network_relevant_addons.empty()) {
+		send_system_message_code("EXTRA_ADDONS", d->localplayername, enabled_non_network_relevant_addons);
+	}
 	if (g_allow_script_console) {
 		// TODO(tothxa): The host could warn only the new client, but other clients can only
 		//               broadcast:
@@ -2523,7 +2543,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 }
 
 static const std::set<std::string> cheating_message_codes = {
-   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "EXTRA_ADDONS", "CHEAT_OTHER"};
 
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();

@@ -1175,14 +1175,37 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 	d->chatmessages.push_back(c);
 	Notifications::publish(c);
 
-	if (g_allow_script_console && code == "CLIENT_HAS_JOINED_GAME") {
-		// Warn others
-		// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
-		//               it to the new user only, but
-		//                 1. We can only send commands to the host
-		//                 2. System messages are assembled and translated on each client, so
-		//                    individual players can't be @-addressed
-		send_cheating_info("CAN_CHEAT");
+	if (code == "CLIENT_HAS_JOINED_GAME") {
+		std::string enabled_non_network_relevant_addons;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.second && !AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+				if (!enabled_non_network_relevant_addons.empty()) {
+					// Unlocalized list
+					// TODO(Nordfriese): If we make this its own NETCMD code,
+					// we could have each recipient build a localised string
+					enabled_non_network_relevant_addons += ", ";
+				}
+				enabled_non_network_relevant_addons += pair.first->internal_name;
+				enabled_non_network_relevant_addons += " ";
+				enabled_non_network_relevant_addons += AddOns::version_to_string(pair.first->version, false);
+				enabled_non_network_relevant_addons += " (";
+				enabled_non_network_relevant_addons += AddOns::kAddOnCategories.at(pair.first->category).internal_name;
+				enabled_non_network_relevant_addons += ")";
+			}
+		}
+		if (!enabled_non_network_relevant_addons.empty()) {
+			send_cheating_info("EXTRA_ADDONS", enabled_non_network_relevant_addons);
+		}
+
+		if (g_allow_script_console) {
+			// Warn others
+			// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
+			//               it to the new user only, but
+			//                 1. We can only send commands to the host
+			//                 2. System messages are assembled and translated on each client, so
+			//                    individual players can't be @-addressed
+			send_cheating_info("CAN_CHEAT");
+		}
 	}
 }
 
