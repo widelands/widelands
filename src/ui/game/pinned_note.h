@@ -21,12 +21,13 @@
 
 #include <memory>
 
-#include "logic/game.h"
 #include "logic/map_objects/pinned_note.h"
 #include "ui/basic/box.h"
 #include "ui/basic/button.h"
 #include "ui/basic/textinput.h"
 #include "ui/basic/unique_window.h"
+
+class InteractivePlayer;
 
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class PinnedNoteEditor : public UI::UniqueWindow {

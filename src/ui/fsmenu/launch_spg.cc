@@ -162,7 +162,7 @@ void LaunchSPG::clicked_ok() {
 			playernumber = sp->settings().playernum + 1;
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
-			game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
+			game_->create_game_interface(playernumber);
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {

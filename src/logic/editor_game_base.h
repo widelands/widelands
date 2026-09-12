@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "logic/addons.h"
+#include "logic/game_interface_provider.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
@@ -39,8 +40,6 @@ struct ProgressWindow;
 namespace FsMenu {
 class LaunchGame;
 }  // namespace FsMenu
-class InteractiveBase;
-class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
 namespace Widelands {
 
@@ -69,7 +68,6 @@ struct NoteFieldPossession {
 
 class EditorGameBase {
 public:
-	friend class InteractiveBase;
 	friend class LaunchGame;
 	friend struct GameClassPacket;
 
@@ -174,12 +172,11 @@ public:
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
-	const Time& get_gametime() const {
+	[[nodiscard]] const Time& get_gametime() const {
 		return gametime_;
 	}
-	// TODO(GunChleoc): Get rid.
-	InteractiveBase* get_ibase() const {
-		return ibase_.get();
+	[[nodiscard]] IGameInterface* get_game_interface() const {
+		return game_interface_.get();
 	}
 
 	void inform_players_about_ownership(MapIndex, PlayerNumber) const;
@@ -200,7 +197,7 @@ public:
 	Time& get_gametime_pointer() {
 		return gametime_;
 	}
-	void set_ibase(InteractiveBase* b);
+	void set_game_interface(std::unique_ptr<IGameInterface> gi);
 
 	/// Lua frontend, used to run Lua scripts
 	virtual LuaInterface& lua() {
@@ -210,8 +207,6 @@ public:
 	PlayersManager* player_manager() {
 		return player_manager_.get();
 	}
-
-	InteractiveGameBase* get_igbase() const;
 
 	// Returns the tribe and world descriptions.
 	const Descriptions& descriptions() const;
@@ -284,7 +279,7 @@ private:
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
 	std::unique_ptr<Descriptions> descriptions_;
-	std::unique_ptr<InteractiveBase> ibase_;
+	std::unique_ptr<IGameInterface> game_interface_;
 	Map map_;
 
 	// Shown while loading or saving a game/map
