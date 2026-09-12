@@ -402,7 +402,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d’errors. Els fitxers de repetició es desen a la carpeta «replays» de la carpeta base del Widelands. A la pestanya «Informació tècnica» d'aquesta finestra podeu veure a quina carpeta del vostre ordinador està instal·lat"
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40

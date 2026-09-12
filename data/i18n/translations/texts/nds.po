@@ -401,7 +401,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden in de Unnerverteeknis »replays« vun de Widelands-Heemverteeknis sekert. Bekiek de lesten Listenwessler »Technisk Informatioon« in deesem Fenster, um to sehn, waar deeses Verteeknis up dienem Reekner liggt."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40

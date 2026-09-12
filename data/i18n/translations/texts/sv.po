@@ -403,7 +403,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Upprepningar är ett mycket användbart verktyg för att hitta fel i spellogiken och kan därför bifogas felrapporter. Upprepningsfilerna sparas i underkatalogen ”replays” i Widelands hemkatalog. På den sista fliken ”Teknisk information” i det här fönstret ser du var katalogen finns på datorn."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
