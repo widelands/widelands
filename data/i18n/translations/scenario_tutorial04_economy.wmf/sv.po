@@ -799,7 +799,7 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares and workers."
-msgstr ""
+msgstr "Observera att knapparna av en anledning heter ”Konfigurera denna flags/detta byggnads ekonomi”. En ekonomi består av alla byggnader och flaggor som är anslutna med vägar, färjor eller skepp. Du kan alltså ha fler än en ekonomi om deras flaggor inte är sammanbundna med något transportsätt. I så fall kan dina skilda ekonomier ha olika inställningar för varor och arbetare."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""

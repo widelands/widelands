@@ -19,58 +19,58 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr ""
+msgstr "הבטח את אספקת חומרי הבנייה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "אספקת חומרי בנייה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "ספק חומרי בנייה בסיסיים לכלכלה שלך:"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
-msgstr ""
+msgstr "בנה מחצבה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "בנה שני בתי כורת עצים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "בנה שני בתי יערן"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
-msgstr ""
+msgstr "בנה מנסרה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "הרחב את שטחך וחקור"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
-msgstr ""
+msgstr "התרחבות וחקירה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "האי עצום, וכל עוד אין לנו ודאות שאנחנו לבדנו כאן, לא נוכל להרגיע את דעתנו. חקור וכבוש אותו — זו הדרך היחידה להגן עלינו מפני איומים באי ומפני אטלנטיס."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "בנה מוצבים צבאיים כדי להרחיב את שטחך"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "הקם ייצור מזון יציב"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
-msgstr ""
+msgstr "ייצור מזון"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
@@ -78,7 +78,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "מזון חשוב מאוד עבור מכרות ומתקני אימונים צבאיים. הקם סביבת מזון תקינה על ידי בניית לפחות חווה אחת, חוות שורש שחור אחת וטחנה. שני סוגי הקמח, יחד עם מים מבאר, ייאפו ללחם במאפייה — לכן בנה גם מאפייה וגם באר."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -87,49 +87,49 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "שתי סחורות המזון החשובות האחרות הן דג מעושן ובשר מעושן. בשר גולמי מגיע מן הצייד. הדייג מוציא דגים מן הים, ומגדל הדגים דואג שלהקת הדגים לא תיכחד על ידי גידול דגים נוספים. העישון מתבצע בבית עישון — תזדקק לפחות לשניים כאלה."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "בנה חווה וחוות שורש שחור"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "בנה טחנה לייצור קמח תירס וקמח שורש שחור"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr ""
+msgstr "בנה באר"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "בנה מאפייה לאפיית לחם מקמח תירס, קמח שורש שחור ומים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "בנה את בית הצייד לקבלת בשר גולמי"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "בנה את בית הדייג קרוב למים לקבלת דגים גולמיים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "בנה את בית מגדל הדגים ליד הדייג כדי להבטיח שהדגים לא ייכחדו"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "בנה שני בתי עישון לעישון בשר ודגים גולמיים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "בנה חוות עכבישים ובית אריגה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "ייצור בד עכביש"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid ""
@@ -138,27 +138,27 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "האורגים מייצרים בד עכביש וגלימות בבית האריגה. בד עכביש נחוץ לבניית מבנים מסוימים ולביגוד, ואילו הגלימות הן מדי החיילים. בית האריגה זקוק לחוט זהב ולמשי עכביש כחומר גלם. משי העכביש מיוצר בחוות העכבישים, וחוט הזהב מיוצר בטוויית הזהב מזהב."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "בנה בית אריגה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Build a spider farm"
-msgstr ""
+msgstr "בנה חוות עכבישים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "בנה את טוויית הזהב"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
-msgstr ""
+msgstr "בנה תעשייה ומכרות"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Industry and Mines"
-msgstr ""
+msgstr "תעשייה ומכרות"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid ""
@@ -166,41 +166,41 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "עפרת ברזל, עפרת זהב ופחם נכרים במכרות המתאימים. מכרה הגבישים יחפור אחר קוורץ ויהלומים — כולם חומרים יקרי ערך ונדירים מאוד. הוא יפיק הרבה גרניט תוך כדי החיפוש אחריהם."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "יש להתיך את העפרות בבית התכה לפני שניתן להשתמש בהן. החומרים המזוקקים משמשים לאחר מכן בנפחיית הנשק, בנפחיית השריון ובנפחיית הכלים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "בנה מכרה מכל סוג. הקפד לשלוח גיאולוגים להר קודם."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr ""
+msgstr "בנה בית התכה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "בנה נפחיית שריון ונפחיית נשק"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "בנה נפחיית כלים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr ""
+msgstr "בנה קסרקטין"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "גיוס חיילים חדשים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
@@ -208,15 +208,15 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "עכשיו, משנחשלים כלי נשק, ניתן לגייס חיילים חדשים. לשם כך עלינו לספק קלשונים קלים וגלימות לקסרקטין. טירונים יגיעו מהמחסן ויקבלו אחד מכל פריט ואימון בסיסי כדי להפוך לחיילים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "בנה מתקני אימונים לחיילים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "מתקני אימוני חיילים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid ""
@@ -224,19 +224,19 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "כמו כל השבטים האחרים, גם האטלנטים מסוגלים לאמן חיילים: הצינוק מאמן תקיפה — התכונה העיקרית של האטלנטים — והמבוך מאמן חמיקה, חיים והגנה. הפריטים המיוצרים בתעשייה משמשים לאימון חיילים טובים יותר בשני מתקני האימונים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "בנה צינוק ומבוך"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "בנה מחסן וחוות סוסים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "מחסן וחוות סוסים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
@@ -244,42 +244,42 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr ""
+msgstr "ככל שרשת הדרכים שלך מתארכת ומסתבכת, כדאי להעסיק סוסים שיסייעו לסבלים שלך. סוסים מגודלים בחוות סוסים באמצעות מים ותירס. מחסן יסייע גם הוא להבטיח שמערכת התחבורה שלך לא תקרוס."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "בנה מחסן"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
-msgstr ""
+msgstr "בנה חוות סוסים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:127
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "בנה 3 ספינות כדי לברוח מהאי"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Escape From the Island"
-msgstr ""
+msgstr "בריחה מהאי"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr ""
+msgstr "יש אגם בפסגת האי. בנה שלוש ספינות במים האלה, ואולי תצליח להציל את בני עמך לפני שהאי ייבלע כליל באוקיינוס."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "בנה מספנה ליד האגם כדי להתחיל לבנות ספינות"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
-msgstr ""
+msgstr "גאה עד המוות"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Favored by the God"
-msgstr ""
+msgstr "חביב האל"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:146
@@ -289,7 +289,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "על האי הנסתר והאבוד אטלנטיס התיישב שבט גאה עוד מאז שהעולם היה צעיר מאוד. בשלטון קו הדם של המלך אג'נתול — האדם הראשון שאל הים לוטאס העניק לו את הכוח לנשום מעל פני הים — ושל הכוהנים החכמים, שסיפקו את הקשר אל לוטאס — הם שגשגו והפכו לבני תרבות."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -300,15 +300,15 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "סיפור זה מתרחש בתקופת שלטונו של המלך אסקנדור, היורש ה-43 של המלך אג'נתול. הוא היה מלך טוב, ששלט באטלנטיס בחוכמה ובראיית הנולד. אך עם הזמן, הוא נעשה לפחד מן המוות, והחל לחפש תרופה למוות, אף על פי שרוב הכוהנים הזהירו אותו מפני כך. יש שאמרו כי חיי נצח שמורים לאלים בלבד, וכי חיפוש אחריהם הוא איסור."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "בחרפה לפני האל"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "עונש האל"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:156
@@ -317,7 +317,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr ""
+msgstr "אך הכול נראה כשורה. רק הסוסים כאילו חשו שמשהו אינו כשורה. בלילות הם השתוללו והיו מלאי פחד. לא עבר זמן רב עד שמגדלת הסוסים קסידרה הבינה מה לא בסדר אצלם: מפלס הים מול האורווה שלהם עלה במהירות הולכת וגוברת."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -327,15 +327,15 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr ""
+msgstr "הכוהנים התבודדו בהתבוננות, וסיבת עליית המים נמצאה עד מהרה: האל לוטאס איבד את אמונו באטלנטים בשל חוצפת מלכם. הוא החליט לשלול את הזכויות שהוענקו למלך אג'נתול ולצאצאיו. וכך הוא קרא להם לשוב אל מתחת לים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "מהומה ומבוכה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "כאוס מתחולל…"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:166
@@ -344,7 +344,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "מיוסר באשמה, המלך שם קץ לחייו. ללא מלך, העם פנה אל הכוהנים, אך לא היה בידיהם סיוע ממשי להציע. רובם השלימו עם גורלם, ואחרים ניסו לשנות את דעת האל בהקרבת בעלי חיים במקדשו. אך ללא הועיל…"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:168
@@ -354,7 +354,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr ""
+msgstr "יונדלינה, בתו של המלך המנוח והכוהנת העליונה של האל, הייתה הכוהנת הנחושה מכולן. משלא שינו קורבנות רבים מספור את המצב, היא שכנעה את עצמה כי כדי לפייס את האל דרוש קורבן בעל ערך אישי רב. לכן היא הקריבה לו את אהובה מכול: את בעלה, אבי ילדה יחידה."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -366,22 +366,22 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr ""
+msgstr "אך גם זה לא שינה את דעת האל. המים המשיכו לעלות. כמעט מובאת לידי טירוף מרוב אשמה, כאב וזעם, יונדלינה הפכה לכופרת: בסתר היא אספה סביבה אנשים מן העם הפשוט, שלא השלימו עם החלטת הכוהנים לקבל את רצון האל. יחד איתם היא הציתה את המקדש וגנבה ספינה כדי לברוח מהשפעתו של האל על אטלנטיס. הקבוצה הקטנה הזו החלה להתפלל לסאטול, אל האש ואויבו המר ביותר של לוטאס."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr ""
+msgstr "בהשאירם מאחוריהם את אטלנטיס הגוססת ואת עברם, הם יצאו למסע למצוא מקום המוגן בידי האש ובטוח מפני הים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "The Princess’ Memoir"
-msgstr ""
+msgstr "זיכרונות הנסיכה"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "יונדלינה כותבת את זיכרונותיה"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:182
@@ -391,7 +391,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr ""
+msgstr "עזבנו את אטלנטיס והפלגנו מזרחה. נכנסנו לים האסור ביום השישי, בלי שהבחנו ברודפים כלשהם מאטלנטיס ובלי שלוטאס ניפץ את ספינתנו. עכשיו אנחנו מחוץ להישג ידו. יום אחד לאחר מכן הבחנו באי שנראה כי יש עליו אחד מאותם הרים יורקי אש. ראיתי בכך אות מאל האש, ועגנו לחופו."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:185
@@ -402,7 +402,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr ""
+msgstr "בילינו את השבוע האחרון בבניית שני מגדלי תצפית על ההרים הסמוכים לאזור הנחיתה שלנו, וכמובן — אולם לכולנו. יש בקבוצתנו בנאים מוכשרים מאוד, ואף על פי כן, המבנים אינם מגיעים לרמת האמנות שהייתה לנו באטלנטיס. אני מקווה שהם יעמדו בפני הגשם הבא. לפחות, המגדלים יזהירו אותנו אם ספינה מאטלנטיס עוקבת אחרינו, ואם האי מיושב, נראה את התוקפים זמן רב לפני שיגיעו."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:188
@@ -411,11 +411,11 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr ""
+msgstr "התבססנו על האי הזה. הצעד הבא כעת הוא להפוך אותו לבית. לדעתי עלינו להקים כלכלה בת-קיימא ולחקור את סביבתנו. קראתי למומחים ואפעל לפי עצתם."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "לופטומור וסידולוס מגיעים"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:192
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:227
@@ -432,7 +432,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:472
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "Jundlina"
-msgstr ""
+msgstr "יונדלינה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:194
@@ -441,11 +441,11 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr ""
+msgstr "שסאטול יחמם את שניכם. לופטומור, היית האדריכל המהולל ביותר באי. סידולוס, אתה לוחם ואסטרטג מנוסה. קראתי לכם לפניי לבקש את עצתכם: מה יש לעשות כדי להפוך את המקום הזה לביתנו החדש?"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "לופטומור מדבר"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:200
@@ -457,11 +457,11 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה! הדבר החשוב ביותר בבניית יישוב הוא חומרי הבנייה. יש כאן כמה עצים, לכן עלינו לבנות בתים לכמה כורתי עצים, וכמובן גם ליערנים, כדי שלא ייגמרו לנו העצים. אה, ואסור לנו לשכוח את המנסרה, שכן רוב המבנים אינם יכולים להיבנות מבולי עץ בלבד. מבנים חזקים יותר זקוקים גם לגרניט, ויש הרבה ממנו צפונית-מזרחית מכאן; עלינו רק לבנות מחצבה, ובנאי האבן שלי ייגשו לעבודה מיד."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "סידולוס מדבר"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -471,17 +471,17 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה! אני מסכים עם מה שלופטומור מציע. אנחנו זקוקים לאספקה טובה של חומרי בנייה, כי עלינו להרחיב את שטחנו במהירות. לא ארגיש בטוח באי הזה כל עוד לא ראינו את כל חופיו. הבאתי איתי הרבה אנשים טובים מאטלנטיס. העוצמה הצבאית זמינה. אנחנו רק זקוקים למקום מגורים כלשהו."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Jundlina is Satisfied"
-msgstr ""
+msgstr "יונדלינה שבעת רצון"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "זיכרונותיה של יונדלינה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:217
@@ -490,17 +490,17 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr ""
+msgstr "תשתית הבנייה שלנו הושלמה, ובילינו כמה ימים בוודא שכולם עובדים יחד כשורה. עכשיו יש עניינים דחופים אחרים. קראתי לקוליונדר, הטבח האישי שלי, לפניי כדי לקבל את עזרתו בסידור כמה דברים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "קוליונדר מגיע"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה. האם אוכל להועיל לך או לאל?"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -510,7 +510,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "יונדלינה משיבה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:229
@@ -520,11 +520,11 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr ""
+msgstr "שסאטול יחמם גם אותך, קוליונדר. כן, תהיתי אם יש דרך לרכז את ייצור המזון שלנו. אנחנו מפסידים הרבה תפוקה כי אנשינו רגילים להכין לעצמם מזון. אני מרגישה שאם נוכל לחלק את האחריות, זה יהיה טוב יותר לכולנו. אני רוצה לשמוע את דעתך בעניין."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "קוליונדר שקוע במחשבות"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:235
@@ -533,7 +533,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr ""
+msgstr "אה, אבל אני חושב שאי אפשר לשנות את זה לגמרי. הכנת המזון ואכילתו הן דברים מושרשים עמוק בנו, האטלנטים — זה טקס שאנחנו פשוט זקוקים לו לשם רווחתנו. אז אני מניח שאי אפשר לקחת את זה לגמרי מהיחידים."
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -543,7 +543,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "אבל אולי נמצא פשרה בתווך: מבחינתי, הכנת לחם היא משימה מטרידה. טחינת שורשי השחור והתירס לקמח, ואחר כך אפיית הלחם, זה מייגע ומשעמם; אני מרגיש שגישה תעשייתית יותר תועיל כאן. אני אישית הייתי שמח פשוט לקבל לחם טרי ישירות לביתי מדי יום."
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:241
@@ -554,32 +554,32 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "אוה, וחשוב אף יותר: עישון הדגים והבשר כדי לטהר אותם ולשפר את טעמם הוא דבר נורא. הבית שלי מתמלא עשן ומסריח במשך שבועות אחרי כן. אינך חושבת שאפשר לעשות זאת במבנה מיוחד שבו תופעות הלוואי לא משנות? אני חושב ששני הדברים האלה יתקבלו בברכה בקרב העם, ויקצרו את זמן הבישול בלי לגרוע מהטקס."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "יונדלינה מסכימה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "דבריך נשמעים חכמים בעיניי, קוליונדר. שיהיה כך אם כן."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "יונדלינה סוקרת את הדיווחים"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "נראה שייצור המזון שלנו הושלם, וכולם עובדים יחד יפה. זה באמת מתחיל להרגיש כמו בית כאן."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "איש בא אל יונדלינה"
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:266
@@ -590,7 +590,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה. שמי אופול, ואני האורג הבכיר של האגודה שנטשה יחד אתך את אטלנטיס ואת לוטאס. אני מגיע עם בשורה עצובה למדי: לא נותר לנו בד עכביש. אף חתיכה אחת לא נמצאת במחסנינו. האם תוכלי לסייע לאגודת האורגים בסידור בניית בית אריגה וחוות עכבישים? העכבישים מספקים את המשי המשובח ביותר, ואנו נייצר ממנו את בד העכביש המשובח ביותר."
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -598,7 +598,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr ""
+msgstr "אנו מציעים לייצר עבורך בתמורה גם את הגלימות לחיילים הצעירים ואת הגלימות המוזהבות לקצינים. תזדקקי להן בוודאות ברגע שתרצי לגייס חיילים חדשים."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -607,11 +607,11 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "שסאטול יחמם גם אותך, אופול. רציתי לדחות את ייצור בד העכביש, אבל אני מבינה את דחיפות העניין שלך. הצעתך נשמעת הוגנת בעיניי, אבנה עבורכם את בית האריגה ואת חוות העכבישים. אבנה גם את טוויית הזהב, כדי שהגלימות המוזהבות שתייצרו לא יהיו מוזהבות בשם בלבד."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
-msgstr ""
+msgstr "אופול מחפש את יונדלינה"
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:285
@@ -620,18 +620,18 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה! בית האריגה, טוויית הזהב וחוות העכבישים הושלמו ומתחילים את עבודתם ממש ברגע זה. אגודת האורגים אסירת תודה מאוד על תמיכתך, ואנו נעמוד במילתנו ונספק את הגלימה הראשונה בקרוב מאוד."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr ""
+msgstr "אלה בשורות טובות אכן, אופול. הכלכלה שלנו מתפתחת יפה מאוד. שוב לעבודתך עכשיו, אופול, ושסאטול יחמם אותך ואת כל חברי אגודתך!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "סידולוס מחפש את יונדלינה"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:301
@@ -642,33 +642,33 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה. שקלת לכרות משאבים בהרים סביבנו? אנחנו מתחילים להיגמר לנו הקוורץ והיהלומים למבנינו. כמו כן, נוכל להיעזר ביותר ברזל, זהב ובעיקר פחם. אם נמצא אספקה מספקת של סחורות אלה, נוכל להתחיל לייצר כלי נשק וכלים; זה יעזור לנו עד מאוד. כמובן, נזדקק למתיכים, לנפחיית נשק, לנפחיית שריון ולנפחיית כלים. ואולי אף יותר מכך."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "יונדלינה מהנהנת"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "שקלתי את זה, סידולוס. אני חושבת שהגיע הזמן. נהפוך את זה לעדיפות מעתה. תקבל את התעשייה שלך בקרוב!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "לופטומור מדווח"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה! השלמנו נפחיית כלים, ועכשיו נפחי הכלים שלנו יפיקו כלים חדשים תוך רגע."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "יונדלינה מזכירה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -677,11 +677,11 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "שסאטול יחמם גם אותך, לופטומור. אלה בשורות טובות לשמוע. עם זאת, זכור נא כי נפחי הכלים שלנו זקוקים לציוד של מסור. הכנת כלים היא בשבילנו אמנות, המחייבת כלי מדויק כמו מסור, לא פטיש גס כמו אצל השבטים האחרים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "יונדלינה כותבת מכתב"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:332
@@ -689,22 +689,22 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "קיבלתי בשורה שתעשיית הכרייה שלנו החלה לפעול. עכשיו, כשאנו מחשלים כלי נשק, אשלח מכתב לסידולוס להודיע לו שהגיע הזמן לבנות קסרקטין ולהתחיל לגייס חיילים."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "היום ראיתי את הטירונים הראשונים מתאספים מול הקסרקטין החדש. אם הכול יתנהל כשורה, הם אמורים לקבל את אימונם בקרוב."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Jundlina Summons Sidolus"
-msgstr ""
+msgstr "יונדלינה מזמנת את סידולוס"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:349
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "יונדלינה כועסת"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:351
@@ -713,11 +713,11 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr ""
+msgstr "מה זה מה שאני שומעת, סידולוס? הגיעו אליי דיווחים שחייליך מתנהגים שלא כשורה ומציקים לעם הפשוט. מה כל השטויות האלה? הם משרתי הטובה הכללית ואסור להם לנצל לרעה את כוחם. זה בלתי נסלח! הסבר לי את זה, בבקשה!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
-msgstr ""
+msgstr "סידולוס נראה חרוט"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:357
@@ -728,7 +728,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr ""
+msgstr "אני מסכים איתך, והענשתי את יוצרי הצרות בחומרה. אבל קשה מאוד להשקיט את אנשיי: הם משועממים ואין להם מה לעשות. הייתי רוצה להגביר את האימונים שלהם. אני חושב שיותר שגרה בחייהם תשאיר אותם עסוקים וממוקדים בתפקידם. אזדקק לצינוק ולמבוך עבורם. יש לי את התוכניות מוכנות, אבל אני מניח שהן לא יעלו בזול."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:363
@@ -737,11 +737,11 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr ""
+msgstr "אינני חוששת מהעלות והעמל, כל עוד זה משאיר את אנשיך במרחק. תקבל את מבניך. אבל דע לך שלא אסבול חייל סורר; אם דברים דומים יקרו שוב, אטיל עליך את האחריות עליהם. פטור."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "יונדלינה קיבלה מכתב"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:373
@@ -751,11 +751,11 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr ""
+msgstr "קיבלתי הזמנה מסידולוס. יום האימונים הראשון במבוך שהושלם זה עתה יתקיים מחר. גם הצינוק הושלם ויתחיל בעבודתו בקרוב. אני מצפה למחר; אני סקרנית מאוד לראות כיצד מאומנים חיילינו, ותוהה אם עומס העבודה הנוסף ירחיק אותם מלהציק לאוכלוסייה האזרחית."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
-msgstr ""
+msgstr "יונדלינה שוקלת את מצב הכלכלה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:382
@@ -763,7 +763,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr ""
+msgstr "אנשים מתלוננים על רחובות צפופים ותחבורה איטית. עלינו לסייע לסבלים שלנו על הדרכים. החלטתי לבנות חוות סוסים, כדי שהסוסים יוכלו לסייע בנשיאת הסחורות הכבדות."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:385
@@ -771,16 +771,16 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr ""
+msgstr "דרך נוספת להקל על העומס בדרכים שלנו היא לבנות מחסנים. כבר תבענו את ההר לעצמנו, ונראה לי רעיון טוב שיהיה מחסן על הרמה, כדי להימנע מהצורך להוביל הכול במעלה ובמורד המדרונות."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "תגלית מסוכנת"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "יונדלינה שקועה במחשבות"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:400
@@ -791,7 +791,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr ""
+msgstr "מצאנו מבנה ישן, הרוס ושרוף באש. אני מודאגת מאוד מהתגלית הזו. המבנה אינו דומה לשום סוג שראיתי אי פעם. הוא בוודאי לא תוכנן בידי אדריכל אטלנטי כלשהו שידוע לי עליו. המבנה גס, וההרכבה שלו רשלנית. אך החומרים עמידים מאוד: העץ ששימש בו נראה כאילו נשרף בדרך מוזרה לפני שנעשה בו שימוש כחומר בנייה — הוא קשה כאבן."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:403
@@ -800,7 +800,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr ""
+msgstr "המשמעויות מפחידות אותי. האם יש עוד אנשים על האי הזה? היכן הם אם כן? הם עובדים עם אש — האם גם הם מתפללים לסאטול? האם הם ידידים או אויבים? ומדוע המבנה שרוף? האם האי הזה חווה מלחמה? האם מלחמה מתחוללת בו כרגע?"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:406
@@ -808,15 +808,15 @@ msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
-msgstr ""
+msgstr "עלינו לשפר את יכולותינו הצבאיות. אם יש אויבים על האי, עלינו להיות מוכנים לקראת המפגש איתם. עלינו גם לחזק את ביצור גבולותינו."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Another Building"
-msgstr ""
+msgstr "מבנה נוסף"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:415
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "יונדלינה מודאגת"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:417
@@ -826,11 +826,11 @@ msgid ""
 "before and obviously it was militarized. I have to check on our military "
 "status with my generals. I will not allow that a potential enemy will find "
 "us unprepared."
-msgstr ""
+msgstr "מצאנו עוד מבנה אחד מהמלאכה המוזרה הזו. עדיין לא ראינו אף אחד מבוניו. אך ברור שהייתה כאן קהילה על האי הזה בעבר, וברור שהיא הייתה ממוגרת. עליי לבדוק את מצבנו הצבאי עם גנרלי. לא אתיר שאויב פוטנציאלי ימצא אותנו לא מוכנים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 msgid "One More Building"
-msgstr ""
+msgstr "עוד מבנה"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:428
@@ -841,11 +841,11 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr ""
+msgstr "ועוד אחד מהמבנים האלה. אנחנו יודעים כעת שהשבט שבנה אותם שלט פעם שליטה מלאה באי. אך אינני חוששת עוד כל כך מאויבים פוטנציאליים. אנחנו כבר יודעים כל כך הרבה על האי הזה, ואין זכר לכלכלה הישנה הזו. אני מתחילה להירגע, אך לא ארפה מערנותנו בהמשך חקר האי היפה הזה. אך בהיעדר סכנות ברורות, אני כבר מרגישה ממש בבית כאן."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "המים עולים!"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:442
@@ -854,11 +854,11 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr ""
+msgstr "שסאטול יציל אותנו! לוטאס עדיין מנסה להגיע אלינו. סייר הודיע לי שהאוקיינוס עולה במהירות. עלינו להגיע לקרקע גבוהה יותר, לפנות את כולם ולהעלות מהמפקדה אל ההרים כמה שיותר סחורות שנוכל. איך נוכל לברוח?"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:445
 msgid "A Young Man Approaches"
-msgstr ""
+msgstr "צעיר מתקרב"
 
 #. TRANSLATORS: Ostur
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:448
@@ -867,7 +867,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "שסאטול יחמם אותך, יונדלינה. שמי אוסטור ואני בונה ספינות. המצאתי סוג חדש של ספינה: קטנה יותר מאלה שהתרגלנו אליהן, אך חסונה בהרבה. אם נבנה אותן כשורה, אני בטוח שנוכל להפליג בהן מרחק ארוך בהרבה, ואולי להימלט מהשפעתו של לוטאס."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
@@ -875,11 +875,11 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr ""
+msgstr "אוסטור, אין לנו זמן. המים עולים מהר מדי, ואם נבנה את הספינות על החוף, הן ייעלמו בים לפני שיוכלו לצוף. אני חוששת שאבדנו!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Ostur Seems Confident"
-msgstr ""
+msgstr "אוסטור נראה בטוח בעצמו"
 
 #. TRANSLATORS: Ostur
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:468
@@ -888,14 +888,14 @@ msgid ""
 " at the top of the mountain. I suggest we build the ships in this lake and "
 "wait until the island drowns beneath us. Then we can sail away. It is a bold"
 " plan, but I think it could work."
-msgstr ""
+msgstr "חבר שלי חקר את האי בכוחות עצמו, וסיפר לי על אגם גדול בפסגת ההר. אני מציע שנבנה את הספינות באגם הזה, ונחכה עד שהאי יטבע מתחתינו. אז נוכל להפליג משם. זו תוכנית נועזת, אבל אני חושב שהיא יכולה להצליח."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr ""
+msgstr "שיערך האדום הוא אות מאל האש. אני אבטח בך ואתמוך בתוכניתך. הישרדותנו נתונה כעת בידיך, אוסטור."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:477
@@ -904,11 +904,11 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr ""
+msgstr "מהר עכשיו, אנחנו זקוקים לבית עבור אוסטור ליד האגם, ואנחנו זקוקים לקרשים, בולי עץ ובד עכביש לבנייה שם. שכחו מכל השאר, אנחנו זקוקים לסחורות האלה בראש ההר לפני שכל מחסנינו ייבלעו בים."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgid "Jundlina is Relieved"
-msgstr ""
+msgstr "יונדלינה מוקלת"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:488
@@ -918,32 +918,32 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "הלל לסאטול! אוסטור, בנאי הספינות הצעיר, הצליח. יש לנו שלוש ספינות — מעולם לא ראיתי חסונות מהן — עם מספיק מקום לשאת את כולנו וגם קצת סחורות. וההצלה הזו הגיעה בדיוק בזמן: לוטאס עומד לבלוע את שארית האי הזה, המים עולים מהר יותר משעה לשעה. אבל אנחנו יכולים להימלט כעת ולהתחיל מחדש במדינה כלשהי הרחק מכאן…"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:491
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr ""
+msgstr "אני צופה מסע ארוך, אך נמצא בסופו של דבר את ארץ סאטול. זה מה שהבטחתי לבני עמי. ולעצמי."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:492
 msgid "Congratulations"
-msgstr ""
+msgstr "ברכות"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:493
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "השלמת את המשימה הזאת. תוכל להמשיך לשחק אם תרצה, או לעבור למשימה הבאה."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "מבנה אבד!"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "איבדנו מבנה לים!"
