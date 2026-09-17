@@ -512,7 +512,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Päämajojen sotilasasetukset"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""

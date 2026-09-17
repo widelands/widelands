@@ -3529,7 +3529,7 @@ msgstr "Minimoi ikkuna"
 
 #: ../../../../src/ui/basic/window.cc:847
 msgid "Unminimize the window"
-msgstr ""
+msgstr "Poista ikkunan pienennys"
 
 #: ../../../../src/ui/basic/window.cc:857
 msgid "Pin the window"
@@ -9575,27 +9575,27 @@ msgstr "Kasvata määrää kymmenellä"
 
 #: ../../../../src/ui/game/marketwindow.cc:189
 msgid "Please select the player you want to trade with."
-msgstr ""
+msgstr "Valitse pelaaja, jonka kanssa haluat käydä kauppaa."
 
 #: ../../../../src/ui/game/marketwindow.cc:195
 msgid "Please select the wares you want to send and receive."
-msgstr ""
+msgstr "Valitse tuotteet, joita haluat lähettää ja vastaanottaa."
 
 #: ../../../../src/ui/game/marketwindow.cc:230
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ei ole sallittua vaihtaa enemmän kuin %d tuote erää kohden."
+msgstr[1] "Ei ole sallittua vaihtaa enemmän kuin %d tuotetta erää kohden."
 
 #: ../../../../src/ui/game/marketwindow.cc:239
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
-msgstr ""
+msgstr "Et voi lähettää etkä vastaanottaa samaa tuotetyyppiä (%s)."
 
 #: ../../../../src/ui/game/marketwindow.cc:245
 msgid "Propose the configured trade to the selected player"
-msgstr ""
+msgstr "Esitä määritettyä kauppaa valitulle pelaajalle."
 
 #: ../../../../src/ui/game/marketwindow.cc:313
 msgid ""
@@ -11977,7 +11977,7 @@ msgstr "Näytä vain merenkulut viestit"
 
 #: ../../../../src/wlapplication_options.cc:755
 msgid "Show Military Messages Only"
-msgstr ""
+msgstr "Näytä vain sotilasviestit"
 
 #: ../../../../src/wlapplication_options.cc:760
 msgid "Show Scenario Messages Only"
@@ -11993,7 +11993,7 @@ msgstr "Siirry laivaan"
 
 #: ../../../../src/wlapplication_options.cc:775
 msgid "Watch Ship"
-msgstr ""
+msgstr "Katso laivaa"
 
 #: ../../../../src/wlapplication_options.cc:780
 msgid "Open Ship Window"
