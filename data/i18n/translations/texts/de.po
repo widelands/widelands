@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-05-02 05:04+0000\n"
+"POT-Creation-Date: 2026-09-10 07:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023,2025\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -215,13 +215,13 @@ msgid "Elders"
 msgstr "Älteste"
 
 #: ../../../../data/txts/developers.lua:22
-#: ../../../../data/txts/developers.lua:423
+#: ../../../../data/txts/developers.lua:424
 msgid "Graphics"
 msgstr "Grafik"
 
 #: ../../../../data/txts/developers.lua:28
-#: ../../../../data/txts/developers.lua:367
-#: ../../../../data/txts/developers.lua:430
+#: ../../../../data/txts/developers.lua:368
+#: ../../../../data/txts/developers.lua:431
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -230,7 +230,7 @@ msgid "Scripting"
 msgstr "Skripterstellung"
 
 #: ../../../../data/txts/developers.lua:40
-#: ../../../../data/txts/developers.lua:438
+#: ../../../../data/txts/developers.lua:439
 msgid "Sound"
 msgstr "Ton"
 
@@ -246,103 +246,103 @@ msgstr "Sprachen"
 msgid "Coders"
 msgstr "Programmierer"
 
-#: ../../../../data/txts/developers.lua:152
+#: ../../../../data/txts/developers.lua:153
 msgid "Graphicians"
 msgstr "Grafiker"
 
-#: ../../../../data/txts/developers.lua:191
+#: ../../../../data/txts/developers.lua:192
 msgid "Musicians"
 msgstr "Musiker"
 
-#: ../../../../data/txts/developers.lua:210
+#: ../../../../data/txts/developers.lua:211
 msgid "Sound Effects"
 msgstr "Geräusche"
 
-#: ../../../../data/txts/developers.lua:226
+#: ../../../../data/txts/developers.lua:227
 msgid "Maps and Missions"
 msgstr "Karten und Missionen"
 
-#: ../../../../data/txts/developers.lua:264
+#: ../../../../data/txts/developers.lua:265
 msgid "Campaign Story"
 msgstr "Kampagnen"
 
-#: ../../../../data/txts/developers.lua:268
+#: ../../../../data/txts/developers.lua:269
 msgid "Barbarians"
 msgstr "Barbaren"
 
-#: ../../../../data/txts/developers.lua:276
+#: ../../../../data/txts/developers.lua:277
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../../../data/txts/developers.lua:283
+#: ../../../../data/txts/developers.lua:284
 msgid "Atlanteans"
 msgstr "Atlanter"
 
-#: ../../../../data/txts/developers.lua:291
+#: ../../../../data/txts/developers.lua:292
 msgid "Frisians"
 msgstr "Friesen"
 
-#: ../../../../data/txts/developers.lua:299
+#: ../../../../data/txts/developers.lua:300
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../../../data/txts/developers.lua:303
+#: ../../../../data/txts/developers.lua:304
 msgid "Debian Linux"
 msgstr "Debian Linux"
 
-#: ../../../../data/txts/developers.lua:309
+#: ../../../../data/txts/developers.lua:310
 msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
-#: ../../../../data/txts/developers.lua:317
+#: ../../../../data/txts/developers.lua:318
 msgid "Mandriva Linux"
 msgstr "Mandriva Linux"
 
-#: ../../../../data/txts/developers.lua:323
+#: ../../../../data/txts/developers.lua:324
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../../../data/txts/developers.lua:329
+#: ../../../../data/txts/developers.lua:330
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: ../../../../data/txts/developers.lua:336
+#: ../../../../data/txts/developers.lua:337
 msgid "Mac OS X"
 msgstr "Mac OS X"
 
-#: ../../../../data/txts/developers.lua:348
+#: ../../../../data/txts/developers.lua:349
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../../../data/txts/developers.lua:359
+#: ../../../../data/txts/developers.lua:360
 msgid "ZetaOS"
 msgstr "Zeta"
 
-#: ../../../../data/txts/developers.lua:371
+#: ../../../../data/txts/developers.lua:372
 msgid "Homepage Coders"
 msgstr "Homepageentwickler"
 
-#: ../../../../data/txts/developers.lua:382
+#: ../../../../data/txts/developers.lua:383
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentation, Hilfe und Wiki"
 
-#: ../../../../data/txts/developers.lua:400
+#: ../../../../data/txts/developers.lua:401
 msgid "Add-Ons"
 msgstr "Erweiterungen"
 
-#: ../../../../data/txts/developers.lua:419
+#: ../../../../data/txts/developers.lua:420
 msgid "Former Elders"
 msgstr "Ehemalige Älteste"
 
-#: ../../../../data/txts/developers.lua:445
+#: ../../../../data/txts/developers.lua:446
 msgid "Translation"
 msgstr "Sprachen"
 
-#: ../../../../data/txts/developers.lua:454
+#: ../../../../data/txts/developers.lua:455
 msgid "Other"
 msgstr "Sonstiges"
 
-#: ../../../../data/txts/developers.lua:462
+#: ../../../../data/txts/developers.lua:463
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "und viele, viele andere (vielen Dank für alles, was ihr beigetragen habt)"
 
@@ -402,24 +402,24 @@ msgid ""
 msgstr "Mit der Option „Aufzeichnung abspielen“ im Hauptmenü wird ein früher gespieltes Spiel genauso nochmals vorgespielt. Beachte aber, dass auch bei kleinen Änderungen im Spieldatensatz oder in der Widelands-Ausführungsdatei (widelands.exe) eine Aufzeichnung inkompatibel sein kann oder „out of sync“ geht. Das ist ähnlich wie bei Netzwerkspielen, die unter einem Zeitversatz leiden können (laggen), wenn die Spieler mit unterschiedlichen Versionen spielen."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
-#, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
 "be useful as attachments to bug reports. The replay files are saved in the "
-"%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
-"subdirectory of your Widelands installation."
-msgstr "Aufzeichnungen sind ein sehr nützliches Werkzeug, um Fehler in der Spiellogik zu finden, daher können sie als Anhang zu einer Fehlermeldung nützlich sein. Die Wiedergabedateien sind im Verzeichnis %s auf Linux und Mac OS X gespeichert. Bei Windows befinden sie sich im „replays“-Unterverzeichnis deiner Widelands-Installation."
+"‘replays’ subdirectory of the Widelands home directory. You may look in the "
+"last tab \"Technical Information\" of this window to see where this "
+"directory is located on your computer."
+msgstr ""
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../../../data/txts/help/common_helptexts.lua:41
+#: ../../../../data/txts/help/common_helptexts.lua:40
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#: ../../../../data/txts/help/common_helptexts.lua:48
-#: ../../../../data/txts/help/common_helptexts.lua:57
-#: ../../../../data/txts/help/common_helptexts.lua:67
+#: ../../../../data/txts/help/common_helptexts.lua:47
+#: ../../../../data/txts/help/common_helptexts.lua:56
+#: ../../../../data/txts/help/common_helptexts.lua:66
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 

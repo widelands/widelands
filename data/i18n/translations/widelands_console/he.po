@@ -20,14 +20,14 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../../../src/wlapplication_messages.cc:55
 #: ../../../../src/wlapplication_messages.cc:87
 #: ../../../../src/wlapplication_messages.cc:92
 #: ../../../../src/wlapplication_messages.cc:113
 msgid "FILENAME"
-msgstr ""
+msgstr "שם_קובץ"
 
 #. * TRANSLATORS: Used instead of a file name indicating last savegame, replay
 #. or map.
@@ -35,72 +35,72 @@ msgstr ""
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "אחרון"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
-msgstr ""
+msgstr "שימוש:"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../../../src/wlapplication_messages.cc:67
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:69
 #: ../../../../src/wlapplication_messages.cc:71
 #: ../../../../src/wlapplication_messages.cc:76
 #: ../../../../src/wlapplication_messages.cc:250
 msgid "DIRNAME"
-msgstr ""
+msgstr "שם_תיקייה"
 
 #: ../../../../src/wlapplication_messages.cc:69
 msgid "Options:"
-msgstr ""
+msgstr "אפשרויות:"
 
 #: ../../../../src/wlapplication_messages.cc:70
 msgid "Use the specified directory for the Widelands data files."
-msgstr ""
+msgstr "השתמש בתיקייה שצוינה עבור קובצי הנתונים של Widelands."
 
 #: ../../../../src/wlapplication_messages.cc:72
 #, c-format
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr ""
+msgstr "השתמש בתיקייה שצוינה עבור קובצי ההגדרות, המשחקים השמורים וההקלטות של Widelands. ברירת המחדל היא `%s`."
 
 #: ../../../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr ""
+msgstr "השתמש בתיקייה שצוינה עבור קובצי השפה של Widelands."
 
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
-msgstr ""
+msgstr "השתמש בשפה שצוינה."
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../../../src/wlapplication_messages.cc:83
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr ""
+msgstr "אל תבדוק אם תיקיית הנתונים בשימוש תואמת לגרסת Widelands זו."
 
 #: ../../../../src/wlapplication_messages.cc:88
 #, c-format
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr ""
+msgstr "צור משחק חדש ישירות עם ההגדרות שהוגדרו בקובץ הנתון. ניתן למצוא דוגמה ב-`%s`."
 
 #: ../../../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
-msgstr ""
+msgstr "התחל את המפה `שם_קובץ` ישירות כתרחיש יחיד-שחקן."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -108,7 +108,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "טען את המשחק השמור `%1$s` ישירות, או את המשחק האחרון שנשמר אם משתמשים ב-`=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -116,7 +116,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "טען את ההקלטה `%1$s` ישירות, או את ההקלטה האחרונה שנשמרה אם משתמשים ב-`=%2$s`."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -126,13 +126,13 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "הפעל את עורך המפות של Widelands ישירות. ניתן להוסיף `=%1$s` כדי לטעון ישירות את המפה `שם_קובץ` בעורך, או `=%2$s` כדי לטעון את המפה האחרונה שנערכה."
 
 #: ../../../../src/wlapplication_messages.cc:114
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor."
-msgstr ""
+msgstr "הרץ את סקריפט ה-Lua הנתון לאחר האתחול. תקף רק יחד עם ‎--scenario‎, ‎--loadgame‎ או ‎--editor‎."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../../../src/wlapplication_messages.cc:120
@@ -147,20 +147,20 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:265
 #: ../../../../src/wlapplication_messages.cc:270
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:122
 msgid "Start the scenario with difficulty `n`. Only valid with --scenario."
-msgstr ""
+msgstr "התחל את התרחיש ברמת קושי `n`. תקף רק יחד עם ‎--scenario‎."
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Start the game with sound disabled."
-msgstr ""
+msgstr "התחל את המשחק כשהצליל כבוי."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Start the game with shuffle mode for playback of songs"
-msgstr ""
+msgstr "התחל את המשחק במצב ניגון אקראי של שירים"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -176,83 +176,83 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:244
 #: ../../../../src/wlapplication_messages.cc:253
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:130
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "נגן את מוזיקת הפתיחה בעת ההפעלה והצג את תמונת הפתיחה עד סיומה."
 
 #: ../../../../src/wlapplication_messages.cc:131
 msgid "Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr "גרום ל-Widelands לקרוס כאשר מתרחשת שגיאת Lua."
 
 #: ../../../../src/wlapplication_messages.cc:133
 msgid ""
 "Force Widelands to crash when a game or the editor terminates with an error."
-msgstr ""
+msgstr "גרום ל-Widelands לקרוס כאשר משחק או העורך מסתיימים בשגיאה."
 
 #. * TRANSLATORS: Placeholder for a time value in seconds
 #: ../../../../src/wlapplication_messages.cc:136
 msgid "<seconds>"
-msgstr ""
+msgstr "<seconds>"
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid ""
 "Automatically close modal message boxes after the given number of seconds "
 "time."
-msgstr ""
+msgstr "סגור אוטומטית תיבות הודעה מודליות לאחר מספר השניות הנתון."
 
 #: ../../../../src/wlapplication_messages.cc:138
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "מחק הקלטות אוטומטית לאחר `n` שבועות."
 
 #: ../../../../src/wlapplication_messages.cc:140
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr ""
+msgstr "הפעל מצב אימון בינה מלאכותית. ראו https://www.widelands.org/wiki/Ai%20Training/ לתיאור מלא של לוגיקת האימון."
 
 #: ../../../../src/wlapplication_messages.cc:144
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr ""
+msgstr "התאם באופן קבוע ואוטומטי את מהירות המשחק בהתאם לעיכוב הבינה המלאכותית. לשימוש בבדיקות/אימון בינה מלאכותית בלבד (יחד עם ‎--ai_training‎)."
 
 #: ../../../../src/wlapplication_messages.cc:149
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "הפעל את מסוף הסקריפטים ומצב הרמאות."
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Game options:"
-msgstr ""
+msgstr "אפשרויות משחק:"
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Note: New values will be written to the config file."
-msgstr ""
+msgstr "הערה: ערכים חדשים ייכתבו לקובץ ההגדרות."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:157
 msgid "Automatically save each `n` minutes."
-msgstr ""
+msgstr "שמור אוטומטית כל `n` דקות."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:160
 msgid "Use `n` files for rolling autosaves."
-msgstr ""
+msgstr "השתמש ב-`n` קבצים לשמירות אוטומטיות מתחלפות."
 
 #: ../../../../src/wlapplication_messages.cc:162
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "אל תיצור שמירה אוטומטית אם המשתמש אינו פעיל מאז השמירה האוטומטית האחרונה."
 
 #: ../../../../src/wlapplication_messages.cc:164
 msgid "Do not save files as binary zip archives."
-msgstr ""
+msgstr "אל תשמור קבצים כארכיוני zip בינאריים."
 
 #: ../../../../src/wlapplication_messages.cc:165
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "שמור קבצים כארכיוני zip בינאריים."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -268,34 +268,34 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:248
 #: ../../../../src/wlapplication_messages.cc:260
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../../../src/wlapplication_messages.cc:171
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "האם לשמור לקובץ את היסטוריית הודעות הצ׳אט שנשלחו."
 
 #: ../../../../src/wlapplication_messages.cc:173
 msgid "Show filenames in the replay screen."
-msgstr ""
+msgstr "הצג שמות קבצים במסך ההקלטות."
 
 #: ../../../../src/wlapplication_messages.cc:175
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr ""
+msgstr "האם להציג אזהרה בעורך כאשר יש יותר מדי שחקנים."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:179
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "השהה את המשחק לאחר `n` דקות של חוסר פעילות מהמשתמש."
 
 #: ../../../../src/wlapplication_messages.cc:181
 msgid "Start building a road after placing a flag."
-msgstr ""
+msgstr "התחל לסלול דרך אחרי הצבת דגל."
 
 #: ../../../../src/wlapplication_messages.cc:185
 msgid "Bitmask of display flags to set for new games."
-msgstr ""
+msgstr "מסכת-סיביות (bitmask) של דגלי תצוגה שיוגדרו למשחקים חדשים."
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -308,92 +308,92 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:215
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../../../src/wlapplication_messages.cc:195
 msgid "Scroll when the mouse cursor is near the screen edge."
-msgstr ""
+msgstr "גלול כאשר סמן העכבר קרוב לקצה המסך."
 
 #: ../../../../src/wlapplication_messages.cc:197
 msgid "Invert click-and-drag map movement direction."
-msgstr ""
+msgstr "הפוך את כיוון תזוזת המפה בגרירת-עכבר."
 
 #: ../../../../src/wlapplication_messages.cc:199
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr ""
+msgstr "אפשר גלילה אלכסונית עם המקלדת המספרית."
 
 #: ../../../../src/wlapplication_messages.cc:200
 msgid "Display system time in the info panel."
-msgstr ""
+msgstr "הצג את שעון המערכת בלוח המידע."
 
 #: ../../../../src/wlapplication_messages.cc:201
 msgid "Use single watchwindow mode."
-msgstr ""
+msgstr "השתמש במצב חלון-צפייה יחיד."
 
 #: ../../../../src/wlapplication_messages.cc:203
 msgid "Show in-game chat with transparent background."
-msgstr ""
+msgstr "הצג את הצ׳אט במשחק עם רקע שקוף."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Bitmask to set the toolbar location and mode."
-msgstr ""
+msgstr "מסכת-סיביות (bitmask) לקביעת מיקום ומצב סרגל הכלים."
 
 #: ../../../../src/wlapplication_messages.cc:205
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "גודל עמוד ברירת מחדל למבנים מחולקים לעמודים."
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "Networking:"
-msgstr ""
+msgstr "רשת:"
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../../../../src/wlapplication_messages.cc:208
 msgid "Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr "התחבר לשרת-מטא אחר למשחק ברשת."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:211
 msgid "Port number `n` of the metaserver for internet gaming."
-msgstr ""
+msgstr "מספר הפורט `n` של שרת-המטא למשחק ברשת."
 
 #: ../../../../src/wlapplication_messages.cc:212
 msgid "The name of the last hosted game."
-msgstr ""
+msgstr "שם המשחק המאורח האחרון."
 
 #: ../../../../src/wlapplication_messages.cc:213
 msgid "The nickname used for LAN and online games."
-msgstr ""
+msgstr "הכינוי המשמש למשחקי LAN ומשחקים מקוונים."
 
 #: ../../../../src/wlapplication_messages.cc:214
 msgid "Name of map author."
-msgstr ""
+msgstr "שם יוצר המפה."
 
 #: ../../../../src/wlapplication_messages.cc:215
 msgid "The last host connected to."
-msgstr ""
+msgstr "המארח האחרון שאליו התחברת."
 
 #: ../../../../src/wlapplication_messages.cc:217
 msgid "Whether the used metaserver login is for a registered user."
-msgstr ""
+msgstr "האם ההתחברות לשרת-המטא בשימוש היא של משתמש רשום."
 
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "The hashed password for online logins."
-msgstr ""
+msgstr "הסיסמה המוצפנת (hashed) להתחברויות מקוונות."
 
 #: ../../../../src/wlapplication_messages.cc:219
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../../../../src/wlapplication_messages.cc:220
 msgid "Connect to a different server address from the add-ons manager."
-msgstr ""
+msgstr "התחבר לכתובת שרת אחרת ממנהל התוספים."
 
 #: ../../../../src/wlapplication_messages.cc:222
 msgid "Connect to a different server port from the add-ons manager."
-msgstr ""
+msgstr "התחבר לפורט שרת אחר ממנהל התוספים."
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in
@@ -402,133 +402,133 @@ msgstr ""
 #. players.
 #: ../../../../src/wlapplication_messages.cc:228
 msgid "Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr "צור קובצי dump של syncstream כדי לסייע באיתור תקלות במשחקי רשת."
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Graphic options:"
-msgstr ""
+msgstr "אפשרויות גרפיקה:"
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "השתמש בכל התצוגה עבור מסך המשחק."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "התחל את המשחק בחלון מוגדל למקסימום."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../../../src/wlapplication_messages.cc:236
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../../../src/wlapplication_messages.cc:238
 msgid "Width `x` of the window in pixel."
-msgstr ""
+msgstr "רוחב `x` של החלון בפיקסלים."
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../../../src/wlapplication_messages.cc:241
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../../../src/wlapplication_messages.cc:243
 msgid "Height `y` of the window in pixel."
-msgstr ""
+msgstr "גובה `y` של החלון בפיקסלים."
 
 #: ../../../../src/wlapplication_messages.cc:245
 msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "האם לתת למערכת לצייר את סמן העכבר. השבת רק אם הסמן לא מוצג כראוי, או אם ברצונך שיהיה גלוי בצילומי מסך או הקלטות מסך."
 
 #: ../../../../src/wlapplication_messages.cc:248
 msgid "Whether to use sticky tooltips."
-msgstr ""
+msgstr "האם להשתמש בטיפים-צפים דביקים (sticky tooltips)."
 
 #: ../../../../src/wlapplication_messages.cc:251
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
-msgstr ""
+msgstr "הנתיב לערכת העיצוב הפעילה של הממשק, יחסית לתיקיית הבית של Widelands."
 
 #: ../../../../src/wlapplication_messages.cc:253
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "אפשרויות למנהל החלונות הפנימי:"
 
 #: ../../../../src/wlapplication_messages.cc:254
 msgid "Whether automatic map movements should be animated."
-msgstr ""
+msgstr "האם תזוזות מפה אוטומטיות צריכות להיות מונפשות."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:257
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr ""
+msgstr "הזז חלון לקצה המסך כאשר קצה החלון מגיע למרחק `n` מקצה המסך."
 
 #: ../../../../src/wlapplication_messages.cc:261
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr ""
+msgstr "בטל את מסגרת החלון בפניה לקצה המסך כאשר קצה החלון סמוך לקצה המסך."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr ""
+msgstr "הזז חלון לקצה הלוח כאשר קצה החלון מגיע למרחק `n` מקצה הלוח."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:272
 msgid ""
 "The factor by which to fractionally scale the Widelands user interface, in "
 "quarters."
-msgstr ""
+msgstr "הגורם שבו יש להגדיל בחלקיות את ממשק המשתמש של Widelands, ברבעים."
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "הפעל הודעות דיבוג מפורטות"
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Others:"
-msgstr ""
+msgstr "אחר:"
 
 #: ../../../../src/wlapplication_messages.cc:277
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr ""
+msgstr "הדפס את כל המחרוזות כפי שהן מתורגמות. זה מסייע באיתור תקלות בבינאום."
 
 #: ../../../../src/wlapplication_messages.cc:280
 msgid "Only print version and exit."
-msgstr ""
+msgstr "הדפס רק את הגרסה וצא."
 
 #: ../../../../src/wlapplication_messages.cc:281
 msgid "Show this help."
-msgstr ""
+msgstr "הצג עזרה זו."
 
 #: ../../../../src/wlapplication_messages.cc:282
 msgid "Show this help with all available config options."
-msgstr ""
+msgstr "הצג עזרה זו עם כל אפשרויות ההגדרה הזמינות."
 
 #: ../../../../src/wlapplication_messages.cc:283
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:284
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "טען את המשחק השמור או ההקלטה הנתונים ישירות. שימושי לשיוך סיומות קבצים ‎.wgf‎/‎.wry‎. אינו פועל עם אפשרויות אחרות. ראו גם ‎--loadgame‎/‎--replay‎."
 
 #. * TRANSLATORS: %s = version information
 #: ../../../../src/wlapplication_messages.cc:319
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "זוהי גרסת Widelands %s"
 
 #: ../../../../src/wlapplication_messages.cc:377
 msgid ""
@@ -536,4 +536,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "דיווחי באגים? הצעות? בקרו באתר הפרויקט:\n        https://www.widelands.org/\n\nמקווים שתיהנו מהמשחק!"
