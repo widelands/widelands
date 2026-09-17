@@ -85,7 +85,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 			// first, clear all world add-ons…
 			std::vector<std::shared_ptr<AddOns::AddOnInfo>> desired_world_addons;
 			for (auto it = addons->begin(); it != addons->end();) {
-				if ((*it)->category == AddOns::AddOnCategory::kWorld) {
+				if ((*it)->acts_as(AddOns::AddOnCategory::kWorld)) {
 					desired_world_addons.push_back(*it);
 					it = addons->erase(it);
 				} else {
@@ -105,7 +105,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 							         AddOns::version_to_string(requirement.second).c_str(),
 							         AddOns::version_to_string(pair.first->version).c_str());
 						}
-						assert(pair.first->category == AddOns::AddOnCategory::kWorld);
+						assert(pair.first->acts_as(AddOns::AddOnCategory::kWorld));
 						addons->push_back(pair.first);
 						desired_world_addons.erase(std::remove(desired_world_addons.begin(),
 						                                       desired_world_addons.end(), pair.first),

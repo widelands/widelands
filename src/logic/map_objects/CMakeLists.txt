@@ -31,7 +31,6 @@ wl_library(logic_tribe_basic_info
     io_filesystem
     logic_addons
     logic_exceptions
-    logic_filesystem_constants
     scripting_lua_table
     scripting_lua_interface
 )
@@ -223,7 +222,6 @@ wl_library(logic_map_objects
     commands # TODO(GunChleoc): Circular dependency
     logic_constants
     logic_exceptions
-    logic_filesystem_constants
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
     logic_map_object_type

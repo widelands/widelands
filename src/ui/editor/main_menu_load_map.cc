@@ -85,15 +85,22 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
 		/* translate directory names */
 		std::string& addon = result.at(1);
 		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
-		std::string profilepath = kAddOnDir;
-		profilepath += FileSystem::file_separator();
-		profilepath += addon;
-		profilepath += FileSystem::file_separator();
+
+		const AddOns::AddOnInfo* addon_info = AddOns::find_addon(addon);
+		if (addon_info == nullptr) {
+			throw wexception("Could not find add-on %s (needed for displaydir %s)", addon.c_str(),
+			                 display_dir.c_str());
+		}
+		const std::string addon_basedir = addon_info->basedir_for(AddOns::AddOnCategory::kMaps);
+
+		std::string profilepath = addon_basedir;
 		profilepath += "dirnames";
 		Profile p(profilepath.c_str());
 
 		/* strip away addons/<addon-name>/ */
-		result.erase(result.begin(), result.begin() + 2);
+		result.erase(
+		   result.begin(), result.begin() + std::count(addon_basedir.begin(), addon_basedir.end(),
+		                                               FileSystem::file_separator()));
 
 		if (Section* s = p.get_section("global")) {
 			for (auto& fname : result) {

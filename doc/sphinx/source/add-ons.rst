@@ -55,6 +55,7 @@ Categories
 - `starting_condition`_
 - `ui_plugin`_
 - `theme`_
+- `combo`_
 
 
 tribes
@@ -143,12 +144,22 @@ The add-on needs to contain one or more scripts called ``<tribename>.lua`` which
 
 ui_plugin
 ~~~~~~~~~
+.. versionadded:: 1.2
+
 A plugin for the graphical user interface. The add-on needs to contain a script called ``init.lua`` which will be run once upon creating the interactive game base or the editor. The script can then modify the user interface using the :doc:`UI scripting API <autogen_wl_ui>`.
 
 
 theme
 ~~~~~
 A UI theme. See :doc:`themes` for details.
+
+
+combo
+~~~~~
+.. versionadded:: 1.4
+
+A combo add-on combines multiple different kinds of add-ons into one. The add-on directory contains one subdirectory for each category of add-on that it provides, which must be named like the provided category (e.g. ``addons/example.wad/tribes/`` and ``addons/example.wad/starting_condition/``).
+
 
 Keyboard Shortcuts
 ------------------
@@ -162,6 +173,16 @@ Each shortcut definition :class:`table` contains the following keys:
 * ``scopes``: An :class:`array` of the scopes in which the shortcut is valid. This is used to detect clashes with other shortcuts. Valid scopes are ``"game"``, ``"editor"``, ``"main_menu"``, and ``"global"``. Each shortcut definition must have at least one scope.
 * ``keycode``: The default keyboard shortcut keycode name.
 * ``mods`` *Optional*: An :class:`array` of the modifiers keys in the default keyboard shortcut. Valid modifiers are ``"control"`` (also known as ``"ctrl"``), ``"shift"``, ``"alt"``, and ``"gui"`` (also known as ``"super"``, ``"meta"``, ``"cmd"``, ``"command"``, or ``"windows"``).
+
+
+Encyclopedia Integration
+------------------------
+
+Since Widelands version 1.4, add-ons can add custom entries to the in-game/in-editor encyclopedia. To do so, the add-on must create a script called ``encyclopedia.lua`` in the add-on directory, which returns an :class:`array` of entry definition tables.
+
+Each entry definition :class:`table` contains all the keys of a regular encyclopedia Entry table and optionally the key:
+
+* ``tab_name`` *(optional)*: The name of the encyclopedia tab in which this entry appears (default ``"addons"``).
 
 
 Restrictions

@@ -158,7 +158,12 @@ static std::string resolve_and_fix_cross_file(const std::string& path) {
 		// normal case
 		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
 	}  // add-on
-	return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
+
+	const AddOns::AddOnInfo* addon = AddOns::find_addon(path.substr(0, colonpos));
+	if (addon == nullptr) {
+		throw wexception("Failed to resolve add-on path '%s': Add-on not found", path.c_str());
+	}
+	return g_fs->FileSystem::fix_cross_file(addon->basedir_for(AddOns::AddOnCategory::kCampaign) +
 	                                        path.substr(colonpos + 1));
 }
 

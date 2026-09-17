@@ -25,6 +25,7 @@
 
 #include "base/string.h"
 #include "game_io/game_preload_packet.h"
+#include "logic/filesystem_constants.h"
 #include "ui/shared/savegamedata.h"
 
 class SavegameLoader {

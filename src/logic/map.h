@@ -39,7 +39,6 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-class FileSystem;
 struct S2MapLoader;
 
 namespace Widelands {

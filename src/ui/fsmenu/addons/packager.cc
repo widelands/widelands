@@ -408,7 +408,7 @@ void AddOnsPackager::clicked_new_addon() {
 		a.unlocalized_description = "No description";
 		a.unlocalized_author = get_config_string("realname", pgettext("author_name", "Unknown"));
 		a.version = {1, 0, 0};
-		a.category = category.get_selected();
+		a.set_category(category.get_selected());
 
 		mutable_addons_[name] = AddOns::MutableAddOn::create_mutable_addon(a);
 		addons_with_changes_[name] = false;

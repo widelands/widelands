@@ -92,9 +92,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 						   AddOns::version_to_string(requirement.second).c_str(),
 						   AddOns::version_to_string(pair.first->version).c_str());
 					}
-					assert(pair.first->category == AddOns::AddOnCategory::kWorld ||
-					       pair.first->category == AddOns::AddOnCategory::kTribes ||
-					       pair.first->category == AddOns::AddOnCategory::kScript);
+					assert(pair.first->acts_as(AddOns::AddOnCategory::kWorld) ||
+					       pair.first->acts_as(AddOns::AddOnCategory::kTribes) ||
+					       pair.first->acts_as(AddOns::AddOnCategory::kScript));
 					game_.enabled_addons().push_back(pair.first);
 					break;
 				}

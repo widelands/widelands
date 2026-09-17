@@ -87,6 +87,7 @@ const std::string kAddOnIconFile = "icon.png";
 const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string kAddOnLocaleVersions = "addons_i18n_versions";
 const std::string kAddOnKeyboardShortcutsFile = "shortcuts.lua";
+const std::string kAddOnEncyclopediaFile = "encyclopedia.lua";
 
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";
