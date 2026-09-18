@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one liana between %1$s and %2$s, depending on how "
 "far the liana cutter has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden liaanin välillä %1$s ja %2$s riippuen siitä, miten paljon liaaninleikkaaja joutuu kävelemään."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
@@ -1340,7 +1340,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden vesiämpärin välillä %1$s ja %2$s keskimäärin riippuen siitä, miten paljon kantaja joutuu kävelemään."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1405,7 +1405,7 @@ msgstr "Tutkii tuntemattomia alueita."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1434
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Tiedustelijoiden tutkimusmatka kestää välillä %1$s ja %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1437,7 +1437,7 @@ msgstr "Valmistaa liaaneista köysiä."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The rope weaver booth needs %s on average to produce one rope."
-msgstr ""
+msgstr "Köydenkutoja tarvitsee %s keskimäärin tuottaakseen yhden köyden."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
 #: ../../../../data/tribes/initialization/amazons/units.lua:1459
@@ -1938,7 +1938,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden lautan välillä %1$s ja %2$s riippuen siitä, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../../../data/tribes/initialization/amazons/units.lua:1750
@@ -4282,7 +4282,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden graniitin välillä %1$s ja %2$s riippuen siitä, miten paljon kivenhakkaaja joutuu kävelemään."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4360,7 +4360,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden tukin välillä %1$s ja %2$s riippuen siitä, miten paljon puunhakkaaja joutuu kävelemään."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4409,7 +4409,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Metsänhoitaja istuttaa yhden puun välillä %1$s ja %2$s riippuen siitä, miten paljon hän joutuu kävelemään."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4439,7 +4439,7 @@ msgstr "Rakenna kalankasvattajan mökki lähelle kalastajatorppaa varmistaaksesi
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1551
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät kalastamisen."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -4505,7 +4505,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder can breed one fish between %1$s and %2$s, depending on how "
 "far he has to walk."
-msgstr ""
+msgstr "Kalankasvattaja kasvattaa yhden kalan välillä %1$s ja %2$s riippuen siitä, miten paljon hän joutuu kävelemään."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's
 #. House
@@ -4548,7 +4548,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden lihan välillä %1$s ja %2$s riippuen siitä, miten paljon metsästäjän täytyy kävellä."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4682,7 +4682,7 @@ msgstr "Lähetti vastaa sotilaalle"
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1659
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Tiedustelijoiden tutkimusmatka kestää välillä %1$s ja %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
