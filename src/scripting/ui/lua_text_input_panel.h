@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_TEXT_INPUT_PANEL_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/textinput.h"
+#include "ui/basic/textinput.h"
 
 namespace LuaUi {
 

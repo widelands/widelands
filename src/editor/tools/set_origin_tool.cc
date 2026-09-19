@@ -18,7 +18,7 @@
 
 #include "editor/tools/set_origin_tool.h"
 
-#include "editor/editorinteractive.h"
+#include "ui/editor/editorinteractive.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                EditorActionArgs* /* args */,

@@ -8,6 +8,7 @@
 # C Jimmy, 2023
 # Renaud Bouchard, 2023
 # David D, 2023
+# Loïc T, 2026
 # 
 msgid ""
 msgstr ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: David D, 2023\n"
+"Last-Translator: Loïc T, 2026\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr "Transport"
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
-"Quatre pelles destinées a supprimer les marais ont étés colléctées à "
+"Quatre pelles destinées à supprimer les marais ont été collectées à "
 "l'entrepôt."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
@@ -53,8 +54,8 @@ msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr ""
-"Quatre nouvelles pelles destinées a supprimer les marais ont étés colléctées"
-" à l'entrepôt."
+"Quatre nouvelles pelles destinées à supprimer les marais ont été collectées "
+"à l'entrepôt."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"

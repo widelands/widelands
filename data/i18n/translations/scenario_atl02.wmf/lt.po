@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,35 +51,40 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Raskite vietą uostui pastatyti"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Raskite vietą uostui"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Kad galėtume išsilapinti šioje saloje, pirmiausia turime rasti vietą, "
+"kurioje būtų galima pastatyti uostą. Ištirkite netoliese esančią pakrantę, "
+"kad surastumėte tinkamą sklypą."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Kai uostas bus pastatytas, turėtume atšaukti kito laivo ekspediciją, kad "
+"galėtume iškrauti ir jo prekes."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Užtikrinkite statybinių medžiagų tiekimą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Sukurkite pagrindinę gamybos grandinę"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -83,14 +92,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Mums prireiks bent akmens skaldyklos, kelių medkirčių ir lentpjūvės. "
+"Miškininko gali prireikti arba ne, priklausomai nuo to, kaip greitai aplink "
+"auga medžiai. Raskite pusiausvyrą."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Greitai pagaminkite įrankių"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Pagaminkite naujų įrankių"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -100,14 +112,18 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"Dauguma mūsų įrankių buvo pamesti per laivo tragediją. Mūsų žmonės negalės "
+"atlikti savo pareigų be tinkamų įrankių. Laimei, mes vis dar turime šiek "
+"tiek geležies rūdos ir daug anglies. Sukurkite įrankių kalvį, nes tai yra "
+"būtina sėkmės saloje sąlyga. Nepamirškite pastatyti ir lydymo darbų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Ieškokite išteklių kalnuose"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Statykite kasyklas"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -115,14 +131,17 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Kadangi vėl galime gaminti įrankius, netrukus turėsime papildyti kasybos "
+"išteklių atsargas. Ištirkite kalnus ir pastatykite bent po vieną kiekvienos "
+"rūšies kasyklą angliai, geležiai ir auksui išgauti."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Tyrinėkite aplinką"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Tyrinėkite savo aplinką"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -130,14 +149,17 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Esame gana tikri, kad saloje nesame vieni. Nežinome, ar kiti šioje saloje "
+"yra draugai, ar priešai, todėl turime elgtis atsargiai. Ištirkite salą "
+"pastatydami bent vieną namą skautui."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Išplėskite savo teritoriją"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Išplėskite teritoriją"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -145,14 +167,17 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Mūsų gyvenvietei augant, visiems pastatams prireiks daugiau vietos. "
+"Išplėskite mūsų teritoriją statydami karinius pastatus. Pastatykite keletą "
+"sargybinių namelių ir bent vieną bokštą dėl didesnio matomumo lauko."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Pastatykite vorų fermą ir audyklą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Vorų audinio gamyba"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -161,6 +186,9 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Mums skubiai reikia vorų audinio, nes jo atsargos senka. Todėl būtina "
+"taupyti kiekvieną turimą gabalėlį. Sumažinkite suvartojimą visuose "
+"pastatuose, kuriems reikia vorų audinio, nepamiršdami ir statybviečių."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -168,30 +196,34 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Vėliau bet kokiu atveju turėsime pastatyti ūkį, nes jo statybai reikia vorų "
+"audinio. Be to, mums reikės vorų fermos ir audyklos."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Pastatykite prekybos postą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Patobulinkite skauto namelį į prekybos postą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"Kad galėtume sumokėti duokles Kalitatui ir palaikyti ryšį su Jundlina, "
+"turime patobulinti skauto namelį į prekybos postą."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Sumokėkite visas duokles Kalitatui"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Nusiųskite prekybininką pas Kalitatą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -199,63 +231,65 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
+"Turime išsiųsti prekes Kalitatui per mūsų prekybininką. Jis jas paims, kai "
+"tik prekybos poste bus paruošta siunta."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Reikia pristatyti šias siuntas:"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
-msgstr ""
+msgstr "Penkios siuntos po penkis rąstus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:121
 msgid "Four batches of four lumps of coal each."
-msgstr ""
+msgstr "Keturios siuntos po keturis anglies gabalus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:122
 msgid "Three batches of three iron bars each."
-msgstr ""
+msgstr "Tris siuntos po tris geležies luitus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr ""
+msgstr "Dvi siuntos po du aukso luitus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
-msgstr ""
+msgstr "Dešimt siuntų po penkis rąstus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:134
 msgid "Eight batches of four lumps of coal each."
-msgstr ""
+msgstr "Aštuonios siuntos po keturis anglies gabalus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:135
 msgid "Six batches of three iron bars each."
-msgstr ""
+msgstr "Šešios siuntos po tris geležies luitus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr ""
+msgstr "Keturios siuntos po du aukso luitus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Nugalėkite Maletą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Nugalėkite Imperijos vadą Maletą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
-msgstr ""
+msgstr "Turime pribaigti Imperiją, kad galėtume susikurti naujus namus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Pastatykite šventyklą Satului garbinti"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Pastatykite šventyklą Satului"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
@@ -263,47 +297,52 @@ msgid ""
 " he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
+"Turime pastatyti šventyklą Satului ir jį deramai garbinti. Taip jis galbūt "
+"parodys šiems barbarams savo galią, o mūsų princesė galbūt atgaus protą."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
+"Taip pat mums reikia skauto namelio, kad neprarastume budrumo ir žinotume, "
+"kas vyksta barbarų teritorijoje."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
-msgstr ""
+msgstr "Garbinkite Satulą ir įšventinkite kuniges"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:542
 msgid "Worship Satul"
-msgstr ""
+msgstr "Garbinkite Satulą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
-msgstr ""
+msgstr "Dabar turime garbinti Satulą ir įšventinti bent dvi kuniges."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Nugalėkite Kalitatą"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
 msgstr ""
+"Atėjo laikas pribaigti šį įkyrų barbarą. Jis mus kankino jau per ilgai."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Nugalėta!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr ""
+msgstr "Sidolas turi blogų naujienų..."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -312,12 +351,15 @@ msgid ""
 "couldn’t protect us from the enemy. They have destroyed our last warehouse. "
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
+"Aaaarch, Jundlina. Nežinau, kaip tai galėjo nutikti, bet Satulas neapsaugojo"
+" mūsų nuo priešo. Jie sugriovė paskutinį mūsų sandėlį. Taigi mi pralaimėjome"
+" šį mūšį, o mūsų tauta pasmerkta!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Jūs pralaimėjote"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -326,14 +368,16 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Jūs pralaimėjote ir negalite tęsti žaidimo. Tikimės, kad kitą kartą jums "
+"pasiseks geriau. Spustelėkite GERAI, kad grįžtumėte į pagrindinį meniu."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Princesės memuarai"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
-msgstr ""
+msgstr "Jundlina rašo dienoraštį"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:194
@@ -342,6 +386,9 @@ msgid ""
 "ships and make our escape, but the currents of the sinking island tested our"
 " new ships and their design."
 msgstr ""
+"Mūsų pabėgimas iš prakeiktos salos buvo per plauką: mums pavyko pakrauti "
+"tris laivus ir pasprukti, tačiau skęstančios salos srovės išbandė mūsų "
+"naujus laivus ir jų konstrukciją."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:197
@@ -350,6 +397,9 @@ msgid ""
 "without much planning and so one of our ships ended up carrying most of the "
 "heavy wares in our possession."
 msgstr ""
+"Vienas laivas išbandymo neišlaikė: paskutinėmis dienomis krovimas vyko "
+"chaotiškai, be jokio plano, todėl viename iš mūsų laivų atsidūrė didžioji "
+"dalis mūsų turimų sunkių prekių."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
@@ -358,6 +408,9 @@ msgid ""
 "was pulled below the sea level by Lutas’s forces and we lost most men and "
 "all wares it carried."
 msgstr ""
+"Didelis svoris ir stipri srovė laivui buvo per didelė našta – Luto pajėgos "
+"jį nutempė po vandeniu, ir mes praradome daugumą vyrų bei visas jame "
+"buvusias prekes."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203
@@ -366,14 +419,17 @@ msgid ""
 "well, but they persisted. We escaped the island and began our smooth sailing"
 " to other coasts."
 msgstr ""
+"Mes visi be galo bijojome. Tikėjomės, kad ir kiti laivai nuskęs, tačiau jie "
+"atsilaikė. Mes pasprukome iš salos ir pradėjome ramų plaukimą link kitų "
+"krantų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
-msgstr ""
+msgstr "Nauja viltis"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr ""
+msgstr "Jundlina tęsia"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -381,6 +437,8 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
+"Praėjo daug savaičių, tačiau matėme tik mažas salas, netinkamas gyventi ir "
+"be jokio ugnies dievo Satulo palaiminimo ženklo."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -389,14 +447,16 @@ msgid ""
 "The black comes from the fiery mountain in the north of the island, the grey"
 " however comes from settlers."
 msgstr ""
+"Tačiau praėjusią naktį išvydome naują salą. Matėme virš jos kylančius dūmus."
+" Juodi dūmai kyla iš ugningo kalno salos šiaurėje, o pilki – iš gyvenviečių."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:217
 msgid "Planning For The Future"
-msgstr ""
+msgstr "Ateities planavimas"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr ""
+msgstr "Jundlina baigia"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -405,6 +465,9 @@ msgid ""
 "do not know if the people there are friends or foes. We do not even know "
 "what tribe they might be from."
 msgstr ""
+"Bent jau rytinė salos pusė yra apgyvendinta, tai aišku. Nežinome, ar "
+"tenykščiai žmonės yra draugai, ar priešai. Net nežinome, kokiai genčiai jie "
+"gali priklausyti."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:223
@@ -413,6 +476,9 @@ msgid ""
 "ship of ours has sailed as far as we did for centuries. I can only hope they"
 " are friendly."
 msgstr ""
+"Vienintelis dalykas, kurį tikrai žinome, yra tai, kad jie negali būti "
+"atlantai, nes nė vienas mūsų laivas neplaukė taip toli, kaip mes šimtmečius."
+" Galiu tik tikėtis, kad jie draugiški."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:226
@@ -422,16 +488,20 @@ msgid ""
 "sail any further, and we must attempt to settle on this island as close as "
 "possible to our current position."
 msgstr ""
+"Mums liko nedaug vandens; Mūsų maisto senka; Su trečiuoju laivu praradome "
+"visus įrankius ir didžiąją dalį statybinių medžiagų. Negalime sau leisti "
+"plaukti toliau ir turime stengtis apsigyventi šioje saloje kuo arčiau "
+"dabartinės padėties."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:242
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:250
 msgid "Jundlina Gives Orders"
-msgstr ""
+msgstr "Jundlina duoda įsakymus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr ""
+msgstr "Jundlina nusprendžia"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -440,10 +510,13 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
+"Kadangi čia įkūrėme uostą, dabar galime planuoti savo gyvenvietę. Vis dar "
+"turime daug geležies rūdos, tad įrankių kalvė ir lydykla greitai aprūpins "
+"mus gerais įrankiais."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr ""
+msgstr "Jundlina reikalauja"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -452,10 +525,12 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
+"Tačiau turime pasirūpinti statybinėmis medžiagomis: saloje pilna medžių, "
+"mums gali net neprireikti miškininkų. Tačiau akmens mums tikrai reikės!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:251
 msgid "Jundlina orders"
-msgstr ""
+msgstr "Jundlina įsako"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:253
@@ -464,6 +539,9 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
+"Taip pat ištirkime šią salą ir išplėskime savo teritoriją. Tačiau turime "
+"būti atsargūs. Turėtume pastatyti bent vieną bokštą, kad pastebėtume galimus"
+" priešus anksčiau nei jie mus."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:256
@@ -472,6 +550,8 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
+"Tačiau turime atsargiai naudoti akmenis ir kitas brangias medžiagas. Kai "
+"pastatas mums nebebus reikalingas, mes jį išardysime, o ne sudeginsime."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:259
@@ -479,12 +559,14 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
+"Tai užtruks ilgiau, tačiau galėsime panaudoti dalį medžiagų. Be to, noriu, "
+"kad skautas nuolat tyrinėtų aplinką."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr ""
+msgstr "Opolas praneša apie didelį trūkumą"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -495,18 +577,21 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
+"Tegul Satulas tave šildo, %s. Kaip vyriausiasis gildijos audėjas turiu tau "
+"blogų naujienų. Ką tik supratau, kad mums baigiasi vorų audinys. Tai labai "
+"pavojinga situacija, nes, kaip žinai, vorų audinio reikia daugeliui pastatų."
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:276
 msgid "We should build up a spidercloth production urgently."
-msgstr ""
+msgstr "Turėtume skubiai sukurti vorų audinio gamybą."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr ""
+msgstr "%s atsako"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -515,10 +600,13 @@ msgid ""
 "but I understand the urgency. We need to build a complete spidercloth "
 "production instantly."
 msgstr ""
+"Tegul Satulas šildo ir tave, Opolai. Norėjau atidėti vorų audinio gamybą, "
+"bet suprantu skubą. Privalome nedelsdami sukurti visą vorų audinio gamybos "
+"grandinę."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opolas išsako savo nuomonę"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -529,26 +617,30 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"%s! Atrodo, atsirado dar viena, dar skubesnė problema. Bijau, kad dar "
+"nepastatėme ūkio mūsų vorams maitinti. Kadangi tai vienas iš pastatų, kurių "
+"pabaigimui reikia vorų audinio, laiku jo nebaigus kils krizė, kurios niekada"
+" nepavyks išspręsti."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s pripažįsta"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:305
 msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
-msgstr ""
+msgstr "Matau riziką, Opolai. Ačiū už pranešimą. Nedelsdami pastatysime ūkį."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opolas praneša apie sėkmę"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -559,6 +651,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"%s, tegul Satulas tave šildo! Audykla ir vorų ferma baigtos, tad audėjų "
+"gildija gali vėl pradėti darbą. Pažadu, kad netrukus pristatysime geriausią "
+"audinį ir keletą tabardų. Galbūt vėliau galėsime pastatyti aukso verpyklą, "
+"kad pagamintume dar geresnius tabardus."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -566,7 +662,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:390
 #, lua-format
 msgid "%s Cheers"
-msgstr ""
+msgstr "%s džiaugiasi"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:327
@@ -574,11 +670,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"Tai išties puikios naujienos, Opolai. Gali grįžti prie savo darbų. Tegul "
+"Satulas šildo tave ir audėjų gildiją!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolas praneša apie užsienio gyventojus"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -588,11 +686,13 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Tegul Satulas tave šildo, Jundlina! Turiu nerimą keliančių naujienų. "
+"Pastebėjome svetimšalių valdomas žemes, bet dar nežinome, ko iš jų tikėtis."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina susirūpinusi"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -600,6 +700,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Sidolus, sutinku, tai labai rūpi. Turime sužinoti daugiau. Tikimės, kad mūsų"
+" skautas greitai gaus mums informacijos."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -607,10 +709,12 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Sidolai, sutinku, tai labai kelia nerimą. Turime sužinoti daugiau. Būtinai "
+"turime nusiųsti skautą surinkti informacijos."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Sąjungininkai?"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -619,10 +723,13 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Tegul Satulas tave šildo, Jundlina! Užmezgėme ryšį su svetimšaliais. Jie "
+"turi didelių bėdų, nes kariauja su galinga gentimi šiaurėje. Jie prašo mūsų "
+"paramos."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
-msgstr ""
+msgstr "Jundlina atsargi"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:375
@@ -631,10 +738,13 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
+"Sidolai, kadangi mums gali prireikti bet kokio sąjungininko, turėtume jiems "
+"padėti. Pažiūrėkime, ką galime padaryti. Tačiau turėtume stiprinti ir savo "
+"pačių karinę galią, kad taptume nepriklausomi nuo kitų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr ""
+msgstr "Statybinės medžiagos užtikrintos"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:386
@@ -642,6 +752,7 @@ msgstr ""
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
 msgstr ""
+"Tegul Satulas tave šildo, %s! Užtikrinome statybinių medžiagų tiekimą."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -650,10 +761,13 @@ msgid ""
 "sophisticated buildings to enlarge our economy. Please advise whenever you "
 "feel we are missing necessary buildings."
 msgstr ""
+"Tai išties puikios naujienos, Loftomorai. Dabar galime galvoti apie "
+"sudėtingesnių pastatų statybą mūsų ekonomikai išplėsti. Prašau patarti, kai "
+"pajusi, kad mums trūksta reikiamų pastatų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr ""
+msgstr "Įrankių tiekimas užtikrintas"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -662,13 +776,14 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
+"%s, tegul Satulas tave šildo! Padarėme pažangą kurdami įrankių pramonę."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "%s sužavėta"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -677,10 +792,13 @@ msgid ""
 "buildings we are going to build in our new home. But now we should really "
 "look to get some resources from the mountains."
 msgstr ""
+"Tai išties puikios naujienos, Loftomorai. Tai leis mums naudotis visais "
+"pastatais, kuriuos statysime naujuose namuose. Tačiau dabar turėtume "
+"paieškoti išteklių kalnuose."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr ""
+msgstr "Kasyba sukurta"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -689,13 +807,15 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
+"%s, tegul Satulas tave sušildo! Dar viena problema išspręsta. Radome keletą "
+"išteklių ir pastatėme kiekvieno tipo kasyklą."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "%s susijaudinusi"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -704,11 +824,15 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
+"Puikiai, Loftomorai, puikiai. Tegul Satulas šildo mūsų stiprius ir drąsius "
+"kalnakasius. Tačiau dabar turime užtikrinti, kad galėsime juos pamaitinti. "
+"Turime pastatyti kepyklas, rūkyklas ir visus jiems aprūpinti reikalingus "
+"pastatus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Duoklė pristatyta"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -717,11 +841,13 @@ msgid ""
 "May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
 "Now we expect our princess to return home."
 msgstr ""
+"Tegul Satulas tave šildo, Kalitatai! Pristatėme visas prekes, kurių "
+"reikalavote. Dabar tikimės, kad mūsų princesė sugrįš namo."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitatas vertina pastangas"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -730,11 +856,14 @@ msgid ""
 "However don’t forget to help us defeat the troops of Maletus. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolai, tai labai geros naujienos. Vertinu tai, ką padarė tavo tauta. "
+"Tačiau nepamiršk padėti mums nugalėti Maleto karių. Po to galbūt "
+"pasikalbėsime apie jūsų princesę."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Imperija nugalėta"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -743,6 +872,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
+"Tegul Satulas tave šildo, Kalitatai! Nugalėjome Imperijos karius šiaurėje. "
+"Dabar tikimės, kad mūsų princesė sugrįš namo."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -751,10 +882,13 @@ msgid ""
 "However don’t forget to fulfill your tribute within time. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, tai labai gera žinia. Aš vertinu tai, ką padarė jūsų žmonės. Tačiau"
+" nepamirškite laiku įvykdyti savo pagarbos. Po to galime pasikalbėti apie "
+"jūsų princesę."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitatas pripažįsta"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -762,11 +896,13 @@ msgid ""
 "Sidolus, we appreciate this. But your princess and I already made plans for "
 "our common future on this island. She will explain it to you."
 msgstr ""
+"Sidolai, mes tai vertiname. Tačiau jūsų princesė ir aš jau sukūrėme planus "
+"dėl mūsų bendros ateities šioje saloje. Ji tau viską paaiškins."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina paaiškina"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -780,10 +916,17 @@ msgid ""
 "Barbarians. This includes learning about their gods and preparing to worship"
 " them."
 msgstr ""
+"Sidolus, viešėdamas barbaruose daug sužinojau apie jų svetingumą ir drąsą. "
+"Jie man padarė didelį įspūdį, o jų kariai ir dievai atrodė labai stiprūs "
+"mūšyje su imperija. Ypač jų lyderis Kalitatas buvo labai geras šeimininkas, "
+"ir aš pradėjau galvoti apie mūsų genčių suvienijimą, kad būtų sukurta taiki "
+"ateitis šioje saloje. Taigi noriu, kad paruoštumėte mūsų žmones santuokai ir"
+" taikiam sambūviui su barbarais. Tai apima mokymąsi apie jų dievus ir "
+"pasiruošimą juos garbinti."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitatas reikalauja"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -793,14 +936,18 @@ msgid ""
 "So we will simply take your military buildings with our forces. Naturally "
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
+"Sidolai, dabar vykdyk savo princesės įsakymus. Tuo tarpu mes galime "
+"nuspręsti, kad mums reikės dalies tavo užkariautų žemių mūsų bendrai "
+"ateičiai. Taigi mes tiesiog perimsime tavo karinius pastatus savo pajėgomis."
+" Žinoma, tu neturėsi teisės daryti to paties – vardan savo princesės."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Eretikai!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolas labai nuliūdęs"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -809,10 +956,13 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
+"Tegul Satulas mus visus sušildo. Mūsų princesė buvo supainiota dėl šio "
+"barbaro įkalinimo. Bet aš niekada negarbinsiu jokio barbaro Dievo. Vis dėlto"
+" neįsivaizduoju, kaip galėtume pakeisti jos nuomonę."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Satulo pagalbos pritraukimas"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -823,10 +973,15 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
+"Sidolai, sutinku, kad neturėtume lenktis jokiam kitam dievui, išskyrus "
+"Satulą. Tačiau šiuo atveju mums gali prireikti dievo pagalbos. Tad siūlau "
+"pastatyti šventyklą ir garbinti Satulą prabangiomis aukomis. Taip galėtume "
+"įšventinti keletą kunigių, kurios maldaudų Satulo parodyti savo galias "
+"barbarams ir mūsų princesei."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Pastatykite šventyklą"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -838,10 +993,16 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Tegul Satulas tave šildo, Loftomorai. Tai išties puiki mintis. Tad pavedu "
+"tau pastatyti šventyklą, vertą mūsų dievo. Kol nesame pasirengę prašyti "
+"Satulo galios, turime stebėti mūsų princesę ir tą barbarą. Kadangi turėtume "
+"nutraukti savo prekybininko pristatymus, kad daugiau nebešvaistytume prekių "
+"šiam barbarui, noriu, kad užtikrintum, jog skautas būtų ten ir rinktų "
+"informaciją."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "Šventykla baigta"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -849,6 +1010,8 @@ msgid ""
 "May Satul warm you, Sidolus! My builders just completed the temple for "
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
+"Tegul Satulas tave šildo, Sidolai! Mano statybininkai ką tik baigė Satulo "
+"šventyklą. Dabar galime pradėti jį garbinti ir įšventinti savo kuniges."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -858,10 +1021,14 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Tegul Satulas tave šildo, Loftomorai. Ačiū, kad pastatei tokią puikią "
+"šventyklą. Dabar turime nešti į šventyklą maistą ir brangiausias prekes, kad"
+" aukos būtų tinkamos. Ir nepamiršk, kad mokinėms, kurios tarnaus Satului, "
+"kad taptų jo kunigėmis, reikės auksinių tabardų ir deimantų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Tegul Satulas mus sušildo"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -870,10 +1037,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Mūsų kunigės įšventintos, o geriausios mūsų gėrybės paaukotos Satulo garbei."
+" Tegul jis mus šildo ir parodo savo galią mūsų princesei ir šiai barbariškai"
+" genčiai."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Atvyksta Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -884,10 +1054,14 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Tegul Satulas tave šildo, Sidolai. Ir tegul jis atleidžia man už mano "
+"eretišką elgesį. Jo galios ženklas ir baimė barbarų veiduose staiga privertė"
+" mane vėl pamatyti tiesą. Klydau dėl taikos ir sugyvenimo, nes tai būtų "
+"reiškę amžiną vergystę. O atlantai ne tam sutverti."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolas pajunta palengvėjimą"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -896,6 +1070,9 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Tegul Satulas tave šildo, Jundlina. Džiaugiuosi, kad vėl esi čia. Tikiuosi, "
+"kad galime tavimi pasitikėti tiek pat, kiek tu pasitiki Satulu ir esi jam "
+"ištikima. Kaipgi barbarai tave paleido?"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -906,10 +1083,15 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Sidolai, jie manęs nepaleido. Sutikau mūsų skautą, ir jam pavyko mane "
+"išvesti, nes supratau, kad jie vis dar laiko mane įkaite po to, kai "
+"išreiškiau tam tikrų abejonių dėl ankstesnio susitarimo. Taigi turime "
+"išspręsti barbarų klausimą šioje saloje kartą ir visiems laikams. Nėra kito "
+"būdo gyventi čia taikiai, kaip tik juos nugalėti."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina pajunta palengvėjimą"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -917,6 +1099,8 @@ msgid ""
 "Praise Satul, we have founded a new home. I deeply regret I was weak in my "
 "belief. May Satul guide me better in the future."
 msgstr ""
+"Šlovė Satului, mes įkūrėme naujus namus. Labai gailiuosi, kad mano tikėjimas"
+" buvo susvyravęs. Tegul Satulas geriau veda mane ateityje."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:590
@@ -924,20 +1108,24 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
+"Dabar laikas švęsti, tačiau nemanau, kad galėsime ilgai ilsėtis. Turime "
+"kurti savo visuomenę ir atgauti gebėjimą vėl tyrinėti jūras."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Sveikiname"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Atlikote šią misiją. Jei norite, galite žaisti toliau arba pereiti prie "
+"kitos misijos."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Duoklės reikalavimas"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -946,6 +1134,9 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Nepažįstami žmonės, turime gauti kažkokį jūsų gerų ketinimų ženklą. Jei "
+"tikrai esate mūsų pusėje, turėtumėte reguliariai atsiųsti mums aukso ir "
+"keletą kitų prekių."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -954,6 +1145,10 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Mums įdomios tik tos prekės, kurias galima naudoti ginklų kalybai. Turiu "
+"omenyje tikrus ginklus, tokius kaip mūsų kirviai, o ne tuos dantų "
+"krapštukus, kuriuos naudojate jūs. Tad drąsiai siųskite mums 25 rąstus, 16 "
+"anglies gabalų, 9 geležies luitus ir 4 aukso luitus."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -961,14 +1156,16 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"O, beveik pamiršau: reikalaujame, kad jūsų princesė taip pat būtų mūsų "
+"būstinėje, kad galėtume koordinuoti karo planus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Spąstai!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolas pasipiktinęs"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -977,10 +1174,14 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Tegul Satulas tave šildo, Jundlina! Toks elgesys yra tikrai barbariškas! "
+"Bijau, kad tai spąstai, norint tave laikyti įkaite. O pats reikalavimas yra "
+"tikras įžeidimas. Primygtinai rekomenduoju atmesti šią nepagrįstą "
+"pretenziją."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina nusileidžia"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -989,6 +1190,9 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Sidolai, sutinku su tavimi. Tačiau manau, kad neturime pasirinkimo, todėl "
+"privalome paklusti šiam reikalavimui. Dabar tavo pareiga yra vadovauti mūsų "
+"mažai tautai, kol aš sugrįšiu."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -996,10 +1200,12 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Pirmiausia turi patobulinti skauto namelį į prekybos postą. Tada turėsi "
+"išsiųsti reikalaujamas aukso, geležies, anglies ir rąstų duokles."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr ""
+msgstr "Prekybos postas pastatytas"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1007,10 +1213,12 @@ msgid ""
 "Sidolus, may Satul warm you! We have finished the new trading post. I hope "
 "this will allow Jundlina to return to us soon."
 msgstr ""
+"Sidolai, tegul Satulas tave šildo! Baigėme naują prekybos postą. Tikiuosi, "
+"tai leis Jundlinai greitai sugrįžti pas mus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr ""
+msgstr "Sidolas sutinka"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1018,6 +1226,8 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Puikiai, Loftomorai, puikiai. Tegul Satulas šildo mūsų princesę ir visą mūsų"
+" tautą. Dabar turime pradėti siųsti prekes tam barbarui."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1025,10 +1235,12 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Manau, turėtume pradėti nuo tų pristatymų, kuriuos mums lengviausia sau "
+"leisti. Bet mums tikrai reikia surasti daugiau metalų."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
-msgstr ""
+msgstr "Skubus duoklės reikalavimas"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:651
@@ -1036,6 +1248,8 @@ msgid ""
 "Strangers, we haven’t received any help yet. If you are really on our side, "
 "you should start sending some wares urgently."
 msgstr ""
+"Nepažįstami žmonės, mes dar negavome jokios pagalbos. Jei tikrai esate mūsų "
+"pusėje, turėtumėte skubiai pradėti siųsti kai kuriuos gaminius."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:654
@@ -1043,19 +1257,21 @@ msgid ""
 "As we are facing great losses due to your laziness, you shall now send us "
 "twice the previous amount of each ware."
 msgstr ""
+"Kadangi dėl jūsų tinginystės patiriame didelių nuostolių, dabar turėsite "
+"mums atsiųsti dvigubai daugiau kiekvienos rūšies prekių."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr ""
+msgstr "Esu tikras, kad nenorite nutraukti mūsų sąjungos... ar ne?"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
-msgstr ""
+msgstr "Šantažas!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:661
 msgid "Sidolus is concerned"
-msgstr ""
+msgstr "Sidolas susirūpinęs"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:663
@@ -1063,6 +1279,9 @@ msgid ""
 "May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
 "punish him for his insult as he has our princess at his hands."
 msgstr ""
+"Tegul Satulas mus visus sušildo. Mūsų vadinamasis sąjungininkas mus "
+"šantažuoja, ir mes negalime jo nubausti už jo įžeidimą, nes jis turi mūsų "
+"princesę."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:666
@@ -1070,10 +1289,12 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
+"Vienintelė mūsų galimybė – padvigubinti pastangas ir netrukus pradėti ką "
+"nors pristatyti."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
-msgstr ""
+msgstr "Duoklė pradėta"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:676
@@ -1081,6 +1302,8 @@ msgid ""
 "Strangers, we have received the first batch of wares. So we may finally "
 "trust you."
 msgstr ""
+"Svetimšaliai, gavome pirmąją prekių siuntą. Tad galime pagaliau jumis "
+"pasitikėti."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:679
@@ -1089,6 +1312,9 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
+"Tačiau mūsų priešas šiaurėje yra labai stiprus. Bijau, kad be didelės jūsų "
+"paramos galime pralaimėti karą, nepaisant bet kokios pagalbos prekėmis, "
+"kurią galėtumėte suteikti."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:682
@@ -1096,10 +1322,12 @@ msgid ""
 "They name themselves an Empire, and their leader is called Maletus. I want "
 "you to train your soldiers and help us defeat his lousy Empire."
 msgstr ""
+"Jie vadina save Imperija, o jų vadas – Maletas. Noriu, kad apmokytumėte savo"
+" karius ir padėtumėte mums nugalėti tą apgailėtiną Imperiją."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
-msgstr ""
+msgstr "Būkite budrūs!"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:689
@@ -1107,6 +1335,8 @@ msgid ""
 "May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
 "shouldn’t trust them too much."
 msgstr ""
+"Tegul Satulas tave šildo, Sidolai. Mūsų sąjungininkas dabar mumis šiek tiek "
+"pasitiki, bet mes neturėtume jais per daug pasitikėti."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:692
@@ -1114,22 +1344,25 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
+"Noriu, kad nugalėtum šią Imperiją, bet pasirūpink, kad taptume ir liktume "
+"pakankamai stiprūs, jog išsireikalautume pagarbos, kurios nusipelnėme."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr ""
+msgstr "Tęskite pristatymus"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:698
 msgid ""
 "Strangers, I almost forgot to mention, but it should have been clear anyway."
 msgstr ""
+"Svetimšaliai, beveik pamiršau paminėti, nors tai ir taip turėjo būti aišku."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:701
 msgid ""
 "We are in urgent need of your supply, so hurry up with your deliveries."
-msgstr ""
+msgstr "Mums skubiai reikia jūsų prekių, tad paskubėkite su pristatymais."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:704
@@ -1138,11 +1371,14 @@ msgid ""
 "assume you are just playing along with us. So keep an eye on the time as we "
 "will not give any further warning."
 msgstr ""
+"Jei nepristatysite visko per tris su puse valandos, būsime priversti manyti,"
+" kad jūs tik žaidžiate su mumis. Tad stebėkite laiką, nes daugiau įspėjimų "
+"nebebus."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:722
 msgid "Traitors"
-msgstr ""
+msgstr "Išdavikai"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:713
@@ -1150,6 +1386,8 @@ msgid ""
 "Strangers, we still haven’t received any help. We are deeply insulted by "
 "your treachery."
 msgstr ""
+"Svetimšaliai, mes vis dar negavome jokios pagalbos. Esame giliai įžeisti "
+"jūsų išdavystės."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:716
@@ -1158,6 +1396,8 @@ msgid ""
 "At least your princess will make a reasonable slave, if we survive the "
 "battle with our enemy."
 msgstr ""
+"Bent jau jūsų princesė taps protinga verge, jei išgyvensime mūšį su savo "
+"priešu."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:725
@@ -1165,10 +1405,12 @@ msgid ""
 "Strangers, you did not deliver the help we needed in time. We are deeply "
 "insulted by your treachery."
 msgstr ""
+"Svetimšaliai, jūs laiku nesuteikėte mums reikalingos pagalbos. Esame giliai "
+"įžeisti jūsų išdavystės."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
-msgstr ""
+msgstr "Jundlinos savižudybė"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:737
@@ -1177,6 +1419,9 @@ msgid ""
 "have prepared myself for this eventuality and will rather die from the "
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
+"Barbare, aš esu atlantų princesė ir niekada netapsiu verge. Pasiruošiau šiai"
+" galimybei ir geriau mirsiu nuo nuodų, kuriuos turiu su savimi, nei būsiu "
+"tavo vergė. Tegul Satulas atkeršija už mano auką."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:743
@@ -1185,10 +1430,13 @@ msgid ""
 "protect us from the enemy. We have lost our noble princess. Thus, we have "
 "lost this battle and our people is doomed!"
 msgstr ""
+"Aaaargh. Nežinau, kaip tai galėjo nutikti, bet Satulas negalėjo mūsų "
+"apsaugoti nuo priešo. Mes praradome savo kilnią princesę. Taigi, mes "
+"pralaimėjome šį mūšį ir mūsų žmonės pasmerkti!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
-msgstr ""
+msgstr "Kalitatas nugalėtas"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:754
@@ -1198,55 +1446,59 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
+"Aaaargh. Nežinau, kaip tai galėjo nutikti, bet Satulas negalėjo apsaugoti "
+"mūsų sąjungininko nuo priešo. Jis prarado paskutinį sandėlį ir mūsų "
+"kilmingoji princesė žuvo kartu su juo. Taigi, mes pralaimėjome šį mūšį ir "
+"mūsų žmonės pasmerkti!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr ""
+msgstr "Satulo mokinė"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Priestess"
-msgstr ""
+msgstr "Kunigė"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Skauto namelis"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "žvalgymas"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Temple of Satul"
-msgstr ""
+msgstr "Satulo šventykla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
 #. ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:54
 msgctxt "atlanteans_building"
 msgid "consecrating priestess"
-msgstr ""
+msgstr "įšventinama kunigė"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trader"
-msgstr ""
+msgstr "Prekybininkas"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Trading Post"
-msgstr ""
+msgstr "Prekybos postas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start trading because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:35
@@ -1255,43 +1507,43 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:69
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:81
 msgid "trading"
-msgstr ""
+msgstr "prekyba"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/init.lua:8
 msgctxt "immovable"
 msgid "Trade Pole"
-msgstr ""
+msgstr "Prekybos stulpas"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_copper/init.lua:8
 msgctxt "ware"
 msgid "Copper Coin"
-msgstr ""
+msgstr "Vario moneta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr ""
+msgstr "Aukso moneta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
 msgctxt "ware"
 msgid "Silver Coin"
-msgstr ""
+msgstr "Sidabro moneta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_wood/init.lua:8
 msgctxt "ware"
 msgid "Wood Coin"
-msgstr ""
+msgstr "Medinė moneta"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
-msgstr ""
+msgstr "Leidžia dalintis prekėmis su kitais žaidėjais."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:18
 msgctxt "atlanteans_building"
@@ -1299,13 +1551,14 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
+"Prieš siųsdami čia skautą, turite sujungti šią vėliavą su skauto nameliu."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Tyrinėja nežinomą teritoriją."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
@@ -1313,48 +1566,48 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "A big and expensive temple to worship Satul and consecrate priestesses."
-msgstr ""
+msgstr "Didelė ir brangi šventykla Satului garbinti ir kunigėms įšventinti."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Trader
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
-msgstr ""
+msgstr "Gabenamos prekės, kuriomis norima pasidalinti su kitais žaidėjais."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
 msgctxt "atlanteans_worker"
 msgid "A trader is a scout who needs a horse to transport the wares."
-msgstr ""
+msgstr "Prekybininkas yra skautas, kuriam prekių gabenimui reikia arklio."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Satul's Initiate
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
-msgstr ""
+msgstr "Rūpinasi Satulo šventykla."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
 msgctxt "atlanteans_worker"
 msgid ""
 "Initiates take care of the Temple of Satul while they are learning to become"
 " priestesses."
-msgstr ""
+msgstr "Mokinės rūpinasi Satulo šventykla, kol mokosi tapti kunigėmis."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
-msgstr ""
+msgstr "Garbina Satulą."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:51
 msgctxt "atlanteans_worker"
 msgid "Priestesses are needed to make Satul show his might."
-msgstr ""
+msgstr "Kunigės yra reikalingos tam, kad Satulas parodytų savo galią."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Wooden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
-msgstr ""
+msgstr "Medinė moneta, gauta kaip atlygis už penkių rąstų pristatymą."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
@@ -1362,15 +1615,17 @@ msgctxt "atlanteans_building"
 msgid ""
 "A coin made of copper, received as reward for delivering four lumps of coal."
 msgstr ""
+"Vario moneta, gauta kaip atlygis už keturių anglies gabalų pristatymą."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
 msgctxt "atlanteans_building"
 msgid "A silver coin, received as reward for delivering three iron ingots."
 msgstr ""
+"Sidabro moneta, gauta kaip atlygis už trijų geležies luitų pristatymą."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Golden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
-msgstr ""
+msgstr "Aukso moneta, gauta kaip atlygis už dviejų aukso luitų pristatymą."

@@ -20,47 +20,47 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Pastatykite du girininkų namelius"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Šalia kiekvienos medkirčio trobelės pastatykite po girininko namelį."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Natūralu, kad medžiai auga lėtai. Norėdami užsitikrinti pakankamą rąstų kiekį, turite įkurdinti girininkus."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Išsiplėskite į šiaurės rytus ir pastatykite akmens skaldyklą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Išsiplėskite į šiaurės rytus iki uolų"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Statykite karinius pastatus (pavyzdžiui, sargybos bokštus ar užkardas), kad išplėstumėte savo teritoriją."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Nukeliaukite iki uolų šiaurės rytuose ir ten pastatykite akmens skaldyklą."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Pradėkite statyti kasyklas ant kalno"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Pastatykite anglies ir geležies kasyklas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Pastatykite anglies kasyklą ir geležies kasyklą."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -70,11 +70,11 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Norėdami tai padaryti, rytiniame kalno šlaite pastatykite vėliavą (tik ant kalnų reljefo, ne ant kalnų pievos). Spustelėję naują vėliavą, ten galėsite nusiųsti geologus. Kadangi vėliava stovi ant kalno, geologai ieškos rūdų; kitu atveju jie ieškotų vandens. Tuomet abiejų rūšių rastiems ištekliams pastatykite kasyklas, parinkdami tinkamą kasyklos tipą:"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "šiek tiek anglies"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -82,7 +82,7 @@ msgstr "daug anglies"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "šiek tiek geležies"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -90,66 +90,66 @@ msgstr "daug geležies"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "šiek tiek aukso"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr ""
+msgstr "daug aukso"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "šiek tiek granito"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr ""
+msgstr "daug granito"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
-msgstr ""
+msgstr "vanduo"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr ""
+msgstr "čia nieko nerasta"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "Kasyklos gali būti statomos tik kalnų reljefe. Tinkamos kasyklų vietos žymimos oranžiniais kasyklos simboliais."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Aprūpinkite savo kalnakasius maistu"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "Pastatykite medžiotojo trobelę, girininko (žvėrių prižiūrėtojo) trobelę ir smuklę"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Kad galėtų dirbti, jūsų kalnakasiams reikia maisto."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "Medžiotojas sumedžioja gyvūnus, o girininkas užtikrina, kad jie neišnyktų. Vėliau mėsa smuklėje paruošiama kaip pietūs jūsų kalnakasiams."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "Tai tik pirmasis gaminio, kurį reikia apdoroti prieš naudojant kitame pastate, pavyzdys – bus ir kitų."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Iškepkite duonos"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Pastatykite šulinį, ūkį ir kepyklą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -158,39 +158,39 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Kiti būdai gaminti įvairių rūšių maistą – žvejyba ir ūkininkavimas. Ūkiuose užauginti kviečiai turi būti apdoroti vandeniu kepykloje, kad taptų tinkami valgyti. Vandens galite gauti pastatę šulinį. Siekdami geriausio našumo, statykite jį ten, kur geologai rado vandens šaltinį."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Apdirbkite išgautus išteklius"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Pastatykite lydyklą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "Jūsų kalnakasių iškasta geležies rūda dar netinkama naudoti – pirmiausia ją reikia išlydyti į geležį."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Patobulinkite pastatus ir pastatykite mikro alaus daryklą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Patobulinkite kasyklą bei smuklę ir pastatykite mikro alaus daryklą."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Patobulinkite anglies arba geležies kasyklą į giliąją kasyklą, o smuklę – į užeigą."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Taip pat pastatykite mikro alaus daryklą."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -198,7 +198,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Įprasta kasykla gali iškasti tik apie trečdalį visų po ja esančių išteklių; norint tęsti darbą, ją reikia patobulinti į giliąją kasyklą. Norėdami patobulinti pastatą, pasirinkite jį ir atsiradusiame lange spustelėkite atitinkamą mygtuką."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -206,7 +206,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "Darbuotojai įgyja patirties sėkmingai dirbdami. Įgiję pakankamai patirties, jie tampa labiau patyrusiais darbininkais, kurie yra būtini norint valdyti patobulintus pastatus. Netobulinkite pastato, kol neturite pakankamai patyrusių darbuotojų jam valdyti!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -214,20 +214,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Tokiems pastatams paprastai keliami didesni reikalavimai nei paprastiems – pavyzdžiui, giliosioms kasykloms vietoj maisto davinių reikia užkandžių. Turėsite patobulinti smuklę į užeigą, kad galėtumėte gaminti užkandžius iš pitos IR antros rūšies maisto (mėsos ar žuvies) IR alaus."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "Žinoma, galite visas kasyklas iškart patobulinti į giliąsias, jei tik turite reikiamų darbuotojų – didesnės kasyklos dirba šiek tiek greičiau, o mažesnėms reikia pigesnio maisto. Tik nuo jūsų priklauso, kokią strategiją pasirinksite."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Pastatykite medienos kietintuvą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -236,69 +236,69 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Didesniems ir geresniems pastatams, įskaitant visus karinius, reikia geresnių statybinių medžiagų. Jų negalima pastatyti iš paprastų rąstų – rąstai pirmiausia turi būti apdirbti į juodmedį medienos kietintuve. Visada nepamirškite pastatyti medienos kietintuvo, kol dar nepasibaigė juodmedžio atsargos, nes be jo negalėsite plėstis."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Sukurkite kalkių degyklą ir anglies gavybos grandinę"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Pastatykite kalkių degyklą, kuriai vandenį tiektų šulinys, o anglį – medžio anglies degykla arba anglies kasykla"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Geresniems pastatams, be juodmedžio, gali prireikti ir kitų apdirbtų medžiagų. Viena jų – skiedinys, kurį iš granito, vandens ir anglies gamina kalkių degėjas."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Vandens galite gauti pastatę šulinį virš vandens šaltinio, kurį geologai gali rasti bet kurioje vietoje, kuri nėra ant kalno."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Norėdami pakviesti geologą ieškoti vandens, spustelėkite vėliavą vietovėje, kurią norite ištirti, ir tada mygtuką „Siųsti geologą tyrinėti vietos“."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Anglį galima gauti pastačius medžio anglies degyklą arba anglies kasyklą. Medžio anglies degimas iš rąstų yra lėtas procesas. Medžio anglies degyklą turėtumėte statyti tik tada, kai nėra galimybės kasti akmens anglies."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Pastatykite kalkių degyklą ir šulinį. Taip pat pastatykite medžio anglies degyklą arba anglies kasyklą anglies tiekimui užtikrinti."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Pastatykite nendryną"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "Trečioji medžiaga, reikalinga geresniems pastatams, yra nendrės, naudojamos stogams dengti. Nendrių laukus aplink savo pastatą – nendryną – sodina sodininkas."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Pastatykite galvijų ūkį"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -306,49 +306,49 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Kai keliai ilgą laiką yra labai apkrauti, vieno nešiko greitam prekių gabenimui paprastai neužtenka. To pasekmė – spūstys. Todėl tokiuose keliuose įdarbinamas antrasis nešikas: jautis, padedantis nešti krovinius. Tai dvigubai padidina transportavimo pajėgumus."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Jaučiai veisiami galvijų ūkiuose naudojant kviečius ir vandenį."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "Istorija prasideda"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thronas dūsauja..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Praėjo mėnesiai, o mes vis dar slapstomės ten, kur miškai seni ir tūni."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Mano kariai medžioja dieną, o naktį budi klausydamiesi žiaurių skerdynių garsų, aidinčių iš toli tarp senovinių medžių."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Iš čia, už daugybės mylių, matome siautėjančias liepsnas, ryjančias Al'tunraną."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "Raudonos šviesos mirksi tamsoje ir šoka pagal karo būgnų ritmą, kuris mane persekioja net košmaruose."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -356,7 +356,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "Mano tėvo kaulai ramiai ilsisi žemėje, kurioje jis kadaise nutraukė beprasmį kraujo liejimą tarp mūsų. Man skaudu, kad jo sukurta taika truko tik vieną kartą."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -365,7 +365,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "Boldretas, mano ištikimas bendražygis ir draugas, yra mano ramybės ir paguodos šaltinis šiais tamsiais laikais. Jis palaiko mano ir mano karių dvasią, neleisdamas godumui ar nevilčiai sugriauti mūsų ryšių."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -373,23 +373,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Kaip sakė tėvas, yra laikas kovoti ir laikas slapstytis bei laukti, stengiantis neužmigti ir nenumirti per anksti. Tad aš laukiu."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thronas apmąsto karą"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thronas purto galvą..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "Tačiau karas tęsiasi. Vis daugiau mūsų brolių ir seserų bėga nuo žiauraus karo, siautėjančio sostinėje po medžiais."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -399,7 +399,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Liūdna girdėti istorijas apie mūsų giminaičių poelgius. Praleidau naktis budėdamas, neramus ir pavargęs labiau, nei maniau esant įmanoma. Tačiau kaskart užmerkęs akis matau liepsnų ryjamą tėvo statytą tvirtovę. Sostas tarp medžių, mūsų giminės vienybės ir taikos simbolis, tapo pleištu, kuris mus skiria."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -411,18 +411,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Šiandien mano medžiotojai atvedė vyrus, moteris ir mažus vaikus, kurie slapstėsi miškuose gelbėdamiesi nuo karo, neapykantos ir keršto, siaučiančio tarp genčių. Jos kovoja tarpusavyje kaip senovėje, kai buvome tik laukiniai žvėrys, valdomi instinktų. Nė vienas mano brolis niekada neperims medinio sosto kontrolės, nė viena gentis nebus pakankamai stipri, kad pajungtų kitas. Šios skerdynės nesibaigs, nebent... ar tai tas metas? Kaip man sakė tėvas?"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Sukilti prieš bet ką, kas kelia grėsmę mūsų egzistencijai, net jei tai būtų tavo paties kraujo ar minties žmogus?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thronas svarsto apie ateitį"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -432,7 +432,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Bėgant dienoms Boldretas atrodo vis labiau prislėgtas. Artėjant šaltajam sezonui mano bendražygių nuotaikos prastėja, o mes vis dar gyvename tik trobelėse ir kareivinėse. Niekada neketinau taip ilgai užsibūti šiose dykynėse, bet taip pat nemaniau, kad mano broliai taip ilgai tęs šią beprasmę kovą."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -441,22 +441,22 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Galbūt laikas čia įsikurti patogiau. Galbūt laikas suteikti naujus namus tiems, kurie vis dar išliko vieningi, ir atstatyti tai, ką praradome? Kol galėsime grįžti ten, ką kadaise vadinome savo namais..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Kažkas prieina prie jūsų"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Senolis sako..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "Sveikas, vade. Aš esu Khantrukas, matęs jau daug žiemų. Leisk man padėti tau savo patarimais šiomis tamsiomis dienomis."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -464,7 +464,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Tik dievai žino, kiek dar turėsime čia slapstytis. Kariai tikisi, kad bet kurią dieną galėsime šlovingai grįžti, bet aš labai abejoju, ar tai įvyks greitai. O dienos darosi vis trumpesnės ir šaltesnės..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -477,18 +477,18 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "Patarėjas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukas pastebi..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Matau, kad jau pastatėte akmens skaldyklą ir dvi medkirčių trobeles. Tai gera priežastis, jei ketiname čia pasilikti ilgiau."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -496,23 +496,23 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr ""
+msgstr "Tačiau niekada nepamirškite – šie miškai yra mūsų paveldas, kurį mums patikėjo protėviai. Privalome juos gerbti ir saugoti. Ką paimame iš gamtos, turime jai grąžinti."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Taigi, norėdami atsodinti nupjautus medžius, turėtume pastatyti keletą girininkų namelių, geriausia – netoli medkirčių trobelių."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
-msgstr ""
+msgstr "Naktį"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
-msgstr ""
+msgstr "Thronas sako..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:252
@@ -520,18 +520,18 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr ""
+msgstr "Dar vieną bemiegę naktį užlipau ant kalvos ir pažvelgiau į šiaurę. Gaisrai vis dar dega, ryja mano tėvo palikimą."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "Jie mums nuolat primena, kodėl privalome čia slapstytis... ir kodėl galiausiai privalome grįžti!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
-msgstr ""
+msgstr "Prie kapo"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -539,29 +539,29 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "Dar kartą nuėjau prie tėvo kapo šventojoje giraitėje prie didingosios Kal'mavrato smailės. Tiesiog stovėjau ten nejausdamas nei bėgančių valandų, nei šalto lietaus, pilančio iš aptemusio dangaus..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "Kažkaip tai priminė atsisveikinimą. Pirmą kartą susimąsčiau, ką man paruošė ateitis..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
-msgstr ""
+msgstr "Kitą dieną"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thronas susimąstęs sako..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr ""
+msgstr "Prieš kiek laiko pas mane atėjo Boldretas. Jis patarė persikelti arčiau namų – kad galėtume smogti vos pasirodžius pirmiesiems mano brolių pajėgų susilpnėjimo ženklams."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -570,15 +570,15 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Tačiau žvelgdamas virš miškų vis dar matau į dangų kylančius juodus dūmus. Žinau – dar per anksti, ir tai, ko jis tikisi, greitai neįvyks. Jis gali būti teisus, bet bijau kraujo praliejimo, kurį sukeltų per ankstyvas grįžimas..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
-msgstr ""
+msgstr "Priesaika"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thronas atrodo įniršęs..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:291
@@ -586,12 +586,12 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr ""
+msgstr "Šiandien mano kariai rado senolį, ligotą ir sužeistą klaidžiojantį po tamsų mišką. Su siaubu klausėmės jo pasakojimų apie žiaurumus, vykstančius Al'tunrane."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:294
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr ""
+msgstr "Šiuo atnaujinu savo priesaiką – bet kokia kaina sustabdysiu šią beprotybę!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:314
@@ -603,11 +603,11 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Jūsų ištikimas bendražygis"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Drąsusis Boldretas prieina prie jūsų..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -616,11 +616,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Vadinasi, nori mus paruošti ilgesniam buvimui šiuose miškuose, Thronai? Matau tame išmintį, tačiau mano širdis trokšta šlovingo sugrįžimo į Al'tunraną. Per ilgai laukėme, kol mūsų broliai kovojo mūšio lauke, o mūsų kirviai ir kalavijai per tą laiką aprūdijo."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukas prisijungia..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:310
@@ -628,11 +628,11 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "Atleisk, vade, bet turiu aptarti su tavimi vieną didelį rūpestį. Akmenų atsargos prie mūsų stovyklos sparčiai senka, ir tik laiko klausimas, kada jų visai nebeliks."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Boldretas pašoka..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:318
@@ -641,36 +641,36 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Nors tai tikrai ne kario vertas užsiėmimas, bent jau bus ką veikti! Thronai, ką manai, jei paimčiau keletą neramiausių mūsų karių ir nukeliautume arčiau didžiojo Kal'mavrato kalno – galbūt rasime daugiau uolų, kad pradžiugintume senolį?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Khantrukas sumurma..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Senolis? Nepagarbus jaunime!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:333
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Khantrukas patenkintas linkteli..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Pagaliau! Šių uolų turėtų pakakti kuriam laikui."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldretas sušunka..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "Tik pažiūrėkite! Rytuose stūkso didysis Kal'mavrato kalnas! Įdomu, kokių turtų gamta galėjo paslėpti po jo didingais šlaitais!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:344
@@ -678,27 +678,27 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr ""
+msgstr "Plėskimės į rytus. Štai proga senoliams pagaliau tapti naudingais! Išsiųskime tuos, kurie supranta akmenų kalbą, kad jie atskleistų kalno paslaptis!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldretas juokiasi..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
-msgstr ""
+msgstr "Prisiekiu Čat-Karuto barzda, tai neįtikėtina! Tik įsivaizduokite, kam galėsime panaudoti šią anglį ir geležies rūdą!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "To gali pakakti net..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukas pertraukia..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -707,16 +707,16 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr ""
+msgstr "Nors tai tiesa, apie tai pasvarstysime vėliau, dabar turime kitų rūpesčių. Dirbdami aukštai kalnuose tokiame šaltyje, kalnakasiai neabejotinai reikalaus geresnio maisto, o užtikrinti tokį tiekimą nebus lengva."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "Boldretas linkteli..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Turiu pripažinti: čia tu teisus, senoli."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:373
@@ -724,16 +724,16 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr ""
+msgstr "Atrodo, kad šiuose miškuose pilna žvėrių – galėtume jų sumedžioti daugiau. Ir, žinoma, žmonės labai apsidžiaugtų nauja smukle – galėtume ją pavadinti „Throno pasididžiavimu“ ar panašiai!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "Senolis pašoka iš džiaugsmo..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Išmintis sako, kad reikia įvairovės."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:384
@@ -741,27 +741,27 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "Į šiaurę nuo didžiojo kalno plyti didelė lyguma – kodėl nepasinaudojus Motinos Gamtos mums duota erdve ir nepastačius ūkio? Tikrai neatsisakyčiau šviežiai iškeptos pitos..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
-msgstr ""
+msgstr "Boldretas pralinksmėja..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:392
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Mūsų medžiotojai jau miškuose, Thronai."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr ""
+msgstr "Pažadu, dar šiandien iki saulėlydžio gausite puikius pietus, vertus visų klanų vado!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukas žvelgia į lygumas..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:402
@@ -769,15 +769,15 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr ""
+msgstr "Argi ne nuostabus vaizdas į auksinius laukus, ramiai siūbuojančius vėjyje? Manau, kad kepėjas jau pakeliui su savo skaniausia duona, skirta tik mūsų vadui!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Gražus rytas"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron atpažįsta…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:409
@@ -786,17 +786,17 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr ""
+msgstr "Vakar mūsų žmonėms atidaryta smuklė. Nors vargu ar esu nusiteikęs šventei, pastebėjau, kiek daug šios mažytės namų reiškia mano žmonėms. Jų dainos užpildė orą iki pat nakties, o kitą dieną jie buvo aukštesnės nuotaikos."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr ""
+msgstr "Galbūt mes iš tikrųjų pamažu čia kuriame vietą, kurią galime... vadinti namais."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth pastabos…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:419
@@ -805,19 +805,19 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr ""
+msgstr "Taigi dabar, kai turime ir kasyklas, ir maistą, kad galėtume jas išlaikyti, turėtume perkelti tai, ką mūsų drąsūs kalnakasiai mums įgyja, į naudingesnę būseną. Geležies rūda turi būti išlydyta į geležį, kad ji būtų paruošta kalti į ką tik norime. Ir mums reikia anglies, kad lydyklos krosnys degtų."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:476
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh kalba…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr ""
+msgstr "Mūsų kalnakasiai kasdien kasa vis mažiau! Turime eiti gilyn, arčiau kalno šerdies, jei norime daugiau jo lobių!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:430
@@ -825,11 +825,11 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr ""
+msgstr "Žinoma, tokiose gelmėse tamsu ir šalta, o į šias vietas į šias vietas veržiasi tik nedaugelis. Už šią drąsą turėtume apdovanoti didesniu daviniu už juos. Ir puslitrinis alaus ar dviejų palaikys jų nuotaiką."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldretas atrodo susirūpinęs…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:438
@@ -837,23 +837,23 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr ""
+msgstr "Kaip ką tik sužinojau, mums trūksta Blackwood! Negalime įmesti savo karių į griūvančias trobesius, o dar mažiau pavojingesniais laikais kaip mūsų!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Mums reikia medienos kietiklio, o mums jo reikia dabar!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:447
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth šypsosi…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:449
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr ""
+msgstr "Na, senas drauge, tai turėtų užtikrinti, kad mūsų įtvirtinimai nesuirtų nuo pirmojo mūsų priešų kovos šauksmo! Dabar galime saugiai plėstis!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -861,11 +861,11 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "Vis dėlto nepakenktų sukaupti šiek tiek skiedinio tolimesnei kampanijai; Taigi prireikus galėtume pastatyti tokią tvirtovę, kokios pasaulis dar nematė!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Khantrukh įžengia…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:460
@@ -875,27 +875,27 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "vyriausieji, tai gėda! Gerai, kad dabar galime gaminti skiedinį galingiems įtvirtinimams ir dideliems pastatams – tik tai netrukdo mūsų stogams tapti nesandariais! Galbūt jauniesiems patinka leisti naktis lietuje, bet aš tiesiog nerandu miego, kai ant mano veido laša lietaus lašai!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "Dabar tai yra problema, dėl kurios turėtume ką nors padaryti!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:469
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh atrodo palengvėjęs…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:471
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr ""
+msgstr "Nuostabu! Mūsų stogai nebevarva, o mes turime visą reikalingą medžiagą, na, nesvarbu, kuris monumentalus pastatas mums atrodo tinkamas!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Mums reikia jaučių!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:478
@@ -904,7 +904,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "Kadangi mūsų karalystė vis didesnė ir didesnė, eismas keliuose yra didžiulis. Mūsų vargšai vežėjai nebegali gabenti prekių taip greitai, kaip mums reikia. Siūlau jiems šiek tiek paremti veisiant jaučius."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:481
@@ -912,24 +912,24 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "Jie yra nuostabūs gyvūnai: Jautis yra greitas kaip žmogus, nors yra daug stipresnis ir labai taupus: mums tereikia kviečių ir vandens, kad juos veistume, ir jie ištikimai ir patikimai atliks savo darbą keliuose."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr ""
+msgstr "Užduotis įvykdyta"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron kalba…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr ""
+msgstr "Kitą dieną Boldrethas paprašė manęs palydėti jį į naują užeigą. Tai mane nudžiugintų, sakė jis."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:493
@@ -938,33 +938,33 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "Kai apsidairiau, pamačiau ištikimus veidus, tikėdamas, kad galėsiu juos nukreipti per šias tamsias dienas. Tačiau man nespėjus ištarti dėkingumo ar padrąsinimo žodžių, vienas iš mano karių įbėgo į užeigą. Pastarąsias dienas jis buvo toli miške ir mačiau, koks jis pavargęs."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Jo atneštos naujienos pakeitė viską..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Jūs įvykdėte šią misiją. Jei norite, galite toliau žaisti, kitaip pereikite prie kitos misijos."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Viena pilnaties naktis"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
-msgstr ""
+msgstr "Vieną naktį, kai mėnulis švietė ryškiai, užkopiau į Kal'Mavrath viršūnę."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:508
@@ -973,15 +973,15 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "Kai pažvelgiau į horizontą, vis tiek mačiau tolumoje mirgančias tamsiai raudonas šviesas. Neįtikėtina, kiek aistros mano broliai kovoja šiame kare. Bijau, kad tą akimirką, kai vėl pamatysiu Al'Thuraną – ar ten patekus mūsų kadaise gražioje sostinėje liks nieko, išskyrus pelenus ir išsekusius griuvėsius?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Dar viena šalta diena"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron atrodo susirūpinęs..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:515
@@ -989,41 +989,41 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Atėjo žiema. Daugelis iš mūsų kenčia nuo šalčio, tačiau turime ištverti. Diena, kai galime sugrįžti, nebegali būti toli – toli nebeturi būti."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "Meldžiausi, kad vėl būtų šilčiau, nes meldžiausi, kad karas pagaliau baigtųsi."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Kol kas atrodo, kad nė viena malda nebuvo įvykdyta."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Prie mūsų prisijungė draugiškas kaimas!"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "Radome kaimą, kuriame gyvena draugiški ir darbštūs žmonės, sužavėti mūsų turtų, technologijų ir stiprybės."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Jie gyveno paprastai ir nerūpestingai, vertėsi medžiokle bei ūkininkavimu. Iki šiol jie nebuvo įsivėlę į jokius konfliktus ir nėra pasirengę kovai."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Tačiau jie baiminasi, kad karas aplink Al'Thuraną užbaigs šį gyvenimą. Todėl jie nusprendė prisijungti prie mūsų, tikėdamiesi, kad galėsime vieni kitiems padėti."

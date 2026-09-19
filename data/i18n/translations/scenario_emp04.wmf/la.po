@@ -4,6 +4,7 @@
 # 
 # Translators:
 # GunChleoc, 2025
+# un connected, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: GunChleoc, 2025\n"
+"Last-Translator: un connected, 2026\n"
 "Language-Team: Latin (https://app.transifex.com/widelands/teams/35159/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1523,7 +1524,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Domus lignatoris"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
@@ -1547,6 +1548,9 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Lignarius qui in domo huius lignarii laborat nullas arbores in area sua "
+"laboris invenire potest. De aedificio diruendo vel destruendo vel de domo "
+"silvicultoris aedificanda cogitare debes."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"

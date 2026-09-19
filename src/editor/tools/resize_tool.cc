@@ -18,8 +18,8 @@
 
 #include "editor/tools/resize_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "logic/widelands_geometry.h"
+#include "ui/editor/editorinteractive.h"
 
 int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                             EditorActionArgs* args,

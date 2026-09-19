@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_PROGRESS_BAR_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/progressbar.h"
+#include "ui/basic/progressbar.h"
 
 namespace LuaUi {
 

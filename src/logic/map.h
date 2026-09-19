@@ -113,6 +113,17 @@ struct FindBobByName : public FindBob {
 private:
 	std::string name_;
 };
+
+struct FindBobByType : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindBobByType(const MapObjectType t) : type_(t) {
+	}
+	~FindBobByType() override = default;
+
+private:
+	MapObjectType type_;
+};
+
 struct FindCritter : public FindBob {
 	bool accept(Bob* b) const override;
 	~FindCritter() override = default;

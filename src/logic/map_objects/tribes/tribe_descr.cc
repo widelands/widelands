@@ -33,7 +33,7 @@
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -41,7 +41,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/note_loading_message.h"
+#include "ui/basic/note_loading_message.h"
 
 namespace {
 

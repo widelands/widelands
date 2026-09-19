@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Hibajavító kiadás"
+		],
 		"1.3": [
 			"Kereskedés",
 			"A játék hat új térképpel bővült, és három régi térkép el lett távolítva",
@@ -17,9 +20,6 @@
 			"Térképek letöltése a honlapról a bővítményekhez hasonlóan",
 			"Új megjelenítési módok a térképszerkesztőben",
 			"Sok új lehetőség a bővítményfejlesztők számára"
-		],
-		"1.2.1": [
-			"Hibajavító kiadás"
 		]
 	}
 }

@@ -71,5 +71,5 @@ wl_library(network
     ui_fsmenu
     widelands_ball_of_mud
     widelands_options
-    wui
+    wui_interactive
 )

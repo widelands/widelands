@@ -20,7 +20,7 @@
 
 #include "logic/game.h"
 #include "logic/player.h"
-#include "wui/interactive_player.h"
+#include "ui/wui/interactive_player.h"
 
 namespace LuaEditor {
 

@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_PANEL_H
 
 #include "scripting/lua_ui.h"
-#include "ui_basic/panel.h"
+#include "ui/basic/panel.h"
 
 namespace UI {
 struct Box;

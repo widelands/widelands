@@ -30,7 +30,7 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/map_objects/checkstep.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"

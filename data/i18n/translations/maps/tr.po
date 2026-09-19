@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Enes Efe Ü., 2026
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 msgid ""
 msgstr ""
@@ -9,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
+"Last-Translator: Enes Efe Ü., 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Yeni bir yurt arayışında zorluk çekmek"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
@@ -39,7 +40,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Yurdun diyebileceğin bir yer"
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -49,7 +50,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Burası bizim toprağımız"
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -60,32 +61,32 @@ msgstr ""
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Kolay"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Orta"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Zor"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Çok Zor"
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "İkinci İmparatorluk"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Barbarlarla Tanışmak"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52
@@ -108,12 +109,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Sürgün Ayları"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "İmparatorlukla Tanışmak"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:75
@@ -133,12 +134,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Ateş için Yolculuk"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Atlantalılar ile Tanışma"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:98
@@ -153,27 +154,27 @@ msgstr ""
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Sudan Buza"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Frisyalılar ile Tanışma"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Denizci (Zor)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Dümenci (Çok Zor)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kaptan (Aşırı Zor)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:125
@@ -192,7 +193,7 @@ msgstr "Henüz tamamlanmadı"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
-msgstr ""
+msgstr "Kimse"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
@@ -213,7 +214,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Sürgündeki için İleri Karakol"
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -225,7 +226,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptün'ün İntikamı"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -235,7 +236,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Sürpriz, Sürpriz!"
 
 #: ../../../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
@@ -246,7 +247,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Büyük Fırtınaseli"
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -265,7 +266,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Buzlu bir Hoşgeldin"
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
@@ -275,7 +276,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Kara Gün Dostu"
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
@@ -286,7 +287,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Kavuşan İki Arkadaş"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
@@ -296,7 +297,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Yeniden Fetih"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
@@ -307,7 +308,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
-msgstr ""
+msgstr "Basit Kontrol"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
@@ -317,7 +318,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Savaş"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -328,7 +329,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Denizcilik"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -338,7 +339,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Ekonomi ve Alışveriş"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -349,7 +350,7 @@ msgstr ""
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Gerçeği Gibi Avrupa 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -372,11 +373,11 @@ msgstr ""
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Amipler"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Bir amipsin, genişle ve öteki amipleri fethet ..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -388,7 +389,7 @@ msgstr ""
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Takımada Denizi"
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -410,15 +411,15 @@ msgstr ""
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astorya 2.R"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – Nordfriese tarafından düzeltildi"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Uzun soluklu, güzel topraklarda ekonomi oynayışı. Her oyuncu denesin!"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -426,11 +427,11 @@ msgstr "Mercanada"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Büyük mercan adasının gerçek kralı kim olacak?"
 
 #: ../../../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../../../data/maps/Calvisson.wmf/elemental:10
 msgid ""
@@ -457,7 +458,7 @@ msgstr "Kuyrukluyıldız Adası"
 #: ../../../../data/maps/Comet_Island.wmf/elemental:9
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nasenbaer – king_of_nowhere tarafından düzeltildi"
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
@@ -488,19 +489,19 @@ msgstr "Birkaç dağa meteor çarptıktan çok sonra, kraterde hayat canlandı. 
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Ufku Geçmek"
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – 3plus4i tarafından düzeltildi"
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Gemine atla ve ufka doğru yelken aç."
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomit Dağları 3.0"
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
@@ -534,7 +535,7 @@ msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_Goose_Fish"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
@@ -542,11 +543,11 @@ msgstr ""
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
-msgstr ""
+msgstr "Cemiyet"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
@@ -591,7 +592,7 @@ msgstr ""
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Orman Vadisi v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
@@ -627,7 +628,7 @@ msgstr ""
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Dolunay"
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
@@ -658,7 +659,7 @@ msgstr ""
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Buz savaşları"
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
@@ -670,7 +671,7 @@ msgstr "Başlangıç pozisyonları saat yönünde"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Savaştaki Adalar"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
@@ -681,7 +682,7 @@ msgstr ""
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Krallar ve Kraliçeler"
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
@@ -707,7 +708,7 @@ msgstr "Son Kale"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Another Barbarian – king_of_nowhere tarafından düzeltildi"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
@@ -728,7 +729,7 @@ msgstr ""
 
 #: ../../../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Son Sağ Kalanlar"
 
 #: ../../../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
@@ -738,7 +739,7 @@ msgstr ""
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Küçük Yüzük 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -751,7 +752,7 @@ msgstr ""
 
 #: ../../../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Uzun uzunca yol v2"
 
 #: ../../../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
@@ -761,7 +762,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
-msgstr ""
+msgstr "Adadan Sıçrama"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
@@ -784,7 +785,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Ateşin Çatal Mızrağı"
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -836,7 +837,7 @@ msgstr ""
 
 #: ../../../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
-msgstr ""
+msgstr "Nehir Keşifçileri"
 
 #: ../../../../data/maps/River_Explorers.wmf/elemental:10
 msgid ""
@@ -849,7 +850,7 @@ msgstr ""
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
-msgstr ""
+msgstr "Nehirtopraklar"
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:10
 msgid ""
@@ -859,7 +860,7 @@ msgstr "Mistik bir kara parçası, farklı manzaralarla dolu, hepsi de bir avuç
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Nehir Boyunca"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -886,7 +887,7 @@ msgstr ""
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Kumlu Geçişler"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""

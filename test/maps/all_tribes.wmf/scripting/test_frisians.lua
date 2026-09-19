@@ -442,6 +442,7 @@ run(function()
 
    -- Test saveloading and verify the buildings again
    stable_save(game, "frisian_tribe", 1000)
+   sleep_with_fps(5)
 
    -- Did buildings saveload OK?
    verify_buildings(playernumber, expected_number_of_buildings)

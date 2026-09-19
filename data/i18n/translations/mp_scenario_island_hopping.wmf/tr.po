@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Enes Efe Ü., 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Enes Efe Ü., 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,15 +19,15 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
-msgstr ""
+msgstr "5 Dakika"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
-msgstr ""
+msgstr "10 Dakika"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
-msgstr ""
+msgstr "15 Dakika"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:102
@@ -40,7 +41,7 @@ msgstr "Kurallar"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr ""
+msgstr "Ada Sıçramasına Hoş Geldin"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
@@ -50,7 +51,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "Ada Sıçraması Atlantalı kültüründe geleneksel bir turnuvadır. Kurallar basitçe şöyle: Bir adada ana karargah ile başlıyorsun. İlk adanın sonunda ne zaman bir kalen bitirirsen, ikinci bir adada ikinci bir karargah sana bahşediliyor ki tüm kaynağını, işçilerini ve askerlerini de ilk adadan bu ikinci adaya taşımış oluyorsun."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -59,14 +60,14 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Eğer bir kaleyi ikinci adada hedef bölgede bitirirsen, üçüncü bir karargahı elde da üçüncü adada elde edip, buradaki tüm kaynağını, işçilerini ve askerlerini oraya taşımış oluyorsun yine önceki de dahil. Üçüncü adanın tam ortasına bir kale inşa edip 20 dakika boyunca tutmalısın ki oyunu kazanabilesin. "
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr ""
+msgstr "Ne zaman bir adayı bitirirsen ekstra olarak oyunda senden önce ada bitiren oyuncu sayısına dayanarak kaynak elde edeceksin. Ne kadar erken bitirirsen o kadar az kaynak alırsın. Detaylara aşağıda göz atabilirsin."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:25
 msgid ""
@@ -74,81 +75,81 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "İlk adanın olayı yalnızca taş ve odun sağlıyor olmasıdır, ikinci ada da çayırlar ve kaynaklara sahiptir. Geride bıraktığın ekonomiler senin için çalışmaya devam edecek ama yeni adaya ulaştığın faydaların tadını çıkarıyor olacaksın."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr ""
+msgstr "Sonunda, elması ve kuvarsı harcarken dikkatli davran."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 msgid "Finish Rewards"
-msgstr ""
+msgstr "Bitiş Ödülleri"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
 msgid "First Island"
-msgstr ""
+msgstr "İlk Ada"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "1st to finish"
-msgstr ""
+msgstr "Birinci bitiren"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "2nd to finish"
-msgstr ""
+msgstr "İkinci bitiren"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:40
 msgid "3rd to finish"
-msgstr ""
+msgstr "Üçüncü bitiren"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:41
 msgid "4th to finish"
-msgstr ""
+msgstr "Dördüncü bitiren"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "Second Island"
-msgstr ""
+msgstr "İkinci Ada"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr ""
+msgstr "Ada sayısı %2$i'ye ulaşmış ilk oyuncu: %1$s."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr ""
+msgstr "Ada sayısı %2$i'ye ulaşmış ikinci oyuncu: %1$s."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr ""
+msgstr "Ada sayısı %2$i'ye ulaşmış üçüncü oyuncu: %1$s."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr ""
+msgstr "Ada sayısı %2$i'ye ulaşmış dördüncü oyuncu: %1$s."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
-msgstr ""
+msgstr "Bu başarı için ödül:"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr ""
+msgstr "Tepenin Kralı %s adlı oyuncudur ve kimse tepeyi alamazsa 20 dakika içerisinde oyunu kazanacaktır."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
-msgstr ""
+msgstr "%s, tepenin kontrolünü kaybetti."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:56
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr ""
+msgstr "%1$s, şu kadar süredir Tepenin Kralıdır: %2$s!"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 #, lua-format
 msgid "%s has won the game. Congratulations!"
-msgstr ""
+msgstr "%s oyunu kazandı. Tebrikler!"

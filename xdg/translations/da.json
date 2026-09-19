@@ -9,6 +9,9 @@
 	],
 	"release_notes": {
 		"1.4": [],
+		"1.3.1": [
+			"Udgivelse med fejlrettelser"
+		],
 		"1.3": [
 			"Markedshandel",
 			"Seks nye kort tilføjet og tre gamle kort fjernet",
@@ -17,9 +20,6 @@
 			"Hent kort fra internettet som en udvidelse",
 			"Nye visualiseringstilstande i redigeringsprogrammet",
 			"Mange nye funktioner for udviklere af udvidelser"
-		],
-		"1.2.1": [
-			"Udgivelse med fejlrettelser"
 		]
 	}
 }

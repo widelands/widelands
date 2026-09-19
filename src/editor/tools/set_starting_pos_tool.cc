@@ -18,8 +18,8 @@
 
 #include "editor/tools/set_starting_pos_tool.h"
 
-#include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
+#include "ui/editor/editorinteractive.h"
 
 // global variable to pass data from callback to class
 static int32_t current_player_;

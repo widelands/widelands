@@ -4,6 +4,7 @@
 # Translators:
 # Aathonaeax <ardawarcraft@gmail.com>, 2015
 # D Tufan, 2022
+# Enes Efe Ü., 2026
 # Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Volkan Gezer <volkangezer@gmail.com>, 2015
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: D Tufan, 2022\n"
+"Last-Translator: Enes Efe Ü., 2026\n"
 "Language-Team: Turkish (http://app.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "Bu haritada eserler yok. Bu olmamalıydı. Lütfen şurada: %s, bir hata bildiriminde bulun ve Widelands versiyonu ile yüklemeye çalıştığın haritayı belirt."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -97,19 +98,19 @@ msgstr "Özet:"
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i kadar eser"
+msgstr[1] "%i kadar eser"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s adlı oyuncu şuna sahip: %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "%1$i Takımı (oyuncular %2$s) şuna sahip: %3$s."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
@@ -120,7 +121,7 @@ msgstr "Toplayıcılar"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Depolarındaki değerli kaynaklar için puan kazanırsın. %s'dan sonra en yüksek skora sahip oyuncu oyunu kazanır."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -131,7 +132,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "süre"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -157,14 +158,14 @@ msgstr[1] "Toplam %i puan"
 #: ../../../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "Takım %d'in Durumu"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Takım Toplamı Puanı: %i"
+msgstr[1] "Takım Toplamı Puanı: %i"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
@@ -174,7 +175,7 @@ msgstr "Otokrat"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Ötekilerini yenen kabile ya da takım oyunu kazanır! Bu düşmanların karargahlarının, limanlarının ya da depolarının geride kalmadığı anlamına da gelir."
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -186,13 +187,13 @@ msgstr "Bu oyun kuralsız sonsuz bir oyundur."
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "'HQ' Avcı"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Öteki tüm karargahları bulup yok eden kabile ya da takım oyunu kazanır. Karargahlar olmadan olan başlanıgıç koşullarıyla çalışmaz."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -211,7 +212,7 @@ msgstr "%1$s, toprağın %%%2$3.0f kısmına sahipti (%3$i/%4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Bölge oranı"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -246,11 +247,11 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Haritanın yarıdan fazlasını, her oyuncu ya da takım almaya çalışmalıdır. Söz konusu bölgeyi en az 20 dakika tutan oyuncu ya da takım kazanan olacaktır. Eğer barışçıl mod seçildiyse, oyun bir oyuncunun öteki oyuncudan kazanabileceğinden fazla toprağa sahip olmasıyla biter. "
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Şu anda hiçbir taraf haritanın yarısına sahip değil."
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -264,13 +265,13 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Haritanın yarıdan fazlasını, her oyuncu ya da takım almaya çalışmalıdır. Söz konusu bölgeyi en az 20 dakika tutan oyuncu ya da takım veya en yüksek bölgeye %s'dan sonra kadar sahip olan oyuncu ya da takım, hangisi önce gerçekleşirse onlar kazanacaktır. Eğer barışçıl mod seçildiyse, oyun bir oyuncunun öteki oyuncudan kazanabileceğinden fazla toprağa sahip olmasıyla biter. "
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% gün"
+msgstr[1] "%1% kadar gün"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -281,13 +282,13 @@ msgstr[1] "%1% saat"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% dakika"
+msgstr[1] "%1% dakika"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s gün, %2$s yarım gün, %3$s yarım saat"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
@@ -355,7 +356,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Odun cücesi olarak kocaman ormanları seversin, görevin de tüm oyuncuların sahip olabileceğinden fazla ağaca sahip olmaktır. %s'den sonra oyun biter. O noktada en çok ağacı olan kazanır."
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
@@ -389,4 +390,4 @@ msgstr "Kazanan %2$s ile %1$s."
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "Kazananların şu kadar ağacı vardı: %s."

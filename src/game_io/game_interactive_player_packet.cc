@@ -26,9 +26,9 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_player.h"
-#include "wui/mapview.h"
-#include "wui/mapviewpixelfunctions.h"
+#include "ui/wui/interactive_player.h"
+#include "ui/wui/mapview.h"
+#include "ui/wui/mapviewpixelfunctions.h"
 
 namespace Widelands {
 

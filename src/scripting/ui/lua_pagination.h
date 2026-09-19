@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_PAGINATION_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/pagination.h"
+#include "ui/basic/pagination.h"
 
 namespace LuaUi {
 
