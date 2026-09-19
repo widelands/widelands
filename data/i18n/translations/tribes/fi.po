@@ -6,6 +6,7 @@
 # Atte Timonen, 2022
 # GunChleoc, 2016
 # GunChleoc, 2014,2016
+# Jaakko Muilu, 2026
 # Jukka Pakarinen, 2016-2020,2022
 # LINUX-SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-02-23 04:25+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: LINUX-SAUNA, 2022\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,13 +34,13 @@ msgstr ""
 #: ../../../../data/tribes/buildings/markets/amazons/market/init.lua:8
 msgctxt "amazons_building"
 msgid "Market"
-msgstr ""
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/atlanteans/market/init.lua:83
 msgctxt "atlanteans_building"
 msgid "Market"
-msgstr ""
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/barbarians/market/init.lua:8
@@ -51,13 +52,13 @@ msgstr "Kauppapaikka"
 #: ../../../../data/tribes/buildings/markets/empire/market/init.lua:8
 msgctxt "empire_building"
 msgid "Market"
-msgstr ""
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/markets/frisians/market/init.lua:8
 msgctxt "frisians_building"
 msgid "Market"
-msgstr ""
+msgstr "Kauppapaikka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -753,7 +754,7 @@ msgstr "Vahtitupa"
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldier has occupied your blockhouse."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet vahtitupasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -1113,7 +1114,7 @@ msgstr "Puutorni"
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldier has occupied your wooden tower."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet puutornisi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
@@ -1900,11 +1901,11 @@ msgstr "Kvartsin louhinta"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:97
 msgid "No Stones"
-msgstr ""
+msgstr "Ei kiveä"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:98
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Kiven pääesiintymä ehtynyt"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:100
 msgctxt "amazons_building"
@@ -5197,13 +5198,13 @@ msgstr "Ei resursseja"
 #: ../../../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Vähän kvartsia"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Runsaasti kvartsia"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -6951,7 +6952,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/amazons/init.lua:428
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Titicacajärvi"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../../../data/tribes/ships/amazons/init.lua:430
@@ -7353,7 +7354,7 @@ msgstr "Beowulf"
 #: ../../../../data/tribes/ships/barbarians/init.lua:51
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Biisoni"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../../../data/tribes/ships/barbarians/init.lua:53
@@ -7377,7 +7378,7 @@ msgstr "Dellingr"
 #: ../../../../data/tribes/ships/barbarians/init.lua:59
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Kotka"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:61
@@ -7539,13 +7540,13 @@ msgstr "Villisika"
 #: ../../../../data/tribes/ships/barbarians/init.lua:113
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Valkyyria"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:115
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Visentti"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../../../data/tribes/ships/barbarians/init.lua:117
@@ -7749,7 +7750,7 @@ msgstr "Gallus"
 #: ../../../../data/tribes/ships/empire/init.lua:101
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiaattori"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:103
@@ -8456,7 +8457,7 @@ msgstr "Pihdit"
 #: ../../../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Tulikiviä"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/tribes/wares/fish/init.lua:8

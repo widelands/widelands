@@ -317,7 +317,7 @@ msgstr "Tutkimusmatkoja voidaan aloittaa kakista satamista. Silloin kaikki tarvi
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Voit tarkistaa tarvittavat tuotteet satamasi Tutkimusmatkat-välilehdeltä (se ilmestyy, kun olet aloittanut tutkimusmatkan)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."

@@ -1124,7 +1124,7 @@ msgstr "Kokeile!"
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "Esitä kauppaa"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
