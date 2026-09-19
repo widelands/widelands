@@ -114,7 +114,7 @@ function ware_help_consumers_string(tribe, ware_description)
          end
       end
       if(add_this_worker) then
-         workers_string = workers_string .. image_line(worker.icon_name, 1, p(linkify_encyclopedia_object(worker)))
+         workers_string = workers_string .. image_line(worker.icon_name, 1, linkify_encyclopedia_object(worker))
       end
    end
 
