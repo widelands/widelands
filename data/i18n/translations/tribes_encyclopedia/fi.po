@@ -199,7 +199,7 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr ""
+msgstr "Amatsonit käyttävät graniittia työstääkseen työkaluja. Sitä tuottavat kivenleikkaajat kiviouhoksilla."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:114
@@ -213,7 +213,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "Se on myös rakennusmateriaali joillekin edistyneille rakennuksille. Sitä tuotetaan kiviouhoksilla."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../../../data/tribes/initialization/amazons/units.lua:127
@@ -393,7 +393,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Hakuilla kivenhakkaajat hakkaavat kivistä graniittia tai louhivat graniittia ja kvartsia kiviouhoksilla. "
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -1142,7 +1142,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden graniitin välillä %1$s ja %2$s riippuen siitä, miten paljon kivenhakkaaja joutuu kävelemään."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1266,7 +1266,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden lihan tai kalan välillä %1$s ja %2$s riippuen siitä, miten paljon metsästäjä-keräilijä joutuu kävelemään. Jos kumpaakin ruokaa on saatavilla, sitten yhtä kutakin tuotetaan välillä %3$s ja %4$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1671,7 +1671,7 @@ msgctxt "amazons_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a tapir"
 " in %s on average."
-msgstr ""
+msgstr "Jos kaikki tarvittavat tuotteet toimitetaan ajallaan, tämä rakennus tuottaa tapiirin keskimäärin %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
