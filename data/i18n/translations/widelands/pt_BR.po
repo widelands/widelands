@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 05f7c14829a7f0004c7a414c9bd4d253_5e10bee <ac668b7aa91ffe1e4ff8943d2a820367_813261>, 2021\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -2468,7 +2468,7 @@ msgid ""
 " you tried to connect."
 msgstr "O Widelands não conseguiu estabelecer uma conexão com o endereço fornecido. Ou nenhum servidor Widelands estava acessível na porta TCP %u, ou o servidor desligou enquanto você tentava se conectar."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2476,35 +2476,35 @@ msgstr[0] "%u incompatibilidade de complemento detectada:\n"
 msgstr[1] "%u incompatibilidades de complementos detectadas:\n"
 msgstr[2] "%u incompatibilidades de complementos detectadas:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ exigido pelo anfitrião não encontrado"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ instalado na versão %3$s, mas o anfitrião usa a versão %4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "O arquivo de /me falhou na verificação md5."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me verificou o arquivo recebido.  Embora a soma de verificação md5 tenha sido bem-sucedida, não consigo lidar com o arquivo."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2632,7 +2632,7 @@ msgstr "O Widelands não conseguiu iniciar um servidor.\nProvavelmente algum out
 msgid "Computer %u"
 msgstr "Computador %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3044,8 +3044,13 @@ msgstr "O cliente %s está trapaceando!"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Trapaça: o cliente %1$s agora controla %2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr ""
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "O cliente %1$s está trapaceando, agindo como %2$s!"
