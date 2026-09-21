@@ -481,7 +481,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "Lämmittäköön Satul sinua, Jundlina! Hyväksyn sen mitä Loftomor ehdotti. Tarvitsemme hyvän rakennusmateriaalien lähteen minkä vuoksi meidän täytyy laajentaa aluettamme nopeasti. En tunne olevani turvassa lällä saarella ennen kuin olemme nähneet kaikki sen rannat. Toin runsain mitoin kelpomiehiä Atlantikselta. Sotilasvoimaa on siis saatavilla. Me tarvitsemme vain joitakin asuntoja asettuaksemme."
+msgstr "Lämmittäköön Satul sinua, Jundlina! Hyväksyn Loftomorin ehdotuksen. Tarvitsemme hyvän rakennusmateriaalien lähteen, minkä vuoksi meidän täytyy laajentaa aluettamme nopeasti. Ei tunnu turvalliselta lällä saarella ennen kuin olemme nähneet kaikki sen rannat. Toin runsain mitoin kelpo miehiä Atlantikselta. Sotilasvoimaa onkin saatavilla. Me tarvitsemme vain joitakin asuntoja asettuaksemme."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:254
@@ -687,7 +687,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Satul lämmittäköön sinuakin, Loftomor. Nuo ovat hyviä uutisia kuulla. Muistathan kuitenkin, työkaluseppämme tulee olla varustettu sahalla. Työkalujen tekeminen on meille taidetta, vaatien sahan kaltaisen tarkan työkalun, ei raakalaismaista vasaraa kuten mikä muilla heimoilla on."
+msgstr "Satul lämmittäköön sinuakin, Loftomor. Nuo ovat hyviä uutisia kuulla. Muistathan kuitenkin, että työkaluseppämme tulee olla varustettu sahalla. Työkalujen tekeminen on meille taidetta, vaatien sahan kaltaisen tarkan työkalun, ei raakalaismaista vasaraa kuten mikä muilla heimoilla on."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"

@@ -11406,7 +11406,7 @@ msgstr ""
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr "Tuntematon kometoriviparametri: %s\nKenties '=' puuttuu?"
+msgstr "Tuntematon komentoriviparametri: %s\nKenties '=' puuttuu?"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format

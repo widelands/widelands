@@ -371,6 +371,7 @@ Widelands size yapay zeka ile size meydan okuma tercihini de sunar.
         <li xml:lang="cs">Výpis chyb skriptu</li>
         <li xml:lang="da">Udgivelse med fejlrettelser</li>
         <li xml:lang="de">Fehlerbehebung</li>
+        <li xml:lang="fi">Viankorjauspäivitys</li>
         <li xml:lang="fr"> 
 Version de correction de bugs</li>
         <li xml:lang="he">גרסת תיקון באגים</li>
@@ -425,6 +426,13 @@ Version de correction de bugs</li>
         <li xml:lang="de">Lade Homepagekarten als Erweiterung</li>
         <li xml:lang="de">Neue Darstellungsmodi im Editor</li>
         <li xml:lang="de">Viele neue Fähigkeiten für Erweiterungsentwickler</li>
+        <li xml:lang="fi">Market trading</li>
+        <li xml:lang="fi">Kuusi uutta karttaa lisätty ja kolme vanhaa karttaa poistettu</li>
+        <li xml:lang="fi">Talousalueet</li>
+        <li xml:lang="fi">Many improvements to the in-game Encyclopedia</li>
+        <li xml:lang="fi">Lataa verkkosivuston kartat lisäosina</li>
+        <li xml:lang="fi">Uudet visualisointimuodot editorissa</li>
+        <li xml:lang="fi">Lukuisia uusia ominaisuuksia laajennusten kehittäjille</li>
         <li xml:lang="fr">Négociation sur le marché</li>
         <li xml:lang="fr">Six nouvelles cartes ont été ajoutées et trois anciennes cartes ont été retirées</li>
         <li xml:lang="fr">économie des districts</li>

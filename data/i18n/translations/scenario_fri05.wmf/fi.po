@@ -340,6 +340,8 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Anna kun ensin näytän kokonaiskuvan pikkusaarestamme näyttämällä sinulle "
+"paikkoja."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
@@ -719,6 +721,8 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"Ja niin me erkanemme, jotta tapaamme pian. Hyvästi, ja siunatkoon ikuinen "
+"rauha koko Helgolandiaa!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
