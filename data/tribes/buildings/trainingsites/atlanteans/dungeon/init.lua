@@ -149,7 +149,7 @@
 --          -- Make this translatable with pgettext: Empire training site tooltip when it has no soldiers assigned
 --          no_soldier = "No soldier to train!"
 --          -- Make this translatable with pgettext: Empire training site tooltip when none of the present soldiers match the current training program
---          no_soldier_for_level = "No soldier found for this training level!",
+--          no_soldier_for_level = "No soldier found for the possible training levels!",
 --       },
 --    }
 --
@@ -289,7 +289,7 @@ wl.Descriptions():new_trainingsite_type {
       -- TRANSLATORS: Atlantean training site tooltip when it has no soldiers assigned
       no_soldier = pgettext("atlanteans_building", "No soldier to train!"),
       -- TRANSLATORS: Atlantean training site tooltip when none of the present soldiers match the current training program
-      no_soldier_for_level = pgettext("atlanteans_building", "No soldier found for this training level!"),
+      no_soldier_for_level = pgettext("atlanteans_building", "No soldier found for the possible training levels!"),
    },
 }
 
