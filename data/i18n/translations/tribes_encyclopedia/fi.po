@@ -456,7 +456,7 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr "Maakerrostieteilijät, yleisrakentajat, laivanrakentajat ja kivenveistäjät tarvitsevat kaikki vasaraa. Varmista että näitä on alati jonkin verran varastossa! Vasaroita tuottaa kivenveistäjä. "
+msgstr "Kaikki geologit, rakentajat, laivanrakentajat ja kivenveistäjät tarvitsevat kaikki vasaran. Varmista, että sinulla on aina jokunen varalla! Kivenveistäjä tuottaa niitä."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Machete
 #: ../../../../data/tribes/initialization/amazons/units.lua:365
@@ -3257,7 +3257,7 @@ msgstr "Asiantaitaja puuttuu"
 #: ../../../../data/tribes/initialization/amazons/units.lua:2145
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr "Asiantaitajia puuttuvat"
+msgstr "Asiantaitajia puuttuu"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -3592,7 +3592,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, asesepät, haarniskasepät ja laivanrakentajat tarvitsevat vasaran. Varmista, että sinulla on aina jokunen varalla! Työkaluseppä tuottaa niitä."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:717
@@ -4877,7 +4877,7 @@ msgstr "Musta ääni haastelee miilun sisältä"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Miilu tarvitsee keskimäärin %s tuottaakseen yhden hiilen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting
 #. Works
@@ -6162,7 +6162,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2331
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "Asiantaitaja puuttuu"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -6170,7 +6170,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2333
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "Asiantaitajia puuttuu"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -6436,7 +6436,7 @@ msgid ""
 "hammer. Make sure you’ve always got some in reserve! They are one of the "
 "basic tools produced at the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, sepät, kypäräsepät ja laivanrakentajat tarvitsevat vasaran. Varmista, että sinulla on aina jokunen varalla! Ne ovat perustyökaluja, joita tuotetaan metallipajassa (mutta tuotanto loppuu rakennuksessa, jos se laajennetaan kirvespajaksi ja asetehtaaksi)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -6918,7 +6918,7 @@ msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1132
 msgctxt "barbarians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Kauppapaikka mahdollistaa kaupankäynnin muiden heimojen kanssa."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Quarry
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1141
@@ -7079,7 +7079,7 @@ msgstr "Kalastajan mökin työskentelyalueella tarvitaan kalaisia vesiä."
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1208
 msgctxt "building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät kalastamisen."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's
 #. Hut, part 1
@@ -7088,7 +7088,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden kalan välillä %1$s ja %2$s riippuen siitä, miten paljon kalastajan täytyy kävellä."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1222
@@ -7180,7 +7180,7 @@ msgstr "Kantaja tarvitsee %s yhtä täyttä vesiämpäriä kohden."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Jos vesivaranto on ehtynyt, kantaja tarvitsee keskimäärin %s."
 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
@@ -7209,7 +7209,7 @@ msgstr "Chat’Karuth<br>ensimmäisen tiedustelijaryhmän valaseremoniassa"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1283
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Tiedustelijoiden tutkimusmatka kestää välillä %1$s ja %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1295
@@ -7458,7 +7458,7 @@ msgstr "Valmistaa ruoka-annokset ruokkiakseen tiedustelijat ja kaivostyöläiset
 msgctxt "barbarians_building"
 msgid ""
 "The tavern can produce one ration in %s on average, if the supply is steady."
-msgstr ""
+msgstr "Taverna tuottaa yhden ruoka-annoksen keskimäärin %s, jos toimitus on vakaa."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Inn
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1398
@@ -7546,7 +7546,7 @@ msgstr "Hiilentislaajien laulu"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Miilu tarvitsee keskimäärin %s tuottaakseen yhden hiilen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Smelting Works
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1444
@@ -7714,7 +7714,7 @@ msgstr "Varustaa alokkaat ja kouluttaa heidät sotilaiksi."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Kasarmi tarvitsee keskimäärin %s sotilaan värväämiseen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Cattle Farm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1526
@@ -7903,7 +7903,7 @@ msgstr "Metsä toki tarjoaa puuta kotitalouksiin ja pitää heidät lämpimänä
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, tämä kaivos tuottaa hiiltä keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -8046,7 +8046,7 @@ msgstr ""
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Complete training of one soldier takes %s on average."
-msgstr ""
+msgstr "Yhden sotilaan koko koulutus kestää keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Training Camp
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1741
@@ -8187,7 +8187,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ferry between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden lautan välillä %1$s ja %2$s riippuen siitä, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Shipyard
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1853
@@ -8205,7 +8205,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one ship between %1$s and %2$s, depending on how "
 "far the shipwright has to walk."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden laivan välillä %1$s ja %2$s riippuen siitä, miten paljon laivanrakentajan täytyy kävellä."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Weaving Mill
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1877
@@ -8236,7 +8236,7 @@ msgstr "Kutoo kangasta ruoikosta"
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The weaving mill needs %s on average to produce one cloth."
-msgstr ""
+msgstr "Kutomo tarvitsee keskimäärin %s tuottaakseen yhden kankaan."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1915
@@ -10371,7 +10371,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2627
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Asiantaitaja puuttuu"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -10379,7 +10379,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:2629
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Asiantaitajia puuttuu"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -10643,7 +10643,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, asesepät, haarniskasepät ja laivanrakentajat tarvitsevat vasaran. Varmista, että sinulla on aina jokunen varalla! Työkaluseppä tuottaa niitä."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -13952,7 +13952,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../../../data/tribes/initialization/empire/units.lua:2800
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "Asiantaitaja puuttuu"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13960,7 +13960,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:2802
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "Asiantaitajia puuttuu"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -14258,7 +14258,7 @@ msgid ""
 "Geologists, builders, blacksmiths and shipwrights all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the "
 "blacksmithy."
-msgstr ""
+msgstr "Kaikki geologit, rakentajat, sepät ja laivanrakentajat tarvitsevat vasaran. Varmista, että sinulla on aina jokunen varalla! Niitä tuotetaan sepän pajassa."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fishing Net
 #: ../../../../data/tribes/initialization/frisians/units.lua:445
@@ -14800,7 +14800,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
 msgctxt "frisians_building"
 msgid "A market enables trading with other tribes."
-msgstr ""
+msgstr "Kauppapaikka mahdollistaa kaupankäynnin muiden heimojen kanssa."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../../../data/tribes/initialization/frisians/units.lua:1567
@@ -16691,7 +16691,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../../../data/tribes/initialization/frisians/units.lua:2489
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Asiantaitaja puuttuu"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -16699,7 +16699,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:2491
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Asiantaitajia puuttuu"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -16947,22 +16947,22 @@ msgstr ""
 #: ../../../../data/tribes/scripting/help/building_help.lua:771
 #: ../../../../data/tribes/scripting/help/building_help.lua:779
 msgid "From %1% to %2%"
-msgstr ""
+msgstr "Välillä %1% ja %2%"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:762
 msgid "Attack training:"
-msgstr ""
+msgstr "Hyökkäysharjoitus:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:770
 msgid "Defense training:"
-msgstr ""
+msgstr "Puolustusharjoitus:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:778
 msgid "Evade training:"
-msgstr ""
+msgstr "Väistöharjoitus:"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../../../data/tribes/scripting/help/building_help.lua:788
