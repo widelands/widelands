@@ -124,6 +124,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	}
 }
 
+InteractiveGameBase::~InteractiveGameBase() = default;
+
 void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_image_cache->get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);

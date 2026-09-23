@@ -35,7 +35,7 @@ public:
 	                    Section& global_s,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
-	~InteractiveGameBase() override = default;
+	~InteractiveGameBase() override;
 	Widelands::Game* get_game() const override;
 	Widelands::Game& game() const override;
 

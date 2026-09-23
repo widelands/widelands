@@ -41,6 +41,7 @@ public:
 	                  Widelands::PlayerNumber,
 	                  bool multiplayer,
 	                  ChatProvider* chat_provider = nullptr);
+	~InteractivePlayer() override;
 
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;

@@ -264,6 +264,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	initialization_complete();
 }
 
+InteractivePlayer::~InteractivePlayer() = default;
+
 void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.set_image(g_image_cache->get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
