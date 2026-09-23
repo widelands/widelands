@@ -264,7 +264,9 @@ private:
 	                           const Widelands::Economy* economy,
 	                           bool receive);
 
-	bool check_economies();
+	EconomyObserver* rotate_economies_and_flags();
+
+	void check_economies();
 	bool check_productionsites(const Time&);
 	bool check_mines_(const Time&);
 
@@ -298,7 +300,6 @@ private:
 	void consider_ally_sites(Widelands::FCoords, BuildableField&);
 	void consider_own_msites(Widelands::FCoords, BuildableField&, bool&);
 
-	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(BuildingAttribute);
 	uint32_t count_productionsites_without_buildings();
 	BuildingObserver& get_building_observer(char const*);
@@ -364,9 +365,9 @@ private:
 	ManagementData management_data;
 	ExpansionType expansion_type;
 	std::deque<MineableField*> mineable_fields;
-	std::deque<Widelands::Flag const*> new_flags;
 	std::deque<Widelands::Road const*> roads;
-	std::deque<EconomyObserver*> economies;
+	std::map<Widelands::Serial, EconomyObserver> economies_;
+	Widelands::Serial current_economy_{Widelands::kInvalidSerial};
 	std::deque<ProductionSiteObserver> productionsites;
 	std::deque<ProductionSiteObserver> mines_;
 	std::deque<ProductionSiteObserver> shipyardsites;
