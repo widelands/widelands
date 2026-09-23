@@ -39,8 +39,8 @@ struct WLWarning : public std::exception {
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
-	[[nodiscard]] virtual const char* title() const;
-	[[nodiscard]] const char* what() const noexcept override;
+	[[nodiscard]] virtual const char* title() const [[clang::lifetimebound]];
+	[[nodiscard]] const char* what() const noexcept [[clang::lifetimebound]] override;
 
 protected:
 	WLWarning() = default;
