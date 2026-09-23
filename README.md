@@ -40,6 +40,14 @@ You will need to install the following dependencies:
 *  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
 
+On most common systems, you can install these automatically by running:
+
+~~~~
+./install-dependencies.sh
+~~~~
+
+It auto-detects your OS, or you can pass it explicitly, e.g. `./install-dependencies.sh debian`.
+
 
 ### Compiling with our convenience script
 
