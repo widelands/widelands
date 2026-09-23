@@ -19,7 +19,7 @@ wl.Descriptions():new_productionsite_type {
       log = 1,
       granite = 1,
       marble = 1,
-      marble_column = 2
+      marble_column = 1
    },
 
    animation_directory = dirname,
