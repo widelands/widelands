@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ari ploni, 2025\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
@@ -2457,7 +2457,7 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands לא הצליח ליצור חיבור לכתובת שצוינה. או שלא היה שרת Widelands זמין ביציאת TCP %u, או שהשרת כובה בזמן שניסית להתחבר."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2465,35 +2465,35 @@ msgstr[0] "זוהתה אי-התאמה ב-%u תוספת:\n"
 msgstr[1] "זוהו אי-התאמות ב-%u תוספות:\n"
 msgstr[2] "זוהו אי-התאמות ב-%u תוספות:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ הנדרש על ידי המארח לא נמצא"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ מותקן בגרסה %3$s אך המארח משתמש בגרסה %4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me – הקובץ שלו נכשל בבדיקת md5."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me בדק את הקובץ שהתקבל. למרות שבדיקת ה-md5 הצליחה, אין באפשרותי לטפל בקובץ."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "מנותק"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2621,7 +2621,7 @@ msgstr "Widelands לא הצליח להפעיל שרת.\nכנראה שתהליך 
 msgid "Computer %u"
 msgstr "מחשב %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3033,8 +3033,13 @@ msgstr "הלקוח %s מרמה!"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "רמאות: הלקוח %1$s שולט כעת ב-%2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr ""
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "הלקוח %1$s מרמה, ומתחזה ל-%2$s!"

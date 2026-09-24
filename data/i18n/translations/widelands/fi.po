@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1373,7 +1373,7 @@ msgstr "Vaihtotarjous tarjoajalta %s"
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Vaihtotarjous tarjoajalta %1$s kohteelle %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
@@ -2453,42 +2453,42 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u laajennuksen epätäsmäys havaittu:\n"
 msgstr[1] "%u laajennusten epätäsmäystä havaittu:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me ’n tiedosto epäonnistui md5 tarkistussummauksessa."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-tarkistus onnistui."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2616,7 +2616,7 @@ msgstr "Widelands ei voinut käynnistää palvelinta.\nMahdollisesti jollakin to
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3026,8 +3026,13 @@ msgstr "Asiakas %s huijaa! "
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Huijaus: asiakas %1$s ohjaa nyt %2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr "Asiakas %1$s on ottanut käyttöön seuraavat ylimääräiset lisäosat: %2$s"
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "Asiakas %1$s huijaa, esittää olevansa %2$s!"
@@ -5173,7 +5178,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Selaa ja asenna karttoja widelands.org-verkkosivuston kartta-arkistosta. Manuaalisesti ladattujen karttojen tavoin asennetut verkkosivustokartat tallennetaan hakemistoon '%s' Widelands-kotihakemiston alle."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:736
 msgid "Development"
@@ -5515,7 +5520,7 @@ msgstr ""
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "Lisäosaa '%s' ei voi ladata palvelimeen, koska lisäosassa olevia seuraavia tiedostonimiä ei sallita:"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2060
 msgid ""
@@ -11406,7 +11411,7 @@ msgstr ""
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr "Tuntematon kometoriviparametri: %s\nKenties '=' puuttuu?"
+msgstr "Tuntematon komentoriviparametri: %s\nKenties '=' puuttuu?"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
