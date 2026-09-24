@@ -616,8 +616,11 @@ bool AttackPanel::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int3
 	return true;
 }
 
-void AttackPanel::ListOfSoldiers::handle_mousein(bool /*inside*/) {
-	set_tooltip(std::string());
+void AttackPanel::ListOfSoldiers::handle_mousein(bool inside) {
+	// tooltip is set by handle_mousemove(), which could happen before mouse-in event.
+	if (!inside) {
+		set_tooltip(std::string());
+	}
 }
 
 bool AttackPanel::ListOfSoldiers::handle_mousemove(
