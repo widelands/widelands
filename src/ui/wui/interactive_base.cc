@@ -729,22 +729,16 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 		if (bln != intermediate_result.end()) {
 			TCoords<> tc(pair.first, Widelands::TriangleIndex::D);
 			WorkareaPreviewData wd(tc, workarea_max(pair.second, brn->second, bln->second));
-			for (const auto& p : workarea.data) {
-				if (p.first == tc) {
-					wd = WorkareaPreviewData(tc, wd.index, p.second);
-					break;
-				}
+			if (const auto it = workarea.data.find(tc); it != workarea.data.end()) {
+				wd = WorkareaPreviewData(tc, wd.index, it->second);
 			}
 			result.first.push_back(wd);
 		}
 		if (rn != intermediate_result.end()) {
 			TCoords<> tc(pair.first, Widelands::TriangleIndex::R);
 			WorkareaPreviewData wd(tc, workarea_max(pair.second, brn->second, rn->second));
-			for (const auto& p : workarea.data) {
-				if (p.first == tc) {
-					wd = WorkareaPreviewData(tc, wd.index, p.second);
-					break;
-				}
+			if (const auto it = workarea.data.find(tc); it != workarea.data.end()) {
+				wd = WorkareaPreviewData(tc, wd.index, it->second);
 			}
 			result.first.push_back(wd);
 		}
