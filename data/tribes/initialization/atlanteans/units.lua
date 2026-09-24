@@ -43,14 +43,19 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **animations**: Global animations. Contains subtables for ``frontier``, ``flag``, and ``pinned_note``.
---    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
---    and may also define ``fps`` (integer frames per second).
---
 --    **animation_directory**: The location of the animation png files.
 --
---    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``,
---    ``busy_e``, ``busy_se`` and ``busy_sw``.
+--    **animations**: Global animations. Contains subtables for:
+--
+--    * ``frontier``
+--    * ``flag``
+--    * ``pinned_note``
+--    * ``bridge_normal_e``, ``bridge_normal_se``, ``bridge_normal_sw``
+--    * ``bridge_busy_e``, ``bridge_busy_se``, ``bridge_busy_sw``
+--    * (optional) ``bridge_pillar_normal``, ``bridge_pillar_busy`` .. versionadded:: 1.4
+--
+--    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
+--    and may also define ``fps`` (integer frames per second).
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
 --
@@ -349,7 +354,9 @@ wl.Descriptions():new_tribe {
       bridge_normal_se = { hotspot = {8, 8} },
       bridge_busy_se = { hotspot = {8, 8} },
       bridge_normal_sw = { hotspot = {40, 8} },
-      bridge_busy_sw = { hotspot = {40, 8} }
+      bridge_busy_sw = { hotspot = {40, 8} },
+      bridge_pillar_normal = { hotspot = {14, 9} },
+      bridge_pillar_busy = { hotspot = {14, 9} },
    },
    spritesheets = {
       flag = {
