@@ -234,7 +234,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Kuten kaikki muutkin heimot, Atlantislaiset kysenevät myös kouluttaa sotilaita: tyrmä kouluttaa hyökkäystä – tärkein Atlantislaisten ominaisuus – ja labyrintti kouluttaa väistelyä, terveyttä ja puolustusta. Teollisuuden tuottamat esineet käytetään parempien sotilaiden kouluttamiseksi kahdella harjoittelupaikalla."
+msgstr "Kuten kaikki muutkin heimot, Atlantislaiset kysenevät myös kouluttamaan sotilaita: tyrmä kouluttaa hyökkäystä – tärkein Atlantislaisten ominaisuus – ja labyrintti kouluttaa väistelyä, terveyttä ja puolustusta. Teollisuuden tuottamat esineet käytetään parempien sotilaiden kouluttamiseksi kahdella harjoittelupaikalla."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
