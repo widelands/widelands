@@ -611,6 +611,7 @@ private:
 	void do_think();
 
 	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);
+	void set_mousein_child(Panel* child);
 	void do_mousein(bool inside);
 	bool do_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool do_mouserelease(uint8_t btn, int32_t x, int32_t y);
@@ -673,6 +674,7 @@ private:
 	static std::atomic<Panel*> mousegrab_;
 	static Panel* mousein_;
 	static Panel* tooltip_panel_;
+	static std::atomic<uint32_t> destroyed_panels_counter_;
 	static Vector2i tooltip_fixed_pos_;
 	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
