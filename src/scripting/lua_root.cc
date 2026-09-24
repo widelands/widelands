@@ -198,8 +198,8 @@ int LuaGame::get_allow_saving(lua_State* L) {
       value of :attr:`wl.game.Player.number` of the interactive player
 */
 int LuaGame::get_interactive_player(lua_State* L) {
-	upcast(const InteractivePlayer, p, get_game(L).get_ibase());
-	lua_pushuint32(L, p ? p->player_number() : 0);
+	upcast(const InteractivePlayer, p, get_game(L).get_game_interface());
+	lua_pushuint32(L, p != nullptr ? p->player_number() : 0);
 	return 1;
 }
 

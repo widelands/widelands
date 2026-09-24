@@ -29,6 +29,7 @@
 #include "base/multithreading.h"
 #include "base/string.h"
 #include "base/time_string.h"
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -280,6 +281,16 @@ InteractiveBase::~InteractiveBase() {
 		abort_build_road();
 	}
 	RenderQueue::instance().clear();  // Cleanup spurious drawing commands
+}
+
+void InteractiveBase::load_plugins() {
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+			egbase().lua().run_script(kAddOnDir + FileSystem::file_separator() +
+			                          pair.first->internal_name + FileSystem::file_separator() +
+			                          "init.lua");
+		}
+	}
 }
 
 UI::Box* InteractiveBase::toolbar() {
@@ -803,6 +814,87 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
  * Default implementation does nothing.
  */
 void InteractiveBase::postload() {
+}
+
+void InteractiveBase::notify_player_starting_pos(Widelands::PlayerNumber player,
+                                                 Widelands::Coords coords) {
+	if (player == player_number()) {
+		// Scroll map to starting position for new games.
+		// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+		// InteractiveGameBase::start() for multiplayer.
+		map_view()->scroll_to_field(coords, MapView::Transition::Jump);
+	}
+}
+
+void InteractiveBase::main_loop() {
+	run<UI::Panel::Returncodes>();
+}
+void InteractiveBase::end_main_loop() {
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
+
+void InteractiveBase::notify_replay_ended() {
+	UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("End of Replay"),
+	                     _("The end of the replay has been reached and the game has "
+	                       "been paused. You may unpause the game and continue watching "
+	                       "if you want to."),
+	                     UI::WLMessageBox::MBoxType::kOk);
+	mmb.run<UI::Panel::Returncodes>();
+}
+
+void InteractiveBase::notify_desync() {
+	UI::WLMessageBox m(
+	   this, UI::WindowStyle::kWui, _("Desync"),
+	   format(_("The replay has desynced and the game was paused.\n"
+	            "You are probably watching a replay created with another version of "
+	            "Widelands, which is not supported.\n\n"
+	            "If you are certain that the replay was created with the same version "
+	            "of Widelands, %1$s, please report this problem as a bug.\n"
+	            "You will find related messages in the standard output (stdout.txt on "
+	            "Windows). Please add this information to your report."),
+	          build_ver_details()),
+	   UI::WLMessageBox::MBoxType::kOk);
+	m.run<UI::Panel::Returncodes>();
+}
+
+std::unique_ptr<Texture> InteractiveBase::draw_minimap_for_savegame() {
+	return draw_minimap(game(), nullptr, Rectf(), MiniMapType::kStaticMap, kSavegameMinimapLayers);
+}
+
+void InteractiveBase::gather_saveloading_information(SaveloadingInformation& data) {
+	data.mapview_center = map_view()->view_area().rect().center();
+	data.display_flags = get_display_flags();
+
+	const auto& landmarks = quick_navigation().landmarks();
+	data.landmarks.resize(landmarks.size());
+	for (size_t i = 0; i < landmarks.size(); ++i) {
+		data.landmarks.at(i).set = landmarks.at(i).set;
+		data.landmarks.at(i).view_x = landmarks.at(i).view.viewpoint.x;
+		data.landmarks.at(i).view_y = landmarks.at(i).view.viewpoint.y;
+		data.landmarks.at(i).zoom = landmarks.at(i).view.zoom;
+		data.landmarks.at(i).name = landmarks.at(i).name;
+	}
+}
+
+void InteractiveBase::restore_from_saveloading_information(SaveloadingInformation& data) {
+	map_view()->scroll_to_map_pixel(data.mapview_center, MapView::Transition::Jump);
+
+	if (g_allow_script_console) {
+		data.display_flags |= InteractiveBase::dfDebug;
+	} else {
+		data.display_flags &= ~InteractiveBase::dfDebug;
+	}
+	set_display_flags(data.display_flags);
+
+	quick_navigation().landmarks().resize(data.landmarks.size());
+	for (size_t i = 0; i < data.landmarks.size(); ++i) {
+		const auto& lm = data.landmarks.at(i);
+		if (lm.set) {
+			MapView::View view = {Vector2f(lm.view_x, lm.view_y), lm.zoom};
+			quick_navigation().set_landmark(i, view);
+		}
+		quick_navigation().landmarks()[i].name = lm.name;
+	}
 }
 
 void InteractiveBase::draw_road_building(RenderTarget* dst,

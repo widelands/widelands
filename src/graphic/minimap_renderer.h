@@ -45,15 +45,18 @@ enum class MiniMapLayer {
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
-inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
+constexpr inline MiniMapLayer operator|(MiniMapLayer left, MiniMapLayer right) {
 	return MiniMapLayer(static_cast<int>(left) | static_cast<int>(right));
 }
-inline int operator&(MiniMapLayer left, MiniMapLayer right) {
+constexpr inline int operator&(MiniMapLayer left, MiniMapLayer right) {
 	return static_cast<int>(left) & static_cast<int>(right);
 }
-inline MiniMapLayer operator^(MiniMapLayer left, MiniMapLayer right) {
+constexpr inline MiniMapLayer operator^(MiniMapLayer left, MiniMapLayer right) {
 	return MiniMapLayer(static_cast<int>(left) ^ static_cast<int>(right));
 }
+
+constexpr MiniMapLayer kSavegameMinimapLayers =
+   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 
 enum class MiniMapType {
 	// Keep the view window always in the center of the minimap and pan the underlying map.

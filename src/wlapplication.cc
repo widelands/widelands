@@ -90,6 +90,7 @@
 #include "ui/shared/chat_panel.h"
 #include "ui/shared/maptable.h"
 #include "ui/wui/interactive_player.h"
+#include "ui/wui/interactive_provider.h"
 #include "ui/wui/interactive_spectator.h"
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
@@ -919,7 +920,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background, true);
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
+	game.set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
+	game.create_game_interface(playernumber);
 
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
@@ -1007,6 +1009,7 @@ void WLApplication::run() {
 					throw FileNotFoundError("--loadgame", _("No last saved game."), filename_);
 				}
 			}
+			game.set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
 			if (start_replay) {
 				game.run_replay(filename_, "");
 			} else {
@@ -1036,6 +1039,7 @@ void WLApplication::run() {
 	case GameType::kScenario: {
 		Widelands::Game game;
 		try {
+			game.set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
 			if (scenario_difficulty_ != Widelands::kScenarioDifficultyNotSet) {
 				game.set_scenario_difficulty(scenario_difficulty_);
 			}

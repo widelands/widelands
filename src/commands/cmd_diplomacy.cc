@@ -26,7 +26,6 @@
 #include "logic/playersmanager.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "ui/wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -42,8 +41,8 @@ void CmdDiplomacy::execute(Game& game) {
 			                             Message::Type::kDiplomacy, game.get_gametime(),
 			                             _("Diplomacy"), "images/players/team.png", heading, text)));
 		}
-		if (upcast(InteractiveSpectator, is, game.get_ibase())) {
-			is->log_message(heading, text);
+		if (game.get_game_interface()->player_number() == neutral()) {
+			game.get_game_interface()->log_message(heading, text);
 		}
 	};
 

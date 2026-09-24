@@ -232,7 +232,7 @@ void WatchWindow::think() {
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		// Drop the tracking if it leaves our vision range
-		InteractivePlayer* ipl = game().get_ipl();
+		upcast(InteractivePlayer, ipl, &parent_);
 		if ((ipl != nullptr) &&
 		    !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
@@ -300,7 +300,7 @@ void WatchWindow::do_follow() {
 			   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);
 			const float dist = MapviewPixelFunctions::calc_pix_distance(map, p, center_map_pixel);
-			InteractivePlayer* ipl = game().get_ipl();
+			upcast(InteractivePlayer, ipl, &parent_);
 			if (((closest == nullptr) || closest_dist > dist) &&
 			    ((ipl == nullptr) ||
 			     ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width())))) {

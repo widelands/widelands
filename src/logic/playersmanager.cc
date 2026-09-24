@@ -22,7 +22,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "ui/wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -109,13 +108,13 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool c
 	}
 
 	/* If all results have been gathered, show the summary screen. */
-	if (change_existing || egbase_.get_igbase() == nullptr) {
+	if (change_existing || egbase_.get_game_interface() == nullptr) {
 		return;
 	}
 	if (players_end_status_.size() < number_of_players_) {
 		return;
 	}
-	egbase_.get_igbase()->show_game_summary();
+	egbase_.get_game_interface()->notify_game_ended();
 }
 
 }  // namespace Widelands

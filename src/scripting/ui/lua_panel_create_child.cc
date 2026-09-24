@@ -69,7 +69,8 @@ create_plugin_action_lambda(lua_State* L, const std::string& cmd, bool is_hyperl
 	}
 
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	return [&egbase, cmd, is_hyperlink](Args... args) {  // do not capture L directly
+	InteractiveBase* ibase = get_ibase_if_exists(L);
+	return [&egbase, ibase, cmd, is_hyperlink](Args... args) {  // do not capture L directly
 		try {
 			if (is_hyperlink) {
 				do_set_global_string(egbase.lua().L(), "HYPERLINK_ACTION", args...);
@@ -82,7 +83,7 @@ create_plugin_action_lambda(lua_State* L, const std::string& cmd, bool is_hyperl
 				throw;
 			}
 
-			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
+			UI::WLMessageBox m(ibase, UI::WindowStyle::kWui, _("Plugin Error"),
 			                   format_l(_("Error when running plugin:\n%s"), e.what()),
 			                   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
@@ -923,7 +924,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 		reg = &get_main_menu(L).unique_windows().get_registry(registry);
 		style = UI::WindowStyle::kFsMenu;
 	} else {
-		reg = &get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
+		reg = &get_safe_ibase(L).unique_windows().get_registry(registry);
 		style = UI::WindowStyle::kWui;
 	}
 
