@@ -33,6 +33,12 @@ wl.Descriptions():new_trainingsite_type {
       unoccupied = {hotspot = {43, 54}},
    },
    spritesheets = {
+      build = {
+         hotspot = {43, 54},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      },
       working = {
          hotspot = {43, 54},
          fps = 15,
