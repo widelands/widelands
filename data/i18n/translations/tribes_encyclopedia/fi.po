@@ -505,7 +505,7 @@ msgstr "Kivikulhoja käytetään kullanhuuhdonnassa ja kultahippujen sulatuksess
 #: ../../../../data/tribes/initialization/amazons/units.lua:422
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Piikivillä sytytetään tulta hiilipolttimoissa ja uunissa."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../../../data/tribes/initialization/amazons/units.lua:433
@@ -5113,7 +5113,7 @@ msgstr "Viljelijä istuttaa ja korjaa yhden nipullisen maissia välillä %1$s ja
 msgctxt "atlanteans_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Maatila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot
 #. Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
@@ -5144,7 +5144,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer sows and harvests one bundle of blackroot between %1$s "
 "and %2$s, depending on how far he has to walk."
-msgstr ""
+msgstr "Mustajuuriviljelijä istuttaa ja korjaa yhden nipullisen mustajuuria välillä %1$s ja %2$s riippuen siitä, miten paljon hän joutuu kävelemään."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site:
 #. Blackroot Farm, part 2; %s is replaced by 'N growing fields'
@@ -5154,7 +5154,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farm needs at least %s to work at full productivity most of "
 "the time."
-msgstr ""
+msgstr "Mustajuuritila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1865
@@ -6982,7 +6982,7 @@ msgstr "Tämä rakennus tuottaa yhden graniitin välillä %1$s ja %2$s riippuen 
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1869
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Jos reitillä on rinteitä tai esteitä, aikaa lisätään."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -7290,7 +7290,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The reed yard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Ruokotarha tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lime Kiln
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1328
@@ -7787,7 +7787,7 @@ msgstr "Viljelijä istuttaa ja korjaa yhden nipullisen vehnää välillä %1$s j
 msgctxt "barbarians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Maatila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Helm Smithy
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1557
@@ -11211,7 +11211,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr ""
+msgstr "Kivenhakkaaja löytää 5 kappaletta graniittia ja 2 kappaletta marmoria 7 kivestä."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -11368,7 +11368,7 @@ msgstr "Kalastajatorpan työskentelyalueella tarvitaan kalaisia vesiä."
 #: ../../../../data/tribes/initialization/empire/units.lua:1355
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät kalastamisen."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Fisher's
 #. House, part 1
@@ -11446,7 +11446,7 @@ msgstr "Keisarillinen sanonta"
 #, lua-format
 msgctxt "empire_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Kantaja tarvitsee %s yhtä täyttä vesiämpäriä kohden."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 2
@@ -11490,7 +11490,7 @@ msgstr "Sinun on yhdistettävä tämä lippu tiedustelijan taloon ennen kuin voi
 #: ../../../../data/tribes/initialization/empire/units.lua:1437
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Tiedustelijoiden tutkimusmatka kestää välillä %1$s ja %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11699,7 +11699,7 @@ msgctxt "empire_building"
 msgid ""
 "The vineyard needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Viinitila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12071,7 +12071,7 @@ msgstr "Viljelijä istuttaa ja korjaa yhden nipullisen vehnää välillä %1$s j
 msgctxt "empire_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Maatila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14182,7 +14182,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces, armor smithies and recycling centers"
 " are fed with coal."
-msgstr ""
+msgstr "Tiiliuunien, haarniskapajojen ja kierrätyskeskusten tuliin syötetään hiiltä."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321
@@ -14794,7 +14794,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/frisians/units.lua:1556
 msgctxt "frisians_building"
 msgid "A trader explaining his diplomacy"
-msgstr ""
+msgstr "Kauppias esittelee diplomatioaansa"
 
 #. TRANSLATORS: Purpose helptext for a Frisian market: Market
 #: ../../../../data/tribes/initialization/frisians/units.lua:1558
@@ -14879,7 +14879,7 @@ msgstr "Tämä rakennus tuottaa yhden graniitin välillä %1$s ja %2$s riippuen 
 #: ../../../../data/tribes/initialization/frisians/units.lua:2306
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Jos reitillä on rinteitä tai esteitä, aikaa lisätään."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14965,7 +14965,7 @@ msgstr "Tämä rakennus tuottaa yhden lihan välillä %1$s ja %2$s riippuen siit
 #: ../../../../data/tribes/initialization/frisians/units.lua:1633
 msgctxt "frisians_building"
 msgid "The hunter produces one fur after he has produced five pieces of meat."
-msgstr ""
+msgstr "Metsästäjä tuottaa yhden turkiksen tuotettuaan viisi kappaletta lihaa."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:1641
@@ -15000,7 +15000,7 @@ msgstr "Kalastajatorpan työskentelyalueella tarvitaan kalaisia vesiä."
 #: ../../../../data/tribes/initialization/frisians/units.lua:1650
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Tiet ja puut pitkin rannikkoa estävät kalastamisen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House, part 1
@@ -15059,7 +15059,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farm needs at least %s to work at full productivity most of the "
 "time."
-msgstr ""
+msgstr "Ruokotila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../../../data/tribes/initialization/frisians/units.lua:1683
@@ -15081,7 +15081,7 @@ msgstr "Päällikkö Arldorin tiuskaisu, kun häneltä kysyttiin miksi hänen he
 #, lua-format
 msgctxt "frisians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Kantaja tarvitsee %s yhtä täyttä vesiämpäriä kohden."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Well, part
 #. 2
@@ -15324,7 +15324,7 @@ msgstr "Sinun on yhdistettävä tämä lippu tiedustelijan taloon ennen kuin voi
 #: ../../../../data/tribes/initialization/frisians/units.lua:1820
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Tiedustelijoiden tutkimusmatka kestää välillä %1$s ja %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../../../data/tribes/initialization/frisians/units.lua:1832
@@ -15859,7 +15859,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Jos toimitus toimii tasaisesti ja turkikislle on jatkuva tarve, poronhoitoalue tuottaa yhden lihan kolmen turkiksen tuottamisen jälkeen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15917,7 +15917,7 @@ msgstr "Viljelijä istuttaa ja korjaa yhden nipullisen ohraa välillä %1$s ja %
 msgctxt "frisians_building"
 msgid ""
 "The farm needs at least %s to work at full productivity most of the time."
-msgstr ""
+msgstr "Maatila tarvitsee ainakin %s toimiakseen täydellä teholla valtaosan ajasta."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../../../data/tribes/initialization/frisians/units.lua:2089
@@ -15969,7 +15969,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, syvä kivikaivos tuottaa graniittia keskimäärin %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Coal Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2122
@@ -15988,7 +15988,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, syvä hiilikaivos tuottaa hiiltä keskimäärin %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Iron Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2140
@@ -16007,7 +16007,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, syvä rautakaivos tuottaa rautamalmia keskimäärin %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../../../data/tribes/initialization/frisians/units.lua:2158
@@ -16026,7 +16026,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Jos muonitus on vakaa, syvä kultakaivos tuottaa kultamalmia keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../../../data/tribes/initialization/frisians/units.lua:2176

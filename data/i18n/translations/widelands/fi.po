@@ -2273,7 +2273,7 @@ msgstr "Peli on luultavasti tallennettu eri Widelands-versiolla tai eri käyttö
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:1022
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Tarkista voimassa olevat tuotanto-ohjelmat ja syöttöasetukset."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -2451,7 +2451,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands ei pystynyt muodostamaan yhteyttä annettuun osoitteeseen. Joko TCP-portissa %u ei ollut saavutettavissa yhtään Widelands-palvelinta tai palvelin sammutettiin, kun yritit muodostaa yhteyden."
 
 #: ../../../../src/network/gameclient.cc:842
 #, c-format
@@ -2465,14 +2465,14 @@ msgstr[1] "%u laajennusten epätäsmäystä havaittu:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• Isännän edellyttämää ‘%2$s’ ei löytynyt"
 
 #: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ Asennettu versio %3$s,  mutta isännällä on käytössä versio%4$s"
 
 #: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
@@ -5275,7 +5275,7 @@ msgstr[1] "Haluatko varmasti päivittää nämä %u laajennusta?"
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s) tekijältä %3$s"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1042
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:498
@@ -5528,7 +5528,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Tiedostonimet saavat sisältää vain aakkosnumeerisia merkkejä (A–Z, a–z, 0–9) ja yksinkertaisia välimerkkejä (piste, väliviiva ja alaviiva; ei useita pisteitä). Muita merkkejä, kuten välilyöntejä, ei sallita. Tiedostonimien pituus ei saa ylittää 80 merkkiä."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2075
 #, c-format
@@ -7323,7 +7323,7 @@ msgstr "(C) %1%-%2% Widelandsin kehittäjäryhmän toimesta · Luvitettu GNU-yle
 
 #: ../../../../src/ui/fsmenu/main.cc:892
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Napsauta päävalikkoon"
 
 #: ../../../../src/ui/fsmenu/main.cc:970
 msgid "Desyncing Add-On Found"
@@ -7632,7 +7632,7 @@ msgstr "Vieritysasetusten ristiriita"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr ""
+msgstr "‘%1$s’, ‘%2$s’ tai '%3$s' ovat ristiriidassa suositeltujen asetusten kanssa. Vaihdetaanko myös ristiriitaiset asetukset?"
 
 #: ../../../../src/ui/fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
