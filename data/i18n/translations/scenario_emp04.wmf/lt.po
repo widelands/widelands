@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jaunius Belickas, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: Jaunius Belickas, 2026\n"
 "Language-Team: Lithuanian (https://app.transifex.com/widelands/teams/35159/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,167 +21,192 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/starting_conditions.lua:39
 msgid "Fremil"
-msgstr ""
+msgstr "Fremilis"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Išmontuokite neproduktyvius pastatus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Išmontuoti pastatus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:46
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Išardykite visus neproduktyvius mažus pastatus, kad gautumėte išteklių "
+"naujiems pastatams."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
+"Nepamirškite patikrinti neproduktyvių pastatų pranešimų ir būsenos etikečių."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Panaikinkite visus nereikalingus kelius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:60
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Išvalyti kelių tinklą"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:56
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:61
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
+"Sutvarkykite chaotišką kelių tinklą pašalindami visus nereikalingus kelius."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:62
 msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
+"Užtikrinkite, kad būtų ne daugiau kaip 3 aklavietės ir ne daugiau kaip viena"
+" vėliava su daugiau nei 4 keliais."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Spustelėkite vieną iš ūkių"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:69
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Atidarykite ūkio pastato langą"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:70
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Spustelėkite ūkio pastatą, kad atidarytumėte jo langą. Tai leis jums "
+"išanalizuoti pastatą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Raskite ūkių statybos planus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:78
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Rasti ūkių statybos planus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:79
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Susigrąžinkite ūkių statybos planus. Ieškokite jų kalvose į rytus nuo savo "
+"sienos."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Pastatykite bent 3 medkirčių namelius ir 2 karjerus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:87
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Karjerai ir medkirčiai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:88
 msgid ""
 "Build at least three new lumberjack’s houses and two new quarries to renew "
 "your building material supply chain."
 msgstr ""
+"Pastatykite bent tris naujus medkirčių namelius ir du naujus karjerus, kad "
+"atnaujintumėte statybinių medžiagų tiekimo grandinę."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Gaminame žuvį ir davinius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:96
 msgid "Food Production"
-msgstr ""
+msgstr "Maisto gamyba"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:97
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Raskite ir pagaukite žuvies. Po to paruoškite davinius savo kalnakasiams."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "Pakeiskite senus ir neefektyvius miškininkų namelius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:105
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Pastatykite du naujus miškininkų namelius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:106
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
+"Pakeiskite du miškininkų namelius naujais, kad padidintumėte produktyvumą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "Raskite vienuolyną šiaurėje"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:114
 msgid "Find the Monastery"
-msgstr ""
+msgstr "Rasti vienuolyną"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:115
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Raskite vienuolyną šiaurėje, kad gautumėte patobulintą kviečių gamybos "
+"technologiją."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Susitarkite su Julija dėl technologijos"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:123
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Diplomatija: prekyba arba karas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:124
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Nuspręskite: arba surinkite 35 kviečių pėdus ir 15 vyno amforų deivei savo "
+"būstinėje, arba užkariaukite vienuolyną."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Apmokykite bent 3 herojus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:132
 msgid "Hero Training"
-msgstr ""
+msgstr "Herojų apmokymas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:133
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
 msgstr ""
+"Išmintingai naudokite išteklius, kad apmokytumėte bent tris pilnai "
+"paaukštintus herojus."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:134
 msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
+"Norėdami apmokyti kareivį iki aukščiausio lygio vienoje vietoje, "
+"apsvarstykite galimybę sustabdyti apmokymų vietą, kol ji bus pilnai "
+"aprūpinta visu reikiamu maistu ir ginklais."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
+"Kad išvengtumėte išteklių švaistymo, apribokite apmokomų karių skaičių iki "
+"vieno vienoje vietoje."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -185,102 +214,106 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
+"Apmokymų vieta visada teiks pirmenybę geriausiai tinkančiam kareiviui. "
+"Įsitikinkite, kad jūsų pusiau apmokyti kareiviai nėra įgulę kariniame "
+"pastate."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Pagaminkite bent 10 įrankių"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Tool Production"
-msgstr ""
+msgstr "Įrankių gamyba"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:145
 msgid "Produce at least ten tools to improve your economy."
-msgstr ""
+msgstr "Pagaminkite bent dešimt įrankių savo ekonomikai pagerinti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
+"Atminkite, kad gamybos kiekį galite reguliuoti ekonomikos nustatymuose."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:152
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "Verbuokite naujus karius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:154
 msgid "New Soldier Recruiting"
-msgstr ""
+msgstr "Naujų karių verbavimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:155
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr ""
+msgstr "Savo kareivinėse užverbuokite bent dešimt naujų karių."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:161
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Nugalėkite barbarus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Nugalėkite priešą"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "Nutraukite barbarų įsiveržimą į jūsų pasaulio dalį."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "Build 2 charcoal kilns"
-msgstr ""
+msgstr "Pastatykite 2 anglies deginimo krosnis"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Pastatykite dvi anglies deginimo krosnis"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:173
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Pastatykite dvi anglies deginimo krosnis geležies pramonei palaikyti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:174
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "Nepamirškite užtikrinti nuolatinio rąstų tiekimo joms."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:180
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "Padidinkite savo karinę galią apmokydami karius"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:182
 msgid "Training is Important"
-msgstr ""
+msgstr "Apmokymai yra svarbu"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:183
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Intensyviai ir greitai apmokykite savo karius."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:184
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Jums reikia padidinti savo karinę galią."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:190
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "Pastatykite mokymo stovyklą ir patobulinkite areną"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:192
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Efektyvesni mokymo pastatai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:193
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Pastatykite mokymo stovyklą ir patobulinkite areną iki koliziejaus."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:204
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Namai, mieli namai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:205
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:216
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:232
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Liucijaus dienoraštis"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:207
@@ -289,15 +322,18 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"Galiausiai mums pavyko pasiekti namus. Taip džiaugiuosi vėl matydamas mūsų "
+"gražią šalį. Labai laukiu pasivaikščiojimo nuostabiąja pakrante ir "
+"medžioklės giliuose miškuose."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "Tikiuosi, kad Saledus ir Amalėja taip pat labai džiaugiasi."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:215
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "Įrankiai, įrankiai, įrankiai"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:218
@@ -305,12 +341,14 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
+"Šlovinkite dievus! Mes ką tik užtikrinome nuolatinį įrankių tiekimą. Dabar "
+"turėtume galėti plėsti savo ekonomiką."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:622
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:668
 msgid "Military Strength"
-msgstr ""
+msgstr "Karinė galia"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:226
@@ -318,10 +356,12 @@ msgid ""
 "Thank the gods! Now we have everything prepared to fully train our soldiers."
 " We can increase our military strength at last."
 msgstr ""
+"Ačiū dievams! Dabar viskas paruošta visapusiškam karių apmokymui. Pagaliau "
+"galime padidinti savo karinę galią."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid "The Battle is Won"
-msgstr ""
+msgstr "Mūšis laimėtas"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:234
@@ -331,24 +371,29 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
+"Šlovinkite dievus, mums pavyko. Įveikėme visus mums mestus iššūkius. Netgi "
+"išvijome barbarus iš savo šalies. Tačiau mūsų pergalė tik laikina, nes tai "
+"tik karo pradžia. Pažiūrėkime, ką mums žada ateitis."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:235
 msgid "Victory"
-msgstr ""
+msgstr "Pergalė"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:236
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Jūs įvykdėte šią misiją. Jei norite, galite tęsti žaidimą, kitu atveju "
+"pereikite prie kitos misijos."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:245
 msgid "Chaos"
-msgstr ""
+msgstr "Chaosas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Liucijus nusivylęs"
 
 #. TRANSLATORS: Lutius
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:248
@@ -357,27 +402,30 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
+"O ne! Amalėja teisi. Tiesą sakant, aš nematau jokio produktyvumo. Be to, "
+"panašu, kad kelių tinklas taip pat visiškai sugriuvęs. Kas galėtų būti "
+"atsakingas už šį chaosą?"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Explanation Needed"
-msgstr ""
+msgstr "Reikalingas paaiškinimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "Liucijus sveikina pareigūną"
 
 #. TRANSLATORS: Lutius
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:256
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "Ave! Kas jūs esate ir kas nutiko mūsų nuostabiai šaliai?"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:261
 msgid "Difficult Times"
-msgstr ""
+msgstr "Sunkūs laikai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:262
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Liucijus priima iššūkį"
 
 #. TRANSLATORS: Lutius
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:264
@@ -386,6 +434,8 @@ msgid ""
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
 msgstr ""
+"Mere, turime jums padėkoti už pastangas saugant mūsų miestą. Mes padarysime "
+"viską, kad atsigautume po šio chaoso. Tačiau, deja, tai atrodo labai sunku."
 
 #. TRANSLATORS: Lutius
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:267
@@ -393,14 +443,16 @@ msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
 msgstr ""
+"Man tikrai baisu, nes esame visiškai nepasiruošę, jei barbarai nuspręstų mus"
+" pulti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:275
 msgid "Welcome Back"
-msgstr ""
+msgstr "Sveiki sugrįžę"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:276
 msgid "A high Fremil official is welcoming you…"
-msgstr ""
+msgstr "Aukštas Fremilio pareigūnas sveikina jus..."
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -409,20 +461,24 @@ msgid ""
 "Ave, Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
 msgstr ""
+"Ave, pone! Žmonės ir aš labai džiaugiamės, kad grįžtate namo. Mums čia "
+"tikrai reikia gero vadovavimo."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:280
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
+"Kaip jau pastebėjote, nuo tada, kai išvykote, viskas klostėsi siaubingai ne "
+"taip."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:285
 msgid "A Long Story"
-msgstr ""
+msgstr "Ilga istorija"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:286
 msgid "The official sighs deeply…"
-msgstr ""
+msgstr "Pareigūnas giliai atsidūsta…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -433,6 +489,10 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"Pone, leiskite man pradėti nuo pradžių. Karalius seniai paliko Fremilį "
+"kovoti su barbarais. Kadangi ši pareiga reikalavo visiško jo įsipareigojimo,"
+" jis perdavė miesto valdymą savo buvusiam sekretoriui ir paskyrė jį čia savo"
+" pakaitalu."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:290
 msgid ""
@@ -440,6 +500,9 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"Tačiau tai buvo vienas blogiausių jo sprendimų. Sekretorius apakino savo "
+"naują galią. Jo savanaudiški instinktai buvo tokie pat baisūs, kaip ir "
+"visiškas kvailumas ir nesugebėjimas valdyti miesto."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:292
 msgid ""
@@ -447,14 +510,17 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"Po kurio laiko žmonės atrado tiesą ir išvarė visišką kvailį. Vėliau mane "
+"išrinko šio miesto meru. Tačiau atsigauti po chaoso atrodo per didelė "
+"užduotis mano sugebėjimams."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:300
 msgid "Amalea Looks Puzzled"
-msgstr ""
+msgstr "Amalea atrodo sutrikusi"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:301
 msgid "Amalea is doubtful…"
-msgstr ""
+msgstr "Amalea abejotina…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:303
@@ -463,6 +529,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"Ave, Saledus! Viena vertus, jūs teisus, tikrai malonu vėl pamatyti mūsų "
+"tėvynę. Tačiau, kita vertus, man susidaro įspūdis, kad čia kažkas nutiko "
+"labai ne taip."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:306
@@ -471,14 +540,17 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Pažvelkite į ekonomiką. Produktyvumas beveik nėra. Kas valdė mūsų šalį, kol "
+"mūsų nebuvo, sukūrė visišką chaosą. Nesu tikras, kaip galime tai išspręsti, "
+"jei įmanoma."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:311
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalea tiria"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "Amalea susimąsčiusi linkteli..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:314
@@ -489,6 +561,10 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
+"Lucijus, mano nuomone, tai vėl bus labai sunkus iššūkis. Bet bijau, kad "
+"esame pasmerkti valdyti šią situaciją. Kad viskas būtų dar blogiau, mūsų "
+"sandėliuose mane sutiko bjauri staigmena: jie visi tušti. Vargu ar rasite "
+"ten paliktų dulkių: jokių prekių, įrankių, darbininkų ir kareivių."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:317
@@ -501,6 +577,12 @@ msgid ""
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
 msgstr ""
+"Taigi, visų pirma, mums reikia tam tikrų statybinių medžiagų, kad pradėtume "
+"taisyti liūdnai pagarsėjusio sekretoriaus padarytas klaidas. Manau, kad "
+"turėtume pabandyti išardyti neproduktyvius mažus pastatus, kad iš jų atgautų"
+" kai kurias statybines medžiagas ir surinktume jas savo būstinėje. Kiek "
+"dabar matau, žvejų namai ir karjerai šalia jų neturi jokių išteklių. Visi "
+"medkirčių namai ir šuliniai taip pat atrodo neefektyvūs arba susidėvėję."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:320
@@ -509,6 +591,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn’t do anything with them."
 msgstr ""
+"Kitų pastatų kol kas negalime pasakyti, ar jie veikia tinkamai. Turime juos "
+"atidžiai stebėti, kada galėsime juos pateikti. Iki tol neturėtume su jais "
+"nieko daryti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:323
@@ -518,15 +603,19 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Išskyrus, galbūt turėtume apriboti visų pastatų, kurie sunaudoja mūsų "
+"statybines medžiagas, sąnaudas iki nulio. O gal netgi galėtume pristabdyti "
+"gamybą visuose didesniuose pastatuose ir priversti darbuotojus pailsėti, kol"
+" pagaminsime kai kurias jų žaliavas."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:330
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:590
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "Amalea turi blogų naujienų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:331
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea rekomenduoja…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:333
@@ -534,6 +623,8 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Broli, aš tikrai nerimauju, kad vėl turiu pranešti blogas naujienas. Kaip "
+"matote, mūsų ūkiai nieko negamina ir mes negalime jų išardyti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:336
@@ -542,6 +633,9 @@ msgid ""
 "instructions on how to construct and operate farms. Therefore they have zero"
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
+"Tokią situaciją lėmė liūdnas faktas, kad mūsų žmonės prarado instrukcijas, "
+"kaip statyti ir eksploatuoti ūkius. Todėl jų produktyvumas nulinis, o "
+"konstruktoriai taip pat nežino, kaip juos išardyti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:339
@@ -550,6 +644,9 @@ msgid ""
 "operation of farms. One older constructor told me that they might have been "
 "concealed in a cave in the hills east of our border."
 msgstr ""
+"Taigi, mums reikia skubiai susigrąžinti ūkių statybos ir eksploatavimo "
+"planus. Vienas vyresnis konstruktorius man pasakė, kad jie galėjo būti "
+"paslėpti oloje kalvose į rytus nuo mūsų sienos."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:342
@@ -557,14 +654,15 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
+"Kol nerasime planų, vienintelė galimybė mūsų ūkiams yra juos sunaikinti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:349
 msgid "Amalea Looks Confident"
-msgstr ""
+msgstr "Amalea atrodo pasitikinti savimi"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:350
 msgid "Amalea is more confident"
-msgstr ""
+msgstr "Amalea labiau pasitiki savimi"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:352
@@ -572,6 +670,8 @@ msgid ""
 "Lutius, now we are getting somewhere. As we have gained some construction "
 "materials, we can start to rebuild our economy."
 msgstr ""
+"Lucijus, dabar mes kažkur einame. Įgiję statybinių medžiagų, galime pradėti "
+"atstatyti savo ekonomiką."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:355
@@ -580,6 +680,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
 " all of the unproductive buildings though."
 msgstr ""
+"Visų pirma, mums reikia daugiau statybinių medžiagų. Taigi, turėtume "
+"pastatyti mažiausiai tris medkirčių namus ir du karjerą. Tačiau būtinai "
+"išardykite visus neproduktyvius pastatus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:358
@@ -588,14 +691,17 @@ msgid ""
 " are doing their job, somebody should clear up our road network. They are "
 "leaving us no space to place the buildings that we need."
 msgstr ""
+"O, kol nepamiršiu, reikia atlikti kitą užduotį. Kol mūsų statybininkai dirba"
+" savo darbą, kažkas turėtų išvalyti mūsų kelių tinklą. Jie nepalieka mums "
+"vietos statyti mums reikalingus pastatus."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:365
 msgid "Amalea is Somewhat Relieved"
-msgstr ""
+msgstr "Amalei šiek tiek palengvėjo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:366
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalea giliai atsiduso..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:368
@@ -603,6 +709,7 @@ msgid ""
 "Praise the gods, Lutius! We have found the plans on how to build and operate"
 " farms."
 msgstr ""
+"Šlovink dievus, Lucijus! Suradome planų, kaip statyti ir eksploatuoti ūkius."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:371
@@ -611,19 +718,22 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Dabar galime pradėti statyti ūkius, kad gamintume alų, kurio taip reikia "
+"mūsų kalnakasiams. Be to, planai leido mums atnaujinti senus ūkius, kad vėl "
+"pradėtume dirbti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:374
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
-msgstr ""
+msgstr "Bet bijau, kad ši problema mūsų ekonomikoje nebuvo paskutinė."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:380
 msgid "Amalea has Good News"
-msgstr ""
+msgstr "Amale turi gerų naujienų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:381
 msgid "Amalea smiles for the first time in weeks…"
-msgstr ""
+msgstr "Amalea šypsosi pirmą kartą per kelias savaites..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:383
@@ -631,12 +741,15 @@ msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
 msgstr ""
+"Lucijus, gerai padaryta iki šiol. Ką tik gavau žinią, kad baigėme "
+"pagrindinius pastatus, kad gautume statybinių medžiagų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:386
 msgid ""
 "This is offering us more options to get the shambles in our economy solved."
 msgstr ""
+"Tai siūlo mums daugiau galimybių, kaip išspręsti mūsų ekonomikos žlugimą."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:389
@@ -644,6 +757,8 @@ msgid ""
 "I really think we can start to be hopeful about our future now. I pray that "
 "we can make ourselves comfortable in our homeland again."
 msgstr ""
+"Tikrai manau, kad dabar galime pradėti tikėtis savo ateities. Meldžiuosi, "
+"kad vėl galėtume jaustis patogiai savo tėvynėje."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:392
@@ -652,19 +767,22 @@ msgid ""
 "some houses for our fishermen. As all the fish has been caught at our coast,"
 " we should try our luck in the eastern part of our territory."
 msgstr ""
+"Bet tai vis tiek bus sunkus darbas. Kol kas turėtume pradėti nuo kai kurių "
+"namų statybų savo žvejams. Kadangi visos žuvys buvo sugautos mūsų "
+"pakrantėje, turėtume išbandyti laimę rytinėje savo teritorijos dalyje."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:395
 msgid "After we have managed this, we can start making rations in our tavern."
-msgstr ""
+msgstr "Kai mums tai pavyks, galime pradėti gaminti davinį savo smuklėje."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:402
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea patenkinta"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:403
 msgid "Amalea is nodding her head…"
-msgstr ""
+msgstr "Amale linkteli galva..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:405
@@ -672,19 +790,21 @@ msgid ""
 "Well done, well done. Our road network looks a lot more structured than "
 "before."
 msgstr ""
+"Puiku, gerai padaryta. Mūsų kelių tinklas atrodo daug labiau struktūrizuotas"
+" nei anksčiau."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:408
 msgid "Now we can focus on rebuilding our economy."
-msgstr ""
+msgstr "Dabar galime sutelkti dėmesį į savo ekonomikos atkūrimą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:414
 msgid "Amalea Shakes Her Head"
-msgstr ""
+msgstr "Amalea purto galvą"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:415
 msgid "Amalea is getting fed up with all the problems in this economy…"
-msgstr ""
+msgstr "„Amalea“ pavargo nuo visų šios ekonomikos problemų..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:417
@@ -692,6 +812,8 @@ msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
 msgstr ""
+"Dėl Neptūno ką tik atradau kitą problemą! Atrodo, kad šioje ekonomikoje "
+"tikrai labai mažai dalykų veikia taip, kaip tikėtasi."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:420
@@ -700,6 +822,9 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
+"Vienas iš mūsų medkirčių man pasakė, kad mūsų miškų dauginimasis gerokai "
+"atsilieka nuo jo patirties ir lūkesčių. Taigi, atidžiai pažvelgiau į mūsų "
+"miškininkų veiklą."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:423
@@ -708,6 +833,9 @@ msgid ""
 " seed is degenerated. For this reason, they need much more time than usual "
 "for planting trees."
 msgstr ""
+"Ir spėk ką? Jie labai seni. Jų namai ir įrankiai susidėvėję, o sėklos "
+"išsigimusios. Dėl šios priežasties medžiams sodinti jiems reikia daug "
+"daugiau laiko nei įprastai."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:426
@@ -717,14 +845,17 @@ msgid ""
 "eventually destroy the old one or at least expel the forester to change "
 "houses."
 msgstr ""
+"Vienintelė išeitis – šalia mūsų medkirčių pastatyti du naujus miškininkų "
+"namus. Pirmiausia būtinai pastatykite naują miškininko namą, o vėliau "
+"sunaikinkite senąjį arba bent jau išvarykite miškininką pakeisti namus."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:433
 msgid "Amalea Laughs Sarcastically"
-msgstr ""
+msgstr "Amalea sarkastiškai juokiasi"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:434
 msgid "Amalea is laughing sarcastically…"
-msgstr ""
+msgstr "Amalea sarkastiškai juokiasi..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:436
@@ -733,19 +864,22 @@ msgid ""
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
 msgstr ""
+"Na, Lucijus, mes ką tik išsprendėme kitą keistą elgesį mūsų ekonomikoje. "
+"Dabar mūsų medkirčiai turėtų būti aprūpinti pakankamai medžių, kad "
+"pagerintume mūsų ekonomiką."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:439
 msgid "I am really very curious about what will go wrong next!"
-msgstr ""
+msgstr "Man tikrai labai įdomu, kas nutiks toliau!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:444
 msgid "Amalea Shrugs"
-msgstr ""
+msgstr "Amalea gūžteli pečiais"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:445
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "Amalea pripranta prie blogų naujienų..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:447
@@ -755,6 +889,9 @@ msgid ""
 "mills and breweries is somewhat outdated. This way, they are consuming far "
 "too many resources."
 msgstr ""
+"Gerai, Lutius, štai dar viena problema: pagaminus šiek tiek alaus ir miltų, "
+"supratau, kad mūsų gamyklose ir alaus daryklose naudojama technologija yra "
+"šiek tiek pasenusi. Tokiu būdu jie sunaudoja per daug išteklių."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:450
@@ -764,6 +901,10 @@ msgid ""
 "monastery in the north where the priestesses are supposed to possess some "
 "knowledge about improved technologies."
 msgstr ""
+"Ir nepatikėtumėte, bet niekas nežino, kaip patobulinti technologiją ar kaip "
+"statyti efektyvesnius pastatus. Girdėjau tik keletą gandų apie vienuolyną "
+"šiaurėje, kur kunigės turėtų turėti tam tikrų žinių apie patobulintas "
+"technologijas."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:453
@@ -771,14 +912,16 @@ msgid ""
 "But I’m not sure if they will share their knowledge with us for free. "
 "Anyway, we have no choice. We need to find them to improve our economy."
 msgstr ""
+"Bet nesu tikras, ar jie pasidalins savo žiniomis su mumis nemokamai. Šiaip "
+"mes neturime pasirinkimo. Turime juos rasti, kad pagerintume savo ekonomiką."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:460
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea atrodo laiminga"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:461
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea ateina…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:463
@@ -786,6 +929,8 @@ msgid ""
 "Brother, I think this is a rather fair offer. And some good will from any of"
 " our gods could be very helpful as well."
 msgstr ""
+"Broli, manau, kad tai gana teisingas pasiūlymas. Ir tam tikra gera valia iš "
+"bet kurio iš mūsų dievų taip pat gali būti labai naudinga."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:466
@@ -794,14 +939,17 @@ msgid ""
 "the wares. In particular, we will need to shorten the supply to our mines "
 "drastically. This will give us a real drawback in metal production."
 msgstr ""
+"Vienintelė problema gali būti ta, kad prireiks daug laiko surinkti visas "
+"prekes. Visų pirma, turėsime drastiškai sutrumpinti tiekimą savo kasykloms. "
+"Tai suteiks mums tikrą metalo gamybos trūkumą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:472
 msgid "Amalea Looks Sad"
-msgstr ""
+msgstr "Amalea atrodo liūdna"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:473
 msgid "Amalea is really sad…"
-msgstr ""
+msgstr "Amalea tikrai liūdna…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:475
@@ -811,6 +959,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"Nesu tikras, ar tai buvo teisingas dalykas. Taip, mes gavome planus. Tačiau "
+"nors dabar galime statyti ir atnaujinti savo gamyklas ir alaus daryklas "
+"naudodami patobulintas technologijas, niekada nesužinosime, ar ir kaip Vesta"
+" ir jos kunigės galėjo padėti mums prieš barbarus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:478
@@ -818,14 +970,16 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
+"Be to, mes turėsime gyventi su kaltės jausmu, kad sugriovė mūsų sielas "
+"imperijos deivės šventyklą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:483
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea yra labai patenkinta"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:484
 msgid "Amalea claps her hands…"
-msgstr ""
+msgstr "Amalea ploja rankomis..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:486
@@ -834,6 +988,9 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"Gerai padaryta. Dabar galime statyti efektyvesnius pastatus, kad galėtume "
+"tobulinti savo kviečius. Be to, planai leidžia atnaujinti dabartinę gamyklą "
+"ir alaus daryklą su patobulintomis technologijomis."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:489
@@ -842,14 +999,17 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
+"Ir, kas geriausia, turime naują sąjungininką, kuris ką tik aprūpino mus daug"
+" vandens, miltų ir alaus. Dabar tikrai manau, kad niekas negali sutrukdyti "
+"mums sustiprėti ir atsiimti tėvynę."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:494
 msgid "Amalea is Satisfied"
-msgstr ""
+msgstr "Amalea patenkinta"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:495
 msgid "Amalea is satisfied with the progress…"
-msgstr ""
+msgstr "Amalea patenkinta pažanga…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:497
@@ -859,6 +1019,10 @@ msgid ""
 "immediately. After all, we need more tools to get our economy back up and "
 "build more and different production sites."
 msgstr ""
+"Gerai, Lucijus, dar viena problema išspręsta. Dar bus daugiau. Kadangi dabar"
+" galime gaminti maistą, turėtume nedelsiant pradėti kasti anglies ir "
+"geležies rūdą. Galų gale, mums reikia daugiau įrankių, kad galėtume atkurti "
+"ekonomiką ir sukurti daugiau ir skirtingų gamybos vietų."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:500
@@ -867,6 +1031,9 @@ msgid ""
 "wrong with our mines as well. It’s probably a good idea to send a geologist "
 "to check whether there are enough resources in the vicinity of our mines."
 msgstr ""
+"Tačiau, remiantis mūsų naujausia patirtimi, manau, kad kažkas bus negerai ir"
+" su mūsų kasyklomis. Tikriausiai verta nusiųsti geologą, kad patikrintų, ar "
+"šalia mūsų kasyklų yra pakankamai išteklių."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:503
@@ -876,14 +1043,18 @@ msgid ""
 "In the meantime, we can start raising the buildings that we need most "
 "urgently. I think we are still lacking a vineyard in our economy."
 msgstr ""
+"Kai tik ištirpstame šiek tiek geležies, turime pradėti gaminti įrankius. "
+"Galbūt turėtume kontroliuoti jų gamybą per ekonominius nustatymus. Tuo tarpu"
+" galime pradėti kelti skubiausiai reikalingus pastatus. Manau, kad mūsų "
+"ekonomikoje vis dar trūksta vynuogyno."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:510
 msgid "Amalea has Some Advice"
-msgstr ""
+msgstr "Amalea turi keletą patarimų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:511
 msgid "Amalea is providing economic advice…"
-msgstr ""
+msgstr "Amalea teikia ekonomines konsultacijas…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:513
@@ -891,6 +1062,8 @@ msgid ""
 "Lutius, it seems that our coal supply is a little weak. So, we need to "
 "expand and explore all mineable areas for more coal."
 msgstr ""
+"Lucijus, atrodo, kad mūsų anglies tiekimas šiek tiek silpnas. Taigi, turime "
+"plėsti ir ištirti visas išgaunamas sritis, kad būtų daugiau anglies."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:516
@@ -899,14 +1072,17 @@ msgid ""
 "mining shortfalls with charcoal. But be careful to ensure a continuous log "
 "supply afterwards."
 msgstr ""
+"Tuo tarpu tai gali padėti pastatyti anglies krosnį, skirtą bet kokiam "
+"kasybos trūkumui apsaugoti anglimi. Tačiau būkite atsargūs, kad vėliau būtų "
+"užtikrintas nuolatinis rąstų tiekimas."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Amalea geros nuotaikos"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:524
 msgid "Amalea is celebrating success…"
-msgstr ""
+msgstr "Amalea švenčia sėkmę…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:526
@@ -914,14 +1090,16 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
+"Puiku, dar viena problema išspręsta! Dabar anglis palaikys mūsų metalo "
+"gamybą ir galėsime daugiau susikoncentruoti į žvalgymą ir karinę jėgą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea Looks Thoughtful"
-msgstr ""
+msgstr "Amalea atrodo susimąsčiusi"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is sorrowful…"
-msgstr ""
+msgstr "Amalea liūdna…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:534
@@ -930,14 +1108,17 @@ msgid ""
 "destroyed by an uncontrolled kitchen fire. I fear this might be a sign of "
 "the goddess Vesta still being in a bad mood."
 msgstr ""
+"Mielas broli, turiu pranešti blogų naujienų. Vieną iš mūsų pastatų ką tik "
+"sugriovė nekontroliuojamas virtuvės gaisras. Bijau, kad tai gali būti "
+"ženklas, kad deivė Vesta vis dar yra blogos nuotaikos."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea is Positively Surprised"
-msgstr ""
+msgstr "Amalea teigiamai nustebino"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:540
 msgid "Amalea is celebrating a happy event…"
-msgstr ""
+msgstr "Amalea švenčia laimingą įvykį…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:542
@@ -946,14 +1127,17 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
+"Sveiki, Lucijus, nežinau kaip, bet mums buvo padovanotas alus ir vynas. "
+"Neseniai vertindami sandėlį radome papildomų prekių. Galbūt deivė Vesta vis "
+"dar mus palaiko."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea Analyzes the Economy"
-msgstr ""
+msgstr "Amalea analizuoja ekonomiką"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:548
 msgid "Amalea reminds Lutius of the farms…"
-msgstr ""
+msgstr "Amalea primena Lucijui ūkius..."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:550
@@ -962,20 +1146,25 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
+"Pažiūrėk, Lucijus, aš ką tik šiek tiek toliau analizavau mūsų ekonomiką. "
+"Manau, kad gali kilti problemų su mūsų ūkiais. Jie nerodo jokio "
+"produktyvumo, nors yra pakankamai vietos kviečiams sodinti."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:553
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Manau, kad turėtume atidžiau pažvelgti į šią problemą ir aplankyti vieną iš "
+"jų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea’s Restrictions"
-msgstr ""
+msgstr "Amalea apribojimai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:561
 msgid "Amalea restricts the building possibilities…"
-msgstr ""
+msgstr "„Amalea“ riboja statybos galimybes…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:563
@@ -983,6 +1172,8 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
+"Atsiprašau, Lucijus, bet manau, kad svarbiausi ištekliai dabartinėje mūsų "
+"ekonomikos padėtyje yra žurnalai."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:566
@@ -991,14 +1182,17 @@ msgid ""
 " lumberjack’s house until we have gained enough building materials by "
 "dismantling the ineffective buildings."
 msgstr ""
+"Todėl aš pasinaudojau laisve apriboti mūsų dabartines statybos galimybes iki"
+" medkirčio namo, kol išardydami neefektyvius pastatus įgisime pakankamai "
+"statybinių medžiagų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:571
 msgid "Amalea Reminds to Clear Road Network"
-msgstr ""
+msgstr "„Amalea“ primena „Clear Road Network“."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:572
 msgid "Amalea reminds Lutius of the scrambled road network…"
-msgstr ""
+msgstr "Amalea primena Lucijui apie užšifruotą kelių tinklą…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:574
@@ -1006,6 +1200,9 @@ msgid ""
 "Look Brother, I have just realized we haven’t cleared the road network yet. "
 "I think we should do so very quickly to free enough space for new buildings."
 msgstr ""
+"Žiūrėk, broli, aš ką tik supratau, kad dar neišvalėme kelių tinklo. Manau, "
+"kad turėtume tai padaryti labai greitai, kad atlaisvintume pakankamai vietos"
+" naujiems pastatams."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:577
@@ -1014,16 +1211,19 @@ msgid ""
 "ends (flags with only one road) and not more than one flag with more than "
 "four roads attached."
 msgstr ""
+"Kad tai pasiektume, turėtume pasirūpinti, kad būtų ne daugiau kaip trys "
+"aklavietės (vėliavos su vienu keliu) ir ne daugiau kaip viena vėliava su "
+"daugiau nei keturiais keliais."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:601
 msgid "Defeated!"
-msgstr ""
+msgstr "Nugalėtas!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:602
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Amalea praneša apie mūsų pralaimėjimą…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:585
@@ -1031,10 +1231,12 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"O ne Lucijus, aš nežinau, kaip tai galėjo nutikti, bet barbarai atleido mūsų"
+" būstinę. Taigi, mes pralaimėjome šį mūšį ir mūsų imperiją!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:591
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "„Amalea“ praneša, kad mūsų būstinė prarado…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:593
@@ -1043,6 +1245,8 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
+"O ne Lucijus, aš nežinau, kaip tai galėjo nutikti, bet barbarai sunaikino "
+"mūsų būstinę. Taigi, mes nebegalime pristatyti prekių Julijai."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:596
@@ -1050,6 +1254,8 @@ msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
 msgstr ""
+"Dabar turime stengtis atlikti savo pareigas be jų technologijų. Tačiau tai "
+"nebus lengva užduotis."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:604
@@ -1058,14 +1264,16 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"O ne Lucijus, aš nežinau, kaip tai galėjo nutikti, bet barbarai sugriovė "
+"mūsų paskutinį sandėlį. Taigi, mes pralaimėjome šį mūšį ir mūsų imperiją!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
-msgstr ""
+msgstr "Amalea skuba"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr ""
+msgstr "Amalea labai užimta…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:612
@@ -1074,6 +1282,9 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Broli, kaip matote, šioje ekonomikoje daug dalykų atrodo negerai. Būsiu "
+"labai užsiėmęs viską išnagrinėti, todėl nebūsiu čia, kad patarčiau, kaip "
+"anksčiau."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:615
@@ -1082,10 +1293,12 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Bet esu labai įsitikinęs, kad viską tinkamai susitvarkysite patys. Žinoma, "
+"aš nedelsdamas pranešiu ir patarsiu, kai tik atrasiu naujų problemų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"
-msgstr ""
+msgstr "Saledus atrodo labai atsipalaidavęs…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:625
@@ -1094,14 +1307,17 @@ msgid ""
 "can see we still have some military strength. I can count five towers and a "
 "fortress in our vicinity to guard us."
 msgstr ""
+"Pone, tikrai labai malonu vėl būti namuose. Ir geriausia: matau, kad vis dar"
+" turime karinės jėgos. Galiu suskaičiuoti penkis bokštus ir tvirtovę šalia "
+"mūsų, kad mus saugotų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:630
 msgid "We Could Use The Military Instead"
-msgstr ""
+msgstr "Vietoj to galėtume naudoti kariuomenę"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:631
 msgid "Saledus raises his voice…"
-msgstr ""
+msgstr "Saledus pakelia balsą..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:633
@@ -1109,6 +1325,8 @@ msgid ""
 "Sire, if we need the technology that badly, why don’t we conquer it? We "
 "could defeat the little monastery in an instant."
 msgstr ""
+"Pone, jei mums labai reikia technologijos, kodėl jos neįveikus? Galime "
+"akimirksniu nugalėti mažą vienuolyną."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:636
@@ -1116,14 +1334,16 @@ msgid ""
 "The problem is however that the gods won’t be amused if we destroy one of "
 "their temples. And you never know what this could lead to."
 msgstr ""
+"Tačiau problema ta, kad dievai nebus linksmi, jei sunaikinsime vieną iš jų "
+"šventyklų. Ir niekada nežinai, ką tai gali sukelti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:643
 msgid "Easy Victory"
-msgstr ""
+msgstr "Lengva pergalė"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:644
 msgid "Saledus is cheering proudly…"
-msgstr ""
+msgstr "Saledus išdidžiai džiaugiasi…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:646
@@ -1131,15 +1351,17 @@ msgid ""
 "General, our armies just swept over the priestesses and conquered the plans."
 " That was a rather easy victory."
 msgstr ""
+"Generole, mūsų kariuomenės tiesiog nušlavė kuniges ir užkariavo planus. Tai "
+"buvo gana lengva pergalė."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:651
 msgid "Defiance"
-msgstr ""
+msgstr "Nepaklusnumas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:652
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:660
 msgid "Saledus asserts his point…"
-msgstr ""
+msgstr "Saledus tvirtina savo mintį…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:654
@@ -1149,10 +1371,14 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"Pone, pripažįstu, kad tai buvo labai geras sandoris, nors planus galėjome "
+"turėti daug anksčiau. Šiaip ar taip, mes negalėsime sudaryti jokių sandorių "
+"su barbarais, todėl geriau išlaikyti savo karius geros nuotaikos ir tinkamai"
+" juos apmokyti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:659
 msgid "Pride"
-msgstr ""
+msgstr "Pasididžiavimas"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:662
@@ -1162,10 +1388,14 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"Pone, pripažįstu, kad greičiausiai mes mėgavomės dievų pasipiktinimu, bet "
+"karo metu pabaiga kartais pateisina priemones. Ir mes negalėsime sudaryti "
+"jokių sandorių su barbarais, todėl geriau išlaikyti savo karius geros "
+"nuotaikos ir tinkamai juos apmokyti."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:669
 msgid "Saledus asks for a stronger army…"
-msgstr ""
+msgstr "Saledus prašo stipresnės armijos..."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:671
@@ -1173,6 +1403,8 @@ msgid ""
 "Now that we have produced some tools, I think it is time to divert some of "
 "our iron and coal towards military production."
 msgstr ""
+"Dabar, kai pagaminome keletą įrankių, manau, laikas dalį savo geležies ir "
+"anglies nukreipti į karinę gamybą."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:674
@@ -1181,19 +1413,21 @@ msgid ""
 "increase our military power. As a starting point, we should recruit at least"
 " ten new soldiers."
 msgstr ""
+"Aš tikrai nerimauju dėl mūsų kariuomenės silpnumo. Turėtume pradėti didinti "
+"savo karinę galią. Iš pradžių turėtume įdarbinti bent dešimt naujų karių."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Perhaps we should train them further in the arena as well."
-msgstr ""
+msgstr "Galbūt turėtume juos toliau treniruoti ir arenoje."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:684
 msgid "Training is Needed"
-msgstr ""
+msgstr "Reikalingas mokymas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:685
 msgid "Saledus still has security concerns…"
-msgstr ""
+msgstr "Saledus vis dar turi susirūpinimą dėl saugumo…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:687
@@ -1202,6 +1436,8 @@ msgid ""
 "train them well. It is important to increase the strength of our soldiers as"
 " fast as we can."
 msgstr ""
+"Generole, nors pradėjome verbuoti naujus karius, vis tiek turime juos gerai "
+"apmokyti. Svarbu kuo greičiau padidinti savo karių jėgą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:689
 msgid ""
@@ -1210,14 +1446,17 @@ msgid ""
 "improve this. Alas! But we need to use what we have to get prepared for "
 "battle."
 msgstr ""
+"Deja, turime tik areną ir labai seną bei mažą treniruočių stovyklą su labai "
+"maža saugykla. Ir nė vienas iš mūsų statybininkų nežino, kaip tai pagerinti."
+" Deja! Tačiau turime panaudoti tai, ką turime pasiruošti mūšiui."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:696
 msgid "Praise The Army of The Empire"
-msgstr ""
+msgstr "Girkite imperijos armiją"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:697
 msgid "Saledus is happy…"
-msgstr ""
+msgstr "Saledus laimingas…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:699
@@ -1226,20 +1465,24 @@ msgid ""
 "builders and developed better and more efficient training buildings "
 "together."
 msgstr ""
+"Pone, apmokę daugybę naujokų, mūsų treneriai pasitarė su mūsų statybininkais"
+" ir kartu kūrė geresnius ir efektyvesnius mokymo pastatus."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:701
 msgid ""
 "Now we can really improve our army and build the military strength that we "
 "will need to defend our country."
 msgstr ""
+"Dabar tikrai galime tobulinti savo kariuomenę ir sukurti karinę jėgą, kurios"
+" mums prireiks ginti savo šalį."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:708
 msgid "We Just Need Another Hero"
-msgstr ""
+msgstr "Mums tiesiog reikia kito herojaus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:709
 msgid "Saledus is in a good mood…"
-msgstr ""
+msgstr "Saledus geros nuotaikos…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:711
@@ -1248,6 +1491,9 @@ msgid ""
 "training facilities, we should train as many fully promoted soldiers as we "
 "can. I really would consider them heroes after that."
 msgstr ""
+"Apskritai, dabar, kai turime daugiau ir geresnio alaus, be patobulintų "
+"mokymo patalpų, turėtume apmokyti kuo daugiau visiškai paaukštintų karių. Po"
+" to tikrai juos laikyčiau herojais."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:713
 msgid ""
@@ -1255,6 +1501,9 @@ msgid ""
 "powerful than the Barbarians’. So, we need to spend our resources wisely to "
 "get some heroes as soon as we can."
 msgstr ""
+"Tai suteiks mums didelį pranašumą mūšyje, jei mūsų kariai bus daug "
+"galingesni nei barbarai. Taigi, turime protingai išleisti savo išteklius, "
+"kad kuo greičiau gautume herojų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:715
 msgid ""
@@ -1262,14 +1511,17 @@ msgid ""
 "with. But don’t forget to send them to the front line, because they are not "
 "that useful back home."
 msgstr ""
+"Sakyčiau, kad pradėti turėtų pakakti trijų visiškai apmokytų herojų. Tačiau "
+"nepamirškite nusiųsti jų į fronto liniją, nes jie nėra tokie naudingi "
+"namuose."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:722
 msgid "We Should Expel The Barbarians"
-msgstr ""
+msgstr "Turėtume išvaryti barbarus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:723
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus džiaugiasi…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:725
@@ -1277,20 +1529,24 @@ msgid ""
 "Now that we have some fully trained soldiers, it is time to expel the "
 "Barbarians from our homeland."
 msgstr ""
+"Dabar, kai turime keletą visiškai apmokytų karių, laikas išvaryti barbarus "
+"iš mūsų tėvynės."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:727
 msgid ""
 "Let’s finish them off and regain control over our lands. They shall regret "
 "deeply that they ever came!"
 msgstr ""
+"Užbaikime juos ir atgaukime savo žemių kontrolę. Jie labai gailisi, kad kada"
+" nors atėjo!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:734
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Pergalė yra mūsų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:735
 msgid "Saledus is cheering loudly…"
-msgstr ""
+msgstr "Saledus garsiai džiaugiasi…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:737
@@ -1298,6 +1554,8 @@ msgid ""
 "Sire, finally we have defeated the Barbarians. We have expelled even the "
 "last of them. May they never come back!"
 msgstr ""
+"Pone, pagaliau mes nugalėjome barbarus. Mes išvarėme net paskutinį iš jų. "
+"Tegul jie niekada negrįžta!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:739
 msgid ""
@@ -1305,14 +1563,17 @@ msgid ""
 "But first of all we should have some wine to celebrate our victory and our "
 "reclaimed freedom."
 msgstr ""
+"Dabar atėjo laikas išsiaiškinti, kodėl galėjo įvykti ši didelė netvarka "
+"aplink mus. Bet pirmiausia turėtume išgerti vyno, kad švęstume savo pergalę "
+"ir atgautą laisvę."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:744
 msgid "The Enemy is Near"
-msgstr ""
+msgstr "Priešas yra šalia"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:745
 msgid "Saledus is alerted…"
-msgstr ""
+msgstr "Saledus įspėtas…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:747
@@ -1320,20 +1581,24 @@ msgid ""
 "Sire, although we don’t have enough fully trained soldiers yet, we just have"
 " made contact with the enemy."
 msgstr ""
+"Pone, nors dar neturime pakankamai visiškai apmokytų karių, mes tiesiog "
+"užmezgėme ryšį su priešu."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid ""
 "We have to finish them off and regain control over our lands. They shall "
 "regret deeply that they ever came!"
 msgstr ""
+"Turime juos užbaigti ir atgauti savo žemių kontrolę. Jie labai gailisi, kad "
+"kada nors atėjo!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:760
 msgid "Worship to be Gifted"
-msgstr ""
+msgstr "Garbinimas turi būti gabus"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:761
 msgid "Julia is demanding a sacrifice for Vesta…"
-msgstr ""
+msgstr "Julija reikalauja aukos dėl Vestos..."
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:763
@@ -1342,14 +1607,17 @@ msgid ""
 "goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
 " to prepare a worthy sacrifice for her."
 msgstr ""
+"Ave, Lucijus! Jei norite, kad jums padėtume, pirmiausia turite garbinti mūsų"
+" deivę Vestą. Todėl atiduokite 35 gabalėlius kviečių ir 15 amforų vyno, kad "
+"paruoštumėte jai vertą auką."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:768
 msgid "May The Gods Bless You"
-msgstr ""
+msgstr "Tepalaimina jus dievai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:769
 msgid "Vesta is blessing us…"
-msgstr ""
+msgstr "Vesta mus laimina…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:771
@@ -1359,14 +1627,18 @@ msgid ""
 "you need so desperately as well. Furthermore, we will pray for you and join "
 "your party to safeguard our land from the Barbarians."
 msgstr ""
+"Ačiū, Lucijus, tu gerai tarnavai mūsų deivei. Būsite apdovanoti ne tik savo "
+"technologijos patobulinimais, bet ir kai kuriomis prekėmis, kurių jums labai"
+" reikia. Be to, mes melsimės už jus ir prisijungsime prie jūsų partijos, kad"
+" apsaugotume mūsų žemę nuo barbarų."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:776
 msgid "Damned"
-msgstr ""
+msgstr "Prakeiktas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:777
 msgid "Vesta is cursing us…"
-msgstr ""
+msgstr "Vesta mus keikia…"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/texts.lua:779
@@ -1375,82 +1647,87 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
+"Po velnių, Lucijus, kad nužudei taikius deivės Vestos tarnus! Tegul tavo "
+"gyvenimas ir tavo žemė būna prakeikti, o deivės rūstybė išvaro tavo šeimą "
+"nuo žemės paviršiaus!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Alaus darykla"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "Alaus virimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Ūkininkauti"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
 msgctxt "empire_building"
 msgid "working"
-msgstr ""
+msgstr "darbo"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr ""
+msgstr "Kviečių sodinimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr ""
+msgstr "Kviečių derliaus nuėmimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
 msgid "No Fields"
-msgstr ""
+msgstr "Nėra laukų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
 msgctxt "empire_building"
 msgid "Out of Fields"
-msgstr ""
+msgstr "Už laukų ribų"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Šiame ūkyje dirbantis ūkininkas neturi išvalytos dirvos, kad galėtų pasėti "
+"savo sėklas."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Miškininko namas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr ""
+msgstr "Medžių sodinimas"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Brewery
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "Gamina alų, kad kalnakasiai būtų stiprūs ir laimingi."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Farm
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
 msgctxt "empire_building"
 msgid "Sows and harvests wheat."
-msgstr ""
+msgstr "Sėja ir nuima kviečius."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Forester’s
 #. House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Apylinkėse sodina medžius."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Forester’s House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1459,40 +1736,41 @@ msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
+"Miškininko namams darbo zonoje reikia laisvos vietos medžiams sodinti."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack’s
 #. House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "kerta medžius apylinkėse ir apdoroja juos į rąstus."
 
 #. TRANSLATORS: Note helptext for an Empire production site: Lumberjack’s
 #. House
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Medienos namui reikia medžių, kad jie nukristų į darbo zoną."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Mill
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
 msgctxt "empire_building"
 msgid "Grinds wheat to produce flour."
-msgstr ""
+msgstr "Malda kviečius, kad gautų miltus."
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 1
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Apmoko karius „ataka“ ir „sveikata“."
 
 #. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 2
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "aprūpina karius visais reikalingais ginklais ir šarvų dalimis."
 
 #. TRANSLATORS: Note helptext for an Empire training site: Training Camp
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
@@ -1501,12 +1779,14 @@ msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"Imperijos kariai negali būti mokomi „gynybos“ ir išliks tokio lygio, su "
+"kuriuo atėjo."
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Well
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Ištraukia vandenį iš gelmių."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Temple of Vesta
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
@@ -1515,26 +1795,28 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
+"Vestos šventykloje saugomi reikmenys, kuriuos reikia garbinti. Tai kunigų ir"
+" deivės sargybinių namai."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Lumberjacko namas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
-msgstr ""
+msgstr "Medžių kirtimas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Nėra medžių"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "Iš medžių"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:48
 msgctxt "empire_building"
@@ -1543,102 +1825,105 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Šio medkirčio namuose dirbantis medkirtys savo darbo zonoje neranda medžių. "
+"Turėtumėte apsvarstyti galimybę išardyti arba sugriauti pastatą ar pastatyti"
+" miškininko namą."
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Malūnas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
-msgstr ""
+msgstr "Malti kviečius"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
-msgstr ""
+msgstr "Vestos šventykla"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Treniruočių stovykla"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
 msgid "sleeping"
-msgstr ""
+msgstr "miegotas"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Kareivio atakos atnaujinimas iš 0 lygio į 1 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Kareivio atakos atnaujinimas iš 1 lygio į 2 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Kareivio atakos atnaujinimas iš 2 lygio į 3 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Kareivio atakos atnaujinimas iš 3 lygio į 4 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Kareivio sveikatos atnaujinimas iš 0 lygio į 1 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Kareivio sveikatos atnaujinimas iš 1 lygio į 2 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Kareivio sveikatos atnaujinimas iš 2 lygio į 3 lygį"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Kareivio sveikatos atnaujinimas iš 3 lygio į 4 lygį"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Jokio kareivio treniruotis!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Šiam mokymo lygiui nerasta nė vieno kareivio!"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Gerai"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "Nėra vandens"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "Iš vandens"
 
 #: ../../../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "Šiame šulinyje dirbantis vežėjas neranda vandens savo šulinyje."

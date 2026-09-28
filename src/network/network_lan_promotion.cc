@@ -88,13 +88,13 @@ LanBase::LanBase(uint16_t port) : socket_v4(io_context), socket_v6(io_context) {
 	struct ifaddrs* ifaddr;
 	struct ifaddrs* ifa;
 	int s;
-	int n;
+
 	char host[NI_MAXHOST];
 	if (getifaddrs(&ifaddr) == -1) {
 		perror("getifaddrs");
 		exit(EXIT_FAILURE);
 	}
-	for (ifa = ifaddr, n = 0; ifa != nullptr; ifa = ifa->ifa_next, n++) {
+	for (ifa = ifaddr; ifa != nullptr; ifa = ifa->ifa_next) {
 		if (ifa->ifa_addr == nullptr) {
 			continue;
 		}

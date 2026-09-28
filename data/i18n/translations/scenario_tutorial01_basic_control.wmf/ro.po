@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2015
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,34 +27,34 @@ msgstr "Frumos şi încet o face tot timpul"
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "Îmi pare rău, dar trebuie să distrug asta. Mai târziu s-ar putea să avem nevoie de spațiu aici."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:20
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "Îmi pare rău, dar trebuie să distrug asta din nou. Mai târziu s-ar putea să avem nevoie de spațiu aici."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:22
 msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "Sunt prea lent pentru tine, trebuie să joci un joc real și să descoperi totul singur. Altfel, te rog ai răbdare, nu mai sunt așa de tânăr și rapid."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Welcome to the Widelands Tutorial!"
-msgstr ""
+msgstr "Bine ai venit la tutorialul Widelands!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Bine ai venit în Widelands!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands este un joc de strategie lent, concentrat pe construit și nu pe distrus."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "You will be guided through this tutorial by objectives."
@@ -61,7 +62,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Care sunt obiectivele și cum să le gestionezi"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Handling of the ‘Objectives’ window"
@@ -71,56 +72,56 @@ msgstr ""
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Poți deschide și închide fereastra cu 'Obiective' apăsând pe butonul 'Obiective' aflat în bara de la baza ecranului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Ca mai toate ferestrele, poți închide această fereastră apăsând click-dreapta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Poți să și minimizezi ferestrele apăsând click pe butonul din mijloc pe ea."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Când ai îndeplinit un obiectiv, va dispărea din listă."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Acum închide te rog fereastra 'Obiective' ca să continuăm."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
 msgid "Show building spaces"
-msgstr ""
+msgstr "Arată locurile pentru construit"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Activarea 'Locurilor pentru construit'. Există două modalități prin care poți face asta:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Apasă %s pentru a le activa, sau alege opțiunea 'Afișează locurile pentru construit' din meniul 'Afișează / Ascunde'."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Acum afișează locurile pentru construit."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building Spaces"
-msgstr ""
+msgstr "Locurile pentru construit"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "Hai să începem imediat!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:83
 msgid ""
@@ -174,7 +175,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "Constuirea cabanei tărietorului de lemne"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:122
 msgid ""
@@ -191,7 +192,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:130
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:141
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Conectarea drumurilor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:133
 msgid ""
@@ -215,7 +216,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "Aștept tătietorul de lemne să meargă în sus"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid ""

@@ -22,7 +22,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "wui/interactive_gamebase.h"
+#include "ui/wui/interactive_gamebase.h"
 
 namespace Widelands {
 

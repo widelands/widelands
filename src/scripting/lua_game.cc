@@ -24,7 +24,7 @@
 #include "economy/flag.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
-#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/ship/ship.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
 #include "logic/objective.h"
@@ -35,9 +35,9 @@
 #include "scripting/globals.h"
 #include "scripting/map/lua_field.h"
 #include "scripting/map/lua_tribe_description.h"
+#include "ui/game/story_message_box.h"
+#include "ui/wui/interactive_player.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_player.h"
-#include "wui/story_message_box.h"
 
 namespace LuaGame {
 

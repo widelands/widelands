@@ -37,6 +37,10 @@ Ship
 
    This represents a ship in game.
 
+   See also: :ref:`has_soldiers`
+
+     .. versionadded:: 1.4
+
    More properties are available through this object's
    :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
 */
@@ -45,6 +49,8 @@ const char LuaShip::className[] = "Ship";
 const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_wares),
    METHOD(LuaShip, get_workers),
+   METHOD(LuaShip, get_soldiers),
+   METHOD(LuaShip, set_soldiers),
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
    METHOD(LuaShip, refit),
@@ -545,6 +551,88 @@ int LuaShip::get_workers(lua_State* L) {
 	}
 	lua_pushint32(L, nworkers);
 	return 1;
+}
+
+/* RST
+   .. method:: get_soldiers(descr)
+
+      .. versionadded:: 1.4
+
+      Gets information about the soldiers on this ship.
+
+      See: :ref:`has_soldiers`
+*/
+int LuaShip::get_soldiers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Invalid arguments!");
+	}
+
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+	const std::vector<Widelands::Soldier*> soldiers = ship->onboard_soldiers();
+	const Widelands::TribeDescr& tribe = ship->owner().tribe();
+
+	if (lua_isstring(L, -1) != 0) {
+		if (std::string(luaL_checkstring(L, -1)) == "stationed") {
+			if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+				lua_pushuint32(L, soldiers.size());
+			} else {
+				lua_pushuint32(L, 0);
+			}
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "present") {
+			lua_pushuint32(L, soldiers.size());
+			return 1;
+		}
+		if (std::string(luaL_checkstring(L, -1)) == "associated") {
+			lua_pushuint32(L, ship->associated_soldiers().size());
+			return 1;
+		}
+	}
+
+	return do_get_soldiers_inner(L, soldiers, tribe);
+}
+
+/* RST
+   .. method:: set_soldiers(which[, amount])
+
+      .. versionadded:: 1.4
+
+      Sets the number of soldiers of the given level(s) on this ship.
+
+      See: :ref:`has_soldiers`
+*/
+int LuaShip::set_soldiers(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship = get(L, game);
+	Widelands::Player* owner = ship->get_owner();
+
+	const SoldiersList onboard_soldiers = ship->onboard_soldiers();
+	SoldiersList soldiers_to_delete;
+	SoldiersList soldiers_to_add;
+
+	Widelands::Quantity capacity;
+	if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+		capacity = ship->get_warship_soldier_capacity();
+	} else {
+		capacity = ship->get_capacity() - ship->get_nritems() + onboard_soldiers.size();
+	}
+
+	do_set_soldiers_inner(L, owner, ship->get_position(), capacity, onboard_soldiers,
+	                      soldiers_to_delete, soldiers_to_add);
+
+	for (Widelands::Soldier* s : soldiers_to_delete) {
+		ship->remove_item_by_serial(game, s->serial());
+	}
+
+	for (Widelands::Soldier* s : soldiers_to_add) {
+		s->start_task_shipping(game, nullptr);
+		ship->add_item(game, Widelands::ShippingItem(*s));
+	}
+
+	ship->update_warship_soldier_request(false);
+	return 0;
 }
 
 /* RST

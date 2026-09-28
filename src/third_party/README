@@ -6,6 +6,7 @@ Changes
 
 Eris:
 - Removed luac.c and lua.c. These sources are used only for stand-alone CLI tools, not usable for game functionality.
+- Fixed a MemoryLeak in eris.c in line 2086 when a thread is (un)persisted
 
 Tinygettext:
 - Not using the base repository but the fork at `https://github.com/SuperTux/tinygettext`

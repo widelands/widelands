@@ -8,6 +8,7 @@
 # heidi.wenger, 2022
 # Atte Timonen, 2022
 # Oi Suomi On! <oisuomion@protonmail.com>, 2023
+# Jaakko Muilu, 2026
 # 
 msgid ""
 msgstr ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
+"Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -454,8 +455,8 @@ msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
-"Sinun pitäisi määritellä uuden ruokofarmin ruoikko korkeimmalle "
-"prioriteetille rakennustyömaan ruudussa."
+"Sinun pitäisi määritellä uusi ruokofarmi korkeimmalle prioriteetille "
+"rakennustyömaan ruudussa."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
@@ -507,11 +508,11 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
-"Huomasin meidän tiilien olevan vähissä. Se hidastaa rakennuksien "
-"rakentamista paljon, koska tarvitsemme niin paljon tiiliä. Meidän pitäisi "
-"todellakin käydä rakentamaan uutta tiiliuunia, ja määritellä sen "
-"rakennustyömaan ruudusta tiilet korkeimmalle prioriteetille, jotta "
-"ratkaisisimme puutteongelman niin pian kuin mahdollista."
+"Huomasin, että tiilit ovat vähissä. Se hidastaa rakennuksien rakentamista "
+"paljon, koska tarvitsemme niin paljon tiiliä. Meidän pitäisikin alkaa "
+"rakentaa uutta tiiliuunia, ja määritellä sen rakennustyömaan ruudusta tiilet"
+" korkeimmalle prioriteetille, jotta ratkaisemme puutteen mahdollisimman "
+"pian."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
@@ -1101,8 +1102,8 @@ msgstr ""
 "Myrskytulva näyttää tulevan lännestä. Jos pidämme kiirettä, ehdimme tehdä "
 "sen! Meidän tarvitsee rakentaa vain satama ja telakka – niin, ja myös kutomo"
 " kutomaan kestävää kangasta, joka tehdään ruoikosta ja turkiksesta purjeita "
-"varten.Sen jälkeen voimme aloittaa tutkimusmatkan satamasta. Rukoile jumalia"
-" ja toimi nopeasti!"
+"varten. Sen jälkeen voimme aloittaa tutkimusmatkan satamasta. Rukoile "
+"jumalia ja toimi nopeasti!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"

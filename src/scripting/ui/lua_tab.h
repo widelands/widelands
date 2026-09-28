@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_TAB_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/tabpanel.h"
+#include "ui/basic/tabpanel.h"
 
 namespace LuaUi {
 

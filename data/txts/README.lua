@@ -27,7 +27,7 @@ local r = {
       p(
           li(_("Detailed steps on how to trigger the bug, if possible.")) ..
           li(_("What you expected to happen when performing the steps and what actually happened.")) ..
-          li(_("Which version of Widelands you are running (i.e. either the build number or the revision number if you are running a development version or a daily build.)")) ..
+          li(_("Which version of Widelands you are running (i.e. either the build number or the revision number if you are running a development version or a daily build).")) ..
           li(_("Please also include which operating system you are running Widelands on as some bugs can be platform specific.")) ..
           li(_("Which map you were playing when the bug occurred.")) ..
           li(_("If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.")) ..

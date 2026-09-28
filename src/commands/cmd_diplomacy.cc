@@ -26,7 +26,7 @@
 #include "logic/playersmanager.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_spectator.h"
+#include "ui/wui/interactive_spectator.h"
 
 namespace Widelands {
 

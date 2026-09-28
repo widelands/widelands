@@ -28,7 +28,7 @@
 #include "io/streamwrite.h"
 #include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/shipstates.h"
+#include "logic/map_objects/tribes/ship/shipstates.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"

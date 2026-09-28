@@ -130,8 +130,6 @@ SDL_GLContext initialize(
 	// See graphic/gl/system_headers.h for an explanation of the next line.
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
-	// LeakSanitizer reports a memory leak which is triggered somewhere above this line, probably
-	// coming from the graphics drivers
 
 #ifdef GLEW_ERROR_NO_GLX_DISPLAY
 	// err == GLEW_ERROR_NO_GLX_DISPLAY is a workaround for crash on wayland

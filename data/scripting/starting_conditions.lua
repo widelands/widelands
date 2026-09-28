@@ -52,7 +52,7 @@ end
 --
 --    :arg player: The player to use
 --    :type player: :class:`~wl.game.Player`
---    :arg items: An :class:`array` of :class:`tables` with `ware_or_worker_name = amount` pairs. As many ships will
+--    :arg items: An :class:`array` of :class:`tables` with ``ware_or_worker_name = amount`` pairs. As many ships will
 --                be created as there are subtables, and the n-th ship created will load the
 --                additional wares and workers defined in ``items[n]``. The capacity of each ship will
 --                be adjusted to accommodate the build cost of the player's tribe's port building
@@ -75,6 +75,41 @@ function launch_expeditions(player, items)
       ship.capacity = buildcost + nr_i
 
       ship:make_expedition(items[i])
+   end
+
+   sleep_then_goto(player, 1000, fields[1])
+end
+
+-- RST
+-- .. function:: create_warships(player, soldiers)
+--
+--    .. versionadded:: 1.4
+--
+--    Creates some warships in random places with the given soldiers on them.
+--    If called for the interactive player, centers the view on an arbitrary of these ships.
+--
+--    If naval warfare is disabled, creates transports ships with the given soldiers.
+--
+--    :arg player: The player to use
+--    :type player: :class:`~wl.game.Player`
+--    :arg soldiers: An :class:`array` of :class:`tables` with
+--                ``[{health, attack, defense, evade}] = amount`` pairs.
+--                As many ships will be created as there are subtables, and the n-th ship created
+--                will load the soldiers defined in ``soldiers[n]``.
+--                The ships will be created with the default capacity, so do not define more
+--                soldiers for a ship.
+--
+--    :returns: :const:`nil`
+
+function create_warships(player, soldiers)
+   local fields = wl.Game().map:find_ocean_fields(#soldiers)
+
+   for i,f in pairs(fields) do
+      local ship = player:place_ship(f)
+      if wl.Game().allow_naval_warfare then
+         ship.type = "warship"
+      end
+      ship:set_soldiers(soldiers[i])
    end
 
    sleep_then_goto(player, 1000, fields[1])

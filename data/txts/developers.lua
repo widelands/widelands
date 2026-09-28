@@ -144,6 +144,7 @@ function developers() return {
                "cake>pie",
                "Christoph Elsenhans (frosch)",
                "andersand",
+               "qoole",
             },
          },
       },

@@ -20,7 +20,7 @@
 #define WL_SCRIPTING_UI_LUA_BUTTON_H
 
 #include "scripting/ui/lua_panel.h"
-#include "ui_basic/button.h"
+#include "ui/basic/button.h"
 
 namespace LuaUi {
 

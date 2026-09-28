@@ -20,7 +20,5 @@ Here's a brief overview of what each directory contains:
 | scripting | Lua scripting interface |
 | sound | Sound & music backend |
 | third_party | Third-party sources (eris, gettext, libmd, minizip) |
-| ui_basic | UI Widgets |
-| ui_fsmenu | Main ("Full Screen") menus |
+| ui | The Widelands user interface |
 | website | Utilities used by https://github.com/widelands/widelands-website |
-| wui | In-game/In-editor GUI ("Widelands UI") |
