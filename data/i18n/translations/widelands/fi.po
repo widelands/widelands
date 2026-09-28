@@ -9017,7 +9017,7 @@ msgstr[1] "Jatka sitä %d erällä pitämällä Ctrl pohjassa"
 #: ../../../../src/ui/game/diplomacy_menu.cc:655
 #: ../../../../src/ui/game/marketwindow.cc:576
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Jatka kauppaa toistaiseksi pitämällä Shift pohjassa"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
@@ -11856,7 +11856,7 @@ msgstr "Pelaajavalikko"
 
 #: ../../../../src/wlapplication_options.cc:536
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Laita maastonkorkeuden lämpökartta päälle/pois"
 
 #: ../../../../src/wlapplication_options.cc:540
 msgid "Toggle Grid"
@@ -12038,7 +12038,7 @@ msgstr "Näytä sotalaivat"
 
 #: ../../../../src/wlapplication_options.cc:825
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Näytä kunnostettavia laivoja"
 
 #: ../../../../src/wlapplication_options.cc:830
 msgid "Toggle Quick Navigation"

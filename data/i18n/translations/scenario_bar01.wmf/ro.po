@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
 # Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,37 +32,37 @@ msgstr "Construieşte o cabană a pădurarului aproape de cabana tăietorului de
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "În mod natural, copacii cresc încet. Pentru a avea suficienți bușteni, trebuie să construiești cabane pentru pădurari."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Extinde-te către partea de nord-est și construiește o carieră de piatră"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Extinde-te către nord-est către pietre"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Construiește clădiri militare (precum santiele și bariere) pentru a-ți extinde teritoriul."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Mergi către pietrele la nord-est de tine și construiește acolo o carieră de piatră."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Începi să construiești mine în munți"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Construiește mine de cărbune și fier"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Construiește o mină de cărbune și o mină de fier."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -71,86 +72,86 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Pentru asta, plasează un steag pe marginea de est a muntelui (pe suprafața muntelui, nu în afara lui). Când apeși pe acest steag, poți trimite geologi acolo. Întrucât steagul este pe munte, geologii vor căuta minereuri, altfel ei vor căuta doar apă. Apoi construiește o mină pentru ambele tipuri de resurse pe care le vor găsi, alegând să construiești minele respective:"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "puțin cărbune"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
-msgstr ""
+msgstr "mult cărbune"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "puțin fier"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
-msgstr ""
+msgstr "mult fier"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "puțin aur"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr ""
+msgstr "mult aur"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "puțin granit"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr ""
+msgstr "mult granit"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
-msgstr ""
+msgstr "apă"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr ""
+msgstr "nu s-a găsit nimic aici"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "Minele se pot construi doar pe munte. Locurile potrivite sunt afișate cu simboluri portocalii de mină."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Trimite de mâncare minerilor"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "Construiește o cabană pentru vânător, una pentru paznicul de vânătoare și o tavernă."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Pentru a funcționa, minerii au nevoie de mâncare."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "Un vânător poate vâna animale, dar un paznic de vânătoare le protejează pentru a nu dispărea. Carnea este procesată în tavernă și transformată în masă de prânz pentru mineri."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "Ăsta este doar primul exemplu al unui obiect care trebuie rafinat pentru a fi folosit într-o a doua clădire pentru construcții – vor mai urma și altele."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Coace pâine"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Construiește o fântână, o fermă și o brutărie"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -159,15 +160,15 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Alte metode pentru producerea mâncării – diferite tipuri de mâncare – sunt pescarii și fermele. Grâul de la ferme trebuie procesat cu apă într-o brutărie pentru a deveni comestibil. Poți obține apă construind o fântână. Pentru o productivitate maximă, construiește fântâna într-un loc unde geologii au descoperit o sursă de apă."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Rafinează resursele minate"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Construiește o topitorie"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""

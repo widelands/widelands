@@ -383,6 +383,7 @@ Version de correction de bugs</li>
         <li xml:lang="nn">Feilrettingsutgåve</li>
         <li xml:lang="pl">Wydanie poprawkowe</li>
         <li xml:lang="pt_BR">Lançamento de correção de bugs</li>
+        <li xml:lang="ro">Versiune care fixează bug-uri</li>
         <li xml:lang="sk">Vydanie opravy chýb</li>
         <li xml:lang="sv">Buggfixutgåva</li>
         <li xml:lang="tr">Hata düzeltme güncellemesi</li>
@@ -510,6 +511,13 @@ Version de correction de bugs</li>
         <li xml:lang="pt_BR">Baixe mapas do site como add-ons</li>
         <li xml:lang="pt_BR">Novos modos de visualização no editor</li>
         <li xml:lang="pt_BR">Muitas novas funcionalidades para desenvolvedores de add-ons</li>
+        <li xml:lang="ro">Tranzacții la piață</li>
+        <li xml:lang="ro">Au fost adăugate șase hărți și scoase trei hărți vechi</li>
+        <li xml:lang="ro">Districte economice</li>
+        <li xml:lang="ro">Multe îmbunătățiri la Enciclopedia jocului</li>
+        <li xml:lang="ro">Descărcați hărți ca extensii</li>
+        <li xml:lang="ro">Tipuri noi de vizualizări în editor</li>
+        <li xml:lang="ro">Multe funcționalități noi pentru dezvoltatorii de extensii</li>
         <li xml:lang="sk">Obchodovanie v tržnici</li>
         <li xml:lang="sk">Pridaných 6 nových máp a 3 staré odstránené</li>
         <li xml:lang="sk">Ekonomické oblasti</li>
@@ -672,6 +680,7 @@ Version de correction de bugs</li>
     <name xml:lang="pl">Zespół rozwojowy Widelands</name>
     <name xml:lang="pt">A Equipa de Desenvolvimento The Widelands</name>
     <name xml:lang="pt_BR">Equipe de Desenvolvimento de Widelands</name>
+    <name xml:lang="ro">Echipa de dezvoltare a jocului Widelands</name>
     <name xml:lang="sk">Vývojový tím hry Widelands</name>
     <name xml:lang="sv">Widelands utvecklingsteam</name>
     <name xml:lang="tr">The Widelands Geliştirici Ekibi</name>
