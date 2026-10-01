@@ -128,7 +128,7 @@ void MultilineTextarea::recompute() {
 		if (scrollmode_ == ScrollMode::kNoScrolling) {
 			scrollbar_.set_scrollpos(0);
 			scrollbar_.set_steps(1);
-			set_desired_size(get_w(), height);
+			set_desired_size(0, height);
 			set_size(get_w(), height);
 		}
 

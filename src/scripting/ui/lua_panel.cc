@@ -634,6 +634,8 @@ int LuaPanel::get_child(lua_State* L) {
                * ``"minutes"``
                * ``"weeks"``
 
+             * ``"allow_multiline_label"``: **Optional**. **New in version 1.4**.
+                Whether a long label text may be wrapped across multiple lines. Default ``false``.
              * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
                ``"replacement"``. When the spinbox's value is equal to any replaced value,
                the replacement string is displayed instead of the value.

@@ -58,6 +58,7 @@ public:
 	        int32_t maxval,
 	        UI::PanelStyle style,
 	        const std::string& label_text = std::string(),
+	        bool allow_multiline_label = true,
 	        const Units& unit = Units::kNone,
 	        SpinBox::Type = SpinBox::Type::kSmall,
 	        // The amount by which units are increased/decreased for small and big steps when a
