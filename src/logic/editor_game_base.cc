@@ -30,6 +30,7 @@
 #include "economy/waterway.h"
 #include "graphic/color.h"
 #include "graphic/road_segments.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -54,8 +55,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui/basic/progresswindow.h"
-#include "ui/wui/interactive_base.h"
-#include "ui/wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -202,22 +201,13 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 	return descriptions_.get();
 }
 
-void EditorGameBase::set_ibase(InteractiveBase* const b) {
-	ibase_.reset(b);
+void EditorGameBase::set_game_interface(std::unique_ptr<IGameInterface> gi) {
+	game_interface_ = std::move(gi);
 
 	// Now that the IBase and the EGBase are linked into each other, load the UI plugins.
-	if (b != nullptr) {
-		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
-				lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name +
-				                 FileSystem::file_separator() + "init.lua");
-			}
-		}
+	if (game_interface_ != nullptr) {
+		game_interface_->load_plugins();
 	}
-}
-
-InteractiveGameBase* EditorGameBase::get_igbase() const {
-	return dynamic_cast<InteractiveGameBase*>(get_ibase());
 }
 
 /// @see PlayerManager class
@@ -562,7 +552,7 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  */
 void EditorGameBase::cleanup_for_load() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Cleaning up for loading: Map objects (1/3)")));
-	if (InteractiveBase* i = get_ibase()) {
+	if (IGameInterface* i = get_game_interface()) {
 		i->cleanup_for_load();
 	}
 	cleanup_objects();  /// Clean all the stuff up, so we can load.

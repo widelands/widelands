@@ -74,6 +74,11 @@ namespace LuaUi {
    objects for a short amount of time where the user can't take control to do
    something else.
 
+.. Note::
+   Since version 1.4, Widelands can run in "headless" mode without a user interface.
+   In this mode, many UI classes and functions cannot be meaningfully accessed.
+   Use :meth:`is_headless` to determine whether the system is running in headless mode.
+
 */
 
 int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
@@ -110,7 +115,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(BaseListselect, LuaListselect)
 	else TRY_TO_LUA(BaseTable, LuaTable)
 	else TRY_TO_LUA(Box, LuaBox)
-	else if (!is_main_menu(L) && panel == get_egbase(L).get_ibase()) {
+	else if (!is_main_menu(L) && panel == get_ibase_if_exists(L)) {
 		to_lua<LuaMapView>(L, new LuaMapView(L));
 	} else if (upcast(MapView, temp_MapView, panel); temp_MapView != nullptr) {
 		to_lua<LuaMapView>(L, new LuaMapView(temp_MapView));
@@ -143,6 +148,21 @@ Module Functions
 ^^^^^^^^^^^^^^^^
 
 */
+
+/* RST
+.. method:: is_headless()
+
+   .. versionadded:: 1.4
+
+   Returns whether Widelands is running without a user interface.
+
+   :returns: Whether Widelands is running headless.
+   :rtype: :class:`boolean`
+*/
+static int L_is_headless(lua_State* L) {
+	lua_pushboolean(L, get_ibase_if_exists(L) == nullptr ? 1 : 0);
+	return 1;
+}
 
 /* RST
 .. function:: set_user_input_allowed(b)
@@ -253,7 +273,7 @@ static int L_get_ingame_shortcut_help(lua_State* L) {
    :rtype: :class:`string`
 */
 static int L_get_fastplace_help(lua_State* L) {
-	InteractivePlayer* ipl = get_game(L).get_ipl();
+	upcast(InteractivePlayer, ipl, get_ibase_if_exists(L));
 	if (ipl == nullptr) {
 		report_error(L, "This can only be called when there's an interactive player");
 	}
@@ -280,6 +300,9 @@ static int L_get_editor_shortcut_help(lua_State* L) {
 .. method:: show_messagebox(title, text[, cancel_button = true])
 
    .. versionadded:: 1.2
+
+   .. versionchanged: 1.4
+      Not permitted in headless games.
 
    Show the user a modal message box with an OK button and optionally a cancel button.
 
@@ -308,7 +331,7 @@ static int L_show_messagebox(lua_State* L) {
 	const bool mainmenu = is_main_menu(L);
 	UI::WLMessageBox m(
 	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) :
-	              static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
+	              static_cast<UI::Panel*>(&get_safe_ibase(L)),
 	   mainmenu ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result;
@@ -396,6 +419,7 @@ const static struct luaL_Reg wlui[] = {
    {"is_rtl", &L_is_rtl},
    {"get_clipboard", &L_get_clipboard},
    {"set_clipboard", &L_set_clipboard},
+   {"L_is_headless", &L_is_headless},
    {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L, const bool game_or_editor) {

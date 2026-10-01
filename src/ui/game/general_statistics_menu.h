@@ -29,6 +29,7 @@
 #include "ui/basic/unique_window.h"
 #include "ui/wui/plot_area.h"
 
+class InteractiveBase;
 class InteractiveGameBase;
 
 struct GeneralStatisticsMenu : public UI::UniqueWindow {

@@ -32,8 +32,6 @@
 #include "logic/map.h"
 #include "logic/playersmanager.h"
 #include "scripting/lua_table.h"
-#include "ui/wui/interactive_player.h"
-#include "ui/wui/minimap.h"
 
 namespace Widelands {
 
@@ -117,8 +115,6 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	Profile prof;
 	Section& s = prof.create_section("global");
 
-	InteractivePlayer* const ipl = game.get_ipl();
-
 	s.set_int("packet_version", kCurrentPacketVersion);
 
 	//  save some kind of header.
@@ -126,9 +122,10 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	const Map& map = game.map();
 	s.set_string("mapname", map.get_name());  // Name of map
 
-	if (ipl != nullptr) {
+	if (Widelands::PlayerNumber pn = game.get_game_interface()->player_number();
+	    pn != Widelands::neutral()) {
 		// player that saved the game.
-		s.set_int("player_nr", ipl->player_number());
+		s.set_int("player_nr", pn);
 	} else {
 		// Pretend that the first player saved the game
 		for (Widelands::PlayerNumber p = 1; p <= map.get_nrplayers(); ++p) {
@@ -173,18 +170,11 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	}
 
 	NoteThreadSafeFunction::instantiate(
-	   [&game, &fs, ipl]() {
+	   [&game, &fs]() {
 		   std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 		   if (sw != nullptr) {
-			   const MiniMapLayer layers =
-			      MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
-			   std::unique_ptr<Texture> texture;
-			   if (ipl != nullptr) {  // Player
-				   texture = draw_minimap(game, &ipl->player(), ipl->map_view()->view_area().rect(),
-				                          MiniMapType::kStaticViewWindow, layers);
-			   } else {  // Observer
-				   texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
-			   }
+			   std::unique_ptr<Texture> texture =
+			      game.get_game_interface()->draw_minimap_for_savegame();
 			   assert(texture != nullptr);
 			   save_to_png(texture.get(), sw.get(), ColorType::RGBA);
 			   sw->flush();

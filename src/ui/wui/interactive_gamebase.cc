@@ -124,6 +124,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	}
 }
 
+InteractiveGameBase::~InteractiveGameBase() = default;
+
 void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_image_cache->get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);
@@ -765,6 +767,10 @@ bool InteractiveGameBase::try_show_ship_windows() {
 	// Show a selection dialog.
 	show_ship_selection_window(this, &fieldaction_, get_sel_pos().node, manageable, attackable);
 	return true;
+}
+
+void InteractiveGameBase::notify_game_ended() {
+	show_game_summary();
 }
 
 void InteractiveGameBase::show_game_summary() {
