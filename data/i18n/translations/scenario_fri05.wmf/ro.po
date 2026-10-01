@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dominic Iastrebschi, 2025
+# Cristian Romanescu, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Notă"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -30,64 +31,71 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Se pare că nu ai încheiat misiunea anterioară. Poți juca totuși acest "
+"scenariu, dar vei fi dezavantajat. Îți recomand să termini mai întâi "
+"scenariul anterior și apoi să reîncepi această misiune."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
-msgstr ""
+msgstr "København"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Negoț"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Pe această insulă nu poți extrage resurse și nici nu poți scoate piatră din "
+"stânci. În schimb, poți schimba produsele locale pe alte tipuri de bunuri."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Orice bunuri depozitate într-un port vor fi schimbate. Prețurile de schimb "
+"sunt indicate în tabelul următor."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Învinge-i pe invadatori"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Învinge forțele lui Atterdag."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Distruge toate clădirile inamicului."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Blochează trecătoarea"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Blochează trecătoarea."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -95,48 +103,51 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Asigură trecătoarea îngustă de la est de Ținutul de Sus cu mai multe clădiri"
+" militare mari, ca inamicul să nu poată trece înainte să fii pregătit de "
+"atac."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Producția de lemn"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Asigură-ți producția de lemn."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Construiește cel puțin trei case ale tăietorului de lemne."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Construiește cel puțin patru case ale silvicultorului."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "Ținutul de Sus"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Folosește înțelept Ținutul de Sus."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Mută-ți industria în Ținutul de Sus."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Bine ai revenit!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -144,6 +155,9 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"În sfârșit acasă! Nu pot pune în cuvinte bucuria pe care o simt văzându-mi "
+"din nou patria… nici nerăbdarea de a fi atât de aproape și totuși atât de "
+"departe."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -156,6 +170,14 @@ msgid ""
 " will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"De data asta, marea a fost blândă și ne-a îngăduit să ne întoarcem repede în"
+" sud. Henneke și cu mine am petrecut cea mai mare parte a drumului stând la "
+"prova corabiei, nerăbdători să ne întoarcem. La început, Reebaud a stat la "
+"pupă și a privit înapoi la fel cum noi priveam înainte. Se vede că își "
+"iubește noul cămin la fel de mult cum îl iubesc eu pe cel vechi. Sunt sigur "
+"că dorința de a se întoarce viu și învingător îi va însufleți pe soldații "
+"lui să lupte la fel de aprig cum se vor strădui trupele mele să ne "
+"recucerească vechiul cămin."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -164,6 +186,9 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"Atmosfera de pe corabia noastră a devenit tot mai încordată pe măsură ce ne "
+"apropiam de ape cunoscute. Râsetele vesele și nerăbdarea întoarcerii au "
+"lăsat loc unei stări sumbre, pe măsură ce ne pregăteam de luptă."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -172,6 +197,9 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"Și apoi a sosit, în sfârșit, ziua. Am zărit vârful cel mai nordic al insulei"
+" Sylt și știam că vom debarca pe Föhr chiar în seara aceleiași zile. Dar "
+"apoi –"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -180,6 +208,9 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Făcuserăm una dintre cele mai elementare greșeli și ar trebui să ne fie "
+"rușine tuturor că n-am fost mai atenți decât un mus. În lunile de când "
+"plecaserăm de pe Föhr, uitaserăm să fim atenți la calendar."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -190,6 +221,11 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Astăzi este Ziua Morților, 2 noiembrie, și orice copil de pe aici știe că "
+"niciun căpitan în toate mințile nu s-ar gândi să ridice pânzele în săptămâna"
+" dinaintea sau de după această zi. Din timpuri străvechi, furtunile "
+"neobișnuit de puternice care bat mereu în această perioadă a anului au "
+"trimis mulți marinari nechibzuiți într-un mormânt de apă."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -200,6 +236,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Doar norocul cel mai curat ne-a salvat. Corăbiile noastre au fost doar ușor "
+"avariate și niciun marinar nu s-a pierdut în valuri. N-aș fi crezut că "
+"cineva poate avea vreodată atâta noroc dacă n-aș fi văzut cu ochii mei. "
+"Scăparea noastră de necrezut mă umple de speranță – e limpede un semn că "
+"încercarea noastră primejdioasă este binecuvântată de sfinți."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -211,6 +252,12 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"Furtuna ne-a abătut corabia de la drum cale de vreo două zile. Din fericire,"
+" încă recunosc aceste ape, așa că e cu adevărat doar un mic contratimp. Când"
+" furtuna s-a potolit, eram aproape de insula Helgoland și am hotărât să "
+"debarcăm aici. Insularii sunt cunoscuți pentru ospitalitatea lor, iar șansa "
+"de a ne odihni și de a ne reface înainte de bătălie va conta. Unii dintre ei"
+" s-ar putea chiar alătura cauzei noastre."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -219,12 +266,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Salutări"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Bun venit în Helgoland!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -235,10 +282,15 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Pace și bun venit în Helgoland! Faima voastră vă premerge, Claus Lembeck, "
+"iubit stăpân al Föhrului, și Reebaud, pe care bardii îl numesc Îndrăznețul, "
+"Viteazul și Puternicul. Sunt Ocke Ketelsen, primul consilier al "
+"Helgolandului, și, în ciuda acestor vremuri grele, mă bucur și sunt onorat "
+"să primesc oaspeți atât de ilustri."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Ospitalitate"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -250,6 +302,12 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Pace și mulțumiri pentru salutul prietenos, Ocke Ketelsen! E o schimbare "
+"plăcută să nu fim nevoiți să pornim război împotriva cuiva pe a cărui insulă"
+" debarcăm. Totuși, bun-venitul tău sună ciudat de scurt. Cum cuvintele tale "
+"sunt atât de calde, nu pot decât să trag concluzia că v-a lovit un alt fel "
+"de necaz. Dacă nu te superi că întreb și dacă întrebarea nu pare obraznică, "
+"aș vrea să știu dacă vă putem ajuta cu ceva."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -257,18 +315,20 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Ești remarcabil de perspicace. Într-adevăr, avem o problemă și o poți vedea "
+"chiar acolo."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Dușmani"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Danezi! Până aici ajunge setea de cuceriri a lui Atterdag?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -276,6 +336,8 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Da, până aici. Văd că îl recunoașteți pe acest dușman și aș fi curios să aud"
+" cum v-ați întâlnit – deși îmi închipui că pentru ei nu s-a terminat bine!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -286,6 +348,12 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Presupunerea aceasta nu e adevărată, spre marea mea mâhnire. Ca să fiu "
+"scurt, voi spune doar că Atterdag a invadat Föhrul cu o forță atât de mare, "
+"încât am fost silit să părăsesc insula și să-l rog pe Reebaud să mă ajute "
+"s-o recuceresc. De fapt, navigam spre Föhr ca să-i alungăm pe invadatori o "
+"dată pentru totdeauna, când o furtună ne-a abătut de la drum și ne-a adus în"
+" Helgoland."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -294,12 +362,15 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Faptul că s-a întâmplat astfel ar putea fi chiar o intervenție a cerului. Vă"
+" vom ajuta cu drag să luptați cu acest dușman. O bătălie de încălzire, ca să"
+" zic așa – abia o aștept!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "Pregătiri de război"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -309,6 +380,10 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"Entuziasmul tău mă încălzește la fel de mult cum mă mișcă necazul tău. Dar "
+"dușmanii sunt mai puternici decât ar putea părea – au adus o forță uriașă de"
+" soldați danezi, iar nici măcar soldații voștri puternici nu-i vor putea "
+"învinge pe toți."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -317,6 +392,10 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"Insula noastră nu e obișnuită cu acest fel de război. Suntem pescari și "
+"fermieri, nu avem priceperea sau economia necesare pentru a susține o "
+"bătălie îndelungată. Priceperea voastră în acest domeniu ne-ar fi de mare "
+"ajutor."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -324,10 +403,12 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Dar mai întâi dați-mi voie să vă arăt împrejurimile, ca să vă faceți o "
+"imagine limpede despre mica noastră insulă."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Economia"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -337,6 +418,10 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Cum reușiți măcar să vă întrețineți aici? Stâncile astea arată impresionant,"
+" dar nu văd cum ați putea scoate piatră din ele ca să construiți case de "
+"piatră. Nu văd aproape niciun copac și niciun loc unde ați putea extrage "
+"fier și alte minerale! Cum vă descurcați?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -349,6 +434,13 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Prin negoț. Vindem pe continent cereale, pește și diverse alte mărfuri și "
+"cumpărăm de acolo minereuri și granit. Hai să ne împărțim sarcinile după ce "
+"știe fiecare să facă mai bine: voi vă ocupați de reorganizarea economiei "
+"noastre pentru război și de pregătirea oamenilor noștri pentru luptă, iar eu"
+" mă voi îngriji să aduc oricâte mărfuri v-ar trebui. Lăsați pur și simplu în"
+" porturi bunurile de vândut, iar de restul mă ocup eu. Acest tabel arată "
+"câte bunuri din fiecare fel schimbăm de obicei."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -357,11 +449,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "Planificarea războiului"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "Folosește înțelept Ținutul de Sus"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -370,6 +462,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Întâi lucrurile cele mai importante. Orașul acesta are o poziție defensivă "
+"excelentă, dar este jalnic de slab păzit. Trebuie să planificăm tactic, "
+"pentru că sunt de acord că această bătălie nu va fi câștigată repede."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -383,10 +478,19 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"Ținutul de Sus are o singură intrare: rampa aceasta de chiar aici, de lângă "
+"centrul orașului. Hai să construim acolo sus toate clădirile noastre de "
+"producție importante. Câteva fortărețe așezate strâns una lângă alta chiar "
+"la vârful lui sudic vor face acest platou întins aproape imposibil de "
+"cucerit. Chiar dacă inamicul ar reuși să ia toată partea de jos a insulei, "
+"am putea rezista acolo ani de zile, cu condiția să strângem dinainte destule"
+" provizii în depozitele din Ținutul de Sus. Bineînțeles, am fi despărțiți de"
+" porturi și de rutele comerciale, așa că ar trebui să încercăm să nu ajungem"
+" în acest punct."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "Fortifică trecătoarea"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -401,6 +505,15 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"Grija noastră cea mai urgentă ar trebui să fie însă să asigurăm această "
+"trecătoare de lângă portul nostru cel mai nordic. Inamicul trebuie să treacă"
+" prin acest loc îngust ca să ajungă la noi, dar la fel e și invers. Dacă "
+"suntem atenți, putem ține inamicul pe loc aici multă vreme, până când suntem"
+" pregătiți să lansăm contraatacul. Totuși, trecătoarea e prea îngustă ca să "
+"fie fortificată la fel de ușor ca Ținutul de Sus. Trebuie să construim aici "
+"cât mai multe fortărețe, strâns una lângă alta, ca să împiedicăm inamicul să"
+" câștige teren. N-ar fi înțelept să construim ceva la nord de trecătoare, "
+"pentru că ar fi periculos de expus."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -411,10 +524,15 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"În funcție de câte materiale de construcție ne permitem, ar putea fi "
+"înțelept să demolăm câteva dintre celelalte clădiri de aici, ca să facem loc"
+" și mai multor fortificații. Oricum, toate clădirile din această zonă, "
+"militare sau nu, vor fi în permanent pericol de a fi arse în timpul unei "
+"incursiuni daneze."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "Aprovizionarea cu lemn"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -423,6 +541,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Așa cum bine arată Reebaud, Ținutul de Sus e cea mai bună poziție pentru "
+"clădiri noi. Pe lângă valoarea lui strategică, oferă mult spațiu de "
+"construcție, de care partea de jos a insulei cam duce lipsă."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -433,6 +554,11 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"Cât despre ce vom construi, nu sunt de acord. Mai multe clădiri militare "
+"sunt importante, dar și mai importantă este capacitatea de a construi "
+"clădiri. Nu există niciun tăietor de lemne pe insulă și nu ne putem baza pe "
+"negoț pentru lemn, așa că trebuie să ne asigurăm imediat producția de lemn, "
+"înainte ca tot lemnul nostru să fie consumat de afumătorii și cărbunari!"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -443,10 +569,16 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"Pământul pare destul de sterp, așa că va trebui să rezervăm pentru "
+"împădurire mai mult spațiu decât mi-ar plăcea. Ținutul de Jos pare puțin mai"
+" fertil, așa că ar putea fi înțelept să construim casele silvicultorilor și "
+"ale tăietorilor de lemne aici jos și să mutăm câteva dintre ferme în Ținutul"
+" de Sus. Fermele, fermele de stuf și fermele de fructe de pădure nu depind "
+"chiar atât de mult de pământul fertil cât copacii."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "Strategia pe termen lung"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -458,6 +590,12 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"Negoțul nostru a pornit cu succes. Acum va trebui să ne planificăm economia "
+"de recrutare și de antrenament. Avem o producție de bază de hrană și metal, "
+"dar pare să fi crescut la întâmplare și nu ne va ajunge. Vom avea nevoie de "
+"mai multe centre, și mai avansate, care să ne dea destule arme și armuri, "
+"precum și hrană pentru soldați. Nu mai e nevoie să spun că două centre de "
+"antrenament și o cazarmă sunt și ele esențiale."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -469,10 +607,16 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"În permanență va trebui să fim cu ochii pe rezerva noastră de bunuri de "
+"schimb. Îl voi ruga pe Ocke Ketelsen să cumpere doar bunurile de care "
+"economia noastră chiar are nevoie, ca să nu irosim nimic, dar va depinde de "
+"noi să ne asigurăm că putem oferi destule bunuri. Toate aceste rute "
+"comerciale sunt foarte scumpe și va trebui să rezervăm mult spațiu doar "
+"pentru producerea bunurilor de vânzare."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Îndiguirea"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -483,6 +627,11 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Lipsa de spațiu din Helgoland încă ne îngrijorează. Pământul ar fi destul de"
+" mare ca să antrenăm un număr decent de soldați într-un timp rezonabil, dar "
+"antrenarea armatelor de care credem că vom avea nevoie ar dura o veșnicie! "
+"S-ar putea să trebuiască să ne asumăm unele riscuri și să folosim tactici "
+"superioare ca să compensăm acest dezavantaj."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -494,10 +643,17 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"Totuși, dacă preferi să joci la sigur, nu uita că putem pur și simplu să "
+"mărim insula. Acum că avem o aprovizionare constantă cu bușteni, putem "
+"construi diguri ca să câștigăm de la mare mai mult spațiu de construcție. "
+"Când vom fi gata de atac, putem chiar folosi asta ca să ocolim trecătoarea "
+"îngustă din est sau, dacă suntem cu adevărat îndrăzneți, am putea îndigui "
+"toată coasta de vest a insulei, ca să atacăm inamicul din două părți "
+"deodată!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Mult noroc!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -505,14 +661,16 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Hotărârea voastră mă îmbărbătează. Hai să ne grăbim cu toții spre sarcinile "
+"noastre și fie ca norocul să ne surâdă!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "Aprovizionarea cu lemn"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "Aprovizionarea cu lemn este asigurată"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -521,14 +679,17 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Silvicultorii și tăietorii noștri de lemne s-au apucat de lucru. Va mai dura"
+" ceva până vom avea o aprovizionare constantă cu bușteni, dar problema "
+"imediată a fost înlăturată."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "Trecătoarea este asigurată"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "Trecătoarea este păzită"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:293
@@ -536,14 +697,16 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
+"Soldații noștri au fortificat trecătoarea. Cu siguranță niciun dușman nu va "
+"trece de ei înainte să fim pregătiți."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "Ținutul de Sus a fost colonizat"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "Ținutul de Sus a fost populat"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -552,6 +715,10 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"Ținutul de Sus este transformat într-un adevărat centru al economiei "
+"noastre. Nu trebuie să uităm să fim mereu atenți la schimbul de bunuri "
+"dintre Ținutul de Jos și Ținutul de Sus și să-l ținem la minimum, ca să "
+"evităm ambuteiajele de pe drumuri."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -566,7 +733,7 @@ msgstr "Victorie"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Inamicul a fost învins"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -575,6 +742,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Au fost învinși! Mulțumesc, vă mulțumesc pentru ajutor. N-am fi putut "
+"niciodată să-i învingem singuri. Orașul nostru nici măcar n-a suferit pagube"
+" mari – dimpotrivă, l-ați extins mult dincolo de fostele lui hotare."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -584,6 +754,11 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"Poporul meu și cu mine nu vom putea niciodată să ne plătim datoria pe care o"
+" avem față de voi. Voi trimite cu voi toți soldații pe care i-ați antrenat, "
+"ca să vă ajute în misiunea de a vă elibera propriul cămin. Dacă mai putem "
+"face ceva pentru voi, acum sau oricând în viitor, nu trebuie decât să cereți"
+" și vă vom sta la dispoziție."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -591,6 +766,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Cu plăcere, Ocke Ketelsen. Dar nu-ți micșora propriul rol în această "
+"victorie, pentru că n-am fi putut-o obține singuri."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -603,12 +780,19 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"Și primește mulțumirile mele din inimă pentru promisiunea de a ne trimite "
+"soldații tăi. Știam deja că Atterdag e un dușman de temut, dar forțele pe "
+"care le-am întâlnit acum întrec tot ce am văzut în viața mea, și erau doar o"
+" avangardă! Vom avea nevoie de orice avantaj putem obține și, chiar și așa, "
+"nu mai sunt la fel de sigur de victorie cum eram înainte. Dacă ai auzit de "
+"orice altceva care ne-ar putea fi de folos – vreun sfat tactic – vreun oraș "
+"care ni s-ar putea alătura – te rog să ne spui și nouă."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "Cunoaște-ți dușmanul"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -619,6 +803,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Cu drag. Într-adevăr, după partenerii mei de negoț, setea de cuceriri a lui "
+"Atterdag nu are margini. După ce s-a instalat pe Föhr, a cucerit și toate "
+"celelalte insule din apropiere. Fortăreața ta de pe Föhr a fost întotdeauna "
+"singura lor apărare demnă de acest nume, așa că, după ce ai plecat, a pus "
+"stăpânire cu ușurință pe toată zona."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -629,6 +818,11 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Se zvonește că ocupanții impun o stăpânire crudă. Se știe sigur că au oprit "
+"orice negoț, iar localnicii sunt obligați să le dea danezilor, ca tribut, "
+"jumătate din tot ce produc. Jumătate! Se spune că zeci de oameni au fost "
+"deja executați pentru că au sustras un baniț de grâne. Oamenii suferă și, "
+"fără îndoială, se vor alătura bucuroși oricui vine să-i elibereze."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -638,6 +832,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"Mai e ceva. Corăbiile de negoț care au încercat să navigheze mult la nord de"
+" zona ocupată au fost abordate și scufundate de pirați. Supraviețuitorii "
+"jură însă că pirații erau de fapt soldați danezi și că navele lor fac parte "
+"din flota daneză."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -648,6 +846,11 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Acum, asta e mai mult o presupunere, dar cred că Atterdag își transportă "
+"trupele cu corăbiile din capitala daneză pe insulele pe care le cucerește. "
+"Drumul pe uscat e mult mai lung și mai obositor, așa că nu e greu de înțeles"
+" de ce ar face asta. E limpede că încearcă să ascundă acest lucru. De ce ar "
+"face-o, dacă nu crede că acest secret are o importanță strategică?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -661,6 +864,14 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Nu știu ce parte din soldații lui e mutată cu corăbiile între capitală și "
+"insule, dar numărul lor pare destul de mare ca să te sfătuiesc să întrerupi "
+"acest schimb. După cum știi, cele două zone sunt legate printr-o singură "
+"rută maritimă, care trece printr-o strâmtoare numită Kattegat. Această "
+"strâmtoare are doar câteva mile lățime și e presărată cu insulițe. Dacă poți"
+" ajunge acolo fără să fii atacat de navele lor, poți cuceri insulele și "
+"construi un brâu de fortărețe de necucerit, care să blocheze orice navă "
+"inamică ce încearcă să treacă."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
@@ -675,6 +886,10 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"Iar dacă o putem bloca, vor pierde cea mai importantă rută comercială a lor!"
+" Trebuie să încercăm. Vom naviga imediat spre Kattegat ca să cucerim "
+"strâmtoarea, iar apoi vom ridica poporul de pe Föhr și de pe toate celelalte"
+" insule la o răscoală comună împotriva invadatorului!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -686,6 +901,13 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Aș mai avea o rugăminte. O rugăminte și o ofertă. Cei doi fii ai mei, Harke "
+"Ockesen și Eschel Ockesen, se pregătesc să devină soldați și comandanți. Aș "
+"aprecia mult dacă i-ați lăsa să vă însoțească în campania spre Kattegat, ca "
+"să capete ceva experiență practică, și mi i-ați aduce înapoi după aceea. "
+"Între timp, vom folosi industria pe care ați construit-o pentru noi ca să "
+"antrenăm mai mulți soldați, care vă vor ajuta în încercările voastre "
+"următoare."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -694,6 +916,9 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Ne vom bucura foarte mult să-i avem cu noi și îți promit că vom avea mare "
+"grijă de ei. Cu siguranță te pricepi să le alegi fiilor tăi cei mai buni "
+"învățători."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -701,13 +926,17 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"Și astfel ne despărțim, ca să ne revedem curând. Rămâi cu bine și fie ca o "
+"pace trainică să binecuvânteze tot Helgolandul!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci"
+" la misiunea următoare."

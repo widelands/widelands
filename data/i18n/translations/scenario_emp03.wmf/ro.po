@@ -22,39 +22,44 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Construiește-ți primul avanpost"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr ""
+msgstr "Primul avanpost"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Construiește un avanpost pe simbolul galben de casă, la est de sediul tău "
+"central provizoriu."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construiește o carieră"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Quarry"
-msgstr ""
+msgstr "Carieră"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Construiește o carieră aproape de stâncile numeroase, pentru a elibera "
+"câteva terenuri de construcție și a obține resurse valoroase."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
 msgstr ""
+"Construiește o casă a tăietorului de lemne, un gater și o casă a pietrarului"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr ""
+msgstr "Tăietor de lemne, gater și pietrar"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -62,57 +67,65 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Construiește o casă a tăietorului de lemne, un gater și o casă a pietrarului"
+" imediat ce e destul spațiu pentru ele. Astfel vei completa lanțul de "
+"aprovizionare cu materiale de construcție de bază."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Redu cererea de coloane de marmură la 4"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Redu cererea de coloane de marmură"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Redu la patru cererea de coloane de marmură din setările economiei. Asta ne "
+"va ajuta să economisim marmură pentru clădiri."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Ține minte că poți accesa setările economiei făcând clic pe orice steag."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
-msgstr ""
+msgstr "Găsește un spațiu pentru port pe insula mică"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr ""
+msgstr "Spațiu pentru port"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Caută un spațiu pentru port, ca să ai din nou acces la mare."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Construiește un port și un șantier naval pe insulă"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
-msgstr ""
+msgstr "Industria navală"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
 msgstr ""
+"Construiește un port pentru a putea porni pe mare de pe această insulă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
 msgstr ""
+"Construiește un șantier naval pentru a produce navele cu care să navigăm."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr ""
+msgstr "Produ grâu"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
@@ -121,113 +134,127 @@ msgstr "Producția de grâu"
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
-msgstr ""
+msgstr "Produ cel puțin 50 de snopi de grâu pentru a porni producția de lână."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Produ pânză pentru construirea primei noastre nave"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
-msgstr ""
+msgstr "Producția de pânză"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
 "Now build a sheep farm and use all the wheat to produce at least 50 bales of"
 " wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Acum construiește o stână și folosește tot grâul pentru a produce cel puțin "
+"50 de baloți de lână. Apoi folosește lâna pentru a țese pânză, ca să "
+"construiești o navă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Construiește 2 porturi pe insule îndepărtate"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Construiește două porturi prin expediții"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Explorează insula din sud. Trimite o expediție din portul nostru pentru a "
+"construi acolo un port. Apoi încearcă să găsești resurse minerale."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Trimite o navă spre nord pentru a strânge informații despre barbari. "
+"Încearcă să construiești un port pe insulă și să întemeiezi un avanpost."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Produ aur pentru a trimite expediții"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
-msgstr ""
+msgstr "Producția de aur"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Produ cel puțin șase lingouri de aur, ca să poți coloniza împrejurimile."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Învinge-i pe barbari"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Învinge inamicul"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Pune capăt existenței barbarilor în această parte a lumii."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Explorează mai departe și construiește porturi"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Explorează alte insule și caută spații pentru porturi"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr ""
+"Descoperă mai mult pământ în împrejurimi și construiește cât mai multe "
+"porturi."
 
 #. TRANSLATORS: Objective header
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:157
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Recuperează altarul"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Găsește altarul sfânt"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr ""
+"Trebuie să găsim și să punem la adăpost toate cele șase bucăți ale altarului"
+" sfânt al lui Neptun."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:170
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Construiește o infrastructură de antrenament"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 msgid "Training Infrastructure"
-msgstr ""
+msgstr "Infrastructura de antrenament"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:173
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Construiește o tabără de antrenament, câteva cazărmi și o arenă sau un "
+"colosseum pentru a-ți antrena soldații."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
-msgstr ""
+msgstr "Drumul spre casă"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:195
@@ -236,7 +263,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:622
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:652
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Jurnalul lui Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:185
@@ -244,15 +271,17 @@ msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
+"În sfârșit, am pornit din nou spre Fremil. Abia așteptam ocazia să-mi spăl "
+"numele de marea înfrângere suferită în fața barbarilor."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:188
 msgid "But the gods themselves didn’t want us to get home so quickly!"
-msgstr ""
+msgstr "Dar zeii înșiși n-au vrut să ajungem acasă atât de repede!"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:194
 msgid "The Wrath of Neptune"
-msgstr ""
+msgstr "Mânia lui Neptun"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:197
@@ -261,6 +290,10 @@ msgid ""
 "But this time it felt even worse than last time. The waves were twice the "
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
+"Neptun însuși a fost împotriva noastră și ne-a aruncat din nou într-o "
+"furtună întunecată și sălbatică. Dar de data asta a fost și mai rău decât "
+"data trecută. Valurile erau de două ori mai înalte decât corabia noastră "
+"vitează, iar vânturile ne-au împins în ape nesigure."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:200
@@ -269,15 +302,18 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Corabia noastră este grav avariată. Catargul a căzut peste bord, iar carena "
+"ia tot mai multă apă. Ne-am bucura să scăpăm din această noapte neagră măcar"
+" cu viață."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
-msgstr ""
+msgstr "Din nou naufragiați"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
-msgstr ""
+msgstr "În sfârșit, mânia zeilor și a oceanului pare să fi trecut."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:212
@@ -287,6 +323,10 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Din nou am eșuat pe o coastă necunoscută și am dormit la umbra unor palmieri"
+" până când soarele s-a ridicat sus pe cer. Mă tem că, atunci când ne-am "
+"trezit la amiază, nimeni n-a fost cu adevărat surprins că tot ce vedeam era "
+"nisip… deși mulțimea de stânci din jurul taberei noastre era uimitoare."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -294,6 +334,7 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Chiar pare că am ajuns pe o insulă foarte mică, cu foarte puțin spațiu."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:218
@@ -301,6 +342,9 @@ msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
+"Colac peste pupăză, tot pământul pe care îl vedem e blocat de stânci și "
+"copaci. Mă tem că nu vom găsi resursele de care avem nevoie pentru a "
+"construi o corabie nouă."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -308,14 +352,16 @@ msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr ""
+"Chiar nu știu dacă și cum vom ajunge înapoi acasă. Iar războiul continuă "
+"fără noi. Sper că tovarășii mei de arme apără bine imperiul nostru."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
-msgstr ""
+msgstr "Nimic la vedere"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
-msgstr ""
+msgstr "Saledus se uită neliniștit în jur…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:230
@@ -324,14 +370,17 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
+"Sire, nu știm nimic despre această insulă. Și cred că nici nu suntem în "
+"siguranță. Probabil ar fi înțelept să construim un turn, ca să explorăm "
+"insula și să ne sporim puterea militară."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
-msgstr ""
+msgstr "Amalea intervine"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:237
 msgid "Amalea raises her hand…"
-msgstr ""
+msgstr "Amalea ridică mâna…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:239
@@ -340,15 +389,18 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
+"Pentru că nu știm câte resurse putem obține, ar trebui să fim foarte "
+"chibzuiți cu cheltuirea lor. Chiar și cu clădirile militare ar trebui să fim"
+" foarte atenți."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:246
 msgid "Save Resources"
-msgstr ""
+msgstr "Economisește resursele"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:247
 msgid "Saledus is nodding in agreement…"
-msgstr ""
+msgstr "Saledus dă aprobator din cap…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:249
@@ -357,14 +409,17 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
+"Sire, Amalea are dreptate în privința resurselor. Așa că mă corectez. Ar "
+"trebui să construim doar un avanpost, pentru că este cea mai eficientă "
+"clădire militară."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
-msgstr ""
+msgstr "Stânci, numai stânci"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:258
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus vorbește cu un oftat de ușurare…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:260
@@ -372,6 +427,8 @@ msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr ""
+"Sire, am văzut că avanpostul a fost terminat, așa că am repartizat acolo "
+"câțiva dintre cei mai buni soldați ai mei, ca să facă de strajă."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:263
@@ -381,14 +438,18 @@ msgid ""
 "new ship or even have some basic infrastructure to make our lives more "
 "comfortable?"
 msgstr ""
+"Dar, deși este un pas bun înainte, nu văd prea mult spațiu pentru clădiri. "
+"Toată insula e presărată cu stânci. Cum am putea construi vreodată o corabie"
+" nouă sau măcar o infrastructură de bază care să ne facă viața mai "
+"confortabilă?"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "Planul Amaleei"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea zâmbește…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:272
@@ -396,6 +457,9 @@ msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr ""
+"Lutius, poate părea foarte greu, dar putem reuși. În primul rând, ca să "
+"reușim în această parte a lumii avem nevoie de răbdare, dar și de iuțeală și"
+" de un plan."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:275
@@ -403,6 +467,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
+"Cred că ar trebui să încercăm să eliberăm ceva spațiu de construcție, tăind "
+"toate stâncile într-o carieră."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:278
@@ -411,15 +477,17 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
+"În plus, am obține astfel granit și marmură pentru a ne clădi noua lume. Le "
+"putem folosi imediat ce va fi, în sfârșit, destul spațiu pentru clădiri."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
-msgstr ""
+msgstr "Noile instrucțiuni ale Amaleei"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:287
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:361
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea recomandă…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:289
@@ -427,6 +495,8 @@ msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr ""
+"Vești bune de la oameni, Lutius. Am primit vestea că prima noastră carieră "
+"și-a început azi lucrul."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -434,20 +504,22 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
+"Poate ar fi o idee bună să așteptăm până eliberează ceva spațiu și apoi să "
+"construim o industrie de bază a materialelor de construcție."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
-msgstr ""
+msgstr "Recomandările Amaleei"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:301
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:318
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea intră…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr ""
+msgstr "Am lucruri importante de discutat… Mai întâi vestea bună:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -455,6 +527,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
+"Am observat că, în sfârșit, pietrarul nostru s-a apucat de lucru. El va "
+"ciopli atâtea coloane de marmură câte cerem în setările economiei."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:309
@@ -464,15 +538,19 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Dar aici e buba: dacă folosim toată marmura pentru coloane, am putea rămâne "
+"fără ea. Așa că ar trebui să reducem la o cantitate mai mică setarea pentru "
+"coloanele de marmură din setările economiei. Cred că o rezervă de patru "
+"coloane ar ajunge deocamdată."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea pare fericită"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr ""
+msgstr "Acum am de raportat progrese excelente."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -480,6 +558,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
+"Am aflat că au fost terminate casa tăietorului de lemne și gaterul, așa că "
+"putem începe să strângem bușteni și să facem din ei scânduri."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:326
@@ -487,14 +567,16 @@ msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr ""
+"Este un mare pas înainte în construirea clădirilor avansate. Și ne putem "
+"gândi să folosim niște scânduri pentru a construi nave noi."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
-msgstr ""
+msgstr "Avem nevoie de un port"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
-msgstr ""
+msgstr "Saledus stă pe gânduri…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:335
@@ -502,6 +584,9 @@ msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr ""
+"Sire, tocmai m-am gândit la drumul nostru spre casă. Este extrem de "
+"important să construim un port, ca să ne încărcăm navele și să pornim o "
+"expediție."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:338
@@ -511,14 +596,18 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
+"Problema este că portul e o clădire care are nevoie de un loc cu totul "
+"special. Așa că, în timp ce ne construim economia, ar trebui totuși să ne "
+"extindem mai departe pentru a descoperi toată insula. Hai să încercăm să "
+"găsim un asemenea loc de construcție prețios."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Un pas mai aproape de casă"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus pare entuziasmat…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:349
@@ -527,6 +616,9 @@ msgid ""
 "military has spotted a space to build a port on. We should start to build a "
 "port quickly."
 msgstr ""
+"Sire, astăzi ne-am apropiat mult de întoarcerea acasă. Militarii noștri au "
+"zărit un loc unde se poate construi un port. Ar trebui să începem repede "
+"construcția portului."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:352
@@ -534,10 +626,12 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
+"Acum chiar putem aștepta cu nerăbdare să construim nave. Așa că ar trebui să"
+" construim și un șantier naval."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
-msgstr ""
+msgstr "Înțelepciunea Amaleei"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:363
@@ -545,6 +639,8 @@ msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
 msgstr ""
+"Înțeleg euforia lui Saledus, dar mai întâi avem de rezolvat niște probleme "
+"serioase."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:366
@@ -553,6 +649,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Ca să trimitem o navă în expediție, mai întâi ne trebuie o navă. Din păcate,"
+" ne-au mai rămas doar cinci baloți de pânză, de care vom avea nevoie pentru "
+"a construi portul și șantierul naval."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:369
@@ -561,6 +660,10 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
+"Așa că avem nevoie de mai multă pânză pentru a putea construi, în sfârșit, "
+"nave. Dar pe insulă nu e spațiu pentru a construi o întreagă economie care "
+"să producă pânză. De aceea, trebuie să producem pas cu pas bunurile "
+"necesare."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:372
@@ -569,6 +672,10 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Deci, hai să ne gândim bine. Ca să țesem pânză, avem nevoie de lână de la o "
+"stână. Stâna, la rândul ei, are nevoie de grâu și apă ca să funcționeze. Așa"
+" că hai să găsim un loc pentru o clădire mare și să construim mai întâi o "
+"fermă."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -579,6 +686,11 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"După ce producem destul grâu, putem demonta ferma și construi o stână care "
+"să producă lână. Când stâna începe să lucreze, am putea găsi sau elibera un "
+"loc pentru o clădire medie, ca să construim o țesătorie care să țeasă pânză "
+"din lâna noastră. Dar deocamdată hai să începem prin a produce o cantitate "
+"rezonabilă de grâu."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -587,23 +699,27 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Cred că un stoc de 50 de snopi de grâu ar ajunge pentru început. Nu avem o "
+"cantitate țintă pentru grâu, pentru că fermierul nu are nevoie de alte "
+"bunuri ca să-l producă. Tot ce trebuie să facem e să urmărim cum ne crește "
+"stocul de grâu."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Navigația e din nou posibilă"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 msgid "Praise the gods. We finally have a ship industry."
-msgstr ""
+msgstr "Lăudați fie zeii. În sfârșit avem o industrie navală."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
-msgstr ""
+msgstr "Amalea este mândră"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
-msgstr ""
+msgstr "Amalea se bucură…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:398
@@ -611,6 +727,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
+"Bravo până acum. Am produs destul grâu. Acum demontează ferma și "
+"construiește următoarea clădire din lanțul de producție."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:401
@@ -619,6 +737,9 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
+"Nu uita să verifici cantitatea țintă pentru lână și pânză în setările "
+"economiei. Trebuie să transformăm tot grâul în lână și apoi toată lâna în "
+"pânză."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:404
@@ -626,15 +747,17 @@ msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
+"Poate ar fi o idee bună să oprim producția șantierului naval până avem ceva "
+"pânză, ca să nu irosim bușteni sau scânduri."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
-msgstr ""
+msgstr "Ar trebui să explorăm insulele"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:413
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:459
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus este entuziasmat…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:415
@@ -642,6 +765,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
+"Acum că avem toate resursele pregătite pentru construirea unei nave, ar "
+"trebui să explorăm insulele din jur."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:418
@@ -650,11 +775,14 @@ msgid ""
 " have spotted an island with some mountains in the south. Perhaps we can "
 "find some valuable resources like iron there."
 msgstr ""
+"Mai întâi trebuie să găsim mai multe resurse care să ne sprijine economia în"
+" creștere. Am zărit o insulă cu câțiva munți în sud. Poate găsim acolo "
+"resurse valoroase, precum fierul."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:421
 msgid "But the following objective is even more important:"
-msgstr ""
+msgstr "Dar următorul obiectiv este și mai important:"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:424
@@ -663,6 +791,10 @@ msgid ""
 " the north. If I’m not totally wrong, I have heard some Barbarian war drums."
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
+"Cred că am auzit vântul aducând dinspre nord niște sunete ciudate, dar bine "
+"cunoscute. Dacă nu mă înșel cu totul, am auzit tobele de război ale "
+"barbarilor. Așa că ar fi mai bine să mergem să vedem ce se petrece acolo "
+"sus."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:427
@@ -671,14 +803,17 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
+"În orice caz, ar trebui să fim atenți cu porturile noastre. Ca să le apărăm "
+"de eventualii dușmani, ar trebui să trimitem câțiva soldați în fiecare port "
+"nou, până când le putem proteja cu clădiri militare."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Amalea sfătuiește"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:436
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Amalea pare gânditoare…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:438
@@ -687,12 +822,16 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve, Lutius. Când am vorbit cu toți constructorii noștri harnici, mi-au "
+"spus că trebuie să folosească tot aurul rămas pentru construirea portului. "
+"Așa că nu ne va mai rămâne deloc aur după ce portul va fi gata."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:441
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr ""
+"Dar problema este că, pentru a trimite o expediție, avem nevoie de aur."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:444
@@ -701,6 +840,9 @@ msgid ""
 "have some mining resources. Perhaps we should send some geologists to "
 "explore the hidden resources."
 msgstr ""
+"Din fericire, am zărit un munte care arată foarte promițător și pare să aibă"
+" resurse minerale. Poate că ar trebui să trimitem câțiva geologi să "
+"exploreze resursele ascunse."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:447
@@ -709,6 +851,10 @@ msgid ""
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
 " hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
+"Recomand insistent să construim un lanț de producție pentru extragerea și "
+"topirea aurului. Cred că avem nevoie de o vie, o cramă, o tavernă, o casă a "
+"pescarului sau o casă a vânătorului și o topitorie. Și, bineînțeles, de "
+"minele însele."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:450
@@ -718,29 +864,36 @@ msgid ""
 "should perhaps optimize our roads to free up some building sites, or even "
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
+"Dacă avem greutăți în a construi toate clădirile necesare, ar trebui să ne "
+"gândim la tot ce am învățat până acum. Putem tăia toate stâncile. Poate ar "
+"trebui să ne optimizăm drumurile ca să eliberăm câteva locuri de construcție"
+" sau chiar să demontăm câteva clădiri militare, ca să obținem mai mult "
+"spațiu pentru economie."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "We Should Conquer All the Islands"
-msgstr ""
+msgstr "Ar trebui să cucerim toate insulele"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:461
 msgid "Now it is time to conquer the islands."
-msgstr ""
+msgstr "Acum e timpul să cucerim insulele."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:463
 msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
 msgstr ""
+"Hai să-i terminăm pe barbari și să-i dăruim cezarului imperiului nostru o "
+"colonie frumoasă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Norocul Amaleei"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
-msgstr ""
+msgstr "Amalea este cu adevărat mândră de realizări…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:474
@@ -749,6 +902,9 @@ msgid ""
 "to send out at least three expeditions. Perhaps we might even keep some gold"
 " to make some jewelry."
 msgstr ""
+"Lutius, tocmai am rezolvat încă o problemă. Am reușit să topim destul aur "
+"pentru a trimite cel puțin trei expediții. Poate chiar ne mai rămâne ceva "
+"aur pentru niște bijuterii."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:477
@@ -756,14 +912,16 @@ msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr ""
+"Glumesc doar. Bineînțeles că ar trebui să păstrăm cât mai mult aur pentru "
+"construirea unei arene și a altor clădiri pentru antrenarea soldaților."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea este mulțumită"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
-msgstr ""
+msgstr "Amalea e convinsă că vom trece de toate provocările"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:486
@@ -773,6 +931,11 @@ msgid ""
 "economy. Remember, our industry will only be working until the given amount "
 "in the economy settings is reached."
 msgstr ""
+"Bravo până acum. De acum nu vom mai produce mai multe coloane de marmură "
+"decât e nevoie. Chiar cred că vom avea nevoie destul de des de această "
+"funcție a economiei ca să ne ajustăm economia. Ține minte, industria noastră"
+" va lucra doar până când se atinge cantitatea stabilită în setările "
+"economiei."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:489
@@ -781,14 +944,17 @@ msgid ""
 "ware and afterwards dismantle the building to gain space for another "
 "building."
 msgstr ""
+"De exemplu, ar putea fi o idee bună să producem o cantitate rezonabilă "
+"dintr-un bun și apoi să demontăm clădirea, ca să facem loc pentru o altă "
+"clădire."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea’s Reminder"
-msgstr ""
+msgstr "Amalea îți amintește"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:496
 msgid "Amalea is shaking her head…"
-msgstr ""
+msgstr "Amalea clatină din cap…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:498
@@ -797,6 +963,9 @@ msgid ""
 "security. But I think we could use the little space on this island better "
 "than by building a lot of military buildings."
 msgstr ""
+"Lutius. Apreciez cu adevărat că tu și Saledus sunteți atât de preocupați de "
+"siguranța noastră. Dar cred că am putea folosi mai bine puținul spațiu de pe"
+" această insulă decât construind o mulțime de clădiri militare."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:501
@@ -806,19 +975,23 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
+"Recomand insistent să demontăm cele mai multe dintre ele, ca să putem "
+"construi clădiri industriale. Nu cred că e mare pericol pe această insulă, "
+"dar dacă vrei să fii prudent, poți păstra câteva posturi de santinelă sau "
+"fortinuri lângă țărm."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:504
 msgid "But be careful not to waste any bigger building spots."
-msgstr ""
+msgstr "Dar ai grijă să nu irosești locurile de construcție mai mari."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid "Amalea’s Excited"
-msgstr ""
+msgstr "Amalea e nerăbdătoare"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:511
 msgid "Amalea is looking forward to the exploration…"
-msgstr ""
+msgstr "Amalea așteaptă cu nerăbdare explorarea…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:513
@@ -826,6 +999,8 @@ msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
 msgstr ""
+"Lutius. Am făcut atâtea progrese până acum. Mă bucur să aud că acum avem "
+"multe nave."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:516
@@ -833,6 +1008,9 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
+"Acum că flota noastră crește tot mai mult, ar trebui să descoperim întreaga "
+"regiune. Hai să încercăm să găsim mai mult pământ și, eventual, mai multe "
+"resurse."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:519
@@ -840,15 +1018,17 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
+"Ne-ar ajuta mai ales să găsim mai multă marmură, fie în câmpurile de stânci,"
+" fie în munți, ca s-o extragem."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea este foarte mulțumită"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:528
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:537
 msgid "Amalea is clapping her hands…"
-msgstr ""
+msgstr "Amalea bate din palme…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:530
@@ -857,10 +1037,13 @@ msgid ""
 " in the complete region. Now we can strengthen our economy and we will "
 "manage to sail home soon."
 msgstr ""
+"Lutius. Bravo. Bravo. Am descoperit toate locurile posibile pentru porturi "
+"din întreaga regiune. Acum ne putem întări economia și vom reuși curând să "
+"navigăm spre casă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea’s Counsel"
-msgstr ""
+msgstr "Sfatul Amaleei"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:539
@@ -869,6 +1052,9 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
+"Salve, Lutius. Tocmai am terminat țesătoria. Acum suntem foarte aproape să "
+"pornim din nou pe mare. Totuși, m-am gândit că ar fi util să-ți amintesc că "
+"producția de nave nu este singura industrie care are nevoie de pânză."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:541
 msgid ""
@@ -876,6 +1062,10 @@ msgid ""
 "it to build some of the training buildings for our soldiers. And most "
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
+"Avem nevoie de pânză și pentru producerea armurilor în fierăria de armuri. "
+"Ne trebuie pentru a construi unele dintre clădirile de antrenament pentru "
+"soldați. Și, cel mai important și mai urgent dintre toate, ne trebuie pentru"
+" a trimite expediții."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:543
 msgid ""
@@ -885,14 +1075,19 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
+"De aceea, recomand cu tărie să ne verificăm regulat stocul de pânză, ca să "
+"ne asigurăm că păstrăm destulă pânză în rezervă pentru a trimite măcar "
+"câteva expediții. Cum o expediție are nevoie de trei baloți de pânză, cred "
+"că o rezervă de șase până la nouă baloți, care ne-ar ajunge pentru două-trei"
+" expediții, ar fi suficientă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Victoria e a noastră"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
-msgstr ""
+msgstr "Saledus se bucură…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:552
@@ -900,18 +1095,20 @@ msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
 msgstr ""
+"Sire, în sfârșit i-am învins pe barbarii din această regiune. Și, mai mult, "
+"am construit o colonie frumoasă pentru imperiul nostru."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:554
 msgid "The king will be very pleased with our victory."
-msgstr ""
+msgstr "Regele va fi foarte mulțumit de victoria noastră."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
-msgstr ""
+msgstr "Îmbunarea lui Neptun"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
-msgstr ""
+msgstr "Saledus este foarte trist și neliniștit…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:563
@@ -919,12 +1116,17 @@ msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
 msgstr ""
+"Sire, facem progrese bune spre a ajunge în cele din urmă acasă. Dar e un "
+"lucru despre care trebuie să vorbesc:"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:565
 msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
+"După cum am văzut în călătoriile noastre, este foarte important să-i avem pe"
+" zei, și mai ales pe Neptun, într-o dispoziție bună, ca să ne ocrotească "
+"drumul."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:567
 msgid ""
@@ -932,20 +1134,26 @@ msgid ""
 "can’t worship him well. I think we should search the whole region to see if "
 "we can recover all six pieces of the shrine."
 msgstr ""
+"Din păcate, am pierdut altarul sfânt al lui Neptun în marea furtună, așa că "
+"nu-l putem cinsti cum se cuvine. Cred că ar trebui să căutăm prin toată "
+"regiunea, ca să vedem dacă putem recupera toate cele șase bucăți ale "
+"altarului."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:569
 msgid ""
 "To ease the search, I have crafted some models of the pieces as you can see."
 " You can give them to our soldiers and sailors to look for them."
 msgstr ""
+"Ca să ușurez căutarea, am făcut câteva modele ale bucăților, după cum vezi. "
+"Le poți da soldaților și marinarilor noștri, ca să le caute."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid "Praise, Praise, Praise"
-msgstr ""
+msgstr "Laudă, laudă, laudă"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:578
 msgid "Saledus is happily worshipping…"
-msgstr ""
+msgstr "Saledus se roagă fericit…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:580
@@ -953,6 +1161,8 @@ msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
 msgstr ""
+"Sire, am recuperat altarul sfânt al lui Neptun. Acum îi putem cere ocrotirea"
+" pentru călătoria noastră."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:582
 msgid ""
@@ -960,14 +1170,17 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
+"O, mare Neptun, ocrotește-ne călătoria! O, mare Neptun, fă ca vânturile să "
+"ne fie prielnice! O, mare Neptun, scapă-ne de creaturile mării! O, mare "
+"Neptun, …"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Descoperiri neplăcute"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:589
 msgid "Saledus looks very worried…"
-msgstr ""
+msgstr "Saledus pare foarte îngrijorat…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:591
@@ -976,14 +1189,17 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
+"Sire, am găsit ruinele unei foste fortărețe și ale unui fost sat barbar. Mă "
+"cam îngrijorează că va trebui să luptăm împotriva lor înainte să fim "
+"pregătiți."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Antrenați-vă mai repede, antrenați-vă mai din greu"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:598
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Saledus cere disciplină"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:600
@@ -992,20 +1208,25 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
+"Sire, avem la dispoziție toate clădirile pentru antrenarea soldaților, dar "
+"ar trebui să ne străduim mai mult să-i antrenăm până la cel mai înalt nivel "
+"și să antrenăm mai mulți."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr ""
+"Pentru asta avem nevoie de multă hrană, mult fier și mult aur. Așa că avem "
+"de făcut față multor provocări."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Training Infrastructure is Needed"
-msgstr ""
+msgstr "E nevoie de o infrastructură de antrenament"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
-msgstr ""
+msgstr "Saledus are griji legate de siguranță"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:611
@@ -1014,6 +1235,10 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
+"Sire, trebuie să-i pregătim pe unii dintre oamenii noștri să slujească în "
+"marea ta armată. E important să sporim numărul soldaților noștri cât de "
+"repede putem. Și ar trebui să-i antrenăm bine, ca să le îmbunătățim "
+"capacitatea de luptă."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:613
 msgid ""
@@ -1021,10 +1246,13 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
+"De aceea, trebuie să construim o infrastructură completă de antrenament, în "
+"ciuda spațiului limitat. Avem nevoie de câteva cazărmi, o tabără de "
+"antrenament și o arenă sau un colosseum."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid "Time to get Home Again"
-msgstr ""
+msgstr "E timpul să ne întoarcem acasă"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:624
@@ -1033,6 +1261,9 @@ msgid ""
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
+"Da, tovarăși de arme, am reușit! Am trecut de toate încercările care ne-au "
+"fost puse în cale. Dar inima mea e tot acasă. Vom porni pe mare cât mai "
+"curând posibil, ca să ajutăm la apărarea Imperiului de tribul barbar."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid "Victory"
@@ -1043,25 +1274,28 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci"
+" la misiunea următoare."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:637
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
+"În sfârșit, am descoperit o bucată a altarului nostru. Lăudat fie Neptun!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Am descoperit încă o bucată a altarului nostru. Lăudat fie Neptun!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Mai trebuie să descoperim %d bucată a altarului nostru."
+msgstr[1] "Mai trebuie să descoperim %d bucăți ale altarului nostru."
+msgstr[2] "Mai trebuie să descoperim %d de bucăți ale altarului nostru."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:648
@@ -1069,7 +1303,9 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"În sfârșit, am descoperit ultima bucată a altarului nostru. Acum îl putem "
+"reasambla, ca să ne cinstim zeul. Lăudat fie Neptun!"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefact găsit"

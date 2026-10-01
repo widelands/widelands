@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -27,7 +28,7 @@ msgstr "10 minute"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:78
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minute"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:102
@@ -37,11 +38,11 @@ msgstr "%1$dx %2$s"
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:213
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
-msgstr ""
+msgstr "Reguli"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr ""
+msgstr "Bun venit la „Din insulă în insulă”"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
@@ -51,7 +52,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "„Din insulă în insulă” este un turnir tradițional în cultura atlanților. Regulile jocului sunt simple: pornești cu un sediu central pe o insulă. Când termini un castel la capătul primei insule, primești un al doilea sediu central pe a doua insulă, în care vor fi transferate toate bunurile, muncitorii și soldații din sediul central și din depozitele tale de pe prima insulă."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -60,14 +61,14 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Dacă termini un castel în zona-țintă de pe a doua insulă, vei primi un al treilea sediu central pe a treia insulă, în care vor fi transferate din nou toate bunurile, muncitorii și soldații din sediul central și depozitele anterioare. Ca să câștigi jocul, trebuie să construiești un castel în centrul celei de-a treia insule și să-l păstrezi timp de 20 de minute."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr ""
+msgstr "De fiecare dată când termini o insulă, primești bunuri bonus, în funcție de câți jucători au terminat insula înaintea ta. Cu cât termini mai devreme, cu atât vei primi mai puține bunuri. Vezi detaliile mai jos."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:25
 msgid ""
@@ -75,81 +76,81 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "Ideea este că prima insulă oferă doar stânci și copaci, iar a doua doar pajiști și resurse. Economiile pe care le lași în urmă vor continua să lucreze pentru tine, dar vei culege roadele doar în momentul în care ajungi pe o insulă nouă."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr ""
+msgstr "În sfârșit, ai grijă să nu-ți irosești cuarțul și diamantele."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 msgid "Finish Rewards"
-msgstr ""
+msgstr "Recompense la final"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
 msgid "First Island"
-msgstr ""
+msgstr "Prima insulă"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "1st to finish"
-msgstr ""
+msgstr "Primul care termină"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "2nd to finish"
-msgstr ""
+msgstr "Al doilea care termină"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:40
 msgid "3rd to finish"
-msgstr ""
+msgstr "Al treilea care termină"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:41
 msgid "4th to finish"
-msgstr ""
+msgstr "Al patrulea care termină"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "Second Island"
-msgstr ""
+msgstr "A doua insulă"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s a ajuns primul pe insula numărul %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s a ajuns al doilea pe insula numărul %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s a ajuns al treilea pe insula numărul %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s a ajuns al patrulea pe insula numărul %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
-msgstr ""
+msgstr "Recompensa pentru această ispravă este:"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr ""
+msgstr "%s este acum Regele dealului și va câștiga jocul în 20 de minute, dacă nimeni nu cucerește dealul până atunci."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
-msgstr ""
+msgstr "%s a pierdut controlul asupra dealului."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:56
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr ""
+msgstr "%1$s este Regele dealului de %2$s!"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 #, lua-format
 msgid "%s has won the game. Congratulations!"
-msgstr ""
+msgstr "%s a câștigat jocul. Felicitări!"

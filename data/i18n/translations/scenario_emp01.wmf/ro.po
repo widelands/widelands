@@ -2,6 +2,8 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
+# Dominic Iastrebschi, 2025
 # Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -10,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,86 +22,86 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
-msgstr "Fort"
+msgstr "Construiește un fortin"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
-msgstr ""
+msgstr "Fortin"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Construiește un fortin pe simbolul roșu de casă din partea de est a pădurilor, la dreapta sediului tău central provizoriu."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Construiește o casă a tăietorului de lemne"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa tăietorului de lemne"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr ""
+msgstr "Construiește o casă a tăietorului de lemne pe simbolul roșu de casă, la sud de sediul tău central provizoriu."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Construiește 2 case ale tăietorului de lemne și un gater"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Două case ale tăietorului de lemne și un gater"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr ""
+msgstr "Construiește încă două case ale tăietorului de lemne și un gater imediat ce e destul spațiu pentru ele."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Construiește o casă a silvicultorului"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa silvicultorului"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr ""
+msgstr "Construiește o casă a silvicultorului pentru a păstra resursele de lemn ale acestei insule."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
-msgstr "Construiește o carieră de piatră"
+msgstr "Construiește o carieră"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
-msgstr ""
+msgstr "Carieră"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "Construiește o carieră în sud, pentru a scoate granit și marmură din stânci."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Acestea ar putea fi folosite pentru clădirile viitoare."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "O noapte întunecată"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Jurnalul lui Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -107,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Ce s-a ales de Imperiul nostru? Chiar mă întreb – de ce mi-a interzis regele să lupt împotriva acelui trib barbar monstruos, care s-a purtat mai întâi ca un prieten pașnic și apoi mi-a atacat armata în cea mai neagră noapte?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -117,7 +119,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Cu o armată de 150 de oameni, am fost trimis să patrulez la granița noastră de nord, care se află lângă Munții Galdin, într-o pădure mare, frumoasă și străveche. Curând am întâlnit un trib barbar, care la început a fost prietenos. Câțiva dintre oamenii mei chiar au făcut negoț cu ei, iar copiii lor veneau la noi să ne admire uniformele și armele curate și îngrijite."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -128,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Dar în a cincea noapte petrecută în acea regiune, ne-au atacat fără niciun motiv. Am pierdut zeci de oameni buni, iar eu m-am trezit prizonier și adus în fața căpeteniei lor. M-a scuipat, și-a bătut joc de mine și mi-a spus să părăsesc pentru totdeauna acest ținut. Nu voia pământ nou și nu voia pământul nostru, dar mi-a spus că ACEASTĂ pădure era pământul lor – și avea să rămână al lor până când spiritele îl vor lua și pe ultimul om al neamului său!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -137,7 +139,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "Trei săptămâni mai târziu m-am întors la Fremil ca să vorbesc cu regele nostru. Era furios pe barbari, dar a interzis orice atac asupra acestor triburi. Credea că armata noastră era prea slabă pentru a supraviețui unui război cu barbarii."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -146,11 +148,11 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "Totuși, nu vedeam cum mi-aș putea spăla rușinea fără să lupt împotriva acestor barbari. Așa că am părăsit Fremilul cu o corabie, ca să-mi găsesc o lume nouă și o viață nouă, undeva în sud. Acum navighez pe Golful Perl, împreună cu familia mea, unii dintre prietenii mei și câțiva dintre cei mai buni războinici ai mei."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
-msgstr ""
+msgstr "Marea furioasă"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:99
@@ -159,23 +161,23 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr ""
+msgstr "Se pare că navigarea pe Golful Perl a fost una dintre cele mai mari greșeli ale noastre. Natura a fost împotriva noastră și ne-a aruncat într-o furtună întunecată și sălbatică. Chiar nu știu câte ore au trecut de când valurile s-au ridicat mai sus decât corabia noastră, dar ar fi tot sinucidere să ieșim afară."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr ""
+msgstr "Corabia noastră este grav avariată și ia tot mai multă apă. Să mulțumim zeilor dacă vom scăpa cu viață din această noapte neagră."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:108
 msgid "Survivors"
-msgstr ""
+msgstr "Supraviețuitori"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "În sfârșit, zeii au fost cu noi!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -183,7 +185,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr ""
+msgstr "Am ajuns pe o coastă necunoscută și ne-am odihnit în liniște sub palmierii care cresc pe țărm. Dar cam atât cu veștile bune. Adevărul este că, atunci când m-am trezit azi-dimineață, n-am văzut în jurul nostru decât nisip."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -191,15 +193,15 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr ""
+msgstr "Chiar pare că am ajuns sub singurii palmieri din acest deșert de nisip îndepărtat. Mă tem că nu vom găsi ajutorul de care avem nevoie ca să ne reparăm corabia la timp."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
-msgstr ""
+msgstr "O presimțire"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr "Saledus se uită nervos în jur..."
+msgstr "Saledus se uită neliniștit în jur…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:126
@@ -207,7 +209,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "Sire, mă tem că nu suntem în siguranță pe acest pământ străin. Cine știe ce creaturi înfricoșătoare trăiesc dincolo de această pădure, în deșertul acela uriaș? Și dacă aceste creaturi intră în păduri și așteaptă momentul să ne atace?"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -215,7 +217,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "Ei bine, poate că teama mea e nefondată, dar n-are cum să fie greșit să facem de strajă în păduri – ca să fim siguri că vedem eventualii dușmani înainte să ne vadă ei pe noi."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -223,51 +225,51 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Chiar ar trebui să construiești un fortin în partea de est a pădurii. Atunci unul dintre oamenii mei poate face de strajă în întuneric și ne poate apăra de aceste creaturi."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
-msgstr ""
+msgstr "În siguranță deocamdată"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
-msgstr ""
+msgstr "Saledus vorbește cu un oftat de ușurare…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "Sire, am văzut că fortinul a fost terminat, așa că am repartizat acolo pe unul dintre cei mai buni soldați ai mei, ca să supravegheze deșertul."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr ""
+msgstr "E un pas bun înainte. Acum ne putem simți ceva mai în siguranță și ne putem gândi la repararea corabiei."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Young Amalea"
-msgstr ""
+msgstr "Tânăra Amalea"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
-msgstr ""
+msgstr "Amalea zâmbește…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Salut, Lutius! Tocmai m-am întâlnit afară cu Saledus."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Mi-a spus despre fortin. Ei bine, nu cred că avem nevoie de mai multe fortinuri – în schimb, ne-am putea concentra acum pe alte lucruri."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -275,11 +277,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "E absolut limpede că avem nevoie de lemn ca să ne reparăm corabia. Așa că ieri m-am plimbat prin pădure să caut un loc bun pentru o casă a tăietorului de lemne și am găsit unul chiar la sud de sediul nostru central provizoriu."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea recomandă…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -288,7 +290,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr ""
+msgstr "Am primit vestea că primul nostru tăietor de lemne și-a început azi lucrul. Poate că ar fi o idee bună să așteptăm până face destul loc pentru încă două case ale tăietorului de lemne, ca să putem strânge buștenii mai repede."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -297,30 +299,30 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Dar, din păcate, buștenii nu ne folosesc la repararea corabiei – trebuie să-i transformăm în scânduri, de care are nevoie orice corabie și orice clădire mai mare. Așa că ar trebui să construim un gater – imediat ce avem destul spațiu pentru el."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea intră…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Am două lucruri importante de discutat… Mai întâi vestea bună:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr ""
+msgstr "Am văzut că gaterul a fost terminat, așa că putem începe să transformăm în scânduri buștenii pe care îi strâng tăietorii de lemne."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Dar vestea proastă este că tăietorii noștri de lemne taie într-un ritm incredibil. Aproape că nu mai sunt copaci pe această insulă."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -328,42 +330,42 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Acești copaci ne apără de furtunile de nisip care vin dinspre deșert și ne dau umbră în zilele toride, iar în ei își au casa multe animale blânde. N-ar trebui să lăsăm în urmă această insulă ca pe un deșert pustiu."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "Lutius, te rog, găsește pe cineva care să se ocupe de plantarea de copaci noi."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "Gânduri despre viitor"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr ""
+msgstr "Saledus observă…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "Sire, tocmai m-am gândit la stâncile de pe țărmul sudic al acestui ținut. Poate că am putea scoate din ele granit folositor și marmură frumoasă."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "Repararea corabiei va dura oricum câteva săptămâni, iar resursele pe care le strângem acum ar putea sta la baza unor clădiri mari și trainice pe alt pământ."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
-msgstr ""
+msgstr "Un pas înainte"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
-msgstr ""
+msgstr "Saledus pare entuziasmat…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:213
@@ -371,16 +373,16 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "Sire, astăzi ne-am apropiat mult de primul nostru castel. Cariera din sud și-a început azi lucrul și în curând ne va aproviziona cu granit și marmură frumoasă."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:216
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "Acum chiar putem aștepta cu nerăbdare să ne așezăm pe o altă insulă."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
-msgstr ""
+msgstr "Misiune îndeplinită"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:224
@@ -388,41 +390,41 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr ""
+msgstr "Astăzi am primit vestea că, în sfârșit, corabia noastră a fost reparată complet. În acest moment, oamenii mei încarcă totul pe corabia abia reparată, sperând că ne va servi mai bine decât data trecută."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr ""
+msgstr "Aceasta va fi ultima noastră noapte pe insulă. Mâine dimineață vom pleca în căutarea unui nou loc pentru exilul nostru."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Încă mă întreb dacă vom mai vedea vreodată Fremilul."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
-msgstr ""
+msgstr "Victorie"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci la misiunea următoare."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Peninsula sigură"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Saledus spune:"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:241
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "Sire, ai făcut din această peninsulă un loc foarte sigur. Acum e timpul să mergem mai departe!"

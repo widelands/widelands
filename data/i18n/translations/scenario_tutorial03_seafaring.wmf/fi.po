@@ -485,7 +485,7 @@ msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Tällä kartalla ei ole vihollista pelättäväksi. Sinun tulee laittaa vähän puolustajia satamillesi ja rakentaa yksi tai kaksi sotilaslinnoitusta uuden siirtokunnan ympärille ensisijassa."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -722,13 +722,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Kuten näkyy, lauttoja voidaan tuottaa melko nopeasti, mutta hukkamateriaaleista ei pidä murhetia, koska lauttatelakat tuottavat niitä normaalisti vaadittaessa, kun on huoltamattomia vesiväyliä."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Niin kauan kuin lautta palvelee vesiväylää, sen elinikä on rajaton, mutta työtön lautta lahoaa pois ja lopulta uppoaa."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349

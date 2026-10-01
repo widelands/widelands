@@ -25,15 +25,15 @@ msgstr "Artefacte"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "Caută artefacte antice. După ce toate au fost găsite, echipa care deține cele mai multe dintre ele câștigă jocul."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Artefacte deținute"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
-msgstr ""
+msgstr "Niciun artefact"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
@@ -41,82 +41,82 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "Nu există artefacte pe această hartă. Acest lucru nu ar trebui să se întâmple. Te rugăm să raportezi eroarea la %s și să precizezi versiunea Widelands și harta pe care ai încercat să o încarci."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefact nou"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "Echipa ta a găsit un artefact nou."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Ai găsit un artefact nou."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Artefact pierdut"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Unul dintre artefactele echipei tale a fost furat de un inamic."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Unul dintre artefactele tale a fost furat de un inamic."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Artefact cucerit"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "Echipa ta a furat un artefact de la un inamic."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Ai furat un artefact de la un inamic."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
-msgstr ""
+msgstr "Prezentare generală:"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:182
 #: ../../../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%i artefact"
+msgstr[1] "%i artefacte"
+msgstr[2] "%i de artefacte"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s deține %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "Echipa %1$i (%2$s) deține %3$s."
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
-msgstr ""
+msgstr "Colecționari"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:20
 #, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Primești puncte pentru bunurile prețioase din depozitele tale. Jucătorul cu cel mai mare scor după %s câștigă jocul."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -127,118 +127,118 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "limita de timp configurată"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
-msgstr ""
+msgstr "Puncte"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "Situația pentru %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../../../data/scripting/win_conditions/collectors.lua:84
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:88
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Total: %i punct"
+msgstr[1] "Total: %i puncte"
+msgstr[2] "Total: %i de puncte"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for Team %d"
-msgstr ""
+msgstr "Situația pentru echipa %d"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Total echipă: %i punct"
+msgstr[1] "Total echipă: %i puncte"
+msgstr[2] "Total echipă: %i de puncte"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr ""
+msgstr "Autocrat"
 
 #: ../../../../data/scripting/win_conditions/defeat_all.lua:17
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Tribul sau echipa care îi poate înfrânge pe toți ceilalți câștigă jocul! Asta înseamnă că adversarilor nu le mai rămâne niciun sediu central, port sau depozit."
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
-msgstr ""
+msgstr "Joc fără sfârșit"
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
-msgstr ""
+msgstr "Acesta este un joc fără sfârșit și fără reguli."
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Vânătorul de sedii"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Tribul sau echipa care reușește să găsească și să distrugă toate celelalte sedii centrale câștigă jocul! Nu funcționează cu condiții de start fără sediu central."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "Echipa %i"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s deține %2$3.0f%% din teritoriu (%3$i din %4$i)."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s a deținut %2$3.0f%% din teritoriu (%3$i din %4$i)."
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Procent de teritoriu"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "Deții mai mult de jumătate din suprafața hărții."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:236
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Păstreaz-o încă %i minut pentru a câștiga jocul."
+msgstr[1] "Păstreaz-o încă %i minute pentru a câștiga jocul."
+msgstr[2] "Păstreaz-o încă %i de minute pentru a câștiga jocul."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s deține mai mult de jumătate din suprafața hărții."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:265
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Mai ai %i minut pentru a împiedica victoria."
+msgstr[1] "Mai ai %i minute pentru a împiedica victoria."
+msgstr[2] "Mai ai %i de minute pentru a împiedica victoria."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
-msgstr ""
+msgstr "Stăpânul teritoriului"
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
@@ -246,15 +246,15 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Fiecare jucător sau echipă încearcă să obțină mai mult de jumătate din suprafața hărții. Câștigă jucătorul sau echipa care reușește să păstreze acea suprafață cel puțin 20 de minute. Dacă este selectat modul pașnic, jocul se încheie când un jucător are mai mult teritoriu decât ar putea obține oricare alt jucător."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Momentan nicio facțiune nu deține mai mult de jumătate din suprafața hărții."
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
-msgstr ""
+msgstr "Timp teritorial"
 
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:24
 #, lua-format
@@ -264,80 +264,80 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Fiecare jucător sau echipă încearcă să obțină mai mult de jumătate din suprafața hărții. Câștigă jucătorul sau echipa care reușește să păstreze acea suprafață cel puțin 20 de minute sau cel cu cel mai mult teritoriu după %s, în funcție de care situație apare prima. Dacă este selectat modul pașnic, jocul se încheie când un jucător are mai mult teritoriu decât ar putea obține oricare alt jucător."
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% zi"
+msgstr[1] "%1% zile"
+msgstr[2] "%1% de zile"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% oră"
+msgstr[1] "%1% ore"
+msgstr[2] "%1% de ore"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% minut"
+msgstr[1] "%1% minute"
+msgstr[2] "%1% de minute"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s și %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr "%1$s şi %2$s"
+msgstr "%1$s și %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:394
 #, lua-format
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Jocul se va încheia peste %s."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
-msgstr ""
+msgstr "Felicitări!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:34
 msgid "You have won this game!"
-msgstr ""
+msgstr "Ai câștigat acest joc!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:45
 msgid "You are defeated!"
-msgstr ""
+msgstr "Ai fost înfrânt!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:46
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr ""
+msgstr "Ai pierdut ultimul depozit și, prin urmare, ai fost înfrânt. Dacă vrei, poți continua ca spectator."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:57
 msgid "You won"
-msgstr ""
+msgstr "Ai câștigat"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:58
 msgid "You are the winner!"
-msgstr ""
+msgstr "Tu ești câștigătorul!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:69
 msgid "You lost"
-msgstr ""
+msgstr "Ai pierdut"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:70
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "Ai pierdut acest joc!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
@@ -346,11 +346,11 @@ msgstr "Stare"
 #. TRANSLATORS: This is an overview for all players.
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:83
 msgid "Player overview:"
-msgstr ""
+msgstr "Prezentarea jucătorilor:"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
-msgstr ""
+msgstr "Spiridușul pădurii"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:19
 #, lua-format
@@ -358,11 +358,11 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Ca spiriduș al pădurii, iubești pădurile mari, așa că sarcina ta este să ai pe teritoriul tău mai mulți copaci decât oricare alt jucător. Jocul se va încheia după %s. Cel care are atunci cei mai mulți copaci câștigă jocul."
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
-msgstr ""
+msgstr "Copaci deținuți"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:68
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:90
@@ -370,27 +370,27 @@ msgstr ""
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%i copac"
+msgstr[1] "%i copaci"
+msgstr[2] "%i de copaci"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:71
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s are în acest moment %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:92
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s a avut %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
-msgstr ""
+msgstr "Câștigătorul este %1$s, cu %2$s."
 
 #. TRANSLATORS: %s = x tree(s)
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "Câștigătorii au avut %s."

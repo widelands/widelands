@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dominic Iastrebschi, 2025
+# Cristian Romanescu, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,152 +23,167 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "Marele potop (salvare automată de rezervă)"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Construiește o economie a lemnului și o fermă de stuf"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "Economia lemnului"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Construiește cel puțin o casă a tăietorului de lemne și două case ale "
+"silvicultorului pentru a începe producția de bușteni, precum și o fermă de "
+"stuf pentru a începe cultivarea stufului."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Începe producția de cărămizi"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr ""
+msgstr "Economia cărămizilor"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construiește un cuptor de cărămizi, o mină de cărbune, o mină de piatră, o "
+"groapă de argilă și o fântână pentru a începe producția de cărămizi."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "Strânge materiale de construcție"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Fă stocuri de materiale de construcție"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
+"Strânge în sediul central un stoc de materiale de construcție. Adună cel "
+"puțin:"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × buștean"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × granit"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × argilă"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × cărămidă"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × cărbune"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × stuf"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Ține minte că pentru cele mai multe dintre aceste bunuri poți stabili "
+"cantități țintă în setările economiei."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Produ hrană pentru mineri"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr ""
+msgstr "Economia hranei"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construiește o tavernă, o casă a pescarului, o afumătorie, o fermă de fructe"
+" de pădure și o casă a culegătorului de fructe."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "Îmbunătățește-ți economia hranei"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Îmbunătățește economia hranei"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Construiește cel puțin două ferme, o casă a apicultorului (lângă ferma de "
+"fructe de pădure), o brutărie, o berărie și încă o tavernă."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Construiește o mină de fier și o infrastructură minieră"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "Construiește mine și infrastructură minieră"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Construiește o mină de fier, un cuptor de topire, o fierărie și o fierărie "
+"mică de armuri."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "Începe recrutarea de soldați"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "Recrutarea de soldați"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Construiește o cazarmă, o fermă de reni și un atelier de cusut."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Descoperă mai mult din insulă"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Extinde-te și descoperă"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Extinde-te mai departe și descoperă mai mult din insulă."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Antrenează-ți soldații"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -177,7 +193,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Antrenarea soldaților"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -186,38 +202,46 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Antrenează un soldat până la cel mai înalt nivel posibil. Soldații sunt "
+"antrenați în tabere de antrenament și în arene de antrenament. Vom avea "
+"nevoie de o mină de aur, de o croitorie care să coasă haine mai rezistente "
+"și de o fierărie mare de armuri pentru arme și căști mai bune."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "Învinge inamicul!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "Învinge inamicul!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "Distruge sediul central al tribului inamic."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "Scapă de potop"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Fugi de potop"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Construiește un port, o țesătorie și un șantier naval, apoi pornește o "
+"expediție ca să fugi înainte ca potopul să înece insula."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"Poți construi portul fie pe vârful cel mai estic al insulei, fie în locul "
+"unde s-a aflat sediul central al inamicului."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
@@ -225,6 +249,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
+"Dacă nu te-ai pregătit destul de bine ca să treci la timp de această "
+"încercare, poți reîncărca scenariul din salvarea de rezervă creată automat "
+"pentru tine cu puțin înainte să ajungi la sediul central al inamicului."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -232,11 +259,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "Introducere"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "Bun venit!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129
@@ -244,6 +271,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Bun venit pe frumoasa insulă Langeness! Sunt Reebaud, căpetenia acestei "
+"insule neatinse."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -254,10 +283,14 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
+"Tribul meu și cu mine tocmai am sosit de pe continent. Erau lupte cu danezii"
+" în nord, cu schauenburgii și holsteinezii în est și în sud… Așa că am "
+"hotărât să-mi duc tribul departe, ca să începem o viață liniștită și pașnică"
+" pe această insulă neatinsă."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "Un nou cămin"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:138
@@ -265,6 +298,9 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"E un loc la fel de bun ca oricare altul pentru a începe să ne construim noul"
+" cămin. Mai întâi de toate, trebuie să asigurăm o aprovizionare stabilă cu "
+"materiale de construcție de bază."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -272,10 +308,12 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"L-am rugat pe Hauke, unul dintre sfetnicii mei, să supravegheze construirea "
+"așezării noastre."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "Primele clădiri"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
@@ -283,7 +321,7 @@ msgstr ""
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
-msgstr ""
+msgstr "Pace, căpetenie Reebaud! Mă apuc imediat de colonizarea insulei."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -292,6 +330,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Ca toți frizonii, ne construim casele mai ales din cărămidă. Le îmbunătățim "
+"adăugând niște bușteni și granit. Acoperișurile sunt, firește, din stuf. "
+"Nimic nu ține mai bine ploaia afară."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -300,6 +341,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Ar trebui să începem prin a ne ocupa de producția de lemn. Copacii nu par să"
+" crească bine pe această insulă; mai bine construim cel puțin două case "
+"pentru silvicultori și una pentru un tăietor de lemne."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -309,10 +353,15 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
+"De asemenea, ar fi bine să construim curând o fermă de stuf. Chiar și "
+"fermele de stuf au nevoie de stuf ca să fie construite, așa că trebuie să "
+"avem grijă să nu rămânem fără el înainte de a-l putea cultiva noi înșine. "
+"Stuful se cultivă ușor, așa că cultivatorul de stuf nu are nevoie de nimic "
+"altceva ca să înceapă să planteze lanuri de stuf."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "Construim noul nostru cămin"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -323,6 +372,12 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"Aprovizionarea cu lemn și stuf este asigurată. Acum trebuie să ne ocupăm de "
+"aprovizionarea cu cărămizi. Cărămizile se fac din granit și argilă și sunt "
+"arse într-un cuptor de cărămizi, așa că mai întâi trebuie să producem aceste"
+" materiale. Pe continent tăiam granitul din stânci, dar aici nu văd niciuna."
+" Poate că dealurile acestea conțin destulă piatră ca să extragem ceva "
+"granit."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -332,6 +387,10 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"Argila se face ușor: un săpător de argilă care lucrează la o groapă de "
+"argilă doar sapă niște pământ și îl amestecă cu apă. Ai grijă doar să aibă "
+"destul spațiu de săpat în jurul gropii lui de argilă. Ar putea fi o idee "
+"bună să construiești câteva posturi de strajă ca să te extinzi."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -340,6 +399,10 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Ca să ardă cărămizile, cuptorul de cărămizi are nevoie de foc. Trebuie să "
+"folosim cărbune drept combustibil. Construiește o mină de cărbune, ca să nu "
+"rămânem fără. Fără cărbune nu avem cărămizi, fără cărămizi nu avem mine, "
+"fără mine nu avem cărbune… vezi care e problema."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -347,10 +410,12 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"De asemenea, construiește o fântână – nimănui nu-i place să bea apă sărată "
+"și nici nu e bună pentru făcut argilă."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "Prima noastră așezare"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -359,14 +424,18 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Te-ai descurcat bine. Toată producția noastră de materiale de construcție "
+"funcționează acum. Hai să așteptăm până strângem mai multe materiale. Ne-am "
+"putea extinde teritoriul încă puțin, ca să vedem ce se mai găsește pe "
+"această insulă."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Lipsă de stuf"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr ""
+msgstr "Construiește încă o fermă de stuf"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -376,20 +445,26 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"Am observat că de o vreme ducem lipsă de stuf. Clădirile noastre par să aibă"
+" nevoie de destul de mult. Ar trebui să mai construim una sau două ferme de "
+"stuf. Stuful este folosit și pentru făcut plase de pescuit și alte unelte; "
+"de aceea, rezolvarea acestei lipse ar trebui să fie o prioritate."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
+"Ar trebui să-i acorzi noii ferme de stuf cea mai mare prioritate pentru stuf"
+" în fereastra șantierului de construcție."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Lipsă de argilă"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Construiește încă o groapă de argilă"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -399,6 +474,10 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"Cărămidarii noștri se plâng de o vreme de lipsa de argilă. Fără argilă nu se"
+" pot produce cărămizi, așa că această lipsă ne încetinește foarte mult. Ar "
+"fi mai bine să construim încă una sau două gropi de argilă și fântâni care "
+"să le aprovizioneze cu apă."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -407,14 +486,18 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"Argila este folosită și la construcția navelor și pentru îmbunătățirea "
+"cuptoarelor de cărbune. Dacă vom avea vreodată nevoie să construim o navă "
+"sau dacă minele nu ne vor putea da destul cărbune, vom avea nevoie de mai "
+"multă argilă, așa că lipsa trebuie rezolvată."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Lipsă de cărămizi"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Construiește încă un cuptor de cărămizi"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -425,20 +508,27 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"Am observat că rămânem fără cărămizi. Asta încetinește mult construirea "
+"clădirilor noastre, pentru că avem nevoie de atât de multe cărămizi. Chiar "
+"ar trebui să începem să construim încă un cuptor de cărămizi și să-i acordăm"
+" cea mai mare prioritate pentru cărămizi în fereastra șantierului de "
+"construcție, ca să rezolvăm lipsa cât mai repede."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"Ar trebui să-i acorzi noului cuptor de cărămizi cea mai mare prioritate "
+"pentru cărămizi în fereastra șantierului de construcție."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Depozite"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Construiește un depozit în est"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -449,14 +539,19 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Ne extindem teritoriul tot mai departe spre est, iar bunurile trebuie "
+"transportate pe distanțe mai lungi. Ar trebui să construim depozite lângă "
+"granița de est, la anumite distanțe, și de preferință să păstrăm materialele"
+" de construcție în cel mai estic. Sediul nostru central este prea departe în"
+" vest ca să fie util pentru depozitarea pe termen lung a bunurilor."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "Mineri flămânzi"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Minerii protestează…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -465,6 +560,9 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"Căpetenie Reebaud! Aduc vești proaste. Minerii muncesc atât de mult, încât "
+"nu au timp să-și pregătească singuri mâncarea. Cer să fie aprovizionați cu "
+"ea."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -474,6 +572,11 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Trebuie să construim o tavernă pentru prepararea rațiilor. Ca să obținem "
+"hrana brută, trebuie să construim o casă a pescarului și, pentru că nimănui "
+"nu-i place peștele crud, o afumătorie care să-l afume. Pe lângă asta, "
+"construiește o fermă de fructe de pădure, care va planta tufe de fructe de "
+"pădure, și o casă a culegătorului de fructe, ca tufele să fie culese."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -481,19 +584,22 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Ar trebui să începem să ne extindem teritoriul mai repede, ca să avem destul"
+" spațiu pentru multe ferme de fructe de pădure și o coastă mai lungă pentru "
+"pescuit."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Îmbunătățirea economiei hranei"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Hrănirea soldaților"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "Bravo. Minerii sunt mulțumiți și s-au apucat din nou de lucru."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -502,6 +608,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"Dar când minele vor trebui îmbunătățite, rațiile nu-i vor mai mulțumi pe "
+"mineri. Mai bine luăm măsuri din timp – construiește o a doua tavernă, apoi "
+"gândește-te s-o îmbunătățești pe una într-o sală a ospețelor."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -512,6 +621,11 @@ msgid ""
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
 msgstr ""
+"O sală a ospețelor are nevoie de hrană mai bună. Construiește o brutărie, o "
+"berărie și două-trei ferme pentru a începe cultivarea orzului. Ține minte că"
+" orzul crește foarte încet; de aceea, aceste câteva ferme nu vor fi de ajuns"
+" când vom avea cu adevărat nevoie de pâine și bere. Ar trebui să ne extindem"
+" repede în continuare, ca să avem mai mult spațiu pentru agricultură."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -521,14 +635,18 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
+"Brutăria și berăria ar trebui îmbunătățite imediat ce muncitorii au destulă "
+"experiență. Atunci vor putea produce mied și pâine îndulcită cu miere. "
+"Construiește o casă a apicultorului lângă ferma de fructe de pădure, ca să "
+"producem niște miere, pe care o putem păstra până avem nevoie de ea."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Construiește o economie minieră"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "Economia minieră"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -536,6 +654,8 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Acum putem produce toate felurile de hrană cu care suntem obișnuiți. Oare ce"
+" comori ascund aceste dealuri? Ar trebui să aflăm."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -546,11 +666,16 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
+"Construiește o mină de fier și poate o mină de aur. Pentru că ele produc "
+"doar minereuri, vom avea nevoie de un cuptor de topire ca să le topim. "
+"Construiește și o fierărie, ca să nu rămânem fără unelte – și, da, și o "
+"fierărie mică de armuri. Ea produce căști, dar și săbii. Sper să nu întâlnim"
+" dușmani aici, dar e mai bine să fim pregătiți."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Fii pregătit"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -558,6 +683,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Minele noastre merg bine. Acum putem produce toate uneltele de care avem "
+"nevoie, dar și câteva arme."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -567,6 +694,10 @@ msgid ""
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
 msgstr ""
+"Am putea folosi aceste arme ca să echipăm câțiva soldați noi. Sper să nu "
+"găsim dușmani aici, dar e întotdeauna mai bine să fim pregătiți. În cazarmă,"
+" soldații noi sunt echipați cu o sabie scurtă și o haină de blană, uniforma "
+"tuturor războinicilor onorabili."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -576,6 +707,10 @@ msgid ""
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
 msgstr ""
+"Vom avea nevoie, bineînțeles, de o cazarmă; de o fermă de reni care să "
+"producă blană și de un atelier de cusut care să facă haine din blană. Ferma "
+"de reni produce și ceva carne ca produs secundar al blănii și, în plus, "
+"crește reni care să-i ajute pe cărăușii noștri pe drumurile aglomerate."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -584,6 +719,10 @@ msgid ""
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
+"Te sfătuiesc să construiești toate aceste clădiri la mică distanță unele de "
+"altele și să ridici în apropiere două depozite: unul ar trebui setat să "
+"păstreze doar arme, armuri, minereuri, metal și cărbune, iar celălalt "
+"materiale de construcție."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -593,20 +732,25 @@ msgid ""
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
 msgstr ""
+"Ar trebui să construim în apropiere și alte clădiri legate de acestea, "
+"precum un cuptor de topire, câteva fântâni și ferme care să aprovizioneze "
+"ferma de reni. Această organizare ne va face economia militară mai "
+"eficientă, pentru că reduce timpul de așteptare a bunurilor în clădirile de "
+"prelucrare."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "Explorează insula"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Extinderea"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "Cazarma noastră și-a început lucrul, iar acum recrutăm soldați noi."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -614,6 +758,9 @@ msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
 msgstr ""
+"Dar încă nu putem fi siguri că suntem în siguranță aici. Ar fi mai bine să "
+"ne extindem mai departe spre est, ca să aflăm dacă suntem cu adevărat "
+"singuri aici."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -621,23 +768,26 @@ msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
+"Extinderea ne-ar da și mai mult spațiu pentru agricultură. Ne-ar prinde bine"
+" niște orz în plus pentru a crește mai mulți reni, pentru că drumurile "
+"noastre sunt destul de aglomerate."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "Dușmani!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "Inamic la vedere!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "Un alt trib! Pe insula NOASTRĂ! Ce căutați aici, invadatorilor?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -648,6 +798,9 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
+"Asta e insula MEA! VOI sunteți intrușii aici! Mă rog singurului și "
+"adevăratului Dumnezeu să vă ucidem pe toți, iar sufletele voastre să fie "
+"chinuite în iad pentru totdeauna!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -655,10 +808,12 @@ msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
 msgstr ""
+"Necredincioșilor! Mă rog zeilor NOȘTRI ca acest trib fără credință să fie "
+"zdrobit cu totul! Război împotriva lor!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "Mai puternici în luptă"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -666,6 +821,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
+"Recrutăm soldați destul de ușor, dar sunt cam slabi. Trebuie să ne antrenăm "
+"soldații dacă vrem să învingă inamicul."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -673,10 +830,13 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
+"Soldații sunt antrenați la nivelurile de bază de atac, sănătate și apărare "
+"într-o tabără de antrenament. Tehnicile mai avansate le pot învăța într-o "
+"arenă de antrenament."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Lupta frizonă"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -685,6 +845,9 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
+"Soldații sunt antrenați în doi pași la apărare și sănătate. Primesc haine de"
+" blană cu ținte de fier și chiar de aur, care să amortizeze loviturile; și "
+"căști făurite din fier, și tot din aur, care să le lungească viața în luptă."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -695,6 +858,11 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
+"Învață să atace cu trei săbii diferite: sabia lungă, spada lată și sabia cu "
+"două tăișuri. Ultimele două conțin aur și toate conțin fier. Soldații "
+"avansați învață să folosească două săbii deodată: își păstrează prima sabie "
+"cu două tăișuri și primesc diverse alte săbii pe care să le mânuiască în "
+"cealaltă mână. Astfel rezultă șase pași de antrenament la atac."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -703,10 +871,13 @@ msgid ""
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
 msgstr ""
+"Nu ne antrenăm soldații să se ferească de atacuri; un adevărat războinic "
+"poate para loviturile adversarului cu o răsucire iscusită a sabiei, în loc "
+"să sară deoparte ca un laș."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Planificarea unui centru de antrenament"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -717,6 +888,12 @@ msgid ""
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
 msgstr ""
+"Vom avea nevoie de o croitorie care să coasă haine mai protectoare și de "
+"încă un atelier de cusut, ca să producem în continuare haine de blană "
+"obișnuite. De asemenea, ar trebui să îmbunătățești fierăria mică de armuri, "
+"ca să producă arme și căști mai bune, și să construiești una mică nouă, ca "
+"să primim în continuare arme de bază. Acum avem nevoie de cel puțin o mină "
+"de aur, pentru că cele mai bune arme și armuri folosesc aur."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -727,6 +904,11 @@ msgid ""
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
 msgstr ""
+"Ar trebui să construim aceste clădiri aproape de cazarmă, pentru că, așa cum"
+" am mai spus, e mult mai eficient să ne centralizăm toate instalațiile "
+"militare într-un singur centru de recrutare și antrenament decât să le "
+"împrăștiem pe o distanță mare. Construiește acolo un al treilea depozit, "
+"care să păstreze doar hrana necesară pentru antrenament."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -735,6 +917,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Când soldații se antrenează să folosească arme noi, echipamentul lor vechi "
+"este aruncat. Ia în calcul că resturile inutile îți vor aglomera drumurile "
+"până când vor fi depozitate undeva, într-un depozit."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -742,19 +927,22 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Recomand să antrenezi cel puțin un soldat la cel mai înalt nivel la "
+"sănătate, apărare și atac. Până atunci, inamicul este pur și simplu prea "
+"puternic pentru noi."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Soldații noștri sunt puternici"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
-msgstr ""
+msgstr "În sfârșit avem primul soldat complet antrenat. La atac!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Sunt soldații noștri destul de puternici?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -764,10 +952,15 @@ msgid ""
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
 msgstr ""
+"Cu tot respectul, căpetenie, te rog nu te grăbi atât! Dușmanii sunt foarte "
+"puternici și încă nu sunt convins că îi putem învinge. Aș prefera să nu "
+"trimit soldați într-o luptă pe care probabil o vor pierde. Aș prefera să mai"
+" așteptăm puțin, până când putem învinge sigur inamicul fără să pierdem "
+"soldați."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Soldații noștri sunt destul de puternici"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -777,16 +970,20 @@ msgid ""
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
 msgstr ""
+"Bineînțeles că și eu prefer să-i țin pe soldații noștri în viață, dar nu "
+"putem salva fiecare viață. Soldații mor în luptă, așa stau lucrurile. Poți "
+"hotărî cât să aștepți până la atac, dar nu aștepta prea mult, altfel "
+"dușmanii ne vor folosi slăbiciunea."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "Atenție!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "Nu suntem destul de puternici"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -795,6 +992,9 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
+"Căpetenie Reebaud! Cercetașii noștri raportează că inamicul înaintează "
+"repede. Mă tem că încă nu suntem destul de puternici ca să ne apărăm dacă "
+"atacă el primul. Trebuie să născocești ceva ca să-l ții la distanță."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -804,6 +1004,10 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
+"Cercetașii m-au informat că inamicul nu poate construi turnuri. Am putea "
+"construi o fortăreață, clădirea care va împinge granița cât mai departe spre"
+" est dintr-odată. Inamicul o va putea vedea doar dacă își construiește o "
+"fortăreață chiar la graniță."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -813,16 +1017,20 @@ msgid ""
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
 msgstr ""
+"Putem împiedica asta sau măcar îi putem îngreuna treaba, poruncindu-le "
+"câtorva silvicultori să planteze copaci la graniță. Inamicul va trebui să "
+"taie mulți dintre ei ca să facă loc fortăreței, așa că am putea fi în "
+"siguranță până când vom începe noi bătălia, în momentul pe care îl alegem."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Inamicul a fost învins"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Inamicul a fost învins!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
@@ -830,6 +1038,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"Au fost învinși! Vă mulțumesc vouă, tuturor zeilor mei, că ne-ați dat "
+"victoria asupra necredincioșilor!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -837,16 +1047,18 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Mă rog lui Dumnezeu să-mi audă ultimele cuvinte. Nu lăsa ca diavolul cel "
+"mincinos să triumfe! Pedepsește-i pentru această faptă josnică!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "Potopul"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "Insula se inundă!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -854,6 +1066,8 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
+"Dumnezeul lui i-a împlinit dorința! Oceanul crește! Insula e aproape plată –"
+" ne vom îneca toți!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -863,6 +1077,10 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
+"Nu disperați, am întrezărit o speranță! Vârful cel mai estic al insulei, "
+"precum și locul unde s-a aflat sediul central al diavolilor, par potrivite "
+"pentru construirea unui port. Dacă reușim să construim o navă și s-o umplem "
+"cu tot ce ne trebuie pentru a clădi o nouă așezare, s-ar putea să scăpăm."
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -873,14 +1091,18 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"Potopul pare să vină dinspre vest. Dacă ne grăbim, vom reuși la limită! "
+"Trebuie doar să construim un port și un șantier naval – a, și o țesătorie "
+"care să țeasă pânza trainică pentru vele, făcută din stuf și blană. Apoi "
+"putem porni o expediție din port. Rugați-vă zeilor și grăbiți-vă!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Nu uita de soldați"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Soldații la port!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -902,14 +1124,40 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"Era să uit în graba asta – oriunde vom debarca, vom avea nevoie de niște "
+"materiale de construcție ca să începem și de soldați care să ne apere și să "
+"ne extindă noua colonie. Chiar și după încărcarea expediției, nava ar trebui"
+" să aibă destul spațiu liber pentru câteva bunuri și muncitori. Pe deasupra,"
+" ar trebui să fie loc pentru cel mult %d soldat, dacă nu se supără nimeni că"
+" stă înghesuit. Hai să trimitem niște provizii de construcție și pe cei mai "
+"buni oameni ai noștri la port când va fi gata, ca să fie pregătiți să se "
+"îmbarce când ridicăm pânzele!"
 msgstr[1] ""
+"Era să uit în graba asta – oriunde vom debarca, vom avea nevoie de niște "
+"materiale de construcție ca să începem și de soldați care să ne apere și să "
+"ne extindă noua colonie. Chiar și după încărcarea expediției, nava ar trebui"
+" să aibă destul spațiu liber pentru câteva bunuri și muncitori. Pe deasupra,"
+" ar trebui să fie loc pentru cel mult %d soldați, dacă nu se supără nimeni "
+"că stau înghesuiți. Hai să trimitem niște provizii de construcție și pe cei "
+"mai buni oameni ai noștri la port când va fi gata, ca să fie pregătiți să se"
+" îmbarce când ridicăm pânzele!"
 msgstr[2] ""
+"Era să uit în graba asta – oriunde vom debarca, vom avea nevoie de niște "
+"materiale de construcție ca să începem și de soldați care să ne apere și să "
+"ne extindă noua colonie. Chiar și după încărcarea expediției, nava ar trebui"
+" să aibă destul spațiu liber pentru câteva bunuri și muncitori. Pe deasupra,"
+" ar trebui să fie loc pentru cel mult %d de soldați, dacă nu se supără "
+"nimeni că stau înghesuiți. Hai să trimitem niște provizii de construcție și "
+"pe cei mai buni oameni ai noștri la port când va fi gata, ca să fie "
+"pregătiți să se îmbarce când ridicăm pânzele!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Toate bunurile și toți muncitorii încărcați în expediție, precum și o parte "
+"dintre soldații din port, vor fi preluați în scenariul următor."
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
@@ -917,7 +1165,7 @@ msgstr "Victorie"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "Am scăpat!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -926,10 +1174,13 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
+"Zeii ne-au ascultat rugăciunile. Vom scăpa de pe insula care se scufundă și "
+"sunt încrezător că vom putea construi din nou un cămin într-un colț mai "
+"liniștit al acestei lumi!"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:427
@@ -937,3 +1188,6 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"Ai încheiat această misiune. Acum poți trece la scenariul următor, ca să ne "
+"ajuți să construim un nou cămin, departe de mâna răzbunătoare a Dumnezeului "
+"mincinos…"

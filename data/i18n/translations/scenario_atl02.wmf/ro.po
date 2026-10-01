@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dominic Iastrebschi, 2025
+# Cristian Romanescu, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,20 +67,25 @@ msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Ca să punem piciorul pe această insulă, trebuie mai întâi să găsim un loc de"
+" construcție unde se poate ridica un port. Explorează coasta din apropiere "
+"ca să găsești un astfel de teren."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"După ce portul e construit, ar trebui să anulăm expediția celeilalte nave, "
+"ca să-i descărcăm și ei bunurile."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Asigură aprovizionarea cu materiale de construcție"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Pune pe picioare lanțul de producție de bază"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -87,14 +93,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Vom avea nevoie cel puțin de o carieră, câțiva tăietori de lemne și un "
+"gater. Un silvicultor ar putea fi sau nu necesar, în funcție de cât de "
+"repede cresc copacii în jurul nostru. Găsește echilibrul."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Construiește repede unelte"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Fă unelte noi"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -104,14 +113,19 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"Cele mai multe dintre uneltele noastre s-au pierdut în tragedia corăbiei. "
+"Oamenii noștri nu își vor putea îndeplini îndatoririle fără unelte "
+"potrivite. Din fericire, încă avem ceva minereu de fier și destul cărbune. "
+"Construiește o fierărie de unelte, pentru că este o condiție pentru reușita "
+"pe insulă. Nu uita să construiești și o topitorie."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Caută resurse în munți"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Construiește mine"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -119,14 +133,17 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Pentru că putem face din nou unelte, rezerva noastră de resurse minerale "
+"trebuie refăcută curând. Explorează munții și construiește cel puțin câte o "
+"mină de fiecare tip pentru a extrage cărbune, fier și aur."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Explorează împrejurimile"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Explorează-ți împrejurimile"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -134,14 +151,18 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Suntem destul de siguri că nu suntem singuri pe insulă. Nu știm dacă "
+"ceilalți de pe această insulă sunt prieteni sau dușmani, așa că trebuie să "
+"pășim cu grijă. Explorează insula construind cel puțin o casă pentru un "
+"cercetaș."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Extinde-ți teritoriul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Extinde teritoriul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -149,14 +170,18 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Pe măsură ce așezarea noastră crește, vom avea nevoie de mai mult spațiu "
+"pentru toate clădirile. Extinde-ne teritoriul construind clădiri militare. "
+"Construiește câteva corpuri de gardă și cel puțin un turn, pentru raza lui "
+"vizuală mai mare."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Construiește o fermă de păianjeni și o țesătorie"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Producția de pânză de păianjen"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -165,6 +190,10 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Avem urgent nevoie de pânză de păianjen, pentru că rămânem fără ea. De aceea"
+" este esențial să economisim fiecare bucată pe care încă o avem. Redu "
+"livrările către toate clădirile care consumă pânză de păianjen, fără să uiți"
+" de șantierele de construcție."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -172,30 +201,35 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Apoi trebuie să construim neapărat o fermă, pentru că ridicarea ei necesită "
+"pânză de păianjen. În plus, avem nevoie de o fermă de păianjeni și de o "
+"țesătorie."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Construiește un post comercial"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Îmbunătățește casa cercetașului într-un post comercial"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"Ca să putem plăti tributurile către Kalitath și să păstrăm legătura cu "
+"Jundlina, trebuie să îmbunătățim casa cercetașului într-un post comercial."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Plătește toate tributurile către Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Trimite negustorul la Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -203,63 +237,67 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
+"Trebuie să-i trimitem bunurile lui Kalitath prin negustorul nostru. El le va"
+" lua imediat ce un lot este gata în postul lui comercial."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Trebuie livrate următoarele loturi:"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
-msgstr ""
+msgstr "Cinci loturi a câte cinci bușteni."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:121
 msgid "Four batches of four lumps of coal each."
-msgstr ""
+msgstr "Patru loturi a câte patru bucăți de cărbune."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:122
 msgid "Three batches of three iron bars each."
-msgstr ""
+msgstr "Trei loturi a câte trei lingouri de fier."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr ""
+msgstr "Două loturi a câte două lingouri de aur."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
-msgstr ""
+msgstr "Zece loturi a câte cinci bușteni."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:134
 msgid "Eight batches of four lumps of coal each."
-msgstr ""
+msgstr "Opt loturi a câte patru bucăți de cărbune."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:135
 msgid "Six batches of three iron bars each."
-msgstr ""
+msgstr "Șase loturi a câte trei lingouri de fier."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr ""
+msgstr "Patru loturi a câte două lingouri de aur."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Învinge-l pe Maletus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Învinge-l pe conducătorul imperial Maletus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
 msgstr ""
+"Trebuie să terminăm cu Imperiul ca să avem o șansă de a ne construi un nou "
+"cămin."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Construiește un templu pentru cinstirea lui Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Construiește un templu pentru Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
@@ -267,47 +305,55 @@ msgid ""
 " he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
+"Trebuie să construim un templu pentru Satul și trebuie să-l cinstim cum se "
+"cuvine. Astfel, poate că le va arăta acestor barbari puterea lui, iar "
+"prințesa noastră își va veni în fire."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
+"Și avem nevoie de o casă a cercetașului, ca să nu pierdem șirul celor ce se "
+"petrec pe teritoriul barbarilor."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
-msgstr ""
+msgstr "Cinstește-l pe Satul și consacră preotese"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:542
 msgid "Worship Satul"
-msgstr ""
+msgstr "Cinstește-l pe Satul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
 msgstr ""
+"Acum trebuie să-l cinstim pe Satul și să consacrăm cel puțin două preotese."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Învinge-l pe Kalitath"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
 msgstr ""
+"Acum e timpul să-l terminăm pe acest barbar supărător. Ne-a necăjit mult "
+"prea mult timp."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Înfrânți!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr ""
+msgstr "Sidolus are vești proaste…"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -316,6 +362,9 @@ msgid ""
 "couldn’t protect us from the enemy. They have destroyed our last warehouse. "
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
+"Aaaah, Jundlina. Nu știu cum s-a putut întâmpla, dar Satul nu ne-a putut "
+"apăra de dușman. Ne-au distrus ultimul depozit. Așa că am pierdut această "
+"bătălie, iar poporul nostru e sortit pieirii!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
@@ -330,14 +379,16 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Ai pierdut și nu mai poți continua să joci. Sper să ai mai mult noroc când "
+"vei relua acest scenariu. Fă clic pe OK pentru a reveni la meniul principal."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Memoriile prințesei"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
-msgstr ""
+msgstr "Jundlina își scrie jurnalul"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:194
@@ -346,6 +397,9 @@ msgid ""
 "ships and make our escape, but the currents of the sinking island tested our"
 " new ships and their design."
 msgstr ""
+"Am scăpat la limită de pe insula blestemată: am reușit să încărcăm trei "
+"corăbii și să fugim, dar curenții insulei care se scufunda au pus la "
+"încercare noile noastre corăbii și felul în care au fost construite."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:197
@@ -354,6 +408,9 @@ msgid ""
 "without much planning and so one of our ships ended up carrying most of the "
 "heavy wares in our possession."
 msgstr ""
+"Iar una nu a trecut încercarea: ultimele zile de încărcare s-au desfășurat "
+"în haos și fără prea multă planificare, așa că una dintre corăbii a ajuns să"
+" ducă cele mai multe dintre bunurile grele pe care le aveam."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:200
@@ -362,6 +419,9 @@ msgid ""
 "was pulled below the sea level by Lutas’s forces and we lost most men and "
 "all wares it carried."
 msgstr ""
+"Greutatea mare și curentul puternic au fost prea mult pentru corabie, care a"
+" fost trasă sub apă de forțele lui Lutas, iar noi am pierdut cei mai mulți "
+"oameni și toate bunurile de pe ea."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:203
@@ -370,14 +430,17 @@ msgid ""
 "well, but they persisted. We escaped the island and began our smooth sailing"
 " to other coasts."
 msgstr ""
+"Ne era tuturor o frică cumplită. Ne așteptam ca și celelalte corăbii să se "
+"scufunde, dar au rezistat. Am scăpat de pe insulă și am pornit într-o "
+"navigație liniștită spre alte țărmuri."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
-msgstr ""
+msgstr "O nouă speranță"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr ""
+msgstr "Jundlina continuă"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -385,6 +448,8 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
+"Au trecut multe săptămâni și am văzut doar insule mici, nepotrivite pentru "
+"locuit și fără niciun semn că ar fi binecuvântate de Satul, zeul focului."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -393,14 +458,17 @@ msgid ""
 "The black comes from the fiery mountain in the north of the island, the grey"
 " however comes from settlers."
 msgstr ""
+"Totuși, noaptea trecută am zărit o insulă nouă. Am văzut fum plutind "
+"deasupra ei. Cel negru vine de la muntele de foc din nordul insulei, dar cel"
+" cenușiu vine de la niște coloniști."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:217
 msgid "Planning For The Future"
-msgstr ""
+msgstr "Planuri pentru viitor"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr ""
+msgstr "Jundlina încheie"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -409,6 +477,9 @@ msgid ""
 "do not know if the people there are friends or foes. We do not even know "
 "what tribe they might be from."
 msgstr ""
+"Cel puțin partea de est a insulei este locuită, atât e sigur. Nu știm dacă "
+"oamenii de acolo sunt prieteni sau dușmani. Nici măcar nu știm din ce trib "
+"ar putea fi."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:223
@@ -417,6 +488,9 @@ msgid ""
 "ship of ours has sailed as far as we did for centuries. I can only hope they"
 " are friendly."
 msgstr ""
+"Singurul lucru pe care îl știm sigur este că nu pot fi atlanți, pentru că "
+"nicio corabie de-a noastră n-a mai navigat atât de departe de secole. Nu pot"
+" decât să sper că sunt prietenoși."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:226
@@ -426,16 +500,20 @@ msgid ""
 "sail any further, and we must attempt to settle on this island as close as "
 "possible to our current position."
 msgstr ""
+"Nu ne-a mai rămas multă apă; hrana ni se termină; am pierdut odată cu a "
+"treia corabie toate uneltele și cele mai multe materiale de construcție. Nu "
+"ne permitem să navigăm mai departe și trebuie să încercăm să ne așezăm pe "
+"această insulă, cât mai aproape de locul unde ne aflăm acum."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:242
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:250
 msgid "Jundlina Gives Orders"
-msgstr ""
+msgstr "Jundlina dă ordine"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr ""
+msgstr "Jundlina hotărăște"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -444,10 +522,13 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
+"Pentru că am întemeiat aici un port, acum ne putem planifica așezarea. Încă "
+"avem destul minereu de fier, așa că o fierărie de unelte și o topitorie ne "
+"vor da repede unelte bune."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr ""
+msgstr "Jundlina cere"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -456,10 +537,13 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
+"Totuși, trebuie să avem grijă de materialele de construcție: insula e plină "
+"de copaci, s-ar putea să nici nu avem nevoie de silvicultori. Dar avem "
+"nevoie de piatră, atât e sigur!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:251
 msgid "Jundlina orders"
-msgstr ""
+msgstr "Jundlina poruncește"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:253
@@ -468,6 +552,9 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
+"Hai să explorăm și această insulă și să ne extindem teritoriul. Dar trebuie "
+"să fim atenți. Ar trebui să construim cel puțin un turn, ca să putem vedea "
+"eventualii dușmani înainte să ne vadă ei."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:256
@@ -476,6 +563,9 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
+"Dar trebuie să fim chibzuiți cu folosirea pietrelor și a celorlalte "
+"materiale prețioase. Când nu mai avem nevoie de o clădire, o vom demonta în "
+"loc s-o dăm pradă flăcărilor."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:259
@@ -483,12 +573,15 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
+"Asta va dura mai mult, dar putem refolosi o parte din materialele ei. De "
+"asemenea, vreau ca în permanență un cercetaș să fie pe teren și să "
+"exploreze."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr ""
+msgstr "Opol raportează lipsuri grave"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -499,18 +592,22 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
+"Satul să te încălzească, %s. Ca cel mai mare țesător al breslei, am vești "
+"proaste pentru tine. Tocmai mi-am dat seama că rămânem fără pânză de "
+"păianjen. Este o situație foarte periculoasă, pentru că, după cum știi, "
+"pânza de păianjen este necesară pentru multe clădiri."
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:276
 msgid "We should build up a spidercloth production urgently."
-msgstr ""
+msgstr "Ar trebui să punem urgent pe picioare producția de pânză de păianjen."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr ""
+msgstr "%s răspunde"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -519,10 +616,13 @@ msgid ""
 "but I understand the urgency. We need to build a complete spidercloth "
 "production instantly."
 msgstr ""
+"Satul să te încălzească și pe tine, Opol. Voiam să amân producția de pânză "
+"de păianjen, dar înțeleg urgența. Trebuie să punem pe picioare imediat o "
+"producție completă de pânză de păianjen."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol are o observație"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -533,13 +633,18 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"%s! Se pare că există o altă problemă, chiar mai urgentă. Mă tem că încă "
+"n-am construit o fermă care să ne hrănească păianjenii. Cum ferma este una "
+"dintre clădirile care au nevoie de pânză de păianjen pentru a fi terminate, "
+"dacă nu o terminăm la timp, vom ajunge într-o criză care nu va mai putea fi "
+"rezolvată niciodată."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s încuviințează"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -547,12 +652,13 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
+"Văd riscul, Opol. Îți mulțumesc că mi-ai spus. Vom construi imediat o fermă."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol raportează un succes"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -563,6 +669,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"%s, Satul să te încălzească! Țesătoria și ferma de păianjeni sunt gata, iar "
+"breasla țesătorilor se poate apuca din nou de lucru. Promit că vom livra "
+"curând cea mai fină pânză și câteva tabarde. Poate că mai târziu vom putea "
+"construi și o filatură de aur, ca să facem și tabarde mai bune."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -570,7 +680,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:390
 #, lua-format
 msgid "%s Cheers"
-msgstr ""
+msgstr "%s se bucură"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:327
@@ -578,11 +688,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"Chiar sunt vești bune, Opol. Te poți întoarce acum la lucru, și Satul să te "
+"încălzească pe tine și breasla țesătorilor!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolus raportează locuitori străini"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -592,11 +704,14 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Satul să te încălzească, Jundlina! Am vești neliniștitoare. Am zărit un "
+"ținut stăpânit de străini, dar încă nu știm la ce să ne așteptăm din partea "
+"lor."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina este îngrijorată"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -604,6 +719,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Sidolus, sunt de acord că e foarte îngrijorător. Trebuie să aflăm mai multe."
+" Sper că cercetașul nostru ne va aduce curând informații."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -611,10 +728,12 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Sidolus, sunt de acord că e foarte îngrijorător. Trebuie să aflăm mai multe."
+" Trebuie neapărat să trimitem un cercetaș să strângă informații."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Aliați?"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -623,10 +742,13 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Satul să te încălzească, Jundlina! Am intrat în legătură cu străinii. Sunt "
+"la mare ananghie, pentru că sunt în război cu un trib puternic din nord. Ne "
+"cer sprijinul."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
-msgstr ""
+msgstr "Jundlina este prudentă"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:375
@@ -635,10 +757,13 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
+"Sidolus, pentru că ne-ar prinde bine orice aliat putem găsi, ar trebui să-i "
+"ajutăm. Să vedem ce putem face pentru ei. Totuși, ar trebui să ne "
+"îmbunătățim propria putere militară, ca să nu depindem de alții."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr ""
+msgstr "Materialele de construcție sunt asigurate"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:386
@@ -646,6 +771,8 @@ msgstr ""
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
 msgstr ""
+"Satul să te încălzească, %s! Ne-am pus la punct aprovizionarea cu materiale "
+"de construcție."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -654,10 +781,13 @@ msgid ""
 "sophisticated buildings to enlarge our economy. Please advise whenever you "
 "feel we are missing necessary buildings."
 msgstr ""
+"Chiar sunt vești bune, Loftomor. Acum ne putem gândi să construim clădiri "
+"mai complexe, ca să ne dezvoltăm economia. Te rog să-mi spui ori de câte ori"
+" simți că ne lipsesc clădiri necesare."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr ""
+msgstr "Aprovizionarea cu unelte este asigurată"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -666,13 +796,15 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
+"%s, Satul să te încălzească! Am făcut progrese în construirea industriei "
+"noastre de unelte."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "%s: ce încântare!"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -681,10 +813,13 @@ msgid ""
 "buildings we are going to build in our new home. But now we should really "
 "look to get some resources from the mountains."
 msgstr ""
+"Chiar sunt vești bune, Loftomor. Asta ne permite să punem în funcțiune toate"
+" clădirile pe care urmează să le construim în noul nostru cămin. Dar acum "
+"chiar ar trebui să căutăm să obținem resurse din munți."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr ""
+msgstr "Mineritul a pornit"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -693,13 +828,15 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
+"%s, Satul să te încălzească! Încă o problemă rezolvată. Am găsit resurse și "
+"am construit câte o mină de fiecare tip."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "%s e în culmea fericirii"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -708,11 +845,15 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
+"Bravo, Loftomor, bravo. Satul să-i încălzească pe minerii noștri puternici "
+"și viteji. Dar acum trebuie să ne asigurăm că îi putem hrăni. Trebuie să "
+"construim brutării și afumătorii și toate clădirile care să le "
+"aprovizioneze."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Tributul a fost livrat"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -721,11 +862,13 @@ msgid ""
 "May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
 "Now we expect our princess to return home."
 msgstr ""
+"Satul să te încălzească, Kalitath! Am livrat toate bunurile pe care le-ai "
+"cerut. Acum ne așteptăm ca prințesa noastră să se întoarcă acasă."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitath apreciază eforturile"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -734,11 +877,14 @@ msgid ""
 "However don’t forget to help us defeat the troops of Maletus. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, sunt vești foarte bune. Apreciez ce a făcut poporul tău. Dar nu "
+"uitați să ne ajutați să înfrângem trupele lui Maletus. După aceea, poate vom"
+" vorbi despre prințesa voastră."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Imperiul a fost învins"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -747,6 +893,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
+"Satul să te încălzească, Kalitath! Am învins trupele Imperiului din nord. "
+"Acum ne așteptăm ca prințesa noastră să se întoarcă acasă."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -755,10 +903,13 @@ msgid ""
 "However don’t forget to fulfill your tribute within time. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, sunt vești foarte bune. Apreciez ce a făcut poporul tău. Dar nu "
+"uitați să vă plătiți tributul la timp. După aceea, poate vom vorbi despre "
+"prințesa voastră."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitath încuviințează"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -766,11 +917,13 @@ msgid ""
 "Sidolus, we appreciate this. But your princess and I already made plans for "
 "our common future on this island. She will explain it to you."
 msgstr ""
+"Sidolus, apreciem asta. Dar prințesa ta și cu mine ne-am făcut deja planuri "
+"pentru viitorul nostru comun pe această insulă. Îți va explica ea."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina explică"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -784,10 +937,18 @@ msgid ""
 "Barbarians. This includes learning about their gods and preparing to worship"
 " them."
 msgstr ""
+"Sidolus, în timpul șederii mele la barbari am aflat multe despre "
+"ospitalitatea și vitejia lor. M-au impresionat cu adevărat, iar războinicii "
+"și zeii lor păreau foarte puternici în lupta împotriva Imperiului. Mai ales "
+"conducătorul lor, Kalitath, a fost o gazdă foarte bună, iar eu am început să"
+" mă gândesc să ne unim triburile, ca să avem un viitor pașnic pe această "
+"insulă. Așa că vreau să ne pregătești poporul pentru o căsătorie și pentru o"
+" viață pașnică alături de barbari. Asta înseamnă și să învățăm despre zeii "
+"lor și să ne pregătim să-i cinstim."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitath cere"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -797,14 +958,19 @@ msgid ""
 "So we will simply take your military buildings with our forces. Naturally "
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
+"Sidolus, acum urmează ordinele prințesei tale. Între timp, s-ar putea să "
+"hotărâm că avem nevoie de o parte din pământul cucerit de voi pentru "
+"viitorul nostru comun. Așa că vă vom lua pur și simplu clădirile militare cu"
+" forțele noastre. Firește, voi nu veți avea dreptul să faceți la fel, de "
+"dragul prințesei voastre."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Eretici!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolus este foarte trist"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -813,10 +979,14 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
+"Satul să ne încălzească pe toți. Prințesa noastră a fost zăpăcită de acest "
+"barbar în timpul captivității. Dar eu nu voi cinsti niciodată vreun zeu "
+"barbar. Totuși, nu-mi pot închipui cum am putea s-o facem să se "
+"răzgândească."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Atragerea ajutorului lui Satul"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -827,10 +997,15 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
+"Sidolus, sunt de acord că nu ar trebui să ne plecăm în fața niciunui alt zeu"
+" decât Satul. Dar s-ar putea să avem nevoie de ajutorul zeului în această "
+"situație. Așa că propun să construim un templu și să-l cinstim pe Satul cu "
+"jertfe alese. Astfel am putea consacra câteva preotese, care l-ar putea ruga"
+" pe Satul să-și arate puterea barbarilor și prințesei noastre."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Construiește templul"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -842,10 +1017,16 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Satul să te încălzească, Loftomor. Chiar e o idee foarte bună. Așa că îți "
+"încredințez sarcina de a construi un templu vrednic de cinstirea zeului "
+"nostru. Până suntem pregătiți să cerem puterea lui Satul, ar trebui să fim "
+"cu ochii pe prințesa noastră și pe acest barbar. Cum ar trebui să oprim "
+"livrările negustorului nostru, ca să nu mai irosim bunuri pe acest barbar, "
+"vreau să te asiguri că avem un cercetaș pe teren care să strângă informații."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "Templul este gata"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -853,6 +1034,9 @@ msgid ""
 "May Satul warm you, Sidolus! My builders just completed the temple for "
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
+"Satul să te încălzească, Sidolus! Constructorii mei tocmai au terminat "
+"templul lui Satul. Acum putem începe să-l cinstim și să ne consacrăm "
+"preotesele."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -862,10 +1046,15 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Satul să te încălzească, Loftomor. Îți mulțumesc că ai construit un templu "
+"atât de măreț. Acum trebuie să aducem la templu hrană și cele mai prețioase "
+"bunuri ale noastre, ca să facem jertfe pe plac. Și nu uita că inițiatele "
+"care îl vor sluji pe Satul ca să devină preotesele lui au nevoie de tabarde "
+"aurite și diamante."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Satul să ne încălzească"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -874,10 +1063,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Preotesele noastre au fost consacrate, iar noi am jertfit cele mai bune "
+"bunuri ale noastre spre plăcerea lui Satul. Fie ca el să ne încălzească și "
+"să-și arate puterea prințesei noastre și acestui trib barbar."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Sosește Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -888,10 +1080,15 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Satul să te încălzească, Sidolus. Și fie ca el să-mi ierte purtarea eretică."
+" Semnul puterii lui și frica de pe chipurile barbarilor m-au făcut deodată "
+"să recunosc din nou adevărul. M-am înșelat în privința păcii și a "
+"conviețuirii, pentru că ar fi însemnat robie pe vecie. Iar atlanții nu sunt "
+"făcuți pentru așa ceva."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolus este ușurat"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -900,6 +1097,9 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Satul să te încălzească, Jundlina. Mă bucur că ești din nou aici. Sper că ne"
+" putem încrede în tine, pe cât te vei încrede tu în Satul și îi vei fi "
+"credincioasă. Cum de te-au lăsat barbarii să pleci?"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -910,10 +1110,16 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Sidolus, nu m-au lăsat să plec. L-am întâlnit pe cercetașul nostru și el a "
+"reușit să mă scoată pe furiș, după ce mi-am dat seama că mă țineau în "
+"continuare ostatică pentru că îmi exprimasem unele îndoieli în privința "
+"înțelegerii noastre de dinainte. Așa că trebuie să rezolvăm acum și pentru "
+"totdeauna problema barbarilor de pe această insulă. Nu există altă cale de a"
+" trăi aici în pace decât să-i înfrângem."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina este ușurată"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -921,6 +1127,8 @@ msgid ""
 "Praise Satul, we have founded a new home. I deeply regret I was weak in my "
 "belief. May Satul guide me better in the future."
 msgstr ""
+"Lăudat fie Satul, am întemeiat un nou cămin. Regret adânc că am fost slabă "
+"în credința mea. Fie ca Satul să mă călăuzească mai bine pe viitor."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:590
@@ -928,20 +1136,24 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
+"Acum e timpul să sărbătorim, dar mă aștept să nu ne putem odihni prea mult. "
+"Trebuie să ne clădim societatea și capacitatea de a explora din nou mările."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci"
+" la misiunea următoare."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Cererea de tribut"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -950,6 +1162,9 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Străinilor, trebuie să primim un semn al bunelor voastre intenții. Dacă "
+"sunteți cu adevărat de partea noastră, ar trebui să ne trimiteți regulat "
+"ceva aur și alte câteva bunuri."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -958,6 +1173,10 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Ne interesează doar bunurile care pot fi folosite la făurirea armelor. Adică"
+" arme adevărate, ca topoarele noastre, nu scobitorile pe care le folosiți "
+"voi. Așa că nu vă sfiiți să ne trimiteți 25 de bușteni, 16 bucăți de "
+"cărbune, 9 lingouri de fier și 4 lingouri de aur."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -965,14 +1184,16 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"A, și era să uit asta. Cerem ca prințesa voastră să fie și ea în sediul "
+"nostru central, ca să ne coordonăm planurile de război."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Capcană!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolus este supărat"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -981,10 +1202,14 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Satul să te încălzească, Jundlina! Purtarea aceasta e cu adevărat barbară! "
+"Mă tem că e o capcană ca să te țină ostatică. Iar cererea însăși e o "
+"adevărată insultă. Îți recomand cu tărie să respingi această pretenție "
+"nejustificată."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina cedează"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -993,6 +1218,9 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Sidolus, sunt de acord cu tine. Totuși, cred că nu avem de ales, așa că "
+"trebuie să ne supunem acestei cereri. De acum e datoria ta să conduci micul "
+"nostru popor până mă întorc."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -1000,10 +1228,12 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Mai întâi trebuie să îmbunătățești casa cercetașului într-un post comercial."
+" Apoi trebuie să trimiți tributurile cerute: aur, fier, cărbune și bușteni."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr ""
+msgstr "Postul comercial a fost construit"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1011,10 +1241,12 @@ msgid ""
 "Sidolus, may Satul warm you! We have finished the new trading post. I hope "
 "this will allow Jundlina to return to us soon."
 msgstr ""
+"Sidolus, Satul să te încălzească! Am terminat noul post comercial. Sper că "
+"asta îi va permite Jundlinei să se întoarcă la noi curând."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr ""
+msgstr "Sidolus este de acord"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1022,6 +1254,9 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Bravo, Loftomor, bravo. Satul s-o încălzească pe prințesa noastră și pe "
+"întregul nostru popor. Acum trebuie să începem să-i trimitem bunuri acestui "
+"barbar."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1029,10 +1264,12 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Cred că ar trebui să începem cu livrările pe care ni le permitem cel mai "
+"ușor. Dar, sigur, trebuie să găsim mai multe metale."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
-msgstr ""
+msgstr "Cerere urgentă de tribut"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:651
@@ -1040,6 +1277,8 @@ msgid ""
 "Strangers, we haven’t received any help yet. If you are really on our side, "
 "you should start sending some wares urgently."
 msgstr ""
+"Străinilor, încă n-am primit niciun ajutor. Dacă sunteți cu adevărat de "
+"partea noastră, ar trebui să începeți urgent să ne trimiteți bunuri."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:654
@@ -1047,19 +1286,21 @@ msgid ""
 "As we are facing great losses due to your laziness, you shall now send us "
 "twice the previous amount of each ware."
 msgstr ""
+"Pentru că suferim pierderi mari din cauza lenei voastre, de acum trebuie să "
+"ne trimiteți dublul cantității de dinainte din fiecare bun."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr ""
+msgstr "Sunt sigur că nu vreți să rupeți alianța noastră… nu-i așa?"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
-msgstr ""
+msgstr "Șantaj!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:661
 msgid "Sidolus is concerned"
-msgstr ""
+msgstr "Sidolus este îngrijorat"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:663
@@ -1067,6 +1308,9 @@ msgid ""
 "May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
 "punish him for his insult as he has our princess at his hands."
 msgstr ""
+"Satul să ne încălzească pe toți. Așa-zisul nostru aliat ne șantajează, iar "
+"noi nu-l putem pedepsi pentru insultă, pentru că o are în mâinile lui pe "
+"prințesa noastră."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:666
@@ -1074,10 +1318,12 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
+"Singura noastră șansă este să ne dublăm eforturile și să începem curând să "
+"livrăm ceva."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
-msgstr ""
+msgstr "Tributul a început"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:676
@@ -1085,6 +1331,8 @@ msgid ""
 "Strangers, we have received the first batch of wares. So we may finally "
 "trust you."
 msgstr ""
+"Străinilor, am primit primul lot de bunuri. Așa că, în sfârșit, putem avea "
+"încredere în voi."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:679
@@ -1093,6 +1341,9 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
+"Totuși, dușmanul nostru din nord este foarte puternic. Mă tem că, fără un "
+"ajutor serios din partea voastră, am putea pierde războiul, oricât de multe "
+"bunuri ne-ați da."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:682
@@ -1100,10 +1351,12 @@ msgid ""
 "They name themselves an Empire, and their leader is called Maletus. I want "
 "you to train your soldiers and help us defeat his lousy Empire."
 msgstr ""
+"Își spun Imperiu, iar conducătorul lor se numește Maletus. Vreau să vă "
+"antrenați soldații și să ne ajutați să înfrângem Imperiul lor păduchios."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
-msgstr ""
+msgstr "Fii vigilent!"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:689
@@ -1111,6 +1364,8 @@ msgid ""
 "May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
 "shouldn’t trust them too much."
 msgstr ""
+"Satul să te încălzească, Sidolus. Aliatul nostru are acum oarecare încredere"
+" în noi, dar noi n-ar trebui să avem prea multă încredere în el."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:692
@@ -1118,22 +1373,26 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
+"Așa că vreau să înfrângi acest Imperiu, dar asigură-te că vom deveni și vom "
+"rămâne destul de puternici ca să impunem respectul pe care îl merităm."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr ""
+msgstr "Continuați livrările"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:698
 msgid ""
 "Strangers, I almost forgot to mention, but it should have been clear anyway."
 msgstr ""
+"Străinilor, era să uit să vă spun, deși ar fi trebuit să fie oricum limpede."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:701
 msgid ""
 "We are in urgent need of your supply, so hurry up with your deliveries."
 msgstr ""
+"Avem nevoie urgentă de proviziile voastre, așa că grăbiți-vă cu livrările."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:704
@@ -1142,11 +1401,14 @@ msgid ""
 "assume you are just playing along with us. So keep an eye on the time as we "
 "will not give any further warning."
 msgstr ""
+"Dacă nu livrați totul în trei ore și jumătate, va trebui să presupunem că "
+"doar vă jucați cu noi. Așa că fiți atenți la timp, pentru că nu vă vom mai "
+"avertiza."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:722
 msgid "Traitors"
-msgstr ""
+msgstr "Trădători"
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:713
@@ -1154,6 +1416,8 @@ msgid ""
 "Strangers, we still haven’t received any help. We are deeply insulted by "
 "your treachery."
 msgstr ""
+"Străinilor, încă n-am primit niciun ajutor. Suntem profund jigniți de "
+"trădarea voastră."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:716
@@ -1162,6 +1426,8 @@ msgid ""
 "At least your princess will make a reasonable slave, if we survive the "
 "battle with our enemy."
 msgstr ""
+"Măcar prințesa voastră va fi o sclavă acceptabilă, dacă vom supraviețui "
+"bătăliei cu dușmanul nostru."
 
 #. TRANSLATORS: Kalitath
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:725
@@ -1169,10 +1435,12 @@ msgid ""
 "Strangers, you did not deliver the help we needed in time. We are deeply "
 "insulted by your treachery."
 msgstr ""
+"Străinilor, nu ne-ați trimis la timp ajutorul de care aveam nevoie. Suntem "
+"profund jigniți de trădarea voastră."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
-msgstr ""
+msgstr "Sinuciderea Jundlinei"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:737
@@ -1181,6 +1449,9 @@ msgid ""
 "have prepared myself for this eventuality and will rather die from the "
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
+"Barbarule, sunt o prințesă atlantă și nu voi ajunge niciodată sclavă. M-am "
+"pregătit pentru această situație și prefer să mor de otrava pe care o port "
+"cu mine decât să-ți fiu sclavă. Fie ca Satul să-mi răzbune jertfa."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:743
@@ -1189,10 +1460,13 @@ msgid ""
 "protect us from the enemy. We have lost our noble princess. Thus, we have "
 "lost this battle and our people is doomed!"
 msgstr ""
+"Aaaah. Nu știu cum s-a putut întâmpla, dar Satul nu ne-a putut apăra de "
+"dușman. Ne-am pierdut nobila prințesă. Așa că am pierdut această bătălie, "
+"iar poporul nostru e sortit pieirii!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
-msgstr ""
+msgstr "Kalitath a fost învins"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:754
@@ -1202,55 +1476,59 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
+"Aaaah. Nu știu cum s-a putut întâmpla, dar Satul nu l-a putut apăra pe "
+"aliatul nostru de dușman. Și-a pierdut ultimul depozit, iar nobila noastră "
+"prințesă a pierit împreună cu el. Așa că am pierdut această bătălie, iar "
+"poporul nostru e sortit pieirii!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr ""
+msgstr "Inițiată a lui Satul"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Priestess"
-msgstr ""
+msgstr "Preoteasă"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa cercetașului"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "cercetarea"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Temple of Satul"
-msgstr ""
+msgstr "Templul lui Satul"
 
 #. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
 #. ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:54
 msgctxt "atlanteans_building"
 msgid "consecrating priestess"
-msgstr ""
+msgstr "consacrarea unei preotese"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trader"
-msgstr ""
+msgstr "Negustor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Trading Post"
-msgstr ""
+msgstr "Post comercial"
 
 #. TRANSLATORS: Completed/Skipped/Did not start trading because ...
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:35
@@ -1259,43 +1537,43 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:69
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:81
 msgid "trading"
-msgstr ""
+msgstr "negoțul"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/init.lua:8
 msgctxt "immovable"
 msgid "Trade Pole"
-msgstr ""
+msgstr "Stâlp de negoț"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_copper/init.lua:8
 msgctxt "ware"
 msgid "Copper Coin"
-msgstr ""
+msgstr "Monedă de cupru"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr ""
+msgstr "Monedă de aur"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
 msgctxt "ware"
 msgid "Silver Coin"
-msgstr ""
+msgstr "Monedă de argint"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/coin_wood/init.lua:8
 msgctxt "ware"
 msgid "Wood Coin"
-msgstr ""
+msgstr "Monedă de lemn"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
-msgstr ""
+msgstr "Permite schimbul de bunuri cu alți jucători."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:18
 msgctxt "atlanteans_building"
@@ -1303,13 +1581,15 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
+"Trebuie să conectezi acest steag la o casă a cercetașului înainte de a putea"
+" trimite aici un cercetaș."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Explorează teritoriile necunoscute."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
@@ -1318,23 +1598,27 @@ msgctxt "atlanteans_building"
 msgid ""
 "A big and expensive temple to worship Satul and consecrate priestesses."
 msgstr ""
+"Un templu mare și scump pentru cinstirea lui Satul și consacrarea "
+"preoteselor."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Trader
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
-msgstr ""
+msgstr "Transportă bunuri pentru schimbul cu alți jucători."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
 msgctxt "atlanteans_worker"
 msgid "A trader is a scout who needs a horse to transport the wares."
 msgstr ""
+"Un negustor este un cercetaș care are nevoie de un cal pentru a transporta "
+"bunurile."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Satul's Initiate
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
-msgstr ""
+msgstr "Are grijă de Templul lui Satul."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
 msgctxt "atlanteans_worker"
@@ -1342,23 +1626,26 @@ msgid ""
 "Initiates take care of the Temple of Satul while they are learning to become"
 " priestesses."
 msgstr ""
+"Inițiatele au grijă de Templul lui Satul în timp ce învață să devină "
+"preotese."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
-msgstr ""
+msgstr "Îl cinstește pe Satul."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:51
 msgctxt "atlanteans_worker"
 msgid "Priestesses are needed to make Satul show his might."
-msgstr ""
+msgstr "Preotesele sunt necesare pentru ca Satul să-și arate puterea."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Wooden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
 msgstr ""
+"O monedă de lemn, primită ca răsplată pentru livrarea a cinci bușteni."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
@@ -1366,15 +1653,20 @@ msgctxt "atlanteans_building"
 msgid ""
 "A coin made of copper, received as reward for delivering four lumps of coal."
 msgstr ""
+"O monedă de cupru, primită ca răsplată pentru livrarea a patru bucăți de "
+"cărbune."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
 msgctxt "atlanteans_building"
 msgid "A silver coin, received as reward for delivering three iron ingots."
 msgstr ""
+"O monedă de argint, primită ca răsplată pentru livrarea a trei lingouri de "
+"fier."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Golden Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
 msgstr ""
+"O monedă de aur, primită ca răsplată pentru livrarea a două lingouri de aur."

@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dominic Iastrebschi, 2025
+# Cristian Romanescu, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr ""
+msgstr "Notă"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -30,42 +31,50 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Se pare că nu ai încheiat misiunea anterioară. Poți juca totuși acest "
+"scenariu, dar vei fi dezavantajat. Îți recomand să termini mai întâi "
+"scenariul anterior și apoi să reîncepi această misiune."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Construiește o economie de bază"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Asigură toate materialele de bază"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Construiește o carieră, o fermă de stuf, o groapă de argilă, o fântână, un "
+"cuptor de cărbune, un cuptor de cărămizi, precum și case pentru un tăietor "
+"de lemne și un silvicultor."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
-msgstr ""
+msgstr "Extinde-te spre sud"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Extinde-ți teritoriul ca să explorezi sudul"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:36
 msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"Nordul nu pare să ne fie de mare folos, dar cine știe ce am putea găsi în "
+"sud?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
-msgstr ""
+msgstr "Antrenează și reciclează"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr ""
+msgstr "Reciclează armele pentru a recupera metalul"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -73,6 +82,9 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Când soldații se antrenează, armele lor vechi sunt aruncate. Ele pot fi "
+"transformate în metal într-un centru de reciclare. Folosește armele din "
+"depozit ca să antrenezi soldați și reciclează o parte din fierul vechi."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid ""
@@ -81,14 +93,18 @@ msgid ""
 "cycle. You need to stop the blacksmithy until at least two iron are stored "
 "in its input queue."
 msgstr ""
+"Fierăria produce un târnăcop doar în al doilea ciclu de producție. Dacă "
+"primește doar câte un lingou de fier o dată, s-ar putea să nu ajungă "
+"niciodată la acest ciclu. Trebuie să oprești fierăria până când în coada ei "
+"de intrare sunt depozitate cel puțin două lingouri de fier."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Construiește o fermă piscicolă"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Construiește o fermă piscicolă pentru a începe producția de pește"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -96,68 +112,74 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Construiește o fermă piscicolă pentru a produce pește. Ferma piscicolă are "
+"nevoie în apropiere de gropile lăsate de o groapă de argilă, pe care să le "
+"folosească drept iazuri în care să crească pește. Doar un pescar care "
+"lucrează la o fermă piscicolă poate pescui din aceste iazuri."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Hotărăște dacă vrei să cooperezi cu Imperiul"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Strânge bunuri ca dar sau distruge depozitul Imperiului"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Hotărăște dacă vrei să lucrezi cu Murilius împotriva barbarilor. Dacă da, "
+"umple-i depozitul cu aceste bunuri:"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × buștean"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × granit"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × pește"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × bere"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × apă"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × rație"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × masă"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × cărbune"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × minereu de fier"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × fier"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × minereu de aur"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × aur"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -168,95 +190,106 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
+"Altfel, pur și simplu distruge depozitul și riscă să-l ai pe Murilius ca "
+"dușman. El ți-a interzis să-ți extinzi teritoriul până când bunurile nu vor "
+"fi predate."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Spionează-l pe Murilius"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Trimite un cercetaș să spioneze Imperiul"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Construiește o casă a cercetașului lângă graniță, ca să descoperi secretele "
+"Imperiului."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Descifrează poezia"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Înțelege poezia pe care cercetașul a găsit-o în Imperiu"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:336
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "Câte locuri cu ostași păzești,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:339
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "Peste câte locuri stăpânești,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:342
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "Deși nu vede unde sunt ele,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:345
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Cel ce-ți dă aici porunci grele!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Învinge-i pe barbari!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Învinge-i pe barbari"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Învinge tribul ostil care trăiește la nord-vest de avanpostul Imperiului!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Învinge-l pe Murilius!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr ""
+msgstr "Învinge avanpostul arogant al Imperiului"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
 "The only way to put an end to the Empire’s desire to steal our liberty is to"
 " destroy this outpost once and for all. Conquer its entire land."
 msgstr ""
+"Singura cale de a pune capăt dorinței Imperiului de a ne fura libertatea "
+"este să distrugem o dată pentru totdeauna acest avanpost. Cucerește-i tot "
+"teritoriul."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Cucerește fiecare câmp care încă îi aparține lui Murilius."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Învinge-l pe Murilius și pe barbari!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr ""
+msgstr "Învinge-i pe barbari și colonia Imperiului"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
+"Barbarii și Imperiul sunt prea periculoși ca să-i lăsăm să trăiască lângă "
+"noi. Trebuie să-i învingem pe amândoi."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:128
@@ -264,6 +297,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Începusem să cred că drumul nu se va sfârși niciodată. Habar n-am cât am "
+"stat pe mare, aruncați încoace și încolo de furtuni invidioase… trebuie să "
+"fi fost luni întregi."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -274,6 +310,11 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Furtunile au ținut corabia în strânsoarea lor tot drumul. Aproape că n-a "
+"fost zi în care să nu ne întrebăm dacă nu e ultima. Am fost nevoiți să "
+"aruncăm peste bord metalele prețioase pe care le luaserăm cu noi, ca să "
+"stabilizăm corabia, simțind că e o jertfă jalnică adusă zeilor ca să ne dea "
+"speranța de a mai trăi câteva ore."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -283,6 +324,10 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Puținele unelte pe care am reușit să le salvăm din Langeness n-au rezistat "
+"bine. Târnăcoapele minerilor s-au dovedit deosebit de vulnerabile și a "
+"trebuit să le aruncăm în ocean când a devenit limpede că fuseseră roase atât"
+" de tare de sarea mării, încât nu mai puteam săpa nimic cu ele."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -290,18 +335,20 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Dar am supraviețuit. În sfârșit, am ajuns la gura unui fiord mai liniștit. "
+"Am navigat în amonte și am ajuns aici."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:140
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:145
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:154
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Bine ai revenit!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:146
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:155
 msgid "A new home"
-msgstr ""
+msgstr "Un nou cămin"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:148
@@ -309,6 +356,8 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
+"Aici trăia un mic grup de străini. Ne-au întâmpinat fluturându-și topoarele "
+"spre noi și strigând într-o limbă neînțeleasă."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -317,6 +366,9 @@ msgid ""
 "took their land. I just hope there aren’t more of them, so we can live in "
 "peace."
 msgstr ""
+"Corabia noastră nu mai era în stare să navigheze, așa că i-am ucis pe "
+"localnici și le-am luat pământul. Sper doar să nu mai fie și alții, ca să "
+"putem trăi în pace."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:157
@@ -324,6 +376,8 @@ msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
+"Tovarășii mei spun că locul acesta arată sumbru și pustiu, dar eu cred că "
+"arată… frumos."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:160
@@ -331,6 +385,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Cercetașii mei nu mai raportează niciun semn de viețuitoare prin apropiere. "
+"Aici vom începe să ne construim noul cămin."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -341,14 +397,19 @@ msgid ""
 "wood. Our neighbors used to envy us for this clever technique, which they "
 "couldn’t copy."
 msgstr ""
+"Trebuie să începem prin a construi toate clădirile de bază. Nu văd munți "
+"prin apropiere unde să putem extrage cărbune. Mai bine construim un cuptor "
+"de cărbune, ca să ardem buștenii și să obținem mangal. Ne îmbunătățim "
+"cuptoarele cu argilă, ca să nu consume atât de mult lemn. Vecinii noștri ne "
+"invidiau pentru această tehnică isteață, pe care n-o puteau copia."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
-msgstr ""
+msgstr "Spre sud"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Extinde-te și cucerește"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:171
@@ -356,6 +417,9 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
+"Ne-am construit un cămin în acest peisaj minunat. Dar, pe măsură ce tribul "
+"nostru crește, avem nevoie de mai mult spațiu. Ar trebui să începem să ne "
+"extindem teritoriul."
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:174
@@ -364,17 +428,20 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Cercetașii au raportat că ținuturile din nord sunt dealuri accidentate, "
+"frumoase la privit, dar nepotrivite pentru clădiri. Hai să aflăm ce putem "
+"descoperi în sud."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:179
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:188
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Lipsă de metal"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
-msgstr ""
+msgstr "Am rămas fără metale"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
@@ -383,6 +450,9 @@ msgid ""
 "where we might be able to start mining coal and iron, but we have no miners,"
 " nor any picks to equip them with."
 msgstr ""
+"Căpetenie Reebaud! Avem o problemă serioasă. Am descoperit un munte unde am "
+"putea începe să extragem cărbune și fier, dar nu avem mineri și nici "
+"târnăcoape cu care să-i echipăm."
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:185
@@ -390,11 +460,13 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
+"Și nu ne-a mai rămas deloc fier. Trebuie să găsim o cale de a obține ceva "
+"metal ca să făurim târnăcoape noi. Din păcate, habar n-am cum."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
-msgstr ""
+msgstr "Obținerea de metal nou"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:191
@@ -402,6 +474,8 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
+"Sunt vești îngrozitoare! Fără fier sau fără mijloace de a-l produce, rămânem"
+" blocați așa pentru totdeauna! Trebuie să găsești o soluție."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:194
@@ -410,10 +484,12 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Am văzut câteva arme avansate în depozitele noastre. Poate că s-ar putea "
+"topi înapoi în metal? Dar pare o risipă de săbii prețioase…"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
-msgstr ""
+msgstr "Metal nou"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:200
@@ -422,6 +498,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
+"Acum am o idee: când soldații noștri sunt antrenați, sunt echipați cu săbii "
+"noi, iar armele vechi sunt aruncate. Acestea nu mai sunt bune de folosit în "
+"luptă, așa că n-ar fi o risipă să le topim."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -430,6 +509,9 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Asta trebuie să facem. Ne vom folosi armele ca să antrenăm soldați, apoi vom"
+" topi resturile de metal ca să obținem fier și aur. Iar apoi fierarii noștri"
+" vor putea produce târnăcoape cu care să echipăm mineri. Mă ocup imediat!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -440,14 +522,19 @@ msgid ""
 "Of course, we will need to move all our wares to a warehouse before we can "
 "dismantle the port."
 msgstr ""
+"Nu te grăbi atât! Ca să construim o tabără de antrenament, mai întâi avem "
+"nevoie de aur, iar noi nu avem deloc. Trebuie mai întâi să demontăm portul, "
+"ceea ce ne va da exact cât aur ne trebuie pentru o tabără de antrenament. "
+"Nu-mi place asta, dar e singura cale. Bineînțeles, va trebui să mutăm toate "
+"bunurile într-un depozit înainte să putem demonta portul."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
-msgstr ""
+msgstr "Producția de metal"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
-msgstr ""
+msgstr "Minele funcționează"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:217
@@ -455,6 +542,8 @@ msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
+"Minele noastre și-au început lucrul. Acum ne trebuie doar un cuptor de "
+"topire, iar producția de metal va merge ca pe roate."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:220
@@ -464,15 +553,19 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Avem deja o fermă de reni? Dacă nu, ar trebui să construim una acum. Avem "
+"nevoie de mai mulți reni pentru drumurile aglomerate și am putea începe deja"
+" să coasem haine de blană pentru echiparea soldaților noi. Cine știe dacă nu"
+" va trebui să luptăm până la urmă?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:233
 msgid "Fishing"
-msgstr ""
+msgstr "Pescuitul"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 msgid "We need fish"
-msgstr ""
+msgstr "Avem nevoie de pește"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:226
@@ -482,6 +575,11 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Căpetenie Reebaud, mai am vești proaste. Aproape că nu există pește în apele"
+" din apropiere. Deși putem prepara rații doar din fructe sau pâine, "
+"antrenarea soldaților cere multă carne sau mult pește afumat. Resturile de "
+"carne pe care o fermă de reni le dă ca produs secundar atunci când face "
+"blană nu ajung."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -491,10 +589,14 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Din fericire, unul dintre pescarii noștri s-a gândit la o soluție. Gropile "
+"noastre de argilă lasă găuri mari în pământ; un pescar le-ar putea umple cu "
+"apă și ar putea crește pește în aceste iazuri. Va avea nevoie doar de multă "
+"apă pentru iazuri și de fructe pentru hrănirea peștilor."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
-msgstr ""
+msgstr "Avem din nou pește"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:236
@@ -503,6 +605,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Bravo. Am construit o fermă piscicolă, iar economia noastră minieră este "
+"deocamdată stabilă. Totuși, minerii îmi spun că resursele sunt deja pe "
+"terminate și că minele s-ar putea goli complet în curând."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:239
@@ -511,14 +616,18 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Minele vor mai putea produce și atunci, dar le va lua de aproximativ "
+"douăzeci de ori mai mult – de zece ori, dacă e o mină adâncă – să producă "
+"minereu sau cărbune. Probabil că ar fi bine să te pregătești pentru nevoile "
+"tot mai mari de timp și de hrană."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
-msgstr ""
+msgstr "Recrutarea"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Economia noastră este completă"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:245
@@ -526,6 +635,9 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Ai dreptate – ar trebui să construim mai multe ferme de fructe de pădure, "
+"case ale culegătorilor de fructe și taverne, precum și o sală a ospețelor și"
+" brutării și berării avansate."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:248
@@ -535,6 +647,10 @@ msgid ""
 "building armor smithies, a barracks, a training arena and a tailor’s shop "
 "now."
 msgstr ""
+"Totuși, ne putem concentra deja pe recrutarea și antrenarea soldaților. Acum"
+" ne permitem să folosim metal pentru arme, căști și haine. Propun să "
+"construim acum fierării de armuri, o cazarmă, o arenă de antrenament și o "
+"croitorie."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -546,7 +662,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Nu suntem singuri"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -556,7 +672,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr ""
+msgstr "Salvete peregrini!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -567,24 +683,26 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
+"Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
+"sum. Vos nominate!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
-msgstr ""
+msgstr "Străini"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:262
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "…înțelege cineva ce spune?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:268
 msgid "Do they not even speak the noble language of the Empire?"
-msgstr ""
+msgstr "Nici măcar nu vorbesc nobila limbă a Imperiului?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:271
@@ -593,6 +711,9 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Străinilor! Eu, Murilius, proconsul al Ținuturilor Nordice, provincie a "
+"Imperiului, cer să aflu cine sunteți și ce treburi aveți pe aceste "
+"meleaguri!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. Frisian greeting, nothing more.
@@ -602,6 +723,9 @@ msgid ""
 "tribe. All we want is to settle down here, build our home and live our lives"
 " in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
+"Pace, reprezentant al Imperiului! Sunt Reebaud, căpetenia acestui trib. Tot "
+"ce vrem este să ne așezăm aici, să ne construim căminul și să ne trăim viața"
+" în pace. Nu căutăm necazuri, dar nici nu ne temem de luptă."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -611,6 +735,9 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"În acest caz, Reebaude, trebuie să te înștiințez de prezența, chiar în "
+"vecinătatea acestui avanpost al Imperiului, a unui trib de barbari "
+"neospitalier și ostil."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -619,6 +746,8 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Dacă dorești să trăiești aici în pace, nu ai de ales dacă să le permiți sau "
+"nu să trăiască aici – ești obligat să ajuți Imperiul să-i alunge."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:292
@@ -628,6 +757,10 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"De asemenea, ca semn al bunelor voastre intenții, cerem un dar de prietenie "
+"pentru Imperiu. După cum ar fi trebuit să observați, v-am dăruit un depozit "
+"nou. Umpleți-l cu darurile cerute, ca să ni le predați. Vă îngădui să ne "
+"dați aceste bunuri:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -636,6 +769,10 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 de bușteni, 40 de blocuri de granit, 30 de pești, 30 de halbe de bere, "
+"150 de găleți cu apă, 40 de rații, 10 mese, 30 de bucăți de cărbune, 40 de "
+"bucăți de minereu de fier, 20 de lingouri de fier, 20 de bucăți de minereu "
+"de aur și 10 lingouri de aur."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:301
@@ -645,6 +782,10 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"Căpetenie Reebaud – pretențiile acestui proconsul arogant al Imperiului sunt"
+" pur și simplu scandaloase. Ne tratează ca pe slugile lui. Și cu siguranță "
+"nu ne permitem să cedăm atâtea bunuri ca să-l ajutăm. Propun să distrugem "
+"depozitul acela urât și să-l lăsăm să-și ducă singur luptele."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:307
@@ -654,6 +795,10 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Dacă nu livrați aceste bunuri, Imperiul vă va trata ca pe niște dușmani. Și,"
+" ca să nu vă irosiți prețiosul metal, vă interzic din acest moment să vă "
+"extindeți teritoriul până ne veți da darul. Dacă nu vă supuneți, Imperiul vă"
+" va trata ca pe niște dușmani."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -664,6 +809,11 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Va trebui să luptați cu barbarii aceia dacă aveți de gând să trăiți în zonă;"
+" cu siguranță vedeți că e mai ușor să luptați împotriva lor împreună cu "
+"Imperiul decât singuri? Și chiar nu vreți să aveți Imperiul ca dușman. "
+"Barbari cum sunteți, cred totuși că veți înțelege adevărul cuvintelor mele "
+"după ce vă veți gândi puțin."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -672,6 +822,10 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Asta e cea mai mare obrăznicie dintre toate. Cum îndrăznește să ne "
+"poruncească să ne oprim din extinderea teritoriului, când tot ce vrem e să "
+"ne construim un nou cămin, și să ne amenințe cu războiul dacă refuzăm să-i "
+"fim sclavi?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:320
@@ -681,6 +835,10 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"Aș vrea să spun că ar trebui să-l atacăm chiar acum, dar mă tem că încă nu "
+"suntem destul de puternici ca să-i ținem piept în luptă. Ar trebui să grăbim"
+" antrenarea soldaților, prefăcându-ne că strângem așa-zisul lui dar. Asta "
+"ne-ar face să câștigăm timp."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -688,14 +846,16 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"Cât despre extindere – mă întreb cât de strict ne poate controla. Poate că "
+"ar trebui să trimitem un cercetaș să-l spioneze…"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Cercetașul a descoperit ceva"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
-msgstr ""
+msgstr "Cercetașul nostru s-a întors"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:333
@@ -705,6 +865,9 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Căpetenie Reebaud! Cercetașul nostru tocmai s-a întors. A găsit o poezie în "
+"limba ciudată pe care o vorbește acest proconsul. Cu ceva greutate, am "
+"tradus-o în limba noastră. Dacă n-am tradus greșit, sună așa:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:348
@@ -712,11 +875,13 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Nu știu ce înseamnă, dar sunt sigur că e important. Poate reușești tu să-i "
+"dai de cap."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:353
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "Imperiul este furios"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -724,7 +889,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:355
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid "Hostes Imperii estis!"
-msgstr ""
+msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:357
@@ -732,12 +897,14 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
+"Barbarilor! Mi-ați refuzat cât se poate de nepoliticos oferta de prietenie, "
+"distrugând frumoasa clădire pe care v-am dăruit-o!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:360
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "You are enemies of the Empire, and I shall treat you as such!"
-msgstr ""
+msgstr "Sunteți dușmani ai Imperiului și vă voi trata ca atare!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -746,14 +913,16 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbarilor! Mi-ați refuzat cât se poate de nepoliticos oferta de prietenie, "
+"irosindu-vă cu nerușinare resursele prețioase pe extindere!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
-msgstr ""
+msgstr "Doi dușmani"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Învinge-i pe dușmani!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:375
@@ -761,6 +930,9 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Murilius a arătat destul de limpede că nu ne va lăsa în pace. Mă tem că "
+"trebuie să-l înfrângem și să-i distrugem colonia dacă vrem să avem vreodată "
+"pace aici."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:378
@@ -769,17 +941,21 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
+"Tribul barbar de care a pomenit este și el o amenințare. Nu vreau să împart "
+"acest pământ cu nimeni, pentru că împărțirea duce doar la conflicte și "
+"lupte, așa cum am văzut în vechiul nostru cămin. Trebuie să-i înfrângem și "
+"pe barbari."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "Imperiul este recunoscător"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
@@ -787,6 +963,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Străinilor! Văd că v-ați ținut de cuvânt. Imperiul își răsplătește "
+"prietenii, de aceea vă voi răsplăti cu prietenia Imperiului!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -798,16 +976,21 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Acum vă îngădui să ne ajutați să-i cucerim pe barbari, care trăiesc într-o "
+"vale adăpostită la nord-vest de noi. Vă poruncesc să vă extindeți de-a "
+"lungul capătului nordic al munților care înconjoară acest avanpost; acolo îi"
+" veți găsi pe barbari – atacați-i! Noi vom respinge atacurile lansate de "
+"inamic."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "Răsplata pentru serviciile voastre"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:397
@@ -815,6 +998,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"V-ați descurcat bine, străinilor! Așa cum v-am spus mai devreme, veți fi "
+"răsplătiți cu prietenia Imperiului!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:400
@@ -825,14 +1010,19 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Vă propun să începeți prin a trimite legați în Capitală, ca să aflați cele "
+"mai recente evenimente politice. Odată ajunși acolo, veți putea primi "
+"instrucțiuni pentru tribul vostru de la Senat. De asemenea, va trebui să "
+"aflați ce tribut vă va cere Capitala și, bineînțeles, cine va fi regele "
+"tribului vostru."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
-msgstr ""
+msgstr "Încă un dușman"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Învinge Imperiul!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:406
@@ -842,6 +1032,9 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"L-am înțeles bine? După tot ce am făcut pentru el, după ce atâția dintre "
+"soldații mei și-au dat viața pentru el, vrea să fim slugile acestui Imperiu "
+"și să-mi ia conducerea? Și îndrăznește ipocritul să numească asta răsplată?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:409
@@ -850,6 +1043,9 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Îl vom pedepsi pe acest așa-zis proconsul pentru trădarea lui! Îi voi arde "
+"toată colonia și îi voi ucide fiecare om din ținutul lui. Va regreta amarnic"
+" că ne-a insultat astfel tribul."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
@@ -865,16 +1061,21 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Ne-am învins toți dușmanii! Acum niciun alt trib nu va mai îndrăzni vreodată"
+" să se așeze aici. Suntem în siguranță și, în sfârșit, ne putem trăi viața "
+"în pace."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci"
+" la misiunea următoare."
 
 #. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
@@ -883,9 +1084,11 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
+"Muncitorii și soldații tăi își vor găsi adăpost aici. De asemenea, aici sunt"
+" depozitate bunurile și uneltele tale."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Depozitul Imperiului"

@@ -3,6 +3,8 @@
 # 
 # Translators:
 # Cristian Romanescu, 2026
+# Cristian Romanescu, 2026
+# Dominic Iastrebschi, 2025
 # Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -11,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Cristian Romanescu, 2026\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,43 +24,43 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr "Contruieşte două cabane ale pădurarului"
+msgstr "Construiește două colibe ale silvicultorului"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Construieşte o cabană a pădurarului aproape de cabana tăietorului de lemne"
+msgstr "Construiește câte o colibă a silvicultorului lângă fiecare colibă a tăietorului de lemne."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "În mod natural, copacii cresc încet. Pentru a avea suficienți bușteni, trebuie să construiești cabane pentru pădurari."
+msgstr "În mod natural, copacii cresc încet. Ca să ai destui bușteni, trebuie să construiești colibe pentru silvicultori."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr "Extinde-te către partea de nord-est și construiește o carieră de piatră"
+msgstr "Extinde-te spre nord-est și construiește o carieră"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr "Extinde-te către nord-est către pietre"
+msgstr "Extinde-te spre nord-est, până la stânci"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Construiește clădiri militare (precum santiele și bariere) pentru a-ți extinde teritoriul."
+msgstr "Construiește clădiri militare (de exemplu posturi de santinelă sau bariere) pentru a-ți extinde teritoriul."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Mergi către pietrele la nord-est de tine și construiește acolo o carieră de piatră."
+msgstr "Du-te la stâncile de la nord-est de tine și construiește acolo o carieră."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr "Începi să construiești mine în munți"
+msgstr "Începe să construiești mine pe munte"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr "Construiește mine de cărbune și fier"
+msgstr "Construiește mine de cărbune și de fier"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
@@ -72,7 +74,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr "Pentru asta, plasează un steag pe marginea de est a muntelui (pe suprafața muntelui, nu în afara lui). Când apeși pe acest steag, poți trimite geologi acolo. Întrucât steagul este pe munte, geologii vor căuta minereuri, altfel ei vor căuta doar apă. Apoi construiește o mină pentru ambele tipuri de resurse pe care le vor găsi, alegând să construiești minele respective:"
+msgstr "Pentru asta, pune un steag sus, pe versantul estic al muntelui (pe teren de munte, nu pe pajiște montană). Când faci clic pe noul steag, poți trimite geologi acolo. Pentru că steagul este pe munte, geologii vor căuta minereuri; altfel, ar căuta apă. Apoi construiește câte o mină pentru fiecare dintre cele două tipuri de resurse pe care le vor găsi, alegând mina potrivită:"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
@@ -118,32 +120,32 @@ msgstr "nu s-a găsit nimic aici"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Minele se pot construi doar pe munte. Locurile potrivite sunt afișate cu simboluri portocalii de mină."
+msgstr "Minele pot fi construite doar pe teren de munte. Locurile potrivite pentru mine sunt afișate cu simboluri portocalii de mină."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr "Trimite de mâncare minerilor"
+msgstr "Asigură hrană pentru mineri"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "Construiește o cabană pentru vânător, una pentru paznicul de vânătoare și o tavernă."
+msgstr "Construiește o colibă a vânătorului, o colibă a paznicului de vânătoare și o tavernă"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr "Pentru a funcționa, minerii au nevoie de mâncare."
+msgstr "Ca să poată lucra, minerii au nevoie de hrană."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Un vânător poate vâna animale, dar un paznic de vânătoare le protejează pentru a nu dispărea. Carnea este procesată în tavernă și transformată în masă de prânz pentru mineri."
+msgstr "Un vânător poate vâna animale, iar un paznic de vânătoare le împiedică să dispară. Carnea este apoi prelucrată într-o tavernă în mâncare pentru minerii tăi."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Ăsta este doar primul exemplu al unui obiect care trebuie rafinat pentru a fi folosit într-o a doua clădire pentru construcții – vor mai urma și altele."
+msgstr "Acesta este doar primul exemplu de bun care trebuie prelucrat înainte de a fi folosit într-o clădire secundară – vor urma și altele."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
@@ -160,11 +162,11 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Alte metode pentru producerea mâncării – diferite tipuri de mâncare – sunt pescarii și fermele. Grâul de la ferme trebuie procesat cu apă într-o brutărie pentru a deveni comestibil. Poți obține apă construind o fântână. Pentru o productivitate maximă, construiește fântâna într-un loc unde geologii au descoperit o sursă de apă."
+msgstr "Alte modalități de a produce hrană – alte tipuri de hrană – sunt pescarii și fermele. Grâul de la ferme trebuie prelucrat cu apă într-o brutărie înainte de a deveni comestibil. Poți obține apă construind o fântână. Pentru o productivitate cât mai bună, construiește-o într-un loc unde geologii tăi au găsit o sursă de apă."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr "Rafinează resursele minate"
+msgstr "Prelucrează resursele extrase"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
@@ -174,25 +176,25 @@ msgstr "Construiește o topitorie"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "Minereul de fier scos de mineri nu poate fi folosit încă – mai întâi trebuie topit în fier."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Îmbunătățește clădiri și construiește o berărie mică"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Îmbunătățește o mină și taverna și construiește o berărie mică."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Îmbunătățește mina de cărbune sau mina de fier într-o mină adâncă și îmbunătățește taverna într-un han."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Construiește și o berărie mică."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -200,7 +202,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "O mină obișnuită poate extrage doar aproximativ o treime din toate resursele aflate sub ea; apoi trebuie îmbunătățită într-o mină adâncă pentru a funcționa în continuare cum trebuie. Pentru a îmbunătăți o clădire, selecteaz-o și apoi fă clic pe butonul potrivit din fereastra care apare."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -208,7 +210,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "Muncitorii câștigă experiență muncind cu succes. Cu destulă experiență, devin muncitori avansați, necesari pentru a lucra în clădirile îmbunătățite. Nu îmbunătăți o clădire înainte de a avea destui muncitori avansați care să lucreze în clădirea avansată!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -216,20 +218,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Astfel de clădiri au de obicei cerințe mai mari decât varianta de bază – de exemplu, minele adânci au nevoie de gustări în loc de rații. Va trebui să-ți îmbunătățești taverna într-un han pentru a produce gustări din pâine ȘI un al doilea tip de hrană (carne sau pește) ȘI bere."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "Bineînțeles că poți îmbunătăți imediat toate minele în mine adânci, dacă ai muncitorii necesari – minele mai mari lucrează ceva mai repede, cele mai mici au nevoie de hrană mai ieftină. Tu alegi strategia pe care o preferi."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construiește un atelier de călire a lemnului"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -238,69 +240,69 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Clădirile mai mari și mai bune – inclusiv toate cele militare – au nevoie de materiale de construcție mai bune. Nu pot fi construite din simpli bușteni – buștenii trebuie mai întâi transformați în lemn călit de un atelier de călire a lemnului. Nu uita niciodată să construiești un atelier de călire a lemnului înainte să rămâi fără lemn călit, pentru că fără el nu te poți extinde."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Construiește o varniță și o economie a cărbunelui"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Construiește o varniță alimentată de o fântână și de un cuptor de cărbune sau de o mină de cărbune"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Clădirile mai bune pot necesita, pe lângă lemnul călit, și alte materiale îmbunătățite. Unul dintre ele este mortarul, produs de un varnic din granit, apă și cărbune."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Poți obține apă construind o fântână deasupra unei surse de apă, pe care geologii tăi o pot descoperi atunci când îi trimiți la orice steag care nu se află pe munte."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Pentru a chema un geolog să caute apă, fă clic pe un steag din zona în care vrei să caute și apoi pe butonul „Trimite un geolog să exploreze locul”."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Cărbunele poate fi obținut construind un cuptor de cărbune sau o mină de cărbune. Arderea buștenilor pentru a obține cărbune este lentă. Ar trebui să construiești un cuptor de cărbune doar atunci când nu ai cărbune la dispoziție."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Construiește o varniță și o fântână. În plus, construiește fie un cuptor de cărbune, fie o mină de cărbune pentru aprovizionarea cu cărbune."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Construiește o plantație de stuf"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "Al treilea material necesar pentru clădirile îmbunătățite este stuful, folosit pentru acoperișuri. Lanurile de stuf sunt plantate de un grădinar în jurul clădirii sale, plantația de stuf."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construiește o fermă de vite"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -308,49 +310,49 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Când drumurile sunt foarte aglomerate o perioadă lungă, un singur cărăuș nu mai ajunge de obicei ca bunurile să fie transportate repede. Rezultatul sunt ambuteiajele. De aceea, astfel de drumuri primesc un al doilea cărăuș: un bou care ajută la transportul bunurilor. Astfel se dublează capacitatea de transport."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Boii sunt crescuți în fermele de vite, cu grâu și apă."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "Începe povestea"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron oftează…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Au trecut luni întregi și încă ne ascundem acolo unde pădurile sunt vechi și întunecate."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Războinicii mei vânează ziua și stau treji noaptea – ascultând sunetele măcelului crunt care răsună de departe printre copacii străvechi."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "De aici, de la mile depărtare, vedem flăcările furioase care înghit Al’thunran."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "Luminile roșii licăresc în întuneric și dansează în ritmul tobelor de război care mă bântuie chiar și în coșmaruri."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -358,7 +360,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "Oasele tatălui meu se odihnesc în pace în pământul pe care el a pus odinioară capăt vărsării fără rost de sânge izbucnite între noi. Mă doare că pacea lui a durat doar o generație."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -367,7 +369,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "Boldreth, tovarășul și prietenul meu credincios, îmi aduce pace și alinare în aceste vremuri întunecate. El îmi ține moralul sus și pe al războinicilor mei treaz, împiedicând lăcomia sau disperarea să rupă și legăturile dintre noi."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -375,23 +377,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Cum îmi spunea tata, sunt vremuri pentru luptă și vremuri pentru a sta la pândă și a aștepta, încercând să nu adormi sau să mori înainte să vină momentul potrivit. Și astfel, aștept."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron se gândește la război"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron clatină din cap…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "Și totuși, războiul continuă. Tot mai mulți dintre frații și surorile noastre fug de războiul crunt care se dă în capitala de sub copaci."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -401,7 +403,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Poveștile pe care le spun despre faptele neamului nostru sunt triste. Am petrecut nopți întregi treaz, neliniștit, mai obosit decât am crezut vreodată că poate fi cineva. Și totuși, de câte ori închid ochii, văd fortăreața ridicată de tatăl meu mistuită de flăcări. Tronul dintre Copaci, simbolul unității și al păcii dintre neamurile noastre, a devenit pana care ne desparte."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -413,18 +415,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Astăzi, vânătorii mei au adus în fața mea bărbați, femei și copii mici care se ascunseseră în păduri, încercând să scape de războiul, ura și răzbunarea care fac ravagii între triburile ce se luptă între ele ca în vremurile de demult, când nu eram decât niște fiare sălbatice mânate și stăpânite de instincte. Niciunul dintre frații mei nu va reuși vreodată să cucerească și să păstreze tronul de lemn, niciunul dintre triburi nu va fi destul de puternic pentru a-l supune pe celălalt. Măcelul acesta nu se va sfârși niciodată, decât dacă… asta să fie? Cum îmi spunea tata?"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Să te ridici împotriva oricui ne amenință însăși existența, chiar dacă e de-un sânge sau de-un gând cu tine?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron se gândește la viitor"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -434,7 +436,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Boldreth pare tot mai sfâșiat pe măsură ce trec zilele. Moralul tovarășilor mei scade pe măsură ce se apropie anotimpul rece, iar noi încă locuim doar în colibe și barăci. N-am avut niciodată de gând să stăm atât de mult aici, în sălbăticie – dar nici n-am crezut vreodată că frații mei se vor încleșta atât de mult în această luptă fără rost."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -443,22 +445,22 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Poate că e timpul să ne simțim ceva mai confortabil aici. Poate că e timpul să le dăm celor care încă trăiesc și gândesc uniți un nou cămin, în locul celui pe care l-am pierdut? Până când ne vom putea întoarce în locul pe care odinioară îl numeam acasă…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Cineva vine la tine"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Un bătrân spune…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "Salut, căpetenie. Sunt Khantrukh și am văzut trecând multe ierni. Îngăduie-mi să te ajut cu sfatul meu în aceste zile întunecate."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -466,7 +468,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Doar zeii știu cât timp va trebui să rămânem ascunși aici. Războinicii speră că ne vom putea întoarce glorioși dintr-o zi în alta, dar mă îndoiesc serios că se va întâmpla curând. Iar zilele sunt scurte și reci…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -479,18 +481,18 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "Sfetnicul"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh observă…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Văd că ai construit deja o carieră și două colibe ale tăietorului de lemne. E un început bun, dacă vrem să rămânem mai mult aici."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -498,23 +500,23 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr ""
+msgstr "Dar nu uita niciodată – aceste păduri sunt moștenirea noastră, încredințată nouă de strămoși. Trebuie să le respectăm și să avem grijă de ele mereu. Ce luăm, trebuie să dăm înapoi."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Așa că, pentru a înlocui copacii pe care îi tăiem, ar trebui să construim câteva colibe ale silvicultorului, de preferință aproape de colibele tăietorilor de lemne."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
-msgstr ""
+msgstr "În noapte"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron spune…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:252
@@ -522,18 +524,18 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr ""
+msgstr "Într-o altă noapte fără somn, am urcat pe deal și am privit spre nord. Focurile ard încă, potolindu-și foamea cu moștenirea tatălui meu."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "Ele ne amintesc mereu de ce trebuie să ne ascundem aici… și de ce trebuie să ne întoarcem până la urmă!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
-msgstr ""
+msgstr "La mormânt"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -541,29 +543,29 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "Am urcat din nou la mormântul tatălui meu, într-un crâng sacru de la poalele marelui pisc Kal’mavrath. Am stat pur și simplu acolo și n-am simțit nici orele trecând, nici ploaia rece care se revărsa din cerul întunecat…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "Cumva, a fost ca un rămas-bun. Pentru prima dată m-am întrebat ce-mi va aduce viitorul…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
-msgstr ""
+msgstr "Zilele trecute"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron spune gânditor…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr ""
+msgstr "Cu ceva timp în urmă, Boldreth a venit la mine. Sfatul lui era să ne mutăm mai aproape de casă – ca să lovim la primul semn de șovăială al forțelor fraților mei."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -572,15 +574,15 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Dar când privesc peste păduri, încă văd fum negru ridicându-se spre cer. Știu – e încă prea devreme, iar ce speră el nu se va întâmpla prea curând. Poate că are totuși dreptate, dar mă tem de vărsarea de sânge pe care ar provoca-o, de ambele părți, o întoarcere prea grăbită…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
-msgstr ""
+msgstr "Jurământul"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
-msgstr "Thron pare îngrijorat..."
+msgstr "Thron pare furios…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:291
@@ -588,12 +590,12 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr ""
+msgstr "Astăzi, războinicii mei au găsit un bătrân care rătăcea bolnav și rănit prin pădurea întunecată. Am ascultat îngroziți ce ne-a povestit despre atrocitățile din Al’thunran."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:294
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr ""
+msgstr "Îmi reînnoiesc jurământul – voi opri această nebunie cu orice preț!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:314
@@ -605,11 +607,11 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Tovarășul tău credincios"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Viteazul Boldreth vine lângă tine…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -618,11 +620,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Deci vrei să ne pregătești pentru o ședere mai lungă în aceste păduri, Thron? Ei bine, văd că e un lucru înțelept, dar inima mea tânjește după o întoarcere glorioasă în Al’thunran. Prea mult am așteptat în timp ce frații noștri luptau pe câmpul de bătălie, iar topoarele și săbiile noastre au ruginit între timp."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukh intervine…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:310
@@ -630,11 +632,11 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "Îți cer iertare, căpetenie, dar am o îngrijorare serioasă pe care vreau s-o discut cu tine. Stâncile de lângă tabăra noastră se micșorează repede sub uneltele muncitorilor noștri și e doar o chestiune de timp până vor dispărea cu totul."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Boldreth sare în picioare…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:318
@@ -643,36 +645,36 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Deși nu e deloc o sarcină demnă de un războinic, măcar e ceva de făcut! Thron, ce-ai zice dacă aș lua câțiva dintre cei mai neastâmpărați războinici ai noștri și ne-am aventura ceva mai aproape de marele munte Kal’mavrath – poate găsim niște stânci mari care să-l mulțumească pe bătrân?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Khantrukh bombăne…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Bătrân? Tânăr obraznic ce ești!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:333
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Khantrukh dă mulțumit din cap…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "În sfârșit! Stâncile astea ar trebui să ne ajungă o vreme."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldreth exclamă…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "Ia uită-te! În est se află marele munte Kal’mavrath! Oare ce comori o fi ascuns natura sub versanții lui maiestuoși?"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:344
@@ -680,27 +682,27 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr ""
+msgstr "Hai să ne extindem spre est. Uite o ocazie ca bătrânii să fie și ei de folos din când în când! Să trimitem câțiva dintre cei care înțeleg graiul pietrei să dezlege tainele muntelui!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldreth râde…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
-msgstr ""
+msgstr "Pe barba lui Chat’Karuth, e uimitor! Imaginează-ți doar la ce putem folosi acest cărbune și acest minereu de fier!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "Poate chiar ne-ar ajunge ca să…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukh îl întrerupe…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -709,16 +711,16 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr ""
+msgstr "Deși e adevărat, ar trebui să ne gândim la asta mai târziu, acum avem alte obstacole în față. Minerii vor cere cu siguranță rații mai mari ca să muncească sus pe munte, în frigul ăsta aprig, iar asigurarea acestor provizii s-ar putea să nu fie ușoară."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "Boldreth dă din cap…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Trebuie să recunosc: aici ai dreptate, bătrâne."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:373
@@ -726,16 +728,16 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr ""
+msgstr "Se pare că sunt destul de multe animale în pădurile de aici – am putea vâna mai multe. Și, bineînțeles, oamenii s-ar bucura de o tavernă nouă – hei, am putea s-o numim „Mândria lui Thron” sau cam așa, dacă vrei!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "Bătrânul sare în sus…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Înțelepciunea ne cere să căutăm varietatea."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:384
@@ -743,27 +745,27 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "La nord de marele munte e o câmpie întinsă – de ce să nu folosim spațiul pe care ni l-a dat Mama Natură și să construim o fermă? Mi-ar plăcea tare o pâine proaspăt coaptă, pentru schimbare…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
-msgstr ""
+msgstr "Boldreth se înveselește…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:392
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Vânătorii noștri sunt în păduri, Thron."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr ""
+msgstr "Îți promit că, înainte să apună soarele astăzi, vei avea un ospăț minunat, demn de căpetenia tuturor clanurilor!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukh privește peste câmpii…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:402
@@ -771,15 +773,15 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr ""
+msgstr "Nu-i așa că e minunată priveliștea lanurilor aurii, crescând în liniște și dansând în vânt? Și cred că brutarul e chiar pe drum încoace, cu cea mai gustoasă pâine a lui, păstrată doar pentru căpetenia noastră!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "O dimineață frumoasă"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron recunoaște…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:409
@@ -788,17 +790,17 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr ""
+msgstr "Ieri s-a deschis o tavernă pentru oamenii noștri. Deși nu prea am chef de sărbătoare, am observat cât de mult înseamnă pentru oamenii mei această mică bucată de acasă. Cântecele lor au umplut văzduhul până noaptea târziu, iar a doua zi erau încă și mai bine dispuși."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr ""
+msgstr "Poate chiar construim încet-încet aici un loc pe care să-l putem… numi acasă."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth remarcă…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:419
@@ -807,19 +809,19 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr ""
+msgstr "Acum că avem și mine, și hrana care să le întrețină, ar trebui să aducem ce scot pentru noi minerii noștri viteji într-o formă mai folositoare. Minereul de fier trebuie topit în fier, ca să fie gata de făurit în orice vrem. Iar cărbunele ne trebuie ca să țină aprinse cuptoarele topitorului."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:476
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh spune…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr ""
+msgstr "Minerii noștri scot tot mai puțin de la o zi la alta! Trebuie să săpăm mai adânc, mai aproape de inima muntelui, dacă vrem mai multe dintre comorile lui!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:430
@@ -827,11 +829,11 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr ""
+msgstr "Bineînțeles, la asemenea adâncimi e întuneric și frig și doar puțini se aventurează de bunăvoie în astfel de locuri. Ar trebui să le răsplătim curajul cu rații mai mari. Iar o halbă-două de bere le va ține moralul sus."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldreth pare îngrijorat…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:438
@@ -839,23 +841,23 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr ""
+msgstr "Tocmai am descoperit că rămânem fără lemn călit! Nu ne putem adăposti războinicii în niște colibe care se prăbușesc, cu atât mai puțin în vremuri atât de periculoase ca acestea!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Avem nevoie de un atelier de călire a lemnului și avem nevoie de el acum!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:447
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth zâmbește…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:449
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr ""
+msgstr "Ei bine, bătrâne prieten, asta ar trebui să ne asigure că fortificațiile noastre nu se vor prăbuși la primul strigăt de luptă al dușmanilor! Acum ne putem extinde în siguranță!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -863,11 +865,11 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "Totuși, n-ar strica să strângem ceva mortar pentru campania noastră de mai departe; așa am putea, la nevoie, să construim o fortăreață cum lumea n-a mai văzut!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Khantrukh intervine…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:460
@@ -877,27 +879,27 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "Căpetenie, asta e o rușine! E bine că acum putem produce mortar pentru fortificații puternice și clădiri mărețe – doar că asta nu ne împiedică acoperișurile să curgă! Poate că celor tineri le place să-și petreacă nopțile în ploaie, dar eu nu pot dormi deloc cu stropii ăștia care-mi picură pe față!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "Asta e o problemă în privința căreia ar trebui să facem ceva!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:469
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh pare ușurat…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:471
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr ""
+msgstr "Minunat! Acoperișurile noastre nu mai curg și avem tot materialul de care avem nevoie pentru, ei bine, orice clădire monumentală considerăm potrivită!"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Avem nevoie de boi!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:478
@@ -906,7 +908,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "Pe măsură ce tărâmul nostru devine tot mai mare, traficul de pe drumuri e copleșitor. Bieții noștri cărăuși nu mai reușesc să transporte bunurile atât de repede cât avem nevoie. Propun să-i ajutăm crescând boi."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:481
@@ -914,24 +916,24 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "Sunt niște animale uimitoare: boul e la fel de iute ca un om, dar mult mai puternic și foarte cumpătat: tot ce ne trebuie ca să-i creștem e grâu și apă, iar ei își vor face treaba pe drumuri cu credință și fără greș."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
-msgstr ""
+msgstr "Misiune îndeplinită"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron vorbește…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr ""
+msgstr "Zilele trecute, Boldreth m-a rugat să-l însoțesc la noul han. Spunea că o să mă înveselească."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:493
@@ -940,33 +942,33 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "Când m-am uitat în jur, am văzut chipuri credincioase, încrezătoare că îi pot călăuzi prin aceste zile întunecate. Dar înainte să apuc să rostesc vreun cuvânt de mulțumire sau de îmbărbătare, unul dintre războinicii mei a dat buzna în han. Fusese departe, în pădure, în ultimele zile și vedeam cât de istovit era."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Veștile pe care le-a adus au schimbat totul…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
-msgstr ""
+msgstr "Victorie"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci la misiunea următoare."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "O noapte cu lună plină"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
-msgstr ""
+msgstr "Într-o noapte, când luna strălucea puternic, am urcat pe vârful Kal’mavrath."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:508
@@ -975,15 +977,15 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "Când am privit spre orizont, încă am văzut lumini purpurii pâlpâind în depărtare. E de necrezut cu câtă patimă duc frații mei acest război. Mă tem de clipa în care voi vedea din nou Al’thunran – va mai rămâne ceva din frumoasa noastră capitală în afară de cenușă și ruine pustiite când vom ajunge acolo?"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Încă o zi rece"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr "Thron pare îngrijorat..."
+msgstr "Thron pare îngrijorat…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:515
@@ -991,41 +993,41 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Iarna a venit peste noi. Mulți dintre noi suferă de frig, dar trebuie să îndurăm. Ziua în care ne vom putea întoarce nu mai poate fi departe – nu trebuie să mai fie departe."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "M-am rugat să se încălzească din nou, așa cum m-am rugat ca războiul să se încheie în sfârșit."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Până acum se pare că niciuna dintre rugăciuni nu mi-a fost ascultată."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Un sat prietenos ni s-a alăturat!"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "Am găsit un sat cu oameni prietenoși și harnici, impresionați de bogăția, tehnica și puterea noastră."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Au trăit simplu, dar fără griji, din vânătoare și agricultură. Nu au fost implicați până acum în niciun conflict și nu sunt pregătiți de luptă."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Dar se tem că războiul din jurul orașului Al’thunran le va pune capăt acestui trai. De aceea au hotărât să ni se alăture, sperând că ne putem ajuta unii pe alții."

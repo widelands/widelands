@@ -2,6 +2,8 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
+# Dominic Iastrebschi, 2025
 # Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -10,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,57 +24,57 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Ondun"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr "Construieşte o economie de bază"
+msgstr "Construiește o economie de bază"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "Începe să strângi materiale de construcție de bază și fortifică tabăra."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Construiește o colibă a tăietorului de lemne"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Construiește o colibă a silvicultorului"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
-msgstr "Construiește o carieră de piatră"
+msgstr "Construiește o carieră"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construiește un atelier de călire a lemnului"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "Construiește un post de santinelă la granița de est"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "Până la urmă ar trebui să construiești și o plantație de stuf și o varniță."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Construiește o mică economie a hranei"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Construiește o economie de bază a hranei, ca să-ți hrănești oamenii."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Construiește o colibă a pescarului"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Construiește o colibă a vânătorului"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
@@ -80,82 +82,82 @@ msgstr "Construiește o fântână"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr ""
+msgstr "Construiește o fermă"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
-msgstr ""
+msgstr "Construiește o brutărie"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construiește o fermă de vite"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Nu uita să construiești o fermă de vite"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Pe măsură ce drumurile tale devin mai lungi și economia mai mare, ar trebui să folosești din plin boii pentru a transporta bunurile mai repede."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr ""
+msgstr "Construiește un turn"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Construiește un turn la granița de nord-est a teritoriului tău, pentru o rază vizuală mai mare și pentru a-ți apăra oamenii de atacurile neașteptate ale dușmanilor."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "Explorează mai departe"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Construiește mai multe clădiri militare pentru a explora zona din jurul sediului central și pentru a-ți ține oamenii în siguranță."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Construiește o infrastructură minieră"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Extinde-ți teritoriul până la munți, trimite geologi să caute minereuri și cărbune și construiește o economie minieră, cu mine, taverne, topitorii și un atelier de metal."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Construiește o fortăreață"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Construiește o fortăreață la est de munți."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Construiește o infrastructură de antrenament"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "Construiește o cazarmă pentru a pregăti câțiva soldați de bază."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Construiește o arenă de luptă și o tabără de antrenament la vest de munți."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:122
@@ -165,23 +167,23 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Îmbunătățește atelierul de metal într-un atelier de topoare, pentru a produce arme, și construiește un al doilea atelier de metal, pentru a asigura producția de unelte. Când fierarul ajunge la nivelul următor (maestru fierar), poți îmbunătăți chiar și atelierul de topoare într-o fierărie de război, care va produce arme suplimentare."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Construiește o fierărie de coifuri la vest de munți, pentru a le da soldaților tăi armuri mai bune."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Construiește un depozit"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Construiește un depozit la vest de munți."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
@@ -189,18 +191,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Depozitele sunt asemănătoare sediului central, singura diferență fiind că nu sunt apărate de soldați. Adesea e înțelept să construiești un depozit atunci când teritoriul tău crește, iar drumurile până la sediul central devin tot mai lungi."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 msgid "Build training sites"
-msgstr ""
+msgstr "Construiește centre de antrenament"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Construiește o cazarmă, o arenă de luptă și o tabără de antrenament la vest de munți."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
@@ -208,30 +210,30 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "Cazarma pregătește soldați de bază, în timp ce centrele de antrenament, precum tabăra de antrenament sau arena de luptă, sunt folosite pentru a antrena soldații la diferitele lor atribute. Aceste atribute sunt importante în lupte și, cu cât un soldat e mai bun, cu atât are șanse mai mari să câștige o luptă."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Atributele sunt: sănătate, atac, apărare și eschivă."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr ""
+msgstr "Pune pe picioare producția de arme"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Construiește o fierărie de coifuri"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Distruge armata lui Kalitath"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Distruge armata lui Kalitath și extinde-ți teritoriul spre est."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
@@ -239,27 +241,27 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Pentru a ataca un inamic, trebuie să faci clic pe ușa unei clădiri militare a adversarului. Va apărea un meniu în care poți alege numărul de soldați care să atace. Când ai stabilit numărul, fă clic pe cruce („Pornește atacul”)."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Asaltul militar asupra Al’thunran"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "Distruge toate forțele celor doi frați ai lui Thron pentru a elibera cercul tronului."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
-msgstr ""
+msgstr "Aproape de casă"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr "Thron pare îngrijorat..."
+msgstr "Thron pare îngrijorat…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:158
@@ -267,20 +269,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "În ultimele zile ne-am apropiat de capitala noastră. Mulți oameni ni s-au alăturat deja în marș și și-au pus speranțele în mine. Totuși, mă tem că nu suntem destul de puternici pentru a înfrunta armatele fraților mei."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "Deocamdată ne odihnim la marginea pădurii bătrâne și ne pregătim pentru zilele ce vin."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Încă o zi rece"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -291,15 +293,15 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "Veștile aduse de o patrulă nu sunt bune. Spionii noștri ne spun că triburile războinice încă se luptă cu furie, dar unii dintre soldații mai vârstnici și dintre conducătorii de trib par să se fi săturat de acest război fără rost. Kalitath, fiul lui Kun, este primul căpitan de război care a părăsit Al’thunran, lăsându-și tabăra slabă și vulnerabilă. După cum raportează cercetașii mei, a pus piciorul pe ținuturile joase din jurul capitalei, asigurând inelele exterioare de fortificații."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
-msgstr ""
+msgstr "Îndoieli"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth clatină din cap…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:178
@@ -310,12 +312,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "Thron vrea să creadă că Kalitath s-a săturat de luptă și că ar fi dispus să ni se alăture odată ce vom porni să restabilim legea și ordinea în Al’thunran. Dar eu nu cred asta. Kalitath este fiul unuia dintre cei mai puternici generali ai oștirii noastre, iar familiei lui nu i-a plăcut niciodată ideea de a se pleca în fața steagului lui Chat’Karuth. De ce ar mărșălui alături de fiul lui Chat’Karuth ca să-i redea moștenirea și tronul?"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid "The Story Continues"
-msgstr ""
+msgstr "Povestea continuă"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:232
@@ -323,7 +325,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:267
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldreth spune:"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:186
@@ -331,11 +333,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Totuși, Thron nu vrea să-mi asculte îndoielile. El vrea să ne extindă fortificațiile până la granițele teritoriului lui Kalitath și să se reunească cu forțele acestuia. Trebuie să fiu cu ochii pe tot ce se întâmplă aici."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Thron vorbește încrezător."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:194
@@ -346,7 +348,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "Linia frontului forțelor mele a ajuns până la marginea pădurilor. Avem în urmă o iarnă lungă și rece și atâtea mile. Fortificațiile pe care le-am ridicat în jurul așezării Ondun ne vor garanta o aprovizionare rapidă cu oameni și bunuri, iar odată ce Al’thunran va fi în mâinile mele, cele două orașe vor fi legate printr-o infrastructură bună și ușor de apărat. Totuși, sper să nu fiu singur în această misiune, sper că Kalitath, fiul lui Kun, îmi va urma chemarea."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -356,7 +358,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
-msgstr ""
+msgstr "Thron spune:"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:202
@@ -367,15 +369,15 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Am trimis oameni să se întâlnească cu Kalitath în fortăreața lui. El a baricadat fosta intrare principală în capitală și încearcă să ridice un cerc de asediu în jurul orașului Al’thunran. Nu va lăsa pe nimeni să intre sau să iasă din oraș cât timp cercul rămâne întreg. Până acum nu a răspuns la niciunul dintre mesajele mele. Dar timpul petrecut așteptând nu va fi pierdut. Îmi voi antrena în continuare soldații și mă voi pregăti de luptă."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Tovarășul tău credincios"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldreth strigă!"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:209
@@ -384,11 +386,11 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "NEMERNICUL! Un singur om din patrula noastră de frontieră s-a întors viu. Aducea un mesaj de la Kalitath, care ne spune că va pedepsi orice mișcare a trupelor noastre cu propriul lor sânge! Nu putem accepta un asemenea comportament. De acum înainte, e război între Kalitath și noi!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Fortificația renegaților"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:220
@@ -398,7 +400,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "Trădătorul și-a lăsat armatele să moară acolo unde căzuseră când a văzut că nu-mi va putea opri forțele. Kalitath a dispărut în vâltoarea războiului, dar acum nu-mi pasă. N-are decât să fugă și să fie uitat pentru totdeauna, ca un conducător de trib care n-a vrut să se plece în fața tronului de lemn – tron pe care acum îl pot lua eu."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:223
@@ -408,7 +410,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "Mai mult, fuga lui ne-a adus un mare folos: tot anul, Kalitath a fost atât de ocupat cu lupta, încât nici nu s-a sinchisit să strângă destulă hrană pentru toți oamenii lui. Acum că a fugit, foamea i-a făcut pe unii dintre adepții lui mai tineri să dezerteze. Acest grup ține o fortificație puternică pe inelul principal."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -417,11 +419,11 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "Dar mai sunt vești: cercetașii mei au raportat că cele două triburi dezlănțuite ale fraților mei sunt în haos și abia au observat noul pericol care stă să cadă peste ele. Totuși, bănuiesc că nu le-ar păsa nici dacă l-ar observa – orbite de furie și ură, cred că nu le-a mai rămas nicio urmă de judecată."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Iarna se apropie"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -431,15 +433,15 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Azi-dimineață l-am găsit pe Thron cu mintea tulburată. S-a întors târziu aseară din patrulă și s-a așezat rezemat de un copac, veghind tabăra. Certurile și neînțelegerile se înmulțesc, iar iarna ne ține strâns în ghearele ei. Ar trebui să punem hrană în magazii ca să supraviețuim iernii lungi și reci!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "Sfetnicul"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Khantrukh dă din cap."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:242
@@ -449,22 +451,22 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth are dreptate! Nu avem destulă hrană ca să supraviețuim unei ierni lungi și reci. Ar trebui să începem prin a construi o fântână, o colibă a pescarului și una a vânătorului. Iar dacă găsim destul spațiu, ar trebui să construim și o fermă și o brutărie! Unul dintre fermierii noștri pare foarte priceput – a reușit deja să facă să crească niște culturi în solul ăsta rece."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Economia hranei este gata"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "Khantrukh tocmai m-a anunțat că economia noastră de bază a hranei a fost construită cu succes. În sfârșit, niciunul dintre noi nu mai trebuie să se teamă de foamete."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
-msgstr ""
+msgstr "Urme"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:260
@@ -473,11 +475,11 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi-a spus că a descoperit urme în zăpadă la nord-est de așezarea noastră. Ne-a poruncit să construim un turn, ca să avem o rază vizuală mai mare asupra zonei din jurul sălii noastre și să ne apărăm oamenii de atacuri neașteptate."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
-msgstr ""
+msgstr "Continuarea explorării"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:269
@@ -489,7 +491,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "Prima fortificație poruncită de Thron tocmai a fost terminată. Acum el încearcă să le aducă încredere și credință celor care trăiesc între zidurile noului nostru cămin, pe care l-am numit „Ondun”, ceea ce în limba veche înseamnă „cei care așteaptă”. Dar Thron încă nu este mulțumit – și îi înțeleg pe deplin temerile: pădurile sunt adânci, iar granița cu Al’thunran este aproape. Sunt sigur că acolo ne pândesc o mie de pericole mai mari decât urmele necunoscute."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -498,11 +500,11 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Ca să cuprindem cu privirea mai mult din zona din jurul sălii noastre, ar trebui să explorăm mai departe și să punem mai multe străji și cercetași care să supravegheze granița și să fie cu ochii pe războaiele dezlănțuite de la ușa noastră. ABIA ATUNCI vom fi pregătiți când necazurile vor încerca să ne cucerească pădurile."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
-msgstr ""
+msgstr "Munți descoperiți"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:281
@@ -512,11 +514,11 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Tocmai am vorbit cu conducătorul patrulei noastre. Mi-a spus că au găsit niște munți la nord-est și la est de teritoriul nostru. Cu puțin noroc, asta ne va da o nouă șansă să ne reînarmăm oamenii, pentru că, din câte îmi amintesc, majoritatea munților de la vest de Al’thunran ascund cărbune și câteva minereuri de metal."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Economia minieră este gata"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:290
@@ -524,11 +526,11 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "Tocmai am fost anunțat că economia noastră minieră și-a început activitatea. Vestea asta mi-a adus zâmbetul pe buze – chiar dacă partea cea mai grea abia urmează, acum fierarii noștri vor da tot ce au mai bun ca să ne ușureze și mai mult viața."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
-msgstr ""
+msgstr "E nevoie de o fortăreață"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:298
@@ -539,11 +541,11 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth și cu mine tocmai am explorat zona din jurul celor trei munți. O mare problemă strategică a zonei pare să fie că există două trecători mai mari – una la nord și una la sud de muntele din mijloc. Aceste trecători sunt destul de greu de controlat, așa că mi se pare că avem o singură șansă să ferim munții de mâinile dușmanilor: trebuie să construim o fortăreață la est de munți!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Fortăreața este gata"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:307
@@ -552,11 +554,11 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "În sfârșit! Fortăreața tocmai a fost terminată, așa că intrarea în așezarea noastră ar trebui să fie deocamdată în siguranță. Pe viitor ne-am putea gândi să construim mai multe fortificații, precum bariere și turnuri, la trecători, dar acum putem respira ușurați."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Economie și antrenament îmbunătățite"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:315
@@ -564,7 +566,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Economia noastră minieră pare să meargă bine, iar asta e deja o veste bună! Oricum, încă mulți bărbați și multe femei din sala noastră așteaptă o sarcină, ca să-i poată ajuta pe soldații noștri să se pregătească pentru războiul care vine."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -576,7 +578,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Geologii noștri au găsit mult mai multe zăcăminte de minereu de fier, cărbune și chiar aur. Ar trebui să ne îmbunătățim minele actuale imediat ce minerii noștri vor avea mai multă experiență. Ar trebui să construim mai multe mine, o infrastructură a hranei mai mare, ca să ne aprovizionăm mereu oamenii cu destulă hrană, și o economie de prelucrare mai dezvoltată. Dar asta încă nu e tot – majoritatea soldaților noștri sunt destul de tineri și nici nu au o armă bună, nici nu sunt bine antrenați. Ar trebui să construim centre de antrenament ca să-i pregătim pentru sarcinile lor viitoare."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:328
@@ -585,7 +587,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Frații mei și soldații lor sunt morți și au lăsat în urmă foc și distrugere. În niciuna dintre ruine n-am găsit vreun bărbat sau vreo femeie din poporul de rând, așa că nu pot decât să sper că au fugit de pe acest câmp de luptă crud și au început o viață mai bună în altă parte."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -596,21 +598,21 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "N-a mai rămas nimic din frumusețea pe care mi-o amintesc, din vechea capitală au rămas doar ruine. Sunt îndurerat, dar și ușurat. Nu mai speram să revăd vechea frumusețe a orașului Al’thunran – abia cu câteva luni în urmă mă întrebam dacă voi mai putea vreodată să pun piciorul acolo. Acum orașul vechi e din nou în mâinile mele și nu voi ezita să-l reconstruiesc cu toată puterea oamenilor mei. Abia aștept să-l văd din nou în vechea lui frumusețe."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
-msgstr ""
+msgstr "Victorie"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Ai încheiat ultima misiune a campaniei-tutorial a barbarilor. Poți continua să joci, dacă vrei; altfel, treci la următoarea campanie."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
-msgstr ""
+msgstr "Asaltul militar"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:341
@@ -618,7 +620,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Așa să fie, generalii sunt pe teren și îmi așază trupele, iar Boldreth însuși va conduce primul atac. Voi călări alături de el, ca să eliberez Al’thunran de acest război și să aduc pacea înapoi în capitala noastră."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:344
@@ -627,20 +629,20 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Când soarele tânăr se va ridica mâine dimineață deasupra copacilor, voi porunci asaltul. Până la amurg îmi voi sărbători victoria în sălile de lemn ale căpeteniei războinice și voi sacrifica un miel nou-născut în cinstea tatălui meu, ai cărui ochi sunt ațintiți astăzi asupra mea."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
-msgstr ""
+msgstr "Așa să fie!"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Transport mai rapid"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Khantrukh spune:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:355
@@ -648,4 +650,4 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Căpetenie, gândește-te la bieții cărăuși: drumurile noastre devin tot mai lungi, iar povara de pe umerii lor nu devine niciodată mai ușoară. Ar trebui să creștem mai mulți boi, ca să le ușurăm munca și să ne facem transportul mai eficient."

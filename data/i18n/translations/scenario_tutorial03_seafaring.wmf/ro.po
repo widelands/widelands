@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# # Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -19,60 +20,60 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
-msgstr "Navigare"
+msgstr "Navigație"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Tutorialul de navigație"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Bine ai revenit. În acest tutorial vei învăța cele mai importante lucruri despre navigație, adică despre nave, porturi și expediții."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "Dar mai întâi lasă-mă să-ți fac o prezentare a teritoriului tău: aici, în sud, ai o economie întreagă, cu aproape tot ce îți trebuie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr ""
+msgstr "Partea de nord"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Aici, în partea de nord, ai doar o mină de aur și un depozit. Deși minerii sunt bine aprovizionați cu mâncare, nu există nicio cale de a transporta minereul de aur la topitoria noastră din partea de sud."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Am încercat să construim un drum, dar muntele este prea lat și prea abrupt. Prin urmare, avem o singură posibilitate: trebuie să stabilim o rută maritimă între aceste două părți."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Dar nu vreau să te grăbesc: abia ai ajuns aici și probabil ai vrea să-ți vezi tabăra mai îndeaproape. Și eu voi lua o scurtă pauză și revin curând."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
 msgid "Ports"
-msgstr ""
+msgstr "Porturi"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
 msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
+msgstr "Pentru tot ce faci pe mare deschisă ai nevoie de un port pe țărm. Porturile sunt ca sediul central: pot depozita bunuri, muncitori și soldați. Soldații dinăuntru vor ieși automat când un inamic atacă portul."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
 msgid ""
@@ -81,221 +82,221 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "În plus, porturile oferă posibilitatea de a transporta bunuri cu navele. Când faci clic pe portul pe care îl ai deja, vei observa două file suplimentare: „Bunuri care așteaptă să fie expediate” și „Muncitori care așteaptă să se îmbarce”. Aceștia așteaptă o navă care să-i transporte în alt port. Momentan nu există niciunul, pentru că nu am construit încă un al doilea port. Așa că hai să schimbăm asta!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
-msgstr ""
+msgstr "Construirea porturilor"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
-msgstr ""
+msgstr "Cum se construiește un port"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
+msgstr "Porturile sunt clădiri mari, dar pot fi construite doar în locuri speciale: cele marcate cu"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
-msgstr ""
+msgstr "pictograma albastră de spațiu pentru port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "Spațiile pentru porturi sunt stabilite de autorul hărții, așa că o hartă fie le conține, fie nu. Totuși, ele pot fi ascunse sub copaci sau blocate de clădirile din jur."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "Poate ai observat deja că ai o astfel de pictogramă lângă castelul tău."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
-msgstr ""
+msgstr "Construiește un port"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "Construiește un port în partea de nord a taberei tale"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Ai întotdeauna nevoie de un port atunci când vrei să transporți bunuri cu o navă."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "Construiește un port lângă castelul tău, pe pictograma albastră de spațiu pentru port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "Porturile se construiesc ca niște clădiri obișnuite, dar sunt disponibile doar pe spațiile albastre pentru porturi. Fă clic pe un câmp cu această pictogramă, iar meniul de construcție îți va oferi automat construirea unui port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "Deși porturile funcționează ca depozite, nu ar trebui să construiești mai multe decât e necesar: costă cuarț, diamante și aur, ceea ce le face destul de scumpe."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Constructing ships"
-msgstr ""
+msgstr "Construirea navelor"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Hai să construim nave"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "Grozav. Cât timp se construiește portul, hai să construim câteva nave."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "Navele sunt construite pe țărm, lângă un șantier naval, de un constructor de nave. Trebuie să construim unul undeva aproape de mal."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Construiește un șantier naval"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "Construiește un șantier naval aproape de coastă"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "Navele sunt produse de un șantier naval. Este o clădire medie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Construiește un șantier naval aproape de țărmul părții de sud a teritoriului tău."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
+msgstr "Șantierul naval este o clădire medie. Deși poate fi construit oriunde pe hartă, constructorul de nave lucrează doar dacă este aproape de apă și dacă pe țărm nu sunt copaci sau drumuri."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "Așteptăm navele"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
+msgstr "Foarte bine. Șantierul tău naval este gata, iar constructorul de nave s-a apucat imediat de lucru. Pentru construirea navelor are nevoie de bușteni, scânduri și pânză de păianjen, care vor fi transportate la șantierul naval."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr ""
+msgstr "Constructorul de nave va duce bunurile de care are nevoie într-un loc liber de pe țărm și va construi acolo o navă. Când prima navă va fi gata, va fi lansată la apă, iar constructorul de nave va construi alta."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "Ar trebui să așteptăm până avem două nave. Deocamdată ar trebui să fie de ajuns."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
-msgstr ""
+msgstr "Nave"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "Construiește două nave"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
+msgstr "Navele sunt construite automat după ce șantierul naval este gata și bunurile necesare au fost livrate."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr ""
+msgstr "Așteaptă până când constructorul de nave a construit două nave."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "Nu uita să oprești șantierul naval când ai destule nave."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "Shipyard production"
-msgstr ""
+msgstr "Producția șantierului naval"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "We have enough ships"
-msgstr ""
+msgstr "Avem destule nave"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "A doua ta navă, „%1%”, este acum gata."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
+msgstr "Trebuie să oprești șantierul naval când ai destule nave. Altfel, constructorul de nave îți va consuma toți buștenii și toată pânza de păianjen, producând zeci de nave."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
+msgstr "Aceasta este pictograma pentru oprirea producției. O vei găsi în fereastra clădirii."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
-msgstr ""
+msgstr "Fără fier"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
-msgstr ""
+msgstr "Ne lipsește fierul"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "S-ar putea ca a doua navă să nu fie încă gata, dar avem o problemă urgentă."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
+msgstr "Cum sigur ai observat deja, în muntele din vest nu există fier. Avem cărbune și minereu de aur din belșug, dar fără minereu de fier nu putem produce nicio unealtă."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
+msgstr "Deși ar putea dura mult, ar putea fi scump și nu lipsit de pericole – cine știe ce monștri trăiesc în mare? – nu văd altă posibilitate: va trebui să pornim într-o expediție pe mări necunoscute."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "O plimbare pe mare, ce bucurie mare"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Expeditions"
-msgstr ""
+msgstr "Expediții"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
+msgstr "În timpul unei expediții, trimiți o navă să descopere insule noi și poate să întemeieze acolo o colonie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -304,82 +305,82 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
+msgstr "Expedițiile pot fi pornite din orice port. Apoi, toate bunurile necesare sunt transportate în acel port. Bunurile sunt exact cele de care tribul tău are nevoie pentru a construi un port (scopul tău este să construiești un port departe de casă, așa că asta nu e surprinzător) și, bineînțeles, îți trebuie și un constructor. Când totul este pregătit, va veni o navă să le ia."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Poți verifica bunurile necesare în fila „Expediție” a portului (va apărea pe ultima poziție după ce ai pornit o expediție)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
-msgstr ""
+msgstr "Acum încearcă. Îți voi spune mai târziu care sunt pașii următori."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "Pornește o expediție din oricare dintre porturile tale."
 
 #. TRANSLATORS: This refers to a memory game
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "Mi-am făcut bagajul și am pus în el …"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr ""
+msgstr "Elemente suplimentare"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Ar putea fi util să luăm cu noi mai multe bunuri decât cele necesare pentru construirea unui port nou. Astfel, vom putea începe să construim clădiri noi imediat ce portul este gata."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Poți lua cu tine într-o expediție bunuri, soldați sau muncitori suplimentari. Îi poți stabili completând locurile goale de sub bunurile principale necesare pentru construirea portului."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "Fă clic pe locurile goale și apoi derulează lista pentru a alege elementul suplimentar."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Acum încearcă. Un punct mic verde, galben sau roșu îți arată dacă elementul a sosit, este pe drum sau, respectiv, nu este disponibil."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
-msgstr ""
+msgstr "Expediție"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr ""
+msgstr "Pornește o expediție"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
-msgstr ""
+msgstr "Pornește o expediție."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
+msgstr "Pentru asta, fă clic pe butonul „Pornește o expediție” din oricare port. Va apărea o filă nouă în care poți vedea bunurile necesare."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
-msgstr ""
+msgstr "Spre pășuni mai verzi"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr ""
+msgstr "Pornește-ți expediția"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -388,64 +389,64 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Nava ta de expediție este pregătită. Așteaptă ordinele tale în fața portului. Nu mai transportă bunuri. Folosește-i butoanele pentru a trimite nava în oricare dintre cele șase direcții principale ale hărții Widelands. Când a ajuns la un țărm, o poți face să navigheze de-a lungul coastei, unde va căuta locuri potrivite pentru debarcare."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "După ce a fost găsit un spațiu pentru port, poți construi un port nou cu butonul din centrul ferestrei de control a navei."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
+msgstr "Bunurile vor fi apoi descărcate, iar nava își va relua sarcina de a transporta bunuri. Constructorul se va apuca de lucru și va construi un port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "Caută o insulă cu un munte și găsește acolo un spațiu pentru port. Colonizează insula."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
-msgstr ""
+msgstr "Explorează"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid "Found a settlement"
-msgstr ""
+msgstr "Întemeiază o așezare"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr ""
+msgstr "Navighează cu nava spre o insulă care ar putea conține minereu de fier."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
+msgstr "Când faci clic pe nava de expediție, se deschide o fereastră din care îți poți controla nava."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "Când ai găsit un spațiu potrivit pentru port, construiește acolo un port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
-msgstr ""
+msgstr "Colonie nouă"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "Colonia ta a fost întemeiată"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
+msgstr "Ai dus expediția la bun sfârșit și ai întemeiat o nouă colonie. Am trimis câțiva geologi – ei raportează deja că au găsit minereu de fier."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:213
 msgid ""
@@ -453,7 +454,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Până acum ai învățat tot ce trebuie despre navigație: cum să construiești porturi și nave și cum să trimiți o expediție. Ține minte că expedițiile sunt uneori calea cea mai rapidă de a ajunge la resurse esențiale – iar uneori singura."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -461,7 +462,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
+msgstr "Dar vreau să te și avertizez. Porturile sunt ca sediul central: pot fi atacate de un inamic din apropiere. În timp ce sediul tău central are soldați care să-l apere, portul tău nou construit nu va avea. De aceea, ar trebui să eviți să te stabilești lângă un inamic."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
@@ -471,49 +472,49 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Pentru a te asigura că sunt apărate cum trebuie, poți seta numărul dorit de soldați apărători pentru amândouă în fila „Soldați”, la fel ca la clădirile militare. Dar ele sunt în același timp și depozite, așa că pot găzdui oricâți soldați. Numărul dorit asigură că apărătorii sunt ceruți de port sau de sediul central, iar odată ce sunt încartiruiți acolo, nu mai sunt trimiși în altă parte pentru alte nevoi."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "Pe această hartă nu există niciun inamic de care să te temi. În alte jocuri, ar trebui să setezi câțiva apărători pentru porturi și să acorzi prioritate construirii uneia sau a două fortificații militare în jurul noilor tale colonii."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
-msgstr ""
+msgstr "Misiunea noastră"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:225
 msgid "Start mining"
-msgstr ""
+msgstr "Începe mineritul"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "A fost o muncă lungă și costisitoare să ajungem aici. Insula nu are prea multe de oferit, dar în muntele ei există ceva minereu de fier. Economia noastră are nevoie de minereu de fier, așa că trebuie să construim o mină de fier."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "Începe extragerea minereului de fier din munte."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mină de fier"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "Construiește o mină de fier pe insulă"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "Economiei noastre îi lipsesc resursele."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "Începe extragerea minereului de fier din munții insulei."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
@@ -521,25 +522,25 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid "There is more to it…"
-msgstr ""
+msgstr "Mai e ceva…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid "Another gold mountain"
-msgstr ""
+msgstr "Încă un munte de aur"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "Va dura ceva timp până când șantierul tău naval va construi niște nave. Cât le așteptăm, aș vrea să te învăț încă un mod de transport pe apă."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Navele au avantajul că pot transporta simultan cantități mari de bunuri și muncitori, dar, din păcate, destinațiile lor sunt limitate la câteva locuri potrivite pentru un port."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
 msgid ""
@@ -548,53 +549,53 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "Uită-te la valea aceasta din sudul îndepărtat. Am găsit aici un munte cu aur și am vrea să extragem minereu și din el. Dar pâraiele care îl despart de colonia noastră principală sunt prea late pentru a construi poduri și prea înguste pentru ca navele să treacă prin ele. Drumurile noastre ar trebui să ocolească mult, ceea ce încetinește foarte tare transportul bunurilor."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "Bărci cu vâsle și șantiere de bacuri"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "Aici intră în scenă bacurile. Bacurile sunt bărci mici cu vâsle, care pot transporta doar un bun o dată și niciun muncitor (în afară de cel care vâslește și care nu își părăsește niciodată barca)."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Bacurile sunt construite în șantiere de bacuri; o barcă cu vâsle costă doi bușteni și o bucată de pânză și se construiește repede. Un șantier de bacuri este o clădire medie care trebuie construită aproape de țărm."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "Hai să construim un șantier de bacuri aproape de țărm înainte să continuăm."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "Construiește un șantier de bacuri"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "Construiește un șantier de bacuri aproape de țărm"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "Bacurile sunt construite de un șantier de bacuri."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "Trebuie să construiești șantierul de bacuri aproape de țărm, altfel nu va putea construi bacuri acolo."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr ""
+msgstr "Căi navigabile"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -602,7 +603,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "Spre deosebire de nave, care călătoresc spre orice port unde este nevoie de ele, bacurile au rute de transport fixe, numite căi navigabile. O cale navigabilă se construiește la fel ca un drum: faci clic pe un steag aproape de țărm, alegi „Construiește o cale navigabilă” și selectezi traseul căii navigabile la fel cum ai face pentru un drum."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -610,76 +611,76 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "Căile navigabile pot fi construite atât pe mare deschisă, cât și aproape de țărm, unde apa este prea mică pentru navele mari. Singura regulă este ca cele două triunghiuri direct alăturate fiecărui segment al căii navigabile să fie apă, iar întregul traseu să fie pe teritoriul tău."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "Reține și că, spre deosebire de drumuri, căile navigabile nu pot fi construite oricât de lungi vrei. Fiecare hartă are o limită de lungime pentru căile navigabile. Pe această hartă, limita este de 5 câmpuri."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "Ține minte mereu că bacurile nu transportă muncitori. Le poți folosi pentru a grăbi transportul bunurilor, dar nu pot înlocui niciodată complet drumurile."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "Permite-mi să-ți arăt cum se construiește o cale navigabilă…"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
-msgstr ""
+msgstr "Valuri de aur"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "După cum vezi, nu e chiar așa de greu. Când construiești o cale navigabilă, cel mai apropiat bac liber se va repartiza singur pe ea."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Acum e rândul tău: construiește o mină de aur pe muntele din sud și conecteaz-o la uscatul principal construind căi navigabile peste pâraie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "Construiește o mină de aur și căi navigabile"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Construiește o mină de aur pe muntele din sud și conecteaz-o la uscatul principal construind căi navigabile peste pâraie."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "O cale navigabilă se construiește la fel ca un drum: faci clic pe un steag aproape de țărm, alegi „Construiește o cale navigabilă” și selectezi traseul căii navigabile la fel cum ai face pentru un drum."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "Totuși, fiecare segment al căii navigabile are nevoie de două triunghiuri de apă alături."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "Încheiere"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "Despre bacuri"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Acum mai sunt doar câteva lucruri pe care aș vrea să le ții minte ori de câte ori folosești bacuri."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
@@ -688,7 +689,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Nu uita niciodată că aceste bărci cu vâsle sunt prea mici pentru a transporta muncitori. Le poți folosi ca scurtături pentru transportul bunurilor în interiorul unor părți ale teritoriului tău, dar nu și pentru a revendica regiuni în care nu poți ajunge nici pe drum, nici cu nava. Nu tăia niciodată toate drumurile dintre două locuri conectate prin căi navigabile, decât dacă ești sigur că niciun muncitor nu va trebui să meargă vreodată acolo."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -700,47 +701,47 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Iar dacă o cale navigabilă reprezintă o scurtătură importantă între rețelele tale de drumuri, economia ta va tinde să trimită multe bunuri pe calea navigabilă. Cum o cale navigabilă poate avea un singur bac – spre deosebire de drumuri, care primesc un al doilea cărăuș dacă sunt foarte aglomerate – și cum ele tind adesea să fie mai lungi decât cele două-trei câmpuri recomandate pentru drumuri, există mereu riscul ca acestea să devină blocaje serioase în economia ta. Încearcă să construiești mai multe căi navigabile în paralel, pentru a împărți încărcătura. Dacă nu este posibil, în unele cazuri este chiar mai eficient să nu folosești căi navigabile."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid "Ferry yard production"
-msgstr ""
+msgstr "Producția șantierului de bacuri"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
 msgid "More ferries needed?"
-msgstr ""
+msgstr "E nevoie de mai multe bacuri?"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "După cum vezi, bacurile pot fi produse destul de repede, dar nu trebuie să-ți faci griji că se irosesc materiale, pentru că șantierele de bacuri le produc în mod normal doar la cerere, când există căi navigabile nedeservite."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Cât timp un bac deservește o cale navigabilă, durata lui de viață este nelimitată, dar bacurile fără ocupație vor putrezi și, în cele din urmă, se vor scufunda."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Ai învățat tot ce se poate învăța despre nave și bacuri!"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "Mai există o insulă pe care poți construi un port, dacă vrei să încerci să pornești încă o expediție."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "Ca întotdeauna, poți continua să joci și să mai exersezi pe această hartă, dacă vrei, sau îți poți pregăti brevetul de căpitan și îți poți încerca noile abilități într-un joc adevărat…"

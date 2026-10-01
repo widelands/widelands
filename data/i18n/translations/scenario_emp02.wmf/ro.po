@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
-msgstr "Construieşte o economie a lemnului"
+msgstr "Construiește o economie a lemnului"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
@@ -27,146 +28,146 @@ msgstr "Economia lemnului"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Construiește trei case ale tăietorului de lemne, o casă a silvicultorului și un gater."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr "Construiește o carieră de piatră"
+msgstr "Construiește o carieră"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
-msgstr ""
+msgstr "Carieră"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Construiește o carieră la sud de sediul central."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
-msgstr ""
+msgstr "Apără-ți colonia"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "Apără-ți colonia"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Construiește câteva fortinuri și posturi de santinelă în jurul coloniei."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
-msgstr ""
+msgstr "Începe exploatarea marmurei"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
-msgstr ""
+msgstr "Marmură"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "Extinde-te spre est, ca să începi să extragi marmură din munte."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr ""
+msgstr "Construiește o casă a pietrarului și o infrastructură minieră"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr ""
+msgstr "Casa pietrarului și infrastructura minieră"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "Construiește o casă a pietrarului și apoi o infrastructură completă de minerit și producție (mină de cărbune și/sau cuptor de cărbune, mină de fier, fierărie de unelte, fierărie de arme, fierărie de armuri și topitorie)."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
-msgstr "Trimite de mâncare minerilor"
+msgstr "Asigură hrană pentru mineri"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "Hrană pentru mineri"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
-msgstr ""
+msgstr "Construiește o tavernă pentru a produce hrană pentru minerii noștri."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
-msgstr ""
+msgstr "Bineînțeles, asta înseamnă că vei avea nevoie de mai multe resurse pentru prepararea acestei hrane – precum pește, carne sau pâine."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Pentru a asigura aceste alimente, poți construi o casă a pescarului, o casă a vânătorului, o fermă, o moară și o brutărie."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
-msgstr ""
+msgstr "Construiește o berărie și o cramă, ca să le dai minerilor băuturi bune și tari."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
-msgstr ""
+msgstr "Poate vei avea nevoie și de o crescătorie de porci, o vie și câteva fântâni."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "Tu hotărăști ce vrei să construiești. Dar ține minte – minele de cărbune și de fier au nevoie de bere, minele de marmură și de aur au nevoie de vin, iar toate minele au nevoie cel puțin de rații, care se prepară din pâine SAU carne SAU pește."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Apără-ți granița de est"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "Apără-ți granița de est"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
-msgstr ""
+msgstr "Construiește clădiri militare mai puternice, precum un avanpost, o barieră sau un turn, la granița de est."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:88
 msgid "Build a tower to watch deep inside the enemy territory."
-msgstr ""
+msgstr "Construiește un turn pentru a vedea adânc în teritoriul inamic."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Distruge tribul barbar"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Distruge tribul barbar"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Construiește o cazarmă pentru a începe pregătirea soldaților."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "Attack and completely destroy the Barbarian buildings as soon as you have "
 "enough soldiers."
-msgstr ""
+msgstr "Atacă și distruge complet clădirile barbarilor imediat ce ai destui soldați."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
-msgstr ""
+msgstr "Construiește o fortăreață pe peninsulă (lângă locul unde se afla înainte sediul central al barbarilor). În cele din urmă, asta va împiedica așezarea altor triburi în acea regiune."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
-msgstr ""
+msgstr "O insulă nouă"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:120
@@ -178,7 +179,7 @@ msgstr ""
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:262
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Jurnalul lui Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:111
@@ -187,7 +188,7 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr ""
+msgstr "În sfârșit! Insula aceasta pare făcută pentru noi, e un dar al zeilor pentru poporul meu și pentru mine. Până acum am văzut doar o mică parte din ea, dar numai partea aceasta îmi aduce deja lumină în suflet. Simt că am găsit o comoară fără preț, un ținut ca raiul."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:114
@@ -195,11 +196,11 @@ msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr ""
+msgstr "Pe această insulă ne vom începe viața cea nouă. Vom ridica un avanpost pentru exilul nostru, care poate va deveni un cămin nou și frumos pentru fiecare dintre noi."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
-msgstr ""
+msgstr "Pădurile verzi"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:122
@@ -207,7 +208,7 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr ""
+msgstr "Când ne-am plimbat, Saledus și cu mine, prin aceste păduri minunate din nord, am simțit că viitorul nostru abia a început. Ținutul acesta e atât de liniștit, de bun și de frumos, încât aș putea rămâne aici până la sfârșitul vieții."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:125
@@ -215,25 +216,25 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Dar până în ziua aceea pot trece mulți ani! Deocamdată trebuie să ne concentrăm asupra prezentului și să construim câteva case ale tăietorului de lemne și un gater, ca să producem materiale de construcție de bază."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Dar nu trebuie să uităm să ocrotim această bogăție a naturii. Pădurile acestea ar trebui să dăinuie pentru totdeauna, așa că trebuie neapărat să construim și o casă a silvicultorului."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
-msgstr ""
+msgstr "Stâncile"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Mai târziu am coborât la stâncile din sud și am căutat un loc unde am putea construi o carieră, ca să obținem granit pentru clădirile noastre mai mari."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:140
@@ -241,37 +242,37 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr ""
+msgstr "Din nou m-am simțit ca în rai când am observat că printre stânci se aflau câteva pietre ca de marmură. Se pare că în curând vom putea construi clădiri trainice și luxoase, precum cele cu care eram obișnuiți în Fremil."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Lemn pentru colonie"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:149
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr ""
+msgstr "Vești bune! Astăzi economia noastră a lemnului este gata. Acum putem fi siguri că vom avea destul lemn pentru viitoarele noastre construcții."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr ""
+msgstr "Piatră pentru colonie"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
-msgstr ""
+msgstr "Grozav! Astăzi a fost terminată construcția carierei. Acum vom avea destul granit și marmură pentru a construi clădiri mai mari."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
-msgstr ""
+msgstr "Resturi de corabie periculoase"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Saledus pare nemulțumit"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:166
@@ -281,29 +282,29 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Sire, nu vreau să stârnesc panică, dar am găsit ceva care îmi dă un gol în stomac și îmi umple inima de valuri de teamă. Când am coborât pe țărmul sudic, am găsit resturile unei alte corăbii. Nu știu dacă aceste bucăți sunt tot ce a mai rămas din acea corabie. În orice caz, nu par să fie vechi."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
-msgstr ""
+msgstr "Poate că oamenii de pe acea corabie au fost prinși de aceeași furtună care ne-a adus pe noi la Malac’ Mor – și au fost aduși pe această insulă."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:172
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Te rog să fii prudent și să construiești câteva fortinuri sau posturi de santinelă în jurul coloniei noastre."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
-msgstr ""
+msgstr "Marmură pe munte"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Saledus zâmbește"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:182
@@ -311,7 +312,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Sire, am vești bune pentru tine: când am mers spre est, am găsit un munte mai mare. Nu sunt absolut sigur – un geolog ar trebui să verifice dacă am dreptate –, dar cred că am putea extrage marmură din câteva locuri de pe munte."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:185
@@ -319,20 +320,20 @@ msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr ""
+msgstr "Ar fi o sursă bună pentru a ne spori rezerva de marmură de calitate, dincolo de cantitățile mici pe care le putem obține din carieră. Poate că ai avut dreptate când ai spus că insula aceasta e ca raiul."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Te rog, extinde-te până la acel munte și începe să extragi marmură."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Further Mountains"
-msgstr ""
+msgstr "Alți munți"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Saledus este entuziasmat"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:198
@@ -342,7 +343,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Pe zei, ce noroc de necrezut! Mai sunt doi munți și se pare că unul are o cantitate mare de cărbune, iar celălalt de minereu de fier. Te sfătuiesc să construiești imediat mine de fier și de cărbune (sau măcar cuptoare de cărbune), topitorii, fierării de unelte, fierării de armuri și fierării de arme."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:201
@@ -350,25 +351,25 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "Totuși: pentru toate aceste clădiri mai mari avem nevoie de materiale de construcție mai bune și mai elegante. Așa că trebuie să construiești o casă pentru pietrar, care va ciopli coloane din marmură."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:204
 msgid "After everything, we can now begin to live like we did in Fremil."
-msgstr ""
+msgstr "După toate prin câte am trecut, acum putem începe să trăim așa cum trăiam în Fremil."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Hrană pentru mineri"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Intră Amalea…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutius, nu crezi că ai uitat ceva important?"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:215
@@ -377,40 +378,40 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr ""
+msgstr "E frumos și, bineînțeles, o idee bună să construiești mine, care ne vor da o viață mai confortabilă, dar oamenii care lucrează în mine sunt nemulțumiți de situația actuală. Muncesc din greu și nu au timp să-și pregătească singuri mâncarea."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Ce-ai zice să-i ajuți? Nu-ți pot spune exact de ce avem nevoie… dar iată recomandările mele:"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"
-msgstr ""
+msgstr "Noua noastră tavernă"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea zâmbește"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:226
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Tocmai am vizitat noua noastră tavernă, „La palmieri”. Berea pe care o servesc e chiar gustoasă. Ar trebui să bei și tu ceva acolo."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:229
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr ""
+msgstr "E bine să văd că acum avem pe insula noastră un mediu mai cald și mai familiar. Mulțumesc, Lutius."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
-msgstr ""
+msgstr "Barbarii"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:237
@@ -418,7 +419,7 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
+msgstr "Pe zei! E absolut îngrozitor. Se pare că ne aflăm în fața unei încercări – și se pare că Saledus a avut dreptate să se teamă de epava pe care a găsit-o."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:240
@@ -426,7 +427,7 @@ msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr ""
+msgstr "Astăzi, când am coborât pe țărmul estic, m-am speriat. Am zărit unul dintre acele triburi barbare detestate și rele, cu care am avut atâtea probleme înainte."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:243
@@ -435,16 +436,16 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "La început am fost naiv și am sperat că sunt pașnici, dar de îndată ce unul dintre ei m-a văzut, s-au năpustit spre mine și au început să mă atace cu sulițele lor de aruncat. Mulțumesc zeilor că am reușit să fug și să mă ascund, înainte să mă întorc la colonia noastră sub acoperirea întunericului."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "Anyway, we must build stronger military buildings as soon as possible."
-msgstr ""
+msgstr "Oricum, trebuie să construim clădiri militare mai puternice cât mai curând posibil."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Command to Attack"
-msgstr ""
+msgstr "Ordin de atac"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:255
@@ -452,18 +453,18 @@ msgid ""
 "That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr ""
+msgstr "E bine. Prima clădire militară mare este gata, iar infrastructura minieră e tot mai bună. Acum ar trebui să ne gândim să ne pregătim de luptă."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
-msgstr ""
+msgstr "Victorie"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
-msgstr ""
+msgstr "Astăzi este o zi de mândrie. Am luptat pentru noul nostru cămin și am ieșit învingători."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:267
@@ -471,32 +472,32 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Încă mai sunt câțiva barbari ascunși pe insula noastră, dar sunt sigur că îi vom găsi curând. Fiecare barbar care nu ne atacă va fi urcat într-o barcă împreună cu ceilalți pașnici și trimis înapoi în țara lui."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr ""
+msgstr "Am pus pe picioare o economie care funcționează, am pregătit soldați noi și i-am alungat pe barbari de pe insulă. Acum ne putem gândi la pașii următori."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
-msgstr ""
+msgstr "Pe măsură ce timpul trece"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr ""
+msgstr "7 zile mai târziu…"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
-msgstr ""
+msgstr "Un mesaj"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr ""
+msgstr "Astăzi un porumbel a aterizat pe insula noastră. A adus un mesaj care mă umple de gânduri negre și îmi readuce temerile."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:288
@@ -505,10 +506,10 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
+msgstr "Mesajul îmi era adresat și mă implora să mă întorc la Fremil. Spune că Imperiul e în război cu barbarii. Imperiul a fost atacat dinspre nord de tribul pe care mi se interzisese să-l atac. Îmi e limpede ce trebuie să fac…"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci la misiunea următoare."
