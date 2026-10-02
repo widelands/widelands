@@ -47,3 +47,6 @@ gmon.out
 
 # Saveloading compatibility test cases
 /test/save/*
+
+# IntelliJ configs
+/.idea/
