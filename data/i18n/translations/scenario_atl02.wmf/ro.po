@@ -116,8 +116,8 @@ msgstr ""
 "Cele mai multe dintre uneltele noastre s-au pierdut în tragedia corăbiei. "
 "Oamenii noștri nu își vor putea îndeplini îndatoririle fără unelte "
 "potrivite. Din fericire, încă avem ceva minereu de fier și destul cărbune. "
-"Construiește o fierărie de unelte, pentru că este o condiție pentru reușita "
-"pe insulă. Nu uita să construiești și o topitorie."
+"Construiește o fierărie, pentru că este o condiție pentru reușita pe insulă."
+" Nu uita să construiești și o topitorie."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
@@ -523,8 +523,8 @@ msgid ""
 "provide us with good tools."
 msgstr ""
 "Pentru că am întemeiat aici un port, acum ne putem planifica așezarea. Încă "
-"avem destul minereu de fier, așa că o fierărie de unelte și o topitorie ne "
-"vor da repede unelte bune."
+"avem destul minereu de fier, așa că o fierărie și o topitorie ne vor da "
+"repede unelte bune."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"

@@ -2001,7 +2001,7 @@ msgstr "Tăietorul de lemne de la această colibă nu găsește niciun copac în
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr "Fierăria de armuri"
+msgstr "Atelier de scuturi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
@@ -2485,7 +2485,7 @@ msgstr "Fermă de păianjeni"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Fierăria de unelte"
+msgstr "Fierărie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -2552,7 +2552,7 @@ msgstr "confecționarea unei coase"
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Weapon Smithy"
-msgstr "Fierăria de arme"
+msgstr "Armurărie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
 #. because ...
@@ -2876,7 +2876,7 @@ msgstr "Filonul principal al acestei mine de granit s-a epuizat. Așteaptă-te l
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:8
 msgctxt "barbarians_building"
 msgid "Helm Smithy"
-msgstr "Fierăria de coifuri"
+msgstr "Atelier de coifuri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:79
@@ -3139,7 +3139,7 @@ msgstr "călirea lemnului"
 #: ../../../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Armor Smithy"
-msgstr "Fierăria de armuri"
+msgstr "Atelier de armuri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
@@ -3501,7 +3501,7 @@ msgstr "Tavernă"
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Fierăria de unelte"
+msgstr "Fierărie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
@@ -3538,7 +3538,7 @@ msgstr "Viticultorul de la această vie nu are teren curățat pe care să-și p
 #: ../../../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Weapon Smithy"
-msgstr "Fierăria de arme"
+msgstr "Armurărie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
@@ -9195,7 +9195,7 @@ msgstr "Maestru tăietor de lemne"
 #: ../../../../data/tribes/workers/atlanteans/armorsmith/init.lua:104
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
-msgstr "Armurier"
+msgstr "Meșter de scuturi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/baker/init.lua:8
@@ -9351,7 +9351,7 @@ msgstr "Pietrar"
 #: ../../../../data/tribes/workers/atlanteans/toolsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Fierar de unelte"
+msgstr "Fierar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/trainer/init.lua:8
@@ -9363,7 +9363,7 @@ msgstr "Antrenor"
 #: ../../../../data/tribes/workers/atlanteans/weaponsmith/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Weaponsmith"
-msgstr "Fierar de arme"
+msgstr "Meșter de arme"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/atlanteans/weaver/init.lua:8
@@ -9471,7 +9471,7 @@ msgstr "Geolog"
 #: ../../../../data/tribes/workers/barbarians/helmsmith/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Fierar de coifuri"
+msgstr "Meșter de coifuri"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/barbarians/hunter/init.lua:8
@@ -9579,7 +9579,7 @@ msgstr "Țesător"
 #: ../../../../data/tribes/workers/empire/armorsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Armorsmith"
-msgstr "Armurier"
+msgstr "Meșter de armuri"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/baker/init.lua:8
@@ -9747,7 +9747,7 @@ msgstr "Pietrar"
 #: ../../../../data/tribes/workers/empire/toolsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "Fierar de unelte"
+msgstr "Fierar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/trainer/init.lua:8
@@ -9771,7 +9771,7 @@ msgstr "Vinificator"
 #: ../../../../data/tribes/workers/empire/weaponsmith/init.lua:8
 msgctxt "empire_worker"
 msgid "Weaponsmith"
-msgstr "Fierar de arme"
+msgstr "Meșter de arme"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/tribes/workers/empire/weaver/init.lua:8

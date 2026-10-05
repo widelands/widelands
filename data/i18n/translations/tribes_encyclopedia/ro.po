@@ -3303,7 +3303,7 @@ msgid ""
 "Atlanteans use logs also as the base for planks, which are used in nearly "
 "every building. Besides the sawmill, the charcoal kiln, the toolsmithy and "
 "the smokery also need logs for their work."
-msgstr "Atlanții folosesc buștenii și ca materie primă pentru scânduri, care sunt folosite la aproape orice clădire. Pe lângă gater, și cuptorul de cărbune, fierăria de unelte și afumătoria au nevoie de bușteni pentru munca lor."
+msgstr "Atlanții folosesc buștenii și ca materie primă pentru scânduri, care sunt folosite la aproape orice clădire. Pe lângă gater, și cuptorul de cărbune, fierăria și afumătoria au nevoie de bușteni pentru munca lor."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Planks, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Planks, part 1
@@ -3325,7 +3325,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
-msgstr "Fierăria de arme și șantierul naval folosesc și ele scânduri pentru a produce diferitele tridente și navele puternice."
+msgstr "Armurăria și șantierul naval folosesc și ele scânduri pentru a produce diferitele tridente și navele puternice."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:470
@@ -3334,7 +3334,7 @@ msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It can "
 "be processed into spidercloth or tabards in a weaving mill, or used to make "
 "tools in the toolsmithy."
-msgstr "Mătasea de păianjen este produsă de păianjeni, care sunt crescuți în fermele de păianjeni. Poate fi prelucrată în țesătorie în pânză de păianjen sau în tabarduri ori poate fi folosită la fierăria de unelte pentru confecționarea uneltelor."
+msgstr "Mătasea de păianjen este produsă de păianjeni, care sunt crescuți în fermele de păianjeni. Poate fi prelucrată în țesătorie în pânză de păianjen sau în tabarduri ori poate fi folosită la fierărie pentru confecționarea uneltelor."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:479
@@ -3475,7 +3475,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The Atlantean fires in smelting works, armor smithies and weapon smithies "
 "are fed with coal."
-msgstr "Focurile atlanților din topitorii, fierăriile de armuri și fierăriile de arme sunt alimentate cu cărbune."
+msgstr "Focurile atlanților din topitorii, atelierele de scuturi și armurăriile sunt alimentate cu cărbune."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron Ore, part 1
@@ -3513,7 +3513,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used in the toolsmithy, armor "
 "smithy and weapon smithy."
-msgstr "Este produs de topitorie și folosit în fierăria de unelte, fierăria de armuri și fierăria de arme."
+msgstr "Este produs de topitorie și folosit în fierărie, în atelierul de scuturi și în armurărie."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold Ore, part 1
@@ -3554,7 +3554,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "It is produced by the smelting works and used by the armor smithy, the "
 "weapon smithy and the gold spinning mill."
-msgstr "Este produs de topitorie și folosit de fierăria de armuri, de fierăria de arme și de filatura de aur."
+msgstr "Este produs de topitorie și folosit de atelierul de scuturi, de armurărie și de filatura de aur."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Pick
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:673
@@ -3562,7 +3562,7 @@ msgctxt "ware"
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr "Târnăcoapele sunt folosite de pietrari și de mineri. Sunt produse de fierarul de unelte."
+msgstr "Târnăcoapele sunt folosite de pietrari și de mineri. Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Saw
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:682
@@ -3570,7 +3570,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr "Fierăstrăul este necesar fierăstrăierului, tăietorului de lemne și fierarului de unelte. Este produs de fierarul de unelte."
+msgstr "Fierăstrăul este necesar fierăstrăierului, tăietorului de lemne și fierarului. Este produs de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Shovel, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:694
@@ -3578,7 +3578,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Therefore the forester and the blackroot farmer use them. They are produced "
 "by the toolsmith."
-msgstr "De aceea le folosesc silvicultorul și cultivatorul de rădăcină neagră. Sunt produse de fierarul de unelte."
+msgstr "De aceea le folosesc silvicultorul și cultivatorul de rădăcină neagră. Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:707
@@ -3587,7 +3587,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr "Geologii, constructorii, fierarii de arme, armurierii și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt produse de fierarul de unelte."
+msgstr "Geologii, constructorii, meșterii de arme, meșterii de scuturi și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:717
@@ -3595,26 +3595,26 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
-msgstr "Clești de muls sunt folosiți de crescătorul de păianjeni pentru a mulge păianjenii. Sunt produși de fierarul de unelte."
+msgstr "Clești de muls sunt folosiți de crescătorul de păianjeni pentru a mulge păianjenii. Sunt produși de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:726
 msgctxt "atlanteans_ware"
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr "Plasa de pescuit este folosită de pescar și produsă de fierarul de unelte."
+msgstr "Plasa de pescuit este folosită de pescar și produsă de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Buckets
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:735
 msgctxt "atlanteans_ware"
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr "Găleți mari pentru piscicultor – produse de fierarul de unelte."
+msgstr "Găleți mari pentru piscicultor – produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Hunting Bow
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:744
 msgctxt "atlanteans_ware"
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
-msgstr "Acest arc este folosit de vânătorul atlant. Este produs de fierarul de unelte."
+msgstr "Acest arc este folosit de vânătorul atlant. Este produs de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Hook Pole
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:753
@@ -3622,7 +3622,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
-msgstr "Această cange este folosită de afumător pentru a atârna toată carnea și tot peștele în partea de sus a afumătoriei. Este făcută de fierarul de unelte."
+msgstr "Această cange este folosită de afumător pentru a atârna toată carnea și tot peștele în partea de sus a afumătoriei. Este făcută de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Scythe, part 1
@@ -3640,7 +3640,7 @@ msgstr "Coasa este unealta fermierilor."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:765
 msgctxt "atlanteans_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr "Coasele sunt produse de fierarul de unelte."
+msgstr "Coasele sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Bread Paddle, part 1
@@ -3658,7 +3658,7 @@ msgstr "Lopata de brutar este unealta brutarului; fiecare brutar are nevoie de u
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:778
 msgctxt "atlanteans_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr "Lopețile de brutar sunt produse de fierarul de unelte."
+msgstr "Lopețile de brutar sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Fire Tongs, part 1
@@ -3676,7 +3676,7 @@ msgstr "Cleștele de foc este unealta pentru topirea minereurilor."
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:791
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr "Este folosit în topitorie și produs de fierarul de unelte."
+msgstr "Este folosit în topitorie și produs de fierar."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Light Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:804
@@ -3685,7 +3685,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "Aceasta este arma de bază a soldaților atlanți. Împreună cu un tabard, formează echipamentul soldaților tineri. Tridentele ușoare sunt produse în fierăria de arme, la fel ca toate celelalte tridente."
+msgstr "Aceasta este arma de bază a soldaților atlanți. Împreună cu un tabard, formează echipamentul soldaților tineri. Tridentele ușoare sunt produse în armurărie, la fel ca toate celelalte tridente."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Long Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:813
@@ -3694,7 +3694,7 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "Tridentul lung este primul trident din antrenamentul soldaților. Este produs în fierăria de arme și folosit în temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de atac."
+msgstr "Tridentul lung este primul trident din antrenamentul soldaților. Este produs în armurărie și folosit în temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de atac."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Steel Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:822
@@ -3703,7 +3703,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr "Acesta este tridentul mediu. Este produs în fierăria de arme și folosit de soldații avansați în temniță – împreună cu hrană – pentru a se antrena de la nivelul 1 la nivelul 2 de atac."
+msgstr "Acesta este tridentul mediu. Este produs în armurărie și folosit de soldații avansați în temniță – împreună cu hrană – pentru a se antrena de la nivelul 1 la nivelul 2 de atac."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Double Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:831
@@ -3712,7 +3712,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "Tridentul dublu este unul dintre cele mai bune tridente produse de fierăria de arme a atlanților. Este folosit într-o temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de atac."
+msgstr "Tridentul dublu este unul dintre cele mai bune tridente produse de armurăria atlanților. Este folosit într-o temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de atac."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Heavy Double Trident
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:840
@@ -3722,7 +3722,7 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr "Aceasta este cea mai periculoasă armă a armatei atlante. Doar cei mai buni dintre cei mai buni soldați o pot folosi. Este produsă în fierăria de arme și folosită în temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de atac."
+msgstr "Aceasta este cea mai periculoasă armă a armatei atlante. Doar cei mai buni dintre cei mai buni soldați o pot folosi. Este produsă în armurărie și folosită în temniță – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de atac."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Steel Shield
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:849
@@ -3730,7 +3730,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
-msgstr "Acest scut de oțel este produs în fierăria de armuri și folosit în labirint – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de apărare."
+msgstr "Acest scut de oțel este produs în atelierul de scuturi și folosit în labirint – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de apărare."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Advanced Shield
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:858
@@ -3739,7 +3739,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr "Aceste scuturi avansate sunt folosite de cei mai buni soldați ai atlanților. Sunt produse în fierăria de armuri și folosite în labirint – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de apărare."
+msgstr "Aceste scuturi avansate sunt folosite de cei mai buni soldați ai atlanților. Sunt produse în atelierul de scuturi și folosite în labirint – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de apărare."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Tabard
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:867
@@ -4961,7 +4961,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You hear that sound of metal strident? The weapon smith just forged a "
 "trident!"
-msgstr "Auzi zăngănitul de metal ce răsună? Fierarul de arme tocmai a forjat un trident ca lumea!"
+msgstr "Auzi zăngănitul de metal ce răsună? Meșterul de arme tocmai a forjat un trident ca lumea!"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -6366,7 +6366,7 @@ msgid ""
 "The fires of the Barbarians are usually fed with coal. Consumers are several"
 " buildings: lime kiln, smelting works, ax workshop, war mill, and helm "
 "smithy."
-msgstr "Focurile barbarilor sunt de obicei alimentate cu cărbune. Consumatorii sunt mai multe clădiri: varnița, topitoria, atelierul de topoare, fierăria de război și fierăria de coifuri."
+msgstr "Focurile barbarilor sunt de obicei alimentate cu cărbune. Consumatorii sunt mai multe clădiri: varnița, topitoria, atelierul de topoare, fierăria de război și atelierul de coifuri."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:281
@@ -6380,7 +6380,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "It is produced by the smelting works and used to produce weapons and tools "
 "in the metal workshop, ax workshop, war mill and helm smithy."
-msgstr "Este produs de topitorie și folosit pentru producerea armelor și uneltelor în atelierul de metal, atelierul de topoare, fierăria de război și fierăria de coifuri."
+msgstr "Este produs de topitorie și folosit pentru producerea armelor și uneltelor în atelierul de metal, atelierul de topoare, fierăria de război și atelierul de coifuri."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Gold Ore, part 2
 #: ../../../../data/tribes/initialization/barbarians/units.lua:307
@@ -6398,7 +6398,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr "Doar lucrurile foarte importante sunt împodobite cu aur. Este produs de topitorie și folosit ca material de construcție prețios și pentru producerea diferitelor topoare (în fierăria de război) și a diferitelor piese de armură (în fierăria de coifuri)."
+msgstr "Doar lucrurile foarte importante sunt împodobite cu aur. Este produs de topitorie și folosit ca material de construcție prețios și pentru producerea diferitelor topoare (în fierăria de război) și a diferitelor piese de armură (în atelierul de coifuri)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Pick
 #: ../../../../data/tribes/initialization/barbarians/units.lua:333
@@ -6435,7 +6435,7 @@ msgid ""
 "hammer. Make sure you’ve always got some in reserve! They are one of the "
 "basic tools produced at the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr "Geologii, constructorii, fierarii, fierarii de coifuri și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt una dintre uneltele de bază produse în atelierul de metal (dar clădirea nu le mai produce dacă este îmbunătățită în atelier de topoare și fierărie de război)."
+msgstr "Geologii, constructorii, fierarii, meșterii de coifuri și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt una dintre uneltele de bază produse în atelierul de metal (dar clădirea nu le mai produce dacă este îmbunătățită în atelier de topoare și fierărie de război)."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
@@ -6573,7 +6573,7 @@ msgid ""
 "A helmet is a basic tool to protect soldiers. It is produced in the helm "
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
-msgstr "Casca este o piesă de bază pentru protecția soldaților. Este produsă în fierăria de coifuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de sănătate."
+msgstr "Casca este o piesă de bază pentru protecția soldaților. Este produsă în atelierul de coifuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de sănătate."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Mask
 #: ../../../../data/tribes/initialization/barbarians/units.lua:521
@@ -6582,7 +6582,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr "Masca este o armură îmbunătățită pentru soldații barbari. Este produsă în fierăria de coifuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de sănătate."
+msgstr "Masca este o armură îmbunătățită pentru soldații barbari. Este produsă în atelierul de coifuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de sănătate."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Warhelm
 #: ../../../../data/tribes/initialization/barbarians/units.lua:530
@@ -6591,7 +6591,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr "Aceasta este cea mai avansată armură a barbarilor. Este produsă într-o fierărie de coifuri și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de sănătate."
+msgstr "Aceasta este cea mai avansată armură a barbarilor. Este produsă într-un atelier de coifuri și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de sănătate."
 
 #. TRANSLATORS: Helptext for a Barbarian worker: Carrier
 #: ../../../../data/tribes/initialization/barbarians/units.lua:546
@@ -10439,7 +10439,7 @@ msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
 "trees. Logs are also used by the charcoal kiln, the toolsmithy and the "
 "sawmill."
-msgstr "Tăietorii de lemne ai Imperiului taie copacii; silvicultorii se îngrijesc de refacerea pădurii. Buștenii sunt folosiți și de cuptorul de cărbune, de fierăria de unelte și de gater."
+msgstr "Tăietorii de lemne ai Imperiului taie copacii; silvicultorii se îngrijesc de refacerea pădurii. Buștenii sunt folosiți și de cuptorul de cărbune, de fierărie și de gater."
 
 #. TRANSLATORS: Helptext for an Empire ware: Planks, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:138
@@ -10451,7 +10451,7 @@ msgstr "Sunt produse din bușteni la gater."
 #: ../../../../data/tribes/initialization/empire/units.lua:140
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
-msgstr "Sunt folosite și de fierăria de arme."
+msgstr "Sunt folosite și de armurărie."
 
 #. TRANSLATORS: Helptext for an Empire ware: Wool
 #: ../../../../data/tribes/initialization/empire/units.lua:150
@@ -10465,7 +10465,7 @@ msgctxt "empire_ware"
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
 " smithy."
-msgstr "Pânza este necesară pentru construirea mai multor clădiri. Este consumată și în fierăria de armuri."
+msgstr "Pânza este necesară pentru construirea mai multor clădiri. Este consumată și în atelierul de armuri."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fish
 #: ../../../../data/tribes/initialization/empire/units.lua:170
@@ -10579,7 +10579,7 @@ msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal."
-msgstr "Focurile din topitoriile, fierăriile de armuri și fierăriile de arme ale Imperiului sunt de obicei alimentate cu cărbune."
+msgstr "Focurile din topitoriile, atelierele de armuri și armurăriile Imperiului sunt de obicei alimentate cu cărbune."
 
 #. TRANSLATORS: Helptext for an Empire ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:318
@@ -10609,7 +10609,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
 " gold in the armor smithy and the weapon smithy."
-msgstr "Este produs de topitorie. Armurile și armele sunt împodobite cu aur în fierăria de armuri și în fierăria de arme."
+msgstr "Este produs de topitorie. Armurile și armele sunt împodobite cu aur în atelierul de armuri și în armurărie."
 
 #. TRANSLATORS: Helptext for an Empire ware: Pick
 #: ../../../../data/tribes/initialization/empire/units.lua:370
@@ -10617,19 +10617,19 @@ msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
 "toolsmith."
-msgstr "Târnăcoapele sunt folosite de pietrari și de mineri. Sunt produse de fierarul de unelte."
+msgstr "Târnăcoapele sunt folosite de pietrari și de mineri. Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Felling Ax, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:382
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
-msgstr "Topoarele de tăiat copaci sunt folosite de tăietorii de lemne și produse de fierăria de unelte."
+msgstr "Topoarele de tăiat copaci sunt folosite de tăietorii de lemne și produse de fierărie."
 
 #. TRANSLATORS: Helptext for an Empire ware: Saw
 #: ../../../../data/tribes/initialization/empire/units.lua:392
 msgctxt "empire_ware"
 msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
-msgstr "Acest fierăstrău este necesar tâmplarului. Este produs de fierarul de unelte."
+msgstr "Acest fierăstrău este necesar tâmplarului. Este produs de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Shovel, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:404
@@ -10637,7 +10637,7 @@ msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
 "the toolsmith."
-msgstr "De aceea le folosesc silvicultorul și viticultorul. Sunt produse de fierarul de unelte."
+msgstr "De aceea le folosesc silvicultorul și viticultorul. Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Hammer, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:417
@@ -10646,7 +10646,7 @@ msgid ""
 "Geologists, builders, weaponsmiths, armorsmiths and shipwrights all need a "
 "hammer. Make sure you’ve always got some in reserve! They are produced by "
 "the toolsmith."
-msgstr "Geologii, constructorii, fierarii de arme, armurierii și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt produse de fierarul de unelte."
+msgstr "Geologii, constructorii, meșterii de arme, meșterii de armuri și constructorii de nave au toți nevoie de un ciocan. Asigură-te că ai mereu câteva în rezervă! Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
@@ -10654,19 +10654,19 @@ msgstr "Geologii, constructorii, fierarii de arme, armurierii și constructorii 
 #: ../../../../data/tribes/initialization/empire/units.lua:443
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr "Sunt produse de fierarul de unelte."
+msgstr "Sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Scythe, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:456
 msgctxt "empire_ware"
 msgid "Scythes are produced by the toolsmith."
-msgstr "Coasele sunt produse de fierarul de unelte."
+msgstr "Coasele sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Bread Paddle, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:469
 msgctxt "empire_ware"
 msgid "Bread paddles are produced by the toolsmith."
-msgstr "Lopețile de brutar sunt produse de fierarul de unelte."
+msgstr "Lopețile de brutar sunt produse de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Basket
 #: ../../../../data/tribes/initialization/empire/units.lua:479
@@ -10674,7 +10674,7 @@ msgctxt "empire_ware"
 msgid ""
 "This basket is needed by the vine farmer for harvesting the grapes. It is "
 "produced by the toolsmith."
-msgstr "Acest coș este necesar viticultorului pentru culesul strugurilor. Este produs de fierarul de unelte."
+msgstr "Acest coș este necesar viticultorului pentru culesul strugurilor. Este produs de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Kitchen Tools
 #: ../../../../data/tribes/initialization/empire/units.lua:488
@@ -10682,13 +10682,13 @@ msgctxt "empire_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. They are produced "
 "in a toolsmithy and used in taverns and inns."
-msgstr "Ustensilele de bucătărie sunt necesare pentru prepararea rațiilor și a meselor. Sunt produse într-o fierărie de unelte și folosite în taverne și hanuri."
+msgstr "Ustensilele de bucătărie sunt necesare pentru prepararea rațiilor și a meselor. Sunt produse într-o fierărie și folosite în taverne și hanuri."
 
 #. TRANSLATORS: Helptext for an Empire ware: Fire Tongs, part 2
 #: ../../../../data/tribes/initialization/empire/units.lua:500
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr "Sunt folosiți în topitorie și produși de fierarul de unelte."
+msgstr "Sunt folosiți în topitorie și produși de fierar."
 
 #. TRANSLATORS: Helptext for an Empire ware: Wooden Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:513
@@ -10697,7 +10697,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr "Această suliță de lemn este arma de bază în sistemul militar al Imperiului. Este produsă în fierăria de arme. Împreună cu un coif, formează echipamentul soldaților tineri."
+msgstr "Această suliță de lemn este arma de bază în sistemul militar al Imperiului. Este produsă în armurărie. Împreună cu un coif, formează echipamentul soldaților tineri."
 
 #. TRANSLATORS: Helptext for an Empire ware: Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:522
@@ -10706,7 +10706,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr "Această suliță are un vârf de fier. Este produsă într-o fierărie de arme și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de atac."
+msgstr "Această suliță are un vârf de fier. Este produsă într-o armurărie și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de atac."
 
 #. TRANSLATORS: Helptext for an Empire ware: Advanced Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:531
@@ -10715,7 +10715,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr "Aceasta este o suliță avansată, cu vârf de oțel. Este produsă într-o fierărie de arme și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de atac."
+msgstr "Aceasta este o suliță avansată, cu vârf de oțel. Este produsă într-o armurărie și folosită într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de atac."
 
 #. TRANSLATORS: Helptext for an Empire ware: Heavy Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:540
@@ -10724,7 +10724,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr "Aceasta este o suliță puternică, cu vârf de oțel și o mică lamă. Este produsă în fierăria de arme și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de atac."
+msgstr "Aceasta este o suliță puternică, cu vârf de oțel și o mică lamă. Este produsă în armurărie și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de atac."
 
 #. TRANSLATORS: Helptext for an Empire ware: War Spear
 #: ../../../../data/tribes/initialization/empire/units.lua:549
@@ -10733,7 +10733,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr "Aceasta este cea mai bună și mai ascuțită armă pe care fierarul de arme al Imperiului o creează pentru soldați. Este folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de atac."
+msgstr "Aceasta este cea mai bună și mai ascuțită armă pe care meșterul de arme al Imperiului o creează pentru soldați. Este folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de atac."
 
 #. TRANSLATORS: Helptext for an Empire ware: Helmet
 #: ../../../../data/tribes/initialization/empire/units.lua:558
@@ -10743,7 +10743,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Coiful este apărarea de bază a unui soldat. Este produs într-o fierărie de armuri. Împreună cu o suliță de lemn, formează echipamentul soldaților tineri. Coifurile sunt folosite și în taberele de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de sănătate."
+msgstr "Coiful este apărarea de bază a unui soldat. Este produs într-un atelier de armuri. Împreună cu o suliță de lemn, formează echipamentul soldaților tineri. Coifurile sunt folosite și în taberele de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 0 la nivelul 1 de sănătate."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:567
@@ -10752,7 +10752,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr "Armura de bază a soldaților Imperiului. Este produsă în fierăria de armuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de sănătate."
+msgstr "Armura de bază a soldaților Imperiului. Este produsă în atelierul de armuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 1 la nivelul 2 de sănătate."
 
 #. TRANSLATORS: Helptext for an Empire ware: Chain Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:576
@@ -10761,7 +10761,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr "Zalele sunt o armură medie pentru soldații Imperiului. Sunt produse într-o fierărie de armuri și folosite într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de sănătate."
+msgstr "Zalele sunt o armură medie pentru soldații Imperiului. Sunt produse într-un atelier de armuri și folosite într-o tabără de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 2 la nivelul 3 de sănătate."
 
 #. TRANSLATORS: Helptext for an Empire ware: Gilded Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:585
@@ -10770,7 +10770,7 @@ msgid ""
 "The gilded armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr "Armura aurită este cea mai puternică armură pe care o poate avea un soldat al Imperiului. Este produsă în fierăria de armuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de sănătate."
+msgstr "Armura aurită este cea mai puternică armură pe care o poate avea un soldat al Imperiului. Este produsă în atelierul de armuri și folosită în tabăra de antrenament – împreună cu hrană – pentru a antrena soldații de la nivelul 3 la nivelul 4 de sănătate."
 
 #. TRANSLATORS: Helptext for an Empire worker: Carrier
 #: ../../../../data/tribes/initialization/empire/units.lua:600
@@ -11893,7 +11893,7 @@ msgstr "Fiecare om este făurarul propriului destin."
 #: ../../../../data/tribes/initialization/empire/units.lua:1699
 msgctxt "empire_building"
 msgid "Imperial proverb quoted in a toolsmith's advertising"
-msgstr "Proverb imperial citat în reclama unui fierar de unelte"
+msgstr "Proverb imperial citat în reclama unui fierar"
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Toolsmithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1703
@@ -11932,7 +11932,7 @@ msgstr "Se bucură de armurile lor mari de sub mantii, țesute strâns din inele
 #: ../../../../data/tribes/initialization/empire/units.lua:1724
 msgctxt "empire_building"
 msgid "An armorsmith teaching an apprentice"
-msgstr "Un armurier învățând un ucenic"
+msgstr "Un meșter de armuri învățând un ucenic"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Armor Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1726
@@ -12193,7 +12193,7 @@ msgstr "Focul își păstrează căldura chiar și în fier."
 #: ../../../../data/tribes/initialization/empire/units.lua:1881
 msgctxt "empire_building"
 msgid "Motto of the Weaponsmiths’ Guild"
-msgstr "Deviza breslei fierarilor de arme"
+msgstr "Deviza breslei meșterilor de arme"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Weapon Smithy
 #: ../../../../data/tribes/initialization/empire/units.lua:1883

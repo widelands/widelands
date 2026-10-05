@@ -11658,15 +11658,15 @@ msgstr "Topirea minereului"
 
 #: ../../../../src/wlapplication_options.cc:211
 msgid "Tool Smithy"
-msgstr "Fierăria de unelte"
+msgstr "Fierărie"
 
 #: ../../../../src/wlapplication_options.cc:212
 msgid "Weapon Smithy"
-msgstr "Fierăria de arme"
+msgstr "Armurărie"
 
 #: ../../../../src/wlapplication_options.cc:213
 msgid "Armor Smithy"
-msgstr "Fierăria de armuri"
+msgstr "Atelier de armuri"
 
 #: ../../../../src/wlapplication_options.cc:214
 msgid "Weaving Mill"

@@ -175,7 +175,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Minereurile trebuie topite într-o topitorie înainte de a putea fi folosite. Materialele obținute sunt apoi folosite în fierăria de arme, fierăria de armuri și fierăria de unelte."
+msgstr "Minereurile trebuie topite într-o topitorie înainte de a putea fi folosite. Materialele obținute sunt apoi folosite în armurărie, în atelierul de scuturi și în fierărie."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
@@ -189,11 +189,11 @@ msgstr "Construiește o topitorie"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Construiește o fierărie de armuri și o fierărie de arme"
+msgstr "Construiește un atelier de scuturi și o armurărie"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr "Construiește o fierărie de unelte"
+msgstr "Construiește o fierărie"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
@@ -644,7 +644,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Satul să te încălzească, Jundlina. Te-ai gândit să extragem resurse din munții din jurul nostru? Ne lipsesc cuarțul și diamantele pentru clădiri. De asemenea, ne-ar prinde bine mai mult fier, aur și mai ales cărbune. Dacă găsim o rezervă îndestulătoare din aceste bunuri, am putea începe să producem arme și unelte; asta ne-ar ajuta enorm. Bineînțeles, am avea nevoie de topitori, o fierărie de arme, o fierărie de armuri și o fierărie de unelte. Și poate chiar de mai multe."
+msgstr "Satul să te încălzească, Jundlina. Te-ai gândit să extragem resurse din munții din jurul nostru? Ne lipsesc cuarțul și diamantele pentru clădiri. De asemenea, ne-ar prinde bine mai mult fier, aur și mai ales cărbune. Dacă găsim o rezervă îndestulătoare din aceste bunuri, am putea începe să producem arme și unelte; asta ne-ar ajuta enorm. Bineînțeles, am avea nevoie de topitori, o armurărie, un atelier de scuturi și o fierărie. Și poate chiar de mai multe."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -666,7 +666,7 @@ msgstr "Loftomor raportează"
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Satul să te încălzească, Jundlina! Am terminat o fierărie de unelte, iar acum fierarii noștri de unelte vor produce unelte noi cât ai clipi."
+msgstr "Satul să te încălzească, Jundlina! Am terminat o fierărie, iar acum fierarii noștri vor produce unelte noi cât ai clipi."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
@@ -679,7 +679,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Satul să te încălzească și pe tine, Loftomor. Mă bucur să aud asta. Totuși, te rog să nu uiți că fierarii noștri de unelte trebuie să fie echipați cu un fierăstrău. Pentru noi, făurirea uneltelor este o artă care cere o unealtă precisă, precum fierăstrăul, nu un ciocan brutal, ca la celelalte triburi."
+msgstr "Satul să te încălzească și pe tine, Loftomor. Mă bucur să aud asta. Totuși, te rog să nu uiți că fierarii noștri trebuie să fie echipați cu un fierăstrău. Pentru noi, făurirea uneltelor este o artă care cere o unealtă precisă, precum fierăstrăul, nu un ciocan brutal, ca la celelalte triburi."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"

@@ -79,7 +79,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Construiește o casă a pietrarului și apoi o infrastructură completă de minerit și producție (mină de cărbune și/sau cuptor de cărbune, mină de fier, fierărie de unelte, fierărie de arme, fierărie de armuri și topitorie)."
+msgstr "Construiește o casă a pietrarului și apoi o infrastructură completă de minerit și producție (mină de cărbune și/sau cuptor de cărbune, mină de fier, fierărie, armurărie, atelier de armuri și topitorie)."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
@@ -343,7 +343,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Pe zei, ce noroc de necrezut! Mai sunt doi munți și se pare că unul are o cantitate mare de cărbune, iar celălalt de minereu de fier. Te sfătuiesc să construiești imediat mine de fier și de cărbune (sau măcar cuptoare de cărbune), topitorii, fierării de unelte, fierării de armuri și fierării de arme."
+msgstr "Pe zei, ce noroc de necrezut! Mai sunt doi munți și se pare că unul are o cantitate mare de cărbune, iar celălalt de minereu de fier. Te sfătuiesc să construiești imediat mine de fier și de cărbune (sau măcar cuptoare de cărbune), topitorii, fierării, ateliere de armuri și armurării."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:201

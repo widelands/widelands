@@ -174,7 +174,7 @@ msgstr "Îmbunătățește atelierul de metal într-un atelier de topoare, pentr
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "Construiește o fierărie de coifuri la vest de munți, pentru a le da soldaților tăi armuri mai bune."
+msgstr "Construiește un atelier de coifuri la vest de munți, pentru a le da soldaților tăi armuri mai bune."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
@@ -224,7 +224,7 @@ msgstr "Pune pe picioare producția de arme"
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr "Construiește o fierărie de coifuri"
+msgstr "Construiește un atelier de coifuri"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
