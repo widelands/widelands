@@ -1,5 +1,9 @@
-#version 120
-
+#ifndef __EMSCRIPTEN__
+#define H(x)x
+H(#)version 120
+#else
+precision highp float;
+#endif
 uniform sampler2D u_texture;
 uniform sampler2D u_mask;
 

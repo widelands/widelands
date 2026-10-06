@@ -44,7 +44,13 @@ DitherProgram::DitherProgram() {
 }
 
 void DitherProgram::set_dither_mask(const std::string& filepath) {
+#ifdef __EMSCRIPTEN__
+	// webgl do not support GL_INTENSITY format, see difference in dither shader for webgl/native
+	// intensity is just a greyscale image with alpha set to the greyscale value.
+	dither_mask_.reset(new Texture(load_image_as_sdl_surface(filepath, g_fs), false));
+#else
 	dither_mask_.reset(new Texture(load_image_as_sdl_surface(filepath, g_fs), true));
+#endif
 
 	Gl::State::instance().bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));

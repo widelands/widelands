@@ -52,11 +52,11 @@ public:
 	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	[[nodiscard]] const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept [[clang::lifetimebound]] override {
 		return what_.c_str();
 	}
 
-	[[nodiscard]] const std::string& file() const {
+	[[nodiscard]] const std::string& file() const [[clang::lifetimebound]] {
 		return file_;
 	}
 	[[nodiscard]] uint32_t line() const {
