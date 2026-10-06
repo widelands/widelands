@@ -55,8 +55,9 @@ enum class QueueCommandTypes : uint8_t {
 	kEnhanceBuilding,
 	kBulldoze,
 
-	kChangeTrainingOptions,
-	kDropSoldier,
+	// 8 was removed in v1.4, wasn't actually used anywhere
+
+	kDropSoldier = 9,
 	kChangeSoldierCapacity,
 	kAttack,
 
