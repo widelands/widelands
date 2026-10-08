@@ -49,6 +49,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 eia_.egbase().map().max_field_height_diff(),
                 UI::PanelStyle::kWui,
                 _("Increase/Decrease height by:"),
+                false,
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
@@ -59,6 +60,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,
              _("Set height to:"),
+             false,
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      picker_(
