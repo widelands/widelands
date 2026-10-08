@@ -81,13 +81,16 @@ public:
 	[[nodiscard]] const std::string& name() const;
 	[[nodiscard]] const AttrMap& attrs() const;
 	[[nodiscard]] const ChildList& children() const;
-	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&);
+	void parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags) {
+		parse(ts, tcs, allowed_tags, false);
+	}
 
 private:
+	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&, bool autolink_protection);
 	void parse_opening_tag(TextStream& ts, TagConstraints& tcs);
 	void parse_closing_tag(TextStream& ts);
 	void parse_attribute(TextStream& ts, std::unordered_set<std::string>&);
-	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&);
+	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&, bool autolink_protection);
 
 	std::string name_;
 	AttrMap attribute_map_;
