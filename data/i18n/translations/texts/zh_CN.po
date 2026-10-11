@@ -51,7 +51,7 @@ msgstr "版权 2002 - %1% 由 Widelands开发团队所有"
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "本游戏是自由开源软件(FOSS)，根据GNU通用公共许可证(GPL) V2.0授权(或者，按您的选择，任何更高版本)。"
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -64,40 +64,40 @@ msgstr "你可以通过访问以下网页找到更多关于FOSS和GPL的信息�
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "您可以在那里找到许可证的完整文本，以及关于其理念和法律影响的更多信息。"
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "我们也随Widelands本身一起提供了GPL文本文件。"
 
 #: ../../../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "在Linux上，您可以在源代码或独立二进制包的根目录中找到名为COPYING的文件，或在安装目录中(如'%1%')找到。"
 
 #: ../../../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "在Windows上，您可以在安装文件夹中找到名为COPYING.txt的文件，Widelands开始菜单条目提供了指向此文件的链接。"
 
 #: ../../../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "在MacOS上，您可以在从网站下载的压缩包中找到名为COPYING的文件。"
 
 #: ../../../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "本游戏按原样提供，不提供任何保证。"
 
 #: ../../../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "获取更多信息和支持，您可以在%1%(网站、Wiki、问题或一般支持的论坛)、%2%(错误跟踪系统)和%3%(翻译)找到我们。"
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -111,7 +111,7 @@ msgstr "查看Widelands项目主页："
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands根据GNU通用公共许可证(GPL)授权。更多信息，请参阅文件'COPYING'。"
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
@@ -124,7 +124,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands功能几乎完整，单人游戏很有趣，多人游戏更有趣。尽管如此，所有领域仍有更多工作要做。如果您有兴趣做出贡献——无论是制作图形、修复错误或添加新功能、将游戏翻译成您的语言或创建新地图——请访问我们的主页联系我们。"
 
 #: ../../../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -169,30 +169,30 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "您正在运行的Widelands版本(即构建号，或者如果您运行的是开发版本或每日构建，则是修订号)。"
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "还请包括您运行Widelands的操作系统，因为某些错误可能是特定平台的问题。"
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "错误发生时您正在玩的地图。"
 
 #: ../../../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "如果错误涉及某些内容显示不正确，或者有助于演示问题，请包含一个或多个截图。"
 
 #: ../../../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "如果您有演示问题的保存游戏或回放(例如崩溃时很难确定确切触发因素的情况)，也请包含它。更多信息，请参阅下面的回放部分。"
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
@@ -336,7 +336,7 @@ msgstr "其他"
 
 #: ../../../../data/txts/developers.lua:463
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "还有许许多多的人(感谢您所做的一切)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -348,7 +348,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "如果您需要Widelands或Widelands编辑器的更多文档或帮助，请务必访问我们位于%s的主页。您可以在我们的wiki中找到在线帮助。"
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
@@ -360,7 +360,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands是一款免费、开源的即时战略游戏，包含单人战役和多人模式。该游戏受《 settlers II》启发，但具有更多样化和深度。不过，通过可玩教程，很容易上手。"
 
 #: ../../../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -369,7 +369,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "在这款游戏中，您从一小块土地和少量资源开始。利用这些资源，您将创建一个拥有数千居民的帝国。在实现这一目标的过程中，您必须建立经济基础设施，探索周围的土地，并面对敌对的部落。"
 
 #: ../../../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -381,7 +381,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands将您玩的每场游戏记录在扩展名为.wry的回放文件中。该文件包含初始保存游戏和所有玩家发出的所有命令，例如建造道路或攻击敌人。文件名将告诉您开始游戏的时间。"
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -391,7 +391,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "使用主菜单中的观看回放选项，之前玩过的游戏将被精确重建供您观看。但是请注意，即使游戏数据文件或Widelands可执行文件发生微小变化，也可能导致回放不兼容和'不同步'。这类似于如果其中一个玩家游戏版本不同，网络游戏将出现不同步问题。"
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
 msgid ""
@@ -400,7 +400,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "回放是发现游戏逻辑错误的有用工具，因此它们可以作为错误报告的附件。回放文件保存在Widelands主目录的'replays'子目录中。您可以查看此窗口的最后一页\"技术信息\"，以了解此目录在您计算机上的位置。"
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
@@ -480,13 +480,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "后三个选项只能由托管客户端通过左键单击玩家的'类型'按钮来设置。托管玩家还可以设置每个玩家的初始化(玩家开始时拥有的建筑、货物和工人集合)，以及计算机玩家的部落和团队。"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "连接到每个玩家(不是观众)的每个客户端都可以为该玩家设置部落和团队。"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
@@ -504,20 +504,20 @@ msgstr "你要以在右边看到已选择的地图或游戏存档的信息。东
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "亚马逊人热爱树木。建造足够的丛林保护者小屋以获得足够的树木。"
 
 #: ../../../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "稀有木材是亚马逊人经济的支柱。建造稀有树木种植园来种植这些木材的特殊树木。"
 
 #: ../../../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "稀有树木由经验丰富的伐木工在升级为稀有树木伐木工小屋的伐木工小屋中砍伐。但他们停止砍伐普通树木。提前规划它们的位置。"
 
 #: ../../../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
@@ -527,49 +527,49 @@ msgstr "用炭火把食物烘干。确保供应稳定。"
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "藤蔓采集者从附近的树木上采集藤蔓，但在这个过程中树木不会受到伤害。"
 
 #: ../../../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "水是亚马逊人的生命。水采集者为他们的部落提供重要的服务。"
 
 #: ../../../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "淘金需要稳定的水流，最好尽可能靠近水源以保证效率和新鲜度。"
 
 #: ../../../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "荒野守护者确保狩猎的野生动物和捕鱼的鱼类。野生动物只在未被哨所占据的树木附近释放。"
 
 #: ../../../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "稀有木材库存水平由稀有树木种植园监控，丛林大师将根据经济需求进行种植。"
 
 #: ../../../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "绳子对于确保坚固的建筑、缝制耐用的衣物和将独木舟捆绑成船只至关重要。"
 
 #: ../../../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "丛林大师通过作为丛林保护者工作，然后在园艺中心或稀有树木种植园工作来学习技能。"
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "关注您的渔民，建造一个鱼类养殖者的小屋来恢复鱼类资源。"
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -608,7 +608,7 @@ msgstr "大多数升级后的建筑物需要有经验的劳动者。除非储备
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands正在创建紧急保存，因此您可以完全在游戏关闭的地方继续游戏。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/editor.lua:8
@@ -641,91 +641,91 @@ msgstr "按住Shift键可以打开可切换工具的第一候选项。在大多�
 #: ../../../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "按住Ctrl键可以切换第二个替代工具(如果存在)。"
 
 #: ../../../../data/txts/tips/editor.lua:28
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "按%1%键可以直接设置鼠标周围选定区域的大小。"
 
 #: ../../../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "%1%的行为与正常游戏中类似：它切换建筑空间是否显示。"
 
 #: ../../../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "放置树木时，使用帮助按钮查看哪些树木更有可能在哪种地形上存活。"
 
 #: ../../../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "如果您不设置水和鱼类资源，将使用默认数量。"
 
 #: ../../../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "您可以在任何东南方向坡度不超过1且与半径2内所有节点的高度差不超过2的节点上放置中型建筑。"
 
 #: ../../../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "您可以在任何可以放置中型建筑的节点上放置大型建筑，如果向西、西北和东北方向没有障碍物或不可耕种的地形。"
 
 #: ../../../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "总是建造一个森林管理员的小屋，这样您就不会用完原木。"
 
 #: ../../../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "帝国需要大量大理石。继续寻找大理石资源。"
 
 #: ../../../../data/txts/tips/frisians.lua:4
 msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "要生产砖块，您需要花岗岩；要生产花岗岩，您需要采石场或岩石矿；要建造这些，您需要砖块。注意不要陷入死锁！"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "总是建造一个森林管理员的小屋，这样您就不会用完原木。"
 
 #: ../../../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "只有在建造通往建筑工地的道路后，建造过程才会开始。"
 
 #: ../../../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "在建造水井或矿山之前，务必派遣地质学家勘探地点。"
 
 #: ../../../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "通过建造各种军事建筑可以扩大您的领土——哨所、要塞、碉堡等。"
 
 #: ../../../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "只有在提供食物的情况下，矿工才会工作。"
 
 #: ../../../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "通过种植一些旗子将道路分成较短的路段。这将加快您的货物运输速度。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/general_game.lua:28
@@ -733,111 +733,111 @@ msgstr ""
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "还有其他问题？我们的FAQ、wiki当然还有我们的社区论坛可以在%s上在线找到。"
 
 #: ../../../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "使用建筑窗口中的优先滑块来调整特定货物的交付。按住Shift键的同时点击将同时调整所有货物。"
 
 #: ../../../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "使用'配置经济'菜单来调整货物的目标数量。可以通过旗子菜单访问。"
 
 #: ../../../../data/txts/tips/general_game.lua:40
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "更有效地管理您的消息：按'%1%'访问消息窗口，然后使用'%2%'进行前往，按'%3%'键归档消息。"
 
 #: ../../../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "按%1%存储重要位置，然后按%2%调用它们。"
 
 #: ../../../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "按住Ctrl键的同时移除道路可以移除到第一个路口的所有旗子。"
 
 #: ../../../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "新士兵在兵营中招募。然后可以在训练场所提高他们的能力。"
 
 #: ../../../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "如果您喜欢冒险，按住Ctrl键的同时点击增强、拆除或销毁建筑按钮将跳过确认。"
 
 #: ../../../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "按'%s'快速切换库存显示。"
 
 #: ../../../../data/txts/tips/general_game.lua:65
 msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr ""
+msgstr "经济由所有通过道路、渡口或船只连接的建筑和旗子组成。建筑物的供需在其经济中处理。一个玩家可以拥有多个经济。"
 
 #: ../../../../data/txts/tips/general_game.lua:69
 msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "如果经济之间的旗子没有通过任何运输方式连接，您可以拥有多个经济。这就是为什么配置经济菜单只能从旗子和仓库访问，而不是从玩家的主菜单访问。"
 
 #: ../../../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "一些建筑，如农场，有非常小的工作区域。如果建筑物周围有树木或道路，生产将停止。"
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "使用鼠标滚轮或%1%/%2%放大/缩小。按%3%/%4%设置最大/最小缩放级别。按%5%重置缩放。"
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "使用'%1$s'和'%2$s'键在最近访问的位置之间快速跳转。"
 
 #: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "使用%1%/%2%加速或减慢游戏速度。使用%3%/%4%进行快速变化；%5%/%6%将平滑调整速度。"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "方向键"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + 方向键"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "使用%1%移动地图视图。%2%将更快地移动视图，%3%缓慢移动。"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + 方向键"
 
 #: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
@@ -845,7 +845,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "如果您使用带触摸板的笔记本电脑玩游戏，您可以在'选项'→'编辑键盘和鼠标操作'菜单中为触摸板滚动分配功能。例如，通过滚动而不是用鼠标右键拖动来移动地图视图可能会更舒适。"
 
 #: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
@@ -853,37 +853,37 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "当建筑被摧毁时，其工人将开始寻找附近的旗子，他们可以通过道路移动到连接的仓库。如果附近没有这样的旗子，他们将继续游荡，最终死亡。"
 
 #: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "交易可以帮助您的经济并加强玩家之间的关系。在教程'经济与交易'中学习基础知识。"
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "您可以使用'Page up'和'Page down'键来调整您想要的速度——然后实际速度将被民主地设置。"
 
 #: ../../../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "您可以在聊天消息开头使用'/me'：'/me is tired'将被打印为'-> Nickname is tired'。"
 
 #: ../../../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "在聊天消息开头使用'@name'将其仅发送给一个玩家。"
 
 #: ../../../../data/txts/tips/multiplayer.lua:16
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "如果游戏崩溃，不要担心！游戏会自动保存，以便您之后可以重新加载它。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/singleplayer.lua:7
@@ -891,4 +891,4 @@ msgstr ""
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "电脑玩家太无聊了吗？访问我们的网站%s，与其他玩家在线游戏。"

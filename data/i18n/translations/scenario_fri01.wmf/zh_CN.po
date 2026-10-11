@@ -18,152 +18,152 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
-msgstr ""
+msgstr "大风暴潮（备份自动存档）"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
 msgid "Langeneß"
-msgstr ""
+msgstr "朗格内斯"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "建立木材经济和芦苇农场"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "木业经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
-msgstr ""
+msgstr "建造至少一个伐木工小屋和两个森林小屋来开始生产原木，以及一个芦苇农场来开始种植芦苇。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr ""
+msgstr "开始生产砖块"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
-msgstr ""
+msgstr "砖块经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
-msgstr ""
+msgstr "建造一个砖窑、一个煤矿、一个岩石矿、一个黏土坑和一个水井，以开始生产砖块。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr ""
+msgstr "收集建筑材料"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "储备建筑材料"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
-msgstr ""
+msgstr "在你的总部储备一些建筑材料。收集至少："
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × 原木"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × 花岗岩"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × 黏土"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × 砖块"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × 煤"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × 芦苇"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
-msgstr ""
+msgstr "记住，你可以在经济设置中为大多数这些物品设置目标数量。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "为矿工生产食物"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr ""
+msgstr "食物经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
-msgstr ""
+msgstr "建造一个酒馆、一个渔夫小屋、一个熏鱼厂、一个浆果农场和一个水果采集者小屋。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "增强你的食物经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "增强食物经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
-msgstr ""
+msgstr "建造至少两个农场、一个养蜂场（位于浆果农场旁）、一个面包店和一个啤酒厂，以及另一个酒馆。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "建造铁矿和采矿基础设施"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "建造矿场和采矿基础设施"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr ""
+msgstr "建造一个铁矿、一个熔炉、一个铁匠铺和一个小型盔甲锻造厂。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "开始招募士兵"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "招募士兵"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "建造一个兵营、一个驯鹿场和一个缝纫室。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr ""
+msgstr "探索岛屿更多区域"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
-msgstr ""
+msgstr "扩张与探索"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "进一步扩张并探索岛屿的更多区域。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
-msgstr ""
+msgstr "训练你的士兵"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:309
@@ -173,7 +173,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "训练士兵"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -181,46 +181,46 @@ msgid ""
 "training camps and training arenas. We will need a gold mine, a tailor’s "
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
-msgstr ""
+msgstr "将一名士兵训练到最高可能级别。士兵在训练营和训练场进行训练。我们需要一座金矿、一个裁缝店来缝制更坚固的衣物，以及一个大型盔甲锻造厂来制造更好的武器和头盔。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "击败敌人！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "击败敌人！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "摧毁敌对部落的总部。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
-msgstr ""
+msgstr "逃离洪水"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "逃离洪水"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
-msgstr ""
+msgstr "建造一个港口、一个纺织厂和一个造船厂，然后开始一次远征，在风暴潮淹没岛屿之前逃离。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
-msgstr ""
+msgstr "你可以在岛屿的最东端或敌人的总部所在地建造港口。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
 "If you did not prepare well enough to master this challenge in time, you can"
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
-msgstr ""
+msgstr "如果你没有做好充分准备来及时应对这个挑战，你可以从在你到达敌人总部前不久自动为你创建的备份存档中重新加载该剧情关卡。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -228,18 +228,18 @@ msgstr ""
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
-msgstr ""
+msgstr "欢迎！"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:129
 msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
-msgstr ""
+msgstr "欢迎来到美丽的朗格内斯岛！我是里博德，这个原始岛屿的酋长。"
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -249,29 +249,29 @@ msgid ""
 "the Danes in the North, the Schauenburgers and Holsteiners in the East and "
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
-msgstr ""
+msgstr "我和我的部落刚从大陆而来。我们在北方与丹麦人战斗，在东方和南方与绍恩堡人和荷尔施泰因人交战……所以我决定带领我的部落离开，在这个未受污染的岛上开始平静安宁的生活。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
-msgstr ""
+msgstr "一个新家园"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:138
 msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
-msgstr ""
+msgstr "这里是建造我们新家的好地方。首先，我们必须确保基本建筑材料供应稳定。"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
-msgstr ""
+msgstr "我已经请我的顾问之一霍克负责监督我们定居点的建设。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
-msgstr ""
+msgstr "第一批建筑"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
@@ -279,7 +279,7 @@ msgstr ""
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
-msgstr ""
+msgstr "和平，酋长里博德！我将立即开始殖民这座岛屿。"
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -287,7 +287,7 @@ msgid ""
 "Like all Frisians, we build our houses mainly with bricks. We improve them "
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
-msgstr ""
+msgstr "和所有弗里斯兰人一样，我们主要用砖块建造房屋。我们通过添加一些原木和花岗岩来改善它们。屋顶自然是用芦苇茅草覆盖的。没有什么比这更能防雨了。"
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -295,7 +295,7 @@ msgid ""
 "We should start by taking care of our wood production. Trees don’t seem to "
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
-msgstr ""
+msgstr "我们应该首先处理木材生产。这岛上的树木似乎生长得不太好；最好至少建造两个森林小屋和一个伐木工小屋。"
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -304,11 +304,11 @@ msgid ""
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
-msgstr ""
+msgstr "另外，我们最好尽快建造一个芦苇农场。即使芦苇农场也需要芦苇来建造，所以我们必须确保在能够种植自己的芦苇之前不会短缺。芦苇很容易种植，所以芦苇农民不需要任何额外的东西就可以开始种植芦苇田。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
-msgstr ""
+msgstr "建造我们的新家园"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:163
@@ -318,7 +318,7 @@ msgid ""
 "first need to produce those. On the mainland, we used to cut granite out of "
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
-msgstr ""
+msgstr "我们的木材和芦苇供应得到了保障。现在，我们必须处理砖块供应。砖块是在砖窑中用花岗岩和黏土烧制而成的，所以我们首先需要生产这些材料。在大陆上，我们习惯从岩石中开采花岗岩，但我在这里看不到任何岩石。也许这些山丘含有足够的石头可以开采一些花岗岩。"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -327,7 +327,7 @@ msgid ""
 " some earth and mix it with water. Just make sure that he has plenty of "
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
-msgstr ""
+msgstr "制作黏土很容易：黏土挖掘者在黏土坑工作只需挖起一些泥土并与水混合。只需确保他的黏土坑周围有足够的挖掘空间。建造一些哨所来扩张可能是个好主意。"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -335,18 +335,18 @@ msgid ""
 "To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
-msgstr ""
+msgstr "为了烧制砖块，砖窑需要火。我们需要使用煤作为燃料。建造一个煤矿以确保我们不会耗尽。没有煤就意味着没有砖块，没有砖块就意味着没有矿场，没有矿场就意味着没有煤……你可以看到问题所在。"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:172
 msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
-msgstr ""
+msgstr "另外，建造一口水井——没有人喜欢喝咸水，而且它也不适合制作黏土。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr ""
+msgstr "我们的第一个定居点"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -354,15 +354,15 @@ msgid ""
 "You did well. Our entire building material production is working now. Let’s "
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
-msgstr ""
+msgstr "你做得很好。我们所有的建筑材料生产现在都在运行。让我们等到收集到更多材料。我们可以进一步扩张我们的领土，看看这座岛上还能找到什么。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
-msgstr ""
+msgstr "芦苇短缺"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
-msgstr ""
+msgstr "建造另一个芦苇农场"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:187
@@ -371,21 +371,21 @@ msgid ""
 "need quite a lot of it. We should build another reed farm or two. Reed is "
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
-msgstr ""
+msgstr "我注意到我们芦苇已经短缺一段时间了。我们的建筑似乎需要很多芦苇。我们应该再建造一两个芦苇农场。芦苇也用于制作渔网和其他工具；因此，解决这个短缺应该是优先事项。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
-msgstr ""
+msgstr "你应该在建造窗口中为新的芦苇农场设置芦苇的最高优先级。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr ""
+msgstr "黏土短缺"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "建造另一个黏土坑"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -394,7 +394,7 @@ msgid ""
 "now. No clay means no bricks can be produced, so this shortage is slowing us"
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
-msgstr ""
+msgstr "我们的砖匠已经抱怨黏土短缺一段时间了。没有黏土就无法生产砖块，所以这个短缺大大减缓了我们的进度。最好再建造一两个黏土坑，以及水井来供应它们用水。"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -402,15 +402,15 @@ msgid ""
 "Clay is also used in shipbuilding and to improve charcoal kilns. If we ever "
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
-msgstr ""
+msgstr "黏土也用于造船和改善炭窑。如果我们需要建造船只，或者矿场无法提供足够的煤，我们将需要更多黏土，所以必须解决这个短缺问题。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "砖块短缺"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "建造另一个砖窑"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -420,21 +420,21 @@ msgid ""
 "construct another brick kiln, and assign it the highest priority for bricks "
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
-msgstr ""
+msgstr "我注意到我们的砖块即将用完。这大大减缓了我们建筑的建设速度，因为我们需要这么多砖块。我们真的应该开始建造另一个砖窑，并在建造窗口中为它设置砖块的最高优先级，以便尽快解决短缺问题。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
-msgstr ""
+msgstr "你应该在建造窗口中为新的砖窑设置砖块的最高优先级。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "仓库"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "在东部建造一个仓库"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -444,15 +444,15 @@ msgid ""
 "near our eastern border in certain distances and preferably store "
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
-msgstr ""
+msgstr "我们正在向东部不断扩张领土，货物需要运输更长的距离。我们应该在东部边境的适当距离内建造仓库，并最好将建筑材料储存在最东边的仓库里。我们的总部在西边太远，不适合长期储存货物。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "饥饿的矿工"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "矿工们在抗议……"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -460,7 +460,7 @@ msgid ""
 "Chieftain Reebaud! I bring bad news. The miners are working so hard that "
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
-msgstr ""
+msgstr "酋长里博德！我带来了坏消息。矿工们工作太辛苦，没有时间准备自己的食物。他们要求供应食物。"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -469,27 +469,27 @@ msgid ""
 "have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
-msgstr ""
+msgstr "我们需要建造一个酒馆来准备口粮。要获得原材料，我们必须建造一个渔夫小屋，而且没有人喜欢生鱼，所以还需要一个熏鱼厂来熏制鱼。此外，建造一个浆果农场来种植浆果灌木，以及一个水果采集者小屋，这样灌木就会被采摘。"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:223
 msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
-msgstr ""
+msgstr "我们应该开始更快地扩张领土，以便有足够的空间建造许多浆果农场，以及更长的海岸线用于捕鱼。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "增强食物经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "喂养士兵"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
-msgstr ""
+msgstr "做得好。矿工们满意了，并已开始重新工作。"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -497,7 +497,7 @@ msgid ""
 "But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
-msgstr ""
+msgstr "但当矿场需要升级时，口粮无法让矿工满意。最好采取预防措施——建造第二个酒馆，然后考虑将其中一个升级为宴会厅。"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -507,7 +507,7 @@ msgid ""
 "slowly; therefore, these few farms won’t suffice when we actually need the "
 "bread and beer. We should keep expanding quickly to have more space for "
 "farming."
-msgstr ""
+msgstr "宴会厅需要更好的食物。建造一个面包店、一个啤酒厂，以及两三个农场开始种植大麦。记住大麦生长非常慢；因此，当我们真正需要面包和啤酒时，这几个农场是不够的。我们应该继续快速扩张，以便有更多空间用于农业。"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -516,22 +516,22 @@ msgid ""
 " experience. They can then produce mead, and bread sweetened with honey. "
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
-msgstr ""
+msgstr "面包店和啤酒厂应该在工人有足够经验后尽快升级。它们然后可以生产蜂蜜酒和蜂蜜甜面包。在浆果农场旁建造一个养蜂场来生产一些蜂蜜，我们可以储存起来直到需要时使用。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "建立采矿经济"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "采矿经济"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247
 msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
-msgstr ""
+msgstr "我们现在可以生产所有我们习惯的食物。我想知道这些山丘可能蕴藏着什么宝藏？我们应该找出答案。"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -541,19 +541,19 @@ msgid ""
 "won’t run out of tools – and yes, a small armor smithy as well. It produces "
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
-msgstr ""
+msgstr "建造一个铁矿，也许还有一个金矿。由于它们只生产矿石，我们需要一个熔炉来冶炼它们。同时建造一个铁匠铺以确保我们不会工具短缺——是的，还需要一个小型盔甲锻造厂。它生产头盔以及剑。我希望我们不会在这里遇到敌人，但做好准备总是好的。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "做好准备"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:257
 msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
-msgstr ""
+msgstr "我们的矿场运行良好。我们现在可以生产所有需要的工具，以及一些武器。"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -562,7 +562,7 @@ msgid ""
 "enemies here, but it is always better to be prepared. New soldiers are "
 "equipped in a barracks with a short sword and a fur garment, the uniform of "
 "all honorable warriors."
-msgstr ""
+msgstr "我们可以用这些武器来装备一些新士兵。我希望我们在这里不会找到敌人，但做好准备总是好的。新士兵在兵营中配备短剑和毛皮服装，这是所有光荣战士的制服。"
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -571,7 +571,7 @@ msgid ""
 "sewing room to sew the fur into garments. The reindeer farm produces some "
 "meat as a by-product of fur, and it also trains reindeer to help our "
 "carriers on busy roads."
-msgstr ""
+msgstr "我们当然需要一个兵营；一个驯鹿场来生产毛皮，以及一个缝纫室来将毛皮缝制成服装。驯鹿场生产一些毛皮副产品，同时也训练驯鹿来帮助我们在繁忙的道路上的搬运工。"
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:269
@@ -579,7 +579,7 @@ msgid ""
 "I advise to build all those buildings within a short distance of each other,"
 " and to construct two warehouses nearby: One should be set to store only "
 "weapons, armor, ores, metal and coal; the other to store building materials."
-msgstr ""
+msgstr "我建议将所有这些建造物相互靠近建造，并在附近建造两个仓库：一个应设置为只储存武器、盔甲、矿石、金属和煤；另一个储存建筑材料。"
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -588,52 +588,52 @@ msgid ""
 "some wells and farms to supply the reindeer farm. This design will make our "
 "military economy more efficient, because it reduces the waiting time for "
 "wares in the processing buildings."
-msgstr ""
+msgstr "我们还应该在附近建造其他相关建筑，例如一个熔炉，以及一些水井和农场来供应驯鹿场。这种设计将使我们的军事经济更高效，因为它减少了加工建筑中货物的等待时间。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "探索岛屿"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "扩张"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "我们的兵营已经开始运作，我们正在招募新士兵。"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:282
 msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
-msgstr ""
+msgstr "但我们还不能确定在这里是否安全。最好向东进一步扩张，看看我们是否真的独自在这里。"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:285
 msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
-msgstr ""
+msgstr "扩张也会为农业提供更多空间。我们可以使用额外的大麦来招募更多的驯鹿，因为我们的道路相当繁忙。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "敌人！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "发现敌人！"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "另一个部落！在我们的岛屿上！你们这些入侵者在这里做什么？"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -643,36 +643,36 @@ msgid ""
 "This is MY island! YOU are the intruder here! I pray to the one and solely "
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
-msgstr ""
+msgstr "这是我的岛屿！你们才是入侵者！我向唯一真实的上帝祈祷，我们将杀死你们所有人，你们的灵魂将在地狱中永远受折磨！"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:305
 msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
-msgstr ""
+msgstr "不信教者！我向我们的神祈祷，这个无信仰的部落将被彻底粉碎！向他们开战！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "战斗中更强大"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:312
 msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
-msgstr ""
+msgstr "我们招募士兵很容易，但他们相当弱小。我们必须训练我们的士兵才能击败敌人。"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
-msgstr ""
+msgstr "士兵在训练营中接受基础攻击、健康和防御训练。他们可以在训练场学习更精细的技巧。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "弗里斯兰战斗方式"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -680,7 +680,7 @@ msgid ""
 "Soldiers are trained in two steps in defense and health. They get fur "
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
-msgstr ""
+msgstr "士兵在防御和健康方面分两个步骤进行训练。他们获得镶嵌铁钉的毛皮服装以及金饰来缓冲打击；还有用铁锻造的头盔，以及金饰，来延长他们在战斗中的生命。"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:324
@@ -690,7 +690,7 @@ msgid ""
 "The advanced soldiers are taught to use two swords at once: They keep their "
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
-msgstr ""
+msgstr "他们学习使用三种不同的剑进行攻击：长剑、阔剑和双刃剑。后两者含有金，所有剑都含有铁。高级士兵被教导同时使用两把剑：他们保留第一把双刃剑，并在另一只手中给予各种其他剑。这是六步攻击训练。"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -698,11 +698,11 @@ msgid ""
 "We do not train soldiers to evade attacks; a true warrior can block his "
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
 "like a coward."
-msgstr ""
+msgstr "我们不训练士兵躲避攻击；真正的战士可以用剑的巧妙扭转来挡住对手的攻击，而不是像懦夫一样跳开。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "规划训练中心"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -712,7 +712,7 @@ msgid ""
 "the small armor smithy to produce better weapons and helmets, and build a "
 "new small one so we will still get basic weapons. We need at least one gold "
 "mine now, because the best weapons and armor use gold."
-msgstr ""
+msgstr "我们需要一个裁缝店来缝制更多防护服装，以及另一个缝纫室来继续生产普通毛皮服装。此外，你应该将小型盔甲锻造厂升级以生产更好的武器和头盔，并建造一个新的小型盔甲锻造厂，这样我们仍然可以获得基础武器。我们现在至少需要一个金矿，因为最好的武器和盔甲使用金。"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -722,7 +722,7 @@ msgid ""
 "military facilities in one recruiting and training center, than if they were"
 " strewn out over a long distance. Build a third warehouse there which will "
 "store only the food needed for training."
-msgstr ""
+msgstr "我们应该将这些建造物靠近兵营建造，因为正如我之前提到的，将所有军事设施集中在一个招募和训练中心，比将它们分散在长距离上要高效得多。在那里建造第三个仓库，只储存训练所需的食物。"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:339
@@ -730,27 +730,27 @@ msgid ""
 "When soldiers train to use new weapons, their old equipment is discarded. "
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
-msgstr ""
+msgstr "当士兵学习使用新武器时，他们的旧装备会被丢弃。考虑到这些无用的碎片会堵塞你的道路，直到它们被储存在某个仓库中。"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:342
 msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
-msgstr ""
+msgstr "我建议至少将一名士兵在健康、防御和攻击方面训练到最高级别。在此之前，敌人对我们来说太强大了。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "我们的士兵很强大"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
-msgstr ""
+msgstr "我们终于有了第一个完全训练好的士兵。让我们发起攻击！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "我们的士兵足够强大了吗？"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -759,11 +759,11 @@ msgid ""
 "strong, and I’m still not convinced we can defeat them. I’d prefer not to "
 "send any soldiers into a battle they will likely lose. I’d prefer to wait a "
 "bit longer until we can certainly beat the enemy without losing soldiers."
-msgstr ""
+msgstr "尊敬的酋长，请不要太仓促！敌人非常强大，我仍然不相信我们能击败他们。我不想派任何士兵去参加他们很可能会输掉的战斗。我宁愿再等一段时间，直到我们能确定在不损失士兵的情况下击败敌人。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "我们的士兵足够强大了"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -772,17 +772,17 @@ msgid ""
 "life. Soldiers die in battle, that’s just the way things are. You may decide"
 " how long to wait until attacking, but don’t take too long, or the enemies "
 "will exploit our weakness."
-msgstr ""
+msgstr "当然我也希望让我们的士兵活下来，但我们不能拯救每一条生命。士兵在战斗中牺牲，这就是事实。你可以决定等待多久再发起攻击，但不要拖太久，否则敌人会利用我们的弱点。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "小心！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "不够强大"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -790,7 +790,7 @@ msgid ""
 "Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I "
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
-msgstr ""
+msgstr "酋长 Reebaud！我们的斥候报告说敌人正在快速推进。我担心如果敌人先发动攻击，我们还不够强大，无法自卫。你必须想办法阻止他们。"
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:374
@@ -799,7 +799,7 @@ msgid ""
 "fortress, which is the building that will push the border as far east as "
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
-msgstr ""
+msgstr "斥候告诉我敌人无法建造塔。我们可以建造一个要塞，这是能一次性将边界向东扩展最远的建筑。只有敌人在边界处建造要塞时，他们才能看到它。"
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -808,48 +808,48 @@ msgid ""
 "foresters to plant trees at the border. The enemy will have to cut down many"
 " of them to make room for it, so we may be safe until we open the battle at "
 "a time of our choosing."
-msgstr ""
+msgstr "我们可以通过命令一些林务员在边界种植树木来阻止这种情况，或至少让这更难做到。敌人必须砍掉很多树木才能腾出空间，所以我们可能很安全，直到我们选择合适的时机发起战斗。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "敌人被击败"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "敌人被击败了！"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:383
 msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
-msgstr ""
+msgstr "他们被击败了！感谢我的所有神明，让我们战胜了不信者！"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:389
 msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
-msgstr ""
+msgstr "我向神祈祷聆听我的最后话语。不要让那虚假的恶魔得逞！惩罚他们犯下的这种卑劣行径！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "风暴洪水"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "岛屿正在被洪水淹没！"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
-msgstr ""
+msgstr "他的神明应允了他的愿望！海洋正在上涨！岛屿几乎被淹没——我们都会淹死！"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:401
@@ -858,7 +858,7 @@ msgid ""
 "well as the space where the fiends’ headquarters stood, seems well suited to"
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
-msgstr ""
+msgstr "不要绝望，我确实看到了希望！岛屿的最东端，以及恶魔们总部所在的地方，似乎很适合建造港口。如果我们能够建造一艘船，并装载所有建造新定居点所需的物资，我们或许能够逃脱。"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:404
@@ -868,15 +868,15 @@ msgid ""
 "mill to weave the durable cloth, which is made from reed and fur, for the "
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
-msgstr ""
+msgstr "风暴洪水似乎是从西边涌来的。如果我们抓紧时间，我们就能及时赶到！我们只需要建造一个港口和一个造船厂——哦，还需要一个纺织厂，用芦苇和毛皮编织耐用的布料来做船帆。然后我们就可以从港口派遣一支探险队。向神明祈祷，抓紧时间！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "不要忘记士兵"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "士兵们到港口来！"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -897,21 +897,21 @@ msgid_plural ""
 " for up to %d soldiers, if nobody minds being all crammed together. Let’s "
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
-msgstr[0] ""
+msgstr[0] "我在这匆忙中几乎忘了——无论我们在哪里登陆，我们都需要一些建筑材料来开始，还需要士兵来保护和扩展我们的新殖民地。即使装载了探险队，船只也应该有足够的剩余空间装载一些货物和工人。此外，如果没有人介意挤在一起，还应该有空间容纳最多 %d 名士兵。当港口建成后，让我们把一些建筑材料和我们最好的士兵送到港口，准备起航时登船！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
-msgstr ""
+msgstr "所有装载到探险队中的货物和工人，以及港口中的一些士兵，将被带到下一个剧情关卡。"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "我们逃脱了！"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -919,15 +919,15 @@ msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
-msgstr ""
+msgstr "神明回应了我们的祈祷。我们将逃离被淹没的岛屿，我相信我们能够在世界的某个更和平的角落重建家园！"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "恭喜"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
-msgstr ""
+msgstr "你已经完成了这个任务。现在你可以进入下一个剧情关卡，帮助我们在这个远离虚假神明复仇之地的远方重建家园……"

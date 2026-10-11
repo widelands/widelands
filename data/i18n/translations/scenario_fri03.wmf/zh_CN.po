@@ -21,37 +21,37 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:31
 msgid "Get to the North"
-msgstr ""
+msgstr "前往北方"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
-msgstr ""
+msgstr "向北前进"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:34
 msgid "Sail to the North as far as possible, as fast as you can."
-msgstr ""
+msgstr "尽可能快地向北方航行，尽可能远地前进。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr ""
+msgstr "摧毁安加杜尔的宫殿"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr ""
+msgstr "摧毁亚特兰蒂斯人的总部并建造一个港口"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
-msgstr ""
+msgstr "在岛屿的北部海岸建造一个港口。港口空间位于安加杜尔总部的下方。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:51
 msgid "Pay or Fight"
-msgstr ""
+msgstr "付钱或战斗"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "向帝国付钱或摧毁他们的港口"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:54
 #, lua-format
@@ -61,45 +61,45 @@ msgid ""
 msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
-msgstr[0] ""
+msgstr[0] "在你的最北端的港口收集%d块金条，即可从马库斯·凯尤斯·伊尼尤昆杜斯那里获得通行许可。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:57
 msgid ""
 "Alternatively, you can destroy his port to build one of your own in it’s "
 "place."
-msgstr ""
+msgstr "或者，你可以摧毁他的港口，在原址上建造你自己的港口。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
-msgstr ""
+msgstr "当你启航时，所有在北方岛屿上的士兵都将与你同行。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:59
 msgid "You have two hours to accomplish this objective."
-msgstr ""
+msgstr "你有两个小时来完成这个目标。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:71
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:72
 msgid "Welcome back!"
-msgstr ""
+msgstr "欢迎回来！"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:74
 msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
-msgstr ""
+msgstr "我们已经向北航行了数周，直到到达这个海岸。我的无数海图没有一张告诉我这个点之外有什么。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:77
 msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
-msgstr ""
+msgstr "只有一件事是确定的：我们必须在这片陆地带的北部海岸找到一个港口空间，以便派遣远征队并继续向北航行。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:80
@@ -107,19 +107,19 @@ msgid ""
 "I want to find my old friend Reebaud as fast as I can. Every minute of "
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
-msgstr ""
+msgstr "我想尽快找到我的老朋友里博德。每分钟的无所事事都让我痛苦，因为我想象着阿特达格正得意地践踏着我弗厄岛上的绿色沼泽……让我们快点吧。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:85
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "Eight Weeks Ago"
-msgstr ""
+msgstr "八周前"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:86
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:95
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:104
 msgid "An unfair fight"
-msgstr ""
+msgstr "一场不公平的战斗"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:88
@@ -127,14 +127,14 @@ msgid ""
 "But forgive me. I did not even introduce myself yet. I am Claus Lembeck, the"
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
-msgstr ""
+msgstr "但请原谅我。我甚至还没有介绍自己。我是克劳斯·伦贝克，统治弗厄岛的骑士……或者我曾是，直到我被征服者赶走。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:91
 msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
-msgstr ""
+msgstr "在我的统治下，岛屿繁荣昌盛，我的子民爱戴并尊敬我。他们甚至为我建造了一座新城堡作为礼物。然后阿特达格来了。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -144,7 +144,7 @@ msgid ""
 "thirst for war and conquest, and most times we fought him off. But eight "
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
-msgstr ""
+msgstr "阿特达格！丹麦帝国的国王，我宣誓的敌人。许多次我帮助大陆的公爵们抵抗他对战争和征服的渴望，而且大多数时候我们击退了他。但八周前，他和一些盟友以及一支庞大且训练有素的军队在我的弗厄岛登陆，试图占领它。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:100
@@ -155,22 +155,22 @@ msgid ""
 "compete against such odds? In the end I had no choice but to escape with my "
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
-msgstr ""
+msgstr "而我必须痛苦地承认——他成功了。战斗持续了三十五天，每天早晚都有来自丹麦的船只带来更多的士兵。我怎能希望与这样的优势抗衡？最终我别无选择，只能带着我的儿子亨内克和我的一些最忠实的追随者逃走，而阿特达格现在称弗厄岛为他不断扩张的帝国又一块领土。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:106
 msgid "But I will not accept defeat!"
-msgstr ""
+msgstr "但我不会接受失败！"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:118
 msgid "Dark Future"
-msgstr ""
+msgstr "黑暗的未来"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:110
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:119
 msgid "Reconquest"
-msgstr ""
+msgstr "收复"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:112
@@ -181,7 +181,7 @@ msgid ""
 "proved that he was never even truly trying to win until now. He was merely "
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
-msgstr ""
+msgstr "很明显，单独一人，我不可能希望击败这个宿敌。那些曾经与我并肩作战的人也无法帮助我，因为我们一直竭尽全力击退阿特达格；而他最近的进攻证明，他以前甚至从未真正试图获胜，他只是在戏弄我们。不，如果我有机会战胜他，我需要找到一个更强大的力量来支持我的事业。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:115
@@ -190,7 +190,7 @@ msgid ""
 "small but strong Frisian community whom I once befriended; his haughty pride"
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
-msgstr ""
+msgstr "而我现在正在寻找这样的力量。里博德，一个小但强大的弗里斯兰社区的首领，我曾与他结为朋友；他那傲慢的自负和在战斗中无与伦比的技巧在已知世界所有地方都是无人能及的。如果有人能够对抗阿特达格，那一定是他。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -200,7 +200,7 @@ msgid ""
 "found a new settlement in the far North where no men have ever dared to "
 "settle before. The bravery for so bold an undertaking is also something I "
 "would expect from nobody but him."
-msgstr ""
+msgstr "然而，当我请求他帮助时，我遇到了令人失望的回应。他和他的部下不再生活在北弗里斯兰，而是选择在遥远的北方建立一个新定居点，那是以前没有人敢定居的地方。如此大胆的尝试所展现的勇气，也只有他才能让我期待。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:124
@@ -209,20 +209,20 @@ msgid ""
 "action we can take. We must sail to the North and find my old friend "
 "Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
 " the evil Dane."
-msgstr ""
+msgstr "这是一种我们必须尝试复制的勇气，因为我们只有一条路可走。我们必须向北航行，找到我老朋友里博德，说服他派士兵与我一起，把我亲爱的弗厄岛从邪恶的丹麦人手中解放出来。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:127
 msgid "We must not fail. The future of my people depends on me."
-msgstr ""
+msgstr "我们不能失败。我的人民的未来取决于我。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:131
 msgid "Diking"
-msgstr ""
+msgstr "筑堤"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:132
 msgid "Gaining Land"
-msgstr ""
+msgstr "获取土地"
 
 #. TRANSLATORS: Claus Lembeck – Diker
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:134
@@ -232,15 +232,15 @@ msgid ""
 "construct breakwaters, which will allow us to seize some extra land from the"
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
-msgstr ""
+msgstr "这个岛屿对我来说有点太小太拥挤了。在我的民众中有一位经验丰富的筑堤者，他建议用一些原木建造防波堤，这样我们就能从海里夺取一些额外的土地。这将是一项缓慢且昂贵的工作，我希望我们不会在这个岛上停留太久，但至少我们应该考虑它。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid "Port Space Found"
-msgstr ""
+msgstr "找到港口空间"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:139
 msgid "One step closer to the North"
-msgstr ""
+msgstr "更接近北方的第一步"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:141
@@ -250,15 +250,15 @@ msgid ""
 "seafaring economy first, with a shipyard and a weaving mill. But don’t waste"
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
-msgstr ""
+msgstr "我的士兵报告说他们找到了一个港口空间！现在我们需要建造一个港口并开始远征。当然，我们必须先建立一个完整的航海经济，包括造船厂和编织厂。但不要花太多时间完善我们的经济——重要的是我们尽快到达北方。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
 msgid "A Strange Island"
-msgstr ""
+msgstr "一个奇怪的岛屿"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:145
 msgid "An apprehension"
-msgstr ""
+msgstr "一种忧虑"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:147
@@ -270,7 +270,7 @@ msgid ""
 "hardly put into words my feeling of apprehension. I do not know what there "
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
-msgstr ""
+msgstr "我们登陆在一个奇怪的岛屿上。地面坚硬、黑色且陡峭，空气有烧焦的味道。海滩是灰烬的颜色，沙子本身感觉充满恶意，仿佛一条林德沃姆蜷缩在下面，等待扑向任何愚蠢到这里的生物。我几乎无法用言语表达我的忧虑。我不知道有什么可害怕的，但无论如何我们在穿越它时必须非常谨慎。希望我们能很快到达岛屿的另一边。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:151
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -286,23 +286,23 @@ msgstr ""
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:264
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:283
 msgid "Strangers"
-msgstr ""
+msgstr "陌生人"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:152
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:233
 msgid "Who are they?"
-msgstr ""
+msgstr "他们是谁？"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:154
 msgid ""
 "Our soldiers have sighted strangers. Their buildings do not look like any I "
 "have seen before. I wonder who they are."
-msgstr ""
+msgstr "我们的士兵发现了陌生人。他们的建筑不像我以前见过的任何建筑。我想知道他们是谁。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:158
 msgid "Who are you?"
-msgstr ""
+msgstr "你们是谁？"
 
 #. TRANSLATORS: Angadthur – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:160
@@ -310,12 +310,12 @@ msgid ""
 "Be greeted, foreigners! I am Angadthur, the King of this miraculous island, "
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
-msgstr ""
+msgstr "欢迎你们，外国人！我是安加杜尔，这个神奇岛屿的国王，传奇的亚特兰蒂斯第一国王阿赞图尔的后裔。如果你们愿意成为我们的朋友，欢迎来到我的领地！"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:176
 msgid "Greetings to the King!"
-msgstr ""
+msgstr "向国王致敬！"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:166
@@ -324,21 +324,21 @@ msgid ""
 "are searching for my old friend Reebaud, who has left our country several "
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
-msgstr ""
+msgstr "和平，安加杜尔国王！我是克劳斯·伦贝克，这是我儿子亨内克。我们正在寻找我老朋友里博德，他几年前离开了我们的国家，在遥远的北方寻找新家园。如果我可以问，你以前听说过他吗，你能告诉我们去哪里找到他吗？"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:170
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:251
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:265
 msgid "Greetings"
-msgstr ""
+msgstr "问候"
 
 #. TRANSLATORS: Angadthur – Strangers 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:172
 msgid ""
 "Of course you may ask. Ask whatever you like. Why do you ask whether you may"
 " ask?"
-msgstr ""
+msgstr "当然你可以问。随便问什么。为什么问你是否可以问？"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:178
@@ -346,7 +346,7 @@ msgid ""
 "It’s a figure of speech that is considered polite among our people, that’s "
 "all. Very well, I’ll ask properly: Do you know where we can find my friend "
 "Reebaud?"
-msgstr ""
+msgstr "这只是我们民族认为礼貌的一种修辞手法，仅此而已。好吧，我会正确地问：你知道我们在哪里可以找到我的朋友里博德吗？"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -356,7 +356,7 @@ msgid ""
 "travelling to the North – I am afraid there is but one suitable location for"
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
-msgstr ""
+msgstr "很抱歉让你失望，伦贝克先生，但我从未听说过这个名字，因此无法给你他的消息。至于你向北旅行的意图——恐怕除了你登陆的那个地方，这个岛上只有一个适合建造港口的位置，它直接位于我的宫殿下方。"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:187
@@ -366,17 +366,17 @@ msgid ""
 "try and destroy my palace. I am certain that you will not stand a chance, "
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
-msgstr ""
+msgstr "碰巧的是，我的士兵们对无事可做感到厌倦。让我们进行一场武器竞赛，好吗？你可以派你的士兵来尝试摧毁我的宫殿。我确定你没有机会，因此我承诺如果你成功了，我会祈求神明祝福你的旅程。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid "Congratulations"
-msgstr ""
+msgstr "恭喜"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:192
 msgid "May Satul bless you"
-msgstr ""
+msgstr "愿萨图尔保佑你"
 
 #. TRANSLATORS: Angadthur – Atlantean Headquarter Destroyed
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:194
@@ -385,18 +385,18 @@ msgid ""
 "believed to be impossible. You must be very powerful, and favoured by the "
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
-msgstr ""
+msgstr "你越过了我最好的卫兵并烧毁了宫殿，我原以为这是不可能的。你一定非常强大，得到神明的眷顾。你绝对配得上你的胜利。我祝贺你，并祝愿你航行顺利。愿萨图尔保佑你安全！"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:198
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:204
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:211
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "在冰漠中"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:199
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:205
 msgid "The next island"
-msgstr ""
+msgstr "下一个岛屿"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:201
@@ -404,35 +404,35 @@ msgid ""
 "We seem to be getting closer to the North. A desert of ice! I did not know "
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
-msgstr ""
+msgstr "我们似乎越来越接近北方了。一片冰的沙漠！我不知道这样的东西甚至存在。但我怀疑任何人能在这里生活；我担心我们不会在这个岛上发现任何有用的东西。"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:207
 msgid ""
 "It doesn’t matter. Let’s just find the next port space quickly, so we can "
 "continue our journey."
-msgstr ""
+msgstr "没关系。让我们快点找到下一个港口空间，这样我们就可以继续我们的旅程。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
-msgstr ""
+msgstr "找到港口空间"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:214
 msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
-msgstr ""
+msgstr "我们在岛上找到了一个港口空间。现在我们可以离开这个寒冷荒凉的冰漠，继续航行。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:218
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:224
 msgid "The North"
-msgstr ""
+msgstr "北方"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:219
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:225
 msgid "In the North"
-msgstr ""
+msgstr "在北方"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:221
@@ -440,25 +440,25 @@ msgid ""
 "Yes, this looks more like what I imagine the North should look like. The "
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
-msgstr ""
+msgstr "是的，这更像我想象中的北方应该的样子。草地在这里仍然是绿色的，但随着越往北看，雪的面积越来越大。"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:227
 msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
-msgstr ""
+msgstr "看起来不错，但这可能只是另一个岛屿。让我们快点继续前进。"
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:235
 msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
-msgstr ""
+msgstr "我们的士兵又发现了陌生人。我想知道他们是否类似于祝贺我们摧毁他宫殿的奇怪国王。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:239
 msgid "No troubles, please"
-msgstr ""
+msgstr "请勿麻烦"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:241
@@ -466,12 +466,12 @@ msgid ""
 "Greetings, Strangers! I am Marcus Caius Iniucundus, a legate of the Empire. "
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
-msgstr ""
+msgstr "问候，陌生人！我是马库斯·卡乌斯·伊尼库恩杜斯，帝国的军团长。这是你们的岛屿吗？我们只是路过，希望你们不介意。我们不想要任何麻烦。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:245
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:257
 msgid "Travellers"
-msgstr ""
+msgstr "旅行者"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:247
@@ -480,7 +480,7 @@ msgid ""
 "are just passing through as well. You are a legate, you say? You must be "
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
-msgstr ""
+msgstr "和平，伊尼库恩杜斯先生！我是克劳斯·伦贝克，这是我儿子亨内克。我们也只是路过。你说你是军团长？你一定经常四处旅行。你听说过我老朋友里博德的消息吗？我只知道他生活在北方，你能告诉我们去哪里找到他吗？"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:253
@@ -490,27 +490,27 @@ msgid ""
 " destination, for that is exactly where I am travelling on official business"
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
-msgstr ""
+msgstr "我很高兴听到你们想要和平。很抱歉，我以前没听说过里博德这个名字。但是，如果你们想去北方，我们有同样的目的地，因为那正是我从首都出发正式旅行的目的地。我们目前正在准备一艘船出发。如果你们愿意，我们可以带你们一起走，前提是你们能支付船费。"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:259
 msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
-msgstr ""
+msgstr "感谢你的提议！你要求的价格是多少？而且，如果不介意我问，我能知道你从事什么业务吗？"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:266
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
+msgstr[0] "%d 块金币。"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:268
 msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
-msgstr ""
+msgstr "我知道这似乎很多，但参议院没有为这次远征提供很多资金，所以我必须承认我需要一些。"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:271
@@ -522,7 +522,7 @@ msgid ""
 "him back to the Capital in chains. I must say, I am rather happy to be given"
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
-msgstr ""
+msgstr "我旅行的目的是寻找北方省份的总督，他已经连续几年没有缴税了。我的任务是好好训斥这个穆里利乌斯，如果我发现他是因为贪婪而不是必需而未能支付，我就要把他铐回首都。我必须说，我很高兴得到这个任务，因为我有很好的机会在他成功后接替他成为总督。"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:274
@@ -534,11 +534,11 @@ msgid ""
 "travel impossible for a long time. We must set sail within two hours, and "
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
-msgstr ""
+msgstr "但回到你们船费的话题上。这个岛屿的北部海岸只有一个地方可以建造港口。所以你们别无选择，只能在我的战舰上购买船票。但我的占星家报告说，一场可怕的风暴正在聚集，这将使海上航行长时间不可能。我们必须在两小时内启航，之后还在岛上的人将不会很快离开。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 msgid "Decide"
-msgstr ""
+msgstr "决定"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:286
@@ -546,17 +546,17 @@ msgid ""
 "He seems happy enough to offer us a passage, but the price is exorbitant. We"
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
-msgstr ""
+msgstr "他似乎很乐意提供我们船票，但价格太高了。我们不如摧毁他的港口，建造我们自己的。我想知道哪个会更好......"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:304
 msgid "Victory!"
-msgstr ""
+msgstr "胜利！"
 
 #. TRANSLATORS: Claus Lembeck – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:297
@@ -565,21 +565,21 @@ msgid ""
 "will finally be travelling to the actual far North. Although we still heard "
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
-msgstr ""
+msgstr "我们征服了港口！我们已经在建造一艘船，然后我们将终于真正地前往遥远的北方。尽管我们仍然没有听到里博德的消息，但我相信我们会很快找到他。然后他会援助我们，我将从篡位者阿特达格手中收复弗厄岛！"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:308
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续玩下去，也可以继续下一个任务。"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:306
 msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
-msgstr ""
+msgstr "你用纯金支付了船费。现在你得到它是理所当然的。我们的船准备好了，你可以启航！"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:312
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:316
@@ -588,11 +588,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:328
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:335
 msgid "You Have Lost"
-msgstr ""
+msgstr "你输了"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:313
 msgid "Goodbye!"
-msgstr ""
+msgstr "再见！"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:315
@@ -600,7 +600,7 @@ msgid ""
 "You have taken too long. We must set sail now, and then the storm will not "
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
-msgstr ""
+msgstr "你花了太长时间。我们必须现在启航，然后风暴将不允许你离开这个岛屿。我很为你遗憾，但天气不等人。再见。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:317
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:325
@@ -608,12 +608,12 @@ msgstr ""
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
-msgstr ""
+msgstr "你输了，不能继续玩。当你重试这个剧情关卡时，祝你有更好的运气。点击OK返回主菜单。"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "被困住"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -623,21 +623,21 @@ msgid ""
 "though you appear to be more powerful in combat than us, they force you to "
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
-msgstr ""
+msgstr "现在看看你的愚蠢把我们带向了哪里。风暴已经来临，自从你烧毁了我们的港口，我们都被困在这里了。神明是公正的——尽管你们在战斗中似乎比我们更强大，但他们迫使你在这个岛上停留这么长时间，你永远不会完成你徒劳旅程的目标。为你的胜利而绝望吧！"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:331
 msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
-msgstr ""
+msgstr "这是一场灾难！我们到达了另一个海岸，但另一个部落已经定居在那里。他们不允许我们在他们的海岸登陆。"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:334
 msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
-msgstr ""
+msgstr "我们太慢了。我们拖延和徘徊，这就是结果。没有前进的道路。我们中没有人会再看到我们的家园！"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -651,4 +651,4 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "作为海外殖民和贸易的基地。也储存你的士兵、货物和工具。"
