@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Batuhan Saç, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Batuhan Saç, 2026\n"
 "Language-Team: Turkish (https://app.transifex.com/widelands/teams/35159/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,35 +51,40 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Bir liman inşa etmek için bir yer bul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Portspace'i bul"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Bu adaya ayak basabilmek için, öncelikle bir limanın inşa edilebileceği bir "
+"arsa bulmalıyız. Böyle bir arsa bulmak için yakındaki sahil şeridini "
+"keşfedin."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Liman inşa edildikten sonra, diğer geminin seferini iptal etmeliyiz ki o "
+"gemideki malları da boşaltabilelim."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "İnşaat malzemelerinin tedarikini sağla."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Temel Üretim Zincirini kur."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -83,14 +92,18 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"En azından bir taş ocağına, birkaç oduncuya ve bir kereste fabrikasına "
+"ihtiyacımız olacak. Çevremizdeki ağaçların ne kadar hızlı büyüdüğüne bağlı "
+"olarak bir orman görevlisine ihtiyaç duyulabilir ya da duyulmayabilir. "
+"Dengeli bir çözüm bulun."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Araçları hızlı bir şekilde oluştur"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Yeni Araçlar Oluştur"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -100,14 +113,18 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"Gemi kazasında aletlerimizin çoğu kayboldu. Halkımız, uygun aletler olmadan "
+"görevlerini yerine getiremeyecek. Neyse ki hâlâ biraz demir cevherimiz ve "
+"bol miktarda kömürümüz var. Adada başarılı olmanın ön koşulu olduğu için bir"
+" alet atölyesi inşa et. Ayrıca bir eritme tesisi inşa etmeyi de unutma."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Kaynak bulmak için dağları ara."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Madenler İnşa Et"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -115,14 +132,17 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Artık aletler üretebildiğimize göre, madencilik kaynaklarımızı bir an önce "
+"yenilememiz gerekiyor. Dağları keşfedin ve kömür, demir ve altın çıkarmak "
+"için her türden en az birer maden kurun."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Çevreyi keşfet"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Çevreni Keşfet"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -130,14 +150,17 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Adada yalnız olmadığımızdan oldukça eminiz. Bu adadaki diğerlerinin dost mu "
+"yoksa düşman mı olduğunu bilmiyoruz, bu yüzden dikkatli davranmamız "
+"gerekiyor. Bir keşifçisi için en az bir ev inşa ederek adayı keşfedin."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Bölgeni genişlet"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Bölgeyi Genişlet"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -145,14 +168,17 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Yerleşimimiz büyüdükçe, tüm binalar için daha fazla alana ihtiyacımız "
+"olacak. Askeri binalar inşa ederek topraklarımızı genişletin. Birkaç nöbet "
+"kulübesi ve daha geniş görüş menzili için en az bir kule inşa edin."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Bir örümcek çiftliği ve bir dokuma fabrikası kur"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Örümcek Ağı Üretimi"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -161,6 +187,10 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Örümcek kumaşımız bitmek üzere olduğu için acilen buna ihtiyacımız var. Bu "
+"nedenle, elimizde kalan her parçayı idareli kullanmak hayati önem taşıyor. "
+"İnşaat sahalarını da unutmadan, örümcek kumaşı tüketen tüm binaların girdi "
+"miktarını azaltın."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""

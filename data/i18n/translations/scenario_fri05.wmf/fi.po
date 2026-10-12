@@ -284,7 +284,7 @@ msgstr "Viholliset"
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Tanskalaisia! Näinkö pitkälle Atterdagin valloitushalu ulottuu?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167

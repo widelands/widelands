@@ -25,67 +25,67 @@ msgstr "De la Nemesis la Genesis"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "După debarcarea pe insula misterioasă aproape de Atlantis, atlanţii rămaşi se luptă să îşi clădească o nouă casă."
+msgstr "După ce au debarcat pe o insulă misterioasă din apropierea Atlantidei, atlanții rămași se zbat să-și clădească un nou cămin."
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Din nou în căutarea unui nou cămin"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "După fuga grăbită de pe insula care se scufunda, atlanții din jurul Jundlinei se confruntă cu noi provocări."
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Un loc numit Acasă"
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "În acest scenariu sunt introduse clădirile de producție avansate, inclusiv mineritul."
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Acesta este pământul nostru"
 
 #: ../../../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Acest tutorial explică folosirea clădirilor militare și a centrelor de antrenament și prezintă bătăliile."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Ușor."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Mediu."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Greu."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Provocator."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Al doilea imperiu"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Prezintă barbarii."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:52
@@ -103,17 +103,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Când Chat’Karuth a murit, era bătrân, tată a trei fii puternici și ambițioși și căpetenie de război a unei armate care putea face față oricărui dușman dispus să se ridice împotriva pădurilor străvechi. La sfârșitul domniei sale glorioase, Chat’Karuth l-a ales pe fiul său cel mare, Thron, să-i urmeze la conducerea tribului – o decizie care i-a nemulțumit pe ceilalți doi frați. Bătrâna căpetenie știa asta. Așa cum îl îndrumase tatăl său, Thron a părăsit capitala Al’thunran, locul Tronului dintre Copaci, și și-a retras oștile pe dealurile înalte, unde și-a îngropat tatăl. Acolo a jurat în fața zeilor și a spiritului tatălui său că se va întoarce pentru a restabili ordinea. În timp ce frații lui au pornit un război orb împotriva lui Thron și a puținelor forțe lăsate să apere granițele Al’thunranului, tânăra căpetenie caută să-și reunească frații ambițioși și să facă triburile să mărșăluiască din nou sub un singur steag."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Perioada exilului"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Introducerea Imperiului."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:75
@@ -128,17 +128,17 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Cu șase luni în urmă, Lutius – un tânăr general al Imperiului – a fost trimis cu 150 de soldați la granița de dincolo de pădurile nordice, unde triburile barbare treceau pe pământurile stăpânite de Imperiu. Sarcina lui era să apere pământurile Imperiului. La început, totul a fost liniștit. A stat chiar de vorbă cu câțiva copii barbari și s-a gândit la o viață pașnică – alături de acest popor arhaic. A început să se simtă mai în siguranță, iar armata lui a început să-și piardă atenția față de posibilul dușman. Asta i-a fost pieirea. Într-o noapte de martie, armata lui nepregătită a fost atacată de 100 de pedestrași barbari și a fost complet împrăștiată. Doar el și o mână de soldați au scăpat, cu greu, cu viață."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Goana după foc"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Prezintă atlanții."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:98
@@ -148,32 +148,32 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Când zeul lor și-a pierdut încrederea în atlanți și le-a scufundat insula, lupta unei femei pentru dreptate și pentru o a doua șansă pentru poporul ei avea să devină legendă. Conducându-i pe atlanții rămași spre un nou viitor, într-o nouă parte a lumii, Jundlina a devenit cel mai puternic om al vremii sale, dar cu un preț mare: umanitatea și sufletul ei."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "De la apă la gheață"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Prezintă frizonii."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Marinar (Dificil)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Cârmaci (Foarte greu)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Căpitan (Imposibil)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../../../data/campaigns/campaigns.lua:125
@@ -184,7 +184,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "A trăi din ce dă oceanul este o luptă continuă, cu atât mai mult pentru locuitorii țărmului frizon al Mării Nordului. Oare ultima inundație provocată de furtună, cea mai devastatoare din memoria omenirii, a fost doar încă un exemplu al greutăților cu care se confruntă toți frizonii – sau un semn de la zei că un trib abia așezat aici trebuie să-și caute un cu totul alt cămin?"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -192,15 +192,15 @@ msgstr "Încă neimplementat"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
-msgstr ""
+msgstr "Nimeni"
 
 #: ../../../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "Îmi pare rău, această hartă nu a fost încă implementată"
+msgstr "Ne pare rău, această hartă nu este încă implementată."
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Țărmurile din Malac’ Mor"
 
 #: ../../../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -209,11 +209,11 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "După ce a pierdut o bătălie importantă împotriva barbarilor, care a dus la pierderea unei mari părți din teritoriul Imperiului, Lutius părăsește Fremilul pentru a începe o viață nouă. Dar destinul îi duce corabia într-o furtună puternică, ce aproape o distruge. Doar cu mult noroc reușește să-și eșueze corabia avariată pe un țărm pustiu și necunoscut și să-și salveze oamenii. Deocamdată."
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Un avanpost pentru exil"
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -221,32 +221,32 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr ""
+msgstr "În sfârșit, corabia a fost reparată, așa că Lutius și oamenii lui și-au reluat căutarea unui loc bun pentru un nou început. Doar câteva zile mai târziu, ajung pe o insulă verde, mediteraneeană, care arată ca un paradis. Plini de bucurie, pornesc să exploreze acest nou spațiu de viață."
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Răzbunarea lui Neptun"
 
 #: ../../../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "În drum spre casă, pentru a apăra Imperiul, echipajul lui Lutius a fost luat prin surprindere de voia zeilor."
 
 #: ../../../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Surprize, surprize!"
 
 #: ../../../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "După întoarcerea acasă, Lutius și echipajul său se confruntă cu o economie în ruină. Rezolvarea blocajelor din economie va fi de cea mai mare importanță pentru a readuce gloria Imperiului."
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Marea inundație"
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -255,101 +255,101 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "În 1362, viața liniștită și pașnică a locuitorilor insulelor nord-frizone a fost tulburată de una dintre cele mai mari inundații provocate de furtună din memoria omenirii: Potopul Sfântului Marcel. Este oare doar încă o furtună sau un semn de la zei că comunitatea frizonă de pe insula Langeness nu este dorită aici?"
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Acest scenariu are un context istoric, dar cea mai mare parte a poveștii este ficțiune."
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "O primire înghețată"
 
 #: ../../../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud și tribul său au ajuns în Nord. Dar sosirea lor între stepele înghețate și munții acoperiți de zăpadă nu este deloc binevenită…"
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Prietenul la nevoie"
 
 #: ../../../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Reebaud și tribul său trăiesc fericiți în Nord. Între timp, ținuturile pe care le-au lăsat în urmă sunt departe de a fi pașnice, iar un vechi prieten are disperată nevoie de ajutorul lor…"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Doi prieteni reuniți"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus și Henneke Lembeck au ajuns în sfârșit în Nord. Dar vor reuși să-l convingă pe Reebaud să le trimită ajutor?"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Recucerirea"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Întorși în sfârșit în Frizia de Nord, Claus, Henneke și Reebaud se pregătesc de luptă împotriva invadatorilor. Trebuie să-și adune aliați și să-și plănuiască strategia, dar dușmanul nu e niciodată departe…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
-msgstr ""
+msgstr "Controale de bază"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "În acest tutorial vei învăța cum să te deplasezi în Widelands și cum să construiești clădiri și drumuri."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Război"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "În acest tutorial vei afla secretele războiului: cum să creezi soldați, cum să-i antrenezi și cum să-i conduci în luptă. Va fi prezentată și cercetarea."
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr "Navigare"
+msgstr "Navigație"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "În acest tutorial vei face cunoștință cu navigația, adică cu folosirea navelor și a porturilor, precum și a bacurilor și a căilor navigabile."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "Economie și comerț"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "În acest tutorial vei afla ce opțiuni oferă Widelands pentru ajustarea economiei și cum să faci comerț cu alți jucători. Recomandat jucătorilor cu ceva experiență."
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "Accurate Europe 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -361,22 +361,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "Atenție: această hartă este oferită ca previzualizare experimentală. Deși este mai bună din multe puncte de vedere decât Europa 1.2, pe care o înlocuiește, probabil mai are erori. În plus, este o hartă foarte mare, cu mai multe poziții de jucători decât se recomandă în general, așa că are cerințe hardware ridicate.  —  O hartă pentru jocuri de rol cu imperii istorice. – Această hartă a Europei își propune să fie cât mai exactă posibil în Widelands. – UȘOR: Imperiul Otoman, Suedia, Imperiul Rus, Cartagina – MEDIU: Imperiul Francez, Imperiul Britanic, Spania, Imperiul German, Imperiul Roman – GREU: Egipt, Polonia, Grecia"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "Râurile late sunt navigabile, pentru a crea o „rețea comercială”. Toți jucătorii au propriile provocări, dar sunt relativ echilibrați pentru a putea fi jucați: – Imperiul Britanic: creează colonii durabile – Imperiul Rus: distanțe foarte mari …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "Amibe"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "Ești o amibă: extinde-te și cucerește toate celelalte amibe …"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -384,11 +384,11 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "Fii atent: ești înconjurat de dușmani. Dezactivează diplomația pentru un joc mai ușor sau activeaz-o pentru un joc mai provocator. În plus, poți stabili dificultatea jucând împotriva unor echipe diferite de IA. Deși unii jucători au mai mult spațiu la început, harta este bine echilibrată."
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Marea Arhipelagului"
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -399,65 +399,65 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Între Suedia și Finlanda se află Marea Arhipelagului. Acest loc de o frumusețe incredibilă nu este nici uscat, nici mare, ci amândouă. Pe câteva sute de kilometri se găsesc nu mai puțin de 50.000 de insule și insulițe, cele mai multe având doar câțiva acri. Clima este destul de blândă pentru latitudinea sa; agricultura prosperă, fructele de pădure sunt din belșug, iar peștele abundă. Puțina populație a acestui loc n-a cunoscut niciodată foametea. Voi, niște ticăloși războinici, n-ați putut lăsa acest mic paradis în pace, nu-i așa?"
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Terenurile mari de construcție sunt rare pe aceste insule mici. Dă prioritate construirii clădirilor mari pe ele. Uneori vei avea nevoie de clădiri militare mari pentru a te extinde până la insula următoare. IA se va descurca slab."
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – editată de Nordfriese"
 
 #: ../../../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Joc economic lung, pe un tărâm frumos. Încearcă fiecare jucător!"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr ""
+msgstr "Atol"
 
 #: ../../../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Cine va fi adevăratul rege al marelui atol?"
 
 #: ../../../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../../../data/maps/Calvisson.wmf/elemental:10
 msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "E o plăcere să te așezi în frumusețea acestui ținut brăzdat de văi. Dar drumurile care străbat aceste teritorii întinse sunt lungi și șerpuite, așa că e ușor să rătăcești pe pământul clanurilor străine."
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
-msgstr ""
+msgstr "Șah mat"
 
 #: ../../../../data/maps/Checkmate.wmf/elemental:10
 msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr ""
+msgstr "Fie că este una dintre cele mai ciudate forme ale naturii, fie creația unui zeu nebun (și însetat de joc), acest câmp de luptă straniu așteaptă doi adversari pentru o nouă confruntare."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
-msgstr ""
+msgstr "Insula Cometei"
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:9
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nasenbaer – editată de king_of_nowhere"
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
@@ -466,7 +466,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr ""
+msgstr "La câteva mile în fața Coastei Gerion se află o mică insulă fără nume. Până acum n-ai avut niciun motiv să navighezi până acolo, dar ieri o minge uriașă de foc a căzut din cer și a atins pământul în centrul ei. Este un semn de la zei? Tu crezi că da și speri ca tribul tău să găsească comoara acestei insule înainte să vină și alte triburi."
 
 #: ../../../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
@@ -474,33 +474,33 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr ""
+msgstr "Jucătorul roșu este aproape de minereuri, dar are puțin teren fertil. Jucătorul galben are mult teren bun, dar trebuie să se îndepărteze mult de poziția de start pentru a găsi minereuri. Jucătorul albastru se află la mijloc – are ceva teren fertil și nu este prea departe de resurse."
 
 #: ../../../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
-msgstr ""
+msgstr "Craterul"
 
 #: ../../../../data/maps/Crater.wmf/elemental:10
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr ""
+msgstr "La mult timp după ce un meteorit s-a prăbușit peste câțiva munți, viața înflorește în crater. Acum, două triburi se luptă pentru resursele bogate."
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
-msgstr ""
+msgstr "Dincolo de orizont"
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – editată de 3plus4i"
 
 #: ../../../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Urcă-ți echipajul pe corabie și navighează spre orizont."
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomiți 3.0"
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
@@ -509,7 +509,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Bijuteria Alpilor, masivul Dolomiților, a fost declarat sit al patrimoniului mondial pentru frumusețea sa neatinsă. Această hartă este o reconstituire, cât de fidelă se poate în mod rezonabil, a zonei delimitate de Cortina d’Ampezzo la nord-est și Canazei la sud-vest. Dacă tot trebuie să te lupți pe viață și pe moarte cu dușmanii, măcar s-o faci într-un loc frumos."
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -518,11 +518,11 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Munții au teren plan din abundență. Din păcate, cea mai mare parte e verticală – folosește cu înțelepciune puținul spațiu de construcție pe care îl ai. O fortăreață la gura unei trecători înguste poate fi un obstacol formidabil pentru o armată inamică – folosește terenul în avantajul tău. Taie toți copacii și extinde-te oriunde poți – e singura cale de a găsi toate locurile prețioase pentru ferme."
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "Mandala egipteană v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -530,56 +530,56 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "Abia au avut timp să se pregătească atunci când s-au îmbarcat spre această insulă. Potrivit exploratorilor tăi, lucrurile nu vor merge însă atât de ușor pe cât ți s-a spus. Așteaptă-te la o opoziție înverșunată. Extinde-ți baza și fii primul care ajunge la inelul puterii."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher_Goose_Fish"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Condiții de start egale pentru trei jucători."
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
-msgstr ""
+msgstr "Frăția navelor"
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "Navele sunt cei mai buni tovarăși ai tăi. Pozițiile de start sunt asemănătoare, așa că harta ar trebui să fie echitabilă."
 
 #: ../../../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "Aceasta este o hartă oarecum tehnică și se potrivește cel mai bine pentru doi sau trei jucători umani. Cărbunele e greu de găsit – gândește-te să-l produci. Există aur lângă punctul de start – îl vezi?"
 
 #: ../../../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "Lacurile finlandeze"
 
 #: ../../../../data/maps/Finnish_Lakes.wmf/elemental:10
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "Acestea sunt frumoasele ținuturi finlandeze, cu lacuri, râuri, păduri străvechi și munți. Depinde de tine să-ți găsești drumul prin ele."
 
 #: ../../../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "Jucătorul galben are o poziție de start mult mai ușoară decât ceilalți doi; această hartă se potrivește pentru 1 la 2."
 
 #: ../../../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
-msgstr ""
+msgstr "Jocurile focului"
 
 #: ../../../../data/maps/Firegames.wmf/elemental:10
 msgid ""
@@ -587,57 +587,57 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "Este un test al zeilor sau planul malefic al altcuiva faptul că tu și tribul tău v-ați trezit pe această insulă, printre foc și lavă? Deocamdată se pare că ești singur, dar cine știe ce s-ar putea întâmpla dacă ai întâlni un trib advers?"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "Valea pădurii v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "O vale de râu înconjurată de munți, cu multe resurse, cu excepția cărbunelui. Mult spațiu plan pentru construcție."
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr ""
+msgstr "Patru castele"
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "Bine apărate în fortărețele lor puternice, patru căpetenii însetate de putere își desăvârșesc planurile de a domina aceste ținuturi…"
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
-msgstr ""
+msgstr "Patru munți"
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:10
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "Fiecare trib este înconjurat de patru munți puternici. Cine îi va cuceri primul și va revendica resursele pentru tribul său?"
 
 #: ../../../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: Apa se găsește de-a lungul râului. II: Oamenii de zăpadă marchează surse suplimentare de apă. III: Fiecare munte conține o singură resursă."
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Lună plină"
 
 #: ../../../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Fie că e vorba de cel mai recent solstițiu, fie de o boală a lunii, ceva împinge aceste triburi spre încercarea lor finală."
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Lacul ghețarului"
 
 #: ../../../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
@@ -646,68 +646,68 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "Tribul tău a trăit multă vreme pe malul acestui lac glaciar frumos și singuratic. Nimeni nu v-a deranjat, iar resursele erau suficiente pentru tot tribul, dar acum câteva luni un alt trib a trecut munții și s-a stabilit aici. Iar tu ești sigur că e loc doar pentru un singur trib."
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "Peninsula de aur"
 
 #: ../../../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
+msgstr "Două imperii se întrec pentru comorile unei peninsule legendare…"
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "Războaiele gheții"
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "Toamna s-a făcut iarnă. Unele lucruri au înghețat, dar nu și războiul."
 
 #: ../../../../data/maps/Ice_wars.wmf/elemental:11
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Pozițiile de start sunt în sensul acelor de ceasornic"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "Insule în război"
 
 #: ../../../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "De secole ați trăit în pace, unul lângă altul, cu celălalt trib de pe insula vecină. Această pace pare să se apropie acum de sfârșit – vecinul tău a început să se extindă."
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Regi și regine"
 
 #: ../../../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "O veche legendă spune că aceste șapte regate, care au înflorit în prosperitate de-a lungul veacurilor, se vor prăbuși într-o zi într-un război devastator. A fost ultima ta trădare una în plus și se va împlini profeția?"
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "Lacul liniștii"
 
 #: ../../../../data/maps/Lake_of_Tranquility.wmf/elemental:10
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr ""
+msgstr "Acest lac, ascuns în adâncul celor mai vechi păduri, este cunoscut de mult pentru frumusețea și liniștea sa idilică. Totuși, sfințenia lui a fost acum tulburată, căci două triburi ostile au ajuns pe malurile sale…"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
-msgstr ""
+msgstr "Ultimul bastion"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Another Barbarian – editată de king_of_nowhere"
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
@@ -720,25 +720,25 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Zeii capricioși nu ne-au ascultat rugăciunile. În schimb, lumina tot mai puternică a soarelui a încălzit Pământul de o mie de ori, ghețarii s-au topit, iar oamenii au fost înghițiți de adâncuri. Dar acum – sus, în munții maiestuoși, pe ultima fâșie de pământ – s-au adăpostit două triburi supraviețuitoare. Deși zeii s-au îndurat și clima s-a răcit din nou, apa continuă să crească și să crească. Spre ultimul loc sigur – cel mai înalt lanț muntos, unde aurul și spațiul de trai abia ajung pentru un singur trib – duc doar două drumuri opuse. Dar ține minte, ai grijă… acest ultim spațiu de trai este și un loc mic și aspru pentru viață."
 
 #: ../../../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Nu uita să ai grijă de rezervele de lemn, vei avea nevoie de ele."
 
 #: ../../../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Ultimii supraviețuitori"
 
 #: ../../../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Patru triburi luptă pentru supremație pe un ținut arid. Resursele sunt împrăștiate pe toată harta."
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Inelul mic 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -747,21 +747,21 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "O hartă echitabilă pentru 8 jucători, cu forme de relief naturale care împart teritoriul. Formele de relief sunt gândite să fie cât de cât realiste, cu râuri care curg din ghețarii munților, prin dealuri și câmpii, până în mare. Aurul este o resursă mult mai rară decât cărbunele și fierul. Resursele diferite se găsesc adesea la o anumită distanță unele de altele."
 
 #: ../../../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
-msgstr ""
+msgstr "Drum lung, lung v2"
 
 #: ../../../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr "„Where dat? A thousand miles from here.” [Porgy and Bess] Ai de parcurs un drum lung, lung pentru a cuceri toate insulele. Mult noroc!"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
-msgstr ""
+msgstr "Din insulă în insulă"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
@@ -769,22 +769,22 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "Un turneu special în cultura atlanților este așa-numitul „Din insulă în insulă”, în care două sau mai multe grupuri încearcă să ajungă cât mai repede pe insula din centru, pentru a fi primele care ridică un castel în vârful muntelui central."
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Contrabandiștii"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "Rutele tale de contrabandă, bine stabilite, s-au aglomerat dintr-odată: au apărut alte două triburi și a început o rivalitate între contrabandiști. Care echipă va fi prima care trece prin contrabandă un anumit număr de bunuri?"
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tridentul de foc"
 
 #: ../../../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -792,21 +792,21 @@ msgid ""
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
 "be discovered. But only by becoming a naval power will your tribe be able to"
 " explore enough resources to compete with its opponents."
-msgstr ""
+msgstr "În vecinătatea a trei vulcani mari, șase insule încântătoare îi invită pe coloniști să înceapă o viață nouă. Deșerturi și o pădure care crește repede așteaptă să fie descoperite. Dar doar devenind o putere navală va putea tribul tău să exploateze suficiente resurse pentru a concura cu adversarii."
 
 #: ../../../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Labirintul mistic"
 
 #: ../../../../data/maps/Mystical_Maze.wmf/elemental:10
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr ""
+msgstr "Două mari întrebări plutesc în aer: cine a creat acest labirint incredibil de mare și ce se găsește înăuntru?"
 
 #: ../../../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Provocarea fără metal v2"
 
 #: ../../../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
@@ -815,28 +815,28 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Această hartă este gândită ca o provocare solo pentru jucătorii foarte pricepuți, cărora 1 contra 6 împotriva IA li se pare prea ușor. Jucătorul albastru nu are metal (cu excepția unei mici cantități de fier pentru a-ți porni economia), așa că trebuie să te bazezi pe producția de 5% a unei mine epuizate. Și tot 1 contra 6 ești (deși, desigur, poți elimina câțiva jucători IA ca să fie puțin mai ușor). Mult noroc!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "Rendez-Vous"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Doar un mic deal în centrul hărții leagă aceste patru triburi rivale. Condu-ți armata imediat spre acest deal și construiește o fortăreață uriașă, ca semn al superiorității tale!"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "În centru este loc pentru o singură fortăreață. Apa se găsește peste tot, așa că nu este nevoie să trimiți geologi."
 
 #: ../../../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
-msgstr ""
+msgstr "Exploratorii râurilor"
 
 #: ../../../../data/maps/River_Explorers.wmf/elemental:10
 msgid ""
@@ -845,21 +845,21 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr ""
+msgstr "Fiecare jucător are un alt obstacol în calea extinderii și există mereu mai multe moduri de a-l depăși. Deși IA poate fi învinsă aici fără a construi nicio navă, jucătorilor li se recomandă să acorde prioritate porturilor și șantierelor navale – expedițiile sunt utile oriunde și sunt adesea calea cea mai rapidă spre zăcămintele de aur."
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
-msgstr ""
+msgstr "Ținutul râurilor"
 
 #: ../../../../data/maps/Riverlands.wmf/elemental:10
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
+msgstr "Un tărâm mistic, plin de peisaje diferite, toate străbătute de câteva râuri mari."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "De-a lungul râului"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -870,11 +870,11 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "Este ținutul unde soarele abia se vede iarna și unde primăvara spală orice amintire a trecutului. Tensiuni ciudate au crescut între locuitorii săi, iar mulți conducători egoiști au profitat de haos. Oamenii superstițioși nu par să fie un obstacol în calea armatelor mai bine echipate. Vremuri grele stau să vină și ar fi bine să asculți cuvintele sfetnicilor tăi înțelepți, altfel vei cădea în uitare precum ceilalți."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
-msgstr ""
+msgstr "Platoul verde"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
 msgid ""
@@ -882,43 +882,43 @@ msgid ""
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
-msgstr ""
+msgstr "Te afli pe o insulă încununată de munți puternici, care păstrează în mijlocul lor o comoară minunată și prețioasă – Platoul verde, greu de cucerit, dar ușor de pierdut. Așa că, dacă îl vrei, ferește-te de celelalte clanuri."
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Trecătorile nisipoase"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "Patru triburi se luptă cu vecinul cel mai apropiat pentru a ajunge primele la muntele de aur care promite bogății de necrezut. Dar vor putea cele două rămase să împartă resursele cu înțelepciune?"
 
 #: ../../../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
-msgstr ""
+msgstr "Insula mlaștinilor"
 
 #: ../../../../data/maps/Swamp_Island.wmf/elemental:10
 msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr ""
+msgstr "Miroase a mlaștină, arată a mlaștină și chiar este o mlaștină. Dar este locul unde te-ai născut și unde ai trăit toată viața. Dacă nu vrei să-l pierzi, apără-l!"
 
 #: ../../../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
-msgstr ""
+msgstr "Călugării mlaștinii"
 
 #: ../../../../data/maps/Swamp_Monks.wmf/elemental:10
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr ""
+msgstr "Se spune că vechii călugări războinici, care trăiesc în mlaștinile și mai vechi, sunt cheia controlului asupra întregii insule."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "Războiul Negru din Tasmania"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -931,7 +931,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "Bine ai venit, intrusule! Ești asemenea unui cuceritor european de la începutul anilor 1800, când aceștia au colonizat Țara lui Van Diemen – cunoscută mai târziu drept Tasmania. Între 1828 și 1832 a avut loc un război numit Războiul Negru, în care Imperiul Britanic a exterminat aproape întreaga populație aborigenă din Țara lui Van Diemen. – Harta simulează un Imperiu Britanic împrăștiat, dar fără niciun avantaj – de fapt, are câteva dezavantaje mari și probabil îți va fi greu să cucerești Tasmania. În timpul Războiului Negru istoric, raportul dintre europeni și aborigeni era de aproximativ unu la zece, dar de data aceasta ei sunt înarmați până în dinți pentru revanșă."
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -944,11 +944,11 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "Această hartă este gândită pentru a fi jucată de un singur jucător, din poziția de start a jucătorului albastru, cu tribul Imperiului. Alege barbari și amazoane pentru triburile rivale. Dacă vrei o provocare, pune-i pe toți în aceeași tabără și dezactivează diplomația. Sau poți juca fiecare împotriva tuturor, cu condiția de victorie Timp teritorial. Această hartă nu este potrivită pentru jocuri scurte, iar un joc va dura probabil peste zece ore. IA se descurcă foarte bine pe această hartă. Unul dintre jucătorii calculatorului se va apuca probabil și de navigație și va concura pentru cele mai bune locuri de port de pe coasta Tasmaniei, așa că ai fost avertizat!"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
-msgstr ""
+msgstr "Lacul cel mare"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:10
 msgid ""
@@ -958,11 +958,11 @@ msgid ""
 " grew and grew. Until one day, when the whole fire mountain exploded. "
 "Nowadays only this ring is left from that mighty fire mountain. Do you think"
 " that it is big enough for more than one tribe?"
-msgstr ""
+msgstr "Această insulă s-a ridicat cândva din cele mai mari adâncuri ale mării. Pe atunci, focul a țâșnit din apa sărată a mării și a scos la lumină cenușă, pietre și pământ. Iar focul se apropia tot mai mult de soare, în timp ce muntele creștea și creștea. Până într-o zi, când tot muntele de foc a explodat. Astăzi a mai rămas doar acest inel din puternicul munte de foc. Crezi că e destul de mare pentru mai mult de un trib?"
 
 #: ../../../../data/maps/The_Far_North.wmf/elemental:8
 msgid "The Far North"
-msgstr ""
+msgstr "Nordul îndepărtat"
 
 #: ../../../../data/maps/The_Far_North.wmf/elemental:10
 msgid ""
@@ -977,11 +977,11 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
+msgstr "Unii spun că ținuturile de nepătruns din nordul îndepărtat i-au speriat până și pe cei mai curajoși coloniști și pe cei mai viteji dintre războinici. Păduri mari și bătrâne, pline de vânat mare și de prădători, străbătute de mlaștini și dealuri, erau învăluite în mister. Cei care reușiseră să se întoarcă pomeneau de clădiri uimitoare, împodobite cu sculpturi și cu aur din lanțuri muntoase maiestuoase, undeva în mijlocul sălbăticiei. Zeci de ani mai târziu, din acele vremuri bune au rămas doar câteva ruine fărâmițate, acoperite de mușchi și de copaci. Formele lor oferă doar o idee despre măiestria constructorilor din vechime. Nimeni nu știe de ce au dispărut. Nimeni nu știe de ce. Oamenii spun că acum nimic nu mai blochează drumul spre bogăție. Dar mulți vor muri sfâșiați de lupi, înghițiți de mlaștină… încercuiți de triburi ostile."
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "Insulele celor opt triburi"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -989,58 +989,58 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "Această hartă este concepută pentru un joc lung! Opt triburi, trei insule și multe resurse. Colonizarea și bacurile îți pot aduce un mare avantaj, dar nu sunt necesare pentru a-i învinge pe ceilalți jucători. Dacă vrei să amâni luptele, poți dezactiva ultimii patru jucători."
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
-msgstr ""
+msgstr "Drumul lung"
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:10
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr ""
+msgstr "Încă un test ciudat al zeilor. Pentru a ajunge de cealaltă parte, se pare că nu există altă cale decât să ocupi pământul dușmanilor."
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "Nilul"
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "Râul a oferit dintotdeauna hrană și cale de comunicare. De data aceasta, opt imperii se vor lupta pentru controlul acestui ținut."
 
 #: ../../../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Folosește râul cu înțelepciune. Adversarii tăi vor face la fel. Principalele resurse de minereu le vei găsi adânc în deșert."
 
 #: ../../../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Triunghiul oazelor"
 
 #: ../../../../data/maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr ""
+msgstr "Există ceva mistic, ca o atmosferă cenușie, în jurul acestor trei oaze, ceva ce nimeni n-a descoperit încă. Poate tu vei fi acela, dar ferește-te de ceilalți care caută și ei!"
 
 #: ../../../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "Trecătoarea prin munți"
 
 #: ../../../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:10
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr ""
+msgstr "În această zonă muntoasă s-au așezat doi prinți. Acum își extind teritoriile, fără să știe că nu sunt singuri!"
 
 #: ../../../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
-msgstr ""
+msgstr "Dezghețul"
 
 #: ../../../../data/maps/The_Thaw.wmf/elemental:10
 msgid ""
@@ -1049,25 +1049,25 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr ""
+msgstr "A venit un nou dezgheț. Trei triburi se adăposteau de iarna aspră printre munți maiestuoși. În vremea solstițiului au ascultat oracolul și au pornit la război. Singurul supraviețuitor va aduce ca jertfă comorile dușmanilor pe altarul străvechi, va ridica acolo un castel măreț și va câștiga bunăvoința și respectul zeilor."
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
-msgstr ""
+msgstr "Trei războinici"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:10
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr ""
+msgstr "Munți puternici împart acest ținut în trei văi fertile. Dar o potecă leagă văile, așa că o luptă pare de neevitat!"
 
 #: ../../../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "Apa se găsește în jurul lacurilor."
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Împreună suntem puternici"
 
 #: ../../../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
@@ -1080,11 +1080,11 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr ""
+msgstr "Cele patru porturi puternice din Insulele Craw își schimbă mărfurile între ele de secole. Toate aveau nevoie de resurse pe care nu le puteau produce pe propriul teritoriu și, în schimb, ofereau alte resurse celor care nu le puteau produce. Pe baza acestor schimburi, între cele patru porturi și oamenii care trăiau în Insulele Craw exista un comerț foarte prietenos – până de curând, când două dintre porturi s-au unit într-o alianță comercială exclusivă, obligându-le pe celelalte două să facă la fel. Dintr-odată, pare doar o chestiune de timp până când primele lupte dintre porturi vor spulbera viața pașnică ce a durat atâta vreme…"
 
 #: ../../../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Lagunele gemene"
 
 #: ../../../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
@@ -1093,35 +1093,35 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "Când vântul s-a întețit și s-au format primele dune pe aceste lagune gemene părăsite, nimeni nu s-ar fi așteptat ca două triburi, aflate în căutarea disperată a mai multor resurse pentru a-și susține războaiele nesfârșite, să ajungă în acest loc uitat în același timp și din același motiv binecunoscut."
 
 #: ../../../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Apără-ți liniile de transport sau folosește nave pentru a-l ocoli pe adversar. Apoi elimină orice activitate inamică."
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
-msgstr ""
+msgstr "Două frontiere"
 
 #: ../../../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr ""
+msgstr "O hartă de luptă multiplayer pe o insulă mică, în formă de cerc."
 
 #: ../../../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Lumea largă"
 
 #: ../../../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "Lumea nu este de ajuns! Dacă vrei să câștigi, trebuie să trimiți câteva nave. Dar ține minte: adversarii tăi sunt foarte aproape."
 
 #: ../../../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
-msgstr ""
+msgstr "Valea zimbrilor"
 
 #: ../../../../data/maps/Wisent_Valley.wmf/elemental:10
 msgid ""
@@ -1129,7 +1129,7 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr ""
+msgstr "Se pare că această vale magică a fost locuită de zimbri de la începutul vremurilor. Când tribul tău a ajuns aici, erai sigur că locul oferă destul spațiu pentru o viață pașnică. Dar poate tribul tău să trăiască în pace cu vecinii?"
 
 #: ../../../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
@@ -1138,4 +1138,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "Jucătorul negru este înconjurat în centru, fără resurse, așa că există trei moduri diferite de a folosi această hartă: fără jucătorul negru, ca hartă normală pentru 4 jucători; cu o IA pe negru, pentru a complica extinderea celorlalți jucători; sau o poți juca drept provocare, cu jucătorul negru împotriva celorlalți 4 (FOARTE dificil)."

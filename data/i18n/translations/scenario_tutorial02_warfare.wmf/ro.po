@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# # Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -23,7 +24,7 @@ msgstr "Introducere"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Soldați, antrenament și război"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
@@ -32,18 +33,18 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "În acest scenariu îți voi vorbi despre soldați, despre antrenamentul lor și despre meseria lor: războiul. Deși Widelands este despre construcție, nu despre distrugere, există uneori un dușman pe care trebuie să-l învingi. Totuși, războiul se bazează în principal pe economie, nu pe strategie militară, iar mecanismele lui merită explicate."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "Am pregătit un mic sat care conține cele mai importante clădiri. Ai și destule bunuri, așa că nu trebuie să te ocupi de producția de arme. Într-un joc adevărat nu vei avea acest lux."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Abilitățile soldaților"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid ""
@@ -51,7 +52,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr ""
+msgstr "Soldații noi sunt creați altfel decât muncitorii obișnuiți: recruții vor merge de la un depozit (sau de la sediul central) la cazarmă, unde vor primi un antrenament de bază și vor deveni soldați. Soldații barbari de bază nu folosesc armură, au nevoie doar de un topor."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -60,7 +61,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "Uită-te la soldații care se îndreaptă spre clădirile noastre militare. Arată altfel decât muncitorii obișnuiți: au deasupra capului o bară de sănătate care arată cât le-a mai rămas și au patru simboluri, care arată nivelurile actuale ale fiecărui soldat în cele patru categorii: sănătate, atac, apărare și eschivă."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
@@ -68,22 +69,22 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Un soldat barbar complet antrenat are nivelul %1% la sănătate, nivelul %2% la atac, nivelul %3% la apărare și nivelul %4% la eschivă. Un războinic de temut, nu glumă! Fiecare abilitate are următoarea semnificație:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid "Health:"
-msgstr ""
+msgstr "Sănătate:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "Viața totală a unui soldat. Un soldat barbar începe cu %1% puncte de sănătate și câștigă %2% puncte de sănătate la fiecare nivel de sănătate."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Attack:"
-msgstr ""
+msgstr "Atac:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
@@ -92,11 +93,11 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "Cantitatea de daune pe care un soldat o provoacă inamicului când un atac reușește. Un soldat barbar cu nivelul de atac 0 provoacă aproximativ ~%1% puncte de daune când reușește să lovească un inamic. La fiecare nivel de atac, câștigă %2% puncte de daune."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Defense:"
-msgstr ""
+msgstr "Apărare:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -107,11 +108,11 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Apărarea este procentul care se scade din valoarea atacului. Barbarii nu se pot antrena la această abilitate și de aceea au mereu nivelul de apărare 0, ceea ce înseamnă că daunele sunt întotdeauna reduse cu %1%%%. Dacă un atacator cu o valoare de atac de 3500 de puncte lovește un soldat barbar, barbarul va pierde 3500×%2%%% = %3% puncte de sănătate."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
-msgstr ""
+msgstr "Eschivă:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -120,22 +121,22 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "Eschiva este șansa ca soldatul să poată evita un atac. Un barbar de nivelul 0 are o șansă de %1%%% să se ferească de un atac, iar aceasta crește cu câte %2%%% la fiecare nivel."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Arena de luptă"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "Am vorbit despre antrenament și niveluri. Hai să le explic mai pe larg."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "Un soldat nou creat nu are experiență și nu se pricepe prea bine la luptă. Pentru a-l face mai puternic, poți construi centre de antrenament."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
@@ -143,135 +144,135 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr ""
+msgstr "Unul dintre aceste centre de antrenament este arena de luptă. Este o clădire mare și scumpă și îi antrenează pe soldați la eschivă. Pentru că soldații se înfometează foarte tare la antrenament, această clădire are nevoie de multă mâncare și de bere tare. Într-un joc adevărat, ar trebui să ai o infrastructură bună înainte s-o construiești."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "Pentru a vedea antrenamentul la eschivă în acțiune, construiește o arenă de luptă."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr ""
+msgstr "Cât așteptăm arena de luptă, probabil vei observa niște soldați care se plimbă de colo-colo. Ei sunt schimbați automat din când în când. Îți voi explica asta mai târziu."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Arena de luptă"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Construiește o arenă de luptă"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Construiește o arenă de luptă. Este o clădire mare."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Pentru că construcția va dura ceva timp, poți schimba viteza jocului folosind %1$s și %2$s."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "Arena de luptă a fost construită"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:82
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr ""
+msgstr "Foarte bine. Arena noastră de luptă este gata, iar soldații se îndreaptă deja spre ea."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr ""
+msgstr "Tot acolo sunt livrate și bunurile necesare. Pentru un antrenament reușit ai nevoie de pâine și bere tare, precum și de pește sau carne."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr ""
+msgstr "Pentru mai multe informații, poți consulta fereastra de ajutor a clădirii, accesibilă prin semnul întrebării din fereastra fiecărei clădiri."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr ""
+msgstr "Pentru a afla cât de mult au progresat soldații tăi la antrenament, te poți uita la pictogramele lor. Acestea sunt marcate cu puncte roșii:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr ""
+msgstr "Lipsa punctelor roșii înseamnă că soldatul nu este antrenat, deci are nivelul 0. Toți recruții tăi noi arată așa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+msgstr "Cu fiecare etapă de antrenament reușită, soldatul tău devine mai puternic. Acest lucru este indicat printr-un punct roșu. Acest soldat are nivelul 1 la antrenamentul de eschivă."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Când soldatul tău a atins cel mai înalt nivel posibil (în acest caz, nivelul 2), acest lucru este indicat printr-un fundal alb."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:115
 msgid "The Training Camp"
-msgstr ""
+msgstr "Tabăra de antrenament"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:98
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "Există un al doilea centru de antrenament: tabăra de antrenament. Este tot o clădire mare și, ca să completeze arena de luptă, antrenează atacul și sănătatea (ține minte, soldații barbari nu pot fi antrenați la apărare)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp."
-msgstr ""
+msgstr "Construiește o tabără de antrenament."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Tabăra de antrenament"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
-msgstr ""
+msgstr "Construiește o tabără de antrenament"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "Arena de luptă îi antrenează pe soldați doar la eschivă. Pentru a obține cel mai puternic soldat posibil, trebuie să construiești și o tabără de antrenament, care îi antrenează la atac și sănătate."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr ""
+msgstr "Grozav, și tabăra noastră de antrenament este gata. Acum nimic nu ne mai poate împiedica să obținem cei mai puternici războinici pe care i-a văzut lumea vreodată."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "Pentru a se antrena în tabăra de antrenament, soldații noștri au nevoie de mâncare, ca în arena de luptă, dar nu și de bere tare. În schimb, au nevoie de diferite topoare pentru antrenamentul la atac și de căști pentru antrenamentul la sănătate."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr ""
+msgstr "Acest echipament este produs în fierării, din cărbune, fier și uneori aur. Vei afla mai multe despre asta în al doilea scenariu al campaniei barbarilor."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
@@ -280,77 +281,77 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Ar trebui să ții minte și că fiecare trib din Widelands are propriul mod de antrenament, așa că și clădirile și bunurile diferă. De asemenea, nivelurile abilităților nu pot fi comparate: un soldat imperial are un atac de bază de %1% la nivelul 0, în timp ce un soldat barbar de același nivel are un atac de bază de doar %2%."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Coliba cercetașului"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Explorează împrejurimile"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Părți mari ale hărții nu au fost încă explorate. Ar fi o idee bună să știm în ce direcție e cel mai bine să ne extindem imperiul."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Poți să-ți încerci norocul și să te extinzi la întâmplare, dar e riscant. O cale mai sigură este să folosești un cercetaș care să exploreze părțile nevăzute ale hărții. Ce-ar fi dacă ar găsi munți plini de aur?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Avem nevoie de o colibă a cercetașului ca să începem explorarea. Este o clădire mică."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Construiește o colibă a cercetașului."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Construiește o colibă a cercetașului"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "E bine să-ți cunoști împrejurimile. Un cercetaș va explora pentru tine părțile nevăzute ale hărții."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Construiește o colibă a cercetașului."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
-msgstr ""
+msgstr "Cercetașul este pregătit"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
-msgstr ""
+msgstr "Gata de drum!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Bravo! Coliba cercetașului a fost construită. Cât se mută cercetașul în ea, hai să aflăm ceva mai multe despre el."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "În primul rând, va trebui să ia mâncare cu el în drumurile de cercetare. Din fericire, avem niște rații în depozit."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "Când are mâncare, va umbla la întâmplare prin zonă. Ar trebui să-i urmărești mișcările înainte ca ceața de război să ascundă ce a văzut."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
@@ -358,49 +359,49 @@ msgstr "Cercetaș"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
-msgstr ""
+msgstr "Explorează harta"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Așteaptă ca cercetașul să exploreze zonele nevăzute."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 msgid "Observe your scout."
-msgstr ""
+msgstr "Urmărește-ți cercetașul."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"
-msgstr ""
+msgstr "Cercetașul a făcut progrese"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid "New horizons?"
-msgstr ""
+msgstr "Noi orizonturi?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "După cum vezi, cercetașii pot ajunge destul de departe. Vestea bună este că nu sunt inamici prin preajmă."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Poți folosi miniharta pentru a vedea progresul explorării."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Nu uita că cercetarea este o muncă grea și, ca atare, nu se poate face fără provizii de mâncare."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Eroi și recruți"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "Cât se antrenează soldații noștri, hai să-ți spun ce putem face cu ei."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
@@ -408,29 +409,29 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr ""
+msgstr "În fiecare clădire militară poți seta preferința pentru eroi (soldați antrenați) sau pentru recruți. Din când în când, un soldat va ieși din clădire și va fi înlocuit automat cu unul mai puternic/mai slab – asta ai văzut mai devreme."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "Setarea inițială depinde de tipul clădirii. La barbari, postul de santinelă este singura clădire care preferă implicit recruții. Ar trebui să schimbi această setare după nevoile tale de moment."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr ""
+msgstr "Când te extinzi într-un teritoriu al nimănui, poți face ca clădirile tale să prefere recruții. Când plănuiești un atac, trimite eroi în acea regiune. Clădirile cucerite preferă întotdeauna eroii."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:192
 msgid "Soldier capacity"
-msgstr ""
+msgstr "Capacitatea de soldați"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "Ajustarea numărului de soldați"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
 msgid ""
@@ -439,51 +440,51 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr ""
+msgstr "Mai există o cale de a controla puterea unei clădiri militare: numărul de soldați staționați acolo. Fă clic pe butoanele cu săgeți pentru a scădea sau a crește numărul dorit de soldați. Fiecare clădire are o capacitate maximă. De exemplu, la barieră aceasta este de cinci."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:196
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "Dacă vrei să trimiți un anumit soldat în altă parte, pur și simplu fă clic pe el. Va fi apoi înlocuit cu alt soldat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Să-ți explic și ce înseamnă numerele din șirul de stare. Acest șir poate conține o săgeată și până la trei numere, de ex. „↑ 1 (+5) soldat (+2)”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The arrow shows whether the building is set to prefer heroes (upwards arrow)"
 " or rookies (downwards arrow)."
-msgstr ""
+msgstr "Săgeata arată dacă clădirea este setată să prefere eroii (săgeată în sus) sau recruții (săgeată în jos)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "Primul număr arată câți soldați se află momentan în această clădire. În acest exemplu, înăuntru a mai rămas un singur soldat (fiecare clădire militară este păzită întotdeauna de cel puțin un soldat)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "Al doilea număr îți spune câți soldați suplimentari aparțin acestei clădiri, dar se află momentan afară. Cei cinci soldați ar putea ataca un inamic. Se vor întoarce după ce vor reuși."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
+msgstr "Al treilea număr indică soldații lipsă. Din cei opt soldați (1 + 5 + 2) pe care vrei să-i ai aici, doi s-ar putea să fi murit. Vor fi înlocuiți, dacă se poate, cu soldați noi din depozitul tău."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Soldații din sediul central"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -491,7 +492,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Sediul tău central are unele dintre capacitățile clădirilor militare: cucerește teritoriu, inamicul îl poate ataca direct, iar soldații aflați în el îl apără pe el și împrejurimile atunci când este atacat. Pe de altă parte, există și o diferență: nu poți porni un atac cu soldații din sediul central."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -499,12 +500,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "Capacitățile militare ale sediului central îl deosebesc mult de depozitele simple, care nu cuceresc teritoriu și au nevoie de clădiri militare în apropiere pentru apărare. Soldații aflați în depozitele simple nu participă la nicio luptă, iar depozitele simple nu pot fi atacate direct."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Setările de soldați ale sediului central"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -515,7 +516,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Deși toți soldații care se întâmplă să fie în sediul central ajută la apărarea lui, ei nu sunt repartizați permanent sediului central, așa că pot fi trimiși oricând în altă parte, când o clădire militară are nevoie de un soldat. Din fericire, poți repartiza și câțiva soldați la apărarea sediului central, la fel cum setezi capacitatea și preferința de soldați pentru clădirile militare. Dacă faci asta, sediul central va lăsa să plece spre alte clădiri doar soldații în plus, nu și pe cei din garnizoana repartizată."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -526,15 +527,15 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Dacă te uiți la liniile de stare, poți vedea că depozitul tău nu are nimic, dar sediul central are inițial semnul „—”. Asta înseamnă că nu există nicio garnizoană stabilită pentru protejarea sediului central, deși s-ar putea să mai fie soldați acolo. Dacă mărești numărul dorit de soldați peste zero, sediul central va afișa în stare aceleași informații despre soldați ca și clădirile militare. Soldații în plus nu sunt niciodată afișați în stare."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
-msgstr ""
+msgstr "Demontează postul de santinelă"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "Demontarea clădirilor militare"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid ""
@@ -542,7 +543,7 @@ msgid ""
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle or burn down the"
 " building."
-msgstr ""
+msgstr "Poți reduce numărul de soldați doar până la unu. Ultimul soldat al unei clădiri nu va ieși niciodată (decât dacă acea clădire este atacată). Dacă vrei să-ți ai soldatul în altă parte, va trebui să demontezi sau să incendiezi clădirea."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
 msgid ""
@@ -553,32 +554,32 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "Totuși, distrugerea unei clădiri militare implică întotdeauna un risc: teritoriul rămâne al tău, dar nu mai este protejat. Orice inamic care își construiește propriile clădiri militare poate prelua acel teritoriu fără luptă, iar clădirile tale vor lua foc. În plus, unele părți ale teritoriului pot fi acum ascunse de ceața de război. De aceea, ar trebui să demontezi clădiri militare doar în interiorul teritoriului tău, unde ești ferit de inamici."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:232
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Ai văzut postul tău de santinelă? Pentru că nu poate găzdui mulți soldați și se află lângă o barieră mai puternică, este destul de inutil."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
 msgid "Dismantle it."
-msgstr ""
+msgstr "Demontează-l."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
+msgstr "Poți folosi această ocazie și pentru a te familiariza cu celelalte opțiuni: preferința eroi/recruți și capacitatea."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Soldați, liberi!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
 msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Demontează postul de santinelă din nord-vest"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:244
 msgid ""
@@ -586,59 +587,59 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "Poți controla numărul de soldați staționați într-o clădire militară cu butoanele cu săgeți. Dacă vrei să scoți afară chiar și ultimul soldat, va trebui să distrugi clădirea. Totuși, atunci ea nu îți va mai proteja teritoriul, care va deveni vulnerabil la atacuri ostile."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:245
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "Demontează postul de santinelă din nord-vest, de lângă barieră."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Îmbunătățește-ți fortăreața"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
 msgid "Enhancing Buildings"
-msgstr ""
+msgstr "Îmbunătățirea clădirilor"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:254
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "Bravo. Acum știi cum să-ți retragi soldații din locurile unde nu ai nevoie de ei. E timpul să-ți spun cum să-ți întărești linia frontului."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:255
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "Fortăreața ta este deja destul de puternică și cucerește mult teritoriu. Dar există o clădire și mai mare: citadela."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:256
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "Citadelele nu pot fi construite direct. În schimb, va trebui să construiești mai întâi o fortăreață și apoi s-o îmbunătățești într-o citadelă. Pentru asta, fă clic pe fortăreață, apoi alege butonul „Îmbunătățește în Citadelă”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "Soldații tăi vor părăsi fortăreața cât timp durează construcția. Asta înseamnă că fortăreața își va pierde influența militară, așa cum am descris mai sus."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "Îmbunătățește acum fortăreața într-o citadelă."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Îmbunătățește-ți fortăreața într-o citadelă"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:267
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "Îmbunătățește-ți fortăreața într-o citadelă puternică."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
 msgid ""
@@ -646,15 +647,15 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
+msgstr "Citadela poate găzdui 12 soldați și este cea mai mare clădire militară pe care o pot construi barbarii. De asemenea, costă multe resurse și durează mult până e construită. Este cea mai potrivită pentru apărarea punctelor importante din punct de vedere strategic, precum trecătorile înguste sau munții."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Învinge-ți inamicul"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:277
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Învinge inamicul"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:278
 msgid ""
@@ -663,44 +664,44 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "Excelentă treabă, citadela este gata. Dar ce e asta? Un trib ostil s-a așezat lângă noi cât timp citadela era în construcție! Vezi cum ne-au luat o parte din teritoriu? Iar tăietorul nostru de lemne și-a pierdut locul de muncă. Despre asta vorbeam. Hai să ne luăm teritoriul înapoi și să învingem inamicul!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:290
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "Pentru a ataca o clădire, fă clic pe ușile ei, alege numărul de soldați pe care vrei să-i trimiți și fă clic pe butonul „Atac”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Soldații tăi vor veni din toate clădirile militare din apropiere. La fel, apărătorii vor veni din toate clădirile militare apropiate ale inamicului și îți vor intercepta forțele."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
+msgstr "Atacă și cucerește toate clădirile militare ale inamicului și distruge-i sediul central."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:286
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Învinge-ți inamicul"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:288
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Învinge tribul inamic"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:289
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "Învinge inamicul din apropiere."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:295
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:297
 msgid "Conclusion"
-msgstr ""
+msgstr "Încheiere"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:298
 msgid ""
@@ -708,18 +709,18 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "Îți mulțumesc că ai jucat acest tutorial. Sper că ți-a plăcut și că ai învățat cum să creezi și să antrenezi soldați, cum să controlezi unde merg și cum să învingi un inamic. Ai văzut cât de ușor ți-ai putut copleși inamicul? Să ai soldați antrenați este un avantaj uriaș."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:299
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "Dar un război este scump și nu este întotdeauna calea spre țintă. Când configurezi un joc nou, poți alege și condiții de victorie pașnice. Ar trebui neapărat să le încerci, merită."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:300
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "Acum ești pregătit să joci campaniile. Ele te vor învăța despre economiile diferite ale triburilor. Poți juca și tutorialele rămase, dar ele nu sunt esențiale pentru a reuși în campanii."
