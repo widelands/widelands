@@ -9,7 +9,7 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023,2025
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023,2025-2026
 # Elisabeth Jäger, 2015-2016
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015-2016
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-09-10 07:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023,2025\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023,2025-2026\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +177,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "Welche Version von Widelands du benutzt (Zum Beispiel die Versionsnummer (1.x.x) oder die git Revisionsnummer / Hash, falls du eine Entwicklungsversion oder einen täglichen Build benutzt)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -408,7 +408,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Aufzeichnungen sind ein sehr nützliches Werkzeug, um Fehler in der Spiellogik zu finden, daher können sie als Anhang zu einer Fehlermeldung nützlich sein. Die Wiedergabedateien sind im Unterverzeichnis ‘replays’ des Widelands Heimverzeichnisses gespeichert. Du kannst in den letzten Reiter \"Technische Informationen\" dieses Fenster schauen, um zu sehen wo sich dieses Verzeichnis auf deinem Computer befindet."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
@@ -577,7 +577,7 @@ msgstr "Dschungelmeisterinnen lernen ihre Fähigkeiten während der Arbeit als D
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Beobachte deine Fischer und baue ein Fischzüchterhaus, um die Fischbestände zu erneuern."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -813,7 +813,7 @@ msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbei
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3%/%4% für maximalen/minimalen Zoomfaktor. Drücke %5%, um den Zoomfaktor zurückzusetzen."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
