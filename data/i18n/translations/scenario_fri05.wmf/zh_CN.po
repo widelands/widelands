@@ -18,128 +18,128 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "注意"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
 "You appear not to have completed the previous mission. You may still play "
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
-msgstr ""
+msgstr "您似乎没有完成上一个任务。您仍然可以玩这个剧情关卡，但会处于劣势。我建议您先完成上一个剧情关卡，然后再重新开始这个任务。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2979
 #: ../../../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../../../data/campaigns/fri05.wmf/scripting/init_p2.lua:14
 msgid "København"
-msgstr ""
+msgstr "København"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "贸易"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
-msgstr ""
+msgstr "你不能在这个岛上开采资源或采石。相反，你可以用当地特产与其他商品进行交易。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
-msgstr ""
+msgstr "存储在港口中的任何商品都将被交易。交易价格如下表所示。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "击败入侵者"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "击败阿特达格的部队。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "摧毁敌人的所有建筑。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "封锁瓶颈"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "封锁瓶颈。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
 "Secure the narrow passage to the east of the Uplands with several large "
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
-msgstr ""
+msgstr "在高地东侧的狭窄通道上建造几个大型军事建筑，以确保敌人在你准备好进攻前无法通过。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "木材生产"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "保障你的木材生产。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "建造至少三个伐木工小屋。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "建造至少四个林场小屋。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "高地"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "善用高地。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "将你的工业迁移到高地。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "欢迎回来！"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:99
 msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
-msgstr ""
+msgstr "终于回家了！我无法用言语表达再次看到故土的喜悦……也无法表达近在咫尺却又遥不可及的急切心情。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -151,7 +151,7 @@ msgid ""
 " as much as I do my old one. I am sure the wish to return alive and a victor"
 " will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
-msgstr ""
+msgstr "这次海上风平浪静，让我们得以迅速向南航行。我和亨内克在航行的大部分时间里都站在船头，期待着我们的归来。里鲍德起初站在船尾，和我们一样望着前方。显然，他热爱自己的新家园，正如我热爱我的故土一样。我相信，活着凯旋归来的愿望将激励他的士兵们奋力作战，就像我自己的部队将努力夺回家园一样。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -159,7 +159,7 @@ msgid ""
 "The mood on our ship grew tenser as we approached familiar waters. The "
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
-msgstr ""
+msgstr "当我们接近熟悉的海域时，船上的气氛变得紧张起来。归来的喜悦笑声和兴奋期待在我们准备战斗时变成了严肃的心情。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -167,7 +167,7 @@ msgid ""
 "And then the day arrived at last. We sighted the northernmost tip of the "
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
-msgstr ""
+msgstr "然后，那一天终于到来了。我们看到了叙尔特岛的最北端，并知道我们将在当天晚上在弗尔岛登陆。但是——"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -175,7 +175,7 @@ msgid ""
 "We had made one of the most basic mistakes, and we should all be ashamed of "
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
-msgstr ""
+msgstr "我们犯了一个最基本的错误，我们都应该为此感到羞愧，我们的谨慎程度还不如一个舱房男孩。自从我们离开弗尔岛以来的几个月里，我们一直忽略了关注日历。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -185,7 +185,7 @@ msgid ""
 "within a week of this day. For time immemorial, the exceptionally strong "
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
-msgstr ""
+msgstr "今天是万圣节，11月2日，这里的每个孩子都知道，任何一个理智的船长都不会梦想在这一周内扬帆起航。自古以来，每年这个时候总是刮着异常强烈的暴风雨，已经让许多粗心的水手葬身大海。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -195,7 +195,7 @@ msgid ""
 "lucky had I not witnessed it myself. Our unbelievable escape fills me with "
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
-msgstr ""
+msgstr "只有纯粹的运气拯救了我们。我们的船只几乎没有损坏，没有一个水手被海浪吞没。如果不是我亲眼所见，我绝不会相信有人能如此幸运。我们难以置信的逃生让我充满希望——这显然表明我们危险的征程得到了圣人的祝福。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -206,7 +206,7 @@ msgid ""
 "and decided to land here. The islanders are well known for their "
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
-msgstr ""
+msgstr "暴风雨将我们的船只吹离了大约两天的航程。幸运的是，我仍然认得这片水域，所以这确实是一个小小的挫折。当暴风雨平息时，我们接近了黑尔戈兰岛，并决定在这里登陆。岛民们以好客而闻名，在战斗前有机会休息和恢复精力将大有帮助。他们中的一些人甚至可能加入我们的事业。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -215,12 +215,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "问候"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "欢迎来到黑尔戈兰！"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -230,11 +230,11 @@ msgid ""
 "the Brave and the Mighty. I am Ocke Ketelsen, senior alderman of Helgoland, "
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
-msgstr ""
+msgstr "和平与欢迎来到黑尔戈兰！你们的名声 precedes 你们，克劳斯·伦贝克，弗尔岛深受爱戴的领主，以及里鲍德，诗人们称他为勇敢、勇敢和强大的人。我是奥克·凯特森，黑尔戈兰的高级长老，尽管时局艰难，我仍然很高兴和荣幸地接待这样杰出的客人。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "好客"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -245,33 +245,33 @@ msgid ""
 " warm, I can only conclude that some other sort of trouble has befallen you."
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
-msgstr ""
+msgstr "和平与感谢你友好的问候，奥克·凯特森！不必在登陆的岛上与人开战，这是一个令人愉快的改变。然而你的欢迎听起来出奇的简短。既然你的话语如此温暖，我只能推断出其他某种麻烦已经降临到你身上。假设你不介意我问这个问题，这个问题也不显得无礼，我想知道我们是否能以任何方式帮助你。"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:153
 msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
-msgstr ""
+msgstr "你非常敏锐。确实我们有麻烦，你可以直接看到那边。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "敌人"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "丹麦人！那么阿特达格的征服欲望已经到达这么远了吗？"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
 msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
-msgstr ""
+msgstr "确实如此。我看你认出了这个敌人，我很想听听你是如何遇见他们的——尽管我想他们的情况不会好！"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -281,7 +281,7 @@ msgid ""
 " compelled to leave the island and ask Reebaud to help me reclaim it. In "
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
-msgstr ""
+msgstr "这个假设不正确，让我深感遗憾。为简洁起见，我只说阿特达格以如此强大的力量入侵弗尔岛，我被迫离开岛屿并请求里鲍德帮助我夺回它。事实上，我们正航行到弗尔岛以彻底驱逐入侵者时，一场暴风雨将我们吹离了航线，带到了黑尔戈兰。"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -289,13 +289,13 @@ msgid ""
 "That it did so might even be heavenly intervention. We will gladly help you "
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
-msgstr ""
+msgstr "它这样做可能是天意的干预。我们很乐意帮助你对抗这个敌人。可以说是一场热身战——我期待着它！"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "战争准备"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -304,7 +304,7 @@ msgid ""
 " enemies are more powerful than they may appear – they have brought an "
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
-msgstr ""
+msgstr "你的热情让我感到温暖，你的困境也让我深表同情。但敌人比他们看起来更强大——他们带来了大量丹麦士兵，即使你强大的士兵也无法击败他们所有人。"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -312,18 +312,18 @@ msgid ""
 "Our island is not accustomed to this kind of warfare. We are fishers and "
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
-msgstr ""
+msgstr "我们的岛不适应这种战争。我们是渔夫和农民，我们没有专业知识或经济来支持持久的战斗。你们在这方面将大有帮助。"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:192
 msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
-msgstr ""
+msgstr "但首先让我带你参观一下，让你对我们的小岛有一个清晰的认识。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -332,7 +332,7 @@ msgid ""
 "don't see how you could quarry them to construct stone houses. I see hardly "
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
-msgstr ""
+msgstr "你们在这里如何维持生计？这些岩石看起来很壮观，但我看不出你们如何能开采它们来建造石屋。我几乎看不到树木，也没有可以开采铁和其他矿物的地方！你们是怎么生活的？"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -344,7 +344,7 @@ msgid ""
 "any quantity you require. Simply drop off the wares to sell in the ports and"
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
-msgstr ""
+msgstr "通过贸易。我们将谷物、鱼和各种其他商品卖到大陆，并从那里购买矿石和花岗岩。让我们根据各自最擅长的来分工：你负责重组我们的经济以适应战争并训练我们的人民作战，我负责以你需要的任何数量进口商品。只需将待售商品放在港口，其余的交给我处理。这个图表显示了我们通常交易的商品种类和数量。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -353,11 +353,11 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "战争规划"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "善用高地"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -365,7 +365,7 @@ msgid ""
 "First things first. This town has an excellent defensive position, but it is"
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
-msgstr ""
+msgstr "首先，这个城镇有绝佳的防御位置，但遗憾的是毫无防备。我们必须提前制定战术计划，因为我同意这场战斗不会很快获胜。"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -378,11 +378,11 @@ msgid ""
 "there, provided we stock enough supplies in warehouses on the Uplands in "
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
-msgstr ""
+msgstr "高地只有一个入口：就是城镇中心旁边的这个斜坡。让我们把所有重要的生产建筑建在那里。在南部顶端紧密地放置几个堡垒将使这片广阔的高地几乎不可能被征服。即使敌人设法占领了整个低地岛屿，我们也可以在高地上坚守数年，前提是提前在高地的仓库中储备足够的物资。当然，我们会与港口和贸易路线隔绝，所以我们应该尽量避免达到这种地步。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "加固狭窄"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -396,7 +396,7 @@ msgid ""
 "as possible in order to prevent the enemy from gaining any land. It would be"
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
-msgstr ""
+msgstr "然而，我们最紧迫的关切应该是确保我们最北部港口附近的这个通道。敌人必须通过这个狭窄的点才能到达我们，但反之亦然。如果我们小心，我们可以长时间将敌人阻挡在这个点，直到我们准备好发动反击。然而，这个通道太窄，不像高地那样容易加固。我们必须在这里尽可能紧密地建造多个堡垒，以防止敌人获得任何立足之地。在通道以北建造任何东西都是不明智的，因为那里会危险地暴露。"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -406,11 +406,11 @@ msgid ""
 "fortifications. In any case, all buildings in this area, military or "
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
-msgstr ""
+msgstr "根据我们能节省多少建筑材料，拆除这里的一些其他建筑以腾出空间建造更多堡垒可能是明智的。无论如何，这个区域的所有建筑，无论是军事建筑还是其他建筑，在丹麦入侵期间都将持续面临被烧毁的危险。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "木材供应"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -418,7 +418,7 @@ msgid ""
 "As Reebaud points out correctly, the Uplands are the best position for new "
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
-msgstr ""
+msgstr "正如里鲍德正确指出的，高地是建造新建筑的最佳位置。除了战略价值外，它们还提供了大量的建造空间，而低地岛屿在这方面有些不足。"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -428,7 +428,7 @@ msgid ""
 "There are no woodcutters anywhere on the island, and we can’t rely on trade "
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
-msgstr ""
+msgstr "至于我们将建造什么，我不同意。更多的军事地点很重要，但更重要的是建造建筑的能力。岛上没有任何伐木工，我们不能依赖贸易来获得木材，所以我们必须立即确保木材生产，否则所有的木材都会被熏肉厂和木炭窑用完！"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -438,11 +438,11 @@ msgid ""
 "fertile, so it might be wise to build the foresters’ and woodcutters’ houses"
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
-msgstr ""
+msgstr "这片土地看起来相当贫瘠，因此我们需要预留比我想象的更多的空间给林场。低地似乎稍微肥沃一些，所以将林场和伐木工小屋建在这里，并将一些农场迁移到高地可能是明智的。农场、芦苇农场和浆果农场不像树木那样依赖肥沃的土地。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "长期战略"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -453,7 +453,7 @@ msgid ""
 "meet our needs. We will require more numerous and more advanced sites to "
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
-msgstr ""
+msgstr "我们的贸易已经成功启动。现在我们需要规划我们的招募和培训经济。我们确实有基本的食品和金属生产，但它似乎是随意发展的，不足以满足我们的需求。我们需要更多和更高级别的场所来为我们的士兵提供足够的武器、盔甲和食物。不用说，一对训练场所和一个兵营也是必不可少的。"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -464,11 +464,11 @@ msgid ""
 "ensure we can provide enough goods. These trade routes are all very "
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
-msgstr ""
+msgstr "我们必须时刻密切关注可交易商品的供应。我会请奥克·凯特森只购买我们经济实际需要的商品，这样我们不会浪费任何商品，但我们需要确保能提供足够的商品。这些贸易路线都非常昂贵，我们需要标记出大量的空间纯粹用于生产待售商品。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "筑堤"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -478,7 +478,7 @@ msgid ""
 "time, but training the armies we believe we will need would take forever! We"
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
-msgstr ""
+msgstr "黑尔戈兰空间不足仍然是个问题。土地足够大，可以在合理的时间内训练相当数量的士兵，但要训练我们相信需要的军队将需要永远！我们可能需要冒险，并使用 superior 的战术来弥补这个劣势。"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -489,26 +489,26 @@ msgid ""
 " ready to attack, we can even use this as a way to bypass the narrow point "
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
-msgstr ""
+msgstr "然而，如果你更喜欢稳妥行事，不要忘记我们可以简单地扩大岛屿。既然我们现在有稳定的木材供应，我们可以建造堤坝和防波堤从海中获得更多的建造空间。当我们准备攻击时，我们甚至可以用这种方法绕过东部的狭窄点，或者如果我们真正大胆，我们可以围绕整个西海岸筑堤，同时从两侧攻击敌人！"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "祝你好运！"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:279
 msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
-msgstr ""
+msgstr "你的积极性让我感到鼓舞。让我们都各自加快任务，愿好运降临我们！"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "木材供应"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "木材供应已得到保障"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -516,30 +516,30 @@ msgid ""
 "Our foresters and woodcutters have taken up their work. It will take some "
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
-msgstr ""
+msgstr "我们的林场工人和伐木工已经开始工作。在我们获得稳定的木材供应之前还需要一些时间，但迫在眉睫的问题已经得到缓解。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "通道已安全"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "通道已被守卫"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:293
 msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
-msgstr ""
+msgstr "我们的士兵已经加固了通道。在我们准备好之前，肯定没有敌人能通过他们。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "高地已殖民"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "高地已被定居"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -547,7 +547,7 @@ msgid ""
 "The Uplands are being converted to a true center of our economy. We must not"
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
-msgstr ""
+msgstr "高地正在被改造为我们经济的真正中心。我们必须时刻密切关注低地和高地之间的商品交换，并尽量减少交换量，以避免道路堵塞。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -557,12 +557,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "敌人已被击败"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -570,7 +570,7 @@ msgid ""
 "They are defeated! Thank you, thank you for your help. We could never have "
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
-msgstr ""
+msgstr "他们被击败了！谢谢你，谢谢你的帮助。我们自己永远无法打败他们。我们的城镇甚至没有遭受重大损失——相反，你将它扩展到了远超以前的范围。"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -579,14 +579,14 @@ msgid ""
 " all the soldiers you have trained along with you to aid you in your quest "
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
-msgstr ""
+msgstr "我和我的人民永远无法偿还我们欠你的债务。我会派所有你训练的士兵与你一起，帮助你解放自己的家园。如果我们现在或将来能为你做任何事情，你只需提出，我们将听从你的命令。"
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:317
 msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
-msgstr ""
+msgstr "非常欢迎你，奥克·凯特森。但不要低估你在这次胜利中的作用，因为我们自己无法取得这样的胜利。"
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -598,13 +598,13 @@ msgid ""
 " as certain of victory as I was before. If you have heard of anything else "
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
-msgstr ""
+msgstr "请接受我衷心的感谢，感谢你承诺派遣你的士兵。我已经知道阿特达格是一个可怕的敌人，但我们现在遇到的部队胜过我一生中见过的任何部队，而且他们只是先锋！我们需要我们能获得的所有优势，即使如此，我也不像以前那样确定能取得胜利。如果你听说任何可能有用的信息——任何战术建议——任何可能加入我们的城镇——请与我们分享这些信息。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "了解你的敌人"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -614,7 +614,7 @@ msgid ""
 "Föhr, he has conquered all the other islands in the vicinity as well. Your "
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
-msgstr ""
+msgstr "我很乐意这样做。确实，根据我的贸易伙伴，阿特达格的征服欲望是无止境的。他在弗尔岛建立存在后，也征服了附近的所有其他岛屿。你们在弗尔岛的据点一直是他们唯一的防御，所以一旦你们离开，他轻易地占领了整个地区。"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -624,7 +624,7 @@ msgid ""
 "everything they produce to the Danes in tribute. Half! Already, dozens are "
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
-msgstr ""
+msgstr "据说占领者实行残酷的统治。众所周知，他们切断了所有贸易，当地人被迫将自己生产的一半交给丹麦人作为贡品。一半！据说已经有数十人因贪污一蒲式耳谷物而被处决。人们正在受苦，毫无疑问，他们会欢迎任何前来解放他们的人。"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -633,7 +633,7 @@ msgid ""
 "occupied area have been boarded and sunk by pirates. The survivors, however,"
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
-msgstr ""
+msgstr "还有一件事。试图占领区以北航行的贸易船被海盗登船并击沉。然而，幸存者发誓说那些海盗实际上是丹麦士兵，而他们的船只属于丹麦舰队。"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -643,7 +643,7 @@ msgid ""
 "route is much longer and more strenuous, so it is not hard to see why he "
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
-msgstr ""
+msgstr "这主要是推测，但我相信阿特达格通过船只将他的士兵从丹麦首都运送到他征服的岛屿。陆路要长得多且更费力，所以不难理解他为什么这样做。显然他试图掩盖这个事实。为什么他要这样做，除非他相信这个秘密具有战略重要性？"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -656,12 +656,12 @@ msgid ""
 "tiny islands. If you can reach this place without being attacked by their "
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
-msgstr ""
+msgstr "我不知道他的士兵有多少是通过船只往返于首都和岛屿之间的，但他们的数量似乎足够大，我建议你切断这种交流。正如你所知，这两个地区只有一条海路相连，它通过一个名为卡特加特的海峡。这个海峡有几英里宽，点缀着小岛。如果你能够在不被他们的船只攻击的情况下到达这个地方，你可以占领这些岛屿，建造一道不可征服的堡垒带，阻止任何试图通过的敌船。"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "胜利！"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:350
@@ -670,7 +670,7 @@ msgid ""
 "must try it. We will sail to the Kattegat at once to conquer the strait, and"
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
-msgstr ""
+msgstr "如果我们能封锁它，他们将失去最重要的贸易路线！我们必须尝试。我们将立即航行到卡特加特以征服海峡，然后我们将号召弗尔岛和其他所有岛屿的人民共同反抗入侵者！"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -681,7 +681,7 @@ msgid ""
 "campaign to the Kattegat to gain some practical experience, and return them "
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
-msgstr ""
+msgstr "我想再提一个请求。一个请求和一个提议。我的两个儿子，哈克·奥克森和埃舍尔·奥克森，正在接受士兵和指挥官的训练。如果你们能让他们陪同你们前往卡特加特战役以获得一些实践经验，然后送他们回来，我将不胜感激。与此同时，我们将利用你们为我们建立的工业训练更多士兵，他们将在你们后续的行动中帮助你们。"
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -689,21 +689,21 @@ msgid ""
 "We will be very glad to have them with us and I promise we will take good "
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
-msgstr ""
+msgstr "我们非常高兴有他们同行，我保证我们会好好照顾他们。你确实有安排儿子们找最好老师的诀窍。"
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
 msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
-msgstr ""
+msgstr "就这样我们分别了，很快再见。再见，愿持久的和平祝福整个黑尔戈兰！"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "恭喜"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续玩下去，也可以继续下一个任务。"

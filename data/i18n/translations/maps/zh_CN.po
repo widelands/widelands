@@ -31,13 +31,13 @@ msgstr "在亚特兰蒂斯附近的一个神秘岛屿登陆后，剩下的亚特
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "再次为新的家园而奋斗"
 
 #: ../../../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "在迅速逃离沉没的岛屿后，朱德琳娜周围的亚特兰蒂斯人面临着新的挑战。"
 
 #: ../../../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -211,7 +211,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "在与野蛮人的一场重要战役中失利，导致帝国大片领土沦丧后，卢蒂乌斯离开弗雷米尔开始新生活。但命运让他的船只遭遇猛烈风暴，几乎将其摧毁。凭借极大的幸运，他成功地将受损的船只搁浅在一个未知的荒凉海滩上，暂时拯救了他的族人。"
 
 #: ../../../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -244,7 +244,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "回到家后，卢蒂乌斯和他的船员面临着一片混乱的经济。解决经济瓶颈将是重振帝国辉煌的关键。"
 
 #: ../../../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -288,24 +288,24 @@ msgstr "里波特和他的部落幸福地生活在北方。 同时，他们的�
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "两位朋友重逢"
 
 #: ../../../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "克劳斯和亨内克·莱姆贝克终于到达了北方。但他们能说服里鲍德派兵援助吗？"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "收复"
 
 #: ../../../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "终于回到北弗里斯兰，克劳斯、亨内克和里鲍德正准备对抗入侵者。他们必须集结盟友并制定战略，但敌人从不远离..."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -340,18 +340,18 @@ msgstr "在本教程中，你将了解航海，也就是如何控制船舶和港
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy and Trading"
-msgstr ""
+msgstr "经济与贸易"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what options Widelands offers to adjust "
 "your economy, and how to trade with other players. Recommended for players "
 "with some experience."
-msgstr ""
+msgstr "在本教程中，您将学习 Widelands 提供的调整经济选项，以及如何与其他玩家交易。推荐有一定经验的玩家。"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:8
 msgid "Accurate Europe 1.2"
-msgstr ""
+msgstr "精准欧洲 1.2"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:10
 msgid ""
@@ -363,22 +363,22 @@ msgid ""
 "as practically possible in Widelands. – EASY: Ottoman Empire, Sweden, "
 "Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, "
 "German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
-msgstr ""
+msgstr "警告：此地图作为实验性预览提供。尽管它比其取代的欧洲 1.2 在许多方面更好，但它可能仍有缺陷。此外，这是一张非常大的地图，玩家位置比通常推荐的多，因此对硬件要求很高。— 一张用于扮演历史帝国的地图。— 这张欧洲地图旨在尽可能在 Widelands 中做到精准。— 简单：奥斯曼帝国、瑞典、俄罗斯帝国、迦太基 — 中等：法兰西帝国、大英帝国、西班牙、德意志帝国、罗马帝国 — 困难：埃及、波兰、希腊"
 
 #: ../../../../data/maps/Accurate_Europe_v1.2.wmf/elemental:11
 msgid ""
 "The wide rivers are navigable to create a ”trade network”. All players have "
 "their own challenges, but are relatively balanced to be playable: – British "
 "Empire: create sustainable colonies – Russian Empire: Very large distances …"
-msgstr ""
+msgstr "宽阔的河流可用于创建\"贸易网络\"。所有玩家都有自己的挑战，但相对平衡，可供游玩：– 大英帝国：建立可持续的殖民地 – 俄罗斯帝国：距离非常远…"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:8
 msgid "Amoebae"
-msgstr ""
+msgstr "变形虫"
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:10
 msgid "You are an Amoeba, expand and conquer all other Amoebae …"
-msgstr ""
+msgstr "你是一个变形虫，扩张并征服所有其他变形虫..."
 
 #: ../../../../data/maps/Amoebae.wmf/elemental:11
 msgid ""
@@ -386,7 +386,7 @@ msgid ""
 " game, enable it for a more challenging game. Additionally you can define "
 "the difficulty by playing against different AI teams. Although some players "
 "have more space in the beginning, the map is well balanced."
-msgstr ""
+msgstr "注意你被敌人包围。关闭外交以获得更容易的游戏，开启外交以获得更具挑战性的游戏。此外，你可以通过与不同的 AI 团队对战来定义难度。尽管一些玩家在开始时有更多空间，但地图平衡良好。"
 
 #: ../../../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -511,7 +511,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "阿尔卑斯山的瑰宝，多洛米蒂山脉因其原始之美被宣布为世界遗产。这张地图是对东北部的科尔蒂纳丹佩佐到西南部的卡纳泽伊之间区域的尽可能合理的重建。如果你必须与敌人进行生死决斗，那不妨在一个美丽的地方进行。"
 
 #: ../../../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -520,11 +520,11 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "山区有大量平坦地带。不幸的是，其中大部分是垂直的——明智地使用你有限的建造空间。在狭窄山口建造的要塞可以成为敌军的强大障碍——利用地形优势。砍伐所有树木，尽可能扩张——这是找到所有珍贵农场空间的唯一方法。"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:8
 msgid "Egyptian Mandala v1.2"
-msgstr ""
+msgstr "埃及曼陀罗 v1.2"
 
 #: ../../../../data/maps/Egyptian_Mandala_v1.2.wmf/elemental:10
 msgid ""
@@ -532,7 +532,7 @@ msgid ""
 "island. According to your explorers, however, things will not go as easily "
 "as you were told earlier. You should expect fierce opposition. Expand your "
 "base and be the first to reach the ring of power."
-msgstr ""
+msgstr "他们几乎没有时间准备就启程前往这个岛屿。然而，根据你的探险者所说，事情不会像你之前被告知的那样顺利。你应该预料到强烈的抵抗。扩张你的基地，第一个到达力量之环。"
 
 #: ../../../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
@@ -593,13 +593,13 @@ msgstr "这是上帝的考验还是别人的邪恶计划，你和你的部族在
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:8
 msgid "Forest Valley v2.0"
-msgstr ""
+msgstr "森林山谷 v2.0"
 
 #: ../../../../data/maps/Forest_Valley_v2.wmf/elemental:10
 msgid ""
 "A river valley surrounded by mountains with lots of resources except coal. "
 "Plenty of flat building space."
-msgstr ""
+msgstr "一个被山脉环绕的河谷，资源丰富，但缺少煤。有大量平坦的建造空间。"
 
 #: ../../../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -740,7 +740,7 @@ msgstr "四个部族在一个荒凉的地区争夺统治权。资源散布于地
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "小环 1.2"
 
 #: ../../../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -749,7 +749,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "一个公平的 8 人地图，有自然地理特征分隔土地。地理特征旨在尽可能真实，河流从山中的冰川流经丘陵和平原注入大海。与煤和铁相比，金是一种更为稀有的资源。不同的资源通常彼此相距一定距离。"
 
 #: ../../../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -817,7 +817,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "此地图旨在作为对那些非常熟练的玩家的单人挑战，他们认为 1 对 6 对抗 AI 太容易了。蓝色玩家没有金属（除了少量铁来启动你的经济），所以你必须依赖空矿 5% 的产量。而且你仍然是 1 对 6（当然你可以移除一些 AI 玩家让它稍微容易一些）。祝你好运！"
 
 #: ../../../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -861,7 +861,7 @@ msgstr "一片神秘的土地，到处都是不同的风景，几乎都有几条
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "沿河而行"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -872,7 +872,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "这是冬季几乎看不到阳光，春季冲走过去一切回忆的土地。居民之间出现了奇怪的紧张关系，许多自私的统治者利用了混乱。迷信的人民似乎无法阻挡装备精良军队的发展。艰难时期即将来临，你应该听从你明智顾问的建议，否则将像其他人一样消失于历史长河。"
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -888,7 +888,7 @@ msgstr "你伫立于岛屿之上，巍峨的群山为你加冕，群山之间隐
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "沙丘通道"
 
 #: ../../../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -920,7 +920,7 @@ msgstr "据说是古代的武装修道士，生活在更古老的沼泽里，是
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:8
 msgid "Tasmanian Black War"
-msgstr ""
+msgstr "塔斯马尼亚黑色战争"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:10
 msgid ""
@@ -933,7 +933,7 @@ msgid ""
 " have a hard time conquering Tasmania. During the historical Black War the "
 "ratio between Europeans and Aboriginals was around one against ten, but this"
 " time they’re armed to the teeth for a rematch."
-msgstr ""
+msgstr "欢迎，入侵者！你就像 1800 年代初定居范迪门地的欧洲征服者——后来被称为塔斯马尼亚。在 1828 年到 1832 年间发生了一场被称为黑色战争的战争，在这场战争中，大英帝国几乎消灭了范迪门地的整个原住民人口。– 地图模拟了一个分散的大英帝国，没有任何优势– 实际上它提供了一些巨大的劣势，你可能会在征服塔斯马尼亚时遇到困难。在历史上的黑色战争中，欧洲人与原住民的比例大约是十比一，但这一次他们武装到牙齿准备复仇。"
 
 #: ../../../../data/maps/Tasmanian_Black_War.wmf/elemental:11
 msgid ""
@@ -946,7 +946,7 @@ msgid ""
 "on this map. One of the computer players will likely also begin seafaring "
 "and competing for the best harbor places on the Tasmanian coast, so you’ve "
 "been warned!"
-msgstr ""
+msgstr "此地图旨在由蓝色玩家起始位置的单一玩家作为帝国进行游戏。选择野蛮人和亚马逊人作为敌对部落。如果你想要挑战，让他们全部在同一阵营并关闭外交。或者你可以让每个玩家对抗所有其他玩家，以领土时间为胜利条件。这张地图不适合短时间游戏，一场游戏可能会超过十小时。AI 在这张地图上能力很强。其中一个电脑玩家很可能也会开始航海，竞争塔斯马尼亚海岸上的最佳港口位置，所以你已经得到了警告！"
 
 #: ../../../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -983,7 +983,7 @@ msgstr "有人说，遥远北方那片难以逾越的土地吓跑了最勇敢的
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:8
 msgid "The Islands of the Eight Tribes"
-msgstr ""
+msgstr "八个部落的岛屿"
 
 #: ../../../../data/maps/The_Islands_of_the_Eight_Tribes.wmf/elemental:10
 msgid ""
@@ -991,7 +991,7 @@ msgid ""
 "of resources. Colonization and ferries can give you a big advantage, but "
 "this is not necessary to defeat other players. If you want to delay the "
 "fighting, you can turn off the last four players."
-msgstr ""
+msgstr "这张地图是为长时间游戏设计的！八个部落，三座岛屿，和大量资源。殖民和渡口可以给你巨大优势，但这不是击败其他玩家的必要条件。如果你想延迟战斗，可以关闭后四个玩家。"
 
 #: ../../../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

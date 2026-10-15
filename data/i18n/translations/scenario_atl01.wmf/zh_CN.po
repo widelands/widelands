@@ -59,19 +59,19 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "这座岛屿非常广阔，在我们确定岛上只有我们之前，我们不能放松。探索并征服它，这是保护我们免受岛上威胁和亚特兰蒂斯威胁的唯一方法。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "建造军事设施以扩展你的领土"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "建立稳固的食物生产"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
-msgstr ""
+msgstr "食物生产"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
@@ -79,7 +79,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "食物对矿场和军事训练场所非常重要。通过建造至少一个农场、一个黑根农场和一个磨坊，建立良好的食物生产环境。这两种面粉与井水一起在面包房烘焙成面包，所以也要建造一个面包房和一口井。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -88,49 +88,49 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "另外两种重要的食物是熏鱼和熏肉。生肉由猎人提供。渔民从海中捕鱼，而鱼养殖者通过繁殖更多的鱼来确保鱼群不会灭绝。熏制过程在熏制房中进行，你需要至少两个这样的设施。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "建造一个农场和一个黑根农场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "建造一个磨坊来制作玉米粉和黑根面粉"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
-msgstr ""
+msgstr "建造一口井"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "建造一个面包房，用玉米粉、黑根面粉和水烘焙面包"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "建造猎人小屋以获取生肉"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "在水边建造渔民小屋以获取生鱼"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "在渔民附近建造鱼养殖者小屋，确保鱼群不会灭绝"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "建造两个熏制房来熏制生肉和鱼"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "建造一个蜘蛛农场和一个纺织厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "蛛丝布生产"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid ""
@@ -139,27 +139,27 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "织工在纺织厂生产蛛丝布和短外衣。蛛丝布用于建造某些建筑和制作服装，而短外衣是士兵的制服。纺织厂需要金线和蛛丝作为原材料。蛛丝由蜘蛛农场生产，而金线由金纺厂用黄金生产。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "建造一个纺织厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Build a spider farm"
-msgstr ""
+msgstr "建造一个蜘蛛农场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "建造一个金纺厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
-msgstr ""
+msgstr "建造工业和矿场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Industry and Mines"
-msgstr ""
+msgstr "工业和矿场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid ""
@@ -167,41 +167,41 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "铁矿石、金矿石和煤在各自的矿场中开采。水晶矿将挖掘石英和钻石——这些都是珍贵的材料，非常罕见。在寻找它们的过程中，它还会生产大量花岗岩。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "矿石必须在冶炼厂熔炼后才能使用。精炼材料随后用于武器锻造厂、盔甲锻造厂和工具锻造厂。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "建造每种类型的矿场。确保先派遣地质学家去山区。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
-msgstr ""
+msgstr "建造一个冶炼厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "建造一个盔甲锻造厂和一个武器锻造厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "建造一个工具锻造厂"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
-msgstr ""
+msgstr "建造一个兵营"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "招募新士兵"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
@@ -209,15 +209,15 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "既然武器正在锻造中，现在可以招募新士兵了。为此，我们需要将轻型三叉戟和短外衣运送到兵营。新兵将从仓库到达，每人各发一件，并接受一些基础训练成为士兵。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "建造士兵训练场所"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "士兵训练场所"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid ""
@@ -225,19 +225,19 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "与其他所有部落一样，亚特兰蒂斯人也能够训练士兵：地牢训练攻击——这是亚特兰蒂斯人的主要属性——而迷宫训练闪避、生命值和防御。工业生产的产品用于在两个训练场所中训练更好的士兵。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "建造一个地牢和一个迷宫"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "建造一个仓库和一个马场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "仓库和马场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
@@ -245,42 +245,42 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr ""
+msgstr "随着你的道路网络变得越来越长和复杂，你应该雇佣马匹来帮助你的搬运工。马匹在马场用水和玉米饲养。仓库还将有助于确保你的运输系统不会崩溃。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr ""
+msgstr "建造一个仓库"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
-msgstr ""
+msgstr "建造一个马场"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:127
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "建造3艘船只以逃离岛屿"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Escape From the Island"
-msgstr ""
+msgstr "逃离岛屿"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr ""
+msgstr "岛屿顶部有一个湖泊。在这些水域建造三艘船，你或许能在岛屿被海洋完全吞噬之前拯救你的族人。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "在湖边建造一个造船厂以开始建造船只"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
-msgstr ""
+msgstr "骄傲至死"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Favored by the God"
-msgstr ""
+msgstr "受神眷顾"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:146
@@ -290,7 +290,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "在古老而隐失的亚特兰蒂斯岛上，一个骄傲的部落在世界还很年轻时定居于此。由阿詹苏尔国王的血统——第一位被海神卢塔斯赋予在水面之上呼吸能力的人类——和提供与卢塔斯联系的贤明祭司统治——他们繁荣起来并变得文明。"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -301,15 +301,15 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "这个故事发生在阿斯坎多国王统治时期，他是阿詹苏尔国王的第43位继承人。他一直是个好国王，以智慧和远见统治亚特兰蒂斯。但随着年龄增长，他开始害怕死亡，因此他开始寻找长生不老之药，尽管大多数祭司都警告他不要这样做。有人说永恒的生命只属于神祇，寻求它是被禁止的。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "在神面前蒙羞"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "神的惩罚"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:156
@@ -318,7 +318,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr ""
+msgstr "但一切似乎都很好。只有马匹似乎感觉到了什么不对劲。在夜晚，它们变得疯狂，充满了恐惧。不久之后，马饲养者泽德拉就弄清楚出了什么问题：他们马厩前的海平面正在以越来越快的速度上升。"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -328,15 +328,15 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr ""
+msgstr "祭司们退入冥想，海水上涨的原因很快就被找到了：神卢塔斯因为国王的大胆而失去了对亚特兰蒂斯人的信任。他决定收回授予阿詹苏尔国王和他的后代的权利。于是，他命令他们再次回到海面之下。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
-msgstr ""
+msgstr "骚动与混乱"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "混乱蔓延..."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:166
@@ -345,7 +345,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "内疚的国王自杀了。没有君主，人民转向祭司，但他们没有实质性的帮助可以提供。大多数人接受了他们的命运，而另一些人则试图在神的庙宇中献祭动物来改变神的想法。但徒劳无功..."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:168
@@ -355,7 +355,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr ""
+msgstr "琼德莉娜，已故国王的女儿和神的最高女祭司，是最坚定的祭司。当无数的献祭没有改变情况时，她确信要安抚神，需要献上极具个人价值的东西。于是她献上了她最心爱的东西：她唯一的孩子的父亲，她的丈夫。"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -367,22 +367,22 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr ""
+msgstr "但即使这样也没有改变神的想法。海水继续上涨。被内疚、痛苦和愤怒几乎逼疯的琼德莉娜成为了异教徒：她秘密聚集了普通民众中那些不同意祭司接受神意决定的人。与他们一起，她放火烧毁了神庙，并偷了一艘船逃离了神对亚特兰蒂斯的影响。这个小团体开始向萨图尔，火的神祇和卢塔斯最大的敌人祈祷。"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr ""
+msgstr "离开垂死的亚特兰蒂斯和他们的过去，他们开始寻找一个被火庇护、免受海洋威胁的地方。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "The Princess’ Memoir"
-msgstr ""
+msgstr "公主的回忆录"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
-msgstr ""
+msgstr "琼德莉娜写下她的记忆"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:182
@@ -392,7 +392,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr ""
+msgstr "我们离开了亚特兰蒂斯向东航行。第六天我们进入了禁海，没有注意到亚特兰蒂斯的追兵，也没有被卢塔斯击沉我们的船。现在，我们已不在他的掌控范围内。一天后，我们看到了一座岛屿，上面似乎有一座喷火的火山。我认为这是火神的征兆，我们在它的岸边登陆。"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:185
@@ -403,7 +403,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr ""
+msgstr "我们上周在靠近登陆区的山上建造了两座瞭望塔；当然，也为我们所有人建造了一座大厅。我们团体中有非常有才华的建筑师——尽管如此，这些建筑还是无法与我们在亚特兰蒂斯的工艺相媲美。我希望它们能经受住下一次雨水。至少，如果亚特兰蒂斯的船跟随我们，或者岛屿上有人居住，塔楼会在攻击者到达很久前就警告我们。"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:188
@@ -412,11 +412,11 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr ""
+msgstr "我们已经在这座岛上安顿下来。下一步是让它成为我们的家园。我认为我们需要建立一个可持续的经济，并探索我们的周围环境。我召见了专家，并将遵循他们的建议。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "洛夫托莫尔和西多卢斯到达"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:192
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:227
@@ -433,7 +433,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:472
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "Jundlina"
-msgstr ""
+msgstr "琼德莉娜"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:194
@@ -442,11 +442,11 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr ""
+msgstr "愿萨图尔温暖你们两人。洛夫托莫尔，你是岛上最著名的建筑师。西多卢斯，你是经验丰富的战士和战略家。我把你们叫来是为了寻求你们的建议：需要做什么才能使这里成为我们的新家园？"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "洛夫托莫尔发言"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:200
@@ -458,11 +458,11 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜！建造定居点最重要的是建筑材料。这里有一些树木，所以我们应该为一些伐木工建造住所，当然也要为护林员建造住所，这样我们就不会耗尽树木。哦，我们也不能忘记锯木厂，因为大多数建筑不能仅用原木建造。更坚固的建筑还需要花岗岩，但东北部有充足的资源；我们只需要建造一个采石场，我的石匠就会立即开始工作。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "西多卢斯发言"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -472,17 +472,17 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜！我同意洛夫托莫尔的提议。我们需要充足的建筑材料供应，因为我们必须迅速扩展我们的领土。只要我们没有看到岛屿的所有海岸线，我就不会感到安全。我从亚特兰蒂斯带来了许多优秀的人。军事力量已经到位。我们只需要一些住所来居住。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:254
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Jundlina is Satisfied"
-msgstr ""
+msgstr "琼德莉娜满意了"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
-msgstr ""
+msgstr "琼德莉娜的回忆录"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:217
@@ -491,17 +491,17 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr ""
+msgstr "我们的建筑基础设施已经完成，我花了一些时间确保每个人都很好地协同工作。现在，还有其他紧迫的事情。我把我的私人厨师科利昂德叫来，帮助我解决一些问题。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
-msgstr ""
+msgstr "科利昂德到达"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜。我能为你或神祇提供什么服务吗？"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:226
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:272
@@ -511,7 +511,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:451
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "琼德莉娜回复"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:229
@@ -521,11 +521,11 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr ""
+msgstr "愿萨图尔也温暖你，科利昂德。是的，我在想我们是否可以集中我们的食物生产。因为我们的人民习惯于自己制作食物，我们失去了很多生产力。我觉得如果我们能分工，对我们所有人都会更好。我想听听你的想法。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "科利昂德在思考"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:235
@@ -534,7 +534,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr ""
+msgstr "啊，但我认为这不可能改变。食物的准备和食用深深扎根于我们亚特兰蒂斯人心中——这是一种仪式，我们需要它来维持健康。所以我想我们不能完全从个人身上拿走这个。"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -544,7 +544,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "但我们或许可以找到一个折中方案：对我来说，制作面包是一项麻烦的任务。将黑根和玉米磨成面粉，然后烘焙面包是单调乏味的；我觉得这里采用更工业化的方法会有帮助。我个人就希望每天有人将新鲜面包送到我家。"
 
 #. TRANSLATORS: Colionder
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:241
@@ -555,32 +555,32 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "哦哦，而且更重要的是：熏制鱼和肉以清洁它们并改善它们的味道太糟糕了。我的房子里满是烟雾，之后几周都臭气熏天。你不认为这可以在一个特殊的建筑里进行，这样副作用就不重要了吗？我认为这两件事会被人们接受，并且不会减少烹饪时间，也不会拿走仪式感。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "琼德莉娜同意"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "你的话听起来很明智，科利昂德。那就这么定了。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
-msgstr ""
+msgstr "琼德莉娜正在审阅报告"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "看来我们的食物生产已经完成，每个人都很好地协同工作。这里真的开始有家的感觉了。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "一个人来到琼德莉娜面前"
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:266
@@ -591,7 +591,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜。我叫奥波尔，是行会中最高级的织工，我和你一起离开亚特兰蒂斯和卢塔斯。我带来了不幸的消息：我们没有蛛丝布了。我们的仓库里找不到一块蛛丝布。你能否帮助织工行会，安排建造一个纺织厂和一个蜘蛛农场？蜘蛛提供最优质的丝线，我们将用它生产最优质的蛛丝布。"
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -599,7 +599,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr ""
+msgstr "我们提议为你制作年轻士兵的短外衣和军官的金色短外衣。一旦你想招募新士兵，你肯定会需要它们。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -608,11 +608,11 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "愿萨图尔也温暖你，奥波尔。我本想推迟蛛丝布的生产，但我理解你的紧迫性。你的建议听起来很公平，我会建造你的纺织厂和蜘蛛农场。我也会建造一个金纺厂，这样你制作的金色短外衣就不会徒有其名了。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
-msgstr ""
+msgstr "奥波尔寻求琼德莉娜"
 
 #. TRANSLATORS: Opol
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:285
@@ -621,18 +621,18 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜！纺织厂、金纺厂和蜘蛛农场建筑已经完成，此刻已经开始工作。织工行会非常感谢你的支持，我们将信守诺言，很快送来第一件短外衣。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr ""
+msgstr "这确实是好消息，奥波尔。我们的经济发展得很好。现在回去工作吧，奥波尔，愿萨图尔温暖你和你的所有行会成员！"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "西多卢斯寻求琼德莉娜"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:301
@@ -643,33 +643,33 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜。你是否考虑过在我们周围的山区开采资源？我们的建筑石英和钻石短缺。我们还需要更多的铁、金，特别是煤。如果我们找到充足的这些商品，我们可以开始生产武器和工具；这将大有帮助。当然，我们需要冶炼厂、武器锻造厂、盔甲锻造厂和工具锻造厂。可能还需要更多。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "琼德莉娜点头"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "我已经考虑过了，西多卢斯。我认为是时候了。我们现在将把它作为优先事项。你很快就会得到你的工业设施！"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "洛夫托莫尔报告"
 
 #. TRANSLATORS: Loftomor
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德莉娜！我们已经完成了一个工具锻造厂，现在我们的工具锻造工将立即生产新工具。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "琼德莉娜提醒"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -678,11 +678,11 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "愿萨图尔也温暖你，洛夫托莫尔。听到这个消息真好。但请记住，我们的工具锻造工需要配备一把锯子。制作工具对我们来说是一门艺术，需要像锯子这样精确的工具，而不是像其他部落那样使用野蛮的锤子。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "琼德莉娜写了一封信"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:332
@@ -690,22 +690,22 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "我收到消息说我们的矿业已经开始运作。既然我们正在锻造武器，我会给西多卢斯写一封信，通知他该建造兵营并开始招募士兵了。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "今天我看到第一批新兵聚集在新兵营前。如果一切顺利，他们很快应该会接受训练。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Jundlina Summons Sidolus"
-msgstr ""
+msgstr "琼德莉娜召见西多卢斯"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:349
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "琼德莉娜生气了"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:351
@@ -714,11 +714,11 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr ""
+msgstr "我听到的是什么，西多卢斯？我收到消息说你的士兵行为不端，欺压平民。这是什么胡闹？他们是服务于大众的，不能滥用权力。这是不可原谅的！解释一下，如果你愿意的话！"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
-msgstr ""
+msgstr "西多卢斯似乎悔悟"
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:357
@@ -729,7 +729,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr ""
+msgstr "我同意你的观点，我已经严厉惩罚了惹事者。但很难让我的士兵保持安静：他们感到无聊，无事可做。我想加强他们的训练。我认为生活中更多的常规会让他们专注于自己的职责。我需要为他们建造一个地牢和一个迷宫。我已经准备好了计划，但我想它们不会便宜。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:363
@@ -738,11 +738,11 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr ""
+msgstr "只要它能让你的人民安分，我不怕成本和劳力。你会得到你的建筑。但请注意，我不会容忍任何流氓士兵；如果类似的事情再次发生，我会让你负责。退下。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "琼德莉娜收到一封信"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:373
@@ -752,11 +752,11 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr ""
+msgstr "我收到了西多卢斯的邀请。新完成的迷宫训练的第一天是明天。地牢也已经完工，很快将开始工作。我期待着明天；我非常好奇我们的士兵是如何训练的，我想知道额外的工作量是否能阻止他们欺压平民。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
-msgstr ""
+msgstr "琼德莉娜考虑经济"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:382
@@ -764,7 +764,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr ""
+msgstr "人们在抱怨街道拥挤和运输缓慢。我们需要帮助道路上的搬运工。我决定建造一个马场，让马匹可以帮助搬运重物。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:385
@@ -772,16 +772,16 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr ""
+msgstr "减轻我们道路负担的另一种方法是建造仓库。我们已经占领了这座山，在高原上建造一个仓库似乎是个好主意，避免必须把所有东西运上运下山坡。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "危险的发现"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "琼德莉娜在思考"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:400
@@ -792,7 +792,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr ""
+msgstr "我们发现了一座被火焰摧毁和烧毁的古老建筑。这个发现让我非常担忧。这些建筑不是我以前见过的任何类型。它肯定不是我听说过的任何亚特兰蒂斯建筑师设计的。这些建筑粗糙，组装粗糙。但材料非常耐用：用于建筑的木材似乎在使用前以一种奇怪的方式被烧过——它像石头一样坚硬。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:403
@@ -801,7 +801,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr ""
+msgstr "这个发现让我害怕。岛上还有其他人吗？他们在哪里？他们使用火，他们也在向萨图尔祈祷吗？他们是朋友还是敌人？为什么建筑被烧毁了？这座岛屿经历过战争吗？战争是否正在其上进行？"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:406
@@ -809,15 +809,15 @@ msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
-msgstr ""
+msgstr "我们必须提高我们的军事能力。如果岛上有敌人，我们必须做好与他们相遇的准备。我们还应该加强边境的防御工事。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Another Building"
-msgstr ""
+msgstr "另一座建筑"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:415
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "琼德丽娜很担心"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:417
@@ -827,11 +827,11 @@ msgid ""
 "before and obviously it was militarized. I have to check on our military "
 "status with my generals. I will not allow that a potential enemy will find "
 "us unprepared."
-msgstr ""
+msgstr "我们又发现了一座奇特的建筑。我们还没见到它的建造者。但显然，这个岛上曾经有一个社区，而且显然是军事化的。我必须和我的将军们检查我们的军事状况。我不会让潜在敌人发现我们毫无防备。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 msgid "One More Building"
-msgstr ""
+msgstr "又一座建筑"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:428
@@ -842,11 +842,11 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr ""
+msgstr "又是这样一座建筑。我们现在知道建造这些部落的部落曾经完全控制了这个岛。但我不再那么害怕潜在的敌人了。我们已经对这个岛了解很多，却找不到这个古老经济的任何痕迹。我开始放松了，但在继续探索这个美丽岛屿的过程中，我不会放松警惕。但没有明显的危险，我已经感觉像在家里一样了。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "水位正在上涨！"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:442
@@ -855,11 +855,11 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr ""
+msgstr "愿萨图尔拯救我们！卢塔斯仍然试图找到我们。一个侦察兵告诉我，海洋正在迅速上涨。我们必须前往高地，并将所有人以及尽可能多的物资从总部撤离到山上。我们如何才能逃脱？"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:445
 msgid "A Young Man Approaches"
-msgstr ""
+msgstr "一位年轻人走近"
 
 #. TRANSLATORS: Ostur
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:448
@@ -868,7 +868,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’s influence."
-msgstr ""
+msgstr "愿萨图尔温暖你，琼德丽娜。我叫奥斯图，我建造船只。我发明了一种新船：比我们习惯的船小，但坚固得多。如果我们正确建造它们，我相信我们可以航行更远的距离，也许能摆脱卢塔斯的影响。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:454
@@ -876,11 +876,11 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr ""
+msgstr "奥斯图，我们没有时间了。水上涨得太快了，如果我们岸边建造船只，它们还没浮起来就会被大海吞没。我担心我们完了！"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Ostur Seems Confident"
-msgstr ""
+msgstr "奥斯图似乎很有信心"
 
 #. TRANSLATORS: Ostur
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:468
@@ -889,14 +889,14 @@ msgid ""
 " at the top of the mountain. I suggest we build the ships in this lake and "
 "wait until the island drowns beneath us. Then we can sail away. It is a bold"
 " plan, but I think it could work."
-msgstr ""
+msgstr "我的一个朋友独自探索了岛屿，他告诉我山顶上有一个大湖。我建议我们在这个湖里建造船只，等待岛屿在我们脚下被淹没。然后我们可以航行离开。这是一个大胆的计划，但我觉得它可能会奏效。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr ""
+msgstr "你的红发是火神的信号。我会信任你并支持你的计划。现在我们的生存掌握在你的手中，奥斯图。"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:477
@@ -905,11 +905,11 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr ""
+msgstr "快，我们需要在湖边为奥斯图建一座房子，我们需要木板、原木和蛛丝在那里建造。忘掉其他一切，我们需要在仓库被大海吞没之前将这些物资运到山顶。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgid "Jundlina is Relieved"
-msgstr ""
+msgstr "琼德丽娜松了口气"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:488
@@ -919,14 +919,14 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "赞美萨图尔！奥斯图，年轻的造船师做到了。我们有三艘船——我从没见过更坚固的船——有足够的空间容纳我们所有人和一些物资。而且这次救援来得正是时候：卢塔斯即将吞没这个岛屿的其余部分，水每小时都在上涨。但现在我们可以逃脱，在更远的国家重新开始..."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:491
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr ""
+msgstr "我预计这是一段漫长的旅程，但最终我们会找到萨图尔的土地。这是我对我的人民的承诺。也是对我自己的承诺。"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:492
 msgid "Congratulations"
@@ -943,8 +943,8 @@ msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "建筑已丢失！"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "我们的建筑被大海吞没了！"
