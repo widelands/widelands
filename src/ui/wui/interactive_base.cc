@@ -114,6 +114,9 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 	if ((caps & Widelands::BUILDCAPS_FLAG) != 0) {
 		return Widelands::Field::Buildhelp_Flag;
 	}
+	if ((caps & Widelands::BUILDCAPS_BRIDGE) != 0) {
+		return Widelands::Field::Buildhelp_Bridge;
+	}
 	return Widelands::Field::Buildhelp_None;
 }
 
@@ -179,7 +182,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		constexpr const char* filenames[] = {
 		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
 		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
-		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
+		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png",
+		   "images/wui/overlays/bridge.png"};
 		for (uint8_t scale_index = 0; scale_index < ImageCache::kScalesCount; ++scale_index) {
 			const char* const* filename = filenames;
 
@@ -576,6 +580,23 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		}
 	}
 	return button;
+}
+
+InteractiveBase::RoadBuildingMode::RoadBuildingMode(Widelands::EditorGameBase& egbase,
+                                                    Widelands::PlayerNumber p,
+                                                    Widelands::Coords s,
+                                                    RoadBuildingType t)
+   : player(p), path(s), type(t), work_area(nullptr) {
+	if (type == RoadBuildingType::kRoad) {
+		Widelands::CheckStepRoad cs =
+		   Widelands::CheckStepRoad(egbase.player(p), Widelands::MOVECAPS_WALK);
+		checkstep.reset(new Widelands::CheckStep(cs));
+	} else {
+		Widelands::CheckStepAnd cs = Widelands::CheckStepAnd();
+		cs.add(Widelands::CheckStepRoad(egbase.player(p), Widelands::MOVECAPS_SWIM));
+		cs.add(Widelands::CheckStepFerry(egbase));
+		checkstep.reset(new Widelands::CheckStep(cs));
+	}
 }
 
 InteractiveBase::RoadBuildingMode::PreviewPathMap
@@ -1053,29 +1074,99 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 }
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
+                                   const FieldsToDraw* fields_to_draw,
                                    const FieldsToDraw::Field* f,
                                    const Time& gametime,
                                    float scale) const {
 	if (f->obscured_by_slope) {
 		return;
 	}
+
+	// Also draws pillars on bridgeable water nodes if the tribe defines them.
+	// Pillars fill the gaps between bridge segments so the bridge looks continuous when
+	// the bridge segment joints need a gap to look right. They are not needed on shore
+	// (=walkable) nodes.
+	//
+	// Pillars must be drawn under the bridge segments to not cover the ends, so some
+	// extra steps are needed to make sure we only draw them for the first time a bridge
+	// to a node is drawn.
+	// Note that any bridgeable field can have either 0 or exactly 2 bridge segments
+	// connected to it. The only other possible road type is a waterway, also with exactly
+	// 2 segments, but that's exclusive of bridge segments too.
+	// Also note that the road building code always replaces consequent segments in
+	// neighbouring directions with a shortcut, so sharp corners are not possible.
+	// All this, and the drawing order of the map means that we usually have to draw a
+	// pillar at the far end of the bridge, and we usually don't have to draw it at the
+	// near end ("f"), with the following exceptions:
+	//
+	//  - the only practically possible configuration where we have to draw the pillar at
+	//    "f" is when it has bridges to E and SW
+	//  - the far end of an E segment can have a previous SW segment connected from its TR
+	//    neighbour (SE from TL would be a sharp corner)
+
 	if (Widelands::is_bridge_segment(f->road_e)) {
+		const bool busy = f->road_e == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillars if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->rn_index);
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const FieldsToDraw::Field* f_tr = fields_to_draw->check_field(f_end->trn_index);
+			if (f_tr == nullptr || f_tr->road_sw == Widelands::RoadSegment::kNone) {
+				const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+				if (pillar != 0) {
+					dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar,
+					                    gametime, &f_end->owner->get_playercolor());
+				}
+			}
+		}
+		if ((f->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0 &&
+		    f->road_sw != Widelands::RoadSegment::kNone) {
+			const uint32_t pillar = f->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale, pillar, gametime,
+				                    &f->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_E, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
+
 	if (Widelands::is_bridge_segment(f->road_sw)) {
+		const bool busy = f->road_sw == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillar if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->bln_index);
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar, gametime,
+				                    &f_end->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SW, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
+
 	if (Widelands::is_bridge_segment(f->road_se)) {
+		const bool busy = f->road_se == Widelands::RoadSegment::kBridgeBusy;
+		// Draw pillar if needed
+		const FieldsToDraw::Field* f_end = fields_to_draw->check_field(f->brn_index);
+		if (f_end != nullptr &&
+		    (f_end->fcoords.field->nodecaps() & Widelands::BUILDCAPS_BRIDGE) != 0) {
+			const uint32_t pillar = f_end->owner->tribe().bridge_pillar_animation(busy);
+			if (pillar != 0) {
+				dst->blit_animation(f_end->rendertarget_pixel, f_end->fcoords, scale, pillar, gametime,
+				                    &f_end->owner->get_playercolor());
+			}
+		}
+		// Draw the bridge itself
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
-		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
-		                    gametime, &f->owner->get_playercolor());
+		                    f->owner->tribe().bridge_animation(Widelands::WALK_SE, busy), gametime,
+		                    &f->owner->get_playercolor());
 	}
 }
 
@@ -1298,7 +1389,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 
 	assert(!road_building_mode_);
-	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
+	road_building_mode_.reset(new RoadBuildingMode(egbase(), player, road_start, t));
 
 	road_building_add_overlay();
 	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
@@ -1314,14 +1405,13 @@ void InteractiveBase::start_build_road(Coords road_start,
 		road_building_mode_->work_area->insert(std::make_pair(len, std::set<std::string>()));
 
 		std::map<Widelands::FCoords, bool> reachable_nodes;
-		Widelands::CheckStepFerry cstep(egbase());
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(road_start), len));
 		do {
-			reachable_nodes.insert(
-			   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
-			                                    !mr.location().field->is_border() &&
-			                                    cstep.reachable_dest(map, mr.location())));
+			reachable_nodes.insert(std::make_pair(
+			   mr.location(), mr.location().field->get_owned_by() == player &&
+			                     !mr.location().field->is_border() &&
+			                     road_building_mode_->checkstep->reachable_dest(map, mr.location())));
 		} while (mr.advance(map));
 		WorkareaPreview::ExtraDataMap wa_data;
 		for (const auto& pair : reachable_nodes) {
@@ -1461,20 +1551,12 @@ InteractiveBase::try_append_build_road(const Widelands::Coords field) const {
 	assert(road_building_mode_);
 
 	const Map& map = egbase().map();
-	const Widelands::Player& player = egbase().player(road_building_mode_->player);
 	Widelands::CoordPath result_path = road_building_mode_->path;
 
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
-		Widelands::CheckStepAnd cstep;
-		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
-			cstep.add(Widelands::CheckStepFerry(egbase()));
-			cstep.add(
-			   Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
-		} else {
-			cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_WALK));
-		}
-		if (map.findpath(result_path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
+		if (map.findpath(result_path.get_end(), field, 0, path, *(road_building_mode_->checkstep),
+		                 Map::fpBidiCost) < 0) {
 			return std::nullopt;  // could not find a path
 		}
 		result_path.append(map, path);
@@ -1660,41 +1742,32 @@ void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(road_building_mode_->player).get_buildcaps(neighb);
+		const Widelands::CheckStep* checkstep = road_building_mode_->checkstep.get();
 
-		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
-			Widelands::CheckStepFerry checkstep(egbase());
-			if (!checkstep.reachable_dest(map, neighb) || path.get_index(neighb) >= 0 ||
-			    !neighb.field->is_interior(road_building_mode_->player)) {
-				continue;
-			}
-
-			bool next_to = false;
-			Widelands::FCoords nb;
-			for (int32_t d = 1; d <= 6; ++d) {
-				map.get_neighbour(neighb, d, &nb);
-				if (nb != endpos && path.get_index(nb) >= 0 &&
-				    checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
-					next_to = true;
-					break;
-				}
-			}
-			if (!next_to && path.get_nsteps() >= map.get_waterway_max_length()) {
-				continue;  // exceeds length limit
-			}
-		} else if ((caps & Widelands::MOVECAPS_WALK) == 0) {
-			continue;  // need to be able to walk there
-		}
-
-		//  can't build on robusts
-		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
-		if ((imm != nullptr) && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
-		    ((dynamic_cast<const Widelands::Flag*>(imm) == nullptr) &&
-		     ((dynamic_cast<const Widelands::RoadBase*>(imm) == nullptr) ||
-		      ((caps & Widelands::BUILDCAPS_FLAG) == 0)))) {
+		if (!neighb.field->is_interior(road_building_mode_->player)) {
+			// Not owned
 			continue;
 		}
 		if (path.get_index(neighb) >= 0) {
-			continue;  // the road can't cross itself
+			// Already visited node
+			continue;
+		}
+
+		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
+			if (path.get_nsteps() >= map.get_waterway_max_length()) {
+				// Can't extend
+				continue;
+			}
+		} else if ((caps & (Widelands::MOVECAPS_WALK | Widelands::BUILDCAPS_BRIDGE)) == 0) {
+			// Need to be able to walk or build bridge there
+			continue;
+		}
+
+		if (!(checkstep->allowed(
+		         map, endpos, neighb, dir, Widelands::CheckStep::StepId::stepNormal) ||
+		      checkstep->allowed(map, endpos, neighb, dir, Widelands::CheckStep::StepId::stepLast))) {
+			// Forbidden as next step
+			continue;
 		}
 
 		int32_t slope;
