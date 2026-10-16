@@ -443,6 +443,9 @@ The ``styled_sizes`` table contains integer values to be used for paddings and U
 * **ui_default_button_size_small** (*since version 1.4*): default size for smaller common button-like UI elements
 * **ui_default_button_size_large** (*since version 1.4*): default size for extra-large common button-like UI elements
 * **ui_default_progress_bar_width** (*since version 1.4*): default width for progress bars
+* **ui_default_panel_dimension_narrow** (*since version 1.4*): default width or height for common narrow panes
+* **ui_default_panel_dimension_medium** (*since version 1.4*): default width or height for common medium panes
+* **ui_default_panel_dimension_large** (*since version 1.4*): default width or height for common large panes
 * **ui_default_spacing** (*since version 1.4*): default size for spacing between UI elements
 * **ui_default_padding**: default size for padding around UI elements (also known as margin)
 * **ui_default_indent** (*since version 1.3*): default horizontal gap for indenting UI elements
