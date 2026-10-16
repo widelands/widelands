@@ -18,19 +18,16 @@
 
 #include "logic/map_objects/backtrace.h"
 
-#ifndef _WIN32
-#ifndef __APPLE__
+#if !defined(_WIN32) && !defined(__APPLE__) && !defined(__EMSCRIPTEN__)
 #if !defined(__linux__) || defined(__GLIBC__)
 
 #include <execinfo.h>
 #endif
 #endif
-#endif
 
 std::string get_backtrace() {
 	std::string result("Backtrace:\n");
-#ifndef _WIN32
-#ifndef __APPLE__
+#if !defined(_WIN32) && !defined(__APPLE__) && !defined(__EMSCRIPTEN__)
 #if !defined(__linux__) || defined(__GLIBC__)
 #define BACKTRACE_STACKSIZE 24
 
@@ -42,7 +39,6 @@ std::string get_backtrace() {
 		result += '\n';
 	}
 	free(list);
-#endif
 #endif
 #endif
 	return result;

@@ -158,6 +158,8 @@ public:
 
 	virtual unsigned long long disk_space() = 0;  // NOLINT
 
+	static void do_sync_idbfs();
+
 protected:
 	/// To get a filesystem, use the Create methods
 	FileSystem() = default;
