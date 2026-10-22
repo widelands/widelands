@@ -3,6 +3,7 @@
 # 
 # Translators:
 # # Cristian Romanescu, 2026
+# Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
