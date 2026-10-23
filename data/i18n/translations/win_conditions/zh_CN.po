@@ -117,7 +117,7 @@ msgstr "收集者"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "你在仓库中的珍贵商品会得分。在 %s 后得分最高的玩家将赢得游戏。"
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -128,7 +128,7 @@ msgstr ""
 #: ../../../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "配置的时间限制"
 
 #: ../../../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -169,7 +169,7 @@ msgstr "独裁者"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "能够击败所有其他部落的团队将赢得游戏！这意味着对手不再拥有任何总部、港口或仓库。"
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -181,13 +181,13 @@ msgstr "这是一场没有规则的无休止游戏。"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "总部猎手"
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "能够找到并摧毁所有其他总部的部落或团队将赢得游戏！在没有总部作为起始条件的游戏中不适用。"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -257,12 +257,12 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "每位玩家或团队尝试获得地图面积的一半以上。获胜者将是能够在至少20分钟内保持该区域的玩家或团队，或在 %s 后拥有最多领土的玩家或团队，以先发生者为准。如果选择了和平模式，当一个玩家拥有的土地比其他任何玩家可能获得的都多时，游戏将结束。"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
+msgstr[0] "%1% 天"
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -277,7 +277,7 @@ msgstr[0] "%1% 分钟"
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s、%2$s 和 %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
@@ -345,7 +345,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "作为木地精，你喜欢大森林，所以你的任务是在自己的领土上拥有比其他玩家更多的树木。游戏将在 %s 后结束。届时拥有最多树木的玩家将赢得游戏。"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
@@ -378,4 +378,4 @@ msgstr "胜利者是%1$s和%2$s。"
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "获胜者有 %s。"

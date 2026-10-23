@@ -19,47 +19,47 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "建造两个林间小屋"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "在每个伐木小屋旁边建造一个林间小屋"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "树木自然生长缓慢。为确保有足够的原木，你必须建造林间小屋"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "向东北方向扩展并建造采石场"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "向东北方向扩展到岩石区"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "建造军事建筑（如哨所或屏障）以扩展你的领土"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "到达你东北方的岩石区并在那里建造采石场"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "开始在山上建造矿场"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "建造煤矿和铁矿"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "建造一个煤矿和一个铁矿"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -69,53 +69,53 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "为此，在东边的山坡上放置一个旗帜（要放在山地地形上，而不是山地草甸）。当你点击新旗帜时，可以派遣地质学家前往。由于旗帜位于山上，地质学家将寻找矿石；否则，他们会寻找水源。然后为他们发现的两种资源建造矿场，选择相应的矿场类型："
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "一些煤"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
-msgstr ""
+msgstr "大量煤"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "一些铁"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
-msgstr ""
+msgstr "大量铁"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "一些金"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr ""
+msgstr "大量金"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "一些花岗岩"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr ""
+msgstr "大量花岗岩"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
-msgstr ""
+msgstr "水源"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr ""
+msgstr "此处未发现任何资源"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "矿场只能建造在山地地形上。适合建造矿场的地点会显示为橙色矿场符号"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
@@ -123,32 +123,32 @@ msgstr "为你的矿工提供食物"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "建造猎人小屋、猎场看守小屋和酒馆"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "矿工需要食物才能工作"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "猎人可以猎杀动物，而猎场看守可以防止动物灭绝。然后肉会在酒馆中被加工成矿工的午餐"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "这只是需要先精炼才能在二级建筑中使用的一种物资的例子——其他物资也会陆续出现"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "烘焙面包"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "建造水井、农场和面包房"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -157,39 +157,39 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "其他生产食物——不同种类食物——的方式是渔民和农场。农场的小麦需要先在面包房中用水加工才能食用。你可以通过建造水井来获得水源。为了获得最佳生产力，请将其建在地质学家已发现水源的地方"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "精炼你开采的资源"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "建造一个冶炼厂"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "矿工挖出的铁矿石还不能直接使用——必须先熔炼成铁"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "升级建筑并建造啤酒厂"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "升级一个矿场和酒馆，并建造啤酒厂"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "将煤矿或铁矿升级为深矿井，并将酒馆升级为旅店"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "同时建造一个啤酒厂"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -197,7 +197,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "普通矿场只能开采地下资源的约三分之一；之后必须将其升级为深矿井才能正常工作。要升级建筑，选择它然后点击弹出的窗口中的相应按钮"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -205,7 +205,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "工人通过成功工作获得经验。积累了足够经验后，他们会成为更高级的工人，这些高级工人是操作升级后建筑的必要条件。在拥有足够的高级工人来操作升级后的建筑之前，不要升级建筑！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -213,20 +213,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "这类建筑通常比基础建筑有更高的需求——例如，深矿井需要零食而不是口粮。你必须将酒馆升级为旅店，才能用皮塔饼和另一种食物（肉或鱼）以及啤酒生产零食"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "当然，如果你有工人，你可以立即将所有矿场升级为深矿井——较大的矿场工作稍快，较小的矿场需要更便宜的食物。选择哪种策略由你决定"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "建造木材硬化厂"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -235,69 +235,69 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "更大更好的建筑——包括所有军事建筑——需要更好的建筑材料。它们不能由简单的原木建造——原木必须先通过木材硬化厂硬化成黑木。始终记得在黑木用完前建造木材硬化厂，因为没有它你就无法扩展"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "建造石灰窑和煤炭经济"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "建造由水井、木炭窑或煤矿供料的石灰窑"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "更好的建筑除了黑木外还可能需要其他改良材料。其中一种是砂浆，由石灰匠用花岗岩、水和煤炭生产"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "你可以通过在水源上建造水井来获得水源，当地质学家被派往任何不在山上的旗帜时，他们可以发现水源"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "要派遣地质学家寻找水源，点击你希望他搜索区域的旗帜，然后点击标记为'派遣地质学家勘探地点'的按钮"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "可以通过建造木炭窑或煤矿来获得煤炭。用原木烧制木炭速度很慢。只有在没有煤炭时才应建造木炭窑"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "建造石灰窑和水井。另外，建造一个木炭窑或煤矿来供应煤炭"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr ""
+msgstr "建造芦苇田"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "改良建筑所需的第三种材料是芦苇，用于覆盖屋顶。芦苇田由园丁在他的建筑——芦苇田周围种植"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "建造畜牧场"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -305,49 +305,49 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "当道路长时间负荷过重时，一个搬运工通常不足以快速运输货物。结果就是交通堵塞。因此这类道路会使用第二个搬运工：一头牛来帮助搬运货物。这使运输能力翻倍"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "牛在畜牧场中用小麦和水饲养"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "故事开始"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "特隆叹了口气..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "已经过去几个月了，我们仍然藏身在古老而黑暗的森林中"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "我的战士们白天狩猎，夜晚却无法入睡——倾听着残酷的屠杀声从远处古老的树木间回荡"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "从这里我们能看到吞噬阿尔图南的熊熊烈火，远在数英里之外"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "红色的光芒在黑暗中闪烁，随着战争鼓的节奏舞动，即使在噩梦中也萦绕着我"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -355,7 +355,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "我父亲的遗骨静静地安葬在他曾经结束我们之间无谓流血冲突的土地上。令我痛心的是，他的和平只持续了一代人"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -364,7 +364,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "博尔德雷斯，我忠诚的伙伴和朋友，在这黑暗时期是我的平静与慰藉。他鼓舞我和我的战士们的士气，防止贪婪或绝望破坏我们之间的纽带"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -372,23 +372,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "正如父亲告诉我的，有时需要战斗，有时需要躺下等待，试图在合适的时机到来前不睡着或死去。所以我确实在等待"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "特隆在思考战争"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "特隆摇着头..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "然而战争仍在继续。越来越多的兄弟姐妹逃离了在树冠下首都爆发的残酷战争"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -398,7 +398,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "他们讲述的关于我们族人所作所为的故事令人悲伤。我整夜无法安眠，焦躁不安，比想象中还要疲惫。然而每当我闭上眼睛，就看到我父亲建造的要塞被火焰吞噬。树中之王，我们族人团结与和平的象征，成为了分裂我们的楔子"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -410,18 +410,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "今天我的猎人带来了男人、女人和小孩，他们藏身于森林中，试图逃离在各部落之间爆发的战争、仇恨和复仇，就像古老的年代，我们不过是受本能驱使和控制的野兽。我的任何一个兄弟都无法获得并掌控木制王座，没有哪个部族能够强大到征服其他部族。这场屠杀将永无止境，除非...这就是答案？正如父亲告诉我的？"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "起来反抗那些威胁我们生存的人，即使那可能是你自己的血亲或同族？"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "特隆在考虑未来"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -431,7 +431,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "随着日子一天天过去，博尔德雷斯似乎越来越矛盾。随着寒冷季节的临近，我同伴们的精神越来越低落，而我们仍然住在小屋和兵营中。我从未打算在荒野中停留这么长时间——但我也从没想过我的兄弟们会进行这场无谓的战斗这么久"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -440,22 +440,22 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "也许是时候让我们在这里感觉更舒适一些了。也许是时候给那些仍然团结一心的人们一个新家，取代我们现在失去的一切？直到我们能回到我们曾经称为家园的地方..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "有人走向你"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "一个老人说..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "你好，酋长。我是坎特鲁克，已经历了无数寒冬。请允许我在这些黑暗的日子里用我的建议帮助你"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -463,7 +463,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "只有神知道我们必须在这里隐藏多久。战士们希望我们很快就能光荣地返回，但我强烈怀疑这不会很快发生。而且日子越来越短，越来越冷..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -476,18 +476,18 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "顾问"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "坎特鲁克注意到..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "我看到你已经建造了一个采石场和两个伐木小屋。如果我们想在这里停留更久，这是个好的开始"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -495,23 +495,23 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr ""
+msgstr "但永远不要忘记——这些森林是我们的遗产，是我们的祖先托付给我们的。我们必须永远尊重并爱护它们。我们索取什么，就必须归还什么"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "因此，为了取代我们砍伐的树木，我们应该建造一些林间小屋，最好靠近伐木小屋"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
-msgstr ""
+msgstr "夜晚"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
-msgstr ""
+msgstr "特隆说..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:252
@@ -519,18 +519,18 @@ msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
 " legacy."
-msgstr ""
+msgstr "又一个不眠之夜，我登上山丘向北眺望。大火仍在燃烧，吞噬着我父亲的遗产"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "它们是我们必须藏在这里的永恒提醒...也是我们必须最终返回的原因！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
-msgstr ""
+msgstr "在墓前"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -538,29 +538,29 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "我又一次来到父亲的墓前，它位于卡尔玛弗拉斯巨塔脚下的神圣树林中。我只是站在那里，既没有感受到时间的流逝，也没有感受到从黑暗天空倾泻而下的冷雨..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "不知何故，这感觉像是一种告别。第一次，我好奇未来会给我带来什么..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
-msgstr ""
+msgstr "前几天"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "特隆若有所思地说..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr ""
+msgstr "不久前，博尔德雷斯来找我。他的建议是搬到离家乡更近的地方——在我兄弟们的力量开始动摇时发动攻击"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -569,15 +569,15 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "但当我望向森林时，我仍然能看到黑烟升向天空。我知道——现在还为时过早，他所期望的事情不会很快发生。他可能仍然是对的，但我害怕太快返回会导致双方流血..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
-msgstr ""
+msgstr "誓言"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "特隆看起来很愤怒..."
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:291
@@ -585,12 +585,12 @@ msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
-msgstr ""
+msgstr "今天，我的战士们在黑暗的森林中发现了一个老人，他病痛缠身，四处游荡。我们惊恐地听他讲述阿尔图南发生的暴行"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:294
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr ""
+msgstr "我在此重申我的誓言——我将不惜一切代价阻止这种疯狂！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:314
@@ -602,11 +602,11 @@ msgstr ""
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "你忠诚的伙伴"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "勇敢的博尔德雷斯走到你身边..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:302
@@ -615,11 +615,11 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "所以你想让我们为在这些森林中长期停留做准备，特隆？嗯，我明白这样做的智慧，但我的心渴望光荣地返回阿尔图南。我们已经等待太久，而我们的族人在战场上战斗，我们的斧剑却随着时间生锈"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "坎特鲁克加入进来..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:310
@@ -627,11 +627,11 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr ""
+msgstr "请原谅我，酋长，但我有一件重要的事情要与你讨论。我们营地附近的岩石在我们工人的工具下迅速减少，用不了多久它们就会全部消失"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "博尔德雷斯跳起来..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:318
@@ -640,36 +640,36 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "虽然这肯定不是战士值得做的任务，但至少有事可做！特隆，我带几个最不安分的战士去卡尔玛弗拉斯大山的方向冒险怎么样？也许我们能找到更多的大岩石来取悦这位老人？"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "坎特鲁克咕哝着..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "老人？无礼的年轻人！"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:333
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "坎特鲁克满意地点头..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "终于！这些岩石应该能维持一段时间"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "博尔德雷斯喊道..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr ""
+msgstr "快看！东边是卡尔玛弗拉斯大山！我想知道大自然可能在其雄伟的山坡下隐藏了什么宝藏！"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:344
@@ -677,27 +677,27 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr ""
+msgstr "让我们向东部扩展。老人偶尔也能派上用场！让我们派一些懂得石头语言的人去揭开山的秘密！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "博尔德雷斯大笑..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
-msgstr ""
+msgstr "以查卡鲁斯的胡须起誓，这太棒了！想想我们能用这些煤和铁矿石做什么！"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "这甚至可能足以..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "坎特鲁克打断..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:362
@@ -706,16 +706,16 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr ""
+msgstr "虽然这是事实，但我们应该稍后再考虑，因为现在还有其他障碍。矿工们肯定会在寒冷的高山上工作，需要更多的口粮，而这些供应可能不容易"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "博尔德雷斯点头..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "我不得不承认你是对的，老人"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:373
@@ -723,16 +723,16 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr ""
+msgstr "这里的森林里似乎有很多动物——我们可能猎杀更多。当然，人们会欢迎一个新的酒馆——嘿，如果你想，我们可以称之为'特隆的骄傲'之类的！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "长老跳了起来..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "智慧要求寻求多样性"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:384
@@ -740,27 +740,27 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "大山北面是一片广阔的平原——我们为什么不利用大自然赐予的空间建造一个农场呢？我肯定想尝尝新鲜烘焙的皮塔饼..."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
-msgstr ""
+msgstr "Boldreth 振作起来…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:392
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "我们的猎人在森林里，Thron。"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr ""
+msgstr "我向你保证，在今天日落之前，你将享有一顿盛宴，足以款待所有部落的酋长！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukh 凝视着平原…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:402
@@ -768,15 +768,15 @@ msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
-msgstr ""
+msgstr "这景色多美啊，金黄的田野，宁静地生长，随风摇曳。我相信面包师正朝这里走来，他特意为我们的酋长准备了最美味的面包！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "一个美丽的早晨"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron 认出了…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:409
@@ -785,17 +785,17 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr ""
+msgstr "昨天我们的人民开了一家酒馆。虽然我没什么心情庆祝，但我注意到这小小的家园对我的人民意味着什么。他们的歌声响彻夜空，直到深夜，而第二天他们的精神更加振奋。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr ""
+msgstr "也许我们真的在慢慢地在这里创造一个我们可以称之为家园的地方。"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth 评论道…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:419
@@ -804,19 +804,19 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr ""
+msgstr "既然我们有了矿藏和食物来维持它们，我们应该把我们勇敢的矿工为我们获得的资源加工成更有用的状态。铁矿石必须熔炼成铁，这样才能准备好锻造我们想要的任何东西。而且我们需要煤来保持熔炉的燃烧。"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:476
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh 说道…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
-msgstr ""
+msgstr "我们的矿工每天挖到的资源越来越少！我们必须挖得更深，更接近山脉的核心，如果我们想要更多的宝藏！"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:430
@@ -824,11 +824,11 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr ""
+msgstr "当然，在这样的深处既黑暗又寒冷，很少有人自愿去这些地方。我们应该用更多的口粮来奖励这种勇气。几品脱的啤酒会让他们的精神保持高昂。"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldreth 似乎很担忧…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:438
@@ -836,23 +836,23 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr ""
+msgstr "正如我刚刚发现的，我们的黑木短缺！我们不能让我们的战士住在摇摇欲坠的小屋里，更不能在我们现在这样危险的时期！"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "我们需要一个木材硬化剂，而且现在就需要！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:447
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth 微笑着…"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:449
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr ""
+msgstr "嗯，老朋友，这应该能确保我们的防御工事不会在敌人的第一声战吼声中就崩溃！现在我们可以安全地扩张了！"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -860,11 +860,11 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr ""
+msgstr "尽管如此，积累一些砂浆为我们的远征做准备也不会有坏处；这样在需要的时候，我们可以建造一个前所未有的要塞！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Khantrukh 插话道…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:460
@@ -874,27 +874,27 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr ""
+msgstr "酋长，这太不像话了！我们现在能够生产用于强大防御工事和宏伟建筑的砂浆——但这并不能防止我们的屋顶漏水！也许年轻人喜欢在雨夜里度过，但我就是无法在雨滴滴在我脸上的时候入睡！"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "现在这是一个我们应该解决的问题！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:469
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh 似乎松了一口气…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:471
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr ""
+msgstr "太好了！我们的屋顶不再漏水了，而且我们有所有需要的材料来建造任何我们认为宏伟的建筑！"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "我们需要牛！"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:478
@@ -903,7 +903,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "随着我们的领地越来越大，道路上的交通变得不堪重负。我们可怜的搬运工无法像我们需要的那样快速运输货物。我建议我们通过饲养牛来给他们一些支持。"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:481
@@ -911,7 +911,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "它们是惊人的动物：牛和人类一样快，但更强壮而且非常节俭：我们只需要小麦和水来饲养它们，它们就会忠诚可靠地在道路上工作。"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
@@ -921,14 +921,14 @@ msgstr "任务完成"
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron 说道…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr ""
+msgstr "前几天 Boldreth 问我陪他去新的酒馆。他说这会让我振作起来。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:493
@@ -937,12 +937,12 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "当我环顾四周，我看到了忠诚的面孔，他们相信我能带领他们度过这些黑暗的日子。然而，在我能说出任何感激或鼓励的话之前，我的一个战士冲进了酒馆。他过去几天一直在森林深处，我能看到他有多疲惫。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "他带来的消息改变了一切…"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
@@ -956,14 +956,14 @@ msgstr "你已经完成了本次任务。如果你愿意的话，你可以继续
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "一个月圆之夜"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
-msgstr ""
+msgstr "一个月圆之夜，当月光皎洁时，我爬上了 Kal'mavrath 的山顶。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:508
@@ -972,15 +972,15 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "当我凝视地平线时，我仍然看到远处有红色的光芒闪烁。我的兄弟们以如此的热情战斗这场战争，这令人难以置信。我害怕再次见到 Al'thunran 的那一刻——当我们到达那里时，我们曾经美丽的首都还会剩下什么，除了灰烬和浪费的废墟？"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
-msgstr ""
+msgstr "又一个寒冷的日子"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron 看起来很担忧…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:515
@@ -988,41 +988,41 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "冬天已经降临。我们中的许多人正在遭受寒冷，但我们必须忍受。我们可能回来的日子不会太远了——一定不会太远了。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "我祈祷天气能再次变暖，就像我祈祷战争最终能够结束一样。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "到目前为止，似乎两个祈祷都没有实现。"
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "一个友好的村庄加入了我们！"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "我们发现了一个村庄，那里有友好且勤劳的人民，他们对我们的财富、技术和力量印象深刻。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "他们一直简单地、快乐地过着狩猎和农耕的生活。到目前为止他们没有卷入任何冲突，也没有准备好战斗。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "但他们担心围绕 Al'thunran 的战争会结束这种生活。因此，他们决定加入我们，希望我们能互相帮助。"
