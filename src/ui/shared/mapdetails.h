@@ -50,7 +50,6 @@ public:
 private:
 	void layout() override;
 	const UI::PanelStyle style_;
-	const int padding_{4};
 
 	UI::Box main_box_;
 	UI::Box descr_box_;
