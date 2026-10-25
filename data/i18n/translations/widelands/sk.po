@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -288,7 +288,7 @@ msgstr "dec"
 #: ../../../../src/base/time_string.cc:170
 msgctxt "day_of_month"
 msgid "Sun"
-msgstr ""
+msgstr "ne"
 
 #. * TRANSLATORS: Monday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -297,7 +297,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:175
 msgctxt "day_of_month"
 msgid "Mon"
-msgstr ""
+msgstr "po"
 
 #. * TRANSLATORS: Tuesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -306,7 +306,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:180
 msgctxt "day_of_month"
 msgid "Tue"
-msgstr ""
+msgstr "ut"
 
 #. * TRANSLATORS: Wednesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -315,7 +315,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:185
 msgctxt "day_of_month"
 msgid "Wed"
-msgstr ""
+msgstr "st"
 
 #. * TRANSLATORS: Thursday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -324,7 +324,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:190
 msgctxt "day_of_month"
 msgid "Thu"
-msgstr ""
+msgstr "št"
 
 #. * TRANSLATORS: Friday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -333,7 +333,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:195
 msgctxt "day_of_month"
 msgid "Fri"
-msgstr ""
+msgstr "pi"
 
 #. * TRANSLATORS: Saturday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -342,19 +342,19 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:200
 msgctxt "day_of_month"
 msgid "Sat"
-msgstr ""
+msgstr "so"
 
 #. * TRANSLATORS: Display date.
 #. * Placeholders are: day_of_month month day, year, hour:minute
 #: ../../../../src/base/time_string.cc:212
 msgid "%1% %2% %3%, %4%, %5%:%6%"
-msgstr ""
+msgstr "%1% %2% %3%, %4%, %5%:%6%"
 
 #. * TRANSLATORS: Display time.
 #. * Placeholders are: hour:minute:second
 #: ../../../../src/base/time_string.cc:258
 msgid "%1%:%2%:%3%"
-msgstr ""
+msgstr "%1%:%2%:%3%"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
 #: ../../../../src/ui/game/diplomacy_menu.cc:44
@@ -441,7 +441,7 @@ msgstr "Zmena tímu zamietnutá"
 
 #: ../../../../src/commands/cmd_replay_end.cc:33
 msgid "End of Replay"
-msgstr ""
+msgstr "Koniec záznamu"
 
 #: ../../../../src/commands/cmd_replay_end.cc:34
 msgid ""
@@ -2478,7 +2478,7 @@ msgid ""
 " you tried to connect."
 msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou. Buď bol server hry Widelands nedosiahnuteľný na TCP porte %u, alebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2487,35 +2487,35 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me - zlyhal kontrolný súčet md5 môjho súboru."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me skontroloval(a) prijatý súbor. Hoci md5 kontrola súčtu bola úspešná, nedokážem spracovať súbor."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Odpojenie"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2643,7 +2643,7 @@ msgstr ""
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3057,8 +3057,13 @@ msgstr "Klient %s podvádza!"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr ""
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr ""
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr ""
@@ -6590,7 +6595,7 @@ msgstr "Veľkosť: %1$u×%2$u • Max hráči: %3$u • %4$s"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:728
 #, c-format
 msgid "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
-msgstr ""
+msgstr "%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"
 
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -11392,7 +11397,7 @@ msgstr "Skry prekrytia pracovných oblastí"
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
-msgstr ""
+msgstr "Prepínač zobrazenia prekrývajúcich sa pracovných oblastí pri umiestňovaní staveniska"
 
 #: ../../../../src/ui/wui/interactive_player.cc:484
 msgid "No current objectives"

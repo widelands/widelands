@@ -5,8 +5,11 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Frank Carvalho, 2024
+# Frank Carvalho, 2024
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# Willian Francisco Urbano, 2022
 # Willian Francisco Urbano, 2022
 msgid ""
 msgstr ""
@@ -14,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Frank Carvalho, 2024\n"
+"Last-Translator: Willian Francisco Urbano, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -488,7 +491,7 @@ msgstr "O terceiro número indica os soldados que faltam. Dos oito soldados (1 +
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Soldiers in the headquarters"
-msgstr ""
+msgstr "Soldados no quartel-general"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -496,7 +499,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr ""
+msgstr "Seu quartel-general tem algumas capacidades de locais militares: ele conquista território, o inimigo pode atacá-lo diretamente, e os soldados armazenados o defendem, bem como seus arredores, quando atacado. Por outro lado, também há uma diferença: você não pode iniciar um ataque com os soldados do seu quartel-general."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -504,12 +507,12 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr ""
+msgstr "As capacidades militares do quartel-general são uma grande diferença em relação aos armazéns comuns, que não conquistam território e precisam de locais militares próximos para defesa. Soldados armazenados em armazéns comuns não participam de nenhum combate, e armazéns comuns não podem ser atacados diretamente."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Soldier settings of the headquarters"
-msgstr ""
+msgstr "Configurações de soldados do quartel-general"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -520,7 +523,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr ""
+msgstr "Embora todos os soldados que estejam no seu quartel-general ajudem a defendê-lo, eles não são designados permanentemente ao quartel-general, então podem ser enviados embora a qualquer momento quando um local militar precisar de um soldado. Felizmente, você também pode designar alguns soldados para a defesa do quartel-general da mesma forma que define a capacidade e a preferência de soldados nos locais militares. Se fizer isso, o quartel-general só deixará que soldados excedentes sejam enviados a outras construções, mas não os soldados da guarnição designada."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -531,7 +534,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr ""
+msgstr "Se você olhar as linhas de status, verá que seu armazém não tem nada dentro, mas seu quartel-general inicialmente mostra um sinal de ‘—’. Isso significa que não há nenhuma guarnição configurada para proteger o quartel-general, embora ainda possa haver alguns soldados armazenados lá. Se você aumentar o número desejado de soldados para mais de zero, o quartel-general mostrará no status as mesmas informações de soldados que os locais militares. Soldados excedentes nunca são mostrados no status."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ondřej Itřech, 2020-2021,2024-2026\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -292,7 +292,7 @@ msgstr "prosinec"
 #: ../../../../src/base/time_string.cc:170
 msgctxt "day_of_month"
 msgid "Sun"
-msgstr ""
+msgstr "Ne"
 
 #. * TRANSLATORS: Monday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -301,7 +301,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:175
 msgctxt "day_of_month"
 msgid "Mon"
-msgstr ""
+msgstr "Po"
 
 #. * TRANSLATORS: Tuesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -310,7 +310,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:180
 msgctxt "day_of_month"
 msgid "Tue"
-msgstr ""
+msgstr "Út"
 
 #. * TRANSLATORS: Wednesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -319,7 +319,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:185
 msgctxt "day_of_month"
 msgid "Wed"
-msgstr ""
+msgstr "St"
 
 #. * TRANSLATORS: Thursday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -328,7 +328,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:190
 msgctxt "day_of_month"
 msgid "Thu"
-msgstr ""
+msgstr "Čt"
 
 #. * TRANSLATORS: Friday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -337,7 +337,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:195
 msgctxt "day_of_month"
 msgid "Fri"
-msgstr ""
+msgstr "Pá"
 
 #. * TRANSLATORS: Saturday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -346,7 +346,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:200
 msgctxt "day_of_month"
 msgid "Sat"
-msgstr ""
+msgstr "So"
 
 #. * TRANSLATORS: Display date.
 #. * Placeholders are: day_of_month month day, year, hour:minute
@@ -358,7 +358,7 @@ msgstr ""
 #. * Placeholders are: hour:minute:second
 #: ../../../../src/base/time_string.cc:258
 msgid "%1%:%2%:%3%"
-msgstr ""
+msgstr "%1%:%2%:%3%"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
 #: ../../../../src/ui/game/diplomacy_menu.cc:44
@@ -1876,11 +1876,11 @@ msgstr "Objevené místo pro přístav již není dostupné pro stavbu přístav
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "A new ship has been built."
-msgstr ""
+msgstr "Byla postavena nová loď."
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "New Ship"
-msgstr ""
+msgstr "Nová loď"
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80
@@ -2482,7 +2482,7 @@ msgid ""
 " you tried to connect."
 msgstr "Hra Widelands nemohla navázat spojení se zadanou adresou. Buďto není na síťovém portu TCP %u dostupný žádný Widelands server, nebo byl v době pokusu o připojení nedostupný."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2491,35 +2491,35 @@ msgstr[1] "Byly zjištěny %u nesoulady v rámci vybraných rozšíření:\n"
 msgstr[2] "Bylo zjištěno %u nesouladů v rámci vybraných rozšíření:\n"
 msgstr[3] "Bylo zjištěno %u nesouladů v rámci vybraných rozšíření:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ požadováno hostitelem a nebylo nalezeno"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ instalováno ve verzi %3$s, ale hostitel používá %4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me soubor neprošel kontrolním součtem md5."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me zkontroloval přijatý soubor. Přestože kontrolní součet md5 souhlasí, nemohu se souborem pracovat."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Odpojen"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2647,7 +2647,7 @@ msgstr "Widelands se nepodařilo spustit server.\nZřejmě je již spuštěn jin
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3061,8 +3061,13 @@ msgstr "Uživatel %s cheatuje!"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Cheating: Uživatel %1$s nyní kontroluje hráče %2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr "Uživatel %1$s aktivoval následující dodatečné/á rozšíření: %2$s"
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "Uživatel %1$s cheatuje, vydává se za hráče %2$s!"
@@ -7121,7 +7126,7 @@ msgstr "Nahrát záznam"
 #: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:200
 msgid "No game selected"
-msgstr ""
+msgstr "Nevybrána žádná hra"
 
 #. * TRANSLATORS: Tooltip for OK button. The user has no files to select
 #. * TRANSLATORS: Tooltip for the delete button. The user has
@@ -7129,7 +7134,7 @@ msgstr ""
 #: ../../../../src/ui/fsmenu/loadgame.cc:194
 #: ../../../../src/ui/shared/load_or_save_game.cc:197
 msgid "No replay selected"
-msgstr ""
+msgstr "Nevybrán žádný záznam"
 
 #: ../../../../src/ui/fsmenu/login_box.cc:37
 #: ../../../../src/ui/fsmenu/main.cc:431
@@ -7879,7 +7884,7 @@ msgstr "Zadané jméno hostitele nebo adresa nejsou platné a nelze se tak přip
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%d×"
-msgstr ""
+msgstr "%d×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.5×" or
 #. "1,5×"
@@ -7887,7 +7892,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.1f×"
-msgstr ""
+msgstr "%.1f×"
 
 #. * TRANSLATORS: This is a UI scaling integer value of the form "1.25×" or
 #. "1,75×"
@@ -7895,7 +7900,7 @@ msgstr ""
 #, c-format
 msgctxt "ui_scaling_factor"
 msgid "%.2f×"
-msgstr ""
+msgstr "%.2f×"
 
 #: ../../../../src/ui/fsmenu/options.cc:117
 msgid "Apply"
@@ -7946,7 +7951,7 @@ msgstr "Vzdálenost pro přichycení oken k okrajům:"
 
 #: ../../../../src/ui/fsmenu/options.cc:244
 msgid "User interface scaling factor"
-msgstr ""
+msgstr "Násobek přiblíření zobrazení"
 
 #: ../../../../src/ui/fsmenu/options.cc:254
 msgid "Edit keyboard and mouse actions…"
@@ -8075,7 +8080,7 @@ msgstr "Hra obecně"
 
 #: ../../../../src/ui/fsmenu/options.cc:468
 msgid "User interface scaling factor:"
-msgstr ""
+msgstr "Násobek přiblíření zobrazení:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../../../src/ui/fsmenu/options.cc:552
@@ -9231,7 +9236,7 @@ msgstr "Předdefinované profily nelze smazat"
 
 #: ../../../../src/ui/game/economy_options_window.cc:602
 msgid "Delete the selected profile"
-msgstr ""
+msgstr "Smazat vybraný profil"
 
 #: ../../../../src/ui/game/economy_options_window.cc:624
 msgid "Overwrite?"
@@ -9881,7 +9886,7 @@ msgstr "Náhodné pořadí"
 
 #: ../../../../src/ui/game/music_player.cc:103
 msgid "Current Song:"
-msgstr ""
+msgstr "Vybraná hudba:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../../../src/ui/game/options_sound_menu.cc:34
@@ -11930,7 +11935,7 @@ msgstr "Nastav podle mapy"
 
 #: ../../../../src/wlapplication_options.cc:481
 msgid "Show Tools Menu"
-msgstr ""
+msgstr "Zobrazit nabídku nástrojů"
 
 #: ../../../../src/wlapplication_options.cc:486
 msgid "Change Height Tool"

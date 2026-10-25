@@ -12,7 +12,7 @@
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020,2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2017-2018,2021-2023,2025
+# David D, 2017-2018,2021-2023,2025-2026
 # GunChleoc, 2016,2018
 # Loïc Ch., 2025
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -32,9 +32,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2026\n"
+"Last-Translator: David D, 2017-2018,2021-2023,2025-2026\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -307,7 +307,7 @@ msgstr "Déc"
 #: ../../../../src/base/time_string.cc:170
 msgctxt "day_of_month"
 msgid "Sun"
-msgstr ""
+msgstr "Dim"
 
 #. * TRANSLATORS: Monday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -316,7 +316,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:175
 msgctxt "day_of_month"
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 #. * TRANSLATORS: Tuesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -325,7 +325,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:180
 msgctxt "day_of_month"
 msgid "Tue"
-msgstr ""
+msgstr "Mar"
 
 #. * TRANSLATORS: Wednesday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -334,7 +334,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:185
 msgctxt "day_of_month"
 msgid "Wed"
-msgstr ""
+msgstr "Mer"
 
 #. * TRANSLATORS: Thursday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -343,7 +343,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:190
 msgctxt "day_of_month"
 msgid "Thu"
-msgstr ""
+msgstr "Jeu"
 
 #. * TRANSLATORS: Friday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -352,7 +352,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:195
 msgctxt "day_of_month"
 msgid "Fri"
-msgstr ""
+msgstr "Ven"
 
 #. * TRANSLATORS: Saturday. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from
@@ -361,7 +361,7 @@ msgstr ""
 #: ../../../../src/base/time_string.cc:200
 msgctxt "day_of_month"
 msgid "Sat"
-msgstr ""
+msgstr "Sam"
 
 #. * TRANSLATORS: Display date.
 #. * Placeholders are: day_of_month month day, year, hour:minute
@@ -373,7 +373,7 @@ msgstr ""
 #. * Placeholders are: hour:minute:second
 #: ../../../../src/base/time_string.cc:258
 msgid "%1%:%2%:%3%"
-msgstr ""
+msgstr "%1%:%2%:%3%"
 
 #: ../../../../src/commands/cmd_diplomacy.cc:43
 #: ../../../../src/ui/game/diplomacy_menu.cc:44
@@ -2481,7 +2481,7 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands n'a pas pu établir de connexion à l'adresse donnée. Ou aucun serveur n'a pu être joint sur le port TCP  %u ou le serveur était éteint lors que vous avez essayé de vous connecter."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2489,35 +2489,35 @@ msgstr[0] "Module complémentaire %u inadéquat détecté:\n"
 msgstr[1] "Modules complémentaires %u inadéquats détecté:\n"
 msgstr[2] "Modules complémentaires %u inadéquats détecté:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ requis par l'hôte n'ont pas été trouvé"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ installé en version %3$s mais l'hôte utilise la version %4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "Le contrôle de la somme md5 du fichier /me a échoué."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me a vérifié le fichier reçu. Bien que la vérification md5 soit réussie, je n'arrive pas à manipuler le fichier."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2645,7 +2645,7 @@ msgstr "Widelands n'a pas pu démarrer un serveur.\nIl est probable qu'un autre 
 msgid "Computer %u"
 msgstr "Ordinateur %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3057,8 +3057,13 @@ msgstr "Le client %s triche !"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Triche : le client%1$s contrôle désormais%2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr "Le client %1$s a activé le ou les modules complémentaires supplémentaires suivants :  %2$s"
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "Le client%1$s triche, agissant comme %2$s!"

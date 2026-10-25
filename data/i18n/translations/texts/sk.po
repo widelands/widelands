@@ -403,7 +403,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Záznamy sú veľmi užitočným nástrojom na hľadanie chýb v hernej logike, niekedy je preto vhodné priložiť ich k nahláseným chybám. Záznamové súbory sa ukladajú do podadresára „replays“ v domovskom adresári Widelands. Na poslednej karte „Technické informácie“ v tomto okne si môžete pozrieť, kde sa tento adresár vo vašom počítači nachádza."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40

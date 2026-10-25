@@ -100,7 +100,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "Sotilaan aiheuttama vahingon määrä viholliselle, kun hyökkäys onnistuu. Barbaarisotilas hyökkäys tasolla 0 aiheuttaa ~%1% pisteen vahingon, kun hän onnistuu lyömään vihollista. Jokaisella hyökkäystasolla hän saa %2% vahinkopistettä."
+msgstr "Sotilaan aiheuttama vahingon määrä viholliselle, kun hyökkäys onnistuu. Barbaarisotilaan hyökkäys tasolla 0 aiheuttaa ~%1% pisteen vahingon, kun hän onnistuu lyömään vihollista. Jokaisella hyökkäystasolla hän saa %2% vahinkopistettä."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Defense:"
@@ -115,7 +115,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Puolustus on prosenttimäärä, joka vähenee hyökkäysarvosta. Barbaari ei voi harjoitella tätä taitoa, ja siksi hänellä on aina puolustustaso 0, mikä tarkoitta, että vanhingosta vähennetään aina %1%%%. Jos 3500 hyökkäyspisteen hyökkääjä iskee Barbaarisotilasta, hän menettää 3500·%2%%% = %3% terveyttä."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
@@ -239,7 +239,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "On olemassa myös toinen harjoituspaikka: Harjoitusleiri. Se on myös iso rakennus ja täydentää taisteluareenaa. Se opettaa hyökkäystä ja terveyttä (muista ettei Barbaarille voi opettaa puolustusta)."
+msgstr "On olemassa myös toinen harjoituspaikka: Harjoitusleiri. Se on myös iso rakennus ja täydentää taisteluareenaa. Se opettaa hyökkäystä ja terveyttä (muista, ettei Barbaarille voi opettaa puolustusta)."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
@@ -259,7 +259,7 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Taisteluareena opettaa vain väistämään. Saadaksesi mahdollisimman vahvan sotilaan, sinun täytyy myös rakentaa harjoitusleiri, joka kouluttaa heille hyökkäystä ja terveyttä."
+msgstr "Taisteluareena opettaa vain väistämään. Saadaksesi mahdollisimman vahvan sotilaan sinun täytyy myös rakentaa harjoitusleiri, joka kouluttaa heille hyökkäystä ja terveyttä."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""

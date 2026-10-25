@@ -24,7 +24,7 @@ msgstr "Controles"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "Ajuda do Editor"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
@@ -33,16 +33,16 @@ msgstr "Geral"
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Introdução"
 
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Dicas"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "Terrenos"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -50,23 +50,23 @@ msgstr "Árvores"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "O Editor do Widelands"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Este editor é destinado a jogadores que gostariam de criar seus próprios mapas para usar no Widelands."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Como você pode ver, este editor é um trabalho em andamento intenso e, à medida que o editor fica cada vez melhor, este texto também ficará mais longo e completo."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "A wiki também inclui um tutorial curto sobre como criar um mapa."
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -75,17 +75,17 @@ msgstr "Recursos"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Recurso válido:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Recursos válidos:"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
-msgstr ""
+msgstr "Padrão:"
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
@@ -96,12 +96,12 @@ msgstr "%1%x %2%"
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Probabilidade de crescimento de árvores"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Nenhuma árvore crescerá aqui."
 
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
@@ -114,4 +114,4 @@ msgstr "%2.1f%%"
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Terrenos preferidos"

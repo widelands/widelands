@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2026\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -2449,42 +2449,42 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands kon geen verbinding maken met het opgegeven adres. Ofwel was er geen Widelands server bereikbaar op de TCP poort %u of de server is afgesloten toen je verbinding probeerde te maken."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u uitbreiding ongelijkheid ontdekt:\n"
 msgstr[1] "%u uitbreiding ongelijkheden ontdekt:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
 msgstr "%1$s\n• ‘%2$s’ vereist door host niet gevonden"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n• ‘%2$s’ geïnstalleerd onder versie %3$s maar host gebruikt versie %4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "het bestand van /me  heeft een md5 checksum fout"
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me heeft het ontvangen bestand gecontroleerd. Hoewel de md5 controle succesvol was, kan ik het bestand niet verwerken."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Verbinding verbroken"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2612,7 +2612,7 @@ msgstr "Widelands kon geen server starten.\nHet lijkt erop dat een ander proces 
 msgid "Computer %u"
 msgstr "Computer %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3022,8 +3022,13 @@ msgstr "Client %s speelt Vals!"
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Bedriegen: Klant %1$s controleert nu %2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr ""
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "Klant %1$s speelt vals en gedraagt zich als %2$s!"

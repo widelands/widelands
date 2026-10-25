@@ -4,7 +4,9 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# GunChleoc, 2014
 # henrique terto de souza <henrique.terto.new@gmail.com>, 2015
+# Patrick de Castro <raybackpc@gmail.com>, 2015
 # Patrick de Castro <raybackpc@gmail.com>, 2015
 msgid ""
 msgstr ""
@@ -12,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: henrique terto de souza <henrique.terto.new@gmail.com>, 2015\n"
+"Last-Translator: Patrick de Castro <raybackpc@gmail.com>, 2015\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +87,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not Barbarian "
 "craft."
-msgstr ""
+msgstr "Pelos Deuses! Um dos nossos batedores descobriu um castelo imponente no centro do antigo planalto. O castelo deve ser bem antigo e parece ter sido construído em um estilo estrangeiro. É bastante óbvio que isso não é obra dos Bárbaros."
 
 #: ../../../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""

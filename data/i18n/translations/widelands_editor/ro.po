@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -24,11 +25,11 @@ msgstr "Comenzi"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "Ajutor pentru editor"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../../../../data/scripting/editor/editor_help.lua:60
 #: ../../../../data/scripting/editor/editor_introduction.lua:10
@@ -38,35 +39,35 @@ msgstr "Introducere"
 #: ../../../../data/scripting/editor/editor_help.lua:72
 #: ../../../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Sfaturi"
 
 #: ../../../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr ""
+msgstr "Terenuri"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
-msgstr ""
+msgstr "Copaci"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Editorul Widelands"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Acest editor este destinat jucătorilor care vor să-și creeze propriile hărți pentru Widelands."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "După cum vezi, editorul este încă în plină dezvoltare și, pe măsură ce devine tot mai bun, și acest text va deveni mai lung și mai complet."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "Wiki-ul conține și un scurt tutorial despre cum se construiește o hartă."
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -75,17 +76,17 @@ msgstr "Resurse"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Resursă validă:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Resurse valide:"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
-msgstr ""
+msgstr "Implicit:"
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
@@ -96,22 +97,22 @@ msgstr "%1%x %2%"
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Probabilitatea de creștere a copacilor"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Aici nu va crește niciun copac."
 
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Terenuri preferate"

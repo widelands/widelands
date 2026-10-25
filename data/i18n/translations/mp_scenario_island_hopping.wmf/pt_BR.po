@@ -2,9 +2,11 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# 05f7c14829a7f0004c7a414c9bd4d253_5e10bee <ac668b7aa91ffe1e4ff8943d2a820367_813261>, 2021
 # Daniel San <daniel1977.br@gmail.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # 05f7c14829a7f0004c7a414c9bd4d253_5e10bee <ac668b7aa91ffe1e4ff8943d2a820367_813261>, 2021
 msgid ""
@@ -55,7 +57,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "O Salto entre Ilhas é um torneio tradicional da cultura Atlante. As regras do jogo são simples: você começa com um quartel-general em uma ilha. Quando termina um castelo no fim da primeira ilha, você recebe um segundo quartel-general em uma segunda ilha, que receberá todas as mercadorias, trabalhadores e soldados transferidos do seu quartel-general e armazéns na primeira ilha."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -64,7 +66,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Se você terminar um castelo na área-alvo da segunda ilha, receberá um terceiro quartel-general na terceira ilha, com todas as mercadorias, trabalhadores e soldados novamente transferidos dos seus quartéis-generais e armazéns anteriores. Você deve construir um castelo no centro da terceira ilha e mantê-lo por 20 minutos para vencer o jogo."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

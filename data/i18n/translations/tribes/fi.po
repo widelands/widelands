@@ -250,7 +250,7 @@ msgstr "Puunlatvavartiosto"
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldier has occupied your treetop sentry."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet puunlatvavartiosi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
@@ -1811,7 +1811,7 @@ msgstr "Kivimaljan teko"
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "piikivien teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...

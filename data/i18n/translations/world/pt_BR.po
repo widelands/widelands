@@ -5,8 +5,11 @@
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Frank Carvalho, 2024
+# Frank Carvalho, 2024
+# GunChleoc, 2018
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 # Patrick de Castro <raybackpc@gmail.com>, 2015
+# Pedro Supriano, 2025
 # Pedro Supriano, 2025
 # Rui <xymarior@yandex.com>, 2019
 # Salatiel Ewerton <salatiel2021@hotmail.com>, 2015
@@ -16,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Pedro Supriano, 2025\n"
+"Last-Translator: Salatiel Ewerton <salatiel2021@hotmail.com>, 2015\n"
 "Language-Team: Portuguese (Brazil) (http://app.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -658,77 +661,77 @@ msgstr "Pinheiro (Muda)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/twine/mature/init.lua:10
 msgid "Twine Tree (Mature)"
-msgstr ""
+msgstr "Torcilho (Maduro)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/twine/old/init.lua:10
 msgid "Twine Tree (Old)"
-msgstr ""
+msgstr "Torcilho (Velho)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/twine/old/init.lua:12
 msgid "Twine Tree"
-msgstr ""
+msgstr "Torcilho"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/twine/pole/init.lua:10
 msgid "Twine Tree (Pole)"
-msgstr ""
+msgstr "Torcilho (Pólo)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/twine/sapling/init.lua:10
 msgid "Twine Tree (Sapling)"
-msgstr ""
+msgstr "Torcilho (Rebento)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_green/mature/init.lua:10
 msgid "Green Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Guarda-chuva Verde (Maduro)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_green/old/init.lua:10
 msgid "Green Umbrella Tree (Old)"
-msgstr ""
+msgstr "Guarda-chuva Verde (Velho)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_green/old/init.lua:12
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Guarda-chuva Verde"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_green/pole/init.lua:10
 msgid "Green Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Guarda-chuva Verde (Pólo)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_green/sapling/init.lua:10
 msgid "Green Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Guarda-chuva Verde (Rebento)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_red/mature/init.lua:10
 msgid "Red Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Guarda-chuva Vermelho (Maduro)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_red/old/init.lua:10
 msgid "Red Umbrella Tree (Old)"
-msgstr ""
+msgstr "Guarda-chuva Vermelho (Velho)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_red/old/init.lua:12
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Guarda-chuva Vermelho"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_red/pole/init.lua:10
 msgid "Red Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Guarda-chuva Vermelho (Pólo)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/umbrella_red/sapling/init.lua:10
 msgid "Red Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Guarda-chuva Vermelho (Rebento)"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../../../data/world/init.lua:121

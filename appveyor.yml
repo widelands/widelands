@@ -7,7 +7,7 @@
 image: Visual Studio 2022
 
 init:
-  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
+  - cmd: "set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64"
 
 install:
   # Installing various utilities
@@ -20,7 +20,6 @@ install:
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
   # deleting broken repo from mirrorlist (needs to be repeated after first update if needed)
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
@@ -56,7 +55,6 @@ on_success:
 
 platform:
   - x64
-  - x86
 
 configuration:
   - Release

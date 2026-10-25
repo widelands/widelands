@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-07 07:01+0000\n"
+"POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jaakko Muilu, 2026\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1373,7 +1373,7 @@ msgstr "Vaihtotarjous tarjoajalta %s"
 #: ../../../../src/logic/map_objects/tribes/market.cc:772
 #, c-format
 msgid "Trade offer from %1$s to %2$s"
-msgstr ""
+msgstr "Vaihtotarjous tarjoajalta %1$s kohteelle %2$s"
 
 #: ../../../../src/logic/map_objects/tribes/market.cc:782
 #, c-format
@@ -2273,7 +2273,7 @@ msgstr "Peli on luultavasti tallennettu eri Widelands-versiolla tai eri käyttö
 
 #: ../../../../src/map_io/map_buildingdata_packet.cc:1022
 msgid "Please review the current production programs and input settings."
-msgstr ""
+msgstr "Tarkista voimassa olevat tuotanto-ohjelmat ja syöttöasetukset."
 
 #: ../../../../src/map_io/map_saver.cc:85
 #, c-format
@@ -2451,44 +2451,44 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was reachable at the TCP port %u or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Widelands ei pystynyt muodostamaan yhteyttä annettuun osoitteeseen. Joko TCP-portissa %u ei ollut saavutettavissa yhtään Widelands-palvelinta tai palvelin sammutettiin, kun yritit muodostaa yhteyden."
 
-#: ../../../../src/network/gameclient.cc:838
+#: ../../../../src/network/gameclient.cc:842
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u laajennuksen epätäsmäys havaittu:\n"
 msgstr[1] "%u laajennusten epätäsmäystä havaittu:\n"
 
-#: ../../../../src/network/gameclient.cc:840
+#: ../../../../src/network/gameclient.cc:844
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• Isännän edellyttämää ‘%2$s’ ei löytynyt"
 
-#: ../../../../src/network/gameclient.cc:843
+#: ../../../../src/network/gameclient.cc:847
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ Asennettu versio %3$s,  mutta isännällä on käytössä versio%4$s"
 
-#: ../../../../src/network/gameclient.cc:1010
+#: ../../../../src/network/gameclient.cc:1014
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me ’n tiedosto epäonnistui md5 tarkistussummauksessa."
 
-#: ../../../../src/network/gameclient.cc:1052
+#: ../../../../src/network/gameclient.cc:1056
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-tarkistus onnistui."
 
-#: ../../../../src/network/gameclient.cc:1374
+#: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
-#: ../../../../src/network/gameclient.cc:1375
+#: ../../../../src/network/gameclient.cc:1405
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2616,7 +2616,7 @@ msgstr "Widelands ei voinut käynnistää palvelinta.\nMahdollisesti jollakin to
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../../../src/network/gamehost.cc:1961
+#: ../../../../src/network/gamehost.cc:1984
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3026,8 +3026,13 @@ msgstr "Asiakas %s huijaa! "
 msgid "Cheating: Client %1$s now controls %2$s"
 msgstr "Huijaus: asiakas %1$s ohjaa nyt %2$s"
 
-#. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:82
+#, c-format
+msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
+msgstr "Asiakas %1$s on ottanut käyttöön seuraavat ylimääräiset lisäosat: %2$s"
+
+#. * TRANSLATORS: %1 and %2 are user and player names
+#: ../../../../src/network/network_gaming_messages.cc:84
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
 msgstr "Asiakas %1$s huijaa, esittää olevansa %2$s!"
@@ -5173,7 +5178,7 @@ msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
 "manually downloaded maps, installed website maps are stored in the ‘%s’ "
 "directory under the Widelands home directory."
-msgstr ""
+msgstr "Selaa ja asenna karttoja widelands.org-verkkosivuston kartta-arkistosta. Manuaalisesti ladattujen karttojen tavoin asennetut verkkosivustokartat tallennetaan hakemistoon '%s' Widelands-kotihakemiston alle."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:736
 msgid "Development"
@@ -5270,7 +5275,7 @@ msgstr[1] "Haluatko varmasti päivittää nämä %u laajennusta?"
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s) tekijältä %3$s"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1042
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:498
@@ -5515,7 +5520,7 @@ msgstr ""
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
-msgstr ""
+msgstr "Lisäosaa '%s' ei voi ladata palvelimeen, koska lisäosassa olevia seuraavia tiedostonimiä ei sallita:"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2060
 msgid ""
@@ -5523,7 +5528,7 @@ msgid ""
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
 "Other characters such as whitespace are not permitted. Filenames may not "
 "exceed 80 characters."
-msgstr ""
+msgstr "Tiedostonimet saavat sisältää vain aakkosnumeerisia merkkejä (A–Z, a–z, 0–9) ja yksinkertaisia välimerkkejä (piste, väliviiva ja alaviiva; ei useita pisteitä). Muita merkkejä, kuten välilyöntejä, ei sallita. Tiedostonimien pituus ei saa ylittää 80 merkkiä."
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:2075
 #, c-format
@@ -7318,7 +7323,7 @@ msgstr "(C) %1%-%2% Widelandsin kehittäjäryhmän toimesta · Luvitettu GNU-yle
 
 #: ../../../../src/ui/fsmenu/main.cc:892
 msgid "Click for the main menu"
-msgstr ""
+msgstr "Napsauta päävalikkoon"
 
 #: ../../../../src/ui/fsmenu/main.cc:970
 msgid "Desyncing Add-On Found"
@@ -7627,7 +7632,7 @@ msgstr "Vieritysasetusten ristiriita"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr ""
+msgstr "‘%1$s’, ‘%2$s’ tai '%3$s' ovat ristiriidassa suositeltujen asetusten kanssa. Vaihdetaanko myös ristiriitaiset asetukset?"
 
 #: ../../../../src/ui/fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -9012,7 +9017,7 @@ msgstr[1] "Jatka sitä %d erällä pitämällä Ctrl pohjassa"
 #: ../../../../src/ui/game/diplomacy_menu.cc:655
 #: ../../../../src/ui/game/marketwindow.cc:576
 msgid "Hold down Shift to extend the trade indefinitely"
-msgstr ""
+msgstr "Jatka kauppaa toistaiseksi pitämällä Shift pohjassa"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
@@ -11406,7 +11411,7 @@ msgstr ""
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr "Tuntematon kometoriviparametri: %s\nKenties '=' puuttuu?"
+msgstr "Tuntematon komentoriviparametri: %s\nKenties '=' puuttuu?"
 
 #: ../../../../src/wlapplication.cc:1799
 #, c-format
@@ -11851,7 +11856,7 @@ msgstr "Pelaajavalikko"
 
 #: ../../../../src/wlapplication_options.cc:536
 msgid "Toggle Height Heat Map"
-msgstr ""
+msgstr "Laita maastonkorkeuden lämpökartta päälle/pois"
 
 #: ../../../../src/wlapplication_options.cc:540
 msgid "Toggle Grid"
@@ -12033,7 +12038,7 @@ msgstr "Näytä sotalaivat"
 
 #: ../../../../src/wlapplication_options.cc:825
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Näytä kunnostettavia laivoja"
 
 #: ../../../../src/wlapplication_options.cc:830
 msgid "Toggle Quick Navigation"

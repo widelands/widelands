@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# millimarg, 2015
+# 9d627c5b4b41df59e6c19f0a569b0594_edcc82a, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Elisabeth Jäger, 2015
