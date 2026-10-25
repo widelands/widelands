@@ -225,6 +225,8 @@ wl_library(ui_game_soldierlist
     soldiercapacitycontrol.h
     soldierlist.cc
     soldierlist.h
+    soldier_preference_control.cc
+    soldier_preference_control.h
   USES_SDL2
   DEPENDS
     wui_interactive

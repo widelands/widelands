@@ -99,7 +99,6 @@ private:
 
 	// BuildingSettings-related UI elements
 	UI::Checkbox* cs_launch_expedition_{nullptr};
-	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
 	ConstructionSoldierCapacityBox* cs_soldier_capacity_{nullptr};
 	std::vector<InputQueueDisplay*> cs_ware_queues_;
 	std::vector<InputQueueDisplay*> cs_worker_queues_;
