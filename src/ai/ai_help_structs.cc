@@ -39,6 +39,7 @@ constexpr int kNeuronsPos = 1;
 constexpr int kFNeuronsPos = 2;
 
 // CheckStepRoadAI
+// TODO(tothxa): Unify with main CheckStepRoad
 CheckStepRoadAI::CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe)
    : player(pl), movecaps(mc), open_end(oe) {
 }
@@ -55,9 +56,20 @@ bool CheckStepRoadAI::allowed(const Widelands::Map& map,
 		return false;
 	}
 
-	// Calculate cost and passability
+	// Check passability
 	if ((endcaps & movecaps) == 0) {
-		return false;
+		// Check exceptions
+		if ((movecaps & Widelands::MOVECAPS_WALK) != 0) {
+			if ((endcaps & Widelands::BUILDCAPS_BRIDGE) == 0) {
+				return false;
+			}
+		} else {
+			assert((movecaps & Widelands::MOVECAPS_SWIM) != 0);
+			if (((endcaps & Widelands::MOVECAPS_WALK) == 0) ||
+			    ((player->get_buildcaps(start) & Widelands::MOVECAPS_SWIM) == 0)) {
+				return false;
+			}
+		}
 	}
 
 	// Check for blocking immovables
@@ -82,17 +94,16 @@ bool CheckStepRoadAI::reachable_dest(const Widelands::Map& map,
                                      const Widelands::FCoords& dest) const {
 	Widelands::NodeCaps const caps = dest.field->nodecaps();
 
-	if ((caps & movecaps) == 0) {
-		if (((movecaps & Widelands::MOVECAPS_SWIM) == 0) ||
-		    ((caps & Widelands::MOVECAPS_WALK) == 0)) {
-			return false;
-		}
-		if (!map.can_reach_by_water(dest)) {
-			return false;
-		}
+	if ((caps & movecaps) != 0) {
+		return true;
 	}
 
-	return true;
+	if ((movecaps & Widelands::MOVECAPS_WALK) != 0) {
+		return (caps & Widelands::BUILDCAPS_BRIDGE) != 0;
+	}
+
+	assert((movecaps & Widelands::MOVECAPS_SWIM) != 0);
+	return map.can_reach_by_water(dest);
 }
 
 // CheckStepOwnTerritory
@@ -105,7 +116,7 @@ CheckStepOwnTerritory::CheckStepOwnTerritory(Widelands::Player* const pl,
 // Defines when movement is allowed:
 // 1. startfield is walkable (or it is the first step)
 // And endfield either:
-// 2a. is walkable
+// 2a. is walkable or bridgeable
 // 2b. has our PlayerImmovable (building or flag)
 bool CheckStepOwnTerritory::allowed(const Widelands::Map& map,
                                     Widelands::FCoords start,
@@ -121,13 +132,19 @@ bool CheckStepOwnTerritory::allowed(const Widelands::Map& map,
 		return false;
 	}
 
+	// TODO(tothxa): Needs changing if the AI is made to handle waterways
+	if ((movecaps & Widelands::MOVECAPS_WALK) == 0) {
+		NEVER_HERE();
+	}
+
 	// Start field must be walkable
-	if ((startcaps & movecaps) == 0) {
+	if (((startcaps & movecaps) == 0) && ((startcaps & Widelands::BUILDCAPS_BRIDGE) == 0)) {
 		return false;
 	}
 
 	// Endfield can not be water
-	if ((endcaps & Widelands::MOVECAPS_SWIM) != 0) {
+	if (((endcaps & Widelands::MOVECAPS_SWIM) != 0) &&
+	    ((endcaps & Widelands::BUILDCAPS_BRIDGE) == 0)) {
 		return false;
 	}
 
@@ -138,10 +155,10 @@ bool CheckStepOwnTerritory::allowed(const Widelands::Map& map,
 bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
                                            const Widelands::FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
-	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest)) {
+	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest); imm != nullptr) {
 		return imm->descr().type() >= Widelands::MapObjectType::FLAG;
 	}
-	return (endcaps & Widelands::MOVECAPS_WALK) != 0;
+	return (endcaps & (Widelands::MOVECAPS_WALK | Widelands::BUILDCAPS_BRIDGE)) != 0;
 }
 
 // We are looking for fields we can walk on
