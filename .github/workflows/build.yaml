@@ -45,7 +45,9 @@ jobs:
               # not 'utils/download_asio.sh', called by install-dependencies.sh for some other arch
             - &installer
               - *src_cmake_dependencies
-              - 'data/**'
+              # data/ except of translations, because they change frequently
+              - 'data/!(i18n/translations)/**'
+              - 'data/*' # do not ignore files directly inside
             - &ubuntu_dependencies
               - *src_cmake_dependencies
               - 'utils/ubuntu/packages'
