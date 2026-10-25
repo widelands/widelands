@@ -15,12 +15,12 @@
 # 1dd713b44d53c6f200eff6c2cb59aa8a_24534f2 <a51069abad5b85f84df96b034560114b_616796>, 2017
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023
 # millimarg, 2015
-# millimarg, 2015
+# 9d627c5b4b41df59e6c19f0a569b0594_edcc82a, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Simon Heimberg, 2023
 # Simon Heimberg, 2023,2025
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2025
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2026
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # Hybrid Dog, 2015
@@ -34,7 +34,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-09-07 07:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Simon Heimberg, 2023,2025\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2026\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1372,7 +1372,7 @@ msgid ""
 "how far the master woodcutter has to walk. If all kinds of rare tree are "
 "available within her work area, then one of each kind is produced between "
 "%3$s and %4$s."
-msgstr ""
+msgstr "Dieses Gebäude kann ein seltenes Holz zwischen%1$s und %2$s produzieren, je nachdem, wie weit die Meisterholzfällerin laufen muss. Wenn alle Arten von seltenen Bäumen in ihrem Arbeitsbereich vorhanden sind, dann wird von jeder Art eine zwischen %3$s und %4$s produziert."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -14194,7 +14194,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces, armor smithies and recycling centers"
 " are fed with coal."
-msgstr ""
+msgstr "Die Feuer in den Ziegeleien, Schmelzöfen, Rüstungsschmieden und Aufbereitungszentren werden mit Kohle geheizt."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Iron Ore, part 2
 #: ../../../../data/tribes/initialization/frisians/units.lua:321

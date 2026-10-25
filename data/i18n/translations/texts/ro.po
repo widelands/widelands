@@ -2,6 +2,8 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# Cristian Romanescu, 2026
+# Dominic Iastrebschi, 2025
 # Dominic Iastrebschi, 2025
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
@@ -10,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-09-10 07:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +22,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Readme"
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
@@ -36,82 +38,82 @@ msgstr "Traducători"
 
 #: ../../../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
-msgstr "Echipa de dezvoltatori Widelands"
+msgstr "Echipa de dezvoltare Widelands"
 
 #: ../../../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
-msgstr "Informații licențiere Widelands"
+msgstr "Informații despre licența Widelands"
 
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "Copyright 2002 - %1% de către Widelands Development Team."
+msgstr "Copyright 2002 - %1% Echipa de dezvoltare Widelands."
 
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr ""
+msgstr "Acest joc este liber și cu sursă deschisă (FOSS), licențiat sub Licența Publică Generală GNU (GPL) V2.0 (sau, la alegerea ta, orice versiune ulterioară)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "Poți afla mai multe despre FOSS și GPL vizitând următoarea pagină web: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Acolo poți găsi textul complet al licenței, precum și informații suplimentare despre filozofia ei și implicațiile legale."
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Distribuim GPL și ca document text împreună cu Widelands."
 
 #: ../../../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Pe Linux, poți găsi fișierul numit COPYING în rădăcina pachetului sursă sau a pachetului binar de sine stătător ori în directorul de instalare (de exemplu „%1%”)."
 
 #: ../../../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "Pe Windows, poți găsi fișierul numit COPYING.txt în folderul de instalare, iar intrarea Widelands din meniul Start oferă un link către acest fișier."
 
 #: ../../../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr ""
+msgstr "Pe MacOS, poți găsi fișierul numit COPYING în arhiva descărcată de pe site."
 
 #: ../../../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "Acest joc este oferit ca atare, fără nicio garanție."
 
 #: ../../../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Pentru mai multe informații și asistență ne găsești la %1% (site, wiki, forum pentru întrebări sau asistență generală), %2% (sistemul de raportare a erorilor) și %3% (traduceri)."
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
-msgstr ""
+msgstr "un joc de strategie cu sursă deschisă"
 
 #: ../../../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Vizitează pagina proiectului Widelands:"
 
 #: ../../../../data/txts/README.lua:12
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands este licențiat sub Licența Publică Generală GNU (GPL). Pentru mai multe informații, vezi fișierul „COPYING”."
 
 #: ../../../../data/txts/README.lua:13
 msgid "Status"
@@ -124,223 +126,223 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands este aproape complet din punctul de vedere al funcționalităților și e foarte distractiv de jucat singur, și chiar mai mult în multiplayer, cu alții. Totuși, mereu mai e de lucru în toate domeniile. Dacă vrei să contribui – fie prin grafică, remedierea erorilor sau funcționalități noi, prin traducerea jocului în limba ta sau prin crearea de hărți noi – ia legătura cu noi pe site-ul nostru."
 
 #: ../../../../data/txts/README.lua:16
 msgid "Widelands Help"
-msgstr ""
+msgstr "Ajutor Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Poți găsi ajutor despre joc sau despre editor folosind butonul de ajutor din meniul de jos sau apăsând %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../../../data/txts/README.lua:20
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../../../data/txts/README.lua:23
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Raportarea erorilor"
 
 #: ../../../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Dacă întâlnești o eroare, te rugăm s-o raportezi în sistemul nostru de urmărire a erorilor:"
 
 #: ../../../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Te rugăm să ne dai destule informații de context. Spune-ne:"
 
 #: ../../../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "Pașii detaliați prin care poate fi declanșată eroarea, dacă este posibil."
 
 #: ../../../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "Ce te așteptai să se întâmple când ai urmat pașii și ce s-a întâmplat de fapt."
 
 #: ../../../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "Ce versiune de Widelands folosești (adică fie numărul build-ului, fie numărul reviziei, dacă folosești o versiune de dezvoltare sau un build zilnic)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "Te rugăm să menționezi și sistemul de operare pe care rulezi Widelands, pentru că unele erori pot fi specifice unei platforme."
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "Harta pe care jucai când a apărut eroarea."
 
 #: ../../../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "Dacă eroarea ține de ceva care nu este afișat corect sau dacă ajută la ilustrarea problemei, te rugăm să atașezi una sau mai multe capturi de ecran."
 
 #: ../../../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "Dacă ai un joc salvat sau o reluare care arată problema (de exemplu în cazul blocărilor, când poate fi greu de spus exact ce le declanșează), te rugăm s-o atașezi și pe aceasta. Pentru mai multe informații, vezi mai jos secțiunea despre reluări."
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Traducătorii Widelands"
 
 #: ../../../../data/txts/developers.lua:5
 msgid "Chieftains"
-msgstr ""
+msgstr "Căpetenii"
 
 #: ../../../../data/txts/developers.lua:18
 msgid "Elders"
-msgstr ""
+msgstr "Bătrâni"
 
 #: ../../../../data/txts/developers.lua:22
 #: ../../../../data/txts/developers.lua:424
 msgid "Graphics"
-msgstr ""
+msgstr "Grafică"
 
 #: ../../../../data/txts/developers.lua:28
 #: ../../../../data/txts/developers.lua:368
 #: ../../../../data/txts/developers.lua:431
 msgid "Homepage"
-msgstr ""
+msgstr "Site"
 
 #: ../../../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Scripturi"
 
 #: ../../../../data/txts/developers.lua:40
 #: ../../../../data/txts/developers.lua:439
 msgid "Sound"
-msgstr ""
+msgstr "Sunet"
 
 #: ../../../../data/txts/developers.lua:42
 msgid "vacant"
-msgstr ""
+msgstr "liber"
 
 #: ../../../../data/txts/developers.lua:46
 msgid "Tongues"
-msgstr ""
+msgstr "Limbi"
 
 #: ../../../../data/txts/developers.lua:54
 msgid "Coders"
-msgstr ""
+msgstr "Programatori"
 
 #: ../../../../data/txts/developers.lua:153
 msgid "Graphicians"
-msgstr ""
+msgstr "Graficieni"
 
 #: ../../../../data/txts/developers.lua:192
 msgid "Musicians"
-msgstr ""
+msgstr "Muzicieni"
 
 #: ../../../../data/txts/developers.lua:211
 msgid "Sound Effects"
-msgstr ""
+msgstr "Efecte sonore"
 
 #: ../../../../data/txts/developers.lua:227
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Hărți și misiuni"
 
 #: ../../../../data/txts/developers.lua:265
 msgid "Campaign Story"
-msgstr ""
+msgstr "Povestea campaniilor"
 
 #: ../../../../data/txts/developers.lua:269
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../../../data/txts/developers.lua:277
 msgid "Empire"
-msgstr ""
+msgstr "Imperiul"
 
 #: ../../../../data/txts/developers.lua:284
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanți"
 
 #: ../../../../data/txts/developers.lua:292
 msgid "Frisians"
-msgstr ""
+msgstr "Frizoni"
 
 #: ../../../../data/txts/developers.lua:300
 msgid "Packagers"
-msgstr ""
+msgstr "Creatori de pachete"
 
 #: ../../../../data/txts/developers.lua:304
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../../../data/txts/developers.lua:310
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../../../data/txts/developers.lua:318
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../../../data/txts/developers.lua:324
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../../../data/txts/developers.lua:330
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: ../../../../data/txts/developers.lua:337
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../../../data/txts/developers.lua:349
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../../../data/txts/developers.lua:360
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../../../data/txts/developers.lua:372
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Programatorii site-ului"
 
 #: ../../../../data/txts/developers.lua:383
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Documentație, ajutor și wiki"
 
 #: ../../../../data/txts/developers.lua:401
 msgid "Add-Ons"
-msgstr ""
+msgstr "Suplimente"
 
 #: ../../../../data/txts/developers.lua:420
 msgid "Former Elders"
-msgstr ""
+msgstr "Foști bătrâni"
 
 #: ../../../../data/txts/developers.lua:446
 msgid "Translation"
-msgstr ""
+msgstr "Traducere"
 
 #: ../../../../data/txts/developers.lua:455
 msgid "Other"
-msgstr ""
+msgstr "Altele"
 
 #: ../../../../data/txts/developers.lua:463
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "și mulți, mulți alții (vă mulțumim pentru tot ce ați făcut)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "Ajutor online"
 
 #: ../../../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -348,7 +350,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "Dacă ai nevoie de mai multă documentație sau ajutor pentru Widelands ori pentru editorul Widelands, vizitează site-ul nostru la %s. Acolo găsești ajutor online în wiki-ul nostru."
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
@@ -360,7 +362,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands este un joc de strategie în timp real, liber și cu sursă deschisă, cu campanii pentru un singur jucător și un mod multiplayer. Jocul a fost inspirat de Settlers II, dar are mult mai multă varietate și profunzime. Totuși, e ușor de început datorită tutorialelor jucabile."
 
 #: ../../../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -369,11 +371,11 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "În acest joc pornești de pe o bucată mică de pământ, cu doar câteva resurse. Folosindu-le, vei crea un imperiu cu multe mii de locuitori. Pe drumul spre acest țel va trebui să construiești o infrastructură economică, să explorezi ținuturile din jur și să înfrunți triburi rivale."
 
 #: ../../../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
-msgstr ""
+msgstr "Reluări"
 
 #: ../../../../data/txts/help/common_helptexts.lua:30
 msgid ""
@@ -381,7 +383,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands înregistrează fiecare joc pe care îl joci într-un fișier de reluare cu extensia .wry. Acest fișier conține un joc salvat inițial și toate comenzile date de toți jucătorii, precum construirea unui drum sau atacarea unui inamic. Numele fișierului îți arată momentul în care ai început jocul."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -391,7 +393,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Folosind opțiunea „Vizionează o reluare” din meniul principal, un joc jucat anterior va fi reconstruit întocmai, ca să-l poți urmări. Reține totuși că până și modificări mici ale fișierelor de date ale jocului sau ale executabilului Widelands pot face ca o reluare să devină incompatibilă și să „se desincronizeze”. La fel se întâmplă și în jocurile în rețea, care vor avea probleme de desincronizare dacă unul dintre jucători are o altă versiune a jocului."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
 msgid ""
@@ -400,75 +402,75 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Reluările sunt un instrument foarte util pentru găsirea erorilor din logica jocului, așa că pot fi atașate cu folos la rapoartele de erori. Fișierele de reluare sunt salvate în subdirectorul „replays” din directorul personal Widelands. Poți vedea în ultima filă a acestei ferestre, „Informații tehnice”, unde se află acest director pe calculatorul tău."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #: ../../../../data/txts/help/common_helptexts.lua:47
 #: ../../../../data/txts/help/common_helptexts.lua:56
 #: ../../../../data/txts/help/common_helptexts.lua:66
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
-msgstr "Configurare joc multiplayer"
+msgstr "Configurarea jocului multiplayer"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr "Vă aflați in meniul joc multiplayer."
+msgstr "Te afli în meniul de pornire a jocului multiplayer."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
-msgstr "Setări client"
+msgstr "Setările clienților"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "În stânga se află o listă cu toți clienții, inclusiv tu. Îți poți alege rolul cu butonul de după pseudonimul tău. Rolurile disponibile sunt:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Jucătorul cu culoarea steagului. Dacă mai mulți clienți au ales aceeași culoare, aceștia controlează împreună jucătorul („modul regat comun”)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Modul spectator, adică poți vedea totul, dar nu poți controla niciun jucător"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
-msgstr "Opțiuni jucator"
+msgstr "Setările jucătorilor"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "În mijloc se află setările pentru jucători. Pentru a începe un joc, fiecare jucător trebuie să fie în una dintre următoarele situații:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Conectat la unul sau mai mulți clienți (vezi „Setările clienților”)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Conectat la un jucător controlat de calculator (fața din imagine, precum și textele afișate la trecerea mouse-ului, indică puterea jucătorului-calculator selectat)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Setat să împartă poziția de start cu alt jucător."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
@@ -480,17 +482,17 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "Ultimele trei pot fi setate doar de clientul-gazdă, făcând clic stânga pe butonul „tip” al unui jucător. Gazda poate seta și pachetul de start al fiecărui jucător (setul de clădiri, bunuri și muncitori cu care începe jucătorul), precum și tribul și echipa jucătorilor controlați de calculator."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "Fiecare client conectat la un jucător (și care nu este spectator) poate seta tribul și echipa acelui jucător."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
-msgstr "Detalii hartă"
+msgstr "Detaliile hărții"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:26
 msgid ""
@@ -498,103 +500,103 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "În dreapta poți vedea informații despre harta sau jocul salvat selectat. Un buton de lângă numele hărții îi permite gazdei să schimbe harta. În plus, gazda poate stabili o anumită condiție de victorie și, în final, poate porni jocul imediat ce toți jucătorii sunt pregătiți."
 
 #: ../../../../data/txts/tips/amazons.lua:4
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Amazoanele iubesc copacii. Construiește destule colibe ale ocrotitorului junglei, ca să ai destui copaci."
 
 #: ../../../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Lemnul rar este coloana vertebrală a economiei amazoanelor. Construiește plantații de arbori rari pentru a planta copacii speciali din care se obține acest lemn."
 
 #: ../../../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Arborii rari sunt tăiați de tăietori de lemne experimentați, în colibe ale tăietorului de lemne îmbunătățite în colibe ale tăietorului de arbori rari. Dar aceștia nu mai taie copaci obișnuiți. Planifică-le din timp amplasarea."
 
 #: ../../../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Hrana este uscată la foc de cărbune. Asigură o aprovizionare constantă."
 
 #: ../../../../data/txts/tips/amazons.lua:20
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Tăietorii de liane culeg liane din copacii din apropiere, dar copacii nu au de suferit în acest proces."
 
 #: ../../../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Apa înseamnă viață pentru amazoane. Culegătorii de apă îndeplinesc un serviciu important pentru tribul lor."
 
 #: ../../../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Căutarea aurului prin spălare necesită un flux constant de apă, care e bine să fie adusă de cât mai aproape, pentru eficiență și prospețime."
 
 #: ../../../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "Paznicii sălbăticiei asigură vânat proaspăt pentru vânătoare și pește pentru pescuit. Vânatul este eliberat doar lângă copacii nelocuiți de posturile de veghe."
 
 #: ../../../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Nivelul stocurilor de lemn rar este urmărit de plantațiile de arbori rari, iar maeștrii junglei vor planta în funcție de nevoile economiei."
 
 #: ../../../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "Frânghiile sunt esențiale pentru clădiri trainice, pentru coaserea hainelor rezistente și pentru legarea canoelor între ele, ca să formeze nave."
 
 #: ../../../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Maeștrii junglei își învață meșteșugul lucrând ca ocrotitori ai junglei, înainte de a lucra în centrele de grădinărit sau în plantațiile de arbori rari."
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Fii atent la pescarii tăi și construiește o casă a piscicultorului pentru a reface resursele de pește."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Construiește întotdeauna o casă a silvicultorului și o casă a tăietorului de lemne, ca să nu rămâi fără bușteni."
 
 #: ../../../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "Atlanții au nevoie de pânză de păianjen pentru multe clădiri. Construiește din timp infrastructura necesară, înainte să rămâi fără ea."
 
 #: ../../../../data/txts/tips/barbarians.lua:4
 #: ../../../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Fii atent la pescarii tăi. După ce resursele de pește din zona lor de lucru se epuizează, nu mai pescuiesc."
 
 #: ../../../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "Construiește întotdeauna o colibă a silvicultorului și o colibă a paznicului de vânătoare, ca să nu rămâi fără bușteni sau vânat."
 
 #: ../../../../data/txts/tips/barbarians.lua:12
 #: ../../../../data/txts/tips/empire.lua:12
@@ -602,13 +604,13 @@ msgstr ""
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "Cele mai multe clădiri îmbunătățite au nevoie de muncitori experimentați. Nu îmbunătăți o clădire decât dacă ai la dispoziție muncitorii necesari."
 
 #: ../../../../data/txts/tips/crash.lua:7
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands creează o salvare de urgență, ca să poți continua jocul exact de unde s-a închis."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/editor.lua:8
@@ -616,116 +618,116 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Poți găsi ajutor general pentru editor, precum și un scurt tutorial, în wiki-ul nostru, la %s."
 
 #: ../../../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Poți selecta mai multe tipuri de animale dacă ții apăsat Ctrl în timpul selecției. Dacă apoi faci clic pe hartă, va fi plasat un exemplar dintr-unul dintre tipurile de animale selectate."
 
 #: ../../../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "La fel ca la animale, poți selecta și mai multe imobile sau texturi de teren cu Ctrl + clic."
 
 #: ../../../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Dacă ții apăsat Shift, se activează prima unealtă alternativă. În cele mai multe cazuri, aceasta face exact opusul uneltei obișnuite (de exemplu, șterge un obiect în loc să plaseze unul)."
 
 #: ../../../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Dacă ții apăsat Ctrl, se activează a doua unealtă alternativă (dacă există)."
 
 #: ../../../../data/txts/tips/editor.lua:28
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "Tastele %1% îți permit să setezi direct dimensiunea zonei selectate din jurul cursorului mouse-ului."
 
 #: ../../../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "%1% funcționează ca în jocurile obișnuite: activează sau dezactivează afișarea locurilor de construcție."
 
 #: ../../../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "Când plasezi copaci, folosește butonul de ajutor ca să vezi ce copaci au mai multe șanse să supraviețuiască pe fiecare teren."
 
 #: ../../../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "Dacă nu setezi resursele de apă și de pește, va fi folosită o cantitate implicită."
 
 #: ../../../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Poți plasa o clădire medie pe orice nod unde panta spre sud-est nu este mai mare de 1, iar diferența de înălțime față de toate nodurile pe o rază de 2 nu este mai mare de 2."
 
 #: ../../../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Poți plasa o clădire mare pe orice nod unde ai putea plasa o clădire medie, dacă spre vest, nord-vest și nord-est nu există niciun obstacol și niciun teren necultivabil."
 
 #: ../../../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Construiește întotdeauna o casă a silvicultorului, ca să nu rămâi fără bușteni."
 
 #: ../../../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "Imperiul are nevoie de multă marmură. Caută mereu resurse de marmură."
 
 #: ../../../../data/txts/tips/frisians.lua:4
 msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Ca să produci cărămizi, ai nevoie de granit; ca să produci granit, ai nevoie de o carieră sau de o mină de piatră; ca să le construiești pe acestea, ai nevoie de cărămizi. Ai grijă să nu ajungi într-un impas!"
 
 #: ../../../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Construiește întotdeauna o casă a silvicultorului, ca să nu rămâi fără bușteni."
 
 #: ../../../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "Construcția va începe abia după ce se construiește un drum până la șantierul de construcție."
 
 #: ../../../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "Nu uita să trimiți un geolog să cerceteze terenul înainte de a construi o fântână sau o mină."
 
 #: ../../../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Teritoriul tău poate fi extins construind diverse clădiri militare – post de santinelă, fortăreață, fortin etc."
 
 #: ../../../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Minerii lucrează doar dacă sunt aprovizionați cu hrană."
 
 #: ../../../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "Împarte drumurile în segmente mai scurte, plasând câteva steaguri. Astfel se va grăbi transportul bunurilor."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/general_game.lua:28
@@ -733,111 +735,111 @@ msgstr ""
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Mai ai întrebări? Întrebările frecvente, wiki-ul și, bineînțeles, forumurile comunității noastre le găsești online la %s."
 
 #: ../../../../data/txts/tips/general_game.lua:32
 msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Folosește glisoarele de prioritate din ferestrele clădirilor pentru a ajusta livrarea unui anumit bun. Dacă ții apăsat Shift în timp ce faci clic, vor fi ajustate toate bunurile deodată."
 
 #: ../../../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Folosește meniul „Configurează economia” pentru a ajusta cantitatea țintă de bunuri. Îl poți accesa din meniul steagului."
 
 #: ../../../../data/txts/tips/general_game.lua:40
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Gestionează-ți mesajele mai eficient: apasă „%1%” pentru a deschide fereastra mesajelor, apoi folosește „%2%” pentru „Mergi la” și tasta „%3%” pentru a arhiva mesajele."
 
 #: ../../../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Apasă %1% pentru a memora locații importante, apoi apasă %2% pentru a reveni la ele."
 
 #: ../../../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "Dacă elimini un drum ținând apăsat Ctrl, poți elimina toate steagurile până la prima intersecție."
 
 #: ../../../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "Soldații noi sunt recrutați într-o cazarmă. Abilitățile lor pot fi apoi îmbunătățite în centrele de antrenament."
 
 #: ../../../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "Dacă îți place să trăiești periculos, ținând apăsat Ctrl când faci clic pe butoanele de îmbunătățire, demontare sau distrugere a clădirii, vei sări peste confirmare."
 
 #: ../../../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Apasă „%s” pentru a afișa sau ascunde rapid inventarul stocurilor tale."
 
 #: ../../../../data/txts/tips/general_game.lua:65
 msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr ""
+msgstr "O economie cuprinde toate clădirile și steagurile legate prin drumuri, bacuri sau nave. Ofertele și cererile clădirilor sunt gestionate în cadrul economiei lor. Un jucător poate avea mai multe economii."
 
 #: ../../../../data/txts/tips/general_game.lua:69
 msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "Poți avea mai multe economii dacă steagurile lor nu sunt legate prin niciun mijloc de transport. De aceea, meniul „Configurează economia” poate fi accesat doar din steaguri și depozite, nu din meniul principal al jucătorului."
 
 #: ../../../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Unele clădiri, precum ferma, au o zonă de lucru foarte mică. Dacă clădirea este înconjurată de copaci sau drumuri, producția se va opri."
 
 #: ../../../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3%/%4% for "
 "maximum/minimum zoom level. Press %5% to reset the zoom."
-msgstr ""
+msgstr "Mărește sau micșorează imaginea cu rotița mouse-ului sau cu %1%/%2%. Apasă %3%/%4% pentru nivelul maxim/minim de zoom. Apasă %5% pentru a reseta zoomul."
 
 #: ../../../../data/txts/tips/general_game.lua:86
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Folosește tastele „%1$s” și „%2$s” pentru a sări rapid între locațiile vizitate recent."
 
 #: ../../../../data/txts/tips/general_game.lua:90
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Accelerează sau încetinește jocul cu %1%/%2%. Folosește %3%/%4% pentru o schimbare rapidă; %5%/%6% vor ajusta viteza treptat."
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Tastele săgeți"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + tastele săgeți"
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "Mută vederea hărții folosind %1%. %2% o va muta mai repede, %3% o mută încet."
 
 #: ../../../../data/txts/tips/general_game.lua:100
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + tastele săgeți"
 
 #: ../../../../data/txts/tips/general_game.lua:104
 msgid ""
@@ -845,7 +847,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Dacă joci pe un laptop cu touchpad, poți atribui funcții derulării cu touchpadul în meniul „Opțiuni” → „Editează acțiunile tastaturii și ale mouse-ului”. De exemplu, mutarea vederii hărții poate fi mult mai comodă prin derulare decât prin tragere cu butonul drept al mouse-ului."
 
 #: ../../../../data/txts/tips/general_game.lua:108
 msgid ""
@@ -853,37 +855,37 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Când o clădire este distrusă, muncitorii ei vor căuta un steag din apropiere de unde să poată ajunge pe drum la un depozit conectat. Dacă nu există astfel de steaguri în vecinătate, vor rătăci de colo-colo și, în cele din urmă, vor muri."
 
 #: ../../../../data/txts/tips/general_game.lua:112
 msgid ""
 "Trading can help your economy and strengthen relationships between players. "
 "Learn the basics in the tutorial ‘Economy and Trading’."
-msgstr ""
+msgstr "Comerțul îți poate ajuta economia și poate întări relațiile dintre jucători. Învață noțiunile de bază în tutorialul „Economie și comerț”."
 
 #: ../../../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "Poți folosi tastele „Page Up” și „Page Down” pentru a-ți ajusta viteza dorită – viteza reală este apoi stabilită democratic."
 
 #: ../../../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "Poți folosi „/me” la începutul unui mesaj de chat: „/me e obosit” va fi afișat ca „-> Pseudonim e obosit”."
 
 #: ../../../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "Folosește „@nume” la începutul unui mesaj de chat pentru a-l trimite unui singur jucător."
 
 #: ../../../../data/txts/tips/multiplayer.lua:16
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Dacă jocul se blochează, nu-ți face griji! Jocul va fi salvat automat, ca să-l poți reîncărca după aceea."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/singleplayer.lua:7
@@ -891,4 +893,4 @@ msgstr ""
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Jucătorii controlați de calculator sunt prea plictisitori? Vizitează site-ul nostru la %s și întâlnește alți jucători, ca să joci online."
