@@ -22,6 +22,7 @@
 
 #include <cassert>
 #include <cstdlib>
+#include <iterator>
 #include <list>
 #include <string>
 #ifdef _WIN32
