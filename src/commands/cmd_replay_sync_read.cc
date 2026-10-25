@@ -18,12 +18,9 @@
 
 #include "commands/cmd_replay_sync_read.h"
 
-#include "build_info.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/replay.h"
-#include "ui/basic/messagebox.h"
-#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -51,18 +48,7 @@ void CmdReplaySyncRead::execute(Game& game) {
 		// There has to be a better way to do this.
 		game.game_controller()->set_desired_speed(0);
 
-		UI::WLMessageBox m(
-		   game.get_ibase(), UI::WindowStyle::kWui, _("Desync"),
-		   format(_("The replay has desynced and the game was paused.\n"
-		            "You are probably watching a replay created with another version of "
-		            "Widelands, which is not supported.\n\n"
-		            "If you are certain that the replay was created with the same version "
-		            "of Widelands, %1$s, please report this problem as a bug.\n"
-		            "You will find related messages in the standard output (stdout.txt on "
-		            "Windows). Please add this information to your report."),
-		          build_ver_details()),
-		   UI::WLMessageBox::MBoxType::kOk);
-		m.run<UI::Panel::Returncodes>();
+		game.get_game_interface()->notify_desync();
 	}
 }
 

@@ -33,7 +33,7 @@
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"
 
-class InteractivePlayer;
+struct ChatProvider;
 struct GameSettings;
 class GameController;
 
@@ -331,9 +331,6 @@ public:
 	void send_player_building_name(PlayerNumber p, Serial s, const std::string& name);
 	void send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q);
 
-	InteractivePlayer* get_ipl();
-	const InteractivePlayer* get_ipl() const;
-
 	SaveHandler& save_handler() {
 		return savehandler_;
 	}
@@ -397,6 +394,13 @@ public:
 	const std::list<std::string>& list_of_scenarios() const {
 		return list_of_scenarios_;
 	}
+
+	void set_game_interface_provider(std::unique_ptr<IGameInterfaceProvider> gip) {
+		game_interface_provider_ = std::move(gip);
+	}
+	void create_game_interface(PlayerNumber player_number,
+	                           bool multiplayer = false,
+	                           ChatProvider* chat_provider = nullptr);
 
 	TradeID propose_trade(TradeInstance trade);
 	void accept_trade(TradeID trade_id, Market& receiver);
@@ -576,6 +580,7 @@ private:
 
 	std::string next_game_to_load_;
 	std::list<std::string> list_of_scenarios_;
+	std::unique_ptr<IGameInterfaceProvider> game_interface_provider_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

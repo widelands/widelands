@@ -27,7 +27,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
-#include "ui/wui/interactive_player.h"
 
 namespace Widelands {
 

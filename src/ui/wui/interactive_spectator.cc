@@ -80,6 +80,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	initialization_complete();
 }
 
+InteractiveSpectator::~InteractiveSpectator() = default;
+
 void InteractiveSpectator::draw(RenderTarget& dst) {
 	// This fixes a crash with displaying an error dialog during loading.
 	if (!game().is_loaded()) {
