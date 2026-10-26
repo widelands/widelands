@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:10
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "您的经济及其设置"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:12
 msgid "Economy"
@@ -28,30 +28,30 @@ msgstr "经济"
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr ""
+msgstr "欢迎回来。在本教程中，我将告诉您如何检查您的经济运行状况。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:14
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "建设和完善您的经济并使其良好运行和增长是 Widelands 的主要部分。但是您不能直接控制工人——他们会遵循您设定的总体条件。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:15
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "这就是我将在本教程中向您展示的内容：您可以采取哪些行动来定义这些总体条件？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "一片宁静的土地"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:26
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "现在来说说地图：您已经在一个位于两座山脉之间的美丽山谷中安家，这里盛产大理石、铁矿石和煤炭。所有人都希望过上和平的生活。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:27
 msgid ""
@@ -59,86 +59,86 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "但有一天，您在东方发现了一片荒芜的废墟，那里有废弃的建筑。那里传来一种奇怪的气息，没有人愿意踏足那里。但边境不能无人防守，于是您建造了三座要塞。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:28
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr ""
+msgstr "您没有为战争做好准备，现在必须赶快组建一支军队。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid "An accident"
-msgstr ""
+msgstr "一场意外"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:37
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "酒馆着火了！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:39
 msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "哦不，看看这个：我们的酒馆着火了！在匆忙中，我们的店主不小心掉落了一个火炬。她没事，但我们没能及时扑灭火火。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
 msgid "Open the building statistics window"
-msgstr ""
+msgstr "打开建筑统计窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:50
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "打开建筑统计窗口，概览您拥有的建筑。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:51
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:125
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "首先，您需要打开屏幕底部的'统计'菜单。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
-msgstr ""
+msgstr "然后，选择'建筑'。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "You can also use the hotkey ‘%s’."
-msgstr ""
+msgstr "您也可以使用快捷键'%s'。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
-msgstr ""
+msgstr "建筑统计"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:60
 msgid "Check out your taverns"
-msgstr ""
+msgstr "查看您的酒馆"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "首先，我们应该找出我们目前有多少酒馆。Widelands 为您提供了一个可以轻松查看此信息的窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:69
 msgid "Look up how many taverns you have"
-msgstr ""
+msgstr "查找您拥有的酒馆数量"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:70
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "我们想知道我们是否还有酒馆。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "在建筑统计窗口中选择'中型建筑'标签。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "查找您拥有的酒馆数量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid ""
@@ -146,11 +146,11 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr ""
+msgstr "每种建筑下方都有两行。第一行显示您拥有的建筑数量和正在建造的数量。第二行显示如果是生产场所或训练场所，则显示平均生产力；如果是军事建筑，则显示驻扎和需要的士兵数量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:75
 msgid "Close the building statistics window when you are done."
-msgstr ""
+msgstr "完成后，关闭建筑统计窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid "Building Statistics"
@@ -160,24 +160,24 @@ msgstr "建筑统计"
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr ""
+msgstr "这是建筑统计窗口。它显示了您可能拥有的所有建筑，按大小分类。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid "Let me now explain what all those numbers mean:"
-msgstr ""
+msgstr "现在让我解释一下所有这些数字的含义："
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "采石场下方的'2/1'：表示您有两个采石场，还有一个正在建设中。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "0%：这表示该类型所有建筑的平均生产力。您刚刚开始这个游戏，因此您的任何建筑都还没有开始工作，但它们很快就会开始工作。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
@@ -185,76 +185,76 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "哨所下方的'2/4'：对于军事建筑，显示的是驻扎的士兵数量而非生产力。您希望哨所中有四名士兵，但这类建筑目前只驻扎了两名士兵。这还剩下两个空缺位置——我们确实需要更多士兵。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
-msgstr ""
+msgstr "在这两种情况下，颜色（绿色-黄色-红色）都会告诉您这个值的好坏程度。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:89
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "如果您点击一个建筑，可以滚动查看所选类型的建筑。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:90
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "如果您没有某种特定类型的建筑，它将以灰色显示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "目前的解释已经足够了。现在请自己尝试一下。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "You closed the building statistics window!"
-msgstr ""
+msgstr "您关闭了建筑统计窗口！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr ""
+msgstr "您关闭了建筑统计窗口。我没有注意到您切换到中型建筑来查看酒馆的数量。您能好心向我展示一下吗？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:111
 msgid "Open the building statistics window again"
-msgstr ""
+msgstr "再次打开建筑统计窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:113
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr ""
+msgstr "您关闭了建筑统计窗口，尽管您还没有查看酒馆的数量。"
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr ""
+msgstr "请重新打开它并选择第二个标签（中型建筑）。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "打开您的库存窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
 "The stock window gives you an overview over the wares you currently have."
-msgstr ""
+msgstr "库存窗口为您提供当前物资的概览。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:126
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "然后，选择'库存'。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:708
 #, lua-format
 msgid "You can also use the hotkey ‘%s’ to access this window quickly."
-msgstr ""
+msgstr "您也可以使用快捷键'%s'来快速打开此窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -264,85 +264,85 @@ msgstr "存货"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr ""
+msgstr "检查食物配给"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr ""
+msgstr "好的。在列表中，您看到您不再有酒馆或旅店。这意味着您不再生产食物配给。但让我们看看我们还有什么库存。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
 msgid "Examine the first two tabs in the stock window"
-msgstr ""
+msgstr "查看库存窗口的前两个标签"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "查看库存窗口的前两个标签。它们显示您拥有的所有物资和工人。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr ""
+msgstr "当您查看足够后，切换回第三个标签('仓库中的货物')。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The stock window has four tabs. The first one shows you all your current "
 "wares, including those on roads, at flags and inside buildings waiting for "
 "processing."
-msgstr ""
+msgstr "库存窗口有四个标签。第一个标签显示您当前的所有物资，包括道路上的、旗帜旁的和建筑物内等待处理的。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr ""
+msgstr "查看食物配给，目前总共只有五个，可能正在运往某处。五个食物配给对于这么大的经济体来说不算多。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
-msgstr ""
+msgstr "第二个标签显示您所有的工人，同样包括道路上的和建筑物内的总数。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:168
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr ""
+msgstr "第三个标签显示存储在您的总部、仓库和港口中的物资。它们不需要在任何地方使用，因此是您的储备。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:169
 msgid "The fourth tab shows the same thing for workers."
-msgstr ""
+msgstr "第四个标签对工人显示相同的信息。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:170
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr ""
+msgstr "第三个标签告诉您您的总部中已经没有食物配给——这可不好！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "您关闭了库存窗口！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the first tab?"
-msgstr ""
+msgstr "您关闭了库存窗口，但我还没有完成我的解释。您能重新打开它并选择第一个标签吗？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:213
 msgid "Open the stock window again"
-msgstr ""
+msgstr "再次打开库存窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:215
@@ -350,89 +350,89 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "您在我完成对库存窗口的介绍前就关闭了它。如果您已经了解一切，随时可以离开本教程。"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid "Otherwise, please reopen it and have a look at all its tabs."
-msgstr ""
+msgstr "否则，请重新打开它并查看所有标签。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:203
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "您关闭了库存窗口，但我还没有完成我的解释。您能重新打开它并选择第三个标签吗？"
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr ""
+msgstr "否则，请重新打开它并选择第三个标签。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr ""
+msgstr "建造新酒馆"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
-msgstr ""
+msgstr "建造至少两座酒馆。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr ""
+msgstr "只要我们不生产食物配给，矿工就不会开采矿石。而没有铁，我们无法锻造一个头盔。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
-msgstr ""
+msgstr "新酒馆"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid "We need new taverns"
-msgstr ""
+msgstr "我们需要新酒馆"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better."
-msgstr ""
+msgstr "现在您有了概览，应该采取行动了。我认为我们应该不只建造一座酒馆——建造两座或三座更好。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "打开游戏内帮助窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "百科全书窗口包含游戏内帮助和您当前部落的百科全书。"
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:248
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "打开它。您可以通过屏幕底部的按钮访问它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
 #, lua-format
 msgid "Alternatively, you can access it directly with the ‘%s’ key."
-msgstr ""
+msgstr "或者，您可以直接使用'%s'键访问它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
-msgstr ""
+msgstr "百科全书"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "如何获取帮助"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "当然，记住我的所有评论和建议是很难的。例如，您可能会问自己：为什么我们需要食物配给来招募士兵？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -440,12 +440,12 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "当您玩得多了，您就会自然而然地了解所有这些事情。但在此之前，或者如果您不确定您部落的需求和能力，以及其建筑和工人的运作方式，您可以在我们的部落特定游戏内帮助和百科全书中轻松查找。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "查找招募士兵所需的物资"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""
@@ -453,123 +453,123 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "一名士兵需要一根木矛和一个头盔——从那里您可以向后搜索，找到供应您招募士兵的兵营所需的物资和建筑。完成后，只需关闭百科全书窗口即可。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "使用百科全书了解如何创建新士兵。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:271
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "在百科全书中选择'货物'标签。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "查找生产头盔和生产木矛所需的物资。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "如果您愿意，可以进一步查找生产您刚刚查看的物资所需的物资。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "完成后，关闭百科全书窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "百科全书详情"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:281
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "百科全书分类"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "百科全书有五个标签："
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:283
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "'通用'标签包含Widelands所有基本界面控件的信息。此外，您还可以在那里找到与您的部落相关的提示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "'货物'标签显示您的部落所需的货物信息，包括简短的帮助文本、生产每种货物的建筑列表、生产所需的货物以及货物的消耗位置。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:285
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "'工人'标签以与第二个标签中货物类似的方式显示您部落工人的信息。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:286
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "'建筑'标签包含您部落建筑的所有必要信息。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:287
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "最后，'不可移动物'标签显示您的部落工人可以在地图上放置的特定不可移动物的信息。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "您关闭了百科全书！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "您关闭了百科全书窗口，但我没有注意到您正在尝试查找招募士兵所需的物资。您能重新打开它并查找吗？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:306
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "再次打开百科全书窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "您关闭了百科全书窗口，但没有搜索我们需要的信息。如果您已经了解一切，随时可以离开本教程。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "否则，请重新打开百科全书窗口并选择第二个标签。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
 msgid "Priority Settings"
-msgstr ""
+msgstr "优先级设置"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Send the wares where they’re needed"
-msgstr ""
+msgstr "将物资运送到需要的地方"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:319
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr ""
+msgstr "太好了。我们的酒馆现在已经建成并为我们提供食物配给。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see a slider."
-msgstr ""
+msgstr "目前，所有矿井都供应有食物配给。如果您想优先供应某个特定矿井，只需打开其窗口。在物资标签中，每种物资后面都有一个滑块。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -577,27 +577,27 @@ msgid ""
 "the corresponding ware gets delivered less frequently. Red (right side) "
 "means that as many wares as possible should be delivered to this building, "
 "maybe because it produces something important."
-msgstr ""
+msgstr "当您将滑块移到左侧的蓝色区域（低优先级）时，相应物资的配送频率会降低。红色（右侧）表示应尽可能多地向该建筑配送物资，可能因为它生产重要物品。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
 "The actual supply state is indicated by varying colors of the ware icons "
 "themselves:"
-msgstr ""
+msgstr "实际的供应状态由物资图标的不同颜色表示："
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid "Wares stored in the building are shown in full color."
-msgstr ""
+msgstr "建筑中存储的物资以完整颜色显示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Missing wares are greyed out."
-msgstr ""
+msgstr "缺少的物资以灰色显示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:325
 msgid ""
 "Wares not present in the building yet but already being transported there "
 "are shown in a darker grey."
-msgstr ""
+msgstr "尚未出现在建筑中但正在运往那里的物资以深灰色显示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -605,16 +605,16 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr ""
+msgstr "在我们的情况下，您可能希望面包店尽快工作，因为它们供应我们的酒馆，所以您可以为其设置水的最高优先级。其他建筑（例如驴农场）将获得较少的水，但面包店可以工作得更快。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "打开物资统计窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "从'统计'菜单中选择'货物'条目。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
@@ -625,52 +625,52 @@ msgstr "物品统计"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Let’s have a look at how our wares production is doing."
-msgstr ""
+msgstr "让我们看看我们的物资生产情况如何。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
 msgid "Examine your ware production and consumption"
-msgstr ""
+msgstr "查看您的物资生产和消耗"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:353
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr ""
+msgstr "前两个标签显示任何物资的生产和消耗。您只需点击它们即可切换。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr ""
+msgstr "当您查看足够后，切换到第三个标签('经济健康度')。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "In this window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr ""
+msgstr "在此窗口中，您可以选择物资，查看它们的生产或消耗如何随时间变化。尝试使用一些物资进行操作。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "您点击第三个标签('经济健康度')后，我将继续。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid "Examine your economy’s health"
-msgstr ""
+msgstr "查看您的经济健康状况"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
-msgstr ""
+msgstr "第三个标签显示物资的经济健康状况。当值为正时，这意味着您的库存正在增长。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid "Now try this out. You can also compare it with the two previous tabs."
-msgstr ""
+msgstr "现在尝试一下。您还可以与前两个标签进行比较。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "当您查看足够后，切换到第四个标签('库存')。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""
@@ -678,51 +678,51 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr ""
+msgstr "在此标签中，您可以查看生产与消费之间的差异，称为'经济健康度'。您可以一目了然地看到所选货物中哪一项更高，即数量是增加还是减少。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid "Examine your stock"
-msgstr ""
+msgstr "查看您的库存"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr ""
+msgstr "库存标签显示您拥有的物资数量。比较四个标签的信息以了解它们之间的关联。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid "When you have finished, close the ware statistics window."
-msgstr ""
+msgstr "完成后，关闭物资统计窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:404
 msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
-msgstr ""
+msgstr "在最后一个标签页中，您还可以看到您的绝对库存。当经济健康为正数时，库存会增加，否则会减少。比较这两个图表！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
-msgstr ""
+msgstr "最后两个标签页是判断即将出现短缺的良好指标。别忘了定期查看它们！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:411
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "You closed the ware statistics window!"
-msgstr ""
+msgstr "您关闭了仓库统计窗口！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "您关闭了仓库统计窗口，但我还没有解释完。请您重新打开它并选择第三个标签页。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:423
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "再次打开仓库统计窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
@@ -730,33 +730,33 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "您在我完成关于仓库统计窗口的解释前就关闭了它。如果您已经了解所有内容，请随时随时退出本教程。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "您关闭了仓库统计窗口，但我还没有解释完。请您重新打开它并选择第四个标签页。"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr ""
+msgstr "否则，请重新打开它并选择第四个标签页。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "打开'配置经济'窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "打开'配置经济'窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
 msgid ""
 "The window can be accessed by clicking on any flag you own or from warehouse"
 " windows."
-msgstr ""
+msgstr "通过点击您拥有的任何旗帜或从仓库窗口中可以访问此窗口。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
@@ -770,22 +770,22 @@ msgstr "经济选项"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "我向您展示了库存窗口，您可以在其中看到仓库中有哪些货物。您还记得吗？"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr ""
+msgstr "现在我将告诉您如何确定您想要拥有多少货物。此窗口可以通过任何旗帜访问，称为'配置经济'。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid "This is the icon."
-msgstr ""
+msgstr "这就是图标。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
 msgid "The same button is also available in warehouse windows."
-msgstr ""
+msgstr "仓库窗口中也有相同的按钮。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
 msgid ""
@@ -794,26 +794,26 @@ msgid ""
 "roads, ferries, or ships, so you can have more than one economy if their "
 "flags are not connected by any means of transportation. In that case, your "
 "separate economies can have different settings for wares and workers."
-msgstr ""
+msgstr "请注意，按钮之所以被称为'配置此旗帜/建筑的经济'是有原因的。经济包括所有通过道路、渡口或船只连接的建筑和旗帜，因此如果它们的旗帜没有通过任何运输方式连接，您可以拥有多个经济。在这种情况下，您各自的经济可以对货物和工人有不同的设置。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
-msgstr ""
+msgstr "此窗口看起来与库存窗口相似，但底部有额外的按钮。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr ""
+msgstr "您首先需要选择一种或多种货物（也可以左键点击并拖动）。然后您可以设置所选货物的期望目标数量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr ""
+msgstr "大多数建筑只有在您仓库中的库存水平低于目标数量时才会生产某些东西，因此您应该表示您想要储备的库存量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -821,7 +821,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr ""
+msgstr "例如：镰刀的默认值为1。如果您建造一个农场，搬运工将带走一把镰刀并成为农民。然后就没有镰刀了，但目标数量是1，因此您的工具匠将开始生产另一把。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
@@ -829,7 +829,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr ""
+msgstr "如果您建造两个农场，只有其中一个会立即开始工作。第二个农场必须等待其工人，而该工人将缺少镰刀。如果您之前将目标数量设置为2，就会有把镰刀可用，两个农场都能立即开始工作。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
@@ -840,14 +840,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "囤积货物是一把双刃剑。一方面，库存中的货物有助于缓冲经济中的暂时波动，而这种情况往往会持续发生。另一方面，任何存放在仓库中而不是被加工成其他东西的货物都被浪费了。在供应链中找到浪费性囤积和准时生产之间的平衡是完善经济的最深刻挑战之一。当有疑问时，倾向于拥有一些额外的储备。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "为了便于在不同经济情况之间切换，您可以在经济选项窗口底部保存和应用经济配置文件。那里预设了一个用于囤积和一个用于效率的配置文件。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
@@ -856,7 +856,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "大多数时候，经济选项是一个有用的工具，可确保资源不会用于生产经济实际不需要的货物。然而，有时大量囤积某种货物是有用的。为此，经济选项窗口允许您将货物的目标设置为无限，以便它总是会被生产。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -865,36 +865,36 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "在生产场所的建筑窗口中也可以找到相同的按钮。在那里，它会导致该场所无限生产，无论经济设置如何。这可以用于安排，例如，在边境附近生产更多建筑材料，即使您的祖国远方库存充足。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "生产20根大理石柱"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr ""
+msgstr "为了准备额外的防御工事，您应该生产20根大理石柱。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr ""
+msgstr "当不需要大理石柱时，您的石匠不会生产它们。您必须增加目标数量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
-msgstr ""
+msgstr "为此，点击任意旗帜并选择'配置经济'。在此窗口中，你可以决定每种类型的产品希望库存多少。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr ""
+msgstr "有时，您会需要同时快速获得大量货物——比生产速度更快。在这种情况下，拥有足够的储备是好的。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
@@ -902,71 +902,71 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr ""
+msgstr "通过更改目标数量，您可以决定您的资源（在本例中：铁）应该转化为哪些货物/工具，或者您是否想要保存铁并等待直到您知道将用它做什么。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr ""
+msgstr "只有消耗货物的建筑才会关心此设置。免费生产货物的建筑（例如您的农场或水井）将始终持续工作。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr ""
+msgstr "现在让我们尝试一下：大理石柱的当前目标数量是10。增加它，以便在您需要快速建立防御工事时做好准备。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "将20根大理石柱带到前线"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "将全部20根大理石柱带到前线附近的仓库。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr ""
+msgstr "要实现这一点，你需要做两件事。首先，在目标仓库中设置大理石柱的优先级。未来生产的大理石柱如果可能的话将被送往那里。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr ""
+msgstr "然后，要将大理石柱从您的总部运出，您必须点击那里的移除按钮。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
-msgstr ""
+msgstr "仓库偏好"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
-msgstr ""
+msgstr "将大理石柱带到前线"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
-msgstr ""
+msgstr "大理石柱的生产现在运行良好，但如果它们能存储在我们需要的地方就更好了。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr ""
+msgstr "通常，生产的货物如果不需要在其他地方使用，会被带到最近的仓库。在这种情况下，这意味着我们的总部。但我们希望它们能存放在要塞附近的仓库中。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr ""
+msgstr "每个仓库都有四个按钮来设置偏好。如果您将鼠标指针悬停在它们上面，您将看到解释这些按钮功能的工具提示。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:565
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:575
@@ -978,7 +978,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:641
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:735
 msgid "Trading"
-msgstr ""
+msgstr "贸易"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
@@ -986,14 +986,14 @@ msgid ""
 " can build up our fortifications. However, it turns out that there is indeed"
 " a tribe of Frisians living in this wasteland, and they’re peaceful. They "
 "have asked to trade with us."
-msgstr ""
+msgstr "很好。我们现在有足够的大理石柱，这样如果有侵略者，我们可以建立我们的防御工事。然而，事实证明这个荒地上确实居住着一个弗里斯兰人部落，他们是和平的。他们请求与我们贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Since Widelands is all about building up rather than burning down, trading "
 "is a much better way to interact with other tribes than to invade their "
 "land. So let’s trade."
-msgstr ""
+msgstr "由于Widelands关乎建设而非破坏，与其他部落互动的最好方式是贸易而不是入侵他们的土地。所以让我们进行贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:577
 msgid ""
@@ -1001,33 +1001,33 @@ msgid ""
 "player negotiate about which wares you wish to exchange with each other, and"
 " how many of them. But I’ll walk you through the process step by step. "
 "First, you need to build a market."
-msgstr ""
+msgstr "贸易通过市场进行。一旦您有了市场，您和其他玩家就会商议希望交换哪些货物以及交换多少。但我会一步步引导您完成这个过程。首先，您需要建造一个市场。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:584
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:586
 msgid "Build a market"
-msgstr ""
+msgstr "建造一个市场"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:587
 msgid "Build a market near the wasteland."
-msgstr ""
+msgstr "在荒地附近建造一个市场。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:588
 msgid "The market is a big building."
-msgstr ""
+msgstr "市场是一个大建筑。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:597
 msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "在您的领土内，货物由搬运工运输。但贸易可以跨越很长的距离，远远超过您的搬运工可以行走的距离。所以我们使用一支驴队来代替运输我们的货物。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
 "Donkeys are bred in a donkey farm. In this scenario, you already have one "
 "here."
-msgstr ""
+msgstr "驴在驴场中饲养。在本场景中，您已经在这里有一个了。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:599
 msgid ""
@@ -1035,47 +1035,47 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "除了运输贸易货物外，驴还用于繁忙道路的辅助：当一条道路接收大量交通时，其搬运工会请求一头驴协助工作，这样可以在相同时间内运输两倍的货物。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
 "The market is now complete, and we can start creating a trade proposal for "
 "the Frisians. This is done from the market’s window. Let me just open it for"
 " you."
-msgstr ""
+msgstr "市场现在已经完成，我们可以开始为弗里斯兰人创建贸易提案。这是从市场的窗口完成的。让我为您打开它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:615
 msgid ""
 "As you can see, the market window contains three tabs. The first tab is the "
 "most interesting to us right now: Here you can configure and propose a new "
 "trade."
-msgstr ""
+msgstr "如您所见，市场窗口包含三个标签页。第一个标签页现在对我们来说最有趣：在这里您可以配置和提出新的贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:616
 msgid ""
 "The second tab lists trades that you have previously proposed from this "
 "market. It is currently empty, since you did not propose any trades yet."
-msgstr ""
+msgstr "第二个标签列出了您之前从此市场提出的贸易。目前它是空的，因为您还没有提出任何贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:617
 msgid ""
 "The third tab lists trade offers that you received from other players, and "
 "allows you to accept or reject them. This, too, is empty, since the Frisians"
 " are waiting for you to make the first move."
-msgstr ""
+msgstr "第三个标签列出了您从其他玩家收到的贸易提议，并允许您接受或拒绝它们。这也是空的，因为弗里斯兰人正在等待您迈出第一步。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:625
 msgid ""
 "Proposing a trade is straightforward. The first step is to select the player"
 " you want to trade with from the dropdown. In this case, there is only one "
 "other player, and he is automatically preselected for you."
-msgstr ""
+msgstr "提出贸易很简单。第一步是从下拉列表中选择您想要交易的玩家。在这种情况下，只有一个其他玩家，并且已自动为您预选。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:633
 msgid ""
 "Next, you select the wares you want to send and receive respectively from "
 "the large double panel in the center of the market window."
-msgstr ""
+msgstr "接下来，您从市场窗口中央的大型双面板中选择您想要发送和接收的货物。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:634
 msgid ""
@@ -1085,72 +1085,72 @@ msgid ""
 "Imperial tribe can’t build houses out of Frisian brick and doesn’t eat their"
 " smoked fish. The panel only shows wares that you and your prospective "
 "trading partner can both use."
-msgstr ""
+msgstr "当您与其他部落交易时，并非所有货物都可以交换。每个部落都有自己的经济，他们使用不同的货物。例如，弗里斯兰人不喝葡萄酒，不能用大理石建造房屋；而您的帝国部落不能用弗里斯兰砖建造房屋，也不吃他们的熏鱼。该面板只显示您和潜在贸易伙伴都能使用的货物。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:635
 msgid ""
 "Select the wares in the panel and use the arrow buttons below it to increase"
 " or decrease the amount of the wares to exchange."
-msgstr ""
+msgstr "在面板中选择货物，并使用它下方的箭头按钮增加或减少要交换的货物数量。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:643
 msgid ""
 "Lastly, select how many batches of the selected wares will be exchanged. You"
 " can also set the trade to run indefinitely using the Infinity icon."
-msgstr ""
+msgstr "最后，选择将交换多少批选定的货物。您也可以使用无限图标将贸易设置为无限运行。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "一批货物将在一次运输中交付，每件货物需要一头驴。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
 "When you have configured everything, click the ‘Propose’ button to send the "
 "trade offer to the other player. He can then decide whether to accept or "
 "reject your proposal."
-msgstr ""
+msgstr "当您配置好一切后，点击'提议'按钮将贸易提议发送给其他玩家。然后他可以决定接受还是拒绝您的提议。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:646
 msgid "Try it out!"
-msgstr ""
+msgstr "尝试一下！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:653
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:655
 msgid "Propose a trade"
-msgstr ""
+msgstr "提议贸易"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:656
 msgid "Offer the Frisians a trade."
-msgstr ""
+msgstr "向弗里斯兰人提供贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:657
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "弗里斯兰人只会接受对他们有利的贸易；也就是说，他们不会给出比接收更多的货物。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
-msgstr ""
+msgstr "贸易已拒绝"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:665
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "弗里斯兰人拒绝了您的贸易提议。他们不会接受可能对他们不利的贸易。向他们发送新的贸易提议。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
 msgid "Trade Accepted"
-msgstr ""
+msgstr "贸易已接受"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:674
 msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "干得好！弗里斯兰人接受了您的贸易提议。很快您将看到一队您的驴离开市场将货物带给弗里斯兰人，一队他们的驯鹿将为您带来货物作为交换。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""
@@ -1158,72 +1158,72 @@ msgid ""
 " every active trade at this market. The tab shows more details about the "
 "running trade and the wares waiting to be traded, and also allows you to "
 "manage it:"
-msgstr ""
+msgstr "如您所见，市场窗口现在有一个新的标签页。此市场的每个活跃贸易都有一个这样的标签页。该标签页显示正在运行的贸易和等待交易的货物的更多详细信息，并允许您进行管理："
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:684
 msgid "You can pause the trade for a while and resume it when you wish."
-msgstr ""
+msgstr "您可以暂停贸易一段时间并在需要时恢复它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:685
 msgid "You can move the trade to another of your markets."
-msgstr ""
+msgstr "您可以将贸易移至您的其他市场。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:686
 msgid "You can propose to extend the trade with more batches."
-msgstr ""
+msgstr "您可以提议用更多批次扩展贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:687
 msgid "And you can cancel the trade at any time."
-msgstr ""
+msgstr "您可以随时取消贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:694
 msgid "Trade Offered"
-msgstr ""
+msgstr "已提供贸易"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:696
 msgid ""
 "Now the Frisians have offered you a trade as well. You can find a list of "
 "all trade offers and proposals as well as running trades in the Diplomacy "
 "window. Open it via the button from the main toolbar."
-msgstr ""
+msgstr "现在弗里斯兰人也向您提供了贸易。您可以在外交窗口中找到所有贸易提议、提供的贸易以及正在运行的贸易列表。通过主工具栏中的按钮打开它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:703
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:705
 msgid "Open the diplomacy window"
-msgstr ""
+msgstr "打开外交窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:706
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr ""
+msgstr "外交窗口让您概览所有您的贸易、贸易提议和提供的贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
-msgstr ""
+msgstr "您可以通过主工具栏中的此按钮打开它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:714
 msgid "The Diplomacy Window"
-msgstr ""
+msgstr "外交窗口"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:716
 msgid ""
 "In the top half of the diplomacy window, you can see all players and their "
 "teams. Here you can invite other players to join your team or request to "
 "join theirs. But being in a team is not required for trading."
-msgstr ""
+msgstr "在外交窗口的上半部分，您可以看到所有玩家及其团队。在这里您可以邀请其他玩家加入您的团队或请求加入他们的团队。但加入团队不是进行贸易的必要条件。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:717
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr ""
+msgstr "我们对窗口的下半部分更感兴趣。在这里您可以看到您提供的贸易、提议的贸易和正在运行的贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
 "Right now, you have one trade offer – the one the Frisians just sent you. "
 "Review it, then use the buttons next to it to either accept or reject it."
-msgstr ""
+msgstr "现在，您有一个贸易提议——弗里斯兰人刚刚发送给您的那个。查看它，然后使用它旁边的按钮接受或拒绝它。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:719
 msgid ""
@@ -1231,39 +1231,39 @@ msgid ""
 "market you want to use for this trade, as you can have multiple markets. You"
 " can also manage the offer directly from the window of the market where you "
 "want to accept the trade."
-msgstr ""
+msgstr "如果您希望接受贸易，需要从下拉列表中选择您想要用于此贸易的市场，因为您可以拥有多个市场。您也可以从您想要接受贸易的市场窗口中直接管理该提议。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:726
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:728
 msgid "Decide about the trade offer"
-msgstr ""
+msgstr "决定关于贸易提议"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:729
 msgid "Accept or reject the Frisians’ trade offer."
-msgstr ""
+msgstr "接受或拒绝弗里斯兰人的贸易提议。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:730
 msgid ""
 "You can do so either from the Diplomacy window or from the market’s window."
-msgstr ""
+msgstr "您可以从外交窗口或市场窗口中这样做。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:737
 msgid ""
 "Well done! That’s all there is to it really; now you know how to send and "
 "manage trade proposals and offers."
-msgstr ""
+msgstr "干得好！实际上这就是全部内容；现在您知道如何发送和管理贸易提议和提供了。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:738
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr ""
+msgstr "您可以拥有任意数量的活跃贸易，与任意数量的玩家进行交易；可以在同一个市场或跨多个市场，根据您的喜好。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
 "To truly master the art of trading, just remember this: The value of any "
 "ware depends highly on the circumstances, and also on the tribe."
-msgstr ""
+msgstr "要真正掌握贸易的艺术，只需记住这一点：任何货物的价值在很大程度上取决于情况，也取决于部落。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:740
 msgid ""
@@ -1272,14 +1272,14 @@ msgid ""
 "in the Frisian Drinking Hall. On the other hand, Frisians can burn charcoal "
 "much more efficiently than the Empire. Therefore, trading Imperial meals "
 "against Frisian coal is a trade from which both parties can benefit greatly."
-msgstr ""
+msgstr "例如，弗里斯兰矿工会很乐意接受任何餐点，无论它是帝国旅馆廉价生产的，还是在弗里斯兰酒馆以高得多的成本生产的。另一方面，弗里斯兰人比帝国更有效地燃烧木炭。因此，用帝国餐点交换弗里斯兰煤炭是一种双方都能从中受益巨大的贸易。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:741
 msgid ""
 "As you gain more experience with the different tribes of Widelands, you will"
 " gain a thorough understanding of the relative cost and value of each ware "
 "for each tribe. This knowledge is invaluable when deciding about trades."
-msgstr ""
+msgstr "随着您对Widelands不同部落的经验增加，您将深入了解每种货物对每个部落的相对成本和价值。在决定贸易时，这些知识是无价的。"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
@@ -1292,7 +1292,7 @@ msgid ""
 "at first. Even if you’ve only understood a few concepts, you mustn’t give "
 "up. Try them out in some games, become familiar with them and experience the"
 " possibilities. Then, return to this tutorial and learn the rest!"
-msgstr ""
+msgstr "本教程到此结束！我希望我能教您如何在Widelands中控制经济。有很多选项，一开始可能会让人困惑。即使您只理解了几个概念，也不必放弃。在一些游戏中尝试它们，熟悉它们并体验可能性。然后，回到本教程学习其余内容！"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:751
 msgid ""
@@ -1301,4 +1301,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "这是我为您准备的最后一个教程。我现在已经教会了我所知道的一切。这个世界中仍然有连我也不知道的秘密。我现在将寻找一个安静的地方度过我的晚年。如果您仍有疑问，Widelands社区肯定会帮助您。您可以在以下地方找到它："
