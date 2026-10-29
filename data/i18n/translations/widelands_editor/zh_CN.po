@@ -23,7 +23,7 @@ msgstr "控制"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr ""
+msgstr "编辑器帮助"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
@@ -45,27 +45,27 @@ msgstr "地形"
 
 #: ../../../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
-msgstr ""
+msgstr "树木"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Widelands 编辑器"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "此编辑器面向那些想要设计自己的地图以在 Widelands 中使用的玩家"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "如您所见，此编辑器仍在大量开发中，随着编辑器越来越好，这段文本也会变得更长更完整"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "维基百科还包括一个关于如何构建地图的简短教程"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -74,17 +74,17 @@ msgstr "资源"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "有效资源："
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "有效资源："
 
 #: ../../../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
-msgstr ""
+msgstr "默认："
 
 #. TRANSLATORS: e.g. "5x Water"
 #: ../../../../data/scripting/editor/terrain_help.lua:41
@@ -95,12 +95,12 @@ msgstr "%1%x %2%"
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "树木生长概率"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
-msgstr ""
+msgstr "此处不会生长树木"
 
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:25
 #: ../../../../data/scripting/editor/tree_tooltip.lua:25
@@ -113,4 +113,4 @@ msgstr "%2.1f%%"
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr ""
+msgstr "首选地形"

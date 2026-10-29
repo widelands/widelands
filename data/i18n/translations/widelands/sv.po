@@ -3027,7 +3027,7 @@ msgstr "Fusk: Klient %1$s kontrollerar nu %2$s"
 #: ../../../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s has enabled the following additional add-on(s): %2$s"
-msgstr ""
+msgstr "Klienten %1$s har aktiverat följande ytterligare tillägg: %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../../../src/network/network_gaming_messages.cc:84

@@ -18,6 +18,7 @@
 
 #include "scripting/lua_table.h"
 
+#include <iterator>
 #include <memory>
 
 #include "base/log.h"
