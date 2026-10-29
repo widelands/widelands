@@ -45,6 +45,11 @@
           "name": "OPTION_BUILD_TESTS",
           "value": "False",
           "type": "BOOL"
+        },
+        {
+          "name": "OPTION_CPPTRACE",
+          "value": "True",
+          "type": "BOOL"
         }
       ]
     },
@@ -86,6 +91,11 @@
         },
         {
           "name": "OPTION_BUILD_TESTS",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_CPPTRACE",
           "value": "False",
           "type": "BOOL"
         }
@@ -130,6 +140,11 @@
         {
           "name": "OPTION_BUILD_TESTS",
           "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_CPPTRACE",
+          "value": "True",
           "type": "BOOL"
         }
       ]

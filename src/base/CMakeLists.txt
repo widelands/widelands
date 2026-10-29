@@ -12,6 +12,8 @@ wl_library(base
     format/tree.h
     format/wildcard_node.h
     format/write_number.h
+    backtrace_provider.h
+    backtrace_provider.cc
     i18n.h
     i18n.cc
     multithreading.h
@@ -22,11 +24,13 @@ wl_library(base
     string.h
     string.cc
   USES_ATOMIC
+  USES_CPPTRACE
   USES_SDL2
   USES_TINYGETTEXT
   DEPENDS
     base_exceptions
     base_macros
+    base_time_string
     base_times
     build_info
     io_filesystem

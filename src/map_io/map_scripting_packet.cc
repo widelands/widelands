@@ -20,6 +20,7 @@
 
 #include <csignal>
 
+#include "base/backtrace_provider.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/string.h"
@@ -101,9 +102,10 @@ void MapScriptingPacket::read(FileSystem& fs,
 			if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &egbase.lua());
 				signal(SIGABRT, &abort_handler);
+				// Destructor of guard restores original signal handler.
+				BacktraceProvider::DefaultAbortGuard abort_guard;
 				lgi->read_textdomain_stack(fr);
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
-				signal(SIGABRT, SIG_DFL);
 			} else {
 				throw UnhandledVersionError(
 				   "MapScriptingPacket", packet_version, kCurrentPacketVersion);
