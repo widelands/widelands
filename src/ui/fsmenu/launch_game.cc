@@ -85,6 +85,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              512 * 60,  // 512 hours maximum gametime (arbitrary limit)
                              UI::PanelStyle::kFsMenu,
                              _("Playing time"),
+                             true,
                              UI::SpinBox::Units::kMinutes,
                              UI::SpinBox::Type::kBig,
                              5,
