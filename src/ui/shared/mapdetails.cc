@@ -68,18 +68,18 @@ MapDetails::MapDetails(Panel* parent,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, "minimap", 0, 0, 0, 0, nullptr),
      suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
+        new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, default_spacing(), 0)),
      egbase_(egbase) {
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 	descr_.set_handle_mouse(false);
 
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
-	descr_box_.add_space(padding_);
+	descr_box_.add_space(default_spacing());
 	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(padding_);
+	main_box_.add_space(default_spacing());
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
 
 	layout();
@@ -98,7 +98,7 @@ void MapDetails::layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
-		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
+		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - default_spacing());
 	} else {
 		main_box_.set_size(get_w(), get_h());
 	}
@@ -108,7 +108,7 @@ void MapDetails::layout() {
 	} else {
 		// Fit minimap to width
 		const int width =
-		   std::min<int>(main_box_.get_w() - UI::Scrollbar::default_size() - 2 * padding_,
+		   std::min<int>(main_box_.get_w() - UI::Scrollbar::default_size() - 2 * default_spacing(),
 		                 minimap_cache_.at(last_map_)->width());
 		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
 		const int height = scale * minimap_cache_.at(last_map_)->height();
