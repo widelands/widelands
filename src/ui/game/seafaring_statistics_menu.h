@@ -28,6 +28,7 @@
 #include "ui/basic/table.h"
 #include "ui/basic/unique_window.h"
 
+class InteractiveBase;
 class InteractivePlayer;
 
 /// Shows a list of the ships owned by the interactive player with filtering and navigation options.

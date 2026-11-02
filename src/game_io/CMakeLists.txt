@@ -48,8 +48,4 @@ wl_library(game_io
     map_io_map_loader
     scripting_lua_table
     ui_basic
-    wui_interactive
-    wui_main_ui
-    wui_mapviewpixelfunctions
-    wui_minimap
 )

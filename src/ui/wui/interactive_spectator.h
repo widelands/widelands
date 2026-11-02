@@ -38,6 +38,7 @@ struct InteractiveSpectator : public InteractiveGameBase {
 	                     Section& global_s,
 	                     bool multiplayer = false,
 	                     ChatProvider* chat_provider = nullptr);
+	~InteractiveSpectator() override;
 
 	Widelands::Player* get_player() const override;
 

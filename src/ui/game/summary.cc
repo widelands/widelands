@@ -37,6 +37,7 @@ constexpr uint8_t kPadding = 4;
 
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
    : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "game_summary", r, 0, 0, _("Game over")),
+     igbase_(parent),
      game_(parent->game()),
      desired_speed_(game_.game_controller()->desired_speed()) {
 	game_.game_controller()->set_desired_speed(0);
@@ -183,7 +184,7 @@ void GameSummaryScreen::fill_data() {
 	bool local_won = false;
 	std::string won_name;
 	Widelands::TeamNumber team_won = 0;
-	InteractivePlayer* ipl = game_.get_ipl();
+	upcast(InteractivePlayer, ipl, igbase_);
 	// This defines a row to be selected: either the local player,
 	// or the first line if the local player was not in the game
 	uint32_t local_player_index = 0;
@@ -271,7 +272,7 @@ void GameSummaryScreen::continue_clicked() {
 }
 
 void GameSummaryScreen::stop_clicked() {
-	game_.get_ibase()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	game_.get_game_interface()->end_main_loop();
 }
 
 void GameSummaryScreen::update_selection() {

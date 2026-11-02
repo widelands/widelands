@@ -18,6 +18,9 @@
 
 #include "scripting/globals.h"
 
+#include "scripting/report_error.h"
+#include "ui/wui/interactive_base.h"
+
 Widelands::Game& get_game(lua_State* const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "game");
 	Widelands::Game* g = static_cast<Widelands::Game*>(lua_touserdata(L, -1));
@@ -40,6 +43,19 @@ Widelands::EditorGameBase& get_egbase(lua_State* const L) {
 	}
 
 	return *g;
+}
+
+InteractiveBase* get_ibase_if_exists(lua_State* const L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	return dynamic_cast<InteractiveBase*>(egbase.get_game_interface());
+}
+
+InteractiveBase& get_safe_ibase(lua_State* const L) {
+	InteractiveBase* ibase = get_ibase_if_exists(L);
+	if (ibase == nullptr) {
+		report_error(L, "Cannot access the InteractiveBase in a headless game");
+	}
+	return *ibase;
 }
 
 Widelands::MapObjectLoader* get_mol(lua_State* const L) {

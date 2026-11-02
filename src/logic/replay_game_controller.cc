@@ -24,9 +24,9 @@
 
 #include "commands/cmd_replay_end.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/replay.h"
-#include "ui/wui/interactive_base.h"
 
 ReplayGameController::ReplayGameController(Widelands::Game& game)
    : game_(game), lastframe_(SDL_GetTicks()), time_(game_.get_gametime()) {
