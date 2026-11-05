@@ -4,7 +4,7 @@
 ## from Transifex.
 ## It then updates the developers/authors file.
 ## Afterwards, the catalogs will be updated.
-## We also run utils/fix_formatting.py to periodically format the source code.
+## We also run utils/fix_lua_formatting.py to periodically format the source code.
 ## Finally, the result will pushed to the master branch on GitHub
 ## and to Transifex.
 
@@ -67,8 +67,8 @@ update_authors() {
     exit 1
   fi
   # Fix formatting for Lua
-  python3 utils/fix_formatting.py --lua --dir data/i18n
-  python3 utils/fix_formatting.py --lua --dir data/txts
+  python3 utils/fix_lua_formatting.py data/i18n
+  python3 utils/fix_lua_formatting.py data/txts
 }
 
 update_metainfo() {

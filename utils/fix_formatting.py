@@ -2,16 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-"""The code base had inconsistent usage of tabs/spaces for indenting in Lua.
+"""Enforce unified formatting of Lua, C++ and python files.
 
-files. Spaces were more prominent - and I prefer them over tabs. So I wrote
-this small script to fix leading tabs in Lua files to spaces.
-
-It also saves files in unix file endings ("\r\n") and strips empty lines at the
-end of files and whitespace characters at the end of lines.
-
-After fixing the Lua tabs, this script also executes clang-format over the src
-directory and pyformat over the utils directory.
+This script executes fix_lua_formatting.py over the data and test directories,
+clang-format over the src directory, and pyformat over the utils directory.
 
 """
 
@@ -25,6 +19,8 @@ from file_utils import read_text_file, write_text_file, find_files
 import autoflake
 import autopep8
 import unify
+
+from fix_lua_formatting import format_lua_files
 
 LEADING_TABS = re.compile(r'^\s*\t+\s*')
 SPACES_PER_TAB = 3
@@ -115,22 +111,7 @@ def main():
         else:
             directories = {'./data', './test'}
         for directory in directories:
-            sys.stdout.write(
-                '\nFixing Lua tabs in directory: ' + directory + ' ')
-            for filename in find_files(directory, ['.lua']):
-                sys.stdout.write('.')
-                sys.stdout.flush()
-                lines = read_text_file(filename).strip().split('\n')
-                new_lines = []
-                for line in lines:
-                    m = LEADING_TABS.match(line)
-                    if m is not None:
-                        line = line[m.start():m.end()].expandtabs(
-                            SPACES_PER_TAB) + line[m.end():]
-                    new_lines.append(line.rstrip() + '\n')
-                write_text_file(filename, ''.join(new_lines))
-                check_call(['git', 'add', '--renormalize', filename])
-            print(' done.')
+            format_lua_files(directory)
 
     if format_python:
         directories = set()
