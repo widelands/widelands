@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dominic Iastrebschi, 2025
+# Cristian Romanescu, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: Dominic Iastrebschi, 2025\n"
+"Last-Translator: Cristian Romanescu, 2026\n"
 "Language-Team: Romanian (https://app.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Notă"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -30,69 +31,75 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Se pare că nu ai încheiat misiunea anterioară. Poți juca totuși acest "
+"scenariu, dar vei fi dezavantajat. Îți recomand să termini mai întâi "
+"scenariul anterior și apoi să reîncepi această misiune."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Găsește-l pe Reebaud"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
+"Extinde-ți teritoriul până îl întâlnești pe vechiul tău prieten Reebaud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Învinge-i pe străini"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Învinge-i pe străini"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Învinge tribul ostil."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Învinge Imperiul"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Învinge-l pe legatul imperial"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Învinge-l pe Marcus Caius Iniucundus."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Recrutează și antrenează"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Recrutează și antrenează-ți soldații"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Antrenează-ți soldații în timp ce aștepți ca Reebaud să-și declare soldații "
+"gata de luptă."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
-msgstr ""
+msgstr "Ai la dispoziție o oră ca să antrenezi cât mai mulți soldați."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Bine ai revenit!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "În sfârșit am sosit"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -101,6 +108,9 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Iniucundus nu mințise în privința furtunii. Plecaserăm tocmai "
+"la timp; ne-a prins pe mare și eram cu toții siguri că nava noastră stă să "
+"se rupă și să se scufunde, iar niciunul dintre noi nu-și va mai vedea casa."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -110,6 +120,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Dar Dumnezeu a fost milostiv, iar rugăciunile noastre fără număr L-au "
+"îndemnat să ne cruțe. A trebuit să acostăm pe un țărm pustiu și nelocuit și "
+"să reparăm corabia înainte să putem naviga mai departe. În cele din urmă, am"
+" ajuns cât de departe spre nord se poate merge cu corabia."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -122,6 +136,13 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"Legatul și cu mine nu mai avem nimic de-a face unul cu celălalt. Mi-a "
+"displăcut purtarea lui trufașă în timpul călătoriei și mai ales felul "
+"disprețuitor în care își trata sclavii de pe galeră. Nu părea să-i treacă "
+"prin minte că sunt oameni ca el și ca mine; sau, dacă îi trecea, se purta de"
+" parcă ei înșiși ar fi fost vinovați de soarta lor rea. Nu regret că "
+"probabil nu-l voi mai vedea. Și-a așezat tabăra la oarecare distanță de a "
+"mea, ca să nu ne încurcăm unul pe altul."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -131,6 +152,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Dar acum că am ajuns atât de aproape, sunt prea nerăbdător ca să stau "
+"degeaba și să mă gândesc la trecut. Repede acum! Hai să mergem să-l căutăm "
+"pe prietenul meu. Deși n-am văzut încă prin preajmă niciun semn de așezare "
+"omenească, n-am nicio îndoială că îl vom găsi curând."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -140,12 +165,12 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Străini"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Cine sunt ei?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -153,6 +178,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Soldații noștri au zărit niște străini – primii localnici din acest ținut "
+"pustiu. Poate știu unde îl putem găsi pe Reebaud?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -161,11 +188,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Pace și salutări, oameni buni! Sunt Claus Lembeck, iar acesta este fiul meu,"
+" Henneke. Am venit să-l căutăm pe prietenul meu Reebaud. Pot să vă întreb "
+"dacă știți unde îl putem găsi?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Dușmani"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -173,10 +203,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Soldații noștri au zărit niște străini. Aceștia trebuie să fie intrușii de "
+"care a pomenit Reebaud."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Intruși"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -185,11 +217,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"Noi – amazoane. Voi – străini. Pământ – aici – al – nostru. Voi – intruși. "
+"Voi – dușmani. Noi – pe voi – toți – facem – morți!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Nu tocmai cei mai prietenoși oameni…"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -204,7 +238,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Un vechi prieten"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -219,13 +253,15 @@ msgstr ""
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "În sfârșit ne-am întâlnit"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"În sfârșit! Clădirile acestor oameni par cunoscute. Trebuie să fie tribul "
+"lui Reebaud."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -233,6 +269,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Mă înșală ochii sau îmi joacă feste vreun duh? Nu se poate să fie vechiul "
+"meu prieten Claus cel care mă întâlnește atât de departe de casă!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -241,6 +279,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Nu e nicio festă sau înșelătorie, chiar sunt eu, Claus Lembeck! Fiul meu "
+"Henneke și cu mine am călătorit până aici ca să te găsim. Nu pot spune cât "
+"mă bucur că te-am găsit în sfârșit."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -250,6 +291,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Mă bucură nespus că te-ai ostenit atât ca să mă întâlnești. Dar n-ai făcut "
+"asta doar ca să mai stai de vorbă cu mine. Ce te frământă? Așa cum m-ai "
+"ajutat odată să resping o invazie din Holstein, acum îmi voi ajuta "
+"prietenul, dacă pot."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -260,6 +305,11 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"Într-adevăr, am venit să-ți cer ajutorul. Sigur îți amintești de Atterdag, "
+"regele danezilor, care ne-a pricinuit nouă, frizonilor, de multe ori mari "
+"necazuri. Tu nu te-ai luptat niciodată cu el, pentru că se temea prea mult "
+"de faima ta ca să te atace direct; dar eu mi l-am făcut dușman de moarte "
+"ajutându-i adesea pe cei pe care încerca să-i cucerească."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -271,6 +321,13 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Acum vreo trei sau patru luni – am pierdut șirul timpului în lunga călătorie"
+" – și-a debarcat soldații pe insula mea, Föhr. Te scutesc de povestea "
+"bătăliei, care a durat cinci săptămâni, nici o zi mai puțin. Adevărul scurt "
+"și amar este că am fost înfrânt și silit să fug. Nu aveam nicio speranță că "
+"prietenii mei de pe continent m-ar putea ajuta, pentru că armatele lui "
+"Atterdag sunt atât de nemaipomenit de numeroase, încât știam că n-ar fi avut"
+" nicio șansă."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -280,6 +337,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Doar tu ai faima celor mai minunate isprăvi de arme. Probabil ești singurul "
+"om în viață care îl poate învinge pe danezul cel rău. Te rog să vii cu mine "
+"în sud și să eliberezi Föhrul sau măcar să trimiți cu mine o trupă din "
+"soldații tăi vestiți."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -293,6 +354,14 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Dacă ai fi venit cu o săptămână mai devreme, ți-aș fi îndeplinit cererea pe "
+"loc. Acum însă a apărut o mică belea la orizont. O spun la propriu: niște "
+"străini au venit de departe și încearcă să ne alunge și să ne ia "
+"pământurile, așa cum noi înșine, împinși de nevoie, le-am luat de la poporul"
+" ostil care trăia aici. Barbari războinici și un ticălos imperial pe nume "
+"Murilius, care avea cele mai scandaloase pretenții. I-am învins pe toți și "
+"credeam că am găsit în sfârșit pacea. Și timp de patru ani lungi viața a "
+"fost, într-adevăr, liniștită."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -309,6 +378,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Dar acum, cum spuneam, odată cu sosirea scurtei veri, când zăpada se topește"
+" pe alocuri și se poate călători în locuri îndepărtate, străinii au apărut "
+"și ne-au atras în luptă. Ne-au luat prin surprindere, pentru că viața fără "
+"lupte ne făcuse neglijenți. Mulți soldați buni au căzut sub sulițele lor, "
+"printre ei Hauke, cel mai bun prieten și cel mai respectat sfetnic al meu, "
+"și Fiete, singurul meu fiu și moștenitor. Mișcările lor de luptă viclene "
+"erau o noutate pentru noi, dar acum că știm cu cine avem de-a face, nu "
+"încape îndoială că până la urmă îi vom învinge. Mă tem însă că va mai dura "
+"până când vor fi învinși și voi putea călători în siguranță spre sud cu "
+"tine. Până atunci, vei primi, bineînțeles, toată ospitalitatea și toată "
+"curtoazia pe care ți le putem oferi."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -325,6 +405,18 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Dar acum, cum spuneam, odată cu sosirea scurtei veri, când zăpada se topește"
+" pe alocuri și se poate călători în locuri îndepărtate, străinii au apărut "
+"și ne-au atras în luptă. Ne-au luat prin surprindere, pentru că viața fără "
+"lupte ne făcuse neglijenți. Mulți soldați buni au căzut sub sulițele lor, "
+"printre ei Hauke, cel mai bun prieten și cel mai respectat sfetnic al meu, "
+"și Fiete, singurul meu fiu și moștenitor. Mișcările lor de luptă viclene "
+"erau o noutate pentru noi, dar când am aflat cu cine avem de-a face, am "
+"reușit până la urmă să-i învingem. Totuși, toți soldații noștri sunt încă "
+"istoviți și răniți după luptele grele și vor avea nevoie de ceva timp ca să-"
+"și revină înainte să-i putem trimite din nou în luptă. Până atunci, vei "
+"primi, bineînțeles, toată ospitalitatea și toată curtoazia pe care ți le "
+"putem oferi."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -334,6 +426,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Cred că i-am întâlnit deja pe acești intruși. Ar fi nepotrivit să stăm și să"
+" ne bucurăm de halbe de mied în timp ce voi luptați pentru viețile voastre. "
+"În spiritul prieteniei noastre și în cinstea oamenilor buni pe care i-ai "
+"pierdut, vom lupta alături de voi împotriva invadatorilor!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -343,6 +439,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Într-adevăr, ar fi cât se poate de nepotrivit să stăm și să ne bucurăm de "
+"halbe de mied în timp ce voi luptați pentru viețile voastre. În spiritul "
+"prieteniei noastre și în cinstea oamenilor buni pe care i-ai pierdut, îi vom"
+" căuta pe acei invadatori și vom lupta alături de voi împotriva lor!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -355,18 +455,25 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Aproape că sunt dezamăgit că faima ta nu întrece faptele, pentru că, pe când"
+" îi descriai pe invadatori, abia așteptam să mă lupt cu ei alături de tine. "
+"Îmi pare rău pentru pierderile tale și mai ales că nu-l voi cunoaște "
+"niciodată pe renumitul Hauke, al cărui nume va trăi în glorie. Cât timp "
+"soldații tăi se refac, mă voi ocupa de organizarea antrenamentelor pentru "
+"propriii noștri soldați, ca să învețe de la ai tăi și să devină cât mai "
+"puternici înainte să ne întoarcem în patria noastră."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Un vechi dușman"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Trădare"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -374,6 +481,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Stați puțin, voi doi. Ce ați spus? L-ați atacat și l-ați ucis pe Murilius, "
+"proconsul al Imperiului?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -383,6 +492,10 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"Este cât se poate de inacceptabil. Sunt Marcus Caius Iniucundus, legat al "
+"Imperiului. Și când mă gândesc că am fost trimis să cercetez dacă Murilius "
+"nu și-a plătit impozitele din nevoie sau din lăcomie, iar acum descopăr că "
+"el și toți oamenii lui au fost uciși mișelește de niște invadatori aroganți!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -393,6 +506,11 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Prin fapta voastră v-ați atras mânia Imperiului și jur pe Jupiter Optimus "
+"Maximus că nu mă voi odihni până când voi și ai voștri nu veți zăcea în "
+"propriul sânge. Voi fi milostiv doar cu cei prea tineri ca să fi luat parte "
+"la lupte, pe care îi voi ține în viață ca să-i înlocuiască pe cei câțiva "
+"sclavi de pe galeră care n-au supraviețuit ultimei călătorii."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -401,6 +519,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Ooo, acum chiar mi-e frică. Spune-mi, omule bun, prostia e o condiție pentru"
+" a fi numit reprezentant al Imperiului? Claus, de ce l-ai adus cu tine pe "
+"bufonul ăsta jalnic?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -410,10 +531,14 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Îmi pare rău. Ne-a oferit un loc pe corabia lui și n-aveam de unde să știu "
+"și nici vreun motiv să cred că va căuta ceartă cu tine. Dar, pentru că eu "
+"ți-am adus acest necaz, cel puțin pot să-mi asum răspunderea de a te scăpa "
+"de el."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr ""
+msgstr "Se întâmplă ceva…"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -423,15 +548,19 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Astăzi am întâlnit un soldat rănit lângă granița noastră de nord-vest. A "
+"spus cu greu ceva despre tribul lui, atacat de niște străini fioroși, dar a "
+"murit înainte să ne poată spune mai multe. Armura și armele lui păreau "
+"surprinzător de cunoscute. Mă întreb dacă tribul lui Reebaud e în pericol."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Trebuie să ne grăbim."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Am ajuns prea târziu"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -440,6 +569,9 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicious "
 "strangers. With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Astăzi am întâlnit un soldat rănit lângă granița noastră de nord-vest. A "
+"spus cu greu ceva despre tribul lui, atacat și înfrânt de niște străini "
+"fioroși. Cu ultima suflare ne-a spus numele conducătorului său: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -448,6 +580,9 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Am ajuns prea târziu. Reebaud era deja la un pas de noi și a fost înfrânt cu"
+" doar câteva ore înainte să-l putem întâlni. Nu mai există nicio speranță pe"
+" lumea asta pentru niciunul dintre noi."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:253
@@ -462,16 +597,18 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Ai pierdut și nu mai poți continua să joci. Sper să ai mai mult noroc când "
+"vei relua acest scenariu. Fă clic pe OK pentru a reveni la meniul principal."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Înfrângere"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Am pierdut"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -482,6 +619,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"Dușmanii ne-au distrus ultimul depozit. Niciun trib n-ar putea supraviețui "
+"în asemenea condiții și tot ce mai putem face acum e să ne înfruntăm soarta "
+"sigură cu capul sus. Singurul meu regret este că nu-l voi putea ajuta pe "
+"vechiul meu prieten Claus în necazul lui. Fie ca zeii să aibă milă de el, "
+"dar mă tem că orice speranță e pierdută."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -492,14 +634,19 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Am fost atât de aproape, dar acum dușmanii ne-au distrus ultimul depozit. "
+"Poate a fost o nebunie din partea mea să cred că l-aș putea învinge pe "
+"Atterdag, când nu eram în stare să le țin piept nici măcar acestor străini "
+"neînsemnați. Dumnezeu nu vede cu ochi buni această trufie a mea, iar El, nu "
+"o gloată oarecare de străini, ne-a pecetluit soarta tristă."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Extinderea"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Ni se taie calea"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -508,6 +655,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Iniucundus își extinde repede teritoriul. Deși e pe deplin în "
+"dreptul lui să facă asta, mă tem că am putea fi despărțiți de pământul lui "
+"Reebaud dacă nu suntem atenți."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -516,6 +666,10 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Ar trebui să ne grăbim propria extindere. Fără să știm în ce direcție "
+"trebuie să mergem, te-aș sfătui să ne concentrăm deocamdată pe extinderea "
+"spre vest, înainte ca Marcus Caius Iniucundus să ne blocheze calea la "
+"această graniță."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -527,7 +681,7 @@ msgstr "Victorie"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Intrușii au fost învinși"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -535,10 +689,12 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Acești intruși nu au fost atât de puternici pe cât credeau. Nu te vor mai "
+"necăji."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Străinii au fost învinși"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -546,21 +702,25 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Acești străini nu au fost atât de puternici pe cât credeau. Oricine ar fi "
+"fost, nu ne vor mai necăji."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legatul a fost învins"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Încercarea de a te măsura cu mine a fost ultima greșeală pe care ai făcut-o,"
+" legat nesăbuit."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Am câștigat"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -569,11 +729,14 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Dușmanii au fost învinși. Acum voi veni cu tine în sud împreună cu toți "
+"soldații mei, în afară de o mică garnizoană care să-mi apere ținuturile, și "
+"îți vom recuceri insula!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitări"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -581,6 +744,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ai încheiat această misiune. Poți continua să joci, dacă vrei; altfel, treci"
+" la misiunea următoare."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -590,6 +755,10 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Soldații noștri și-au revenit, iar tu ai folosit bine timpul, sporindu-ți "
+"puterea armatei. Acum voi veni cu tine în sud împreună cu toți soldații mei,"
+" în afară de o mică garnizoană care să-mi apere ținuturile, și îți vom "
+"recuceri insula!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -604,3 +773,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Servește ca bază pentru colonizarea de peste mări și pentru comerț. De "
+"asemenea, depozitează soldații, bunurile și uneltele tale."

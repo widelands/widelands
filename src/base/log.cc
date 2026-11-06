@@ -204,7 +204,7 @@ void do_log(const LogType type, const Time& gametime, const char* const fmt, ...
 			continue;
 		}
 		logger->log_cstring(buffer_prefix);
-		str.push_back('\n');
 		logger->log_cstring(str.c_str());
+		logger->log_cstring("\n");
 	}
 }

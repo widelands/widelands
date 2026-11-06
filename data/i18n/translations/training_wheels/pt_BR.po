@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Claudio Rodrigues, 2026
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Claudio Rodrigues, 2026\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,32 +25,33 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "Espaços de construção"
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
 msgstr ""
+"Vamos querer posicionar construções para podermos produzir mercadorias."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Então, vamos descobrir onde temos espaço para elas."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "Clique no menu ‘Mostrar / Ocultar’."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Selecione ‘Mostrar Espaços de Construção’."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "Agora podemos ver onde é possível posicionar construções e bandeiras."
 
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr ""
+msgstr "Clique em ‘OK’ para continuar."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/flags.lua:60
@@ -54,50 +59,54 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/flags.lua:83
 #: ../../../../data/scripting/training_wheels/init.lua:168
 msgid "Flags"
-msgstr ""
+msgstr "Bandeiras"
 
 #: ../../../../data/scripting/training_wheels/flags.lua:63
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
 msgstr ""
+"Seus carregadores podem transportar suas mercadorias mais rápido se "
+"dividirem a carga."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Clique no símbolo de bandeira."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
-msgstr ""
+msgstr "Clique no botão de bandeira."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
 msgstr ""
+"Agora verifique se você pode posicionar ainda mais bandeiras nas suas "
+"estradas."
 
 #: ../../../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr ""
+msgstr "Clique em ‘OK’ quando terminar."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:142
 msgid "Welcome"
-msgstr ""
+msgstr "Boas-vindas"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:147
 #: ../../../../data/scripting/training_wheels/objectives.lua:22
 #: ../../../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "Objetivos"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Toras e estradas"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/init.lua:163
 msgid "Rocks"
-msgstr ""
+msgstr "Rochas"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:115
 #: ../../../../data/scripting/training_wheels/rocks.lua:115
@@ -105,6 +114,8 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
+"Clique em um espaço de construção pequeno, médio ou grande, depois selecione"
+" a construção na aba de construções pequenas."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:117
 #: ../../../../data/scripting/training_wheels/rocks.lua:117
@@ -112,6 +123,8 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
+"Clique em um espaço de construção médio ou grande, depois selecione a "
+"construção na aba de construções médias."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:119
 #: ../../../../data/scripting/training_wheels/rocks.lua:119
@@ -119,23 +132,29 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
+"Clique em um espaço de construção grande, depois selecione a construção na "
+"aba de construções grandes."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Se você segurar a tecla ‘Ctrl’ enquanto clica na segunda bandeira, isso "
+"também posicionará mais bandeiras na sua estrada, se possível."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:125
 #: ../../../../data/scripting/training_wheels/logs.lua:175
 msgid "Logs"
-msgstr ""
+msgstr "Toras"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:128
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
+"Você precisa suprir sua tribo com toras. Por favor, construa a seguinte "
+"construção:"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:138
 #: ../../../../data/scripting/training_wheels/logs.lua:149
@@ -144,36 +163,41 @@ msgstr ""
 #: ../../../../data/scripting/training_wheels/rocks.lua:152
 #: ../../../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
-msgstr ""
+msgstr "Estradas"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:141
 #: ../../../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
 msgstr ""
+"Clique na bandeira em frente à construção para começar a posicionar uma "
+"estrada."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
 msgstr ""
+"Clique no botão ‘Construir estrada’, depois clique na bandeira indicada."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:164
 #: ../../../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Clique no botão da construção…"
 
 #: ../../../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr ""
+msgstr "…depois clique na bandeira em frente à construção de destino."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"Muito bem! Em breve começaremos a produzir toras, que precisaremos para "
+"construir mais construções."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr ""
+msgstr "Abra a janela de Objetivos"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -181,59 +205,74 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"Clique no botão para o qual a seta está apontando, ou pressione ‘%s’ para "
+"ver os objetivos atuais do jogo."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "Feche esta janela"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr ""
+msgstr "Fechando esta janela"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"Você pode abrir e fechar esta janela clicando no botão ‘Objetivos’ na barra "
+"de ferramentas na parte inferior da tela."
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"Como qualquer outra janela, você também pode fechar a janela ‘Objetivos’ "
+"clicando nela com o botão direito."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"Enquanto faz isso, verifique os marcadores para deixar a estrada o mais "
+"plana possível:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
+"O terreno é plano aqui. Seus carregadores serão bem velozes neste terreno."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
+"Há uma pequena subida para alcançar este campo. Isso significa que seus "
+"trabalhadores serão mais rápidos descendo do que subindo."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
+"A ligação entre os campos é extremamente íngreme. O ganho de velocidade em "
+"uma direção é enorme, enquanto a lentidão na outra também é considerável."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:128
 #: ../../../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "Granito"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:131
 msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
+"Você precisa suprir sua tribo com granito. Por favor, construa a seguinte "
+"construção:"
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:155
 msgid ""
@@ -241,24 +280,31 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Clique no botão ‘Construir estrada’. Depois, clique nos marcadores coloridos"
+" no mapa para guiar sua estrada até alcançar a bandeira em frente à "
+"construção de destino."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…depois clique nos marcadores coloridos no mapa para guiar sua estrada até "
+"alcançar a bandeira em frente à construção de destino."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"Muito bem! Em breve começaremos a produzir granito, que precisaremos para "
+"construir mais construções."
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:20
 #: ../../../../data/scripting/training_wheels/welcome.lua:24
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Bem-vindo ao Widelands!"
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "Siga as setas para aprender a jogar."

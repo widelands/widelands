@@ -216,7 +216,7 @@ msgstr "Kasarmi kouluttaa tavallisia sotilaita, kun taas koulutuskeskukset kuten
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr "Ominaisuudet ovat: terveys, hyökkäys, puolustus ja väistely."
+msgstr "Ominaisuuksia ovat: terveys, hyökkäys, puolustus ja väistely."
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
