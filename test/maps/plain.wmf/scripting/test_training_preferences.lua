@@ -114,8 +114,6 @@ run(function()
    assert_equal(1, tc:get_soldiers{0, 3, 0, 1}, "Level 4 soldier is not in the training camp")
    assert_equal(1, tc:get_soldiers{0, 5, 0, 2}, "Level 7 soldier is not in the training camp")
 
-   stable_save(game, "training_weakest", 50000)
-
    tc:set_inputs("fish", 6)
    tc:set_inputs("barbarians_bread", 10)
    while tc:get_soldiers({3, 3, 0, 1}) ~= 1 do
@@ -205,6 +203,8 @@ run(function()
    assert_equal(2, tc:get_soldiers{0, 4, 0, 0}, "Wrong number of level 4 soldiers in the training camp")
    assert_equal(1, tc:get_soldiers{0, 5, 0, 0}, "Wrong number of level 5 soldiers in the training camp")
    print("level 0->1 OK")
+
+   stable_save(game, "training_any", 50000)
 
    while tc:get_soldiers({0, 2, 0, 0}) ~= 3 do
       sleep(1000)
