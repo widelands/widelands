@@ -478,8 +478,15 @@ if(OPTION_BUILD_WINSTATIC)
     wl_add_flag(TARGET_COMPILE_FLAGS "/EHsc")
   else()
     wl_add_static_libs(SDL_IMG_STATIC_LIBS ${MINGW_SDL_IMG_DEPS})
-    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp xmp wavpack)
-    wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI})
+    # The set of codec backends compiled into the MSYS2 static SDL2_mixer changes between package releases,
+    # so take the complete, link-ordered dependency list from its pkg-config file.
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SDL2_MIXER_PC REQUIRED SDL2_mixer)
+    set(SDL2_MIXER_PC_DEPS ${SDL2_MIXER_PC_STATIC_LDFLAGS})
+    # Inherited from SDL; would turn the console test executables into GUI ones.
+    list(REMOVE_ITEM SDL2_MIXER_PC_DEPS "-mwindows")
+    list(APPEND SDL_MIXER_STATIC_LIBS ${SDL2_MIXER_PC_DEPS})
+    wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI} iconv)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
