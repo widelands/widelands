@@ -19,6 +19,7 @@
 #include "io/fileread.h"
 
 #include <cassert>
+#include <cstdlib>
 
 FileRead::~FileRead() {
 	if (data_ != nullptr) {
