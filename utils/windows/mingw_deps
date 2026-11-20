@@ -6,8 +6,8 @@ host-git:   heimdal libcbor libfido2 openssh perl-Error perl-Authen-SASL perl-En
 toolchain:  libwinpthread-git gcc-libs zstd zlib binutils headers-git crt-git gmp isl libiconv mpfr mpc windows-default-manifest winpthreads-git gcc gcc-ada gcc-libgfortran gcc-fortran gcc-objc expat gettext host-libtre-git libsystre ncurses bzip2 libffi mpdecimal openssl termcap readline tcl sqlite3 tk xz tzdata python xxhash gdb gdb-multiarch libgccjit libmangle-git make pkgconf tools-git winstorecompat-git
 cmake:      c-ares brotli libunistring libidn2 libpsl libtasn1 p11-kit ca-certificates libssh2 nghttp2 curl jsoncpp libb2 lz4 libarchive libuv ninja rhash
 asio:
-SDL2_ttf:   vulkan-headers vulkan-loader SDL2 libpng wineditline pcre2 glib2 harfbuzz freetype
-SDL2_mixer: libogg flac lame libvorbis mpg123 opus libsndfile portaudio fluidsynth libxmp opusfile wavpack
-SDL2_image: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openjph openexr libjxl svt-av1
+SDL2_ttf:
+SDL2_mixer:
+SDL2_image:
 glew:
 icu:
