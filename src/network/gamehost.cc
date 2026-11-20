@@ -1023,11 +1023,39 @@ bool GameHost::can_launch() {
 }
 
 void GameHost::set_map(const std::string& mapname,
-                       const std::string& mapfilename,
+                       std::string mapfilename,
                        const std::string& theme,
                        const std::string& bg,
                        uint32_t const maxplayers,
                        bool const savegame) {
+	// If the map/save is a directory, zip it and use the created zipfile instead.
+	const std::string original_file = mapfilename;
+	bool can_send = true;
+	if (g_fs->is_directory(mapfilename)) {
+		g_fs->ensure_directory_exists(kTempFileDir);
+		mapfilename =
+		   g_fs->create_unique_temp_file_path(kTempFileDir, FileSystem::filename_ext(original_file));
+		verb_log_dbg("Gamehost: Zipping mapdirectory %s to %s for sending", original_file.c_str(),
+		             mapfilename.c_str());
+
+		std::unique_ptr<FileSystem> map_fs(g_fs->make_sub_file_system(original_file));
+		if (map_fs == nullptr) {
+			log_err("Unable to create mapfilesystem for sending: %s", original_file.c_str());
+			can_send = false;
+
+		} else {
+			std::unique_ptr<FileSystem> zip_fs(
+			   g_fs->create_sub_file_system(mapfilename, FileSystem::Type::ZIP));
+			if (zip_fs == nullptr) {
+				log_err("Unable to create zipfile for sending: %s", mapfilename.c_str());
+				can_send = false;
+
+			} else {
+				map_fs->recursive_copy_all(*zip_fs);
+			}
+		}
+	}
+
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
@@ -1135,10 +1163,7 @@ void GameHost::set_map(const std::string& mapname,
 		}
 	}
 
-	// If possible, offer the map / saved game as transfer
-	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
-	// in place or such ...
-	if (!g_fs->is_directory(mapfilename)) {
+	if (can_send) {
 		// Read in the file
 		FileRead fr;
 		fr.open(*g_fs, mapfilename);
@@ -1652,11 +1677,7 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
  * \returns true if the data was written, else false
  */
 bool GameHost::write_map_transfer_info(SendPacket& packet, const std::string& mapfilename) {
-	// TODO(unknown): not yet able to handle directory type maps / savegames
-	if (g_fs->is_directory(mapfilename)) {
-		log_warn("Map/Save is a directory! No way for making it available a.t.m.!\n");
-		return false;
-	}
+	assert(!g_fs->is_directory(mapfilename));
 
 	// Write the new map/save file information, so client can decide whether it
 	// needs the file.
@@ -1763,6 +1784,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	verb_log_info("[Host]: Client %u: welcome to usernum %u", number, client.usernum);
 
+	std::string enabled_non_network_relevant_addons;
+
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_HELLO);
 	packet.unsigned_8(NETWORK_PROTOCOL_VERSION);
@@ -1770,8 +1793,25 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
-				enabled_addons.push_back(pair.first.get());
+			if (pair.second) {
+				if (AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+					enabled_addons.push_back(pair.first.get());
+				} else {
+					// Unlocalized list
+					// TODO(Nordfriese): If we make this its own NETCMD code,
+					// we could have each recipient build a localised string
+					if (!enabled_non_network_relevant_addons.empty()) {
+						enabled_non_network_relevant_addons += ", ";
+					}
+					enabled_non_network_relevant_addons += pair.first->internal_name;
+					enabled_non_network_relevant_addons += " ";
+					enabled_non_network_relevant_addons +=
+					   AddOns::version_to_string(pair.first->version, false);
+					enabled_non_network_relevant_addons += " (";
+					enabled_non_network_relevant_addons +=
+					   AddOns::kAddOnCategories.at(pair.first->category).internal_name;
+					enabled_non_network_relevant_addons += ")";
+				}
 			}
 		}
 		packet.unsigned_32(enabled_addons.size());
@@ -1855,6 +1895,10 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 
+	if (!enabled_non_network_relevant_addons.empty()) {
+		send_system_message_code(
+		   "EXTRA_ADDONS", d->localplayername, enabled_non_network_relevant_addons);
+	}
 	if (g_allow_script_console) {
 		// TODO(tothxa): The host could warn only the new client, but other clients can only
 		//               broadcast:
@@ -2502,7 +2546,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 }
 
 static const std::set<std::string> cheating_message_codes = {
-   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "EXTRA_ADDONS", "CHEAT_OTHER"};
 
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();

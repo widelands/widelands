@@ -413,7 +413,7 @@ void GameDiplomacyMenu::update_trades_offers(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("Nobody has offered you any trades at the moment."));
 		trades_box_offers_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_offers_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_offers_.add_space(3 * UI::Scrollbar::default_size());
 		return;
 	}
 
@@ -509,7 +509,7 @@ void GameDiplomacyMenu::update_trades_proposed(bool always) {
 		txt->set_text(_("There are no pending trade proposals at the moment. You can propose a new "
 		                "trade from a market."));
 		trades_box_proposed_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_proposed_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_proposed_.add_space(3 * UI::Scrollbar::default_size());
 		return;
 	}
 
@@ -608,7 +608,7 @@ void GameDiplomacyMenu::update_trades_active(bool always) {
 		txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 		txt->set_text(_("There are no active trade agreements at the moment."));
 		trades_box_active_.add(txt, UI::Box::Resizing::kFullSize);
-		trades_box_active_.add_space(3 * UI::Scrollbar::kSize);
+		trades_box_active_.add_space(3 * UI::Scrollbar::default_size());
 		return;
 	}
 

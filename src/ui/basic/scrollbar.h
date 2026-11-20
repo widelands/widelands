@@ -31,7 +31,9 @@ struct Scrollbar : public Panel {
 
 	/// default width for vertical scrollbars,
 	/// or height for horizontal scrollbars
-	static constexpr int kSize = 24;
+	[[nodiscard]] static inline int default_size() {
+		return default_button_size_small();
+	}
 
 public:
 	Scrollbar(Panel* parent,

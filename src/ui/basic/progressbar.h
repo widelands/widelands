@@ -34,10 +34,15 @@ struct ProgressBar : public Panel {
 	enum {
 		Horizontal = 0,  ///< from left to right
 		Vertical = 1,    ///< from bottom to top
-
-		DefaultWidth = 100,
-		DefaultHeight = 24,
 	};
+
+	[[nodiscard]] static inline int default_width() {
+		return g_style_manager->styled_size(StyledSize::kUIDefaultProgressBarWidth);
+	}
+
+	[[nodiscard]] static inline int default_height() {
+		return default_button_size_small();
+	}
 
 public:
 	ProgressBar(Panel* parent,

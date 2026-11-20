@@ -78,6 +78,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      max_list_items_(max_list_items),
 
      base_height_(base_height(button_dimension, style)),
+     mouse_tolerance_(2 * default_button_size_small()),
 
      button_box_(this, style, "dropdown_button_box", 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?

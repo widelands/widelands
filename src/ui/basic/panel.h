@@ -444,6 +444,9 @@ public:
 	[[nodiscard]] static inline int default_button_size_small() {
 		return g_style_manager->styled_size(StyledSize::kUIDefaultButtonSizeSmall);
 	}
+	[[nodiscard]] static inline int default_button_size_large() {
+		return g_style_manager->styled_size(StyledSize::kUIDefaultButtonSizeLarge);
+	}
 
 	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
 		kNone = 0,          ///< This panel is not saveable.

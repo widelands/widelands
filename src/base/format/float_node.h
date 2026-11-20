@@ -78,7 +78,7 @@ struct FloatNode : FormatNode {
 			}
 
 			rounded += rounding_;
-			if (rounded > kMaxInt) {
+			if (rounded > static_cast<double>(kMaxInt)) {
 				throw wexception("Floating point value too large: %f", arg_u.float_val);
 			}
 			int_part = static_cast<int64_t>(rounded);

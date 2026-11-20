@@ -4,6 +4,8 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# GunChleoc, 2015
+# liu lizhi <xingzuo88@qq.com>, 2021
 # Roy Luo <1598359376@qq.com>, 2021
 # liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
@@ -1013,19 +1015,19 @@ msgstr "浮冰 2"
 
 #: ../../../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "泰加森林 1"
 
 #: ../../../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "泰加森林 2"
 
 #: ../../../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "泰加森林 3"
 
 #: ../../../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "苔原"
 
 #: ../../../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

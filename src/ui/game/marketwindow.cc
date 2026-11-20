@@ -76,7 +76,8 @@ public:
 	              _("Batches:"),
 	              1,
 	              1,
-	              Widelands::kMaxBatches),
+	              Widelands::kMaxBatches,
+	              false),
 	     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Propose")) {
 		set_size(400, 100);  // guard against SpinBox asserts
 
@@ -316,7 +317,7 @@ private:
 				txt->set_text(_("There are no pending trade proposals at the moment."));
 			}
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * UI::Scrollbar::default_size());
 
 		} else {
 			const bool can_act = iplayer_ != nullptr && iplayer_->can_act(player_number_);
@@ -448,7 +449,7 @@ private:
 			txt->set_style(UI::FontStyle::kWuiInfoPanelParagraph);
 			txt->set_text(_("Nobody has offered you any trades at the moment."));
 			add(txt, UI::Box::Resizing::kFullSize);
-			add_space(3 * UI::Scrollbar::kSize);
+			add_space(3 * UI::Scrollbar::default_size());
 
 		} else {
 			for (Widelands::TradeID trade_id : trades) {

@@ -28,13 +28,13 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
                  "label_name",
                  0,
                  0,
-                 UI::Scrollbar::kSize,
+                 UI::Scrollbar::default_size(),
                  0,
                  UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, "description", 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
+     descr_(this, "description", 0, 0, UI::Scrollbar::default_size(), 0, UI::PanelStyle::kFsMenu) {
 
 	constexpr int kPadding = 4;
 	add(&name_label_, UI::Box::Resizing::kFullSize);

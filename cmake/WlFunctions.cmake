@@ -55,6 +55,21 @@ function(wl_add_static_libs VAR_NAME)
     set(${VAR_NAME} ${STATIC_LIBS} PARENT_SCOPE)
 endfunction()
 
+# Append the static link dependencies of pkg-config MODULE to VAR_NAME, in the link order
+# given by "pkg-config --static --libs".
+function(wl_add_pkgconfig_static_libs VAR_NAME MODULE)
+    find_package(PkgConfig REQUIRED)
+    string(MAKE_C_IDENTIFIER "WL_PC_${MODULE}" PC_PREFIX)
+    pkg_check_modules(${PC_PREFIX} REQUIRED ${MODULE})
+    set(PC_DEPS ${${PC_PREFIX}_STATIC_LDFLAGS})
+    # Inherited from SDL; would turn the console test executables into GUI ones.
+    list(REMOVE_ITEM PC_DEPS "-mwindows")
+    # The static sdl2-compat libSDL2.a contains a complete copy of SDL3, so any member pulled
+    # from libSDL3.a collides with it. Nothing else in the dependency graph uses SDL3 symbols.
+    list(REMOVE_ITEM PC_DEPS "-lSDL3")
+    set(${VAR_NAME} ${${VAR_NAME}} ${PC_DEPS} PARENT_SCOPE)
+endfunction()
+
 # Add common compile tasks, like includes and libraries to link against for third party
 # libraries, and codecheck hook for sources.
 macro(_common_compile_tasks)

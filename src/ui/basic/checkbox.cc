@@ -26,11 +26,11 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
-constexpr int kPadding = 4;
-
 namespace {
-int text_width(int available_width, int pic_width) {
-	return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
+inline int text_width(int available_width, int pic_width) {
+	return available_width > (pic_width + UI::Panel::default_spacing()) ?
+	          available_width - pic_width - UI::Panel::default_spacing() :
+	          0;
 }
 }  // namespace
 
@@ -46,7 +46,8 @@ Statebox::Statebox(Panel* const parent,
                    Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
-   : Panel(parent, s, name, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+   : Panel(
+        parent, s, name, p.x, p.y, default_statebox_size(), default_statebox_size(), tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
      rendered_text_(nullptr) {
@@ -70,7 +71,14 @@ Statebox::Statebox(Panel* const parent,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    int width)
-   : Panel(parent, s, name, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
+   : Panel(parent,
+           s,
+           name,
+           p.x,
+           p.y,
+           std::max(width, default_statebox_size()),
+           default_statebox_size(),
+           tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_image_cache->get(get_checkbox_graphics(panel_style_))),
      rendered_text_(nullptr),
@@ -88,8 +96,8 @@ void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
 	if ((flags_ & Has_Text) != 0) {
 		int w = get_w();
-		int h = kStateboxSize;
-		int pic_width = kStateboxSize;
+		int h = default_statebox_size();
+		int pic_width = default_statebox_size();
 		assert((flags_ & Has_Custom_Picture) == 0);
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
@@ -99,7 +107,7 @@ void Statebox::layout() {
 		                                                        UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
-			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
+			w = std::max(rendered_text_->width() + default_spacing() + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
 		set_desired_size(w, h);
@@ -173,26 +181,30 @@ void Statebox::draw(RenderTarget& dst) {
 
 		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
 	} else {
-		static_assert(0 <= kStateboxSize, "assert(0 <= kStateboxSize) failed.");
+		assert(0 <= default_statebox_size());
 		Vector2i image_anchor = Vector2i::zero();
-		Vector2i text_anchor(kStateboxSize + kPadding, 0);
+		Vector2i text_anchor(default_statebox_size() + default_spacing(), 0);
 
 		if (rendered_text_) {
 			if (UI::g_fh->fontset()->is_rtl()) {
 				text_anchor.x = 0;
-				image_anchor.x = rendered_text_->width() + kPadding;
-				image_anchor.y = (get_h() - kStateboxSize) / 2;
+				image_anchor.x = rendered_text_->width() + default_spacing();
+				image_anchor.y = (get_h() - default_statebox_size()) / 2;
 			}
 			rendered_text_->draw(dst, text_anchor);
 		}
 
-		dst.blitrect(image_anchor, pic_graphics_,
-		             Recti(Vector2i((flags_ & Is_Checked) != 0 ? kStateboxSize : 0, 0), kStateboxSize,
-		                   kStateboxSize));
+		// TODO(Nordfriese): Use mipmaps for checkbox graphics
+		dst.blitrect_scale(
+		   Rectf(image_anchor, default_statebox_size(), default_statebox_size()), pic_graphics_,
+		   Recti(Vector2i((flags_ & Is_Checked) != 0 ? pic_graphics_->width() / 2 : 0, 0),
+		         pic_graphics_->width() / 2, pic_graphics_->height()),
+		   1.0f, BlendMode::UseAlpha);
 
 		if ((flags_ & Is_Highlighted) != 0) {
 			dst.draw_rect(
-			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+			   Recti(image_anchor, default_statebox_size() + 1, default_statebox_size() + 1),
+			   RGBColor(100, 100, 80));
 		}
 	}
 }

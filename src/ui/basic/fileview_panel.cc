@@ -53,11 +53,12 @@ void FileViewPanel::load_tab_contents() {
 void FileViewPanel::add_tab(const std::string& title, const std::string& lua_script) {
 	size_t index = boxes_.size();
 	script_paths_.push_back(lua_script);
-	boxes_.push_back(std::unique_ptr<UI::Box>(new UI::Box(
-	   this, panel_style_, format("box_%" PRIuS, index), 0, 0, UI::Box::Vertical, 0, 0, padding_)));
+	boxes_.push_back(
+	   std::unique_ptr<UI::Box>(new UI::Box(this, panel_style_, format("box_%" PRIuS, index), 0, 0,
+	                                        UI::Box::Vertical, 0, 0, default_padding())));
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
-	   boxes_.at(index).get(), "text_pane", 0, 0, Scrollbar::kSize, 0, panel_style_);
+	   boxes_.at(index).get(), "text_pane", 0, 0, Scrollbar::default_size(), 0, panel_style_);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add(format("about_%" PRIuS, index), title, boxes_.at(index).get(), "");
@@ -96,11 +97,12 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ = std::max(0, get_w() - 2 * padding_);
+	contents_width_ = std::max(0, get_w() - 2 * default_padding());
 
-	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
-	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
-	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
+	contents_height_ =
+	   std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
+	                  get_inner_h() - 2 * default_padding() - default_tab_panel_button_height() :
+	                  get_inner_h() - 3 * default_padding() - default_tab_panel_button_height());
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {
 		update_tab_size(i);

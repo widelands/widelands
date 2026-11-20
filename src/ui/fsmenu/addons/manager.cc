@@ -20,10 +20,7 @@
 
 #include <algorithm>
 #include <cstdlib>
-#include <iomanip>
 #include <memory>
-#include <ostream>
-#include <sstream>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -71,17 +68,6 @@ std::string filesize_string(const uint32_t bytes) {
 		return format_l(_("%.2f kB"), (bytes / 1000.f));
 	}
 	return format_l(_("%u bytes"), bytes);
-}
-
-std::string time_string(const std::time_t& time) {
-	std::ostringstream oss("");
-	try {
-		oss.imbue(std::locale(i18n::get_locale()));
-	} catch (...) {
-		// silently ignore
-	}
-	oss << std::put_time(std::localtime(&time), "%c");
-	return oss.str();
 }
 
 static inline std::function<bool(const std::shared_ptr<AddOns::AddOnInfo>,
@@ -345,106 +331,90 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                             UI::ButtonStyle::kFsMenuSecondary),
      filter_maps_min_players_(&filter_maps_rvbox_min_,
                               "filter_maps_min_players",
-                              0,
-                              0,
-                              0,
-                              150,
+                              UI::SpinBox::default_unit_width_narrow(panel_style_),
                               0,
                               0,
                               kMaxPlayers,
                               UI::PanelStyle::kFsMenu,
                               _("Min Players:"),
+                              false,
                               UI::SpinBox::Units::kNone,
                               UI::SpinBox::Type::kSmall),
      filter_maps_min_w_(&filter_maps_rvbox_min_,
                         "filter_maps_min_w",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
                         UI::PanelStyle::kFsMenu,
                         _("Min Width:"),
+                        false,
                         UI::SpinBox::Units::kNone,
                         UI::SpinBox::Type::kValueList),
      filter_maps_min_h_(&filter_maps_rvbox_min_,
                         "filter_maps_min_h",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
                         UI::PanelStyle::kFsMenu,
                         _("Min Height:"),
+                        false,
                         UI::SpinBox::Units::kNone,
                         UI::SpinBox::Type::kValueList),
      filter_maps_min_size_(&filter_maps_rvbox_min_,
                            "filter_maps_min_size",
-                           0,
-                           0,
-                           0,
-                           150,
+                           UI::SpinBox::default_unit_width_narrow(panel_style_),
                            0,
                            0,
                            0,
                            UI::PanelStyle::kFsMenu,
                            _("Min Size:"),
+                           false,
                            UI::SpinBox::Units::kNone,
                            UI::SpinBox::Type::kValueList),
      filter_maps_max_players_(&filter_maps_rvbox_max_,
                               "filter_maps_max_players",
-                              0,
-                              0,
-                              0,
-                              150,
+                              UI::SpinBox::default_unit_width_narrow(panel_style_),
                               kMaxPlayers + 1,
                               0,
                               kMaxPlayers + 1,
                               UI::PanelStyle::kFsMenu,
                               _("Max Players:"),
+                              false,
                               UI::SpinBox::Units::kNone,
                               UI::SpinBox::Type::kSmall),
      filter_maps_max_w_(&filter_maps_rvbox_max_,
                         "filter_maps_max_w",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
                         UI::PanelStyle::kFsMenu,
                         _("Max Width:"),
+                        false,
                         UI::SpinBox::Units::kNone,
                         UI::SpinBox::Type::kValueList),
      filter_maps_max_h_(&filter_maps_rvbox_max_,
                         "filter_maps_max_h",
-                        0,
-                        0,
-                        0,
-                        150,
+                        UI::SpinBox::default_unit_width_narrow(panel_style_),
                         0,
                         0,
                         0,
                         UI::PanelStyle::kFsMenu,
                         _("Max Height:"),
+                        false,
                         UI::SpinBox::Units::kNone,
                         UI::SpinBox::Type::kValueList),
      filter_maps_max_size_(&filter_maps_rvbox_max_,
                            "filter_maps_max_size",
-                           0,
-                           0,
-                           0,
-                           150,
+                           UI::SpinBox::default_unit_width_narrow(panel_style_),
                            0,
                            0,
                            0,
                            UI::PanelStyle::kFsMenu,
                            _("Max Size:"),
+                           false,
                            UI::SpinBox::Units::kNone,
                            UI::SpinBox::Type::kValueList),
      upload_addon_(&dev_box_,
@@ -877,9 +847,6 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_maps_lvbox_.add_space(default_spacing());
 	filter_maps_lvbox_.add(&filter_maps_reset_, UI::Box::Resizing::kFullSize);
 
-	// Spinboxes and their width requirements...
-	filter_maps_rvbox_min_.set_size(300, 100);
-	filter_maps_rvbox_max_.set_size(300, 100);
 	filter_maps_rvbox_min_.add(&filter_maps_min_players_, UI::Box::Resizing::kFullSize);
 	filter_maps_rvbox_min_.add_space(default_spacing());
 	filter_maps_rvbox_min_.add(&filter_maps_min_w_, UI::Box::Resizing::kFullSize);
@@ -1187,14 +1154,6 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	main_box_.add_space(default_spacing());
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(default_spacing());
-
-	// prevent assert failures
-	installed_addons_box_.set_size(100, 100);
-	browse_addons_box_.set_size(100, 100);
-	maps_box_.set_size(100, 100);
-	installed_addons_inner_wrapper_.set_size(100, 100);
-	browse_addons_inner_wrapper_.set_size(100, 100);
-	maps_inner_wrapper_.set_size(100, 100);
 
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
@@ -1936,6 +1895,10 @@ void AddOnsCtrl::layout() {
 
 		installed_addons_outer_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * default_button_size());
+		installed_addons_inner_wrapper_.set_max_size(
+		   tabs_placeholder_.get_w() - UI::Scrollbar::default_size() - default_spacing() -
+		      default_button_size(),
+		   tabs_placeholder_.get_h() - 2 * default_button_size());
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 4 * default_button_size() -
 		                                 browse_addons_buttons_box_.get_h() -

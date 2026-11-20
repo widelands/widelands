@@ -500,7 +500,7 @@ msgstr "Déplace une fenêtre vers le bord du panneau lorsque le bord de la fen�
 msgid ""
 "The factor by which to fractionally scale the Widelands user interface, in "
 "quarters."
-msgstr ""
+msgstr "Le facteur permettant d'adapter  la taille de l'interface utilisateur de Widelands, par incrément de 1/4."
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"

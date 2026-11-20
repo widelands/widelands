@@ -114,6 +114,8 @@ enum class StyledSize {
 	kSPScenarioPlateauMessageBoxPosY,
 	kUIDefaultButtonSize,
 	kUIDefaultButtonSizeSmall,
+	kUIDefaultButtonSizeLarge,
+	kUIDefaultProgressBarWidth,
 	kUIDefaultPadding,
 	kUIDefaultSpacing,
 	kUIDefaultIndent,

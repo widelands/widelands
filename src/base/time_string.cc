@@ -20,10 +20,9 @@
 
 #include <cassert>
 #include <ctime>
-#include <iomanip>
-#include <sstream>
 
 #include "base/i18n.h"
+#include "base/string.h"
 
 namespace {
 char timestring_buffer[] =
@@ -162,6 +161,59 @@ std::string localize_month(int8_t month) {
 	}
 }
 
+std::string localize_day_of_month(int8_t dom) {
+	switch (dom) {
+	case 0:
+		/** TRANSLATORS: Sunday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Sun");
+	case 1:
+		/** TRANSLATORS: Monday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Mon");
+	case 2:
+		/** TRANSLATORS: Tuesday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Tue");
+	case 3:
+		/** TRANSLATORS: Wednesday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Wed");
+	case 4:
+		/** TRANSLATORS: Thursday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Thu");
+	case 5:
+		/** TRANSLATORS: Friday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Fri");
+	case 6:
+		/** TRANSLATORS: Saturday. Keep this to 4 letters maximum. */
+		/** TRANSLATORS: Use the "Day - Stand-alone - Short Names" definition from the CLDR */
+		/** TRANSLATORS: definition if there is one for your language. */
+		return pgettext("day_of_month", "Sat");
+	default:
+		return std::to_string(dom);
+	}
+}
+
+std::string format_datetime(const std::time_t& time) {
+	struct tm* datetime = localtime(&time);
+
+	return format(
+	   /** TRANSLATORS: Display date.
+	    * Placeholders are: day_of_month month day, year, hour:minute */
+	   _("%1% %2% %3%, %4%, %5%:%6%"), localize_day_of_month(datetime->tm_wday),
+	   localize_month(datetime->tm_mon), datetime->tm_mday, (1900 + datetime->tm_year),
+	   datetime->tm_hour, format("%02u", datetime->tm_min));
+}
+
 char* gamestring_with_leading_zeros(uint32_t gametime) {
 	uint32_t time = gametime / 1000;
 	gamestringbuffer[8] = '0' + time % 10;
@@ -199,8 +251,9 @@ std::string gametimestring(uint32_t gametime, bool show_seconds) {
 
 std::string realtimestring() {
 	std::time_t t = std::time(nullptr);
-	std::tm tm = *std::localtime(&t);
-	std::ostringstream oss("");
-	oss << std::put_time(&tm, "%X");
-	return oss.str();
+	std::tm* tm = std::localtime(&t);
+	return format(
+	   /** TRANSLATORS: Display time.
+	    * Placeholders are: hour:minute:second */
+	   _("%1%:%2%:%3%"), tm->tm_hour, format("%02u", tm->tm_min), format("%02u", tm->tm_sec));
 }

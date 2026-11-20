@@ -634,6 +634,8 @@ int LuaPanel::get_child(lua_State* L) {
                * ``"minutes"``
                * ``"weeks"``
 
+             * ``"allow_multiline_label"``: **Optional**. **New in version 1.4**.
+                Whether a long label text may be wrapped across multiple lines. Default ``false``.
              * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
                ``"replacement"``. When the spinbox's value is equal to any replaced value,
                the replacement string is displayed instead of the value.
@@ -657,6 +659,9 @@ int LuaPanel::get_child(lua_State* L) {
              The properties for normal spinboxes above cannot be used when ``"values"`` is used.
 
            This widget can not have a custom tooltip.
+
+           .. versionchanged:: 1.4
+              This widget does not use the sizing and positioning properties.
 
          * ``"slider"``: A button that can be slid along a line to change a value. Properties:
 

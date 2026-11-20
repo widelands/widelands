@@ -18,18 +18,12 @@ jobs:
       uses: actions/checkout@v6
       with:
         fetch-depth: 1
-    - name: Install msys2
-      id: msys2
-      uses: msys2/setup-msys2@v2
-      with:
-        location: C:\
-        msystem: clangarm64
-        update: true
     - name: Installing dependencies
       run: |
         $env:Path = "C:\msys64\usr\bin;$env:Path"
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         bash.exe -c "./install-dependencies.sh msysarm --noconfirm --disable-download-timeout"
-        # pacman.exe --noconfirm -U https://mirror.msys2.org/mingw/clangarm64/mingw-w64-clang-aarch64-icu-77.1-1-any.pkg.tar.zst 
         choco install innosetup
     - name: Compiler
       run: |

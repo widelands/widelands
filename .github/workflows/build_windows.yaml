@@ -8,14 +8,11 @@ jobs:
       fail-fast: false
       matrix:
         config: [Debug, Release]
-        arch: [x64, x86]
+        arch: [x64]
         include:
           - arch: x64
             bits: 64
             archname: x86_64
-          - arch: x86
-            bits: 32
-            archname: i686
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-2022
     env:

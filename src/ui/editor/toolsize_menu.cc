@@ -27,8 +27,6 @@ inline EditorInteractive& EditorToolsizeMenu::eia() const {
 }
 
 constexpr int kMargin = 5;
-constexpr int kSpinboxWidth = 300;
-constexpr int kSpinboxUnitW = 180;
 
 /**
  * Create all the buttons etc...
@@ -40,28 +38,24 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
      box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      spinbox_radius_(&box_,
                      "toolsize",
-                     0,
-                     0,
-                     kSpinboxWidth,
-                     kSpinboxUnitW,
+                     UI::SpinBox::default_unit_width_narrow(panel_style_),
                      1,
                      1,
                      kMaxToolArea + 1,
                      UI::PanelStyle::kWui,
                      _("Size:"),
+                     false,
                      UI::SpinBox::Units::kNone,
                      UI::SpinBox::Type::kSmall),
      spinbox_gap_(&box_,
                   "toolgap",
-                  0,
-                  0,
-                  kSpinboxWidth,
-                  kSpinboxUnitW,
+                  UI::SpinBox::default_unit_width_narrow(panel_style_),
                   0,
                   0,
                   100,
                   UI::PanelStyle::kWui,
                   _("Gaps:"),
+                  false,
                   UI::SpinBox::Units::kPercent,
                   UI::SpinBox::Type::kBig) {
 	spinbox_radius_.set_tooltip(_("Radius of the active tool"));
@@ -70,7 +64,6 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 	spinbox_radius_.changed.connect([this]() { changed(); });
 	spinbox_gap_.changed.connect([this]() { changed(); });
 
-	box_.set_size(kSpinboxWidth, 0);  // to prevent spinbox asserts during layouting
 	box_.add(&spinbox_radius_, UI::Box::Resizing::kFullSize);
 	box_.add(&spinbox_gap_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&box_);

@@ -53,7 +53,7 @@ Scrollbar::Scrollbar(Panel* const parent,
    : Panel(parent, style, name, x, y, w, h),
      horizontal_(horiz),
 
-     buttonsize_(kSize),
+     buttonsize_(default_size()),
 
      pic_minus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
@@ -511,10 +511,11 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 }
 
 void Scrollbar::layout() {
-	if ((2 * kSize + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
-		buttonsize_ = kSize / 2;
+	const int size = default_size();
+	if ((2 * size + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
+		buttonsize_ = size / 2;
 	} else {
-		buttonsize_ = kSize;
+		buttonsize_ = size;
 	}
 	set_can_focus(is_enabled());
 }
