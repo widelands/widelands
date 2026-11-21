@@ -18,24 +18,14 @@
 
 #include "commands/cmd_replay_end.h"
 
+#include "logic/game.h"
 #include "logic/game_controller.h"
-#include "ui/basic/messagebox.h"
-#include "ui/wui/interactive_base.h"
 
 namespace Widelands {
 
 void CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-
-	// Need to pull this out into a variable to make the includes script happy
-	InteractiveBase* i = game.get_ibase();
-	assert(i != nullptr);
-	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
-	                     _("The end of the replay has been reached and the game has "
-	                       "been paused. You may unpause the game and continue watching "
-	                       "if you want to."),
-	                     UI::WLMessageBox::MBoxType::kOk);
-	mmb.run<UI::Panel::Returncodes>();
+	game.get_game_interface()->notify_replay_ended();
 }
 
 }  // namespace Widelands
