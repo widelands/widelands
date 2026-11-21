@@ -26,7 +26,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-09-21 07:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Daniele Vintauri <duriumingabbia@gmail.com>, 2026\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021,2025-2026\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -430,7 +430,7 @@ msgstr "%1$s ha ritirato la richiesta di unirsi al team di %2$s."
 #: ../../../../src/commands/cmd_diplomacy.cc:156
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$sha negato %2$s iscrizioni nella loro squadra."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:159
 #, c-format
@@ -786,7 +786,7 @@ msgstr "Tema"
 
 #: ../../../../src/logic/addons.cc:76
 msgid "UI Plugin"
-msgstr ""
+msgstr "Plugin UI"
 
 #: ../../../../src/logic/addons.cc:120
 #, c-format
@@ -850,9 +850,9 @@ msgstr[2] "%u add-on mancanti"
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u add-on con la versione sbagliata"
+msgstr[1] "%u add-on con la versione sbagliata"
+msgstr[2] "%u add-on con la versione sbagliata"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../../../src/logic/addons.cc:280
@@ -1149,7 +1149,7 @@ msgstr ""
 #: ../../../../src/logic/game.cc:1529
 #, c-format
 msgid "%s has proposed to extend a trade."
-msgstr ""
+msgstr "%s ha proposto di estendere un commercio."
 
 #: ../../../../src/logic/game.cc:1556
 msgid "Trade Extension Retracted"
@@ -1709,7 +1709,7 @@ msgstr ""
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:364
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Nave nemica che attacca"
 
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:97
 #: ../../../../src/logic/map_objects/tribes/ship/battle.cc:363
@@ -1873,7 +1873,7 @@ msgstr ""
 
 #: ../../../../src/logic/map_objects/tribes/ship/ship.cc:90
 msgid "New Ship"
-msgstr ""
+msgstr "Nuova nave"
 
 #. * TRANSLATORS: Warship ready
 #: ../../../../src/logic/map_objects/tribes/ship/task_expedition.cc:80

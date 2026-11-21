@@ -37,14 +37,14 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr "I detta scenario kommer jag att lära dig om soldater, deras träning och deras yrke: krigföring. Även om Widelands mest handlar om att bygga upp, inte bränna ner, så finns det en fiende som du ibland måste besegra. Krigsföringen är mest fokuserad på ekonomi, inte på militär strategi, och dess mekanik förtjänar att förklaras."
+msgstr "I det här scenariot berättar jag om soldater, deras träning och deras yrke: krigföring. Widelands handlar om att bygga upp, inte bränna ned, men ibland måste du besegra en fiende. Krigföring handlar främst om ekonomi, inte militära strategier, och därför behöver dess mekanik förklaras."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr "Jag har byggt upp en liten by som innehåller de viktigaste byggnaderna. Du har också tillräckligt med varor så du behöver inte ta hand om din vapenproduktion. I ett riktigt spel kommer du inte att ha den förmånen."
+msgstr "Jag har byggt upp en liten by med de viktigaste byggnaderna. Du har också tillräckligt med varor, så du behöver inte sköta vapenproduktionen. I ett vanligt spel har du inte den förmånen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
@@ -56,7 +56,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Nya soldater skapas på ett annat sätt än övriga arbetare. Rekryter går från en lagerbyggnad (eller ditt högkvarter) till kasernen där de får grundläggande träning och blir soldater. Nyutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
+msgstr "Nya soldater skapas på ett annat sätt än vanliga arbetare: rekryter går från ett magasin eller ditt högkvarter till kasernen, där de får grundläggande träning och blir soldater. Grundutbildade barbarsoldater använder ingen rustning utan behöver bara en yxa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr "Titta på soldaterna som är på väg till våra militärbyggnader. De ser annorlunda ut jämfört med vanliga arbetare: De har en hälsostapel över sitt huvud som visar deras återstående hälsa och de har fyra symboler som symboliserar den individuella soldatens nuvarande nivåer i de fyra kategorierna hälsa, attack, försvar och förmågan att parera."
+msgstr "Titta på soldaterna på väg till våra militärbyggnader. De skiljer sig från vanliga arbetare: över huvudet har de en hälsostapel som visar återstående hälsa och fyra symboler som visar varje soldats aktuella nivå i de fyra kategorierna hälsa, attack, försvar och parering."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
@@ -73,7 +73,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Om en barbarsoldat är fullt tränad har han hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och nivå %4% avseende förmågan att parera. Då är han en skräckinjagande krigare! De individuella förmågorna har följande betydelse:"
+msgstr "En fulltränad barbarsoldat har hälsonivå %1%, attacknivå %2%, försvarsnivå %3% och pareringsnivå %4%. Det är en skräckinjagande krigare! De enskilda förmågorna betyder följande:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid "Health:"
@@ -84,7 +84,7 @@ msgstr "Hälsa:"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr "Mängden livskraft i soldaten. En barbarsoldat börjar med %1% hälsopoäng och den ökar med %2% poäng för varje hälsonivå."
+msgstr "En soldats totala hälsa. En barbarsoldat börjar med %1% hälsa och får ytterligare %2% hälsa för varje hälsonivå."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Attack:"
@@ -97,7 +97,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr "Hur mycket skada en soldat kommer att tillfoga fienden när en attack lyckas. En barbarsoldat med attacknivå 0 tillfogar ~%1% poängs hälsoskada när han lyckas träffa en fiende. För varje högre attacknivå ökar detta värde med %2% poäng."
+msgstr "Den skada en soldat tillfogar fienden när en attack lyckas. En barbarsoldat med attacknivå 0 tillfogar ungefär %1% hälsopoäng i skada när han träffar en fiende. För varje attacknivå ökar skadan med %2% poäng."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Defense:"
@@ -112,7 +112,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr "Försvaret är den procentandel som dras av från attackvärdet. Barbarer kan inte träna denna färdighet och har därför alltid försvarsnivå 0, vilket innebär att skadan alltid reduceras med %1%%%. Om en angripare med ett attackvärde på 3500 poäng träffar en barbarisk soldat, förlorar barbaren 3500×%2%%% = %3% hälsa."
+msgstr "Försvar är den procentandel som dras av från attackvärdet. Barbarerna kan inte träna denna färdighet och har därför alltid försvarsnivå 0, vilket innebär att skadan alltid minskas med %1%%%. Om en angripare med attackvärdet 3500 poäng träffar en barbarsoldat, förlorar barbaren 3500×%2%%% = %3% hälsa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
@@ -125,7 +125,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr "Parera är möjligheten att soldaten lyckas blockera en attack. En nivå 0 barbar har en chans på %1%%% att parera en attack och detta ökar i steg om %2%%% för varje nivå."
+msgstr "Parering är chansen att soldaten kan undvika en attack. En barbar på nivå 0 har %1%%% chans att parera en attack, och chansen ökar med %2%%% för varje nivå."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
@@ -134,13 +134,13 @@ msgstr "Stridsarenan"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr "Nu har jag pratat om träning och nivåer. Låt mig utveckla det lite."
+msgstr "Nu har jag berättat om träning och nivåer. Låt mig utveckla det."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "En nyligen skapad soldat har ingen erfarenhet och är inte speciellt bra på att slåss. För att göra honom starkare kan du bygga träningsanläggningar."
+msgstr "En ny soldat saknar erfarenhet och är inte särskilt bra på att slåss. Du kan göra honom starkare genom att bygga träningsbyggnader."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
@@ -148,18 +148,18 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "En av dessa träningsanläggningar är stridsarenan. Det är en stor och dyr byggnad och där tränar soldaterna på att parera. Eftersom soldater blir mycket hungriga under sin träning behöver denna byggnad mängder av mat och starköl. I ett riktigt spel ska du ha en bra infrastruktur innan du bygger en stridsarena."
+msgstr "En sådan träningsbyggnad är stridsarenan. Det är en stor och dyr byggnad där soldater tränar parering. Eftersom soldaterna blir mycket hungriga under träningen behöver byggnaden mycket mat och starköl. I ett vanligt spel bör du ha en väl fungerande infrastruktur innan du bygger den."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "To see evade training in action, build a battle arena."
-msgstr "För att se en pågående träning i parering, bygg en stridsarena."
+msgstr "Bygg en stridsarena för att se pareringsträningen i praktiken."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
-msgstr "Medan vi väntar på stridsarenan kommer du troligtvis att se några soldater som går omkring. De byts automatiskt ut då och då. Jag lär dig mer om det senare."
+msgstr "Medan vi väntar på stridsarenan ser du kanske några soldater gå omkring. De byts ut automatiskt då och då. Jag berättar mer om det senare."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
@@ -177,7 +177,7 @@ msgstr "Bygg en stridsarena. Det är en stor byggnad."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr "Eftersom byggnationen kommer att ta lite tid kan du ändra spelets hastighet med %1$s och %2$s."
+msgstr "Eftersom bygget tar en stund kan du ändra spelhastigheten med %1$s och %2$s."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
 msgid "The Battle Arena Has Been Constructed"
@@ -187,25 +187,25 @@ msgstr "Stridsarenan är färdigbyggd"
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
-msgstr "Mycket bra. Vår stridsarena har färdigställts och soldaterna går redan på väg mot den."
+msgstr "Mycket bra. Vår stridsarena är färdigbyggd och soldaterna är redan på väg dit."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
-msgstr "Varorna som behövs levereras också. För att lyckas med träningen behöver du pitabröd och starköl och även fisk eller kött."
+msgstr "De varor som behövs levereras också dit. För att träningen ska fungera behöver du pitabröd och starköl samt antingen fisk eller kött."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr "För mer information kan du titta i byggnadens hjälpfönster, som du når via frågetecknet i alla byggnaders fönster."
+msgstr "Mer information finns i byggnadens hjälpfönster, som du öppnar med frågetecknet i byggnadsfönstret."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "För att få reda på hur långt dina soldater har kommit i sin träning kan du titta på deras ikoner. De har röda prickar som förändras:"
+msgstr "Du ser hur långt soldaterna har kommit i träningen på deras ikoner. De ändras med röda prickar:"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
@@ -217,7 +217,7 @@ msgstr "Inga röda prickar betyder att soldaten är otränad, så han har nivå 
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "För varje lyckat träningssteg blir dina soldater starkare. Detta visas med en röd prick. Denna soldat är på nivå 1 i sin förmåga att parera motståndarens slag."
+msgstr "För varje lyckat träningssteg blir soldaten starkare, vilket visas med en röd prick. Den här soldaten är på nivå 1 i pareringsträning."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
@@ -236,7 +236,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Det finns en andra typ av träningsanläggning; träningslägret. Det är också en stor byggnad och som ett komplement till stridsarenan tränar den attack och hälsa (kom ihåg att barbarsoldater inte kan tränas i försvar)."
+msgstr "Det finns en till träningsbyggnad: träningslägret. Även det är en stor byggnad och kompletterar stridsarenan genom att träna attack och hälsa. Kom ihåg att barbarsoldater inte kan träna försvar."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
@@ -256,13 +256,13 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Stridsarenan tränar bara soldaterna i att parera. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, vilket tränar dem i attack och hälsa."
+msgstr "Stridsarenan tränar bara soldaternas parering. För att få så starka soldater som möjligt behöver du också bygga ett träningsläger, där de tränar attack och hälsa."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "Bra, nu är vårt träningsläger är också färdigbyggt. Därmed finns det ingenting som hindrar oss från att få de starkaste soldater världen har skådat."
+msgstr "Bra, vårt träningsläger är nu också färdigbyggt. Nu kan vi få de starkaste krigare världen har skådat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
@@ -276,7 +276,7 @@ msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr "Denna utrustning produceras i smedjor av kol, järn och ibland guld. Du kommer att lära dig mer om detta i det andra scenariot i barbarkampanjen."
+msgstr "Den här utrustningen tillverkas i smedjor av kol, järn och ibland guld. Du får lära dig mer om detta i det andra scenariot i barbarernas fälttåg."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
@@ -285,7 +285,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr "Kom också ihåg att var och en av stammarna i Widelands har sitt eget sätt att träna, så byggnaderna och varorna är olika. Nivåerna på de olika förmågorna kan heller inte jämföras. En imperiesoldat har en grundattack på %1% på nivå 0 medan en barbarsoldat på samma nivå bara har en grundattack på %2%."
+msgstr "Kom också ihåg att varje klan i Widelands tränar på sitt eget sätt, så byggnader och varor skiljer sig åt. Förmågenivåerna kan inte heller jämföras: en imperiesoldat har en grundattack på %1% på nivå 0, medan en barbarsoldat på samma nivå bara har en grundattack på %2%."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
@@ -300,14 +300,14 @@ msgstr "Utforska dina omgivningar"
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr "Stora delar av kartan har ännu inte utforskats. Det kan vara en bra ide att veta åt vilket håll det vore bäst att utvidga vårt imperium."
+msgstr "Stora delar av kartan är ännu outforskade. Det kan vara bra att veta åt vilket håll vårt imperium bäst kan utvidgas."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr "Du kan prova din lycka och expandera slumpmässigt men du tar då en risk. Det är säkrare att använda en spejare för att utforska okända delar av kartan. Tänk om han hittar berg fulla med guld."
+msgstr "Du kan pröva lyckan och expandera slumpmässigt, men det är riskabelt. Ett säkrare sätt är att låta en spejare utforska oupptäckta delar av kartan. Tänk om han hittar berg fulla av guld?"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
@@ -325,7 +325,7 @@ msgstr "Bygg en spejarkoja."
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr "Det är bra att känna till sina omgivningar. En spejare kommer att utforska osedda delar av kartan åt dig."
+msgstr "Det är bra att känna till omgivningarna. En spejare utforskar oupptäckta delar av kartan åt dig."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
@@ -343,19 +343,19 @@ msgstr "Redo för att ge sig av!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr "Bra gjort! Din spejarkoja har byggts. Medan vår spanare flyttar in kan vil lära oss lite mer om honom."
+msgstr "Bra gjort! Din spejarkoja är färdigbyggd. Medan spejaren flyttar in kan vi lära oss lite mer om honom."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några ransoner i våt magasin."
+msgstr "Först behöver spejaren ta med sig mat på sina upptäcktsfärder. Som tur är har vi ransoner i magasinet."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr "När han förses med mat kommer han att vandra omkring slumpmässigt. Du bör följa hans förflyttningar innan krigsdimma döljer vad han såg."
+msgstr "När han har fått mat vandrar han slumpmässigt omkring i området. Följ honom innan krigsdimman döljer det han har sett."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
@@ -389,13 +389,13 @@ msgstr "Som du kan se kan spejaren gå ganska långt. Den goda nyheten är att i
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr "Du kan använda minikartan för att se hur utforskandet fortskrider."
+msgstr "Du kan följa utforskningens framsteg på minikartan."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr "Glöm inte att utforskning är hårt arbete och därför inte kan göras utan tillgång till mat."
+msgstr "Glöm inte att utforskning är hårt arbete och därför kräver mat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
@@ -405,7 +405,7 @@ msgstr "Hjältar och nybörjare"
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr "Medan våra soldater tränar, låt mig berätta vad vi kan göra med dem."
+msgstr "Medan soldaterna tränar berättar jag vad vi kan göra med dem."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
@@ -413,21 +413,21 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr "I varje militärbyggnad kan du ställa in om byggnaden föredrar hjältar (tränade soldater) eller nybörjare. Då och då kommer en soldat att gå ut från byggnaden och ersättas av en starkare eller svagare automatiskt – detta är vad du tidigare såg."
+msgstr "I varje militärbyggnad kan du välja om byggnaden ska föredra hjältar, alltså tränade soldater, eller nybörjare. Då och då lämnar en soldat byggnaden och ersätts automatiskt av en starkare eller svagare soldat. Det var detta du såg tidigare."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "Grundinställningen beror på typen av byggnad. För barbarerna är vaktposten den enda byggnaden som föredrar nybörjare som grundinställning. Du bör ändra denna inställning för att passa dina behov."
+msgstr "Grundinställningen beror på byggnadstypen. För barbarerna är vaktposten den enda byggnad som standard föredrar nybörjare. Ändra inställningen efter dina aktuella behov."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "När du expanderar ut i ingenmansland kan dina byggnader föredra nybörjare. När du planerar att attackera, skicka hjältar till den regionen. Besegrade byggnader föredrar alltid hjältar."
+msgstr "När du expanderar in i ingenmansland kan du låta byggnaderna föredra nybörjare. När du planerar ett anfall skickar du hjältar till området. Erövrade byggnader föredrar alltid hjältar."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:192
 msgid "Soldier capacity"
@@ -444,19 +444,19 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "Det finns ett annat sätt att styra en militärbyggnads styrka, genom antalet soldater som stationeras där. Bara klicka på pilknapparna för att öka eller minska hur många soldater du vill ha i byggnaden. Varje byggnad har en maximal kapacitet. För fortet är det till exempel fem."
+msgstr "Du kan också styra en militärbyggnads styrka genom antalet soldater som är stationerade där. Klicka på pilknapparna för att minska eller öka önskat antal soldater. Varje byggnad har en högsta kapacitet. Fortet har till exempel plats för fem."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:196
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr "Om du vill skicka iväg en speciell soldat är det bara att klicka på den. Den kommer i så fall att ersättas av en annan soldat."
+msgstr "Om du vill skicka iväg en viss soldat klickar du bara på honom. Han ersätts då av en annan soldat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr "Låt mig också beskriva vad siffrorna i statusraden betyder. Raden kan innehålla en pil och upp till tre nummer, t ex ‘↑ 1 (+5) soldat (+2)’."
+msgstr "Låt mig också förklara vad siffrorna i statusraden betyder. Raden kan innehålla en pil och upp till tre siffror, till exempel ”↑ 1 (+5) soldat (+2)”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
@@ -469,21 +469,21 @@ msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr "Den första siffran beskriver hur många soldater som för tillfället befinner sig i byggnaden. I detta exempel är bara en soldat kvarlämnad där (varje militärbyggnad vaktas alltid av minst en soldat)"
+msgstr "Den första siffran visar hur många soldater som just nu finns i byggnaden. I det här exemplet finns bara en soldat kvar där. Varje militärbyggnad vaktas alltid av minst en soldat."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr "Den andra siffran talar om hur många fler soldater som bor i byggnaden, men är ute för tillfället. De fem soldaterna kanske attackerar en fiende. De kommer att återvända när de har lyckats."
+msgstr "Den andra siffran visar hur många ytterligare soldater som hör till byggnaden men just nu befinner sig utanför den. De fem soldaterna kan till exempel anfalla en fiende. De återvänder när anfallet har lyckats."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Den tredje siffran indikerar soldater som saknas. Av de åtta soldater (1 + 5 + 2) som du vill ha här kan två ha dött. De kommer att ersättas av nya soldater från ditt magasin, om möjligt."
+msgstr "Den tredje siffran visar hur många soldater som saknas. Av de åtta soldater du vill ha här (1 + 5 + 2) kan två ha dött. De ersätts om möjligt av nya soldater från magasinet."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
@@ -496,7 +496,7 @@ msgid ""
 "land, the enemy can attack it directly, and the stored soldiers defend it "
 "and its surroundings when attacked. On the other hand, there’s a difference "
 "too: you can’t start an attack with the soldiers in your headquarters."
-msgstr "Ditt högkvarter har vissa egenskaper som liknar militära anläggningar: Det erövrar viss mark, fienden kan attackera det direkt och de soldater som finns där försvarar det och dess omgivningar när det attackeras. Å andra sidan finns det också en skillnad: du kan inte inleda en attack med soldaterna i ditt högkvarter."
+msgstr "Ditt högkvarter har vissa egenskaper som militära byggnader har: det erövrar mark, fienden kan anfalla det direkt och de lagrade soldaterna försvarar det och omgivningarna när det angrips. Det finns dock också en skillnad: du kan inte inleda ett anfall med soldaterna i högkvarteret."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
@@ -504,7 +504,7 @@ msgid ""
 "plain warehouses that don’t conquer land, and need nearby military sites for"
 " defense. Soldiers stored in plain warehouses don’t participate in any "
 "fighting, and plain warehouses can’t be attacked directly."
-msgstr "Högkvarterets militära kapacitet skiljer sig avsevärt från vanliga magasin som inte erövrar land och behöver närliggande militära anläggningar för försvar. Soldater som förvaras i magasin deltar inte i några strider, och magasin kan inte attackeras direkt."
+msgstr "Högkvarterets militära egenskaper skiljer det från vanliga magasin, som inte erövrar mark och behöver militära byggnader i närheten för försvar. Soldater i vanliga magasin deltar inte i strider och magasinen kan inte anfallas direkt."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
@@ -520,7 +520,7 @@ msgid ""
 "set soldier capacity and preference for military sites. If you do so, the "
 "headquarters will only let surplus soldiers be sent to other buildings, but "
 "not soldiers from the assigned garrison."
-msgstr "Alla soldater som råkar befinna sig i ditt högkvarter hjälper till att försvara det, men de är inte permanent tilldelade högkvarteret, så de kan skickas iväg när som helst när en militär anläggning behöver en soldat. Lyckligtvis kan du också tilldela vissa soldater till försvaret av högkvarteret på samma sätt som du ställer in soldatkapacitet och preferenser för militära anläggningar. Om du gör det kommer högkvarteret endast att låta överskottsoldater skickas till andra byggnader, men inte soldater från den tilldelade garnisonen."
+msgstr "Alla soldater som råkar vara i högkvarteret hjälper till att försvara det, men de är inte permanent tilldelade det. Därför kan de skickas iväg när en militärbyggnad behöver en soldat. Du kan också tilldela vissa soldater till högkvarterets försvar, på samma sätt som du anger soldatkapacitet och preferens för militära byggnader. Då kan endast överskottsoldater skickas till andra byggnader, inte soldater ur den tilldelade garnisonen."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid ""
@@ -531,7 +531,7 @@ msgid ""
 "soldiers to more than zero, then the headquarters will show the same soldier"
 " information as military sites in the status. Surplus soldiers are never "
 "shown in the status."
-msgstr "Om du tittar på statusraderna kan du se att det är tomt i ditt magasin, men att ditt högkvarter initialt har ett ”—” tecken. Det betyder att det inte finns någon garnison som skyddar högkvarteret, även om det fortfarande kan finnas några soldater lagrade där. Om du ökar önskat antal soldater till mer än noll, kommer högkvarteret att visa samma soldatinformation som militära anläggningar i statusen. Överskottsoldater visas aldrig i statusen."
+msgstr "I statusraderna ser du att magasinet är tomt medan högkvarteret från början visar tecknet ”—”. Det betyder att ingen garnison har satts upp för att skydda högkvarteret, även om det fortfarande kan finnas soldater lagrade där. Om du ökar önskat antal soldater över noll visar högkvarteret samma soldatinformation som militära byggnader i statusraden. Överskottsoldater visas aldrig där."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your sentry"
@@ -558,7 +558,7 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Men att förstöra en militärbyggnad är alltid förenat med en risk. Landet runt omkring är fortfarande ditt men det är inte längre skyddat. Vilken fiende som helst som bygger sin egen militärbyggnad i närheten kan ta över detta land utan fight, och få dina byggnader att fatta eld. Vidare kan nu delar av landet döljas av krigsdimma. Därför ska du endast demontera militärbyggnader långt in i ditt territorium, där du är säker för fienden."
+msgstr "Att förstöra en militärbyggnad innebär alltid en risk: marken är fortfarande din, men den är inte längre skyddad. En fiende som bygger egna militärbyggnader kan ta över marken utan strid, så att dina byggnader fattar eld. Dessutom kan delar av marken döljas av krigsdimman. Demontera därför bara militärbyggnader långt inne på ditt territorium, där du är säker från fienden."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:232
 msgid ""
@@ -575,7 +575,7 @@ msgstr "Demontera den."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Du kan också nyttja denna chans för att bekanta dig med de andra inställningsmöjligheterna; att föredra hjältar/nybörjare och att ändra antalet soldater i byggnaden."
+msgstr "Passa också på att bekanta dig med de andra inställningarna: preferensen för hjältar eller nybörjare och kapaciteten."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid "Soldiers, dismissed!"
@@ -591,7 +591,7 @@ msgid ""
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr "Du kan kontrollera hur många soldater som stationeras i en militärbyggnad med pilknapparna. Om du vill få ut även den sista soldaten måste du förstöra byggnaden, men i så fall kommer den inte längre att försvara ditt territorium. Detta kommer att göra dig sårbar för fientliga attacker."
+msgstr "Du kan styra hur många soldater som stationeras i en militärbyggnad med pilknapparna. Om du vill få ut även den sista soldaten måste du förstöra byggnaden. Då skyddar den dock inte längre ditt territorium, vilket gör det sårbart för fientliga anfall."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:245
 msgid "Dismantle your sentry in the north-west, next to the barrier."
@@ -604,7 +604,7 @@ msgstr "Bygg ut din fästning"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
 msgid "Enhancing Buildings"
-msgstr "Bygger ut byggnader"
+msgstr "Bygga ut byggnader"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:254
 msgid ""
@@ -624,14 +624,14 @@ msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Citadell kan inte byggas direkt. Istället måste du bygga en fästning först och sedan bygga ut den till ett citadell. För att göra det, klicka på fästningen, välj sedan 'Utöka till Citadell' knappen."
+msgstr "Citadell kan inte byggas direkt. Bygg först en fästning och bygg sedan ut den till ett citadell. Klicka på fästningen och välj sedan knappen ”Bygg ut till citadell”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr "Dina soldater kommer att lämna fästningen medan bygget pågår. Detta betyder att din fästning förlorar sin militära influens, som jag beskrev ovan."
+msgstr "Soldaterna lämnar fästningen medan bygget pågår. Det innebär att fästningen förlorar sitt militära inflytande, som jag beskrev ovan."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid "Enhance your fortress to a citadel now."
@@ -651,7 +651,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "Citadellet kan rymma 12 soldater och det är den största militära byggnaden som barbarerna kan bygga. Det kostar också mycket resurser och tar lång tid att bygga. Det är mest lämpligt för att vakta strategiskt viktiga platser som trånga passager eller berg."
+msgstr "Citadellet rymmer 12 soldater och är den största militärbyggnad barbarerna kan bygga. Det kostar också mycket resurser och tar lång tid att bygga. Det lämpar sig bäst för att vakta strategiskt viktiga platser som trånga passager och berg."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
 msgid "Defeat your Enemy"
@@ -668,27 +668,27 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Väl utfört arbete, citadellet är färdigbyggt. Men vad är det där? En fientlig stam har bosatt sig bredvid oss medan citadellet byggdes! Ser du hur de tog en del av vårt land? Och vår skogshuggare har nu förlorat sin arbetsplats. Detta är vad jag talade om. Låt oss ta tillbaka vårt land och besegra fienden!"
+msgstr "Väl utfört, citadellet är färdigbyggt. Men vad är det där? En fientlig klan har bosatt sig bredvid oss medan citadellet byggdes! Ser du hur de tog en del av vår mark? Vår skogshuggare har nu förlorat sin arbetsplats. Det var detta jag talade om. Låt oss ta tillbaka marken och besegra fienden!"
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:290
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "För att attackera en byggnad, klicka på dess dörr, välj antal soldater som du vill skicka och klicka på 'Attack' knappen."
+msgstr "För att anfalla en byggnad klickar du på dess dörr, väljer hur många soldater du vill skicka och klickar på knappen ”Anfall”."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr "Dina soldater kommer att anfalla från alla närliggande militärbyggnader. Likaså kommer försvarare att ansluta från fiendens alla närliggande byggnader och genskjuta dina styrkor."
+msgstr "Dina soldater kommer från alla närliggande militärbyggnader. På samma sätt kommer fiendens försvarare från deras närliggande militärbyggnader och genskjuter dina styrkor."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr "Anfall och erövra din fiendes alla militära byggnader och förstör deras högkvarter."
+msgstr "Anfall och erövra fiendens alla militärbyggnader och förstör deras högkvarter."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:286
 msgid "Defeat Your Enemy"
@@ -720,7 +720,7 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Men ett krig är dyrt och inte alltid den väg som leder till målet. När du startar ett nytt spel kan du också välja fredliga förutsättningar. Du borde definitivt testa dem, det är de värda."
+msgstr "Men krig är dyrt och leder inte alltid till målet. När du startar ett nytt spel kan du också välja fredliga vinstvillkor. Prova dem gärna; de är väl värda det."
 
 #: ../../../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:300
 msgid ""

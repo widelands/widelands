@@ -173,7 +173,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Järnmalm, guldmalm och kol bryts i respektive gruvor. I kristallgruvan gräver man efter kvarts och diamanter – sällsynta material som sällan hittas. Mycket granit kommer att produceras medan man söker efter dem."
+msgstr "Järnmalm, guldmalm och kol bryts i respektive gruvor. I kristallgruvan gräver man efter kvarts och diamanter, som alla är värdefulla och sällsynta material. Mycket granit kommer att produceras medan man söker efter dem."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
@@ -649,7 +649,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Må Satul värma dig, Judlinda. Har du funderat på att gräva efter resurser i bergen runt omkring oss? Vi börjar få slut på kvarts och diamanter till våra byggnader. Vi skulle också behöva mer järn, guld, och framför allt kol. Om vi får riklig tillgång till dessa resurser skulle vi kunna börja producera vapen och verktyg, det skulle hjälpa oss enormt. Vi skulle förstås behöva metallsmältare, en vapensmed, en rustningssmed och en verktygssmed också. Och kanske ännu fler."
+msgstr "Må Satul värma dig, Jundlina. Har du funderat på att gräva efter resurser i bergen runt omkring oss? Vi börjar få slut på kvarts och diamanter till våra byggnader. Vi skulle också behöva mer järn, guld och framför allt kol. Om vi får riklig tillgång till dessa resurser kan vi börja producera vapen och verktyg, vilket skulle hjälpa oss enormt. Vi skulle förstås behöva smältverk, en vapensmedja, en rustningssmedja och en verktygssmedja, kanske ännu fler."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -671,11 +671,11 @@ msgstr "Loftomor rapporterar"
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Må Satul värma dig, Jundina! Vi har färdigställt en verktygssmedja och våra verktygssmeder kommer att börja tillverka nya verktyg omgående."
+msgstr "Må Satul värma dig, Jundlina! Vi har färdigställt en verktygssmedja och våra verktygssmeder kommer att börja tillverka nya verktyg omgående."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr "Jundina påminner"
+msgstr "Jundlina påminner"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:323

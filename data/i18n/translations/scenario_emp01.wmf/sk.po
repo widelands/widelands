@@ -6,14 +6,14 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
-# Pavol Gono, 2024-2025
+# Pavol Gono, 2024-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Pavol Gono, 2024-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr "Dva drevorubačské domy a píla"
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Postavte ďalšie dva drevorubačské domy a pílu, akonáhle pre ne bude dostatok miesta."
+msgstr "Postavte ďalšie dva drevorubačské domy a pílu, len čo pre ne bude dostatok miesta."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"

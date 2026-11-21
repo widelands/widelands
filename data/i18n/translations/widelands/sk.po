@@ -2599,7 +2599,7 @@ msgstr ""
 
 #: ../../../../src/network/gamehost.cc:191
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Nesprávne použité, malo by byť: /ack_kick <meno>"
+msgstr "Nesprávne použitie, očakáva sa: /ack_kick <meno>"
 
 #: ../../../../src/network/gamehost.cc:197
 msgid "Kick acknowledgement cancelled: Wrong name given!"
@@ -5428,20 +5428,20 @@ msgstr "Pripájanie sa na server…"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1411
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Chyba pripojenia k serveru"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1413
 msgid "a networking bug"
-msgstr ""
+msgstr "sieťovej chyby"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1414
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "Nepodarilo sa načítať zoznam dostupných doplnkov zo servera!<br>Chybové hlásenie: %s"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1572
 #, c-format
@@ -6458,7 +6458,7 @@ msgstr "(%s)"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:701
 #, c-format
 msgid "by %s"
-msgstr ""
+msgstr "od %s"
 
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:290
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:570
@@ -6493,7 +6493,7 @@ msgstr "Komentáre a hodnotenia"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:427
 #, c-format
 msgid "%1$s   ✎ %2$s"
-msgstr ""
+msgstr "%1$s   ✎ %2$s"
 
 #. * TRANSLATORS: Filesize • Download count • Average rating • Number of
 #. comments •
@@ -7024,7 +7024,7 @@ msgstr "Scenár"
 
 #: ../../../../src/ui/fsmenu/launch_game.cc:435
 msgid "Win condition is set through the scenario"
-msgstr "Podmienka výhry sa nastaví počas scenára"
+msgstr "Podmienka výhry je určená scenárom"
 
 #: ../../../../src/ui/fsmenu/launch_game.cc:441
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:510
@@ -7931,7 +7931,7 @@ msgstr "V prípade pochybností nechajte túto možnosť zapnutú. Ak je vypnut�
 
 #: ../../../../src/ui/fsmenu/options.cc:202
 msgid "Accessibility mode for tooltips"
-msgstr ""
+msgstr "Režim prístupnosti pre kontextovú nápovedu"
 
 #: ../../../../src/ui/fsmenu/options.cc:212
 msgid "Dock windows to edges"
@@ -8007,7 +8007,7 @@ msgstr "Zobraz prekrytia pracovných oblastí"
 
 #: ../../../../src/ui/fsmenu/options.cc:351
 msgid "Pause game when inactive for:"
-msgstr "Zastaviť hru po neaktivite:"
+msgstr "Pozastaviť hru po neaktivite:"
 
 #: ../../../../src/ui/fsmenu/options.cc:361
 msgid "Start building road after placing a flag"
@@ -9539,7 +9539,7 @@ msgstr "Stratené civilné budovy"
 
 #: ../../../../src/ui/game/general_statistics_menu.cc:228
 msgid "Civilian buildings destroyed"
-msgstr "Porazené civilné budovy"
+msgstr "Zničené civilné budovy"
 
 #: ../../../../src/ui/game/general_statistics_menu.cc:233
 msgid "Military"
@@ -11081,7 +11081,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for volume slider in sound options
 #: ../../../../src/ui/shared/sound_options.cc:73
 msgid "Changes the volume. Click to hear a sample."
-msgstr "Mení hlasitosť. Kliknite pre vypočutie ukážky."
+msgstr "Mení hlasitosť. Kliknutím si vypočujete ukážku."
 
 #: ../../../../src/ui/shared/sound_options.cc:150
 msgid "Play your own music in-game"
@@ -11363,12 +11363,12 @@ msgstr "Pokračovať v hre"
 
 #: ../../../../src/ui/wui/interactive_gamebase.cc:374
 msgid "Pause"
-msgstr "Zastaviť"
+msgstr "Pozastaviť"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../../../src/ui/wui/interactive_gamebase.cc:377
 msgid "Pause the Game"
-msgstr "Zastaviť hru"
+msgstr "Pozastaviť hru"
 
 #. * TRANSLATORS: actual_speed (target_speed) (desired_speed)
 #: ../../../../src/ui/wui/interactive_gamebase.cc:630
@@ -11871,7 +11871,7 @@ msgstr "Vymazať položku"
 
 #: ../../../../src/wlapplication_options.cc:374
 msgid "Tooltip Accessibility Mode Key"
-msgstr ""
+msgstr "Kláves režimu prístupnosti pre kontextovú nápovedu"
 
 #: ../../../../src/wlapplication_options.cc:378
 msgid "Toggle Fullscreen"
@@ -12077,7 +12077,7 @@ msgstr "Nastavenie normálnej rýchlosti hry"
 
 #: ../../../../src/wlapplication_options.cc:714
 msgid "Pause The Game"
-msgstr "Zastaviť hru"
+msgstr "Pozastaviť hru"
 
 #: ../../../../src/wlapplication_options.cc:719
 msgid "Scroll to Starting Field"

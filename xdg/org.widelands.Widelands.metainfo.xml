@@ -285,10 +285,10 @@ Widelands همچنین دارای یک هوش مصنوعی برای به چال�
       Widelands - Širozemlje - nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite međusobno u pepelu rata. Widelands takođe u ponudi ima i AI da te izazove.
     </p>
     <p xml:lang="sv">
-      Du är ledaren för en liten klan. Din uppgift är att bygga en ständigt växande bosättning. Varje medlem i din klan gör sin del i att tillverka mer resurser för ytterligare tillväxt.
+      Du är ledare för en liten klan. Din uppgift är att bygga en ständigt växande bosättning. Varje medlem i klanen bidrar till att ta fram fler resurser som gör att den kan växa.
     </p>
     <p xml:lang="sv">
-      Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Men bosättandet börjar verkligen på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig.
+      Widelands har ett enspelarläge med fälttåg som berättar om stammarnas kamp i Widelands värld. Det är dock först när du spelar med vänner över internet eller LAN som ni tillsammans kan bygga upp nya imperier – eller krossa varandra i krigets damm. Widelands har även en AI-motståndare som utmanar dig.
     </p>
     <p xml:lang="tr">
       Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. 
@@ -459,7 +459,7 @@ Version de correction de bugs</li>
         <li xml:lang="it">Sono state aggiunte sei nuove mappe e ne sono state rimosse tre mappe vecchie.</li>
         <li xml:lang="it">Distretti economici</li>
         <li xml:lang="it">Molti miglioramenti all'Enciclopedia dentro alla partita</li>
-        <li xml:lang="it">Download website maps as add-ons</li>
+        <li xml:lang="it">Scarica le mappe del sito web come add-on</li>
         <li xml:lang="it">Nuove modalità di visualizzazione nell'editor</li>
         <li xml:lang="it">Molte nuove funzionalità per gli sviluppatori di componenti aggiuntivi</li>
         <li xml:lang="lt">prekyba rinkoje</li>
@@ -526,12 +526,12 @@ Version de correction de bugs</li>
         <li xml:lang="sk">Nové zobrazenia v editore</li>
         <li xml:lang="sk">Veľa nových funkcií pre vývoj doplnkov</li>
         <li xml:lang="sv">Marknadshandel</li>
-        <li xml:lang="sv">Sex nya kartor tillagda och tre gamla kartor borttagna</li>
+        <li xml:lang="sv">Sex nya kartor har lagts till och tre gamla har tagits bort</li>
         <li xml:lang="sv">Ekonomidistrikt</li>
-        <li xml:lang="sv">Många förbättringar till spelets uppslagsverk</li>
-        <li xml:lang="sv">Ladda ner webbplatskartor som tillägg</li>
+        <li xml:lang="sv">Många förbättringar av uppslagsverket i spelet</li>
+        <li xml:lang="sv">Hämta kartor från webbplatsen som tillägg</li>
         <li xml:lang="sv">Nya visuella lägen i redigeraren</li>
-        <li xml:lang="sv">Många nya förmågor för tilläggsutvecklare</li>
+        <li xml:lang="sv">Många nya möjligheter för tilläggsutvecklare</li>
         <li xml:lang="tr">Alışveriş - ticaret</li>
         <li xml:lang="tr">6 yeni harita eklendi, 3 eski harita kaldırıldı</li>
         <li xml:lang="tr">Ekonomi bölgeleri</li>

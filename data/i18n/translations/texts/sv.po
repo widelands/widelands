@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../../../data/txts/ABOUT.lua:7
 msgid "Readme"
-msgstr "Viktigt"
+msgstr "Läs mig"
 
 #: ../../../../data/txts/ABOUT.lua:11
 msgid "License"
@@ -39,7 +39,7 @@ msgstr "Översättare"
 
 #: ../../../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
-msgstr "Widelands utvecklingslag"
+msgstr "Widelands utvecklingsteam"
 
 #: ../../../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
@@ -48,26 +48,26 @@ msgstr "Licensinformation för Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "Copyright 2002 - %1% Widelands utvecklingsteam"
+msgstr "Copyright 2002–%1% av Widelands utvecklingsteam."
 
 #: ../../../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0 (or, at your option, any later version)."
-msgstr "Detta spel är gratis och öppen källkod (FOSS), licensierat under GNU General Public License (GPL) V2.0 (eller, om du föredrar det, någon senare version)."
+msgstr "Det här spelet är fri programvara med öppen källkod (FOSS) och licensieras under GNU General Public License (GPL) version 2.0 (eller, om du föredrar det, någon senare version)."
 
 #: ../../../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr "Du kan hitta mer information om FOSS och GPL genom att besöka följande webbsida: %s"
+msgstr "Mer information om FOSS och GPL finns på följande webbsida: %s"
 
 #: ../../../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "Du kan hitta hela licenstexten där, samt mer information om dess filosofi och den lagliga innebörden."
+msgstr "Där finns licensens fullständiga text samt mer information om dess filosofi och juridiska följder."
 
 #: ../../../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
@@ -77,19 +77,19 @@ msgstr "Vi skickar också med GPL som ett textdokument tillsammans med Widelands
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "I Linux kan du hitta filen kallad COPYING i källans rot eller i fristående binärpaket, eller i installationsfoldern (som ‘%1%’)."
+msgstr "På Linux hittar du filen COPYING i rotkatalogen för källkoden eller det fristående binärpaketet, eller i installationsmappen (till exempel ”%1%”)."
 
 #: ../../../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "I Windows kan du hitta filen kallad COPYING.txt i installationsfoldern och Widelands startmeny innehåller en länk till filen."
+msgstr "På Windows hittar du filen COPYING.txt i installationsmappen. Widelands post på Start-menyn länkar till filen."
 
 #: ../../../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "I MacOS kan du hitta filen kallad COPYING i arkivet du laddade ner från webbsidan."
+msgstr "På macOS hittar du filen COPYING i arkivet som du hämtade från webbplatsen."
 
 #: ../../../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
@@ -100,7 +100,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "För mer information och support kan du hitta oss på %1% (Webbsida, wiki, forum för frågor och generell support), %2% (felsökning) och %3% (översättningar)"
+msgstr "Mer information och support finns på %1% (webbplats, wiki och forum för frågor eller allmän support), %2% (felhantering) och %3% (översättningar)."
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -127,7 +127,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands är mer eller mindre funktionellt färdigt och är mycket roligt att spela själv och ännu roligare i flerspelarläge med andra. Ändå finns det alltid mer jobb att göra i alla områden. Om du är intresserad av att bidra – bidraget kan vara att göra grafik, rätta buggar eller lägga till nya funktioner, översätta spelet till ditt språk eller skapa nya kartor – kontakta oss på vår webbplats."
+msgstr "Widelands är nästan färdigt funktionsmässigt och roligt att spela själv, men ännu roligare tillsammans med andra i flerspelarläge. Det finns ändå alltid mer att göra på alla områden. Vill du bidra, till exempel med grafik, felrättningar, nya funktioner, översättningar eller kartor, kan du kontakta oss via vår webbplats."
 
 #: ../../../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -138,7 +138,7 @@ msgstr "Widelands hjälp"
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr "Du kan hitta hjälp om spelande eller editorn/kartbyggaren genom att använda hjälpknappen längst ner i menyn, eller genom att trycka på %1%."
+msgstr "Du hittar hjälp om spelet och redigeraren med hjälpknappen i den nedre menyn eller genom att trycka på %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../../../data/txts/README.lua:20
@@ -147,25 +147,25 @@ msgstr "F1"
 
 #: ../../../../data/txts/README.lua:23
 msgid "Reporting Bugs"
-msgstr "Rapportera buggar"
+msgstr "Rapportera fel"
 
 #: ../../../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Om du upptäcker en bugg, rapportera det till vår felsökare:"
+msgstr "Om du upptäcker ett fel, rapportera det i vårt felhanteringssystem:"
 
 #: ../../../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr "Bidra med tillräcklig bakgrundsinformation. Berätta:"
+msgstr "Ge oss tillräcklig bakgrundsinformation. Berätta:"
 
 #: ../../../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr "Detaljerade information om hur man får felet att uppstå, om möjligt."
+msgstr "Detaljerade steg för hur felet kan återskapas, om möjligt."
 
 #: ../../../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "Vad du förväntade dig skulle hända när du gjorde det du gjorde och vad som istället hände."
+msgstr "Vad du förväntade dig skulle hända när du följde stegen och vad som faktiskt hände."
 
 #: ../../../../data/txts/README.lua:30
 msgid ""
@@ -178,11 +178,11 @@ msgstr "Vilken version av Widelands du kör, det vill säga antingen byggnumret 
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "Inkludera gärna vilket operativsystem du kör Widelands på, eftersom en del buggar kan påverkas av det."
+msgstr "Ange också vilket operativsystem du kör Widelands på, eftersom vissa fel är plattformsspecifika."
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
-msgstr "Vilken karta du spelade när felet uppkom."
+msgstr "Vilken karta du spelade på när felet uppstod."
 
 #: ../../../../data/txts/README.lua:33
 msgid ""
@@ -195,7 +195,7 @@ msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t. ex. att det kraschar där det kan vara svårt att veta vad som utlöser det), inkludera det också. För mer information, se avsnittet om svar nedan."
+msgstr "Om du har ett sparat spel eller en repris som visar problemet, till exempel en krasch där det är svårt att avgöra vad som utlöser den, får du gärna bifoga det. Mer information finns i avsnittet Repriser nedan."
 
 #: ../../../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
@@ -207,7 +207,7 @@ msgstr "Hövdingar"
 
 #: ../../../../data/txts/developers.lua:18
 msgid "Elders"
-msgstr "Åldermän"
+msgstr "Äldste"
 
 #: ../../../../data/txts/developers.lua:22
 #: ../../../../data/txts/developers.lua:424
@@ -247,7 +247,7 @@ msgstr "Grafiker"
 
 #: ../../../../data/txts/developers.lua:192
 msgid "Musicians"
-msgstr "Musikskapare"
+msgstr "Musiker"
 
 #: ../../../../data/txts/developers.lua:211
 msgid "Sound Effects"
@@ -343,7 +343,7 @@ msgstr "och många, många fler (tack för allting ni har gjort)"
 
 #: ../../../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr "Hjälp på nätet"
+msgstr "Onlinehjälp"
 
 #: ../../../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -351,7 +351,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr "Om du behöver mer dokumentation eller hjälp med Widelands eller Widelands kartredigerare, besök vår webbplats på %s. Du kan hitta hjälp i vår sökbara webbplats wiki, som finns där."
+msgstr "Om du behöver mer dokumentation eller hjälp med Widelands eller Widelands redigerare, besök vår webbplats på %s. Där finns onlinehjälp i vår wiki."
 
 #: ../../../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
@@ -363,7 +363,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands är ett gratis, öppen källkodsbaserat realtidsstrategispel med kampanjer för en spelare och ett flerspelarläge. Spelet är inspirerat av Settlers II, men har betydligt större variation och djup. Det är ändå lätt att komma igång tack vare spelbara handledningar."
+msgstr "Widelands är ett fritt realtidsstrategispel med öppen källkod, enspelarfälttåg och flerspelarläge. Spelet är inspirerat av Settlers II men har betydligt större variation och djup. Det är ändå lätt att komma igång med de spelbara handledningarna."
 
 #: ../../../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -394,7 +394,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Med hjälp av alternativet Se repris i huvudmenyn kan du se en exakt rekonstruktion av ett tidigare spelat spel. Observera dock att även små förändringar i speldatafilerna eller Widelands-programfilen kan göra att omspelningen blir inkompatibel och ”synkroniseras”. Detta liknar hur nätverksspel drabbas av synkroniseringsproblem om en av spelarna har en annan version av spelet."
+msgstr "Med alternativet Visa repris i huvudmenyn kan du spela upp en exakt rekonstruktion av ett tidigare spel. Observera dock att även små ändringar i speldatafilerna eller Widelands körbara fil kan göra en repris inkompatibel eller få den att tappa synkroniseringen. Det liknar synkroniseringsproblemen i nätverksspel när någon spelare har en annan spelversion."
 
 #: ../../../../data/txts/help/common_helptexts.lua:32
 msgid ""
@@ -403,7 +403,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr "Upprepningar är ett mycket användbart verktyg för att hitta fel i spellogiken och kan därför bifogas felrapporter. Upprepningsfilerna sparas i underkatalogen ”replays” i Widelands hemkatalog. På den sista fliken ”Teknisk information” i det här fönstret ser du var katalogen finns på datorn."
+msgstr "Repriser är ett mycket användbart verktyg för att hitta fel i spellogiken och kan därför bifogas felrapporter. Reprisfilerna sparas i underkatalogen ”replays” i Widelands hemkatalog. På den sista fliken ”Teknisk information” i det här fönstret ser du var katalogen finns på datorn."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
@@ -424,7 +424,7 @@ msgstr "Inställningar för flerspelarspel"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
-msgstr "Du är i menyn för att starta spel för flera spelare."
+msgstr "Du befinner dig i startmenyn för flerspelarspel."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
@@ -434,19 +434,19 @@ msgstr "Klientinställningar"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr "På vänstersidan finns en lista över alla klienter, inklusive din egen. Du kan ställa in din roll med knappen efter ditt användarnamn. Tillgängliga roller är:"
+msgstr "Till vänster finns en lista över alla klienter, även din egen. Du väljer roll med knappen efter ditt användarnamn. Följande roller finns:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Färgen på spelarnas flaggor. Om mer än en klient valde samma färg delar dessa på kontrollen över spelaren ('delat kungarike läge')."
+msgstr "Spelaren med flaggans färg. Om flera klienter väljer samma färg delar de kontrollen över spelaren (delat kungarike-läge)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Publikläge, innebär att du kan se allting men du kan inte styra någon spelare"
+msgstr "Åskådarläge: du kan se allt men inte styra någon spelare"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
@@ -456,18 +456,18 @@ msgstr "Spelarinställningar"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr "I mitten är inställningarna för spelarna. För att starta spelet måste varje spelare vara något av följande:"
+msgstr "I mitten finns spelarnas inställningar. För att starta ett spel måste varje spelare vara något av följande:"
 
 #: ../../../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Ansluten till en eller flera klienter (se 'Klientinställningar')."
+msgstr "Ansluten till en eller flera klienter (se Klientinställningar)."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr "Ansluten till en datorspelare (ansiktet i bilden såväl som texten som framträder när musen förs över den indikerar vald datorspelares styrka)."
+msgstr "Ansluten till en datorspelare. Ansiktet i bilden och texterna som visas när musen hålls över dem anger den valda datorspelarens styrka."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
@@ -483,13 +483,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "De tre sista kan bara väljas av värdklienten genom att vänsterklicka på 'typ' knappen för en spelare. Värdspelare kan också ställa in initieringen av varje spelare (vilka byggnader, varor och arbetare spelaren startar med) och datorspelarnas stam och lag."
+msgstr "De tre sista kan endast väljas av värdklienten genom att vänsterklicka på en spelares typknapp. Värdklienten kan även ange varje spelares utgångsläge (byggnader, varor och arbetare) samt datorspelarnas klan och lag."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr "Varje klient som är ansluten till en spelare (som inte är åskådare) kan ställa in stam och lag för den spelaren."
+msgstr "Varje klient som är ansluten till en spelare som inte är åskådare kan välja spelarens klan och lag."
 
 #: ../../../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
@@ -501,7 +501,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr "Du kan se information om vald karta eller valt sparat spel på högersidan. En knapp bredvid kartan tillåter värden att byta till en annan karta. Vidare har värden möjlighet att ställa in vinstförutsättningar och slutligen starta spelet så snart alla spelare är klara."
+msgstr "Till höger visas information om den valda kartan eller det sparade spelet. Med knappen bredvid kartnamnet kan värden byta karta, välja ett särskilt vinstvillkor och starta spelet när alla spelare är klara."
 
 #: ../../../../data/txts/tips/amazons.lua:4
 msgid ""
@@ -520,11 +520,11 @@ msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr "Sällsynta träd huggs ned av erfarna skogshuggare,  boende i skogshuggarkojor utökade till bostad för erfaren skogshuggare. När byggnaden utökas slutar de hugga vanliga träd så planera deras placering i förväg."
+msgstr "Sällsynta träd fälls av erfarna skogshuggare i skogshuggarkojor som byggts ut för sällsynt trädfällning. De slutar då att fälla vanliga träd, så planera placeringen i förväg."
 
 #: ../../../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr "Mat torkas med träkolseldar. Säkerställ kontinuerliga leveranser."
+msgstr "Mat torkas över träkolseldar. Se till att tillgången är jämn."
 
 #: ../../../../data/txts/tips/amazons.lua:20
 msgid ""
@@ -542,7 +542,7 @@ msgstr "Vatten är livet för Amazonerna. Vattensamlarna gör en viktig insats f
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr "För att vaska guld krävs en stadig ström av vatten, och det är bättre att hämta det så nära som möjligt för att få det effektivt och fräscht."
+msgstr "Guldvaskning kräver ett jämnt vattenflöde. Hämta vattnet så nära som möjligt för bästa effektivitet och färskhet."
 
 #: ../../../../data/txts/tips/amazons.lua:32
 msgid ""
@@ -554,7 +554,7 @@ msgstr "Vildmarksvakter ser till att det finns färskt vilt för jakt och fisk f
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr "Lagernivåerna för sällsynta träslag övervakas av plantager för sällsynta träd, och djungelmästarna planterar enligt ekonomiska krav."
+msgstr "Lagren av sällsynta träslag övervakas av plantagerna, och djungelmästarna planterar efter ekonomins behov."
 
 #: ../../../../data/txts/tips/amazons.lua:40
 msgid ""
@@ -566,7 +566,7 @@ msgstr "Rep är nödvändiga för att bygga stabila byggnader, sy stadiga kläde
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr "Djungelmästare lär sig sina färdigheter genom att arbeta som djungelbevarare innan de arbetar i trädgårdscenter eller plantager med sällsynta träd."
+msgstr "Djungelmästare lär sig yrket som djungelbevarare innan de arbetar i trädgårdscentraler eller plantager med sällsynta träd."
 
 #: ../../../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -578,7 +578,7 @@ msgstr "Håll ett öga på dina fiskare och bygg ett fiskodlarhus för att åter
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "Bygg alltid hus åt skogsvaktaren och  skogshuggaren så att dina stockar inte tar slut."
+msgstr "Bygg alltid både ett skogvaktarhus och ett skogshuggarhus så att timret inte tar slut."
 
 #: ../../../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -611,7 +611,7 @@ msgstr "De flesta utbyggda byggnader behöver erfarna arbetare. Bygg inte ut en 
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr "Widelands skapar en nödsparing, så att du kan fortsätta spela exakt där spelet stängdes."
+msgstr "Widelands skapar en nödsparning så att du kan fortsätta spela exakt där spelet avslutades."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../../../data/txts/tips/editor.lua:8
@@ -619,44 +619,44 @@ msgstr "Widelands skapar en nödsparing, så att du kan fortsätta spela exakt d
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr "Du kan hitta allmän hjälp för editorn samt en kort handledning på vår wiki på %s."
+msgstr "Allmän hjälp om redigeraren och en kort handledning finns på vår wiki på %s."
 
 #: ../../../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Du kan välja multipla typer av djur om du håller ner 'Ctrl' medan du väljer. Om du sedan klickar på kartan, placeras ett djur av något av de valda djurtyperna ut."
+msgstr "Du kan välja flera djurtyper genom att hålla ned Ctrl medan du väljer. När du sedan klickar på kartan placeras ett exemplar av en av de valda djurtyperna ut."
 
 #: ../../../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr "Precis som med djuren så kan du välja multipla fasta objekt eller markstrukturer med 'Ctrl' + musklick."
+msgstr "Precis som för djur kan du välja flera orörliga objekt eller marktexturer med Ctrl + musklick."
 
 #: ../../../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Att hålla ner 'Shift' aktiverar det första alternativa verktyget. Detta verktyg är oftast motsatsen till det vanliga verktyget (till exempel att ta bort ett objekt istället för att placera ut ett)."
+msgstr "Genom att hålla ned Skift aktiverar du det första alternativa verktyget. Det är i de flesta fall motsatsen till det vanliga verktyget, till exempel att ta bort ett objekt i stället för att placera ut ett."
 
 #: ../../../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr "Om du håller ned Ctrl aktiveras det andra alternativa verktyget (om det finns)."
+msgstr "Om du håller ned Ctrl aktiveras det andra alternativa verktyget, om det finns."
 
 #: ../../../../data/txts/tips/editor.lua:28
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr "Med knapparna %1% kan du direkt ställa in storleken på det markerade området runt muspekaren."
+msgstr "Med tangenterna %1% kan du direkt ställa in storleken på det valda området runt muspekaren."
 
 #: ../../../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr "%1%  beter sig som i vanliga spel: Det växlar om byggnadsytor visas på eller av."
+msgstr "%1% fungerar som i vanliga spel: det växlar visningen av byggnadsytor."
 
 #: ../../../../data/txts/tips/editor.lua:36
 msgid ""
@@ -667,7 +667,7 @@ msgstr "När du placerar ut träd, använd hjälpknappen för att se vilka träd
 #: ../../../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr "Om du inte placerar ut vatten och fiskresurser kommer en förinställd mängd att användas."
+msgstr "Om du inte anger vatten- och fiskresurser används en förinställd mängd."
 
 #: ../../../../data/txts/tips/editor.lua:44
 msgid ""

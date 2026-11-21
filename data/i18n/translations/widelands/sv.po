@@ -424,7 +424,7 @@ msgstr "%1$s har dragit tillbaka önskemålet att gå med i laget %2$s."
 #: ../../../../src/commands/cmd_diplomacy.cc:156
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr "%1$shar nekat %2$s medlemskap i deras lag."
+msgstr "%1$s har nekat %2$s medlemskap i sitt lag."
 
 #: ../../../../src/commands/cmd_diplomacy.cc:159
 #, c-format
@@ -466,7 +466,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "Fel i reprisens synkronisering så spelet pausades.\nDu tittar troligtvis på en repris som har skapats med en annan version av Widelands, vilket inte stöds.\n\nOm du är säker på att reprisen skapades med samma version av Widelands, %1$s, och rapportera problemet som en bugg.\nDu kan hitta relaterade meddelanden i standard ut (stdout.txt på Windows). Bifoga denna information till din rapport."
+msgstr "Reprisen har hamnat ur synk och spelet har pausats.\nDu tittar troligen på en repris som har skapats med en annan version av Widelands, vilket inte stöds.\n\nOm du är säker på att reprisen skapades med samma version av Widelands, %1$s, rapportera problemet som en bugg.\nDu hittar relaterade meddelanden i standardutdata (stdout.txt i Windows). Bifoga denna information till din rapport."
 
 #: ../../../../src/editor/map_generator.cc:755
 msgid "Random Player"
@@ -812,8 +812,8 @@ msgstr[1] "%1$u tillägg med fel version: %2$s"
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
-msgstr[0] "%1$usaknat tillägg: %2$s"
-msgstr[1] "%1$usaknade tillägg: %2$s"
+msgstr[0] "%1$u saknat tillägg: %2$s"
+msgstr[1] "%1$u saknade tillägg: %2$s"
 
 #: ../../../../src/logic/addons.cc:256
 #, c-format
@@ -1067,7 +1067,7 @@ msgstr "Saknar startposition"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands kunde inte starta spelet eftersom spelare %u inte har någon startposition\nDu kan lägga till en startposition för hand med kartredigeraren för att lösa detta problem."
+msgstr "Widelands kunde inte starta spelet eftersom spelare %u inte har någon startposition.\nDu kan lägga till en startposition för hand med kartredigeraren för att lösa detta problem."
 
 #: ../../../../src/logic/game.cc:767
 msgid "Initializing…"
@@ -1788,7 +1788,7 @@ msgstr "Väntar"
 #: ../../../../src/ui/game/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr "Rekognocerar"
+msgstr "Utforskar"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../../../src/logic/map_objects/tribes/ship/draw.cc:110
@@ -2480,7 +2480,7 @@ msgstr "/me fil stämde inte med md5-kontrollsumma."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me kontrollerade mottagen fil. Trots att md5s kontrollsumma lyckades kan inte filen hanteras.."
+msgstr "/me kontrollerade den mottagna filen. Trots att MD5-kontrollen lyckades kan filen inte hanteras."
 
 #: ../../../../src/network/gameclient.cc:1404
 msgid "Disconnected"
@@ -2596,7 +2596,7 @@ msgstr "Misslyckades med att vara värd för servern!"
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "Wideland kunde inte börja vara värd för en server.\nDetta borde inte hända och det finns troligen ingenting du kan göra åt det. Rapportera gärna buggen."
+msgstr "Widelands kunde inte starta en server.\nDetta borde inte hända och det finns troligen ingenting du kan göra åt det. Rapportera gärna buggen."
 
 #: ../../../../src/network/gamehost.cc:363
 msgid "Failed to start the server!"
@@ -2626,7 +2626,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "Widelands kunde inte etablera en anslutning till den givna adressen.\nAntingen finns det ingen metaserver som körs på den förmodade porten eller\när dina nätverksinställingar felaktiga."
+msgstr "Widelands kunde inte etablera en anslutning till den givna adressen.\nAntingen körs ingen metaserver på den förmodade porten eller\när dina nätverksinställningar felaktiga."
 
 #: ../../../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
@@ -2873,7 +2873,7 @@ msgstr "Spelet påbörjades alldeles efter att du försökte ansluta."
 
 #: ../../../../src/network/network_gaming_messages.cc:36
 msgid "Server has crashed and performed an emergency save."
-msgstr "Sververn har kraschat och nödsparat."
+msgstr "Servern har kraschat och nödsparat."
 
 #: ../../../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
@@ -2931,7 +2931,7 @@ msgstr "Servern använder en annan protokollversion"
 #: ../../../../src/network/network_gaming_messages.cc:54
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
-msgstr "Mottog kommando nr %s, vilket inte är tillåtet i detta land."
+msgstr "Mottog kommando nr %s, vilket inte är tillåtet i detta tillstånd."
 
 #: ../../../../src/network/network_gaming_messages.cc:56
 msgid "Client reports time to host that is running backwards."
@@ -3045,7 +3045,7 @@ msgstr "Misslyckades med att använda det lokala nätverket!"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr "Widelands kunde inte använda det lokala nätverket. Kanske någon annan process redan kör en server på port %s eller dina nätverksinställningar är felaktiga."
+msgstr "Widelands kunde inte använda det lokala nätverket. Kanske kör någon annan process redan en server på port %s eller så är dina nätverksinställningar felaktiga."
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -3932,7 +3932,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Ett fel har uppstått. Felmeddelandet är:\n\n%1$s\n\nRapportera detta problem för att hjälpa till att förbättra Widelands. Du kan hitta relaterade meddelanden i standard ut (stdout.txt i Windows). Du använder version%2$s.\nBifoga denna information till din rapport."
+msgstr "Ett fel har uppstått. Felmeddelandet är:\n\n%1$s\n\nRapportera detta problem för att hjälpa oss att förbättra Widelands. Du hittar relaterade meddelanden i standardutdata (stdout.txt i Windows). Du använder version %2$s.\nBifoga denna information till din rapport."
 
 #: ../../../../src/ui/editor/editorinteractive.cc:1317
 #, c-format
@@ -4600,7 +4600,7 @@ msgstr "För många spelare"
 msgid ""
 "We do not recommend setting more than 8 players except for testing purposes."
 " Are you sure that you want more than 8 players?"
-msgstr "Vi rekommenderar inte inställningar med fler än 8 spelare för annat än att prova ändamål. Är du säker på att du vill ha fler än 8 spelare?"
+msgstr "Vi rekommenderar inte fler än 8 spelare annat än för teständamål. Är du säker på att du vill ha fler än 8 spelare?"
 
 #. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
 #. players except
@@ -4735,7 +4735,7 @@ msgstr "Högsta höjd:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "Klicka på kartan för att ge terrängen ett slumpmässigt höjdvärde inom specifierade gränser"
+msgstr "Klicka på kartan för att ge terrängen ett slumpmässigt höjdvärde inom de angivna gränserna"
 
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:97
 msgid "Fixed height"
@@ -5279,7 +5279,7 @@ msgstr "\n• %1$s (%2$s) av %3$s"
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:498
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:532
 msgid "NOT VERIFIED"
-msgstr "INTE VERIFIERADE"
+msgstr "INTE VERIFIERAT"
 
 #: ../../../../src/ui/fsmenu/addons/manager.cc:1042
 msgid "verified"
@@ -5762,7 +5762,7 @@ msgstr "Ogiltigt versionskrav"
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr "Den minimala Widelands-versionen '%1$s' kan inte vara nyare än den maximala idelands-versionen '%2$s'.  Tillägget '%3$s' Kommer inte sparas."
+msgstr "Den lägsta Widelands-versionen %1$s får inte vara nyare än den högsta Widelands-versionen %2$s. Tillägget %3$s kommer inte att sparas."
 
 #: ../../../../src/ui/fsmenu/addons/packager.cc:595
 msgid "Invalid Version"
@@ -5784,7 +5784,7 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr "Tillägget '%1$s'  specifierar inte ett versionsminimum, men inga av kartorna kan läsas in med Widelands-versioner äldre än %2$s. Versionsminimumet sätts automatiskt till det."
+msgstr "Tillägget %1$s anger ingen lägsta Widelands-version, men ingen av kartorna kan läsas in med Widelands-versioner äldre än %2$s. Den lägsta versionen ställs in automatiskt."
 
 #: ../../../../src/ui/fsmenu/addons/packager.cc:616
 #, c-format
@@ -5792,7 +5792,7 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr "Tillägget '%1$s'  specifierar ett versionsminimum %2$s, men inga av kartorna kan läsas in med Widelands-versioner äldre än %3$s Versionsminimumet sätts automatiskt till det."
+msgstr "Tillägget %1$s anger en lägsta Widelands-version på %2$s, men ingen av kartorna kan läsas in med Widelands-versioner äldre än %3$s. Versionskravet ändras automatiskt."
 
 #: ../../../../src/ui/fsmenu/addons/packager.cc:638
 msgid "Error Writing Addon"
@@ -6575,7 +6575,7 @@ msgstr "Standard"
 
 #: ../../../../src/ui/fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
-msgstr "Krashrapportdetaljer"
+msgstr "Detaljer för kraschrapport"
 
 #: ../../../../src/ui/fsmenu/crash_report.cc:62
 #: ../../../../src/ui/fsmenu/crash_report.cc:149
@@ -6609,7 +6609,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr "Det verkar som Widelands krashade förra gången du körde det. En backtrace genererades automatiskt i felsökningssyfte. Skicka gärna in rapporten och en beskrivning av vad du gjorde innan kraschen till Widelands utvecklare under %s så att vi kan lösa problemen."
+msgstr "Det verkar som att Widelands kraschade förra gången du körde det, men ett stackspår för felsökning genererades automatiskt. Skicka rapporten och en beskrivning av vad som hände i spelet och vad du gjorde strax före kraschen till Widelands utvecklingsteam på %s, så att vi kan lösa problemet."
 
 #: ../../../../src/ui/fsmenu/crash_report.cc:142
 msgid "Show details…"
@@ -6743,7 +6743,7 @@ msgstr "Återställ alla"
 
 #: ../../../../src/ui/fsmenu/keyboard_options.cc:224
 msgid "Reset all to defaults"
-msgstr "Återställ alla till standardintällningar"
+msgstr "Återställ alla till standardinställningarna"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
@@ -7523,7 +7523,7 @@ msgstr "Rullningsinställningskonflikt"
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
-msgstr "'%1$s %2$s' är i konflikt med '%3$s'. Välj en annan kombination eller ändra först inställningen som är i konflikt."
+msgstr "%1$s%2$s står i konflikt med %3$s. Välj en annan kombination eller ändra först inställningen som står i konflikt."
 
 #: ../../../../src/ui/fsmenu/mousewheel_options.cc:371
 msgid "Reset Scrolling"
@@ -7856,7 +7856,7 @@ msgstr "Fäst fönster vid kanter"
 
 #: ../../../../src/ui/fsmenu/options.cc:222
 msgid "Distance for windows to snap to other panels:"
-msgstr "Avstånd för att fönster ska snappa till andra paneler:"
+msgstr "Avstånd för att fönster ska fästa vid andra paneler:"
 
 #: ../../../../src/ui/fsmenu/options.cc:232
 msgid "Distance for windows to snap to borders:"
@@ -8060,7 +8060,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr "Den slumpmässiga kartgeneratorn är fortfarande under utveckling. Kartorna som genereras är oftast, – men inte alltid –, väl spelbara. Sjöfarande och artefakter stöds inte. Tillägg till stammarna och skriptkategorier är avstängda i slumpmässiga matcher."
+msgstr "Den slumpmässiga kartgeneratorn är fortfarande under utveckling. Kartorna som genereras är oftast, men inte alltid, väl spelbara. Sjöfarande och artefakter stöds inte. Tillägg i kategorierna stammar och skript är inaktiverade i slumpmässiga matcher."
 
 #: ../../../../src/ui/fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -8345,7 +8345,7 @@ msgstr "Avbryt?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:568
 msgid "Do you really want to cancel this trade agreement?"
-msgstr "Vill du verkligen annulera detta handelsavtal?"
+msgstr "Vill du verkligen avbryta detta handelsavtal?"
 
 #: ../../../../src/ui/game/actionconfirm.cc:596
 msgid "Extend Trade"
@@ -9019,7 +9019,7 @@ msgstr "Håll ned Skift för att förlänga handeln på obestämd tid"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:660
 msgid "Cancel this trade agreement"
-msgstr "Annulera detta handelsavtal"
+msgstr "Avbryt detta handelsavtal"
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:663
 #: ../../../../src/ui/game/marketwindow.cc:601
@@ -9229,7 +9229,7 @@ msgstr "Skicka spejare för att utforska omgivningarna"
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
-msgstr "Du måsta ansluta denna flagga till en spejares/spanares byggnad innan du kan utforska här."
+msgstr "Du måste ansluta denna flagga till en byggnad för utforskare innan du kan skicka en utforskare hit."
 
 #: ../../../../src/ui/game/fieldaction.cc:512
 msgid "Place a flag"
@@ -10057,7 +10057,7 @@ msgstr "Avbryt expedition"
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
-msgstr "Expeditionen kan inte ställas in, för skeppet har ingen hamn att återvända till."
+msgstr "Expeditionen kan inte avbrytas eftersom skeppet inte har någon hamn att återvända till."
 
 #. * TRANSLATORS: No destination
 #: ../../../../src/ui/game/shipwindow.cc:364
@@ -10636,7 +10636,7 @@ msgstr "Spelarna bildar lag om fyra spelare i varje"
 #: ../../../../src/ui/shared/mapdata.cc:51
 #: ../../../../src/ui/shared/mapdata.cc:80
 msgid "No Author"
-msgstr "Ingen upphovsman"
+msgstr "Ingen upphovsperson"
 
 #. * TRANSLATORS: Parent directory/folder
 #: ../../../../src/ui/shared/mapdata.cc:179
@@ -10782,7 +10782,7 @@ msgstr[1] "%d repriser kunde inte tas bort."
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
-msgstr "Denna fil har fel format och kan inte läsas in. Kanske den skapades med en äldre version av Widelands."
+msgstr "Denna fil har fel format och kan inte läsas in. Den kan ha skapats med en äldre version av Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../../../src/ui/shared/savegameloader.cc:131
@@ -10976,7 +10976,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr "Du kan spela valfri musik i spelet genom att placera dina egna musikfiler i \"<Widelands Home Directory>/music/custom_XX\" (där 'XX' är sekventiella tvåsiffriga nummer som startar på 00). Filformat som stöds är ‘.mp3’ och ‘.ogg’."
+msgstr "Du kan spela egen musik i spelet genom att placera dina musikfiler i ‘<Widelands Home Directory>/music/custom_XX.*’ (där ‘XX’ är löpande tvåsiffriga nummer med början på 00). Filformat som stöds är ‘.mp3’ och ‘.ogg’."
 
 #: ../../../../src/ui/shared/sound_options.cc:161
 msgid "Play the intro music at startup"
@@ -11187,7 +11187,7 @@ msgstr "Återstarta scenario"
 
 #: ../../../../src/ui/wui/interactive_gamebase.cc:241
 msgid "Are you sure you wish to restart this replay?"
-msgstr "År du säker på att du vill starta om denna repris?"
+msgstr "Är du säker på att du vill starta om denna repris?"
 
 #: ../../../../src/ui/wui/interactive_gamebase.cc:242
 msgid "Are you sure you wish to restart this scenario?"
@@ -11383,7 +11383,7 @@ msgstr "Inget senaste sparat spel."
 #: ../../../../src/wlapplication.cc:1017
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
-msgstr "Widelands kunde inte hitta filen \"%s \"."
+msgstr "Widelands kunde inte hitta filen \"%s\"."
 
 #: ../../../../src/wlapplication.cc:1019
 msgid "File system error"
@@ -11456,7 +11456,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Ett fel uppstod under spelets gång. Felmeddelandet är:\n\n%1$s\n\nRapportera detta problem för att hjälpa oss förbättra Widelands. Du kan hitta relaterade meddelanden i standard ut (stdout.txt i Windows). Du använder version %2$s\n\nBifoga denna information till din rapport.\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta, men inte alltid, möjligt att läsa in den och fortsätta spela."
+msgstr "Ett fel uppstod under spelets gång. Felmeddelandet är:\n\n%1$s\n\nRapportera detta problem för att hjälpa oss att förbättra Widelands. Du hittar relaterade meddelanden i standardutdata (stdout.txt i Windows). Du använder version %2$s.\n\nBifoga denna information till din rapport.\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta – men inte alltid – möjligt att läsa in den och fortsätta spela."
 
 #: ../../../../src/wlapplication.cc:2064
 #, c-format
@@ -11896,7 +11896,7 @@ msgstr "Återstarta scenario eller repris"
 
 #: ../../../../src/wlapplication_options.cc:617
 msgid "Toggle Census"
-msgstr "Visa/dölj byggnadstbeskrivningar"
+msgstr "Visa/dölj byggnadsbeskrivningar"
 
 #: ../../../../src/wlapplication_options.cc:622
 msgid "Toggle Status Labels"
@@ -12024,7 +12024,7 @@ msgstr "Visa väntande skepp"
 
 #: ../../../../src/wlapplication_options.cc:810
 msgid "Show Scouting Expeditions"
-msgstr "Visa utforskningexpeditioner"
+msgstr "Visa utforskningsexpeditioner"
 
 #: ../../../../src/wlapplication_options.cc:815
 msgid "Show Expeditions with Port Spaces"

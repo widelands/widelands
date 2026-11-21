@@ -7,14 +7,14 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015,2017
 # MiroslavR <miroslavr256@gmail.com>, 2015
-# Pavol Gono, 2025
+# Pavol Gono, 2025-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Pavol Gono, 2025\n"
+"Last-Translator: Pavol Gono, 2025-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +121,7 @@ msgstr "nič nenájdené"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "Staviať bane možno len na horskom teréne. Miesta vhodné na stavbu baní sa zobrazujú vo forme symbolu oranžovej bane."
+msgstr "Stavať bane možno len v horskom teréne. Miesta vhodné na stavbu baní sa zobrazujú vo forme symbolu oranžovej bane."
 
 #: ../../../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
