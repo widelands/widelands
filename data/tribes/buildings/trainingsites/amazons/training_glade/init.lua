@@ -205,7 +205,7 @@ wl.Descriptions():new_trainingsite_type {
       -- TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
       no_soldier = pgettext("amazons_building", "No soldier to train!"),
       -- TRANSLATORS: Amazon training site tooltip when none of the present soldiers match the current training program
-      no_soldier_for_level = pgettext("amazons_building", "No soldier found for this training level!"),
+      no_soldier_for_level = pgettext("amazons_building", "No soldier found for the possible training levels!"),
    },
 }
 
