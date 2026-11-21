@@ -183,8 +183,11 @@ elseif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelW
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
     if(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-      # Workaround for buggy MSVC behavior with default /Ob1
-      set(WL_OPTIMIZE_FLAGS "/Ob2")
+      # Workaround for buggy MSVC behavior with default /Ob1.
+      # Replace it in the default flags instead of appending /Ob2 to avoid warning D9025.
+      foreach(lang C CXX)
+        string(REPLACE "/Ob1" "/Ob2" CMAKE_${lang}_FLAGS_RELWITHDEBINFO "${CMAKE_${lang}_FLAGS_RELWITHDEBINFO}")
+      endforeach()
     endif()
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
