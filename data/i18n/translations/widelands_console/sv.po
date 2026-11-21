@@ -68,22 +68,22 @@ msgstr "Flaggor:"
 
 #: ../../../../src/wlapplication_messages.cc:70
 msgid "Use the specified directory for the Widelands data files."
-msgstr "Använd specificerad katalog för Widelands datafiler."
+msgstr "Använd den angivna katalogen för Widelands datafiler."
 
 #: ../../../../src/wlapplication_messages.cc:72
 #, c-format
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr "Använd specificerad katalog för Widelands konfigurationsfiler, sparade spel och repriser. Standard är \"%s\"."
+msgstr "Använd den angivna katalogen för Widelands konfigurationsfiler, sparade spel och repriser. Standard är `%s`."
 
 #: ../../../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr "Använd specificerad katalog för Widelands språkfiler."
+msgstr "Använd den angivna katalogen för Widelands språkfiler."
 
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
-msgstr "Använd specificerad språkinställning."
+msgstr "Använd den angivna språkinställningen."
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
@@ -95,14 +95,14 @@ msgstr "[de_DE|sv_SE|...]"
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr "Kontrollera inte om datakatalogen som ska användas är kompatibel med Widelands version."
+msgstr "Kontrollera inte om den datakatalog som ska användas är kompatibel med den här Widelands-versionen."
 
 #: ../../../../src/wlapplication_messages.cc:88
 #, c-format
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr "Skapa ett nytt spel omedelbart med konfigurationsinställningarna i den angivna filen. Ett exempel kan ses i \"%s\"."
+msgstr "Skapa ett nytt spel direkt med inställningarna i den angivna filen. Ett exempel finns i `%s`."
 
 #: ../../../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
@@ -138,7 +138,7 @@ msgstr "Starta Widelands kartredigerare direkt. Du kan lägga till `=%1$s` för 
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor."
-msgstr "Kör det angivna Lua-scriptet efter initieringen. Bara giltigt med --scenario,  --loadgame eller --editor."
+msgstr "Kör det angivna Lua-skriptet efter initieringen. Gäller bara med --scenario, --loadgame eller --editor."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../../../src/wlapplication_messages.cc:120
@@ -166,7 +166,7 @@ msgstr "Starta spelet med ljudet avstängt."
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Start the game with shuffle mode for playback of songs"
-msgstr "Starta spelet med blandningsläge för uppspelning av låtar"
+msgstr "Starta spelet med slumpmässig uppspelning av låtar"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -186,11 +186,11 @@ msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:130
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr "Spela upp intromusiken vid uppstart och visa startbilden tills den slutar."
+msgstr "Spela upp intromusiken vid uppstarten och visa startbilden tills den slutar."
 
 #: ../../../../src/wlapplication_messages.cc:131
 msgid "Force Widelands to crash when a Lua error occurs."
-msgstr "Tvinga Widelands att krascha när ett Lua-fel uppkommer."
+msgstr "Tvinga Widelands att krascha när ett Lua-fel uppstår."
 
 #: ../../../../src/wlapplication_messages.cc:133
 msgid ""
@@ -206,23 +206,23 @@ msgstr "<seconds>"
 msgid ""
 "Automatically close modal message boxes after the given number of seconds "
 "time."
-msgstr "Stäng automatiskt modala meddelanderutor efter angiven tid i sekunder."
+msgstr "Stäng automatiskt modala meddelanderutor efter det angivna antalet sekunder."
 
 #: ../../../../src/wlapplication_messages.cc:138
 msgid "Delete replays automatically after `n` weeks."
-msgstr "Tag bort repriser automatiskt efter \"n\" veckor."
+msgstr "Ta bort repriser automatiskt efter `n` veckor."
 
 #: ../../../../src/wlapplication_messages.cc:140
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Möjliggör träningsläge för AI. Se  https://www.widelands.org/wiki/Ai%20Training/ för en fullständig beskrivning av AI träningslogik."
+msgstr "Aktivera AI-träningsläget. Se https://www.widelands.org/wiki/Ai%20Training/ för en fullständig beskrivning av AI-träningslogiken."
 
 #: ../../../../src/wlapplication_messages.cc:144
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr "Gör ständiga justeringar av spelhastigheten automatiskt beroende på AI fördröjning. Ska bara användas för test eller träning av AI (i samband med --ai_training)."
+msgstr "Justera kontinuerligt spelhastigheten automatiskt beroende på AI-fördröjningen. Ska bara användas för AI-testning eller AI-träning (tillsammans med --ai_training)."
 
 #: ../../../../src/wlapplication_messages.cc:149
 msgid "Enable the Script Console and Cheating Mode."
@@ -230,35 +230,35 @@ msgstr "Aktivera skriptkonsolen och fuskläget."
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Game options:"
-msgstr "Spelflaggor:"
+msgstr "Spelalternativ:"
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Note: New values will be written to the config file."
-msgstr "Notera att nya värden kommer att skrivas till konfigurationsfilen."
+msgstr "Obs! Nya värden skrivs till konfigurationsfilen."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:157
 msgid "Automatically save each `n` minutes."
-msgstr "Spara automatiskt varje gång \"n\" minuter har gått."
+msgstr "Spara automatiskt var `n`:e minut."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:160
 msgid "Use `n` files for rolling autosaves."
-msgstr "Använd \"n\" filer för rullande automatsparningar."
+msgstr "Använd `n` filer för roterande automatsparningar."
 
 #: ../../../../src/wlapplication_messages.cc:162
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr "Skapa inte en autosparning när användaren har varit inaktiv sedan den senaste autosparningen."
+msgstr "Skapa inte en automatsparning när användaren har varit inaktiv sedan den senaste automatsparningen."
 
 #: ../../../../src/wlapplication_messages.cc:164
 msgid "Do not save files as binary zip archives."
-msgstr "Spara inte filer som binära zip-arkiv."
+msgstr "Spara inte filer som binära ZIP-arkiv."
 
 #: ../../../../src/wlapplication_messages.cc:165
 msgid "Save files as binary zip archives."
-msgstr "Spara filer som binära zip-arkiv."
+msgstr "Spara filer som binära ZIP-arkiv."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -282,7 +282,7 @@ msgstr "Om historiken över skickade chattmeddelanden ska sparas i en fil."
 
 #: ../../../../src/wlapplication_messages.cc:173
 msgid "Show filenames in the replay screen."
-msgstr "Visa filnamn i reprisskärmen."
+msgstr "Visa filnamn i reprisvyn."
 
 #: ../../../../src/wlapplication_messages.cc:175
 msgid ""
@@ -293,15 +293,15 @@ msgstr "Om en varning ska visas i redigeraren om det är för många spelare."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:179
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr "Pausa spelet efter `n` minuters inaktivitet från användaren."
+msgstr "Pausa spelet efter `n` minuters inaktivitet."
 
 #: ../../../../src/wlapplication_messages.cc:181
 msgid "Start building a road after placing a flag."
-msgstr "Börja bygga en väg när en flagga har placerats ut."
+msgstr "Börja bygga en väg efter att ha placerat en flagga."
 
 #: ../../../../src/wlapplication_messages.cc:185
 msgid "Bitmask of display flags to set for new games."
-msgstr "Bitmask för inställning av flaggvisning i nya spel."
+msgstr "Bitmask som anger visningsflaggor i nya spel."
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -318,15 +318,15 @@ msgstr "[...]"
 
 #: ../../../../src/wlapplication_messages.cc:195
 msgid "Scroll when the mouse cursor is near the screen edge."
-msgstr "Skrolla när muspekaren är nära skärmens kant."
+msgstr "Rulla när muspekaren är nära skärmens kant."
 
 #: ../../../../src/wlapplication_messages.cc:197
 msgid "Invert click-and-drag map movement direction."
-msgstr "Inverterad flyttriktning vid klicka och drag."
+msgstr "Invertera kartans rörelseriktning vid klicka och dra."
 
 #: ../../../../src/wlapplication_messages.cc:199
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr "Tillåt diagonal skrollning med det numeriska tangentbordet."
+msgstr "Tillåt diagonal rullning med siffertangentbordet."
 
 #: ../../../../src/wlapplication_messages.cc:200
 msgid "Display system time in the info panel."
@@ -334,23 +334,23 @@ msgstr "Visa systemtiden i informationspanelen."
 
 #: ../../../../src/wlapplication_messages.cc:201
 msgid "Use single watchwindow mode."
-msgstr "Använd läge för ett ensamt övervakningsfönster."
+msgstr "Använd enkelt övervakningsfönsterläge."
 
 #: ../../../../src/wlapplication_messages.cc:203
 msgid "Show in-game chat with transparent background."
-msgstr "Visa chatten i spelet med genomskinlig bakgrund."
+msgstr "Visa spelets chatt med genomskinlig bakgrund."
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Bitmask to set the toolbar location and mode."
-msgstr "Bitmask för inställning av verktygslistens placering och utformning."
+msgstr "Bitmask som anger verktygslistens plats och läge."
 
 #: ../../../../src/wlapplication_messages.cc:205
 msgid "Default pagesize for paginated structures."
-msgstr "Standard sidstorlek för paginerade strukturer."
+msgstr "Standardsidstorlek för paginerade strukturer."
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "Networking:"
-msgstr "Nätverkande:"
+msgstr "Nätverk:"
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "URI"
@@ -363,19 +363,19 @@ msgstr "Anslut till en annan metaserver för internetspel."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:211
 msgid "Port number `n` of the metaserver for internet gaming."
-msgstr "Metaserverns port \"n\" för internetspel."
+msgstr "Portnummer `n` för metaservern för internetspel."
 
 #: ../../../../src/wlapplication_messages.cc:212
 msgid "The name of the last hosted game."
-msgstr "Namn på senaste spelet du var värd för."
+msgstr "Namnet på det senaste spel du var värd för."
 
 #: ../../../../src/wlapplication_messages.cc:213
 msgid "The nickname used for LAN and online games."
-msgstr "Användarnamn använt för LAN och onlinespel."
+msgstr "Det smeknamn som används i LAN- och onlinespel."
 
 #: ../../../../src/wlapplication_messages.cc:214
 msgid "Name of map author."
-msgstr "Namn på kartans upphovsman."
+msgstr "Namn på kartans skapare."
 
 #: ../../../../src/wlapplication_messages.cc:215
 msgid "The last host connected to."
@@ -383,11 +383,11 @@ msgstr "Den senaste värden du anslöt till."
 
 #: ../../../../src/wlapplication_messages.cc:217
 msgid "Whether the used metaserver login is for a registered user."
-msgstr "Om den använda metaserverns inloggning är för registrerade användare."
+msgstr "Om den använda metaserverinloggningen gäller en registrerad användare."
 
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "The hashed password for online logins."
-msgstr "Det hashade lösenordet för inloggning online."
+msgstr "Hashat lösenord för onlineinloggningar."
 
 #: ../../../../src/wlapplication_messages.cc:219
 msgid "IP"
@@ -395,11 +395,11 @@ msgstr "IP"
 
 #: ../../../../src/wlapplication_messages.cc:220
 msgid "Connect to a different server address from the add-ons manager."
-msgstr "Anslut till en annan serveradress från tilläggshanteraren."
+msgstr "Anslut till en annan serveradress i tilläggshanteraren."
 
 #: ../../../../src/wlapplication_messages.cc:222
 msgid "Connect to a different server port from the add-ons manager."
-msgstr "Anslut till en annan serverport från tilläggshanteraren."
+msgstr "Anslut till en annan serverport i tilläggshanteraren."
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in
@@ -408,15 +408,15 @@ msgstr "Anslut till en annan serverport från tilläggshanteraren."
 #. players.
 #: ../../../../src/wlapplication_messages.cc:228
 msgid "Create syncstream dump files to help debug network games."
-msgstr "Skapa dumpfiler av synkström för att hjälpa till med felsökning av nätverksspel."
+msgstr "Skapa synkströmsdumpfiler för felsökning av nätverksspel."
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Graphic options:"
-msgstr "Grafikflaggor:"
+msgstr "Grafikalternativ:"
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Use the whole display for the game screen."
-msgstr "Använd hela skärmen för spelskärmen."
+msgstr "Använd hela skärmen för spelet."
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Start the game in a maximized window."
@@ -430,7 +430,7 @@ msgstr "x"
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../../../src/wlapplication_messages.cc:238
 msgid "Width `x` of the window in pixel."
-msgstr "Fönstrets bredd \"x\" i antal bildpunkter."
+msgstr "Fönsterbredd `x` i bildpunkter."
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../../../src/wlapplication_messages.cc:241
@@ -440,7 +440,7 @@ msgstr "y"
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../../../src/wlapplication_messages.cc:243
 msgid "Height `y` of the window in pixel."
-msgstr "Fönstrets höjd \"y\" i antal bildpunkter."
+msgstr "Fönsterhöjd `y` i bildpunkter."
 
 #: ../../../../src/wlapplication_messages.cc:245
 msgid ""
@@ -451,7 +451,7 @@ msgstr "Om systemet ska rita muspekaren. Inaktivera den endast om pekaren inte v
 
 #: ../../../../src/wlapplication_messages.cc:248
 msgid "Whether to use sticky tooltips."
-msgstr "Om klistrade verktygstips ska användas."
+msgstr "Om fasta verktygstips ska användas."
 
 #: ../../../../src/wlapplication_messages.cc:251
 msgid ""
@@ -471,27 +471,27 @@ msgstr "Om automatiska kartförflyttningar ska animeras."
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr "Flytta ett fönster till skärmens kant när fönstrets kant kommer inom distansen \"n\" från skärmens kant."
+msgstr "Flytta ett fönster till skärmens kant när fönstrets kant kommer inom avståndet `n` från skärmens kant."
 
 #: ../../../../src/wlapplication_messages.cc:261
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "Dölj ett fönsters ram mot skärmens kant när fönstrets kant ligger intill skärmens kant."
+msgstr "Ta bort ett fönsters ram mot skärmens kant när fönstrets kant ligger intill skärmens kant."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Flytta ett fönster till kontrollpanelens kant när fönstrets kant kommer inom avståndet \"n\" från kontrollpanelens kant."
+msgstr "Flytta ett fönster till kontrollpanelens kant när fönstrets kant kommer inom avståndet `n` från kontrollpanelens kant."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:272
 msgid ""
 "The factor by which to fractionally scale the Widelands user interface, in "
 "quarters."
-msgstr "Faktorn som Widelands användargränssnitt ska skalas med i fjärdedelar."
+msgstr "Faktorn för skalning av Widelands användargränssnitt i fjärdedelssteg."
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"
@@ -499,25 +499,25 @@ msgstr "Aktivera utförliga felsökningsmeddelanden"
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Others:"
-msgstr "Annat:"
+msgstr "Övrigt:"
 
 #: ../../../../src/wlapplication_messages.cc:277
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr "Skriv ut alla strängar som de är översatta. Detta hjälper till med att hitta fel i internationaliseringen."
+msgstr "Skriv ut alla strängar medan de översätts. Det hjälper till att spåra internationaliseringsfel."
 
 #: ../../../../src/wlapplication_messages.cc:280
 msgid "Only print version and exit."
-msgstr "Skriv bara version och avsluta."
+msgstr "Skriv bara ut versionen och avsluta."
 
 #: ../../../../src/wlapplication_messages.cc:281
 msgid "Show this help."
-msgstr "Visa denna hjälpen."
+msgstr "Visa den här hjälpen."
 
 #: ../../../../src/wlapplication_messages.cc:282
 msgid "Show this help with all available config options."
-msgstr "Visa denna hjälpen med alla tillgängliga konfigurationsalternativ."
+msgstr "Visa den här hjälpen med alla tillgängliga konfigurationsalternativ."
 
 #: ../../../../src/wlapplication_messages.cc:283
 msgid "<save.wgf>/<replay.wry>"
@@ -528,13 +528,13 @@ msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr "Ladda in det sparade spel eller den sparade repris som anges omedelbart. Användbart för association av filändelserna .wgf och .wry. Fungerar inte med andra inställningsalternativ. Se även --loadgame/--replay."
+msgstr "Ladda det angivna sparade spelet eller reprisen direkt. Användbart för filändelseassociation för .wgf/.wry. Fungerar inte med andra alternativ. Se även --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../../../src/wlapplication_messages.cc:319
 #, c-format
 msgid "This is Widelands version %s"
-msgstr "Detta är Widelands version %s"
+msgstr "Det här är Widelands version %s"
 
 #: ../../../../src/wlapplication_messages.cc:377
 msgid ""
@@ -542,4 +542,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Buggrapporter? Förslag? Gå in på projektets webbsida:\n        https://www.widelands.org/\n\nHoppas du gillar spelet!"
+msgstr "Felrapporter? Förslag? Besök projektets webbplats:\n        https://www.widelands.org/\n\nHoppas att du gillar spelet!"

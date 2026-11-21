@@ -56,7 +56,7 @@ msgstr "Ett fridfullt land"
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr "Nu, beträffande kartan: du har slagit läger i en fin dal mellan två berg, med rika tillgångar till marmor, järn och kol. Allt vi hoppas på är ett fridfullt liv."
+msgstr "Nu till kartan: du har slagit dig ned i en vacker dal mellan två berg med rika tillgångar på marmor, järnmalm och kol. Alla hoppades på ett fridfullt liv."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:27
 msgid ""
@@ -70,7 +70,7 @@ msgstr "Men en dag upptäckte du en öde ödemark med övergivna byggnader i ös
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr "Du hade inte förberett dig på krig och nu måste du skynda dig att bygga upp en arme."
+msgstr "Du var inte förberedd på krig och måste nu skynda dig att bygga upp en armé."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid "An accident"
@@ -85,7 +85,7 @@ msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr "Nej, titta! Vår krog brinner! Mitt i all stress tappade krögaren, av misstag, en brinnande fackla. Hon mår bra, men vi kunde inte släcka elden i tid."
+msgstr "Åh nej, titta! Vår krog brinner! I all hast tappade vår krögare av misstag en fackla. Hon mår bra, men vi hann inte släcka elden."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:49
@@ -143,7 +143,7 @@ msgstr "Välj fliken ”Medelstora byggnader” i fönstret med byggnadsstatisti
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 msgid "Look up how many taverns you have."
-msgstr "Tag reda på hur många krogar du har."
+msgstr "Ta reda på hur många krogar du har."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid ""
@@ -182,7 +182,7 @@ msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr "‘0%’: Detta visar medelvärdet för produktiviteten i alla byggnader av den typen. Du har just startat detta spelet. Därför har ingen av dina byggnader gjort något arbete än, de kommer att börja jobba snart."
+msgstr "‘0%’: Detta visar genomsnittsproduktiviteten för alla byggnader av den här typen. Du har just startat spelet. Därför har ingen av dina byggnader arbetat ännu, men de börjar snart arbeta."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
@@ -190,7 +190,7 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr "'2/4' under din vaktpost: För militärbyggnader visas stationerade soldater istället för produktivitet. Du vill ha fyra soldater i dina vaktposter, men bara två soldater finns i byggnadstypen. Detta innebär att det finns två vakanta platser – vi behöver verkligen fler soldater."
+msgstr "‘2/4’ under vaktposten: Militärbyggnader visar antalet stationerade soldater i stället för produktivitet. Du vill ha fyra soldater i dina vaktposter, men bara två är stationerade i den här typen av byggnad. Det innebär två vakanta platser – vi behöver verkligen fler soldater."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
@@ -208,7 +208,7 @@ msgstr "Om du klickar på en byggnad kan du bläddra mellan alla byggnader av sa
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr "Om du inte har någon byggnad av en speciell byggnadstyp visas den nedtonad."
+msgstr "Om du inte har någon byggnad av en viss typ visas den nedtonad."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "This is enough explanation for now. Now try it out yourself."
@@ -234,12 +234,12 @@ msgstr "Öppna fönstret med byggnadsstatistik igen"
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
-msgstr "Du stängde byggnadsstatistikfönstret fast att du inte har letat upp antalet krogar som finns kvar."
+msgstr "Du stängde byggnadsstatistikfönstret trots att du ännu inte har kontrollerat hur många krogar du har."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr "Öppna det igen och välj den andra fliken (mellanstora byggnader)."
+msgstr "Öppna det igen och välj den andra fliken (Medelstora byggnader)."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
@@ -269,14 +269,14 @@ msgstr "Lager"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr "Leta efter matbitar"
+msgstr "Kontrollera ransonerna"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Ok. I listan såg du att du inte har några fler krogar eller värdshus. Det betyder att du inte producerar några matbitar. Låt oss ta reda på hur många vi fortfarande har i lager."
+msgstr "Okej. I listan såg du att du inte längre har några krogar eller värdshus. Det innebär att du inte producerar några ransoner. Men vi kan se vad vi fortfarande har i lager."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
@@ -1201,7 +1201,7 @@ msgstr "Öppna diplomatifönstret"
 msgid ""
 "The diplomacy window gives you an overview over all your trades, trade "
 "offers, and trade proposals."
-msgstr "Diplomatifönstret ger dig en översikt över alla din handel, handelserbjudanden och handelsförslag."
+msgstr "Diplomatifönstret ger dig en översikt över all din handel, alla handelserbjudanden och handelsförslag."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:707
 msgid "You can open it via this button from the main toolbar."
@@ -1222,7 +1222,7 @@ msgstr "I den övre halvan av diplomatifönstret kan du se alla spelare och dera
 msgid ""
 "We are more interested in the bottom half of the window. Here you can see "
 "your offered, proposed, and active trades."
-msgstr "Vi är mer intresserade av den nedre halvan av fönstret. Här kan du se dina erbjudanden, förslag och aktiv handel."
+msgstr "Vi är mer intresserade av den nedre halvan av fönstret. Här kan du se dina erbjudna, föreslagna och aktiva handelstransaktioner."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:718
 msgid ""
@@ -1262,7 +1262,7 @@ msgstr "Bra gjort! Det är egentligen allt; nu vet du hur du skickar och hantera
 msgid ""
 "You can have any number of active trades, and with any number of players; at"
 " the same market or across many, as you prefer."
-msgstr "Du kan ha valfritt antal aktiv handel och valfritt antal spelare, på samma marknad eller på flera marknader, precis som du vill."
+msgstr "Du kan ha hur många aktiva handelstransaktioner som helst med hur många spelare som helst, på samma marknad eller på flera marknader, precis som du vill."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:739
 msgid ""
@@ -1288,7 +1288,7 @@ msgstr "När du får mer erfarenhet av de olika stammarna i Widelands kommer du 
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:747
 msgid "Congratulations"
-msgstr "Gratulerar"
+msgstr "Grattis"
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:749
 msgid ""
@@ -1306,4 +1306,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr "Detta var den sista handledningen jag har förberett för dig. Jag har nu lärt dig allting jag kan. Det finns fortfarande dolda hemligheter i denna värld som inte ens jag känner till. Jag kommer nu att försöka hitta en lugn plats att spendera ålderns höst på. Om du fortfarande har frågor kommer säkert Widelands gemenskap att hjälpa dig. Du kan hitta den här:"
+msgstr "Detta var den sista handledningen jag hade förberett åt dig. Nu har jag lärt dig allt jag kan. Det finns fortfarande hemligheter i den här världen som inte ens jag känner till. Nu ska jag leta efter en lugn plats där jag kan tillbringa mina sista år. Om du fortfarande har frågor hjälper Widelands-gemenskapen dig säkert. Du hittar den här:"

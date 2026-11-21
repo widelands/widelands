@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr "Nu kan vi se var det är möjligt att placera byggnader och flaggor."
 #: ../../../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr "Klicka på 'OK' för att fortsätta."
+msgstr "Klicka på ”OK” för att fortsätta."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../../../data/scripting/training_wheels/flags.lua:60
@@ -129,8 +129,8 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
-"Klicka på en stor byggnadsyta och välj sedan byggnaden från fliken Stora "
-"byggnader."
+"Klicka på en stor byggnadsyta och välj sedan byggnaden från fliken för stora"
+" byggnader."
 
 #: ../../../../data/scripting/training_wheels/logs.lua:122
 msgid ""
@@ -189,7 +189,7 @@ msgstr ""
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr "Öppna Mål-fönstret"
+msgstr "Öppna fönstret Mål"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -206,7 +206,7 @@ msgstr "Stäng detta fönster"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr "Stänger detta fönster"
+msgstr "Stänga det här fönstret"
 
 #: ../../../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
@@ -235,16 +235,16 @@ msgstr ""
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
 msgstr ""
-"Terrängen är platt här. Era transportörer kommer att vara mycket snabba på "
-"denna terräng."
+"Terrängen är plan här. Dina transportörer kommer att vara mycket snabba på "
+"den här terrängen."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:124
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
 msgstr ""
-"Det finns en liten sluttning att klättra upp för att nå detta fält. Det "
-"innebär att dina arbetare kommer att gå snabbare nedför än uppför."
+"En liten sluttning leder upp till det här fältet. Det innebär att dina "
+"arbetare går snabbare nedför än uppför."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:125
 msgid ""
@@ -279,8 +279,8 @@ msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
-"...klicka sedan på de färgade markeringarna på kartan för att navigera fram "
-"till flaggan framför målbyggnaden."
+"…klicka sedan på de färgade markörerna på kartan för att styra vägen tills "
+"du når flaggan framför målbyggnaden."
 
 #: ../../../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
@@ -297,4 +297,4 @@ msgstr "Välkommen till Widelands!"
 
 #: ../../../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr "Följ pilarna för att lära dig hur man spelar."
+msgstr "Följ pilarna för att lära dig spela."

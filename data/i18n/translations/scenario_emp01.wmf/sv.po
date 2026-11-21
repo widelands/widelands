@@ -32,7 +32,7 @@ msgstr "Blockhus"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Bygg ett blockhus över den röda hussymbolen på östra sidan av skogen, till höger om ditt tillfälliga högkvarter."
+msgstr "Bygg ett blockhus vid den röda hussymbolen på skogens östra sida, till höger om ditt tillfälliga högkvarter."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
@@ -46,7 +46,7 @@ msgstr "Skogshuggarbostad"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Bygg en skogshuggarbostad över den röda hussymbolen söder om ditt tillfälliga högkvarter."
+msgstr "Bygg en skogshuggarbostad vid den röda hussymbolen söder om ditt tillfälliga högkvarter."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -90,7 +90,7 @@ msgstr "Bygg ett stenbrott i söder för att hugga ut granit och marmor ur klipp
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Detta kan vara användbart till framtida byggnader."
+msgstr "Det kan användas till framtida byggnader."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
@@ -109,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Vad har hänt med vårt imperium? Jag ställer verkligen frågan – varför förbjöd min kung mig att slåss mot den ohyggliga barbarstammen, vilken först betedde sig som en fredlig vän och sedan attackerade min arme mitt i mörka natten?"
+msgstr "Vad har hänt med vårt imperium? Jag undrar verkligen varför min kung förbjöd mig att slåss mot den ohyggliga barbarstammen, som först uppträdde som en fredlig vän och sedan anföll min armé mitt i natten?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -335,7 +335,7 @@ msgstr "Träden ger skydd mot sandstormarna som sveper in från öknen, och skug
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr "Lutus, vill du vara snäll och leta upp någon som ser till att plantera nya träd."
+msgstr "Lutius, leta gärna upp någon som kan plantera nya träd."
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
@@ -343,7 +343,7 @@ msgstr "Tänker på framtiden"
 
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr "Seledus observerar..."
+msgstr "Saledus anmärker…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:201
@@ -390,7 +390,7 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Idag fick jag bud om att vårt skepp är helt reparerat. Just nu lastar mitt folk ombord allt på vår nyreparerade fartyg. Må det tjäna oss bättre än förra gången."
+msgstr "I dag fick jag besked om att vårt skepp är helt reparerat. Just nu lastar mitt folk allt ombord på vårt nyreparerade skepp i hopp om att det ska tjäna oss bättre än förra gången."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp01.wmf/scripting/texts.lua:227

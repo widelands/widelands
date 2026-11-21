@@ -85,7 +85,7 @@ msgstr "Artefakt erövrad"
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
-msgstr "Ditt lat stal en artefakt från fienden."
+msgstr "Ditt lag stal en artefakt från en fiende."
 
 #: ../../../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
@@ -181,11 +181,11 @@ msgstr "Den stam eller det lag som kan besegra alla andra vinner spelet! Det inn
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
-msgstr "Evigt spel"
+msgstr "Oändligt spel"
 
 #: ../../../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
-msgstr "Det här är ett evigt spel utan regler."
+msgstr "Det här är ett oändligt spel utan regler."
 
 #: ../../../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
@@ -214,7 +214,7 @@ msgstr "%1$s hade %2$3.0f%% av landytan (%3$i av %4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr "Territorieprocent"
+msgstr "Territorieandel"
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -230,7 +230,7 @@ msgstr[1] "Behåll det i %i minuter till för att vinna spelet."
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr "%s äger med än hälften av kartområdet."
+msgstr "%s äger mer än hälften av kartområdet."
 
 #: ../../../../data/scripting/win_conditions/territorial_functions.lua:265
 #, lua-format
@@ -249,7 +249,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr "Varje spelare eller lag försöker erhålla mer än halva kartområdet. Vinnare blir den som kan behålla den ytan i minst 20 minuter. Om fredligt spelläge är valt avslutas spelet om någon spelare har mer land än någon av de andra spelarna har möjlighet att få."
+msgstr "Varje spelare eller lag försöker få kontroll över mer än hälften av kartområdet. Vinnare blir den spelare eller det lag som kan behålla området i minst 20 minuter. Om fredligt spelläge är valt avslutas spelet när en spelare har mer land än någon annan kan få."
 
 #: ../../../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -267,7 +267,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr "Varje spelare eller lag försöker erhålla mer än hälften av kartans yta. Vinnare blir den spelare eller det lag som lyckas hålla den ytan i minst 20 minuter eller den som har största territoriet efter %s, beroende av vilket som sker först. Om fredligt spelläge är valt slutar spelet om en spelare har större landyta än någon annan spelare har möjlighet att skaffa sig."
+msgstr "Varje spelare eller lag försöker få kontroll över mer än hälften av kartområdet. Vinnare blir den spelare eller det lag som kan behålla området i minst 20 minuter, eller den som har störst territorium efter %s, beroende på vad som inträffar först. Om fredligt spelläge är valt avslutas spelet när en spelare har mer land än någon annan kan få."
 
 #: ../../../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
@@ -307,7 +307,7 @@ msgstr "Spelet slutar om %s."
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:33
 msgid "Congratulations!"
-msgstr "Gratulerar!"
+msgstr "Grattis!"
 
 #: ../../../../data/scripting/win_conditions/win_condition_texts.lua:34
 msgid "You have won this game!"
@@ -358,11 +358,11 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr "Som skogsgnom tycker du om stora skogar så ditt uppdrag är att ha fler träd på ditt territorium än någon annan spelare. Spelet slutar efter %s. Den som har flest träd i den stunden vinner spelet."
+msgstr "Som skogsgnom tycker du om stora skogar, så ditt uppdrag är att ha fler träd på ditt territorium än någon annan spelare. Spelet slutar efter %s. Den som då har flest träd vinner spelet."
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
-msgstr "Träd ägda"
+msgstr "Ägda träd"
 
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:68
 #: ../../../../data/scripting/win_conditions/wood_gnome.lua:90
