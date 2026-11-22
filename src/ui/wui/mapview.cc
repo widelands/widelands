@@ -548,7 +548,7 @@ constexpr int16_t kEdgeScrollingSpeedNormal = 20;
 constexpr int16_t kEdgeScrollingSpeedFast = 80;
 
 bool MapView::handle_mousemove(
-    uint8_t const /*state*/, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+   uint8_t const /*state*/, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	last_mouse_pos_.x = x;
 	last_mouse_pos_.y = y;
 
