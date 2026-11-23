@@ -180,18 +180,6 @@ if(OPTION_CPPTRACE)
     set(USE_FETCHCONTENT ON)
   endif()
   add_definitions(-DPRINT_BACKTRACE_CPPTRACE)
-  if(OPTION_ASAN AND NOT WIN32)
-    message(WARNING "Both AddressSanitizer and cpptrace are handling crashes, consider turning off one of them.")
-  endif()
-  if(OPTION_TSAN)
-    message(WARNING " Both ThreadSanitizer and cpptrace are handling crashes, consider turning off one of them."
-                    " ThreadSanitizer may produce too many error messages inside the crash handler.")
-  endif()
-  if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
-    # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
-    # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
-    message(WARNING "cpptrace needs debugging symbols to produce meaningful backtrace, consider RelWithDebInfo build type.")
-  endif()
 endif()
 
 if(USE_FETCHCONTENT)
@@ -547,6 +535,21 @@ if(OPTION_BUILD_WINSTATIC)
     wl_add_pkgconfig_static_libs(SDL_TTF_STATIC_LIBS SDL2_ttf)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
+
+if(OPTION_CPPTRACE)
+  if(OPTION_ASAN AND NOT WIN32)
+    message(WARNING "Both AddressSanitizer and cpptrace are handling crashes, consider turning off one of them.")
+  endif()
+  if(OPTION_TSAN)
+    message(WARNING " Both ThreadSanitizer and cpptrace are handling crashes, consider turning off one of them."
+                    " ThreadSanitizer may produce too many error messages inside the crash handler.")
+  endif()
+  if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
+    # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
+    # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
+    message(WARNING "cpptrace needs debugging symbols to produce meaningful backtrace, consider RelWithDebInfo build type.")
+  endif()
+endif()
 
 set(WL_CRASH_HANDLER ${OPTION_CPPTRACE})
 if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN AND NOT OPTION_TSAN)
