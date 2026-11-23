@@ -4,7 +4,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2025
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,16 +67,16 @@ msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
-"Du kan inte bryta resurser eller sten på denna ö. Istället kan du byta "
-"lokala produkter mot andra typer av varor."
+"Du kan inte utvinna resurser eller bryta sten på denna ö. I stället kan du "
+"byta lokala produkter mot andra slags varor."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
-"Alla varor som lagras i en hamn kommer att handlas. Handelspriserna anges i "
-"följande tabell."
+"Alla varor som lagras i en hamn kommer att handlas. Handelspriserna framgår "
+"av följande diagram."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
@@ -92,7 +92,7 @@ msgstr "Förstör alla fiendens byggnader."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr "Blockera flaskhalsen"
+msgstr "Spärra passagen"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
@@ -157,8 +157,8 @@ msgid ""
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
 "Äntligen hemma! Jag kan inte beskriva med ord den glädje jag känner över att"
-" åter se mitt hemland... eller otåligheten över att vara så nära och ändå så"
-" långt borta."
+" åter se mitt hemland… eller otåligheten över att vara så nära och ändå så "
+"långt borta."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -172,13 +172,12 @@ msgid ""
 "reclaim our home."
 msgstr ""
 "För en gångs skull var havet lugnt och möjliggjorde en snabb återresa "
-"söderut. Henneke och jag tillbringade större delen av resan stående vid "
-"fartygets för och såg fram emot vår återkomst. Reebaud stod först vid aktern"
-" och såg bakåt på samma sätt som vi såg framåt. Han älskar uppenbarligen "
-"sitt nya hem lika mycket som jag älskar mitt gamla. Jag är säker på att "
-"önskan att återvända levande och som segrare kommer att inspirera hans "
-"soldater att kämpa lika hårt som mina egna trupper kommer att kämpa för att "
-"återta vårt hem."
+"söderut. Henneke och jag stod större delen av resan vid fören och såg fram "
+"emot vår återkomst. Reebaud stod först vid aktern och såg bakåt på samma "
+"sätt som vi såg framåt. Han älskar uppenbarligen sitt nya hem lika mycket "
+"som jag älskar mitt gamla. Jag är säker på att önskan att återvända levande "
+"och som segrare kommer att inspirera hans soldater att kämpa lika hårt som "
+"mina egna trupper kommer att kämpa för att återta vårt hem."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -239,8 +238,8 @@ msgid ""
 msgstr ""
 "Det var ren tur som räddade oss. Våra skepp skadades knappt, inte en enda "
 "sjöman förlorades till vågorna. Jag skulle inte tro att någon någonsin kunde"
-" ha sån tur om jag inte själv hade sett det. Vår otroliga flykt fyller mig "
-"med hopp – det är uppenbarligen ett tecken på att vårt farliga företag "
+" ha sådan tur om jag inte själv hade sett det. Vår otroliga flykt fyller mig"
+" med hopp – det är uppenbarligen ett tecken på att vårt farliga företag "
 "välsignas av helgonen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
@@ -254,9 +253,9 @@ msgid ""
 "will make a difference. Some of them might even join our cause."
 msgstr ""
 "Stormen drev vårt skepp ungefär två dagars resa från sin kurs. Lyckligtvis "
-"känner jag fortfarande igen dessa vatten, så detta är verkligen ett mycket "
-"mindre bakslag. När stormen avtog befann vi oss nära ön Helgoland och "
-"beslutade att landstiga här. Öborna är välkända för sin gästfrihet, och "
+"känner jag fortfarande igen dessa vatten, så detta är verkligen ett "
+"obetydligt bakslag. När stormen avtog befann vi oss nära ön Helgoland och "
+"beslutade att gå i land här. Öborna är välkända för sin gästfrihet, och "
 "möjligheten att vila och återhämta oss inför striden kommer att göra "
 "skillnad. Några av dem kanske till och med ansluter sig till vår sak."
 
@@ -285,9 +284,9 @@ msgid ""
 msgstr ""
 "Fred och välkomna till Helgoland! Ert rykte föregår er, Claus Lembeck, den "
 "älskade herren av Föhr, och Reebaud, som skalderna kallar den djärve, den "
-"modige och den mäktige. Jag är Ocke Ketelsen, seniorrådman i Helgoland, och "
-"trots dessa svåra tider är jag glad och hedrad över att få ta emot så "
-"illustra gäster."
+"modige och den mäktige. Jag är Ocke Ketelsen, den äldste rådmannen på "
+"Helgoland, och trots dessa svåra tider är jag glad och hedrad över att få ta"
+" emot så illustra gäster."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
@@ -304,9 +303,9 @@ msgid ""
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
 "Fred och tack för det vänliga välkomnandet, Ocke Ketelsen! Det är en trevlig"
-" omväxling att inte tvingas gå i krig mot någon vars ö vi landar på. Men "
-"ditt välkomnande låter märkligt kortfattat. Eftersom dina ord är så varma "
-"kan jag bara dra slutsatsen att någon annan sorts problem har drabbat dig. "
+" omväxling att inte tvingas gå i krig mot någon på vars ö vi går i land. Men"
+" din välkomsthälsning verkar egendomligt kort. Eftersom dina ord är så varma"
+" kan jag bara dra slutsatsen att någon annan sorts problem har drabbat dig. "
 "Om du inte har något emot att jag frågar och om denna fråga inte verkar "
 "oförskämd, skulle jag vilja veta om vi kan hjälpa dig på något sätt."
 
@@ -329,7 +328,7 @@ msgstr "Fiender"
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr "Danskar! Sträcker sig Atterdags erövringslust så långt?"
+msgstr "Danskar! Har Atterdags erövringslust nått så här långt?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -337,9 +336,9 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
-"Ja, det gör det. Jag ser att du känner igen denna fiende, och jag skulle "
-"vara intresserad av att höra hur ni träffades – även om jag antar att det "
-"inte gick så bra för dem!"
+"Ja, det gör den. Jag ser att du känner igen denna fiende, och jag skulle "
+"vara intresserad av att höra hur ni möttes – även om jag antar att det inte "
+"gick så bra för dem!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -354,7 +353,7 @@ msgstr ""
 "jag bara säga att Atterdag invaderade Föhr med en så mäktig styrka att jag "
 "tvingades lämna ön och be Reebaud om hjälp att återta den. Vi var faktiskt "
 "på väg till Föhr för att en gång för alla driva bort inkräktarna när en "
-"storm blåste oss ur kurs och till Helgoland."
+"storm blåste oss ur kurs och förde oss till Helgoland."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -364,8 +363,8 @@ msgid ""
 "it!"
 msgstr ""
 "Att det blev så kan till och med vara ett himmelskt ingripande. Vi hjälper "
-"dig gärna att bekämpa denna fiende. En uppvärmningskamp, så att säga – jag "
-"ser fram emot det!"
+"dig gärna att bekämpa denna fiende. En uppvärmningsstrid, så att säga – jag "
+"ser fram emot den!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:196
@@ -382,9 +381,9 @@ msgid ""
 " able to defeat them all."
 msgstr ""
 "Din entusiasm värmer mig lika mycket som din situation väcker min sympati. "
-"Men fienderna är mäktigare än de verkar – de har tagit med sig en enorm "
-"styrka danska soldater, och inte ens dina mäktiga soldater kommer att kunna "
-"besegra dem alla."
+"Men fienderna är mäktigare än de verkar – de har tagit med sig en väldig "
+"styrka av danska soldater, och inte ens dina mäktiga soldater kommer att "
+"kunna besegra dem alla."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -393,9 +392,9 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
-"Vår ö är inte van vid denna typ av krigföring. Vi är fiskare och bönder, vi "
-"har varken expertis eller ekonomi för att klara av en utdragen strid. Din "
-"expertis på detta område skulle vara mycket uppskattad."
+"Vår ö är inte van vid denna typ av krigföring. Vi är fiskare och bönder och "
+"saknar den erfarenhet och ekonomi som krävs för att klara av en utdragen "
+"strid. Din kunskap på detta område skulle vara mycket uppskattad."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -420,7 +419,8 @@ msgid ""
 msgstr ""
 "Hur klarar ni er här? Dessa klippor ser imponerande ut, men jag förstår inte"
 " hur ni kan bryta sten för att bygga hus. Jag ser knappt några träd och inga"
-" platser där ni kan bryta järn och andra mineraler! Hur klarar ni er?"
+" platser där ni kan bryta järn och andra mineraler! Hur får ni tag på det ni"
+" behöver?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -435,10 +435,10 @@ msgid ""
 msgstr ""
 "Genom handel. Vi säljer spannmål, fisk och olika andra varor till fastlandet"
 " och köper malm och granit därifrån. Låt oss dela upp uppgifterna efter vad "
-"var och en av oss är bäst på: Du tar ansvar för att omorganisera vår ekonomi"
-" för kriget och träna vårt folk för strid, och jag ordnar import av varor i "
+"var och en av oss gör bäst: Du tar ansvar för att omorganisera vår ekonomi "
+"för kriget och träna vårt folk för strid, och jag ordnar import av varor i "
 "den mängd du behöver. Lämna bara varorna som ska säljas i hamnarna så tar "
-"jag hand om resten. Denna tabell visar hur många varor av olika slag vi "
+"jag hand om resten. Detta diagram visar hur många varor av olika slag vi "
 "vanligtvis handlar med."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:212
@@ -448,7 +448,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr "Planera kriget"
+msgstr "Krigsplanering"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
@@ -461,9 +461,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
-"Det viktigaste först. Denna stad har ett utmärkt försvar, men är tyvärr helt"
-" oskyddad. Vi måste planera taktiskt i förväg, för jag håller med om att "
-"denna strid inte kommer att vinnas snabbt."
+"Det viktigaste först. Denna stad har ett utmärkt försvarsläge, men är tyvärr"
+" helt oskyddad. Vi måste planera taktiskt i förväg, för jag håller med om "
+"att denna strid inte kommer att vinnas snabbt."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -489,7 +489,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr "Förstärk det smala"
+msgstr "Befäst passet"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -541,7 +541,7 @@ msgid ""
 msgstr ""
 "Som Reebaud korrekt påpekar är Uplands den bästa platsen för nya byggnader. "
 "Förutom sitt strategiska värde erbjuder det gott om utrymme för byggnation, "
-"vilket den lägre delen av ön saknar."
+"något som den nedre delen av ön har ont om."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -569,10 +569,10 @@ msgid ""
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
 "Marken ser ganska karg ut, så vi kommer att behöva reservera mer utrymme för"
-" skogsbruk än jag skulle önska. Låglandet verkar vara något mer bördigt, så "
-"det kan vara klokt att bygga skogsvaktarnas och skogshuggarnas hus här nere "
-"och flytta några av gårdarna till Uplands. Gårdar, vassodlingar och "
-"bärodlingar är inte lika beroende av bördig mark som träd."
+" skogsplantering än jag skulle önska. Låglandet verkar vara något mer "
+"bördigt, så det kan vara klokt att bygga skogsvaktarnas och skogshuggarnas "
+"hus här nere och flytta några av gårdarna till Uplands. Gårdar, vassodlingar"
+" och bärodlingar är inte lika beroende av bördig jord som träd."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
@@ -589,13 +589,13 @@ msgid ""
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
 "Vår handel har kommit igång på ett framgångsrikt sätt. Nu måste vi planera "
-"vår rekrytering och utbildning. Vi har visserligen en grundläggande "
-"produktion av livsmedel och metaller, men den verkar ha vuxit fram på ett "
-"slumpmässigt sätt och kommer inte att räcka till för att tillgodose våra "
-"behov. Vi kommer att behöva fler och mer avancerade anläggningar för att "
-"kunna tillhandahålla tillräckligt med vapen och rustningar samt mat till "
-"våra soldater. Det säger sig självt att ett par träningsanläggningar och en "
-"kasern också är nödvändiga."
+"vår rekryterings- och utbildningsekonomi. Vi har visserligen en "
+"grundläggande produktion av livsmedel och metaller, men den verkar ha vuxit "
+"fram på ett slumpmässigt sätt och kommer inte att räcka till för att "
+"tillgodose våra behov. Vi kommer att behöva fler och mer avancerade "
+"anläggningar för att kunna tillhandahålla tillräckligt med vapen och "
+"rustningar samt mat till våra soldater. Det säger sig självt att ett par "
+"träningsanläggningar och en kasern också är nödvändiga."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr "Dikesgrävning"
+msgstr "Dikning"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -630,8 +630,8 @@ msgstr ""
 "Bristen på utrymme på Helgoland är fortfarande ett problem. Landet skulle "
 "vara tillräckligt stort för att utbilda ett rimligt antal soldater på rimlig"
 " tid, men att utbilda de arméer som vi tror att vi kommer att behöva skulle "
-"ta evigheter! Vi kanske måste ta några risker och använda överlägsna "
-"taktiker för att kompensera för denna nackdel."
+"ta evigheter! Vi kanske måste ta några risker och använda överlägsen taktik "
+"för att kompensera för denna nackdel."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -645,11 +645,10 @@ msgid ""
 msgstr ""
 "Men om du föredrar att spela säkert, glöm inte att vi helt enkelt kan "
 "förstora ön. Eftersom vi nu har en stadig tillgång på timmer kan vi bygga "
-"vallar och vågbrytare för att få mer byggnadsyta från havet. När vi är redo "
-"att attackera kan vi till och med använda detta som ett sätt att kringgå den"
-" smala punkten i öster, eller om vi vill vara riktigt djärva kan vi bygga en"
-" vall runt hela öns västra kust för att attackera fienden från två sidor "
-"samtidigt!"
+"vallar och vågbrytare för att återvinna mer byggmark från havet. När vi är "
+"redo att anfalla kan vi till och med använda detta för att kringgå den smala"
+" passagen i öster, eller om vi vill vara riktigt djärva kan vi bygga en vall"
+" runt hela öns västra kust för att anfalla fienden från två sidor samtidigt!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
@@ -661,7 +660,7 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
-"Jag är uppmuntrad av din framåtanda. Låt oss alla skynda oss till våra "
+"Jag är uppmuntrad av din handlingskraft. Låt oss alla skynda oss till våra "
 "respektive uppgifter, och må lyckan le mot oss!"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:283
@@ -670,7 +669,7 @@ msgstr "Träförsörjning"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr "Träförsörjningen är säkerställd"
+msgstr "Träförsörjningen är tryggad"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -702,11 +701,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr "Uplands koloniserat"
+msgstr "Uplands har koloniserats"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr "Uplands har blivit bosatt"
+msgstr "Uplands har befolkats"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -716,9 +715,8 @@ msgid ""
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
 "Uplands håller på att omvandlas till ett verkligt centrum för vår ekonomi. "
-"Vi får inte glömma att alltid hålla ett öga på varuutbytet mellan Lowlands "
-"och Uplands och hålla det på ett minimum för att undvika trafikstockningar "
-"på vägarna."
+"Vi får inte glömma att alltid hålla ett öga på varuutbytet mellan Låglandet "
+"och Uplands och begränsa det för att undvika trafikstockningar på vägarna."
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -804,9 +802,9 @@ msgid ""
 "you were gone he seized the entire area with ease."
 msgstr ""
 "Det gör jag gärna. Enligt mina handelspartner är Atterdags erövringslust "
-"gränslös. Efter att han etablerat sig på Föhr har han erövrat alla andra öar"
-" i närheten också. Er fästning på Föhr har alltid varit deras enda försvar, "
-"så när ni försvann kunde han enkelt ta över hela området."
+"gränslös. Efter att han hade etablerat ett fäste på Föhr erövrade han också "
+"alla andra öar i närheten. Er fästning på Föhr har alltid varit öarnas enda "
+"verkliga försvar, så när ni försvann kunde han enkelt ta över hela området."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -817,7 +815,7 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
-"Det ryktas att ockupanterna tillämpar en grym regel. Det är ett känt faktum "
+"Det ryktas att ockupanterna utövar ett grymt styre. Det är ett känt faktum "
 "att de har avbrutit all handel, och lokalbefolkningen tvingas ge hälften av "
 "allt de producerar till danskarna som tribut. Hälften! Redan nu sägs "
 "dussintals ha avrättats för att ha förskingrat en skäppa säd. Folket lider "
@@ -868,9 +866,9 @@ msgstr ""
 "Jag vet inte hur stor del av hans soldater som transporteras mellan "
 "huvudstaden och öarna med fartyg, men antalet verkar vara tillräckligt stort"
 " för att jag ska råda dig att stoppa denna transport. Som ni vet är dessa "
-"två områden endast förbundna med en enda sjöväg, och den går genom en sund "
-"som kallas Kattegatt. Denna sund är några mil bred och prickad med små öar. "
-"Om ni kan nå denna plats utan att bli attackerade av deras skepp kan ni "
+"två områden endast förbundna med en enda sjöväg, och den går genom ett sund "
+"som kallas Kattegatt. Detta sund är några mil brett och prickat med små öar."
+" Om ni kan nå denna plats utan att bli attackerade av deras skepp kan ni "
 "erövra öarna och bygga ett bälte av ointagliga fästen som blockerar alla "
 "fiendeskepp som försöker passera."
 
@@ -905,7 +903,7 @@ msgstr ""
 "Jag skulle vilja framföra ytterligare en begäran. En begäran och ett "
 "erbjudande. Mina två söner, Harke Ockesen och Eschel Ockesen, utbildar sig "
 "till soldater och befälhavare. Jag skulle vara mycket tacksam om ni lät dem "
-"följa med er på er fälttåg till Kattegatt för att skaffa sig praktisk "
+"följa med er på ert fälttåg till Kattegatt för att skaffa sig praktisk "
 "erfarenhet, och sedan skickade tillbaka dem till mig. Under tiden kommer vi "
 "att använda den industri ni byggt upp åt oss för att utbilda fler soldater "
 "som ska hjälpa er i era kommande strävanden."
@@ -918,8 +916,8 @@ msgid ""
 "teachers."
 msgstr ""
 "Vi kommer att vara mycket glada över att ha dem hos oss och jag lovar att vi"
-" kommer att ta väl hand om dem. Du har verkligen en talang för att ge dina "
-"söner de bästa lärarna."
+" kommer att ta väl hand om dem. Du har verkligen en fallenhet för att ge "
+"dina söner de bästa lärarna."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -932,7 +930,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr "Gratulerar"
+msgstr "Gratulationer"
 
 #: ../../../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""

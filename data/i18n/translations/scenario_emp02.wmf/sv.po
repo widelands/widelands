@@ -93,7 +93,7 @@ msgstr "Mat åt dina gruvarbetare"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
-msgstr "Bygg en krog för att producera mat som får våra gruvarbetare orka jobba."
+msgstr "Bygg en krog för att producera mat så att våra gruvarbetare orkar arbeta."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
@@ -136,7 +136,7 @@ msgstr "Skydda den östra gränsen"
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
-msgstr "Bygg starkare militärbyggnader, som en utpost. ett fort eller ett torn vid den östra fronten."
+msgstr "Bygg starkare militärbyggnader, som en utpost, ett fort eller ett torn, vid den östra gränsen."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:88
 msgid "Build a tower to watch deep inside the enemy territory."
@@ -165,7 +165,7 @@ msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
-msgstr "Bygg en fästning på halvön (nära platsen där barbarernas högkvarter tidigare stod).  Till sist hindras då andra stammar från att bosätta sig i området."
+msgstr "Bygg en fästning på halvön (nära platsen där barbarernas högkvarter tidigare stod). Till sist hindrar detta andra stammar från att bosätta sig i området."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
@@ -244,7 +244,7 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr "Återigen kände jag mig som i paradiset, när jag såg några marmorliknande stenar bland klipporna. Det ser ut som om vi snart kommer att kunna bygga kraftiga eleganta byggnader, som dem vi var vana vid i Fremil."
+msgstr "Återigen kände jag mig som i paradiset när jag såg några marmorliknande stenar bland klipporna. Det ser ut som om vi snart kommer att kunna bygga kraftiga, eleganta byggnader, sådana som vi var vana vid i Fremil."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
@@ -255,7 +255,7 @@ msgstr "Timmer till kolonin"
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr "Goda nyheter! Idag blev vår trähushållning komplett. Nu kan vi vara säkra på att ha nog med trä för våra framtida byggnadsprojekt."
+msgstr "Goda nyheter! I dag blev vår träförsörjning klar. Nu kan vi vara säkra på att ha nog med trä för våra framtida byggnadsprojekt."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
@@ -284,14 +284,14 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr "Vår ledare, jag vill inte skapa panik, men jag hittade någonting som ger mig en dålig känsla i magen och sprider skräck inom mig. När jag gick längs den södra stranden hittade jag resterna av ett annat skepp. Jag vet inte om dessa delar är allt som finns kvar skeppet. Hur som helst så verkar inte delarna speciellt gamla."
+msgstr "Vår ledare, jag vill inte skapa panik, men jag hittade någonting som ger mig en dålig känsla i magen och sprider skräck inom mig. När jag gick längs den södra stranden hittade jag resterna av ett annat skepp. Jag vet inte om dessa delar är allt som finns kvar av skeppet. Hur som helst verkar delarna inte särskilt gamla."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
-msgstr "Kanske fastnade deras skepp i samma storm som förde oss till Malac' Mor - och de fördes också hit till ön."
+msgstr "Kanske fastnade deras skepp i samma storm som förde oss till Malac’ Mor – och de fördes också hit till ön."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:172
@@ -353,7 +353,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Men för att kunna göra det, för alla dessa stora byggnader behöver vi bättre och elegantare byggnadsmaterial. Du behöver bygga ett stenhuggeri som kan hugga ut pelare ur marmor."
+msgstr "Men för alla dessa större byggnader behöver vi bättre och mer eleganta byggnadsmaterial. Därför behöver du bygga ett stenhuggeri där pelare kan huggas ut ur marmor."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:204
@@ -366,7 +366,7 @@ msgstr "Mat åt gruvarbetarna"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Amalea enters…"
-msgstr "Amalea kommer in..."
+msgstr "Amalea kommer in…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:212
@@ -387,7 +387,7 @@ msgstr "Det är trevligt, och förstås en bra idé, att bygga gruvor som kommer
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr "Vad tror du om att hjälpa dem. Jag kan inte säga exakt vad vi behöver... men detta är mina rekommendationer:"
+msgstr "Vad tror du om att hjälpa dem? Jag kan inte säga exakt vad vi behöver … men här är mina rekommendationer:"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"
@@ -421,7 +421,7 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr "Vid gudarna! Detta är helt förfärligt. Det verkar som om vi står inför en prövning - och det ser ut som om Saledus hade rätt i sin rädsla när han hittade skeppsvraket."
+msgstr "Vid gudarna! Detta är helt förfärligt. Det verkar som om vi står inför en prövning – och det ser ut som om Saledus hade rätt i sin rädsla när han hittade skeppsvraket."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:240
@@ -429,7 +429,7 @@ msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr "Idag när jag gick längs östra stranden fick jag en chock. Jag fick syn på en av de hatade, ondsinta barbarstammar som vi tidigare har haft så mycket problem med."
+msgstr "I dag när jag gick längs östra stranden fick jag en chock. Jag fick syn på en av de hatade, ondsinta barbarstammarna som vi tidigare har haft så mycket problem med."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:243
@@ -438,12 +438,12 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr "Till en början var jag naiv och hoppades att de var fredliga, men så snart de såg mig rusade de mot mig och började attackera mig med sina kastspjut. Tacka gudarna att jag kunde fly och gömma mig, för att senare ta mig tillbaka hit under skydd av mörkret."
+msgstr "Till en början var jag naiv och hoppades att de var fredliga, men så snart en av dem såg mig rusade de mot mig och började attackera mig med sina kastspjut. Tacka gudarna att jag kunde fly och gömma mig, för att senare ta mig tillbaka hit under skydd av mörkret."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "Anyway, we must build stronger military buildings as soon as possible."
-msgstr "I vilket fall som, vi måste bygga starkare militärbyggnader så snart som möjligt."
+msgstr "Hur som helst måste vi bygga starkare militärbyggnader så snart som möjligt."
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Command to Attack"
@@ -488,7 +488,7 @@ msgstr "Tiden går"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr "7 dagar senare..."
+msgstr "7 dagar senare…"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
@@ -508,10 +508,10 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "Meddelandet var adresserat till mig, med en vädjan att komma tillbaka till Fremil. Det säger att Imperiet är i krig med barbarerna. De attackerades från norr av stammen som jag inte fick anfalla. Det står klart för mig vad jag måste göra..."
+msgstr "Meddelandet var adresserat till mig, med en vädjan att komma tillbaka till Fremil. Det säger att Imperiet är i krig med barbarerna. De attackerades från norr av stammen som jag inte fick anfalla. Det står klart för mig vad jag måste göra…"
 
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Du har slutfört det här uppdraget. Du kan fortsätta att spela om du vill, gå annars vidare till nästa uppdrag."
+msgstr "Du har slutfört det här uppdraget. Du kan fortsätta spela om du vill. Annars går du vidare till nästa uppdrag."

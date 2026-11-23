@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# GunChleoc, 2015
 # Roy Luo <1598359376@qq.com>, 2021
 msgid ""
 msgstr ""

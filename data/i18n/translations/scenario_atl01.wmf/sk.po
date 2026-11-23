@@ -85,7 +85,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Jedlo je veľmi dôležité pre bane a výcvikové stavby. Zriaďte dobre fungujúce potravinárske prostredie postavením aspoň jednej farmy, jednej čiernokoreňovej farmy a mlynu. Dva druhy múky sa spolu s vodou zo studne použijú na výrobu chleba v pekárni, takže postavte aj pekáreň a studňu."
+msgstr "Jedlo je veľmi dôležité pre bane a výcvikové stavby. Zriaďte dobre fungujúce potravinárske prostredie postavením aspoň jednej farmy, jednej čiernokoreňovej farmy a mlyna. Dva druhy múky sa spolu s vodou zo studne použijú na výrobu chleba v pekárni, takže postavte aj pekáreň a studňu."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -215,7 +215,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Teraz, keď sa kujú zbrane, je možné verbovať nových vojakov. Aby sa tak mohlo stať, musime do kasární doručiť ľahké trojzubce a kabátce. Verbovanci dorazia zo skladu, budú vyzbrojení, odetí a vycvičení a stanú sa vojakmi."
+msgstr "Teraz, keď sa kujú zbrane, je možné verbovať nových vojakov. Aby sa tak mohlo stať, musíme do kasární doručiť ľahké trojzubce a kabátce. Verbovanci dorazia zo skladu, budú vyzbrojení, odetí a vycvičení a stanú sa vojakmi."
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
@@ -296,7 +296,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Na skrytom a stratenom ostrove Atlantída usadil sa od počiatkoch sveta hrdý kmeň. Pod vládou pokrvnej línie kráľa Ajanthula – prvého človeka oprávneného bohom mora Lutasa dýchať nad morskou hladinou – a múdrych duchovných, ktorí zabezpečili spojenie s Lutasom – nastalo obdobie prosperity a civilizácie."
+msgstr "Na skrytom a stratenom ostrove Atlantída sa od počiatku sveta usadil hrdý kmeň. Pod vládou pokrvnej línie kráľa Ajanthula – prvého človeka oprávneného bohom mora Lutasa dýchať nad morskou hladinou – a múdrych duchovných, ktorí zabezpečili spojenie s Lutasom – nastalo obdobie prosperity a civilizácie."
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -342,7 +342,7 @@ msgstr "Rozruch a zmätok"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
-msgstr "Vystúpi chaos…"
+msgstr "Nastáva chaos…"
 
 #. TRANSLATORS: Foreword
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:166

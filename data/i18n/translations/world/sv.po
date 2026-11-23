@@ -104,7 +104,7 @@ msgstr "Ruin"
 #: ../../../../data/world/immovables/miscellaneous/debris01/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/debris02/init.lua:7
 msgid "Debris"
-msgstr "Skräp"
+msgstr "Bråte"
 
 #: ../../../../data/world/immovables/miscellaneous/mushroom1/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/mushroom2/init.lua:7
@@ -134,7 +134,7 @@ msgstr "Skelett"
 #: ../../../../data/world/immovables/miscellaneous/skeleton2/init.lua:7
 #: ../../../../data/world/immovables/miscellaneous/skeleton4/init.lua:7
 msgid "Seashell"
-msgstr "Snäcka"
+msgstr "Snäckskal"
 
 #: ../../../../data/world/immovables/miscellaneous/snowman/init.lua:7
 msgid "Snowman"
@@ -231,7 +231,7 @@ msgstr "Klippor 6"
 #: ../../../../data/world/immovables/standing_stones/standing_stone6/init.lua:7
 #: ../../../../data/world/immovables/standing_stones/standing_stone7/init.lua:7
 msgid "Standing Stone"
-msgstr "Stenstod"
+msgstr "Rest sten"
 
 #: ../../../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
@@ -474,7 +474,7 @@ msgstr "Rött svampträd (vuxet)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/mushroom_red/old/init.lua:10
 msgid "Red Mushroom Tree (Old)"
-msgstr "Rött svampträd (gamalt)"
+msgstr "Rött svampträd (gammalt)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../../../data/world/immovables/trees/mushroom_red/old/init.lua:12
@@ -593,23 +593,23 @@ msgstr "Oljepalm (planta)"
 
 #: ../../../../data/world/immovables/trees/palm_roystonea/mature/init.lua:9
 msgid "Roystonea regia Palm (Mature)"
-msgstr "Roystonea regia palm (vuxen)"
+msgstr "Roystoneiapalm (vuxen)"
 
 #: ../../../../data/world/immovables/trees/palm_roystonea/old/init.lua:9
 msgid "Roystonea regia Palm (Old)"
-msgstr "Roystonea regia palm (gammal)"
+msgstr "Roystoneiapalm (gammal)"
 
 #: ../../../../data/world/immovables/trees/palm_roystonea/old/init.lua:10
 msgid "Roystonea regia Palm"
-msgstr "Roystonea regia palm"
+msgstr "Roystoneiapalm"
 
 #: ../../../../data/world/immovables/trees/palm_roystonea/pole/init.lua:9
 msgid "Roystonea regia Palm (Pole)"
-msgstr "Roystonea regia palm (ung)"
+msgstr "Roystoneiapalm (ung)"
 
 #: ../../../../data/world/immovables/trees/palm_roystonea/sapling/init.lua:9
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Roystonea regia palm (planta)"
+msgstr "Roystoneiapalm (planta)"
 
 #: ../../../../data/world/immovables/trees/rowan/mature/init.lua:9
 msgid "Rowan (Mature)"
@@ -744,7 +744,7 @@ msgstr "Vattenlevande"
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:168
 msgid "Miscellaneous"
-msgstr "Diverse"
+msgstr "Övrigt"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:207
@@ -753,7 +753,7 @@ msgstr "Artefakter"
 
 #: ../../../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Dessa fasta föremål används av vinstvillkoret 'Artefakter'."
+msgstr "Dessa fasta föremål används av vinstvillkoret ”Artefakter”."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../../../data/world/init.lua:220
@@ -1029,4 +1029,4 @@ msgstr "Tundra"
 
 #: ../../../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"
-msgstr "Arktisk tundra"
+msgstr "Tundrataiga"

@@ -5232,7 +5232,7 @@ msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy l
 msgctxt "atlanteans_building"
 msgid ""
 "Carves precious (and normal) stones out of the rock in mountain terrain."
-msgstr "Vysekáva drahé (a bežné) kamene zo skaly na horskom teréne."
+msgstr "Vysekáva drahé (a bežné) kamene zo skaly v horskom teréne."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Crystal Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1899
@@ -5280,7 +5280,7 @@ msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky horniny
 #: ../../../../data/tribes/initialization/frisians/units.lua:2129
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr "Ťaží uhlie zo zeme na horskom teréne."
+msgstr "Ťaží uhlie zo zeme v horskom teréne."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Iron Mine
@@ -5331,7 +5331,7 @@ msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať uhlie v pr
 #: ../../../../data/tribes/initialization/frisians/units.lua:2147
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr "Ťaží železnú rudu zo zeme na horskom teréne."
+msgstr "Ťaží železnú rudu zo zeme v horskom teréne."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Iron
 #. Mine
@@ -5361,7 +5361,7 @@ msgstr "Táto baňa dokáže pri stálom prísune jedla vyprodukovať železnú 
 #: ../../../../data/tribes/initialization/frisians/units.lua:2165
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr "Ťaží zlatú rudu zo zeme na horskom teréne."
+msgstr "Ťaží zlatú rudu zo zeme v horskom teréne."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Gold Mine
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1945
@@ -7861,7 +7861,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1580
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
-msgstr "Dobýva žulu zo skaly na horskom teréne."
+msgstr "Dobýva žulu zo skaly v horskom teréne."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1583
@@ -12252,7 +12252,7 @@ msgstr ""
 #: ../../../../data/tribes/initialization/empire/units.lua:1929
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
-msgstr "Dobýva mramor a žulu zo skaly na horskom teréne."
+msgstr "Dobýva mramor a žulu zo skaly v horskom teréne."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Marble
 #. Mine

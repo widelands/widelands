@@ -4,7 +4,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2025
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:31
 msgid "Get to the North"
-msgstr "Ta dig till norrut"
+msgstr "Ta dig norrut"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:33
 msgid "Go North"
@@ -38,7 +38,7 @@ msgstr "Förstör Angadthurs palats"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
-msgstr "Förstör Atlantis högkvarter och bygg en hamn"
+msgstr "Förstör det atlantiska högkvarteret och bygg en hamn"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:43
 msgid ""
@@ -65,11 +65,11 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
-"Samla %d guldtackor i din nordligaste hamn för att få en passagerare från "
-"Marcus Caius Iniucundus."
+"Samla %d guldtackor i din nordligaste hamn för att få en överfart av Marcus "
+"Caius Iniucundus."
 msgstr[1] ""
-"Samla %d guldtackor i din nordligaste hamn för att få en passagerbiljett "
-"från Marcus Caius Iniucundus."
+"Samla %d guldtackor i din nordligaste hamn för att få en överfart av Marcus "
+"Caius Iniucundus."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:57
 msgid ""
@@ -104,8 +104,8 @@ msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
 msgstr ""
-"Vi har seglat norrut i flera veckor tills vi nådde denna kust. Ingen av mina"
-" många sjökort ger mig information om vad som finns bortom denna punkt."
+"Vi seglade norrut i veckor innan vi nådde denna kust. Ingen av mina många "
+"sjökort visar vad som finns bortom denna punkt."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -113,8 +113,9 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
-"Endast en sak är säker: Vi måste hitta en hamn på norra kusten av detta "
-"landremsa för att kunna starta en expedition och fortsätta segla norrut."
+"Endast en sak är säker: Vi måste hitta en plats för en hamn på den norra "
+"kusten av denna landremsa för att kunna starta en expedition och fortsätta "
+"segla norrut."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:80
@@ -123,16 +124,15 @@ msgid ""
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
-"Jag vill hitta min gamle vän Reebaud så fort som möjligt. Varje minut av "
-"sysslolöshet plågar mig när jag föreställer mig Atterdag som glatt trampar "
-"på de gröna träskmarkerna i mitt Föhr med sin fega fot... Låt oss skynda "
-"oss."
+"Jag vill hitta min gamle vän Reebaud så snart jag kan. Varje sysslolös minut"
+" plågar mig när jag föreställer mig Atterdag som trampar på de gröna "
+"träskmarkerna på mitt Föhr med sina grymma fötter… Låt oss skynda oss."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:85
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:94
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:103
 msgid "Eight Weeks Ago"
-msgstr "Åtta veckor sedan"
+msgstr "För åtta veckor sedan"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:86
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:95
@@ -158,8 +158,8 @@ msgid ""
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
 "Ön blomstrade under mitt styre, och mina undersåtar älskade och respekterade"
-" mig. De byggde till och med ett nytt slott till mig som gåva. Och sedan kom"
-" Atterdag."
+" mig. De byggde mig till och med ett nytt slott som gåva. Sedan kom "
+"Atterdag."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -186,12 +186,12 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
-"Och jag måste erkänna det bittra faktum – han lyckades. Striderna varade i "
-"trettiofem dagar, och varje morgon och kväll anlände ännu ett skepp från "
-"Danmark med ytterligare en trupp soldater. Hur kunde jag hoppas på att kunna"
-" konkurrera mot sådana odds? Till slut hade jag inget annat val än att fly "
-"med min son Henneke och några av mina närmaste följeslagare, medan Atterdag "
-"nu kallar Föhr för ännu en del av sitt växande imperium."
+"Och jag måste erkänna det bittra faktumet – han lyckades. Striderna varade i"
+" trettiofem dagar, och varje morgon och kväll anlände ännu ett skepp från "
+"Danmark med ytterligare en trupp soldater. Hur skulle jag kunna stå emot en "
+"sådan övermakt? Till slut hade jag inget annat val än att fly med min son "
+"Henneke och några av mina närmaste följeslagare, medan Atterdag nu kallar "
+"Föhr för ännu en del av sitt växande imperium."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:106
@@ -219,11 +219,11 @@ msgid ""
 "to find a greater force to aid my cause."
 msgstr ""
 "Det är uppenbart att jag inte kan hoppas på att besegra denna ärkefiende på "
-"egen hand. Inte heller de som jag många gånger kämpat tillsammans med skulle"
-" kunna hjälpa mig, eftersom vi alltid haft svårt att slå tillbaka Atterdag. "
-"Hans senaste angrepp bevisade att han aldrig ens försökt vinna på riktigt "
-"förrän nu. Han lekte bara med oss. Nej, om jag ska ha en chans att besegra "
-"honom måste jag hitta en större styrka som kan hjälpa mig."
+"egen hand. Inte heller de som jag så ofta har kämpat sida vid sida med "
+"skulle kunna hjälpa mig, eftersom vi alltid haft svårt att slå tillbaka "
+"Atterdag. Hans senaste angrepp bevisade att han aldrig ens försökt vinna på "
+"riktigt förrän nu. Han lekte bara med oss. Nej, om jag ska ha en chans att "
+"besegra honom måste jag hitta en större styrka som kan hjälpa mig."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:115
@@ -234,9 +234,9 @@ msgid ""
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
 "Och det är just en sådan kraft jag söker nu. Reebaud, hövdingen för en liten"
-" men stark frisiska gemenskap som jag en gång blev vän med; hans högmodiga "
-"stolthet och hans enorma skicklighet i strid är oöverträffad i hela den "
-"kända världen. Om någon kan stå upp mot Atterdag, så måste det vara han."
+" men stark frisisk gemenskap som jag en gång blev vän med; hans stolta "
+"högmod och enastående stridsskicklighet är oöverträffade i hela den kända "
+"världen. Om någon kan stå upp mot Atterdag, så måste det vara han."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -248,10 +248,10 @@ msgid ""
 "would expect from nobody but him."
 msgstr ""
 "När jag bad honom om hjälp blev jag dock djupt besviken. Han och hans män "
-"bor inte längre i norra Frisland utan har valt att grunda en ny bosättning "
-"långt uppe i norr, där ingen tidigare vågat bosätta sig. Modet att våga sig "
-"på ett så djärvt företag är också något jag inte skulle förvänta mig av "
-"någon annan än honom."
+"bor inte längre i Nordfriesland utan har valt att grunda en ny bosättning "
+"långt uppe i norr, där ingen tidigare vågat bosätta sig. Modet att ge sig i "
+"kast med ett så djärvt företag är också något jag inte skulle förvänta mig "
+"av någon annan än honom."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:124
@@ -273,11 +273,11 @@ msgstr "Vi får inte misslyckas. Mitt folks framtid hänger på mig."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:131
 msgid "Diking"
-msgstr "Dikesgrävning"
+msgstr "Dikning"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:132
 msgid "Gaining Land"
-msgstr "Vinn mark"
+msgstr "Landvinning"
 
 #. TRANSLATORS: Claus Lembeck – Diker
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:134
@@ -289,7 +289,7 @@ msgid ""
 "on this island much, but at least we should consider it."
 msgstr ""
 "Denna ö är lite för liten och trång för min smak. Det finns en erfaren "
-"dikesgrävare bland mitt folk, och han har föreslagit att vi ska använda "
+"dikesbyggare bland mitt folk, och han har föreslagit att vi ska använda "
 "stockar för att bygga vågbrytare, vilket skulle göra det möjligt för oss att"
 " ta ytterligare mark från havet. Det kommer att bli ett långsamt och dyrt "
 "projekt, och jag hoppas att vi inte kommer att stanna länge på denna ö, men "
@@ -297,7 +297,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid "Port Space Found"
-msgstr "Hamnyta hittad"
+msgstr "Hamnplats hittad"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:139
 msgid "One step closer to the North"
@@ -312,10 +312,10 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
-"Mina soldater rapporterar att de har hittat en hamnyta! Nu måste vi bygga en"
-" hamn och starta en expedition. Naturligtvis måste vi först bygga upp en "
+"Mina soldater rapporterar att de har hittat en hamnplats! Nu måste vi bygga "
+"en hamn och starta en expedition. Naturligtvis måste vi först bygga upp en "
 "komplett sjöfartsekonomi, med ett varv och en vävfabrik. Men slösa inte för "
-"mycket tid på att perfekta vår ekonomi – det enda som spelar roll är att vi "
+"mycket tid på att fullända vår ekonomi – det enda som spelar roll är att vi "
 "snart kommer till norr."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -337,13 +337,13 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
-"Vi har landat på en märklig ö. Marken är hård, svart och brant, och luften "
-"luktar bränt. Stranden är askgrå, och sanden känns illvillig, som om en "
-"lindorm gömde sig under den och väntade på att kasta sig över alla levande "
-"varelser som var dumma nog att komma hit. Jag kan knappt beskriva min oro "
-"med ord. Jag vet inte vad vi ska vara rädda för, men vi måste i alla fall "
-"vara mycket försiktiga när vi korsar den. Förhoppningsvis når vi snart den "
-"motsatta sidan av ön."
+"Vi har landat på en märklig ö. Marken är hård, svart och oländig, och luften"
+" luktar bränt. Stranden är askgrå, och sanden känns illvillig, som om en "
+"lindorm låg på lur under den och väntade på att kasta sig över varje levande"
+" varelse som var dum nog att komma hit. Jag kan knappt beskriva min oro med "
+"ord. Jag vet inte vad vi ska vara rädda för, men vi måste i alla fall vara "
+"mycket försiktiga när vi korsar ön. Förhoppningsvis når vi snart öns "
+"motsatta sida."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:151
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -386,9 +386,9 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
-"Var hälsade, främlingar! Jag är Angadthur, kung av denna mirakulösa ö, en "
-"ättling till den legendariske kung Ajanthul den förste av Atlantis själv. "
-"Var välkomna till mig, om ni vill bli våra vänner!"
+"Var hälsade, främlingar! Jag är Angadthur, kung av denna mirakulösa ö och "
+"ättling till den legendariske kung Ajanthul den förste av Atlantis. Var "
+"välkomna till mig, om ni vill bli våra vänner!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:164
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:176
@@ -458,16 +458,16 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
-"Som det nu är, är mina soldater uttråkade av att aldrig ha något att göra. "
-"Låt oss hålla en vapentävling, ska vi? Du kan skicka dina soldater för att "
-"försöka förstöra mitt palats. Jag är säker på att ni inte har en chans, och "
-"därför lovar jag att be gudarna välsigna er resa om ni lyckas."
+"Mina soldater är uttråkade eftersom de aldrig har något att göra. Låt oss "
+"tävla i vapenkonst, ska vi? Du kan skicka dina soldater för att försöka "
+"förstöra mitt palats. Jag är säker på att ni inte har en chans, och därför "
+"lovar jag att be gudarna välsigna er resa om ni lyckas."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:298
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid "Congratulations"
-msgstr "Gratulerar"
+msgstr "Gratulationer"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:192
 msgid "May Satul bless you"
@@ -519,7 +519,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
-msgstr "Hamnyta hittat"
+msgstr "Hamnplats hittad"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:214
@@ -547,9 +547,9 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
-"Ja, det här ser mer ut som jag föreställer mig att norr ska se ut. Ängarna "
-"är fortfarande gröna här, men snöfläckarna blir större och större ju längre "
-"norrut man tittar."
+"Ja, det här ser mer ut som jag föreställer mig att Norden ska se ut. Ängarna"
+" är fortfarande gröna här, men snöfläckarna blir större och större ju längre"
+" norrut man tittar."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:227
@@ -557,7 +557,7 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
-"Det ser bra ut, men det kan vara ännu en ö. Låt oss fortsätta resa snabbt."
+"Det ser bra ut, men det kan vara ännu en ö. Låt oss fortsätta skyndsamt."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:235
@@ -570,7 +570,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:239
 msgid "No troubles, please"
-msgstr "Inga problem, tack"
+msgstr "Inga bråk, tack"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:241
@@ -579,7 +579,7 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
-"Välkomna, främlingar! Jag är Marcus Caius Iniucundus, en legat från "
+"Hälsningar, främlingar! Jag är Marcus Caius Iniucundus, en legat från "
 "Imperiet. Är detta er ö? Vi är bara på genomresa, jag hoppas att ni inte har"
 " något emot det. Vi vill inte ha några problem."
 
@@ -610,11 +610,11 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
-"Det gläder mig att höra att ni vill ha fred. Jag är ledsen, men jag har "
+"Det gläder mig att höra att du vill ha fred. Jag är ledsen, men jag har "
 "aldrig hört namnet Reebaud förut. Om du vill åka norrut har vi dock samma "
-"destination, för det är precis dit jag är på väg i tjänsten från "
+"destination, för det är precis dit jag reser i tjänsten, utsänd från "
 "huvudstaden. Vi förbereder just nu ett skepp för avfärd. Vi kan ta med dig "
-"om du vill, förutsatt att du kan betala för resan."
+"om du vill, förutsatt att du kan betala för överfarten."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:259
@@ -622,8 +622,8 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
-"Vi tackar för ditt erbjudande! Vad är ditt pris? Och, om du inte har något "
-"emot att jag frågar, får jag veta vilken verksamhet du är anställd inom?"
+"Vi tackar för ditt erbjudande! Vilket pris begär du? Om du inte har något "
+"emot att jag frågar, får jag veta vilket ärende du har fått?"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:266
 #, lua-format
@@ -652,13 +652,13 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
-"Syftet med min resa är att söka upp prokonsuln i provinsen Norra länderna, "
-"som har underlåtit att betala sina skatter i flera år i rad. Min uppgift är "
-"att ge denne Murilius en ordentlig utskällning, och om jag upptäcker att han"
-" inte har betalat av girighet snarare än av nödvändighet, ska jag föra honom"
-" tillbaka till huvudstaden i kedjor. Jag måste säga att jag är ganska glad "
-"över att ha fått denna uppgift, för jag har en god chans att bli utnämnd "
-"till prokonsul i hans ställe om jag lyckas."
+"Syftet med min resa är att söka upp prokonsuln i provinsen De nordliga "
+"länderna, som har underlåtit att betala sina skatter i flera år i rad. Min "
+"uppgift är att ge denne Murilius en ordentlig utskällning, och om jag "
+"upptäcker att han inte har betalat av girighet snarare än av nödvändighet, "
+"ska jag föra honom tillbaka till huvudstaden i kedjor. Jag måste säga att "
+"jag är ganska glad över att ha fått denna uppgift, för jag har en god chans "
+"att bli utnämnd till prokonsul i hans ställe om jag lyckas."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:274
@@ -671,16 +671,16 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
-"Men tillbaka till ämnet för din resa. Det finns bara en plats på öns norra "
-"kust där en hamn kan byggas. Så du har egentligen inget annat val än att "
-"köpa en plats på min galär. Men mina astrologer rapporterar att en "
+"Men tillbaka till frågan om din överfart. Det finns bara en plats på öns "
+"norra kust där en hamn kan byggas. Så du har egentligen inget annat val än "
+"att köpa en överfart på min galär. Men mina astrologer rapporterar att en "
 "fruktansvärd storm är på väg som kommer att göra sjöresor omöjliga under "
 "lång tid. Vi måste segla inom två timmar, och den som fortfarande är kvar på"
 " ön efter det kommer inte att kunna lämna den på länge."
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 msgid "Decide"
-msgstr "Besluta"
+msgstr "Bestäm"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:286
@@ -689,8 +689,8 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
-"Han verkar glad att erbjuda oss en passage, men priset är orimligt högt. Vi "
-"kan lika gärna förstöra hans hamn och bygga en egen. Jag undrar vad som "
+"Han verkar glad att erbjuda oss en överfart, men priset är orimligt högt. Vi"
+" kan lika gärna förstöra hans hamn och bygga en egen. Jag undrar vad som "
 "skulle vara bäst…"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:294
@@ -712,10 +712,10 @@ msgid ""
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
 "Vi har erövrat hamnen! Vi bygger redan ett skepp, och sedan kommer vi "
-"äntligen att resa till den verkliga norra delen av landet. Även om vi "
-"fortfarande inte har hört något om Reebaud är jag övertygad om att vi snart "
-"kommer att hitta honom. Då kommer han att ge oss hjälp, och jag kommer att "
-"återerövra Föhr från usurpatorn Atterdag!"
+"äntligen att resa till det verkliga fjärran norr. Även om vi fortfarande "
+"inte har hört något om Reebaud är jag övertygad om att vi snart kommer att "
+"hitta honom. Då kommer han att ge oss hjälp, och jag kommer att återerövra "
+"Föhr från usurpatorn Atterdag!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:308
@@ -732,8 +732,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
-"Du har betalat för resan med rent guld. Nu är det bara rätt att du får det. "
-"Vårt skepp är klart, du kan gå ombord!"
+"Du har betalat för överfarten med rent guld. Då är det inte mer än rätt att "
+"du får den. Vårt skepp är klart, du kan gå ombord!"
 
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:312
 #: ../../../../data/campaigns/fri03.wmf/scripting/texts.lua:316
@@ -795,7 +795,7 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
-"Det här är en katastrof! Vi har nått en annan kust, men en annan stam har "
+"Det här är en katastrof! Vi har nått en annan kust, men en annan klan har "
 "redan bosatt sig där. De tillåter oss inte att landstiga på deras kust."
 
 #. TRANSLATORS: Claus Lembeck – lost
@@ -804,9 +804,9 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
-"Vi var för långsamma. Vi dröjde och fördröjde, och detta är resultatet. Det "
-"finns ingen väg framåt. Ingen av oss kommer någonsin att få se vårt hem "
-"igen!"
+"Vi var för långsamma. Vi har dröjt och dragit benen efter oss, och detta är "
+"resultatet. Det finns ingen väg framåt. Ingen av oss kommer någonsin att få "
+"se vårt hem igen!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -821,5 +821,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
-"Fungerar som bas för kolonisation och handel över vatten. Lagrar också dina "
+"Fungerar som bas för kolonisering och handel över havet. Lagrar också dina "
 "soldater, varor och verktyg."

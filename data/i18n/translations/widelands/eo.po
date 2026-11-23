@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2026-09-21 07:40+0000\n"
+"POT-Creation-Date: 2026-11-21 09:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Raúl Contreras, 2024-2025\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -121,7 +121,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
 #: ../../../../data/scripting/richtext.lua:733
-#: ../../../../src/base/i18n.cc:347 ../../../../src/ui/basic/spinbox.cc:499
+#: ../../../../src/base/i18n.cc:347 ../../../../src/ui/basic/spinbox.cc:503
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s kaj %2$s"
@@ -704,14 +704,14 @@ msgstr "malŝaltita"
 #: ../../../../src/ui/basic/dropdown.cc:363
 #: ../../../../src/ui/editor/editorinteractive.cc:1279
 #: ../../../../src/ui/fsmenu/addons/contact.cc:81
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1983
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1994
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2066
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2074
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2099
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2169
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2279
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2359
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1984
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1995
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2067
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2075
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2100
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2170
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2280
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2360
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:108
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:316
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:597
@@ -1242,7 +1242,7 @@ msgstr "Vintro"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../../../src/logic/map.cc:66
-#: ../../../../src/ui/editor/main_menu_random_map.cc:308
+#: ../../../../src/ui/editor/main_menu_random_map.cc:312
 msgid "Wasteland"
 msgstr "Aridlando"
 
@@ -1255,7 +1255,7 @@ msgstr "Dezerto"
 #: ../../../../src/logic/map.h:246
 #: ../../../../src/ui/editor/editorinteractive.cc:1339
 #: ../../../../src/ui/editor/main_menu_new_map.cc:115
-#: ../../../../src/ui/editor/main_menu_random_map.cc:617
+#: ../../../../src/ui/editor/main_menu_random_map.cc:621
 #: ../../../../src/ui/editor/main_menu_save_map.cc:144
 #: ../../../../src/ui/shared/mapdata.cc:50
 msgid "No Name"
@@ -1265,7 +1265,7 @@ msgstr "Sennoma"
 #: ../../../../src/logic/map.h:247
 #: ../../../../src/ui/editor/editorinteractive.cc:1342
 #: ../../../../src/ui/editor/main_menu_new_map.cc:116
-#: ../../../../src/ui/editor/main_menu_random_map.cc:618
+#: ../../../../src/ui/editor/main_menu_random_map.cc:622
 #: ../../../../src/ui/fsmenu/addons/packager.cc:409
 msgctxt "author_name"
 msgid "Unknown"
@@ -1646,7 +1646,7 @@ msgstr "(haltigita)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../../../src/logic/map_objects/tribes/productionsite.cc:484
-#: ../../../../src/ui/game/building_statistics_menu.cc:722
+#: ../../../../src/ui/game/building_statistics_menu.cc:723
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -2297,7 +2297,7 @@ msgstr "Komencaj pozicioj"
 #: ../../../../src/map_io/widelands_map_loader.cc:275
 #: ../../../../src/ui/editor/editorinteractive.cc:352
 #: ../../../../src/ui/editor/field_info_window.cc:220
-#: ../../../../src/ui/editor/main_menu_random_map.cc:111
+#: ../../../../src/ui/editor/main_menu_random_map.cc:112
 #: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:42
 msgid "Resources"
 msgstr "Resursoj"
@@ -2604,7 +2604,7 @@ msgid ""
 msgstr "Widelands ne povis lanĉi servilon.\nVerŝajne alia procezo jam funkciigas servilon en nia haveno."
 
 #: ../../../../src/network/gamehost.cc:1702
-#: ../../../../src/ui/editor/main_menu_random_map.cc:735
+#: ../../../../src/ui/editor/main_menu_random_map.cc:739
 #, c-format
 msgid "Computer %u"
 msgstr "Komputilo %u"
@@ -3074,7 +3074,7 @@ msgstr ""
 #: ../../../../src/ui/editor/main_menu_map_options.cc:250
 #: ../../../../src/ui/editor/main_menu_save_map_make_directory.cc:62
 #: ../../../../src/ui/editor/player_menu.cc:87
-#: ../../../../src/ui/fsmenu/addons/manager.cc:483
+#: ../../../../src/ui/fsmenu/addons/manager.cc:491
 #: ../../../../src/ui/fsmenu/addons/packager.cc:131
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:197
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:496
@@ -3098,7 +3098,7 @@ msgstr "Apliki"
 #: ../../../../src/ui/editor/main_menu_load_or_save_map.cc:113
 #: ../../../../src/ui/editor/main_menu_map_options.cc:258
 #: ../../../../src/ui/editor/main_menu_new_map.cc:70
-#: ../../../../src/ui/editor/main_menu_random_map.cc:859
+#: ../../../../src/ui/editor/main_menu_random_map.cc:863
 #: ../../../../src/ui/editor/main_menu_save_map_make_directory.cc:70
 #: ../../../../src/ui/fsmenu/addons/contact.cc:55
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:213
@@ -3145,26 +3145,26 @@ msgstr ""
 msgid "Red"
 msgstr ""
 
-#: ../../../../src/ui/basic/color_chooser.cc:353
+#: ../../../../src/ui/basic/color_chooser.cc:354
 msgid "Green"
 msgstr ""
 
-#: ../../../../src/ui/basic/color_chooser.cc:363
+#: ../../../../src/ui/basic/color_chooser.cc:365
 msgid "Blue"
 msgstr ""
 
-#: ../../../../src/ui/basic/color_chooser.cc:483
+#: ../../../../src/ui/basic/color_chooser.cc:486
 msgid "Remove from favorites"
 msgstr ""
 
-#: ../../../../src/ui/basic/color_chooser.cc:483
+#: ../../../../src/ui/basic/color_chooser.cc:486
 #: ../../../../src/ui/fsmenu/addons/packager.cc:106
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:168
 #: ../../../../src/ui/game/quicknavigation.cc:286
 msgid "–"
 msgstr ""
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:493
 #: ../../../../src/ui/editor/main_menu_map_options.cc:108
 #: ../../../../src/ui/fsmenu/addons/packager.cc:97
 #: ../../../../src/ui/fsmenu/addons/packager_box.cc:150
@@ -3172,7 +3172,7 @@ msgstr ""
 msgid "+"
 msgstr "+"
 
-#: ../../../../src/ui/basic/color_chooser.cc:490
+#: ../../../../src/ui/basic/color_chooser.cc:493
 msgid "Add current color to favorites"
 msgstr ""
 
@@ -3239,28 +3239,28 @@ msgstr ""
 msgid "Loading…"
 msgstr "Ŝarganta…"
 
-#: ../../../../src/ui/basic/spinbox.cc:157
+#: ../../../../src/ui/basic/spinbox.cc:161
 msgid "Decrease the value"
 msgstr "Malaltigi la valoron"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:161
-#: ../../../../src/ui/basic/spinbox.cc:189
+#: ../../../../src/ui/basic/spinbox.cc:165
+#: ../../../../src/ui/basic/spinbox.cc:193
 #, c-format
 msgid "Decrease the value by %s"
 msgstr ""
 
-#: ../../../../src/ui/basic/spinbox.cc:170
+#: ../../../../src/ui/basic/spinbox.cc:174
 msgid "Increase the value"
 msgstr "Altigi la valoron"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../../../src/ui/basic/spinbox.cc:174
-#: ../../../../src/ui/basic/spinbox.cc:193
+#: ../../../../src/ui/basic/spinbox.cc:178
+#: ../../../../src/ui/basic/spinbox.cc:197
 #, c-format
 msgid "Increase the value by %s"
 msgstr ""
@@ -3268,7 +3268,7 @@ msgstr ""
 #. * TRANSLATORS: "Increase/Decrease the value by <n> minutes"
 #. You may want to treat this as "by <n> minutes", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:469
+#: ../../../../src/ui/basic/spinbox.cc:473
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d minute"
@@ -3277,8 +3277,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:472
-#: ../../../../src/ui/basic/spinbox.cc:523
+#: ../../../../src/ui/basic/spinbox.cc:476
+#: ../../../../src/ui/basic/spinbox.cc:527
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3288,7 +3288,7 @@ msgstr[1] "%d minutoj"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:482
+#: ../../../../src/ui/basic/spinbox.cc:486
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d hour"
@@ -3297,8 +3297,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:485
-#: ../../../../src/ui/basic/spinbox.cc:511
+#: ../../../../src/ui/basic/spinbox.cc:489
+#: ../../../../src/ui/basic/spinbox.cc:515
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -3311,7 +3311,7 @@ msgstr[1] "%d horoj"
 #. translated "Increase/Decrease the value by %s". You can also defer
 #. translation
 #. of "by X hours" and "by Y minutes".
-#: ../../../../src/ui/basic/spinbox.cc:497
+#: ../../../../src/ui/basic/spinbox.cc:501
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
@@ -3322,7 +3322,7 @@ msgstr ""
 #. You may want to treat this as "by <n> hours", depending on how you
 #. translated
 #. "Increase/Decrease the value by %s" and "%1$s and %2$s".
-#: ../../../../src/ui/basic/spinbox.cc:508
+#: ../../../../src/ui/basic/spinbox.cc:512
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
@@ -3334,7 +3334,7 @@ msgstr[1] ""
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by <n> minutes", depending on how you
 #. translated "Increase/Decrease the value by %s" and "%1$s and %2$s".
-#: ../../../../src/ui/basic/spinbox.cc:520
+#: ../../../../src/ui/basic/spinbox.cc:524
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
@@ -3345,7 +3345,7 @@ msgstr[1] ""
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:533
+#: ../../../../src/ui/basic/spinbox.cc:537
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d week"
@@ -3354,7 +3354,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:536
+#: ../../../../src/ui/basic/spinbox.cc:540
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -3364,7 +3364,7 @@ msgstr[1] ""
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
 #. You may want to treat this as "by <n> pixels", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:542
+#: ../../../../src/ui/basic/spinbox.cc:546
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d pixel"
@@ -3373,7 +3373,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:545
+#: ../../../../src/ui/basic/spinbox.cc:549
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3383,7 +3383,7 @@ msgstr[1] ""
 #. * TRANSLATORS: "Increase/Decrease the value by <n> fields"
 #. You may want to treat this as "by <n> fields", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:551
+#: ../../../../src/ui/basic/spinbox.cc:555
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d field"
@@ -3392,7 +3392,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:554
+#: ../../../../src/ui/basic/spinbox.cc:558
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -3402,16 +3402,16 @@ msgstr[1] ""
 #. * TRANSLATORS: "Increase/Decrease the value by <n>%"
 #. You may want to treat this as "by <n>%", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:560
+#: ../../../../src/ui/basic/spinbox.cc:564
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
 msgstr ""
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../../../src/ui/basic/spinbox.cc:563
-#: ../../../../src/ui/editor/main_menu_random_map.cc:181
-#: ../../../../src/ui/editor/main_menu_random_map.cc:497
+#: ../../../../src/ui/basic/spinbox.cc:567
+#: ../../../../src/ui/editor/main_menu_random_map.cc:185
+#: ../../../../src/ui/editor/main_menu_random_map.cc:501
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -3419,7 +3419,7 @@ msgstr "%i %%"
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../../../src/ui/basic/spinbox.cc:569
+#: ../../../../src/ui/basic/spinbox.cc:573
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
@@ -3554,7 +3554,7 @@ msgstr "Alklaku por elekti objekton. Uzu la klavon Ctrl por elekti plurajn objek
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../../../src/ui/editor/categorized_item_selection_menu.h:214
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:183
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:185
 #, c-format
 msgid "Current: %s"
 msgstr "Nuna: %s…"
@@ -3625,7 +3625,7 @@ msgstr "Nova mapo"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../../../src/ui/editor/editorinteractive.cc:222
-#: ../../../../src/ui/editor/main_menu_random_map.cc:841
+#: ../../../../src/ui/editor/main_menu_random_map.cc:845
 #: ../../../../src/wlapplication_options.cc:456
 msgid "New Random Map"
 msgstr "Nova hazarda mapo"
@@ -3679,7 +3679,7 @@ msgstr "Ŝanĝi la terenaltecon"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../../../src/ui/editor/editorinteractive.cc:310
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:87
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:90
 msgid "Random height"
 msgstr "Hazarda alteco"
 
@@ -3800,7 +3800,7 @@ msgid "Hide Building Spaces"
 msgstr "Kaŝi eblajn konstruejojn"
 
 #: ../../../../src/ui/editor/editorinteractive.cc:477
-#: ../../../../src/ui/fsmenu/options.cc:325
+#: ../../../../src/ui/fsmenu/options.cc:330
 #: ../../../../src/ui/wui/interactive_gamebase.cc:271
 msgid "Show Building Spaces"
 msgstr "Montri eblajn konstruejojn"
@@ -4374,104 +4374,104 @@ msgstr "Ludantoj:"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../../../src/ui/editor/main_menu_random_map.cc:85
+#: ../../../../src/ui/editor/main_menu_random_map.cc:86
 msgid "Low"
 msgstr "Malalta"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../../../src/ui/editor/main_menu_random_map.cc:87
+#: ../../../../src/ui/editor/main_menu_random_map.cc:88
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:278
 msgid "Medium"
 msgstr "Meza"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../../../src/ui/editor/main_menu_random_map.cc:89
+#: ../../../../src/ui/editor/main_menu_random_map.cc:90
 msgid "High"
 msgstr "Alta"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:99
+#: ../../../../src/ui/editor/main_menu_random_map.cc:100
 msgid "Climate"
 msgstr "Klimato"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:123
+#: ../../../../src/ui/editor/main_menu_random_map.cc:124
 msgid "Terrain Distribution"
 msgstr "Distribuo de la tereno"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:137
+#: ../../../../src/ui/editor/main_menu_random_map.cc:138
 msgid "Water:"
 msgstr "Akvo:"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:148
+#: ../../../../src/ui/editor/main_menu_random_map.cc:150
 msgid "Land:"
 msgstr "Tero:"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:159
+#: ../../../../src/ui/editor/main_menu_random_map.cc:162
 msgid "Wasteland:"
 msgstr "Aridlando:"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:172
+#: ../../../../src/ui/editor/main_menu_random_map.cc:176
 msgid "Mountains:"
 msgstr "Montoj:"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:183
+#: ../../../../src/ui/editor/main_menu_random_map.cc:187
 msgid "Island mode"
 msgstr "Insula reĝimo"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:208
+#: ../../../../src/ui/editor/main_menu_random_map.cc:212
 msgid "Random number:"
 msgstr "Hazarda numero:"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:223
+#: ../../../../src/ui/editor/main_menu_random_map.cc:227
 msgid "Generate a new random number"
 msgstr "Generas novan hazardan numeron"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:232
+#: ../../../../src/ui/editor/main_menu_random_map.cc:236
 msgid "Map ID:"
 msgstr "Mapidentigilo:"
 
 #. * TRANSLATORS: Default Map Generator
-#: ../../../../src/ui/editor/main_menu_random_map.cc:245
+#: ../../../../src/ui/editor/main_menu_random_map.cc:249
 msgctxt "map_generator"
 msgid "Default"
 msgstr "Defaŭlta"
 
 #. * TRANSLATORS: Random Climate
-#: ../../../../src/ui/editor/main_menu_random_map.cc:273
+#: ../../../../src/ui/editor/main_menu_random_map.cc:277
 msgctxt "climate"
 msgid "Random"
 msgstr "Hazarda"
 
 #. * TRANSLATORS: Default Terrain Distribution
-#: ../../../../src/ui/editor/main_menu_random_map.cc:304
+#: ../../../../src/ui/editor/main_menu_random_map.cc:308
 msgctxt "terrain"
 msgid "Default"
 msgstr "Defaŭlta"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:306
+#: ../../../../src/ui/editor/main_menu_random_map.cc:310
 msgid "Alpine"
 msgstr "Alpa"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:307
+#: ../../../../src/ui/editor/main_menu_random_map.cc:311
 msgid "Atoll"
 msgstr "Atolo"
 
 #. * TRANSLATORS: Random Terrain Distribution
-#: ../../../../src/ui/editor/main_menu_random_map.cc:310
+#: ../../../../src/ui/editor/main_menu_random_map.cc:314
 msgctxt "terrain"
 msgid "Random"
 msgstr "Hazarda"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:621
+#: ../../../../src/ui/editor/main_menu_random_map.cc:625
 msgid "Generating random map…"
 msgstr "Kreante hazardan mapon…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
 #. editor.
-#: ../../../../src/ui/editor/main_menu_random_map.cc:690
-#: ../../../../src/ui/editor/main_menu_random_map.cc:724
+#: ../../../../src/ui/editor/main_menu_random_map.cc:694
+#: ../../../../src/ui/editor/main_menu_random_map.cc:728
 #: ../../../../src/ui/fsmenu/main.cc:440
 msgid "Random Map"
 msgstr "Hazarda mapo"
@@ -4482,7 +4482,7 @@ msgstr "Hazarda mapo"
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player
 #. positions.
-#: ../../../../src/ui/editor/main_menu_random_map.cc:696
+#: ../../../../src/ui/editor/main_menu_random_map.cc:700
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
@@ -4494,29 +4494,29 @@ msgstr "La mapo estas generita. Bonvolu reekzameni la komencajn poziciojn de la 
 #. * TRANSLATORS: You don't need to be literal with your translation, as long
 #. as
 #. * TRANSLATORS: the user understands that the map's quality is pretty poor.
-#: ../../../../src/ui/editor/main_menu_random_map.cc:702
+#: ../../../../src/ui/editor/main_menu_random_map.cc:706
 msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
 msgstr "La mapgenerilo ne povis produkti sufiĉe bonan mapon kun la provizitaj agordoj. Ĉi tiu mapo probable bezonos ampleksan redaktadon por esti ludebla. Konsideru krei novan mapon kun malsamaj parametroj."
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:725
+#: ../../../../src/ui/editor/main_menu_random_map.cc:729
 msgid "The Widelands Random Map Generator"
 msgstr "La hazarda mapgenerilo de Widelands"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:727
+#: ../../../../src/ui/editor/main_menu_random_map.cc:731
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
 msgstr "Ĉi tiu mapo estis aŭtomate generita de la Hazarda Mapgenerilo de Widelands."
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:735
+#: ../../../../src/ui/editor/main_menu_random_map.cc:739
 #: ../../../../src/ui/game/marketwindow.cc:68
 #: ../../../../src/ui/game/summary.cc:117
 msgid "Player"
 msgstr "Ludanto"
 
-#: ../../../../src/ui/editor/main_menu_random_map.cc:851
+#: ../../../../src/ui/editor/main_menu_random_map.cc:855
 msgid "Generate Map"
 msgstr "Generi mapon"
 
@@ -4655,30 +4655,30 @@ msgstr "Altecilaj opcioj"
 msgid "Increase/Decrease height by:"
 msgstr "Pliigi/Malpliigi altecon je:"
 
-#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:61
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:66
+#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:62
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:68
 msgid "Set height to:"
 msgstr "Agordi altecon al:"
 
-#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:72
+#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:74
 msgid "Pick height from map …"
 msgstr ""
 
-#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:73
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:111
+#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:75
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:114
 msgid "Select the height of a field by clicking on it on the map"
 msgstr ""
 
 #. * TRANSLATORS: Editor change height access keys. *
-#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:78
+#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:80
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
 msgstr "Alklaku sur la mapo por pliigi la altecon de la tereno, aŭ premu Shift dum vi alklakas por malpliigi ĝin"
 
 #. * TRANSLATORS: Editor set height access key. *
-#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:81
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:79
+#: ../../../../src/ui/editor/tool_change_height_options_menu.cc:83
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:82
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr "Premu Ctrl dum vi alklakas sur la mapo por agordi la altecon de la tereno"
 
@@ -4686,27 +4686,27 @@ msgstr "Premu Ctrl dum vi alklakas sur la mapo por agordi la altecon de la teren
 msgid "Increase/Decrease amount by:"
 msgstr "Pliigi/Malpliigi la kvanton je:"
 
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:70
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:71
 msgid "Set amount to:"
 msgstr "Agordi la kvanton al:"
 
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:92
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:94
 msgid "Pick resource from map …"
 msgstr ""
 
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:93
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:95
 msgid "Select a resource type by clicking on it on the map"
 msgstr ""
 
 #. * TRANSLATORS: Editor change rseources access keys. *
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:99
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:101
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
 msgstr "Alklaku sur la mapo por pliigi la kvanton de la elektita resurso, aŭ premu Shift dum vi alklakas por malpliigi ĝin"
 
 #. * TRANSLATORS: Editor set rseources access key. *
-#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:103
+#: ../../../../src/ui/editor/tool_change_resources_options_menu.cc:105
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
@@ -4720,23 +4720,23 @@ msgstr "Hazardaj altecopcioj"
 msgid "Minimum height:"
 msgstr "Minimuma alteco:"
 
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:56
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:57
 msgid "Maximum height:"
 msgstr "Maksimuma alteco:"
 
 #. * TRANSLATORS: Editor random height access key. *
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:73
 #: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:76
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:79
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
 msgstr "Alklaku sur la mapo por agordi la altecon de la tereno al hazarda valoro ene de la specifita intervalo"
 
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:97
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:100
 msgid "Fixed height"
 msgstr "Fiksita alteco"
 
-#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:119
+#: ../../../../src/ui/editor/tool_noise_height_options_menu.cc:122
 msgid "Pick …"
 msgstr ""
 
@@ -4836,15 +4836,15 @@ msgstr "Grandeco de la ilo"
 msgid "Size:"
 msgstr "Grandeco:"
 
-#: ../../../../src/ui/editor/toolsize_menu.cc:56
+#: ../../../../src/ui/editor/toolsize_menu.cc:57
 msgid "Gaps:"
 msgstr "Spacoj:"
 
-#: ../../../../src/ui/editor/toolsize_menu.cc:59
+#: ../../../../src/ui/editor/toolsize_menu.cc:61
 msgid "Radius of the active tool"
 msgstr "Radio de la aktiva ilo"
 
-#: ../../../../src/ui/editor/toolsize_menu.cc:60
+#: ../../../../src/ui/editor/toolsize_menu.cc:62
 msgid "Amount of random gaps in the tool’s area"
 msgstr "Kvanto de hazardaj spacoj en la areo de la ilo"
 
@@ -4981,113 +4981,113 @@ msgstr ""
 msgid "Min Players:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:349
+#: ../../../../src/ui/fsmenu/addons/manager.cc:350
 msgid "Min Width:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:359
+#: ../../../../src/ui/fsmenu/addons/manager.cc:361
 msgid "Min Height:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:369
+#: ../../../../src/ui/fsmenu/addons/manager.cc:372
 msgid "Min Size:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:379
+#: ../../../../src/ui/fsmenu/addons/manager.cc:383
 msgid "Max Players:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:389
+#: ../../../../src/ui/fsmenu/addons/manager.cc:394
 msgid "Max Width:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:399
+#: ../../../../src/ui/fsmenu/addons/manager.cc:405
 msgid "Max Height:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:409
+#: ../../../../src/ui/fsmenu/addons/manager.cc:416
 msgid "Max Size:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:419
+#: ../../../../src/ui/fsmenu/addons/manager.cc:427
 msgid "Choose add-on to upload…"
 msgstr "Elektu kromprogramon por alŝuti…"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:430
+#: ../../../../src/ui/fsmenu/addons/manager.cc:438
 msgid "Upload a screenshot…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:438
+#: ../../../../src/ui/fsmenu/addons/manager.cc:446
 msgid "Understood and confirmed"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:439
+#: ../../../../src/ui/fsmenu/addons/manager.cc:447
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:448
-#: ../../../../src/ui/fsmenu/addons/manager.cc:457
+#: ../../../../src/ui/fsmenu/addons/manager.cc:456
+#: ../../../../src/ui/fsmenu/addons/manager.cc:465
 #: ../../../../src/ui/fsmenu/addons/remote_interaction.cc:205
 #: ../../../../src/ui/fsmenu/training_wheel_options.cc:118
 #: ../../../../src/ui/shared/addons_login_box.cc:69
 msgid "Reset"
 msgstr "Restarigi"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:449
-#: ../../../../src/ui/fsmenu/addons/manager.cc:458
+#: ../../../../src/ui/fsmenu/addons/manager.cc:457
+#: ../../../../src/ui/fsmenu/addons/manager.cc:466
 msgid "Reset the filters"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:474
+#: ../../../../src/ui/fsmenu/addons/manager.cc:482
 msgid "Refresh"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:475
+#: ../../../../src/ui/fsmenu/addons/manager.cc:483
 msgid "Refresh the list of add-ons available from the server"
 msgstr "Ĝisdatigu la liston de kromprogramoj disponeblaj ĉe la servilo"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:492
+#: ../../../../src/ui/fsmenu/addons/manager.cc:500
 msgid "Fix dependencies…"
 msgstr "Ripari dependecaj"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:493
+#: ../../../../src/ui/fsmenu/addons/manager.cc:501
 msgid "Try to automatically fix the dependency errors"
 msgstr "Provu aŭtomate ripari la dependecajn erarojn."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:503
+#: ../../../../src/ui/fsmenu/addons/manager.cc:511
 msgid "Move selected add-on to top"
 msgstr "Movu la elektitan kromprogramon al la supro."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:512
+#: ../../../../src/ui/fsmenu/addons/manager.cc:520
 msgid "Move selected add-on one step up"
 msgstr "Movu la elektitan kromprogramon unu paŝon supren"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:521
+#: ../../../../src/ui/fsmenu/addons/manager.cc:529
 msgid "Move selected add-on one step down"
 msgstr "Movu la elektitan kromprogramon unu paŝon malsupren"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:530
+#: ../../../../src/ui/fsmenu/addons/manager.cc:538
 msgid "Move selected add-on to bottom"
 msgstr "Movu la elektitan kromprogramon al la malsupro"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:538
+#: ../../../../src/ui/fsmenu/addons/manager.cc:546
 msgid "Launch the add-ons packager…"
 msgstr "Lanĉu la kromprograman pakaĵilon…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
 #. Development Team
-#: ../../../../src/ui/fsmenu/addons/manager.cc:549
+#: ../../../../src/ui/fsmenu/addons/manager.cc:557
 msgid "Contact us…"
 msgstr "Kontaktu nin…"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:576
+#: ../../../../src/ui/fsmenu/addons/manager.cc:584
 msgid "Tools for Add-Ons Developers"
 msgstr "Iloj por Kromprogramaj Programistoj"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:584
+#: ../../../../src/ui/fsmenu/addons/manager.cc:592
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -5095,14 +5095,14 @@ msgid ""
 "having to write a single line of code."
 msgstr "La interaga kromprograma pakaĵilo permesas al vi krei, redakti, kaj forigi kromprogramojn. Vi povas kunigi mapojn desegnitajn per la Mapredaktilo de Widelands kiel kromprogramon, uzante la grafikan interfacon, kaj kundividi ilin kun aliaj ludantoj, sen devi skribi eĉ unu linion da kodo."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:599
+#: ../../../../src/ui/fsmenu/addons/manager.cc:607
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "Por pliaj informoj pri kiel disvolvi kaj paki viajn proprajn kromprogramojn, bonvolu viziti %s."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:615
+#: ../../../../src/ui/fsmenu/addons/manager.cc:623
 #, c-format
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
@@ -5113,7 +5113,7 @@ msgid ""
 " main menu or see %s."
 msgstr "Ĉi tie vi povas alŝuti viajn aldonaĵojn al la servilo por igi ilin disponeblaj al aliaj ludantoj. Per la alŝuto vi konsentas publikigi vian kreaĵon laŭ la kondiĉoj de la Ĝenerala Publika Permesilo GNU (GPL), versio 2 aŭ iu posta versio (la sama permesilo laŭ kiu Widelands mem estas distribuita). Por pliaj informoj pri la GPL, bonvolu konsulti “Pri Widelands” → “Permesilo” en la ĉefa menuo aŭ vidu %s."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:624
+#: ../../../../src/ui/fsmenu/addons/manager.cc:632
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -5121,7 +5121,7 @@ msgid ""
 " stead."
 msgstr "Estas malpermesite alŝuti kromprogramojn, kiuj enhavas damaĝan aŭ malican enhavon aŭ spamon. Per alŝuto de kromprogramo, vi asertas, ke la kromprogramo estas via propra kreitaĵo aŭ ke vi havas la permeson de la aŭtoro(j) por sendi ĝin anstataŭ ili."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:630
+#: ../../../../src/ui/fsmenu/addons/manager.cc:638
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -5129,7 +5129,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Vi devas esti leginta la dokumentaron pri kromprogramoj sub la supre donita ligilo antaŭ ol sendi enhavon. Ĉar la dokumentaro estas ofte ŝanĝata, certigu, ke vi legas ĝin lastatempe kaj ke vi sekvas ĉiujn tie indikitajn gvidliniojn."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:636
+#: ../../../../src/ui/fsmenu/addons/manager.cc:644
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -5137,7 +5137,7 @@ msgid ""
 "profile page frequently."
 msgstr "La Disvolva Teamo de Widelands revizios vian kromprogramon baldaŭ post la alŝuto. Se ili havas pliajn demandojn, ili kontaktos vin per privata mesaĝo en la retejo de Widelands; do bonvolu ofte kontroli la enirkeston de via reta uzantprofilo."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:666
+#: ../../../../src/ui/fsmenu/addons/manager.cc:674
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -5146,7 +5146,7 @@ msgid ""
 "be happy to help."
 msgstr "Teknikaj problemoj? Nekomprenebla dokumentaro? Pli altnivelaj bezonoj kiel forigo de kromprogramo aŭ kunlaboro kun alia kromprograma projektisto? Bonvolu viziti niajn forumojn ĉe %s, klarigu viajn bezonojn, kaj la Disvolva Teamo de Widelands volonte helpos vin."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:683
+#: ../../../../src/ui/fsmenu/addons/manager.cc:691
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -5157,15 +5157,15 @@ msgid ""
 " website user profile page."
 msgstr "Alternative, vi ankaŭ povas sendi mesaĝon al la Disvolva Teamo de Widelands, kaj ni provos helpi vin kun via demando kiel eble plej baldaŭ. Nur la servilaj administrantoj povas legi mesaĝojn senditajn per ĉi tiu maniero. Ĉar aliaj kromprogramaj projektistoj ofte povas profiti de demandoj kaj respondoj de aliaj, bonvolu uzi ĉi tiun komunikmanieron nur se ekzistas kialo, ke via afero ne estas por ĉiuj oreloj. Vi ricevos nian respondon per privata mesaĝo en la uzantprofilo de la retejo de Widelands."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:728
+#: ../../../../src/ui/fsmenu/addons/manager.cc:736
 msgid "Manage your installed add-ons"
 msgstr "Administru viajn instalitajn kromprogramojn"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:730
+#: ../../../../src/ui/fsmenu/addons/manager.cc:738
 msgid "Browse and install add-ons available on the server"
 msgstr "Foliumu kaj instalu kromprogramojn disponeblajn ĉe la servilo"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:732
+#: ../../../../src/ui/fsmenu/addons/manager.cc:740
 #, c-format
 msgid ""
 "Browse and install maps from the widelands.org website maps archive. Like "
@@ -5173,166 +5173,166 @@ msgid ""
 "directory under the Widelands home directory."
 msgstr "Foliumu kaj instalu mapojn el la arkivo de mapoj en la retejo widelands.org. Same kiel permane elŝutitaj mapoj, la instalitaj retejaj mapoj konserviĝas en la dosierujo \"%s\" en la hejma dosierujo de Widelands."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:736
+#: ../../../../src/ui/fsmenu/addons/manager.cc:744
 msgid "Development"
 msgstr "Evoluigo"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:736
+#: ../../../../src/ui/fsmenu/addons/manager.cc:744
 msgid "Tools for add-on developers"
 msgstr "Iloj por kromprogramaj programistoj"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../../../src/ui/fsmenu/addons/manager.cc:740
+#: ../../../../src/ui/fsmenu/addons/manager.cc:748
 msgid "Name"
 msgstr "Nomo"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../../../src/ui/fsmenu/addons/manager.cc:742
+#: ../../../../src/ui/fsmenu/addons/manager.cc:750
 msgid "Name (descending)"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui/fsmenu/addons/manager.cc:744
+#: ../../../../src/ui/fsmenu/addons/manager.cc:752
 msgid "Most popular"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../../../src/ui/fsmenu/addons/manager.cc:746
+#: ../../../../src/ui/fsmenu/addons/manager.cc:754
 msgid "Least popular"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui/fsmenu/addons/manager.cc:748
+#: ../../../../src/ui/fsmenu/addons/manager.cc:756
 msgid "Most often downloaded"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../../../src/ui/fsmenu/addons/manager.cc:750
+#: ../../../../src/ui/fsmenu/addons/manager.cc:758
 msgid "Least often downloaded"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui/fsmenu/addons/manager.cc:752
+#: ../../../../src/ui/fsmenu/addons/manager.cc:760
 msgid "Oldest"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../../../src/ui/fsmenu/addons/manager.cc:754
+#: ../../../../src/ui/fsmenu/addons/manager.cc:762
 msgid "Newest"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:763
+#: ../../../../src/ui/fsmenu/addons/manager.cc:771
 msgid "Filter add-ons by name"
 msgstr "Filtru kromprogramojn laŭ nomo"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:764
+#: ../../../../src/ui/fsmenu/addons/manager.cc:772
 msgid "Filter maps by name"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:775
+#: ../../../../src/ui/fsmenu/addons/manager.cc:783
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:791
+#: ../../../../src/ui/fsmenu/addons/manager.cc:799
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:712
 msgid "One World"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:799
+#: ../../../../src/ui/fsmenu/addons/manager.cc:807
 #, c-format
 msgid "Toggle world ‘%s’"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:897
+#: ../../../../src/ui/fsmenu/addons/manager.cc:902
 msgctxt "nr_players"
 msgid "Unlimited"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:899
-#: ../../../../src/ui/fsmenu/addons/manager.cc:901
-#: ../../../../src/ui/fsmenu/addons/manager.cc:903
+#: ../../../../src/ui/fsmenu/addons/manager.cc:904
+#: ../../../../src/ui/fsmenu/addons/manager.cc:906
+#: ../../../../src/ui/fsmenu/addons/manager.cc:908
 msgctxt "map_size"
 msgid "Unlimited"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1035
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1040
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Ĉu vi certas, ke vi volas ĝisdatigi tiun %u kromprogramon?"
 msgstr[1] "Ĉu vi certas, ke vi volas ĝisdatigi tiujn %u kromprogramojn?"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1041
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1046
 #, c-format
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1042
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1047
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:498
 #: ../../../../src/ui/fsmenu/addons/rows_ui.cc:532
 msgid "NOT VERIFIED"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1042
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1047
 msgid "verified"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1046
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1051
 msgid "Upgrade All"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1208
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1205
 msgid "Not logged in"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1209
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1206
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Alklaku por ensaluti. Poste vi povas komenti kaj voĉdoni pri kromprogramoj kaj alŝuti viajn proprajn kromprogramojn."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1213
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1210
 msgid "Please log in to upload add-ons"
 msgstr "Bonvolu ensaluti por alŝuti kromprogramojn"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1215
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1212
 msgid "Please log in to upload content"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1217
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1214
 msgid "Please log in to send an enquiry"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1222
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1219
 #, c-format
 msgid "Logged in as %s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1222
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1219
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1223
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1220
 msgid "Click to log out"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1228
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1225
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Bonvolu marki la konfirmokeston por alŝuti kromprogramojn"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1231
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1228
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1258
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1255
 msgid "Server Error"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1259
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1256
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -5340,114 +5340,114 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1267
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1264
 msgid "Wrong Password"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1268
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1265
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1385
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1382
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Alŝutas kromprogramojn… (%.1f%%)"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1388
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1385
 msgid "Connecting to the server…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1411
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1408
 msgid "Server Connection Error"
 msgstr ""
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1413
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1410
 msgid "a networking bug"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1414
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1411
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Ne eblas akiri la liston de disponeblaj kromprogramoj el la servilo!<br>Erarmesaĝo: %s"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1572
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1569
 #, c-format
 msgid "Installed (%u)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1622
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1619
 msgid "Translations for website maps"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1625
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1622
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1628
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1625
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Neniuj ĝisdatigoj disponeblas por viaj instalitaj kromprogramoj"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1630
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1627
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Ĝisdatigu la jenan %u kromprogramon:"
 msgstr[1] "Ĝisdatigu la jenajn %u kromprogramojn:"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1635
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1632
 #, c-format
 msgid "• %s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1640
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1637
 msgid "Browse"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1641
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1638
 #, c-format
 msgid "Browse (%u)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1705
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1702
 msgid "Website Maps"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1706
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1703
 #, c-format
 msgid "Website Maps (%u)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1780
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1777
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1785
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1782
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1792
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1789
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "• \"%1$s\" bezonas \"%2$s\", kiu estas listigita sub la postulanta kromprogramo"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1820
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1817
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1836
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1833
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -5455,67 +5455,67 @@ msgid ""
 "%s"
 msgstr "Aktivigita kromprogramo estas difekta. Neniuj ludoj povas esti komencitaj kun la nuna agordo.\nErarmesaĝo:\n%s"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1853
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1850
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1855
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1852
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Kromprogramoj kun dependecaj eraroj povas funkcii malĝuste aŭ malhelpi ludojn kaj mapojn ŝargiĝi."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1984
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1985
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia versio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:1995
+#: ../../../../src/ui/fsmenu/addons/manager.cc:1996
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "La kromprogramo \"%1$s\" ne povas esti alŝutita, ĉar ĝia kategorio (%2$s) ne estas pli nova ol la versio ĉeestanta en la servilo (%3$s)."
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2006
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2007
 #: ../../../../src/ui/fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2007
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2008
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Ĉu vi vere volas alŝuti la kromprogramon \"%s\" al la servilo?"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2017
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2018
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2024
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2155
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2244
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2025
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2156
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2245
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2048
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2049
 #, c-format
 msgid "‘%s’"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2056
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2057
 #, c-format
 msgid ""
 "The add-on ‘%s’ may not be uploaded to the server because the following "
 "filenames contained in the add-on are not allowed:"
 msgstr "La kromprogramo \"%s\" eble ne povas esti alŝutita al la servilo, ĉar la jenaj dosiernomoj enhavitaj en la kromprogramo estas malpermesitaj:"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2060
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2061
 msgid ""
 "Filenames may only contain alphanumeric characters (A-Z, a-z, 0-9) and "
 "simple punctuation (period, hyphen, and underscore; not multiple periods). "
@@ -5523,7 +5523,7 @@ msgid ""
 "exceed 80 characters."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2075
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2076
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -5532,7 +5532,7 @@ msgid ""
 "%2$s"
 msgstr "La kromprogramo \"%1$s\" ne povis esti alŝutita al la servilo. \n\nErarmesaĝo:\n%2$s"
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2101
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2102
 #, c-format
 msgid ""
 "The map ‘%1$s’ could not be downloaded from the server.\n"
@@ -5541,12 +5541,12 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2134
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2135
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2171
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2172
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -5555,7 +5555,7 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2280
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2281
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -5564,15 +5564,15 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2303
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2304
 msgid "Website Maps Translations"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2304
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2305
 msgid "Downloading website maps translations…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/addons/manager.cc:2360
+#: ../../../../src/ui/fsmenu/addons/manager.cc:2361
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr ""
@@ -6803,129 +6803,129 @@ msgstr ""
 msgid "Playing time"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:101
+#: ../../../../src/ui/fsmenu/launch_game.cc:102
 msgid "Show or hide additional game configuration options"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:114
+#: ../../../../src/ui/fsmenu/launch_game.cc:115
 msgid "Peaceful mode"
 msgstr " Paca reĝimo"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:122
+#: ../../../../src/ui/fsmenu/launch_game.cc:123
 msgid "No fog of war"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:130
+#: ../../../../src/ui/fsmenu/launch_game.cc:131
 msgid "Forbid diplomacy"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:138
+#: ../../../../src/ui/fsmenu/launch_game.cc:139
 msgid "Enable naval warfare (experimental feature)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:146
+#: ../../../../src/ui/fsmenu/launch_game.cc:147
 msgid "Custom starting positions"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:154
+#: ../../../../src/ui/fsmenu/launch_game.cc:155
 msgid "Write Replay"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:164
+#: ../../../../src/ui/fsmenu/launch_game.cc:165
 msgid "Change map…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:174
+#: ../../../../src/ui/fsmenu/launch_game.cc:175
 msgid "Change saved game…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:200
+#: ../../../../src/ui/fsmenu/launch_game.cc:201
 msgid "Start game"
 msgstr "Lanĉi ludon"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:285
+#: ../../../../src/ui/fsmenu/launch_game.cc:286
 msgid "Show fewer options"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:285
+#: ../../../../src/ui/fsmenu/launch_game.cc:286
 msgid "Show more options"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:301
+#: ../../../../src/ui/fsmenu/launch_game.cc:302
 msgid "The relations between players are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:303
+#: ../../../../src/ui/fsmenu/launch_game.cc:304
 msgid "The relations between players are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:305
+#: ../../../../src/ui/fsmenu/launch_game.cc:306
 msgid "The selected win condition does not allow peaceful matches"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:307
+#: ../../../../src/ui/fsmenu/launch_game.cc:308
 msgid "Forbid fighting between players"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:338
+#: ../../../../src/ui/fsmenu/launch_game.cc:339
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:344
+#: ../../../../src/ui/fsmenu/launch_game.cc:345
 msgid "The starting positions are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:346
+#: ../../../../src/ui/fsmenu/launch_game.cc:347
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:349
+#: ../../../../src/ui/fsmenu/launch_game.cc:350
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:369
+#: ../../../../src/ui/fsmenu/launch_game.cc:370
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:371
+#: ../../../../src/ui/fsmenu/launch_game.cc:372
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:373
+#: ../../../../src/ui/fsmenu/launch_game.cc:374
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:395
+#: ../../../../src/ui/fsmenu/launch_game.cc:396
 msgid "Naval warfare is set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:397
+#: ../../../../src/ui/fsmenu/launch_game.cc:398
 msgid "Naval warfare is set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:400
+#: ../../../../src/ui/fsmenu/launch_game.cc:401
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:421
+#: ../../../../src/ui/fsmenu/launch_game.cc:422
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:423
+#: ../../../../src/ui/fsmenu/launch_game.cc:424
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:425
+#: ../../../../src/ui/fsmenu/launch_game.cc:426
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../../../src/ui/fsmenu/launch_game.cc:434
+#: ../../../../src/ui/fsmenu/launch_game.cc:435
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:506
 #: ../../../../src/ui/fsmenu/scenariodetails.cc:47
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:283
@@ -6934,21 +6934,21 @@ msgstr ""
 msgid "Scenario"
 msgstr "Scenaro"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:435
+#: ../../../../src/ui/fsmenu/launch_game.cc:436
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:441
+#: ../../../../src/ui/fsmenu/launch_game.cc:442
 #: ../../../../src/ui/fsmenu/multiplayersetupgroup.cc:510
 #: ../../../../src/ui/fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Savita ludo"
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:443
+#: ../../../../src/ui/fsmenu/launch_game.cc:444
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/launch_game.cc:518
+#: ../../../../src/ui/fsmenu/launch_game.cc:519
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -7853,58 +7853,58 @@ msgstr ""
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:232
+#: ../../../../src/ui/fsmenu/options.cc:233
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:244
+#: ../../../../src/ui/fsmenu/options.cc:246
 msgid "User interface scaling factor"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:254
+#: ../../../../src/ui/fsmenu/options.cc:256
 msgid "Edit keyboard and mouse actions…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:267
+#: ../../../../src/ui/fsmenu/options.cc:269
 msgid "Save game automatically every:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:278
+#: ../../../../src/ui/fsmenu/options.cc:281
 msgid "Maximum number of autosave files:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:291
+#: ../../../../src/ui/fsmenu/options.cc:295
 msgid "Delete replays after:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:301
+#: ../../../../src/ui/fsmenu/options.cc:306
 msgid "Skip autosaves while inactive"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:308
+#: ../../../../src/ui/fsmenu/options.cc:313
 msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:316
+#: ../../../../src/ui/fsmenu/options.cc:321
 msgid "Keep history of sent chat messages in a file"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:327
+#: ../../../../src/ui/fsmenu/options.cc:332
 #: ../../../../src/ui/wui/interactive_gamebase.cc:278
 msgid "Show Census"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:329
+#: ../../../../src/ui/fsmenu/options.cc:334
 #: ../../../../src/ui/wui/interactive_gamebase.cc:287
 msgid "Show Status"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:334
+#: ../../../../src/ui/fsmenu/options.cc:339
 #: ../../../../src/ui/wui/interactive_gamebase.cc:296
 msgid "Show Soldier Levels"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:336
+#: ../../../../src/ui/fsmenu/options.cc:341
 #: ../../../../src/ui/wui/interactive_gamebase.cc:305
 msgid "Show Buildings"
 msgstr ""
@@ -7912,139 +7912,139 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../../../src/ui/fsmenu/options.cc:341
+#: ../../../../src/ui/fsmenu/options.cc:346
 #: ../../../../src/ui/wui/interactive_player.cc:381
 msgid "Show Workarea Overlaps"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:351
+#: ../../../../src/ui/fsmenu/options.cc:356
 msgid "Pause game when inactive for:"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:361
+#: ../../../../src/ui/fsmenu/options.cc:367
 msgid "Start building road after placing a flag"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:366
+#: ../../../../src/ui/fsmenu/options.cc:372
 msgid "Show in-game chat with transparent background"
 msgstr ""
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../../../src/ui/fsmenu/options.cc:377
+#: ../../../../src/ui/fsmenu/options.cc:383
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:382
+#: ../../../../src/ui/fsmenu/options.cc:388
 msgid "Display system time in the info panel"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:387
+#: ../../../../src/ui/fsmenu/options.cc:393
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:392
+#: ../../../../src/ui/fsmenu/options.cc:398
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:397
+#: ../../../../src/ui/fsmenu/options.cc:403
 msgid "Invert click-and-drag map movement direction"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:402
+#: ../../../../src/ui/fsmenu/options.cc:408
 msgid "Animate automatic map movements"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:411
+#: ../../../../src/ui/fsmenu/options.cc:417
 msgid "Teach me how to play"
 msgstr ""
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
-#: ../../../../src/ui/fsmenu/options.cc:421
+#: ../../../../src/ui/fsmenu/options.cc:427
 msgid "Progress…"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:439
+#: ../../../../src/ui/fsmenu/options.cc:445
 msgid "Interface"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:440
+#: ../../../../src/ui/fsmenu/options.cc:446
 msgid "Sound"
 msgstr "Sono"
 
-#: ../../../../src/ui/fsmenu/options.cc:441
+#: ../../../../src/ui/fsmenu/options.cc:447
 msgid "Saving"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:442
+#: ../../../../src/ui/fsmenu/options.cc:448
 msgid "New Games"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:443
+#: ../../../../src/ui/fsmenu/options.cc:449
 msgid "In-Game"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:468
+#: ../../../../src/ui/fsmenu/options.cc:474
 msgid "User interface scaling factor:"
 msgstr ""
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../../../src/ui/fsmenu/options.cc:552
-#: ../../../../src/ui/fsmenu/options.cc:553
+#: ../../../../src/ui/fsmenu/options.cc:558
+#: ../../../../src/ui/fsmenu/options.cc:559
 msgid "Off"
 msgstr ""
 
 #. * TRANSLATORS: Options: Delete replays after:
-#: ../../../../src/ui/fsmenu/options.cc:555
+#: ../../../../src/ui/fsmenu/options.cc:561
 msgid "Never"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the display selection dropdown
-#: ../../../../src/ui/fsmenu/options.cc:610
+#: ../../../../src/ui/fsmenu/options.cc:616
 msgctxt "multiscreen"
 msgid "Follow mouse"
 msgstr ""
 
 #. * TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920,
 #. 1080)'
-#: ../../../../src/ui/fsmenu/options.cc:616
+#: ../../../../src/ui/fsmenu/options.cc:622
 msgid "#%1% (%2%, %3%, %4%, %5%)"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui/fsmenu/options.cc:631
+#: ../../../../src/ui/fsmenu/options.cc:637
 msgid "Fullscreen"
 msgstr ""
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../../../src/ui/fsmenu/options.cc:634
+#: ../../../../src/ui/fsmenu/options.cc:640
 msgid "Maximized"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../../../src/ui/fsmenu/options.cc:650
-#: ../../../../src/ui/fsmenu/options.cc:658
+#: ../../../../src/ui/fsmenu/options.cc:656
+#: ../../../../src/ui/fsmenu/options.cc:664
 msgid "%1% × %2%"
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:711
+#: ../../../../src/ui/fsmenu/options.cc:717
 msgid "Try system language"
 msgstr ""
 
 #. * TRANSLATORS: %s = language name
-#: ../../../../src/ui/fsmenu/options.cc:823
+#: ../../../../src/ui/fsmenu/options.cc:829
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../../../src/ui/fsmenu/options.cc:827
+#: ../../../../src/ui/fsmenu/options.cc:833
 msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../../../src/ui/fsmenu/options.cc:839
+#: ../../../../src/ui/fsmenu/options.cc:845
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -8360,11 +8360,11 @@ msgstr ""
 msgid "Batches:"
 msgstr ""
 
-#: ../../../../src/ui/game/actionconfirm.cc:639
+#: ../../../../src/ui/game/actionconfirm.cc:640
 msgid "Unpause?"
 msgstr ""
 
-#: ../../../../src/ui/game/actionconfirm.cc:640
+#: ../../../../src/ui/game/actionconfirm.cc:641
 msgid ""
 "Do you really want to unpause this trade?\n"
 "\n"
@@ -8543,48 +8543,48 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:228
+#: ../../../../src/ui/game/building_statistics_menu.cc:229
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:362
+#: ../../../../src/ui/game/building_statistics_menu.cc:363
 msgid "Small buildings"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:364
+#: ../../../../src/ui/game/building_statistics_menu.cc:365
 msgid "Medium buildings"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:366
+#: ../../../../src/ui/game/building_statistics_menu.cc:367
 msgid "Big buildings"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:368
+#: ../../../../src/ui/game/building_statistics_menu.cc:369
 msgid "Mines"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:370
+#: ../../../../src/ui/game/building_statistics_menu.cc:371
 msgid "Ports"
 msgstr ""
 
-#: ../../../../src/ui/game/building_statistics_menu.cc:731
+#: ../../../../src/ui/game/building_statistics_menu.cc:732
 msgid "Low productivity:"
 msgstr ""
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../../../src/ui/game/building_statistics_menu.cc:740
-#: ../../../../src/ui/game/building_statistics_menu.cc:759
-#: ../../../../src/ui/game/building_statistics_menu.cc:761
+#: ../../../../src/ui/game/building_statistics_menu.cc:741
+#: ../../../../src/ui/game/building_statistics_menu.cc:760
+#: ../../../../src/ui/game/building_statistics_menu.cc:762
 #: ../../../../src/ui/game/productionsitewindow.cc:233
 msgid "%1%/%2%"
 msgstr ""
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../../../src/ui/game/building_statistics_menu.cc:750
+#: ../../../../src/ui/game/building_statistics_menu.cc:751
 msgid "Lacking soldiers:"
 msgstr ""
 
@@ -8901,13 +8901,13 @@ msgid "Retract"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:403
-#: ../../../../src/ui/game/marketwindow.cc:936
+#: ../../../../src/ui/game/marketwindow.cc:937
 #, c-format
 msgid "Trade Offers (%u)"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:414
-#: ../../../../src/ui/game/marketwindow.cc:449
+#: ../../../../src/ui/game/marketwindow.cc:450
 msgid "Nobody has offered you any trades at the moment."
 msgstr ""
 
@@ -8917,7 +8917,7 @@ msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:442
 #: ../../../../src/ui/game/diplomacy_menu.cc:673
-#: ../../../../src/ui/game/marketwindow.cc:614
+#: ../../../../src/ui/game/marketwindow.cc:615
 #, c-format
 msgid "%s (closest)"
 msgstr ""
@@ -8930,12 +8930,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:452
-#: ../../../../src/ui/game/marketwindow.cc:468
+#: ../../../../src/ui/game/marketwindow.cc:469
 msgid "Accept this trade offer"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:455
-#: ../../../../src/ui/game/marketwindow.cc:471
+#: ../../../../src/ui/game/marketwindow.cc:472
 msgid "Reject this trade offer"
 msgstr ""
 
@@ -8944,7 +8944,7 @@ msgid "Build a market to accept trade offers."
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:498
-#: ../../../../src/ui/game/marketwindow.cc:930
+#: ../../../../src/ui/game/marketwindow.cc:931
 #, c-format
 msgid "Proposed Trades (%u)"
 msgstr ""
@@ -8961,25 +8961,25 @@ msgid "Center view on this market"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:536
-#: ../../../../src/ui/game/marketwindow.cc:339
+#: ../../../../src/ui/game/marketwindow.cc:340
 msgid "Retract this trade offer"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:548
-#: ../../../../src/ui/game/marketwindow.cc:347
+#: ../../../../src/ui/game/marketwindow.cc:348
 msgid "Move this trade proposal…"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:558
-#: ../../../../src/ui/game/marketwindow.cc:358
+#: ../../../../src/ui/game/marketwindow.cc:359
 #, c-format
 msgid "Move this trade proposal to %s"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:563
 #: ../../../../src/ui/game/diplomacy_menu.cc:683
-#: ../../../../src/ui/game/marketwindow.cc:364
-#: ../../../../src/ui/game/marketwindow.cc:624
+#: ../../../../src/ui/game/marketwindow.cc:365
+#: ../../../../src/ui/game/marketwindow.cc:625
 msgid "You have no markets you could move this trade to."
 msgstr ""
 
@@ -8994,13 +8994,13 @@ msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:649
 #: ../../../../src/ui/game/diplomacy_menu.cc:657
-#: ../../../../src/ui/game/marketwindow.cc:570
-#: ../../../../src/ui/game/marketwindow.cc:578
+#: ../../../../src/ui/game/marketwindow.cc:571
+#: ../../../../src/ui/game/marketwindow.cc:579
 msgid "Propose extending this trade"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:650
-#: ../../../../src/ui/game/marketwindow.cc:571
+#: ../../../../src/ui/game/marketwindow.cc:572
 #, c-format
 msgid "Hold down Ctrl to extend it by %d batch"
 msgid_plural "Hold down Ctrl to extend it by %d batches"
@@ -9008,7 +9008,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:655
-#: ../../../../src/ui/game/marketwindow.cc:576
+#: ../../../../src/ui/game/marketwindow.cc:577
 msgid "Hold down Shift to extend the trade indefinitely"
 msgstr ""
 
@@ -9017,32 +9017,32 @@ msgid "Cancel this trade agreement"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:663
-#: ../../../../src/ui/game/marketwindow.cc:601
+#: ../../../../src/ui/game/marketwindow.cc:602
 msgid "Move this trade…"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:676
-#: ../../../../src/ui/game/marketwindow.cc:617
+#: ../../../../src/ui/game/marketwindow.cc:618
 #, c-format
 msgid "Move this trade to %s (closest)"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:677
-#: ../../../../src/ui/game/marketwindow.cc:618
+#: ../../../../src/ui/game/marketwindow.cc:619
 #, c-format
 msgid "Move this trade to %s"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:737
-#: ../../../../src/ui/game/marketwindow.cc:703
-#: ../../../../src/ui/game/marketwindow.cc:789
+#: ../../../../src/ui/game/marketwindow.cc:704
+#: ../../../../src/ui/game/marketwindow.cc:790
 #, c-format
 msgid "%1$s proposed to extend this trade indefinitely."
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:740
-#: ../../../../src/ui/game/marketwindow.cc:706
-#: ../../../../src/ui/game/marketwindow.cc:784
+#: ../../../../src/ui/game/marketwindow.cc:707
+#: ../../../../src/ui/game/marketwindow.cc:785
 #, c-format
 msgid "%1$s proposed to extend this trade by %2$d batch."
 msgid_plural "%1$s proposed to extend this trade by %2$d batches."
@@ -9050,22 +9050,22 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:749
-#: ../../../../src/ui/game/marketwindow.cc:716
+#: ../../../../src/ui/game/marketwindow.cc:717
 msgid "Reject this trade extension proposal"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:753
-#: ../../../../src/ui/game/marketwindow.cc:720
+#: ../../../../src/ui/game/marketwindow.cc:721
 msgid "Accept this trade extension proposal"
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:783
-#: ../../../../src/ui/game/marketwindow.cc:763
+#: ../../../../src/ui/game/marketwindow.cc:764
 msgid "You proposed to extend this trade indefinitely."
 msgstr ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:784
-#: ../../../../src/ui/game/marketwindow.cc:759
+#: ../../../../src/ui/game/marketwindow.cc:760
 #, c-format
 msgid "You proposed to extend this trade by %d batch."
 msgid_plural "You proposed to extend this trade by %d batches."
@@ -9073,7 +9073,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../../../src/ui/game/diplomacy_menu.cc:793
-#: ../../../../src/ui/game/marketwindow.cc:769
+#: ../../../../src/ui/game/marketwindow.cc:770
 msgid "Retract this trade extension proposal"
 msgstr ""
 
@@ -9356,43 +9356,43 @@ msgstr ""
 msgid "Ship Fleet Options"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:138
+#: ../../../../src/ui/game/fleet_options_window.cc:139
 msgid "Toggle infinite production"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:148
+#: ../../../../src/ui/game/fleet_options_window.cc:149
 msgid "Fleet Statistics"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:172
+#: ../../../../src/ui/game/fleet_options_window.cc:173
 msgid "Ports:"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:173
+#: ../../../../src/ui/game/fleet_options_window.cc:174
 msgid "Ships:"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:175
+#: ../../../../src/ui/game/fleet_options_window.cc:176
 msgid "Total waterways:"
 msgstr "Suma de akvovojoj:"
 
-#: ../../../../src/ui/game/fleet_options_window.cc:176
+#: ../../../../src/ui/game/fleet_options_window.cc:177
 msgid "Unserviced waterways:"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:177
+#: ../../../../src/ui/game/fleet_options_window.cc:178
 msgid "Total ferries:"
 msgstr "Suma de pramoj:"
 
-#: ../../../../src/ui/game/fleet_options_window.cc:178
+#: ../../../../src/ui/game/fleet_options_window.cc:179
 msgid "Unemployed ferries:"
 msgstr "Senlaboraj pramoj:"
 
-#: ../../../../src/ui/game/fleet_options_window.cc:189
+#: ../../../../src/ui/game/fleet_options_window.cc:190
 msgid "Desired number of transport ships:"
 msgstr ""
 
-#: ../../../../src/ui/game/fleet_options_window.cc:190
+#: ../../../../src/ui/game/fleet_options_window.cc:191
 msgid "Desired number of unemployed ferries:"
 msgstr "Dezirata nombro de senlaboraj pramoj:"
 
@@ -9543,109 +9543,109 @@ msgstr ""
 msgid "Error Saving Game!"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:80
+#: ../../../../src/ui/game/marketwindow.cc:81
 msgid "Propose"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:96
+#: ../../../../src/ui/game/marketwindow.cc:97
 msgid "You offer:"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:100
+#: ../../../../src/ui/game/marketwindow.cc:101
 msgid "You demand:"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:106
+#: ../../../../src/ui/game/marketwindow.cc:107
 msgid "Decrease amount by 10"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:113
+#: ../../../../src/ui/game/marketwindow.cc:114
 msgid "Decrease amount"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:121
+#: ../../../../src/ui/game/marketwindow.cc:122
 msgid "Increase amount"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:128
+#: ../../../../src/ui/game/marketwindow.cc:129
 msgid "Increase amount by 10"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:189
+#: ../../../../src/ui/game/marketwindow.cc:190
 msgid "Please select the player you want to trade with."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:195
+#: ../../../../src/ui/game/marketwindow.cc:196
 msgid "Please select the wares you want to send and receive."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:230
+#: ../../../../src/ui/game/marketwindow.cc:231
 #, c-format
 msgid "It is not allowed to exchange more than %d ware per batch."
 msgid_plural "It is not allowed to exchange more than %d wares per batch."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../../src/ui/game/marketwindow.cc:239
+#: ../../../../src/ui/game/marketwindow.cc:240
 #, c-format
 msgid "You cannot both send and receive the same ware type (%s)."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:245
+#: ../../../../src/ui/game/marketwindow.cc:246
 msgid "Propose the configured trade to the selected player"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:313
+#: ../../../../src/ui/game/marketwindow.cc:314
 msgid ""
 "There are no pending trade proposals at the moment. You can propose a new "
 "trade from the first tab."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:316
+#: ../../../../src/ui/game/marketwindow.cc:317
 msgid "There are no pending trade proposals at the moment."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:587
+#: ../../../../src/ui/game/marketwindow.cc:588
 msgid "Cancel this trade"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:809
+#: ../../../../src/ui/game/marketwindow.cc:810
 msgid ""
 "Resume this paused trade. This requires all queues to be at their maximum "
 "capacity."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:813
+#: ../../../../src/ui/game/marketwindow.cc:814
 msgid "Pause this trade"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:824
+#: ../../../../src/ui/game/marketwindow.cc:825
 msgid "You need to pause the trade before you can change the queue capacity."
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:825
+#: ../../../../src/ui/game/marketwindow.cc:826
 msgid "Pause Trade?"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:826
+#: ../../../../src/ui/game/marketwindow.cc:827
 msgid ""
 "Changing the capacity of the input queues will cause the trade to be paused."
 " Pause the trade now?"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:977
+#: ../../../../src/ui/game/marketwindow.cc:978
 msgid "Propose Trade"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:982
+#: ../../../../src/ui/game/marketwindow.cc:983
 msgid "Proposed Trades"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:988
+#: ../../../../src/ui/game/marketwindow.cc:989
 msgid "Trade Offers"
 msgstr ""
 
-#: ../../../../src/ui/game/marketwindow.cc:999
+#: ../../../../src/ui/game/marketwindow.cc:1000
 msgid "Active Trade"
 msgstr ""
 

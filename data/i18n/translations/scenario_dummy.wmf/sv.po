@@ -20,8 +20,8 @@ msgstr ""
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Not yet implemented"
-msgstr "Än så länge inte implementerad"
+msgstr "Inte implementerad ännu"
 
 #: ../../../../data/campaigns/dummy.wmf/scripting/init.lua:14
 msgid "Sorry, this map is not yet implemented."
-msgstr "Tyvärr, den här kartan är inte implementerad än."
+msgstr "Tyvärr är den här kartan ännu inte implementerad."

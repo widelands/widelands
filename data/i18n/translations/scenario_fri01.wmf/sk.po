@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Karl Vest, 2020
-# Pavol Gono, 2025
+# Pavol Gono, 2026
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Pavol Gono, 2025\n"
+"Last-Translator: Pavol Gono, 2026\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
-msgstr "Postavte železorudnú baňu a banícku infraštruktúru"
+msgstr "Postavte železorudnú baňu a banskú infraštruktúru"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
@@ -631,11 +631,11 @@ msgstr ""
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr "Vybudujte banícku ekonomiku"
+msgstr "Vybudujte banskú ekonomiku"
 
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr "Banícka ekonomika"
+msgstr "Banská ekonomika"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../../../data/campaigns/fri01.wmf/scripting/texts.lua:247

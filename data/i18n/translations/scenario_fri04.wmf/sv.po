@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2025
-# D M <kamera001dm@gmail.com>, 2026
+# D M <kamera001dm@gmail.com>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2026\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr "Observera"
+msgstr "Obs"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -108,8 +108,8 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
-"Marcus Caius Iniucundus hade inte ljugit om stormen. Vi hade avseglat precis"
-" i rättan tid; den överraskade oss när vi var till havs och vi var alla "
+"Marcus Caius Iniucundus hade inte ljugit om stormen. Vi hade avseglat i "
+"sista stund; den överraskade oss när vi var till havs och vi var alla "
 "övertygade om att vårt skepp skulle splittras och sjunka, och att ingen av "
 "oss skulle få se vårt hem igen."
 
@@ -137,14 +137,13 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
-"Legaten och jag har inte längre något med varandra att göra. Jag har fått en"
-" aversion mot hans överlägsna attityd under resan, och särskilt mot det "
-"föraktfulla sätt på vilket han behandlade sina galärslavar. Det verkade inte"
-" falla honom in att de är människor precis som han och jag; eller om det "
-"gjorde det, så agerade han som om de själva var skyldiga till sin olycka. "
-"Jag beklagar inte att jag troligen inte kommer att träffa honom igen. Han "
-"slog upp sitt läger en bit bort från mitt så att vi inte skulle störa "
-"varandra."
+"Legaten och jag har inte längre något med varandra att göra. Jag har fattat "
+"motvilja mot hans överlägsna sätt under resan, särskilt hans föraktfulla "
+"behandling av galärslavarna. Det verkade inte falla honom in att de är "
+"människor precis som han och jag; eller om det gjorde det, agerade han som "
+"om de själva var skyldiga till sin olycka. Jag beklagar inte att jag "
+"troligen inte kommer att träffa honom igen. Han slog upp sitt läger en bit "
+"bort från mitt så att vi inte skulle störa varandra."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -191,8 +190,8 @@ msgid ""
 " we may find him?"
 msgstr ""
 "Fred och hälsningar, goda människor! Jag heter Claus Lembeck och detta är "
-"min son Henneke. Vi är på jakt efter min vän Reebaud. Får jag fråga om ni "
-"vet var vi kan hitta honom?"
+"min son Henneke. Vi letar efter min vän Reebaud. Får jag fråga om ni vet var"
+" vi kan hitta honom?"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:116
@@ -205,7 +204,7 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
-"Våra soldater har sett främlingar. Det måste vara de inkräktare som Reebaud "
+"Våra soldater har sett främlingar. Det måste vara inkräktarna som Reebaud "
 "nämnde."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:110
@@ -219,13 +218,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
-"Vi – amasoner. Ni – främlingar. Landet – här – vårt. Ni – inkräktare. Ni – "
-"fiender. Vi – ni – alla – döda!"
+"Vi – amasoner. Ni – främlingar. Land – här – vårt. Ni – inkräktare. Ni – "
+"fiender. Vi – göra – er – alla – döda!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr "Inte de vänligaste personer…"
+msgstr "Inte direkt de vänligaste personerna…"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -255,7 +254,7 @@ msgstr "En gammal vän"
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr "Äntligen träffades vi"
+msgstr "Äntligen återförenade"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:126
@@ -281,9 +280,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
-"Det är inget trick eller bedrägeri, det är verkligen jag, Claus Lembeck! Min"
-" son Henneke och jag har rest så här långt för att leta efter dig. Jag kan "
-"inte beskriva hur glad jag är över att äntligen ha hittat dig."
+"Det är inget spratt eller bedrägeri, det är verkligen jag, Claus Lembeck! "
+"Min son Henneke och jag har rest så här långt för att leta efter dig. Jag "
+"kan inte beskriva hur glad jag är över att äntligen ha hittat dig."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -309,9 +308,9 @@ msgid ""
 msgstr ""
 "Jag kom faktiskt för att be om din hjälp. Du minns säkert Atterdag, kungen "
 "av Danmark, som många gånger ställde till med stora problem för oss frisier."
-" Du har aldrig själv kämpat mot honom, eftersom han var för försiktig med "
-"tanke på ditt rykte för att attackera dig direkt, men jag har gjort honom "
-"till min ärkefiende genom att ofta hjälpa dem som han försökte erövra."
+" Du har aldrig själv kämpat mot honom, eftersom han var alltför rädd för "
+"ditt rykte för att anfalla dig direkt, men jag har gjort honom till min "
+"ärkefiende genom att ofta hjälpa dem han försökte erövra."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -339,10 +338,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
-"Endast du har ett rykte om dig att utföra de mest fantastiska "
-"vapengärningarna. Du är förmodligen den enda levande människan som kan "
-"besegra den onde dansken. Jag ber dig att följa med mig söderut och befria "
-"Föhr, eller åtminstone skicka med mig en trupp av dina berömda soldater."
+"Endast du är känd för sådana fantastiska vapenbragder. Du är förmodligen den"
+" enda levande människan som kan besegra den onde dansken. Jag ber dig att "
+"följa med mig söderut och befria Föhr, eller åtminstone skicka med mig en "
+"trupp av dina berömda soldater."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -361,8 +360,8 @@ msgstr ""
 "talat; utlänningar har kommit från fjärran och försöker driva bort oss och "
 "ta över våra marker, precis som vi själva gjorde när vi, drivna av nöd, tog "
 "dem från de fientliga människor som bodde här. Krigiska barbarer och en "
-"imperialistisk skurk vid namn Murilius som ställde de mest orimliga krav. Vi"
-" besegrade dem alla och trodde att vi äntligen hade funnit fred. Och under "
+"kejserlig skurk vid namn Murilius, som ställde de mest orimliga kraven. Vi "
+"besegrade dem alla och trodde att vi äntligen hade funnit fred. Och under "
 "fyra långa år var livet verkligen fredligt."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
@@ -380,17 +379,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
-"Men nu, som jag sa, när den korta sommarperioden kom, då snön smälter på "
-"vissa ställen och det är möjligt att resa till fjärran platser, dök "
-"främlingarna upp och angrep oss. De överraskade oss, eftersom livet utan "
-"strider hade gjort oss oförsiktiga. Många duktiga soldater föll för deras "
-"spjut, däribland Hauke, min bästa vän och mest vördade rådgivare, och Fiete,"
-" min ende son och arvinge. Deras lömska stridsmetoder var något nytt för "
-"oss, men nu när vi vet vad vi har att möta råder det ingen tvekan om att vi "
-"till slut kommer att besegra dem. Men jag fruktar att det fortfarande kommer"
-" att ta tid innan de är besegrade och det är säkert för mig att resa söderut"
-" med dig. Under denna tid ska du självklart få all den gästfrihet och "
-"artighet vi kan erbjuda."
+"Men nu, som jag berättade, dök främlingarna upp när den korta sommarperioden"
+" inleddes, då snön smälter på vissa ställen och det går att resa långt, och "
+"de gick till anfall. De överraskade oss, eftersom livet utan strider hade "
+"gjort oss oförsiktiga. Många duktiga soldater föll för deras spjut, "
+"däribland Hauke, min bästa vän och mest vördade rådgivare, och Fiete, min "
+"ende son och arvinge. Deras lömska stridstaktik var ny för oss, men nu när "
+"vi vet vad vi har att möta råder det ingen tvekan om att vi till slut kommer"
+" att besegra dem. Men jag fruktar att det fortfarande kommer att ta tid "
+"innan de är besegrade och det är säkert för mig att resa söderut med dig. "
+"Under denna tid ska du självklart få all den gästfrihet och artighet vi kan "
+"erbjuda."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -407,17 +406,17 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
-"Men nu, som jag sa, när den korta sommarperioden kom, då snön smälter på "
-"vissa ställen och det är möjligt att resa till fjärran platser, dök "
-"främlingarna upp och angrep oss. De överraskade oss, eftersom livet utan "
-"strider hade gjort oss slarviga. Många duktiga soldater föll för deras "
-"spjut, däribland Hauke, min bästa vän och mest vördade rådgivare, och Fiete,"
-" min ende son och arvinge. Deras lömska stridsmanövrer var något nytt för "
-"oss, men nu när vi visste vad vi hade att möta lyckades vi till slut besegra"
-" dem. Alla våra soldater är dock fortfarande ömma och sårade efter de hårda "
+"Men nu, som jag berättade, dök främlingarna upp när den korta sommarperioden"
+" inleddes, då snön smälter på vissa ställen och det går att resa långt, och "
+"de gick till anfall. De överraskade oss, eftersom livet utan strider hade "
+"gjort oss oförsiktiga. Många duktiga soldater föll för deras spjut, "
+"däribland Hauke, min bästa vän och mest vördade rådgivare, och Fiete, min "
+"ende son och arvinge. Deras lömska stridsmanövrer var något nytt för oss, "
+"men nu när vi visste vad vi hade att möta lyckades vi till slut besegra dem."
+" Alla våra soldater är dock fortfarande ömma och sårade efter de hårda "
 "striderna, och de kommer att behöva lite tid för att återhämta sig innan vi "
-"kan skicka ut dem i strid igen. Under denna period ska ni självklart få all "
-"den gästfrihet och artighet vi kan erbjuda."
+"kan skicka ut dem i strid igen. Under denna tid ska du självklart få all den"
+" gästfrihet och artighet vi kan erbjuda."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -455,13 +454,13 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
-"Jag är nästan besviken över att ditt rykte inte överstiger fakta, för när du"
-" beskrev inkräktarna såg jag fram emot att slåss mot dem tillsammans med "
-"dig. Jag beklagar dina förluster, och särskilt att jag aldrig kommer att få "
-"träffa den berömde Hauke, vars namn kommer att leva vidare i ära. Medan dina"
-" soldater återhämtar sig kommer jag att ta ansvar för att ordna träning för "
-"våra egna soldater, så att de kan lära sig av dina och bli så starka som "
-"möjligt innan vi återvänder till vårt hemland."
+"Jag är nästan besviken över att ditt rykte inte är större än verkligheten, "
+"för när du beskrev inkräktarna såg jag fram emot att slåss mot dem "
+"tillsammans med dig. Jag beklagar dina förluster, och särskilt att jag "
+"aldrig kommer att få träffa den berömde Hauke, vars namn kommer att leva "
+"vidare i ära. Medan dina soldater återhämtar sig kommer jag att ta ansvar "
+"för att ordna träning för våra egna soldater, så att de kan lära sig av dina"
+" och bli så starka som möjligt innan vi återvänder till vårt hemland."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:213
@@ -482,7 +481,7 @@ msgid ""
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
 "Vänta lite, ni två. Vad var det ni sa? Ni överföll och mördade Murilius, en "
-"prokonsul i imperiet?"
+"prokonsul i Imperiet?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -507,11 +506,11 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
-"Genom din handling har du dragit imperiets vrede över dig själv, och jag "
+"Genom din handling har du dragit Imperiets vrede över dig själv, och jag "
 "svär vid Jupiter Optimus Maximus att jag inte kommer att vila förrän du och "
-"dina egna ligger i ert eget blod. Jag kommer endast att visa barmhärtighet "
-"mot dem som är för unga för att ha deltagit i striderna, och som jag kommer "
-"att hålla vid liv för att ersätta de få galärslavar som inte överlevde den "
+"de dina ligger i ert eget blod. Jag kommer endast att visa barmhärtighet mot"
+" dem som är för unga för att ha deltagit i striderna, och som jag kommer att"
+" hålla vid liv för att ersätta de få galärslavar som inte överlevde den "
 "senaste resan."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
@@ -533,10 +532,10 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
-"Jag är ledsen. Han erbjöd oss en plats på sitt skepp, och jag hade ingen "
-"anledning att tro att han skulle bråka med dig. Men eftersom det är jag som "
-"har orsakat dig detta problem, är det min plikt att ta ansvar för att bli av"
-" med honom."
+"Jag är ledsen. Han erbjöd oss överfart på sitt skepp, och jag hade varken "
+"möjlighet att veta eller skäl att anta att han skulle söka strid med dig. "
+"Men eftersom det är jag som har orsakat dig detta problem, är det min plikt "
+"att ta ansvar för att befria dig från honom."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
@@ -550,9 +549,9 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
-"Vi träffade en sårad soldat nära vår nordvästra gräns idag. Han flämtade "
-"fram något om att hans stam hade attackerats av onda främlingar, men han dog"
-" innan han hann berätta mer. Hans rustning och vapen såg förvånansvärt "
+"Vi mötte en sårad soldat nära vår nordvästra gräns idag. Han flämtade fram "
+"något om att hans stam hade attackerats av grymma främlingar, men han dog "
+"innan han hann berätta mer. Hans rustning och vapen såg förvånansvärt "
 "bekanta ut. Jag undrar om Reebauds stam är i fara?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
@@ -600,13 +599,14 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
-"Du har förlorat och kan inte fortsätta spela. Må du ha bättre tur när du "
-"försöker igen. Klicka på OK för att återgå till huvudmenyn."
+"Du har förlorat och kan inte fortsätta spela. Lycka till nästa gång du "
+"försöker spela det här scenariot. Klicka på OK för att återgå till "
+"huvudmenyn."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr "Besegrad"
+msgstr "Nederlag"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:259
@@ -625,8 +625,8 @@ msgstr ""
 "Fienderna har förstört vår sista lagerbyggnad. Ingen stam skulle kunna "
 "överleva under dessa omständigheter, och allt vi kan göra nu är att möta "
 "vårt öde med högburet huvud. Det enda jag ångrar är att jag inte kommer att "
-"kunna hjälpa min gamle vän Claus i hans svåra situation. Må gudarna ha "
-"förbarmande med honom, men jag fruktar att allt hopp är ute."
+"kunna hjälpa min gamle vän Claus i hans svåra situation. Må gudarna förbarma"
+" sig över honom, men jag fruktar att allt hopp är ute."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -639,9 +639,9 @@ msgid ""
 msgstr ""
 "Vi var så nära, men nu har fienderna förstört vår sista lagerbyggnad. Kanske"
 " var det dumt av mig att tro att jag skulle kunna besegra Atterdag när jag "
-"inte ens kunde mäta mig med dessa obetydliga utlänningar. Gud ogillar min "
-"högmodighet, och det är Han, inte någon slumpmässig skara främlingar, som "
-"har beseglat vårt sorgliga öde."
+"inte ens kunde mäta mig med dessa obetydliga utlänningar. Gud ogillar mitt "
+"högmod, och det är Han, inte någon slumpmässig skara främlingar, som har "
+"beseglat vårt sorgliga öde."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
@@ -669,9 +669,10 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
-"Vi bör öka takten i vår egen expansion. Utan att veta i vilken riktning vi "
-"ska gå, skulle jag råda att fokusera på att expandera västerut för "
-"tillfället, innan Marcus Caius Iniucundus blockerar oss vid denna gräns."
+"Vi bör öka takten i vår egen expansion. Eftersom vi inte vet åt vilket håll "
+"vi måste ta vägen rekommenderar jag att vi tills vidare koncentrerar oss på "
+"att expandera västerut, innan Marcus Caius Iniucundus blockerar oss vid "
+"denna gräns."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -716,7 +717,7 @@ msgstr "Legaten besegrad"
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
-"Att försöka ta mig är det sista misstaget du någonsin gjort, dumma legat."
+"Att utmana mig är det sista misstag du någonsin gjorde, din dumme legat."
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:305
@@ -730,14 +731,14 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
-"Fienderna är besegrade. Nu kommer jag att följa med dig söderut tillsammans "
-"med alla mina soldater, förutom en liten garnison som ska skydda mina "
-"landområden, och vi kommer att återerövra din ö!"
+"Fienderna är besegrade. Nu följer jag med dig söderut tillsammans med alla "
+"mina soldater, förutom en liten garnison som stannar kvar för att skydda "
+"mina marker, och vi kommer att återerövra din ö!"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr "Gratulerar"
+msgstr "Grattis"
 
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -745,8 +746,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
-"Du har slutfört detta uppdrag. Du kan fortsätta spela om du vill, annars går"
-" du vidare till nästa uppdrag."
+"Du har slutfört detta uppdrag. Du kan fortsätta spela om du vill, annars kan"
+" du gå vidare till nästa uppdrag."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -757,9 +758,9 @@ msgid ""
 "reconquer your island!"
 msgstr ""
 "Våra soldater har återhämtat sig, och du har använt tiden väl genom att "
-"stärka din armé. Nu kommer jag att följa med dig söderut tillsammans med "
-"alla mina soldater, förutom en liten garnison som ska skydda mina "
-"landområden, och vi kommer att återerövra din ö!"
+"stärka din armé. Nu följer jag med dig söderut tillsammans med alla mina "
+"soldater, förutom en liten garnison som stannar kvar för att skydda mina "
+"marker, och vi kommer att återerövra din ö!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -774,5 +775,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
-"Fungerar som bas för kolonisation och handel över vatten. Lagrar också dina "
-"soldater, varor och verktyg."
+"Tjänar som bas för kolonisering och handel över havet. Här lagras också dina"
+" soldater, varor och verktyg."

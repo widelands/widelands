@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2025
 # D M <kamera001dm@gmail.com>, 2026
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2026\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,9 +93,9 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
-"VI kommer att behöva minst ett stenbrott, några skogshuggare och ett "
-"sågverk. En skogvaktare kan eventuellt behövas, beroende på hur snabbt "
-"träden växer runt omkring oss. Hitta balansen."
+"Vi kommer att behöva minst ett stenbrott, några skogshuggare och ett "
+"sågverk. En skogvaktare kan behövas beroende på hur snabbt träden växer runt"
+" omkring oss. Hitta balansen."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
@@ -152,16 +152,16 @@ msgid ""
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
 "Vi är ganska säkra på att vi inte är ensamma på ön. Vi vet inte om de andra "
-"på ön är vänner eller fiender så vi måsta gå varsamt framåt. Utforska ön "
+"på ön är vänner eller fiender, så vi måste gå varsamt fram. Utforska ön "
 "genom att bygga minst ett hus för en spanare."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr "Expandera ditt territorium"
+msgstr "Utvidga ditt territorium"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr "Expandera territorium"
+msgstr "Utvidga territoriet"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -169,9 +169,9 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
-"Nu när vår bosättning växer behöver vi mer plats för byggnader. Expandera "
+"När vår bosättning växer behöver vi mer plats för alla byggnader. Utvidga "
 "vårt territorium genom att bygga militärbyggnader. Bygg några vaktstugor och"
-" minst ett torn för dess längre utsikt."
+" minst ett torn för den längre sikten."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
@@ -216,7 +216,7 @@ msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
-"För att kunna betala för Kalitaths hyllningar och behålla kontakten med "
+"För att kunna betala tributerna till Kalitath och behålla kontakten med "
 "Jundlina måste vi bygga ut vår spanarstuga till en handelsplats."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:115
@@ -311,8 +311,8 @@ msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
-"Och vi måste ha en spanarstuga för att inte tappa greppet om vad som pågår "
-"på Barbarernas territorium."
+"Vi måste också ha en spanarstuga för att inte tappa reda på vad som pågår på"
+" barbarernas territorium."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
@@ -359,8 +359,8 @@ msgid ""
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
 "Aaaargh, Jundlina. Jag vet inte hur detta kunde hända, men Satul kunde inte "
-"skydda oss från fienden. De har förstört våt sista magasin. Därmed har vi "
-"förlorat denna strid och vårt folk är dömt!"
+"skydda oss från fienden. De har förstört vår sista lagerbyggnad. Därmed har "
+"vi förlorat denna strid och vårt folk är dömt!"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:744
@@ -426,9 +426,9 @@ msgid ""
 "well, but they persisted. We escaped the island and began our smooth sailing"
 " to other coasts."
 msgstr ""
-"Vi var alla väldigt rädda. Vi trodde att de andra skeppen också skulle "
-"sjunka, men de höll sig flytande. Vi flydde från ön och började vår smidiga "
-"segling mot andra kuster."
+"Vi var alla dödsrädda. Vi trodde att de andra skeppen också skulle sjunka, "
+"men de höll sig flytande. Vi flydde från ön och fortsatte vår lugna seglats "
+"mot andra kuster."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
@@ -444,8 +444,9 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
-"Många veckor har gått och vi har bara sett små öar som inte är lämpliga att "
-"bo på och utan några tecken på att de har välsignats av Satul, eldens gud."
+"Många veckor har gått och vi har bara sett små öar som inte lämpar sig för "
+"bosättning och inte visar några tecken på att ha välsignats av Satul, eldens"
+" gud."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -568,8 +569,9 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
-"Detta kommer att ta längre tid men vi kan återanvända en del av dess "
-"material. Jag vill också att en spanare anställs, som hela tiden utforskar."
+"Detta kommer att ta längre tid, men vi kan återanvända en del av dess "
+"material. Jag vill också att en spanare placeras ut och ständigt utforskar "
+"området."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -601,7 +603,7 @@ msgstr "Vi bör omgående bygga upp en produktion av spindeltyg."
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr "%s svar"
+msgstr "%s svarar"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -757,14 +759,14 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr "Byggmaterial säkerställda"
+msgstr "Byggmaterial säkrat"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:386
 #, lua-format
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
-msgstr "Må Satul värma dig, %s! Vi har slut på byggmaterial."
+msgstr "Må Satul värma dig, %s! Vi har säkrat byggmaterialsförsörjningen."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -828,7 +830,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr "%s är exhalterad"
+msgstr "%s är exalterad"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -839,7 +841,7 @@ msgid ""
 msgstr ""
 "Bra gjort, Loftomor, bra gjort. Må Satul värma våra starka och modiga "
 "gruvarbetare. Men nu måste vi se till att vi kan ge dem mat. Vi måste bygga "
-"bagerier, rökeri och alla byggnader som behövs för att försörja dem."
+"bagerier, rökerier och alla byggnader som behövs för att försörja dem."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:484
@@ -1008,12 +1010,12 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
-"Må Satul väma dig, Loftomor. Detta är verkligen en bra idé så jag ger dig "
-"uppdraget att bygga ett tempel värt att dyrka vår gud. Fram tills vi är "
-"färdiga att be för Satuls styrka måste vi hålla ett öga på vår prinsessa och"
-" barbaren. Vi borde stoppa vår köpmans leveranser för att inte slösa bort "
-"några fler varor till denna barbar och jag vill att du säkerställer att vi "
-"har en spanare där ute som samlar information."
+"Må Satul värma dig, Loftomor. Detta är verkligen en bra idé, så jag ger dig "
+"uppdraget att bygga ett tempel som är värdigt vår gud. Fram tills vi är redo"
+" att be om Satuls styrka måste vi hålla ett öga på vår prinsessa och den här"
+" barbaren. Vi bör stoppa vår köpmans leveranser för att inte slösa fler "
+"varor på honom. Se till att vi har en spanare där ute som samlar "
+"information."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
@@ -1129,7 +1131,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr "Gratulerar"
+msgstr "Grattis"
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
@@ -1215,9 +1217,8 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
-"Först måste du uppgradera våran spanarstuga till en handelsplats. Sedan "
-"måste du skicka den förväntade hyllningen innehållande guld, järn, kol och "
-"stockar."
+"Först måste du uppgradera vår spanarstuga till en handelsplats. Sedan måste "
+"du skicka de krävda hyllningarna i form av guld, järn, kol och stockar."
 
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
@@ -1297,7 +1298,7 @@ msgid ""
 msgstr ""
 "Må Satul värma oss alla. Vår så kallade allierade utpressar oss, och vi kan "
 "inte straffa honom för hans förolämpning eftersom han har vår prinsessa i "
-"sin våld."
+"sitt våld."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:666
@@ -1438,8 +1439,8 @@ msgid ""
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
 "Barbar, jag är en prinsessa från Atlantis och jag kommer aldrig att gå i "
-"slaveri. Jag har förberett mig för denna eventualitet och hellre dör av det "
-"gift jag bär med mig än blir din slav. Må Satul hämnas min uppoffring."
+"slaveri. Jag har förberett mig för denna eventualitet och jag dör hellre av "
+"giftet jag bär med mig än blir din slav. Må Satul hämnas min uppoffring."
 
 #. TRANSLATORS: Sidolus
 #: ../../../../data/campaigns/atl02.wmf/scripting/texts.lua:743
@@ -1473,7 +1474,7 @@ msgstr ""
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr "Satuls initiat"
+msgstr "Satuls novis"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
@@ -1504,7 +1505,7 @@ msgstr "Satuls tempel"
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:54
 msgctxt "atlanteans_building"
 msgid "consecrating priestess"
-msgstr "invigande prästinna"
+msgstr "invigning av prästinna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
@@ -1611,7 +1612,7 @@ msgid ""
 "Initiates take care of the Temple of Satul while they are learning to become"
 " priestesses."
 msgstr ""
-"Initiaterna tar hand om Satuls tempel medan de lär sig att bli prästinnor."
+"Noviserna tar hand om Satuls tempel medan de lär sig att bli prästinnor."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
@@ -1628,7 +1629,7 @@ msgstr "Prästinnor behövs för att Satul ska kunna visa sin mäktighet."
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
-msgstr "En trämynt, erhållen som belöning för att ha levererat fem stockar."
+msgstr "Ett trämynt, erhållet som belöning för att ha levererat fem stockar."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
@@ -1636,7 +1637,8 @@ msgctxt "atlanteans_building"
 msgid ""
 "A coin made of copper, received as reward for delivering four lumps of coal."
 msgstr ""
-"En kopparmynt som erhölls som belöning för att ha levererat fyra kolklumpar."
+"Ett kopparmynt som erhålls som belöning för att ha levererat fyra "
+"kolklumpar."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
@@ -1650,4 +1652,4 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
 msgstr ""
-"En guldmynt, erhållen som belöning för att ha levererat två guldtackor."
+"Ett guldmynt, erhållet som belöning för att ha levererat två guldtackor."
