@@ -214,7 +214,7 @@ void BacktraceProvider::register_signal_handler() {
 #ifdef SIGBUS
 	        SIGBUS,  // Not available on all systems
 #endif
-			  SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
+	        SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
 		install_crash_handler(s);
 	}
 #ifdef _WIN32
