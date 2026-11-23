@@ -448,7 +448,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Nech vás oboch hreje Satul. Loftomor, ste najvychýrenejší architekt na ostrove. Sidolus, ste ostrieľaný bojovník a stratég. Zavolala som si vás ku mne, aby som vás požiadala o radu: čo je potrebné urobiť, aby sa toto miesto stalo naším novým domovom?"
+msgstr "Nech vás oboch hreje Satul. Loftomor, ste najvychýrenejší architekt na ostrove. Sidolus, ste ostrieľaný bojovník a stratég. Zavolala som si vás k sebe, aby som vás požiadala o radu: čo je potrebné urobiť, aby sa toto miesto stalo naším novým domovom?"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
@@ -488,7 +488,7 @@ msgstr "Jundlína je spokojná"
 
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
-msgstr "Jundlinine spomienky"
+msgstr "Jundlínine spomienky"
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:217
@@ -696,7 +696,7 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Dostalo sa mi do uší, že náš ťažobný priemysel začal fungovať. A tak, keď už kujeme zbrane, pošlem list Sidolusovi a budem ho informovať, že je čas postaviť kasárne a začať verbovať vojakov."
+msgstr "Dostalo sa mi do uší, že náš ťažobný priemysel začal fungovať. A tak, keď už kujeme zbrane, pošlem list Sidolovi a budem ho informovať, že je čas postaviť kasárne a začať verbovať vojakov."
 
 #. TRANSLATORS: Jundlina
 #: ../../../../data/campaigns/atl01.wmf/scripting/texts.lua:342

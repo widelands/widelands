@@ -3493,7 +3493,7 @@ msgstr "Kliknutím otočíte zoradenie"
 
 #: ../../../../src/ui/basic/table.cc:163
 msgid "Click to sort by this column"
-msgstr "Kliknutím zoradíte tento stĺpec"
+msgstr "Kliknutím zoradíte podľa tohto stĺpca"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
@@ -4713,7 +4713,7 @@ msgstr "Urči začiatočnú pozíciu tohto hráča"
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:32
 msgid "Height Tools Options"
-msgstr "Voľby výškových nástrojov"
+msgstr "Možnosti výškových nástrojov"
 
 #: ../../../../src/ui/editor/tool_change_height_options_menu.cc:51
 msgid "Increase/Decrease height by:"

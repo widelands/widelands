@@ -506,7 +506,7 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr "Táto kopija je základnou zbraňou v amazonskom vojenskom systéme. Vyrába ich kamenosochárka. V kombinácii s tunikou tvorí výbavu mladých vojačiek."
+msgstr "Táto kopija je základnou zbraňou v amazonskom vojenskom systéme. Vyrába ju kamenosochárka. V kombinácii s tunikou tvorí výbavu mladých vojačiek."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
 #: ../../../../data/tribes/initialization/amazons/units.lua:435
@@ -1106,7 +1106,7 @@ msgctxt "amazons_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojakov na jeho obranu."
+msgstr "Podobne ako ústredie, aj prístav môže byť napadnutý a zničený nepriateľom. Odporúča sa poslať vojačky na jeho obranu."
 
 #. TRANSLATORS: Purpose helptext for an Amazon market: Market
 #: ../../../../data/tribes/initialization/amazons/units.lua:1291
@@ -4856,7 +4856,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build only if you absolutely must produce some coal, or when you have a very"
 " large amount of logs."
-msgstr "Postavajte iba vtedy, ak absolútne musíte vyrobiť nejaké uhlie, alebo ak máte veľmi veľké množstvo kmeňov."
+msgstr "Postavte ju iba vtedy, ak nevyhnutne musíte vyrobiť nejaké uhlie, alebo ak máte veľmi veľké množstvo kmeňov."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1736
