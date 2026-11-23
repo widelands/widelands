@@ -118,7 +118,11 @@ static void segfault_handler(const int sig) {
 		std::cout << "The crash report was also saved to " << filename << std::endl << std::endl;
 	}
 
-	::exit(sig);
+	// Do not run atexit handlers or static destructors on a possibly corrupted state.
+	// Re-raise with default action to keep core dumps, OS crash reporters and exit status.
+	signal(sig, SIG_DFL);
+	raise(sig);
+	std::_Exit(128 + sig);
 }
 
 // Install the crash handler as one-shot handler: a crash inside the handler itself
