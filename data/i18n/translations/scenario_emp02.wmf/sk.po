@@ -181,7 +181,7 @@ msgstr "Nový ostrov"
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:262
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
-msgstr "Denník Lucia"
+msgstr "Lutiov denník"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp02.wmf/scripting/texts.lua:111

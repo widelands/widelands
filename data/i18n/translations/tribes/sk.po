@@ -8,14 +8,14 @@
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
-# Pavol Gono, 2024-2025
+# Pavol Gono, 2024-2026
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-02-23 04:25+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Pavol Gono, 2024-2025\n"
+"Last-Translator: Pavol Gono, 2024-2026\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1363,7 +1363,7 @@ msgstr "sadenie kakaovníka"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:85
 msgid "harvesting cocoa"
-msgstr "zbieranie kakaovníka"
+msgstr "zbieranie kakaových bôbov"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:99
 msgctxt "amazons_building"
@@ -1546,7 +1546,7 @@ msgstr "Lovecko-zberačská chatrč"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:47
 msgid "gathering"
-msgstr "zberanie"
+msgstr "lovenie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:58
@@ -1645,19 +1645,19 @@ msgstr "Chatrč na ťažbu vzácnych drevín"
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:50
 msgid "harvesting balsa"
-msgstr "zberanie balzy"
+msgstr "získavanie balzy"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:62
 msgid "harvesting rubber"
-msgstr "zberanie kaučuku"
+msgstr "získavanie kaučuku"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:74
 msgid "harvesting ironwood"
-msgstr "zberanie železného dreva"
+msgstr "získavanie železného dreva"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
@@ -1898,7 +1898,7 @@ msgstr "Minul sa kameň"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:98
 msgid "Main Stone Vein Exhausted"
-msgstr "Hlavná žila kameňa bola vyčerpaná"
+msgstr "Hlavná kamenná žila vyčerpaná"
 
 #: ../../../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:100
 msgctxt "amazons_building"
@@ -1965,7 +1965,7 @@ msgstr "chovanie rýb"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:67
 msgid "releasing game"
-msgstr "vypustenie zveri"
+msgstr "vypúšťanie zveri"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
@@ -2174,7 +2174,7 @@ msgstr "sadenie kukurice"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
 msgid "harvesting corn"
-msgstr "zberanie kukurice"
+msgstr "zbieranie kukurice"
 
 #: ../../../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:90
 msgctxt "atlanteans_building"
@@ -2780,7 +2780,7 @@ msgstr "sadenie pšenice"
 #: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 #: ../../../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 msgid "harvesting wheat"
-msgstr "zberanie pšenice"
+msgstr "zbieranie pšenice"
 
 #: ../../../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:109
 msgctxt "barbarians_building"
@@ -3849,7 +3849,7 @@ msgstr "Dom zberateľa ovocia"
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:56
 msgid "gathering berries"
-msgstr "zberanie bobúľ"
+msgstr "zbieranie bobúľ"
 
 #: ../../../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:69
 msgid "No Bushes"
@@ -5621,7 +5621,7 @@ msgstr "Začať hru so siedmymi loďami plnými nákladu plávajúcimi na mori"
 #: ../../../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
 #: ../../../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr "Úbohý Hamlet"
+msgstr "Chudobná osada"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -7809,7 +7809,7 @@ msgstr ""
 #: ../../../../data/tribes/ships/empire/init.lua:123
 msgctxt "shipname"
 msgid "Lutius"
-msgstr ""
+msgstr "Lutius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../../../data/tribes/ships/empire/init.lua:125

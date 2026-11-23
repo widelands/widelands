@@ -178,7 +178,7 @@ msgstr "Akú verziu hry používate (inými slovami buď číslo zostavenia, ale
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "Uveďte tiež, v ktorom operačnom systéme ste spustili Widelands,\nkeďže niektoré chyby môžu byť príznačné pre istú platformu."
+msgstr "Uveďte tiež, v ktorom operačnom systéme ste spustili Widelands, keďže niektoré chyby môžu byť príznačné pre istú platformu."
 
 #: ../../../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
