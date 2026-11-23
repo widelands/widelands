@@ -156,7 +156,10 @@ if(OPTION_CPPTRACE)
     message(STATUS "Adding crash self-diagnosis handler using installed cpptrace.")
   else()
     include(FetchContent)
+    # avoid fetching and compiling zstd
     set(CPPTRACE_ENABLE_LIBDWARF_COMPRESSION_SUPPORT OFF)
+    # backtrace does not show frames inside cpptrace, so its debugging info would only make the binary bigger
+    set(CPPTRACE_BUILD_NO_SYMBOLS ON)
     # cpptrace and its dependencies are linked statically, so they are added with EXCLUDE_FROM_ALL
     # to keep their libraries, headers and CMake package files out of the install target.
     set(WL_CPPTRACE_SOURCE
