@@ -2,16 +2,18 @@
 # Copyright (C) 2005-2026 Widelands Development Team
 # 
 # Translators:
+# # Cristian Romanescu, 2026
+# Cristian Romanescu, 2026
 # Cristian Romanescu, 2026
 # Tarța Vasile-Florin <florin13t@gmail.com>, 2015
-# Tarța Vasile-Florin <florin13t@gmail.com>, 2016
+# Tarța Vasile-Florin <florin13t@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Cristian Romanescu, 2026\n"
+"Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2015-2016\n"
 "Language-Team: Romanian (http://app.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,26 +23,26 @@ msgstr ""
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid "Nice And Easy Does It All the Time"
-msgstr "Frumos şi încet o face tot timpul"
+msgstr "Încet și sigur, de fiecare dată"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr "Îmi pare rău, dar trebuie să distrug asta. Mai târziu s-ar putea să avem nevoie de spațiu aici."
+msgstr "Îmi pare rău, dar va trebui să dărâm asta. S-ar putea să avem nevoie de spațiul acesta mai târziu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:20
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr "Îmi pare rău, dar trebuie să distrug asta din nou. Mai târziu s-ar putea să avem nevoie de spațiu aici."
+msgstr "Îmi pare rău, dar va trebui să dărâm asta din nou. S-ar putea să avem nevoie de spațiul acesta mai târziu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:22
 msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr "Sunt prea lent pentru tine, trebuie să joci un joc real și să descoperi totul singur. Altfel, te rog ai răbdare, nu mai sunt așa de tânăr și rapid."
+msgstr "Dacă sunt prea încet pentru tine, poate vrei să joci un joc adevărat și să descoperi totul singur. Altfel, te rog să ai răbdare cu mine, nu mai sunt nici cel mai tânăr, nici cel mai iute."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "Welcome to the Widelands Tutorial!"
@@ -54,74 +56,74 @@ msgstr "Bine ai venit în Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr "Widelands este un joc de strategie lent, concentrat pe construit și nu pe distrus."
+msgstr "Widelands este un joc de strategie cu ritm lent, axat pe dezvoltare, pe construcție mai degrabă decât pe distrugere."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Vei fi ghidat prin acest tutorial cu ajutorul obiectivelor."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Objectives and how to handle them"
-msgstr "Care sunt obiectivele și cum să le gestionezi"
+msgstr "Obiectivele și cum să le folosești"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Folosirea ferestrei „Obiective”"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Poți deschide și închide fereastra cu 'Obiective' apăsând pe butonul 'Obiective' aflat în bara de la baza ecranului."
+msgstr "Poți deschide și închide fereastra „Obiective” făcând clic pe butonul „Obiective” din bara de instrumente din partea de jos a ecranului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr "Ca mai toate ferestrele, poți închide această fereastră apăsând click-dreapta."
+msgstr "Ca majoritatea celorlalte ferestre, o poți închide și făcând clic dreapta pe ea."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:58
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr "Poți să și minimizezi ferestrele apăsând click pe butonul din mijloc pe ea."
+msgstr "Poți și minimiza ferestrele făcând clic cu butonul din mijloc pe ele."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr "Când ai îndeplinit un obiectiv, va dispărea din listă."
+msgstr "Când ai îndeplinit un obiectiv, acesta va dispărea din listă."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr "Acum închide te rog fereastra 'Obiective' ca să continuăm."
+msgstr "Acum te rog să închizi fereastra „Obiective” ca să putem continua."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:69
 msgid "Show building spaces"
-msgstr "Arată locurile pentru construit"
+msgstr "Arată spațiile de construcție"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr "Activarea 'Locurilor pentru construit'. Există două modalități prin care poți face asta:"
+msgstr "Activează „Arată spațiile de construcție”. Poți face asta în două moduri:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:71
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr "Apasă %s pentru a le activa, sau alege opțiunea 'Afișează locurile pentru construit' din meniul 'Afișează / Ascunde'."
+msgstr "Apasă %s pentru a le comuta sau alege „Arată spațiile de construcție” din meniul „Arată / Ascunde”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Show the building spaces now."
-msgstr "Acum afișează locurile pentru construit."
+msgstr "Arată acum spațiile de construcție."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid "Building Spaces"
-msgstr "Locurile pentru construit"
+msgstr "Spațiile de construcție"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
 msgid "Let’s dive right in!"
-msgstr "Hai să începem imediat!"
+msgstr "Hai să ne apucăm direct de treabă!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:83
 msgid ""
@@ -129,7 +131,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "În Widelands există cinci triburi diferite: barbarii, Imperiul, atlanții, frizonii și amazoanele. Toate triburile au economii, puncte forte și puncte slabe diferite, dar modul general de joc este același pentru toate. Deocamdată vom juca cu barbarii."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:84
 msgid ""
@@ -141,29 +143,29 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "De obicei vei începe jocul cu un sediu central. Aceasta este clădirea mare cu steagul albastru în față. Sediul central depozitează bunuri, muncitori și soldați. Unele bunuri sunt necesare pentru construirea caselor, altele pentru producerea altor bunuri. Evident, bunurile inițiale nu vor dura la nesfârșit, așa că trebuie să te asiguri că le refaci stocul. Cele mai importante bunuri la începutul jocului sunt materialele de construcție de bază: buștenii și granitul. Hai să ne asigurăm că nu rămânem fără bușteni. Pentru asta avem nevoie de un tăietor de lemne și de o colibă în care să locuiască."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:85
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Trebuie să găsim un loc bun pentru coliba tăietorului de lemne. Ca să ne fie mai ușor, putem activa „Arată spațiile de construcție”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Îți voi arăta unde este meniul și de unde poți afișa sau ascunde spațiile de construcție."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:97
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Acum că ți-am arătat de unde poți afișa sau ascunde spațiile de construcție, te rog să le activezi, ca să putem plasa prima clădire."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "Locul tăietorului de lemne"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:111
 msgid ""
@@ -171,28 +173,28 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Gata. Acum să-ți arăt cum se construiește o colibă a tăietorului de lemne și cum se conectează cu un drum. Chiar lângă copacii aceia este un loc perfect pentru un tăietor de lemne. Îți voi descrie pașii pe care îi fac și apoi îi voi demonstra."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid "Building the Lumberjack"
-msgstr "Constuirea cabanei tărietorului de lemne"
+msgstr "Construirea colibei tăietorului de lemne"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:122
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Mai întâi fac clic stânga pe simbolul unde vreau să fie construită coliba tăietorului de lemne. Va apărea o fereastră în care pot alege dintre clădiri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:123
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Coliba tăietorului de lemne este o clădire mică, așa că voi selecta fila clădirilor mici. Apoi voi alege coliba tăietorului de lemne."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:130
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:141
 msgid "Building a Connecting Road"
-msgstr "Conectarea drumurilor"
+msgstr "Construirea unui drum de legătură"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:133
 msgid ""
@@ -200,7 +202,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Încă nu e gata. Trebuie să conectez coliba tăietorului de lemne cu sediul central. După ce am comandat șantierul de construcție, am fost trecut automat în modul de construire a drumurilor, așa că nu trebuie decât să fac clic pe steagul albastru din fața sediului central."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid ""
@@ -210,160 +212,160 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Încă nu e gata. Trebuie să conectez coliba tăietorului de lemne cu sediul central. Ai dezactivat opțiunea „Începe construirea unui drum după plasarea unui steag” (pentru a o schimba, alege „Opțiuni” din meniul principal Widelands). De aceea, am intrat manual în modul de construire a drumurilor. Îți voi spune mai târziu cum se face. Pentru a construi drumul, acum nu trebuie decât să fac clic pe steagul albastru din fața sediului central."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:153
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:187
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "Aștept tătietorul de lemne să meargă în sus"
+msgstr "Așteptăm să se ridice coliba tăietorului de lemne"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr ""
+msgstr "Acum urmărește cu atenție cum un constructor iese din sediul central și merge la șantierul de construcție. De asemenea, un cărăuș își va lua poziția între cele două steaguri albastre și va duce bunuri de la un steag albastru la celălalt."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr ""
+msgstr "Construiește un steag care să împartă drumul spre tăietorul de lemne"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Construiește un steag pe drum"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:168
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
+msgstr "Cu cât segmentele de drum sunt mai scurte, cu atât bunurile tale vor fi transportate mai repede. De aceea, ar trebui să te asiguri că drumurile tale au cât mai multe steaguri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
+msgstr "Construiește acum un steag albastru la mijlocul drumului care leagă sediul central de coliba tăietorului de lemne."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:170
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Pentru a construi steagul, fă clic pe simbolul steagului galben dintre cele două steaguri albastre pe care tocmai le-am plasat, apoi fă clic pe simbolul de construire a steagului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:176
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "Plasarea încă unui steag"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Frumos cum lucrează, nu-i așa? Dar bietul cărăuș are un drum foarte lung de parcurs. Îi putem ușura munca (și ne putem face treaba mai eficientă) plasând încă un steag albastru pe drum. De data aceasta, încearcă tu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr ""
+msgstr "Voiam să te învăț cum să construiești steaguri noi, dar se pare că ai descoperit deja singur. Bravo!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr ""
+msgstr "Acum ai împărțit drumul în două părți, fiecare cu propriul cărăuș. Asta înseamnă mai puțină muncă pentru el și eficiență mai mare pentru noi. De aceea, ar trebui să plasezi mereu cât mai multe steaguri pe drumuri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:202
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Să vedem cum merge"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid "Click on the construction site to have a look at it."
-msgstr ""
+msgstr "Fă clic pe șantierul de construcție ca să-l vezi."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:209
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid "The Construction Site"
-msgstr ""
+msgstr "Șantierul de construcție"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Dacă faci clic pe șantierul de construcție, se va deschide o fereastră. Poți vedea, marcate cu gri, bunurile care încă lipsesc. Poți vedea și progresul acestui șantier de construcție."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr ""
+msgstr "Acest buton comută afișarea zonei de lucru a clădirii. Când tăietorul de lemne iese din clădire să caute copaci de tăiat, îi va căuta doar în această zonă. Lasă-mă să-ți arăt cât de perfect este acest loc."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:224
 msgid "Close the construction site window when you have seen enough."
-msgstr ""
+msgstr "Închide fereastra șantierului de construcție când ai văzut destul."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:234
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "Bravo! Hai să așteptăm până e gata coliba."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:236
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Dacă vrei ca lucrurile să meargă mai repede, folosește tasta %1$s de pe tastatură pentru a mări viteza jocului. Poți folosi %2$s pentru a încetini din nou jocul."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Schimbarea este rapidă cu %1$s/%2$s și treptată cu %3$s/%4$s."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "Coliba tăietorului de lemne este gata"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr ""
+msgstr "Excelent. Coliba tăietorului de lemne este gata. Un tăietor de lemne se va muta acum în ea și va începe să taie copaci, așa că deocamdată avem bușteni asigurați. Acum să trecem la granit."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:259
 msgid "Moving the View"
-msgstr ""
+msgstr "Deplasarea vizualizării"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:261
 msgid "Move your view"
-msgstr ""
+msgstr "Deplasează vizualizarea"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:262
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "Deplasarea vizualizării este esențială pentru a avea o imagine completă asupra întregii tale economii. În Widelands există trei moduri de a deplasa vizualizarea."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr ""
+msgstr "Primul este să folosești tastele săgeți de pe tastatură."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr ""
+msgstr "Al doilea este cel mai des folosit și mai rapid: ține apăsat butonul drept al mouse-ului oriunde pe hartă, apoi mișcă mouse-ul și vei vedea cum se deplasează vizualizarea."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr ""
+msgstr "Al treilea este să folosești miniharta. Este utilă mai ales pentru distanțe mari."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 msgid ""
@@ -371,15 +373,15 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Deplasarea cu butonul drept al mouse-ului poate fi incomodă dacă joci pe un laptop cu touchpad. Poți activa deplasarea hărții prin derularea pe touchpad din meniul principal Widelands: alege „Opțiuni”, apoi apasă „Editează acțiunile tastaturii și ale mouse-ului” și selectează fila „Derulare cu mouse-ul”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:271
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Au fost găsite niște pietre"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:273
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "Construirea unei cariere"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:275
 msgid ""
@@ -387,20 +389,20 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Granitul poate fi extras din minele de granit, dar calea mai simplă este să construiești o carieră lângă niște pietre de la suprafață. Se întâmplă să fie o grămadă de pietre chiar la vest (stânga) de sediul tău central. Te voi învăța acum cum să muți vizualizarea până acolo."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:283
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "Învață să folosești miniharta"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:286
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Încearcă să te deplasezi făcând clic pe minihartă"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "Joacă-te puțin cu diferitele straturi afișate (drumuri, steaguri etc.)"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:288
 #, lua-format
@@ -408,61 +410,61 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Când ești gata să continui, închide miniharta alegând „Ascunde miniharta” din meniul „Vizualizare hartă” sau apăsând „%s”. Desigur, merge și un clic dreapta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid "Moving Your View"
-msgstr ""
+msgstr "Deplasarea vizualizării"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:309
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Folosirea minihărții"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "Foarte bine. Și acum despre minihartă."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "O poți deschide alegând „Arată miniharta” din meniul „Vizualizare hartă” din partea de jos a ecranului sau pur și simplu folosind scurtătura de tastatură „%s”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid "I will open it for you."
-msgstr ""
+msgstr "Ți-o deschid eu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr ""
+msgstr "Miniharta arată întreaga hartă în miniatură. Poți sări direct la orice câmp făcând clic stânga pe el. De asemenea, poți activa sau dezactiva în minihartă afișarea clădirilor, drumurilor, steagurilor și a indicatorilor jucătorilor."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:319
 msgid "Onward to the Quarry"
-msgstr ""
+msgstr "Mai departe, spre carieră"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "Grozav. Acum, despre cariera aceea…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Construiește o carieră lângă pietre"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:333
 msgid "Build a Quarry"
-msgstr ""
+msgstr "Construiește o carieră"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "La vest de sediul tău central sunt niște pietre. Construiește o carieră chiar lângă ele."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:335
 #, lua-format
@@ -470,86 +472,86 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "Cariera este o clădire mică, la fel ca coliba tăietorului de lemne. Prin urmare, o poți construi pe orice câmp care arată o căsuță roșie, galbenă sau verde când simbolurile spațiilor de construcție sunt activate (apasă „%s” pentru asta)."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:336
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "Fă clic pe oricare simbol de casă de lângă pietre, selectează fila clădirilor mici în fereastra care se deschide, apoi fă clic pe simbolul carierei."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "Cum se construiește o carieră"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "Construiește o carieră lângă pietrele de aici. Îți amintești cum am făcut eu mai devreme?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:346
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Asigură-te că spațiile de construcție sunt afișate, apoi fă clic pe locul unde vrei să fie clădirea, alege-o din fereastra care apare și va fi plasată."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "În Widelands poți construi patru lucruri pe câmpuri: steaguri, case mici, case medii și case mari. Dar nu orice câmp le poate găzdui pe toate. Simbolurile spațiilor de construcție te ajută să le recunoști:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:348
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Pe simbolul de casă verde se poate construi orice."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:349
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
+msgstr "Pe un simbol de casă galben se poate construi orice, cu excepția clădirilor mari."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:350
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr ""
+msgstr "Simbolurile de clădire roșii permit doar clădiri mici și steaguri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "Și, în sfârșit, simbolul de steag galben permite doar steaguri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:352
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr ""
+msgstr "Dacă plasezi ceva pe un câmp, câmpurile din jur ar putea avea mai puțin spațiu pentru clădiri, așa că alege-ți câmpurile cu înțelepciune."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:358
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "Dacă te hotărăști că nu vrei să construiești un drum acum, poți anula construirea drumului făcând clic pe steagul de pornire al drumului și selectând simbolul de anulare."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:390
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid "Road Building"
-msgstr ""
+msgstr "Construirea drumurilor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "Excelent! Imediat după plasarea clădirii ai fost trecut în modul de construire a drumurilor. Noul drum va porni de la steagul din fața șantierului de construcție pe care tocmai l-ai plasat."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "Poți intra în modul de construire a drumurilor pentru orice steag făcând clic stânga pe un steag și selectând simbolul de construire a drumului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:368
 msgid ""
@@ -557,104 +559,104 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr ""
+msgstr "Acum, despre acest drum. Ține minte: suntem deja în modul de construire a drumurilor, pentru că tocmai ai comandat cariera. Îl poți prelungi câte un câmp pe rând, făcând clic stânga de mai multe ori pe câmpurile vecine, pentru a controla perfect traseul drumului, astfel:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Excelent! Ține minte că trebuie să construim și un drum până la carieră. Pentru a intra în modul de construire a drumurilor pentru orice steag, fă clic stânga pe un steag și selectează simbolul de construire a drumului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr ""
+msgstr "Acum, despre acest drum. Voi intra în modul de construire a drumurilor și apoi îl voi prelungi câte un câmp pe rând, făcând clic stânga de mai multe ori pe câmpurile vecine, pentru a controla perfect traseul drumului, astfel:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:391
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr ""
+msgstr "Sau poți face clic direct pe steagul unde ar trebui să se termine drumul, astfel:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid "Connect the quarry to the headquarters"
-msgstr ""
+msgstr "Conectează cariera la sediul central"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid "Connect Your Construction Site"
-msgstr "Conctează construcțiile tale"
+msgstr "Conectează-ți șantierul de construcție"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Conectează printr-un drum șantierul carierei la sediul central."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:402
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr ""
+msgstr "Pentru a construi un drum complet nou, fă clic pe steagul din fața șantierului de construcție, apoi pe pictograma de construire a drumului și apoi pe steagul din fața sediului central. Așteaptă finalizarea carierei."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:403
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Dacă ții apăsat Ctrl sau Shift+Ctrl când termini drumul, steagurile vor fi plasate automat."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr ""
+msgstr "Încă ceva: în jurul câmpului unde s-ar termina drumul poți vedea diferite marcaje. Ele au următoarea semnificație:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:411
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr ""
+msgstr "Aici terenul este plat. Cărăușii tăi vor fi foarte iuți pe acest teren."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:412
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr ""
+msgstr "Pentru a ajunge la acest câmp trebuie urcată o pantă mică. Asta înseamnă că muncitorii tăi vor merge mai repede la vale decât la deal."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:413
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr ""
+msgstr "Legătura dintre câmpuri este extrem de abruptă. Câștigul de viteză într-o direcție este uriaș, dar și încetinirea în cealaltă este considerabilă."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:414
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Ține cont de pante când plasezi drumuri și folosește-le în avantajul tău. De asemenea, încearcă să faci drumurile cât mai scurte și nu uita să plasezi cât mai multe steaguri pe segmentele de drum, pentru a împărți mai bine încărcătura."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:421
 msgid "Quarry not Connected"
-msgstr "Cariera de piatră nu este conectată"
+msgstr "Cariera nu este conectată"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:423
 msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Muncitorilor tăi nu le place să meargă pe câmp. Trebuie să construiești un drum de la sediul central la șantierul de construcție, pentru ca cărăușii să poată transporta bunurile."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Ai distrus șantierul de construcție!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:432
 msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Se pare că ai distrus șantierul unei cariere pe care voiam s-o construim. Din fericire, de data aceasta mai avem destui bușteni, așa că pur și simplu poți construi alta."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:433
 msgid ""
@@ -662,47 +664,47 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Poți și să reîncarci jocul dintr-o salvare anterioară. Din fericire, acestea sunt create din când în când. Pentru asta, va trebui să te întorci în meniul principal și să alegi „Single player” → „Încarcă jocul”. Și te rog să fii puțin mai atent data viitoare."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:443
 msgid "Build another quarry"
-msgstr ""
+msgstr "Construiește încă o carieră"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:444
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr ""
+msgstr "Construiește o a doua carieră lângă pietre și conecteaz-o la rețeaua ta de drumuri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
 msgid ""
 "You can connect the new road to any flag of your existing road network. You "
 "can create junctions everywhere, not only in front of buildings."
-msgstr ""
+msgstr "Poți conecta noul drum la oricare steag din rețeaua de drumuri existentă. Poți crea intersecții oriunde, nu doar în fața clădirilor."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid "Build a second quarry"
-msgstr ""
+msgstr "Construiește o a doua carieră"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "Când există multe pietre, poți lua în considerare construirea încă unei cariere. Astfel, producția de granit va fi mai rapidă."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:502
 msgid "Census and Status"
-msgstr ""
+msgstr "Recensământ și stare"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Cât așteptăm, îți arăt repede încă o funcție utilă. Uneori e greu să deosebești toate clădirile. Widelands oferă o funcție care afișează deasupra clădirilor etichete text, numite „recensământ”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:464
 #, lua-format
@@ -710,16 +712,16 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Pentru a afișa sau ascunde etichetele de recensământ ale clădirilor, poți alege „Arată recensământul” / „Ascunde recensământul” din meniul „Arată / Ascunde” din partea de jos sau poți apăsa tasta „%s” de pe tastatură."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Lasă-mă să activez recensământul pentru tine."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 msgid "Show the building status"
-msgstr ""
+msgstr "Arată starea clădirilor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:477
 #, lua-format
@@ -727,24 +729,24 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Pentru a afișa sau ascunde etichetele de stare ale clădirilor, poți alege „Arată starea” din meniul „Arată / Ascunde” din partea de jos sau poți apăsa tasta „%s” de pe tastatură."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "Acum, n-ar fi frumos să putem verifica progresul carierelor fără să le deschidem ferestrele?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr ""
+msgstr "Pe lângă recensământul clădirilor, poți activa și etichete de stare pentru ele. Acestea vor afișa informații despre productivitatea clădirilor sau despre progresul șantierelor de construcție."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr ""
+msgstr "Acum știm ce se întâmplă. Hai să așteptăm să fie gata carierele."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:504
 msgid ""
@@ -754,100 +756,100 @@ msgid ""
 "workplace and where any number of your wares can be stored until they are "
 "needed somewhere. So they act like a kind of town center, and to signify "
 "this, they get unique names."
-msgstr ""
+msgstr "Poate ai observat că linia de recensământ a sediului central arată altfel. Asta pentru că este un tip special de clădire, numit depozit. Depozitele sunt clădiri în care muncitorii tăi se pot odihni până primesc un loc de muncă și în care poți păstra oricâte bunuri, până când este nevoie de ele undeva. Așadar, ele funcționează ca un fel de centru al orașului și, pentru a sublinia acest lucru, primesc nume unice."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:505
 msgid ""
 "The small crowns beside the name mark it as your headquarters. As you play "
 "Widelands, you will see three kinds of warehouses, marked by little icons:"
-msgstr ""
+msgstr "Micile coroane de lângă nume îl marchează drept sediul tău central. Pe măsură ce joci Widelands, vei întâlni trei tipuri de depozite, marcate cu mici pictograme:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:506
 msgid ""
 "The headquarters where you usually start the game. It is marked by small "
 "crowns: ♔"
-msgstr ""
+msgstr "Sediul central, de unde începi de obicei jocul. Este marcat cu mici coroane: ♔"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid ""
 "Plain warehouses that simply hold wares and workers to keep them distributed"
 " all over your territory. They are marked by small houses: ⟰"
-msgstr ""
+msgstr "Depozitele simple, care doar păstrează bunuri și muncitori pentru a-i distribui pe tot teritoriul tău. Sunt marcate cu mici case: ⟰"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 msgid ""
 "Ports that you’ll use in seafaring. They don’t only store your wares and "
 "workers, but can also load them on your ships to send them across the seas. "
 "They are marked by small anchors: ⚓"
-msgstr ""
+msgstr "Porturile, pe care le vei folosi în navigație. Ele nu doar îți depozitează bunurile și muncitorii, ci îi pot și încărca pe nave pentru a-i trimite peste mări. Sunt marcate cu mici ancore: ⚓"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid ""
 "All of them are assigned names automatically that match the tribe, but you "
 "can change their names to your liking too."
-msgstr ""
+msgstr "Toate primesc automat nume potrivite tribului, dar le poți schimba numele după pofta inimii."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
 msgid "Change the name of your little village"
-msgstr ""
+msgstr "Schimbă numele micului tău sat"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Change the name of your headquarters"
-msgstr ""
+msgstr "Schimbă numele sediului tău central"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid ""
 "In order to set a new name for your headquarters, first click on it to open "
 "its window."
-msgstr ""
+msgstr "Pentru a da un nume nou sediului central, fă mai întâi clic pe el ca să-i deschizi fereastra."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:521
 msgid "You will see an edit box at the top of the window showing the name."
-msgstr ""
+msgstr "În partea de sus a ferestrei vei vedea o casetă de editare care afișează numele."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:522
 msgid "All you have to do is delete the old name and type in the new one."
-msgstr ""
+msgstr "Nu trebuie decât să ștergi numele vechi și să-l scrii pe cel nou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:523
 msgid "When you’re done, just close the window."
-msgstr ""
+msgstr "Când ai terminat, închide fereastra."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:528
 msgid "Be creative"
-msgstr ""
+msgstr "Fii creativ"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "I see you closed the window without changing the name. I’m sure you can come"
 " up with something. But if you don’t want to, at least delete the old name, "
 "please, to show me you’ve found the editbox."
-msgstr ""
+msgstr "Văd că ai închis fereastra fără să schimbi numele. Sunt sigur că îți vine o idee. Dar dacă nu vrei, măcar șterge numele vechi, te rog, ca să-mi arăți că ai găsit caseta de editare."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid "Archive all messages in your inbox"
-msgstr ""
+msgstr "Arhivează toate mesajele din căsuța de mesaje primite"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:542
 msgid "Archive Your Inbox Messages"
-msgstr ""
+msgstr "Arhivează mesajele primite"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:543
 msgid "Archive all your messages in your inbox now."
-msgstr ""
+msgstr "Arhivează acum toate mesajele din căsuța de mesaje primite."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:544
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr ""
+msgstr "Apasă în continuare butonul „Arhivează mesajul selectat” până când toate mesajele au fost arhivate și lista este goală."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 #, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Poți ține apăsată tasta Ctrl sau Shift pentru a selecta mai multe mesaje sau poți apăsa %s pentru a le selecta pe toate."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:546
 #, lua-format
@@ -855,29 +857,29 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Poți deschide sau închide fereastra de mesaje apăsând „%s” sau făcând clic pe al doilea buton din dreapta, din partea de jos a ecranului. Cel mai nou mesaj va fi marcat automat pentru tine."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:547
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "Fereastra de mesaje este esențială pentru a controla pe deplin soarta tribului tău. Totuși, într-un joc adevărat vei primi o mulțime de mesaje. Ca să nu-ți pierzi firul, ar trebui să încerci să păstrezi căsuța de mesaje primite goală."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
 msgid "Messages"
-msgstr ""
+msgstr "Mesaje"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:553
 msgid "Introducing Messages"
-msgstr ""
+msgstr "Prezentarea mesajelor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:555
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr ""
+msgstr "Salut, iar sunt eu! De data aceasta ți-am trimis un mesaj. Mesajele îți sunt trimise de Widelands pentru a te informa despre evenimente importante: mine epuizate, atacuri asupra tribului tău, clădiri militare câștigate sau pierdute, resurse găsite…"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:556
 msgid ""
@@ -885,46 +887,46 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr ""
+msgstr "Fereastra de mesaje poate fi deschisă sau închisă cu al doilea buton din dreapta, din partea de jos a ecranului. Acest buton își schimbă aspectul ori de câte ori ai mesaje noi, dar se aude și un clopoțel ori de câte ori primești un mesaj nou."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:557
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "Momentan ai două mesaje. Acesta, pe care îl citești acum, și cel care te-a anunțat că un nou sediu central a fost adăugat economiei tale. Hai să învățăm cum se arhivează mesajele:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Close the messages window"
-msgstr ""
+msgstr "Închide fereastra de mesaje"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "Închide fereastra de mesaje"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Toate ferestrele din Widelands (cu excepția ferestrelor de poveste care afișează „OK”) pot fi închise făcând clic dreapta în interiorul lor. Unele ferestre pot fi deschise sau închise și cu butoanele și meniurile din partea de jos a ecranului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Ferestrele pot fi și minimizate făcând clic cu butonul din mijloc în ele."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid "Close the messages window now by right-clicking into it."
-msgstr ""
+msgstr "Închide acum fereastra de mesaje făcând clic dreapta în ea."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Closing Windows"
-msgstr ""
+msgstr "Închiderea ferestrelor"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Excelent. Acum trebuie să ne concentrăm pe alte lucruri."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
 msgid ""
@@ -932,70 +934,70 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr ""
+msgstr "Bravo! Hai să vedem cum funcționează mesajele într-un joc adevărat, bine? Pentru asta, le voi lua toate pietrele bieților pietrari din cariere. Data viitoare când vor încerca să lucreze, fiecare va trimite un mesaj că nu găsește nicio piatră în zona sa de lucru."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:595
 msgid "Destroy the two quarries"
-msgstr ""
+msgstr "Distruge cele două cariere"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Distruge carierele"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr ""
+msgstr "Pentru că acum carierele noastre sunt inutile, le poți distruge și poți refolosi spațiul mai târziu."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr ""
+msgstr "Există două moduri diferite de a distruge o clădire: incendierea și demontarea. Încearcă-le pe amândouă pe carierele tale."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "Incendierea carierei: aceasta este cea mai rapidă cale de a elibera spațiul. Muncitorul părăsește clădirea, dar bunurile se pierd."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "Demontarea carierei: un constructor va veni de la sediul central pentru a demonta cariera bucată cu bucată. Astfel, recuperezi o parte din resursele folosite la construcție."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "Au sosit mesaje!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:608
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Ai primit câteva mesaje. Vezi cum și-a schimbat aspectul butonul din partea de jos a ecranului?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:619
 msgid "Expand your territory"
-msgstr ""
+msgstr "Extinde-ți teritoriul"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:621
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Fă-ți teritoriul să crească"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:622
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Construiește o clădire militară la granița ta. Alege-o pe cea care îți place cel mai mult."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:623
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "Postul de santinelă este singura clădire militară care încape pe un teren de construcție mic. Dacă tăietorul tău de lemne a eliberat destul spațiu, poți construi și o clădire militară mai mare."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:624
 msgid ""
@@ -1003,11 +1005,11 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr ""
+msgstr "Ține minte că clădirile mari (pictograma verde) nu pot fi construite pe terenuri de construcție mici (roșii) sau medii (galbene), dar clădirile pot fi construite pe un teren care oferă mai mult spațiu decât le trebuie. Ar trebui să ții mereu cont de asta când cauți un loc potrivit."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:628
 msgid "Expanding Your Territory!"
-msgstr ""
+msgstr "Extinderea teritoriului!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:631
 msgid ""
@@ -1016,7 +1018,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr ""
+msgstr "Mai este un lucru pe care aș vrea să te învăț acum: extinderea teritoriului. Locul cu care am început, în jurul sediului central, abia ajunge pentru o infrastructură de bază, iar noi nu avem acces la munți, de care avem nevoie pentru a extrage minereuri și cărbune. Așadar, trebuie să ne extindem teritoriul."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:632
 msgid ""
@@ -1027,62 +1029,62 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Extinderea este la fel de simplă ca și construirea unei clădiri militare la marginea teritoriului tău. Barbarii au patru clădiri militare diferite: postul de santinelă, bariera, turnul și fortăreața. Cu cât clădirea este mai mare, cu atât costă mai mult, dar cu atât mai mult teritoriu va cuceri în jurul ei și cu atât mai mulți soldați pot fi staționați acolo. Clădirile diferă și prin raza vizuală: clădirile cu turn văd mai departe decât celelalte."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:633
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "De îndată ce o clădire militară este ocupată de soldați, îți va extinde teritoriul. Îți voi spune mai multe despre clădirile militare într-un alt tutorial."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:640
 msgid "Military Site Occupied"
-msgstr ""
+msgstr "Clădire militară ocupată"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:642
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "Teritoriul tău tocmai a crescut!"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:644
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr ""
+msgstr "Grozav. Vezi cum ți-a crescut teritoriul de când soldații tăi au intrat în noua clădire militară?"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:655
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:657
 msgid "Conclusion"
-msgstr ""
+msgstr "Încheiere"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:659
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr ""
+msgstr "Aici se încheie primul tutorial. Pentru a afla mai multe despre joc, îți sugerez să joci unul dintre celelalte tutoriale. Fiecare dintre ele tratează un alt subiect."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:660
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr ""
+msgstr "Totuși, acum că știi cum să controlezi Widelands, poți și să începi un joc (sau să-l continui pe acesta) și să descoperi singur mai multe."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:661
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "Pentru a părăsi acest joc și a te întoarce în meniul principal:"
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:662
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Fă clic pe butonul „Meniu principal” din extrema stângă, în partea de jos a ecranului."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:663
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Apoi fă clic pe opțiunea „Ieși din joc”."
 
 #: ../../../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:664
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr ""
+msgstr "Îți mulțumesc că ai jucat acest tutorial. Bucură-te de Widelands și nu uita să ne vizitezi la"

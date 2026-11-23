@@ -564,7 +564,7 @@ msgid ""
 "This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
 " It is produced by a dressmaker and used in a training glade – together with"
 " food – to train soldiers from health level 0 to level 1."
-msgstr "Denna lätta trärustning är en grundläggande del av rustningen för amasonernas soldater. Den tillverkas av en klänningsmakare och används i en träningsglänta – tillsammans med mat – för att träna soldater från hälsonivå 0 till nivå 1."
+msgstr "Denna lätta trärustning är en grundläggande del av rustningen för amasonernas soldater. Den tillverkas av en sömmerska och används i en träningsglänta – tillsammans med mat – för att träna soldater från hälsonivå 0 till nivå 1."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
 #: ../../../../data/tribes/initialization/amazons/units.lua:515
@@ -599,7 +599,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr "Swift boots är lätta och slitstarka skor som gör soldaterna snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas förmåga att parera från nivå 1 till nivå 2."
+msgstr "Snabba stövlar är lätta och slitstarka skor som gör soldaterna snabbare på fötterna. De tillverkas av skräddaren och används för att träna soldaternas förmåga att parera från nivå 1 till nivå 2."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Hero Boots
 #: ../../../../data/tribes/initialization/amazons/units.lua:559
@@ -815,7 +815,7 @@ msgstr "Resterna av ett gammalt träd."
 #: ../../../../data/tribes/initialization/amazons/units.lua:858
 #: ../../../../data/tribes/initialization/amazons/units.lua:886
 msgid "This balsa tree has just been planted."
-msgstr "Denna balsaträd har just planterats."
+msgstr "Det här balsaträdet har just planterats."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Pole
 #: ../../../../data/tribes/initialization/amazons/units.lua:809
@@ -823,7 +823,7 @@ msgstr "Denna balsaträd har just planterats."
 #: ../../../../data/tribes/initialization/amazons/units.lua:865
 #: ../../../../data/tribes/initialization/amazons/units.lua:893
 msgid "This balsa tree is growing."
-msgstr "Denna balsaträd växer."
+msgstr "Det här balsaträdet växer."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Mature
 #: ../../../../data/tribes/initialization/amazons/units.lua:816
@@ -883,7 +883,7 @@ msgstr "Detta järnträd är redo att skördas av en mästerskogshuggare. Andra 
 #: ../../../../data/tribes/initialization/amazons/units.lua:1082
 #: ../../../../data/tribes/initialization/amazons/units.lua:1110
 msgid "This rubber tree has just been planted."
-msgstr "Denna gummiträd har just planterats."
+msgstr "Det här gummiträdet har just planterats."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Pole
 #: ../../../../data/tribes/initialization/amazons/units.lua:1033
@@ -891,7 +891,7 @@ msgstr "Denna gummiträd har just planterats."
 #: ../../../../data/tribes/initialization/amazons/units.lua:1089
 #: ../../../../data/tribes/initialization/amazons/units.lua:1117
 msgid "This rubber tree is growing."
-msgstr "Denna gummiträd växer."
+msgstr "Det här gummiträdet växer."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Mature
 #: ../../../../data/tribes/initialization/amazons/units.lua:1040
@@ -979,12 +979,12 @@ msgstr "Denna åker har skördats."
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Sapling
 #: ../../../../data/tribes/initialization/amazons/units.lua:1173
 msgid "This cocoa tree has just been planted."
-msgstr "Denna kakaoträd har just planterats."
+msgstr "Det här kakaoträdet har just planterats."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Pole
 #: ../../../../data/tribes/initialization/amazons/units.lua:1180
 msgid "This cocoa tree is growing."
-msgstr "Denna kakaoträd växer."
+msgstr "Det här kakaoträdet växer."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Mature
 #: ../../../../data/tribes/initialization/amazons/units.lua:1187
@@ -1259,7 +1259,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr "Denna byggnad kan producera ett kött eller en fisk mellan %1$s och %2$s, beroende på hur långt jägare-samlaren måste gå. Om båda typerna av mat är tillgängliga produceras en av varje sort mellan %3$s och %4$s."
+msgstr "Denna byggnad kan producera en köttportion eller en fisk mellan %1$s och %2$s, beroende på hur långt jägare-samlaren måste gå. Om båda typerna av mat är tillgängliga produceras en av varje sort mellan %3$s och %4$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1643,7 +1643,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle master can perform one terraform between %1$s and %2$s, depending"
 " on how far she has to walk."
-msgstr "Djungelmästaren kan utföra en terraform mellan %1$s och %2$s, beroende på hur långt hon måste gå."
+msgstr "Djungelmästaren kan omvandla terrängen en gång mellan %1$s och %2$s, beroende på hur långt hon måste gå."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../../../data/tribes/initialization/amazons/units.lua:1571
@@ -1853,7 +1853,7 @@ msgstr "Om alla nödvändiga varor levereras i tid kan en träningsglänta i gen
 #: ../../../../data/tribes/initialization/amazons/units.lua:1720
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Garrisons soldater för att utvidga ditt territorium."
+msgstr "Stationerar soldater för att utvidga ditt territorium."
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an Amazon military site: Warriors’ Dwelling
@@ -3389,7 +3389,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Rökt kött görs av kött i ett rökeri. Det levereras till gruvor och täningsplatser (labyrint och fängelsehåla) där gruvarbetarna och soldaterna själva tillreder en näringsrik lunch av det."
+msgstr "Rökt kött görs av kött i ett rökeri. Det levereras till gruvor och träningsplatser (labyrint och fängelsehåla) där gruvarbetarna och soldaterna själva tillreder en näringsrik lunch av det."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Water, part 2
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:531
@@ -4745,7 +4745,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr "Om denna byggnad är fullt försörjd och ekonomin behöver alla typer av rökt mat, tar det i genomsnitt %1$s att producera en rökt fisk och %2$s att producera ett rökt kött. Om ekonomin bara behöver en typ av mat, tar det i genomsnitt %3$s att producera en rökt fisk och %4$s att producera ett rökt kött."
+msgstr "Om denna byggnad är fullt försörjd och ekonomin behöver alla typer av rökt mat, tar det i genomsnitt %1$s att producera en rökt fisk och %2$s att producera rökt kött. Om ekonomin bara behöver en typ av mat, tar det i genomsnitt %3$s att producera en rökt fisk och %4$s att producera rökt kött."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:1700
@@ -4908,7 +4908,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar produktionen av ett järn %1$s och ett guld %2$s i genomsnitt. Om endast en sorts metall behövs av ekonomin, tar produktionen av ett järn %3$s och ett guld %4$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar det i genomsnitt %1$s att framställa järn och %2$s att framställa guld. Om endast en sorts metall behövs av ekonomin, tar det i genomsnitt %3$s att framställa järn och %4$s att framställa guld."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -5251,7 +5251,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla mineraler behövs av ekonomin, tar produktionen av en granit %1$s, en kvarts %2$s och en diamant %3$s i genomsnitt. Om endast en typ av mineral behövs av ekonomin, tar produktionen av en granit %4$s, en kvarts %5$s och en diamant %6$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla mineraler behövs av ekonomin, tar det i genomsnitt %1$s att framställa granit, %2$s att framställa kvarts och %3$s att framställa en diamant. Om endast en typ av mineral behövs av ekonomin, tar det i genomsnitt %4$s att framställa granit, %5$s att framställa kvarts och %6$s att framställa en diamant."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -5475,7 +5475,7 @@ msgstr "Om alla nödvändiga varor levereras i tid kan en labyrint i genomsnitt 
 #: ../../../../data/tribes/initialization/atlanteans/units.lua:2077
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Garrisons soldater för att utvidga ditt territorium."
+msgstr "Stationerar soldater för att utvidga ditt territorium."
 
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhall
@@ -7565,7 +7565,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar produktionen av ett järn %1$s och ett guld %2$s i genomsnitt. Om endast en sorts metall behövs av ekonomin, tar produktionen av ett järn %3$s och ett guld %4$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar det i genomsnitt %1$s att framställa järn och %2$s att framställa guld. Om endast en sorts metall behövs av ekonomin, tar det i genomsnitt %3$s att framställa järn och %4$s att framställa guld."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1458
@@ -8107,7 +8107,7 @@ msgstr "Boldreth,<br>om sin tid som ung soldat"
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1823
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Garrisons soldater för att utvidga ditt territorium."
+msgstr "Stationerar soldater för att utvidga ditt territorium."
 
 #. TRANSLATORS: Note helptext for a Barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a Barbarian military site: Barrier
@@ -10733,7 +10733,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Hjälmen är soldatens grundläggande skydd. Den tillverkas i en vapensmedja. Tillsammans med ett träspruta är det den utrustning som unga soldater förses med. Hjälmar används också i träningsläger – tillsammans med mat – för att träna soldater från hälsonivå 0 till nivå 1."
+msgstr "Hjälmen är soldatens grundläggande skydd. Den tillverkas i en vapensmedja. Tillsammans med ett träspjut är det den utrustning som unga soldater förses med. Hjälmar används också i träningsläger – tillsammans med mat – för att träna soldater från hälsonivå 0 till nivå 1."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../../../data/tribes/initialization/empire/units.lua:567
@@ -11213,7 +11213,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s and one marble "
 "between %3$s and %4$s, depending on how far the stonemason has to walk."
-msgstr "Denna byggnad kan producera en granit mellan %1$s och %2$s och en marmor mellan %3$s och %4$s, beroende på hur långt stenhuggaren måste gå."
+msgstr "Denna byggnad kan producera granit mellan %1$s och %2$s och marmor mellan %3$s och %4$s, beroende på hur långt stenhuggaren måste gå."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 2
@@ -11862,7 +11862,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar produktionen av ett järn %1$s och ett guld %2$s i genomsnitt. Om endast en sorts metall behövs av ekonomin, tar produktionen av ett järn %3$s och ett guld %4$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar det i genomsnitt %1$s att framställa järn och %2$s att framställa guld. Om endast en sorts metall behövs av ekonomin, tar det i genomsnitt %3$s att framställa järn och %4$s att framställa guld."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12203,7 +12203,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr "Om denna byggnad är fullt utrustad och alla spjut behövs av ekonomin, tar produktionen av ett spjut i genomsnitt %1$s. Om endast en typ av spjut behövs av ekonomin, tar produktionen av ett träsprut %2$s, ett spjut, ett avancerat spjut, ett tungt spjut eller ett krigssprut i genomsnitt %3$s."
+msgstr "Om denna byggnad är fullt utrustad och alla spjut behövs av ekonomin, tar produktionen av ett av varje spjut i genomsnitt %1$s. Om endast en typ av spjut behövs av ekonomin, tar det i genomsnitt %2$s att tillverka ett träspjut och %3$s att tillverka ett spjut, ett avancerat spjut, ett tungt spjut eller ett krigsspjut."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -12625,7 +12625,7 @@ msgstr "General Passerus Claudius Pedestrus om varför han inte beordrade först
 #: ../../../../data/tribes/initialization/empire/units.lua:2333
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Garrisons soldater för att utvidga ditt territorium."
+msgstr "Stationerar soldater för att utvidga ditt territorium."
 
 #. TRANSLATORS: Note helptext for an Empire military site: Blockhouse
 #. TRANSLATORS: Note helptext for an Empire military site: Sentry
@@ -15376,7 +15376,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar produktionen av ett järn %1$s och ett guld %2$s i genomsnitt. Om endast en sorts metall behövs av ekonomin, tar produktionen av ett järn %3$s och ett guld %4$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla metaller behövs av ekonomin, tar det i genomsnitt %1$s att framställa järn och %2$s att framställa guld. Om endast en sorts metall behövs av ekonomin, tar det i genomsnitt %3$s att framställa järn och %4$s att framställa guld."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../../../data/tribes/initialization/frisians/units.lua:1858
@@ -15413,7 +15413,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla material behövs av ekonomin, tar produktionen av en päls %1$s, ett järn %2$s och ett guld %3$s i genomsnitt. Om endast en typ av material behövs av ekonomin, tar produktionen av en päls %4$s, ett järn %5$s och ett guld %6$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla material behövs av ekonomin, tar det i genomsnitt %1$s att framställa en päls, %2$s att framställa järn och %3$s att framställa guld. Om endast en typ av material behövs av ekonomin, tar det i genomsnitt %4$s att framställa en päls, %5$s att framställa järn och %6$s att framställa guld."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../../../data/tribes/initialization/frisians/units.lua:1871
@@ -15617,7 +15617,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr "Om denna byggnad är fullt försörjd tar produktionen av en av varje rökt livsmedel i genomsnitt %s."
+msgstr "Om denna byggnad är fullt försörjd tar produktionen av en av varje sort rökt mat i genomsnitt %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../../../data/tribes/initialization/frisians/units.lua:1962
@@ -15717,7 +15717,7 @@ msgstr "Om du gillar öl har du aldrig smakat mjöd."
 #: ../../../../data/tribes/initialization/frisians/units.lua:2003
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr "Slogan över en mjödbryggeri"
+msgstr "Slogan över ett mjödbryggeri"
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Mead Brewery
 #: ../../../../data/tribes/initialization/frisians/units.lua:2005
@@ -15736,7 +15736,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr "Om denna byggnad är fullt försörjd och alla drycker behövs av ekonomin, tar produktionen av en öl %1$s och en mjöd %2$s i genomsnitt. Om endast en sorts dryck behövs av ekonomin, tar produktionen av en öl eller en mjöd %3$s i genomsnitt."
+msgstr "Om denna byggnad är fullt försörjd och alla drycker behövs av ekonomin, tar det i genomsnitt %1$s att brygga öl och %2$s att brygga mjöd. Om endast en sorts dryck behövs av ekonomin, tar det i genomsnitt %3$s att brygga öl eller mjöd."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../../../data/tribes/initialization/frisians/units.lua:2014
@@ -15852,7 +15852,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr "Om tillgången är stabil och det finns en kontinuerlig efterfrågan på päls, producerar renfarmen ett kött efter att ha producerat tre pälsar."
+msgstr "Om tillgången är stabil och det finns en kontinuerlig efterfrågan på päls, producerar renfarmen en köttportion efter att ha producerat tre pälsar."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15926,7 +15926,7 @@ msgid ""
 "times. You can manually remove breakwaters when the land is sufficiently "
 "secured to prevent wasting resources; to do so, build a flag, road, or "
 "building in the dike’s place."
-msgstr "Dike-karaktären kommer att terraforma marken runt varje vågbrytare han bygger flera gånger. Du kan manuellt ta bort vågbrytare när marken är tillräckligt säkrad för att undvika slöseri med resurser. För att göra detta bygger du en flagga, väg eller byggnad på platsen för diket."
+msgstr "Dikesgrävaren omvandlar marken runt varje vågbrytare han bygger flera gånger. Du kan manuellt ta bort vågbrytare när marken är tillräckligt säkrad för att undvika slöseri med resurser. För att göra detta bygger du en flagga, väg eller byggnad på platsen där vallen står."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Diker's
 #. House
@@ -15935,7 +15935,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, the diker can perform one terraform "
 "between %1$s and %2$s, depending on how far he has to walk."
-msgstr "Om denna byggnad är fullt försörjd kan diker utföra en terraform mellan %1$s och %2$s, beroende på hur långt han måste gå."
+msgstr "Om denna byggnad är fullt försörjd kan dikesgrävaren omvandla terrängen en gång mellan %1$s och %2$s, beroende på hur långt han måste gå."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
@@ -16126,7 +16126,7 @@ msgstr "Om alla nödvändiga varor levereras i tid kan en träningsarena i genom
 #: ../../../../data/tribes/initialization/frisians/units.lua:2261
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr "Garrisons soldater för att utvidga ditt territorium."
+msgstr "Stationerar soldater för att utvidga ditt territorium."
 
 #. TRANSLATORS: Note helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a Frisian military site: High Wooden Tower

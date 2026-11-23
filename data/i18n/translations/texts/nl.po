@@ -407,7 +407,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Replays zijn een zeer handig hulpmiddel om fouten in de spellogica op te sporen, en kunnen daarom nuttig zijn als bijlage bij foutrapporten. De replay-bestanden worden opgeslagen in de submap ‘replays’ van de Widelands-hoofdmap. Je kunt op het laatste tabblad ‘Technische informatie’ van dit venster kijken om te zien waar deze map zich op je computer bevindt."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40

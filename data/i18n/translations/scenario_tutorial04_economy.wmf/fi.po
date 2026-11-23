@@ -1027,7 +1027,7 @@ msgid ""
 "Within your territory, wares are carried around by carriers. But trades can "
 "happen across long distances, much too far for your carriers to walk. So we "
 "employ a caravan of donkeys to carry our wares instead."
-msgstr ""
+msgstr "Kantajat kuljettavat tuotteita alueellasi. Mutta kauppaa voi käydä pitkien matkojen päähän, mikä on liian pitkä kävelymatka kantajillesi. Sen sijaan me työllistämme aasikaravaanin kuljettamaan tuotteitamme."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:598
 msgid ""
@@ -1041,7 +1041,7 @@ msgid ""
 "roads: When a road receives a lot of traffic, its carrier requests a donkey "
 "to assist with the work, so twice as many wares can be transported in the "
 "same time."
-msgstr ""
+msgstr "Kauppatuotteiden kantamisen lisäksi aaseilla voidaan auttaa ruuhkaisilla teillä: Kun tie saa paljon liikennettä, sen kuljettajat pyytävät aasia avuksi työhön, joten tuotteita voidaan kuljettaa kaksinkertaisesti samaan aikaan."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:607
 msgid ""
@@ -1108,7 +1108,7 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:644
 msgid ""
 "A batch will be delivered in one transport, each ware needing a donkey."
-msgstr ""
+msgstr "Erä toimitetaan yhdellä kuljetuksella, ja jokainen tuote vaatii aasin."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:645
 msgid ""
@@ -1134,7 +1134,7 @@ msgstr "Tarjoa friiseille kaupantekoa."
 msgid ""
 "The Frisians will only accept a trade that is advantageous to them; that is,"
 " they will not give away more wares than they receive."
-msgstr ""
+msgstr "Friisit hyväksyvät vain kaupan, joka on heille suotuisa. eli he eivät anna enempää tuotteita pois kuin voivat saada."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:663
 msgid "Trade Rejected"
@@ -1144,7 +1144,7 @@ msgstr "Kaupat hylätty"
 msgid ""
 "The Frisians have rejected your trade offer. They will not accept a trade "
 "that may be disadvantageous to them. Send them a new trade proposal."
-msgstr ""
+msgstr "Friisit ovat hylänneet vaihtotarjouksesi. He eivät hyväksy kauppaa, joka voi olla heille epäedullinen. Lähetä heille uusi kauppaehdotus."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:672
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:681
@@ -1156,7 +1156,7 @@ msgid ""
 "Well done! The Frisians have accepted your trade offer. Soon you will see a "
 "caravan of your donkeys leaving the market to bring wares to the Frisians, "
 "and a caravan of their reindeer bringing you wares in exchange."
-msgstr ""
+msgstr "Hyvin tehty! Friisit ovat hyväksyneet vaihtotarjouksesi. Pian näet aasikaravaanisi lähtemässä kauppapaikasta tuomaan tuotteita friiseille, ja heidän porokaravaaninsa tuomassa tuotteitasi vaihdossa."
 
 #: ../../../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:683
 msgid ""

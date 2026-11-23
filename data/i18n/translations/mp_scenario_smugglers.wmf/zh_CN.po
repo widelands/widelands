@@ -18,7 +18,7 @@ msgstr ""
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "走私货物"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
@@ -28,12 +28,12 @@ msgstr ""
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
-msgstr[0] ""
+msgstr[0] "%i 分"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
-msgstr ""
+msgstr "规则"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
@@ -50,7 +50,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "走私者是一张适合4人游玩的地图。你和你的队友在对角线位置开始，位于一个点对称的岛屿上。这个岛上有很多走私隧道，每条隧道都有一个接收端和一个发送端。"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -58,7 +58,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "要建立一条走私路线，你需要在发送/接收点建造一个仓库，而你的队友则需要在对应的接收/发送点建造一个仓库。然后每10秒会运输一件货物。"
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -66,32 +66,32 @@ msgstr ""
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr ""
+msgstr "对于较难防守的走私路线，每走私一件货物可获得2或3分。第一个收集到 %s 的队伍获胜。"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr ""
+msgstr "一个发送点"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
-msgstr ""
+msgstr "一个接收点"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:15
 msgid "Notes"
-msgstr ""
+msgstr "说明"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:16
 msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr ""
+msgstr "记住地图具有旋转对称性。例如，当你找到总部左上方的某个位置时，对应的点会在你队友总部的右下方。"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr ""
+msgstr "你可以在常规统计菜单中随时查看交易货物数量。祝你好运！"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
@@ -99,7 +99,7 @@ msgstr ""
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr ""
+msgstr "从 %1$s 到 %2$s 的新走私路线已建立！他们走私的每件货物价值 %3$s。"
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
@@ -107,7 +107,7 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "你的队伍已建立新的走私路线。你拥有发送仓库。走私到这里的每件货物价值 %s。"
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -115,17 +115,17 @@ msgstr ""
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr ""
+msgstr "你的队伍已建立新的走私路线。你拥有接收仓库。走私到这里的每件货物价值 %s。"
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr ""
+msgstr "从 %2$s 到 %3$s 价值 %1$s 的走私路线已被中断！"
 
 #: ../../../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
-msgstr ""
+msgstr "游戏结束！"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
@@ -133,4 +133,4 @@ msgstr ""
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr ""
+msgstr "游戏结束！%1$s 和 %2$s 赢得了游戏！%3$s 和 %4$s 只收集到了 %5$s。"

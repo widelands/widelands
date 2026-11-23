@@ -20,24 +20,24 @@ msgstr ""
 #. other occurences.
 #: ../../../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
 msgid "Ondun"
-msgstr ""
+msgstr "Ondun"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr ""
+msgstr "建立基础经济"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr ""
+msgstr "开始收集基本建筑材料，并加固营地。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "建造伐木小屋"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "建造猎人小屋"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
@@ -45,115 +45,115 @@ msgstr "建造一个采石场"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "建造木材硬化厂"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a sentry on the eastern border"
-msgstr ""
+msgstr "在东部边界建造哨所"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr ""
+msgstr "你还应该建造一个芦苇场和一个石灰窑。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "建立小型食物经济"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "建立基础食物经济，为你的民众提供食物。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "建造渔民小屋"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "建造猎人小屋"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a well"
-msgstr ""
+msgstr "建造一口井"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a farm"
-msgstr ""
+msgstr "建造农场"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a bakery"
-msgstr ""
+msgstr "建造面包房"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:45
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "建造畜牧场"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "记得建造畜牧场"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:48
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "随着道路变长、经济规模扩大，你应该充分利用牛群来更快地运输物资。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 msgid "Build a tower"
-msgstr ""
+msgstr "建造塔"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:58
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "在你的领土东北边界建造一座塔，以获得更广的视野，并保护你的民众免受敌人的突然袭击。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "进一步探索"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:66
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "建造更多军事建筑，探索总部周围的区域，确保你的民众安全。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "建造采矿基础设施"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "将你的领土扩展到山区，派遣地质学家寻找矿石和煤炭，并建造包含矿山、酒馆、熔炉和金属加工厂的采矿经济。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "建造要塞"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:82
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "在山脉东侧建造一座要塞。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "建造训练基础设施"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr ""
+msgstr "建造兵营来训练一些基础士兵。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "在山脉西侧建造一个竞技场和一个训练营。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:122
@@ -163,23 +163,23 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "将你的金属加工厂升级为斧头工坊，以生产武器，并建立第二个金属加工厂确保工具生产。当铁匠达到下一级别（大师铁匠）时，你甚至可以将斧头工坊升级为战争磨坊，这将生产额外武器。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "在山脉西侧建造头盔锻造厂，为你的士兵提供更好的盔甲。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a warehouse"
-msgstr ""
+msgstr "建造一个仓库"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "在山脉西侧建造一座仓库。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid ""
@@ -187,18 +187,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "仓库与你的总部类似，唯一的不同是它们没有士兵防守。当你的领土不断扩大，通往总部的路径越来越长时，建造仓库通常是明智的。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 msgid "Build training sites"
-msgstr ""
+msgstr "建造训练场所"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:111
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "在山脉西侧建造一座兵营、一个竞技场和一个训练营。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
@@ -206,30 +206,30 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr ""
+msgstr "兵营训练基础士兵，而训练营或竞技场等训练场所则用于训练士兵的不同属性。这些属性在战斗中很重要，士兵越好，赢得战斗的机会就越高。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "属性有：生命值、攻击、防御和闪避。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 msgid "Build weapons production"
-msgstr ""
+msgstr "建造武器生产"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "建造头盔锻造厂"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "摧毁卡利塔斯的军队"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "摧毁卡利塔斯的军队，并向东扩展你的领土。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
@@ -237,27 +237,27 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "要攻击敌人，你必须点击敌方军事建筑的门。将会弹出一个菜单，让你选择应该派出的士兵数量。当你设置好数量后，点击十字（'开始攻击'）。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "军事突击阿尔图兰"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:147
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "摧毁索隆两个兄弟的所有部队，解放王座圈。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:155
 msgid "Close to Home"
-msgstr ""
+msgstr "靠近家园"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron 看起来很担忧…"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:158
@@ -265,20 +265,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "最近几天，我们离首都更近了。许多人已经在行军中加入了我们，并将希望寄托在我身上。然而，我担心我们还没有足够强大到能够与我的兄弟们开战。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:161
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
+msgstr "目前，我们正在古老森林的边界休息，为即将到来的日子做准备。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:191
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
-msgstr ""
+msgstr "又一个寒冷的日子"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:170
@@ -289,15 +289,15 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "巡逻队带来的消息并不好。我们的间谍告诉我们，战争部落仍在激战中，但一些老士兵和部落领袖似乎已经厌倦了这场毫无意义的战争。库恩之子卡利塔斯是第一个离开阿尔图兰的战争领袖，从而使他的势力变得脆弱易受攻击。据我的侦察兵报告，他已经踏入了首都周围的低地，确保了外围防御工事的安全。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
-msgstr ""
+msgstr "疑虑"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "博尔德雷特摇着头..."
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:178
@@ -308,12 +308,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "索隆相信卡利塔斯已经厌倦了战斗，一旦我们进军重建阿尔图兰的法律和秩序，他愿意加入我们。但我不这么认为。卡利塔斯是我们军队中最伟大将军的儿子，他的家人一直不喜欢向查卡尔图的旗帜低头。他为什么要和查卡尔图的儿子一起进军，夺回他的遗产和王位？"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:199
 msgid "The Story Continues"
-msgstr ""
+msgstr "故事继续"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:184
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:232
@@ -321,7 +321,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:267
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Boldreth says:"
-msgstr ""
+msgstr "博尔德雷特说："
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:186
@@ -329,11 +329,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "然而，索隆不愿意听我的疑虑。他想要将我们的防御工事扩展到卡利塔斯领土的边界，并与他的部队会合。我必须密切关注这里发生的一切。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "索隆自信地说着。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:194
@@ -344,7 +344,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "我部队的前线已经扩展到森林边缘。我们经历了漫长而寒冷的冬天，已经走了这么远的路。我们在翁丹周围建立的防御工事将确保我们能够快速获得人员和物资补给，一旦阿尔图兰落入我手中，这两座城市将通过良好且可防御的基础设施连接起来。尽管如此，我希望我不会独自完成这个任务，我希望库恩之子卡利塔斯会响应我的号召。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -354,7 +354,7 @@ msgstr ""
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:305
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
-msgstr ""
+msgstr "索隆说："
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:202
@@ -365,15 +365,15 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "我已经派人去他在要塞的地方与卡利塔斯会面。他已经封锁了通往首都的前主入口，并试图在阿尔图兰周围设置包围圈。在包围圈完整的情况下，他不会让任何人进出城市。到目前为止，他没有回复我的任何信息。但我等待的时间不会白费。我会进一步训练我的士兵，为战斗做准备。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "你忠诚的伙伴"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:207
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "博尔德雷特大声喊道！"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:209
@@ -382,11 +382,11 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "那个混蛋！我们前线巡逻队只有一个人活着回来。他带来了卡利塔斯的口信，告诉我们他将用我们的血来惩罚我们部队的每一个行动！我们不能接受这种行为。从现在开始，卡利塔斯和我们之间开战！"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "叛徒的防御工事"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:220
@@ -396,7 +396,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "当叛徒看到他无法阻止我军时，他让他的军队倒在了原地。卡利塔斯在战争混乱中消失了，但现在我不在乎了。让他逃跑吧，作为一个不愿向木王座低头而被遗忘的部落领袖，那王座现在是我的了。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:223
@@ -406,7 +406,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "此外，他的逃跑给我们带来了巨大的好处：整年卡利塔斯都忙于战斗，甚至没有为他的士兵储存足够的食物。现在他逃跑了，饥饿导致他的一些年轻追随者叛逃了。这支部队在主环上有一个坚固的防御工事。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -415,11 +415,11 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "但还有更多消息：我的侦察兵报告说我两个兄弟的狂暴部落处于混乱之中，几乎没有注意到即将到来的新危险。然而，我相信即使他们注意到了也不会在乎，被愤怒和仇恨蒙蔽，他们完全没有理智可言。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
-msgstr ""
+msgstr "冬季将至"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -429,15 +429,15 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "今天早上，我发现索隆心事重重。他昨晚巡逻归来很晚，靠着一棵树坐着，看着营地。争吵和纠纷的数量不断增加，冬天已经牢牢地抓住了我们。我们应该把食物存起来，度过漫长寒冷的冬天！"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
-msgstr ""
+msgstr "顾问"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "坎特鲁克点点头。"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:242
@@ -447,22 +447,22 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "博尔德雷特说得对！我们没有足够的食物来度过漫长寒冷的冬天。我们应该开始建造一口井、一个渔民小屋和一个猎人小屋。如果找到足够的空间，我们还应该建造一个农场和一个面包房！我们中的一个农民似乎很聪明——他已经在寒冷的土壤中让一些作物生长起来了。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "食物经济完成"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "坎特鲁克刚刚通知我，我们的基础食物经济已经成功建立。终于，我们都不必再担心饥饿了。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
-msgstr ""
+msgstr "踪迹"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:260
@@ -471,11 +471,11 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "索隆告诉我，他在我们定居点的东北方的雪地里发现了踪迹。他指示我们建造一座塔，以便对我们的大厅周围区域有更广的视野，保护我们的民众免受突然袭击。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
-msgstr ""
+msgstr "进一步探索"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:269
@@ -487,7 +487,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "索隆下令的第一个防御工事刚刚完成。目前，他试图在我们命名为'翁丹'（在古老语言中意为'等待者'）的新家园墙内的人们中建立信任和信念。但索隆还不满足——我完全理解他的担忧：森林很深，通往阿尔图兰的边境很近。我确信那里有比未知踪迹更危险的千种威胁。"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -496,11 +496,11 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "为了更好地观察我们大厅周围的区域，我们应该进一步探索，设置更多的卫兵和侦察兵来监视边境，关注我们门口的激战。那时，一旦麻烦试图占领我们的森林，我们就会做好准备。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
-msgstr ""
+msgstr "发现山脉"
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:281
@@ -510,11 +510,11 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "我刚刚与我们的巡逻队负责人交谈。他告诉我，他们在我们领土的东北部和东部发现了一些山脉。运气好的话，这将为我们重新武装士兵提供新的机会，因为据我所记得，阿尔图兰西边的大多数山脉都蕴藏着煤炭和一些金属矿石。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "采矿经济完成"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:290
@@ -522,11 +522,11 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "我刚刚接到通知，我们的采矿经济已经开始运作。这个消息让我露出了笑容——即使最艰难的部分还有待完成，现在我们的铁匠将尽最大努力来进一步改善我们的生活。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
-msgstr ""
+msgstr "需要要塞"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:298
@@ -537,11 +537,11 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "博尔德雷特和我刚刚探索了三座山脉周围的区域。该地区的一个主要战略问题是，有两个较大的通道——一个在中央山脉的北部，一个在南部。这些通道很难控制，因此在我看来，我们只有一个机会防止山脉落入敌人手中：我们必须在山脉东侧建造一座要塞！"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
-msgstr ""
+msgstr "要塞完成"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:307
@@ -550,11 +550,11 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "终于！要塞刚刚建成，所以我们定居点的入口目前应该是安全的。将来，我们可能会考虑在通道处建造更多的防御工事，如屏障和塔，但现在我们可以松一口气了。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "增强的经济和训练"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:315
@@ -562,7 +562,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "我们的采矿经济似乎运作良好，这已经是好消息了！无论如何，大厅里还有许多男男女女在等待任务，他们可以帮助我们的士兵为即将到来的战争做准备。"
 
 #. TRANSLATORS: Boldreth
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -574,7 +574,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "我们的地质学家发现了更多的铁矿石、煤炭甚至黄金矿藏。一旦我们的矿工更有经验，我们应该升级现有的矿山。我们应该建造更多的矿山、更大的食物基础设施，确保我们的士兵有足够的食物供应，以及进一步加工的经济。但那还不是全部——我们的大多数士兵还很年轻，既没有好的武器，也没有经过良好训练。我们应该建造训练场所，为他们的未来任务做准备。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:328
@@ -583,7 +583,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "我的兄弟和他们的士兵都死了，留下了火和毁灭。在所有废墟中，我找不到任何一个普通人，所以我只能希望他们逃离了这个残酷的战场，在其他地方开始了更好的生活。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -594,7 +594,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "我记得的那份美丽已经荡然无存，旧都只剩下废墟。我既悲伤又欣慰。我从未希望再看到阿尔图兰的旧日美丽——就在几个月前，我还在怀疑自己是否还能再次踏上那片土地。现在，这座古老的城镇回到了我手中，我将毫不犹豫地用我人民的所有力量重建它。我迫不及待地想再次看到它昔日的美丽。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
@@ -604,11 +604,11 @@ msgstr "胜利"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "你已经完成了野蛮人教程战役的最后一个任务。如果你愿意，可以继续游戏，否则进入下一个战役。"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
-msgstr ""
+msgstr "军事突击"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:341
@@ -616,7 +616,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "就这样吧，将军们正在外面安排我的部队，博尔德雷特本人将领导第一次突击。我将与他并肩作战，解放阿尔图兰的战争，为我们的首都带回和平。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:344
@@ -625,20 +625,20 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "当明天的朝阳从树梢升起时，我将下令突击。黄昏时分，我将在军阀的木制大厅里庆祝我的胜利，并献上一只新生羔羊，纪念我的父亲，他的眼睛今天正注视着我。"
 
 #. TRANSLATORS: Thron
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
-msgstr ""
+msgstr "就这样吧！"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
-msgstr ""
+msgstr "更快的运输"
 
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "坎特鲁克说："
 
 #. TRANSLATORS: Khantrukh
 #: ../../../../data/campaigns/bar02.wmf/scripting/texts.lua:355
@@ -646,4 +646,4 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "酋长，记住那些可怜的搬运工：我们的道路越来越长，他们肩上的负担却从未减轻。我们应该饲养更多的牛，减轻他们的工作负担，使我们的运输更有效率。"

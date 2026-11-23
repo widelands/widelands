@@ -20,14 +20,14 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../../../src/wlapplication_messages.cc:55
 #: ../../../../src/wlapplication_messages.cc:87
 #: ../../../../src/wlapplication_messages.cc:92
 #: ../../../../src/wlapplication_messages.cc:113
 msgid "FILENAME"
-msgstr ""
+msgstr "FILENAME"
 
 #. * TRANSLATORS: Used instead of a file name indicating last savegame, replay
 #. or map.
@@ -35,72 +35,72 @@ msgstr ""
 #. punctuation marks
 #: ../../../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "last"
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "Usage:"
-msgstr ""
+msgstr "用法："
 
 #: ../../../../src/wlapplication_messages.cc:66
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <选项0>=<值0> ... <选项N>=<值N>"
 
 #: ../../../../src/wlapplication_messages.cc:67
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <保存.wgf>/<回放.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:69
 #: ../../../../src/wlapplication_messages.cc:71
 #: ../../../../src/wlapplication_messages.cc:76
 #: ../../../../src/wlapplication_messages.cc:250
 msgid "DIRNAME"
-msgstr ""
+msgstr "DIRNAME"
 
 #: ../../../../src/wlapplication_messages.cc:69
 msgid "Options:"
-msgstr ""
+msgstr "选项："
 
 #: ../../../../src/wlapplication_messages.cc:70
 msgid "Use the specified directory for the Widelands data files."
-msgstr ""
+msgstr "使用指定的目录存放 Widelands 数据文件。"
 
 #: ../../../../src/wlapplication_messages.cc:72
 #, c-format
 msgid ""
 "Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
-msgstr ""
+msgstr "使用指定的目录存放 Widelands 配置文件、存档和回放。默认为 `%s`。"
 
 #: ../../../../src/wlapplication_messages.cc:77
 msgid "Use the specified directory for the Widelands locale files."
-msgstr ""
+msgstr "使用指定的目录存放 Widelands 本地化文件。"
 
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "Use the specified locale."
-msgstr ""
+msgstr "使用指定的本地化语言。"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
 #: ../../../../src/wlapplication_messages.cc:81
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../../../src/wlapplication_messages.cc:83
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr ""
+msgstr "不检查要使用的数据目录是否与此 Widelands 版本兼容。"
 
 #: ../../../../src/wlapplication_messages.cc:88
 #, c-format
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr ""
+msgstr "直接使用给定文件中配置的设置创建新游戏。示例可在 `%s` 中找到。"
 
 #: ../../../../src/wlapplication_messages.cc:93
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
-msgstr ""
+msgstr "直接加载 `FILENAME` 地图作为单人剧情关卡开始游戏。"
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -108,7 +108,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "直接加载存档 `%1$s` 或使用 `=%2$s` 加载最后保存的游戏。"
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -116,7 +116,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "直接加载回放 `%1$s` 或使用 `=%2$s` 加载最后保存的回放。"
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -126,13 +126,13 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "直接启动 Widelands 地图编辑器。您可以添加 `=%1$s` 直接在编辑器中加载地图 `FILENAME`，或添加 `=%2$s` 加载最后编辑的地图。"
 
 #: ../../../../src/wlapplication_messages.cc:114
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor."
-msgstr ""
+msgstr "初始化后运行指定的 Lua 脚本。仅对 --scenario、--loadgame 或 --editor 有效。"
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../../../src/wlapplication_messages.cc:120
@@ -147,20 +147,20 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:265
 #: ../../../../src/wlapplication_messages.cc:270
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:122
 msgid "Start the scenario with difficulty `n`. Only valid with --scenario."
-msgstr ""
+msgstr "以难度 `n` 开始剧情关卡。仅对 --scenario 有效。"
 
 #: ../../../../src/wlapplication_messages.cc:124
 msgid "Start the game with sound disabled."
-msgstr ""
+msgstr "以禁用声音的方式开始游戏。"
 
 #: ../../../../src/wlapplication_messages.cc:125
 msgid "Start the game with shuffle mode for playback of songs"
-msgstr ""
+msgstr "以随机播放歌曲的方式开始游戏。"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -176,83 +176,83 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:244
 #: ../../../../src/wlapplication_messages.cc:253
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../../../src/wlapplication_messages.cc:130
 msgid "Play the intro music at startup and show splash image until it ends."
-msgstr ""
+msgstr "启动时播放介绍音乐并显示启动画面直到结束。"
 
 #: ../../../../src/wlapplication_messages.cc:131
 msgid "Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr "当发生 Lua 错误时强制 Widelands 崩溃。"
 
 #: ../../../../src/wlapplication_messages.cc:133
 msgid ""
 "Force Widelands to crash when a game or the editor terminates with an error."
-msgstr ""
+msgstr "当游戏或编辑器因错误终止时强制 Widelands 崩溃。"
 
 #. * TRANSLATORS: Placeholder for a time value in seconds
 #: ../../../../src/wlapplication_messages.cc:136
 msgid "<seconds>"
-msgstr ""
+msgstr "<秒数>"
 
 #: ../../../../src/wlapplication_messages.cc:137
 msgid ""
 "Automatically close modal message boxes after the given number of seconds "
 "time."
-msgstr ""
+msgstr "在指定秒数后自动关闭模态消息框。"
 
 #: ../../../../src/wlapplication_messages.cc:138
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "`n` 周后自动删除回放。"
 
 #: ../../../../src/wlapplication_messages.cc:140
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr ""
+msgstr "启用 AI 训练模式。完整描述请见 https://www.widelands.org/wiki/Ai%20Training/。"
 
 #: ../../../../src/wlapplication_messages.cc:144
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr ""
+msgstr "根据 AI 延迟自动持续调整游戏速度。仅用于 AI 测试或训练（与 --ai_training 配合使用）。"
 
 #: ../../../../src/wlapplication_messages.cc:149
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "启用脚本控制台和作弊模式。"
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Game options:"
-msgstr ""
+msgstr "游戏选项："
 
 #: ../../../../src/wlapplication_messages.cc:151
 msgid "Note: New values will be written to the config file."
-msgstr ""
+msgstr "注意：新值将被写入配置文件。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:157
 msgid "Automatically save each `n` minutes."
-msgstr ""
+msgstr "每 `n` 分钟自动保存一次。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:160
 msgid "Use `n` files for rolling autosaves."
-msgstr ""
+msgstr "使用 `n` 个文件进行循环自动保存。"
 
 #: ../../../../src/wlapplication_messages.cc:162
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "如果用户自上次自动保存以来未活动，则不创建自动保存。"
 
 #: ../../../../src/wlapplication_messages.cc:164
 msgid "Do not save files as binary zip archives."
-msgstr ""
+msgstr "不将文件保存为二进制 zip 压缩包。"
 
 #: ../../../../src/wlapplication_messages.cc:165
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "将文件保存为二进制 zip 压缩包。"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -268,34 +268,34 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:248
 #: ../../../../src/wlapplication_messages.cc:260
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../../../src/wlapplication_messages.cc:171
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "是否将发送的聊天消息历史保存到文件。"
 
 #: ../../../../src/wlapplication_messages.cc:173
 msgid "Show filenames in the replay screen."
-msgstr ""
+msgstr "在回放屏幕中显示文件名。"
 
 #: ../../../../src/wlapplication_messages.cc:175
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr ""
+msgstr "如果玩家过多，是否在编辑器中显示警告。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:179
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "用户不活动 `n` 分钟后暂停游戏。"
 
 #: ../../../../src/wlapplication_messages.cc:181
 msgid "Start building a road after placing a flag."
-msgstr ""
+msgstr "放置旗帜后开始建造道路。"
 
 #: ../../../../src/wlapplication_messages.cc:185
 msgid "Bitmask of display flags to set for new games."
-msgstr ""
+msgstr "设置新游戏的显示标志位掩码。"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -308,92 +308,92 @@ msgstr ""
 #: ../../../../src/wlapplication_messages.cc:215
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../../../src/wlapplication_messages.cc:195
 msgid "Scroll when the mouse cursor is near the screen edge."
-msgstr ""
+msgstr "当鼠标光标靠近屏幕边缘时滚动画面。"
 
 #: ../../../../src/wlapplication_messages.cc:197
 msgid "Invert click-and-drag map movement direction."
-msgstr ""
+msgstr "反转点击并拖动地图移动的方向。"
 
 #: ../../../../src/wlapplication_messages.cc:199
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr ""
+msgstr "允许使用数字键盘进行对角线滚动。"
 
 #: ../../../../src/wlapplication_messages.cc:200
 msgid "Display system time in the info panel."
-msgstr ""
+msgstr "在信息面板中显示系统时间。"
 
 #: ../../../../src/wlapplication_messages.cc:201
 msgid "Use single watchwindow mode."
-msgstr ""
+msgstr "使用单监视窗口模式。"
 
 #: ../../../../src/wlapplication_messages.cc:203
 msgid "Show in-game chat with transparent background."
-msgstr ""
+msgstr "显示带透明背景的游戏内聊天。"
 
 #: ../../../../src/wlapplication_messages.cc:204
 msgid "Bitmask to set the toolbar location and mode."
-msgstr ""
+msgstr "设置工具栏位置和模式的位掩码。"
 
 #: ../../../../src/wlapplication_messages.cc:205
 msgid "Default pagesize for paginated structures."
-msgstr ""
+msgstr "分页结构的默认页面大小。"
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "Networking:"
-msgstr ""
+msgstr "网络："
 
 #: ../../../../src/wlapplication_messages.cc:207
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../../../../src/wlapplication_messages.cc:208
 msgid "Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr "连接到不同的元服务器进行网络游戏。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:211
 msgid "Port number `n` of the metaserver for internet gaming."
-msgstr ""
+msgstr "网络游戏元服务器的端口号 `n`。"
 
 #: ../../../../src/wlapplication_messages.cc:212
 msgid "The name of the last hosted game."
-msgstr ""
+msgstr "最后托管的游戏的名称。"
 
 #: ../../../../src/wlapplication_messages.cc:213
 msgid "The nickname used for LAN and online games."
-msgstr ""
+msgstr "用于局域网和在线游戏的昵称。"
 
 #: ../../../../src/wlapplication_messages.cc:214
 msgid "Name of map author."
-msgstr ""
+msgstr "地图作者名称。"
 
 #: ../../../../src/wlapplication_messages.cc:215
 msgid "The last host connected to."
-msgstr ""
+msgstr "最后连接的主机。"
 
 #: ../../../../src/wlapplication_messages.cc:217
 msgid "Whether the used metaserver login is for a registered user."
-msgstr ""
+msgstr "使用的元服务器登录是否为已注册用户。"
 
 #: ../../../../src/wlapplication_messages.cc:218
 msgid "The hashed password for online logins."
-msgstr ""
+msgstr "用于在线登录的哈希密码。"
 
 #: ../../../../src/wlapplication_messages.cc:219
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../../../../src/wlapplication_messages.cc:220
 msgid "Connect to a different server address from the add-ons manager."
-msgstr ""
+msgstr "连接到附加管理器的不同服务器地址。"
 
 #: ../../../../src/wlapplication_messages.cc:222
 msgid "Connect to a different server port from the add-ons manager."
-msgstr ""
+msgstr "连接到附加管理器的不同服务器端口。"
 
 #. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
 #. used in
@@ -402,133 +402,133 @@ msgstr ""
 #. players.
 #: ../../../../src/wlapplication_messages.cc:228
 msgid "Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr "创建同步流转储文件以帮助调试网络游戏。"
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Graphic options:"
-msgstr ""
+msgstr "图形选项："
 
 #: ../../../../src/wlapplication_messages.cc:231
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "使用整个显示屏作为游戏画面。"
 
 #: ../../../../src/wlapplication_messages.cc:233
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "以最大化窗口方式启动游戏。"
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../../../src/wlapplication_messages.cc:236
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../../../src/wlapplication_messages.cc:238
 msgid "Width `x` of the window in pixel."
-msgstr ""
+msgstr "窗口宽度 `x`（像素）。"
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../../../src/wlapplication_messages.cc:241
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../../../src/wlapplication_messages.cc:243
 msgid "Height `y` of the window in pixel."
-msgstr ""
+msgstr "窗口高度 `y`（像素）。"
 
 #: ../../../../src/wlapplication_messages.cc:245
 msgid ""
 "Whether to let the system draw the mouse cursor. Disable it only if the "
 "cursor doesn't appear right, or if you want it to be visible in screenshots "
 "or screencasts."
-msgstr ""
+msgstr "是否让系统绘制鼠标光标。仅在光标显示不正确或您希望它在截图或屏幕录制中可见时禁用。"
 
 #: ../../../../src/wlapplication_messages.cc:248
 msgid "Whether to use sticky tooltips."
-msgstr ""
+msgstr "是否使用粘性工具提示。"
 
 #: ../../../../src/wlapplication_messages.cc:251
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
-msgstr ""
+msgstr "活动 UI 主题的路径，相对于 Widelands 主目录。"
 
 #: ../../../../src/wlapplication_messages.cc:253
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "内部窗口管理器选项："
 
 #: ../../../../src/wlapplication_messages.cc:254
 msgid "Whether automatic map movements should be animated."
-msgstr ""
+msgstr "是否应动画化地图自动移动。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:257
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr ""
+msgstr "当窗口边缘与屏幕边缘距离为 `n` 时，将窗口移动到屏幕边缘。"
 
 #: ../../../../src/wlapplication_messages.cc:261
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr ""
+msgstr "当窗口边缘与屏幕边缘相邻时，消除窗口朝向屏幕边缘的边框。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:267
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr ""
+msgstr "当窗口边缘与面板边缘距离为 `n` 时，将窗口移动到面板边缘。"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../../../src/wlapplication_messages.cc:272
 msgid ""
 "The factor by which to fractionally scale the Widelands user interface, in "
 "quarters."
-msgstr ""
+msgstr "Widelands 用户界面按四分之一单位缩放的比例因子。"
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Enable verbose debug messages"
-msgstr ""
+msgstr "启用详细调试消息"
 
 #: ../../../../src/wlapplication_messages.cc:275
 msgid "Others:"
-msgstr ""
+msgstr "其他："
 
 #: ../../../../src/wlapplication_messages.cc:277
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr ""
+msgstr "在翻译时打印所有字符串。这有助于追踪国际化相关的错误。"
 
 #: ../../../../src/wlapplication_messages.cc:280
 msgid "Only print version and exit."
-msgstr ""
+msgstr "仅打印版本并退出。"
 
 #: ../../../../src/wlapplication_messages.cc:281
 msgid "Show this help."
-msgstr ""
+msgstr "显示此帮助。"
 
 #: ../../../../src/wlapplication_messages.cc:282
 msgid "Show this help with all available config options."
-msgstr ""
+msgstr "显示此帮助及所有可用的配置选项。"
 
 #: ../../../../src/wlapplication_messages.cc:283
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<保存.wgf>/<回放.wry>"
 
 #: ../../../../src/wlapplication_messages.cc:284
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "直接加载给定的存档或回放。可用于 .wgf/.wry 文件扩展名关联。不与其他选项一起使用。另见 --loadgame/--replay。"
 
 #. * TRANSLATORS: %s = version information
 #: ../../../../src/wlapplication_messages.cc:319
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "这是 Widelands 版本 %s"
 
 #: ../../../../src/wlapplication_messages.cc:377
 msgid ""
@@ -536,4 +536,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "遇到问题或建议？请访问项目网站：\n        https://www.widelands.org/\n\n希望您喜欢这款游戏！"

@@ -5,7 +5,7 @@
 # Translators:
 # Niklas Nordgren, 2025
 # D M <kamera001dm@gmail.com>, 2025
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgstr "Träna och återvinn"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Recycle Weapons to Regain Metal"
-msgstr "Återvinn vapen för att återvinna metall"
+msgstr "Återvinn vapen och utvinn metall"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:44
 msgid ""
@@ -105,7 +105,7 @@ msgstr "Bygg ett vattenbruk"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr "Bygg ett vattenfarm för att börja producera fisk"
+msgstr "Bygg ett vattenbruk för att börja producera fisk"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -113,10 +113,10 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
-"Bygg en vattenbruk för att odla fisk. Vattenbruket behöver hålen som lämnats"
-" kvar av en lergruva i närheten för att använda som dammar för att odla fisk"
-" i. Endast en fiskare som arbetar på ett vattenbruk kan fiska i dessa "
-"dammar."
+"Bygg ett vattenbruk för att odla fisk. Vattenbruket behöver de hål som en "
+"närbelägen lergrop lämnat efter sig, så att de kan användas som dammar för "
+"fiskodling. Endast en fiskare som arbetar vid ett vattenbruk kan fiska i "
+"dessa dammar."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
@@ -124,7 +124,7 @@ msgstr "Bestäm om du vill samarbeta med Imperiet"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "Samla varor som gåva eller förstör imperiets lagerbyggnad"
+msgstr "Samla varor som gåva eller förstör Imperiets lagerbyggnad"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -251,7 +251,7 @@ msgstr "Besegra Barbarerna"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
-msgstr "Besegra den fientliga stammen som bor nordväst om imperiets utpost!"
+msgstr "Besegra den fientliga klan som bor nordväst om Imperiets utpost!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
@@ -259,7 +259,7 @@ msgstr "Besegra Murilius!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
-msgstr "Besegra imperiets arroganta utpost"
+msgstr "Besegra Imperiets arroganta utpost"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 msgid ""
@@ -279,14 +279,14 @@ msgstr "Besegra Murilius och barbarerna!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
-msgstr "Besegra barbarerna och imperiets koloni"
+msgstr "Besegra barbarerna och Imperiets koloni"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 msgid ""
 "The Barbarians and the Empire are too dangerous to allow them to live near "
 "us. We must defeat them both."
 msgstr ""
-"Barbarerna och imperiet är för farliga för att vi ska kunna låta dem leva "
+"Barbarerna och Imperiet är för farliga för att vi ska kunna låta dem leva "
 "nära oss. Vi måste besegra dem båda."
 
 #. TRANSLATORS: Reebaud – Introduction 1
@@ -296,8 +296,8 @@ msgid ""
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
 "Jag började tro att resan aldrig skulle ta slut. Jag har ingen aning om hur "
-"länge vi var till havs, kastade omkring av svåra stormar... det måste ha "
-"varit månader."
+"länge vi var till havs, kastade omkring av svåra stormar… det måste ha varit"
+" månader."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -311,8 +311,8 @@ msgstr ""
 "Stormarna höll ett fast grepp om skeppet under hela vår resa. Det fanns "
 "knappt en dag då vi inte undrade om det skulle bli vår sista. Vi tvingades "
 "kasta de ädla metaller vi hade tagit med oss överbord för att stabilisera "
-"skeppet, och det kändes som ett smutsigt offer till gudarna för att ge oss "
-"hopp om att få leva några timmar längre."
+"skeppet, och det kändes som ett smutsigt offer till gudarna som skulle ge "
+"oss hopp om att leva några timmar till."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -322,7 +322,7 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
-"De få verktyg vi lyckades rädda från Langeness fungerade inte särskilt bra. "
+"De få verktyg vi lyckades rädda från Langeneß höll inte särskilt bra. "
 "Gruvarbetarnas hackor visade sig vara särskilt känsliga, och vi var tvungna "
 "att kasta dem i havet när det blev uppenbart att de hade rostat så mycket av"
 " havssaltet att vi aldrig mer skulle kunna bryta något med dem."
@@ -354,8 +354,8 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
-"Det bodde en liten grupp utlänningar här. De välkomnade oss genom att svinga"
-" sina yxor mot oss och skrika på ett obegripligt språk."
+"Här bodde en liten grupp främlingar. De välkomnade oss genom att svinga sina"
+" yxor mot oss och skrika på ett obegripligt språk."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:151
@@ -384,7 +384,7 @@ msgid ""
 "start building our new home here."
 msgstr ""
 "Mina spejare rapporterar inte längre några tecken på levande varelser i "
-"närheten. Vi kommer påbörja bygget av vårt nya hem här."
+"närheten. Vi kommer att börja bygga vårt nya hem här."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -396,10 +396,10 @@ msgid ""
 "couldn’t copy."
 msgstr ""
 "Vi måste börja med att bygga alla grundläggande byggnader. Jag ser inga berg"
-" i närheten där vi skulle kunna bryta kol. Det är bättre att vi bygger en "
-"kolugn för att bränna ved till kol. Vi förbättrar ugnarna med lera så att de"
-" inte förbrukar så mycket ved. Våra grannar brukade avundas oss för denna "
-"smarta teknik, som de inte kunde kopiera."
+" i närheten där vi skulle kunna bryta kol. Vi bör bygga en kolugn för att "
+"bränna ved till kol. Vi förbättrar ugnarna med lera så att de inte förbrukar"
+" så mycket ved. Våra grannar brukade avundas oss för denna smarta teknik, "
+"som de inte kunde kopiera."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
@@ -415,7 +415,7 @@ msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
-"Vi har byggt ett hem i detta underbara landskap. Men när vår stam växer "
+"Vi har byggt ett hem i detta underbara landskap. Men när vår klan växer "
 "behöver vi mer utrymme. Vi bör börja utvidga vårt territorium."
 
 #. TRANSLATORS: Reebaud – Expand South
@@ -425,8 +425,8 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
-"Spejarna rapporterade att markerna norröver är grovhuggna kullar, vackra att"
-" betrakta men inte lämpade för byggnader. Låt oss ta reda på vad vi kan "
+"Spejarna rapporterade att markerna norröver är karga kullar, vackra att "
+"betrakta men inte lämpade för byggnader. Låt oss ta reda på vad vi kan "
 "upptäcka i söder."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:179
@@ -438,7 +438,7 @@ msgstr "Brist på metall"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
-msgstr "Vi har slut på metaller"
+msgstr "Vi har slut på metall"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:182
@@ -471,7 +471,7 @@ msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
-"Det här är hemska nyheter! Utan järn eller möjlighet att producera något "
+"Det här är hemska nyheter! Utan järn eller något sätt att producera järn "
 "kommer vi att fastna här för alltid! Du måste komma på en lösning."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
@@ -496,9 +496,9 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
-"Nu har jag en idé: När våra soldater utbildas utrustas de med nya svärd och "
-"de gamla vapnen kasseras. Dessa är olämpliga att använda i strid, så det "
-"vore inte slöseri att smälta ner dem."
+"Nu har jag en idé: När våra soldater tränas får de nya svärd, och de gamla "
+"vapnen kasseras. De går inte att använda i strid, så det vore inte slöseri "
+"att smälta ner dem."
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -508,7 +508,7 @@ msgid ""
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
 "Det är vad vi måste göra. Vi kommer att använda våra vapen för att träna "
-"soldater, sedan smälta skrotmetallen till järn och guld. Och sedan kan våra "
+"soldater och sedan smälta skrotmetallen till järn och guld. Sedan kan våra "
 "smeder tillverka hackor som gruvarbetarna kan använda. Jag ska se till det "
 "genast!"
 
@@ -553,8 +553,9 @@ msgid ""
 "eventually?"
 msgstr ""
 "Har vi redan en renfarm? Om inte, borde vi bygga en nu. Vi behöver fler "
-"renar för de överfulla vägarna, och vi kan redan börja sy pälskläder för att"
-" utrusta nya soldater. Vem vet om vi kommer att behöva slåss till slut?"
+"renar för de hårt trafikerade vägarna, och vi kan redan börja sy pälskläder "
+"för att utrusta nya soldater. Vem vet om vi kommer att behöva slåss till "
+"slut?"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:223
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:233
@@ -574,10 +575,10 @@ msgid ""
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
 "Hövding Reebaud, jag har fler dåliga nyheter. Det finns nästan ingen fisk i "
-"vattnen i närheten. Vi kan visserligen laga mat med bara frukt eller bröd, "
-"men soldatträningen kräver stora mängder rökt kött eller fisk. De köttrester"
-" som renfarmen lämnar kvar som biprodukt vid pälstillverkningen räcker inte "
-"till."
+"vattnen i närheten. Vi kan visserligen tillverka ransoner av enbart frukt "
+"eller bröd, men soldatträningen kräver stora mängder rökt kött eller fisk. "
+"De köttrester som renfarmen lämnar kvar som biprodukt vid pälstillverkningen"
+" räcker inte till."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -603,7 +604,7 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
-"Bra jobbat. Vi har byggt ett vattenbruk och vår gruvindustri är stabil för "
+"Bra gjort. Vi har byggt ett vattenbruk och vår gruvekonomi är stabil för "
 "tillfället. Gruvarbetarna säger dock att resurserna redan är knappa och att "
 "gruvorna snart kan vara helt tomma."
 
@@ -646,7 +647,8 @@ msgid ""
 msgstr ""
 "Vi kan dock redan börja fokusera på att rekrytera och utbilda soldater. Vi "
 "har nu råd att använda metall till vapen, hjälmar och kläder. Jag föreslår "
-"att vi bygger vapensmedjor, en kasern, en träningsarena och en skräddare nu."
+"att vi bygger rustningssmedjor, en kasern, en träningsarena och en "
+"skräddarverkstad nu."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -658,7 +660,7 @@ msgstr ""
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:304
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
-msgstr "Vi är inte själva"
+msgstr "Vi är inte ensamma"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -668,7 +670,7 @@ msgstr "Vi är inte själva"
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:290
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
-msgstr "Salut, pilgrimer!"
+msgstr "Var hälsade, främlingar!"
 
 #. TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
@@ -679,8 +681,8 @@ msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
-"Salut, pilgrimer! Jag är Murilius, prokonsul i provinsen Terrae "
-"Septentrionalis. Ni är utnämnda!"
+"Var hälsade, främlingar! Jag är Murilius, prokonsul i provinsen Terrae "
+"Septentrionalis. Uppge era namn!"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:260
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:275
@@ -731,9 +733,9 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
-"I detta fall, Reebaude, måste jag informera dig om närvaron av en "
-"ogästvänlig, fientlig stam av barbarer i närheten av denna utpost av "
-"imperiet."
+"I så fall, Reebaude, måste jag upplysa dig om att en ogästvänlig och "
+"fientlig klan av barbarer finns i närheten av denna utpost som tillhör "
+"Imperiet."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -754,9 +756,9 @@ msgid ""
 "to give us these wares:"
 msgstr ""
 "Som ett tecken på dina goda avsikter kräver vi också en vänskapsgåva till "
-"imperiet. Som du säkert har märkt har jag gett dig en ny lagerbyggnad. Fyll "
-"det med de gåvor som krävs för att överlämna dem. Jag tillåter dig att ge "
-"oss följande varor:"
+"Imperiet. Som du säkert har märkt har jag gett dig en ny lagerbyggnad. Fyll "
+"den med de varor som krävs och överlämna dem till oss. Jag ger dig "
+"tillåtelse att ge oss följande varor:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:295
@@ -842,13 +844,13 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
-"När det gäller expansion – jag undrar hur strikt han möjligen kan "
-"kontrollera oss. Kanske vi skulle skicka en spejare för att spionera på "
+"När det gäller expansion undrar jag hur strikt han egentligen kan "
+"kontrollera oss. Kanske skulle vi skicka en spejare för att spionera på "
 "honom…"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr "Spejaren upptäckte någonting"
+msgstr "Spejaren upptäckte något"
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
@@ -862,10 +864,10 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
-"Hövding Reebaud! Vår spejare kom just tillbaka. Han har hittat en dikt på "
-"det konstiga språk denna prokonsul talar. Med vissa svårigheter har jag "
-"översatt det till vårat språk. Om jag inte har översatt den fel lyder den "
-"som följer:"
+"Hövding Reebaud! Vår spejare har just kommit tillbaka. Han har hittat en "
+"dikt på det märkliga språk som prokonsuln talar. Med viss möda har jag "
+"översatt den till vårt språk. Om jag inte har misstolkat den, lyder den så "
+"här:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:348
@@ -940,9 +942,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
-"Den barbariska stam han nämnde är också ett hot. Jag vill inte dela detta "
-"land med någon, eftersom delning bara leder till konflikter och strider, som"
-" vi såg i vårt gamla hem. Vi måste också besegra barbarerna."
+"Den barbariska klan han nämnde är också ett hot. Jag vill inte dela landet "
+"med någon, eftersom det bara leder till konflikter och strider, som vi såg i"
+" vårt gamla hem. Vi måste också besegra barbarerna."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
@@ -953,7 +955,7 @@ msgstr "Imperiet är tacksamt"
 #. though
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
-msgstr "Salut, vänner av imperiet!"
+msgstr "Var hälsade, Imperiets vänner!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:386
@@ -975,13 +977,13 @@ msgid ""
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
 "Nu ger jag dig tillåtelse att hjälpa oss att besegra barbarerna, som bor i "
-"en skyddad dal nordväst om oss. Jag ger dig i uppdrag att expandera längs "
-"den norra änden av bergen som omger denna utpost; där kommer du att hitta "
-"barbarerna – attackera dem! Vi kommer att avvärja fiendens attacker."
+"en skyddad dal nordväst om oss. Jag befaller dig att utvidga längs den norra"
+" änden av bergen som omger denna utpost; där hittar du barbarerna – angrip "
+"dem! Vi kommer att avvärja fiendens angrepp."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
-msgstr "Belöningen för din tjänst"
+msgstr "Belöningen för din insats"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -1009,9 +1011,9 @@ msgid ""
 msgstr ""
 "Jag föreslår att du börjar med att skicka sändebud till huvudstaden för att "
 "ta reda på de senaste politiska händelserna. Väl där kan du få instruktioner"
-" för din stam från senaten. Du måste också ta reda på vilken tribut "
-"huvudstaden kommer att kräva av dig och, naturligtvis, vem som ska vara kung"
-" över din stam."
+" för din klan från senaten. Du måste också ta reda på vilken tribut "
+"huvudstaden kommer att kräva av dig och naturligtvis vem som ska vara din "
+"klans kung."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
@@ -1059,8 +1061,9 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
-"Vi har besegrat alla våra fiender! Nu kommer ingen annan stam någonsin våga "
-"bosätta sig här igen. Vi är säkra och kan äntligen leva våra liv i fred."
+"Vi har besegrat alla våra fiender! Nu kommer ingen annan klan någonsin att "
+"våga bosätta sig här igen. Vi är trygga och kan äntligen leva våra liv i "
+"fred."
 
 #: ../../../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"

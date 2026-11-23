@@ -56,7 +56,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr "Ö-hoppningen är en traditionell tävling i den atlantiska kulturen.  Spelets regler är enkla. Du startar med ett högkvarter på en ö. När du har byggt färdigt ett slott i änden av den första ön får du ett andra högkvarter på en andra ö, vilket kommer att få alla varor, arbetare och soldater flyttat till sig från ditt högkvarter och dina lagerbyggnader på den första ön."
+msgstr "Ö-hoppning är en traditionell tävling i den atlantiska kulturen. Reglerna är enkla: du börjar med ett högkvarter på en ö. När du färdigställer ett slott längst ut på den första ön får du ett andra högkvarter på en andra ö. Dit flyttas alla varor, arbetare och soldater från högkvarteret och lagerbyggnaderna på den första ön."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -65,14 +65,14 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr "Om du gör färdigt ett slott i målområdet på den andra ön får du ett tredje högkvarter på den tredje ön och alla varor flyttas återigen till ditt nya högkvarter från ditt förra högkvarter och dina tidigare lagerbyggnader. Du måste bygga ett slott i mitten av den tredje ön och hålla det i 20 minuter för att vinna spelet."
+msgstr "Om du färdigställer ett slott i målområdet på den andra ön får du ett tredje högkvarter på den tredje ön. Dit flyttas återigen alla varor, arbetare och soldater från dina tidigare högkvarter och lagerbyggnader. Du måste bygga ett slott mitt på den tredje ön och hålla det i 20 minuter för att vinna."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr "När du är färdig med en ö får du bonusvaror beroende på hur många spelare som blev färdiga före dig. Ju förr du blir färdig, desto färre varor får du. Se nedan för detaljerad information."
+msgstr "När du färdigställer en ö får du bonusvaror beroende på hur många spelare som blev klara före dig. Ju tidigare du blir klar, desto färre varor får du. Mer information finns nedan."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:25
 msgid ""
@@ -80,11 +80,11 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Poängen är att den första ön endast tillhandahåller klippor och träd, den andra endast ängar och resurser. Ekonomin du lämnar bakom dig kommer att fortsätta arbeta för dig, men du kommer bara att skörda frukten av det i den stund du når en ny ö."
+msgstr "Tanken är att den första ön bara ger klippor och träd, medan den andra bara ger ängar och resurser. Ekonomierna som du lämnar bakom dig fortsätter att arbeta för dig, men du får nytta av dem först när du når en ny ö."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr "Slutligen, var noga med att inte slösa bort din kvarts och dina diamanter."
+msgstr "Se till att inte slösa bort din kvarts och dina diamanter."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 msgid "Finish Rewards"
@@ -124,26 +124,26 @@ msgstr "%1$s var först att nå ö nummer %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr "%1$s var den andra att nå ö nummer %2$i."
+msgstr "%1$s var tvåa att nå ö nummer %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr "%1$s var den tredje att nå ö nummer %2$i."
+msgstr "%1$s var trea att nå ö nummer %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr "%1$s var den fjärde att nå ö nummer %2$i."
+msgstr "%1$s var fyra att nå ö nummer %2$i."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
-msgstr "Belöningen för den bedriften är:"
+msgstr "Belöningen för denna bedrift är:"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr "%s är nu kullens kung och kommer att vinna spelet om 20 minuter, om ingen tar över kullen före dess."
+msgstr "%s är nu Kullens kung och vinner om 20 minuter, om ingen annan tar över kullen innan dess."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
@@ -152,7 +152,7 @@ msgstr "%s förlorade kontrollen över kullen."
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:56
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr "%1$s har varit kullens kung i %2$s!"
+msgstr "%1$s har varit Kullens kung i %2$s!"
 
 #: ../../../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 #, lua-format

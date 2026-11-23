@@ -100,7 +100,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "Viac informácií a podporu nájdete na %1% (webstránka, wiki, fórum pre otázky a podporu vo všeobecnosti), %2% (bugtracker), and %3% (preklady)."
+msgstr "Viac informácií a podporu nájdete na %1% (webstránka, wiki, fórum pre otázky a podporu vo všeobecnosti), %2% (sledovač chýb), and %3% (preklady)."
 
 #: ../../../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -384,7 +384,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands zaznamenáva každú hru, ktorú hráte, v súbore záznamu s príponu .wry. Tento súbor obsahuje začiatočný stav hry a všetky povely, ktoré vydali hráči, ako napríklad stavba cesty alebo útok na nepriateľa. Názov súboru vám prezradí čas, kedy ste začali hru."
+msgstr "Widelands zaznamenáva každú hru, ktorú hráte, v súbore záznamu s príponou .wry. Tento súbor obsahuje začiatočný stav hry a všetky povely, ktoré vydali hráči, ako napríklad stavba cesty alebo útok na nepriateľa. Názov súboru vám prezradí čas, kedy ste začali hru."
 
 #: ../../../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -403,7 +403,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Záznamy sú veľmi užitočným nástrojom na hľadanie chýb v hernej logike, niekedy je preto vhodné priložiť ich k nahláseným chybám. Záznamové súbory sa ukladajú do podadresára „replays“ v domovskom adresári Widelands. Na poslednej karte „Technické informácie“ v tomto okne si môžete pozrieť, kde sa tento adresár vo vašom počítači nachádza."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40

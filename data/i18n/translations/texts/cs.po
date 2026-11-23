@@ -175,7 +175,7 @@ msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build)."
-msgstr ""
+msgstr "Kterou verzi Widelands používáš (tj. buď pořadové číslo aktualizace nebo ověřovací ID, pokud používáš vývojovou verzi nebo denní aktualizaci)."
 
 #: ../../../../data/txts/README.lua:31
 msgid ""
@@ -406,7 +406,7 @@ msgid ""
 "‘replays’ subdirectory of the Widelands home directory. You may look in the "
 "last tab \"Technical Information\" of this window to see where this "
 "directory is located on your computer."
-msgstr ""
+msgstr "Záznamy jsou velmi dobrým nástrojem pro odhalování chyb v herním mechanismu a lze je proto používat jako přílohy při hlášení chyb. Soubory záznamů jsou ukládány do domovského adresáře Widelands. V poslední záložce tohoto okna \"Technické údaje\" si můžeš zkontrolovat, kde přesně se v tvém počítači nachází."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../../../data/txts/help/common_helptexts.lua:40
@@ -575,7 +575,7 @@ msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo n
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house to regenerate "
 "fish resources."
-msgstr ""
+msgstr "Dávej pozor na své rybáře a postav domek porybného, aby byla zajištěna obnova rybí populace."
 
 #: ../../../../data/txts/tips/atlanteans.lua:8
 msgid ""

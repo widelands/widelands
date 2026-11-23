@@ -5,7 +5,7 @@
 # Translators:
 # Niklas Nordgren, 2022
 # D M <kamera001dm@gmail.com>, 2023
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,8 +25,8 @@ msgstr ""
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] "%1% enhet %2% har tagits till din '%3%' byggnad."
-msgstr[1] "%1% enheter %2% har transporterats till din '%3%' byggnad."
+msgstr[0] "%1% enhet av %2% har transporterats till byggnaden ”%3%”."
+msgstr[1] "%1% enheter av %2% har transporterats till byggnaden ”%3%”."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -36,9 +36,7 @@ msgstr "Transport"
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
-msgstr ""
-"Fyra spadar att användas för att ta bort träsken har samlats ihop i "
-"lagerbyggnaden."
+msgstr "Fyra spadar för att avlägsna träsken har samlats in i lagerbyggnaden."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -72,7 +70,7 @@ msgstr "Bygg en hamn"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr "Bygg en hamn i norr "
+msgstr "Bygg en hamn i norr"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
@@ -151,7 +149,7 @@ msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
-"Befria vårt område från pirathotet. Piraterna strier under den gråa fanan."
+"Befria vårt område från pirathotet. Piraterna strider under den grå fanan."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
@@ -263,9 +261,9 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
-"Området bortom piraterna tillhöe en utvecklad stam ledd av den mäktige "
-"hövdingen Hjalmar. De har haft en lång tid på sig att bygga upp sina "
-"förskräckande arméer."
+"Området bortom piraterna tillhör en utvecklad stam som leds av den mäktige "
+"hövdingen Hjalmar. De har haft lång tid på sig att bygga upp sina "
+"avskräckande arméer."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
@@ -285,10 +283,9 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Ers höghet. Visserligen skulle våra soldater möta vilken fiende som helst "
-"utan minsta fruktan men fienden i norr är fortfarande starkare än alla våra "
-"arméer tillsammans. Vi måste undvika en konflikt tills vi är starka nog att "
-"besegra dem."
+"Ers höghet, våra soldater skulle möta vilken fiende som helst utan minsta "
+"fruktan, men vår motståndare i norr är fortfarande starkare än alla våra "
+"arméer tillsammans. Vi bör undvika strid tills vi kan besegra dem."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -307,8 +304,9 @@ msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
-"Ers höghet, vi tog emot ett oroande meddelande från en av våra utforskare. "
-"Törver flyttar fram sin front och närmar sig vårt territorium."
+"Ers höghet, vi har fått ett oroande meddelande från en av våra "
+"upptäcktsresande. Törver flyttar fram sin front och närmar sig vårt "
+"territorium."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -316,15 +314,15 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
-"Vi kan inte undvika att attackera deras arméer för evigt. Om vi lyckas "
-"besegra vår fiende i norr kommer vi utöka vårt territorium och finna mer "
-"resurser för att förstärka våra arméer."
+"Vi kan inte undvika att anfalla deras arméer för alltid. Om vi lyckas "
+"besegra vår fiende i norr utökar vi vårt territorium och får mer resurser "
+"för att stärka våra arméer."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
-"Vi kan också använda deras åtkomst till sjön för att utforska mer mark."
+"Då kan vi också använda deras tillgång till sjön för att utforska mer mark."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
@@ -337,10 +335,9 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
-"Ers höghet, striden mot Törver fortgår ärevördigt och vi har redan besegrat "
-"den största delen av hans armé. Men den här fienden kommer inte att besegras"
-" enkelt. I desperation har Törver nu kallat in en grupp förhärdade "
-"legoknektar."
+"Ers höghet, striden mot Törver utvecklas väl och vi har redan besegrat den "
+"starkaste delen av hans armé. Men fienden blir inte lätt att besegra. I "
+"desperation har Törver kallat in en grupp härdade legoknektar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
@@ -353,8 +350,8 @@ msgid ""
 "give us better opportunities to have contact with other tribes."
 msgstr ""
 "Ers höghet, nu när vi har erövrat Törvers land kan vi dra nytta av deras "
-"förträffliga tillgång till de intilliggande stora sjöarna. En hamn i norr "
-"kommer att ge oss bättre möjligheter att få kontakt med andra stammar."
+"goda tillgång till den stora sjön intill. En hamn i norr ger oss bättre "
+"möjligheter att få kontakt med andra stammar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -376,7 +373,7 @@ msgid ""
 "huts indicate that there is gold nearby."
 msgstr ""
 "Ers höghet, våra män har upptäckt en isolerad fientlig piratvaktpost. De "
-"övergivna hyddorna indikerar att det finns guld i omgivningarna."
+"övergivna hyddorna tyder på att det finns guld i närheten."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -400,9 +397,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
-"Ers höghet, vi har hittat 25 enheter guldmalm i piratvaktposten. De kan ha "
-"blivit plundrade från guldgrävarhyddorna i närheten. Denna guldmalm kommer "
-"att transporteras till våra högkvarter."
+"Ers höghet, vi har hittat 25 enheter guldmalm i piratvaktposten. Den kan ha "
+"plundrats från guldgrävarnas hyddor i närheten. Guldmalmen transporteras "
+"till vårt högkvarter."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -438,10 +435,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Ers höghet, alla spadar har nu delats ut men om vi fortsätter i denna takten"
-" kommer inte träsken att vara borttagna förrän nästa regnperiod. Om du kan "
-"transportera fler spadar till den nya lagerbyggnaden kommer flera volontärer"
-" att hjälpa till."
+"Ers höghet, alla spadar har delats ut, men om vi fortsätter i den här takten"
+" hinner vi inte avlägsna träsken före nästa regnperiod. Om du transporterar "
+"fler spadar till den nya lagerbyggnaden hjälper fler frivilliga till."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -476,10 +472,10 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
-"Ers höghet, som resultat av våra attacker mot piraterna har de börjat "
-"omgruppera med pirater från andra stammar. De kan återfå mycket av sin "
-"förlorade styrka. Våra krympande lager av resurser kan bli ett problem med "
-"en så mäktig fiende framför oss."
+"Ers höghet, till följd av våra angrepp har piraterna börjat sluta sig samman"
+" med pirater från andra stammar. De kan återfå mycket av sin tidigare "
+"förlorade styrka. Våra sinande resurser kan bli ett problem med en så mäktig"
+" fiende framför oss."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -492,8 +488,8 @@ msgid ""
 "direction they have escaped."
 msgstr ""
 "Ers höghet, tack vare våra framgångsrika försök att driva ut piraterna har "
-"många av dem flytt i små båtar. Det är inte känt åt vilket håll de har "
-"flytt."
+"många av dem flytt i små båtar. Vi vet inte åt vilket håll de har gett sig "
+"av."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -511,7 +507,7 @@ msgstr ""
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr "Vår spanare har blivit tillfångatagen."
+msgstr "Vår spanare har blivit tillfångatagen"
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -528,9 +524,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
-"Enligt våra fiskare är han inlåst i högborgen på ön. Vi borde använda "
-"kunskapen om skeppsbygge som vi tog från Törver för att bygga skepp och "
-"attackera deras befästningar."
+"Enligt våra fiskare är han inlåst i högborgen på ön. Vi bör använda "
+"kunskapen om skeppsbygge som vi fick från Törver för att bygga skepp och "
+"anfalla deras ställningar."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -562,8 +558,8 @@ msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
-"Han märkte också att vi kan förflytta oss kring den andra sidan berget, "
-"ifall vi misslyckas här, men det vore mycket svårare."
+"Han lade också märke till att vi kan ta oss fram längs bergets andra sida om"
+" vi skulle misslyckas här, men det blir mycket svårare."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
@@ -576,8 +572,8 @@ msgid ""
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
 "Ers höghet, vi har nästan besegrat alla arméer och närmar oss nu vår sista "
-"fiende. De har insett under lång tid att vi kommer och är väl förberedda för"
-" sitt livs tyngsta strid."
+"fiende. De har väntat på oss länge och är beredda på sitt livs hårdaste "
+"strid."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
@@ -600,9 +596,8 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
-"Du har lyckats med alla mål och har besegrat alla våra fiender. Du har inte "
-"bara besegrat våra konkurrerande stammar utan du har också fångat ditt "
-"älskande folks hjärtan."
+"Du har klarat alla mål och besegrat alla våra fiender. Du har inte bara "
+"erövrat de rivaliserande stammarna, utan också vunnit ditt folks hjärtan."
 
 #: ../../../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."

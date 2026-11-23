@@ -6,7 +6,7 @@
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
 # Niklas Nordgren, 2022
 # D M <kamera001dm@gmail.com>, 2025
-# Daniel Nylander <po@danielnylander.se>, 2025
+# Daniel Nylander <po@danielnylander.se>, 2026
 # 
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2026-01-01 03:54+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2025\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
-"Bygg en utpost över den gula hussymbolen öster om ditt provisoriska "
+"Bygg en utpost vid den gula hussymbolen öster om ditt provisoriska "
 "högkvarter."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:54
@@ -51,12 +51,12 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
-"Bygg ett stenbrott vid de rikliga mängderna av klippor för att frigöra fler "
-"byggnadsytor och få några värdefulla resurser."
+"Bygg ett stenbrott nära de rikliga klipporna för att frigöra byggplatser och"
+" få värdefulla resurser."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr "Bygg en skogshuggarbostad, ett sågverk, och ett stenhuggeri"
+msgstr "Bygg en skogshuggares hus, ett sågverk och en stenhuggares hus"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
@@ -68,9 +68,9 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"Bygg en skogshuggarbostad, ett sågverk och ett stenhuggeri så fort det finns"
-" tillräckligt med plats för dem. Detta kommer att färdigställa den "
-"grundläggande försörjningskedjan av byggnadsmaterial."
+"Bygg en skogshuggares hus, ett sågverk och en stenhuggares hus så snart det "
+"finns tillräckligt med plats för dem. Då är den grundläggande "
+"försörjningskedjan för byggmaterial klar."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
@@ -85,8 +85,8 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Sänk efterfrågan på marmorpelare i ekonomiinställningarna till fyra. Detta "
-"kommer att hjälpa till att spara marmor åt byggnader."
+"Sänk efterfrågan på marmorpelare i ekonomiinställningarna till fyra. Det "
+"hjälper till att spara marmor till byggnader."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
@@ -97,7 +97,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
-msgstr "Hitta ett hamnutrymme på den lilla ön"
+msgstr "Hitta en hamnplats på den lilla ön"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
@@ -117,7 +117,7 @@ msgstr "Fartygsindustrin"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr "Bygg en hamn för att sätta segel från den här ön."
+msgstr "Bygg en hamn för att kunna ge dig av från den här ön."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
@@ -176,7 +176,7 @@ msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Skicka ett skepp norrut för att samla in information om Barbarerna. Försök "
+"Skicka ett skepp norrut för att inhämta information om barbarerna. Försök "
 "att bygga en hamn på ön och grunda en utpost."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:129
@@ -190,8 +190,7 @@ msgstr "Guldproduktion"
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
-msgstr ""
-"Producera åtminstone 6 gulddtackor för att kunna kolonisera ditt närområde."
+msgstr "Producera minst 6 guldtackor för att kunna kolonisera ditt närområde."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
@@ -203,7 +202,7 @@ msgstr "Besegra fienden"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "Avsluta barbarernas existens i denna del av världen."
+msgstr "Gör slut på barbarerna i den här delen av världen."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
@@ -269,7 +268,7 @@ msgid ""
 "clear my records of this big defeat by the Barbarians."
 msgstr ""
 "Äntligen var vi på väg mot Fremil igen. Jag kunde knappt vänta på chansen "
-"att rensa mina tankar från detta stora nederlag mot barbarerna."
+"att gottgöra det stora nederlag som barbarerna hade tillfogat oss."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:188
@@ -299,9 +298,9 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
-"Vårt skepp är allvarligt skadat. Masten har vält överbord och skrovet tar in"
-" mer och mer vatten. Vi kan vara glada om vi överlever denna svarta natt med"
-" enbart våra liv i behåll."
+"Vårt skepp är svårt skadat. Masten har gått överbord och skrovet tar in allt"
+" mer vatten. Vi kan vara glada om vi överlever denna svarta natt med enbart "
+"livet i behåll."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
@@ -321,9 +320,9 @@ msgid ""
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
 "Återigen strandade vi på en okänd kust och sov i skuggan under några palmer "
-"tills solen stod högt på himlen. Jag är rädd att när vi vaknade vid "
-"middagstid var ingen särskilt förvånad över att allt vi kunde se var sand… "
-"även om mängden stenar nära vårt läger var häpnadsväckande."
+"tills solen stod högt på himlen. När vi vaknade vid middagstid var ingen "
+"särskilt förvånad över att allt vi kunde se var sand… även om mängden stenar"
+" nära vårt läger var häpnadsväckande."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:215
@@ -331,8 +330,8 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
-"Det verkar verkligen som att vi har landstigit på en väldigt liten ö med "
-"bara lite utrymme."
+"Det verkar verkligen som om vi har hamnat på en mycket liten ö med ont om "
+"plats."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:218
@@ -356,7 +355,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
-msgstr "Ingen syn"
+msgstr "Inget i sikte"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
@@ -369,9 +368,9 @@ msgid ""
 "safe either. It would probably be reasonable to build a tower to explore the"
 " island and add some military strength."
 msgstr ""
-"Min herre, vi vet ingenting om ön. Och jag tror inte att vi är säkra heller."
-" Det vore nog klokt att bygga ett torn för att utforska ön och förstärka den"
-" militära styrkan."
+"Min herre, vi vet ingenting om ön. Jag tror inte heller att vi är säkra. Det"
+" vore nog klokt att bygga ett torn för att utforska ön och stärka vårt "
+"försvar."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
@@ -408,8 +407,8 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
-"Min herre, Amalea har rätt när det gäller resurserna. Därför rättar jag mig "
-"själv. Vi bör endast bygga en utpost, eftersom det är den mest effektiva "
+"Min herre, Amalea har rätt när det gäller resurserna. Därför måste jag rätta"
+" mig. Vi bör endast bygga en utpost, eftersom det är den mest effektiva "
 "militära byggnaden."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:257
@@ -466,8 +465,8 @@ msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr ""
-"Jag tycker att vi borde försöka frigöra lite byggnadsyta genom att hugga upp"
-" alla stenar i ett stenbrott."
+"Jag tycker att vi borde försöka frigöra byggplats genom att bryta bort "
+"stenarna i ett stenbrott."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:278
@@ -496,7 +495,7 @@ msgid ""
 "has started its work today."
 msgstr ""
 "Goda nyheter från folket, Lutius. Jag har fått besked om att vårt första "
-"stenbrott har påbörjat sin produktion idag."
+"stenbrott har börjat arbeta i dag."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:292
@@ -504,8 +503,8 @@ msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr ""
-"Kanske vore det en bra idé att vänta tills det har frigjorts lite utrymme "
-"och sedan bygga upp en grundläggande byggmaterialindustri."
+"Kanske vore det en bra idé att vänta tills stenbrottet har frigjort lite "
+"utrymme och sedan bygga upp en grundläggande byggmaterialindustri."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
@@ -519,7 +518,7 @@ msgstr "Amalea kommer in…"
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
-msgstr "Jag har viktiga saker att prata om… Först de goda nyheterna:"
+msgstr "Jag har viktiga saker att berätta… Först de goda nyheterna:"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:306
@@ -527,9 +526,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
-"Jag märkte att vår stenhuggare äntligen har börjat sitt arbete. Han kommer "
-"att hugga det antal marmorpelare som vi begär i våra grundläggande "
-"ekonomiska inställningar."
+"Jag märkte att vår stenhuggare äntligen har börjat arbeta. Han kommer att "
+"hugga det antal marmorpelare som vi begär i ekonomiinställningarna."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:309
@@ -551,7 +549,7 @@ msgstr "Amalea ser glad ut"
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
-msgstr "Jag har utmärkta framsteg att rapportera nu."
+msgstr "Jag har stora framsteg att rapportera."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:323
@@ -559,8 +557,8 @@ msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
-"Jag fick reda på att bygget av skogshuggarens hus och sågverket är klart, så"
-" vi kan börja avverka träd och tillverka plankor av dem."
+"Jag fick reda på att både skogshuggarens hus och sågverket är färdigbyggda, "
+"så vi kan börja avverka träd och tillverka plankor av dem."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:326
@@ -577,7 +575,7 @@ msgstr "Vi behöver en hamn"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
-msgstr "Saledus är omtänksam…"
+msgstr "Saledus är fundersam…"
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:335
@@ -596,14 +594,14 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
-"Problemet är att en hamn är en byggnad som behöver en mycket speciell plats "
-"för att kunna byggas. Så medan vi bygger upp vår ekonomi ska vi också "
-"samtidigt fortsätta expandera för att utforska hela ön. Låt oss försöka "
-"hitta en sådan värdefull byggnadsplats."
+"Problemet är att en hamn är en byggnad som behöver en mycket särskild plats "
+"för att kunna byggas. Medan vi bygger upp vår ekonomi ska vi därför "
+"fortsätta expandera och utforska hela ön. Låt oss försöka hitta en sådan "
+"värdefull byggplats."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
-msgstr "Ett steg närmare hemkomst"
+msgstr "Ett steg närmare hemkomsten"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
@@ -626,8 +624,8 @@ msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr ""
-"Nu kan vi verkligen se fram emot att bygga några fartyg. Så vi borde också "
-"bygga ett skeppsvarv."
+"Nu kan vi verkligen se fram emot att bygga fartyg. Därför bör vi också bygga"
+" ett skeppsvarv."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
@@ -660,9 +658,9 @@ msgid ""
 "space on the island for building a whole economy to produce cloth. "
 "Therefore, we need to build the necessary wares step by step."
 msgstr ""
-"Så vi behöver mer tyg för att äntligen kunna bygga skepp. Men det finns inte"
-" plats på ön för att bygga upp en hel ekonomi för att producera tyg. Därför "
-"måste vi bygga upp de nödvändiga varorna steg för steg."
+"Vi behöver alltså mer tyg för att äntligen kunna bygga skepp. Men det finns "
+"inte plats på ön för en hel ekonomi som producerar tyg. Därför måste vi "
+"producera de nödvändiga varorna steg för steg."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:372
@@ -704,7 +702,7 @@ msgstr ""
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
-msgstr "Sjöfart återigen möjlig"
+msgstr "Sjöfart är möjlig igen"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:389
@@ -735,7 +733,7 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
-"Glöm inte att kontrollera målkvantiteten för ull och tyg i "
+"Glöm inte att kontrollera målmängden för ull och tyg i "
 "ekonomiinställningarna. Vi måste omvandla allt vete till ull och sedan all "
 "ull till tyg."
 
@@ -791,8 +789,8 @@ msgid ""
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
 "Jag tror att jag har hört vinden bära med sig några konstiga men välbekanta "
-"ljud från norr. Om jag inte misstar mig helt, har jag hört några barbariska "
-"krigstrummor. Så vi borde nog gå och se vad som pågår där uppe."
+"ljud från norr. Om jag inte misstar mig helt har jag hört barbariska "
+"krigstrummor. Vi borde nog gå och se vad som pågår där uppe."
 
 #. TRANSLATORS: Saledus
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:427
@@ -850,10 +848,10 @@ msgid ""
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
 " hunter’s house and a smelting works. And the mines themselves of course."
 msgstr ""
-"Jag rekommenderar starkt att man bygger en produktionskedja för gruvdrift "
-"och smältning av guld. Jag tror att vi behöver en vingård, ett vineri, en "
-"krog, ett fiskarhus eller ett jaktstuga och ett smältverk. Och gruvorna "
-"själva, förstås."
+"Jag rekommenderar starkt att vi bygger en produktionskedja för gruvdrift och"
+" guldsmältning. Jag tror att vi behöver en vingård, ett vineri, en krog, en "
+"fiskares hus eller en jägares hus samt ett smältverk. Och naturligtvis "
+"gruvorna själva."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:450
@@ -864,7 +862,7 @@ msgid ""
 "dismantle some military buildings to obtain more space for our economy."
 msgstr ""
 "Om det är svårt att bygga alla nödvändiga byggnader bör vi tänka på allt vi "
-"har lärt oss hittills. Vi kan hugga ner alla stenar. Vi bör kanske optimera "
+"har lärt oss hittills. Vi kan bryta bort stenarna. Vi bör kanske optimera "
 "våra vägar för att frigöra byggplatser, eller till och med riva vissa "
 "militära byggnader för att få mer utrymme för vår ekonomi."
 
@@ -891,7 +889,7 @@ msgstr "Amaleas tur"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
-msgstr "Amalea är verkligen stolt över prestationerna…"
+msgstr "Amalea är verkligen stolt över framstegen…"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:474
@@ -919,7 +917,7 @@ msgstr "Amalea är nöjd"
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
-msgstr "Amalea är övertygad om att vi kommer att klara alla våra utmaningar"
+msgstr "Amalea är nöjd med att vi kommer att klara alla våra utmaningar"
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:486
@@ -961,8 +959,8 @@ msgid ""
 "than by building a lot of military buildings."
 msgstr ""
 "Lutius. Jag uppskattar verkligen att du och Saledus är så måna om vår "
-"säkerhet. Men jag tror att vi kan utnyttja den lilla ytan på ön bättre än "
-"genom att bygga en massa militära byggnader."
+"säkerhet. Men jag tror att vi kan använda den lilla ytan på ön bättre än "
+"till att bygga en massa militära byggnader."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:501
@@ -972,9 +970,9 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
-"Jag rekommenderar starkt att man river de flesta av dem för att kunna bygga "
+"Jag rekommenderar starkt att vi river de flesta av dem för att kunna bygga "
 "industribyggnader. Jag tror inte att det finns någon större fara på denna ö,"
-" men om man vill vara försiktig kan man behålla några vaktposter eller "
+" men om du vill vara försiktig kan du behålla några vaktposter eller "
 "blockhus nära kusten."
 
 #. TRANSLATORS: Amalea
@@ -1006,8 +1004,8 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
-"Nu när vår flotta växer och växer borde vi utforska hela regionen. Låt oss "
-"försöka hitta mer land och kanske också få mer resurser."
+"Nu när vår flotta växer alltmer bör vi utforska hela regionen. Låt oss "
+"försöka hitta mer land och fler resurser."
 
 #. TRANSLATORS: Amalea
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:519
@@ -1015,8 +1013,8 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
-"Det skulle vara särskilt hjälpsamt att hitta mer marmor, antingen i "
-"stenbrott eller i bergen där den kan brytas."
+"Det skulle vara särskilt värdefullt att hitta mer marmor, antingen i "
+"stenfält eller i bergen där den kan brytas."
 
 #: ../../../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid "Amalea is Very Content"

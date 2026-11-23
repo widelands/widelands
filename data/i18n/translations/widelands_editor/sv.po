@@ -23,11 +23,11 @@ msgstr ""
 #: ../../../../data/scripting/editor/editor_controls.lua:4
 #: ../../../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
-msgstr "Spelkontroller"
+msgstr "Kontroller"
 
 #: ../../../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr "Hjälp för kartredigerare"
+msgstr "Hjälp för kartredigeraren"
 
 #: ../../../../data/scripting/editor/editor_help.lua:55
 msgid "General"
@@ -53,23 +53,23 @@ msgstr "Träd"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr "Widelands kartredigerare"
+msgstr "Kartredigeraren i Widelands"
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "Denna kartredigerare är ämnad för spelare som vill designa sina egna kartor att användas i Widelands."
+msgstr "Kartredigeraren är avsedd för spelare som vill skapa egna kartor för Widelands."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Som du kan se är denna kartredigerare ett pågående arbete och i samma takt som redigeraren blir bättre och bättre kommer denna text att bli längre och mer komplett."
+msgstr "Som du ser är kartredigeraren under ständig utveckling. Allt eftersom den blir bättre blir även denna text längre och mer fullständig."
 
 #: ../../../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr "Denna beskrivning innehåller också en kort handledning om hur man bygger en karta."
+msgstr "Wikin innehåller också en kort handledning om hur du bygger en karta."
 
 #: ../../../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"
@@ -99,7 +99,7 @@ msgstr "%1%x %2%"
 #: ../../../../data/scripting/editor/terrain_help.lua:57
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
-msgstr "Sannolikhet för träd att växa"
+msgstr "Sannolikhet att träd växer"
 
 #: ../../../../data/scripting/editor/terrain_help.lua:63
 #: ../../../../data/scripting/editor/terrain_tooltip.lua:40
@@ -117,4 +117,4 @@ msgstr "%2.1f%%"
 #: ../../../../data/scripting/editor/tree_help.lua:20
 #: ../../../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
-msgstr "Föredragen terräng"
+msgstr "Föredragna terrängtyper"

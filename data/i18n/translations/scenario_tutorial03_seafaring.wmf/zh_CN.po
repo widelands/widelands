@@ -22,44 +22,44 @@ msgstr "航海"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "航海教程"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "欢迎回来。在本教程中，你将学习关于航海的最重要内容，即船只、港口和远征。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "但首先让我为你介绍一下你的领地：在这里的南部，你拥有一个完整的经济体，几乎所有你需要的东西都有。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr ""
+msgstr "北部区域"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "在这里的北部，你只有一个金矿和一座仓库。虽然矿工的食物供应充足，但我们无法将金矿石运送到南部的冶炼厂。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "我们曾尝试修建一条道路，但山脉太宽太陡峭。因此我们只有一个选择：我们需要在这两个区域之间建立一条海上航线。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "但我不想催促你：你刚到这里，可能想先仔细看看你的营地。我也会稍作休息，很快回来。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -71,7 +71,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr ""
+msgstr "对于你在海上的一切活动，你都需要一个海岸边的港口。港口就像总部：它们可以储存货物、工人和士兵。当敌人攻击港口时，里面的士兵会自动出来迎战。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
 msgid ""
@@ -80,132 +80,132 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr ""
+msgstr "此外，港口还提供了通过船只运输货物的可能性。当你点击已有的港口时，你会注意到两个额外的标签：'等待装运的货物'和'等待登船的工人'。他们在等待船只将他们运送到另一个港口。目前没有这样的人，因为我们还没有建造第二个港口。所以让我们改变这个状况！"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
-msgstr ""
+msgstr "建造港口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
-msgstr ""
+msgstr "如何建造港口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr ""
+msgstr "港口是大型建筑，但只能在特殊位置建造：那些标有"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
-msgstr ""
+msgstr "蓝色港口空间图标的"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr ""
+msgstr "港口空间由地图设计者设定，因此地图可能包含它们也可能不包含。然而，它们可能被树木遮挡或被周围的建筑物阻挡。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr ""
+msgstr "你可能已经注意到你的城堡旁边有这样的图标。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
-msgstr ""
+msgstr "建造港口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
 msgid "Build a port in the northern part of your camp"
-msgstr ""
+msgstr "在你的营地北部建造一个港口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "当你想要用船只运输货物时，你总是需要一个港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr ""
+msgstr "在你的城堡旁边，蓝色港口空间图标上建造一个港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr ""
+msgstr "港口像普通建筑一样建造，但只能在蓝色港口空间上建造。只需点击带有图标的格子，建筑菜单会自动提供建造港口的选项。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr ""
+msgstr "尽管港口作为仓库使用，但你不应建造超过必要的数量：它们需要石英、钻石和黄金，这使得它们相当昂贵。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Constructing ships"
-msgstr ""
+msgstr "建造船只"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid "Let’s build ships"
-msgstr ""
+msgstr "让我们来建造船只"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid "Great. While your port is being constructed, let’s build some ships."
-msgstr ""
+msgstr "很好。当你的港口正在建造时，让我们来建造一些船只。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr ""
+msgstr "船只是在靠近造船厂的海岸线上由造船匠建造的。我们必须在靠近海岸的地方建造一个。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
-msgstr ""
+msgstr "建造一个造船厂"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Build a shipyard close to the coast"
-msgstr ""
+msgstr "在海岸附近建造一个造船厂"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 msgid "Ships are produced by a shipyard. It is a medium building."
-msgstr ""
+msgstr "船只由造船厂生产。它是一个中型建筑。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "在你的领土南部海岸附近建造一个造船厂。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr ""
+msgstr "造船厂是一个中型建筑。虽然它可以在地图上的任何地方建造，但造船匠只有在靠近水域且岸边没有树木或道路时才能工作。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "等待船只"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr ""
+msgstr "非常好。你的造船厂完成了，你的造船匠立即开始工作。为了建造船只，他需要原木、木板和蛛丝，这些将被运送到造船厂。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr ""
+msgstr "造船匠会将所需的货物带到海岸边的一个空闲位置，在那里建造一艘船。当第一艘船完成后，它将下水，造船匠将建造另一艘。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr ""
+msgstr "我们应该等到有两艘船。这应该足够了。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
@@ -213,46 +213,46 @@ msgstr "船舶"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
-msgstr ""
+msgstr "建造两艘船"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:107
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr ""
+msgstr "当造船厂完成且所需货物已送达后，船只会自动建造。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr ""
+msgstr "等待造船匠建造两艘船。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
-msgstr ""
+msgstr "当有足够的船时，不要忘记停止你的造船厂。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "Shipyard production"
-msgstr ""
+msgstr "造船厂生产"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid "We have enough ships"
-msgstr ""
+msgstr "我们有足够的船了"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr ""
+msgstr "你的第二艘船\"%1%\"现在已经准备好了。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
 msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr ""
+msgstr "当有足够的船时，你需要停止你的造船厂。否则，你的造船匠会消耗掉你所有的原木和蛛丝，生产出数十艘船。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr ""
+msgstr "这是停止生产的图标。你可以在建筑窗口中找到它。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
@@ -260,41 +260,41 @@ msgstr "没有铁"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
-msgstr ""
+msgstr "我们缺少铁"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr ""
+msgstr "第二艘船可能还没有完成，但我们有一个紧急问题。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr ""
+msgstr "你肯定已经注意到，西边的山里没有铁。我们有大量的煤和金矿石，但没有铁矿石，我们无法生产任何工具。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr ""
+msgstr "虽然这可能耗时、昂贵且并非没有危险——谁知道海里有什么怪物？——但我看不到其他可能性：我们将不得不进行一次对未知海域的远征。"
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "A trip by the sea, what fun it can be"
-msgstr ""
+msgstr "海上旅行，多么有趣"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Expeditions"
-msgstr ""
+msgstr "远征"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr ""
+msgstr "在远征中，你派遣船只出海发现新的岛屿，也许在那里建立一个殖民地。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -303,56 +303,56 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr ""
+msgstr "远征可以在任何港口开始。然后，所有需要的货物都会被运送到那个港口。这些货物正是你的部落建造一个港口所需的货物（你的目标是在远离家园的地方建造一个港口，所以这并不奇怪），当然，你还需要一个建造者。当一切准备就绪，一艘船会来接取这些货物。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "您可以在您港口的“远征”选项卡中查看所需的物资（当您开始一项远征后，它将出现在最后一个位置）。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
-msgstr ""
+msgstr "现在尝试一下。我稍后会告诉你下一步该做什么。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
-msgstr ""
+msgstr "在你的任何港口开始一次远征。"
 
 #. TRANSLATORS: This refers to a memory game
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "我收拾好行囊，里面装了……"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr ""
+msgstr "额外物品"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "除了建造新港口所需的物品外，带更多的货物可能会很有用。这样，一旦港口建成，我们就能立即开始建造新建筑。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "你可以带上一些额外的货物、士兵或工人进行远征。你可以通过填充建造港口所需主要货物下方的空槽来定义它们。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "只需点击空槽，然后滚动列表选择额外的物品。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "现在尝试一下。一个绿色、黄色或红色的小点会告诉你物品是否已到达、正在路上还是不可用。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
@@ -364,21 +364,21 @@ msgstr "启动一次探险"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
-msgstr ""
+msgstr "开始一次远征。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr ""
+msgstr "为此，请点击任意港口中的“开始远征”按钮。一个显示所需物资的新标签页将会出现。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
-msgstr ""
+msgstr "前往更美好的地方"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr ""
+msgstr "开始你的远征"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -387,64 +387,64 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "你的远征船已经准备好了。它正在你的港口前等待你的命令。它不再运输货物。使用它的按钮将你的船送往 Widelands 地图的六个主要方向中的任何一个。当它到达海岸线时，你可以让它沿着海岸航行，寻找适合登陆的地方。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
-msgstr ""
+msgstr "一旦找到港口空间，你就可以在船只控制窗口的中央按钮处建造一个新港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr ""
+msgstr "然后货物将被卸下，船将再次承担运输货物的任务。建造者将开始工作并建造一个港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr ""
+msgstr "寻找一座有山脉的岛屿，并在那里寻找一个港口空间。殖民该岛屿。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
-msgstr ""
+msgstr "探索"
 
 #. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid "Found a settlement"
-msgstr ""
+msgstr "建立定居点"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid "Navigate your ship to an island that could contain iron ore."
-msgstr ""
+msgstr "将你的船导航到一座可能含有铁矿石的岛屿。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr ""
+msgstr "当你点击远征船时，会打开一个窗口，你可以控制你的船。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
-msgstr ""
+msgstr "当你找到一个合适的港口空间时，在那里建造一个港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
 msgid "New colony"
-msgstr ""
+msgstr "新殖民地"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid "Your colony has been founded"
-msgstr ""
+msgstr "你的殖民地已经建立"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr ""
+msgstr "你成功完成了远征并建立了新的殖民地。我已经派出了一些地质学家——他们已经报告发现了铁矿石。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:213
 msgid ""
@@ -452,7 +452,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "到目前为止，你已经学到了关于航海的一切：如何建造港口和船只，以及如何派出远征。记住，远征有时是获取重要资源的最快方式——有时甚至是唯一的方式。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -460,7 +460,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr ""
+msgstr "但我想提醒一句。港口就像总部：它们可能会被附近的敌人攻击。虽然你的总部有士兵防御，但你新建造的港口没有。因此，你应该避免在敌人附近定居。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
@@ -470,49 +470,49 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "为确保得到妥善防御，您可以在“士兵”选项卡中为港口和总部设置所需的防御士兵数量，这与军事建筑的操作类似。但它们同时也是仓库，因此可以容纳任意数量的士兵。所需数量确保港口或总部会请求增派防御士兵，并且一旦士兵驻扎在此，就不会被派往其他地方执行其他任务。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "在这张地图上，没有需要担心的敌人。在其他游戏中，你应该为你的港口设置一些防御者，并优先在你新殖民地周围建造一两个军事防御工事。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
-msgstr ""
+msgstr "我们的任务"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:225
 msgid "Start mining"
-msgstr ""
+msgstr "开始采矿"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr ""
+msgstr "到达这里是一项漫长而昂贵的工作。这个岛屿没什么可提供的，但它的山里有铁矿石。我们的经济需要铁矿石，所以我们必须建造一个铁矿。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
 msgid "Start mining iron ore in the mountain."
-msgstr ""
+msgstr "在山里开始开采铁矿石。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid "Iron Mine"
-msgstr ""
+msgstr "铁矿"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Build an iron mine on the island"
-msgstr ""
+msgstr "在岛屿上建造一个铁矿"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Our economy lacks resources."
-msgstr ""
+msgstr "我们的经济缺乏资源。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
 msgid "Start mining iron ore in mountains on the island."
-msgstr ""
+msgstr "在岛屿上的山里开始开采铁矿石。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
@@ -520,25 +520,25 @@ msgstr ""
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid "There is more to it…"
-msgstr ""
+msgstr "还有更多……"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid "Another gold mountain"
-msgstr ""
+msgstr "另一座金矿"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr ""
+msgstr "你的造船厂建造一些船只需要一些时间。在我们等待它们的时候，我想教你另一种水上运输方式。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "船只的优势在于它们可以一次携带大量货物和工人，但不幸的是，它们的目的地仅限于少数适合港口的空间。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
 msgid ""
@@ -547,53 +547,53 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "看看远南部的这个山谷。我们在下面发现了一座有金矿的山，也想从中开采矿石。但分隔它与我们的主要殖民地的溪流太宽，无法建造桥梁，又太窄，船只无法通过。我们的道路必须绕远路，这大大减慢了货物运输速度。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
 msgid "Rowboats & Ferry Yards"
-msgstr ""
+msgstr "小船 & 渡口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr ""
+msgstr "这就是渡口的作用。渡口是小船，一次只能携带一件货物，不能携带工人（除了划船的那个人，他从不离开他的船）。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "渡口在渡口中建造，一艘小船需要两根原布和一块布，建造很快。渡口是一个中型建筑，需要建在靠近海岸的地方。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:263
 msgid "Let’s build a ferry yard close to the shore before we will continue."
-msgstr ""
+msgstr "在我们继续之前，让我们先在海岸附近建一个渡口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid "Build a ferry yard"
-msgstr ""
+msgstr "建造一个渡口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:271
 msgid "Build a ferry yard close to the shore"
-msgstr ""
+msgstr "在海岸附近建造一个渡口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:272
 msgid "Ferries are constructed by a ferry yard."
-msgstr ""
+msgstr "渡口由渡口建造。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:273
 msgid ""
 "You need to build the ferry yard close to the shore, otherwise it won’t be "
 "able to build ferries there."
-msgstr ""
+msgstr "你需要将渡口建在靠近海岸的地方，否则它无法在那里建造小船。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid "Waterways"
-msgstr ""
+msgstr "水路"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -601,7 +601,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "与可以前往任何需要港口的船只不同，渡轮有固定的运输路线，称为水路。水路的建造方式与道路相同：您点击岸边的一个旗帜，选择“建造水路”，然后像选择道路路径一样选择水路的路径。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
@@ -609,76 +609,76 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "水路可以在公海上建造，也可以在浅水区靠近海岸的地方建造，那里水深不足以容纳大船。唯一的规则是水路每段直接相邻的两个三角形必须是水域，整个路径必须在你的领土内。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "还要注意，水路不像道路，可以建造得任意长。每张地图对水路都有长度限制。在这张地图上，限制是5格。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:285
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "请始终记住，渡口不运输工人。你可以用它们来加速货物运输，但它们永远不能完全替代道路。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:295
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "让我向你展示如何建造水路……"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:305
 msgid "Golden waves"
-msgstr ""
+msgstr "金色波浪"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr ""
+msgstr "正如你所看到的，这并不难。当你建造水路时，最近的空闲渡口会分配给它自己。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:307
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "现在轮到你了：在南部的山上建造一个金矿，并通过在溪流上建造水路将其与大陆连接起来。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid "Build a gold mine and waterways"
-msgstr ""
+msgstr "建造一个金矿和水路"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "在南部的山上建造一个金矿，并通过在溪流上建造水路将其与大陆连接起来。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "水道的建造方式与道路相同：您点击岸边的一个旗帜，选择“建造水道”，然后像规划道路一样选择水道的路径。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:318
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "然而，水路的每段都需要两个相邻的水三角形。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
 msgid "Conclusion"
-msgstr ""
+msgstr "总结"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:326
 msgid "About Ferries"
-msgstr ""
+msgstr "关于渡口"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "现在，在使用渡口时，我还想让你记住几件事。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
@@ -687,7 +687,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "永远不要忘记这些小船太小，无法携带工人。你可以用它们作为领土内货物运输的捷径，但不能用来通过道路或船只无法到达的区域。除非确定没有工人需要步行，否则永远不要切断两个由水路连接的地方之间的所有道路。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:329
 msgid ""
@@ -699,28 +699,28 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "如果你的水路在道路网络之间提供了重要的捷径，你的经济往往会通过水路发送大量货物。由于一条水路只能容纳一个渡口——与道路不同，如果非常繁忙，道路会获得第二个搬运工——而且它们往往比道路推荐的两三格更长，水路总是成为经济中的严重瓶颈。尝试并行建造多条水路来分散压力。如果这不可能，在某些情况下，不使用水路甚至更有效率。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid "Ferry yard production"
-msgstr ""
+msgstr "渡口生产"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:338
 msgid "More ferries needed?"
-msgstr ""
+msgstr "需要更多渡口？"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "正如你所看到的，渡口可以很快生产出来，但你不必担心材料浪费，因为渡口通常只在有未服务的水路时才按需生产。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "只要渡口服务水路，它的寿命是无限的，但失业的渡口会腐烂并最终沉没。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
@@ -729,17 +729,17 @@ msgstr "恭喜"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "你已经学到了关于船只和渡口的所有知识！"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "还有一个岛屿，如果你想要尝试发起另一场探险，可以在那里建造港口。"
 
 #: ../../../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:352
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
+msgstr "一如既往，你可以继续在这张地图上多练习一会儿，或者准备好你的船长执照，在真正的游戏中尝试你的新技能……"

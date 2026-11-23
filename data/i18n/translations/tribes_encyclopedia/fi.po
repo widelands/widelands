@@ -1360,7 +1360,7 @@ msgid ""
 "how far the master woodcutter has to walk. If all kinds of rare tree are "
 "available within her work area, then one of each kind is produced between "
 "%3$s and %4$s."
-msgstr ""
+msgstr "Tämä rakennus tuottaa yhden harvinaisen puun välillä %1$s ja %2$s riippuen siitä, miten paljon mestarimetsuri joutuu kävelemään. Jos kaikkia harvinaisia puutyyppejä on saatavilla hänen työalueellaan, sitten yhtä kutakin tuotetaan välillä %3$s ja %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -7061,7 +7061,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a Barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "Barbaarien kalastajan jatkuvasta vastauksesta,<br>seurasi usein nautinnoillinen nujakka"
 
 #. TRANSLATORS: Purpose helptext for production site: Fisher's Hut
 #: ../../../../data/tribes/initialization/barbarians/units.lua:1203
