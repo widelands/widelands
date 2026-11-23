@@ -49,7 +49,10 @@ abilities = {
       h2_image("tribes/workers/barbarians/soldier/evade_level0.png", _("Evade:")) ..
       -- TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-      p(_([[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a %1%%% chance to evade an attack, and this increases in steps of %2%%% for each level.]])):bformat(soldier.base_evade, soldier.evade_incr_per_level))
+      p(_([[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a %1%%% chance to evade an attack, and this increases in steps of %2%%% for each level.]])):bformat(soldier.base_evade, soldier.evade_incr_per_level)
+   ),
+   w = messagebox_w_step(2),
+   h = messagebox_h_step(5)
 }
 
 battlearena1 = {
@@ -61,7 +64,8 @@ battlearena1 = {
       p(_([[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strong beer. In a real game, you should have a good infrastructure before you build it.]])) ..
       li(_([[To see evade training in action, build a battle arena.]])) ..
       p(_([[While we’re waiting for the battle arena, you’ll probably notice some soldiers walking around. They are automatically exchanged from time to time. I’ll teach you about that later.]]))
-   )
+   ),
+   h = messagebox_h_step(1)
 }
 
 obj_battlearena = {
@@ -118,7 +122,8 @@ trainingcamp2 = {
       p(_([[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]])) ..
       p(_([[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]])) ..
       p(_([[You should also keep in mind that each of the tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]):bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
-   )
+   ),
+   h = messagebox_h_step(-1)
 }
 
 scouting1 = {
@@ -130,7 +135,8 @@ scouting1 = {
       p(_([[You can try your luck and expand randomly, but this is risky. A safer way is to use a scout to explore unseen parts of the map. What if he finds mountains overflowing with gold?]])) ..
       p(_([[We will need a scout’s hut to start exploring. It is a small building.]])) ..
       li_object("barbarians_scouts_hut", _([[Build a scout’s hut.]]), plr.color)
-   )
+   ),
+   h = messagebox_h_step(3)
 }
 
 obj_scouting1 = {
@@ -140,7 +146,7 @@ obj_scouting1 = {
    body = objective_text(_("Build a scout’s hut"),
       p(_([[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]])) ..
       li(_([[Build a Scout’s Hut.]]))
-   )
+   ),
 }
 
 scouting2 = {
@@ -175,12 +181,13 @@ scouting3 = {
    ),
    h = messagebox_h_step(-3)
 }
+
 heroes_rookies = {
    position = "topright",
    title = _("Heroes and Rookies"),
    body = (
       h1(_("Heroes and Rookies")) ..
-      p(_([[While our soldiers are training, let me tell you what we can do with them.]])) ..
+      p(_([[While we wait for our soldiers to start training, let me tell you what we can do with them.]])) ..
       p(_([[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically – this is what you saw earlier.]])) ..
       p(_([[The initial setting depends on the type of the building. For the Barbarians, the sentry is the only building that prefers rookies by default. You should change this setting to fit your current needs.]])) ..
       p(_([[When you are expanding into no man’s land, you can make your buildings prefer rookies. When you are planning to attack, send heroes into that region. Conquered buildings always prefer heroes.]]))
@@ -199,6 +206,27 @@ soldier_capacity = {
       li(_([[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]])) ..
       li(_([[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers may be attacking an enemy. They will return when they have been successful.]])) ..
       li(_([[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two may have died. They will be replaced by new soldiers from your warehouse, if possible.]]))
+   ),
+   h = messagebox_h_step(3)
+}
+
+preference_demo = {
+   position = "topright",
+   title = _("Send some heroes to the sentry"),
+   body = (
+      h1(_("Try it for yourself"))
+   ),
+   h = messagebox_h_step(-2),
+   field = f_sentry_to_reinforce
+}
+
+obj_preference = {
+   name = "heroes_to_sentry",
+   title = _("Reinforcements"),
+   number = 1,
+   body = objective_text(_("Send heroes to the south-eastern sentry"),
+      p(_([[Set the preference of the south-eastern sentry to heroes and watch as the replacements arrive.]])) ..
+      p(_([[You can also use this opportunity to experiment with the heroes/rookies preference and the capacity in the other military buildings too.]]))
    )
 }
 
@@ -207,9 +235,11 @@ hq_soldiers = {
    title = _("Soldiers in the headquarters"),
    body = (
       h1(_("Soldiers in the headquarters")) ..
-      p(_([[Your headquarters has some capabilities of military sites: It conquers some land, the enemy can attack it directly, and the stored soldiers defend it and its surroundings when attacked. On the other hand, there’s a difference too: you can’t start an attack with the soldiers in your headquarters.]])) ..
+      p(_([[Your headquarters has some capabilities of military sites too: It conquers some land, the enemy can attack it directly, and the stored soldiers defend it and its surroundings when attacked. On the other hand, there’s a difference too: you can’t start an attack with the soldiers in your headquarters.]])) ..
       p(_([[The military capabilities of the headquarters are a big difference from plain warehouses that don’t conquer land, and need nearby military sites for defense. Soldiers stored in plain warehouses don’t participate in any fighting, and plain warehouses can’t be attacked directly.]]))
-   )
+   ),
+   h = messagebox_h_step(-1),
+   field = f_hq
 }
 
 hq_status = {
@@ -218,7 +248,18 @@ hq_status = {
    body = (
       h1(_("Soldier settings of the headquarters")) ..
       p(_([[While all soldiers who happen to be in your headquarters help defending it, they are not permanently assigned to the headquarters, so they can be sent away any time when a military site needs a soldier. Fortunately you can also assign some soldiers to the defense of the headquarters the same way you set soldier capacity and preference for military sites. If you do so, the headquarters will only let surplus soldiers be sent to other buildings, but not soldiers from the assigned garrison.]])) ..
-      p(_([[If you look at the status lines, you can see that your warehouse has nothing in it, but your headquarters has a ‘—’ sign initially. That means that there is no garrison set up to protect the headquarters, though there may still be some soldiers stored there. If you increase the desired number of soldiers to more than zero, then the headquarters will show the same soldier information as military sites in the status. Surplus soldiers are never shown in the status.]]))
+      p(_([[If you look at the status lines, you can see that your warehouse has nothing in it, but your headquarters has a ‘—’ sign initially. That means that there is no garrison set up to protect the headquarters, though there may still be some soldiers stored there. If you increase the desired number of soldiers to more than zero, then the headquarters will show the same soldier information as military sites in the status. Surplus soldiers are never shown in the status.]])) ..
+      p(_([[You can see and change the soldier settings in the third (last) tab of the headquarters window. This tab also shows you the number of present soldiers of each possible training level combination.]]))
+   ),
+   h = messagebox_h_step(4)
+}
+
+obj_hq_garrison = {
+   name = "hq_garrison",
+   title = _("We need guards in our headquarters!"),
+   number = 1,
+   body = objective_text(_("Bring some soldiers to the headquarters"),
+      p(_([[Set the soldier capacity of the headquarters to 5 and watch them arrive.]]))
    )
 }
 
@@ -227,13 +268,15 @@ dismantle = {
    title = _("Dismantle your sentry"),
    body = (
       h1(_("Dismantling military buildings")) ..
-      p(_([[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]])) ..
+      p(_([[You can only reduce the number of soldiers in military buildings to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]])) ..
       p(_([[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]])) ..
       p(_([[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]])) ..
       -- TRANSLATORS: 'it' refers to the Barbarian sentry
-      li(_([[Dismantle it.]])) ..
-      p(_([[You can also use this opportunity to become familiar with the other options: the heroes/rookies preference and the capacity.]]))
-   )
+      li(_([[Dismantle it.]]))
+   ),
+   w = messagebox_w_step(2),
+   h = messagebox_h_step(4),
+   field = f_sentry_to_dismantle
 }
 
 obj_dismantle = {
@@ -246,17 +289,27 @@ obj_dismantle = {
    )
 }
 
+dismantle_done = {
+   position = "topright",
+   title = _(""),
+   body = p(_([[Well done. Now you know how to draw back your soldiers from the places where you don’t need them.]])),
+   w = messagebox_w_step(-1),
+   h = messagebox_h_step(-4),
+}
+
 fortress_enhancement = {
    position = "topright",
    title = _("Enhance Your Fortress"),
    body = (
       h1(_("Enhancing Buildings")) ..
-      p(_([[Well done. Now you know how to draw back your soldiers from the places where you don’t need them. It is time to tell you how to reinforce your front line.]])) ..
+      p(_([[Now that you have started training your soldiers, it is time to tell you how to reinforce your front line.]])) ..
       p(_([[Your fortress is already quite strong and conquers a lot of space. But there is an even bigger building: the citadel.]])) ..
       p(_([[Citadels can’t be built directly. Instead, you’ll have to construct a fortress first and then enhance it to a citadel. To do so, click on the fortress, then choose the ‘Enhance to Citadel’ button.]])) ..
       p(_([[Your soldiers will leave the fortress while the construction is going on. This means that your fortress will lose its military influence, as I described above.]])) ..
       li(_([[Enhance your fortress to a citadel now.]]))
-   )
+   ),
+   h = messagebox_h_step(4),
+   field = citadel_field
 }
 
 obj_fortress = {
@@ -269,6 +322,148 @@ obj_fortress = {
    )
 }
 
+training_preference_intro = {
+   position = "topright",
+   title = _("Training preferences: Introduction"),
+   body = (
+      h1(_("Training site preferences")) ..
+      p(_("While the citadel is getting built, let me tell you about the soldier preference setting of trainingsites.")) ..
+      p(_("Just like in military buildings, you can control the soldiers in the training sites too, but the soldier settings are in the third (last) tab of the training site windows. The preference works a little different though: When there are empty positions, stronger or weaker soldiers will fill them according to the preference, just like in military buildings, but training sites will not replace soldiers automatically as long as they can be trained. Soldiers will be sent away either when they have reached the maximum levels the site can train, or when the site has not had the required wares to train any of the present soldiers for a while, but it has wares to train some other soldiers who are in a warehouse. You can also send soldiers away by clicking on them.")) ..
+      p(_("The other difference is that the soldier preference controls the training sequence too: If set to heroes or rookies, then the strongest or weakest soldier whose next level has the necessary wares will be trained next. If no preference is selected, then each training level will be tried in turn, and the first soldier who needs it will be trained, regardless of his relative strength."))
+   ),
+   h = messagebox_h_step(1)
+}
+
+watch_training = {
+   position = "topright",
+   title = _("Training preferences: Watch the effect"),
+   body = (
+      h1(_("A little demonstration")) ..
+      p(_("Let me show you what this means.")) ..
+      p(_("First of all, please open the windows of both the battle arena and the training camp, and select the soldiers tab in both. The preference should be heroes in both if you haven’t changed it earlier. If you did, please set it back to heroes.")) ..
+      p(_("It may be easier to see the changes in the Soldier Statistics window. You can open it by pressing %s."):bformat(wl.ui.get_shortcut("game_stats_soldiers"))) ..
+      p(_("Also, please set the number of soldiers to four, so you will have soldiers of different levels to see the difference between the preference settings, but not too many soldiers to finish their training in the time we have.")) ..
+      p(_("Each training step needs more than half a minute, so you may want to increase the game speed too."))
+   ),
+   w = messagebox_w_step(2),
+   h = messagebox_h_step(4)
+}
+
+obj_watch_training = {
+   name = "watch_training",
+   title = _("Watch the training"),
+   number = 1,
+   body = objective_text(_("Watch your soldiers getting trained"),
+      li(_("Open the windows of both the battle arena and the training camp, and select the soldiers tab in both.")) ..
+      li(_("Set the number of soldiers to four in both.")) ..
+      li(_("Increase the game speed.")) ..
+      li(_("Open the Soldier Statistics window.")) ..
+      li(_("Sit back and watch the little red dots accumulate and fully trained soldiers get replaced.")) ..
+      li(_("Try to guess which soldier will be the next."))
+   )
+}
+
+train_heroes = {
+   position = "topright",
+   title = _("Training preferences: Heroes"),
+   body = (
+      h1(_("Strongest first")) ..
+      p(_("The simplest case is the default: always train the strongest soldier. If the site has all wares and you start with all rookies, then a single soldier will go through all training steps. All others will wait patiently until he reaches the highest level of the site and leaves.")) ..
+      p(_("In this tutorial, we started with some soldiers with partial training. You will see that the training of the strongest will always be finished first, then the next strongest and so on."))
+   ),
+   h = messagebox_h_step(1)
+}
+
+obj_train_heroes = {
+   name = "train_heroes",
+   title = _("Training the strongest soldiers"),
+   number = 1,
+   body = objective_text(_("Watch training the strongest soldiers"),
+      li(_("Make sure the soldier preference is heroes in both the battle arena and the training camp."))
+   )
+}
+
+train_rookies = {
+   position = "topright",
+   title = _("Training preferences: Rookies"),
+   body = (
+      h1(_("It’s time for a change")) ..
+      p(_("OK, that will be enough of the heroes setting. Now let’s see rookies.")) ..
+      p(_("Always training the weakest soldier will bring all soldiers in the building up to the same level. There’s a catch though: When the first soldier becomes a hero, he will leave and a new rookie will come. When he arrives, he will get all the training, and all the others who only need the final step keep waiting. This is not a very good use of all the costly equipment they needed for their training.")) ..
+      p(_("In real games, you will seldom have this good supply of wares, so you will usually have a more mixed selection of soldiers, but even then, with the rookies preference, you should regularly check your training sites and manage soldier replacement manually."))
+   ),
+   h = messagebox_h_step(2)
+}
+
+obj_train_rookies = {
+   name = "train_rookies",
+   title = _("Training the weakest soldiers"),
+   number = 1,
+   body = objective_text(_("Watch training the weakest soldiers"),
+      p(_("Set the soldier preference of both the battle arena and the training camp to rookies."))
+   )
+}
+
+train_any = {
+   position = "topright",
+   title = _("Training preferences: No preference"),
+   body = (
+      h1(_("... and the last one")) ..
+      p(_("Just a little more patience, please. Now we can switch to no preference.")) ..
+      p(_("As I said before, this setting tries each possible training step in turn. With a good supply, this will also usually train the same soldier through all levels, so if you start with all rookies, you won’t be able to tell the difference from the heroes setting. But now you should have a few soldiers of different levels, so you should be able to see that when a soldier finishes his training, a new rookie should start, not the next strongest soldier."))
+   )
+}
+
+obj_train_any = {
+   name = "train_any",
+   title = _("Training with no preference"),
+   number = 1,
+   body = objective_text(_("Watch training with no preference"),
+      p(_("Set the soldier preference of both the battle arena and the training camp to “No preference”."))
+   )
+}
+
+function remind_training(missing)
+   local reminder_def = {
+      position = "center",
+      title = _("Please watch the training sequence!"),
+      w = messagebox_w_step(-1),
+      h = messagebox_h_step(-3)
+   }
+
+   local body = ""
+
+   if missing.windows then
+      body = body .. li(_("Please keep both training site windows open at the soldiers tabs!"))
+   end
+   if missing.capacities then
+      body = body .. li(_("Please set both training site capacities to four! You won’t be able to see the differences."))
+   end
+   if missing.preferences then
+      local pref = ""
+      if missing.preferences == "heroes" then
+         pref = _("heroes")
+      elseif missing.preferences == "rookies" then
+         pref = _("rookies")
+      elseif missing.preferences == "any" then
+         pref = _("no preference")
+      end
+      body = body .. li(_("Please set both training site preferences to %s!"):bformat(pref))
+   end
+
+   reminder_def.body = body
+
+   return reminder_def
+end
+
+end_watching = {
+   position = "topright",
+   title = _("End of demonstration"),
+   body = p(_("Thank you for your patience. You may close the training site windows now. I hope I helped you better understand the effect of the different training preference options.")),
+   w = messagebox_w_step(-1),
+   h = messagebox_h_step(-4)
+}
+
 attack_enemy = {
    position = "topright",
    field = wl.Game().map:get_field(29,4), -- show the lost territory
@@ -278,7 +473,8 @@ attack_enemy = {
       p(_([[Great work, the citadel is finished. But what’s that? A hostile tribe has settled next to us while the citadel was under construction! Do you see how they took away a part of our land? And our lumberjack has now lost his place of work. This is what I was talking about. Let’s take our land back and defeat the enemy!]])) ..
       p(_([[To attack a building, click on its doors, choose the number of soldiers that you wish to send and click on the ‘Attack’ button.]]) .. " " .. _([[Your soldiers will come from all nearby military buildings. Likewise, the defenders will come from all nearby military buildings of the enemy and intercept your forces.]])) ..
       li(_([[Attack and conquer all military buildings of the enemy and destroy their headquarters.]]))
-   )
+   ),
+   h = messagebox_h_step(3)
 }
 
 obj_attack = {
