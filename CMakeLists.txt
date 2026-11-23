@@ -157,13 +157,25 @@ if(OPTION_CPPTRACE)
   else()
     include(FetchContent)
     set(CPPTRACE_ENABLE_LIBDWARF_COMPRESSION_SUPPORT OFF)
-    FetchContent_Declare(
-      cpptrace
+    # cpptrace and its dependencies are linked statically, so they are added with EXCLUDE_FROM_ALL
+    # to keep their libraries, headers and CMake package files out of the install target.
+    set(WL_CPPTRACE_SOURCE
       GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
       # git hash of dev branch after merge of PR 289, TODO (palino) update to 1.0.5 release tag when ready
       GIT_TAG        4d5f3e2f57c9b35c357d3a21f25c037e58c264cc
     )
-    FetchContent_MakeAvailable(cpptrace)
+    if(CMAKE_VERSION VERSION_LESS 3.28)
+      # FetchContent_Declare() does not know EXCLUDE_FROM_ALL yet
+      FetchContent_Declare(cpptrace ${WL_CPPTRACE_SOURCE})
+      FetchContent_GetProperties(cpptrace)
+      if(NOT cpptrace_POPULATED)
+        FetchContent_Populate(cpptrace)
+        add_subdirectory(${cpptrace_SOURCE_DIR} ${cpptrace_BINARY_DIR} EXCLUDE_FROM_ALL)
+      endif()
+    else()
+      FetchContent_Declare(cpptrace ${WL_CPPTRACE_SOURCE} EXCLUDE_FROM_ALL)
+      FetchContent_MakeAvailable(cpptrace)
+    endif()
     message(STATUS "Adding crash self-diagnosis handler using downloaded cpptrace.")
     set(USE_FETCHCONTENT ON)
   endif()
