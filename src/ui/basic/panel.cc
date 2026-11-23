@@ -42,6 +42,7 @@ namespace UI {
 std::atomic<Panel*> Panel::modal_(nullptr);
 std::atomic<Panel*> Panel::mousegrab_(nullptr);
 Panel* Panel::mousein_ = nullptr;
+std::atomic<uint32_t> Panel::destroyed_panels_counter_(0U);
 Panel* Panel::tooltip_panel_ = nullptr;
 Vector2i Panel::tooltip_fixed_pos_ = Vector2i::invalid();
 Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
@@ -117,6 +118,7 @@ Panel::Panel(Panel* const nparent,
  */
 Panel::~Panel() {
 	initialized_ = false;
+	++destroyed_panels_counter_;
 
 	// Release pointers to this object
 	if (mousegrab_ == this) {
@@ -1300,9 +1302,12 @@ void Panel::find_all_children_at(const int16_t x,
  * Returns the child panel that receives mouse events at the given location.
  * Starts the search with child (which should usually be set to first_child_) and
  * returns the first match.
+ *
+ * This is a pure hit test without side effects. Event dispatch may call it several
+ * times per event while looking for a child that handles the event, so the
+ * "mouse is in" state is only updated once afterwards, by set_mousein_child().
  */
 inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
-
 	for (; child != nullptr; child = child->next_) {
 		if (!child->is_visible() || x >= child->x_ + static_cast<int32_t>(child->w_) ||
 		    x < child->x_ || y >= child->y_ + static_cast<int32_t>(child->h_) || y < child->y_ ||
@@ -1311,16 +1316,24 @@ inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Pan
 		}
 		break;
 	}
+	return child;
+}
 
-	if ((mousein_child_ != nullptr) && mousein_child_ != child) {
+/**
+ * Update which child the mouse is in.
+ * Send mouse-out/mouse-in events only if it something changed.
+ */
+void Panel::set_mousein_child(Panel* child) {
+	if (child == mousein_child_) {
+		return;
+	}
+	if (mousein_child_ != nullptr) {
 		mousein_child_->do_mousein(false);
 	}
 	mousein_child_ = child;
 	if (child != nullptr) {
 		child->do_mousein(true);
 	}
-
-	return child;
 }
 
 /**
@@ -1382,10 +1395,18 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (mousegrab_ != this) {
 		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child)) != nullptr;
 		     child = child->next_) {
+			const uint32_t destroyed_panels = destroyed_panels_counter_;
 			if (child->do_mousepress(btn, x - child->x_, y - child->y_)) {
+				// The handler may have deleted panels, including this one. Only touch
+				// our state if we can be sure that nothing was deleted; otherwise the
+				// next mouse event will update it.
+				if (destroyed_panels == destroyed_panels_counter_) {
+					set_mousein_child(child);
+				}
 				return true;
 			}
 		}
+		set_mousein_child(nullptr);
 	}
 	return handle_mousepress(btn, x, y);
 }
@@ -1424,10 +1445,17 @@ bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 	if (mousegrab_ != this) {
 		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child)) != nullptr;
 		     child = child->next_) {
+			const uint32_t destroyed_panels = destroyed_panels_counter_;
 			if (child->do_mouserelease(btn, x - child->x_, y - child->y_)) {
+				// Ensure nothing was deleted before setting mouse-in from here.
+				// If something WAS deleted, next mouse event will update.
+				if (destroyed_panels == destroyed_panels_counter_) {
+					set_mousein_child(child);
+				}
 				return true;
 			}
 		}
+		set_mousein_child(nullptr);
 	}
 	return handle_mouserelease(btn, x, y);
 }
@@ -1443,10 +1471,17 @@ bool Panel::do_mousemove(
 	if (mousegrab_ != this) {
 		for (Panel* child = first_child_; (child = child_at_mouse_cursor(x, y, child)) != nullptr;
 		     child = child->next_) {
+			const uint32_t destroyed_panels = destroyed_panels_counter_;
 			if (child->do_mousemove(state, x - child->x_, y - child->y_, xdiff, ydiff)) {
+				// Ensure nothing was deleted before setting mouse-in from here.
+				// If something WAS deleted, next mouse event will update.
+				if (destroyed_panels == destroyed_panels_counter_) {
+					set_mousein_child(child);
+				}
 				return true;
 			}
 		}
+		set_mousein_child(nullptr);
 	}
 	return handle_mousemove(state, x, y, xdiff, ydiff);
 }
