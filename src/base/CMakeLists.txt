@@ -12,6 +12,8 @@ wl_library(base
     format/tree.h
     format/wildcard_node.h
     format/write_number.h
+    backtrace_provider.h
+    backtrace_provider.cc
     i18n.h
     i18n.cc
     multithreading.h
@@ -22,11 +24,13 @@ wl_library(base
     string.h
     string.cc
   USES_ATOMIC
+  USES_CPPTRACE
   USES_SDL2
   USES_TINYGETTEXT
   DEPENDS
     base_exceptions
     base_macros
+    base_time_string
     base_times
     build_info
     io_filesystem
@@ -127,3 +131,8 @@ wl_library(base_test
     base
     base_exceptions
 )
+
+if (EXECINFO_LIBRARY)
+  # Needed by backtrace_provider.cc on BSD systems
+  target_link_libraries(base ${EXECINFO_LIBRARY})
+endif()

@@ -1,1 +1,1 @@
-asio gettext[tools] libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[core,mpg123] sdl2-image[libjpeg-turbo]
+asio gettext[tools] libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[core,mpg123] sdl2-image[libjpeg-turbo] cpptrace

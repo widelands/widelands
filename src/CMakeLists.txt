@@ -61,8 +61,6 @@ else()
     DEPENDS
       base
       base_exceptions
-      base_time_string
-      logic_filesystem_constants
       widelands_ball_of_mud
       build_info
   )
@@ -162,14 +160,6 @@ wl_library(widelands_options
     logic_filesystem_constants
   USES_SDL2
 )
-
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
-    CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-  target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
-       CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR
-       CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)

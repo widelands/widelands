@@ -13,7 +13,9 @@ option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
+option(OPTION_CPPTRACE "Build with cpptrace library for crash handling" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
+option(OPTION_MINIMAL_DEBUG_INFO "Build with minimal debugging info" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 set(CMAKE_FIND_FRAMEWORK LAST)
@@ -116,6 +118,9 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
 endif()
 
+# Set to ON when at least one FetchContent_Declare is used
+set(USE_FETCHCONTENT OFF)
+
 find_package (Python3 REQUIRED)
 
 find_package(OpenGL REQUIRED)
@@ -145,6 +150,46 @@ if(NOT asio_location OR asio_location STREQUAL "")
 endif()
 add_definitions(-DASIO_STANDALONE)
 
+if(OPTION_CPPTRACE)
+  find_package(cpptrace CONFIG)
+  if(cpptrace_FOUND)
+    message(STATUS "Adding crash self-diagnosis handler using installed cpptrace.")
+  else()
+    include(FetchContent)
+    # avoid fetching and compiling zstd
+    set(CPPTRACE_ENABLE_LIBDWARF_COMPRESSION_SUPPORT OFF)
+    # backtrace does not show frames inside cpptrace, so its debugging info would only make the binary bigger
+    set(CPPTRACE_BUILD_NO_SYMBOLS ON)
+    # cpptrace and its dependencies are linked statically, so they are added with EXCLUDE_FROM_ALL
+    # to keep their libraries, headers and CMake package files out of the install target.
+    set(WL_CPPTRACE_SOURCE
+      GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+      # git hash of dev branch after merge of PR 289, TODO (palino) update to 1.0.5 release tag when ready
+      GIT_TAG        4d5f3e2f57c9b35c357d3a21f25c037e58c264cc
+    )
+    if(CMAKE_VERSION VERSION_LESS 3.28)
+      # FetchContent_Declare() does not know EXCLUDE_FROM_ALL yet
+      FetchContent_Declare(cpptrace ${WL_CPPTRACE_SOURCE})
+      FetchContent_GetProperties(cpptrace)
+      if(NOT cpptrace_POPULATED)
+        FetchContent_Populate(cpptrace)
+        add_subdirectory(${cpptrace_SOURCE_DIR} ${cpptrace_BINARY_DIR} EXCLUDE_FROM_ALL)
+      endif()
+    else()
+      FetchContent_Declare(cpptrace ${WL_CPPTRACE_SOURCE} EXCLUDE_FROM_ALL)
+      FetchContent_MakeAvailable(cpptrace)
+    endif()
+    message(STATUS "Adding crash self-diagnosis handler using downloaded cpptrace.")
+    set(USE_FETCHCONTENT ON)
+  endif()
+  add_definitions(-DPRINT_BACKTRACE_CPPTRACE)
+endif()
+
+if(USE_FETCHCONTENT)
+  # Prevent clang-tidy checks in external code.
+  file(WRITE ${FETCHCONTENT_BASE_DIR}/.clang-tidy "Checks: '-*'\n")
+endif()
+
 # Disable no symbols warning on macOS, but only on versions where this is
 # supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
 if (APPLE)
@@ -168,10 +213,21 @@ if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   endif()
 endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 
+if(OPTION_MINIMAL_DEBUG_INFO)
+  if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
+     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR
+     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+      # Override default -g option with -g1, to reduce size of binary.
+      # It is still enough to produce full crash backtrace.
+      wl_add_flag(WL_DEBUG_FLAGS "-g1")
+    endif()
+  endif()
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(WL_DEBUG_FLAGS "-DDEBUG")
+  wl_add_flag(WL_DEBUG_FLAGS "-DDEBUG")
   if(NOT MSVC)
-    wl_add_flag(WL_DEBUG_FLAGS "-g")
     if(NOT OPTION_TSAN)
       option(OPTION_ASAN "Build with AddressSanitizer" ON)
     endif()
@@ -196,7 +252,7 @@ elseif((CMAKE_BUILD_TYPE STREQUAL "Release") OR (CMAKE_BUILD_TYPE STREQUAL "RelW
     message(WARNING "GCC <7.6.0 is known to cause segfaults in release builds. Please consider upgrading to GCC version 7.6 or newer or using Clang. Adding selected overrides to suppress reporting of known bugs.")
     wl_add_flag(WL_OPTIMIZE_FLAGS "--param asan-stack=0")
   endif()
-  set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
+  wl_add_flag(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
   option(OPTION_ASAN "Build with AddressSanitizer" OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "None")
   message(STATUS "Not setting any default flags.")
@@ -483,17 +539,35 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
-if(NOT OPTION_ASAN)
+if(OPTION_CPPTRACE)
+  if(OPTION_ASAN AND NOT WIN32)
+    message(WARNING "Both AddressSanitizer and cpptrace are handling crashes, consider turning off one of them.")
+  endif()
+  if(OPTION_TSAN)
+    message(WARNING " Both ThreadSanitizer and cpptrace are handling crashes, consider turning off one of them."
+                    " ThreadSanitizer may produce too many error messages inside the crash handler.")
+  endif()
+  if(CMAKE_BUILD_TYPE STREQUAL "Release" AND WIN32)
+    # according to https://github.com/jeremy-rifkin/cpptrace/releases/tag/v0.8.0
+    # cpptrace can resolve symbols without debugging information for elf and mach-o binaries
+    message(WARNING "cpptrace needs debugging symbols to produce meaningful backtrace, consider RelWithDebInfo build type.")
+  endif()
+endif()
+
+set(WL_CRASH_HANDLER ${OPTION_CPPTRACE})
+if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN AND NOT OPTION_TSAN)
   # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
-    message(STATUS "Adding crash self-diagnosis handler.")
-    add_definitions(-DPRINT_SEGFAULT_BACKTRACE)
-    if(NOT WIN32)
-      # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
-      SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
-    endif()
+    message(STATUS "Adding crash self-diagnosis handler using execinfo.")
+    add_definitions(-DPRINT_BACKTRACE_EXECINFO)
+    set(WL_CRASH_HANDLER ON)
   endif()
+endif()
+
+if(WL_CRASH_HANDLER AND NOT WIN32)
+  # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
 endif()
 
 # on BSD this must be explicitly linked
