@@ -26,6 +26,10 @@
 #include <sstream>
 #include <thread>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 #ifdef PRINT_BACKTRACE_CPPTRACE
 #include <cpptrace/cpptrace.hpp>
 #elif defined(PRINT_BACKTRACE_EXECINFO)
@@ -141,6 +145,35 @@ static void install_crash_handler(const int sig) {
 	sigaction(sig, &action, nullptr);
 #endif
 }
+
+#ifdef _WIN32
+// The CRT keeps SIGSEGV, SIGILL and SIGFPE handlers per thread, so signal() in main()
+// does not catch crashes in other threads. The unhandled exception filter is process-wide.
+static LONG WINAPI unhandled_exception_filter(EXCEPTION_POINTERS* info) {
+	int sig = SIGSEGV;
+	switch (info->ExceptionRecord->ExceptionCode) {
+	case EXCEPTION_ILLEGAL_INSTRUCTION:
+	case EXCEPTION_PRIV_INSTRUCTION:
+		sig = SIGILL;
+		break;
+	case EXCEPTION_FLT_DENORMAL_OPERAND:
+	case EXCEPTION_FLT_DIVIDE_BY_ZERO:
+	case EXCEPTION_FLT_INEXACT_RESULT:
+	case EXCEPTION_FLT_INVALID_OPERATION:
+	case EXCEPTION_FLT_OVERFLOW:
+	case EXCEPTION_FLT_STACK_CHECK:
+	case EXCEPTION_FLT_UNDERFLOW:
+	case EXCEPTION_INT_DIVIDE_BY_ZERO:
+	case EXCEPTION_INT_OVERFLOW:
+		sig = SIGFPE;
+		break;
+	default:
+		break;
+	}
+	segfault_handler(sig);
+	return EXCEPTION_CONTINUE_SEARCH;
+}
+#endif  // _WIN32
 #endif  // PRINT_BACKTRACE_CPPTRACE || PRINT_BACKTRACE_EXECINFO
 
 BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
@@ -180,6 +213,9 @@ void BacktraceProvider::register_signal_handler() {
 			  SIGABRT, SIGFPE, SIGILL, SIGSEGV}) {
 		install_crash_handler(s);
 	}
+#ifdef _WIN32
+	SetUnhandledExceptionFilter(unhandled_exception_filter);
+#endif
 #endif  // PRINT_BACKTRACE_CPPTRACE || PRINT_BACKTRACE_EXECINFO
 }
 
