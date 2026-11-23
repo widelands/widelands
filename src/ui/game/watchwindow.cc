@@ -378,7 +378,7 @@ bool WatchWindow::WatchWindowMapView::handle_mouserelease(const uint8_t btn, int
 }
 bool WatchWindow::WatchWindowMapView::handle_mousemove(
    uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
-	if ((state & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
+	if ((SDL_GetMouseState(nullptr, nullptr) & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
 		view_moved_ = true;
 	}
 	return MapView::handle_mousemove(state, x, y, xdiff, ydiff);
