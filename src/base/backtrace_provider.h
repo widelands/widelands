@@ -35,7 +35,7 @@ public:
 
 	// parse cmdline parameters, search for --no-error-handling
 	// return true if error handling is enabled (default)
-	static bool parseErrorHandling(int argc, char* argv[]);
+	static bool parse_error_handling(int argc, char* argv[]);
 	static void register_signal_handler();
 	static std::string get_signal_description(int sig);
 	static void set_crash_dir(const std::string& homedir);

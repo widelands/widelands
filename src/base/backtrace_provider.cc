@@ -192,7 +192,7 @@ BacktraceProvider::AbortHandlerGuard::~AbortHandlerGuard() {
 #endif
 }
 
-bool BacktraceProvider::parseErrorHandling(int argc, char* argv[]) {
+bool BacktraceProvider::parse_error_handling(int argc, char* argv[]) {
 	// This is simplified argument parsing, which we need before
 	// WLApplication::parse_commandline().
 	const std::string arg("--no-error-handling");
