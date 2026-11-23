@@ -131,3 +131,8 @@ wl_library(base_test
     base
     base_exceptions
 )
+
+if (EXECINFO_LIBRARY)
+  # Needed by backtrace_provider.cc on BSD systems
+  target_link_libraries(base ${EXECINFO_LIBRARY})
+endif()
