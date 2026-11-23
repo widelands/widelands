@@ -184,7 +184,7 @@ endif()
 
 if(USE_FETCHCONTENT)
   # Prevent clang-tidy checks in external code.
-  file(WRITE ${CMAKE_BINARY_DIR}/.clang-tidy "Checks: '-*'\n")
+  file(WRITE ${FETCHCONTENT_BASE_DIR}/.clang-tidy "Checks: '-*'\n")
 endif()
 
 # Disable no symbols warning on macOS, but only on versions where this is
