@@ -101,9 +101,9 @@ void MapScriptingPacket::read(FileSystem& fs,
 			const uint32_t packet_version = fr.unsigned_32();
 			if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &egbase.lua());
-				signal(SIGABRT, &abort_handler);
-				// Destructor of guard restores original signal handler.
-				BacktraceProvider::DefaultAbortGuard abort_guard;
+				// Eris may abort() on corrupted savegames.
+				// Destructor of guard restores the original signal handler.
+				BacktraceProvider::AbortHandlerGuard abort_guard(&abort_handler);
 				lgi->read_textdomain_stack(fr);
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 			} else {

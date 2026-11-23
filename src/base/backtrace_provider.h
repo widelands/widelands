@@ -23,9 +23,14 @@
 
 class BacktraceProvider {
 public:
-	class DefaultAbortGuard {
+	// Temporarily installs a custom SIGABRT handler. The destructor restores
+	// the crash handler (or the default handler if crash handling is disabled).
+	class AbortHandlerGuard {
 	public:
-		~DefaultAbortGuard();
+		explicit AbortHandlerGuard(void (*handler)(int));
+		~AbortHandlerGuard();
+		AbortHandlerGuard(const AbortHandlerGuard&) = delete;
+		AbortHandlerGuard& operator=(const AbortHandlerGuard&) = delete;
 	};
 
 	// parse cmdline parameters, search for --no-error-handling

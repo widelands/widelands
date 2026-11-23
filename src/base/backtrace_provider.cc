@@ -176,7 +176,11 @@ static LONG WINAPI unhandled_exception_filter(EXCEPTION_POINTERS* info) {
 #endif  // _WIN32
 #endif  // PRINT_BACKTRACE_CPPTRACE || PRINT_BACKTRACE_EXECINFO
 
-BacktraceProvider::DefaultAbortGuard::~DefaultAbortGuard() {
+BacktraceProvider::AbortHandlerGuard::AbortHandlerGuard(void (*handler)(int)) {
+	signal(SIGABRT, handler);
+}
+
+BacktraceProvider::AbortHandlerGuard::~AbortHandlerGuard() {
 #if defined(PRINT_BACKTRACE_CPPTRACE) || defined(PRINT_BACKTRACE_EXECINFO)
 	if (error_handling) {
 		install_crash_handler(SIGABRT);
