@@ -10,15 +10,22 @@ function intro()
    training()
 end
 
+local hq = plr:get_buildings("barbarians_headquarters")[1]
+hq:set_warehouse_policies("barbarians_soldier", "remove")
+
 local trainingcamp_done = false
 local battlearena_done = false
 local scouting_done = false
+
+local arena = nil
+local tcamp = nil
+local trainingsites = {}
 
 function training2()
    -- Teach about trainingsites and soldiers' abilities - concurrent part 2
    sleep(60*1000)
    local o = campaign_message_with_objective(trainingcamp1, obj_trainingcamp)
-   while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
+   tcamp = wait_build_one(plr, "barbarians_trainingcamp")
    set_objective_done(o)
    campaign_message_box(trainingcamp2)
    trainingcamp_done = true
@@ -52,33 +59,72 @@ function training()
    run(training2)
    run(scouting)
 
-   while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
+   arena = wait_build_one(plr, "barbarians_battlearena")
    set_objective_done(o, 0)
    campaign_message_box(battlearena2)
    battlearena_done = true
 end
 
 function military_buildings()
-   while not trainingcamp_done or not battlearena_done or
-      not scouting_done do sleep(3000) end
+   while not scouting_done do sleep(3000) end
+
+   sleep(5000)
+
    campaign_message_box(heroes_rookies)
    campaign_message_box(soldier_capacity)
-   campaign_message_box(hq_soldiers)
-   campaign_message_box(hq_status)
 
-   local o = campaign_message_with_objective(dismantle, obj_dismantle)
+   local o = campaign_message_with_objective(preference_demo, obj_preference)
+
+   while heroes_in_sentries(plr) < 1 do sleep(1000) end
+   set_objective_done(o)
+
+   sleep(20000)  -- let the player experiment
+
+   campaign_message_box(hq_soldiers)
+
+   hq:set_warehouse_policies("barbarians_soldier", "normal")
+
+   o = campaign_message_with_objective(hq_status, obj_hq_garrison)
+
+   while hq:get_soldiers("present") < 5 do sleep(500) end
+   set_objective_done(o)
+
+   sleep(5000)
+
+   o = campaign_message_with_objective(dismantle, obj_dismantle)
 
    while #plr:get_buildings("barbarians_sentry") > 1 do sleep(200) end
    set_objective_done(o)
 
-   enhance_fortress()
-end
+   while not (trainingcamp_done and battlearena_done) do
+      sleep(3000)
+   end
 
-function enhance_fortress()
+   sleep(10000)
+
+   -- The citadel will need lots of wares on the roads, slowing down the supply of
+   -- the training sites, which may not even have been filled up yet. But we need
+   -- full trainingsites for the demonstration of the training preferences, so
+   -- we cheat a little.
+   trainingsites = { arena, tcamp }
+   fill_inputs(trainingsites)
+
+   local o = campaign_message_with_objective(fortress_enhancement, obj_fortress)
+
+   -- wait until the player has actually started the upgrade
+   while not (citadel_field.immovable and
+      citadel_field.immovable.descr.name == "constructionsite" and
+      citadel_field.immovable.building == "barbarians_citadel") do sleep(800) end
+
+   -- TODO(tothxa): this causes a segfault in the building window code, and the
+   --               window is most likely still open at this point
+   -- citadel_field.immovable.destruction_blocked = true
+
    sleep(5000)
 
-   local citadel_field = wl.Game().map:get_field(32, 62)
-   local o = campaign_message_with_objective(fortress_enhancement, obj_fortress)
+   -- then we use the waiting time for some demonstration
+   run(training_preference)
+
    while not (citadel_field.immovable and
       citadel_field.immovable.descr.name == "barbarians_citadel") do sleep(800) end
    set_objective_done(o, 0)
@@ -100,6 +146,92 @@ function enhance_fortress()
    sleep(300)
 
    attack()
+end
+
+local preference = nil
+local timer_first_run = true
+
+function check_and_remind_training_watch()
+   -- unfortunately there's no way to set a delay for the first run of a timer
+   if timer_first_run then
+      timer_first_run = false
+      return
+   end
+
+   local remind = { needed = false }
+   if not check_training_windows(trainingsites) then
+      remind.windows = true
+      remind.needed = true
+   end
+   if not check_training_prefs(trainingsites, preference) then
+      remind.preferences = preference
+      remind.needed = true
+   end
+   if not check_training_caps(trainingsites) then
+      remind.capacities = true
+      remind.needed = true
+   end
+
+   if remind.needed then
+      local mv = wl.ui.MapView()
+      -- give the player some time to read the message
+      mv:get_plugin_timer("check_training_watch").active = false
+
+      campaign_message_box(remind_training(remind))
+
+      mv:get_plugin_timer("check_training_watch").next_run = ticks() + 20 * 1000
+      mv:get_plugin_timer("check_training_watch").active = true
+   end
+end
+
+function wait_watch(pref, duration)
+   preference = pref
+   timer_first_run = true
+
+   -- nag the player every 20 seconds (realtime) if things are not done as requested
+   mv:add_plugin_timer("check_and_remind_training_watch()", 20 * 1000, "check_training_watch")
+
+   -- make sure the player obeyed
+   while not check_training_windows(trainingsites) do sleep(1000) end
+
+   sleep(duration)
+
+   -- remove rather than disable, because set_objective_done() saves the game, so this way
+   -- the timer will be recreated in reloaded games too
+   mv:remove_plugin_timer("check_training_watch")
+end
+
+function training_preference()
+   -- we have about 10 minutes until the citadel is finished, but we need more time for the
+   -- demo, so we prevent it from being finished before we're done
+   citadel_field.immovable:set_desired_fill("granite", 3)
+   local watch_duration = 8 * 60 * 1000
+
+   campaign_message_box(training_preference_intro)
+
+   local o_watch = campaign_message_with_objective(watch_training, obj_watch_training)
+
+   local o = campaign_message_with_objective(train_heroes, obj_train_heroes)
+   wait_watch("heroes", watch_duration)
+   set_objective_done(o)
+
+   o = campaign_message_with_objective(train_rookies, obj_train_rookies)
+   wait_watch("rookies", watch_duration)
+   set_objective_done(o)
+
+   o = campaign_message_with_objective(train_any, obj_train_any)
+   wait_watch("any", watch_duration)
+   set_objective_done(o)
+
+   set_objective_done(o_watch)
+
+   -- let the builder finish the citadel
+   local construction = citadel_field.immovable
+   if construction and construction.descr.name == "constructionsite" then
+      construction:set_desired_fill("granite", 4)
+   end
+
+   campaign_message_box(end_watching)
 end
 
 function create_enemy()

@@ -53,7 +53,6 @@ enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
 struct Ship;
-class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 class TrainingWheels;
 #endif
@@ -299,7 +298,6 @@ public:
 	                                    uint32_t,
 	                                    bool is_cs = false,
 	                                    uint32_t disambiguator_id = 0);
-	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(MapObject&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
 	void
