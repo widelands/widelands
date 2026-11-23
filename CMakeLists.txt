@@ -542,17 +542,20 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
+set(WL_CRASH_HANDLER ${OPTION_CPPTRACE})
 if(NOT OPTION_CPPTRACE AND NOT OPTION_ASAN AND NOT OPTION_TSAN)
   # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
     message(STATUS "Adding crash self-diagnosis handler using execinfo.")
     add_definitions(-DPRINT_BACKTRACE_EXECINFO)
-    if(NOT WIN32)
-      # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
-      SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
-    endif()
+    set(WL_CRASH_HANDLER ON)
   endif()
+endif()
+
+if(WL_CRASH_HANDLER AND NOT WIN32)
+  # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
 endif()
 
 # on BSD this must be explicitly linked
