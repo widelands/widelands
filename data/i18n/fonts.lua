@@ -34,13 +34,13 @@ return {
    },
 
    arabic = {
-      sans = "amiri/amiri-regular.ttf",
-      sans_bold = "amiri/amiri-bold.ttf",
-      sans_italic = "amiri/amiri-slanted.ttf",
-      sans_bold_italic = "amiri/amiri-boldslanted.ttf",
+      sans = "DejaVu/DejaVuSans.ttf",
+      sans_bold = "DejaVu/DejaVuSans-Bold.ttf",
+      sans_italic = "DejaVu/DejaVuSans-Oblique.ttf",
+      sans_bold_italic = "DejaVu/DejaVuSans-BoldOblique.ttf",
       direction = "rtl",
       representative_character = "ا",
-      size_offset = 4
+      size_offset = 0
    },
 
    cjk = {
@@ -56,14 +56,15 @@ return {
    },
 
    hebrew = {
-      sans = "Culmus/FrankRuehlCLM-Medium.otf",
-      sans_bold = "Culmus/FrankRuehlCLM-Bold.otf",
-      sans_italic = "Culmus/FrankRuehlCLM-MediumOblique.otf",
+      sans = "DejaVu/DejaVuSans.ttf",
+      sans_bold = "DejaVu/DejaVuSans-Bold.ttf",
+      sans_italic = "DejaVu/DejaVuSans-Oblique.ttf",
+      sans_bold_italic = "DejaVu/DejaVuSans-BoldOblique.ttf",
       serif = "Culmus/FrankRuehlCLM-Medium.otf",
       serif_bold = "Culmus/FrankRuehlCLM-Bold.otf",
       serif_italic = "Culmus/FrankRuehlCLM-MediumOblique.otf",
       representative_character = "א",
       direction = "rtl",
-      size_offset = 4
+      size_offset = 0
    }
 }
