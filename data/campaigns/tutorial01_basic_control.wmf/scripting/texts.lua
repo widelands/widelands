@@ -502,6 +502,7 @@ census_and_statistics_hq = {
    title = _("Census and Status"),
    body = (
       li_object("barbarians_headquarters", _([[You may have noticed that the census line of the headquarters is different. This is because it’s a special building type called a warehouse. Warehouses are buildings where your workers can rest until they get assigned to a workplace and where any number of your wares can be stored until they are needed somewhere. So they act like a kind of town center, and to signify this, they get unique names.]]), plr.color) ..
+      -- TRANSLATORS: Adjust the descriptions if you had to change the icons in Widelands Main
       p(_([[The small crowns beside the name mark it as your headquarters. As you play Widelands, you will see three kinds of warehouses, marked by little icons:]])) ..
       li_arrow(_([[The headquarters where you usually start the game. It is marked by small crowns: ♔]])) ..
       li_arrow(_([[Plain warehouses that simply hold wares and workers to keep them distributed all over your territory. They are marked by small houses: ⟰]])) ..

@@ -635,11 +635,6 @@ bool Warehouse::init(EditorGameBase& egbase) {
 void Warehouse::set_warehouse_name(const std::string& name) {
 	warehouse_name_ = name;
 	get_owner()->reserve_warehousename(name);
-
-	// Line breaks mess up the type icons in the census strings and push the garrison strings
-	// down where they're covered by the flag, so we replace spaces with non-breaking ones.
-	// The names will be richtext escaped for safety, so we can't use "&nbsp;".
-	replace_all(warehouse_name_, " ", " ");
 }
 
 void Warehouse::init_containers(const Player& player) {
@@ -1688,23 +1683,26 @@ void Warehouse::request_soldier_callback(Game& game,
 }
 
 std::string Warehouse::warehouse_census_string() const {
-	// U+2654 white chess king character
-	// "👑" U+1F451 crown character is missing from our font
-	static const std::string hq_fmt = "♔&nbsp;%s&nbsp;♔";
-
-	static const std::string port_fmt = "⚓&nbsp;%s&nbsp;⚓";  // U+2693 anchor character
-
-	// U+27F0 upwards quadruple arrow character (similar to a house)
-	// "📦" U+1F4E6 package character is missing from our font
-	static const std::string wh_fmt = "⟰&nbsp;%s&nbsp;⟰";
-
 	std::string icon_format;
+
 	if (descr().get_isport()) {
-		icon_format = port_fmt;
+		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		//              of "Port %s" (but abbreviate if possible), or just "%s" to only show the name
+		icon_format = _("⚓ %s ⚓");  // U+2693 anchor character
 	} else if (descr().get_conquers() > 0) {
-		icon_format = hq_fmt;
+		// U+2654 white chess king character
+		// "👑" U+1F451 crown character is missing from our font
+		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		//              of "Headquarters %s" (but abbreviate if possible, or just "%s" to only show
+		//              the name
+		icon_format = _("♔ %s ♔");
 	} else {
-		icon_format = wh_fmt;
+		// U+27F0 upwards quadruple arrow character (similar to a house)
+		// "📦" U+1F4E6 package character is missing from our font
+		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		//              of "Warehouse %s" (but abbreviate if possible), or just "%s" to only show
+		//              the name
+		icon_format = _("⟰ %s ⟰");
 	}
 
 	return named_building_census_string(icon_format, get_warehouse_name());

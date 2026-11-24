@@ -144,8 +144,9 @@ void Market::kickout_worker_from_queue(Game& game, Worker& worker) {
 }
 
 std::string Market::market_census_string() const {
-	static const std::string fmt = "⇵&nbsp;%s&nbsp;⇵";
-	return named_building_census_string(fmt, get_market_name());
+	// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent of
+	//              "Market %s" (but abbreviate if possible), or just "%s" to only show the name
+	return named_building_census_string(_("⇵ %s ⇵"), get_market_name());
 }
 
 void Market::update_statistics_string(std::string* str) {
