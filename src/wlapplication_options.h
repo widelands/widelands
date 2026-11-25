@@ -99,7 +99,9 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuMP,
 	kMainMenuLobby,
 	kMainMenuLogin,
+#ifndef __EMSCRIPTEN__
 	kMainMenuLAN,
+#endif
 	kMainMenuE,
 	kMainMenuEditorNew,
 	kMainMenuEditorRandom,

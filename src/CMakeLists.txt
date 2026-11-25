@@ -12,6 +12,21 @@ add_custom_target(run_build_deps
 )
 add_dependencies(codecheck run_build_deps)
 
+# Preprocess shaders
+FILE(GLOB_RECURSE SHADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/shaders/ *.fp *.vp)
+set (SHADERS_PROCESSED_FILES "")
+foreach(F ${SHADER_FILES})
+    get_filename_component(F_NAME ${F} NAME)
+    add_custom_command(
+            OUTPUT "${PROJECT_SOURCE_DIR}/data/shaders/${F_NAME}"
+            COMMAND ${CMAKE_CXX_COMPILER} -xc -P -E ${F} -o "${PROJECT_SOURCE_DIR}/data/shaders/${F_NAME}"
+            COMMENT "Processing shader ${F}")
+    list (APPEND SHADERS_PROCESSED_FILES "${PROJECT_SOURCE_DIR}/data/shaders/${F_NAME}")
+endforeach()
+
+add_custom_target(shaders ALL DEPENDS ${SHADERS_PROCESSED_FILES})
+add_dependencies(shaders run_build_deps)
+
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
 # https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
