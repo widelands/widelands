@@ -592,12 +592,17 @@ std::string Building::info_string(const InfoStringFormat& format) {
 std::string Building::named_building_census_string(const std::string& icon_fmt,
                                                    std::string name) const {
 	if (name.empty()) {
-		name = descr().descname();
-		// See explanation in set_warehouse_name().
 		// Needed because of e.g. Temple of Vesta in emp04
-		replace_all(name, " ", " ");
+		name = descr().descname();
 	}
-	return format(icon_fmt, richtext_escape(name));
+
+	std::string census_string = richtext_escape(format(icon_fmt, name));
+
+	// Line breaks mess up the type icons in the census strings and push the status strings
+	// down where they're covered by the flag, so we replace spaces with non-breaking ones.
+	replace_all(census_string, " ", "&nbsp;");
+
+	return census_string;
 }
 
 InputQueue& Building::inputqueue(DescriptionIndex const wi,
