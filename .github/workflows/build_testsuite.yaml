@@ -103,5 +103,13 @@ jobs:
     - name: download savegame testcases
       run: utils/test/download_loadgame_testcases.sh
     - name: Testsuite
+      id: testsuite
+      shell: bash  # to have pipefail enabled
       run: |
-        ./regression_test.py --ignore-error-code  # TODO(aDiscoverer) memory leaks ignored temporary until #6807 is fixed (see also #6805)
+        ./regression_test.py --ignore-error-code | tee ../testsuite_log.txt
+        # TODO(aDiscoverer) memory leaks ignored temporary until #6807 is fixed (see also #6805)
+        # output ASAN_FAILURE is written by ./regression_test.py
+    - name: ASan Memory Leak Summary
+      if: steps.testsuite.outputs.ASAN_FAILURE && ! cancelled()
+      run: |
+        utils/test/memory_leak_summary_from_gh_log.py ../testsuite_log.txt
