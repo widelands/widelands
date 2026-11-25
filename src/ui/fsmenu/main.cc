@@ -56,6 +56,7 @@
 #include "ui/fsmenu/scenario_select.h"
 #include "ui/shared/maptable.h"
 #include "ui/shared/savegameloader.h"
+#include "ui/wui/interactive_provider.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -297,7 +298,10 @@ void MainMenu::main_loop() {
 
 Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 	try {
-		return new Widelands::Game;
+		Widelands::Game* game = new Widelands::Game;
+		game->set_game_interface_provider(std::make_unique<UserInterfaceProvider>());
+		return game;
+
 	} catch (const std::exception& e) {
 		log_err("Error allocating game: %s", e.what());
 		if (show_error) {
@@ -308,6 +312,7 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 			m.run<UI::Panel::Returncodes>();
 		}
 	}
+
 	return nullptr;
 }
 

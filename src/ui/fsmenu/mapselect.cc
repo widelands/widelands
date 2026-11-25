@@ -29,6 +29,7 @@
 #include "logic/game_settings.h"
 #include "ui/fsmenu/launch_mpg.h"
 #include "ui/fsmenu/launch_spg.h"
+#include "ui/fsmenu/main.h"
 #include "ui/shared/map_tags.h"
 
 namespace FsMenu {
@@ -236,8 +237,9 @@ void MapSelect::clicked_ok() {
 		   get_map(), table_.get_selected_data().maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, std::make_shared<Widelands::Game>(), get_map(),
-		              table_.get_selected_data().maptype == MapData::MapType::kScenario);
+		new LaunchSPG(get_capsule(), *settings_,
+		              std::shared_ptr<Widelands::Game>(get_capsule().menu().create_safe_game()),
+		              get_map(), table_.get_selected_data().maptype == MapData::MapType::kScenario);
 	}
 }
 
