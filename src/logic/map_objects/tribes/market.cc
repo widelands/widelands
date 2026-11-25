@@ -144,8 +144,8 @@ void Market::kickout_worker_from_queue(Game& game, Worker& worker) {
 }
 
 std::string Market::market_census_string() const {
-	// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent of
-	//              "Market %s" (but abbreviate if possible), or just "%s" to only show the name
+	/** TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent of
+	                 "Market %s" (but abbreviate if possible), or just "%s" to only show the name */
 	return named_building_census_string(_("⇵ %s ⇵"), get_market_name());
 }
 

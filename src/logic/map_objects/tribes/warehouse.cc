@@ -1686,22 +1686,23 @@ std::string Warehouse::warehouse_census_string() const {
 	std::string icon_format;
 
 	if (descr().get_isport()) {
-		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
-		//              of "Port %s" (but abbreviate if possible), or just "%s" to only show the name
+		/** TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		 *               of "Port %s" (but abbreviate if possible), or just "%s" to only show the
+		 *               name */
 		icon_format = _("⚓ %s ⚓");  // U+2693 anchor character
 	} else if (descr().get_conquers() > 0) {
 		// U+2654 white chess king character
 		// "👑" U+1F451 crown character is missing from our font
-		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
-		//              of "Headquarters %s" (but abbreviate if possible, or just "%s" to only show
-		//              the name
+		/** TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		 *               of "Headquarters %s" (but abbreviate if possible, or just "%s" to only show
+		 *               the name */
 		icon_format = _("♔ %s ♔");
 	} else {
 		// U+27F0 upwards quadruple arrow character (similar to a house)
 		// "📦" U+1F4E6 package character is missing from our font
-		// TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
-		//              of "Warehouse %s" (but abbreviate if possible), or just "%s" to only show
-		//              the name
+		/** TRANSLATORS: If the icons are missing from your font, you may translate to the equivalent
+		 *               of "Warehouse %s" (but abbreviate if possible), or just "%s" to only show
+		 *               the name */
 		icon_format = _("⟰ %s ⟰");
 	}
 
