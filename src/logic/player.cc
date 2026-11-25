@@ -576,6 +576,11 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 		     !map.l_n(fc).field->is_interior(player_number_))) {
 			buildcaps &= ~BUILDCAPS_SMALL;
 		}
+	} else if ((buildcaps & BUILDCAPS_BRIDGE) != 0) {
+		// Check if a bridge or waterway is already there
+		if (map.has_route(fc)) {
+			buildcaps &= ~BUILDCAPS_BRIDGE;
+		}
 	}
 
 	return static_cast<NodeCaps>(buildcaps);
@@ -645,7 +650,7 @@ Road* Player::build_road(const Path& path) {
 						return nullptr;
 					}
 				}
-				if ((get_buildcaps(fc) & MOVECAPS_WALK) == 0) {
+				if ((get_buildcaps(fc) & (MOVECAPS_WALK | BUILDCAPS_BRIDGE)) == 0) {
 					log_warn_time(
 					   egbase().get_gametime(), "%i: building road, unwalkable\n", player_number());
 					return nullptr;

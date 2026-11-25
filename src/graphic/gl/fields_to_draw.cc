@@ -134,6 +134,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 			f.ln_index = calculate_index(fx - 1, fy);
 			f.rn_index = calculate_index(fx + 1, fy);
+			f.tln_index = calculate_index(fx + (fy & 1) - 1, fy - 1);
 			f.trn_index = calculate_index(fx + (fy & 1), fy - 1);
 			f.bln_index = calculate_index(fx + (fy & 1) - 1, fy + 1);
 			f.brn_index = calculate_index(fx + (fy & 1), fy + 1);
