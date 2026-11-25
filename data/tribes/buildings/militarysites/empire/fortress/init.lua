@@ -20,7 +20,7 @@ wl.Descriptions():new_militarysite_type {
       enhancement_return_on_dismantle = {
          planks = 2,
          marble_column = 2,
-         marble = 3,
+         marble = 2,
          granite = 1
       }
    },

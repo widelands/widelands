@@ -16,9 +16,10 @@ wl.Descriptions():new_productionsite_type {
       marble_column = 3
    },
    return_on_dismantle = {
+      log = 1,
       granite = 1,
       marble = 1,
-      marble_column = 2
+      marble_column = 1
    },
 
    animation_directory = dirname,
