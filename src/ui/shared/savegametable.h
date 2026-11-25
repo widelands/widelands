@@ -39,6 +39,9 @@ protected:
 
 	UI::FontStyle tooltip_style_, tooltip_header_style_;
 
+	[[nodiscard]] static int default_column_width_mode();
+	[[nodiscard]] static int default_column_width_date();
+
 private:
 	bool localize_autosave_;
 

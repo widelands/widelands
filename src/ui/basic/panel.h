@@ -447,6 +447,15 @@ public:
 	[[nodiscard]] static inline int default_button_size_large() {
 		return g_style_manager->styled_size(StyledSize::kUIDefaultButtonSizeLarge);
 	}
+	[[nodiscard]] static inline int default_panel_dimension_narrow() {
+		return g_style_manager->styled_size(StyledSize::kUIDefaultPanelDimensionNarrow);
+	}
+	[[nodiscard]] static inline int default_panel_dimension_medium() {
+		return g_style_manager->styled_size(StyledSize::kUIDefaultPanelDimensionMedium);
+	}
+	[[nodiscard]] static inline int default_panel_dimension_large() {
+		return g_style_manager->styled_size(StyledSize::kUIDefaultPanelDimensionLarge);
+	}
 
 	enum class SaveType {  // Do not change the order – these indices are stored in savegames!
 		kNone = 0,          ///< This panel is not saveable.
