@@ -643,12 +643,10 @@ void Panel::set_border(int l, int r, int t, int b) {
 }
 
 int Panel::get_inner_w() const {
-	assert(w_ == 0 || lborder_ + rborder_ <= w_);
-	return (w_ == 0 ? 0 : w_ - (lborder_ + rborder_));
+	return std::max(0, w_ - (lborder_ + rborder_));
 }
 int Panel::get_inner_h() const {
-	assert(h_ == 0 || tborder_ + bborder_ <= h_);
-	return (h_ == 0 ? 0 : h_ - (tborder_ + bborder_));
+	return std::max(0, h_ - (tborder_ + bborder_));
 }
 
 /**

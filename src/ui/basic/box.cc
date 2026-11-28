@@ -242,9 +242,9 @@ void Box::update_positions() {
 	int32_t scrollpos = scrollbar_ ? scrollbar_->get_scrollpos() : 0;
 
 	int32_t totaldepth = 0;
-	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
+	int totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
 	if (scrollbar_ && scrollbar_->is_enabled()) {
-		totalbreadth -= Scrollbar::default_size();
+		totalbreadth = std::max(0, totalbreadth - Scrollbar::default_size());
 	}
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {

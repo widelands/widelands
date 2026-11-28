@@ -79,7 +79,6 @@ void FileViewPanel::add_tab_without_script(const std::string& name,
 }
 
 void FileViewPanel::update_tab_size(size_t index) {
-	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 	assert(contents_width_ >= 0 && contents_height_ >= 0);
 
 	if (boxes_.at(index).get() != nullptr) {
@@ -94,7 +93,6 @@ void FileViewPanel::update_tab_size(size_t index) {
 
 void FileViewPanel::layout() {
 	assert(boxes_.size() == textviews_.size());
-	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
 	contents_width_ = std::max(0, get_w() - 2 * default_padding());
