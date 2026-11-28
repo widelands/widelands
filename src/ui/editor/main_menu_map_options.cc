@@ -347,13 +347,15 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	// ### Main tab ###
 
 	// Calculate the overall remaining space for MultilineEditboxes.
-	uint32_t remaining_space = main_box_.get_inner_h() - 7 * labelh_ - 5 * indent_;
+	const int label_height = labelh_;
+	const int remaining_space =
+	   std::max(0, main_box_.get_inner_h() - 7 * label_height - 5 * static_cast<int>(indent_));
 
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
-	const int16_t hinth = std::max(labelh_, remaining_space / 3);
+	const int hinth = std::max(label_height, remaining_space / 3);
 	descr_ = new UI::MultilineEditbox(&main_box_, "editbox_description", 0, 0, max_w_,
-	                                  remaining_space - hinth, UI::PanelStyle::kWui);
+	                                  std::max(0, remaining_space - hinth), UI::PanelStyle::kWui);
 	hint_ = new UI::MultilineEditbox(
 	   &main_box_, "editbox_hint", 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
